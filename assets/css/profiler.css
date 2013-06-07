@@ -1,0 +1,246 @@
+* {
+ margin: 0px;
+ padding: 0px;
+}
+
+html, body {
+ height: 100%; 
+ font-family: Arial;
+}
+
+body {
+ background-color: #fff;
+ margin: 5px;
+ font-family: Arial;
+ font-size: 11px;
+ color: #000;
+}
+
+/* ---------------- Common -------------------*/  
+#obullo_profiler {
+  clear: both;
+  background-color: #fff;
+  padding: 10px;
+}
+
+#obullo_profiler table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 8px;
+}
+
+#obullo_profiler table th {
+ font-weight: bold;
+ text-align: left;
+ padding-top: 5px;
+ padding-bottom: 5px;
+}
+ 
+#obullo_profiler table .td {
+ border: 1px solid #ccc; 
+ font-weight: normal;
+ padding: 5px;
+}
+
+#obullo_profiler table .td_val {
+ border: 1px solid #ccc; 
+ font-weight: normal;
+ padding: 5px;
+}
+ 
+/* ---------------- Benchmark -------------------*/
+#benchmark table th {
+ background-color: #fff;
+ font-size: 11px;
+ color: #666666;
+   
+}
+
+#benchmark table .td {
+ background-color: #EFEFEF;
+ font-size: 11px;
+ color: brown;
+}
+
+#benchmark table .td_val {
+ background-color: #EFEFEF;
+ font-size: 11px;
+ color: blue;
+}
+
+/* ---------------- HMVC Requests -------------------*/
+#hmvc table th {
+ background-color: #fff;
+ font-size: 11px;
+ color: #666666;
+   
+}
+
+#hmvc table .td {
+ background-color: #EFEFEF;
+ font-size: 11px;
+ color: brown;
+}
+
+#hmvc table .td_val {
+ background-color: #EFEFEF;
+ font-size: 11px;
+ color: blue;
+}
+
+/* ---------------- Queries -------------------*/
+
+#queries table th {
+ text-align: left;
+ background-color: #fff;
+ font-size: 11px;
+ color: #666666;
+  
+}
+
+#queries table .td {
+ background-color: #EFEFEF;
+ font-size: 11px; 
+}
+
+#queries table .td .notice { color:red; }
+#queries table .td .label { color:brown; }
+#queries table .td .cached_query { color: #007700; }
+
+#queries table .td_val {
+ background-color: #ddd;
+ font-size: 11px;   
+ font-weight: normal;
+ color: #0000FF;
+}
+
+/* ---------------- GET -------------------*/
+#get table th {
+ background-color: #fff;
+ font-size: 11px;
+ color: #666666;
+  
+}
+
+#get table .td {
+ background-color: #EFEFEF;
+ font-size: 11px; 
+ color: brown;
+}
+
+#get table .td_val {
+ background-color: #EFEFEF;
+ font-size: 11px;
+ color: green;
+}
+
+/* ---------------- POST -------------------*/
+#post table th {
+ background-color: #fff;
+ font-size: 11px;
+ color: #666666;
+   
+}
+
+#post table .td {
+ background-color: #EFEFEF;
+ font-size: 11px; 
+ color: brown;
+}
+
+#post table .td_val {
+ background-color: #EFEFEF;
+ font-size: 11px;
+ color: green;
+}
+
+/* ---------------- Uri String -------------------*/
+#uri_string table th {
+ background-color: #fff;
+ font-size: 11px;
+ color: #666666; 
+}
+
+#uri_string .td {
+ background-color: #EFEFEF;
+ font-size: 11px; 
+ color: black;
+}
+
+#uri_string .td_val {
+ background-color: #EFEFEF;
+ font-size: 11px;
+ color: #800080;
+}
+
+/* ---------------- Controller Info -------------------*/
+#controller_info table th {
+ background-color: #fff;
+ font-size: 11px;
+ color: #666666;
+  
+}
+
+#controller_info table .td {
+ background-color: #EFEFEF;
+ font-size: 11px; 
+ color: black;
+}
+
+#controller_info table .td_val {
+ background-color: #EFEFEF;
+ font-size: 11px;
+ color: #000080;
+}
+
+/* ---------------- Memory Info -------------------*/
+#memory table th {
+ background-color: #fff;
+ font-size: 11px;
+ color: #666666;
+   
+}
+
+#memory table .td {
+ background-color: #EFEFEF;
+ font-size: 11px; 
+ color: black;
+}
+
+#memory table .td_val {
+ background-color: #EFEFEF;
+ font-size: 11px;
+ color: green;
+}
+
+/* ---------------- Loaded Files -------------------*/
+#loaded_files table th {
+ background-color: #fff;
+ font-size: 11px;
+ color: #666666;
+  
+}
+
+#loaded_files table .td {
+ background-color: #EFEFEF;
+ font-size: 11px;  
+ color: brown;
+}
+
+#loaded_files table .td_val .subhelper_prefix  {
+ color: #FF0000;
+}
+
+#loaded_files table .td_val .subclass_prefix  {
+ color: #FF0000;
+}
+
+#loaded_files table .td_val .class_operations  {
+ color: #ACACAC;
+}
+
+#loaded_files table .td_val {
+ background-color: #EFEFEF;
+ font-size: 11px;
+ color: #800080;
+}

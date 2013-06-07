@@ -1,0 +1,100 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html, body {
+    height: 100%; 
+    font-family: Arial;
+}
+  
+
+body {
+ background-color: #fff;
+ margin: 40px;
+ font-family: Arial;
+ font-size: 16px;
+ color: #000;
+}
+
+a {
+ color: #003399;
+ background-color: transparent;
+ font-weight: normal;
+}
+
+h1 {
+ color: #808080;
+ background-color: transparent;
+ font-size: 30px;
+ font-weight: bold;
+ margin: 24px 0 2px 0;
+ padding: 5px 0 6px 0;
+}
+
+#main{ width: 640px;}
+
+div.fieldset { padding: 4px 0px 4px 0px; } 
+div.fieldbox { 
+  padding: 10px; 
+  margin: 11px 1px 0px 1px; 
+  border: 1px dotted gray; 
+  z-index: 90; 
+} 
+h3.legend { 
+  position: relative; 
+  top: -19px; 
+  display: inline; 
+  padding: 4px 8px 3px 6px; 
+  margin: 0px; 
+  font: 0.99em Verdana, Helvetica, Sans-Serif; 
+  font-weight: bold; 
+  background: #F0F0F0; 
+  color: #454545; 
+  border: 1px solid gray; 
+  z-index: 105; 
+} 
+div.fieldset .inner { 
+  position: relative; 
+  margin: -6px 0px 0px 0px; 
+  padding: 0px; 
+  border: none; 
+} 
+
+div.fieldset .inner code {
+  display: block;
+  margin: 10px 0 10px 0;
+  padding: 4px 2px 4px 4px;
+  font: 0.99em Monaco, Verdana, Sans-serif;
+  /* background: #F0F0FF;  */
+  color: #454545; 
+  border-bottom: 1px solid #C0C0C0;
+}
+
+div.fieldset .inner .no_background {
+    background: none; 
+    border: none;
+}
+
+fieldset { background: #DFDFDF; border: 1px solid gray; } 
+fieldset.inner { padding: 10px; } 
+legend { 
+  padding: 2px 8px 2px 8px; 
+  font: 0.99em Verdana, Helvetica, Sans-Serif; 
+  font-weight: bold; 
+  color: #454545; 
+  background: #FDFDFD; 
+  border: 1px dotted gray; 
+}
+
+samp { color: #367fc2; font: 0.99em Monaco, Verdana, Sans-serif; }
+kbd { color: #969696; font: 0.99em Monaco, Verdana, Sans-serif; }
+
+div.test {
+ font-family: Monaco, Verdana, Sans-serif;
+ font-size: 16px;
+ color: #969696;
+ display: block;
+ margin-top: 5px; 
+ font-weight: bold;
+}
