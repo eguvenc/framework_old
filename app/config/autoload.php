@@ -28,7 +28,6 @@ $autoload['helper']['ob/html']  = '';
 $autoload['helper']['ob/url']   = '';
 
 
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Libraries
@@ -66,7 +65,7 @@ $autoload['lib']        = array();
 | 
 | Prototype using arguments:
 |
-|       $autoload['config'] = array('config1' => array(TRUE), 'config2' => array($sections = TRUE, $fail = FALSE));
+|       $autoload['config'] = array('config1' => array(TRUE), 'config2' => array($sections = TRUE));
 |
 | NOTE: This item is intended for use ONLY if you have created custom
 | config files.  Otherwise, leave it blank.

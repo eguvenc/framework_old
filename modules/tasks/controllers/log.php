@@ -21,10 +21,9 @@ Class Log extends Controller {
   /_______/   /__________/ /________/ /_______/ /_______ /  /_______/ 
   
                        Welcome to Log Manager (c) 2013
- Please run '."\033[34m".'[$php task.php log level all]'."\033[0m".' log levels'."\033[34m".' all | debug | error | info '."\033[0m\n\n";
-        } 
-        else 
-        {
+ Log Debug default all to set a level run '."\033[34m".'[$php task.php log level debug]'."\033[0m".' levels'."\033[34m".' debug | error | info '."\033[0m\n\n";
+            
+            // Start the Debugging
             $this->_follow(APP.'core'. DS .'logs'. DS .'log-'.date('Y-m-d').'.php');
         }
     }
@@ -40,7 +39,7 @@ Class Log extends Controller {
      * 
      */ 
     private function _follow($file)
-    {
+    {        
         $size = 0;
         while (true)
         {
@@ -83,6 +82,7 @@ Class Log extends Controller {
                     {
                         $line = "\033[0;36m".$line."\033[0m";
                     }
+                    /*
                     if(strpos($out[5], 'Hmvc') !== FALSE && isset($out[6]) && strpos($out[6], 'Request') !== FALSE)
                     {
                         $line = "\033[0;34m".$line."\033[0m";
@@ -91,8 +91,10 @@ Class Log extends Controller {
                     {
                         $line = "\033[0;34m".$line."\033[0m";
                     }
+                     */
                 }
-                
+
+     
                 if(strpos($line, 'DEBUG') !== FALSE)
                 {
                     $line = "\033[0;35m".$line."\033[0m";
@@ -105,12 +107,88 @@ Class Log extends Controller {
                 {
                     $line = "\033[0;34m".$line."\033[0m";
                 }
-
+                if(strpos($line, 'BENCH') !== FALSE)
+                {
+                    $line = "\033[0;36m".$line."\033[0m";
+                }
+  
                 echo $line."\n";
                 $i++;
             }
+            
             fclose($fh);
             $size = $currentSize;
+            
+            $this->_benchmark();
+        }
+       
+    }
+    
+    /**
+     * Clear Logs 
+     */
+    function clear()
+    {
+        $clear_sh = "PROJECT_DIR=\${PWD}
+
+        if [ ! -d obullo ]; then
+            # Check the obullo directory exists, so we know you are in the project folder.
+            echo \"You must be in the project folder root ! Try cd /your/www/path/projectname\".
+            return
+        fi
+
+        # define your paths.
+        APP_LOG_DIR=\"\$PROJECT_DIR/app/core/logs/\"
+
+        # delete application and module directory log files.
+        # help https://help.ubuntu.com/community/find
+        find \$APP_LOG_DIR -name 'log-*.php' -exec rm -rf {} \;
+        echo \"\33[0;32mGreat, all log files successfully deleted !\33[0m\"";
+        
+        echo shell_exec($clear_sh);
+    }
+    
+    function _benchmark()
+    {
+        static $logged = array();
+        
+        if (function_exists('memory_get_usage') && ($usage = memory_get_usage()) != '')
+        {
+            $memory_usage = number_format($usage)." bytes";
+        }
+        else
+        {
+            $memory_usage = "memory_get_usage() function not found on your php configuration.";
+        }
+        
+        $bench = lib('ob/Benchmark'); // init to bencmark for profiling.
+        
+        $profile = array();
+        foreach ($bench->marker as $key => $val)
+        {
+            // We match the "end" marker so that the list ends
+            // up in the order that it was defined
+            if (preg_match("/(.+?)_end/i", $key, $match))
+            {             
+                if (isset($bench->marker[$match[1].'_end']) AND isset($bench->marker[$match[1].'_start']))
+                {
+                    $profile[$match[1]] = benchmark_elapsed_time($match[1].'_start', $key);
+                }
+            }
+        }
+        foreach ($profile as $key => $val)
+        {
+            $key = ucwords(str_replace(array('_', '-'), ' ', $key));
+
+            $date = date('Y-m-d H:i:s');
+            
+            if( ! isset($logged[$date]))
+            {
+                echo "\033[0;36mBENCH - ".$date." --> $key - $val\033[0m\n";
+                echo "\033[0;36mBENCH - ".$date." --> Memory Usage: $memory_usage\033[0m\n";
+            }
+            
+            $logged[$date] = 1;
         }
     }
 }

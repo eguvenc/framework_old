@@ -106,7 +106,7 @@ $config['debug_backtrace']       = array('enabled' => 'E_ALL ^ (E_NOTICE | E_WAR
 | * When $config['log_queries'] == TRUE ALL database queries goes to the log file.
 |
 */
-$config['log_threshold']         = (ENV == 'LIVE') ? 1 : 4;
+$config['log_threshold']         = (ENV == 'LIVE') ? 1 : 5;
 $config['log_queries']           = (ENV == 'LIVE') ? FALSE : TRUE;
 
 /*
@@ -406,7 +406,7 @@ $config['proxy_ips']             = '';
 | Use a full server path with trailing slash.
 |
 */
-$cache['cache_path']             = '';
+$config['cache_path']             = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -425,8 +425,8 @@ $cache['cache_path']             = '';
 | by the output class.  Do not "echo" any values with compression enabled.
 |
 */
-$cache['compress_output']       = FALSE;
-$cache['compression_level']     = 8;
+$config['compress_output']       = FALSE;
+$config['compression_level']     = 8;
 
 
 /* End of file config.php */

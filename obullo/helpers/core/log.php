@@ -95,7 +95,7 @@ if( ! function_exists('log_write') )
         $threshold = 1;
         $date_fmt  = 'Y-m-d H:i:s';
         $enabled   = TRUE;
-        $levels    = array('ERROR' => '1', 'DEBUG' => '2',  'INFO' => '3', 'ALL' => '4');
+        $levels    = array('BENCH' => '0', 'ERROR' => '1', 'DEBUG' => '2',  'INFO' => '3', 'ALL' => '4');
         $level     = strtoupper($level);
 
         $config          = get_config();

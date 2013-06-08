@@ -121,7 +121,7 @@ Class OB_Config
         {    
             if ( ! isset($this->config[$item]))
             {
-                log_me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name');
+                log_me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
                 return FALSE;
             }
@@ -132,14 +132,14 @@ Class OB_Config
         {
             if ( ! isset($this->config[$index]))
             {
-                log_me('info', 'Requested config index "'.$item.'" not found, be sure providing to right name');
+                log_me('info', 'Requested config index "'.$item.'" not found, be sure providing to right name.');
                 
                 return FALSE;
             }
 
             if ( ! isset($this->config[$index][$item]))
             {
-                log_me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name');
+                log_me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
                 return FALSE;
             }

@@ -245,7 +245,7 @@ Class OB_Output {
             echo $output;
             
             log_me('debug', "Final output sent to browser");
-            log_me('debug', "Total execution time: ".$elapsed);
+            log_me('bench', "Total execution time: ".$elapsed);
             
             return TRUE;
         }
@@ -292,7 +292,7 @@ Class OB_Output {
         }
         
         log_me('debug', "Final output sent to browser");
-        log_me('debug', "Total execution time: " . $elapsed);        
+        log_me('bench', "Total execution time: " . $elapsed);        
     }    
     
     // --------------------------------------------------------------------

@@ -173,8 +173,8 @@ ob_system_run();
 // end memory test
 $ob_end = OB_memory_usage();
 $end    = memory_get_usage();
-
+/*
 echo '<b>Started memory:</b> '.$start.'<br />';
 echo '<b>Total consumed memory: </b>'.$end.'<br />';
 echo '<b>OB_Started memory:</b> '.$ob_start.'<br />';
-echo '<b>OB_End memory:</b> '.$ob_end.'<br />';
+echo '<b>OB_End memory:</b> '.$ob_end.'<br />';*/

@@ -475,7 +475,7 @@ Class OB_Hmvc
         $this->_reset_router();    
                        
         log_me('debug', 'Hmvc process completed succesfully.');
-        log_me('debug', 'Hmvc Output: '.$this->_response());
+        log_me('info', 'Hmvc Output: '.$this->_response());
         
         return $this->_response();
     }
@@ -525,7 +525,7 @@ Class OB_Hmvc
 
             $end_time = ob_request_timer('end'); // Profiler
 
-            log_me('debug', 'Hmvc Request: '.$URI->uri_string.' time: '.number_format($end_time - self::$start_time, 4));
+            log_me('info', 'Hmvc Request: '.$URI->uri_string.' time: '.number_format($end_time - self::$start_time, 4));
             
             // self::$request_times[$URI->uri_string] = $end_time - self::$start_time;
         }

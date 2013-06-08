@@ -71,18 +71,14 @@ Class OB_Profiler {
         // Note: At some point we should turn this into a template that can
         // be modified.  We also might want to make this data available to be logged
     
-        $output  = '<div id="benchmark">';       
-        $output .= "<table class=\"tableborder\">";
-        $output .= "<tr><th>".lang('profiler_benchmarks')."</th></tr>";
+        $output  = '';
         
         foreach ($profile as $key => $val)
         {
             $key = ucwords(str_replace(array('_', '-'), ' ', $key));
-            $output .= "<tr><td class=\"td\">".$key."&nbsp;&nbsp;</td><td class=\"td_val\">".$val."</td></tr>";
+            $output .= $key."-".$val;
         }
         
-        $output .= "</table>";
-        $output .= "</div>";
          
         return $output;
     
