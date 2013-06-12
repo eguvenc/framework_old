@@ -406,7 +406,7 @@ $config['proxy_ips']             = '';
 | Use a full server path with trailing slash.
 |
 */
-$cache['cache_path']             = '';
+$config['cache_path']             = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -425,8 +425,8 @@ $cache['cache_path']             = '';
 | by the output class.  Do not "echo" any values with compression enabled.
 |
 */
-$cache['compress_output']       = FALSE;
-$cache['compression_level']     = 8;
+$config['compress_output']       = FALSE;
+$config['compression_level']     = 8;
 
 
 /* End of file config.php */
