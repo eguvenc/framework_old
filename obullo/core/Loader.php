@@ -429,7 +429,7 @@ Class loader {
     */
     public static function lang($file, $folder = '', $return = FALSE)
     {
-        lib('ob/Lang')->load($file, $folder, NULL, $return);
+        lib('ob/Lang')->load($file, $folder, $return);
     }
 
     // --------------------------------------------------------------------
@@ -441,9 +441,9 @@ Class loader {
     * @param bool $use_sections
     * @param bool $fail_gracefully 
     */
-    public static function config($file, $use_sections = FALSE, $fail_gracefully = FALSE)
+    public static function config($file, $use_sections = FALSE)
     {
-        lib('ob/Config')->load($file, $use_sections, $fail_gracefully);
+        lib('ob/Config')->load($file, $use_sections);
     }
  
     // --------------------------------------------------------------------
@@ -462,8 +462,7 @@ Class loader {
     {
         $realname   = ($case_sensitive) ? trim($file_url, '/') : strtolower(trim($file_url, '/'));
         $root       = rtrim(MODULES, DS); 
-        $sub_root   = lib('ob/Router')->fetch_directory(). DS .$folder. DS;
-       
+        
         if($extra_path != '')
         {
             $extra_path = str_replace('/', DS, trim($extra_path, '/')) . DS;
@@ -474,6 +473,10 @@ Class loader {
             $realname = strtolower(substr($file_url, 4));
             $root     = APP . $folder;
             $sub_root = '';
+        } 
+        else 
+        {
+            $sub_root   = lib('ob/Router')->fetch_directory(). DS .$folder. DS;
         }
 
         if(strpos($realname, '../') === 0)   // ../module folder request
@@ -514,12 +517,9 @@ Class loader {
             return $return;
         }
         
-        if($folder == 'lang')
-        {
-            return array('filename' => $realname, 'path' => $root. DS .$sub_root.$extra_path);
-        }
+        if($folder != 'lang') $extra_path = '';
         
-        return array('filename' => $realname, 'path' => $root. DS .$sub_root);
+        return array('filename' => $realname, 'path' => $root. DS .$sub_root.$extra_path);
     }
    
     // --------------------------------------------------------------------

@@ -48,7 +48,7 @@ label { font-weight:bold; }
 <?php } ?>
 
 <div>
-<?php echo form_open('/welcome/start/do_post', array('method' => 'POST', 'class' => 'no-ajax'));?>
+<?php echo form_open('/welcome/start/do_post', array('method' => 'POST', 'class' => 'no-ajax')); ?>
 <table width="100%">
     
     <tr>
@@ -96,7 +96,7 @@ label { font-weight:bold; }
 
         $data['user'] = $user;
 
-        view('view_vmodel', $data, false);</pre>
+        view('view_form', $data, false);</pre>
         </td>
     </tr>
     
@@ -147,7 +147,7 @@ label { font-weight:bold; }
 <?php echo form_close(); ?>
 </div>
 
-<?php echo br(); ?>
+<?php echo '<br />'; ?>
 <?php echo view('../footer') ?>
 </body>
 </html>

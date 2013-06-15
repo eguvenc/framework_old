@@ -65,11 +65,10 @@ Class OB_Lang {
     * @access   public
     * @param    string   $langfile the name of the language file to be loaded. Can be an array
     * @param    string   $idiom the language folder (english, etc.)
-    * @param    string   $dir is it base language file ?
     * @param    bool     $return return to $lang variable if you don't merge
     * @return   mixed
     */
-    public function load($langfile = '', $idiom = '', $dir = '', $return = FALSE)
+    public function load($langfile = '', $idiom = '', $return = FALSE)
     {
         if ($idiom == '')
         {

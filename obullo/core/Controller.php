@@ -51,10 +51,47 @@ Class Controller {
         $this->uri    = lib('ob/Uri');
         $this->output = lib('ob/Output');
         
-        // Initialize to Module Libraries
+        // Initialize to Autoloaders
         // ------------------------------------
         
-        module_init();
+        $autoload = get_static('autoload', '', APP .'config');
+        log_me('debug', 'Application Autoload Initialized');
+
+        if(is_array($autoload))
+        {
+            foreach(array_keys($autoload) as $key)
+            {
+                if(count($autoload[$key]) > 0)
+                {
+                    foreach($autoload[$key] as $filename)
+                    {
+                        loader::$key($filename);
+                    }
+                }
+            }
+        }
+
+        // Initialize to Autorun
+        // ------------------------------------
+        
+        $autorun = get_static('autorun', '', APP .'config');
+        log_me('debug', 'Application Autorun Initialized');
+
+        if(isset($autorun['function']))
+        {
+            if(count($autorun['function']) > 0)
+            {
+                foreach(array_reverse($autorun['function']) as $function => $arguments)
+                {
+                    if( ! function_exists($function))
+                    {
+                        throw new Exception('The autorun function '. $function . ' not found, please define it in APP/config/autoload.php');
+                    }
+
+                    call_user_func_array($function, $arguments);   // Run autorun function.
+                }
+            }
+        }  
         
         // ------------------------------------
     }

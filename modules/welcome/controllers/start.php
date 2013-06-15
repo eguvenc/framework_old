@@ -71,7 +71,7 @@ Class Start extends Controller {
             }
         }
         
-        view('view_vmodel', $data, false);    
+        view('view_form', $data, false);    
     }
    
     public function delete()

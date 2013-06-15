@@ -20,7 +20,6 @@ Class Welcome extends Controller {
 
         $data = array();
         $data['response_a'] = request('welcome/test/1/2/3')->exec();
-        $data['response_b'] = request('backend/hello/test/1/2/3')->exec();
         
         view('view_hmvc', $data, false);
     }
@@ -41,8 +40,9 @@ Class Welcome extends Controller {
         
         echo "<font size='2'>";
         echo "You should run this command with none true or 'false' ";
-        echo "argument when you go LIVE server ! .".br().".e.g. task_run('module/controller/method', false);";
-        echo br().anchor('welcome/task/help', 'Click Here to Help !');
+        echo "argument when you go LIVE server ! .<br />.e.g. task_run('module/controller/method', false);";
+        echo '<br />';
+        echo anchor('welcome/task/help', 'Click Here to Help !');
         echo "<font>";
         
         if($mode == 'help')

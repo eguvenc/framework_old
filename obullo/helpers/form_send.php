@@ -37,9 +37,23 @@ defined('BASE') or exit('Access Denied!');
 */
 if ( ! function_exists('form_send_error'))
 {
-    function form_send_error($model = '')
+    function form_send_error($model = '', $no_cache = true)
     {
-        set_application_header();
+        if(uri_extension() == 'json' AND ! headers_sent() ) // Check uri extension 
+        {
+            /*
+            * The first two headers prevent the browser from caching the 
+            * response (a problem with IE and GET requests) and the third sets 
+            * the correct MIME type for JSON.
+            */
+            if($no_cache)
+            {
+                header('Cache-Control: no-cache, must-revalidate');
+                header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+            }
+
+            header('Content-type: application/json;charset=UTF-8');
+        }
         
         if(is_object($model))
         {
@@ -82,10 +96,24 @@ if ( ! function_exists('form_send_error'))
 */
 if ( ! function_exists('form_send_success'))
 {
-    function form_send_success($model = '')
+    function form_send_success($model = '', $no_cache = true)
     {
-        set_application_header();
-       
+        if(uri_extension() == 'json' AND ! headers_sent() ) // Check uri extension 
+        {
+            /*
+            * The first two headers prevent the browser from caching the 
+            * response (a problem with IE and GET requests) and the third sets 
+            * the correct MIME type for JSON.
+            */
+            if($no_cache)
+            {
+                header('Cache-Control: no-cache, must-revalidate');
+                header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+            }
+
+            header('Content-type: application/json;charset=UTF-8');
+        }
+        
         if(is_object($model))
         {
             if($model->get_func('name') != '') 
@@ -119,7 +147,10 @@ if ( ! function_exists('form_send_redirect'))
 {
     function form_send_redirect($redirect_url, $top_redirect = FALSE)
     {
-        set_application_header();
+        if(uri_extension() == 'json' AND ! headers_sent() ) // Check uri extension 
+        {
+            header('Content-type: application/json;charset=UTF-8');
+        }
         
         $type = 'redirect'; // window.location.replace(); command
         
@@ -145,7 +176,10 @@ if ( ! function_exists('form_send_forward'))
 {
     function form_send_forward($forward_url)
     {
-        set_application_header();
+        if(uri_extension() == 'json' AND ! headers_sent() ) // Check uri extension 
+        {
+            header('Content-type: application/json;charset=UTF-8');
+        }
         
         return json_encode(array('success' => true, 'forward_url' => $forward_url));
     }
@@ -164,7 +198,10 @@ if ( ! function_exists('form_send_alert'))
 {
     function form_send_alert($msg = '')
     {
-        set_application_header();
+        if(uri_extension() == 'json' AND ! headers_sent() ) // Check uri extension 
+        {
+            header('Content-type: application/json;charset=UTF-8');
+        }
         
         return json_encode(array('success' => false, 'alert' => $msg));
     }

@@ -48,7 +48,7 @@ define('ENV', 'DEBUG');
 | For security reasons its default off.
 | But default `Obullo Error Handler` is active if you don't want to use Obullo
 | development error handler you can *turn off it easily from 
-| "application/config.php" file.
+| "app/config/config.php" file.
 |
 */              
 if (defined('ENV'))
@@ -102,14 +102,8 @@ date_default_timezone_set('America/Chicago');
 
 /**
 |---------------------------------------------------------------
-| FOLDER CONSTANTS AND SUBMODULES
+| FOLDER CONSTANTS
 |---------------------------------------------------------------
-|
-| If you want MANAGE MULTIPLE APPLICATIONS in one setup you
-| need to use "sub.modules", you can create your sub.modules using
-| "sub." prefix in modules/ folder. We did an example submodule
-| to you that called "sub.backend".
-|
 */
 define('ROOT',  realpath(dirname(__FILE__)) . DS);
 define('BASE', ROOT .'obullo'. DS);
@@ -170,11 +164,10 @@ ob_include_files();
 ob_set_headers();
 ob_system_run();
 
-// end memory test
-$ob_end = OB_memory_usage();
-$end    = memory_get_usage();
+
 /*
 echo '<b>Started memory:</b> '.$start.'<br />';
 echo '<b>Total consumed memory: </b>'.$end.'<br />';
 echo '<b>OB_Started memory:</b> '.$ob_start.'<br />';
+<<<<<<< HEAD
 echo '<b>OB_End memory:</b> '.$ob_end.'<br />';*/

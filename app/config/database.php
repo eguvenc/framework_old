@@ -17,8 +17,8 @@ defined('BASE') or exit('Access Denied!');
 */
 $database['db']['hostname']  = 'localhost';
 $database['db']['username']  = 'root';
-$database['db']['password']  = '';
-$database['db']['database']  = '';
+$database['db']['password']  = '12345';
+$database['db']['database']  = 'obullo';
 $database['db']['dbdriver']  = 'mysql';
 $database['db']['dbprefix']  = '';
 $database['db']['swap_pre']  = '';

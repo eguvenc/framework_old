@@ -34,7 +34,7 @@ defined('BASE') or exit('Access Denied!');
 *
 * @author   Obullo
 * @param    string $href
-* @param    string $title_or_embed
+* @param    string $title
 * @param    string $media
 * @param    string $rel
 * @param    boolean $index_page
@@ -42,20 +42,8 @@ defined('BASE') or exit('Access Denied!');
 */
 if( ! function_exists('css') )
 {
-    function css($href, $title_or_embed = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)
+    function css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)
     {
-        if($title_or_embed == 'embed')
-        {
-            $css = '<style type="text/css" ';
-            $css.= ($media != '') ? 'media="'.$media.'" ' : '';
-            $css.= '>';
-            $css.= $href;
-            $css.= "</style>\n";
-            
-            return $css;
-        }
-            
-        $title = $title_or_embed;
         $link = '<link ';
 
         if (is_array($href))
@@ -275,116 +263,6 @@ if ( ! function_exists('plugin'))
 // ------------------------------------------------------------------------
 
 /**
-* Generates meta tags from an array of key/values
-*
-* @access   public
-* @param    array
-* @return   string
-*/
-if( ! function_exists('meta') )
-{
-    function meta($name = '', $content = '', $type = 'name', $newline = "\n")
-    {
-        // Since we allow the data to be passes as a string, a simple array
-        // or a multidimensional one, we need to do a little prepping.
-        if ( ! is_array($name))
-        {
-            $name = array(array('name' => $name, 'content' => $content, 'type' => $type, 'newline' => $newline));
-        }
-        else
-        {
-            // Turn single array into multidimensional
-            if (isset($name['name']))
-            {
-                $name = array($name);
-            }
-        }
-
-        $str = '';
-        foreach ($name as $meta)
-        {
-            $type       = ( ! isset($meta['type']) OR $meta['type'] == 'name') ? 'name' : 'http-equiv';
-            $name       = ( ! isset($meta['name']))     ? ''     : $meta['name'];
-            $content    = ( ! isset($meta['content']))    ? ''     : $meta['content'];
-            $newline    = ( ! isset($meta['newline']))    ? "\n"    : $meta['newline'];
-
-            $str .= '<meta '.$type.'="'.$name.'" content="'.$content.'" />'.$newline;
-        }
-
-        return $str;
-    }
-}
-
-// ------------------------------------------------------------------------
-
-/**
- * Link
- *
- * Generates link to a CSS file
- *
- * @access   public
- * @param    mixed    stylesheet hrefs or an array
- * @param    string   rel
- * @param    string   type
- * @param    string   title
- * @param    string   media
- * @param    boolean  should index_page be added to the css path
- * @return   string
- */
-if( ! function_exists('link_tag') )
-{
-    function link_tag($href = '', $rel = 'stylesheet', $type = '', $title = '', $media = '', $index_page = FALSE)
-    {
-        $link = '<link ';
-
-        if ( strpos($href, '://') !== FALSE)
-        {
-            $link .= ' href="'.$href.'" ';
-        }
-        elseif ($index_page === TRUE)
-        {
-            $link .= ' href="'. lib('ob/Config')->site_url($href, false) .'" ';
-        }
-        else
-        {
-            $public_path = ' href="'. _get_public_path($href) .'" ';
-
-            if($public_path == FALSE)
-            {
-                $link .= ' href="'. lib('ob/Config')->site_url($href, false) .'" ';
-            }
-            else
-            {
-                $link .= $public_path;
-            }
-        }
-
-        $link .= 'rel="'.$rel.'" ';
-
-        if ($type    != '')
-        {
-            $link .= 'type="'.$type.'" ';
-        }
-
-        if ($media    != '')
-        {
-            $link .= 'media="'.$media.'" ';
-        }
-
-        if ($title    != '')
-        {
-            $link .= 'title="'.$title.'" ';
-        }
-
-        $link .= '/>';
-
-        return $link."\n";
-    }
-}
-
-// ------------------------------------------------------------------------
-
-/**
 * Generates a page document type declaration
 *
 * Valid options are xhtml11, xhtml-strict, xhtml-trans, xhtml-frame,
@@ -402,22 +280,6 @@ if( ! function_exists('doctype') )
     }
 }
 
-// ------------------------------------------------------------------------
-
-/**
-* Generates HTML BR tags based on number supplied
-*
-* @access   public
-* @param    integer
-* @return   string
-*/
-if( ! function_exists('br') ) 
-{
-    function br($num = 1)
-    {
-        return str_repeat("<br />", $num);
-    }
-}
 
 // ------------------------------------------------------------------------
 
@@ -470,23 +332,6 @@ if( ! function_exists('img') )
         $img .= $attributes . ' />';
 
         return $img;
-    }
-}
-// ------------------------------------------------------------------------
-
-/**
- * Generates non-breaking space entities based on number supplied
- *
- * @access   public
- * @param    integer
- * @return   string
- */
-
-if( ! function_exists('nbs') ) 
-{
-    function nbs($num = 1)
-    {
-        return str_repeat("&nbsp;", $num);
     }
 }
 

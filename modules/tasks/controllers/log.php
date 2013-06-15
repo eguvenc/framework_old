@@ -93,7 +93,6 @@ Class Log extends Controller {
                     }
                      */
                 }
-
      
                 if(strpos($line, 'DEBUG') !== FALSE)
                 {
@@ -119,9 +118,18 @@ Class Log extends Controller {
             fclose($fh);
             $size = $currentSize;
             
-            $this->_benchmark();
+            static $logged = array();
+            
+            $date = date('Y-m-d H:i:s');
+            
+            if( ! isset($logged[$date]))
+            {
+                $this->_compile_benchmark();
+                $this->_compile_loaded_files();
+            }
+            
+            $logged[$date] = 1;
         }
-       
     }
     
     /**
@@ -148,10 +156,8 @@ Class Log extends Controller {
         echo shell_exec($clear_sh);
     }
     
-    function _benchmark()
+    function _compile_benchmark()
     {
-        static $logged = array();
-        
         if (function_exists('memory_get_usage') && ($usage = memory_get_usage()) != '')
         {
             $memory_usage = number_format($usage)." bytes";
@@ -176,21 +182,73 @@ Class Log extends Controller {
                 }
             }
         }
+        
         foreach ($profile as $key => $val)
         {
             $key = ucwords(str_replace(array('_', '-'), ' ', $key));
-
             $date = date('Y-m-d H:i:s');
-            
-            if( ! isset($logged[$date]))
-            {
-                echo "\033[0;36mBENCH - ".$date." --> $key - $val\033[0m\n";
-                echo "\033[0;36mBENCH - ".$date." --> Memory Usage: $memory_usage\033[0m\n";
-            }
-            
-            $logged[$date] = 1;
+            echo "\033[0;36mBENCH - ".$date." --> $key - $val\033[0m\n";
+            echo "\033[0;36mBENCH - ".$date." --> Memory Usage: $memory_usage\033[0m\n";
         }
     }
+    
+    function _compile_loaded_files()
+    {
+        $output = "\033[0;33mPROFL - ".date('Y-m-d H:i:s')." --> LOADED FILES";
+        
+        $helper_prefix   = config('subhelper_prefix');
+        
+        $config_files = array();
+        foreach(lib('ob/Config')->is_loaded as $config_file) { $config_files[] = error_secure_path($config_file); }
+        
+        $lang_files   = array();
+        foreach(lib('ob/Lang')->is_loaded as $lang_file) { $lang_files[] = error_secure_path($lang_file); }
+        
+        $base_helpers = array();
+        foreach(loader::$_base_helpers as $base_helper) 
+        { 
+            if(strpos($base_helper, $helper_prefix) === 0)
+            {
+                $base_helpers[] = str_replace($helper_prefix, $helper_prefix, error_secure_path($base_helper));
+            } 
+            else 
+            {
+                $base_helpers[] = error_secure_path($base_helper);
+            }
+        }
+        
+        $helpers = array();
+        foreach(loader::$_helpers as $helper) { $helpers[] = error_secure_path($helper); }
+        
+        
+        $models  = array();
+        foreach(loader::$_models as $mod) { $model[] = error_secure_path($mod); }
+              
+        $databases = array();
+        foreach(loader::$_databases as $db_name => $db_var) { $database[] = $db_var; }
+
+        // $autoloads = profiler_get('autoloads');
+        // $autoloads = $autoloads['autoloads'];
+        // $autoloads = print_r($autoloads, true);
+        // $autoloads = $this->clean_string($autoloads);
+        // $autoloads = preg_replace('/\[(.*?)\]/', '<br />[<b>$1</b>]', $autoloads); // Highlight keys.
+
+        $output .= "\n# Config Files --> ". implode(',',$config_files);
+        $output .= "\n# Lang Files --> ".implode(',', $lang_files);
+        
+        if(count($base_helpers) > 0)
+        {
+            $output .= "\n# Core Helpers --> ".implode(',',$base_helpers);
+        }
+        
+        $output .= "\n# Helpers --> ".implode(',',$helpers);
+        $output .= "\n# Models --> ".implode(',',$models);
+        $output .= "\n# Databases --> ".implode(',',$databases);
+        
+        $output .= "\033[0m\n";
+        echo $output;
+    }
+
 }
 
 //Terminal Colour Codes (BASH CODES)

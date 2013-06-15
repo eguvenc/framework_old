@@ -54,9 +54,6 @@ if( ! function_exists('ob_set_headers'))
         
         lib('ob/Uri');
         lib('ob/Router');
-        
-        loader::helper('core/module'); // Load Module Helper
-        
         lib('ob/Lang');
         lib('ob/Benchmark');
         lib('ob/Input');

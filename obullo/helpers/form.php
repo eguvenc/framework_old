@@ -660,6 +660,7 @@ if( ! function_exists('form_prep') )
 * @param	string
 * @return	mixed
 */
+
 if( ! function_exists('set_value') ) 
 { 
     function set_value($field = '', $default = '')
@@ -675,6 +676,11 @@ if( ! function_exists('set_value') )
             {
                 return form_prep($_REQUEST[$field], $field);
             }   
+        } 
+
+        if($OBJ->set_value($field, $default) == '' &&  isset($_REQUEST[$field]))
+        {
+            return form_prep($_REQUEST[$field], $field);
         }
 
         return form_prep($OBJ->set_value($field, $default), $field);

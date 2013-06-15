@@ -60,16 +60,9 @@ Class OB_Auth {
     */
     public function __construct($params = array())
     {   
-        if(isset($params['module']))  // Submodule support
-        {
-            $auth   = get_config('auth', '', MODULES .$params['module']. DS .'config');
-            $config = array_merge($auth , $params);
-        } 
-        else 
-        {
-            $auth   = get_config('auth');
-            $config = array_merge($auth , $params);
-        }
+
+        $auth   = get_config('auth');
+        $config = array_merge($auth , $params);
 
         foreach($config as $key => $val)
         {
@@ -268,8 +261,8 @@ Class OB_Auth {
     public function redirect($redirect = '', $urlencode = TRUE)
     {
         if( ! $this->check())  // auth is NOT ok ?
-        {
-            $redirect_url = ($redirect == '') ? $this->not_ok_url : $redirect;
+        {  
+            $redirect_url = ($redirect == '') ? base_url($this->not_ok_url) : base_url($redirect);
             $redirect_url = $redirect_url.'?redirect='.lib('ob/Uri')->request_uri($urlencode);
 
             redirect($redirect_url); 
