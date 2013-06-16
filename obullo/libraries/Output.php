@@ -134,20 +134,6 @@ Class OB_Output {
     // --------------------------------------------------------------------
     
     /**
-    * Enable/disable Profiler
-    *
-    * @access   public
-    * @param    bool  $val
-    * @return   void
-    */    
-    public function profiler($val = TRUE)
-    {
-        $this->enable_profiler = (is_bool($val)) ? $val : TRUE;
-    }
-    
-    // --------------------------------------------------------------------
-    
-    /**
     * Set Cache
     *
     * @access   public
@@ -245,38 +231,14 @@ Class OB_Output {
             echo $output;
             
             log_me('debug', "Final output sent to browser");
-            log_me('bench', "Total execution time: ".$elapsed);
+            
+            if (config('log_benchmark') == TRUE)
+            {
+                log_me('bench', "Total execution time: ".$elapsed);
+            }
             
             return TRUE;
         }
-    
-        // Profiler
-        // --------------------------------------------------------------------
-        
-        // Do we need to generate profile data?        
-        // If so, load the Profile class and run it.
-        if ($this->enable_profiler == TRUE)
-        {
-            // Get profiler output.
-            $profiler       = lib('ob/Profiler');
-            $data['output'] = $profiler->run();
-            
-                                 
-            // If the output data contains closing </body> and </html> tags
-            // we will remove them and add them back after we insert the profiler script
-            if (preg_match("|</body>.*?</html>|is", $output))
-            {
-                $output  = preg_replace("|</body>.*?</html>|is", '', $output);
-                
-                // Add profiler script before the body end tag. ( Obullo Changes )
-                $output .= view('ob/profiler', $data);  
-                $output .= '</body></html>';
-            }
-            else
-            {
-                $output .= view('ob/profiler', $data);
-            }
-        } 
         
         // Does the controller contain a function named _output()?
         // If so send the output there.  Otherwise, echo it.
@@ -292,7 +254,44 @@ Class OB_Output {
         }
         
         log_me('debug', "Final output sent to browser");
-        log_me('bench', "Total execution time: " . $elapsed);        
+                
+        // Do we need to generate profile data?        
+        // If so, load the Profile class and run it.
+        if (config('log_benchmark') == TRUE)
+        {
+            if (function_exists('memory_get_usage') && ($usage = memory_get_usage()) != '')
+            {
+                $memory_usage = number_format($usage)." bytes";
+            }
+            else
+            {
+                $memory_usage = "memory_get_usage() function not found on your php configuration.";
+            }
+
+            $bench = lib('ob/Benchmark'); // init to bencmark for profiling.
+
+            $profile = array();
+            foreach ($bench->marker as $key => $val)
+            {
+                // We match the "end" marker so that the list ends
+                // up in the order that it was defined
+                if (preg_match("/(.+?)_end/i", $key, $match))
+                {             
+                    if (isset($bench->marker[$match[1].'_end']) AND isset($bench->marker[$match[1].'_start']))
+                    {
+                        $profile[$match[1]] = benchmark_elapsed_time($match[1].'_start', $key);
+                    }
+                }
+            }
+            
+            foreach ($profile as $key => $val)
+            {
+                $key = ucwords(str_replace(array('_', '-'), ' ', $key));
+                log_me('bench', "$key: ". $val); 
+            }
+             
+            log_me('bench', "Memory Usage: ". $memory_usage); 
+        } 
     }    
     
     // --------------------------------------------------------------------

@@ -103,11 +103,13 @@ $config['debug_backtrace']       = array('enabled' => 'E_ALL ^ (E_NOTICE | E_WAR
 | For a live site you'll usually only enable Errors (1) to be logged otherwise
 | your log files will fill up very fast.
 |
-| * When $config['log_queries'] == TRUE ALL database queries goes to the log file.
+|  o When $config['log_queries']   == TRUE ALL Database SQL Queries goes to the log file.
+|  o When $config['log_benchmark'] == TRUE ALL framework benchmark goes to the log file.
 |
 */
 $config['log_threshold']         = (ENV == 'LIVE') ? 1 : 5;
 $config['log_queries']           = (ENV == 'LIVE') ? FALSE : TRUE;
+$config['log_benchmark']         = (ENV == 'LIVE') ? FALSE : TRUE;
 
 /*
 |--------------------------------------------------------------------------

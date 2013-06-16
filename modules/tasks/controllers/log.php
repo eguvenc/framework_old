@@ -4,15 +4,15 @@ defined('CMD') or exit('Access Denied!');
 Class Log extends Controller {
     
     function __construct()
-    {   
+    {
         parent::__construct();
-    }         
+    }
     
     public function index($level = '')
-    {   
+    {
         if($level == '')
         {
-        echo '
+        echo "\33[0;36m".'
         _____      ________     __     __  __        __          _______
       / ___  /    / ____   \   / /    / / / /       / /         / ___   /
     /  /   /  /  / /____/  /  / /    / / / /       / /        /  /   /  /
@@ -21,7 +21,7 @@ Class Log extends Controller {
   /_______/   /__________/ /________/ /_______/ /_______ /  /_______/ 
   
                        Welcome to Log Manager (c) 2013
- Log Debug default all to set a level run '."\033[34m".'[$php task.php log level debug]'."\033[0m".' levels'."\033[34m".' debug | error | info '."\033[0m\n\n";
+Display logs [$php task log] to filter logs [$php task log level debug | error | info] '."\033[0m";
             
             // Start the Debugging
             $this->_follow(APP.'core'. DS .'logs'. DS .'log-'.date('Y-m-d').'.php');
@@ -39,7 +39,7 @@ Class Log extends Controller {
      * 
      */ 
     private function _follow($file)
-    {        
+    {
         $size = 0;
         while (true)
         {
@@ -124,7 +124,7 @@ Class Log extends Controller {
             
             if( ! isset($logged[$date]))
             {
-                $this->_compile_benchmark();
+                // $this->_compile_benchmark();
                 $this->_compile_loaded_files();
             }
             
@@ -156,46 +156,8 @@ Class Log extends Controller {
         echo shell_exec($clear_sh);
     }
     
-    function _compile_benchmark()
-    {
-        if (function_exists('memory_get_usage') && ($usage = memory_get_usage()) != '')
-        {
-            $memory_usage = number_format($usage)." bytes";
-        }
-        else
-        {
-            $memory_usage = "memory_get_usage() function not found on your php configuration.";
-        }
-        
-        $bench = lib('ob/Benchmark'); // init to bencmark for profiling.
-        
-        $profile = array();
-        foreach ($bench->marker as $key => $val)
-        {
-            // We match the "end" marker so that the list ends
-            // up in the order that it was defined
-            if (preg_match("/(.+?)_end/i", $key, $match))
-            {             
-                if (isset($bench->marker[$match[1].'_end']) AND isset($bench->marker[$match[1].'_start']))
-                {
-                    $profile[$match[1]] = benchmark_elapsed_time($match[1].'_start', $key);
-                }
-            }
-        }
-        
-        foreach ($profile as $key => $val)
-        {
-            $key = ucwords(str_replace(array('_', '-'), ' ', $key));
-            $date = date('Y-m-d H:i:s');
-            echo "\033[0;36mBENCH - ".$date." --> $key - $val\033[0m\n";
-            echo "\033[0;36mBENCH - ".$date." --> Memory Usage: $memory_usage\033[0m\n";
-        }
-    }
-    
     function _compile_loaded_files()
     {
-        $output = "\033[0;33mPROFL - ".date('Y-m-d H:i:s')." --> LOADED FILES";
-        
         $helper_prefix   = config('subhelper_prefix');
         
         $config_files = array();
@@ -220,32 +182,30 @@ Class Log extends Controller {
         $helpers = array();
         foreach(loader::$_helpers as $helper) { $helpers[] = error_secure_path($helper); }
         
-        
         $models  = array();
-        foreach(loader::$_models as $mod) { $model[] = error_secure_path($mod); }
+        foreach(loader::$_models as $mod) { $models[] = error_secure_path($mod); }
               
         $databases = array();
-        foreach(loader::$_databases as $db_name => $db_var) { $database[] = $db_var; }
-
-        // $autoloads = profiler_get('autoloads');
-        // $autoloads = $autoloads['autoloads'];
-        // $autoloads = print_r($autoloads, true);
-        // $autoloads = $this->clean_string($autoloads);
-        // $autoloads = preg_replace('/\[(.*?)\]/', '<br />[<b>$1</b>]', $autoloads); // Highlight keys.
-
-        $output .= "\n# Config Files --> ". implode(',',$config_files);
-        $output .= "\n# Lang Files --> ".implode(',', $lang_files);
+        foreach(loader::$_databases as $db_name => $db_var) { $databases[] = $db_var; }
         
+        $output = "\n\33[0;36m********************* LOADED FILES *********************";
+        $output.= "\n*";
+        if(count($config_files) > 0)
+        $output .= "\n* Config  --> ".implode(',',$config_files);
+        if(count($lang_files) > 0)
+        $output .= "\n* Lang    --> ".implode(',', $lang_files);
+        if(count($models) > 0)
+        $output .= "\n* Model   --> ".implode(',',$models);
+        if(count($databases) > 0)
+        $output .= "\n* Db      --> ".implode(',',$databases);
         if(count($base_helpers) > 0)
-        {
-            $output .= "\n# Core Helpers --> ".implode(',',$base_helpers);
-        }
+        $output .= "\n* Helper  --> ".implode(',',$base_helpers);
+        if(count($helpers) > 0)
+        $output .= "\n* Helper --> ".implode(',',$helpers);
+        $output.= "\n*";
+        $output .= "\n********************************************************\n";
+        $output .= "\033[0m";
         
-        $output .= "\n# Helpers --> ".implode(',',$helpers);
-        $output .= "\n# Models --> ".implode(',',$models);
-        $output .= "\n# Databases --> ".implode(',',$databases);
-        
-        $output .= "\033[0m\n";
         echo $output;
     }
 

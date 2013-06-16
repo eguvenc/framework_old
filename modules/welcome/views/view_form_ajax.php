@@ -136,7 +136,7 @@ label { font-weight:bold; }
         Please look at the <b>form_send</b> helper functions you will understand well how does it work. Helper file is located <b>obullo/helpers/form_send.php</b>
 </p>
 
-<?php echo br(); ?>
+<?php echo '<br />'; ?>
 <?php echo view('../footer') ?>
 
 </body>
