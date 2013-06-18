@@ -1060,7 +1060,13 @@ Class OB_Mongo {
     private function connection_string() 
     {
         $config = get_config('mongodb');
-
+        
+        if($config['dsn'] != '')
+        {
+            $this->connection_string = $config['dsn'];
+            return;
+        }
+        
         $this->host         = $config['host'];
         $this->port         = $config['port'];
         $this->user         = $config['username'];
