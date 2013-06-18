@@ -18,6 +18,7 @@ $mongodb['port']         = '27017';
 $mongodb['database']     = '';
 $mongodb['username']     = '';
 $mongodb['password']     = '';
+$mongodb['dsn']          = ''; // mongodb://connection_string
 
 /*
 |--------------------------------------------------------------------------
