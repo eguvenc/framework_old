@@ -1,5 +1,5 @@
 <?php
-
+defined('BASE') or exit('Access Denied!');
 /*
 |--------------------------------------------------------------------------
 | Auth Library Options
@@ -35,3 +35,6 @@ $auth['fields']              = array(       // Session Container db table fields
                                 'user_active', 
                                 'user_gender',
                             );
+
+/* End of file auth.php */
+/* Location: .app/config/auth.php */

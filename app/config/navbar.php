@@ -1,5 +1,5 @@
 <?php
-defined('BASE') or exit('Access Denied!');
+
 /*
 |--------------------------------------------------------------------------
 | Navigation top bar class properties.

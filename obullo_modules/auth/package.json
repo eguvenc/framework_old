@@ -1,0 +1,44 @@
+{
+  "name": "auth",
+  "description": "User Authenticatin Class",
+  "version": "0.0.2",
+  "author": "ersin guvenc <eguvenc@gmail.com> (https://github.com/eguvenc)",
+  "component" : "library",
+  "shell" : [
+    {
+        "copy" : { 
+            "source" : "obullo_modules/$name/releases/$version/src/auth.php", 
+            "target" : "app/config/",
+            "##### we don't need to file type if the target path name equal to app/config" :" we move the file to app/config folder "
+        }
+    }
+  ],
+  "dependencies": {
+    "database": "1.7.4",
+    "session": "0.2.0",
+  },
+  "keywords": [
+    "auth",
+    "authentication",
+  ],
+  "homepage": "https://github.com/eguvenc/auth",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/eguvenc/auth.git"
+  },
+  "main": "./releases/latest/auth.php",
+  "requires": {
+    "php": ">= 5.2.4",
+    "extensions" : []
+  },
+  "bugs": {
+    "url": "https://github.com/eguvenc/auth/issues",
+    "email": "eguvenc@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "https://github.com/eguvenc/auth/master/README.md"
+    }
+  ],
+}

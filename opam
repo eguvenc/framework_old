@@ -1,0 +1,31 @@
+<?php
+/**
+|--------------------------------------------------------------------------
+| OPAM ( OBULLO PACKAGE MANAGER )
+|--------------------------------------------------------------------------
+| Obullo Packege Manager Functions
+|
+| - Instal the Opam                 :  cd /var/www/ && wget http://opam.obullo.com/opam
+| - Create a new project            : "php opam install $projectname" it will download the latest Obullo version from github to your project folder.
+| - Update existing project         : "php opam update"  it will update the latest obullo modules using "package.json" file. 
+| - Create virtual host for apache  : "php opam addsite $projectname" ( Support for ubuntu at this time )
+| - Delete virtual host for apache  : "php opam delsite $projectname" ( Support for ubuntu at this time ) 
+|
+*/ 
+
+/**
+| This filename is OPAM ( obullo package manager ) opam an update manager
+| like node.js npm or composer.phar but functionality same like npm.
+| 
+| Command line examples: 
+| 
+| $ cd /var/www/
+| $ wget http://opam.obullo.com/opam
+| 
+| CREATE NEW PROJECT
+| $ php opam install $yourprojectname
+| 
+| UPDATE EXISTING PROJECT
+| $ php opam update
+|
+*/ 
