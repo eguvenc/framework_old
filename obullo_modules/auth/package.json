@@ -9,7 +9,7 @@
         "copy" : { 
             "source" : "obullo_modules/$name/releases/$version/src/auth.php", 
             "target" : "app/config/",
-            "##### we don't need to file type if the target path name equal to app/config" :" we move the file to app/config folder "
+            "##### we don't need to file type if the target path name equal to app/config" :" we move the file to app/config folder and update $config var. "
         }
     }
   ],
