@@ -78,6 +78,7 @@ if( ! function_exists('object_to_array') )
 {
     function object_to_array($object)
     {
+        $array = array();
         if ( ! is_object($object))
         {
             return $object;
