@@ -1,5 +1,3 @@
-New flexible version
-
 Obullo-2.0 Features:
 =========================
 
