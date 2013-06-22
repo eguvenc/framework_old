@@ -1,5 +1,5 @@
 <?php
-defined('STDIN') or exit('Access Denied.');
+defined('STDIN') or exit('Access Denied');
 
 Class Log extends Controller {
     
@@ -39,35 +39,6 @@ Display logs [$php task log] or to filter logs [$php task log level debug | erro
     public function level($level = 'all')
     {
         $this->index($level);
-    }
-    
-     /**
-     * Start the "clear log files" task.
-     */
-    function clear()
-    {
-        $clear_sh = "
-        ####################
-        #  CLEAR. S H  ( Clear all application log files )
-        ####################
-
-        PROJECT_DIR=\${PWD}
-
-        if [ ! -d obullo_modules ]; then
-            # Check the obullo directory exists, so we know you are in the project folder.
-            echo \"You must be in the project folder root ! Try cd /your/www/path/projectname\".
-            return
-        fi
-
-        # define your paths.
-        APP_LOG_DIR=\"\$PROJECT_DIR/app/core/logs/\"
-
-        # delete app directory log files.
-        # help https://help.ubuntu.com/community/find
-        find \$APP_LOG_DIR -name 'log-*.php' -exec rm -rf {} \;
-        echo \"\33[0;32mClear log files task successfully completed !\33[0m\"";
-        
-        echo shell_exec($clear_sh);
     }
     
     /**

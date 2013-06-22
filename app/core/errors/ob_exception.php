@@ -48,7 +48,6 @@ function Obullo_Element() {
     }
     return elements;
 }
-
 function Obullo_Error_Toggle(obj){
     var el = Obullo_Element(obj);
     if (el == null){
@@ -59,11 +58,9 @@ function Obullo_Error_Toggle(obj){
 </script>
 
 <div id="exception_content">
-
 <b>(<?php echo $type; ?>):  <?php echo error_secure_path($e->getMessage(), true); ?></b><br />
-
 <?php 
-if(isset($sql) && count($sql) > 0) 
+if(isset($sql) AND count($sql) > 0) 
 { 
     foreach ($sql as $db => $query)
     {
@@ -72,9 +69,7 @@ if(isset($sql) && count($sql) > 0)
 }
 ?>
 <?php $code = ($e->getCode() != 0) ? ' Code : '. $e->getCode() : ''; ?> 
-
 <span class="errorfile"><?php echo error_secure_path($e->getFile()) ?><? echo $code; ?><? echo ' ( Line : '.$e->getLine().' ) '; ?></span>
-
 <?php 
 $debug  = config('debug_backtrace');
 
@@ -219,5 +214,4 @@ if(is_string($debug['enabled']))
     <?php }   // end if isset ?>
 
 <?php }   // end if debug backtrace ?>
-
 </div>

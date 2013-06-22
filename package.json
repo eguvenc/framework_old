@@ -2,12 +2,15 @@
   "name": "Obullo",
   "version": "2.0",
   "dependencies": {
-    "router": { "v" : "*", "repo" : "git://github.com/eguvenc/router.git" },
-    "uri": { "v" : "*", "repo" : "git://github.com/eguvenc/uri.git" },
-    "config": { "v" : "*", "repo" : "git://github.com/eguvenc/config.git" },
-    "view": { "v" : "*", "repo" : "git://github.com/eguvenc/view.git" },
-    "input": { "v" : "*", "repo" : "git://github.com/eguvenc/input.git" },
-    "security": { "v" : "*", "repo" : "git://github.com/eguvenc/security.git" },
-    "db_pdo": { "v" : "*", "repo" : "git://github.com/eguvenc/db_pdo.git" },
-  },  
+    "router": "*",
+    "uri": "*",
+    "input": "*",
+    "security": "*", 
+    "db_pdo": "*",
+    "view": "*",
+    "config": { "repo" : "git://github.com/eguvenc/config.git", "version" : "*"},
+  },
+  
+  "###comments" : "If you want to replace a default core module you need specify the repo and version.",
+  "###example" : "git://github.com/username/yourlibrary.git"
 }

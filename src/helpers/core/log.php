@@ -107,6 +107,11 @@ if( ! function_exists('log_write') )
         } 
         elseif(defined('STDIN'))  // Command Line Task Request
         {
+            if(isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == 'clear')
+            {
+                return FALSE;
+            }
+            
             $log_path = rtrim($log_path, DS) . DS .'cmd' . DS; 
         }         
         
@@ -140,7 +145,7 @@ if( ! function_exists('log_write') )
         
         if ( ! file_exists($filepath))
         {
-            $message .= "<"."?php defined('BASE') or die('Access Denied'); ?".">\n\n";
+            $message .= "<"."?php defined('BASE') or die('Access Denied') ?".">\n\n";
         }
 
         $message .= $level.' '.(($level == 'INFO') ? ' -' : '-').' '.date($date_fmt). ' --> '.$msg."\n";  

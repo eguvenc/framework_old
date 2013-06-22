@@ -4,7 +4,7 @@ Obullo-2.0 Features:
 =========================
 
 - It's more ligtweight
-- OPAM ( Obullo Package Manager ) Module Support ( added after modeled node.js npm )
+- OBM ( Obullo Package & Version Update Manager ) works like node.js npm.
 - MVC, HMVC 
 - ODM ( Object Database Modeling )
 - UTF8 Libraries
