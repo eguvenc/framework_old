@@ -1,5 +1,4 @@
 <?php
-defined('BASE') or exit('Access Denied!');
 
 /**
  * Obullo Framework (c) 2009.
@@ -91,7 +90,6 @@ if( ! function_exists('log_write') )
         // @todo php errors.
         $php_error = NULL;
         
-        $log_path  = '';
         $threshold = 1;
         $date_fmt  = 'Y-m-d H:i:s';
         $enabled   = TRUE;
@@ -142,7 +140,7 @@ if( ! function_exists('log_write') )
         
         if ( ! file_exists($filepath))
         {
-            $message .= "<"."?php defined('BASE') or exit('Access Denied!'); ?".">\n\n";
+            $message .= "<"."?php defined('BASE') or die('Access Denied'); ?".">\n\n";
         }
 
         $message .= $level.' '.(($level == 'INFO') ? ' -' : '-').' '.date($date_fmt). ' --> '.$msg."\n";  

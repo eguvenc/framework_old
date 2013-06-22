@@ -1,5 +1,4 @@
 <?php
-defined('BASE') or exit('Access Denied!');
 
 /**
  * Obullo Framework (c) 2009.
@@ -75,19 +74,6 @@ Class OB_Router {
            $module  = $default[0];
         }
 
-        /*
-        if(file_exists(MODULES .$module. DS .'config'. DS .'routes'. EXT))
-        {   
-            $module_routes = get_static('routes', '', MODULES .$module. DS .'config');
-            
-            if(isset($module_routes) AND is_array($module_routes))
-            {
-                $routes = array_merge($routes, $module_routes);
-                
-                log_me('debug', '[ '.ucfirst($module).' ]: Module Router Settings Initialized', false, true);
-            }
-        }
-        */
         // Clean Unnecessary slashes !!
         // $routes = array_map(create_function( '$a', 'return trim($a, "/");' ), $routes);
         

@@ -1,5 +1,5 @@
 <?php
-defined('BASE') or exit('Access Denied!');
+
 /**
 |--------------------------------------------------------------------------
 | User Front Controller for Bootstrap.php file.
@@ -31,4 +31,4 @@ ini_set('zend.ze1_compatibility_mode', 0);
  
 
 /* End of file Bootstrap.php */
-/* Location: ./application/core/Bootstrap.php */
+/* Location: .app/core/Bootstrap.php */

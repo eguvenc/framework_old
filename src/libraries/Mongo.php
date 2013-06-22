@@ -1,5 +1,4 @@
 <?php
-defined('BASE') or exit('Access Denied!');
 
 /**
  * Obullo Mongo DB Class.

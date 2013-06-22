@@ -1,5 +1,4 @@
 <?php
-defined('BASE') or exit('Access Denied!');
 
 /**
  * Obullo Framework (c) 2009.
@@ -182,14 +181,14 @@ Class OB_Output {
         // Parse out the elapsed time and memory usage,
         // then swap the pseudo-variables with the data
         
-        $elapsed = benchmark_elapsed_time('total_execution_time_start', 'total_execution_time_end');        
-        $output  = str_replace('{elapsed_time}', $elapsed, $output);
+        $elapsed    = benchmark_elapsed_time('total_execution_time_start', 'total_execution_time_end');        
+        $el_output  = str_replace('{elapsed_time}', $elapsed, $output);
                 
         if ($this->parse_exec_vars === TRUE)
         {
             $memory = ( ! function_exists('memory_get_usage')) ? '0' : round(memory_get_usage()/1024/1024, 2).'MB';
-            $output = str_replace('{elapsed_time}', $elapsed, $output);
-            $output = str_replace('{memory_usage}', $memory, $output);
+            $el_output  = str_replace('{elapsed_time}', $elapsed, $output);
+            $output     = str_replace('{memory_usage}', $memory, $output);
         }       
 
         // Is compression requested?  
@@ -201,7 +200,6 @@ Class OB_Output {
             {             
                 if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) AND strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE)
                 {   
-                    // Obullo changes .. 
                     ini_set('zlib.output_compression_level', config('compression_level'));  
                     ob_start('ob_gzhandler');
                 }
@@ -287,6 +285,7 @@ Class OB_Output {
             foreach ($profile as $key => $val)
             {
                 $key = ucwords(str_replace(array('_', '-'), ' ', $key));
+                
                 log_me('bench', "$key: ". $val); 
             }
              

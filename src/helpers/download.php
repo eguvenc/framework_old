@@ -1,5 +1,4 @@
 <?php
-defined('BASE') or exit('Access Denied!');
 
 /**
  * Obullo Framework (c) 2009.

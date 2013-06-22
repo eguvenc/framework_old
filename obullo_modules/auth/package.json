@@ -1,8 +1,12 @@
 {
   "name": "auth",
-  "description": "User Authenticatin Class",
+  "description": "User Authentication Class",
   "version": "0.0.2",
-  "author": "ersin guvenc <eguvenc@gmail.com> (https://github.com/eguvenc)",
+  "author": {
+    "name": "Ersin Guvenc",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
   "component" : "library",
   "shell" : [
     {

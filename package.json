@@ -2,12 +2,12 @@
   "name": "Obullo",
   "version": "2.0",
   "dependencies": {
-    "router": "*",
-    "uri": "*",
-    "config": "*",
-    "view" : "*",
-    "input" : "*",
-    "security" : "*",
-    "database" : "*"
+    "router": { "v" : "*", "repo" : "git://github.com/eguvenc/router.git" },
+    "uri": { "v" : "*", "repo" : "git://github.com/eguvenc/uri.git" },
+    "config": { "v" : "*", "repo" : "git://github.com/eguvenc/config.git" },
+    "view": { "v" : "*", "repo" : "git://github.com/eguvenc/view.git" },
+    "input": { "v" : "*", "repo" : "git://github.com/eguvenc/input.git" },
+    "security": { "v" : "*", "repo" : "git://github.com/eguvenc/security.git" },
+    "db_pdo": { "v" : "*", "repo" : "git://github.com/eguvenc/db_pdo.git" },
   },  
 }

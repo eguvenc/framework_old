@@ -131,7 +131,7 @@ define('FCPATH', __FILE__);
 define('PHP_PATH', '/usr/bin/php'); 
 define('FPATH', dirname(__FILE__));  
 define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
-define('TASK_FILE', 'task.php');
+define('TASK_FILE', 'task');
 
 /**
 |--------------------------------------------------------------------------

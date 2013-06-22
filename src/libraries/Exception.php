@@ -59,15 +59,14 @@ Class OB_Exception {
         
         if(substr($e->getMessage(),0,3) == 'SQL') 
         {
-            $ob   = this();
             $type = 'Database';
             $code = 'SQL';  // We understand this is an db error.
             
             foreach(loader::$_databases as $db_name => $db_var)
             {
-               if(isset($ob->$db_var) AND is_object($ob->$db_var))
+               if(isset(this()->$db_var) AND is_object(this()->$db_var))
                {
-                   $last_query = $ob->{$db_var}->last_query($ob->{$db_var}->prepare);
+                   $last_query = this()->{$db_var}->last_query(this()->{$db_var}->prepare);
                    
                    if( ! empty($last_query))
                    {
@@ -92,13 +91,16 @@ Class OB_Exception {
                 
         // Load Error Template
         //-----------------------------------------------------------------------
-        loader::helper('ob/view');
         
         $data['e']    = $e;
         $data['sql']  = $sql;
         $data['type'] = $type;
 
-        $error_msg = lib('ob/View')->load(APP .'core'. DS .'errors'. DS, 'ob_exception', $data, true);
+        ob_start();
+        
+        include (APP .'core'. DS .'errors'. DS .'ob_exception'.EXT);
+        
+        $error_msg = ob_get_clean();
         
         // Log Php Errors
         //-----------------------------------------------------------------------
@@ -107,7 +109,6 @@ Class OB_Exception {
         // Displaying Errors
         //-----------------------------------------------------------------------                
         $level  = config('error_reporting');
-        // $errors = error_get_defined_errors();
 
         if(is_numeric($level)) 
         {

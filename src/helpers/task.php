@@ -1,5 +1,4 @@
 <?php
-defined('BASE') or exit('Access Denied!');
 
 /**
  * Obullo Framework (c) 2009.
@@ -52,11 +51,11 @@ if ( ! function_exists('task_run'))
         if($debug)
         {
             // @todo escapeshellcmd();
-            $output = shell_exec($shell);
-
+            
             // clear console colors
             // $output = trim(preg_replace('/\n/', '#', $output), "\n");
-            $output = preg_replace(array('/\033\[36m/','/\033\[31m/','/\033\[0m/'), array('','',''), $output);
+            $output = preg_replace(array('/\033\[36m/','/\033\[31m/','/\033\[0m/'), array('','',''), shell_exec($shell));
+            
             log_me('debug', 'Task function output -> '. $output);
             
             return $output;

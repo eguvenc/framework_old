@@ -53,7 +53,7 @@ Display logs [$php task log] or to filter logs [$php task log level debug | erro
 
         PROJECT_DIR=\${PWD}
 
-        if [ ! -d obullo ]; then
+        if [ ! -d obullo_modules ]; then
             # Check the obullo directory exists, so we know you are in the project folder.
             echo \"You must be in the project folder root ! Try cd /your/www/path/projectname\".
             return
@@ -169,7 +169,7 @@ Display logs [$php task log] or to filter logs [$php task log level debug | erro
         }
     }
     
-    function _compile_loaded_files()
+    private function _compile_loaded_files()
     {
         $config_files = array();
         foreach(lib('ob/Config')->is_loaded as $config_file) { $config_files[] = error_secure_path($config_file); }
