@@ -182,13 +182,13 @@ Class OB_Output {
         // then swap the pseudo-variables with the data
         
         $elapsed    = benchmark_elapsed_time('total_execution_time_start', 'total_execution_time_end');        
-        $el_output  = str_replace('{elapsed_time}', $elapsed, $output);
+        $output  = str_replace('{elapsed_time}', $elapsed, $output);
                 
         if ($this->parse_exec_vars === TRUE)
         {
             $memory = ( ! function_exists('memory_get_usage')) ? '0' : round(memory_get_usage()/1024/1024, 2).'MB';
-            $el_output  = str_replace('{elapsed_time}', $elapsed, $output);
-            $output     = str_replace('{memory_usage}', $memory, $output);
+            $output = str_replace('{elapsed_time}', $elapsed, $output);
+            $output = str_replace('{memory_usage}', $memory, $output);
         }       
 
         // Is compression requested?  
