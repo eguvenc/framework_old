@@ -1,5 +1,5 @@
 <?php
-defined('STDIN') or exit('Access Denied');
+defined('STDIN') or die('Access Denied');
 
 Class Start extends Controller {
     

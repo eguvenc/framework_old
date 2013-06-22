@@ -1,5 +1,5 @@
 <?php
-defined('STDIN') or exit('Access Denied');
+defined('STDIN') or die('Access Denied');
 
 Class Log extends Controller {
     
@@ -90,16 +90,6 @@ Display logs [$php task log] or to filter logs [$php task log level debug | erro
                     {
                         $line = "\033[0;36m".$line."\033[0m";
                     }
-                    /*
-                    if(strpos($out[5], 'Hmvc') !== FALSE && isset($out[6]) && strpos($out[6], 'Request') !== FALSE)
-                    {
-                        $line = "\033[0;34m".$line."\033[0m";
-                    }
-                    if(strpos($out[5], 'Hmvc') !== FALSE && isset($out[6]) && strpos($out[6], 'Output') !== FALSE)
-                    {
-                        $line = "\033[0;34m".$line."\033[0m";
-                    }
-                     */
                 }
      
                 if(strpos($line, 'DEBUG') !== FALSE)
