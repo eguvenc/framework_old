@@ -3,32 +3,12 @@
 |--------------------------------------------------------------------------
 | Obullo Command Line Tool (TASKS)
 |--------------------------------------------------------------------------
-| Go to command line
-| 
-| $ cd /var/www/path/to/yourproject
-| if you have /tasks folder in modules folder root, run
-| $ php task tasks start
-|  OR
-| if you have a /tasks folder in a module, run
-| $ php task module task_controller method 'arguments' 
-|
-| 'Start.php' task controller located in your .modules/tasks folder.
-| Also you can use 'tasks' folder creating it under the current module.
+| @see User Guide: Chapters / General Topics / Tasks
 |
 | @author CJ Lazell
 |
 */ 
-if (isset($_SERVER['REMOTE_ADDR'])) exit('Access denied!');
-
-/**
-|--------------------------------------------------------------------------
-| Cmd Constant
-|--------------------------------------------------------------------------
-| If CMD constant defined that means Obullo works in Command Line 
-| mode so someone can check the mode using php defined() function.
-|
-*/  
-define('CMD', 1);
+if (isset($_SERVER['REMOTE_ADDR'])) die('Access denied');
  
 /**
 |--------------------------------------------------------------------------
@@ -36,6 +16,7 @@ define('CMD', 1);
 |--------------------------------------------------------------------------
 */ 
 unset($_SERVER['argv'][0]);
+
 
 /**
 |--------------------------------------------------------------------------

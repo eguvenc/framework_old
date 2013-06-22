@@ -410,8 +410,6 @@ Class OB_Hmvc
 
             return $this->_response();
         }
-
-        $arg_slice  = 3;
      
         // Call the controller.
         require_once($controller);
@@ -450,7 +448,7 @@ Class OB_Hmvc
         // Call the requested method.                1       2       3
         // Any URI segments present (besides the directory/class/method)
         // will be passed to the method for convenience
-        call_user_func_array(array($OB, $router->fetch_method()), array_slice($URI->rsegments, $arg_slice));
+        call_user_func_array(array($OB, $router->fetch_method()), array_slice($URI->rsegments, 3));
 
         $content = ob_get_contents();       
 

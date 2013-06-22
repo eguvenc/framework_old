@@ -48,7 +48,7 @@ if( ! function_exists('Obullo_Exception_Handler'))
             $code  = $e->getCode();
             $level = config('error_reporting');
     
-            if(defined('CMD'))  // If Command Line Request.
+            if(defined('STDIN'))  // If Command Line Request.
             {
                 echo $type .': '. $e->getMessage(). ' File: ' .error_secure_path($e->getFile()). ' Line: '. $e->getLine(). "\n";
                 

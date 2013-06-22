@@ -144,7 +144,7 @@ define('TASK_FILE', 'task.php');
 | @see User Guide: Chapters / General Topics / Control Your Application Boot
 |
 */                                     
-if(defined('CMD'))
+if(defined('STDIN'))
 {
     // Obullo Command Line Bootstrap file.
     //--------------------------------------------------------------- 

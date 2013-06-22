@@ -1,5 +1,5 @@
 <?php
-defined('CMD') or exit('Access Denied!');
+defined('STDIN') or exit('Access Denied.');
 
 Class Log extends Controller {
     

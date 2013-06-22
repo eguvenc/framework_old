@@ -1,11 +1,10 @@
 <?php
-defined('BASE') or exit('Access Denied!');
+
 /**
 |--------------------------------------------------------------------------
 | Obullo Command Line Bootstrap.php file.
 |--------------------------------------------------------------------------
-| For Command Line operations we use Cli_Bootstrap file, you
-| can run obullo /tasks using cmd.php.
+| For Command Line operations we use Cli_Bootstrap file.
 |
 | @see User Guide: Chapters / General Topics / Tasks
 |
@@ -22,7 +21,7 @@ $_SERVER['HTTP_ACCEPT_CHARSET'] = 'utf-8';
 /**
 |--------------------------------------------------------------------------
 | Disable Deprecated Zend Mode
-|--------------------------------------------------------------------------
+|-----------------------------------------------------defined('BASE') or exit('Access Denied!');---------------------
 |
 | Enable compatibility mode with Zend Engine 1 (PHP 4). It affects the cloning, 
 | casting (objects with no properties cast to FALSE or 0), and comparing of objects. 
@@ -58,11 +57,7 @@ set_time_limit(0);
 */
 ini_set('memory_limit', '100000M');
 
+// Put your functions here ..
 
-// Put your functions here ..     
- 
-
-// END Cli_Bootstrap.php File
-
-/* End of file Bootstrap.php */
-/* Location: ./application/core/Cli_Bootstrap.php */
+/* End of file Cli_Bootstrap.php */
+/* Location: .app/core/Cli_Bootstrap.php */

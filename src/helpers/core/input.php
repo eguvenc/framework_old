@@ -291,7 +291,7 @@ if( ! function_exists('i_cli'))
             return FALSE;
         }
         
-        if(defined('CMD'))
+        if(defined('STDIN'))
         {
             return TRUE;
         }

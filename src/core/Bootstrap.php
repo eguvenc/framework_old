@@ -86,7 +86,7 @@ if( ! function_exists('ob_system_run'))
         
         $folder = 'controllers';
         
-        if(defined('CMD'))  // Command Line Request
+        if(defined('STDIN'))  // Command Line Request
         {                
             if($router->fetch_directory() != 'tasks')    // Check module and application folders.
             {                    
@@ -97,11 +97,8 @@ if( ! function_exists('ob_system_run'))
             }
         }
         
-        $page_uri = "{$router->fetch_directory()} / {$router->fetch_class()} / {$router->fetch_method()}";
-
+        $page_uri   = "{$router->fetch_directory()} / {$router->fetch_class()} / {$router->fetch_method()}";
         $controller = MODULES .$router->fetch_directory(). DS .$folder. DS .$router->fetch_class(). EXT;
-
-        $arg_slice  = 3;
 
         require (BASE .'core'. DS .'Controller'. EXT);  // We load Model File with a 'ob_autoload' function which is
                                                         // located in obullo/core/common.php.         
@@ -129,7 +126,7 @@ if( ! function_exists('ob_system_run'))
             show_404($page_uri);
         }
         
-        $arguments = array_slice($OB->uri->rsegments, $arg_slice);
+        $arguments = array_slice($OB->uri->rsegments, 3);
         
         //                                                                     0       1       2
         // Call the requested method. Any URI segments present (besides the directory/class/method) 
@@ -155,7 +152,7 @@ if( ! function_exists('ob_system_close'))
 {
     function ob_system_close()
     {
-        foreach(loader::$_databases as $db_name => $db_var)  // Close all PDO connections..  
+        foreach(loader::$_databases as $db_var)  // Close all PDO connections..  
         {   
             $driver = db_item('dbdriver', $db_var);
             

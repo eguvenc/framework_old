@@ -308,7 +308,7 @@ Class OB_Router {
         
         $folder = 'controllers';
         
-        if(defined('CMD') AND $this->hmvc == FALSE)  // Command Line Request
+        if(defined('STDIN') AND $this->hmvc == FALSE)  // Command Line Request
         {
             if(is_dir(MODULES .$segments[0]. DS .'tasks')) 
             {                   
@@ -320,7 +320,7 @@ Class OB_Router {
             }
         }
                                         
-        if (is_dir(MODULES .$segments[0]) OR defined('CMD'))  // Check module
+        if (is_dir(MODULES .$segments[0]) OR defined('STDIN'))  // Check module
         {
             $this->set_directory($segments[0]);
 

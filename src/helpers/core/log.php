@@ -103,11 +103,11 @@ if( ! function_exists('log_write') )
         $log_threshold   = $config['log_threshold'];
         $log_date_format = $config['log_date_format'];
         
-        if (defined('CMD') AND defined('TASK'))   // Internal Task Request
+        if (defined('STDIN') AND defined('TASK'))   // Internal Task Request
         {
             $log_path = rtrim($log_path, DS) . DS .'tasks' . DS;
         } 
-        elseif(defined('CMD'))  // Command Line Task Request
+        elseif(defined('STDIN'))  // Command Line Task Request
         {
             $log_path = rtrim($log_path, DS) . DS .'cmd' . DS; 
         }         

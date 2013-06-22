@@ -777,7 +777,7 @@ if( ! function_exists('show_http_error'))
 
         $message = implode('<br />', ( ! is_array($message)) ? array($message) : $message);
         
-        if(defined('CMD'))  // If Command Line Request
+        if(defined('STDIN'))  // If Command Line Request
         {
             return '['.$heading.']: The url ' .$message. ' you requested was not found.'."\n";
         }

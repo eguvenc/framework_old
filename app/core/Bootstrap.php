@@ -26,10 +26,9 @@ defined('BASE') or exit('Access Denied!');
 */
 ini_set('zend.ze1_compatibility_mode', 0); 
 
+
 // Put your functions here ..
  
-
-// END Bootstrap.php File
 
 /* End of file Bootstrap.php */
 /* Location: ./application/core/Bootstrap.php */
