@@ -31,34 +31,25 @@
 | $ php obm update
 |
 */
-
-if($_SERVER['argv'][0])
-{
+$OBM_VERSION = '0.0';
+if($_SERVER['argv'][0]){
     array_shift($_SERVER['argv']);
-
-    if(ini_get('allow_url_fopen') !== "1")
-    {
+    if(ini_get('allow_url_fopen') !== "1"){
         exit("\33[0;31mYou need to set allow_url_fopen to \"On\" in your php.ini file.\033[0m\n");
     }
-    
-    if(strtolower($_SERVER['argv'][0]) == 'install')
-    {
+    if(strtolower($_SERVER['argv'][0]) == 'install'){
         
     }
-    elseif(strtolower($_SERVER['argv'][0]) == 'update') 
-    {
+    elseif(strtolower($_SERVER['argv'][0]) == 'update'){
         // parse package json and send files to OBM SERVER
         
     }
-    
     $server_url   = 'http://obullo-2.0/obm_server.php';
-    
-    if(file_exists('package.json'))
-    {
+    if(file_exists('package.json')){
         $package_json = file_get_contents('package.json');
-        $_SERVER['argv']['json'] = " { *40-23* : "; $package_json;
+        $_SERVER['argv']['_json'] = $package_json; // " { *40-23* : ";
     }
-     
+    $_SERVER['argv']['_version'] = $OBM_VERSION;
     // use key 'http' even if you send the request to https://...
     $options = array(
         'http' => array(
@@ -67,18 +58,42 @@ if($_SERVER['argv'][0])
             'content' => http_build_query($_SERVER['argv']),
         ),
     );
+    $context  = stream_context_create($options);
+    $json_res = file_get_contents($server_url, false, $context);
+    // print_r(json_decode($json_res, true));
+    $response = json_decode($json_res, true);
     
-    $context = stream_context_create($options);
-    $response_xml = file_get_contents($server_url, false, $context);
-    
-    print_r($response_xml);
-    exit;
-    
-    $xml = simplexml_load_string($response_xml); 
-    
-    foreach($xml as $json){
-        echo $json;
+    if(isset($response['version_update'])){ // If need to OBM version update. Run the update.sh.
+        echo "\33[0;36mNew OBM version available !\n";
+        echo "upgrading to version ".$response['version_update']." ..\n";
+        sleep(1);
+        echo "please wait ..\n";
+        sleep(1);
+        echo "..\n";
+        sleep(1);
+        echo "...\n";
+
+        $wget_sh = "
+        wget https://raw.github.com/obullo/obm/master/obm;
+        echo \"\033[0m\";
+        echo \"\33[0m\33[0;32mdone.\33[0m\";
+        exit; > /dev/null &";
+        
+        shell_exec($wget_sh);
+        
+        echo "\033[0m";
+        exit; //terminate the current script.
     }
+    
+    if(isset($response['errors'])){
+        foreach($response['errors'] as $error){
+            echo $error."\n";
+        }
+        die;
+    }
+    
+    print_r($response);
+    
     
     // print_r($xml);
     

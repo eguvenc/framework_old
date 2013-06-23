@@ -1,101 +1,89 @@
 <?php
 
 Class Obm_Server {
-    
     public $package_list = array();
     public $errors = array();
     
     function __construct(){
         // Get the json file from package database 
         // and send it to user.
-        
         // this area will come form MYSQL database.
-        $this->package_list['task']   = file_get_contents('obullo_modules/task/package.json');
-        $this->package_list['view']   = NULL;
-        $this->package_list['auth']   = file_get_contents('obullo_modules/auth/package.json');
-        $this->package_list['config'] = NULL;
+    }
+    function global_client_version(){
+        return '0.1';
     }
     
     function run(){
+        // Check the $USER Obm version if OBM version Out of Date
+        // Send error and begin the upgrade process to new version.
+        if($_REQUEST['_version'] != $this->global_client_version()){
+            header('Access-Control-Max-Age: 3628800');
+            header('Access-Control-Allow-Methods: GET, POST');
+            header('Content-type: application/json');
+            echo json_encode(array('version_update' => $this->global_client_version()));
+            return;
+        }
         
         // get the MAIN package JSON
-        echo 'REQUEST DATA : ';
-        print_r($_REQUEST);  
+        // echo 'REQUEST DATA : ';
+        // print_r($_REQUEST);  
         // if(isset($_GET[0]) AND $_GET[0] == 'update')
         //{
             $package_json = '';
-            if(isset($_REQUEST['json']))  // JSON is required field.
-            {
-                $package_json = json_decode($_REQUEST['json'], true);
-                
-                if( ! is_array($package_json) AND count($package_json) < 1)
-                {
+            if(isset($_REQUEST['_json'])) {  // JSON is required field.
+                $package_json = json_decode($_REQUEST['_json'], true);
+                if( ! is_array($package_json) AND count($package_json) < 1){
                     $this->errors[] = "The package.json file seems empty or not formatted correctly.";
-                    $this->errors[] = "The package.json file seems does not exists in your project root.";
                 }
-            } 
-            else
-            {
+                if(count($package_json['dependencies']) == 0){
+                    $this->errors[] = "The package.json dependencies can't be empty.";
+                }
+                
+            } else {
                 $this->errors[] = "The package.json file seems does not exists in your project root.";
             }
-            
-            if ( ! extension_loaded('libxml') )
-            {
-                die('Server Error: PECL libxml extension not loaded on the server.');
+            if ( ! extension_loaded('libxml') ){
+                echo json_encode(array('errors' => 'Server Error: PECL libxml extension not loaded on the server.'));
             }
-            
-            $xml = new XMLWriter();
-            $xml->openMemory();
-            $xml->startDocument('1.0', 'UTF-8');
-            $xml->startElement('root');
                     
-            if(sizeof($this->errors) > 0)
-            {
-                foreach($this->errors as $error)
-                {
-                    $this->_write_xml($xml, array('error' => $error), true);
+            header('Access-Control-Max-Age: 3628800');
+            header('Access-Control-Allow-Methods: GET, POST');
+            header('Content-type: application/json');
+            
+            $package_update_list = array();
+            if(sizeof($this->errors) > 0){
+               echo json_encode(array('errors' => $this->errors));
+            } else {
+                foreach($package_json['dependencies'] as $key => $row) {
+                    if($this->package_exists($key)){
+                        if( ! is_object($row[$key])){
+                            $package_update_list[$key] = $this->get_package_json($key);
+                        }
+                    }
                 }
-            } 
-            else 
-            {
-                $this->_write_xml($xml, $this->package_list, true);
+                
+                echo json_encode($package_update_list);
+                
+                // echo json_encode($this->package_list);
             }
-            
-            $xml->endElement();
-
-            header("Content-type: text/xml; charset=utf-8");
-            
-            echo $xml->outputMemory(true);
         // }    
     }
     
-    private function _write_xml($xml, $data, $cdata)
-    {
-        foreach($data as $key => $value)
-        {
-            if(is_array($value))
-            {
-               $xml->startElement($key);
-               
-                _write_xml($xml, $value, $cdata);
-                
-               $xml->endElement();
-
-               continue;
-            }
-
-            if($cdata) // full CDATA tags
-            {
-                $xml->startElement($key);
-                $xml->writeCData($value);
-                $xml->endElement();
-            } 
-            else
-            {   
-                $xml->writeElement($key, $value);
-            }
+    function package_exists($name){
+        $packages = array(
+            'auth' => '',
+            'task' => ''
+        );
+        if(isset($packages[$name])){
+            return TRUE;
         }
+        return FALSE;
     }
+    
+    function get_package_json($name){
+        return file_get_contents('obullo_modules/'.$name.'/package.json');
+    }
+    
 }
 
 $server = new Obm_Server();
