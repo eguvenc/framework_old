@@ -29,10 +29,12 @@
     "log debug",
     "follow debugs"
   ],
-  "homepage": "https://github.com/eguvenc/task",
+  "homepage": "https://github.com/obullo/task",
   "repository": {
     "type": "git",
-    "url": "git://github.com/eguvenc/task.git"
+    "url": "https://github.com/obullo/task.git",
+    "archive" : "zip",
+    "archive-url": "https://github.com/obullo/task/archive/master.zip"
   },
   "main": "./releases/latest/task.php",
   "requires": {
@@ -48,5 +50,5 @@
       "type": "GPL",
       "url": "https://github.com/eguvenc/task/master/README.md"
     }
-  ],
+  ]
 }

@@ -38,8 +38,56 @@ if($_SERVER['argv'][0])
 
     if(ini_get('allow_url_fopen') !== "1")
     {
-        exit("\33[0;31mYou need to set allow_url_fopen to \"On\" your php.ini file.\033[0m\n");
+        exit("\33[0;31mYou need to set allow_url_fopen to \"On\" in your php.ini file.\033[0m\n");
     }
     
-    echo file_get_contents('http://obullo-2.0/obm_server.php?'.http_build_query($_SERVER['argv']));
+    if(strtolower($_SERVER['argv'][0]) == 'install')
+    {
+        
+    }
+    elseif(strtolower($_SERVER['argv'][0]) == 'update') 
+    {
+        // parse package json and send files to OBM SERVER
+        
+    }
+    
+    $server_url   = 'http://obullo-2.0/obm_server.php';
+    
+    if(file_exists('package.json'))
+    {
+        $package_json = file_get_contents('package.json');
+        $_SERVER['argv']['json'] = " { *40-23* : "; $package_json;
+    }
+     
+    // use key 'http' even if you send the request to https://...
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method'  => 'POST',
+            'content' => http_build_query($_SERVER['argv']),
+        ),
+    );
+    
+    $context = stream_context_create($options);
+    $response_xml = file_get_contents($server_url, false, $context);
+    
+    print_r($response_xml);
+    exit;
+    
+    $xml = simplexml_load_string($response_xml); 
+    
+    foreach($xml as $json){
+        echo $json;
+    }
+    
+    // print_r($xml);
+    
+    /*
+    if(file_exists($obm_packages.'/'.$package.'.zip'))
+    {
+    }
+
+    $shell = "cd /obullo_srv_cache";
+    $shell.= "wget -0 $package.zip 'https://github.com/obullo/task/archive/master.zip'";
+     */
 }

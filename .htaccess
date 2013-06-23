@@ -1,0 +1,42 @@
+php_value upload_max_filesize 30M
+php_value post_max_size 30M
+php_value memory_limit 32M
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    #this is to remove the index.php in url
+
+    #Removes access to the Obullo folder by users.
+    #previously this would not have been possible.
+    #'obullo' can be replaced if you have renamed your obullo folder.
+    RewriteCond %{REQUEST_URI} ^(?:app|obullo)\b.*
+    RewriteRule ^(.*)$ index.php/$1 [L]
+
+    #Checks to see if the user is attempting to access a valid file,
+    #such as an image or css document, if this isn't true it sends the
+    #request to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !=/favicon.ico
+    RewriteRule (.*)/assets/(.*) modules/$1/assets/$2 [L]
+
+    #This last condition enables access to the images and css folders, and the robots.txt file
+    RewriteCond $1 !^(index\.php|obm_server\.php|obullo|modules|app|assets)
+    RewriteRule ^(.*)$ index.php/$1 [L]
+    AddType text/x-component .htc
+ 
+    #block access to multiple file types at once, use the code below:-
+    <FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak)$">
+        Order Allow,Deny
+        Deny from all
+    </FilesMatch>
+
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    # If we don't have mod_rewrite installed, all 404's
+    # can be sent to index.php, and everything works as normal.
+
+    ErrorDocument 404 /index.php
+</IfModule>
