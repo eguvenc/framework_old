@@ -8,7 +8,7 @@
     "security": "*", 
     "db_pdo": "*",
     "view": "*",
-    "config": { "repo" : "git://github.com/eguvenc/config.git", "version" : "*"},
+    "config": { "repo" : "https://github.com/eguvenc/config.git", "version" : "*"},
     "task" : "*"
   },
   
