@@ -74,6 +74,7 @@ Class Obm_Server {
     
     function package_exists($name){
         $packages = array(
+            'task' => '',
             'auth' => ''
         );
         if(isset($packages[$name])){
