@@ -31,16 +31,27 @@
 | $ php obm update
 |
 */
-$OBM_VERSION = '0.0';
-if($_SERVER['argv'][0]){
+$_SERVER['HTTP_USER_AGENT']     = 'OBM ( Obullo Package Manager ) / OS : '.php_uname();
+$_SERVER['HTTP_ACCEPT_CHARSET'] = 'utf-8';
+
+ini_set('zend.ze1_compatibility_mode', 0);
+ini_set('memory_limit', '100000M');
+set_time_limit(0);
+
+if(getOSname() == 'Windows'){
+    echo "\33[0;31mObullo is African origin and he loves to dance.\033[0m\n";
+    die;
+}
+$OBM_VERSION = '0.1';
+if(isset($_SERVER['argv'][0])){
     array_shift($_SERVER['argv']);
     if(ini_get('allow_url_fopen') !== "1"){
         exit("\33[0;31mYou need to set allow_url_fopen to \"On\" in your php.ini file.\033[0m\n");
     }
-    if(strtolower($_SERVER['argv'][0]) == 'install'){
+    if(isset($_SERVER['argv'][1]) AND strtolower($_SERVER['argv'][1]) == 'install'){
         
     }
-    elseif(strtolower($_SERVER['argv'][0]) == 'update'){
+    elseif(isset($_SERVER['argv'][1]) AND strtolower($_SERVER['argv'][1]) == 'update'){
         // parse package json and send files to OBM SERVER
         
     }
@@ -60,7 +71,7 @@ if($_SERVER['argv'][0]){
     );
     $context  = stream_context_create($options);
     $json_res = file_get_contents($server_url, false, $context);
-    // print_r(json_decode($json_res, true));
+    //print_r(json_decode($json_res, true));
     $response = json_decode($json_res, true);
     
     if(isset($response['version_update'])){ // If need to OBM version update. Run the update.sh.
@@ -74,10 +85,9 @@ if($_SERVER['argv'][0]){
         echo "...\n";
 
         $wget_sh = "
-        wget https://raw.github.com/obullo/obm/master/obm;
+        sudo wget https://raw.github.com/obullo/obm/master/obm;
         echo \"\033[0m\";
         exit; > /dev/null &";
-        
         shell_exec($wget_sh);
         
         echo "\033[0m";
@@ -86,60 +96,70 @@ if($_SERVER['argv'][0]){
     
     if(isset($response['errors'])){
         foreach($response['errors'] as $error){
-            echo $error."\n";
+            error($error);
         }
         die;
     }
     
-    print_r($response);
-    
-    
-    // print_r($xml);
-    
-    /*
-    if(file_exists($obm_packages.'/'.$package.'.zip'))
-    {
-    }
+    // print_r($response);
+    // PARSE JSON DATA
+    if(count($response) > 0){
+        // give chmod 777 permission to installed folder
+        // cd ..
+        // chmod -R 777 modulename
 
-    $shell = "cd /obullo_srv_cache";
-    $shell.= "wget -0 $package.zip 'https://github.com/obullo/task/archive/master.zip'";
-     */
+    } else {
+        error("Connection error, please try again.");
+        die;
+    }
+    
+    try {
+        print_r($response);
+        foreach($response as $key => $package){
+            echo $key;
+            var_dump(json_decode(trim($response[$key])));
+        }
+    } catch (Exception $e){
+        echo $e->getMessage();
+        die;
+    }
 }
 
+//------------------ Obm functions ---------------------
 
-$user_agent     =   $_SERVER['HTTP_USER_AGENT'];
-function getOS() { 
-    global $user_agent;
+function error($error){
+    echo "\33[0;31m".$error."\033[0m\n";
+}
+function getOSname() { 
+    $userOS = php_uname('v');
     $os_platform    =   "Unknown OS Platform";
     $os_array       =   array(
-                            '/windows nt 6.2/i'     =>  'Windows 8',
-                            '/windows nt 6.1/i'     =>  'Windows 7',
-                            '/windows nt 6.0/i'     =>  'Windows Vista',
-                            '/windows nt 5.2/i'     =>  'Windows Server 2003/XP x64',
-                            '/windows nt 5.1/i'     =>  'Windows XP',
-                            '/windows xp/i'         =>  'Windows XP',
-                            '/windows nt 5.0/i'     =>  'Windows 2000',
-                            '/windows me/i'         =>  'Windows ME',
-                            '/win98/i'              =>  'Windows 98',
-                            '/win95/i'              =>  'Windows 95',
-                            '/win16/i'              =>  'Windows 3.11',
-                            '/macintosh|mac os x/i' =>  'Mac OS X',
-                            '/mac_powerpc/i'        =>  'Mac OS 9',
+                            '/windows nt 6.2/i'     =>  'Windows',
+                            '/windows nt 6.1/i'     =>  'Windows',
+                            '/windows nt 6.0/i'     =>  'Windows',
+                            '/windows nt 5.2/i'     =>  'Windows',
+                            '/windows nt 5.1/i'     =>  'Windows',
+                            '/windows xp/i'         =>  'Windows',
+                            '/windows nt 5.0/i'     =>  'Windows',
+                            '/windows me/i'         =>  'Windows',
+                            '/win98/i'              =>  'Windows',
+                            '/win95/i'              =>  'Windows',
+                            '/win16/i'              =>  'Windows',
+                            '/macintosh|mac os x/i' =>  'Mac',
+                            '/mac_powerpc/i'        =>  'Mac',
                             '/linux/i'              =>  'Linux',
                             '/ubuntu/i'             =>  'Ubuntu',
-                            '/iphone/i'             =>  'iPhone',
-                            '/ipod/i'               =>  'iPod',
+                            '/centos/i'             =>  'Centos',
+                            '/freebsd/i'            =>  'FreeBSD',
+                            '/debian/i'             =>  'Debian',
+                            '/fedora/i'             =>  'Fedora',
+                            '/redhat/i'             =>  'RedHat',
                             '/ipad/i'               =>  'iPad',
-                            '/android/i'            =>  'Android',
-                            '/blackberry/i'         =>  'BlackBerry',
-                            '/webos/i'              =>  'Mobile'
                         );
     foreach ($os_array as $regex => $value) { 
-        if (preg_match($regex, $user_agent)) {
+        if (preg_match($regex, $userOS)) {
             $os_platform    =   $value;
         }
     }   
     return $os_platform;
 }
-
-echo getOS();

@@ -9,7 +9,8 @@
     "db_pdo": "*",
     "view": "*",
     "config": { "repo" : "https://github.com/eguvenc/config.git", "version" : "*"},
-    "task" : "*"
+    "task" : "*",
+    "auth" : "*"
   },
   
   "###comments" : "If you want to replace a default core module you need specify the repo and version.",

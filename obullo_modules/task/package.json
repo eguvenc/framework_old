@@ -39,7 +39,7 @@
   "main": "./releases/latest/task.php",
   "requires": {
     "php": ">= 5.2.4",
-    "extensions": [],
+    "extensions": ["none"]
   },
   "bugs": {
     "url": "https://github.com/eguvenc/task/issues",

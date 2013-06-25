@@ -12,7 +12,6 @@ Class Obm_Server {
     function global_client_version(){
         return '0.1';
     }
-    
     function run(){
         // Check the $USER Obm version if OBM version Out of Date
         // Send error and begin the upgrade process to new version.
@@ -20,6 +19,8 @@ Class Obm_Server {
             header('Access-Control-Max-Age: 3628800');
             header('Access-Control-Allow-Methods: GET, POST');
             header('Content-type: application/json');
+            header('Cache-Control: no-cache, must-revalidate'); // NO CACHE
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
             echo json_encode(array('version_update' => $this->global_client_version()));
             return;
         }
@@ -44,11 +45,13 @@ Class Obm_Server {
             }
             if ( ! extension_loaded('libxml') ){
                 echo json_encode(array('errors' => 'Server Error: PECL libxml extension not loaded on the server.'));
+                return;
             }
-                    
             header('Access-Control-Max-Age: 3628800');
             header('Access-Control-Allow-Methods: GET, POST');
             header('Content-type: application/json');
+            header('Cache-Control: no-cache, must-revalidate'); // NO CACHE
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
             
             $package_update_list = array();
             if(sizeof($this->errors) > 0){
@@ -71,8 +74,7 @@ Class Obm_Server {
     
     function package_exists($name){
         $packages = array(
-            'auth' => '',
-            'task' => ''
+            'auth' => ''
         );
         if(isset($packages[$name])){
             return TRUE;
