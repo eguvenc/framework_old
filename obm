@@ -122,7 +122,7 @@ if(isset($_SERVER['argv'][0])){
         foreach($response as $key => $package_json){
             $package = json_decode(trim($package_json));
             if($package == NULL){
-                error("The package $key could not parsed, probably package.json file has a syntax error.");
+                error("The package $key could not parsed, probably there is a  syntax error in package.json file.");
             } 
             /*****
              *  npm http GET https://registry.npmjs.org/commander
