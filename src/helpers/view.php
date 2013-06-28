@@ -143,17 +143,8 @@ if ( ! function_exists('view'))
 {
     function view($file_url, $data = '', $string = TRUE)
     {
-        $folder = 'views';
-        
-        if(strpos($file_url, 'ob/') === 0)  // Obullo Core Views
-        {
-            $file_data = array('filename' => strtolower(substr($file_url, 3)), 'path' => BASE .'views'. DS);
-        }
-        else
-        {
-            $file_data = loader::load_file($file_url, $folder, FALSE, FALSE);
-        }
-        
+        $file_data = loader::load_file($file_url, 'views', FALSE, FALSE);
+
         return lib('ob/View')->load($file_data['path'], $file_data['filename'], $data, $string, FALSE);
     }
 }

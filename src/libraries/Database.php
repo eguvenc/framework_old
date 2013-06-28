@@ -146,8 +146,6 @@ Class OB_Database {
         {
             $options = array('default_db' => $db_var);
         }
-               
-        loader::helper('core/driver');
         
         $DB = lib_driver($folder = 'database', 'Database_'.$driver_name, $options);
         $DB->__wakeup();

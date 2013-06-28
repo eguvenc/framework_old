@@ -97,13 +97,14 @@ $config['debug_backtrace']       = array('enabled' => 'E_ALL ^ (E_NOTICE | E_WAR
 |    1 = Error Messages (including PHP errors)
 |    2 = Debug Messages
 |    3 = Informational Messages
-|    4 = All Messages
+|    4 = Benchmark Info
+|    5 = All Messages
 |
 | For a live site you'll usually only enable Errors (1) to be logged otherwise
 | your log files will fill up very fast.
 |
 |  o When $config['log_queries']   == TRUE ALL Database SQL Queries goes to the log file.
-|  o When $config['log_benchmark'] == TRUE ALL framework benchmark goes to the log file.
+|  o When $config['log_benchmark'] == TRUE ALL framework benchmarks goes to the log file.
 |
 */
 $config['log_threshold']         = (ENV == 'LIVE') ? 1 : 5;
@@ -227,18 +228,6 @@ $config['language']              = 'english';
 |
 */
 $config['charset']               = 'UTF-8';
-
-/*
-|--------------------------------------------------------------------------
-| Class / Helper Extension Prefix
-|--------------------------------------------------------------------------
-|
-| This item allows you to set the classname/helpername prefix when extending
-| native libraries / helpers. For more information please see the user guide.
-|
-*/
-$config['subclass_prefix']       = 'MY_';
-$config['subhelper_prefix']      = 'my_';
 
 /*
 |--------------------------------------------------------------------------

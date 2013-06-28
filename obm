@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 /**
 |--------------------------------------------------------------------------
@@ -89,7 +90,11 @@ if(isset($_SERVER['argv'][0])){
         echo "...\n";
 
         $wget_sh = "
+        sudo rm -rf obm
+        sudo rm -rf /usr/bin/obm
         sudo wget https://raw.github.com/obullo/obm/master/obm;
+        sudo chmod 777 obm
+        sudo cp obm /usr/bin/obm
         echo \"\033[0m\";
         exit; > /dev/null &";
         shell_exec($wget_sh);
@@ -120,34 +125,40 @@ if(isset($_SERVER['argv'][0])){
     try {
         // print_r($response);
         foreach($response as $key => $package_json){
-            $package = json_decode(trim($package_json));
-            if($package == NULL){
-                error("The package $key could not parsed, probably there is a  syntax error in package.json file.");
+            $pack = json_decode(trim($package_json));
+            if($pack == NULL){
+                error("The package $key could not parsed, probably there is a syntax error in package.json file.");
             } 
-            /*****
-             *  npm http GET https://registry.npmjs.org/commander
-                npm http GET https://registry.npmjs.org/tinycolor
-                npm http GET https://registry.npmjs.org/options
-                npm http 200 https://registry.npmjs.org/uglify-js/-/uglify-js-1.2.5.tgz
-                npm http GET https://registry.npmjs.org/zeparser/0.0.5
-                npm http 200 https://registry.npmjs.org/bson/-/bson-0.1.8.tgz
-                npm http 200 https://registry.npmjs.org/xmlhttprequest/-/xmlhttprequest-1.4.2.tgz
-                npm http 200 https://registry.npmjs.org/mongodb
-                npm http 200 https://registry.npmjs.org/tinycolor
-                npm http 200 https://registry.npmjs.org/options
-                npm http 200 https://registry.npmjs.org/zeparser/0.0.5
-                npm http GET https://registry.npmjs.org/zeparser/-/zeparser-0.0.5.tgz
-                npm http 200 https://registry.npmjs.org/commander
-                npm http 200 https://registry.npmjs.org/zeparser/-/zeparser-0.0.5.tgz
-                ** --> npm http GET https://registry.npmjs.org/amanda/0.4.6
-                ** --> npm http 200 https://registry.npmjs.org/amanda/0.4.6
-                npm http GET https://registry.npmjs.org/amanda/-/amanda-0.4.6.tgz
-                npm http 200 https://registry.npmjs.org/amanda/-/amanda-0.4.6.tgz
-                amanda@0.4.6 node_modules/amanda
-             * 
-             */
-            if($package != NULL){
-                echo $package->name."\n";
+            if($pack != NULL){
+                // wget -O framework.zip https://github.com/obullo/framework/zipball/dev
+                // unzip framework.zip
+                // mv obullo-framework* obullo_modules/framework
+                if( ! isset($pack->name)){
+                    line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No name field.');
+                }
+                if( ! isset($pack->version)){
+                    line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No version field.');
+                }                
+                if( ! isset($pack->repo->archive_url)){
+                    line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No repo -> archive_url field.');
+                } else {
+                        $shell 	= "curl -s --head ".trim($pack->repo->archive_url)." | head -n 1 | grep \"HTTP/1.[01] [23]..\"";
+                        $output = shell_exec($shell);
+                        if($output == NULL){
+                           echo line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' '.trim($pack->repo->archive_url).' - url could not be resolved.');
+                        } else {
+                            $code = explode(" ", $output);
+                            if(isset($code[1])) {
+                                if($code[1] == '302' || $code[1] == '200'){
+                                    line('obm http 200 '.trim($pack->repo->archive_url));
+                                    line('obm http GET ');
+                                } else {
+                                    line('obm http '.$code[1].' '.trim($pack->repo->archive_url).' - url could not be resolved. Header: '.getHeader($code[1]));
+                                }
+                            }
+                        }
+                }
+             
             }
         }
     } catch (Exception $e){
@@ -160,6 +171,51 @@ if(isset($_SERVER['argv'][0])){
 
 function error($error){
     echo "\33[0;33m".$error."\033[0m\n";
+}
+function line($line){
+    $words = explode(" ", $line);
+    $text = '';
+    $text.= cli($words[0]).cli($words[1]).cli($words[2]);
+    unset($words[0]);
+    unset($words[1]);
+    unset($words[2]);
+    foreach($words as $word){
+        $text.= cli($word, 'brown');
+    }
+    echo $text."\n";
+}
+function cli($key, $color = ''){
+    $start = "\033[0m";
+    $end   = "\033[0m";
+    if($color != ''){
+        switch ($color) {
+            case 'white':
+                $color_str = '';
+                break;
+            case 'cyan':
+                $color_str = "\33[0;35m";
+                break;
+            case 'brown':
+                $color_str = "\33[0;33m";
+                break;
+        }
+        return $start.$color_str.$key.' '.$end;
+    }
+    switch ($key) {
+        case "obm":
+            $start.= "\33[0;36m";
+            break;
+        case "http":
+            $start.= "\33[0;32m";
+            break;
+        case "WARN":
+            $start.= "\33[0;31m";
+            break;
+        default:
+            $start.= "\33[0;35m";
+            break;
+    }    
+    return $start.$key.' '.$end;
 }
 function getOSname() { 
     $userOS = php_uname('v');
@@ -193,4 +249,50 @@ function getOSname() {
         }
     }   
     return $os_platform;
+}
+function getHeader($code){
+    $headers = array(
+                    200    => 'OK',
+                    201    => 'Created',
+                    202    => 'Accepted',
+                    203    => 'Non-Authoritative Information',
+                    204    => 'No Content',
+                    205    => 'Reset Content',
+                    206    => 'Partial Content',
+
+                    300    => 'Multiple Choices',
+                    301    => 'Moved Permanently',
+                    302    => 'Found',
+                    304    => 'Not Modified',
+                    305    => 'Use Proxy',
+                    307    => 'Temporary Redirect',
+
+                    400    => 'Bad Request',
+                    401    => 'Unauthorized',
+                    403    => 'Forbidden',
+                    404    => 'Not Found',
+                    405    => 'Method Not Allowed',
+                    406    => 'Not Acceptable',
+                    407    => 'Proxy Authentication Required',
+                    408    => 'Request Timeout',
+                    409    => 'Conflict',
+                    410    => 'Gone',
+                    411    => 'Length Required',
+                    412    => 'Precondition Failed',
+                    413    => 'Request Entity Too Large',
+                    414    => 'Request-URI Too Long',
+                    415    => 'Unsupported Media Type',
+                    416    => 'Requested Range Not Satisfiable',
+                    417    => 'Expectation Failed',
+
+                    500    => 'Internal Server Error',
+                    501    => 'Not Implemented',
+                    502    => 'Bad Gateway',
+                    503    => 'Service Unavailable',
+                    504    => 'Gateway Timeout',
+                    505    => 'HTTP Version Not Supported'
+                );
+    if(isset($headers[$code])){
+        return $headers[$code];
+    }
 }

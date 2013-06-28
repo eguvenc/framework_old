@@ -428,9 +428,24 @@ if ( ! function_exists('safe_mailto'))
 
         $x[] = '<'; $x[] = '/'; $x[] = 'a'; $x[] = '>';
 
-        $data['x'] = array_reverse($x);
+        $x_data = array_reverse($x);
+        
+        ob_start();
+        ?>
+        <script type="text/javascript" charset="utf-8"> 
+        //<![CDATA[
+        var l = new Array();
+        <?php $i = 0; foreach ($x_data as $val) { ?>l[<?php echo $i++; ?>]='<?php echo $val; ?>';<?php } ?>
 
-        return view('ob/safe_mail', $data);
+        for (var i = l.length-1; i >= 0; i = i-1)
+        {
+            if (l[i].substring(0, 1) == '|') { document.write("&#"+unescape(l[i].substring(1))+";"); }
+            else { document.write(unescape(l[i])); }
+        }
+        //]]>
+        </script>
+       <?php
+        return ob_get_clean();
     }
 }
 

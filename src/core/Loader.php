@@ -125,8 +125,6 @@ Class loader {
     {
         $data = self::load_file($class, 'libraries', ($params_or_no_ins == FALSE) ? TRUE : FALSE);
 
-        $class_var = '';
-
         #####################
 
         require_once($data['path'].$data['filename'].EXT);
@@ -341,7 +339,6 @@ Class loader {
     *
     * We have three helper directories
     *   o Obullo/helpers: ob/ helpers
-    *   o App/helpers   : app/ helpers
     *   o Local/helpers : module helpers
     *
     * @param    string $helper
@@ -355,14 +352,6 @@ Class loader {
         if(strpos($helper, 'ob/') === 0)
         {
             return loader::_helper(substr($helper, 3));
-        }
-                 
-        // Core helpers
-        // --------------------------------------------------------------------
-        
-        if(strpos($helper, 'core/') === 0) // Obullo Core Helpers
-        {
-            return loader::_helper(substr($helper, 5), true);
         }
        
         // Module Helpers
@@ -388,31 +377,14 @@ Class loader {
     * @param    string $helper
     * @return   void
     */
-    protected static function _helper($helper, $core = FALSE)
+    protected static function _helper($helper)
     {            
         if( isset(self::$_base_helpers[$helper]) )
         {
             return;
         }
-
-        $core_path = ($core) ? 'core'. DS : '';
-        $prefix      = config('subhelper_prefix');
-     
-        //------ end extensions override support -----//
-
-        if( ! isset(self::$_overriden_helpers[$helper]))
-        {
-            if(file_exists(APP .'helpers'. DS .$prefix. $helper. EXT))  // If application my_helper exist.
-            {
-                include(APP .'helpers'. DS .$prefix. $helper. EXT);
-
-                self::$_base_helpers[$prefix . $helper] = $prefix . $helper;
-
-                self::$_overriden_helpers[$helper] = $helper;
-            }
-        }
-
-        include(BASE .'helpers'. DS .$core_path . $helper. EXT);
+        
+        include(BASE .'helpers'. DS . $helper. EXT);
 
         self::$_base_helpers[$helper] = $helper;        
     }
@@ -466,17 +438,8 @@ Class loader {
         {
             $extra_path = str_replace('/', DS, trim($extra_path, '/')) . DS;
         } 
-        
-        if(strpos($file_url, 'app/') === 0)  // APP folder
-        {
-            $realname = strtolower(substr($file_url, 4));
-            $root     = APP . $folder;
-            $sub_root = '';
-        } 
-        else 
-        {
-            $sub_root   = lib('ob/Router')->fetch_directory(). DS .$folder. DS;
-        }
+       
+        $sub_root   = lib('ob/Router')->fetch_directory(). DS .$folder. DS;
 
         if(strpos($realname, '../') === 0)   // ../module folder request
         {
@@ -516,7 +479,10 @@ Class loader {
             return $return;
         }
         
-        if($folder != 'lang') $extra_path = '';
+        if($folder != 'lang')
+        {
+            $extra_path = '';
+        }
         
         return array('filename' => $realname, 'path' => $root. DS .$sub_root.$extra_path);
     }

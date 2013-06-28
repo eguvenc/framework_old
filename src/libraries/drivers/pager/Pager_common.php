@@ -937,9 +937,9 @@ Class OB_Pager_common
     */
     public function get_per_page_select_box($start = 5, $end = 30, $step = 5, $show_all_data = FALSE, $extra_params = array())
     {
-        loader::helper('core/driver');
-                                            
-        $widget = lib_driver($folder = 'pager', 'Pager_html_widgets', array('pager' => $this));
+        require_once 'drivers/pager/pager_html_widgets.php';
+        
+        $widget = new Pager_html_widgets(array('pager' => $this));
         
         return $widget->get_per_page_select_box($start, $end, $step, $show_all_data, $extra_params);
     }
@@ -964,9 +964,9 @@ Class OB_Pager_common
     */
     public function get_page_select_box($params = array(), $extra_attributes = '')
     {   
-        loader::helper('core/driver');
-                                            
-        $widget = lib_driver($folder = 'pager', 'Pager_html_widgets', array('pager' => $this));
+        require_once 'drivers/pager/pager_html_widgets.php';
+        
+        $widget = new Pager_html_widgets(array('pager' => $this));
         
         return $widget->get_page_select_box($params, $extra_attributes);
     }

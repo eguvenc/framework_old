@@ -30,11 +30,13 @@ if( ! function_exists('ob_include_files'))
     function ob_include_files()
     {
         require (APP  .'config'. DS .'constants'. EXT);  // Your constants ..
-        require (BASE .'config'. DS .'file_constants'. EXT);
+        require (BASE .'file_constants'. EXT);
         require (BASE .'core'. DS .'Registry'. EXT);
         require (BASE .'core'. DS .'Common'. EXT);
         require (BASE .'core'. DS .'Loader'. EXT);
-        require (BASE .'helpers'. DS .'core'. DS .'log'. EXT); 
+        
+        $packages = get_config('packages');
+        require (OB_MODULES .'log'. DS .'releases'. DS .$packages['dependencies']['log']. DS .'log'. EXT); 
     }
 }
 
@@ -49,6 +51,9 @@ if( ! function_exists('ob_set_headers'))
             @set_magic_quotes_runtime(0); 
         }   
         
+        $packages = get_config('packages');
+        require (OB_MODULES .'log'. DS .'releases'. DS .$packages['dependencies']['log']. DS .'log'. EXT); 
+        
         ###  load core libraries ####
         
         lib('ob/Uri');
@@ -59,8 +64,8 @@ if( ! function_exists('ob_set_headers'))
         
         ###  load core helpers ####
 
-        loader::helper('core/error');
-        loader::helper('core/input');
+        require (OB_MODULES .'error'. DS .'releases'. DS .$packages['dependencies']['error']. DS .'error'. EXT); 
+        require (OB_MODULES .'input'. DS .'releases'. DS .$packages['dependencies']['input']. DS .'input'. EXT); 
     }
 }
 

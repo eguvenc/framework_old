@@ -24,7 +24,7 @@ function ob_query_timer($mark = '')
 
 // ------------------------------------------------------------------------
 
-require (BASE .'config'. DS .'pdo_constants'. EXT);
+require (BASE .'pdo_constants'. EXT);
 
 // ------------------------------------------------------------------------
 

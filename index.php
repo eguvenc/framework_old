@@ -108,7 +108,8 @@ date_default_timezone_set('America/Chicago');
 define('ROOT',  realpath(dirname(__FILE__)) . DS);
 define('BASE', ROOT .'src'. DS);
 define('APP',  ROOT .'app'. DS);
-define('MODULES',  ROOT . 'modules' . DS);
+define('MODULES',  ROOT .'modules'. DS);
+define('OB_MODULES',  ROOT .'ob_modules'. DS);
 
 /**
 |---------------------------------------------------------------

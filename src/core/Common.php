@@ -71,17 +71,6 @@ function core_class($realname, $new_object = NULL, $params_or_no_ins = '')
         }
 
         $classname = 'OB_'.$Class;
-        $prefix    = config('subclass_prefix');  // MY_
-         
-        if(file_exists(APP .'libraries'. DS .$prefix. $Class. EXT))  // Application extend support
-        {
-            if( ! isset($new_objects[$Class]) )  // check new object instance
-            {
-                require(APP .'libraries'. DS .$prefix. $Class. EXT);
-            }
-            
-            $classname = $prefix. $Class;
-        } 
         
         // __construct params support.
         // --------------------------------------------------------------------
@@ -154,7 +143,6 @@ function core_class($realname, $new_object = NULL, $params_or_no_ins = '')
 function load_class($realname, $new_object = NULL, $params_or_no_ins = '')
 {
     static $new_objects       = array();               
-    static $overriden_objects = array();
     
     // Sub path support
     // --------------------------------------------------------------------
@@ -204,27 +192,7 @@ function load_class($realname, $new_object = NULL, $params_or_no_ins = '')
         }
         
         $classname = $Class;    // prepare classname
-
-        $classname   = 'OB_'.$Class;
-        $prefix      = config('subclass_prefix');  // MY_
-        
-        // Override Support
-        // --------------------------------------------------------------------
-        
-        if( ! isset($overriden_objects[$Class]))    // Check before we override it ..
-        {
-            if(file_exists(APP .'libraries'. $sub_path . DS .$prefix. $Class. EXT))  // Application extend support
-            {                
-                if( ! isset($new_objects[$Class]) )  // check new object instance
-                {
-                    require(APP .'libraries'. $sub_path . DS .$prefix. $Class. EXT);
-                }
-
-                $classname = $prefix. $Class;
-                
-                $overriden_objects[$Class] = $Class;
-            }     
-        }
+        $classname = 'OB_'.$Class;
         
         // __construct() params support.
         // --------------------------------------------------------------------
@@ -301,8 +269,6 @@ function ob_autoload($real_name)
         return;
     }
     
-    $modulename = lib('ob/Router')->fetch_directory();
-    
     $Class = $real_name;    
     
     // Database files.
@@ -312,41 +278,13 @@ function ob_autoload($real_name)
         
         return;
     }
-    
-    static $overriden_objects = array();
-    $prefix = config('subclass_prefix');  // MY_
-    
-    // Extension files.
-    if($real_name == $prefix.'Model' OR $real_name == $prefix.'Vmodel')
-    {
-        $Class = substr($real_name, strlen($prefix));
-
-        if( ! isset($overriden_objects[$Class]))    // Check before we override it ..
-        {
-            if(file_exists(APP .'libraries'. DS .$prefix. $Class. EXT))  
-            {    
-                require(APP .'libraries'. DS .$prefix. $Class. EXT);
-
-                $overriden_objects[$Class] = $Class;
-            }   
-        }
-
-        return;
-    }
 
     // __autoload libraries load support.
     // --------------------------------------------------------------------
-    if(file_exists(MODULES .$modulename. DS .'libraries'. DS .$Class. EXT))
+    if(file_exists(MODULES .'libraries'. DS .$Class. EXT))
     {
-        require(MODULES .$modulename. DS .'libraries'. DS .$Class. EXT);
+        require(MODULES .'libraries'. DS .$Class. EXT);
 
-        return;
-    }
-    
-    if(file_exists(APP .'libraries'. DS .$Class. EXT))
-    {    
-        require(APP .'libraries'. DS .$Class. EXT);
-        
         return;
     }
     
@@ -566,7 +504,7 @@ function db_item($item, $index = 'db')
 function is_really_writable($file)
 {
     // If we're on a Unix server with safe_mode off we call is_writable
-    if (DIRECTORY_SEPARATOR == '/' AND @ini_get("safe_mode") == FALSE)
+    if (DS == '/' AND @ini_get("safe_mode") == FALSE)
     {
         return is_writable($file);
     }
