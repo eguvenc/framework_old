@@ -61,12 +61,6 @@ if( ! function_exists('ob_set_headers'))
         Benchmark::getInstance();
         Input::getInstance();
         
-        lib('ob/Uri');
-        lib('ob/Router');
-        lib('ob/Lang');
-        lib('ob/Benchmark');
-        lib('ob/Input');
-        
         ###  load core helpers ####
 
         require (OB_MODULES .'error'. DS .'releases'. DS .$packages['dependencies']['error']. DS .'error'. EXT); 
