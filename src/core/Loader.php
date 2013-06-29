@@ -32,14 +32,7 @@ Class loader {
     * Track "base" helper files.
     * @var array
     */
-    public static $_base_helpers = array();
-    
-    /**
-    * Track "overriden" helpers.
-    *
-    * @var array
-    */
-    public static $_overriden_helpers = array();
+    public static $_ob_helpers = array();
 
     /**
     * Track db names.
@@ -52,130 +45,6 @@ Class loader {
     * @var array
     */
     public static $_models       = array();
-
-    /**
-    * loader::lib();
-    *
-    * load libraries from /module folder. (current module) 
-    *
-    * @param    mixed $class
-    * @param    mixed $params_or_no_instance array | null | false 
-    * @param    string | boolean $object_name_or_new_instance
-    * @return   self::_library()
-    */
-    public static function lib($class = '', $params_or_no_instance = '', $object_name_or_new_instance = '')
-    {
-        if($class == '')
-        {
-            return FALSE;
-        }
-        
-        if(is_bool($object_name_or_new_instance))
-        {
-            $object_name  = '';
-            $new_instance = $object_name_or_new_instance;
-        }
-        else 
-        {
-            $new_instance = FALSE;
-            $object_name  = $object_name_or_new_instance;
-        }
-        
-        // Obullo Libraries
-        // --------------------------------------------------------------------
-        
-        if(strpos($class, 'ob/') === 0)
-        {
-            $library = strtolower(substr($class, 3));
-            
-            if($params_or_no_instance === FALSE)
-            {   
-                return lib($class, $params_or_no_instance, $new_instance);
-            } 
-            
-            // If someone use HMVC we need to create new instance() foreach Library
-            if(i_hmvc() == FALSE)
-            {
-                if (isset(this()->{$library}) AND is_object(this()->{$library}))
-                {
-                    return;
-                }
-            }
-
-            this()->{$library} = lib($class, $params_or_no_instance, $new_instance);
-            
-            return;
-        }
-        
-        self::_library($class, $params_or_no_instance, $object_name, $new_instance);
-    }
-
-    // --------------------------------------------------------------------
-                             
-    /**
-    * Obullo Library Loader.
-    *
-    * @param    string $class class name
-    * @param    array | boolean $params_or_no_ins __construct() params  | or | No Instantiate
-    * @param    boolean $new_instance create new instance
-    *
-    * @return   void
-    */
-    protected static function _library($class, $params_or_no_ins = '', $object_name = '', $new_instance = FALSE)
-    {
-        $data = self::load_file($class, 'libraries', ($params_or_no_ins == FALSE) ? TRUE : FALSE);
-
-        #####################
-
-        require_once($data['path'].$data['filename'].EXT);
-
-        #####################
-
-        $class_var = strtolower($data['filename']);
-
-        if($object_name != '') 
-        {
-            $class_var = $object_name;
-        }
-
-        if(is_array($params_or_no_ins))  // HMVC need to create new instance() foreach Library
-        {
-            if(i_hmvc() == FALSE AND $new_instance == FALSE)
-            {
-                if (isset(this()->$class_var) AND is_object(this()->$class_var))
-                {
-                    return;
-                }
-            }
-
-            if(class_exists($data['filename']))
-            {
-                this()->$class_var = new $data['filename']($params_or_no_ins);
-            }
-
-            return;
-        }
-        elseif($params_or_no_ins === FALSE)
-        {
-            return;
-        }
-        else
-        {
-            if (isset(this()->$class_var) AND is_object(this()->$class_var))
-            {
-                return;
-            }
-
-            if(class_exists($data['filename']))
-            {
-                $Class = ucfirst($data['filename']);
-
-                this()->$class_var = new $Class();
-            }
-
-            return;
-        }
-    }
 
     // --------------------------------------------------------------------
 
@@ -379,45 +248,15 @@ Class loader {
     */
     protected static function _helper($helper)
     {            
-        if( isset(self::$_base_helpers[$helper]) )
+        if( isset(self::$_ob_helpers[$helper]) )
         {
             return;
         }
         
         include(BASE .'helpers'. DS . $helper. EXT);
 
-        self::$_base_helpers[$helper] = $helper;        
+        self::$_ob_helpers[$helper] = $helper;        
     }
-
-    // --------------------------------------------------------------------
-
-    /**
-    * Load language files.
-    * 
-    * @param string $file
-    * @param string $folder
-    * @param bool $return 
-    */
-    public static function lang($file, $folder = '', $return = FALSE)
-    {
-        lib('ob/Lang')->load($file, $folder, $return);
-    }
-
-    // --------------------------------------------------------------------
-    
-    /**
-    * Load config files.
-    * 
-    * @param string $file
-    * @param bool $use_sections
-    * @param bool $fail_gracefully 
-    */
-    public static function config($file, $use_sections = FALSE)
-    {
-        lib('ob/Config')->load($file, $use_sections);
-    }
- 
-    // --------------------------------------------------------------------
     
     /**
     * Common file loader for models and

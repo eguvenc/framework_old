@@ -25,7 +25,7 @@ Class Clear extends Controller {
 
         PROJECT_DIR=\${PWD}
 
-        if [ ! -d obullo_modules ]; then
+        if [ ! -d ob_modules ]; then
             # Check the obullo directory exists, so we know you are in the project folder.
             echo \"You must be in the project folder root ! Try cd /your/www/path/projectname\".
             return

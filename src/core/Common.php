@@ -1,18 +1,6 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009 - 2012.
- *
- * PHP5 HMVC Based Scalable Software.
- *
- * @package         obullo
- * @author          obullo.com
- * @copyright       Obullo Team
- * @since           Version 1.0
- * @license
- */
-
-/**
 * Common.php
 *
 * @version 1.0
@@ -24,224 +12,6 @@
 * @version 1.5 added PHP5 library interface class, added spl_autoload_register()
 *              renamed register_static() function, added replace support ..
 */
-
-/**
-* Register core libraries
-* 
-* @param string $realname
-* @param boolean | object $new_object
-* @param array $params_or_no_ins
-*/
-function core_class($realname, $new_object = NULL, $params_or_no_ins = '')
-{
-    static $new_objects = array();                
-    
-    $Class    = ucfirst(mb_strtolower($realname, config('charset')));
-    $registry = OB_Registry::instance();
-    
-    // if we need to reset any registered object .. 
-    // --------------------------------------------------------------------
-    if(is_object($new_object))
-    {
-        $registry->unset_object($Class);
-        $registry->set_object($Class, $new_object);
-        
-        return $new_object;
-    }
-    
-    $getObject = $registry->get_object($Class);   
-                                                   
-    if ($getObject !== NULL)
-    {
-        return $getObject;
-    }
-                      
-    if(file_exists(BASE .'libraries'. DS .'core'. DS .$Class. EXT))
-    {
-        if( ! isset($new_objects[$Class]) )  // check new object instance
-        {
-            require(BASE .'libraries'. DS .'core'. DS .$Class. EXT);
-        }
-        
-        $classname = $Class;    // prepare classname
-
-        if($params_or_no_ins === FALSE)
-        {
-            return TRUE;
-        }
-
-        $classname = 'OB_'.$Class;
-        
-        // __construct params support.
-        // --------------------------------------------------------------------
-        if($new_object == TRUE)
-        {
-            if(is_array($params_or_no_ins))  // construct support.
-            {
-                $Object = new $classname($params_or_no_ins);
-
-            } else
-            {
-                $Object = new $classname();
-            }
-            
-            $new_objects[$Class] = $Class;  // set new instance to static variable
-        } 
-        else 
-        {
-            if(is_array($params_or_no_ins)) // construct support.
-            {
-                $registry->set_object($Class, new $classname($params_or_no_ins));
-
-            } else
-            {
-                $registry->set_object($Class, new $classname());
-            }
-
-            $Object = $registry->get_object($Class);
-        }
-
-        // return to singleton object.
-        // --------------------------------------------------------------------
-                      
-        if(is_object($Object))
-        {
-            return $Object;
-        }
-        
-    }
-    else 
-    {
-        throw new Exception('The core class '.$Class. ' not found.');
-    }
-
-    return NULL;  // if register func return to null
-                  // we will show a loader exception
-}
-
-// -------------------------------------------------------------------- 
-
-/**
-* load_class()
-*
-* Register base classes which start by OB_ prefix
-*
-* @access   private
-* @param    string $class the class name being requested
-* @param    array | bool $params_or_no_ins (__construct parameter ) | or | No Instantiate
-* @version  0.1
-* @version  0.2 removed OB_Library::factory()
-*               added lib_factory() function
-* @version  0.3 renamed base "libraries" folder as "base"
-* @version  0.4 added extend to core libraries support
-* @version  0.5 added $params_or_no_ins instantiate switch FALSE.
-* @version  0.6 added $new_object instance param, added unset object.
-* @version  0.7 added new instance support ( added $new_objects variable).
-*
-* @return   object  | NULL
-*/
-function load_class($realname, $new_object = NULL, $params_or_no_ins = '')
-{
-    static $new_objects       = array();               
-    
-    // Sub path support
-    // --------------------------------------------------------------------
-    $sub_path = '';
-    if(strpos($realname, '/') > 0)
-    {
-        $paths    = explode('/', $realname);
-        $realname = array_pop($paths);         // get file name
-        $sub_path = DS . implode(DS, $paths);  // build sub path  ( e.g ./drivers/pager/)
-    }
-    
-    $Class    = ucfirst(mb_strtolower($realname, config('charset')));
-    $registry = OB_Registry::instance();
-    
-    // if we need to reset any registered object .. 
-    // --------------------------------------------------------------------
-    if(is_object($new_object))
-    {
-        $registry->unset_object($Class);
-        $registry->set_object($Class, $new_object);
-        
-        return $new_object;
-    }
-
-    if($params_or_no_ins !== FALSE)  // No instantiate support.
-    {
-        $getObject = $registry->get_object($Class);
-
-        if ($getObject !== NULL)
-        {
-            return $getObject;
-        }
-    }
-    
-    // No Instantiate Support.
-    // --------------------------------------------------------------------
-    if($params_or_no_ins === FALSE)
-    {
-        return TRUE;
-    }
-                                                  
-    if(file_exists(BASE .'libraries'. $sub_path . DS . $Class. EXT))
-    {
-        if( ! isset($new_objects[$Class]) )  // check new object instance
-        {
-            require(BASE .'libraries'. $sub_path . DS . $Class. EXT);
-        }
-        
-        $classname = $Class;    // prepare classname
-        $classname = 'OB_'.$Class;
-        
-        // __construct() params support.
-        // --------------------------------------------------------------------
-        
-        if($new_object == TRUE)
-        {
-            if(is_array($params_or_no_ins))  // construct support.
-            {
-                $Object = new $classname($params_or_no_ins);
-
-            } else
-            {
-                $Object = new $classname();
-            }
-            
-            $new_objects[$Class] = $Class;  // set new instance to static variable
-        } 
-        else 
-        {
-            if(is_array($params_or_no_ins)) // construct support.
-            {
-                $registry->set_object($Class, new $classname($params_or_no_ins));
-
-            } else
-            {
-                $registry->set_object($Class, new $classname());
-            }
-
-            $Object = $registry->get_object($Class);
-        }
-
-        // return to singleton object.
-        // --------------------------------------------------------------------
-                      
-        if(is_object($Object))
-        {
-            return $Object;
-        }
-        
-    }
-    else 
-    {
-        throw new Exception('The Obullo library '.$Class. ' not found.');
-    }
-
-    return NULL;  // if register func return to null
-                  // we will show a loader exception
-}
-
 // --------------------------------------------------------------------
 
 /**
@@ -262,85 +32,30 @@ function load_class($realname, $new_object = NULL, $params_or_no_ins = '')
 *
 * @return NULL | Exception
 */
-function ob_autoload($real_name)
+function ob_autoload($realname)
 {    
-    if(class_exists($real_name))
+    if(class_exists($realname))
     {
         return;
     }
     
-    $Class = $real_name;    
-    
-    // Database files.
-    if($real_name == 'Model' OR $real_name == 'Vmodel')
+    if($realname == 'Model' OR $realname == 'Vmodel') // Database files.
     {
-        require(BASE .'core'. DS .$real_name. EXT);
-        
+        require(BASE .'core'. DS .$realname. EXT);
         return;
     }
+    
+    $packages = get_config('packages');
+    $filename = mb_strtolower($realname, config('charset'));
 
-    // __autoload libraries load support.
-    // --------------------------------------------------------------------
-    if(file_exists(MODULES .'libraries'. DS .$Class. EXT))
+    if(isset($packages['dependencies'][$filename])) //  check package Installed. We don't use file exists because of the performance.
     {
-        require(MODULES .'libraries'. DS .$Class. EXT);
-
+        require(OB_MODULES .$filename. DS .'releases'. DS .$packages['dependencies'][$filename]. DS .$filename. EXT);
         return;
     }
-    
-    return;
 }
 
 spl_autoload_register('ob_autoload', true);
-
-// --------------------------------------------------------------------
-
-/**
-* Obullo library loader
-* 
-* @param string $class
-* @param array | false $params_or_no_instance
-* @param true | object $new_object
-*/
-if( ! function_exists('lib'))
-{
-    function lib($class, $params_or_no_instance = '', $new_object = NULL)
-    {    
-        //------------ Begin core classes --------------
-        
-        $class = mb_strtolower($class, config('charset'));
-
-        if(strpos($class, 'ob/') === 0) // Obullo Libraries.
-        {               
-           $class = substr($class, 3);
-           
-           if(in_array($class, array('router', 'uri', 'module'), true))
-           {
-               return core_class($class, $new_object, $params_or_no_instance);
-           }    
-           
-           if($class == 'output' || $class == 'config') // core clases but located in libraries directory.
-           {
-               return load_class($class, $new_object, $params_or_no_instance);
-           }
-        }
-
-        //------------ End core classes --------------
-        
-        if($new_object === NULL || $new_object === FALSE)  // User Libraries.
-        {   
-            if(function_exists('i_hmvc'))  // allow using lib() function at bootstrap level.
-            {
-                if(i_hmvc()) // We must create new instance for each hmvc requests.
-                {
-                    $new_object = TRUE;
-                }
-            }
-        }
-
-        return load_class($class, $new_object, $params_or_no_instance);
-    }
-}
 
 // --------------------------------------------------------------------
 
@@ -450,11 +165,6 @@ function config($item, $config_name = 'config')
     }
 
     return $config_item[$item];
-}
-
-function config_item($item = '')
-{
-    throw new Exception('config_item() deprecated, please use config().');
 }
 
 // --------------------------------------------------------------------

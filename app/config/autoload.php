@@ -45,7 +45,7 @@ $autoload['helper'] = array('ob/view', 'ob/html', 'ob/url');
 | this will just include file, the library construct params must be array.
 |
 */
-$autoload['lib']        = array();
+$autoload['lib']        = array(); // array('ob/lang')
 
 /*
 | -------------------------------------------------------------------

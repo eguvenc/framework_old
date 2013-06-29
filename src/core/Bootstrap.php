@@ -31,7 +31,6 @@ if( ! function_exists('ob_include_files'))
     {
         require (APP  .'config'. DS .'constants'. EXT);  // Your constants ..
         require (BASE .'file_constants'. EXT);
-        require (BASE .'core'. DS .'Registry'. EXT);
         require (BASE .'core'. DS .'Common'. EXT);
         require (BASE .'core'. DS .'Loader'. EXT);
         
@@ -55,6 +54,12 @@ if( ! function_exists('ob_set_headers'))
         require (OB_MODULES .'log'. DS .'releases'. DS .$packages['dependencies']['log']. DS .'log'. EXT); 
         
         ###  load core libraries ####
+        
+        Uri::getInstance();
+        Router::getInstance();
+        Locale::getInstance();
+        Benchmark::getInstance();
+        Input::getInstance();
         
         lib('ob/Uri');
         lib('ob/Router');

@@ -6,8 +6,8 @@
  * A lightweight and simple user authentication control class.
  *
  * @package       Obullo
- * @subpackage    Libraries
- * @category      Libraries
+ * @subpackage    auth
+ * @category      authentication
  * @author        Obullo
  * @link
  */
