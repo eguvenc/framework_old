@@ -6,35 +6,9 @@
  * @package     Obullo
  * @subpackage  Helpers
  * @category    Helpers
- * @author      Ersin Guvenc
+ * @author      Obullo Team
  * @link        
  */
-
-// ------------------------------------------------------------------------
-
-/**
-* Trim Slashes
-*
-* Removes any leading/traling slashes from a string:
-*
-* /this/that/theother/
-*
-* becomes:
-*
-* this/that/theother
-*
-* @access	public
-* @param	string
-* @return	string
-*/	
-if( ! function_exists('trim_slashes') ) 
-{
-    function trim_slashes($str)
-    {
-	    return trim($str, '/');
-    } 
-}	
-// ------------------------------------------------------------------------
 
 /**
 * Strip Slashes
@@ -269,4 +243,4 @@ if( ! function_exists('repeater') )
 }
 
 /* End of file string.php */
-/* Location: ./obullo/helpers/string.php */
+/* Location: ./ob_modules/string/releases/0.0.1/string.php */

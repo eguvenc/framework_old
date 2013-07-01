@@ -29,6 +29,8 @@ $packages = array(
         'router' =>  array('version' => '0.0.1', 'component' => 'library'),
         'request' => array('version' => '0.0.1', 'component' => 'helper'),
         'security' => array('version' => '0.0.1', 'component' => 'helper'), 
+        'session' => array('version' => '0.0.1', 'component' => 'helper'), 
+        'string' => array('version' => '0.0.1', 'component' => 'helper'), 
         'task'  => array('version' => '0.0.1', 'component' => 'helper'),
         'uri' => array('version' => '0.0.1', 'component' => 'library'),
         'url' => array('version' => '0.0.1', 'component' => 'helper'),

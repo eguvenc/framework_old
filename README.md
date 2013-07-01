@@ -2,10 +2,10 @@
 PLEASE DO NOT DOWNLOAD, WAIT THE BETA VERSION.
 
 
-Obullo-2.0 Features WILL HAVE THESE FEATURES:
+Obullo-2.0 WILL HAVE THESE FEATURES:
 =========================
 
-- Extremely ligtweight !!
+- Extremely ligtweight !
 - OBM ( Obullo Package & Version Update Manager ) works like node.js npm.
 - MVC, HMVC 
 - ODM ( Object Database Modeling )
