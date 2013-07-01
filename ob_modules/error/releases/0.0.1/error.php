@@ -84,7 +84,7 @@ if( ! function_exists('Obullo_Exception_Handler'))
         } 
         else  // Is It Exception ?
         {             
-            $exception = lib('ob/Exception');
+            $exception = new Exceptions();
             
             if(is_object($exception)) 
             {           
@@ -707,4 +707,4 @@ register_shutdown_function('Obullo_Shutdown_Handler');
 // END error.php File
 
 /* End of file error.php */
-/* Location: ./obullo_modules/error/releases/0.0.1/error.php */
+/* Location: ./ob_modules/error/releases/0.0.1/error.php */

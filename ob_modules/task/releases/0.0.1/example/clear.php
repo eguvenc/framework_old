@@ -1,5 +1,5 @@
 <?php
-defined('STDIN') or die('Access Denied');
+defined('STDIN') or exit('Access Denied');
 
 Class Clear extends Controller {
     
@@ -25,7 +25,7 @@ Class Clear extends Controller {
 
         PROJECT_DIR=\${PWD}
 
-        if [ ! -d obullo_modules ]; then
+        if [ ! -d ob_modules ]; then
             # Check the obullo directory exists, so we know you are in the project folder.
             echo \"You must be in the project folder root ! Try cd /your/www/path/projectname\".
             return
@@ -44,5 +44,5 @@ Class Clear extends Controller {
     
 }
 
-/* End of file export.php */
-/* Location: .modules/tasks/export.php */
+/* End of file clear.php */
+/* Location: .modules/tasks/clear.php */

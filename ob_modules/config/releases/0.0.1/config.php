@@ -51,6 +51,18 @@ Class Config
     
     // --------------------------------------------------------------------
     
+    public static function setInstance($object)
+    {
+        if(is_object($object))
+        {
+            self::$instance = $object;
+        }
+        
+        return self::$instance;
+    }
+    
+    // --------------------------------------------------------------------
+    
     /**
     * Load Config File
     *

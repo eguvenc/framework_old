@@ -264,7 +264,7 @@ Class Output {
                 $memory_usage = "memory_get_usage() function not found on your php configuration.";
             }
 
-            $bench = lib('ob/Benchmark'); // init to bencmark for profiling.
+            $bench = Benchmark::getInstance(); // init to bencmark for profiling.
 
             $profile = array();
             foreach ($bench->marker as $key => $val)
@@ -301,8 +301,8 @@ Class Output {
     */    
     public function _write_cache($output)
     {
-        $OB = this();
-        $config = lib('ob/Config');
+        $OB     = this();
+        $config = Config::getInstance();
         
         $path       = $config->item('cache_path');
         $cache_path = ($path == '') ?  APP .'core'. DS .'cache'. DS : $path;

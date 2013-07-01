@@ -48,9 +48,9 @@ function ob_autoload($realname)
     $packages = get_config('packages');
     $filename = mb_strtolower($realname, config('charset'));
 
-    if(isset($packages['dependencies'][$filename])) //  check package Installed. We don't use file exists because of the performance.
+    if(isset($packages['dependencies'][$filename]['component']) AND $packages['dependencies'][$filename]['component'] == 'library') //  check package Installed. We don't use file exists because of the performance.
     {
-        require(OB_MODULES .$filename. DS .'releases'. DS .$packages['dependencies'][$filename]. DS .$filename. EXT);
+        require(OB_MODULES .$filename. DS .'releases'. DS .$packages['dependencies'][$filename]['version']. DS .$filename. EXT);
         return;
     }
 }

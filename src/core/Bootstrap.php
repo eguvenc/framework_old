@@ -1,17 +1,4 @@
 <?php
-
-/**
- * Obullo Framework (c) 2009 - 2012.
- *
- * PHP5 HMVC Based Scalable Software.
- *
- * @package         obullo     
- * @author          obullo.com
- * @copyright       Obullo Team
- * @since           Version 1.0
- * @filesource
- * @license
- */
  
  /**
  * Obullo Bootstrap file.
@@ -19,7 +6,7 @@
  * 
  * @package         Obullo 
  * @subpackage      Obullo.core
- * @category        Front Controller
+ * @category        Bootstrap
  * @version         1.0
  */
 
@@ -33,9 +20,6 @@ if( ! function_exists('ob_include_files'))
         require (BASE .'file_constants'. EXT);
         require (BASE .'core'. DS .'Common'. EXT);
         require (BASE .'core'. DS .'Loader'. EXT);
-        
-        $packages = get_config('packages');
-        require (OB_MODULES .'log'. DS .'releases'. DS .$packages['dependencies']['log']. DS .'log'. EXT); 
     }
 }
 
@@ -49,20 +33,22 @@ if( ! function_exists('ob_set_headers'))
         {
             @set_magic_quotes_runtime(0); 
         }   
-        
-        $packages = get_config('packages');
-        
-        require (OB_MODULES .'log'. DS .'releases'. DS .$packages['dependencies']['log']. DS .'log'. EXT); 
-        require (OB_MODULES .'error'. DS .'releases'. DS .$packages['dependencies']['error']. DS .'error'. EXT); 
-        require (OB_MODULES .'input'. DS .'releases'. DS .$packages['dependencies']['input']. DS .'input'. EXT); 
+
+        loader::helper('ob/log');
+        loader::helper('ob/error'); 
 
         ###  load core libraries ####
+                
+        $packages = get_config('packages');
         
-        if( ! isset($packages['uri'])){ throw new Exception('Obullo Uri module not installed, please check your package.json'); }
-        if( ! isset($packages['router'])){ throw new Exception('Obullo Router module not installed, please check your package.json'); }
-        if( ! isset($packages['locale'])){ throw new Exception('Obullo Locale module not installed, please check your package.json'); }
-        if( ! isset($packages['benchmark'])){ throw new Exception('Obullo Benchmark module not installed, please check your package.json'); }
-        if( ! isset($packages['input'])){ throw new Exception('Obullo Input module not installed, please check your package.json'); }
+        if( ! isset($packages['dependencies']['exceptions'])){ exit('Exceptions package not installed, please check your package.json'); }
+        if( ! isset($packages['dependencies']['uri'])){ exit('Uri package not installed, please check your package.json'); }
+        if( ! isset($packages['dependencies']['config'])){ exit('Config package not installed, please check your package.json'); }
+        if( ! isset($packages['dependencies']['output'])){ exit('Output package not installed, please check your package.json'); }
+        if( ! isset($packages['dependencies']['router'])){ exit('Router package not installed, please check your package.json'); }
+        if( ! isset($packages['dependencies']['locale'])){ exit('Locale package not installed, please check your package.json'); }
+        if( ! isset($packages['dependencies']['benchmark'])){ exit('Benchmark package not installed, please check your package.json'); }
+        if( ! isset($packages['dependencies']['input'])){ exit('Input package not installed, please check your package.json'); }
         
         Uri::getInstance();
         Router::getInstance();
@@ -81,16 +67,16 @@ if( ! function_exists('ob_system_run'))
 {
     function ob_system_run()
     { 
-        $uri    = lib('ob/Uri'); 
-        $router = lib('ob/Router');
+        $uri    = Uri::getInstance(); 
+        $router = Router::getInstance();
         
         benchmark_mark('total_execution_time_start');
         benchmark_mark('loading_time_base_classes_start');
         
-        lib('ob/Input')->_sanitize_globals();  // Initalize to input filter. ( Sanitize must be above the GLOBALS !! )             
+        Input::getInstance()->_sanitize_globals();  // Initalize to input filter. ( Sanitize must be above the GLOBALS !! )             
 
-        $output = lib('ob/Output');
-        $config = lib('ob/Config'); 
+        $output = Output::getInstance();
+        $config = Config::getInstance(); 
                 
         if ($output->_display_cache($config, $uri, $router) == TRUE) { exit; }  // Check REQUEST uri if there is a Cached file exist 
         
@@ -119,7 +105,6 @@ if( ! function_exists('ob_system_run'))
         
         if ( ! class_exists($router->fetch_class()) OR $router->fetch_method() == 'controller' 
               OR $router->fetch_method() == '_output'       // security fix.
-              OR $router->fetch_method() == '_hmvc_output'
               OR $router->fetch_method() == '_instance'
               OR in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods('Controller')))
             )

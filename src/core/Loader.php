@@ -29,12 +29,6 @@ Class loader {
     public static $_helpers      = array();
 
     /**
-    * Track "base" helper files.
-    * @var array
-    */
-    public static $_ob_helpers = array();
-
-    /**
     * Track db names.
     * @var array
     */
@@ -217,19 +211,34 @@ Class loader {
     {
         // Obullo Helpers
         // --------------------------------------------------------------------
-        
-        if(strpos($helper, 'ob/') === 0)
-        {
-            return loader::_helper(substr($helper, 3));
-        }
-       
-        // Module Helpers
-        // --------------------------------------------------------------------
-        
+         
         if( isset(self::$_helpers[$helper]) )
         {
             return;
         }
+        
+        if(strpos($helper, 'ob/') === 0)
+        {
+            $helpername = substr($helper, 3);
+            $packages   = get_config('packages');
+            
+            if( ! isset($packages['dependencies'][$helpername]['component']) )
+            {
+                throw new Exception('Please install the '.$helper.' package.');
+            }
+            
+            if($packages['dependencies'][$helpername]['component'] == 'helper')
+            {
+                require (OB_MODULES .$helpername. DS .'releases'. DS .$packages['dependencies'][$helpername]['version']. DS .$helpername. EXT);
+            }
+
+            self::$_helpers[$helper] = $helper;
+            
+            return;
+        }
+       
+        // Module Helpers
+        // --------------------------------------------------------------------
         
         $data = self::load_file($helper, $folder = 'helpers');
 
@@ -239,24 +248,6 @@ Class loader {
     }
 
     // --------------------------------------------------------------------
-
-    /**
-    * Private helper loader.
-    *
-    * @param    string $helper
-    * @return   void
-    */
-    protected static function _helper($helper)
-    {            
-        if( isset(self::$_ob_helpers[$helper]) )
-        {
-            return;
-        }
-        
-        include(BASE .'helpers'. DS . $helper. EXT);
-
-        self::$_ob_helpers[$helper] = $helper;        
-    }
     
     /**
     * Common file loader for models and
@@ -278,7 +269,7 @@ Class loader {
             $extra_path = str_replace('/', DS, trim($extra_path, '/')) . DS;
         } 
        
-        $sub_root   = lib('ob/Router')->fetch_directory(). DS .$folder. DS;
+        $sub_root   = Router::getInstance()->fetch_directory(). DS .$folder. DS;
 
         if(strpos($realname, '../') === 0)   // ../module folder request
         {

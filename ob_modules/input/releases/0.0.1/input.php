@@ -26,11 +26,9 @@ Class Input {
     */
     public function __construct()
     {
-        $config = lib('ob/Config');
-        
-        $this->_allow_get_array = ($config->item('enable_query_strings') === TRUE) ? TRUE : FALSE;
-        $this->enable_xss       = ($config->item('global_xss_filtering') === TRUE) ? TRUE : FALSE;
-        $this->enable_csrf      = ($config->item('csrf_protection') === TRUE) ? TRUE : FALSE;
+        $this->_allow_get_array = (config('enable_query_strings') === TRUE) ? TRUE : FALSE;
+        $this->enable_xss       = (config('global_xss_filtering') === TRUE) ? TRUE : FALSE;
+        $this->enable_csrf      = (config('csrf_protection') === TRUE) ? TRUE : FALSE;
 
         log_me('debug', "Input Class Initialized");
     }
@@ -119,7 +117,9 @@ Class Input {
         // CSRF Protection check
         if ($this->enable_csrf == TRUE)
         {
-            lib('ob/Security')->csrf_verify();
+            loader::helper('ob/security');
+            
+            Security::getInstance()->csrf_verify();
         }
         
         // Clean $_COOKIE Data
@@ -349,6 +349,8 @@ Class Input {
 // END Input Class
 // -------------------------------------------------------------------- 
 
+// Helper Functions for Input Class.
+
 /**
 * Fetch an item from the GET array
 *
@@ -364,7 +366,7 @@ if( ! function_exists('i_get') )
     {
         $GET = ($use_global_var) ? $GLOBALS['_GET_BACKUP']: $_GET; // _GET_BACKUP = Hmvc local get values
         
-        return lib('ob/Input')->_fetch_from_array($GET, $index, $xss_clean);
+        return Input::getInstance()->_fetch_from_array($GET, $index, $xss_clean);
     }
 }
 // --------------------------------------------------------------------
@@ -384,7 +386,7 @@ if( ! function_exists('i_post') )
     {
         $POST = ($use_global_var) ? $GLOBALS['_POST_BACKUP']: $_POST; // _POST_BACKUP = Hmvc local post values
 
-        return lib('ob/Input')->_fetch_from_array($POST, $index, $xss_clean);
+        return Input::getInstance()->_fetch_from_array($POST, $index, $xss_clean);
     }
 }
 
@@ -405,7 +407,7 @@ if( ! function_exists('i_request') )
     {
         $REQUEST = ($use_global_var) ? $GLOBALS['_REQUEST_BACKUP']: $_REQUEST; // _REQUEST_BACKUP = Hmvc local request values
 
-        return lib('ob/Input')->_fetch_from_array($REQUEST, $index, $xss_clean);
+        return Input::getInstance()->_fetch_from_array($REQUEST, $index, $xss_clean);
     }
 }
 
@@ -450,7 +452,7 @@ if( ! function_exists('i_cookie') )
 {
     function i_cookie($index = '', $xss_clean = FALSE)
     {
-        return lib('ob/Input')->_fetch_from_array($_COOKIE, $index, $xss_clean);
+        return Input::getInstance()->_fetch_from_array($_COOKIE, $index, $xss_clean);
     }
 }
 // --------------------------------------------------------------------
@@ -470,7 +472,7 @@ if( ! function_exists('i_server') )
 {
     function i_server($index = '', $xss_clean = FALSE)
     {
-        return lib('ob/Input')->_fetch_from_array($_SERVER, $index, $xss_clean);
+        return Input::getInstance()->_fetch_from_array($_SERVER, $index, $xss_clean);
     }
 }
 // --------------------------------------------------------------------
@@ -485,7 +487,7 @@ if( ! function_exists('i_ip_address') )
 {
     function i_ip_address()
     {
-        return lib('ob/Input')->ip_address();
+        return Input::getInstance()->ip_address();
     }
 }
 // --------------------------------------------------------------------
@@ -503,7 +505,7 @@ if( ! function_exists('i_valid_ip') )
 {
     function i_valid_ip($ip)
     {        
-        return lib('ob/Input')->valid_ip($ip);
+        return Input::getInstance()->valid_ip($ip);
     }
 }
 // --------------------------------------------------------------------
@@ -518,7 +520,7 @@ if( ! function_exists('i_user_agent') )
 {
     function i_user_agent()
     {
-        $input = lib('ob/Input');
+        $input = Input::getInstance();
 
         if ($input->user_agent !== FALSE)
         {
@@ -651,7 +653,7 @@ if( ! function_exists('i_hmvc'))
 {
     function i_hmvc()
     {    
-        if(lib('ob/Router')->is_hmvc())
+        if(Router::getInstance()->is_hmvc())
         {
             return TRUE;
         }

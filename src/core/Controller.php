@@ -45,10 +45,10 @@ Class Controller {
         // Load Obullo Core Libraries
         // ------------------------------------
         
-        $this->config = lib('ob/Config');
-        $this->router = lib('ob/Router');
-        $this->uri    = lib('ob/Uri');
-        $this->output = lib('ob/Output');
+        $this->config = Config::getInstance();
+        $this->router = Router::getInstance();
+        $this->uri    = Uri::getInstance();
+        $this->output = Output::getInstance();
         
         // Initialize to Autoloaders
         // ------------------------------------

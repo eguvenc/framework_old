@@ -68,7 +68,7 @@ Display logs [$php task log] or to filter logs [$php task log level debug | erro
             while ($line = fgets($fh))
             {
                 if($i == 0) $line = str_replace("\n",'',$line);
-                $line = str_replace('<?php defined(\'BASE\') or exit(\'Access Denied!\'); ?>','',$line);
+                $line = str_replace('<?php defined(\'BASE\') or die(\'Access Denied\') ?>','',$line);
                 
                 // remove all newlines
                 $line = trim(preg_replace('/[\r\n]/', ' ', $line), "\n");
@@ -130,53 +130,62 @@ Display logs [$php task log] or to filter logs [$php task log level debug | erro
         }
     }
     
+    /**
+     *  BENCHMARK INFO 
+     */
     private function _compile_loaded_files()
     {
         $config_files = array();
-        foreach(lib('ob/Config')->is_loaded as $config_file) { $config_files[] = error_secure_path($config_file); }
-        
-        $lang_files   = array();
-        foreach(lib('ob/Lang')->is_loaded as $lang_file) { $lang_files[] = error_secure_path($lang_file); }
-        
-        $base_helpers = array();
-        foreach(loader::$_base_helpers as $base_helper) 
-        { 
-           $base_helpers[] = error_secure_path($base_helper);
+        foreach(Config::getInstance()->is_loaded as $config_file)
+        {
+            $config_files[] = error_secure_path($config_file);
         }
         
+        $lang_files   = array();
+        foreach(Locale::getInstance()->is_loaded as $lang_file)
+        { 
+            $lang_files[]   = error_secure_path($lang_file); 
+        }
+
         $helpers = array();
-        foreach(loader::$_helpers as $helper) { $helpers[] = error_secure_path($helper); }
+        foreach(loader::$_helpers as $helper)
+        { 
+            $helpers[]      = error_secure_path($helper);
+        }
         
         $models  = array();
-        foreach(loader::$_models as $mod) { $models[] = error_secure_path($mod); }
+        foreach(loader::$_models as $mod)
+        {
+            $models[]       = error_secure_path($mod);
+        }
               
         $databases = array();
-        foreach(loader::$_databases as $db_var) { $databases[] = $db_var; }
+        foreach(loader::$_databases as $db_var)
+        { 
+            $databases[]    = $db_var;
+        }
         
         $output = "\n\33[0;36m********************* LOADED FILES *********************";
         $output.= "\n*";
         if(count($config_files) > 0)
-        $output .= "\n* Config  --> ".implode(',',$config_files);
+        $output .= "\n* Configs  --> ".implode(',',$config_files);
         if(count($lang_files) > 0)
-        $output .= "\n* Lang    --> ".implode(',', $lang_files);
+        $output .= "\n* Locales  --> ".implode(',', $lang_files);
         if(count($models) > 0)
-        $output .= "\n* Model   --> ".implode(',',$models);
+        $output .= "\n* Models   --> ".implode(',',$models);
         if(count($databases) > 0)
-        $output .= "\n* Db      --> ".implode(',',$databases);
-        if(count($base_helpers) > 0)
-        $output .= "\n* Helper  --> ".implode(',',$base_helpers);
+        $output .= "\n* Dbs      --> ".implode(',',$databases);
         if(count($helpers) > 0)
-        $output .= "\n* Helper --> ".implode(',',$helpers);
+        $output .= "\n* Helpers  --> ".implode(',',$helpers);
         $output.= "\n*";
         $output .= "\n********************************************************\n";
         $output .= "\033[0m";
         
         echo $output;
     }
-
 }
 
-//Terminal Colour Codes (BASH CODES)
+// Terminal Colour Codes ( TERMINAL SCREEN BASH CODES )
 /*
 $BLACK="33[0;30m";
 $DARKGRAY="33[1;30m";

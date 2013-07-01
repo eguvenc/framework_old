@@ -80,7 +80,7 @@ Class Router {
         
         $this->_set_routing();         
         
-        log_me('debug', 'Router Class Initialized', false, true); // core level log
+        log_me('debug', 'Router Class Initialized');
     }
     
     // --------------------------------------------------------------------
@@ -96,6 +96,16 @@ Class Router {
     }
     
     // --------------------------------------------------------------------
+    
+    public static function setInstance($object)
+    {
+        if(is_object($object))
+        {
+            self::$instance = $object;
+        }
+        
+        return self::$instance;
+    }
     
     /**
     * When we use HMVC we need to Clean
@@ -207,7 +217,7 @@ Class Router {
             // re-index the routed segments array so it starts with 1 rather than 0
             // $this->uri->_reindex_segments();
 
-            log_me('debug', "No URI present. Default controller set.", false, true);
+            log_me('debug', "No URI present. Default controller set.");
             
             return;
         }
@@ -338,7 +348,7 @@ Class Router {
         {
             $this->hmvc_response = 'Hmvc request not found.';
 
-            log_me('debug', 'Hmvc request not found.', false, true);
+            log_me('debug', 'Hmvc request not found.');
             
             return FALSE;
         }

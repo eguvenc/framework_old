@@ -34,32 +34,14 @@
 */
 if( ! function_exists('log_me') ) 
 {
-    function log_me($level = 'error', $message = '', $php_error = FALSE, $core_level = FALSE)
+    function log_me($level = 'error', $message = '')
     {    
         if (config('log_threshold') == 0)
         {
             return;
         }
-
-        if ($core_level == FALSE)  // Router and URI classes are core level class
-        {                          // so they must be write logs to application log folder,
-                                   // otherwise log functionality not works.
-
-            $router = lib('ob/Router');  // If current module /logs dir exists
-            $uri    = lib('ob/Uri');     // write module logs into current module.
-
-            if (is_object($router) AND is_object($uri))
-            {   
-                $config = lib('ob/Config');
-
-                if ($config->item('log_threshold') == 0)
-                {
-                    return;
-                }
-            }
-        }
-
-        log_write($level, $message, $php_error);
+        
+        log_write($level, $message);
 
         return;
     }
@@ -82,13 +64,10 @@ if( ! function_exists('log_me') )
  */        
 if( ! function_exists('log_write') ) 
 {
-    function log_write($level = 'error', $msg = '', $php_error = FALSE)
+    function log_write($level = 'error', $msg = '')
     {   
         // Convert new lines to a temp symbol, than we replace it and read for console debugs.
         $msg = trim(preg_replace('/\n/', '[@]', $msg), "\n");
-        
-        // @todo php errors.
-        $php_error = NULL;
         
         $threshold = 1;
         $date_fmt  = 'Y-m-d H:i:s';
@@ -107,7 +86,7 @@ if( ! function_exists('log_write') )
         } 
         elseif(defined('STDIN'))  // Command Line Task Request
         {
-            if(isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == 'clear')
+            if(isset($_SERVER['argv'][1]) AND $_SERVER['argv'][1] == 'clear')
             {
                 return FALSE;
             }
@@ -167,4 +146,4 @@ if( ! function_exists('log_write') )
 }
 
 /* End of file log.php */
-/* Location: ./obullo/helpers/core/log.php */
+/* Location: ./ob_modules/log/releases/0.0.1/log.php */

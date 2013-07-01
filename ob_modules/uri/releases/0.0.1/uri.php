@@ -41,7 +41,7 @@ Class Uri
         // the URI Class at Bootstrap. When you try loading any library
         // you will get a Fatal Error.
         
-        log_me('debug', 'URI Class Initialized', false, true); // core level log
+        log_me('debug', 'URI Class Initialized'); // core level log
     }
 
     // --------------------------------------------------------------------
@@ -52,12 +52,22 @@ Class Uri
        {
            self::$instance = new self();
        } 
-       
+
        return self::$instance;
     }
     
     // --------------------------------------------------------------------
 
+    public static function setInstance($object)
+    {
+        if(is_object($object))
+        {
+            self::$instance = $object;
+        }
+        
+        return self::$instance;
+    }
+    
     /**
     * When we use HMVC we need to Clean
     * all data.

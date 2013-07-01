@@ -22,30 +22,7 @@
 |       $autoload['helper'] = array('ob/view', 'ob/html', 'ob/url');
 */
 
-$autoload['helper'] = array('ob/view', 'ob/html', 'ob/url');
-
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Libraries
-| -------------------------------------------------------------------
-| These are the classes located in the obullo/libraries folder
-| or in your application/libraries folder, 
-| or modules/current_module/libraries folder.
-| 
-|
-| Prototype:
-|
-|	$autoload['lib'] = array('ob/calendar');
-|       $autoload['lib'] = array('app/mylib');
-| 
-| 
-| NOTE: Using libraries with FALSE means no instantiate 
-| (e.g. like running loader::lib('app/my_library', false)) if you intend to use false 
-| this will just include file, the library construct params must be array.
-|
-*/
-$autoload['lib']        = array(); // array('ob/lang')
+$autoload['helper']     = array('ob/view', 'ob/html', 'ob/url');
 
 /*
 | -------------------------------------------------------------------
@@ -80,7 +57,7 @@ $autoload['lang']       = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['model'] = array('app/model1');
+|	$autoload['model'] = array('model', '../model');
 |
 */
 
