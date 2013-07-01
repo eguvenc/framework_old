@@ -1,24 +1,10 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009 - 2012.
- *
- * PHP5 HMVC Based Scalable Software.
- *
- * @package         obullo
- * @author          obullo.com
- * @copyright       Obullo Team
- * @filesource
- * @license
- */
-
-// --------------------------------------------------------------------
-
-/**
  * Obullo Language Class
  *
  * @package     Obullo
- * @subpackage  Libraries
+ * @subpackage  Locale
  * @category    Language
  * @author      Obullo Team
  * @link        

@@ -51,20 +51,27 @@ if( ! function_exists('ob_set_headers'))
         }   
         
         $packages = get_config('packages');
-        require (OB_MODULES .'log'. DS .'releases'. DS .$packages['dependencies']['log']. DS .'log'. EXT); 
         
+        require (OB_MODULES .'log'. DS .'releases'. DS .$packages['dependencies']['log']. DS .'log'. EXT); 
+        require (OB_MODULES .'error'. DS .'releases'. DS .$packages['dependencies']['error']. DS .'error'. EXT); 
+        require (OB_MODULES .'input'. DS .'releases'. DS .$packages['dependencies']['input']. DS .'input'. EXT); 
+
         ###  load core libraries ####
+        
+        if( ! isset($packages['uri'])){ throw new Exception('Obullo Uri module not installed, please check your package.json'); }
+        if( ! isset($packages['router'])){ throw new Exception('Obullo Router module not installed, please check your package.json'); }
+        if( ! isset($packages['locale'])){ throw new Exception('Obullo Locale module not installed, please check your package.json'); }
+        if( ! isset($packages['benchmark'])){ throw new Exception('Obullo Benchmark module not installed, please check your package.json'); }
+        if( ! isset($packages['input'])){ throw new Exception('Obullo Input module not installed, please check your package.json'); }
         
         Uri::getInstance();
         Router::getInstance();
         Locale::getInstance();
         Benchmark::getInstance();
         Input::getInstance();
-        
+     
         ###  load core helpers ####
 
-        require (OB_MODULES .'error'. DS .'releases'. DS .$packages['dependencies']['error']. DS .'error'. EXT); 
-        require (OB_MODULES .'input'. DS .'releases'. DS .$packages['dependencies']['input']. DS .'input'. EXT); 
     }
 }
 
