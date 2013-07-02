@@ -16,14 +16,13 @@ if( ! function_exists('_sess_start') )
     {                       
         log_me('debug', "Session Native Driver Initialized"); 
 
-        $sess   = lib('ob/Session');
-        $config = lib('ob/Config');
+        $sess   = Session::getInstance();
 
         foreach (array('sess_expiration', 'sess_match_ip', 'sess_die_cookie',
         'sess_match_useragent', 'sess_cookie_name', 'cookie_path', 'cookie_domain', 
         'sess_time_to_update', 'time_reference', 'cookie_prefix') as $key)
         {
-            $sess->{$key} = (isset($params[$key])) ? $params[$key] : $config->item($key);
+            $sess->{$key} = (isset($params[$key])) ? $params[$key] : config($key);
         }
 
         // @todo _unserialize func. use strip_slashes() func. We can add it later if we need it in Native Library. ?
@@ -132,7 +131,7 @@ if( ! function_exists('sess_destroy') )
 {
     function sess_destroy()
     {   
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         unset($_SESSION);
         
@@ -263,7 +262,7 @@ if( ! function_exists('_session_id_expired') )
 { 
     function _session_id_expired()
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         if ( ! isset( $_SESSION['regenerated'] ) )
         {
@@ -295,7 +294,7 @@ if( ! function_exists('sess_set_flash') )
 { 
     function sess_set_flash($newdata = array(), $newval = '')  // ( obullo changes ... )
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         if (is_string($newdata))
         {
@@ -325,7 +324,7 @@ if( ! function_exists('sess_keep_flash') )
 { 
     function sess_keep_flash($key) // ( obullo changes ...)
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         // 'old' flashdata gets removed.  Here we mark all 
         // flashdata as 'new' to preserve it from _flashdata_sweep()
@@ -357,7 +356,7 @@ if( ! function_exists('sess_get_flash') )
 { 
     function sess_get_flash($key, $prefix = '', $suffix = '')  // obullo changes ...
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         $flashdata_key = $sess->flashdata_key.':old:'.$key;
         
@@ -399,7 +398,7 @@ if( ! function_exists('_flashdata_mark') )
 { 
     function _flashdata_mark()
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         $userdata = sess_alldata();
         foreach ($userdata as $name => $value)
@@ -448,7 +447,7 @@ if( ! function_exists('_get_time') )
 {
     function _get_time()
     {   
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         $time = time();
         if (strtolower($sess->time_reference) == 'gmt')

@@ -16,14 +16,13 @@ if( ! function_exists('_sess_start') )
     {
         log_me('debug', "Session Database Driver Initialized"); 
 
-        $sess   = lib('ob/Session');
-        $config = lib('ob/Config');
+        $sess   = Session::getInstance();
         
         foreach (array('sess_encrypt_cookie', 'sess_driver', 'sess_table_name', 
         'sess_expiration', 'sess_die_cookie', 'sess_match_ip', 'sess_match_useragent', 'sess_cookie_name', 'cookie_path', 
         'cookie_domain', 'sess_time_to_update', 'time_reference', 'cookie_prefix', 'encryption_key') as $key)
         {
-            $sess->{$key} = (isset($params[$key])) ? $params[$key] : $config->item($key);
+            $sess->{$key} = (isset($params[$key])) ? $params[$key] : config($key);
         }
 
         // _unserialize func. use strip_slashes() func.
@@ -83,7 +82,7 @@ if( ! function_exists('sess_read') )
 {
     function sess_read()
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         // Fetch the cookie
         $session = i_cookie($sess->sess_cookie_name);
@@ -226,7 +225,7 @@ if( ! function_exists('sess_write') )
 {
     function sess_write()
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         // set the custom userdata, the session data we will set in a second
         $custom_userdata = $sess->userdata;
@@ -276,7 +275,7 @@ if( ! function_exists('sess_create') )
 {
     function sess_create()
     {    
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         $sessid = '';
         while (strlen($sessid) < 32)
@@ -317,7 +316,7 @@ if( ! function_exists('sess_update') )
 {
     function sess_update()
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         // We only update the session every five minutes by default
         if (($sess->userdata['last_activity'] + $sess->sess_time_to_update) >= $sess->now)
@@ -379,7 +378,7 @@ if( ! function_exists('sess_destroy') )
 {
     function sess_destroy()
     {   
-        $sess = lib('ob/Session'); 
+        $sess = Session::getInstance(); 
         
         // Db driver changes..
         // -------------------------------------------------------------------
@@ -415,7 +414,7 @@ if( ! function_exists('sess_get') )
 {
     function sess_get($item, $prefix = '')
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         return ( ! isset($sess->userdata[$prefix.$item])) ? FALSE : $sess->userdata[$prefix.$item];
     }
@@ -448,7 +447,7 @@ if( ! function_exists('sess_alldata') )
 {
     function sess_alldata()
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         return ( ! isset($sess->userdata)) ? FALSE : $sess->userdata;
     }
@@ -467,7 +466,7 @@ if( ! function_exists('sess_set') )
 {
     function sess_set($newdata = array(), $newval = '', $prefix = '')
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         if (is_string($newdata))
         {
@@ -497,7 +496,7 @@ if( ! function_exists('sess_unset') )
 {
     function sess_unset($newdata = array(), $prefix = '')  // ( obullo changes ... )
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         if (is_string($newdata))
         {
@@ -530,7 +529,7 @@ if( ! function_exists('sess_set_flash') )
 {
     function sess_set_flash($newdata = array(), $newval = '') // ( obullo changes ...)
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         if (is_string($newdata))
         {
@@ -574,7 +573,7 @@ if( ! function_exists('sess_keep_flash') )
 {
     function sess_keep_flash($key) // ( obullo changes ...)
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         // 'old' flashdata gets removed.  Here we mark all 
         // flashdata as 'new' to preserve it from _flashdata_sweep()
@@ -606,7 +605,7 @@ if( ! function_exists('sess_get_flash') )
 {
     function sess_get_flash($key, $prefix = '', $suffix = '')  // ( obullo changes ...)
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         $flashdata_key = $sess->flashdata_key.':old:'.$key;
         
@@ -634,7 +633,7 @@ if( ! function_exists('_flashdata_mark') )
 {
     function _flashdata_mark()
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         $userdata = sess_alldata();
         foreach ($userdata as $name => $value)
@@ -684,7 +683,7 @@ if( ! function_exists('_get_time') )
 {
     function _get_time()
     {   
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         $time = time();
         if (strtolower($sess->time_reference) == 'gmt')
@@ -714,7 +713,7 @@ if( ! function_exists('_set_cookie') )
 {
     function _set_cookie($cookie_data = NULL)
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         if (is_null($cookie_data))
         {
@@ -835,7 +834,7 @@ if( ! function_exists('_sess_gc') )
 {
     function _sess_gc()
     {
-        $sess = lib('ob/Session');
+        $sess = Session::getInstance();
         
         srand(time());
         

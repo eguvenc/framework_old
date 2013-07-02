@@ -37,11 +37,11 @@ label { font-weight:bold; }
 </head>
     
 <body>
-<h1>Welcome to Obullo Validation Model !</h1> 
+<h1>Welcome to Validation Model</h1> 
 
 <div style="padding: 10px 10px 10px 0;"><?php echo anchor('/welcome/start', 'Validation Model'); ?> | <?php echo anchor('/welcome/start/ajax_example', 'Validation Model ( Ajax )'); ?></div>
 
-<?php echo form_msg($user, $msg = '', '<div class="notification error">', '</div>'); ?>
+<?php echo form_msg($user, '', '<div class="notification error">', '</div>'); ?>
 
 <?php if(sess_flash('notice') != '') { ?>
 <div class="notification success"><?php echo sess_flash('notice') ?></div>

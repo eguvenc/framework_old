@@ -24,6 +24,7 @@
 loader::helper('ob/request');
 
 $data['response_a'] = request('welcome/start/1/2/3')->exec();
+$data['response_b'] = request('welcome/start/1/5/6')->exec();
     </tr>
 
     <tr>
@@ -39,9 +40,11 @@ $data['response_a'] = request('welcome/start/1/2/3')->exec();
             <br />
             
             <pre>echo $response_a;</pre>
+            <pre>echo $response_a;</pre>
             <br />
             
-            <? echo $response_a;?>            
+            <?php echo $response_a ?>            
+            <?php echo $response_b ?>            
         </td>
     </tr>
 

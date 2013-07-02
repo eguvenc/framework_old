@@ -44,7 +44,6 @@ if( ! function_exists('sess_start'))
  * @author      Obullo Team
  * @link	
  */
-
 Class Session {
     
     public $db;

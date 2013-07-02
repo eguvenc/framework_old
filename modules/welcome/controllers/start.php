@@ -7,7 +7,7 @@ Class Start extends Controller {
         parent::__construct();
        
         loader::helper('ob/form');
-        loader::helper('ob/form_send');
+        loader::helper('ob/form_json');
         loader::helper('ob/session');
         
         sess_start();
@@ -52,7 +52,7 @@ Class Start extends Controller {
         {
             if($this->uri->extension() == 'json')  // Ajax request
             {
-                echo form_send_success($user);
+                echo form_json_success($user);
                 return;
             }
             else    // Http request
@@ -66,7 +66,7 @@ Class Start extends Controller {
         {
             if($this->uri->extension() == 'json') // Ajax request
             {
-                echo form_send_error($user);
+                echo form_json_error($user);
                 return;
             }
         }

@@ -22,9 +22,10 @@
 
 Class Benchmark {
     
-    public static $instance;
     var $marker = array();
-
+    
+    public static $instance;
+    
     public function __construct()
     {
         log_me('debug', "Benchmark Class Initialized");
@@ -42,6 +43,8 @@ Class Benchmark {
        return self::$instance;
     }
 
+    // --------------------------------------------------------------------
+    
     /**
     * Set a benchmark marker
     *

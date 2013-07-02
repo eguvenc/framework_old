@@ -31,8 +31,9 @@ Class Auth {
     public $not_ok_url         = '/login';
     public $ok_url             = '/dashboard';
     public $fields             = array();
+    public $row                = FALSE;    // SQL Query result as row
     
-    public $row = FALSE;    // SQL Query result as row
+    public static $instance;
     
     /**
     * Constructor
@@ -62,7 +63,19 @@ Class Auth {
         log_me('debug', "Auth Class Initialized");
     }
     
-    // ------------------------------------------------------------------------
+    // --------------------------------------------------------------------
+
+    public static function getInstance($params = array())
+    {
+       if( ! self::$instance instanceof self)
+       {
+           self::$instance = new self($params);
+       } 
+       
+       return self::$instance;
+    }
+
+    // --------------------------------------------------------------------
     
     /**
     * Set database select names
@@ -99,7 +112,7 @@ Class Auth {
     * @param string $password  manually login password
     * @return bool | object
     */
-    public function get($username = '', $password = '')
+    public function attempt($username = '', $password = '')
     {
         if($this->item('allow_login') == FALSE)
         {
@@ -163,7 +176,6 @@ Class Auth {
                 $this->db->where($this->password_col, $password);
 
                 $query = $this->db->get($this->tablename);
-
                 $this->row = $query->row();
             }
             
@@ -410,5 +422,5 @@ Class Auth {
 
 // END Auth Class
 
-/* End of file Auth.php */
-/* Location: ./obullo_modules/auth/auth.php */
+/* End of file auth.php */
+/* Location: ./ob_modules/auth/releases/0.0.1/auth.php */

@@ -45,11 +45,11 @@ $autoload['config']     = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['lang'] = array('langfilename', 'langfilename2');
+|	$autoload['locale'] = array('langfilename', 'langfilename2');
 |
 */
 
-$autoload['lang']       = array();
+$autoload['locale']     = array();
 
 /*
 | -------------------------------------------------------------------

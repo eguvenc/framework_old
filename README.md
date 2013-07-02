@@ -13,3 +13,4 @@ Obullo-2.0 WILL HAVE THESE FEATURES:
 - Advanced Debugging from Command Line
 - Log Monitoring from Command Line
 - Extended Mongodb Support
+- Derived from Codeigniter

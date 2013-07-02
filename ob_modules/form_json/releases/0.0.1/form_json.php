@@ -1,22 +1,7 @@
 <?php
 
 /**
- * Obullo Framework (c) 2011.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo       
- * @author          obullo.com
- * @license         public
- * @since           Version 1.0
- * @filesource
- * @license
- */
-
-// ------------------------------------------------------------------------
-
-/**
- * Obullo JQuery Form Validation Plugin Helper
+ * Json Form Validation Helper
  *
  * @package     Obullo
  * @subpackage  Helpers
@@ -25,18 +10,16 @@
  * @link        
  */
 
-
 /**
-* Json Send Error for Obullo Jquery 
-* Form Plugin
+* Send Json Errors
 *
 * @access public
 * @param object | string $model or $system_message
 * @return string
 */
-if ( ! function_exists('form_send_error'))
+if ( ! function_exists('form_json_error'))
 {
-    function form_send_error($model = '', $no_cache = true)
+    function form_json_error($model = '', $no_cache = true)
     {
         if(uri_extension() == 'json' AND ! headers_sent() ) // Check uri extension 
         {
@@ -93,9 +76,9 @@ if ( ! function_exists('form_send_error'))
 * @param boolean $js_alert return to javascript alert
 * @return string
 */
-if ( ! function_exists('form_send_success'))
+if ( ! function_exists('form_json_success'))
 {
-    function form_send_success($model = '', $no_cache = true)
+    function form_json_success($model = '', $no_cache = true)
     {
         if(uri_extension() == 'json' AND ! headers_sent() ) // Check uri extension 
         {
@@ -142,9 +125,9 @@ if ( ! function_exists('form_send_success'))
 * @param string $redirect_url /page/to/redirect
 * @return string
 */
-if ( ! function_exists('form_send_redirect'))
+if ( ! function_exists('form_json_redirect'))
 {
-    function form_send_redirect($redirect_url, $top_redirect = FALSE)
+    function form_json_redirect($redirect_url, $top_redirect = FALSE)
     {
         if(uri_extension() == 'json' AND ! headers_sent() ) // Check uri extension 
         {
@@ -171,9 +154,9 @@ if ( ! function_exists('form_send_redirect'))
 * @param string $post_url url you want to post 2nd page
 * @return string
 */
-if ( ! function_exists('form_send_forward'))
+if ( ! function_exists('form_json_forward'))
 {
-    function form_send_forward($forward_url)
+    function form_json_forward($forward_url)
     {
         if(uri_extension() == 'json' AND ! headers_sent() ) // Check uri extension 
         {
@@ -184,27 +167,6 @@ if ( ! function_exists('form_send_forward'))
     }
 }
 
-// ------------------------------------------------------------------------
 
-/**
-* Alert user to using Jquery
-* Obullo form plugin.
-* 
-* @param string $msg alert
-* @return string
-*/
-if ( ! function_exists('form_send_alert'))
-{
-    function form_send_alert($msg = '')
-    {
-        if(uri_extension() == 'json' AND ! headers_sent() ) // Check uri extension 
-        {
-            header('Content-type: application/json;charset=UTF-8');
-        }
-        
-        return json_encode(array('success' => false, 'alert' => $msg));
-    }
-}
-
-/* End of file form_send.php */
-/* Location: ./obullo/helpers/form_send.php */
+/* End of file form_json.php */
+/* Location: ./ob_modules/form_json/releases/0.0.1/form_json.php */
