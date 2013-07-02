@@ -64,9 +64,9 @@ Class OB_Exception {
             
             foreach(loader::$_databases as $db_name => $db_var)
             {
-               if(isset(this()->$db_var) AND is_object(this()->$db_var))
+               if(isset(getInstance()->$db_var) AND is_object(getInstance()->$db_var))
                {
-                   $last_query = this()->{$db_var}->last_query(this()->{$db_var}->prepare);
+                   $last_query = getInstance()->{$db_var}->last_query(getInstance()->{$db_var}->prepare);
                    
                    if( ! empty($last_query))
                    {

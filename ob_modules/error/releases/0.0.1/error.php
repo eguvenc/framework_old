@@ -55,7 +55,7 @@ if( ! function_exists('Obullo_Exception_Handler'))
                     switch ($level) 
                     {              
                        case  0: return; break; 
-                       case  1: include(APP .'core'. DS .'errors'. DS .'ob_exception'. EXT); return; break;
+                       case  1: include(APP .'errors'. DS .'ob_exception'. EXT); return; break;
                     }   
                 }       
                                  
@@ -70,13 +70,13 @@ if( ! function_exists('Obullo_Exception_Handler'))
     
                 if(isset($allowed_errors[$code]))
                 {
-                    include(APP .'core'. DS .'errors'. DS .'ob_exception'. EXT);
+                    include(APP .'errors'. DS .'ob_exception'. EXT);
                 }
                 
             }
             else  // If error_reporting = 0, we show a blank page template.
             {
-                include(APP .'core'. DS .'errors'. DS .'ob_disabled_error'. EXT);
+                include(APP .'errors'. DS .'ob_disabled_error'. EXT);
             }
             
             log_me('error', $type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), true); 

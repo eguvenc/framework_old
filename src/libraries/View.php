@@ -63,15 +63,15 @@ Class OB_View {
     {
         $return = NULL; // @deprecated
         
-        if(function_exists('this') &&  is_object(this()))
+        if(function_exists('this') &&  is_object(getInstance()))
         {
-            foreach(array_keys(get_object_vars(this())) as $key) // This allows to using "$this" variable in all views files.
+            foreach(array_keys(get_object_vars(getInstance())) as $key) // This allows to using "$this" variable in all views files.
             {
                 // Don't do lazy loading => isset() in here object variables always
                 // must be ## NEW ##. 
                 // e.g. loader::config('somefile_vars'); $this->config->item('somefile_vars')
                 
-                $this->{$key} = &this()->$key;          
+                $this->{$key} = &getInstance()->$key;          
             }
         }
         

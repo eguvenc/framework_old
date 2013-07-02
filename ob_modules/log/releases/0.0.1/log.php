@@ -36,7 +36,7 @@ if( ! function_exists('log_write') )
         $level     = strtoupper($level);
 
         $config          = get_config();
-        $log_path        = ($config['log_path'] != '') ? $config['log_path'] : APP .'core'. DS .'logs'. DS;
+        $log_path        = APP .'logs'. DS;
         $log_threshold   = $config['log_threshold'];
         $log_date_format = $config['log_date_format'];
         
@@ -46,7 +46,7 @@ if( ! function_exists('log_write') )
         } 
         elseif(defined('STDIN'))  // Command Line && Task Requests
         {
-            if(isset($_SERVER['argv'][1]) AND $_SERVER['argv'][1] == 'clear')
+            if(isset($_SERVER['argv'][1]) AND $_SERVER['argv'][1] == 'clear') //  Do not keep clear command logs.
             {
                 return FALSE;
             }

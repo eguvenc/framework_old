@@ -221,7 +221,7 @@ Class OB_Output {
         
         // --------------------------------------------------------------------
         
-        // Does the this() function exist?
+        // Does the getInstance() function exist?
         // If not we know we are dealing with a cache file so we'll
         // simply echo out the data and exit.
         if ( ! function_exists('this'))
@@ -240,7 +240,7 @@ Class OB_Output {
         
         // Does the controller contain a function named _output()?
         // If so send the output there.  Otherwise, echo it.
-        $ob = this();
+        $ob = getInstance();
         
         if (method_exists($ob, '_output'))
         {
@@ -303,7 +303,7 @@ Class OB_Output {
     */    
     public function _write_cache($output)
     {
-        $OB = this();
+        $OB = getInstance();
         $config = lib('ob/Config');
         
         $path       = $config->item('cache_path');

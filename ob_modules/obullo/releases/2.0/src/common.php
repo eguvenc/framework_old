@@ -25,7 +25,7 @@ function ob_autoload($realname)
     
     if($realname == 'Model' OR $realname == 'Vmodel') // Database files.
     {
-        require(OB_MODULES .'obullo'. DS .'releases'. $packages['version'] .'src'. DS .strtolower($realname). EXT);
+        require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .strtolower($realname). EXT);
         
         return;
     }

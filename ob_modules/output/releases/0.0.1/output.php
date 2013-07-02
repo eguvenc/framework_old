@@ -179,7 +179,7 @@ Class Output {
         // Parse out the elapsed time and memory usage,
         // then swap the pseudo-variables with the data
         
-        $elapsed    = benchmark_elapsed_time('total_execution_time_start', 'total_execution_time_end');        
+        $elapsed = benchmark_elapsed_time('total_execution_time_start', 'total_execution_time_end');        
         $output  = str_replace('{elapsed_time}', $elapsed, $output);
                 
         if ($this->parse_exec_vars === TRUE)
@@ -198,7 +198,6 @@ Class Output {
             {             
                 if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) AND strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE)
                 {   
-                    ini_set('zlib.output_compression_level', config('compression_level'));  
                     ob_start('ob_gzhandler');
                 }
             }
@@ -219,7 +218,7 @@ Class Output {
         
         // --------------------------------------------------------------------
         
-        // Does the this() function exist?
+        // Does the getInstance() function exist?
         // If not we know we are dealing with a cache file so we'll
         // simply echo out the data and exit.
         if ( ! function_exists('this'))
@@ -238,7 +237,7 @@ Class Output {
         
         // Does the controller contain a function named _output()?
         // If so send the output there.  Otherwise, echo it.
-        $ob = this();
+        $ob = getInstance();
         
         if (method_exists($ob, '_output'))
         {
@@ -301,11 +300,8 @@ Class Output {
     */    
     public function _write_cache($output)
     {
-        $OB     = this();
-        $config = Config::getInstance();
-        
-        $path       = $config->item('cache_path');
-        $cache_path = ($path == '') ?  APP .'core'. DS .'cache'. DS : $path;
+        $OB = getInstance();
+        $cache_path = APP .'cache'. DS;
 
         if ( ! is_dir(rtrim($cache_path, DS)) OR ! is_really_writable(rtrim($cache_path, DS)))
         {
@@ -353,7 +349,7 @@ Class Output {
     */    
     public function _display_cache(&$config, &$URI, &$router)
     {        
-        $cache_path = ($config->item('cache_path') == '') ? APP .'core'. DS .'cache'. DS : $config->item('cache_path');
+        $cache_path = APP .'cache'. DS;
         
         // Build the file path.  The file name is an MD5 hash of the full URI
         $uri =  $config->base_url() . $config->item('index_page') . $URI->uri_string;

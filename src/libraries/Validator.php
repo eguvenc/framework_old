@@ -657,7 +657,7 @@ Class OB_Validator {
                 }
                 else
                 {
-                    $this->_this = this();
+                    $this->_this = getInstance();
                 }
                 
                 if ( ! method_exists($this->_this, $rule))
@@ -665,7 +665,7 @@ Class OB_Validator {
                     continue;
                 }
                 
-                // print_r(this()->db->ar_where);
+                // print_r(getInstance()->db->ar_where);
                 
                 // Run the function and grab the result
                 $result = $this->_this->$rule($postdata, $param);

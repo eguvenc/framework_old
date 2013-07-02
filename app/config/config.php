@@ -7,12 +7,10 @@
 |
 |    Base Url      "/"                       URL to your Obullo root, generally a '/' trailing slash.
 |    Domain Name   "Domain Name"             Name of your domain like Obullo. ( without .com ).
-|    Domain Root   "http://your-domain.com"  Full url of your domain.
 |
 */
 $config['base_url']              = '/';
-$config['domain_name']           = 'your_domain_name';
-$config['domain_root']           = (ENV == 'LIVE') ? 'http://your-domain.com' : 'http://localhost';
+$config['domain_name']           = 'yourdomainname';
 
 /*
 |--------------------------------------------------------------------------
@@ -110,19 +108,6 @@ $config['debug_backtrace']       = array('enabled' => 'E_ALL ^ (E_NOTICE | E_WAR
 $config['log_threshold']         = (ENV == 'LIVE') ? 1 : 5;
 $config['log_queries']           = (ENV == 'LIVE') ? FALSE : TRUE;
 $config['log_benchmark']         = (ENV == 'LIVE') ? FALSE : TRUE;
-
-/*
-|--------------------------------------------------------------------------
-| Error Logging Directory Paths
-|--------------------------------------------------------------------------
-|
-| Leave this BLANK unless you would like to set something other than the default
-| app/logs/ folder.  ( Use a full server path with trailing slash. )
-| 
-|   Prototype: APP .'core'. DS .'logs'. DS;
-|                  
-*/
-$config['log_path']              = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -387,19 +372,6 @@ $config['proxy_ips']             = '';
 
 /*
 |--------------------------------------------------------------------------
-| Output Cache Directory Path
-|--------------------------------------------------------------------------
-|
-| Leave this BLANK unless you would like to set something other than the
-| default  " app/core/cache/ " folder. 
-| 
-| Use a full server path with trailing slash.
-|
-*/
-$config['cache_path']             = '';
-
-/*
-|--------------------------------------------------------------------------
 | Output Compression
 |--------------------------------------------------------------------------
 |
@@ -416,7 +388,6 @@ $config['cache_path']             = '';
 |
 */
 $config['compress_output']       = FALSE;
-$config['compression_level']     = 8;
 
 
 /* End of file config.php */

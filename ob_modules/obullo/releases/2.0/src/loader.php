@@ -82,7 +82,7 @@ Class loader {
         
         if(i_hmvc() == FALSE AND $new_instance == FALSE) // If someone use HMVC we need to create new instance() foreach HMVC requests.
         {
-            if (isset(this()->$model_var) AND is_object(this()->$model_var))
+            if (isset(getInstance()->$model_var) AND is_object(getInstance()->$model_var))
             {
                 return;   
             }
@@ -108,10 +108,10 @@ Class loader {
 
         loader::$_models[$model_var] = $model_var; // should be above instantiate od the model();
 
-        this()->$model_var = new $model($params_or_no_ins);    // register($class); we don't need it
+        getInstance()->$model_var = new $model($params_or_no_ins);    // register($class); we don't need it
 
         // assign all loaded db objects inside to current model, support for Model_x { function __construct() { loader::database() }}
-        this()->$model_var->_assign_db_objects();
+        getInstance()->$model_var->_assign_db_objects();
     }
 
     // --------------------------------------------------------------------
@@ -141,11 +141,11 @@ Class loader {
             $db_var = ($db_var != 'db') ? $db_name_or_params : 'db';
         }
         
-        if (isset(this()->{$db_var}) AND is_object(this()->{$db_var}))  // Lazy Loading ..
+        if (isset(getInstance()->{$db_var}) AND is_object(getInstance()->{$db_var}))  // Lazy Loading ..
         {
             if($return_object) // return to db object like libraries.
             {
-                return this()->{$db_var};
+                return getInstance()->{$db_var};
             }
 
             return;
@@ -175,8 +175,8 @@ Class loader {
             return $database->connect($db_var, $db_name_or_params);
         }
 
-        this()->{$db_var} = '';
-        this()->{$db_var} = $database->connect($db_var, $db_name_or_params);  // Connect to Database
+        getInstance()->{$db_var} = '';
+        getInstance()->{$db_var} = $database->connect($db_var, $db_name_or_params);  // Connect to Database
         
         loader::$_databases[$db_var] = $db_var;
 
@@ -318,21 +318,21 @@ Class loader {
     */
     protected static function _assign_db_objects($db_var = '')
     {
-        if (count(loader::$_models) == 0 || ! is_object(this()))
+        if (count(loader::$_models) == 0 || ! is_object(getInstance()))
         {
             return;
         }
         
         foreach (loader::$_models as $model_name)
         {
-            if( ! isset(this()->$model_name) || is_object(this()->$model_name->$db_var))  // lazy loading
+            if( ! isset(getInstance()->$model_name) || is_object(getInstance()->$model_name->$db_var))  // lazy loading
             {
                 return;
             }
 
-            if(is_object(this()->$db_var))
+            if(is_object(getInstance()->$db_var))
             {
-                this()->$model_name->$db_var = this()->$db_var;
+                getInstance()->$model_name->$db_var = getInstance()->$db_var;
             }
         }
     }

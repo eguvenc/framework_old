@@ -104,7 +104,7 @@ Class Controller {
 *
 * @param object $new_istance  
 */
-function this($new_instance = '') 
+function getInstance($new_instance = '') 
 { 
     if(is_object($new_instance))  // fixed HMVC object type of integer bug in php 5.1.6
     {

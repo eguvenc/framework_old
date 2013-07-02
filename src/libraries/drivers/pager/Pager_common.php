@@ -408,7 +408,7 @@ Class OB_Pager_common
     */
     public function _render_link($alt_text, $link_text)
     {
-        $OB = this();
+        $OB = getInstance();
         
         if ($this->_http_method == 'GET') 
         {

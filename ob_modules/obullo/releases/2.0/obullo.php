@@ -137,13 +137,13 @@ Class Obullo
         {   
             $driver = db_item('dbdriver', $db_var);
 
-            if($driver == 'mongodb' AND is_object(this()->{$db_var}->connection))
+            if($driver == 'mongodb' AND is_object(getInstance()->{$db_var}->connection))
             {
-                this()->{$db_var}->connection->close();
+                getInstance()->{$db_var}->connection->close();
             } 
             else
             {
-                this()->{$db_var} = NULL;
+                getInstance()->{$db_var} = NULL;
             }
         } 
     }

@@ -28,7 +28,7 @@ function ob_request_timer($mark = '')
  * @category    HMVC Request Class
  * @author      Ersin Guvenc
  * @version     0.1
- * @version     0.2  fixed this() bug, copied all this() object and assigned
+ * @version     0.2  fixed getInstance() bug, copied all getInstance() object and assigned
  *              to instance using Controller::set_instance(); method.
  *              Hmvc router and uri libraries merged.
  */
@@ -38,7 +38,7 @@ Class OB_Hmvc
     public $uri;                   // Clone original URI object
     public $router;                // Clone original Router object
     public $config;                // Clone original Config object
-    public $_this         = NULL;  // Clone original this(); ( Controller instance)
+    public $_this         = NULL;  // Clone original getInstance(); ( Controller instance)
 
     // Request, Response, Reset
     public $uri_string       = '';
@@ -89,10 +89,10 @@ Class OB_Hmvc
     {
         $this->_set_conn_string($hmvc_uri);
 
-        // Don't clone this(), we just do backup.
+        // Don't clone getInstance(), we just do backup.
         #######################################
         
-        $this->_this  = this();      // We need create backup $this object of main controller
+        $this->_this  = getInstance();      // We need create backup $this object of main controller
                                      // becuse of it will change when using HMVC requests.
         
         #######################################

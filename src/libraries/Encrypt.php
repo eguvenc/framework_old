@@ -68,7 +68,7 @@ Class OB_Encrypt {
                 return $this->encryption_key;
             }
 
-            $key = this()->config->item('encryption_key');
+            $key = Config::getInstance()->item('encryption_key');
 
             if ($key === FALSE)
             {

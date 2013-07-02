@@ -28,9 +28,9 @@ Class Model {
     */
     public function _assign_db_objects()
     {
-        $OB = this();
+        $OB = getInstance();
 
-        foreach(loader::$_databases as $db_name => $db_var)
+        foreach(loader::$_databases as $db_var)
         {
             if(method_exists($this, '__get') OR method_exists($this, '__set'))
             {

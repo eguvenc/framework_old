@@ -71,7 +71,7 @@ Class OB_Parser {
         
         if ($return == FALSE)
         {
-            this()->output->append_output($template);
+            getInstance()->output->append_output($template);
         }
         
         return $template;
@@ -131,7 +131,7 @@ Class OB_Parser {
 
         if ($return == FALSE)
         {
-            this()->output->append_output($template);
+            getInstance()->output->append_output($template);
         }
 
         return $template;
