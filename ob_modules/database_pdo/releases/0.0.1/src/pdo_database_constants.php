@@ -267,5 +267,5 @@ define('ori_rel', 5);
 
 
 
-/* End of file db_constants.php */
-/* Location: ./obullo/config/db_constants.php */
+/* End of file pdo_database_constants.php */
+/* Location: ./ob_modules/database_pdo/releases/0.0.1/src/pdo_database_constants.php */

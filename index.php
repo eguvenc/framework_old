@@ -1,25 +1,5 @@
 <?php
 
-// This function just for memory testing..
-function OB_memory_usage() {
-$usage = '';
- 
-        $mem_usage = memory_get_usage(true); 
-        
-        if ($mem_usage < 1024) 
-            $usage =  $mem_usage." bytes"; 
-        elseif ($mem_usage < 1048576) 
-            $usage = round($mem_usage/1024,2)." kilobytes"; 
-        else 
-            $usage = round($mem_usage/1048576,2)." megabytes"; 
-            
-        return $usage;
-} 
-
-// start memory test
-$ob_start = OB_memory_usage();
-$start = memory_get_usage();
-
 /**
 |--------------------------------------------------------------------------
 | APPLICATION ENVIRONMENT
@@ -106,7 +86,7 @@ date_default_timezone_set('America/Chicago');
 |---------------------------------------------------------------
 */
 define('ROOT',  realpath(dirname(__FILE__)) . DS);
-define('BASE', ROOT .'src'. DS);
+define('BASE', ROOT .'obullo'. DS);
 define('APP',  ROOT .'app'. DS);
 define('MODULES',  ROOT .'modules'. DS);
 define('OB_MODULES',  ROOT .'ob_modules'. DS);
@@ -136,39 +116,141 @@ define('TASK_FILE', 'task');
 
 /**
 |--------------------------------------------------------------------------
-| User Front Controller for Bootstrap.php file. 
+| Disable Deprecated Zend Mode
 |--------------------------------------------------------------------------
 |
-| User can create own Front Controller who want replace
-| system methods by overriding to Bootstrap.php file.
+| Enable compatibility mode with Zend Engine 1 (PHP 4). It affects the cloning, 
+| casting (objects with no properties cast to FALSE or 0), and comparing of objects. 
+| In this mode, objects are passed by value instead of reference by default.
 | 
-| @see User Guide: Chapters / General Topics / Control Your Application Boot
+| This feature has been DEPRECATED and REMOVED as of PHP 5.3.0. 
+| It should be '0'. 
+| 
+*/
+ini_set('zend.ze1_compatibility_mode', 0); 
+             
+/**
+|--------------------------------------------------------------------------
+| Obullo Command Line
+|--------------------------------------------------------------------------
+|  @see User Guide: Chapters / General Topics / Tasks
 |
-*/                                     
-if(defined('STDIN'))
+*/ 
+if(defined('STDIN')) 
 {
-    // Obullo Command Line Bootstrap file.
-    //--------------------------------------------------------------- 
-    require(APP  .'core'. DS .'Cli_Bootstrap'. EXT); 
-} 
-else 
-{
-    // Obullo Standart Bootstrap file.
-    //--------------------------------------------------------------- 
-    require(APP  .'core'. DS .'Bootstrap'. EXT); 
+    /**
+    |--------------------------------------------------------------------------
+    | Set Command Line Server Headers
+    |--------------------------------------------------------------------------
+    */ 
+    $_SERVER['HTTP_USER_AGENT']     = 'Obullo Command Line';
+    $_SERVER['HTTP_ACCEPT_CHARSET'] = 'utf-8';
+
+    /**
+    |--------------------------------------------------------------------------
+    | Set Execution Limit
+    |--------------------------------------------------------------------------
+    | 
+    | Limits the maximum execution time. 0 = Unlimited.
+    | Set the number of seconds a script is allowed to run. If this is reached, 
+    | the script returns a fatal error. The default limit is 30 seconds or, if it exists, 
+    | the max_execution_time value defined in the php.ini.
+    | 
+    */
+    set_time_limit(0);
+
+    /**
+    |--------------------------------------------------------------------------
+    | Set Memory limit
+    |--------------------------------------------------------------------------
+    |
+    | Increase the maximum amount of memory available to PHP Cli
+    | operations.
+    | 
+    */
+    ini_set('memory_limit', '100000M');
 }
 
-require(BASE .'core'. DS .'Bootstrap'. EXT);
+// --------------------------------------------------------------------
+
+/**
+* Loads the (static) config or language files.
+*
+* @access    private
+* @author    Obullo Team
+* @param     string $filename file name
+* @param     string $var variable of the file
+* @param     string $folder folder of the file
+* @return    array
+*/
+function get_static($filename = 'config', $var = '', $folder = '')
+{
+    static $loaded    = array();
+    static $variables = array();
+    
+    $key = trim($folder. DS .$filename. EXT);
+    
+    if ( ! isset($loaded[$key]))
+    {
+        require($folder. DS .$filename. EXT);
+     
+        if($var == '') 
+        {
+            $var = &$filename;
+        }
+
+        if($filename != 'autoload' AND $filename != 'constants')
+        {
+            if ( ! isset($$var) OR ! is_array($$var))
+            {
+                $error_msg = 'The static file '. $folder. DS .$filename. EXT .' file does not appear to be formatted correctly.';
+                
+                log_me('debug', $error_msg);
+                
+                throw new Exception($error_msg);
+            }
+        }
+
+        $variables[$key] =& $$var;
+        $loaded[$key] = $key;
+     }
+
+    return $variables[$key];
+}
+
+// --------------------------------------------------------------------
+
+/**
+* Get config file.
+*
+* @access   public
+* @param    string $filename
+* @param    string $var
+* @return   array
+*/
+function get_config($filename = 'config', $var = '', $folder = '')
+{
+    $folder = ($folder == '') ? APP .'config' : $folder;
+    
+    if($filename == 'database')
+    {
+        $database   = get_static($filename, $var, APP .'config');
+
+        return $database;
+    }
+    
+    return get_static($filename, $var, $folder);
+}
+
+$packages = get_config('packages');
 
 
-ob_include_files();
-ob_set_headers();
-ob_system_run();
+// --------------------------------------------------------------------
+
+require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'obullo'. EXT);
+
+// --------------------------------------------------------------------
 
 
-/*
-echo '<b>Started memory:</b> '.$start.'<br />';
-echo '<b>Total consumed memory: </b>'.$end.'<br />';
-echo '<b>OB_Started memory:</b> '.$ob_start.'<br />';
-<<<<<<< HEAD
-echo '<b>OB_End memory:</b> '.$ob_end.'<br />';*/
+$obullo = new Obullo();
+$obullo->run();

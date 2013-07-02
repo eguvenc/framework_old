@@ -1,20 +1,6 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009 - 2012.
- *
- * PHP5 HMVC Based Scalable Software.
- *
- * @package         Obullo
- * @author          Obullo.com  
- * @subpackage      Obullo.libraries        
- * @copyright       Obullo Team
- * @license          
- * @since           Version 1.0
- * @filesource
- */ 
- 
-/**
  * Model Class.
  *
  * Main model class.
@@ -23,9 +9,6 @@
  * @subpackage      Obullo.core     
  * @category        Core Model
  * @version         0.1
- * @version         0.2 added extend to ob
- * @version         0.3 depreciated get_object_vars, added _assing_db_objects
- * @version         0.4 added loader::$_databases; func.
  */                    
 
 Class Model {
@@ -71,5 +54,5 @@ Class Model {
 
 // END Model Class
 
-/* End of file Model.php */
-/* Location: ./obullo/core/Model.php */
+/* End of file model.php */
+/* Location: ./ob_modules/obullo/releases/2.0/src/model.php */

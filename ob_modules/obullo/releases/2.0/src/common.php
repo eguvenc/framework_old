@@ -4,53 +4,37 @@
 * Common.php
 *
 * @version 1.0
-* @version 1.1 added removed OB_Library:factory added
-*              lib_factory function
-* @version 1.2 removed lib_factory function
-* @version 1.3 renamed base "libraries" folder as "base"
-* @version 1.4 added $var  and config_name vars for get_config()
-* @version 1.5 added PHP5 library interface class, added spl_autoload_register()
-*              renamed register_static() function, added replace support ..
 */
+
 // --------------------------------------------------------------------
 
 /**
-* register_autoload();
-* Autoload Just for php5 Libraries.
-*
-* @access   public
-* @author   Ersin Guvenc
-* @param    string $class name of the class.
-*           You must provide real class name. (lowercase)
-* @param    boolean $base base class or not
-* @version  0.1
-* @version  0.2 added base param
-* @version  0.3 renamed base "libraries" folder as "base"
-* @version  0.4 added php5 library support, added spl_autoload_register() func.
-* @version  0.5 added replace and extend support
-* @version  0.6 removed LoaderException to play nicely with other autoloaders.
-*
-* @return NULL | Exception
-*/
+ * Autoload php5 files.
+
+ * @param string $realname
+ * @return
+ */
 function ob_autoload($realname)
 {    
     if(class_exists($realname))
     {
         return;
     }
+   
+    $packages = get_config('packages');
     
     if($realname == 'Model' OR $realname == 'Vmodel') // Database files.
     {
-        require(BASE .'core'. DS .$realname. EXT);
+        require(OB_MODULES .'obullo'. DS .'releases'. $packages['version'] .'src'. DS .strtolower($realname). EXT);
+        
         return;
     }
-    
-    $packages = get_config('packages');
-    $filename = mb_strtolower($realname, config('charset'));
+   
+    $package_filename = mb_strtolower($realname, config('charset'));
 
-    if(isset($packages['dependencies'][$filename]['component']) AND $packages['dependencies'][$filename]['component'] == 'library') //  check package Installed. We don't use file exists because of the performance.
+    if(isset($packages['dependencies'][$package_filename]['component']) AND $packages['dependencies'][$package_filename]['component'] == 'library') //  check package Installed.
     {
-        require(OB_MODULES .$filename. DS .'releases'. DS .$packages['dependencies'][$filename]['version']. DS .$filename. EXT);
+        require(OB_MODULES .$package_filename. DS .'releases'. DS .$packages['dependencies'][$package_filename]['version']. DS .$package_filename. EXT);
         return;
     }
 }
@@ -60,80 +44,30 @@ spl_autoload_register('ob_autoload', true);
 // --------------------------------------------------------------------
 
 /**
-* Loads the (static) configuration or language files.
+* Error and Debug Logging
 *
-* @access    private
-* @author    Ersin Guvenc
-* @param     string $filename file name
-* @param     string $var variable of the file
-* @param     string $folder folder of the file
-* @version   0.1
-* @version   0.2 added $config_name param
-* @version   0.3 added $var variable
-* @version   0.4 renamed function as get_static ,renamed $config_name as $filename, added $folder param
-* @return    array
-*/
-function get_static($filename = 'config', $var = '', $folder = '')
-{
-    static $loaded    = array();
-    static $variables = array();
-    
-    $key = trim($folder. DS .$filename. EXT);
-    
-    if ( ! isset($loaded[$key]))  // Just reqiure once !
-    {
-        #######################
-        
-        require($folder. DS .$filename. EXT);
-        
-        #######################
-        
-        if($var == '') 
-        {
-            $var = &$filename;
-        }
-
-        if($filename != 'autoload' AND $filename != 'constants')
-        {
-            if ( ! isset($$var) OR ! is_array($$var))
-            {
-                $error_msg = 'The static file '. $folder. DS .$filename. EXT .' file does not appear to be formatted correctly.';
-                
-                log_me('debug', $error_msg);
-                
-                throw new Exception($error_msg);
-            }
-        }
-
-        $variables[$key] =& $$var;
-        $loaded[$key] = $key;
-     }
-
-    return $variables[$key];
-}
-
-// --------------------------------------------------------------------
-
-/**
-* Get config file.
+* We use this as a simple mechanism to access the logging
+* functions and send messages to be logged.
 *
-* @access   public
-* @param    string $filename
-* @param    string $var
-* @return   array
+* @access    public
+* @return    void
 */
-function get_config($filename = 'config', $var = '', $folder = '')
+if( ! function_exists('log_me') ) 
 {
-    $folder = ($folder == '') ? APP .'config' : $folder;
-    
-    if($filename == 'database')
-    {
-        $database   = get_static($filename, $var, APP .'config');
-
-        return $database;
+    function log_me($level = 'error', $message = '')
+    {    
+        if (config('log_threshold') == 0)
+        {
+            return;
+        }
+        
+        if(package_exists('log'))
+        {
+            log_write($level, $message);
+        }
+        
+        return;
     }
-    
-    return get_static($filename, $var, $folder);
 }
 
 // --------------------------------------------------------------------
@@ -173,7 +107,6 @@ function config($item, $config_name = 'config')
 * Gets a db configuration items
 *
 * @access    public
-* @author    Ersin Guvenc
 * @param     string $item
 * @param     string $index 'default'
 * @version   0.1
@@ -202,6 +135,24 @@ function db_item($item, $index = 'db')
 // --------------------------------------------------------------------
 
 /**
+ *  Check requested obullo package
+ *  whether to installed.
+ */
+function package_exists($package)
+{
+    $packages = get_config('packages');
+    
+    if(isset($packages['dependencies'][$package]['component']))
+    {
+        return TRUE;
+    }
+    
+    return FALSE;
+}
+
+// --------------------------------------------------------------------
+
+/**
 * Tests for file writability
 *
 * is_writable() returns TRUE on Windows servers when you really can't write to
@@ -225,17 +176,17 @@ function is_really_writable($file)
     {
         $file = rtrim($file, DS). DS .md5(rand(1,100));
 
-        if (($fp = @fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
+        if (($fp = @fopen($file, 'ab')) === FALSE)
         {
             return FALSE;
         }
 
         fclose($fp);
-        @chmod($file, DIR_WRITE_MODE);
+        @chmod($file, '0777');
         @unlink($file);
         return TRUE;
     }
-    elseif (($fp = @fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
+    elseif (($fp = @fopen($file, 'ab')) === FALSE)
     {
         return FALSE;
     }
@@ -476,7 +427,9 @@ if ( ! function_exists('remove_invisible_characters'))
     }
 }
 
-// END Common.php File
+// -------------------------------------------------------------------- 
 
-/* End of file Common.php */
-/* Location: ./obullo/core/Common.php */
+// END common.php File
+
+/* End of file common.php */
+/* Location: ./ob_modules/obullo/releases/2.0/src/common.php */

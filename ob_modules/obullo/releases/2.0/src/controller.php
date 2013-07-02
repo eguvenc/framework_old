@@ -1,17 +1,4 @@
 <?php
-
-/**
- * Obullo Framework (c) 2009 - 2012.
- *
- * PHP5 HMVC Based Scalable Software.
- *
- * @package         obullo    
- * @author          obullo.com
- * @copyright       Obullo Team.
- * @since           Version 1.0
- * @filesource
- * @license
- */
  
  /**
  * Controller Class.
@@ -22,16 +9,6 @@
  * @subpackage      Obullo.core     
  * @category        Core
  * @version         0.2
- */
-
- /**
- * Main Controller Class ( Core of the Obullo ).
- * 
- * @package         Obullo 
- * @subpackage      Obullo.core     
- * @category        Core
- * @version         0.2
- * 
  */
 
 Class Controller {
@@ -105,7 +82,7 @@ Class Controller {
     * @param type $new_instance
     * @return type 
     */
-    public static function _instance($new_instance = '')
+    public static function __obullo_instance($new_instance = '')
     {   
         if(is_object($new_instance))
         {
@@ -131,13 +108,13 @@ function this($new_instance = '')
 { 
     if(is_object($new_instance))  // fixed HMVC object type of integer bug in php 5.1.6
     {
-        Controller::_instance($new_instance);
+        Controller::__obullo_instance($new_instance);
     }
     
-    return Controller::_instance(); 
+    return Controller::__obullo_instance(); 
 }
 
 // END Controller Class
 
-/* End of file Controller.php */
-/* Location: ./obullo/core/Controller.php */
+/* End of file controller.php */
+/* Location: ./ob_modules/obullo/releases/2.0/src/controller.php */

@@ -1,32 +1,16 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009 - 2012.
- *
- * PHP5 HMVC Based Scalable Software.
- *
- *
- * @package         Obullo
- * @author          Obullo.com
- * @subpackage      Obullo.database
- * @copyright       Obullo Team
- * @license         public
- * @since           Version 1.0
- * @filesource
- */
-// ------------------------------------------------------------------------
-
-/**
- * MySQL Database Adapter Class
+ * PDO MySQL Db Adapter Class
  *
  * @package       Obullo
  * @subpackage    Drivers
- * @category      Database
+ * @category      Database PDO
  * @author        Obullo Team
  * @link
  */
 
-Class OB_Database_mysql extends OB_Database_adapter
+Class Pdo_Mysql extends Pdo_Database_Adapter
 {
     /**
     * The character used for escaping
@@ -360,5 +344,5 @@ Class OB_Database_mysql extends OB_Database_adapter
 } // end class.
 
 
-/* End of file Database_mysql.php */
-/* Location: ./obullo/libraries/drivers/database/Database_mysql.php */
+/* End of file pdo_mysql.php */
+/* Location: ./ob_modules/pdo_mysql/releases/0.0.1/pdo_mysql.php */

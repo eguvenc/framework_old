@@ -1,17 +1,6 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo       
- * @author          obullo.com
- * @filesource
- * @license
- */
-
-/**
  * Logging Helper
  *
  * @package     Obullo
@@ -24,42 +13,13 @@
 // --------------------------------------------------------------------
 
 /**
-* Error Logging Interface
-*
-* We use this as a simple mechanism to access the logging
-* class and send messages to be logged.
-*
-* @access    public
-* @return    void
-*/
-if( ! function_exists('log_me') ) 
-{
-    function log_me($level = 'error', $message = '')
-    {    
-        if (config('log_threshold') == 0)
-        {
-            return;
-        }
-        
-        log_write($level, $message);
-
-        return;
-    }
-}
-
-// --------------------------------------------------------------------
-
-/**
  * Write Log File
  *
  * Generally this function will be called using the global log_me() function.
- * Do not use Object in this function.
  *
  * @access   public
  * @param    string    the error level
  * @param    string    the error message
- * @param    bool      whether the error is a native PHP error
- * @param    bool      if true we use log function for current module
  * @return   bool
  */        
 if( ! function_exists('log_write') ) 
@@ -84,7 +44,7 @@ if( ! function_exists('log_write') )
         {
             $log_path = rtrim($log_path, DS) . DS .'tasks' . DS;
         } 
-        elseif(defined('STDIN'))  // Command Line Task Request
+        elseif(defined('STDIN'))  // Command Line && Task Requests
         {
             if(isset($_SERVER['argv'][1]) AND $_SERVER['argv'][1] == 'clear')
             {
@@ -129,7 +89,7 @@ if( ! function_exists('log_write') )
 
         $message .= $level.' '.(($level == 'INFO') ? ' -' : '-').' '.date($date_fmt). ' --> '.$msg."\n";  
     
-        if ( ! $fp = @fopen($filepath, FOPEN_WRITE_CREATE))
+        if ( ! $fp = @fopen($filepath, 'ab'))
         {
             return FALSE;
         }
@@ -139,7 +99,7 @@ if( ! function_exists('log_write') )
         flock($fp, LOCK_UN);
         fclose($fp);
 
-        @chmod($filepath, FILE_WRITE_MODE);
+        @chmod($filepath, '0666');
                  
         return TRUE;
     }

@@ -1,36 +1,15 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009 - 2012.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- *
- * @package         Obullo
- * @author          Obullo.com  
- * @subpackage      Obullo.database        
- * @copyright       Obullo Team.
- * @license         public
- * @since           Version 1.0
- * @filesource
- */ 
-
-// ------------------------------------------------------------------------
-
-/**
- * Obullo CRUD Class for PDO.
+ * CRUD ( CREATE - READ - UPDATE - DELETE ) Class for ** PDO.
  *
  * @package         Obullo 
  * @subpackage      Obullo.database     
  * @category        Database
  * @version         0.1
- * @version         0.2 added query builder
- * @version         0.3 added prepare 'like' support 
- * @version         0.4 added parent::exec();, added CRUD functions 
- * @version         0.5 added method chaining support. 
  */
  
-Class OB_crud  {
+Class Pdo_Database_Crud  {
                                          
     public $ar_select              = array();
     public $ar_distinct            = FALSE;
@@ -93,7 +72,9 @@ Class OB_crud  {
         }
         
         if (is_string($select))
-        $select = explode(',', $select);
+        {
+            $select = explode(',', $select);
+        }
         
         foreach ($select as $val)
         {
@@ -357,7 +338,9 @@ Class OB_crud  {
         return;
         
         if ( ! is_array($values))
-        $values = array($values);
+        {
+            $values = array($values);
+        }
         
         $not = ($not) ? ' NOT' : '';
 
@@ -432,7 +415,9 @@ Class OB_crud  {
     private function _like($field, $match = '', $type = 'AND ', $side = 'both', $not = '')
     {
         if ( ! is_array($field))
-        $field = array($field => $match);
+        {
+            $field = array($field => $match);
+        }
      
         foreach ($field as $k => $v)
         {
@@ -485,7 +470,9 @@ Class OB_crud  {
     public function group_by($by)
     {
         if (is_string($by))
-        $by = explode(',', $by);
+        {
+            $by = explode(',', $by);
+        }
         
         foreach ($by as $val)
         {
@@ -595,7 +582,8 @@ Class OB_crud  {
     */
     public function order_by($orderby, $direction = '')
     {
-        $direction = strtoupper(trim($direction)); 
+        $direction = strtoupper(trim($direction));
+        
         if($direction != '')
         {
             switch($direction)
@@ -634,9 +622,9 @@ Class OB_crud  {
             $orderby = $this->_protect_identifiers($orderby);
         }
     
-        $orderby_statement = $orderby.$direction;
-        
+        $orderby_statement  = $orderby.$direction;
         $this->ar_orderby[] = $orderby_statement;
+        
         if ($this->ar_caching === TRUE)
         {
             $this->ar_cache_orderby[] = $orderby_statement;
@@ -812,7 +800,7 @@ Class OB_crud  {
         
         $this->prepare = FALSE;
         
-        return $this->exec_query($sql);  // return affected rows.      
+        return $this->exec_query($sql);  // return affected rows ( PDO support )
     }
     
     // --------------------------------------------------------------------
@@ -1032,7 +1020,9 @@ Class OB_crud  {
         elseif (is_array($table))
         {
             foreach($table as $single_table)
-            $this->delete($single_table, $where, $limit, FALSE);
+            {
+                $this->delete($single_table, $where, $limit, FALSE);   
+            }
         
             $this->_reset_write();
             return;
@@ -1042,10 +1032,14 @@ Class OB_crud  {
         }
 
         if ($where != '')
-        $this->where($where);
-        
+        {
+            $this->where($where);
+        }
+
         if ($limit != NULL)
-        $this->limit($limit);
+        {
+            $this->limit($limit);
+        }
         
         if (count($this->ar_where) == 0 && count($this->ar_wherein) == 0 && count($this->ar_like) == 0)
         {
@@ -1057,7 +1051,9 @@ Class OB_crud  {
         $sql = $this->_delete($table, $this->ar_where, $this->ar_like, $this->ar_limit);
         
         if ($reset_data)
-        $this->_reset_write();
+        {
+            $this->_reset_write();
+        }
         
         $this->prepare = FALSE;
         
@@ -1386,7 +1382,10 @@ Class OB_crud  {
         foreach ($ar_reset_items as $item => $default_value)
         {
             if ( ! in_array($item, $this->ar_store_array))
-            $this->$item = $default_value;
+            {
+                $this->$item = $default_value;
+            }
+
         }
     }
  
@@ -1658,5 +1657,5 @@ Class OB_crud  {
                                   
 }
 
-/* End of file Database_crud.php */
-/* Location: .obullo/libraries/drivers/database/Database_crud.php */
+/* End of file pdo_database_crud.php */
+/* Location: ./ob_modules/database_pdo/releases/0.0.1/src/pdo_database_crud.php */

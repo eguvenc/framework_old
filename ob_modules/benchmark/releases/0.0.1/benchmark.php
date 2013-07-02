@@ -101,7 +101,7 @@ Class Benchmark {
     
 }
 
-// END benchmark class.
+// Benchmark Functions.
 // -------------------------------------------------------------------- 
 
 /**
@@ -136,7 +136,7 @@ if( ! function_exists('benchmark_mark') )
 if( ! function_exists('benchmark_elapsed_time') ) 
 {
     function benchmark_elapsed_time($point1 = '', $point2 = '', $decimals = 4)
-    {
+    {        
         return Benchmark::getInstance()->elapsed_time($point1, $point2, $decimals);
     }
 }
@@ -155,8 +155,6 @@ if( ! function_exists('benchmark_memory_usage') )
         return '{memory_usage}';
     }
 }
-
-// -------------------------------------------------------------------- 
 
 
 /* End of file Benchmark.php */

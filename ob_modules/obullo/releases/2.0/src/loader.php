@@ -1,18 +1,5 @@
 <?php
 
-/**
- * Obullo Framework (c) 2009 - 2012.
- *
- * PHP5 HMVC Based Scalable Software.
- *
- * @package         Obullo
- * @author          Obullo.com
- * @subpackage      Obullo.core
- * @copyright       Obullo Team
- * @license
- * @filesource
- */
-
 // ------------------------------------------------------------------------
 
 /**
@@ -144,6 +131,7 @@ Class loader {
     public static function database($db_name_or_params = 'db', $return_object = FALSE)
     {
         $db_var = 'db';
+        
         if(is_array($db_name_or_params) AND isset($db_name_or_params['variable']))
         {
             $db_var = $db_name_or_params['variable'];
@@ -152,7 +140,7 @@ Class loader {
         {            
             $db_var = ($db_var != 'db') ? $db_name_or_params : 'db';
         }
-
+        
         if (isset(this()->{$db_var}) AND is_object(this()->{$db_var}))  // Lazy Loading ..
         {
             if($return_object) // return to db object like libraries.
@@ -163,22 +151,25 @@ Class loader {
             return;
         }
         
-        if( ! class_exists('OB_Database'))
+        $packages = get_config('packages');
+        $db_class = $packages['db_class'];
+        
+        if( ! class_exists($db_class))
         {
-            if(is_bool($db_name_or_params) AND $db_name_or_params === FALSE)  // No instantite
-            {
-                $database = lib('ob/Database', FALSE); // Just Include Database File No Instantiate.
-
-                return;
-            }
+            require (OB_MODULES .strtolower($db_class). DS .'releases'. DS .$packages['dependencies'][strtolower($db_class)]['version']. DS .strtolower($db_class). EXT);
         }
         
-        ################
-        
-        $database = lib('ob/Database', '', TRUE); // Database Object Must Be New.
+        if(is_bool($db_name_or_params) AND $db_name_or_params === FALSE)  // No instantite
+        {
+            return;
+        }
 
         ################
-        
+
+        $database = new $db_class(); // Database Object Must Be New.
+
+        ################
+
         if($return_object)
         {
             return $database->connect($db_var, $db_name_or_params);
@@ -349,5 +340,5 @@ Class loader {
 
 // END Loader Class
 
-/* End of file Loader.php */
-/* Location: ./obullo/core/Loader.php */
+/* End of file loader.php */
+/* Location: ./ob_modules/obullo/releases/2.0/src/loader.php */

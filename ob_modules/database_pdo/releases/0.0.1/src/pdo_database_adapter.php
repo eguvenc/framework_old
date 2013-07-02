@@ -1,21 +1,9 @@
 <?php
 
-/**
- * Obullo Framework (c) 2009 - 2012.
- *
- * PHP5 HMVC Based Scalable Software.
- *
- * @package         Obullo
- * @author          Obullo.com  
- * @subpackage      Obullo.database        
- * @copyright       Obullo Team
- * @license         public
- * @since           Version 1.0
- * @filesource
- */
+$packages = get_config('packages');
 
-require (BASE .'libraries'. DS .'drivers'. DS .'database'. DS .'Database_pdo'. EXT);
-
+require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'pdo_database_layer'. EXT);
+        
 // ------------------------------------------------------------------------
 
 /**
@@ -27,7 +15,7 @@ require (BASE .'libraries'. DS .'drivers'. DS .'database'. DS .'Database_pdo'. E
  * @author        Obullo Team
  * @link
  */
-Abstract Class OB_Database_adapter extends OB_Database_pdo {
+Abstract Class Pdo_Database_Adapter extends Pdo_Database_Layer {
     
     public $hostname = '';
     public $username = '';
@@ -300,5 +288,5 @@ Abstract Class OB_Database_adapter extends OB_Database_pdo {
     
 }
 
-/* End of file Database_adapter.php */
-/* Location: .obullo/database/drivers/Database_adapter.php */
+/* End of file pdo_database_adapter.php */
+/* Location: ./ob_modules/database_pdo/releases/0.0.1/src/pdo_database_adapter.php */

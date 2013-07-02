@@ -16,7 +16,7 @@
  *
  */
 
-Class OB_Mongo {
+Class Mongo_DB {
 
     private $db;
     public  $connection;    // ! do not remove we close the connection in the bootstrap.
@@ -1209,7 +1209,7 @@ Class OB_Mongo {
     }
     
 }
-// END Mongo Class
+// END Mongo_DB Class
 
-/* End of file Mongo.php */
-/* Location: ./obullo/libraries/mongo.php */
+/* End of file mongo_db.php */
+/* Location: ./ob_modules/mongo_db/releases/0.0.1/mongo_db.php */
