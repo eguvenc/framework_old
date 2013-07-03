@@ -32,8 +32,6 @@ Class Agent {
     public $version      = '';
     public $mobile       = '';
     public $robot        = '';
-
-    public static $instance;
     
     /**
      * Constructor
@@ -60,18 +58,6 @@ Class Agent {
         }
 
         log_me('debug', "User Agent Class Initialized");
-    }
-
-    // --------------------------------------------------------------------
-
-    public static function getInstance()
-    {
-       if( ! self::$instance instanceof self)
-       {
-           self::$instance = new self();
-       } 
-       
-       return self::$instance;
     }
     
     // ------------------------------------------------------------------------

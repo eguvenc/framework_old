@@ -26,7 +26,7 @@ $packages = array(
         'pdo_mysql'  => array('version' => '0.0.1', 'component' => 'library'),
         'router' =>  array('version' => '0.0.1', 'component' => 'library'),
         'request' => array('version' => '0.0.1', 'component' => 'helper'),
-        'security' => array('version' => '0.0.1', 'component' => 'helper'), 
+        'security' => array('version' => '0.0.1', 'component' => 'library'), 
         'session' => array('version' => '0.0.1', 'component' => 'helper'), 
         'string' => array('version' => '0.0.1', 'component' => 'helper'), 
         'task'  => array('version' => '0.0.1', 'component' => 'helper'),

@@ -23,10 +23,7 @@ function ob_request_timer($mark = '')
 Class Hmvc
 {
     // Cloned objects
-    public $uri;                   // Clone original URI object
-    public $router;                // Clone original Router object
-    public $config;                // Clone original Config object
-    public $_this         = NULL;  // Clone original getInstance(); ( Controller instance)
+    public $_this          = NULL;     // Clone original getInstance(); ( Controller instance)
 
     // Request, Response, Reset
     public $uri_string       = '';
@@ -53,10 +50,6 @@ Class Hmvc
     // public static $request_times = array();   // request time for profiler
     public static $start_time    = '';        // benchmark start time for profiler
     public static $request_count = 0;         // request count for profiler
-
-    // Rendering Output
-    public $decode_format    = '';    // Json, Xml ..
-    public $decode_assoc     = FALSE; // if true decode as (array) else decode as (object)
     
     public function __construct()
     {
@@ -87,22 +80,23 @@ Class Hmvc
         
         if($hmvc_uri != '')
         {
-            $URI     = Uri::getInstance();
-            $Router  = Router::getInstance();
-            $Config  = Config::getInstance();
+            $URI     = getInstance()->uri;
+            $Router  = getInstance()->router;
+            $Config  = getInstance()->config;
             
             # CLONE
             #######################################
             
             $this->uri     = clone $URI;     // Create copy of original URI class.
             $this->router  = clone $Router;  // Create copy of original Router class.
-            $this->config  = clone $Config;  // Create copy of original Config class.
+            $this->config  = clone $Config;  // Create copy of original Router class.
+
             
             # CLEAR
             #######################################
 
-            $URI->clear();           // Reset uri objects we will reuse it for hmvc
-            $Router->clear();        // Reset router objects we will reuse it for hmvc.
+            getInstance()->uri->clear();           // Reset uri objects we will reuse it for hmvc
+            getInstance()->router->clear();        // Reset router objects we will reuse it for hmvc.
 
             #######################################
             
@@ -156,11 +150,12 @@ Class Hmvc
         $this->no_loop      = FALSE;
 
         // Clone objects
-        $this->uri          = '';
-        $this->router       = '';
-        $this->config       = '';
-        $this->_this        = '';
+         $this->uri          = '';
+         $this->router       = '';
+         $this->config       = '';
+       
 
+        $this->_this            = '';
         $this->request_method   = 'GET';
 
         // Global variables
@@ -350,8 +345,8 @@ Class Hmvc
             self::$_conn_id[$conn_id] = $conn_id;    // store connection id.
         }
 
-        $URI    = Uri::getInstance();
-        $router = Router::getInstance();
+        $URI    = getInstance()->uri;
+        $router = getInstance()->router;
 
         //------------------------------------
         self::$start_time = ob_request_timer('start');
@@ -460,12 +455,12 @@ Class Hmvc
         # Set original objects foreach HMVC requests we backup before  ..
         ######################################
         
-        $URI = Uri::getInstance();
-
+        $URI = getInstance()->uri;
+        
         $this->_this->uri     = Uri::setInstance($this->uri);
         $this->_this->router  = Router::setInstance($this->router);
         $this->_this->config  = Config::setInstance($this->config);
-
+        
         getInstance($this->_this);         // Set original $this to controller instance that we backup before
     
         # Assign Obullo global variables ..
@@ -544,16 +539,7 @@ Class Hmvc
     * @return   string
     */
     public function _response()
-    {   
-        if($this->decode_format == 'json')
-        {
-           $row = json_decode($this->response(), $this->decode_assoc);
-            
-           $this->_reset_decode_vars();
-            
-           return $row;
-        }
-        
+    {        
         return $this->response();
     }
 
@@ -583,37 +569,6 @@ Class Hmvc
         return md5(trim($this->_conn_string));
     }
 
-    // --------------------------------------------------------------------
-    
-    /**
-    * Decode encoded string.
-    * Default json.
-    * 
-    * @return object
-    */
-    public function decode($format = 'json', $assoc = FALSE)
-    {
-        $this->decode_format = strtolower($format);
-        $this->decode_assoc  = (bool)$assoc; // else decode as object
-        
-        return $this;
-    }
-    
-    // --------------------------------------------------------------------
-
-    /**
-    * Reset the decoding variables 
-    * before return to hmvc response.  
-    * 
-    * @access private
-    * @return void 
-    */
-    public function _reset_decode_vars()
-    {
-        $this->decode_format = '';
-        $this->decode_assoc  = FALSE;
-    }
-    
     // --------------------------------------------------------------------
     
     /**

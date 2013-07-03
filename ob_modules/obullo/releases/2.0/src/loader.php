@@ -123,6 +123,34 @@ Class loader {
             $libraryname = strtolower(substr($library, 3));
             $packages    = get_config('packages');
             
+            if(isset(getInstance()->{$libraryname}) AND i_hmvc() == FALSE) // lazy loading
+            {
+                return;
+            }
+            
+            if(in_array($libraryname, array('uri','config','router','output')))
+            {
+                return;
+            }
+       
+            if($libraryname == 'benchmark') // Use php5 classes as classical way.
+            {
+                getInstance()->benchmark = Benchmark::getInstance();
+                return;
+            }
+            
+            if($libraryname == 'security')
+            {
+                getInstance()->security = Security::getInstance();
+                return;
+            }
+            
+            if($libraryname == 'locale')
+            {
+                getInstance()->locale = Locale::getInstance();
+                return;
+            }
+            
             if( ! isset($packages['dependencies'][$libraryname]['component']) )
             {
                 show_error('Please install the <b>'.$libraryname.'</b> package.');

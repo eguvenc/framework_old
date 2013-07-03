@@ -15,8 +15,7 @@ if( ! function_exists('sess_start'))
         
         if ($session_start == NULL)
         {
-            $config = Config::getInstance();
-            $driver = (isset($params['sess_driver'])) ? $params['sess_driver'] : $config->item('sess_driver');
+            $driver = (isset($params['sess_driver'])) ? $params['sess_driver'] : config('sess_driver');
            
             $packages = get_config('packages');
     

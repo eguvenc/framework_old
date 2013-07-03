@@ -92,7 +92,7 @@ if( ! function_exists('css') )
             }
             elseif ($index_page === TRUE)
             {
-                $link .= ' href="'. Config::getInstance()->site_url($href, false) .'" ';
+                $link .= ' href="'. getInstance()->config->site_url($href, false) .'" ';
             }
             else
             {
@@ -174,7 +174,7 @@ if( ! function_exists('js') )
             }
             elseif ($index_page === TRUE)  // .js file as PHP
             {
-                $link .= ' src="'. Config::getInstance()->site_url($src, false) .'" ';
+                $link .= ' src="'. getInstance()->config->site_url($src, false) .'" ';
             }
             else
             {
@@ -203,7 +203,7 @@ if ( ! function_exists('plugin'))
 {
     function plugin($plugin_name, $filename = 'plugins')
     {
-        $config = Config::getInstance();
+        $config = getInstance()->config;
         
         ##########
         
@@ -304,7 +304,7 @@ if( ! function_exists('img') )
             {
                 if ($index_page === TRUE)
                 {
-                    $img .= ' src="'.Config::getInstance()->site_url($v, false).'" ';
+                    $img .= ' src="'.getInstance()->config->site_url($v, false).'" ';
                 }
                 else
                 {
@@ -376,7 +376,7 @@ if( ! function_exists('_get_public_path') )
             $folder = '';
         }
 
-        $config = Config::getInstance();
+        $config = getInstance()->config;
         
         return $config->public_url('', true) .'assets/'. $extra_path . $folder . $sub_path . $filename;
     }

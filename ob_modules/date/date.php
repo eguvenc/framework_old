@@ -39,7 +39,8 @@ if( ! function_exists('now') )
 {
     function now()
     {
-        if (strtolower(config('time_reference')) == 'gmt')
+        $time_ref = config('time_reference');
+        if (strtolower($time_ref) == 'gmt')
         {
             $now = time();
             $system_time = mktime(
@@ -155,8 +156,6 @@ if( ! function_exists('timespan') )
 {
     function timespan($seconds = 1, $time = '')
     {
-        loader::lang('ob/date');
-        
         if ( ! is_numeric($seconds))
         {
             $seconds = 1;
@@ -181,7 +180,7 @@ if( ! function_exists('timespan') )
 
         if ($years > 0)
         {	
-            $str .= $years.' '.$OB->lang->line((($years	> 1) ? 'date_years' : 'date_year')).', ';
+            $str .= $years.' '.lang((($years	> 1) ? 'date_years' : 'date_year')).', ';
         }	
 
         $seconds -= $years * 31536000;
@@ -515,8 +514,6 @@ if( ! function_exists('timezone_menu') )
 {
     function timezone_menu($default = 'UTC', $class = "", $name = 'timezones')
     {
-        loader::lang('ob/date');
-
         if ($default == 'GMT')
                 $default = 'UTC';
 

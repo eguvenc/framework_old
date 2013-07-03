@@ -97,7 +97,7 @@ if ( ! function_exists('uri_extension'))
 {
     function uri_extension()
     {
-        return Uri::getInstance()->extension();
+        return getInstance()->uri->extension();
     }
 }
 // ------------------------------------------------------------------------
@@ -113,7 +113,7 @@ if ( ! function_exists('module'))
 {
     function module($uri = '')
     {
-        $module = Router::getInstance()->fetch_directory();
+        $module = getInstance()->router->fetch_directory();
         
         if($uri == '')
         {
@@ -169,11 +169,11 @@ if ( ! function_exists('anchor'))
 
         if ( ! is_array($uri))
         {
-            $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? Config::getInstance()->site_url($uri, $suffix) : $uri;
+            $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? getInstance()->config->site_url($uri, $suffix) : $uri;
         }
         else
         {
-            $site_url = Config::getInstance()->site_url($uri, $suffix);
+            $site_url = getInstance()->config->site_url($uri, $suffix);
         }
 
         if ($title == '')
@@ -246,7 +246,7 @@ if ( ! function_exists('anchor_popup'))
 
         $title = (string) $title;
 
-        $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? Config::getInstance()->site_url($uri, $suffix) : $uri;
+        $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? getInstance()->uri->site_url($uri, $suffix) : $uri;
 
         # if ssl used do not use https:// for standart anchors.
         # if your HTTP server NGINX add below the line to your fastcgi_params file.
@@ -617,7 +617,7 @@ if ( ! function_exists('redirect'))
                 $sharp     = TRUE;
             }
 
-            $uri = Config::getInstance()->site_url($uri, $suffix);
+            $uri = getInstance()->config->site_url($uri, $suffix);
 
             if($sharp == TRUE AND isset($sharp_uri[1]))
             {

@@ -27,14 +27,12 @@ if( ! function_exists('form_open') )
 {
     function form_open($action = '', $attributes = '', $hidden = array())
     {
-        $config = Config::getInstance();
-
         if ($attributes == '')
         {
             $attributes = 'method="post"';
         }
 
-        $action = ( strpos($action, '://') === FALSE) ? $config->site_url($action) : $action;
+        $action = ( strpos($action, '://') === FALSE) ? getInstance()->config->site_url($action) : $action;
 
         $form = '<form action="'.$action.'"';
 
@@ -42,13 +40,11 @@ if( ! function_exists('form_open') )
 
         $form .= '>';
         
-        if ($config->item('csrf_protection') === TRUE) // CSRF Support
+        if (config('csrf_protection') === TRUE) // CSRF Support
         {
-            loader::helper('ob/security');
-         
-            $security = Security::getInstance();
+            loader::library('ob/security');
             
-            $hidden[$security->get_csrf_token_name()] = $security->get_csrf_hash();
+            $hidden[$security->get_csrf_token_name()] = getInstance()->security->get_csrf_hash();
         }
 
         if (is_array($hidden) AND count($hidden) > 0)
@@ -284,7 +280,7 @@ if( ! function_exists('form_dropdown') )
         if($selected === FALSE)   // False == "0" bug fix, FALSE is not a Integer.
         {
             $selected_option = array_keys($options);
-            $selected == $selected_option[0];
+            $selected = $selected_option[0];
         }
         
         if ( ! is_array($selected))

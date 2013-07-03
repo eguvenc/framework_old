@@ -117,8 +117,6 @@ Class Input {
         // CSRF Protection check
         if ($this->enable_csrf == TRUE)
         {
-            loader::helper('ob/security');
-            
             Security::getInstance()->csrf_verify();
         }
         
@@ -274,9 +272,7 @@ Class Input {
         // Should we filter the input data?
         if ($this->enable_xss === TRUE)
         {
-            loader::helper('ob/security');
-
-            $str = xss_clean($str);
+            $str = Security::getInstance()->xss_clean($str);
         }
 
         // Standardize newlines if needed
@@ -336,9 +332,7 @@ Class Input {
 
         if ($xss_clean === TRUE)
         {
-            loader::helper('ob/security');
-
-            return xss_clean($array[$index]);
+            return Security::getInstance()->xss_clean($array[$index]);
         }
 
         return $array[$index];
@@ -366,7 +360,7 @@ if( ! function_exists('i_get') )
     {
         $GET = ($use_global_var) ? $GLOBALS['_GET_BACKUP']: $_GET; // _GET_BACKUP = Hmvc local get values
         
-        return Input::getInstance()->_fetch_from_array($GET, $index, $xss_clean);
+        return getInstance()->input->_fetch_from_array($GET, $index, $xss_clean);
     }
 }
 // --------------------------------------------------------------------
@@ -386,7 +380,7 @@ if( ! function_exists('i_post') )
     {
         $POST = ($use_global_var) ? $GLOBALS['_POST_BACKUP']: $_POST; // _POST_BACKUP = Hmvc local post values
 
-        return Input::getInstance()->_fetch_from_array($POST, $index, $xss_clean);
+        return getInstance()->input->_fetch_from_array($POST, $index, $xss_clean);
     }
 }
 
@@ -407,7 +401,7 @@ if( ! function_exists('i_request') )
     {
         $REQUEST = ($use_global_var) ? $GLOBALS['_REQUEST_BACKUP']: $_REQUEST; // _REQUEST_BACKUP = Hmvc local request values
 
-        return Input::getInstance()->_fetch_from_array($REQUEST, $index, $xss_clean);
+        return getInstance()->input->_fetch_from_array($REQUEST, $index, $xss_clean);
     }
 }
 
@@ -452,7 +446,7 @@ if( ! function_exists('i_cookie') )
 {
     function i_cookie($index = '', $xss_clean = FALSE)
     {
-        return Input::getInstance()->_fetch_from_array($_COOKIE, $index, $xss_clean);
+        return getInstance()->input->_fetch_from_array($_COOKIE, $index, $xss_clean);
     }
 }
 // --------------------------------------------------------------------
@@ -472,7 +466,7 @@ if( ! function_exists('i_server') )
 {
     function i_server($index = '', $xss_clean = FALSE)
     {
-        return Input::getInstance()->_fetch_from_array($_SERVER, $index, $xss_clean);
+        return getInstance()->input->_fetch_from_array($_SERVER, $index, $xss_clean);
     }
 }
 // --------------------------------------------------------------------
@@ -487,7 +481,7 @@ if( ! function_exists('i_ip_address') )
 {
     function i_ip_address()
     {
-        return Input::getInstance()->ip_address();
+        return getInstance()->input->ip_address();
     }
 }
 // --------------------------------------------------------------------
@@ -505,7 +499,7 @@ if( ! function_exists('i_valid_ip') )
 {
     function i_valid_ip($ip)
     {        
-        return Input::getInstance()->valid_ip($ip);
+        return getInstance()->input->valid_ip($ip);
     }
 }
 // --------------------------------------------------------------------
@@ -520,7 +514,7 @@ if( ! function_exists('i_user_agent') )
 {
     function i_user_agent()
     {
-        $input = Input::getInstance();
+        $input = getInstance()->input;
 
         if ($input->user_agent !== FALSE)
         {

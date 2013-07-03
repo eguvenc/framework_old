@@ -1405,9 +1405,7 @@ Class Validator {
      */    
     public function strip_image_tags($str)
     {
-        loader::helper('ob/security');
-        
-        return strip_image_tags($str);
+        return Security::getInstance()->strip_image_tags($str);
     }
     
     // --------------------------------------------------------------------
@@ -1421,9 +1419,7 @@ Class Validator {
      */    
     public function xss_clean($str)
     {
-        loader::helper('ob/security');
-        
-        return xss_clean($str);
+        return Security::getInstance()->xss_clean($str);
     }
     
     // --------------------------------------------------------------------
