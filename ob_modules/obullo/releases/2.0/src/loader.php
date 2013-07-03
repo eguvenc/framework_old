@@ -116,6 +116,30 @@ Class loader {
 
     // --------------------------------------------------------------------
 
+    public static function library($library)
+    {
+        if(strpos($library, 'ob/') === 0)
+        {
+            $libraryname = strtolower(substr($library, 3));
+            $packages    = get_config('packages');
+            
+            if( ! isset($packages['dependencies'][$libraryname]['component']) )
+            {
+                show_error('Please install the <b>'.$libraryname.'</b> package.');
+            }
+            
+            if($packages['dependencies'][$libraryname]['component'] == 'library')
+            {
+                $Class = ucfirst($libraryname);
+                getInstance()->{$libraryname} = new $Class(); // Atuoload the library from ob_modules using php5 autoloader.
+            }
+            
+            return;
+        }
+    }
+    
+    // --------------------------------------------------------------------
+    
     /**
     * loader::database();
     *

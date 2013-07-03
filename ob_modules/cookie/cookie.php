@@ -1,21 +1,6 @@
 <?php 
 
 /**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo       
- * @author          obullo.com
- * @license         public
- * @since           Version 1.0
- * @filesource
- * @license
- */
-
-// ------------------------------------------------------------------------
-
-/**
  * Obullo Cookie Helpers
  *
  * @package     Obullo
@@ -56,26 +41,24 @@ if( ! function_exists('set_cookie') )
             }
         }
 
-        $config = lib('ob/Config');   // Set the config file options
-
-        if ($prefix == '' AND $config->item('cookie_prefix') != '')
+        if ($prefix == '' AND config('cookie_prefix') != '')
         {
-            $prefix = $config->item('cookie_prefix');
+            $prefix = config('cookie_prefix');
         }
         
-        if ($domain == '' AND $config->item('cookie_domain') != '')
+        if ($domain == '' AND config('cookie_domain') != '')
         {
-            $domain = $config->item('cookie_domain');
+            $domain = config('cookie_domain');
         }
         
-        if ($path   == '/' AND $config->item('cookie_path') != '/')
+        if ($path   == '/' AND config('cookie_path') != '/')
         {
-            $path   = $config->item('cookie_path');
+            $path   = config('cookie_path');
         }
         
-        if ($secure == FALSE AND $config->item('cookie_secure') != FALSE)
+        if ($secure == FALSE AND config('cookie_secure') != FALSE)
         {
-            $secure = $config->item('cookie_secure');
+            $secure = config('cookie_secure');
         }
         
         if ( ! is_numeric($expire))
@@ -112,13 +95,11 @@ if( ! function_exists('get_cookie') )
 {
     function get_cookie($index = '', $xss_clean = FALSE)
     {
-        $config = lib('ob/Config');
-        
         $prefix = '';
         
-        if ( ! isset($_COOKIE[$index]) && $config->item('cookie_prefix') != '')
+        if ( ! isset($_COOKIE[$index]) AND config('cookie_prefix') != '')
         {
-            $prefix = $config->item('cookie_prefix');
+            $prefix = config('cookie_prefix');
         }
         
         return i_cookie($prefix.$index, $xss_clean);
@@ -145,4 +126,4 @@ if( ! function_exists('delete_cookie') )
 }
 
 /* End of file cookie.php */
-/* Location: ./obullo/helpers/cookie.php */
+/* Location: ./ob_modules/cookie/releases/0.0.1/cookie.php */

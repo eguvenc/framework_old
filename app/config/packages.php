@@ -10,6 +10,7 @@ $packages = array(
     'db_class' => 'Database_PDO',
     'dependencies' => array(
         'auth'  => array('version' => '0.0.1', 'component' => 'library'),
+        'agent'  => array('version' => '0.0.1', 'component' => 'library'),
         'benchmark' => array('version' => '0.0.1', 'component' => 'library'),
         'config' => array( 'repo' => 'https://github.com/eguvenc/config.git', 'version' =>  '0.0.1', 'component' => 'library'),
         'database_pdo' => array('version' => '0.0.1', 'component' => 'library'),

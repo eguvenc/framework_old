@@ -19,8 +19,6 @@ Class Acl {
     public $members     = array();
     public $access_list = array();
     
-    public static $instance;
-    
     /**
     * Constructor
     *
@@ -34,21 +32,7 @@ Class Acl {
     {
         log_me('debug', "Acl Class Initialized");
     }
-    
-    // ------------------------------------------------------------------------
-
-    public static function getInstance()
-    {
-       if( ! self::$instance instanceof self)
-       {
-           self::$instance = new self();
-       } 
-       
-       return self::$instance;
-    }
-
-    // --------------------------------------------------------------------
-    
+   
     /**
     * Create a Group
     * 

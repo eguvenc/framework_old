@@ -42,16 +42,7 @@ Class Controller {
                 {                    
                     foreach($autoload[$key] as $filename)
                     {
-                        if($key == 'library')
-                        {
-                            $class = strtolower($filename);
-                            
-                            self::__obullo_instance()->{$class} = new $filename();
-                        } 
-                        else 
-                        {
-                            loader::$key($filename);
-                        }
+                        loader::$key($filename);
                     }
                 }
             }
