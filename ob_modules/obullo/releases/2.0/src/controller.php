@@ -39,10 +39,19 @@ Class Controller {
             foreach(array_keys($autoload) as $key)
             {
                 if(count($autoload[$key]) > 0)
-                {
+                {                    
                     foreach($autoload[$key] as $filename)
                     {
-                        loader::$key($filename);
+                        if($key == 'library')
+                        {
+                            $class = strtolower($filename);
+                            
+                            self::__obullo_instance()->{$class} = new $filename();
+                        } 
+                        else 
+                        {
+                            loader::$key($filename);
+                        }
                     }
                 }
             }
@@ -98,9 +107,6 @@ Class Controller {
 
 /**
 * Grab Obullo Super Object
-* 
-* A Pretty handy function this();
-* We use "this()" function if not available $this anywhere.
 *
 * @param object $new_istance  
 */

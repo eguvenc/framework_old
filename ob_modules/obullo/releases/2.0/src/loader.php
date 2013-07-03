@@ -103,7 +103,7 @@ Class loader {
 
         if( ! class_exists($model, false)) // autoload false.
         {
-            throw new Exception('You have a small problem, model name isn\'t right in here: '.$model);
+            show_error('You have a small problem, the model name isn\'t right in here: <b>'.$model.'<b/>');
         }
 
         loader::$_models[$model_var] = $model_var; // should be above instantiate od the model();
@@ -215,7 +215,7 @@ Class loader {
             
             if( ! isset($packages['dependencies'][$helpername]['component']) )
             {
-                throw new Exception('Please install the '.$helper.' package.');
+                show_error('Please install the <b>'.$helper.'</b> package.');
             }
             
             if($packages['dependencies'][$helpername]['component'] == 'helper')
@@ -300,7 +300,7 @@ Class loader {
             return $return;
         }
         
-        if($folder != 'lang')
+        if($folder != 'locale')
         {
             $extra_path = '';
         }

@@ -42,24 +42,18 @@ Class Exceptions {
         //-----------------------------------------------------------------------
         
         $code = $e->getCode();
+        $last_query = '';
+        if(isset(getInstance()->db))
+        {
+            $prepare    = (isset(getInstance()->db->prepare)) ? getInstance()->db->prepare : false;
+            $last_query = getInstance()->db->last_query($prepare);
+        }
         
-        if(substr($e->getMessage(),0,3) == 'SQL') 
+        if( ! empty($last_query))
         {
             $type = 'Database';
             $code = 'SQL';  // We understand this is an db error.
-            
-            foreach(loader::$_databases as $db_name => $db_var)
-            {
-               if(isset(getInstance()->$db_var) AND is_object(getInstance()->$db_var))
-               {
-                   $last_query = getInstance()->{$db_var}->last_query(getInstance()->{$db_var}->prepare);
-                   
-                   if( ! empty($last_query))
-                   {
-                       $sql[$db_name] = $last_query;
-                   }
-               }
-            }        
+            $sql  = $last_query;
         }
         
         // Command Line Errors

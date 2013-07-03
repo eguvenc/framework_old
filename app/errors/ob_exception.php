@@ -37,8 +37,7 @@ background: #fff;
 <script type="text/javascript">
 function Obullo_Element() {
     var elements = new Array();
-    for (var i = 0; i < arguments.length; i++) 
-    {
+    for (var i = 0; i < arguments.length; i++){
         var element = arguments[i];
         if (typeof element == 'string')
             element = document.getElementById(element);
@@ -58,14 +57,11 @@ function Obullo_Error_Toggle(obj){
 </script>
 
 <div id="exception_content">
-<b>(<?php echo $type; ?>):  <?php echo error_secure_path($e->getMessage(), true); ?></b><br />
+<b>(<?php echo $type ?>):  <?php echo error_secure_path($e->getMessage(), true); ?></b><br />
 <?php 
-if(isset($sql) AND count($sql) > 0) 
-{ 
-    foreach ($sql as $db => $query)
-    {
-        echo '<span class="errorfile"><b>('.$db.') SQL:</b> '.$query.'</span>';
-    }
+if(isset($sql)) 
+{
+    echo '<span class="errorfile"><b>SQL :</b> '.$sql.'</span>';
 }
 ?>
 <?php $code = ($e->getCode() != 0) ? ' Code : '. $e->getCode() : ''; ?> 
@@ -80,8 +76,6 @@ if($debug['enabled'] === TRUE OR $debug['enabled'] == 1)  // Covert to readable 
 
 $rules  = error_parse_regex($debug['enabled']);
 $e_code = (substr($e->getMessage(),0,3) == 'SQL') ? 'SQL' : $e->getCode(); 
-$errors = error_get_defined_errors();
-
 $allowed_errors = error_get_allowed_errors($rules);  
 
 if(is_string($debug['enabled'])) 

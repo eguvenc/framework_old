@@ -30,7 +30,7 @@ $autoload['helper']     = array('ob/view', 'ob/html', 'ob/url');
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['config'] = array('config1', '');
+|	$autoload['config'] = array('config1');
 |
 | NOTE: This item is intended for use ONLY if you have created custom
 | config files.  Otherwise, leave it blank.
@@ -38,6 +38,23 @@ $autoload['helper']     = array('ob/view', 'ob/html', 'ob/url');
 */
 
 $autoload['config']     = array();
+
+/*
+| -------------------------------------------------------------------
+|  Auto-load Common Libraries
+| -------------------------------------------------------------------
+| Prototype:
+|
+|	$autoload['library'] = array('auth');
+|
+|       e.g. use it  $this->auth->check();
+|
+| NOTE: This item is intended for use ONLY if you have created custom
+| library files.  Otherwise, leave it blank.
+|
+*/
+
+$autoload['library']    = array('auth');
 
 /*
 | -------------------------------------------------------------------
@@ -50,18 +67,6 @@ $autoload['config']     = array();
 */
 
 $autoload['locale']     = array();
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Models
-| -------------------------------------------------------------------
-| Prototype:
-|
-|	$autoload['model'] = array('model', '../model');
-|
-*/
-
-$autoload['model']      = array();
 
 
 /* End of file autoload.php */

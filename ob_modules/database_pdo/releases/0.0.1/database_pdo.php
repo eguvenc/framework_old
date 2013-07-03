@@ -2,7 +2,7 @@
 
 $packages = get_config('packages');
 
-require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'.DS.'pdo_database_adapter'. EXT);
+require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'pdo_database_adapter'. EXT);
 
 // ------------------------------------------------------------------------
 
@@ -98,7 +98,7 @@ Class Database_PDO {
              break;
            
           default:
-          throw new DBFactoryException('Obullo database library does not support: '. $dbdriver); 
+          throw new Exception('Obullo database library does not support: '. $dbdriver); 
            
         } // end switch.
         

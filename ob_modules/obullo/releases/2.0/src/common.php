@@ -381,7 +381,7 @@ if( ! function_exists('show_http_error'))
         }
         
         ob_start();
-        include(APP. 'core'. DS .'errors'. DS .$template. EXT);
+        include(APP .'errors'. DS .$template. EXT);
         $buffer = ob_get_clean();
         
         return $buffer;

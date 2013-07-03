@@ -75,22 +75,8 @@ Class Locale {
             $default = Config::getInstance()->item('language');
             $idiom   = ($default == '') ? 'english' : $default;
         }
-
-        if(strpos($langfile, 'ob/') === 0)  // Obullo Core Lang
-        {
-            $langfile = strtolower(substr($langfile, 3));
-            
-            $data = array('filename' => $langfile, 'path' => BASE .'lang'. DS. trim($idiom, '/'));
-            
-            if(file_exists(APP .'lang'. DS. trim($idiom, '/') . DS. $langfile. EXT)) // check app path
-            {
-                $data = array('filename' => $langfile, 'path' => APP .'lang'. DS. trim($idiom, '/'));
-            }
-        } 
-        else 
-        {
-            $data = loader::load_file($langfile, 'lang', FALSE, $idiom);
-        }
+        
+        $data = loader::load_file($langfile, 'locale', FALSE, $idiom);
         
         if (in_array($langfile, $this->is_loaded, TRUE))
         {
@@ -102,8 +88,7 @@ Class Locale {
             throw new Exception('The locale folder '.$data['path'].' seems not a folder.');
         }
 
-        $lang = get_static($data['filename'], 'lang', rtrim($data['path'], DS)); 
-        
+        $lang = get_static($data['filename'], 'locale', rtrim($data['path'], DS)); 
 
         if ( ! isset($lang))
         {

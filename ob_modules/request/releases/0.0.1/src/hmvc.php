@@ -173,6 +173,7 @@ Class Hmvc
     // --------------------------------------------------------------------
 
     /**
+    * @todo
     * Set hmvc output cache time.
     * 
     * @param type $time 
@@ -368,11 +369,7 @@ Class Hmvc
         $URI->uri_string = rtrim($URI->uri_string, '/').'/_id_'. $this->_get_id();
         $URI->cache_time = $this->cache_time ;
     
-        /*
-        ob_start();
-         * @todo do HMVC CACHE
-        if(ob_get_level() > 0) ob_end_clean();
-        */
+        // @todo do ob_start(); HMVC CACHE if(ob_get_level() > 0) ob_end_clean();
         
         $hmvc_uri   = "{$router->fetch_directory()} / {$router->fetch_class()} / {$router->fetch_method()}";
         $controller = MODULES .$router->fetch_directory(). DS .'controllers'. DS .$router->fetch_class(). EXT;
@@ -420,7 +417,6 @@ Class Hmvc
         
         ob_start();
 
-        //
         // Call the requested method.                1       2       3
         // Any URI segments present (besides the directory/class/method)
         // will be passed to the method for convenience
@@ -428,19 +424,7 @@ Class Hmvc
 
         $content = ob_get_contents();       
 
-        if(ob_get_level() > 0)  ob_end_clean();   
-                       
-        // Write cache file if cache on ! and Send the final rendered output to the browser
-        // 
-        ################ DISPLAY CACHE FILE  WE WILL DO IT LATER ##################
-        # ob_start();
-        #
-        # Write cache file if cache on ! and Send the final rendered output to the browser
-        #        
-        # $content = ob_get_contents();
-        # if(ob_get_level() > 0)  ob_end_clean(); 
-        #
-        ################ DISPLAY CACHE FILE END ##################        
+        if(ob_get_level() > 0)  ob_end_clean();      
                                         
         $this->set_response($content); 
 
@@ -482,7 +466,7 @@ Class Hmvc
         $this->_this->router  = Router::setInstance($this->router);
         $this->_this->config  = Config::setInstance($this->config);
 
-        this($this->_this);         // Set original $this to controller instance that we backup before
+        getInstance($this->_this);         // Set original $this to controller instance that we backup before
     
         # Assign Obullo global variables ..
         ######################################

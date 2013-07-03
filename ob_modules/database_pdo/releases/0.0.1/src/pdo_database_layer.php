@@ -217,9 +217,7 @@ Class Pdo_Database_Layer extends Pdo_Database_Crud {
     {
         if(is_array($array))
         {
-            loader::helper('ob/array');
-            
-            if( ! is_assoc_array($array))
+            if( ! $this->is_assoc_array($array))
             {
                 throw new Exception("PDO bind data must be associative array.");
             }
@@ -327,10 +325,8 @@ Class Pdo_Database_Layer extends Pdo_Database_Crud {
     */
     public function last_query($prepared = FALSE)
     {
-        loader::helper('ob/array');
-        
         // let's make sure, is it prepared query ?
-        if($prepared == TRUE AND is_assoc_array($this->last_values))
+        if($prepared == TRUE AND $this->is_assoc_array($this->last_values))
         {
             $bind_keys = array();
             foreach(array_keys($this->last_values[$this->exec_count]) as $k)
@@ -766,6 +762,20 @@ Class Pdo_Database_Layer extends Pdo_Database_Crud {
     public function row_array()
     {
         return $this->Stmt->fetch(PDO::FETCH_ASSOC);
+    }
+ 
+    // --------------------------------------------------------------------
+    
+    /**
+    * Check Array is_associative
+    * or not.
+    * 
+    * @param type $a
+    * @return type 
+    */
+    private function is_assoc_array( $a )
+    {
+        return is_array( $a ) && ( count( $a ) !== array_reduce( array_keys( $a ), create_function( '$a, $b', 'return ($b === $a ? $a + 1 : 0);' ), 0 ) );
     }
     
 }
