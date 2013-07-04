@@ -31,15 +31,15 @@ $lang['valid_date']             = "The %s field must contain a valid date.";
 
 // Odm
 //-----------------------------------------------------------------
-$lang['vm_update_success']    = 'Data updated succesfully.';
-$lang['vm_update_fail']       = 'No data changed, please change your data then do update.';
-$lang['vm_insert_success']    = 'Data inserted succesfully.';
-$lang['vm_insert_fail']       = 'Insert error.';
-$lang['vm_delete_success']    = 'Data deleted succesfully.';
-$lang['vm_delete_fail']       = 'Delete error or record already deleted.';
-$lang['vm_system_msg']        = "We couldn't save data at this time please try again or contact us. Error: ";
-$lang['vm_form_error']        = 'There are some errors in the form fields.';
-$lang['vm_form_save']         = 'Data saved succesfully.';
+$lang['odm_update_success']    = 'Data updated succesfully.';
+$lang['odm_update_fail']       = 'No data changed, please change your data then do update.';
+$lang['odm_insert_success']    = 'Data inserted succesfully.';
+$lang['odm_insert_fail']       = 'Insert error.';
+$lang['odm_delete_success']    = 'Data deleted succesfully.';
+$lang['odm_delete_fail']       = 'Delete error or record already deleted.';
+$lang['odm_system_msg']        = "We couldn't save data at this time please try again or contact us. Error: ";
+$lang['odm_form_error']        = 'There are some errors in the form fields.';
+$lang['odm_form_save']         = 'Data saved succesfully.';
 
 // Ftp
 //-----------------------------------------------------------------
@@ -76,13 +76,6 @@ $lang['email_smtp_auth_un']          = "Failed to authenticate username. Error: 
 $lang['email_smtp_auth_pw']          = "Failed to authenticate password. Error: %s";
 $lang['email_smtp_data_failure']     = "Unable to send data: %s";
 $lang['email_exit_status']           = "Exit status code: %s";
-
-// Db
-//-----------------------------------------------------------------
-$lang['db_active_record_delete']    = 'Deletes are not allowed unless they contain a \'where\' or \'like\' clause.';
-$lang['db_active_record_set_table'] = 'Please set table for delete operation.';
-$lang['db_ac_update_set_table']     = 'Please set values for update operation.';
-$lang['db_ac_insert_set_table']     = 'Please set values for insert operation.';
 
 // Date
 //-----------------------------------------------------------------

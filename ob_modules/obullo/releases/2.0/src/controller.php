@@ -26,6 +26,7 @@ Class Controller {
         $this->router = Router::getInstance();
         $this->uri    = Uri::getInstance();
         $this->output = Output::getInstance();
+        $this->locale = Locale::getInstance();
         
         // Initialize to Autoloaders
         // ------------------------------------

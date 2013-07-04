@@ -777,7 +777,7 @@ Class Pdo_Database_Crud  {
         
         if (count($this->ar_set) == 0)
         {
-            throw new Exception(lang('db_ac_insert_set_table'));
+            throw new Exception('Please set values for insert operation.');
             
             return FALSE;
         }
@@ -786,7 +786,7 @@ Class Pdo_Database_Crud  {
         {
             if ( ! isset($this->ar_from[0]))
             {
-                throw new Exception(lang('db_ac_insert_set_table'));
+                throw new Exception('Please set values for insert operation.');
                 
                 return FALSE;
             }
@@ -823,14 +823,14 @@ Class Pdo_Database_Crud  {
 
         if (count($this->ar_set) == 0)
         {
-            throw new Exception(lang('db_ac_replace_use_set'));
+            throw new Exception('Please set values for replace operation.');
         }
 
         if ($table == '')
         {
             if ( ! isset($this->ar_from[0]))
             {
-                throw new Exception(lang('db_ac_replace_set_table'));
+                throw new Exception('Please set from for replace operation.');
             }
 
             $table = $this->ar_from[0];
@@ -895,7 +895,7 @@ Class Pdo_Database_Crud  {
     
         if (count($this->ar_set) == 0)
         {
-            throw new Exception(lang('db_ac_update_set_table'));
+            throw new Exception('Please set values for update operation.');
             
             return FALSE;
         }
@@ -904,7 +904,7 @@ Class Pdo_Database_Crud  {
         {
             if ( ! isset($this->ar_from[0]))
             {
-                throw new Exception(lang('db_ac_update_set_table')); 
+                throw new Exception('Please set values for update operation.'); 
                 
                 return FALSE;
             }
@@ -1010,7 +1010,7 @@ Class Pdo_Database_Crud  {
         {
             if ( ! isset($this->ar_from[0]))
             {
-                throw new Exception(lang('db_active_record_set_table'));
+                throw new Exception('Please set table for delete operation.');
                 
                 return FALSE;
             }
@@ -1043,7 +1043,7 @@ Class Pdo_Database_Crud  {
         
         if (count($this->ar_where) == 0 && count($this->ar_wherein) == 0 && count($this->ar_like) == 0)
         {
-            throw new Exception(lang('db_active_record_delete'));
+            throw new Exception("Deletes are not allowed unless they contain a 'where' or 'like' clause.");
             
             return FALSE;
         }        

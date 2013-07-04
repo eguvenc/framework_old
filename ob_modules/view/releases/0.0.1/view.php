@@ -150,7 +150,7 @@ if ( ! function_exists('view'))
 {
     function view($file_url, $data = '', $string = TRUE)
     {
-        $file_data = loader::load_file($file_url, 'views', FALSE, FALSE);
+        $file_data = loader::getpath($file_url, 'views', FALSE, FALSE);
         
         return View::getInstance()->load($file_data['path'], $file_data['filename'], $data, $string, FALSE);
     }

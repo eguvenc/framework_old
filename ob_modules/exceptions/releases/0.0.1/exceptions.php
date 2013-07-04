@@ -26,7 +26,6 @@ Class Exceptions {
     public function write($e, $type = '')
     {
         $type = ($type != '') ? ucwords(strtolower($type)) : 'Exception Error';
-        $sql  = array();
         
         // If user want to close error_reporting in some parts of the application.
         //-----------------------------------------------------------------------
@@ -53,7 +52,7 @@ Class Exceptions {
         {
             $type = 'Database';
             $code = 'SQL';  // We understand this is an db error.
-            $sql  = $last_query;
+            $data['sql'] = $last_query;;
         }
         
         // Command Line Errors
@@ -73,7 +72,6 @@ Class Exceptions {
         //-----------------------------------------------------------------------
         
         $data['e']    = $e;
-        $data['sql']  = $sql;
         $data['type'] = $type;
 
         ob_start();

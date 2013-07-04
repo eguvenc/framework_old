@@ -22,6 +22,8 @@ Class Validator {
     public $_globals            = array();  // $_POST, $_GET ,$_FILES
     public $_callback_object    = NULL;
     
+    public static $instance;
+    
     public function __construct($rules = array())
     {    
         // Validation rules can be stored in a config file.
@@ -41,6 +43,18 @@ Class Validator {
 
     // --------------------------------------------------------------------
 
+    public static function getInstance()
+    {
+       if( ! self::$instance instanceof self)
+       {
+           self::$instance = new self();
+       } 
+       
+       return self::$instance;
+    }
+    
+    // --------------------------------------------------------------------
+    
     public function clear()
     {
         $this->_field_data         = array();
@@ -326,13 +340,11 @@ Class Validator {
             }
         }
     
-        // Load the language file containing error messages
-        loader::lang('ob/Validator');
+        // Load Obullo language file.
+        getInstance()->locale->load('obullo');
 
         // Cycle through the rules for each field, match the 
         // corresponding $this->_globals item and test for errors
-
-       
         
         foreach ($this->_field_data as $field => $row)
         {        

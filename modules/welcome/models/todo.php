@@ -1,9 +1,7 @@
 <?php
 
-/**
- * Obullo ODM
- */
-Class UserSchema {
+Class UserSchema 
+{
     public $config = array(
     'database' => 'db',
     'table' => 'users',
@@ -21,18 +19,12 @@ Class UserSchema {
     );
 }
 
-$user_schema = new \UserSchema();
-$user_schema->user_id['rules'] = 'trim|integer'; 
-
-Class User extends ODM
+Class User extends Odm
 {
-    function __construct($schema = '')
+    function __construct($schema)
     {
         parent::__construct($schema);
     }
-    
-    function before_save(){}
-    function after_save(){}
     
     /**
     * Update / Insert
@@ -51,8 +43,18 @@ Class User extends ODM
     function delete()
     {
         return parent::save();
-    }    
+    }
+    
+    // function before_save(){}
+    // function after_save(){}
 }
+
+
+$userSchema = new UserSchema();
+$userSchema->user_id['rules'] = 'trim|integer';  // Change default user_id validation rules.
+
+$user = new User($userSchema);
+$user->save();
 
 /* End of file User.php */
 /* Location: .modules/welcome/models/user.php */

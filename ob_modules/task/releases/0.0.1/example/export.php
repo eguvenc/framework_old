@@ -44,7 +44,7 @@ Export your project [$php task export]'."\033[0m\n";
             return
         fi
 
-        APP_LOG_DIR=\"\$PROJECT_DIR/app/core/logs/\"
+        APP_LOG_DIR=\"\$PROJECT_DIR/app/logs/\"
 
         # delete app directory log files.
         sudo find \$APP_LOG_DIR -name 'log-*.php' -exec rm -rf {} \;  # help https://help.ubuntu.com/community/find

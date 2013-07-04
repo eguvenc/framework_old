@@ -1,6 +1,6 @@
 <?php
   
-Class User extends Vmodel
+Class User extends Odm
 {
     function __construct()
     {

@@ -28,7 +28,7 @@ Class Auth {
     public $query_binding      = TRUE;   // Whether to enable the PDO query binding feature for security.
     public $regenerate_sess_id = FALSE;  // Set to TRUE to regenerate the session id on every page load or leave as FALSE to regenerate only upon new login.
     
-    public $not_ok_url         = '/login';
+    public $fail_url           = '/login';
     public $ok_url             = '/dashboard';
     public $fields             = array();
     public $row                = FALSE;    // SQL Query result as row
@@ -258,8 +258,8 @@ Class Auth {
     {
         if( ! $this->check())  // auth is NOT ok ?
         {  
-            $redirect_url = ($redirect == '') ? base_url($this->not_ok_url) : base_url($redirect);
-            $redirect_url = $redirect_url.'?redirect='.lib('ob/Uri')->request_uri($urlencode);
+            $redirect_url = ($redirect == '') ? base_url($this->fail_url) : base_url($redirect);
+            $redirect_url = $redirect_url.'?redirect='.getInstance()->uri->request_uri($urlencode);
 
             redirect($redirect_url); 
         }

@@ -1,21 +1,6 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- *
- * @package         obullo       
- * @author          obullo.com
- * @license         public
- * @since           Version 1.0
- * @filesource
- * @license
- */
-
-// ------------------------------------------------------------------------
-
-/**
  * Obullo Captcha Helper
  *
  * @package     Obullo
@@ -24,43 +9,6 @@
  * @author      Obullo Team
  * @link        
  */
-
-/**
-* Convert HEX Colors to RGB
-* 
-* @access   public
-* @param    string
-* @return   array
-*/
-if( ! function_exists('html2rgb') ) 
-{
-    function html2rgb($color)
-    {
-        if ($color[0] == '#')
-        {
-            $color = substr($color, 1);
-        }
-            
-        if (strlen($color) == 6)
-        {
-            list($r, $g, $b) = array($color[0].$color[1], $color[2].$color[3], $color[4].$color[5]);
-        }
-        elseif (strlen($color) == 3)
-        {
-            list($r, $g, $b) = array($color[0].$color[0], $color[1].$color[1], $color[2].$color[2]);
-        }
-        else
-        {
-            return FALSE;
-        }
-
-        $r = hexdec($r); $g = hexdec($g); $b = hexdec($b);
-
-        return array($r, $g, $b);
-    }
-}
-
-// ------------------------------------------------------------------------
 
 /**
 * Create Captcha Image
@@ -121,17 +69,17 @@ if( ! function_exists('captcha_create') )
 
         if ( ! @is_dir($img_path))
         {
-            throw new Exception('Captcha path seems is not a directory !');
+            throw new Exception('Captcha path seems is not a directory.');
         }
         
-        if ( ! is_really_writable(rtrim($img_path, DS). DS .'index.html'))
+        if ( ! is_really_writable(rtrim($img_path, DS)))
         {
-            throw new Exception('Captcha path '.$img_path. ' is not writeable, please allow the write permission to it !');
+            throw new Exception('Captcha path '.$img_path. ' is not writeable, please allow the write permission to it.');
         }
                 
         if ( ! extension_loaded('gd'))
         {
-            throw new Exception('Gd extension not found for captcha !');
+            throw new Exception('Gd extension not found for captcha.');
         }        
         
         // -----------------------------------
@@ -296,6 +244,43 @@ if( ! function_exists('captcha_create') )
         ImageDestroy($im);
             
         return array('word' => $word, 'time' => $now, 'image' => $img);
+    }
+}
+
+// ------------------------------------------------------------------------
+
+/**
+* Convert HEX Colors to RGB
+* 
+* @access   public
+* @param    string
+* @return   array
+*/
+if( ! function_exists('html2rgb') ) 
+{
+    function html2rgb($color)
+    {
+        if ($color[0] == '#')
+        {
+            $color = substr($color, 1);
+        }
+            
+        if (strlen($color) == 6)
+        {
+            list($r, $g, $b) = array($color[0].$color[1], $color[2].$color[3], $color[4].$color[5]);
+        }
+        elseif (strlen($color) == 3)
+        {
+            list($r, $g, $b) = array($color[0].$color[0], $color[1].$color[1], $color[2].$color[2]);
+        }
+        else
+        {
+            return FALSE;
+        }
+
+        $r = hexdec($r); $g = hexdec($g); $b = hexdec($b);
+
+        return array($r, $g, $b);
     }
 }
 

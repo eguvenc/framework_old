@@ -4,7 +4,7 @@
 
 /**
  * Loader Class (Obullo Loader)
- * Load Obullo library, model, config, lang and any other files ...
+ * Load helper, library, model  and database files.
  */
 
 Class loader {
@@ -30,10 +30,9 @@ Class loader {
     // --------------------------------------------------------------------
 
     /**
-    * loader::model();
-    * loader::model('subfolder/model_name')  sub folder load
-    * loader::model('../module/model_name')  model load from outside directory
-    * loader::model('modelname', FALSE); no instantite just include class.
+    * loader::model('filename');
+    * loader::model('../filename')  model load from outside directory
+    * loader::model('filename', FALSE); no instantite just include class.
     * 
     * @param     string $model
     * @param     string $object_name_OR_NO_INS
@@ -52,7 +51,7 @@ Class loader {
          
         $case_sensitive = ($object_name_or_no_ins === FALSE || $params_or_no_ins === FALSE) ? $case_sensitive = TRUE : FALSE;
         
-        $data = self::load_file($model, 'models', FALSE , $case_sensitive);
+        $data = self::getpath($model, 'models', FALSE , $case_sensitive);
 
         self::_model($data['path'], $data['filename'], $object_name_or_no_ins, $params_or_no_ins, $new_instance);
     }
@@ -116,9 +115,18 @@ Class loader {
 
     // --------------------------------------------------------------------
 
-    public static function library($library)
+    /**
+     * loader::library('filename');
+     * loader::library('../filename')
+     * loader::library('filename', FALSE); no instantite just include class.
+     * 
+     * @param string $library
+     * @param mixed $params_or_no_ins
+     * @return null
+     */
+    public static function library($library, $params_or_no_ins = '')
     {
-        if(strpos($library, 'ob/') === 0)
+        if(strpos($library, 'ob/') === 0)  //  Obullo Modulues
         {
             $libraryname = strtolower(substr($library, 3));
             $packages    = get_config('packages');
@@ -128,7 +136,7 @@ Class loader {
                 return;
             }
             
-            if(in_array($libraryname, array('uri','config','router','output')))
+            if(in_array($libraryname, array('config','router','uri','output','locale')))
             {
                 return;
             }
@@ -145,12 +153,6 @@ Class loader {
                 return;
             }
             
-            if($libraryname == 'locale')
-            {
-                getInstance()->locale = Locale::getInstance();
-                return;
-            }
-            
             if( ! isset($packages['dependencies'][$libraryname]['component']) )
             {
                 show_error('Please install the <b>'.$libraryname.'</b> package.');
@@ -159,9 +161,59 @@ Class loader {
             if($packages['dependencies'][$libraryname]['component'] == 'library')
             {
                 $Class = ucfirst($libraryname);
+                
                 getInstance()->{$libraryname} = new $Class(); // Atuoload the library from ob_modules using php5 autoloader.
             }
             
+            return;
+        }
+        
+        // Application Libraries ( Located in Modules )
+        // --------------------------------------------------------------------
+        
+        $data = self::getpath($class, 'libraries', ($params_or_no_ins == FALSE) ? TRUE : FALSE);
+
+        $class_var = '';
+
+        require_once($data['path'].$data['filename'].EXT);
+
+        $class_var = strtolower($data['filename']);
+
+        if(is_array($params_or_no_ins))  // HMVC need to create new instance() foreach Library
+        {
+            if(i_hmvc() == FALSE)
+            {
+                if (isset(getInstance()->$class_var))
+                {
+                    return;
+                }
+            }
+
+            if(class_exists($data['filename']))
+            {
+                getInstance()->$class_var = new $data['filename']($params_or_no_ins);
+            }
+
+            return;
+        }
+        elseif($params_or_no_ins === FALSE)
+        {
+            return;
+        }
+        else
+        {
+            if (isset(getInstance()->$class_var) AND is_object(getInstance()->$class_var))
+            {
+                return;
+            }
+
+            if(class_exists($data['filename']))
+            {
+                $Class = ucfirst($data['filename']);
+                
+                getInstance()->$class_var = new $Class();
+            }
+
             return;
         }
     }
@@ -238,14 +290,9 @@ Class loader {
     // --------------------------------------------------------------------
 
     /**
-    * loader::helper();
-    *
-    * loader::helper('subfolder/helper_name')  local sub folder load
-    * loader::helper('../outside_folder/helper_name')  outside directory load
-    *
-    * We have three helper directories
-    *   o Obullo/helpers: ob/ helpers
-    *   o Local/helpers : module helpers
+    * loader::helper('filename');
+    * loader::helper('subfolder/filename')  sub folder load
+    * loader::helper('../helper_name')  common helper load
     *
     * @param    string $helper
     * @return   void
@@ -283,7 +330,7 @@ Class loader {
         // Module Helpers
         // --------------------------------------------------------------------
         
-        $data = self::load_file($helper, $folder = 'helpers');
+        $data = self::getpath($helper, $folder = 'helpers');
 
         include($data['path'].$data['filename'].EXT);
 
@@ -302,7 +349,7 @@ Class loader {
     *
     * return array  file_name | file
     */
-    public static function load_file($file_url, $folder = 'helpers', $case_sensitive = FALSE, $extra_path = '')
+    public static function getpath($file_url, $folder = 'helpers', $case_sensitive = FALSE, $extra_path = '')
     {
         $realname   = ($case_sensitive) ? trim($file_url, '/') : strtolower(trim($file_url, '/'));
         $root       = rtrim(MODULES, DS); 
@@ -350,11 +397,6 @@ Class loader {
             $return['path']     = $root. DS .$sub_root.$sub_path.$extra_path;
             
             return $return;
-        }
-        
-        if($folder != 'locale')
-        {
-            $extra_path = '';
         }
         
         return array('filename' => $realname, 'path' => $root. DS .$sub_root.$extra_path);

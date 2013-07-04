@@ -29,18 +29,7 @@ Class Obullo
         }   
 
         loader::helper('ob/log');
-        loader::helper('ob/error'); 
-
-        ###  load core libraries ####
-
-        if( ! isset($packages['dependencies']['exceptions'])){ exit('Exceptions package not installed, please check your package.json'); }
-        if( ! isset($packages['dependencies']['uri'])){ exit('Uri package not installed, please check your package.json'); }
-        if( ! isset($packages['dependencies']['config'])){ exit('Config package not installed, please check your package.json'); }
-        if( ! isset($packages['dependencies']['output'])){ exit('Output package not installed, please check your package.json'); }
-        if( ! isset($packages['dependencies']['router'])){ exit('Router package not installed, please check your package.json'); }
-        if( ! isset($packages['dependencies']['locale'])){ exit('Locale package not installed, please check your package.json'); }
-        if( ! isset($packages['dependencies']['benchmark'])){ exit('Benchmark package not installed, please check your package.json'); }
-        if( ! isset($packages['dependencies']['input'])){ exit('Input package not installed, please check your package.json'); }
+        loader::helper('ob/error');
 
         $uri    = Uri::getInstance(); 
         $router = Router::getInstance();

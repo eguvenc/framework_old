@@ -1920,7 +1920,7 @@ class OB_Email {
      */
     private function _set_error_message($msg, $val = '')
     {
-        loader::lang('ob/email');
+        getInstance()->locale->load('obullo');
 
         if (FALSE === ($line = lang($msg)))
         {

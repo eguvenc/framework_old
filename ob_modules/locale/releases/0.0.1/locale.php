@@ -24,8 +24,8 @@ if( ! function_exists('lang') )
 {
     function lang($item = '')
     {
-        $lang = Locale::getInstance();
-        $item = ($item == '' OR ! isset($lang->language[$item])) ? FALSE : $lang->language[$item];
+        $locale = Locale::getInstance();
+        $item = ($item == '' OR ! isset($locale->language[$item])) ? FALSE : $locale->language[$item];
         
         return $item;
     }
@@ -63,36 +63,34 @@ Class Locale {
     * Load a language file
     *
     * @access   public
-    * @param    string   $langfile the name of the language file to be loaded. Can be an array
+    * @param    string   $filename the name of the language file to be loaded. Can be an array
     * @param    string   $idiom the language folder (english, etc.)
     * @param    bool     $return return to $lang variable if you don't merge
     * @return   mixed
     */
-    public function load($langfile = '', $idiom = '', $return = FALSE)
+    public function load($filename = '', $idiom = '', $return = FALSE)
     {
         if ($idiom == '')
         {
-            $default = Config::getInstance()->item('language');
+            $default = config('language');
             $idiom   = ($default == '') ? 'english' : $default;
         }
         
-        $data = loader::load_file($langfile, 'locale', FALSE, $idiom);
-        
-        if (in_array($langfile, $this->is_loaded, TRUE))
+        if (in_array($filename, $this->is_loaded, TRUE))
         {
             return;
         }
         
-        if( ! is_dir($data['path']))
+        if( ! is_dir(APP .'locale'. DS .$idiom))
         {
-            throw new Exception('The locale folder '.$data['path'].' seems not a folder.');
+            throw new Exception('The locale folder '.APP .'locale'. DS .$idiom.' seems not a folder.');
         }
-
-        $lang = get_static($data['filename'], 'locale', rtrim($data['path'], DS)); 
+        
+        require(APP .'locale'. DS .$idiom. DS .$filename. EXT);
 
         if ( ! isset($lang))
         {
-            log_me('error', 'Locale file contains no lang variable: ' . $data['path'] . DS . $data['filename']. EXT);
+            log_me('error', 'Locale file does not contain $lang variable: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
             
             return;
         }
@@ -102,12 +100,12 @@ Class Locale {
             return $lang;
         }
 
-        $this->is_loaded[] = $langfile;
+        $this->is_loaded[] = $filename;
         $this->language    = array_merge($this->language, $lang);
 
         unset($lang);
 
-        log_me('debug', 'Locale file loaded: '.$data['path'] . DS . $data['filename']. EXT);
+        log_me('debug', 'Locale file loaded: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
         
         return TRUE;
     }

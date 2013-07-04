@@ -594,7 +594,7 @@ Class OB_Ftp {
      */
     private function _error($line)
     {
-        loader::lang('ob/ftp');
+        getInstance()->locale->load('obullo'); // load framework language file.
         
         show_error(lang($line));
     }

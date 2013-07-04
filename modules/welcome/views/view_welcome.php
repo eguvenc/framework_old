@@ -2,11 +2,14 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <title>Welcome to Obullo !</title>
+<meta charset="utf-8"></meta>
 <?php echo css('welcome.css') ?>
 </head>
 <body>
     
 <h1>Welcome to Obullo !</h1> 
+
+<?php         echo lang('odm_update_success'); ?>
 
 <div id="main">
     <div class="fieldset"> 

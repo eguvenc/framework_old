@@ -877,6 +877,14 @@ Class Security {
     
 }
 
+if( ! function_exists('xss_clean'))
+{
+    function xss_clean($str, $is_image = FALSE)
+    {
+        return Security::getInstance()->xss_clean($str, $is_image);
+    }
+}
+
 // END Security Class
 
 /* End of file Security.php */

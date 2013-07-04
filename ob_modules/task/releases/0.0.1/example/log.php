@@ -24,11 +24,11 @@ Class Log extends Controller {
 Display logs [$php task log] or to filter logs [$php task log level debug | error | info] '."\033[0m";
             
             // Start the Debugging Task
-            $this->_follow(APP.'core'. DS .'logs'. DS .'log-'.date('Y-m-d').'.php');
+            $this->_follow(APP .'logs'. DS .'log-'.date('Y-m-d').'.php');
         } 
         else 
         {
-            $this->_follow(APP.'core'. DS .'logs'. DS .'log-'.date('Y-m-d').'.php', $level);
+            $this->_follow(APP .'logs'. DS .'log-'.date('Y-m-d').'.php', $level);
         }
     }
     

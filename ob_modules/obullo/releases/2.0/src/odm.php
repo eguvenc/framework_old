@@ -23,7 +23,7 @@
  * @version         0.1
  */                    
 
-Class Vmodel extends Model {
+Class Odm extends Model {
 
     public $property   = array();  // User public variables, we set them in controller.
     public $errors     = array();  // Validation errors.
@@ -69,7 +69,7 @@ Class Vmodel extends Model {
         
         ##### Reset validation data for multiple operations #######
         
-        lib('ob/Validator')->clear();
+        Validator::getInstance()->clear();
         
         ##### Reset validation data for multiple operations #######
         
@@ -87,7 +87,7 @@ Class Vmodel extends Model {
     */
     private function validator($_GLOBALS = array(), $fields = array())
     {
-        $validator = lib('ob/Validator', '', TRUE);
+        $validator = new Validator();
         $validator->clear();
 
         if(count($_GLOBALS) == 0)
@@ -172,7 +172,7 @@ Class Vmodel extends Model {
     */
     public function validate($fields = array())
     {
-        lib('ob/Lang')->load('ob/vm');  // Load the language file
+        getInstance()->locale->load('obullo');  // Load the language file
         
         $v_data = array();   // validation fields data
         $db_fields = $this->settings['fields'];
@@ -321,7 +321,7 @@ Class Vmodel extends Model {
         
         if(isset($fields[$key])) // set a validation error.
         {
-            lib('ob/Validator')->_field_data[$key]['error'] = $error;
+            Validator::getInstance()->_field_data[$key]['error'] = $error;
         }
     }
 
@@ -576,7 +576,7 @@ Class Vmodel extends Model {
     */
     public function save()
     {
-        lib('ob/Lang')->load('ob/vm');
+        getInstance()->locale->load('obullo');
                    
         $v_data = array();   // validation fields data
         $s_data = array();   // mysql insert / update fields data
@@ -702,7 +702,7 @@ Class Vmodel extends Model {
                     $this->db->commit();    // commit the transaction
                     
                     $this->errors[$table]['success'] = 1;
-                    $this->errors[$table]['msg']     = lang('vm_update_success');
+                    $this->errors[$table]['msg']     = lang('odm_update_success');
                     
                     $this->clear();    // reset validator data
 
@@ -713,7 +713,7 @@ Class Vmodel extends Model {
                     $this->db->rollback();       // roll back the transaction if we fail
 
                     $this->errors[$table]['success'] = 0;
-                    $this->errors[$table]['msg']     = lang('vm_update_fail');
+                    $this->errors[$table]['msg']     = lang('odm_update_fail');
                     $this->errors[$table]['transaction_error'] = $e->getMessage();
                     
                     $this->clear();    // reset validator data
@@ -739,7 +739,7 @@ Class Vmodel extends Model {
                     $this->db->commit();    // commit the transaction
                     
                     $this->errors[$table]['success'] = 1;
-                    $this->errors[$table]['msg']     = lang('vm_insert_success');
+                    $this->errors[$table]['msg']     = lang('odm_insert_success');
                     
                     $this->clear();    // reset validator data  // reset validator data
 
@@ -750,7 +750,7 @@ Class Vmodel extends Model {
                     $this->db->rollback();       // roll back the transaction if we fail
 
                     $this->errors[$table]['success'] = 0;
-                    $this->errors[$table]['msg']     = lang('vm_insert_fail');
+                    $this->errors[$table]['msg']     = lang('odm_insert_fail');
                     $this->errors[$table]['transaction_error'] = $e->getMessage();
                     
                     $this->clear();    // reset validator data  // reset validator data
@@ -919,7 +919,7 @@ Class Vmodel extends Model {
     */
     public function delete()
     {
-        lib('ob/Lang')->load('ob/vm');  // Load the language file
+        getInstance()->locale->load('obullo');  // Load the language file
         
         $v_data = array();
 
@@ -977,7 +977,7 @@ Class Vmodel extends Model {
                 $this->db->commit();    // commit the transaction
                 
                 $this->errors[$table]['success'] = 1;
-                $this->errors[$table]['msg']     = lang('vm_delete_success');
+                $this->errors[$table]['msg']     = lang('odm_delete_success');
                 
                 $this->clear();    // reset validator data
 
@@ -988,7 +988,7 @@ Class Vmodel extends Model {
                 $this->db->rollback();       // roll back the transaction if we fail
 
                 $this->errors[$table]['success'] = 0;
-                $this->errors[$table]['msg']     = lang('vm_delete_fail');
+                $this->errors[$table]['msg']     = lang('odm_delete_fail');
                 $this->errors[$table]['transaction_error'] = $e->getMessage();
 
                 $this->clear();    // reset validator data 
@@ -1006,23 +1006,6 @@ Class Vmodel extends Model {
         return FALSE;
     }
 
-    // --------------------------------------------------------------------
-    
-    /**
-     * Return latest sql query
-     *
-     * @return type 
-     */
-    public function debug()
-    {
-        if(ENV !== 'LIVE')
-        {
-            return $this->db->last_query();
-        }
-        
-        return;
-    }
-    
     // --------------------------------------------------------------------
 
     /**
@@ -1048,7 +1031,7 @@ Class Vmodel extends Model {
             $this->db->_reset_select();  // Reset CRUD variables.
         }
         
-        lib('ob/Validator')->clear(); // Clear validation settings.
+        Validator::getInstance()->clear(); // Clear validation settings.
         
         $this->where           = array();   // Reset Select
         $this->or_where        = array();

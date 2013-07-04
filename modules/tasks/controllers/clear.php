@@ -32,7 +32,7 @@ Class Clear extends Controller {
         fi
 
         # define your paths.
-        APP_LOG_DIR=\"\$PROJECT_DIR/app/core/logs/\"
+        APP_LOG_DIR=\"\$PROJECT_DIR/app/logs/\"
 
         # delete app directory log files.
         # help https://help.ubuntu.com/community/find
