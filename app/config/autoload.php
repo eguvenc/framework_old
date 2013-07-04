@@ -54,7 +54,7 @@ $autoload['config']     = array();
 |
 */
 
-$autoload['library']    = array('ob/auth');
+$autoload['library']    = array();
 
 /*
 | -------------------------------------------------------------------
