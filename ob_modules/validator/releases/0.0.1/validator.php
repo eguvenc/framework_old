@@ -321,7 +321,7 @@ Class Validator {
             }
             
             // Is there a validation rule for the particular URI being accessed?
-            $uri = ($group == '') ? trim(lib('ob/Uri')->ruri_string(), '/') : $group;
+            $uri = ($group == '') ? trim(Uri::getInstance()->ruri_string(), '/') : $group;
             
             if ($uri != '' AND isset($this->_config_rules[$uri]))
             {
