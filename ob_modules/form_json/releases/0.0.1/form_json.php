@@ -44,19 +44,21 @@ if ( ! function_exists('form_json_error'))
                 return json_encode(array('success' => false, $model->get_func('name') => $model->get_func('val'), 'errors' => array()));
             }
            
-            if(isset($model->errors[$model->item('table')]['transaction_error']))
+            $table = $model->schema->config['table'];
+            
+            if(isset($model->errors[$table]['transaction_error']))
             {
-                log_me('debug', 'Transaction Error: '. $model->errors[$model->item('table')]['transaction_error']);
+                log_me('debug', 'Transaction Error: '. $model->errors[$table]['transaction_error']);
                 
-                return json_encode(array('success' => false, 'errors' => array('system_msg' => lang('vm_system_msg').$model->errors[$model->item('table')]['transaction_error'])));
+                return json_encode(array('success' => false, 'errors' => array('system_msg' => lang('odm_system_msg').$model->errors[$table]['transaction_error'])));
             }
 
-            if(isset($model->errors[$model->item('table')]['redirect']))
+            if(isset($model->errors[$table]['redirect']))
             {
-                return json_encode(array('success' => false, 'redirect' => $model->errors[$model->item('table')]['redirect']));
+                return json_encode(array('success' => false, 'redirect' => $model->errors[$table]['redirect']));
             }
 
-            return json_encode(array('success' => false, 'errors' => $model->errors[$model->item('table')]));
+            return json_encode(array('success' => false, 'errors' => $model->errors[$table]));
         }
         else
         {

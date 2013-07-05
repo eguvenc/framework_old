@@ -41,7 +41,7 @@ Class Start extends Controller {
     {
         loader::model('user', false);  // Include user model
         
-        $user = new User();
+        $user = new User(new UserSchema);
         $user->user_password = i_get_post('user_password');
         $user->user_email    = i_get_post('user_email');
         

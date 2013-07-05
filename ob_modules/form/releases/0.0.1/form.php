@@ -861,12 +861,13 @@ if( ! function_exists('form_error') )
         if(is_object($field)) // Validation Model System Error Support
         {
             $model = &$field;
+            $table = $model->schema->config['table'];
             
-            if(isset($model->errors[$model->item('table')]['transaction_error']))
+            if(isset($model->errors[$table]['transaction_error']))
             {
-                log_me('debug', 'Transactional Error: '. $model->errors[$model->item('table')]['transaction_error']);
+                log_me('debug', 'Transactional Error: '. $model->errors[$table]['transaction_error']);
                 
-                return lang('vm_system_message') . $model->errors[$model->item('table')]['transaction_error'];
+                return lang('odm_system_message') . $model->errors[$table]['transaction_error'];
             }
 
             if($model->error('success') == 0)
@@ -936,11 +937,13 @@ if( ! function_exists('form_msg'))
            return;
         }
         
-        if(isset($model->errors[$model->item('table')]['transaction_error']))
+        $table = $model->schema->config['table'];
+        
+        if(isset($model->errors[$table]['transaction_error']))
         {
-            log_me('debug', 'Transactional Error: '. $model->errors[$model->item('table')]['transaction_error']);
+            log_me('debug', 'Transactional Error: '. $model->errors[$table]['transaction_error']);
 
-            $msg =  $model->errors[$model->item('table')]['msg'] .' '. lang('vm_system_message') . $model->errors[$model->item('table')]['transaction_error'];
+            $msg =  $model->errors[$table]['msg'] .' '. lang('odm_system_message') . $model->errors[$table]['transaction_error'];
             
             return ($msg == '') ? '' : $prefix.$msg.$suffix;
         }
@@ -959,7 +962,7 @@ if( ! function_exists('form_msg'))
         
         if($model->errors('success') == 0)
         {
-            $msg = lang('vm_form_error');
+            $msg = lang('odm_form_error');
 
             if( ! empty($form_msg))
             {

@@ -4,7 +4,7 @@
  * Exceptions Class
  *
  * @package       Obullo
- * @subpackage    Libraries
+ * @subpackage    exceptions
  * @category      Exceptions
  * @link
  */

@@ -51,7 +51,7 @@ Class loader {
          
         $case_sensitive = ($object_name_or_no_ins === FALSE || $params_or_no_ins === FALSE) ? $case_sensitive = TRUE : FALSE;
         
-        $data = self::getpath($model, 'models', FALSE , $case_sensitive);
+        $data = self::getpath($model, 'models', $case_sensitive);
 
         self::_model($data['path'], $data['filename'], $object_name_or_no_ins, $params_or_no_ins, $new_instance);
     }
@@ -88,7 +88,7 @@ Class loader {
         }
         
         #####################
-
+ 
         require_once($path . $model_name . EXT);
         
         #####################
@@ -171,7 +171,7 @@ Class loader {
         // Application Libraries ( Located in Modules )
         // --------------------------------------------------------------------
         
-        $data = self::getpath($class, 'libraries', ($params_or_no_ins == FALSE) ? TRUE : FALSE);
+        $data = self::getpath($library, 'libraries', ($params_or_no_ins == FALSE) ? TRUE : FALSE);
 
         $class_var = '';
 
@@ -398,7 +398,7 @@ Class loader {
             
             return $return;
         }
-        
+
         return array('filename' => $realname, 'path' => $root. DS .$sub_root.$extra_path);
     }
    

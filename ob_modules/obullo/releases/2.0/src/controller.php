@@ -21,7 +21,7 @@ Class Controller {
 
         // Load Obullo Core Libraries
         // ------------------------------------
-        
+      
         $this->config = Config::getInstance();
         $this->router = Router::getInstance();
         $this->uri    = Uri::getInstance();

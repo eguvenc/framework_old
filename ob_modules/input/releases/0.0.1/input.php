@@ -360,7 +360,7 @@ if( ! function_exists('i_get') )
     {
         $GET = ($use_global_var) ? $GLOBALS['_GET_BACKUP']: $_GET; // _GET_BACKUP = Hmvc local get values
         
-        return getInstance()->input->_fetch_from_array($GET, $index, $xss_clean);
+        return Input::getInstance()->_fetch_from_array($GET, $index, $xss_clean);
     }
 }
 // --------------------------------------------------------------------
@@ -380,7 +380,7 @@ if( ! function_exists('i_post') )
     {
         $POST = ($use_global_var) ? $GLOBALS['_POST_BACKUP']: $_POST; // _POST_BACKUP = Hmvc local post values
 
-        return getInstance()->input->_fetch_from_array($POST, $index, $xss_clean);
+        return Input::getInstance()->_fetch_from_array($POST, $index, $xss_clean);
     }
 }
 
@@ -401,7 +401,7 @@ if( ! function_exists('i_request') )
     {
         $REQUEST = ($use_global_var) ? $GLOBALS['_REQUEST_BACKUP']: $_REQUEST; // _REQUEST_BACKUP = Hmvc local request values
 
-        return getInstance()->input->_fetch_from_array($REQUEST, $index, $xss_clean);
+        return Input::getInstance()->_fetch_from_array($REQUEST, $index, $xss_clean);
     }
 }
 
@@ -446,7 +446,7 @@ if( ! function_exists('i_cookie') )
 {
     function i_cookie($index = '', $xss_clean = FALSE)
     {
-        return getInstance()->input->_fetch_from_array($_COOKIE, $index, $xss_clean);
+        return Input::getInstance()->_fetch_from_array($_COOKIE, $index, $xss_clean);
     }
 }
 // --------------------------------------------------------------------
@@ -466,7 +466,7 @@ if( ! function_exists('i_server') )
 {
     function i_server($index = '', $xss_clean = FALSE)
     {
-        return getInstance()->input->_fetch_from_array($_SERVER, $index, $xss_clean);
+        return Input::getInstance()->_fetch_from_array($_SERVER, $index, $xss_clean);
     }
 }
 // --------------------------------------------------------------------
@@ -481,7 +481,7 @@ if( ! function_exists('i_ip_address') )
 {
     function i_ip_address()
     {
-        return getInstance()->input->ip_address();
+        return Input::getInstance()->ip_address();
     }
 }
 // --------------------------------------------------------------------
@@ -499,7 +499,7 @@ if( ! function_exists('i_valid_ip') )
 {
     function i_valid_ip($ip)
     {        
-        return getInstance()->input->valid_ip($ip);
+        return Input::getInstance()->valid_ip($ip);
     }
 }
 // --------------------------------------------------------------------
@@ -514,7 +514,7 @@ if( ! function_exists('i_user_agent') )
 {
     function i_user_agent()
     {
-        $input = getInstance()->input;
+        $input = Input::getInstance();
 
         if ($input->user_agent !== FALSE)
         {

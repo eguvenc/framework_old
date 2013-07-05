@@ -17,7 +17,7 @@
 */
 $database['db']['hostname']  = 'localhost';
 $database['db']['username']  = 'root';
-$database['db']['password']  = '123456';
+$database['db']['password']  = '12345';
 $database['db']['database']  = 'obullo';
 $database['db']['dbdriver']  = 'mysql';
 $database['db']['dbprefix']  = '';

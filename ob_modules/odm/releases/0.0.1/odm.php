@@ -1,26 +1,12 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- *
- * @package         Obullo
- * @author          Obullo.com  
- * @subpackage      Obullo.libraries        
- * @copyright       Obullo Team
- * @license          
- * @since           Version 1.0
- * @filesource
- */ 
- 
-/**
- * Validation Model.
+ * OBJECT DATA MODEL
  *
  * @package         Obullo 
- * @subpackage      Obullo.core     
- * @category        Core Model
- * @version         0.1
+ * @subpackage      odm
+ * @category        Model
+ * @version         0.0.1
  */                    
 
 Class Odm extends Model {
@@ -39,32 +25,41 @@ Class Odm extends Model {
     public $or_where_in     = array();
     public $where_not_in    = array();
     public $or_where_not_in = array();
-
+    
+    public $schema = NULL;
+    public $settings = array();
     
     /**
     * Construct
     * 
     * @return void
     */
-    public function __construct()
+    public function __construct($schema = '')
     {                
         parent::__construct();
         
-        if( ! isset($this->settings['fields']) OR ! isset($this->settings['database'])) 
+        if( ! is_object($schema))
         {
-            throw new Exception('Check your model it must be contain $settings[\'fields\'] and $settings[\'database\'] array.');
+            throw new Exception('You must provide a $schema object.');
         }
         
-        $db = $this->settings['database'];
+        $this->schema = $schema;
+        
+        if( ! isset($this->schema->config['database'])) 
+        {
+            throw new Exception('Check your model it must be contains $schema->config[\'database\'] array.');
+        }
+        
+        $db = $this->schema->config['database'];
                  
         if($db != '' AND $db != 'no')
         {
             $this->db = loader::database($db, TRUE); // Cannot assign by reference to overloaded object 
         }
                             
-        if( ! isset($this->settings['table'])) // create random table name
+        if( ! isset($this->schema->config['table'])) // create random table name
         {
-            $this->settings['table'] = 'unknown_'.rand();
+            $this->schema->config['table'] = 'unknown_'.rand();
         }
         
         ##### Reset validation data for multiple operations #######
@@ -73,7 +68,10 @@ Class Odm extends Model {
         
         ##### Reset validation data for multiple operations #######
         
-        log_me('debug', "Vmodel Class Initialized");
+        $this->settings['fields'] = get_object_vars($this->schema);
+        unset($this->settings['fields']['config']);
+        
+        log_me('debug', "Odm Class Initialized");
     }
     
     // --------------------------------------------------------------------
@@ -103,10 +101,11 @@ Class Odm extends Model {
         $validator->set('_globals', $_GLOBALS);
         $validator->set('_callback_object', $this);
     
-        $table = $this->settings['table'];
+        $table = $this->schema->config['table'];
 
         foreach($fields as $key => $val)
         {
+            /*
             if(is_array($this->$key) AND isset($this->{$key}['rules'])) // reset validation rules
             {   
                 $val['rules'] = $this->{$key}['rules'];
@@ -117,7 +116,7 @@ Class Odm extends Model {
                     $this->{$key} = $new_value;
                 }
             }
-
+            */
             if(is_array($val))
             {
                 if(isset($val['rules']) AND $val['rules'] != '')
@@ -223,11 +222,13 @@ Class Odm extends Model {
     */
     public function errors($key = '')
     {
+        $table = $this->schema->config['table'];
+        
         if($key == 'transaction')
         {
-            if(isset($this->errors[$this->item('table')]['transaction_error']))
+            if(isset($this->errors[$table]['transaction_error']))
             {
-                return $this->errors[$this->item('table')]['transaction_error'];
+                return $this->errors[$table]['transaction_error'];
             } 
             else 
             {
@@ -235,11 +236,11 @@ Class Odm extends Model {
             }
         }
         
-        if(isset($this->errors[$this->item('table')]))
+        if(isset($this->errors[$table]))
         {
-            if(isset($this->errors[$this->item('table')][$key]))
+            if(isset($this->errors[$table][$key]))
             {
-                return $this->errors[$this->item('table')][$key];
+                return $this->errors[$table][$key];
             }
             
             if($key != '')
@@ -247,7 +248,7 @@ Class Odm extends Model {
                 return;
             }
             
-            return $this->errors[$this->item('table')];
+            return $this->errors[$table];
         }
         
         if($key != '')
@@ -268,10 +269,12 @@ Class Odm extends Model {
      */
     public function build_query_errors()
     {
+        $table = $this->schema->config['table'];
+        
         $http_query['errors'] = array();
-        if(isset($this->errors[$this->item('table')]))
+        if(isset($this->errors[$table]))
         {
-            foreach($this->errors[$this->item('table')] as $key => $val)
+            foreach($this->errors[$table] as $key => $val)
             {
                 if(is_string($val))
                 {
@@ -293,14 +296,16 @@ Class Odm extends Model {
     */
     public function values($field = '')
     {
-        if(isset($this->values[$this->item('table')]))
+        $table = $this->schema->config['table'];
+        
+        if(isset($this->values[$table]))
         {
-            if(isset($this->values[$this->item('table')][$field]))
+            if(isset($this->values[$table][$field]))
             {
-                return $this->values[$this->item('table')][$field];
+                return $this->values[$table][$field];
             }
             
-            return $this->values[$this->item('table')];
+            return $this->values[$table];
         }
         
         return $this->values;
@@ -315,11 +320,11 @@ Class Odm extends Model {
     */
     public function set_error($key, $error)
     {
-        $this->errors[$this->item('table')][$key] = $error;
+        $table = $this->schema->config['table'];
         
-        $fields = $this->settings['fields'];
-        
-        if(isset($fields[$key])) // set a validation error.
+        $this->errors[$table][$key] = $error;
+       
+        if(isset($this->settings['fields'][$key])) // set a validation error.
         {
             Validator::getInstance()->_field_data[$key]['error'] = $error;
         }
@@ -334,8 +339,10 @@ Class Odm extends Model {
     */
     public function set_func($name, $val)
     {
-        $this->function[$this->item('table')]['name'] = $name;
-        $this->function[$this->item('table')]['val']  = $val;
+        $table = $this->schema->config['table'];
+        
+        $this->function[$table]['name'] = $name;
+        $this->function[$table]['val']  = $val;
     }
     
     // --------------------------------------------------------------------
@@ -346,10 +353,12 @@ Class Odm extends Model {
     * @param string $type
     */
     public function get_func($type = 'name')
-    {        
+    {   
+       $table = $this->schema->config['table'];
+        
        if($type == '')
        {
-           if(isset($this->function[$this->item('table')]['name']))
+           if(isset($this->function[$table]['name']))
            {
                return TRUE;
            }
@@ -357,9 +366,9 @@ Class Odm extends Model {
            return FALSE;
        }
        
-       if(isset($this->function[$this->item('table')][$type]))
+       if(isset($this->function[$table][$type]))
        {
-           return $this->function[$this->item('table')][$type];
+           return $this->function[$table][$type];
        }
        
        return FALSE;
@@ -374,40 +383,7 @@ Class Odm extends Model {
     */
     public function set_value($key, $value)
     {
-        $this->values[$this->item('table')][$key] = $value;
-    }
-    
-    // --------------------------------------------------------------------
-    
-    /**
-    * Get Settings
-    * 
-    * @param mixed $item
-    * @param mixed $index
-    */
-    public function item($item)
-    {
-        if(strpos($item, '['))
-        {
-            $index = explode('[', $item);
-            $index_item = str_replace(']', '', $index[1]);
-            
-            if(isset($this->settings[$index[0]][$index_item]))
-            {
-                return $this->settings[$index[0]][$index_item];
-            }
-            
-            return FALSE;
-        }
-        else
-        {
-            if(isset($this->settings[$item]))
-            {
-                return $this->settings[$item];
-            }
-            
-            return FALSE;
-        }
+        $this->values[$this->schema->config['table']][$key] = $value;
     }
     
     // --------------------------------------------------------------------
@@ -580,8 +556,8 @@ Class Odm extends Model {
                    
         $v_data = array();   // validation fields data
         $s_data = array();   // mysql insert / update fields data
-        $table  = $this->item('table');
-        $id     = ($this->item('primary_key') !== FALSE) ? $this->item('primary_key') : 'id';
+        $table  = $this->schema->config['table'];
+        $id     = ($this->schema->config['primary_key'] != '') ? $this->schema->config['primary_key'] : 'id';
         
         if(count($this->no_save) > 0)
         {
@@ -830,20 +806,6 @@ Class Odm extends Model {
     // --------------------------------------------------------------------
     
     /**
-     * Override to $settings['field'] variable
-     * 
-     * @param string $field
-     * @param string $type
-     * @param string $val 
-     */
-    public function set_field($field, $type = 'rules', $val = '')
-    {
-        $this->settings['fields'][$field][$type] = $val;
-    }
-    
-    // --------------------------------------------------------------------
-    
-    /**
     * Do type casting foreach value
     * 
     * @param mixed $field
@@ -861,7 +823,7 @@ Class Odm extends Model {
 
         ###########
         
-        $value = lib('Validator')->set_value($field, $default);
+        $value = Validator::getInstance()->set_value($field, $default);
         
         ###########
             
@@ -923,9 +885,9 @@ Class Odm extends Model {
         
         $v_data = array();
 
-        $db     = $this->item('database');
-        $table  = $this->item('table');
-        $id     = ($this->item('primary_key') !== FALSE) ? $this->item('primary_key') : 'id';
+        $db     = $this->schema->config['database'];
+        $table  = $this->schema->config['table'];
+        $id     = ($this->schema->config['primary_key'] != '') ? $this->schema->config['primary_key'] : 'id';
         
         $has_rules = FALSE;
         foreach($this->settings['fields'] as $k => $v)
@@ -949,7 +911,7 @@ Class Odm extends Model {
         
         if(count($this->where) == 0 AND count($this->where_in) == 0)
         {
-            throw new Exception('Please set an ID or use $model->where() function before the delete operation.');
+            throw new Exception('Please set an ID using $model->where() function before the delete operation.');
         }
         
         if($has_rules)  // if we have validation rules ..
@@ -1046,6 +1008,7 @@ Class Odm extends Model {
         $this->validation = FALSE;
 
         
+        
         // DON'T reset below the variables
         /*
             $this->errors     = array();  // Validation errors.
@@ -1115,7 +1078,7 @@ Class Odm extends Model {
     
 }
 
-// END Validation Model Class
+// END Odm Class
 
-/* End of file Vmodel.php */
-/* Location: ./obullo/core/Vmodel.php */
+/* End of file odm.php */
+/* Location: ./ob_modules/odm/releases/0.0.1/odm.php */
