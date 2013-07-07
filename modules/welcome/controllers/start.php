@@ -38,7 +38,7 @@ Class Start extends Controller {
     }
     
     function do_post()
-    {
+    {   
         loader::model('user', false);  // Include user model
         
         $user = new User(new UserSchema);

@@ -27,7 +27,7 @@ Class Odm extends Model {
     public $or_where_not_in = array();
     
     public $schema = NULL;
-    public $settings = array();
+    public $schema_fields = array();
     
     /**
     * Construct
@@ -68,8 +68,9 @@ Class Odm extends Model {
         
         ##### Reset validation data for multiple operations #######
         
-        $this->settings['fields'] = get_object_vars($this->schema);
-        unset($this->settings['fields']['config']);
+        $this->schema_fields = get_object_vars($this->schema);
+        
+        unset($this->schema_fields['config']);
         
         log_me('debug', "Odm Class Initialized");
     }
@@ -85,7 +86,7 @@ Class Odm extends Model {
     */
     private function validator($_GLOBALS = array(), $fields = array())
     {
-        $validator = new Validator();
+        $validator = Validator::getInstance();
         $validator->clear();
 
         if(count($_GLOBALS) == 0)
@@ -95,7 +96,7 @@ Class Odm extends Model {
 
         if(count($fields) == 0)
         {
-            $fields = $this->settings['fields'];
+            $fields = $this->schema_fields;
         }
 
         $validator->set('_globals', $_GLOBALS);
@@ -174,7 +175,7 @@ Class Odm extends Model {
         getInstance()->locale->load('obullo');  // Load the language file
         
         $v_data = array();   // validation fields data
-        $db_fields = $this->settings['fields'];
+        $db_fields = $this->schema_fields;
         
         if(count($fields) > 0)
         {
@@ -182,7 +183,7 @@ Class Odm extends Model {
             
             foreach($fields as $f_key => $v)
             {
-                $db_fields[$f_key] = $this->settings['fields'][$f_key];
+                $db_fields[$f_key] = $this->schema_fields[$f_key];
             }
         }
 
@@ -235,7 +236,7 @@ Class Odm extends Model {
                 return;
             }
         }
-        
+       
         if(isset($this->errors[$table]))
         {
             if(isset($this->errors[$table][$key]))
@@ -271,7 +272,7 @@ Class Odm extends Model {
     {
         $table = $this->schema->config['table'];
         
-        $http_query['errors'] = array();
+        $http_query = array();
         if(isset($this->errors[$table]))
         {
             foreach($this->errors[$table] as $key => $val)
@@ -324,7 +325,7 @@ Class Odm extends Model {
         
         $this->errors[$table][$key] = $error;
        
-        if(isset($this->settings['fields'][$key])) // set a validation error.
+        if(isset($this->schema_fields[$key])) // set a validation error.
         {
             Validator::getInstance()->_field_data[$key]['error'] = $error;
         }
@@ -563,20 +564,20 @@ Class Odm extends Model {
         {
             foreach($this->no_save as $k)
             {
-                unset($this->settings['fields'][$k]);
+                unset($this->schema_fields[$k]);
             }
         }
 
         $has_rules = FALSE;
         
-        foreach($this->settings['fields'] as $k => $v)
+        foreach($this->schema_fields as $k => $v)
         {
             if(strpos($k, '[]') > 0)  // remove multiple key names from save key ..
             {
                 $k = str_replace('[]', '', $k);
             }
             
-            if(isset($this->settings['fields'][$k]['rules']))  // validation used or not
+            if(isset($this->schema_fields[$k]['rules']))  // validation used or not
             {
                 $has_rules = TRUE;
             }
@@ -588,13 +589,13 @@ Class Odm extends Model {
             
             if($this->{$k} != '')
             {
-                if(isset($this->settings['fields'][$k]['func']))  // functions ..
+                if(isset($this->schema_fields[$k]['func']))  // functions ..
                 {
-                    $function_string = trim($this->settings['fields'][$k]['func'], '|');
+                    $function_string = trim($this->schema_fields[$k]['func'], '|');
 
                     if(strpos($function_string, '|') > 0)
                     {
-                       $functions = explode('|', $this->settings['fields'][$k]['func']);
+                       $functions = explode('|', $this->schema_fields[$k]['func']);
                     }
                     else
                     {
@@ -814,12 +815,12 @@ Class Odm extends Model {
     */
     public function _set_value($field, $default = '')
     {
-        if( ! isset($this->settings['fields'][$field]['type']))
+        if( ! isset($this->schema_fields[$field]['type']))
         {
             return $default;  // No type, return default value.
         }
         
-        $type  = strtolower($this->settings['fields'][$field]['type']);
+        $type  = strtolower($this->schema_fields[$field]['type']);
 
         ###########
         
@@ -890,9 +891,9 @@ Class Odm extends Model {
         $id     = ($this->schema->config['primary_key'] != '') ? $this->schema->config['primary_key'] : 'id';
         
         $has_rules = FALSE;
-        foreach($this->settings['fields'] as $k => $v)
+        foreach($this->schema_fields as $k => $v)
         {
-            if(isset($this->settings['fields'][$k]['rules']))  // validation used or not
+            if(isset($this->schema_fields[$k]['rules']))  // validation used or not
             {
                 $has_rules = TRUE;
             }
@@ -911,7 +912,7 @@ Class Odm extends Model {
         
         if(count($this->where) == 0 AND count($this->where_in) == 0)
         {
-            throw new Exception('Please set an ID using $model->where() function before the delete operation.');
+            throw new Exception('Please set an ID using $model->where() before the delete operation.');
         }
         
         if($has_rules)  // if we have validation rules ..
@@ -1007,8 +1008,6 @@ Class Odm extends Model {
         $this->no_save    = array(); 
         $this->validation = FALSE;
 
-        
-        
         // DON'T reset below the variables
         /*
             $this->errors     = array();  // Validation errors.

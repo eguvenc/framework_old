@@ -29,7 +29,6 @@ Class UserSchema
     'rules' => 'required|trim|valid_email'
     );
 }
-
 Class User extends Odm
 {
     function __construct($schema)
@@ -53,7 +52,7 @@ Class User extends Odm
     */
     function delete()
     {
-        return parent::save();
+        return parent::delete();
     }
 }
 
