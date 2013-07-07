@@ -821,12 +821,7 @@ Class Odm extends Model {
         }
         
         $type  = strtolower($this->schema_fields[$field]['type']);
-
-        ###########
-        
         $value = Validator::getInstance()->set_value($field, $default);
-        
-        ###########
             
         if($type == 'string')
         {

@@ -1,7 +1,5 @@
 <?php
 
-// ------------------------------------------------------------------------
-
 /**
  * Loader Class (Obullo Loader)
  * Load helper, library, model  and database files.
@@ -162,6 +160,18 @@ Class loader {
             {
                 $Class = ucfirst($libraryname);
                 
+                if(is_array($params_or_no_ins))  // __construct params support.
+                {
+                    getInstance()->{$libraryname} = new $Class($params_or_no_ins); // Atuoload the library.
+
+                    return;
+                }
+                
+                if($params_or_no_ins === FALSE)
+                {
+                    return;
+                }
+                
                 getInstance()->{$libraryname} = new $Class(); // Atuoload the library from ob_modules using php5 autoloader.
             }
             
@@ -179,7 +189,7 @@ Class loader {
 
         $class_var = strtolower($data['filename']);
 
-        if(is_array($params_or_no_ins))  // HMVC need to create new instance() foreach Library
+        if(is_array($params_or_no_ins))  // HMVC needs to create new instance() foreach Library
         {
             if(i_hmvc() == FALSE)
             {

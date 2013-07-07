@@ -4,8 +4,8 @@
  * Logging Helper
  *
  * @package     Obullo
- * @subpackage  Helpers
- * @category    Helpers
+ * @subpackage  log
+ * @category    Logging
  * @author      Obullo Team.
  * @link        
  */

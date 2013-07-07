@@ -4,15 +4,15 @@
  * Obullo Mongo DB Class.
  * Derived from MongoDB Active Record Library.
  *
- * A library to interface with the NoSQL database MongoDB. For more information see http://www.mongodb.org
+ * A library to interface for NoSQL database MongoDB. For more information see http://www.mongodb.org
  *
  * @package		Obullo
  * @author		Alex Bilbie | www.alexbilbie.com | alex@alexbilbie.com ( Original Library )
  * @author		Ersin Güvenç. ( Porting to Obullo )
- * @copyright           Copyright (c) 2012, Alex Bilbie.
+ * @copyright          Copyright (c) 2012, Obullo Team
  * @license		http://www.opensource.org/licenses/mit-license.php
  * @link		http://alexbilbie.com
- * @version		Version 0.5.2
+ * @version		Version 0.0.1
  *
  */
 

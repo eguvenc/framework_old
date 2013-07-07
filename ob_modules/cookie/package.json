@@ -1,0 +1,36 @@
+{
+  "name": "cookie",
+  "description": "Manage the http cookies.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ersin Güvenç",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
+  "component" : "helper",
+  "keywords": [
+    "cookie",
+    "http cookies"
+  ],
+  "homepage": "https://github.com/obullo/cookie",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/cookie.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/cookie/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.1.2",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/cookie/issues",
+    "email": "eguvenc@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

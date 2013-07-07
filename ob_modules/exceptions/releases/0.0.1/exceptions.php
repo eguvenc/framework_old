@@ -52,11 +52,12 @@ Class Exceptions {
         {
             $type = 'Database';
             $code = 'SQL';  // We understand this is an db error.
-            $data['sql'] = $last_query;;
+            $data['sql'] = $last_query;
         }
         
         // Command Line Errors
         //-----------------------------------------------------------------------
+        
         if(defined('STDIN'))  // If Command Line Request. 
         {
             echo $type .': '. $e->getMessage(). ' File: ' .error_secure_path($e->getFile()). ' Line: '. $e->getLine(). "\n";
@@ -82,10 +83,12 @@ Class Exceptions {
         
         // Log Php Errors
         //-----------------------------------------------------------------------
+        
         log_me('error', $type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), true); 
              
         // Displaying Errors
-        //-----------------------------------------------------------------------                
+        //-----------------------------------------------------------------------            
+        
         $level  = config('error_reporting');
 
         if(is_numeric($level)) 

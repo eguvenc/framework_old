@@ -1,9 +1,7 @@
 
 /**
  * Obullo JQuery Form Validation Plugin  (c) 2011.
- *
- * PHP5 HMVC Based Scalable Software.
- *
+
  * @package         obullo       
  * @author          obullo.com
  * @license         public
@@ -11,7 +9,6 @@
  * @filesource
  * @license
  */
-
 (function() {
   (function($, window) {
     $.fn.form = function(options) {

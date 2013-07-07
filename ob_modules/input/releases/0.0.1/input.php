@@ -150,26 +150,26 @@ Class Input {
             return $this->ip_address;
         }
 
-        if (config('proxy_ips') != '' && i_server('HTTP_X_FORWARDED_FOR') && i_server('REMOTE_ADDR'))
+        if (config('proxy_ips') != '' && $_SERVER['HTTP_X_FORWARDED_FOR'] && $_SERVER['REMOTE_ADDR'])
         {
             $proxies = preg_split('/[\s,]/', config('proxy_ips'), -1, PREG_SPLIT_NO_EMPTY);
             $proxies = is_array($proxies) ? $proxies : array($proxies);
 
             $this->ip_address = in_array($_SERVER['REMOTE_ADDR'], $proxies) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
         }
-        elseif (i_server('REMOTE_ADDR') AND i_server('HTTP_CLIENT_IP'))
+        elseif ($_SERVER['REMOTE_ADDR'] AND $_SERVER['HTTP_CLIENT_IP'])
         {
             $this->ip_address = $_SERVER['HTTP_CLIENT_IP'];
         }
-        elseif (i_server('REMOTE_ADDR'))
+        elseif ($_SERVER['REMOTE_ADDR'])
         {
             $this->ip_address = $_SERVER['REMOTE_ADDR'];
         }
-        elseif (i_server('HTTP_CLIENT_IP'))
+        elseif ($_SERVER['HTTP_CLIENT_IP'])
         {
             $this->ip_address = $_SERVER['HTTP_CLIENT_IP'];
         }
-        elseif (i_server('HTTP_X_FORWARDED_FOR'))
+        elseif ($_SERVER['HTTP_X_FORWARDED_FOR'])
         {
             $this->ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
@@ -452,26 +452,6 @@ if( ! function_exists('i_cookie') )
 // --------------------------------------------------------------------
 
 /**
-* Fetch an item from the SERVER array
-* WE DON'T need to $use_global_var variable because of
-* we already use global $_SERVER values in HMVC requests
-* except the http method variable.
-*
-* @access   public
-* @param    string
-* @param    bool
-* @return   string
-*/
-if( ! function_exists('i_server') )
-{
-    function i_server($index = '', $xss_clean = FALSE)
-    {
-        return Input::getInstance()->_fetch_from_array($_SERVER, $index, $xss_clean);
-    }
-}
-// --------------------------------------------------------------------
-
-/**
 * Fetch the IP Address
 *
 * @access    public
@@ -590,7 +570,10 @@ if( ! function_exists('i_ajax'))
 {
     function i_ajax()
     {    
-        return (i_server('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest');
+        if(isset($_SERVER['HTTP_X_REQUESTED_WITH']))
+        {
+            return ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest');
+        }
     } 
 }
 // --------------------------------------------------------------------

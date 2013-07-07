@@ -12,13 +12,10 @@
 // --------------------------------------------------------------------
 
 /**
-* Build css files in <head> tags
+* Build css files.
 *
-* css('welcome.css'); // current module
-* css('subfolder/welcome.css') // from a subfolder
-* css('../module/welcome.css');  // from /modules dir
+* css('welcome.css');
 * css(array('welcome.css', 'hello.css')); // array type
-* css('#main {display: block; color: red;}', 'embed'); // inlise style
 *
 * @author   Obullo
 * @param    string $href
@@ -124,8 +121,6 @@ if( ! function_exists('css') )
 *
 * js('welcome.js');
 * js('subfolder/welcome.js')
-* js('../module/welcome.js');  from /modules dir
-* js(array('welcome.js', 'hello.js'));
 *
 * @author   Obullo
 * @param    string $src  it can be via a path
@@ -133,8 +128,7 @@ if( ! function_exists('css') )
 * @param    string $type
 * @param    string $index_page load js dynamically
 * @version  0.1
-* @version  0.2 removed /js dir, added _get_public_path() func.
-*
+* @return   string
 */
 if( ! function_exists('js') )
 {
@@ -193,85 +187,6 @@ if( ! function_exists('js') )
 // ------------------------------------------------------------------------
 
 /**
- * Get configured output of the called plugin.
- * 
- * @param string $name plugin name (plugin folder)
- * @param string $config_file name of the plugin config file.
- * @return string
- */
-if ( ! function_exists('plugin'))
-{
-    function plugin($plugin_name, $filename = 'plugins')
-    {
-        $config = getInstance()->config;
-        
-        ##########
-        
-        $config->load($filename);
-        
-        ##########
-        
-        $plugins = $config->item($plugin_name);                         
-                                            
-        if(count($plugins) == 0)
-        {
-            return;
-        }
-
-        $output = '';
-        foreach($plugins as $file_path)
-        {
-            $ext = substr(strrchr($file_path, '.'), 1);
-            
-            if($ext == 'js')
-            {   
-                if(strpos(ltrim($file_path, '/'), 'js') === 0)  // remove js word
-                {
-                    $file_path = substr(ltrim($file_path, '/'), 3);
-                }
-                
-                $output.= js($file_path);
-            }
-            
-            if($ext == 'css')
-            {
-                if(strpos(ltrim($file_path, '/'), 'css') === 0) // remove css word
-                {
-                   $file_path = substr(ltrim($file_path, '/'), 4);
-                }
-                
-                $output.= css($file_path);
-            }
-        }
-        
-        return $output;
-    }
-}
-
-// ------------------------------------------------------------------------
-
-/**
-* Generates a page document type declaration
-*
-* Valid options are xhtml11, xhtml-strict, xhtml-trans, xhtml-frame,
-* html4-strict, html4-trans, and html4-frame.
-*
-* Values are saved in the doctypes config file.
-*
-* @access  public
-*/
-if( ! function_exists('doctype') )
-{
-    function doctype($type = 'xhtml1-strict')
-    {
-        return config($type, 'doctypes');
-    }
-}
-
-
-// ------------------------------------------------------------------------
-
-/**
 * Image
 *
 * Generates an <img /> element
@@ -281,8 +196,6 @@ if( ! function_exists('doctype') )
 * @param    boolean  $index_page
 * @param    string   $attributes
 * @version  0.1
-* @version  0.2      added view_set_folder('img'); support
-* @version  0.2      added $attributes variable
 * @return   string
 */
 if( ! function_exists('img') ) 
@@ -326,14 +239,8 @@ if( ! function_exists('img') )
 // ------------------------------------------------------------------------ 
 
 /**
-* Parse head files to learn whether it
-* comes from modules directory.
+* Get assets directory path
 *
-* convert  this path ../welcome/welcome.css
-* to /public_url/modules/welcome/public/css/welcome.css
-*
-* @author   CJ Lazell
-* @author   Ersin Guvenc
 * @access   private
 * @param    mixed $file_url
 * @param    mixed $extra_path

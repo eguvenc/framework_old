@@ -1,0 +1,37 @@
+{
+  "name": "mongo_db",
+  "description": "Mongo db crud class.Control mongodb create,read,update and delete operations.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ersin Güvenç",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
+  "component" : "library",
+  "keywords": [
+    "mongodb",
+    "mongodb crud",
+    "mongo"
+  ],
+  "homepage": "https://github.com/obullo/mongo_db",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/mongo_db.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/mongo_db/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.1.2",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/mongo_db/issues",
+    "email": "eguvenc@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

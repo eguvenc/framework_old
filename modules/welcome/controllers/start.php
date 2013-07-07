@@ -50,7 +50,7 @@ Class Start extends Controller {
   
         if($user->save())
         {
-            if($this->uri->extension() == 'json')  // Ajax request
+            if(i_ajax())  // Ajax request
             {
                 echo form_json_success($user);
                 return;
@@ -64,7 +64,7 @@ Class Start extends Controller {
         } 
         else
         {
-            if($this->uri->extension() == 'json') // Ajax request
+            if(i_ajax()) // Ajax request
             {
                 echo form_json_error($user);
                 return;

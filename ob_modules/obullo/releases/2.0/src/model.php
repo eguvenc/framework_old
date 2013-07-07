@@ -28,22 +28,20 @@ Class Model {
     */
     public function _assign_db_objects()
     {
-        $OB = getInstance();
-
         foreach(loader::$_databases as $db_var)
         {
             if(method_exists($this, '__get') OR method_exists($this, '__set'))
             {
-                if(isset($OB->$db_var) AND is_object($OB->$db_var))
+                if(isset(getInstance()->$db_var) AND is_object(getInstance()->$db_var))
                 {
-                    $this->$db_var = $OB->$db_var;  // to prevent some reference errors
+                    $this->$db_var = getInstance()->$db_var;  // to prevent some reference errors
                 }
             }
             else
             {
-                if(isset($OB->$db_var) AND is_object($OB->$db_var))
+                if(isset(getInstance()->$db_var) AND is_object(getInstance()->$db_var))
                 {
-                    $this->$db_var = &$OB->$db_var;  // to prevent some reference errors
+                    $this->$db_var = &getInstance()->$db_var;  // to prevent some reference errors
                 }
             }
         }

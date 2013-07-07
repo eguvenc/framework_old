@@ -1,18 +1,6 @@
 <?php
 
 /**
- * Obullo Language Class
- *
- * @package     Obullo
- * @subpackage  Locale
- * @category    Language
- * @author      Obullo Team
- * @link        
- */
-
-// --------------------------------------------------------------------
-
-/**
 * Fetch a item of text from the language array
 *
 * @access   public

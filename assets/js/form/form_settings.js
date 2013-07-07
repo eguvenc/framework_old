@@ -10,8 +10,8 @@ var form_plugin_settings = {
    ajax_cache: false,
    ajax_timeout: 10000,     /* Incrase this value for large process .*/
    ajax_data_type: 'json',
-   error_msg: "There are some errors in the form fields !",
-   connection_error: "Timeout or connection error, please check your internet connection !",
+   error_msg: "There are some errors in the form fields.",
+   connection_error: "Timeout or connection error, please check your internet connection.",
    loading_div: "<div style='float:left;'><span class='loading'>Loading ..</span></div>"
 }
 

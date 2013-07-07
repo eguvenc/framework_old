@@ -1,0 +1,38 @@
+{
+  "name": "email",
+  "description": "Email Class",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ersin Güvenç",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
+  "component" : "library",
+  "dependencies": {},
+  "keywords": [
+    "email",
+    "mail",
+    "smtp"
+  ],
+  "homepage": "https://github.com/obullo/email",
+  "repo": {
+    "type": "git",
+    "url": "git://github.com/obullo/email.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/email/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.1.2",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/email/issues",
+    "email": "eguvenc@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

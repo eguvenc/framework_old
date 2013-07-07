@@ -1,0 +1,54 @@
+{
+  "name": "task",
+  "description": "Task Helper, monitor all framework logs and debugs from your console, run cli tasks.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ersin Güvenç",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
+  "component" : "helper",
+  "shell" : [
+    {
+        "copy" : { 
+            "source" : "obullo_modules/$name/releases/$version/src/task", 
+            "target" : "/" 
+        },
+        "copy" : {
+            "source" : "obullo_modules/$name/releases/$version/example/*",
+            "target" : "modules/tasks/controllers"
+        }
+    }
+  ],
+  "keywords": [
+    "task",
+    "debug",
+    "debugging",
+    "cli",
+    "cli log debug",
+    "log debug",
+    "follow debugs"
+  ],
+  "homepage": "https://github.com/obullo/task",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/task.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/task/archive/master.zip"
+  },
+  "main": "./releases/latest/task.php",
+  "requires": {
+    "php": ">= 5.2.4",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/eguvenc/task/issues",
+    "email": "eguvenc@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "https://github.com/eguvenc/task/master/README.md"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "config",
+  "description": "Configuration Class, keeps the all framework configuration file variables.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ersin Güvenç",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
+  "component" : "library",
+  "dependencies": {},
+  "keywords": [
+    "configuration",
+    "config"
+  ],
+  "homepage": "https://github.com/obullo/cart",
+  "repo": {
+    "type": "git",
+    "url": "git://github.com/obullo/benchmark.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/config/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.1.2",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/config/issues",
+    "email": "eguvenc@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

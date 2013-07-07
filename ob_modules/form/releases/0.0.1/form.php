@@ -1,18 +1,6 @@
 <?php
 
 /**
- * Obullo Form Helpers
- *
- * @package     Obullo
- * @subpackage  Helpers
- * @category    Helpers
- * @author      Obullo Team
- * @link        
- */
-
-// ------------------------------------------------------------------------
-
-/**
 * Form Declaration
 *
 * Creates the opening portion of the form.
