@@ -15,7 +15,7 @@
 /**
  * Write Log File
  *
- * Generally this function will be called using the global log_me() function.
+ * This function will be called using the global log_me() function.
  *
  * @access   public
  * @param    string    the error level
@@ -32,13 +32,12 @@ if( ! function_exists('log_write') )
         $threshold = 1;
         $date_fmt  = 'Y-m-d H:i:s';
         $enabled   = TRUE;
-        $levels    = array('BENCH' => '0', 'ERROR' => '1', 'DEBUG' => '2',  'INFO' => '3', 'ALL' => '4');
+        $levels    = array('ERROR' => '1', 'DEBUG' => '2',  'INFO' => '3', 'BENCH' => '4', 'ALL' => '5');
         $level     = strtoupper($level);
 
-        $config          = get_config();
         $log_path        = APP .'logs'. DS;
-        $log_threshold   = $config['log_threshold'];
-        $log_date_format = $config['log_date_format'];
+        $log_threshold   = config('log_threshold');
+        $log_date_format = config('log_date_format');
         
         if (defined('STDIN') AND defined('TASK'))   // Internal Task Request
         {
@@ -78,7 +77,7 @@ if( ! function_exists('log_write') )
         {
             return FALSE;
         }
-
+        
         $filepath = $log_path .'log-'. date('Y-m-d').EXT;
         $message  = '';  
         
@@ -100,7 +99,7 @@ if( ! function_exists('log_write') )
         fclose($fp);
 
         @chmod($filepath, '0666');
-                 
+        
         return TRUE;
     }
 }

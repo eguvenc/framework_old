@@ -23,7 +23,7 @@ function ob_autoload($realname)
    
     $packages = get_config('packages');
     
-    if($realname == 'Model' OR $realname == 'Vmodel') // Database files.
+    if($realname == 'Model') // Database files.
     {
         require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .strtolower($realname). EXT);
         
@@ -428,6 +428,14 @@ if ( ! function_exists('remove_invisible_characters'))
 }
 
 // -------------------------------------------------------------------- 
+
+if( ! function_exists('xss_clean'))
+{
+    function xss_clean($str, $is_image = FALSE)
+    {
+        return Security::getInstance()->xss_clean($str, $is_image);
+    }
+}
 
 // END common.php File
 

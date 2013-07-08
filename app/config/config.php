@@ -108,16 +108,6 @@ $config['debug_backtrace']       = array('enabled' => 'E_ALL ^ (E_NOTICE | E_WAR
 $config['log_threshold']         = (ENV == 'LIVE') ? 1 : 5;
 $config['log_queries']           = (ENV == 'LIVE') ? FALSE : TRUE;
 $config['log_benchmark']         = (ENV == 'LIVE') ? FALSE : TRUE;
-
-/*
-|--------------------------------------------------------------------------
-| Date Format for Logs
-|--------------------------------------------------------------------------
-|
-| Each item that is logged has an associated date. You can use PHP date
-| codes to set your own date formatting
-|
-*/
 $config['log_date_format']       = 'Y-m-d H:i:s';
 
 /*
