@@ -1,33 +1,19 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo       
- * @author          obullo.com
- * @copyright       Ersin Guvenc (c) 2009.
- * @filesource
- * @license
- */
-
-// ------------------------------------------------------------------------
-
-/**
- * Obullo Pager Common File
+ * Pager Common
  *
  *
  * @package       Obullo
- * @subpackage    Libraries.drivers.Pager_common
- * @category      Libraries
- * @author        Ersin Guvenc
+ * @subpackage    src.pager_common
+ * @category      pagination
+ * @author        Obullo Team
  * @author        Derived from PEAR Pager package.
  * @see           Original package http://pear.php.net/package/Pager
  * @link          
  */
 
-Class OB_Pager_common
+Class Pager_Common
 {
     public $_total_items;               // integer number of items
     public $_per_page       = 10;       // integer number of items per page
@@ -937,9 +923,11 @@ Class OB_Pager_common
     */
     public function get_per_page_select_box($start = 5, $end = 30, $step = 5, $show_all_data = FALSE, $extra_params = array())
     {
-        require_once 'drivers/pager/pager_html_widgets.php';
+        $packages = get_config('packages');
+    
+        require_once(OB_MODULES .'pager'. DS .'releases'. DS .$packages['dependencies']['pager']['version']. DS .'src'. DS .'pager_html_widgets'. EXT);
         
-        $widget = new Pager_html_widgets(array('pager' => $this));
+        $widget = new Pager_Html_Widgets(array('pager' => $this));
         
         return $widget->get_per_page_select_box($start, $end, $step, $show_all_data, $extra_params);
     }
@@ -964,9 +952,11 @@ Class OB_Pager_common
     */
     public function get_page_select_box($params = array(), $extra_attributes = '')
     {   
-        require_once 'drivers/pager/pager_html_widgets.php';
+        $packages = get_config('packages');
+    
+        require_once(OB_MODULES .'pager'. DS .'releases'. DS .$packages['dependencies']['pager']['version']. DS .'src'. DS .'pager_html_widgets'. EXT);
         
-        $widget = new Pager_html_widgets(array('pager' => $this));
+        $widget = new Pager_Html_Widgets(array('pager' => $this));
         
         return $widget->get_page_select_box($params, $extra_attributes);
     }
@@ -1238,7 +1228,7 @@ Class OB_Pager_common
 
 }
 
-// END Pager_common Class
+// END Pager_Common Class
 
-/* End of file Pager_common.php */
-/* Location: ./obullo/libraries/php5/pager/Pager_common.php */
+/* End of file Pager_Common.php */
+/* Location: ./ob_modules/pager/releases/0.0.1/pager_common.php */

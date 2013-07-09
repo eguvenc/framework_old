@@ -1,55 +1,38 @@
 <?php
-defined('BASE') or exit('Access Denied!');
 
 /**
- * Obullo Framework (c) 2009 - 2012.
- *
- * PHP5 HMVC Based Scalable Software.
- *
- *
- * @package         Obullo
- * @author          Obullo.com
- * @subpackage      Obullo.database
- * @copyright       Copyright (c) 2009 Ersin Guvenc.
- * @license         public
- * @since           Version 1.0
- * @filesource
- */
-// ------------------------------------------------------------------------
-
-/**
- * MySQL Database Adapter Class
+ * Firebird Database Adapter Class
  *
  * @package       Obullo
  * @subpackage    Drivers
  * @category      Database
- * @author        Ersin Guvenc
- * @link
+ * @author        Obullo Team
+ * @link                              
  */
 
-Class OB_Database_cubrid extends OB_Database_adapter
+Class Pdo_Firebird extends Pdo_Database_Adapter
 {
     /**
     * The character used for escaping
-    *
+    * 
     * @var string
     */
     public $_escape_char = '';
-
-
+    
+    
     // clause and character used for LIKE escape sequences - not used in MySQL
     public $_like_escape_str = '';
-    public $_like_escape_chr = '';
-
+    public $_like_escape_chr = '';     
+     
     public function __construct($param)
-    {
+    {   
         parent::__construct($param);
     }
-
+    
     /**
     * Connect to PDO
-    *
-    * @author   Ersin Guvenc
+    * 
+    * @author   Ersin Guvenc 
     * @param    string $dsn  Dsn
     * @param    string $user Db username
     * @param    mixed  $pass Db password
@@ -60,26 +43,17 @@ Class OB_Database_cubrid extends OB_Database_adapter
     {
         // If connection is ok .. not need to again connect..
         if ($this->_conn) { return; }
-
-        // cubrid:host=localhost;port=33000;dbname=demodb
         
-        $port = empty($this->dbh_port) ? ';port=33000' : ';port='.$this->dbh_port;
-        $dsn  = empty($this->dsn) ? 'cubrid:host='.$this->hostname.$port.';dbname='.$this->database : $this->dsn;
-       
+        $dsn = empty($this->dsn) ? 'firebird:dbname='.$this->database : $this->dsn;
+             
         $this->_pdo = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
-
-        // In CUBRID, there is no need to set charset or collation.
-	// This is why returning true will allow the application continue
-	// its normal process.
-
-        // We set exception attribute for always showing the pdo exceptions errors. (ersin)
-        $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        // PDO::ERRMODE_SILENT
-    }
+        // We set exception attribute for always showing the pdo exceptions errors. (ersin)
+        $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    } 
 
     // --------------------------------------------------------------------
-
+    
     /**
      * Escape the SQL Identifiers
      *
@@ -100,39 +74,38 @@ Class OB_Database_cubrid extends OB_Database_adapter
         {
             if (strpos($item, '.'.$id) !== FALSE)
             {
-                $str = $this->_escape_char. str_replace('.', $this->_escape_char.'.', $item);
-
+                $str = $this->_escape_char. str_replace('.', $this->_escape_char.'.', $item);  
+                
                 // remove duplicates if the user already included the escape
                 return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
-            }
+            }        
         }
-
+        
         if (strpos($item, '.') !== FALSE)
         {
-            $str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;
+            $str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;            
         }
         else
         {
             $str = $this->_escape_char.$item.$this->_escape_char;
         }
-
+    
         // remove duplicates if the user already included the escape
         return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
     }
-
+            
     // --------------------------------------------------------------------
-
+    
     /**
     * Escape String
     *
-    * @author   Ersin Guvenc
     * @access   public
     * @param    string
     * @param    bool    whether or not the string will be used in a LIKE condition
     * @return   string
     */
-    public function escape_str($str, $like = FALSE, $side = 'both')
-    {
+    public function escape_str($str, $like = FALSE, $side = 'both')    
+    {    
         if (is_array($str))
         {
             foreach($str as $key => $val)
@@ -142,31 +115,31 @@ Class OB_Database_cubrid extends OB_Database_adapter
 
             return $str;
         }
-
+    
         // escape LIKE condition wildcards
         if ($like === TRUE)
         {
             $str = str_replace(array('%', '_'), array('\\%', '\\_'), $str);
-
+            
             switch ($side)
             {
                case 'before':
                  $str = "%{$str}";
                  break;
-
+                 
                case 'after':
                  $str = "{$str}%";
                  break;
-
+                 
                default:
                  $str = "%{$str}%";
             }
-
+            
             // not need to quote for who use prepare and :like bind.
-            if($this->prepare == TRUE AND $this->is_like_bind)
+            if($this->prepare == TRUE AND $this->is_like_bind)   
             return $str;
-        }
-
+        } 
+        
         // make sure is it bind value, if not ...
         if($this->prepare === TRUE)
         {
@@ -179,16 +152,16 @@ Class OB_Database_cubrid extends OB_Database_adapter
         {
            $str = $this->quote($str, PDO::PARAM_STR);
         }
-
+        
         return $str;
     }
-
-    // --------------------------------------------------------------------
-
+    
+    // -------------------------------------------------------------------- 
+    
     /**
     * Platform specific pdo quote
     * function.
-    *
+    *                 
     * @author  Ersin Guvenc.
     * @param   string $str
     * @param   int    $type
@@ -198,9 +171,9 @@ Class OB_Database_cubrid extends OB_Database_adapter
     {
          return $this->_conn->quote($str, $type);
     }
-
-    // --------------------------------------------------------------------
-
+    
+    // -------------------------------------------------------------------- 
+    
     /**
     * From Tables
     *
@@ -217,44 +190,48 @@ Class OB_Database_cubrid extends OB_Database_adapter
         {
             $tables = array($tables);
         }
-
+        
         return '('.implode(', ', $tables).')';
     }
 
     // --------------------------------------------------------------------
+    
+    /**
+     * Escape Table Name
+     *
+     * This function adds backticks if the table name has a period
+     * in it. Some DBs will get cranky unless periods are escaped
+     *
+     * @access  private
+     * @param   string  the table name
+     * @return  string
+     */
+    public function _escape_table($table)
+    {
+        if (stristr($table, '.'))
+        {
+            $table = preg_replace("/\./", "`.`", $table);
+        }
 
+        return $table;
+    }
+    
+    // --------------------------------------------------------------------
+    
     /**
      * Insert statement
      *
      * Generates a platform-specific insert string from the supplied data
      *
-     * @access	public
-     * @param	string	the table name
-     * @param	array	the insert keys
-     * @param	array	the insert values
-     * @return	string
+     * @access  public
+     * @param   string  the table name
+     * @param   array   the insert keys
+     * @param   array   the insert values
+     * @return  string
      */
-    function _insert($table, $keys, $values)
+    public function _insert($table, $keys, $values)
     {
-        return "INSERT INTO ".$table." (\"".implode('", "', $keys)."\") VALUES (".implode(', ', $values).")";
-    }
-    
-    // --------------------------------------------------------------------
-
-    /**
-     * Replace statement
-     *
-     * Generates a platform-specific replace string from the supplied data
-     *
-     * @access	public
-     * @param	string	the table name
-     * @param	array	the insert keys
-     * @param	array	the insert values
-     * @return	string
-     */
-    function _replace($table, $keys, $values)
-    {
-        return "REPLACE INTO ".$table." (\"".implode('", "', $keys)."\") VALUES (".implode(', ', $values).")";
+        return "INSERT INTO ".$this->_escape_table($table)." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
     }
     
     // --------------------------------------------------------------------
@@ -264,36 +241,22 @@ Class OB_Database_cubrid extends OB_Database_adapter
      *
      * Generates a platform-specific update string from the supplied data
      *
-     * @access   public
-     * @param    string   the table name
-     * @param    array    the update data
-     * @param    array    the where clause
-     * @param    array    the orderby clause
-     * @param    array    the limit clause
-     * @return   string
+     * @access  public
+     * @param   string  the table name
+     * @param   array   the update data
+     * @param   array   the where clause
+     * @return  string
      */
-    public function _update($table, $values, $where, $orderby = array(), $limit = FALSE)
+    public function _update($table, $where = array(), $like = array(), $limit = FALSE)
     {
         foreach($values as $key => $val)
         {
-            // $valstr[] = $key." = ".$val;
-            $valstr[] = sprintf('"%s" = %s', $key, $val);
-            // output Array ( [0] => "0" = value ) 
+            $valstr[] = $key." = ".$val;
         }
 
-        $limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
-
-        $orderby = (count($orderby) >= 1)?' ORDER BY '.implode(", ", $orderby):'';
-
-        $sql = "UPDATE ".$table." SET ".implode(', ', $valstr);
-
-        $sql .= ($where != '' AND count($where) >=1) ? " WHERE ".implode(" ", $where) : '';
-
-        $sql .= $orderby.$limit;
-
-        return $sql;
+        return "UPDATE ".$this->_escape_table($table)." SET ".implode(', ', $valstr)." WHERE ".implode(" ", $where);
     }
-
+    
     // --------------------------------------------------------------------
 
     /**
@@ -304,28 +267,11 @@ Class OB_Database_cubrid extends OB_Database_adapter
      * @access   public
      * @param    string    the table name
      * @param    array    the where clause
-     * @param    string    the limit clause
      * @return   string
      */
     public function _delete($table, $where = array(), $like = array(), $limit = FALSE)
     {
-        $conditions = '';
-
-        if (count($where) > 0 OR count($like) > 0)
-        {
-            $conditions = "\nWHERE ";
-            $conditions .= implode("\n", $this->ar_where);
-
-            if (count($where) > 0 && count($like) > 0)
-            {
-                $conditions .= " AND ";
-            }
-            $conditions .= implode("\n", $like);
-        }
-
-        $limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
-
-        return "DELETE FROM ".$table.$conditions.$limit;
+        return "DELETE FROM ".$this->_escape_table($table)." WHERE ".implode(" ", $where);
     }
 
     // --------------------------------------------------------------------
@@ -335,29 +281,34 @@ Class OB_Database_cubrid extends OB_Database_adapter
      *
      * Generates a platform-specific LIMIT clause
      *
-     * @access   public
-     * @param    string    the sql query string
-     * @param    integer   the number of rows to limit the query to
-     * @param    integer   the offset value
-     * @return   string
+     * @access  public
+     * @param   string  the sql query string
+     * @param   integer the number of rows to limit the query to
+     * @param   integer the offset value
+     * @return  string
      */
     public function _limit($sql, $limit, $offset)
     {
-        if ($offset == 0)
+        $partial_sql = ltrim($sql, 'SELECTselect');
+
+        if ($offset != 0)
         {
-            $offset = '';
+            $newsql = 'SELECT FIRST ' . $limit . ' SKIP ' . $offset . ' ' . $partial_sql;
         }
         else
         {
-            $offset .= ", ";
+            $newsql = 'SELECT FIRST ' . $limit . ' ' . $partial_sql;
         }
 
-        return $sql."LIMIT ".$offset.$limit;
+        // remember that we used limits
+        // $this->limit_used = TRUE;
+
+        return $newsql;
     }
 
 
 } // end class.
 
 
-/* End of file Database_cubrid.php */
-/* Location: ./obullo/libraries/drivers/database/Database_cubrid.php */
+/* End of file Database_firebird.php */
+/* Location: ./obullo/libraries/drivers/database/Database_firebird.php */

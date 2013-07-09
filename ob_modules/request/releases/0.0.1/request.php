@@ -29,7 +29,7 @@ if( ! function_exists('request') )
         { 
             $packages = get_config('packages');
     
-            require(OB_MODULES .'request'. DS .'releases'. DS .$packages['dependencies']['request']['version']. DS .'src'. DS .'hmvc'.EXT);
+            require(OB_MODULES .'request'. DS .'releases'. DS .$packages['dependencies']['request']['version']. DS .'src'. DS .'hmvc'. EXT);
         }
         
         // Supported request methods

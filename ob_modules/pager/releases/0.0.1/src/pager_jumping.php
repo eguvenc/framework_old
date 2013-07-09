@@ -1,33 +1,18 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo       
- * @author          obullo.com
- * @copyright       Ersin Guvenc (c) 2009.
- * @filesource
- * @license
- */
-
-// ------------------------------------------------------------------------
-
-/**
- * Obullo Pager Jumping Driver
+ * Pager Jumping Driver
  *
  *
  * @package       Obullo
- * @subpackage    Libraries.drivers.Pager_jumping
- * @category      Libraries
- * @author        Ersin Guvenc
+ * @subpackage    src.pager_jumping
+ * @category      pagination
+ * @author        Obullo Team
  * @author        Derived from PEAR Pager package.
- * @see           Original package http://pear.php.net/package/Pager
- * @link          
+ * @see           Original package http://pear.php.net/package/Pager   
  */
 
-Class OB_Pager_jumping extends OB_Pager_common
+Class Pager_Jumping extends Pager_Common
 {
     /**
     * Constructor
@@ -253,7 +238,7 @@ Class OB_Pager_jumping extends OB_Pager_common
 
 }
 
-// END Pager_jumping Class
+// END Pager_Jumping Class
 
-/* End of file Pager_jumping.php */
-/* Location: ./obullo/libraries/drivers/pager/Pager_jumping.php */
+/* End of file Pager_Jumping.php */
+/* Location: ./ob_modules/pager/releases/0.0.1/pager_jumping.php */

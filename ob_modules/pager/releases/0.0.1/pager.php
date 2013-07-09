@@ -1,34 +1,22 @@
 <?php
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo       
- * @author          obullo.com
- * @copyright       Ersin Guvenc (c) 2009.
- * @filesource
- * @license
- */
-
-// ------------------------------------------------------------------------
-
-require_once ('drivers'. DS .'pager'. DS .'Pager_common.php');
+$packages = get_config('packages');
+    
+require(OB_MODULES .'pager'. DS .'releases'. DS .$packages['dependencies']['pager']['version']. DS .'src'. DS .'pager_common'. EXT);
 
 /**                 
  * Obullo Pager Class
  *
  *
  * @package       Obullo
- * @subpackage    Libraries
- * @category      Libraries
- * @author        Ersin Guvenc
+ * @subpackage    pager
+ * @category      pagination
+ * @author        Obullo Team
  * @author        Derived from PEAR pager package.
- * @see           Original package http://pear.php.net/package/Pager
- * @link          
+ * @see           Original package http://pear.php.net/package/Pager         
  */
-Class OB_Pager
+
+Class Pager
 {   
     /**
     * Return a pager based on $mode and $options
@@ -43,12 +31,13 @@ Class OB_Pager
     {
         $mode = (isset($options['mode']) ? strtolower($options['mode']) : 'jumping');
     
-        $classname = 'OB_Pager_' . $mode;
-        $classfile = BASE .'libraries'. DS .'drivers'. DS .'pager'. DS .$classname. EXT;
-
+        $classname = 'pager_' . $mode;
+        
         if ( ! class_exists($classname)) 
         {
-            include_once($classfile);
+            $packages = get_config('packages');
+    
+            require_once(OB_MODULES .'pager'. DS .'releases'. DS .$packages['dependencies']['pager']['version']. DS .'src'. DS .$classname. EXT);
         }                                    
         
         if (class_exists($classname))   // If the class exists, return a new instance of it.  
@@ -72,4 +61,4 @@ Class OB_Pager
 // END Pager Class
 
 /* End of file Pager.php */
-/* Location: ./obullo/libraries/Pager.php */
+/* Location: ./ob_modules/pager/releases/0.0.1/pager.php */

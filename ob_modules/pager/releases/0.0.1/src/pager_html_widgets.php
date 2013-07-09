@@ -1,33 +1,19 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo       
- * @author          obullo.com
- * @copyright       Ersin Guvenc (c) 2009.
- * @filesource
- * @license
- */
-
-// ------------------------------------------------------------------------
-
-/**
- * Obullo Pager Html Widgets
+ * Pager Html Widgets
  *
  *
  * @package       Obullo
- * @subpackage    Libraries.drivers.Pager_html_widgets
- * @category      Libraries
- * @author        Ersin Guvenc
+ * @subpackage    src.pager_html_widgets
+ * @category      pagination
+ * @author        Obullo Team
  * @author        Derived from PEAR Pager package.
  * @see           Original package http://pear.php.net/package/Pager
  * @link          
  */
 
-Class OB_Pager_html_widgets
+Class Pager_Html_Widgets
 {
     public $pager = NULL;
 
@@ -298,7 +284,7 @@ Class OB_Pager_html_widgets
        
 }
 
-// END Pager_html_widgets Class
+// END Pager_Html_Widgets Class
 
-/* End of file Pager_html_widgets.php */
-/* Location: ./obullo/libraries/drivers/pager/Pager_html_widgets.php */
+/* End of file Pager_Html_Widgets.php */
+/* Location: ./ob_modules/pager/releases/0.0.1/pager_html_widgets.php */

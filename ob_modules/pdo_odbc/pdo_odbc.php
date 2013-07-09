@@ -1,21 +1,4 @@
 <?php
-defined('BASE') or exit('Access Denied!');
-
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- *
- * @package         Obullo
- * @author          Obullo.com  
- * @subpackage      Obullo.database        
- * @copyright       Copyright (c) 2009 Ersin Guvenc.
- * @license         public
- * @since           Version 1.0
- * @filesource
- */ 
-// ------------------------------------------------------------------------
 
 /**
  * ODBC Database Adapter Class
@@ -24,11 +7,11 @@ defined('BASE') or exit('Access Denied!');
  * @package       Obullo
  * @subpackage    Drivers
  * @category      Database
- * @author        Ersin Guvenc 
+ * @author        Obullo Team
  * @link                              
  */
 
-Class OB_Database_odbc extends OB_Database_adapter
+Class Pdo_Odbc extends Pdo_Database_Adapter
 {
     /**
     * The character used for escaping

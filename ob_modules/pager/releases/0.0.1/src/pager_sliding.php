@@ -1,33 +1,19 @@
 <?php
 
 /**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo       
- * @author          obullo.com
- * @copyright       Ersin Guvenc (c) 2009.
- * @filesource
- * @license
- */
-
-// ------------------------------------------------------------------------
-
-/**
- * Obullo Pager Sliding Driver
+ * Pager Sliding Driver
  *
  *
  * @package       Obullo
- * @subpackage    Libraries.drivers.Pager_sliding
- * @category      Libraries
- * @author        Ersin Guvenc
+ * @subpackage    src.pager_sliding
+ * @category      pagination
+ * @author        Obullo Team
  * @author        Derived from PEAR Pager package.
  * @see           Original package http://pear.php.net/package/Pager
  * @link          
  */
 
-Class OB_Pager_sliding extends OB_Pager_common
+Class Pager_Sliding extends Pager_Common
 {
 
     /**
@@ -313,4 +299,4 @@ Class OB_Pager_sliding extends OB_Pager_common
 // END Pager_sliding Class
 
 /* End of file Pager_sliding.php */
-/* Location: ./obullo/libraries/drivers/pager/Pager_sliding.php */
+/* Location: ./ob_modules/pager/releases/0.0.1/pager_sliding.php */

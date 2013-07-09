@@ -17,7 +17,6 @@ Class Output {
     public $final_output;
     public $cache_expiration    = 0;
     public $headers             = array();
-    public $enable_profiler     = FALSE;
     public $parse_exec_vars     = TRUE;    // whether or not to parse variables like {elapsed_time} and {memory_usage}
     
     public static $instance;
@@ -221,7 +220,7 @@ Class Output {
         // Does the getInstance() function exist?
         // If not we know we are dealing with a cache file so we'll
         // simply echo out the data and exit.
-        if ( ! function_exists('this'))
+        if ( ! function_exists('getInstance'))
         {
             echo $output;
             

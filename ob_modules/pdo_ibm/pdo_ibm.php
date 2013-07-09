@@ -1,44 +1,31 @@
 <?php
-defined('BASE') or exit('Access Denied!');
 
 /**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- *
- * @package         Obullo
- * @author          Obullo.com  
- * @subpackage      Obullo.database        
- * @copyright       Copyright (c) 2009 Ersin Guvenc.
- * @license         public
- * @since           Version 1.0
- * @filesource
- */ 
-// ------------------------------------------------------------------------
-
-/**
- * SQLITE Database Adapter Class
+ * IBM DB2 Database Adapter Class
  *
  * @package       Obullo
  * @subpackage    Drivers
  * @category      Database
- * @author        Ersin Guvenc 
+ * @author        Obullo Team
+ * @author        Drew Harvey
  * @link                              
  */
 
-Class OB_Database_sqlite extends OB_Database_adapter
+Class Pdo_Ibm extends Pdo_Database_Adapter
 {
     /**
     * The character used for escaping
     * 
     * @var string
     */
-    public $_escape_char = ''; // sqlite not use ` backticks ..
+    public $_escape_char = '';
     
-    // clause and character used for LIKE escape sequences
-    public $_like_escape_str = "";  // some errors using ESCAPE with sqlite2
-    public $_like_escape_chr = "\\";     
+    
+    // clause and character used for LIKE escape sequences - not used in MySQL
+    // http://publib.boulder.ibm.com/infocenter/dzichelp/v2r2/index.jsp?topic=/com.ibm.db29.doc.odbc/db2z_likesc.htm
+    // same as ODBC
+    public $_like_escape_str = " {escape '%s'} ";
+    public $_like_escape_chr = '!';     
      
     public function __construct($param)
     {   
@@ -54,6 +41,7 @@ Class OB_Database_sqlite extends OB_Database_adapter
     * @param    string $user Db username
     * @param    mixed  $pass Db password
     * @param    array  $options Db Driver options
+    * @link     http://www.php.net/manual/en/ref.pdo-dblib.connection.php
     * @return   void
     */
     public function _connect()
@@ -61,46 +49,13 @@ Class OB_Database_sqlite extends OB_Database_adapter
         // If connection is ok .. not need to again connect..
         if ($this->_conn) { return; }
         
-        $type = '';
-         switch ($this->dbdriver)
-         {
-            case 'sqlite':
-                $type = 'sqlite';
-                break;
-             
-            case 'sqlite2':
-                $type = 'sqlite2';
-                break;
-                
-            case 'sqlite3':
-                $type = 'sqlite3';
-                break;
-        }
+        $port = empty($this->dbh_port) ? '' : 'PORT='.$this->dbh_port.';';
+        $dsn  = empty($this->dsn) ? 'ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE='.$this->database.';HOSTNAME='.$this->hostname.';'.$port.'PROTOCOL=TCPIP;' : $this->dsn; 
         
-        $dsn  = empty($this->dsn) ? $type.':'.$this->database : $this->dsn;        
-
-        $this->_pdo = $this->pdo_connect($dsn, NULL, NULL, $this->options);
+        $this->_pdo = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
         
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
         $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-        
-        $retval = $this->_conn->exec('PRAGMA full_column_names=0');
-        
-        if ($retval === false) {
-            
-            $error = $this->_conn->errorInfo();
-
-            throw new Exception($error[2]);
-        }
-
-        $retval = $this->_conn->exec('PRAGMA short_column_names=1');
-        if ($retval === false) {
-            
-            $error = $this->_conn->errorInfo();
-
-            throw new Exception($error[2]);
-        }
-        
     } 
 
     // --------------------------------------------------------------------
@@ -110,9 +65,9 @@ Class OB_Database_sqlite extends OB_Database_adapter
      *
      * This function escapes column and table names
      *
-     * @access   private
+     * @access    private
      * @param    string
-     * @return   string
+     * @return    string
      */
     public function _escape_identifiers($item)
     {
@@ -131,7 +86,7 @@ Class OB_Database_sqlite extends OB_Database_adapter
                 return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
             }        
         }
-    
+        
         if (strpos($item, '.') !== FALSE)
         {
             $str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;            
@@ -140,7 +95,7 @@ Class OB_Database_sqlite extends OB_Database_adapter
         {
             $str = $this->_escape_char.$item.$this->_escape_char;
         }
-        
+    
         // remove duplicates if the user already included the escape
         return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
     }
@@ -148,32 +103,35 @@ Class OB_Database_sqlite extends OB_Database_adapter
     // --------------------------------------------------------------------
     
     /**
-    * Escape String
-    *
-    * @access   public
-    * @param    string
-    * @param    bool    whether or not the string will be used in a LIKE condition
-    * @return   string
-    */
-    public function escape_str($str, $like = FALSE, $side = 'both')    
-    {    
+     * Escape String
+     *
+     * @access    public
+     * @param    string
+     * @param    bool    whether or not the string will be used in a LIKE condition
+     * @return    string
+     */
+    public function escape_str($str, $like = FALSE, $side = 'both')
+    {
         if (is_array($str))
         {
             foreach($str as $key => $val)
             {
                 $str[$key] = $this->escape_str($val, $like);
             }
-
-            return $str;
+           
+           return $str;
         }
-                
+
+        loader::helper('ob/security');
+        
+        $str = _remove_invisible_characters($str);
+        
         // escape LIKE condition wildcards
         if ($like === TRUE)
         {
             $str = str_replace( array('%', '_', $this->_like_escape_chr),
                                 array($this->_like_escape_chr.'%', $this->_like_escape_chr.'_', 
                                 $this->_like_escape_chr.$this->_like_escape_chr), $str);
-            
             switch ($side)
             {
                case 'before':
@@ -190,8 +148,8 @@ Class OB_Database_sqlite extends OB_Database_adapter
             
             // not need to quote for who use prepare and :like bind.
             if($this->prepare == TRUE AND $this->is_like_bind)   
-            return $str;        
-        }
+            return $str;
+        } 
         
         // make sure is it bind value, if not ...
         if($this->prepare === TRUE)
@@ -208,9 +166,7 @@ Class OB_Database_sqlite extends OB_Database_adapter
         
         return $str;
     }
-    
-    // -------------------------------------------------------------------- 
-    
+
     /**
     * Platform specific pdo quote
     * function.
@@ -228,6 +184,26 @@ Class OB_Database_sqlite extends OB_Database_adapter
     // --------------------------------------------------------------------
     
     /**
+     * Escape Table Name
+     *
+     * This function adds backticks if the table name has a period
+     * in it. Some DBs will get cranky unless periods are escaped
+     *
+     * @access   private
+     * @param    string    the table name
+     * @return   string
+     */
+    public function _escape_table($table)
+    {
+        if (stristr($table, '.'))
+        {
+            $table = preg_replace("/\./", "`.`", $table);
+        }
+
+        return $table;
+    }
+    
+    /**
      * From Tables
      *
      * This function implicitly groups FROM tables so there is no confusion
@@ -243,8 +219,8 @@ Class OB_Database_sqlite extends OB_Database_adapter
         {
             $tables = array($tables);
         }
-        
-        return '('.implode(', ', $tables).')';
+
+        return ' '.implode(', ', $tables).' ';
     }
 
     // --------------------------------------------------------------------
@@ -254,30 +230,46 @@ Class OB_Database_sqlite extends OB_Database_adapter
      *
      * Generates a platform-specific insert string from the supplied data
      *
-     * @access   public
-     * @param    string   the table name
+     * @access    public
+     * @param    string    the table name
      * @param    array    the insert keys
      * @param    array    the insert values
-     * @return   string
+     * @return    string
      */
     public function _insert($table, $keys, $values)
-    {    
-        return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
+    {
+        return "INSERT INTO " . $this->_escape_table($table) . " (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
     }
     
     // --------------------------------------------------------------------
-
+    
+    
+    /**
+     * Delete statement
+     *
+     * Generates a platform-specific delete string from the supplied data
+     *
+     * @access   public
+     * @param    string    the table name
+     * @param    array    the where clause
+     * @return   string
+     */
+    public function _delete($table, $where = array(), $like = array(), $limit = FALSE)
+    {
+        return "DELETE FROM ".$this->_escape_table($table)." WHERE ".implode(" ", $where);
+    }
+    
+    // --------------------------------------------------------------------
+    
     /**
      * Update statement
      *
      * Generates a platform-specific update string from the supplied data
      *
      * @access   public
-     * @param    string   the table name
+     * @param    string    the table name
      * @param    array    the update data
      * @param    array    the where clause
-     * @param    array    the orderby clause
-     * @param    array    the limit clause
      * @return   string
      */
     public function _update($table, $values, $where, $orderby = array(), $limit = FALSE)
@@ -286,51 +278,8 @@ Class OB_Database_sqlite extends OB_Database_adapter
         {
             $valstr[] = $key." = ".$val;
         }
-        
-        $limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
-        
-        $orderby = (count($orderby) >= 1)?' ORDER BY '.implode(", ", $orderby):'';
-    
-        $sql = "UPDATE ".$table." SET ".implode(', ', $valstr);
 
-        $sql .= ($where != '' AND count($where) >=1) ? " WHERE ".implode(" ", $where) : '';
-
-        $sql .= $orderby.$limit;
-        
-        return $sql;
-    }
-    // --------------------------------------------------------------------
-
-    /**
-     * Delete statement
-     *
-     * Generates a platform-specific delete string from the supplied data
-     *
-     * @access   public
-     * @param    string   the table name
-     * @param    array    the where clause
-     * @param    string   the limit clause
-     * @return   string
-     */    
-    public function _delete($table, $where = array(), $like = array(), $limit = FALSE)
-    {
-        $conditions = '';
-
-        if (count($where) > 0 OR count($like) > 0)
-        {
-            $conditions = "\nWHERE ";
-            $conditions .= implode("\n", $this->ar_where);
-
-            if (count($where) > 0 && count($like) > 0)
-            {
-                $conditions .= " AND ";
-            }
-            $conditions .= implode("\n", $like);
-        }
-
-        $limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
-    
-        return "DELETE FROM ".$table.$conditions.$limit;
+        return "UPDATE ".$this->_escape_table($table)." SET ".implode(', ', $valstr)." WHERE ".implode(" ", $where);
     }
 
     // --------------------------------------------------------------------
@@ -346,8 +295,8 @@ Class OB_Database_sqlite extends OB_Database_adapter
      * @param    integer   the offset value
      * @return   string
      */
-    public function _limit($sql, $limit, $offset)
-    {    
+    public function _limit($sql, $limit, $offset = 0)
+    {
         if ($offset == 0)
         {
             $offset = '';
@@ -356,13 +305,48 @@ Class OB_Database_sqlite extends OB_Database_adapter
         {
             $offset .= ", ";
         }
-        
-        return $sql."LIMIT ".$offset.$limit;
+
+        return $sql."RETURN FIRST  " . $limit . " ROWS ONLY";
+    }
+    
+    /**
+    * Get Platform Specific Database 
+    * Version number. From Zend.
+    *
+    * @access    public
+    * @return    string
+    */
+    public function version()
+    {
+        try 
+        {
+            $stmt = $this->_conn->query('SELECT service_level, fixpack_num FROM TABLE (sysproc.env_get_inst_info()) as INSTANCEINFO');
+            
+            $result = $stmt->fetchAll(PDO::FETCH_NUM);
+            
+            if (count($result))
+            {
+                $matches = NULL;
+                if (preg_match('/((?:[0-9]{1,2}\.){1,3}[0-9]{1,2})/', $result[0][0], $matches))
+                {
+                    return $matches[1];
+                } 
+                else 
+                {
+                    return NULL;
+                }
+            }
+            return null;
+            
+        } catch (PDOException $e) 
+        {
+            return NULL;
+        }
     }
 
 
 } // end class.
 
 
-/* End of file Database_sqlite.php */
-/* Location: ./obullo/libraries/drivers/database/Database_sqlite.php */
+/* End of file Database_ibm.php */
+/* Location: ./obullo/libraries/drivers/database/Database_ibm.php */

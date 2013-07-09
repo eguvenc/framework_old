@@ -1,54 +1,38 @@
 <?php
-defined('BASE') or exit('Access Denied!');
 
 /**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- *
- * @package         Obullo
- * @author          Obullo.com  
- * @subpackage      Obullo.database        
- * @copyright       Copyright (c) 2009 Ersin Guvenc.
- * @license         public
- * @since           Version 1.0
- * @filesource
- */ 
-// ------------------------------------------------------------------------
-
-/**
- * PGSQL (PostgreSQL) Database Adapter Class
+ * MySQL Database Adapter Class
  *
  * @package       Obullo
  * @subpackage    Drivers
  * @category      Database
- * @author        Ersin Guvenc 
- * @link                              
+ * @author        Obullo Team
+ * @link
  */
 
-Class OB_Database_pgsql extends OB_Database_adapter
+Class Pdo_Cubrid extends Pdo_Database_Adapter
 {
     /**
     * The character used for escaping
-    * 
+    *
     * @var string
     */
-    public $_escape_char = '"';
+    public $_escape_char = '';
 
-    // clause and character used for LIKE escape sequences
-    public $_like_escape_str = " ESCAPE '%s' ";
-    public $_like_escape_chr = '!';
-    
+
+    // clause and character used for LIKE escape sequences - not used in MySQL
+    public $_like_escape_str = '';
+    public $_like_escape_chr = '';
+
     public function __construct($param)
-    {   
+    {
         parent::__construct($param);
     }
-    
+
     /**
     * Connect to PDO
-    * 
-    * @author   Ersin Guvenc 
+    *
+    * @author   Ersin Guvenc
     * @param    string $dsn  Dsn
     * @param    string $user Db username
     * @param    mixed  $pass Db password
@@ -59,21 +43,26 @@ Class OB_Database_pgsql extends OB_Database_adapter
     {
         // If connection is ok .. not need to again connect..
         if ($this->_conn) { return; }
+
+        // cubrid:host=localhost;port=33000;dbname=demodb
         
-        $port = empty($this->dbh_port) ? '' : ';port='.$this->dbh_port;
-        $dsn  = empty($this->dsn) ? 'pgsql:dbname='.$this->database.';user='.$this->username.';password='.$this->password.';host='.$this->hostname.$port : $this->dsn;
-             
-        $this->_pdo  = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
-        
-        if( ! empty($this->char_set) )
-        $this->_conn->exec("SET NAMES '" . $this->char_set . "'");     
-    
+        $port = empty($this->dbh_port) ? ';port=33000' : ';port='.$this->dbh_port;
+        $dsn  = empty($this->dsn) ? 'cubrid:host='.$this->hostname.$port.';dbname='.$this->database : $this->dsn;
+       
+        $this->_pdo = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
+
+        // In CUBRID, there is no need to set charset or collation.
+	// This is why returning true will allow the application continue
+	// its normal process.
+
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
-        $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-    } 
+        $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // PDO::ERRMODE_SILENT
+    }
 
     // --------------------------------------------------------------------
-    
+
     /**
      * Escape the SQL Identifiers
      *
@@ -94,38 +83,39 @@ Class OB_Database_pgsql extends OB_Database_adapter
         {
             if (strpos($item, '.'.$id) !== FALSE)
             {
-                $str = $this->_escape_char. str_replace('.', $this->_escape_char.'.', $item);  
-                
+                $str = $this->_escape_char. str_replace('.', $this->_escape_char.'.', $item);
+
                 // remove duplicates if the user already included the escape
                 return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
-            }        
+            }
         }
-    
+
         if (strpos($item, '.') !== FALSE)
         {
-            $str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;            
+            $str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;
         }
         else
         {
             $str = $this->_escape_char.$item.$this->_escape_char;
         }
-        
+
         // remove duplicates if the user already included the escape
         return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
     }
-            
+
     // --------------------------------------------------------------------
-    
+
     /**
     * Escape String
     *
+    * @author   Ersin Guvenc
     * @access   public
     * @param    string
     * @param    bool    whether or not the string will be used in a LIKE condition
     * @return   string
     */
-    public function escape_str($str, $like = FALSE, $side = 'both')    
-    {    
+    public function escape_str($str, $like = FALSE, $side = 'both')
+    {
         if (is_array($str))
         {
             foreach($str as $key => $val)
@@ -135,33 +125,31 @@ Class OB_Database_pgsql extends OB_Database_adapter
 
             return $str;
         }
-        
+
         // escape LIKE condition wildcards
         if ($like === TRUE)
         {
-            $str = str_replace( array('%', '_', $this->_like_escape_chr),
-                                array($this->_like_escape_chr.'%', $this->_like_escape_chr.'_', 
-                                $this->_like_escape_chr.$this->_like_escape_chr), $str);
-                                
+            $str = str_replace(array('%', '_'), array('\\%', '\\_'), $str);
+
             switch ($side)
             {
                case 'before':
                  $str = "%{$str}";
                  break;
-                 
+
                case 'after':
                  $str = "{$str}%";
                  break;
-                 
+
                default:
                  $str = "%{$str}%";
             }
-            
+
             // not need to quote for who use prepare and :like bind.
-            if($this->prepare == TRUE AND $this->is_like_bind)   
+            if($this->prepare == TRUE AND $this->is_like_bind)
             return $str;
-        } 
-        
+        }
+
         // make sure is it bind value, if not ...
         if($this->prepare === TRUE)
         {
@@ -174,16 +162,16 @@ Class OB_Database_pgsql extends OB_Database_adapter
         {
            $str = $this->quote($str, PDO::PARAM_STR);
         }
-        
+
         return $str;
     }
-    
-    // -------------------------------------------------------------------- 
-    
+
+    // --------------------------------------------------------------------
+
     /**
     * Platform specific pdo quote
     * function.
-    *                 
+    *
     * @author  Ersin Guvenc.
     * @param   string $str
     * @param   int    $type
@@ -191,47 +179,65 @@ Class OB_Database_pgsql extends OB_Database_adapter
     */
     public function quote($str, $type = NULL)
     {
-         return $this->_conn->quote($str, $type);  
+         return $this->_conn->quote($str, $type);
     }
-    
+
     // --------------------------------------------------------------------
-    
+
     /**
-     * From Tables
-     *
-     * This function implicitly groups FROM tables so there is no confusion
-     * about operator precedence in harmony with SQL standards
-     *
-     * @access   public
-     * @param    type
-     * @return   type
-     */
+    * From Tables
+    *
+    * This function implicitly groups FROM tables so there is no confusion
+    * about operator precedence in harmony with SQL standards
+    *
+    * @access   public
+    * @param    type
+    * @return   type
+    */
     public function _from_tables($tables)
     {
         if ( ! is_array($tables))
         {
             $tables = array($tables);
         }
-        
-        return implode(', ', $tables);
+
+        return '('.implode(', ', $tables).')';
     }
 
     // --------------------------------------------------------------------
-    
+
     /**
      * Insert statement
      *
      * Generates a platform-specific insert string from the supplied data
      *
-     * @access    public
-     * @param    string    the table name
-     * @param    array    the insert keys
-     * @param    array    the insert values
-     * @return    string
+     * @access	public
+     * @param	string	the table name
+     * @param	array	the insert keys
+     * @param	array	the insert values
+     * @return	string
      */
-    public function _insert($table, $keys, $values)
-    {    
-        return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
+    function _insert($table, $keys, $values)
+    {
+        return "INSERT INTO ".$table." (\"".implode('", "', $keys)."\") VALUES (".implode(', ', $values).")";
+    }
+    
+    // --------------------------------------------------------------------
+
+    /**
+     * Replace statement
+     *
+     * Generates a platform-specific replace string from the supplied data
+     *
+     * @access	public
+     * @param	string	the table name
+     * @param	array	the insert keys
+     * @param	array	the insert values
+     * @return	string
+     */
+    function _replace($table, $keys, $values)
+    {
+        return "REPLACE INTO ".$table." (\"".implode('", "', $keys)."\") VALUES (".implode(', ', $values).")";
     }
     
     // --------------------------------------------------------------------
@@ -253,22 +259,24 @@ Class OB_Database_pgsql extends OB_Database_adapter
     {
         foreach($values as $key => $val)
         {
-            $valstr[] = $key." = ".$val;
+            // $valstr[] = $key." = ".$val;
+            $valstr[] = sprintf('"%s" = %s', $key, $val);
+            // output Array ( [0] => "0" = value ) 
         }
-        
+
         $limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
-        
+
         $orderby = (count($orderby) >= 1)?' ORDER BY '.implode(", ", $orderby):'';
-    
+
         $sql = "UPDATE ".$table." SET ".implode(', ', $valstr);
 
         $sql .= ($where != '' AND count($where) >=1) ? " WHERE ".implode(" ", $where) : '';
 
         $sql .= $orderby.$limit;
-        
+
         return $sql;
     }
-    
+
     // --------------------------------------------------------------------
 
     /**
@@ -277,11 +285,11 @@ Class OB_Database_pgsql extends OB_Database_adapter
      * Generates a platform-specific delete string from the supplied data
      *
      * @access   public
-     * @param    string   the table name
+     * @param    string    the table name
      * @param    array    the where clause
-     * @param    string   the limit clause
+     * @param    string    the limit clause
      * @return   string
-     */    
+     */
     public function _delete($table, $where = array(), $like = array(), $limit = FALSE)
     {
         $conditions = '';
@@ -299,7 +307,7 @@ Class OB_Database_pgsql extends OB_Database_adapter
         }
 
         $limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
-    
+
         return "DELETE FROM ".$table.$conditions.$limit;
     }
 
@@ -310,27 +318,29 @@ Class OB_Database_pgsql extends OB_Database_adapter
      *
      * Generates a platform-specific LIMIT clause
      *
-     * @access    public
+     * @access   public
      * @param    string    the sql query string
-     * @param    integer    the number of rows to limit the query to
-     * @param    integer    the offset value
-     * @return    string
+     * @param    integer   the number of rows to limit the query to
+     * @param    integer   the offset value
+     * @return   string
      */
     public function _limit($sql, $limit, $offset)
-    {    
-        $sql .= "LIMIT ".$limit;
-    
-        if ($offset > 0)
+    {
+        if ($offset == 0)
         {
-            $sql .= " OFFSET ".$offset;
+            $offset = '';
         }
-        
-        return $sql;
+        else
+        {
+            $offset .= ", ";
+        }
+
+        return $sql."LIMIT ".$offset.$limit;
     }
 
 
 } // end class.
 
 
-/* End of file Database_pgsql.php */
-/* Location: ./obullo/libraries/drivers/database/Database_pgsql.php */
+/* End of file Database_cubrid.php */
+/* Location: ./obullo/libraries/drivers/database/Database_cubrid.php */
