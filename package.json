@@ -10,11 +10,12 @@
     "security": "*", 
     "db_pdo": "*",
     "view": "*",
-    "config": { "repo" : "https://github.com/eguvenc/config.git", "version" : "*"},
+    "config": "*",
     "task" : "*",
     "auth" : "*"
   },
   
-  "###comments" : "If you want to replace a default core module you need specify the repo and version.",
-  "###example" : "git://github.com/username/yourlibrary.git"
+  "###notes" : "If you want to replace a default core module you need specify the your repo.",
+  "###example" : "git://github.com/username/yourlibrary.git",
+  "###setting": " 'config' : { 'repo' : 'https://github.com/username/yourlibrary.git', 'version' : '*'}"
 }
