@@ -35,25 +35,6 @@ Class User extends Odm
     {
         parent::__construct($schema);
     }
-    
-    /**
-    * Update / Insert
-    * 
-    * @param mixed $val
-    */
-    function save()
-    {   
-        return parent::save();
-    }
-
-    /**
-    * Do Validate and Delete
-    *
-    */
-    function delete()
-    {
-        return parent::delete();
-    }
 }
 
 /* End of file User.php */

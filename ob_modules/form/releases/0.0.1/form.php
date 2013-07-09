@@ -30,9 +30,9 @@ if( ! function_exists('form_open') )
         
         if (config('csrf_protection') === TRUE) // CSRF Support
         {
-            loader::library('ob/security');
+            $security = Security::getInstance();
             
-            $hidden[$security->get_csrf_token_name()] = getInstance()->security->get_csrf_hash();
+            $hidden[$security->get_csrf_token_name()] = $security->get_csrf_hash();
         }
 
         if (is_array($hidden) AND count($hidden) > 0)
@@ -849,20 +849,19 @@ if( ! function_exists('form_error') )
         if(is_object($field)) // Validation Model System Error Support
         {
             $model = &$field;
-            $table = $model->schema->config['table'];
             
-            if(isset($model->errors[$table]['transaction_error']))
+            if($model->errors('transaction') != '')
             {
-                log_me('debug', 'Transactional Error: '. $model->errors[$table]['transaction_error']);
+                log_me('debug', 'System Error: '. $model->errors('transaction'));
                 
-                return lang('odm_system_message') . $model->errors[$table]['transaction_error'];
+                return lang('odm_sys_error') . $model->errors('transaction');
             }
 
-            if($model->error('success') == 0)
+            if($model->errors('success') == 0)
             {
-                return $model->error('msg');
+                return $model->errors('msg');
             }
-            
+           
             return;
         }
         
@@ -918,27 +917,25 @@ function form_is_error($field = '', $return_string = '')
  */
 if( ! function_exists('form_msg'))
 {
-    function form_msg($model = '', $form_msg = '', $prefix = '<div class="notification error">', $suffix = '</div>')
+    function form_message($model = '', $form_msg = '', $prefix = '<div class="notification error">', $suffix = '</div>')
     {
         if( ! is_object($model))
         {
            return;
         }
-        
-        $table = $model->schema->config['table'];
-        
-        if(isset($model->errors[$table]['transaction_error']))
+       
+        if($model->errors('transaction') != '')
         {
-            log_me('debug', 'Transactional Error: '. $model->errors[$table]['transaction_error']);
+            log_me('debug', 'System Error: '. $model->errors('transaction'));
 
-            $msg =  $model->errors[$table]['msg'] .' '. lang('odm_system_message') . $model->errors[$table]['transaction_error'];
+            $msg =  $model->errors('msg') .' '. lang('odm_sys_error') . $model->errors('transaction');
             
             return ($msg == '') ? '' : $prefix.$msg.$suffix;
         }
         
-        if($model->errors('system_msg') != '')
+        if($model->errors('sys_error') != '')
         {
-            $msg = $model->errors('system_msg');
+            $msg = $model->errors('sys_error');
             
             return ($msg == '') ? '' : $prefix.$msg.$suffix;
         }

@@ -13,15 +13,14 @@ Class Log extends Controller {
         if($level == '')
         {
         echo "\33[0;36m".'
-        _____      ________     __     __  __        __          _______
-      / ___  /    / ____   \   / /    / / / /       / /         / ___   /
-    /  /   /  /  / /____/  /  / /    / / / /       / /        /  /   /  /
-   /  /   /  /  / _____  /   / /    / / / /       / /        /  /   /  /
-  /  /___/  /  / /____/  \  / /____/ / / /____   / /_____   /  /__ /  /
-  /_______/   /__________/ /________/ /_______/ /_______ /  /_______/ 
-  
-                       Welcome to Log Manager (c) 2013
-Display logs [$php task log] or to filter logs [$php task log level debug | error | info] '."\033[0m";
+        ______  _            _  _
+       |  __  || |__  _   _ | || | ____
+       | |  | ||  _ || | | || || ||  _ |
+       | |__| || |_||| |_| || || || |_||
+       |______||____||_____||_||_||____|
+
+        Welcome to Log Manager (c) 2013
+Display logs [$php task log] or to filter logs [$php task log level error]'."\n\033[0m";
             
             // Start the Debugging Task
             $this->_follow(APP .'logs'. DS .'log-'.date('Y-m-d').'.php');
@@ -44,7 +43,6 @@ Display logs [$php task log] or to filter logs [$php task log level debug | erro
     /**
      * CONSOLE LOG
      * Print colorful log messages to your console. 
-     * 
      */ 
     private function _follow($file, $level = '')
     {
@@ -76,40 +74,58 @@ Display logs [$php task log] or to filter logs [$php task log level debug | erro
                 $out  = explode(" ",$line);
                 // echo print_r($out, true)."\n\n";
                 
-                if(isset($out[5]))
+                if($level == '' OR $level == 'debug')
                 {
-                    if(strpos($out[5], '[') !== FALSE)  // module logs.
+                    if(isset($out[5]))
                     {
-                        $line = "\033[0;33m".$line."\033[0m";
-                    }               
-                    if(strpos($out[5],'SQL') !== FALSE)
-                    {
-                        $line = "\033[0;32m".$line."\033[0m";
-                    }
-                    if(strpos($out[5], 'Task') !== FALSE)
-                    {
-                        $line = "\033[0;36m".$line."\033[0m";
+                        if(strpos($out[5], '[') !== FALSE)  // module logs.
+                        {
+                            $line = "\033[0;33m".$line."\033[0m";
+                        }               
+                        if(strpos($out[5],'SQL') !== FALSE)
+                        {
+                            $line = "\033[0;32m".$line."\033[0m";
+                        }
+                        if(strpos($out[5], 'Task') !== FALSE)
+                        {
+                            $line = "\033[0;36m".$line."\033[0m";
+                        }
                     }
                 }
      
                 if(strpos($line, 'DEBUG') !== FALSE)
                 {
-                    $line = "\033[0;35m".$line."\033[0m";
+                    if($level == '' OR $level == 'debug')
+                    {
+                        $line = "\033[0;35m".$line."\033[0m";
+                        echo $line."\n";
+                    }
                 }
                 if(strpos($line, 'ERROR') !== FALSE)
                 {
-                    $line = "\033[0;31m".$line."\033[0m";
+                    if($level == '' OR $level == 'error')
+                    {
+                        $line = "\033[0;31m".$line."\033[0m";
+                        echo $line."\n";
+                    }
                 }
                 if(strpos($line, 'INFO') !== FALSE)
                 {
-                    $line = "\033[0;34m".$line."\033[0m";
+                    if($level == '' OR $level == 'info')
+                    {
+                        $line = "\033[0;34m".$line."\033[0m";
+                        echo $line."\n";
+                    }
                 }
                 if(strpos($line, 'BENCH') !== FALSE)
                 {
-                    $line = "\033[0;36m".$line."\033[0m";
+                    if($level == '' OR $level == 'bench')
+                    {
+                        $line = "\033[0;36m".$line."\033[0m";
+                        echo $line."\n";
+                    }
                 }
-  
-                echo $line."\n";
+ 
                 $i++;
             }
             
@@ -122,7 +138,6 @@ Display logs [$php task log] or to filter logs [$php task log level debug | erro
             
             if( ! isset($logged[$date]))
             {
-                // $this->_compile_benchmark();
                 $this->_compile_loaded_files();
             }
             
@@ -165,20 +180,20 @@ Display logs [$php task log] or to filter logs [$php task log level debug | erro
             $databases[]    = $db_var;
         }
         
-        $output = "\n\33[0;36m********************* LOADED FILES *********************";
-        $output.= "\n*";
+        $output = "\33[0;36m________LOADED FILES______________________________________________________";
+        $output.= "\n";
         if(count($config_files) > 0)
-        $output .= "\n* Configs  --> ".implode(',',$config_files);
+        $output .= "\nConfigs  --> ".implode(', ',$config_files);
         if(count($lang_files) > 0)
-        $output .= "\n* Locales  --> ".implode(',', $lang_files);
+        $output .= "\nLocales  --> ".implode(', ', $lang_files);
         if(count($models) > 0)
-        $output .= "\n* Models   --> ".implode(',',$models);
+        $output .= "\nModels   --> ".implode(', ',$models);
         if(count($databases) > 0)
-        $output .= "\n* Dbs      --> ".implode(',',$databases);
+        $output .= "\nDbs      --> ".implode(', ',$databases);
         if(count($helpers) > 0)
-        $output .= "\n* Helpers  --> ".implode(',',$helpers);
-        $output.= "\n*";
-        $output .= "\n********************************************************\n";
+        $output .= "\nHelpers  --> ".implode(', ',$helpers);
+        $output.= "\n";
+        $output .= "\n\n";
         $output .= "\033[0m";
         
         echo $output;

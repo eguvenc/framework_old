@@ -1,17 +1,11 @@
 
 /**
- * Obullo JQuery Form Validation Plugin  (c) 2011.
+ * Obullo Form Json Plugin.
  *
- * PHP5 HMVC Based Scalable Software.
- *
- * @package         obullo       
- * @author          obullo.com
- * @license         public
- * @since           Version 1.1
- * @filesource
- * @license
+ * Notification Message Settings.
+ * 
+ * ***** Customize your notification messages.
  */
-
 (function() {
   (function($, window) {
     return $.fn.notification = function(type, message, view) {
@@ -26,9 +20,9 @@
           notification_content += '<div style="margin-top:10px;padding:10px;">' + view + '</div>';
       }
 
-      $notification = $('<div>', {
+      $notification = $('<div>', {  // Close notification window when user click.
         html:  notification_content,
-        click: function() {
+        click: function() {     
             /*
               return $notification.fadeOut('fast', function() {
               return $notification.remove();
@@ -37,7 +31,7 @@
         }
       }).hide();
 
-      if (type === 'success') {
+      if (type === 'success') {  // Fade out success messages if you want.
 
         /*
             setTimeout(function() {
@@ -57,5 +51,5 @@
 }).call(this);
 
 
-/* End of file notification.js. */
-/* Location: .public/js/form/notification.js */
+/* End of file form.notification.js. */
+/* Location: .assets/js/form_json/form.notification.js */

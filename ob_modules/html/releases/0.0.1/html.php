@@ -25,162 +25,137 @@
 * @param    boolean $index_page
 * @return   string
 */
-if( ! function_exists('css') )
+function css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)
 {
-    function css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)
+    $ext = substr(strrchr($href, '.'), 1);   // file extension
+    if($ext == FALSE)   // WE UNDERSTAND THIS IS A FOLDER 
     {
-        $link = '<link ';
-
-        if (is_array($href))
+        $files  = '';
+        $folder = get_filenames(ROOT .'assets'. DS .'css'. DS . str_replace('/', DS, $href));
+        foreach ($folder as $filename)
         {
-            $ext = 'css';
-            if(strpos($href, 'js/') === 0)
-            {
-                $ext  = 'js';
-                $href = substr($href, 3);
-            }
-            
-            $link = '';
-                                
-            foreach ($href as $v)
-            {
-                $link .= '<link ';
-
-                $v = ltrim($v, '/');   // remove first slash  ( Obullo changes )
-
-                if ( strpos($v, '://') !== FALSE)
-                {
-                    $link .= ' href="'. $v .'" ';
-                }
-                else
-                {
-                    $link .= ' href="'. _get_public_path($v, $extra_path = '', $ext) .'" ';
-                }
-
-                $link .= 'rel="'.$rel.'" type="text/css" ';
-
-                if ($media    != '')
-                {
-                    $link .= 'media="'.$media.'" ';
-                }
-
-                if ($title    != '')
-                {
-                    $link .= 'title="'.$title.'" ';
-                }
-
-                $link .= "/>\n";
-            }
+            $files .= _css($href.'/'.$filename, $title, $media, $rel, $index_page = FALSE);
         }
-        else
-        {                
-            $ext = 'css';
-            if(strpos($href, 'js/') === 0)
-            {
-                $ext  = 'js';
-                $href = substr($href, 3);
-            }
-          
-            $href = ltrim($href, '/');  // remove first slash
-
-            if ( strpos($href, '://') !== FALSE)
-            {
-                $link .= ' href="'.$href.'" ';
-            }
-            elseif ($index_page === TRUE)
-            {
-                $link .= ' href="'. getInstance()->config->site_url($href, false) .'" ';
-            }
-            else
-            {
-                $link .= ' href="'. _get_public_path($href, $extra_path = '', $ext) .'" ';
-            }
-
-            $link .= 'rel="'.$rel.'" type="text/css" ';
-
-            if ($media    != '')
-            {
-                $link .= 'media="'.$media.'" ';
-            }
-
-            if ($title    != '')
-            {
-                $link .= 'title="'.$title.'" ';
-            }
-
-            $link .= "/>\n";
-        }
-
-        return $link;
+        
+        return $files;
     }
-}                       
+    
+    return _css($href, $title, $media, $rel, $index_page);
+}
+
 // ------------------------------------------------------------------------
 
 /**
-* Build js files in <head> tags
+* Build css files.
 *
-* js('welcome.js');
-* js('subfolder/welcome.js')
+* css('welcome.css');
+* css(array('welcome.css', 'hello.css')); // array type
 *
 * @author   Obullo
-* @param    string $src  it can be via a path
-* @param    string $arguments
-* @param    string $type
-* @param    string $index_page load js dynamically
-* @version  0.1
+* @param    string $href
+* @param    string $title
+* @param    string $media
+* @param    string $rel
+* @param    boolean $index_page
 * @return   string
 */
-if( ! function_exists('js') )
+function js($src, $arguments = '', $type = 'text/javascript', $index_page = FALSE)
 {
-    function js($src, $arguments = '', $type = 'text/javascript', $index_page = FALSE)
+    $ext = substr(strrchr($src, '.'), 1);   // file extension
+    if($ext == FALSE)  // WE UNDERSTAND THIS IS A FOLDER 
     {
-        $link = '<script type="'.$type.'" ';
-        
-        if (is_array($src))
+        $files  = '';
+        $folder = get_filenames(ROOT .'assets'. DS .'js'. DS . str_replace('/', DS, $src));
+        foreach ($folder as $filename)
         {
-            $link = '';
+            $files .= _js($src.'/'.$filename, $arguments, $type, $index_page = FALSE);
+        }
+        
+        return $files;
+    }
+    
+    return _js($src, $arguments, $type, $index_page);
+}
 
-            foreach ($src as $v)
-            {
-                $link .= '<script type="'.$type.'" ';
+// ------------------------------------------------------------------------
 
-                $v = ltrim($v, '/');   // remove first slash  ( Obullo changes )
+/**
+* Build css files private function.
+*/
+if( ! function_exists('_css') )
+{
+    function _css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)
+    {
+        $link = '<link ';           
+        $ext  = 'css';
+        if(strpos($href, 'js/') === 0)
+        {
+            $ext  = 'js';
+            $href = substr($href, 3);
+        }
 
-                if ( strpos($v, '://') !== FALSE)
-                {
-                    $link .= ' src="'. $v .'" ';
-                }
-                else
-                {
-                    $link .= ' src="'. _get_public_path($v, $extra_path = '') .'" ';
-                }
+        $href = ltrim($href, '/');  // remove first slash
 
-                $link .= "></script>\n";
-            }
+        if ( strpos($href, '://') !== FALSE)
+        {
+            $link .= ' href="'.$href.'" ';
+        }
+        elseif ($index_page === TRUE)
+        {
+            $link .= ' href="'. getInstance()->config->site_url($href, false) .'" ';
         }
         else
         {
-            $src = ltrim($src, '/');   // remove first slash
-
-            if ( strpos($src, '://') !== FALSE)
-            {
-                $link .= ' src="'. $src .'" ';
-            }
-            elseif ($index_page === TRUE)  // .js file as PHP
-            {
-                $link .= ' src="'. getInstance()->config->site_url($src, false) .'" ';
-            }
-            else
-            {
-                $link .= ' src="'. _get_public_path($src, $extra_path = '') .'" ';
-            }
-
-            $link .= $arguments;
-            $link .= "></script>\n";
+            $link .= ' href="'. _get_public_path($href, $extra_path = '', $ext) .'" ';
         }
 
-        return $link;
+        $link .= 'rel="'.$rel.'" type="text/css" ';
 
+        if ($media    != '')
+        {
+            $link .= 'media="'.$media.'" ';
+        }
+
+        if ($title    != '')
+        {
+            $link .= 'title="'.$title.'" ';
+        }
+
+        $link .= "/>\n";
+        
+        return $link;
+    }
+}                       
+
+// ------------------------------------------------------------------------
+
+/**
+* Build js files private function.
+*/
+if( ! function_exists('_js') )
+{
+    function _js($src, $arguments = '', $type = 'text/javascript', $index_page = FALSE)
+    {
+        $link = '<script type="'.$type.'" ';        
+        $src  = ltrim($src, '/');   // remove first slash
+
+        if ( strpos($src, '://') !== FALSE)
+        {
+            $link .= ' src="'. $src .'" ';
+        }
+        elseif ($index_page === TRUE)  // .js file as PHP
+        {
+            $link .= ' src="'. getInstance()->config->site_url($src, false) .'" ';
+        }
+        else
+        {
+            $link .= ' src="'. _get_public_path($src, $extra_path = '', 'js') .'" ';
+        }
+
+        $link .= $arguments;
+        $link .= "></script>\n";
+       
+        return $link;
     }
 }
 
@@ -217,7 +192,7 @@ if( ! function_exists('img') )
             {
                 if ($index_page === TRUE)
                 {
-                    $img .= ' src="'.getInstance()->config->site_url($v, false).'" ';
+                    $img .= ' src="'. getInstance()->config->site_url($v, false).'" ';
                 }
                 else
                 {
@@ -248,7 +223,7 @@ if( ! function_exists('img') )
 */
 if( ! function_exists('_get_public_path') )
 {
-    function _get_public_path($file_url, $extra_path = '', $custom_extension = '')
+    function _get_public_path($file_url, $extra_path = '', $ext = '')
     {                              
         $filename = $file_url;          
         $paths    = array();
@@ -263,17 +238,6 @@ if( ! function_exists('_get_public_path') )
         {
             $sub_path = implode('/', $paths) . '/';      // .module/public/css/sub/welcome.css  sub dir support
         }
-
-        $ext = substr(strrchr($filename, '.'), 1);   // file extension
-        if($ext == FALSE) 
-        {
-            return FALSE;
-        }
-
-        if($custom_extension != '') // set like this css('js/folder/theme/ui.css')
-        {
-            $ext = $custom_extension;
-        }
         
         $folder = $ext . '/';
         
@@ -287,6 +251,53 @@ if( ! function_exists('_get_public_path') )
         
         return $config->public_url('', true) .'assets/'. $extra_path . $folder . $sub_path . $filename;
     }
+}
+
+// ------------------------------------------------------------------------
+
+/**
+ * Get folder filenames.
+ * 
+ * @staticvar array $_filedata
+ * @param string $source_dir
+ * @param bool $include_path
+ * @param bool $_recursion
+ * @return boolean | array
+ */
+if( ! function_exists('get_filenames'))
+{
+    function get_filenames($source_dir, $include_path = FALSE, $_recursion = FALSE)
+    {
+        static $_filedata = array();
+
+        if ($fp = @opendir($source_dir))
+        {
+            // reset the array and make sure $source_dir has a trailing slash on the initial call
+            if ($_recursion === FALSE)
+            {
+                    $_filedata = array();
+                    $source_dir = rtrim(realpath($source_dir), DS). DS;
+            }
+
+            while (FALSE !== ($file = readdir($fp)))
+            {
+                    if (@is_dir($source_dir.$file) && strncmp($file, '.', 1) !== 0)
+                    {
+                             get_filenames($source_dir.$file. DS, $include_path, TRUE);
+                    }
+                    elseif (strncmp($file, '.', 1) !== 0)
+                    {
+                            $_filedata[] = ($include_path == TRUE) ? $source_dir.$file : $file;
+                    }
+            }
+            
+            return $_filedata;
+        }
+        else
+        {
+            return FALSE;
+        }
+    } 
 }
 
 /* End of file html.php */

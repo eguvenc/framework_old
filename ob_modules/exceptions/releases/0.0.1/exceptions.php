@@ -51,7 +51,7 @@ Class Exceptions {
         if( ! empty($last_query))
         {
             $type = 'Database';
-            $code = 'SQL';  // We understand this is an db error.
+            $code = 'SQL';  // We understand this is a db error.
             $data['sql'] = $last_query;
         }
         

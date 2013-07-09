@@ -91,7 +91,7 @@ Class Odm extends Model {
 
         if(count($_GLOBALS) == 0)
         {
-            $_GLOBALS == $_REQUEST;
+            $_GLOBALS = $_REQUEST;
         }
 
         if(count($fields) == 0)
@@ -106,18 +106,6 @@ Class Odm extends Model {
 
         foreach($fields as $key => $val)
         {
-            /*
-            if(is_array($this->$key) AND isset($this->{$key}['rules'])) // reset validation rules
-            {   
-                $val['rules'] = $this->{$key}['rules'];
-                $new_value    = (isset($this->{$key}['value'])) ? $this->{$key}['value'] : FALSE;
-                
-                if($new_value !== FALSE) 
-                {
-                    $this->{$key} = $new_value;
-                }
-            }
-            */
             if(is_array($val))
             {
                 if(isset($val['rules']) AND $val['rules'] != '')
@@ -334,11 +322,11 @@ Class Odm extends Model {
     // --------------------------------------------------------------------
 
     /**
-    * Set Custom Vmodel function.
+    * Set Custom form json function.
     *
     * @param string $key name of function
     */
-    public function set_func($name, $val)
+    public function set_custom_key($name, $val)
     {
         $table = $this->schema->config['table'];
         
@@ -349,11 +337,11 @@ Class Odm extends Model {
     // --------------------------------------------------------------------
     
     /**
-    * Get the function name and values.
+    * Get the form json function name and values.
     *
     * @param string $type
     */
-    public function get_func($type = 'name')
+    public function custom_key($type = 'name')
     {   
        $table = $this->schema->config['table'];
         

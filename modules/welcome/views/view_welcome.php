@@ -29,7 +29,7 @@
                    
                     <br />
                     <div class="test"><?php echo anchor('/welcome/hmvc', 'Try to New HMVC Feature'); ?></div>
-                    <div class="test"><?php echo anchor('/welcome/start', 'Try to New Validation Model'); ?></div>
+                    <div class="test"><?php echo anchor('/welcome/start', 'Try to New Odm'); ?></div>
                     <div class="test"><?php echo anchor('/welcome/task', 'Try to New Task Feature'); ?></div>
                     <br />
                     

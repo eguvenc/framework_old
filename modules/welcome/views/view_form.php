@@ -4,7 +4,7 @@
 <title>Welcome to ODM ( Object Data Model )</title>
 
 <?php echo css('welcome.css') ?>
-<?php echo js('jquery-min.js') ?>
+<?php echo js('jquery/jquery.min.js') ?>
 
 <style type="text/css">
 .input-error { color: #DF4545; }
@@ -20,7 +20,7 @@
 <h1>Welcome to ODM ( Object Data Model )</h1> 
 <div style="padding: 10px 10px 10px 0;"><?php echo anchor('/welcome/start', 'Odm Form') ?> | <?php echo anchor('/welcome/start/ajax_example', 'Odm Form ( Ajax )') ?></div>
 
-<?php echo form_msg($user, '', '<div class="notification error">', '</div>'); ?>
+<?php echo form_message($user, '', '<div class="notification error">', '</div>'); ?>
 
 <?php if(sess_flash('notice') != '') { ?>
 <div class="notification success"><?php echo sess_flash('notice') ?></div>

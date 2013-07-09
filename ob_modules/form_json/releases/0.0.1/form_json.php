@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Json Form Validation Helper
+ * Json Form Json Helper
  *
  * @package     Obullo
  * @subpackage  Helpers
@@ -11,7 +11,7 @@
  */
 
 /**
-* Send Json Errors
+* Send Json Errors, Messages
 *
 * @access public
 * @param object | string $model or $system_message
@@ -39,30 +39,30 @@ if ( ! function_exists('form_json_error'))
         
         if(is_object($model))
         {
-            if($model->get_func())
+            if($model->custom_key())
             {
-                return json_encode(array('success' => false, $model->get_func('name') => $model->get_func('val'), 'errors' => array()));
+                return json_encode(array('success' => false, $model->custom_key('name') => $model->custom_key('val'), 'errors' => array()));
             }
            
             $table = $model->schema->config['table'];
             
-            if(isset($model->errors[$table]['transaction_error']))
+            if($model->errors('transaction') != '')
             {
-                log_me('debug', 'Transaction Error: '. $model->errors[$table]['transaction_error']);
+                log_me('debug', 'System Error: '. $model->errors('transaction'));
                 
-                return json_encode(array('success' => false, 'errors' => array('system_msg' => lang('odm_system_msg').$model->errors[$table]['transaction_error'])));
+                return json_encode(array('success' => false, 'errors' => array('sys_error' => lang('odm_sys_error').$model->errors('transaction'))));
             }
 
-            if(isset($model->errors[$table]['redirect']))
+            if($model->errors('redirect') != '')
             {
-                return json_encode(array('success' => false, 'redirect' => $model->errors[$table]['redirect']));
+                return json_encode(array('success' => false, 'redirect' => $model->errors('redirect')));
             }
 
-            return json_encode(array('success' => false, 'errors' => $model->errors[$table]));
+            return json_encode(array('success' => false, 'errors' => $model->errors()));
         }
         else
         {
-            return json_encode(array('success' => false, 'errors' => array('system_msg' => $model)));
+            return json_encode(array('success' => false, 'errors' => array('sys_error' => (string)$model)));
         }
     }
 }
@@ -100,9 +100,9 @@ if ( ! function_exists('form_json_success'))
         
         if(is_object($model))
         {
-            if($model->get_func('name') != '') 
+            if($model->custom_key('name') != '') 
             {
-                $array = array('success' => true, $model->get_func('name') => $model->get_func('val'), 'msg' => $model->errors('msg'), 'errors' => $model->errors());
+                $array = array('success' => true, $model->custom_key('name') => $model->custom_key('val'), 'msg' => $model->errors('msg'), 'errors' => $model->errors());
             } 
             else
             {

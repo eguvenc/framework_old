@@ -145,7 +145,7 @@ if(isset($_SERVER['argv'][0])){
                         $shell 	= "curl -s --head ".trim($pack->repo->archive_url)." | head -n 1 | grep \"HTTP/1.[01] [23]..\"";
                         $output = shell_exec($shell);
                         if($output == NULL){
-                           echo line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' '.trim($pack->repo->archive_url).' - url could not be resolved.');
+                           line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' '.trim($pack->repo->archive_url).' - url could not be resolved.');
                         } else {
                             $code = explode(" ", $output);
                             if(isset($code[1])) {

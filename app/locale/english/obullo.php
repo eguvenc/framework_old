@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Obullo Framework English Locale Items.
+ * Obullo English Locale Items.
  */
 
 // Validator
@@ -36,7 +36,7 @@ $lang['odm_insert_success']    = 'Data inserted succesfully.';
 $lang['odm_insert_fail']       = 'Insert error.';
 $lang['odm_delete_success']    = 'Data deleted succesfully.';
 $lang['odm_delete_fail']       = 'Delete error or record already deleted.';
-$lang['odm_system_msg']        = "We couldn't save data at this time please try again or contact us. Error: ";
+$lang['odm_sys_error']         = "We couldn't save data at this time please try again or contact us. Error: ";
 $lang['odm_form_error']        = 'There are some errors in the form fields.';
 $lang['odm_form_save']         = 'Data saved succesfully.';
 

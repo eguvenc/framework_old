@@ -11,16 +11,15 @@ Class Export extends Controller {
     public function index()
     {
         echo "\33[0;36m".'
-        _____      ________     __     __  __        __          _______
-      / ___  /    / ____   \   / /    / / / /       / /         / ___   /
-    /  /   /  /  / /____/  /  / /    / / / /       / /        /  /   /  /
-   /  /   /  /  / _____  /   / /    / / / /       / /        /  /   /  /
-  /  /___/  /  / /____/  \  / /____/ / / /____   / /_____   /  /__ /  /
-  /_______/   /__________/ /________/ /_______/ /_______ /  /_______/ 
-  
-                       Welcome to Export Manager (c) 2013
-Export your project [$php task export]'."\033[0m\n";
+        ______  _            _  _
+       |  __  || |__  _   _ | || | ____
+       | |  | ||  _ || | | || || ||  _ |
+       | |__| || |_||| |_| || || || |_||
+       |______||____||_____||_||_||____|
 
+        Welcome to Export Manager (c) 2013
+Export your project [$php task export]'."\nexporting your project ...\n\033[0m";
+        
         $this->_export(); // Start the Export Task
     }
 
