@@ -7,7 +7,7 @@
  * @package       Obullo
  * @subpackage    email
  * @category      Email
- * @author        Ersin Guvenc
+ * @author        Obullo Team
  * @link          
  */
 class Email {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Session Class
+ * Session Helper
  *
  * @package	Obullo
  * @subpackage	session
@@ -41,7 +41,6 @@ Class Session {
        
        return self::$instance;
     }
-   
 }
 
 /**
@@ -62,8 +61,6 @@ if( ! function_exists('sess_start'))
             $driver = (isset($params['sess_driver'])) ? $params['sess_driver'] : config('sess_driver');
            
             $packages = get_config('packages');
-    
-            // loader::helper(ob/session_cookie);
             
             require(OB_MODULES .'session'. DS .'releases'. DS .$packages['dependencies']['session']['version']. DS .'src'. DS .'session_'.$driver.EXT);
             

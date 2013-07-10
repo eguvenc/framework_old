@@ -1,14 +1,11 @@
 <?php 
 
 /**
-* Obullo Framework (c) 2010.
-* Procedural Session Implementation With Session Class. 
+* Procedural Session Implementation. 
 * Less coding and More Control.
 * 
 * @author      Obullo Team.
 * @version     0.1
-* @version     0.2 added extend support
-* @version     0.3 added config('sess_die_cookie') and sess() func.
 */
 if( ! function_exists('_sess_start') ) 
 {
@@ -848,5 +845,5 @@ if( ! function_exists('_sess_gc') )
     }
 }
 
-/* End of file session_database.php */
-/* Location: ./obullo/helpers/drivers/session/session_database.php */
+/* End of file session_datavase.php */
+/* Location: ./ob_modules/session/releases/0.0.1/src/session_database.php */

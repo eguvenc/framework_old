@@ -1,32 +1,33 @@
 <?php
 
 /**
- * OCI (Oracle) Database Adapter Class
+ * MSSQL Database Adapter Class
  *
  * @package       Obullo
  * @subpackage    Drivers
  * @category      Database
- * @author        Obullo Team 
+ * @author        Obullo Team
  * @link                              
  */
 
-Class Pdo_Oci extends Pdo_Database_Adapter
+Class Pdo_Mssql extends Pdo_Database_Adapter
 {
     /**
     * The character used for escaping
     * 
     * @var string
     */
-    public $_escape_char = '"';
-    
+    public $_escape_char = '';
+        
     // clause and character used for LIKE escape sequences
-    public $_like_escape_str = " escape '%s' ";
-    public $_like_escape_chr = '!';
-    
+    var $_like_escape_str = " ESCAPE '%s' ";
+    var $_like_escape_chr = '!';    
+     
     public function __construct($param)
     {   
         parent::__construct($param);
     }
+    
     
     /**
     * Connect to PDO
@@ -36,6 +37,7 @@ Class Pdo_Oci extends Pdo_Database_Adapter
     * @param    string $user Db username
     * @param    mixed  $pass Db password
     * @param    array  $options Db Driver options
+    * @link     http://www.php.net/manual/en/ref.pdo-dblib.connection.php
     * @return   void
     */
     public function _connect()
@@ -43,40 +45,74 @@ Class Pdo_Oci extends Pdo_Database_Adapter
         // If connection is ok .. not need to again connect..
         if ($this->_conn) { return; }
         
-        $port    = empty($this->dbh_port) ? '' : ':'.$this->dbh_port;
-        $charset = empty($this->char_set) ? '' : ';charset='.$this->char_set; 
-        $dsn     = empty($this->dsn) ? 'oci:dbname='.$this->hostname.$port.'/'.$this->database.$charset : $this->dsn;
-        $this->_pdo  = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
+        $type = '';
+        
+         switch ($this->dbdriver)
+         {
+            case 'freetds':
+                $type = 'freetds';
+                break;
+                
+            case 'sybase':
+                $type = 'sybase';
+                break;
+         
+            case 'dblib':
+                $type = 'dblib';
+                break;
+            
+            default:
+                $type = 'mssql';
+                break;
+        }
+        
+        if ( ! empty($this->dbh_port))
+        {
+            $port_seperator = ':';
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+            {
+                $port_seperator = ',';
+            }
+        }
+        
+        $port    = empty($this->dbh_port) ? '' : $port_seperator .$this->dbh_port;
+        $charset = empty($this->char_set) ? '' : ';charset='.$this->char_set;
+        $dsn     = empty($this->dsn) ? $type.':host='.$this->hostname.$port.';dbname='.$this->database.$charset : $this->dsn;
+             
+        $this->_pdo = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
         
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
         $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     } 
-                
+    
     // --------------------------------------------------------------------
     
     /**
-     * Escape String
-     *
-     * @access  public
-     * @param   string
-     * @param   bool    whether or not the string will be used in a LIKE condition
-     * @return  string
-     */
-    public function escape_str($str, $like = FALSE, $side = 'both')
-    {
+    * Escape String
+    *
+    * @access   public
+    * @param    string
+    * @param    bool    whether or not the string will be used in a LIKE condition
+    * @return   string
+    */
+    public function escape_str($str, $like = FALSE, $side = 'both')    
+    {    
         if (is_array($str))
         {
             foreach($str as $key => $val)
             {
                 $str[$key] = $this->escape_str($val, $like);
             }
-           
+
             return $str;
         }
-
+        
         loader::helper('ob/security');
         
         $str = _remove_invisible_characters($str);
+        
+        // If pdo::quote() not work Escape single quotes
+        // $str = str_replace("'", "''", _remove_invisible_characters($str));
         
         // escape LIKE condition wildcards
         if ($like === TRUE)
@@ -84,7 +120,6 @@ Class Pdo_Oci extends Pdo_Database_Adapter
             $str = str_replace( array('%', '_', $this->_like_escape_chr),
                                 array($this->_like_escape_chr.'%', $this->_like_escape_chr.'_', 
                                 $this->_like_escape_chr.$this->_like_escape_chr), $str);
-            
             switch ($side)
             {
                case 'before':
@@ -98,7 +133,7 @@ Class Pdo_Oci extends Pdo_Database_Adapter
                default:
                  $str = "%{$str}%";
             }
-            
+        
             // not need to quote for who use prepare and :like bind.
             if($this->prepare == TRUE AND $this->is_like_bind)   
             return $str;
@@ -116,41 +151,36 @@ Class Pdo_Oci extends Pdo_Database_Adapter
         {
            $str = $this->quote($str, PDO::PARAM_STR);
         }
-
-        return $str;
+                  
+        return $str; 
     }
-    
-    // --------------------------------------------------------------------
+        
+    // --------------------------------------------------------------------    
     
     /**
-    * Quote a string.
-    * Most PDO drivers have an implementation for the quote() method,
-    * but the Oracle OCI driver not. From Zend.
-    *
-    * @param   string $value    Raw string
-    * @return  string           Quoted string
+    * Platform specific pdo quote
+    * function.
+    *                 
+    * @author  Ersin Guvenc.
+    * @param   string $str
+    * @param   int    $type
+    * @return
     */
-    protected function quote($value, $type = NULL)
+    public function quote($str, $type = NULL)
     {
-        if (is_int($value) || is_float($value))
-        {
-            return $value;
-        }
-        
-        $value = str_replace("'", "''", $value);
-        return "'" . addcslashes($value, "\000\n\r\\\032") . "'";
+         return $this->_conn->quote($str, $type);  
     }
-    
-    // -------------------------------------------------------------------- 
+        
+    // --------------------------------------------------------------------
     
     /**
      * Escape the SQL Identifiers
      *
      * This function escapes column and table names
      *
-     * @access    private
+     * @access   private
      * @param    string
-     * @return    string
+     * @return   string
      */
     public function _escape_identifiers($item)
     {
@@ -169,7 +199,7 @@ Class Pdo_Oci extends Pdo_Database_Adapter
                 return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
             }        
         }
-    
+
         if (strpos($item, '.') !== FALSE)
         {
             $str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;            
@@ -189,9 +219,9 @@ Class Pdo_Oci extends Pdo_Database_Adapter
      * This function implicitly groups FROM tables so there is no confusion
      * about operator precedence in harmony with SQL standards
      *
-     * @access   public
+     * @access    public
      * @param    type
-     * @return   type
+     * @return    type
      */
     public function _from_tables($tables)
     {
@@ -210,14 +240,14 @@ Class Pdo_Oci extends Pdo_Database_Adapter
      *
      * Generates a platform-specific insert string from the supplied data
      *
-     * @access  public
-     * @param   string  the table name
-     * @param   array   the insert keys
-     * @param   array   the insert values
-     * @return  string
+     * @access    public
+     * @param    string    the table name
+     * @param    array    the insert keys
+     * @param    array    the insert values
+     * @return    string
      */
     public function _insert($table, $keys, $values)
-    {
+    {    
         return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
     }
     
@@ -290,38 +320,59 @@ Class Pdo_Oci extends Pdo_Database_Adapter
         return "DELETE FROM ".$table.$conditions.$limit;
     }
 
+
     // --------------------------------------------------------------------
 
     /**
-     * Limit string
-     *
-     * Generates a platform-specific LIMIT clause
-     *
-     * @access  public
-     * @param   string  the sql query string
-     * @param   integer the number of rows to limit the query to
-     * @param   integer the offset value
-     * @return  string
-     */
+    * Limit string
+    *
+    * Generates a platform-specific LIMIT clause
+    *
+    * @access   public
+    * @param    string    the sql query string
+    * @param    integer   the number of rows to limit the query to
+    * @param    integer   the offset value
+    * @return   string
+    */
     public function _limit($sql, $limit, $offset)
     {
-        $limit = $offset + $limit;
-        $newsql = "SELECT * FROM (select inner_query.*, rownum rnum FROM ($sql) inner_query WHERE rownum < $limit)";
-
-        if ($offset != 0)
-        {
-            $newsql .= " WHERE rnum >= $offset";
-        }
-
-        // remember that we used limits
-        // $this->limit_used = TRUE;
-
-        return $newsql;
+        $i = $limit + $offset;
+    
+        return preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);        
     }
+    
+    /**
+    * Get Platform Specific Database 
+    * Version number. From Zend.
+    *
+    * @access    public
+    * @return    string
+    */
+    public function version()
+    {
+        try 
+        {
+            $stmt = $this->_conn->query("SELECT SERVERPROPERTY('productversion')");
+            
+            $result = $stmt->fetchAll(PDO::FETCH_NUM);
+            
+            if (count($result))
+            {
+                return $result[0][0];
+            }
+            
+            return NULL;
+        
+        } catch (PDOException $e)
+        {
+            return NULL;
+        }
+    }
+
 
 
 } // end class.
 
 
-/* End of file Database_oci.php */
-/* Location: ./obullo/libraries/drivers/database/Database_oci.php */
+/* End of file Pdo_Mssql.php */
+/* Location: ./ob_modules/pdo_mssql/releases/0.0.1/pdo_mssql.php */

@@ -36,7 +36,7 @@ function ob_autoload($realname)
     {
         require(OB_MODULES .$package_filename. DS .'releases'. DS .$packages['dependencies'][$package_filename]['version']. DS .$package_filename. EXT);
         return;
-    }
+    } 
 }
 
 spl_autoload_register('ob_autoload', true);

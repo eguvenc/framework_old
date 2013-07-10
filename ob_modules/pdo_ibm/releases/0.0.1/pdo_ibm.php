@@ -1,32 +1,37 @@
 <?php
 
 /**
- * PGSQL (PostgreSQL) Database Adapter Class
+ * IBM DB2 Database Adapter Class
  *
  * @package       Obullo
  * @subpackage    Drivers
  * @category      Database
- * @author        Obullo Team 
+ * @author        Obullo Team
+ * @author        Drew Harvey
  * @link                              
  */
 
-Class Pdo_Pgsql extends Pdo_Database_Adapter
+Class Pdo_Ibm extends Pdo_Database_Adapter
 {
     /**
     * The character used for escaping
     * 
     * @var string
     */
-    public $_escape_char = '"';
-
-    // clause and character used for LIKE escape sequences
-    public $_like_escape_str = " ESCAPE '%s' ";
-    public $_like_escape_chr = '!';
+    public $_escape_char = '';
     
+    
+    // clause and character used for LIKE escape sequences - not used in MySQL
+    // http://publib.boulder.ibm.com/infocenter/dzichelp/v2r2/index.jsp?topic=/com.ibm.db29.doc.odbc/db2z_likesc.htm
+    // same as ODBC
+    public $_like_escape_str = " {escape '%s'} ";
+    public $_like_escape_chr = '!';     
+     
     public function __construct($param)
     {   
         parent::__construct($param);
     }
+    
     
     /**
     * Connect to PDO
@@ -36,6 +41,7 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
     * @param    string $user Db username
     * @param    mixed  $pass Db password
     * @param    array  $options Db Driver options
+    * @link     http://www.php.net/manual/en/ref.pdo-dblib.connection.php
     * @return   void
     */
     public function _connect()
@@ -43,14 +49,11 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
         // If connection is ok .. not need to again connect..
         if ($this->_conn) { return; }
         
-        $port = empty($this->dbh_port) ? '' : ';port='.$this->dbh_port;
-        $dsn  = empty($this->dsn) ? 'pgsql:dbname='.$this->database.';user='.$this->username.';password='.$this->password.';host='.$this->hostname.$port : $this->dsn;
-             
-        $this->_pdo  = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
+        $port = empty($this->dbh_port) ? '' : 'PORT='.$this->dbh_port.';';
+        $dsn  = empty($this->dsn) ? 'ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE='.$this->database.';HOSTNAME='.$this->hostname.';'.$port.'PROTOCOL=TCPIP;' : $this->dsn; 
         
-        if( ! empty($this->char_set) )
-        $this->_conn->exec("SET NAMES '" . $this->char_set . "'");     
-    
+        $this->_pdo = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
+        
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
         $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     } 
@@ -62,9 +65,9 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
      *
      * This function escapes column and table names
      *
-     * @access   private
+     * @access    private
      * @param    string
-     * @return   string
+     * @return    string
      */
     public function _escape_identifiers($item)
     {
@@ -83,7 +86,7 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
                 return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
             }        
         }
-    
+        
         if (strpos($item, '.') !== FALSE)
         {
             $str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;            
@@ -92,7 +95,7 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
         {
             $str = $this->_escape_char.$item.$this->_escape_char;
         }
-        
+    
         // remove duplicates if the user already included the escape
         return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
     }
@@ -100,24 +103,28 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
     // --------------------------------------------------------------------
     
     /**
-    * Escape String
-    *
-    * @access   public
-    * @param    string
-    * @param    bool    whether or not the string will be used in a LIKE condition
-    * @return   string
-    */
-    public function escape_str($str, $like = FALSE, $side = 'both')    
-    {    
+     * Escape String
+     *
+     * @access    public
+     * @param    string
+     * @param    bool    whether or not the string will be used in a LIKE condition
+     * @return    string
+     */
+    public function escape_str($str, $like = FALSE, $side = 'both')
+    {
         if (is_array($str))
         {
             foreach($str as $key => $val)
             {
                 $str[$key] = $this->escape_str($val, $like);
             }
-
-            return $str;
+           
+           return $str;
         }
+
+        loader::helper('ob/security');
+        
+        $str = _remove_invisible_characters($str);
         
         // escape LIKE condition wildcards
         if ($like === TRUE)
@@ -125,7 +132,6 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
             $str = str_replace( array('%', '_', $this->_like_escape_chr),
                                 array($this->_like_escape_chr.'%', $this->_like_escape_chr.'_', 
                                 $this->_like_escape_chr.$this->_like_escape_chr), $str);
-                                
             switch ($side)
             {
                case 'before':
@@ -160,9 +166,7 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
         
         return $str;
     }
-    
-    // -------------------------------------------------------------------- 
-    
+
     /**
     * Platform specific pdo quote
     * function.
@@ -180,6 +184,26 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
     // --------------------------------------------------------------------
     
     /**
+     * Escape Table Name
+     *
+     * This function adds backticks if the table name has a period
+     * in it. Some DBs will get cranky unless periods are escaped
+     *
+     * @access   private
+     * @param    string    the table name
+     * @return   string
+     */
+    public function _escape_table($table)
+    {
+        if (stristr($table, '.'))
+        {
+            $table = preg_replace("/\./", "`.`", $table);
+        }
+
+        return $table;
+    }
+    
+    /**
      * From Tables
      *
      * This function implicitly groups FROM tables so there is no confusion
@@ -195,8 +219,8 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
         {
             $tables = array($tables);
         }
-        
-        return implode(', ', $tables);
+
+        return ' '.implode(', ', $tables).' ';
     }
 
     // --------------------------------------------------------------------
@@ -213,23 +237,39 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
      * @return    string
      */
     public function _insert($table, $keys, $values)
-    {    
-        return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
+    {
+        return "INSERT INTO " . $this->_escape_table($table) . " (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
     }
     
     // --------------------------------------------------------------------
-
+    
+    
+    /**
+     * Delete statement
+     *
+     * Generates a platform-specific delete string from the supplied data
+     *
+     * @access   public
+     * @param    string    the table name
+     * @param    array    the where clause
+     * @return   string
+     */
+    public function _delete($table, $where = array(), $like = array(), $limit = FALSE)
+    {
+        return "DELETE FROM ".$this->_escape_table($table)." WHERE ".implode(" ", $where);
+    }
+    
+    // --------------------------------------------------------------------
+    
     /**
      * Update statement
      *
      * Generates a platform-specific update string from the supplied data
      *
      * @access   public
-     * @param    string   the table name
+     * @param    string    the table name
      * @param    array    the update data
      * @param    array    the where clause
-     * @param    array    the orderby clause
-     * @param    array    the limit clause
      * @return   string
      */
     public function _update($table, $values, $where, $orderby = array(), $limit = FALSE)
@@ -238,52 +278,8 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
         {
             $valstr[] = $key." = ".$val;
         }
-        
-        $limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
-        
-        $orderby = (count($orderby) >= 1)?' ORDER BY '.implode(", ", $orderby):'';
-    
-        $sql = "UPDATE ".$table." SET ".implode(', ', $valstr);
 
-        $sql .= ($where != '' AND count($where) >=1) ? " WHERE ".implode(" ", $where) : '';
-
-        $sql .= $orderby.$limit;
-        
-        return $sql;
-    }
-    
-    // --------------------------------------------------------------------
-
-    /**
-     * Delete statement
-     *
-     * Generates a platform-specific delete string from the supplied data
-     *
-     * @access   public
-     * @param    string   the table name
-     * @param    array    the where clause
-     * @param    string   the limit clause
-     * @return   string
-     */    
-    public function _delete($table, $where = array(), $like = array(), $limit = FALSE)
-    {
-        $conditions = '';
-
-        if (count($where) > 0 OR count($like) > 0)
-        {
-            $conditions = "\nWHERE ";
-            $conditions .= implode("\n", $this->ar_where);
-
-            if (count($where) > 0 && count($like) > 0)
-            {
-                $conditions .= " AND ";
-            }
-            $conditions .= implode("\n", $like);
-        }
-
-        $limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
-    
-        return "DELETE FROM ".$table.$conditions.$limit;
+        return "UPDATE ".$this->_escape_table($table)." SET ".implode(', ', $valstr)." WHERE ".implode(" ", $where);
     }
 
     // --------------------------------------------------------------------
@@ -293,27 +289,64 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
      *
      * Generates a platform-specific LIMIT clause
      *
-     * @access    public
+     * @access   public
      * @param    string    the sql query string
-     * @param    integer    the number of rows to limit the query to
-     * @param    integer    the offset value
-     * @return    string
+     * @param    integer   the number of rows to limit the query to
+     * @param    integer   the offset value
+     * @return   string
      */
-    public function _limit($sql, $limit, $offset)
-    {    
-        $sql .= "LIMIT ".$limit;
-    
-        if ($offset > 0)
+    public function _limit($sql, $limit, $offset = 0)
+    {
+        if ($offset == 0)
         {
-            $sql .= " OFFSET ".$offset;
+            $offset = '';
         }
-        
-        return $sql;
+        else
+        {
+            $offset .= ", ";
+        }
+
+        return $sql."RETURN FIRST  " . $limit . " ROWS ONLY";
+    }
+    
+    /**
+    * Get Platform Specific Database 
+    * Version number. From Zend.
+    *
+    * @access    public
+    * @return    string
+    */
+    public function version()
+    {
+        try 
+        {
+            $stmt = $this->_conn->query('SELECT service_level, fixpack_num FROM TABLE (sysproc.env_get_inst_info()) as INSTANCEINFO');
+            
+            $result = $stmt->fetchAll(PDO::FETCH_NUM);
+            
+            if (count($result))
+            {
+                $matches = NULL;
+                if (preg_match('/((?:[0-9]{1,2}\.){1,3}[0-9]{1,2})/', $result[0][0], $matches))
+                {
+                    return $matches[1];
+                } 
+                else 
+                {
+                    return NULL;
+                }
+            }
+            return null;
+            
+        } catch (PDOException $e) 
+        {
+            return NULL;
+        }
     }
 
 
 } // end class.
 
 
-/* End of file Database_pgsql.php */
-/* Location: ./obullo/libraries/drivers/database/Database_pgsql.php */
+/* End of file Pdo_Ibm.php */
+/* Location: ./ob_modules/pdo_ibm/releases/0.0.1/pdo_ibm.php */

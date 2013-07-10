@@ -1,6 +1,6 @@
 {
-  "name": "database_pdo",
-  "description": "Database pdo layer libraries",
+  "name": "pdo_ibm",
+  "description": "Pdo ibm database driver class.",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",
@@ -8,26 +8,25 @@
     "url": "https://github.com/eguvenc"
   },
   "component" : "library",
-  "dependencies": {},
   "keywords": [
-    "database",
-    "pdo",
-    "db",
-    "php data object"
+    "ibm",
+    "pdo ibm",
+    "pdo_ibm",
+    "pdo driver"
   ],
-  "homepage": "https://github.com/obullo/database_pdo",
+  "homepage": "https://github.com/obullo/pdo_ibm",
   "repo": {
     "type": "git",
-    "url": "git://github.com/obullo/database_pdo.git",
+    "url": "https://github.com/obullo/pdo_ibm.git",
     "archive" : "zip",
-    "archive_url": "https://github.com/obullo/database_pdo/archive/master.zip"
+    "archive_url": "https://github.com/obullo/pdo_ibm/archive/master.zip"
   },
   "requires": {
     "php": ">= 5.1.2",
-    "extensions": ["pdo"]
+    "extensions": ["pdo","pdo_ibm"]
   },
   "bugs": {
-    "url": "https://github.com/obullo/database_pdo/issues",
+    "url": "https://github.com/obullo/pdo_ibm/issues",
     "email": "eguvenc@gmail.com"
   },
   "licenses": [

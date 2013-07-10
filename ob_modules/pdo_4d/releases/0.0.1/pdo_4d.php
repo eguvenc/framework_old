@@ -1,33 +1,35 @@
 <?php
 
 /**
- * SQLITE Database Adapter Class
+ * 4D Database Adapter Class
  *
  * @package       Obullo
  * @subpackage    Drivers
  * @category      Database
  * @author        Obullo Team
- * @link                              
+ * @link          ftp://ftp.4d.com/ACI_PRODUCT_REFERENCE_LIBRARY/
+ *                4D_PRODUCT_DOCUMENTATION/PDF_Docs_by_4D_Product_A-Z/
+ *                4D/4D_v11_SQL/4D_v11_SQL_Reference_r4.pdf                           
  */
 
-Class Pdo_Sqlite extends Pdo_Database_Adapter
+Class Pdo_4d extends Pdo_Database_Adapter
 {
     /**
     * The character used for escaping
     * 
     * @var string
     */
-    public $_escape_char = ''; // sqlite not use ` backticks ..
+    public $_escape_char = '';
     
-    // clause and character used for LIKE escape sequences
-    public $_like_escape_str = "";  // some errors using ESCAPE with sqlite2
-    public $_like_escape_chr = "\\";     
+    
+    // clause and character used for LIKE escape sequences - not used in 4D
+    public $_like_escape_str = '';
+    public $_like_escape_chr = '';     
      
     public function __construct($param)
     {   
         parent::__construct($param);
     }
-    
     
     /**
     * Connect to PDO
@@ -44,46 +46,14 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
         // If connection is ok .. not need to again connect..
         if ($this->_conn) { return; }
         
-        $type = '';
-         switch ($this->dbdriver)
-         {
-            case 'sqlite':
-                $type = 'sqlite';
-                break;
+        $port    = empty($this->dbh_port) ? '' : ':'.$this->dbh_port.';';
+        $charset = empty($this->char_set) ? '' : ';charset='.$this->char_set;
+        $dsn     = empty($this->dsn) ? '4D:host='.$this->hostname.$port.$charset : $this->dsn;
              
-            case 'sqlite2':
-                $type = 'sqlite2';
-                break;
-                
-            case 'sqlite3':
-                $type = 'sqlite3';
-                break;
-        }
-        
-        $dsn  = empty($this->dsn) ? $type.':'.$this->database : $this->dsn;        
+        $this->_pdo  = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
 
-        $this->_pdo = $this->pdo_connect($dsn, NULL, NULL, $this->options);
-        
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
         $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-        
-        $retval = $this->_conn->exec('PRAGMA full_column_names=0');
-        
-        if ($retval === false) {
-            
-            $error = $this->_conn->errorInfo();
-
-            throw new Exception($error[2]);
-        }
-
-        $retval = $this->_conn->exec('PRAGMA short_column_names=1');
-        if ($retval === false) {
-            
-            $error = $this->_conn->errorInfo();
-
-            throw new Exception($error[2]);
-        }
-        
     } 
 
     // --------------------------------------------------------------------
@@ -114,7 +84,7 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
                 return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
             }        
         }
-    
+        
         if (strpos($item, '.') !== FALSE)
         {
             $str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;            
@@ -123,7 +93,7 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
         {
             $str = $this->_escape_char.$item.$this->_escape_char;
         }
-        
+    
         // remove duplicates if the user already included the escape
         return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
     }
@@ -149,13 +119,11 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
 
             return $str;
         }
-                
+    
         // escape LIKE condition wildcards
         if ($like === TRUE)
         {
-            $str = str_replace( array('%', '_', $this->_like_escape_chr),
-                                array($this->_like_escape_chr.'%', $this->_like_escape_chr.'_', 
-                                $this->_like_escape_chr.$this->_like_escape_chr), $str);
+            $str = str_replace(array('%', '_'), array('\\%', '\\_'), $str);
             
             switch ($side)
             {
@@ -173,8 +141,8 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
             
             // not need to quote for who use prepare and :like bind.
             if($this->prepare == TRUE AND $this->is_like_bind)   
-            return $str;        
-        }
+            return $str;
+        } 
         
         // make sure is it bind value, if not ...
         if($this->prepare === TRUE)
@@ -192,7 +160,7 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
         return $str;
     }
     
-    // -------------------------------------------------------------------- 
+    // --------------------------------------------------------------------
     
     /**
     * Platform specific pdo quote
@@ -208,18 +176,18 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
          return $this->_conn->quote($str, $type);  
     }
     
-    // --------------------------------------------------------------------
+    // -------------------------------------------------------------------- 
     
     /**
-     * From Tables
-     *
-     * This function implicitly groups FROM tables so there is no confusion
-     * about operator precedence in harmony with SQL standards
-     *
-     * @access   public
-     * @param    type
-     * @return   type
-     */
+    * From Tables
+    *
+    * This function implicitly groups FROM tables so there is no confusion
+    * about operator precedence in harmony with SQL standards
+    *
+    * @access   public
+    * @param    type
+    * @return   type
+    */
     public function _from_tables($tables)
     {
         if ( ! is_array($tables))
@@ -227,7 +195,7 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
             $tables = array($tables);
         }
         
-        return '('.implode(', ', $tables).')';
+        return ''.implode(', ', $tables).'';
     }
 
     // --------------------------------------------------------------------
@@ -237,11 +205,11 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
      *
      * Generates a platform-specific insert string from the supplied data
      *
-     * @access   public
-     * @param    string   the table name
+     * @access    public
+     * @param    string    the table name
      * @param    array    the insert keys
      * @param    array    the insert values
-     * @return   string
+     * @return    string
      */
     public function _insert($table, $keys, $values)
     {    
@@ -282,6 +250,7 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
         
         return $sql;
     }
+    
     // --------------------------------------------------------------------
 
     /**
@@ -289,11 +258,11 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
      *
      * Generates a platform-specific delete string from the supplied data
      *
-     * @access   public
-     * @param    string   the table name
+     * @access    public
+     * @param    string    the table name
      * @param    array    the where clause
-     * @param    string   the limit clause
-     * @return   string
+     * @param    string    the limit clause
+     * @return    string
      */    
     public function _delete($table, $where = array(), $like = array(), $limit = FALSE)
     {
@@ -329,23 +298,25 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
      * @param    integer   the offset value
      * @return   string
      */
-    public function _limit($sql, $limit, $offset)
-    {    
-        if ($offset == 0)
+    public function limit($sql, $limit, $offset)
+    {   
+        $newsql = '';
+        
+        if($offset != NULL)
         {
-            $offset = '';
+            $newsql = $sql.'LIMIT '.$limit.' OFFSET '.$offset;
         }
-        else
+        else 
         {
-            $offset .= ", ";
+            $newsql = $sql.'LIMIT '.$limit;
         }
         
-        return $sql."LIMIT ".$offset.$limit;
+        return $newsql;
     }
 
 
 } // end class.
 
 
-/* End of file Database_sqlite.php */
-/* Location: ./obullo/libraries/drivers/database/Database_sqlite.php */
+/* End of file Pdo_4d.php */
+/* Location: ./ob_modules/pdo_4d/releases/0.0.1/pdo_4d.php */

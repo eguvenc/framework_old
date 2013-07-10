@@ -310,5 +310,5 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
 } // end class.
 
 
-/* End of file Database_firebird.php */
-/* Location: ./obullo/libraries/drivers/database/Database_firebird.php */
+/* End of file Pdo_Firebird.php */
+/* Location: ./ob_modules/pdo_firebird/releases/0.0.1/pdo_firebird.php */

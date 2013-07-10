@@ -1,6 +1,6 @@
 {
-  "name": "database_pdo",
-  "description": "Database pdo layer libraries",
+  "name": "router",
+  "description": "Parses the uri and control the framework routes.",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",
@@ -8,26 +8,25 @@
     "url": "https://github.com/eguvenc"
   },
   "component" : "library",
-  "dependencies": {},
   "keywords": [
-    "database",
-    "pdo",
-    "db",
-    "php data object"
+    "router",
+    "route",
+    "routing",
+    "routes"
   ],
-  "homepage": "https://github.com/obullo/database_pdo",
+  "homepage": "https://github.com/obullo/router",
   "repo": {
     "type": "git",
-    "url": "git://github.com/obullo/database_pdo.git",
+    "url": "https://github.com/obullo/router.git",
     "archive" : "zip",
-    "archive_url": "https://github.com/obullo/database_pdo/archive/master.zip"
+    "archive_url": "https://github.com/obullo/router/archive/master.zip"
   },
   "requires": {
     "php": ">= 5.1.2",
-    "extensions": ["pdo"]
+    "extensions": ["none"]
   },
   "bugs": {
-    "url": "https://github.com/obullo/database_pdo/issues",
+    "url": "https://github.com/obullo/router/issues",
     "email": "eguvenc@gmail.com"
   },
   "licenses": [

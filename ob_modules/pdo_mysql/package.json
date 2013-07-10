@@ -1,6 +1,6 @@
 {
-  "name": "database_pdo",
-  "description": "Database pdo layer libraries",
+  "name": "pdo_mysql",
+  "description": "Pdo mysql database driver class.",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",
@@ -8,26 +8,25 @@
     "url": "https://github.com/eguvenc"
   },
   "component" : "library",
-  "dependencies": {},
   "keywords": [
-    "database",
-    "pdo",
-    "db",
-    "php data object"
+    "mysql",
+    "pdo mysql",
+    "pdo_mysql",
+    "pdo driver"
   ],
-  "homepage": "https://github.com/obullo/database_pdo",
+  "homepage": "https://github.com/obullo/pdo_mysql",
   "repo": {
     "type": "git",
-    "url": "git://github.com/obullo/database_pdo.git",
+    "url": "https://github.com/obullo/pdo_mysql.git",
     "archive" : "zip",
-    "archive_url": "https://github.com/obullo/database_pdo/archive/master.zip"
+    "archive_url": "https://github.com/obullo/pdo_mysql/archive/master.zip"
   },
   "requires": {
     "php": ">= 5.1.2",
-    "extensions": ["pdo"]
+    "extensions": ["pdo","pdo_mysql"]
   },
   "bugs": {
-    "url": "https://github.com/obullo/database_pdo/issues",
+    "url": "https://github.com/obullo/pdo_mysql/issues",
     "email": "eguvenc@gmail.com"
   },
   "licenses": [

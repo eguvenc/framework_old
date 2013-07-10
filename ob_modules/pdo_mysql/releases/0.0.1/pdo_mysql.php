@@ -344,5 +344,5 @@ Class Pdo_Mysql extends Pdo_Database_Adapter
 } // end class.
 
 
-/* End of file pdo_mysql.php */
+/* End of file Pdo_Mysql.php */
 /* Location: ./ob_modules/pdo_mysql/releases/0.0.1/pdo_mysql.php */

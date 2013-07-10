@@ -1,6 +1,6 @@
 {
-  "name": "database_pdo",
-  "description": "Database pdo layer libraries",
+  "name": "pdo_cubrid",
+  "description": "Pdo cubrid database driver class.",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",
@@ -8,26 +8,25 @@
     "url": "https://github.com/eguvenc"
   },
   "component" : "library",
-  "dependencies": {},
   "keywords": [
-    "database",
-    "pdo",
-    "db",
-    "php data object"
+    "cubrid",
+    "pdo cubrid",
+    "pdo_cubrid",
+    "pdo driver"
   ],
-  "homepage": "https://github.com/obullo/database_pdo",
+  "homepage": "https://github.com/obullo/pdo_cubrid",
   "repo": {
     "type": "git",
-    "url": "git://github.com/obullo/database_pdo.git",
+    "url": "https://github.com/obullo/pdo_cubrid.git",
     "archive" : "zip",
-    "archive_url": "https://github.com/obullo/database_pdo/archive/master.zip"
+    "archive_url": "https://github.com/obullo/pdo_cubrid/archive/master.zip"
   },
   "requires": {
     "php": ">= 5.1.2",
-    "extensions": ["pdo"]
+    "extensions": ["pdo","pdo_cubrid"]
   },
   "bugs": {
-    "url": "https://github.com/obullo/database_pdo/issues",
+    "url": "https://github.com/obullo/pdo_4d/issues",
     "email": "eguvenc@gmail.com"
   },
   "licenses": [

@@ -1,6 +1,6 @@
 {
-  "name": "database_pdo",
-  "description": "Database pdo layer libraries",
+  "name": "pdo_sqlite",
+  "description": "Pdo sqlite database driver class.",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",
@@ -8,26 +8,26 @@
     "url": "https://github.com/eguvenc"
   },
   "component" : "library",
-  "dependencies": {},
   "keywords": [
-    "database",
-    "pdo",
-    "db",
-    "php data object"
+    "sqlite",
+    "sqllite",
+    "pdo sqlite",
+    "pdo_sqlite",
+    "pdo driver"
   ],
-  "homepage": "https://github.com/obullo/database_pdo",
+  "homepage": "https://github.com/obullo/pdo_sqlite",
   "repo": {
     "type": "git",
-    "url": "git://github.com/obullo/database_pdo.git",
+    "url": "https://github.com/obullo/pdo_sqlite.git",
     "archive" : "zip",
-    "archive_url": "https://github.com/obullo/database_pdo/archive/master.zip"
+    "archive_url": "https://github.com/obullo/pdo_sqlite/archive/master.zip"
   },
   "requires": {
     "php": ">= 5.1.2",
-    "extensions": ["pdo"]
+    "extensions": ["pdo","pdo_sqlite"]
   },
   "bugs": {
-    "url": "https://github.com/obullo/database_pdo/issues",
+    "url": "https://github.com/obullo/pdo_sqlite/issues",
     "email": "eguvenc@gmail.com"
   },
   "licenses": [

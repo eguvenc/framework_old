@@ -22,7 +22,7 @@
   },
   "requires": {
     "php": ">= 5.1.2",
-    "extensions": ["none"]
+    "extensions": ["mongo"]
   },
   "bugs": {
     "url": "https://github.com/obullo/mongo_db/issues",

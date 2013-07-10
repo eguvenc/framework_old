@@ -17,7 +17,7 @@ require(OB_MODULES .'pager'. DS .'releases'. DS .$packages['dependencies']['page
  */
 
 Class Pager
-{   
+{     
     /**
     * Return a pager based on $mode and $options
     *

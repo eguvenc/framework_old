@@ -1,18 +1,6 @@
 <?php
 
 /**
- * Obullo Hmvc Helpers
- *
- * @package     Obullo
- * @subpackage  request
- * @category    Hmvc
- * @author      Obullo Team
- * @link
- */
-
-// ------------------------------------------------------------------------
-
-/**
 * Call HMVC Request using HMVC Class.
 *
 * @access   public

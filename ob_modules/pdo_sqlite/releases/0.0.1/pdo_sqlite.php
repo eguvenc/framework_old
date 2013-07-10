@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MSSQL Database Adapter Class
+ * SQLITE Database Adapter Class
  *
  * @package       Obullo
  * @subpackage    Drivers
@@ -10,18 +10,18 @@
  * @link                              
  */
 
-Class Pdo_mssql extends Pdo_Database_Adapter
+Class Pdo_Sqlite extends Pdo_Database_Adapter
 {
     /**
     * The character used for escaping
     * 
     * @var string
     */
-    public $_escape_char = '';
-        
+    public $_escape_char = ''; // sqlite not use ` backticks ..
+    
     // clause and character used for LIKE escape sequences
-    var $_like_escape_str = " ESCAPE '%s' ";
-    var $_like_escape_chr = '!';    
+    public $_like_escape_str = "";  // some errors using ESCAPE with sqlite2
+    public $_like_escape_chr = "\\";     
      
     public function __construct($param)
     {   
@@ -37,7 +37,6 @@ Class Pdo_mssql extends Pdo_Database_Adapter
     * @param    string $user Db username
     * @param    mixed  $pass Db password
     * @param    array  $options Db Driver options
-    * @link     http://www.php.net/manual/en/ref.pdo-dblib.connection.php
     * @return   void
     */
     public function _connect()
@@ -46,131 +45,47 @@ Class Pdo_mssql extends Pdo_Database_Adapter
         if ($this->_conn) { return; }
         
         $type = '';
-        
          switch ($this->dbdriver)
          {
-            case 'freetds':
-                $type = 'freetds';
+            case 'sqlite':
+                $type = 'sqlite';
+                break;
+             
+            case 'sqlite2':
+                $type = 'sqlite2';
                 break;
                 
-            case 'sybase':
-                $type = 'sybase';
-                break;
-         
-            case 'dblib':
-                $type = 'dblib';
-                break;
-            
-            default:
-                $type = 'mssql';
+            case 'sqlite3':
+                $type = 'sqlite3';
                 break;
         }
         
-        if ( ! empty($this->dbh_port))
-        {
-            $port_seperator = ':';
-            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
-            {
-                $port_seperator = ',';
-            }
-        }
-        
-        $port    = empty($this->dbh_port) ? '' : $port_seperator .$this->dbh_port;
-        $charset = empty($this->char_set) ? '' : ';charset='.$this->char_set;
-        $dsn     = empty($this->dsn) ? $type.':host='.$this->hostname.$port.';dbname='.$this->database.$charset : $this->dsn;
-             
-        $this->_pdo = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
+        $dsn  = empty($this->dsn) ? $type.':'.$this->database : $this->dsn;        
+
+        $this->_pdo = $this->pdo_connect($dsn, NULL, NULL, $this->options);
         
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
         $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-    } 
-    
-    // --------------------------------------------------------------------
-    
-    /**
-    * Escape String
-    *
-    * @access   public
-    * @param    string
-    * @param    bool    whether or not the string will be used in a LIKE condition
-    * @return   string
-    */
-    public function escape_str($str, $like = FALSE, $side = 'both')    
-    {    
-        if (is_array($str))
-        {
-            foreach($str as $key => $val)
-            {
-                $str[$key] = $this->escape_str($val, $like);
-            }
+        
+        $retval = $this->_conn->exec('PRAGMA full_column_names=0');
+        
+        if ($retval === false) {
+            
+            $error = $this->_conn->errorInfo();
 
-            return $str;
+            throw new Exception($error[2]);
+        }
+
+        $retval = $this->_conn->exec('PRAGMA short_column_names=1');
+        if ($retval === false) {
+            
+            $error = $this->_conn->errorInfo();
+
+            throw new Exception($error[2]);
         }
         
-        loader::helper('ob/security');
-        
-        $str = _remove_invisible_characters($str);
-        
-        // If pdo::quote() not work Escape single quotes
-        // $str = str_replace("'", "''", _remove_invisible_characters($str));
-        
-        // escape LIKE condition wildcards
-        if ($like === TRUE)
-        {
-            $str = str_replace( array('%', '_', $this->_like_escape_chr),
-                                array($this->_like_escape_chr.'%', $this->_like_escape_chr.'_', 
-                                $this->_like_escape_chr.$this->_like_escape_chr), $str);
-            switch ($side)
-            {
-               case 'before':
-                 $str = "%{$str}";
-                 break;
-                 
-               case 'after':
-                 $str = "{$str}%";
-                 break;
-                 
-               default:
-                 $str = "%{$str}%";
-            }
-        
-            // not need to quote for who use prepare and :like bind.
-            if($this->prepare == TRUE AND $this->is_like_bind)   
-            return $str;
-        } 
-        
-        // make sure is it bind value, if not ...
-        if($this->prepare === TRUE)
-        {
-            if(strpos($str, ':') === FALSE)
-            {
-                $str = $this->quote($str, PDO::PARAM_STR);
-            }
-        }
-        else
-        {
-           $str = $this->quote($str, PDO::PARAM_STR);
-        }
-                  
-        return $str; 
-    }
-        
-    // --------------------------------------------------------------------    
-    
-    /**
-    * Platform specific pdo quote
-    * function.
-    *                 
-    * @author  Ersin Guvenc.
-    * @param   string $str
-    * @param   int    $type
-    * @return
-    */
-    public function quote($str, $type = NULL)
-    {
-         return $this->_conn->quote($str, $type);  
-    }
-        
+    } 
+
     // --------------------------------------------------------------------
     
     /**
@@ -199,7 +114,7 @@ Class Pdo_mssql extends Pdo_Database_Adapter
                 return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
             }        
         }
-
+    
         if (strpos($item, '.') !== FALSE)
         {
             $str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;            
@@ -212,6 +127,88 @@ Class Pdo_mssql extends Pdo_Database_Adapter
         // remove duplicates if the user already included the escape
         return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
     }
+            
+    // --------------------------------------------------------------------
+    
+    /**
+    * Escape String
+    *
+    * @access   public
+    * @param    string
+    * @param    bool    whether or not the string will be used in a LIKE condition
+    * @return   string
+    */
+    public function escape_str($str, $like = FALSE, $side = 'both')    
+    {    
+        if (is_array($str))
+        {
+            foreach($str as $key => $val)
+            {
+                $str[$key] = $this->escape_str($val, $like);
+            }
+
+            return $str;
+        }
+                
+        // escape LIKE condition wildcards
+        if ($like === TRUE)
+        {
+            $str = str_replace( array('%', '_', $this->_like_escape_chr),
+                                array($this->_like_escape_chr.'%', $this->_like_escape_chr.'_', 
+                                $this->_like_escape_chr.$this->_like_escape_chr), $str);
+            
+            switch ($side)
+            {
+               case 'before':
+                 $str = "%{$str}";
+                 break;
+                 
+               case 'after':
+                 $str = "{$str}%";
+                 break;
+                 
+               default:
+                 $str = "%{$str}%";
+            }
+            
+            // not need to quote for who use prepare and :like bind.
+            if($this->prepare == TRUE AND $this->is_like_bind)   
+            return $str;        
+        }
+        
+        // make sure is it bind value, if not ...
+        if($this->prepare === TRUE)
+        {
+            if(strpos($str, ':') === FALSE)
+            {
+                $str = $this->quote($str, PDO::PARAM_STR);
+            }
+        }
+        else
+        {
+           $str = $this->quote($str, PDO::PARAM_STR);
+        }
+        
+        return $str;
+    }
+    
+    // -------------------------------------------------------------------- 
+    
+    /**
+    * Platform specific pdo quote
+    * function.
+    *                 
+    * @author  Ersin Guvenc.
+    * @param   string $str
+    * @param   int    $type
+    * @return
+    */
+    public function quote($str, $type = NULL)
+    {
+         return $this->_conn->quote($str, $type);  
+    }
+    
+    // --------------------------------------------------------------------
     
     /**
      * From Tables
@@ -219,9 +216,9 @@ Class Pdo_mssql extends Pdo_Database_Adapter
      * This function implicitly groups FROM tables so there is no confusion
      * about operator precedence in harmony with SQL standards
      *
-     * @access    public
+     * @access   public
      * @param    type
-     * @return    type
+     * @return   type
      */
     public function _from_tables($tables)
     {
@@ -230,7 +227,7 @@ Class Pdo_mssql extends Pdo_Database_Adapter
             $tables = array($tables);
         }
         
-        return implode(', ', $tables);
+        return '('.implode(', ', $tables).')';
     }
 
     // --------------------------------------------------------------------
@@ -240,11 +237,11 @@ Class Pdo_mssql extends Pdo_Database_Adapter
      *
      * Generates a platform-specific insert string from the supplied data
      *
-     * @access    public
-     * @param    string    the table name
+     * @access   public
+     * @param    string   the table name
      * @param    array    the insert keys
      * @param    array    the insert values
-     * @return    string
+     * @return   string
      */
     public function _insert($table, $keys, $values)
     {    
@@ -259,7 +256,7 @@ Class Pdo_mssql extends Pdo_Database_Adapter
      * Generates a platform-specific update string from the supplied data
      *
      * @access   public
-     * @param    string    the table name
+     * @param    string   the table name
      * @param    array    the update data
      * @param    array    the where clause
      * @param    array    the orderby clause
@@ -285,7 +282,6 @@ Class Pdo_mssql extends Pdo_Database_Adapter
         
         return $sql;
     }
-    
     // --------------------------------------------------------------------
 
     /**
@@ -294,9 +290,9 @@ Class Pdo_mssql extends Pdo_Database_Adapter
      * Generates a platform-specific delete string from the supplied data
      *
      * @access   public
-     * @param    string    the table name
+     * @param    string   the table name
      * @param    array    the where clause
-     * @param    string    the limit clause
+     * @param    string   the limit clause
      * @return   string
      */    
     public function _delete($table, $where = array(), $like = array(), $limit = FALSE)
@@ -320,59 +316,36 @@ Class Pdo_mssql extends Pdo_Database_Adapter
         return "DELETE FROM ".$table.$conditions.$limit;
     }
 
-
     // --------------------------------------------------------------------
 
     /**
-    * Limit string
-    *
-    * Generates a platform-specific LIMIT clause
-    *
-    * @access   public
-    * @param    string    the sql query string
-    * @param    integer   the number of rows to limit the query to
-    * @param    integer   the offset value
-    * @return   string
-    */
+     * Limit string
+     *
+     * Generates a platform-specific LIMIT clause
+     *
+     * @access   public
+     * @param    string    the sql query string
+     * @param    integer   the number of rows to limit the query to
+     * @param    integer   the offset value
+     * @return   string
+     */
     public function _limit($sql, $limit, $offset)
-    {
-        $i = $limit + $offset;
-    
-        return preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);        
-    }
-    
-    /**
-    * Get Platform Specific Database 
-    * Version number. From Zend.
-    *
-    * @access    public
-    * @return    string
-    */
-    public function version()
-    {
-        try 
+    {    
+        if ($offset == 0)
         {
-            $stmt = $this->_conn->query("SELECT SERVERPROPERTY('productversion')");
-            
-            $result = $stmt->fetchAll(PDO::FETCH_NUM);
-            
-            if (count($result))
-            {
-                return $result[0][0];
-            }
-            
-            return NULL;
-        
-        } catch (PDOException $e)
-        {
-            return NULL;
+            $offset = '';
         }
+        else
+        {
+            $offset .= ", ";
+        }
+        
+        return $sql."LIMIT ".$offset.$limit;
     }
-
 
 
 } // end class.
 
 
-/* End of file Database_mssql.php */
-/* Location: ./obullo/libraries/drivers/database/Database_mssql.php */
+/* End of file Pdo_Sqlite.php */
+/* Location: ./ob_modules/pdo_mysql/releases/0.0.1/pdo_sqlite.php */

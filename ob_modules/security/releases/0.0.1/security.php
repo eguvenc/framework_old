@@ -1,23 +1,11 @@
 <?php
 
 /**
- * Obullo Security Class
- *
- * @package     Obullo
- * @subpackage  security
- * @category    security
- * @author      Obullo Team
- * @link        
- */
-
-// --------------------------------------------------------------------
-
-/**
  * Security Class
  *
  * @package     Obullo
- * @subpackage	Libraries
- * @category	Security
+ * @subpackage	security
+ * @category	Securities
  * @author	Obullo Team
  * @link
  */

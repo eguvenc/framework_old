@@ -14,11 +14,9 @@ function ob_request_timer($mark = '')
  * @package     Obullo
  * @subpackage  Libraries
  * @category    HMVC Request Class
- * @author      Ersin Guvenc
+ * @author      Obullo Team
  * @version     0.1
- * @version     0.2  fixed getInstance() bug, copied all getInstance() object and assigned
- *              to instance using Controller::set_instance(); method.
- *              Hmvc router and uri libraries merged.
+ * 
  */
 Class Hmvc
 {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MySQL Database Adapter Class
+ * Cubrid Database Adapter Class
  *
  * @package       Obullo
  * @subpackage    Drivers
@@ -342,5 +342,5 @@ Class Pdo_Cubrid extends Pdo_Database_Adapter
 } // end class.
 
 
-/* End of file Database_cubrid.php */
-/* Location: ./obullo/libraries/drivers/database/Database_cubrid.php */
+/* End of file Pdo_Cubrid.php */
+/* Location: ./ob_modules/pdo_cubrid/releases/0.0.1/pdo_cubrid.php */

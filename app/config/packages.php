@@ -29,6 +29,7 @@ $packages = array(
         'locale' => array('version' => '0.0.1', 'component' => 'library'),
         'odm'  => array('version' => '0.0.1', 'component' => 'library'),
         'output'  => array('version' => '0.0.1', 'component' => 'library'),
+        'pager'  => array('version' => '0.0.1', 'component' => 'library'),
         'pdo_mysql'  => array('version' => '0.0.1', 'component' => 'library'),
         'router' =>  array('version' => '0.0.1', 'component' => 'library'),
         'request' => array('version' => '0.0.1', 'component' => 'helper'),

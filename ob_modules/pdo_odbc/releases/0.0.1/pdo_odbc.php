@@ -317,5 +317,5 @@ Class Pdo_Odbc extends Pdo_Database_Adapter
 } // end class.
 
 
-/* End of file Database_odbc.php */
-/* Location: ./obullo/libraries/drivers/database/Database_odbc.php */
+/* End of file Pdo_Odbc.php */
+/* Location: ./ob_modules/pdo_odbc/releases/0.0.1/pdo_odbc.php */
