@@ -1,5 +1,5 @@
 <?php
-  
+
 Class UserSchema 
 {
     public $config = array(
@@ -29,6 +29,8 @@ Class UserSchema
     'rules' => 'required|trim|valid_email'
     );
 }
+
+
 Class User extends Odm
 {
     function __construct($schema)

@@ -14,7 +14,7 @@
  * @param string $realname
  * @return
  */
-function ob_autoload($realname)
+function obullo_autoloader($realname)
 {    
     if(class_exists($realname))
     {
@@ -25,11 +25,52 @@ function ob_autoload($realname)
     
     if($realname == 'Model') // Database files.
     {
-        require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .strtolower($realname). EXT);
+        require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'model'. EXT);
         
         return;
     }
-   
+    
+    if($realname == 'Model\\Model') // Database files.
+    {
+        require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'model'. EXT);
+        
+        return;
+    }
+    
+    if($realname == 'Model\\Odm') // Database files.
+    {
+        require(OB_MODULES .'odm'. DS .'releases'. DS .$packages['dependencies']['odm']['version']. DS .'odm'. EXT);
+        return;
+    }
+    
+    if(strpos($realname, 'Model\\') === 0)
+    {   
+        if(class_exists($realname))
+        {
+            return;
+        }
+        
+        $model_parts = explode('\\', $realname);
+
+        if(isset($model_parts[2]))  //  Directory Request
+        {
+            $model_name = $model_parts[2];
+            $model_path = MODULES .strtolower($model_parts[1]) . DS .'models'. DS .strtolower($model_name). EXT;
+        } 
+        else 
+        {   $model_name = $model_parts[1];
+            $model_path = MODULES .'models'. DS .strtolower($model_name). EXT;
+        }
+        
+        if(class_exists($model_name))
+        {
+            return;
+        }
+        
+        require($model_path);
+        return;
+    }
+    
     $package_filename = mb_strtolower($realname, config('charset'));
 
     if(isset($packages['dependencies'][$package_filename]['component']) AND $packages['dependencies'][$package_filename]['component'] == 'library') //  check package Installed.
@@ -39,7 +80,7 @@ function ob_autoload($realname)
     } 
 }
 
-spl_autoload_register('ob_autoload', true);
+spl_autoload_register('obullo_autoloader', true);
 
 // --------------------------------------------------------------------
 
