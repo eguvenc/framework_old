@@ -62,15 +62,6 @@ if (defined('ENV'))
 
 /**
 |--------------------------------------------------------------------------
-| DIRECTORY SEPERATOR
-|--------------------------------------------------------------------------
-| Friendly Directory Seperator
-|
-*/
-define('DS',   DIRECTORY_SEPARATOR);
-
-/**
-|--------------------------------------------------------------------------
 | Set Default Time Zone Identifer.
 |--------------------------------------------------------------------------
 |                                                                 
@@ -82,18 +73,7 @@ date_default_timezone_set('America/Chicago');
 
 /**
 |---------------------------------------------------------------
-| FOLDER CONSTANTS
-|---------------------------------------------------------------
-*/
-define('ROOT',  realpath(dirname(__FILE__)) . DS);
-define('BASE', ROOT .'obullo'. DS);
-define('APP',  ROOT .'app'. DS);
-define('MODULES',  ROOT .'modules'. DS);
-define('OB_MODULES',  ROOT .'ob_modules'. DS);
-
-/**
-|---------------------------------------------------------------
-| UNDERSTANDING CONSTANTS
+| UNDERSTANDING ESSENTIAL CONSTANTS
 |---------------------------------------------------------------
 | DS          - The DIRECTORY SEPERATOR
 | EXT         - The file extension.  Typically ".php"
@@ -101,17 +81,28 @@ define('OB_MODULES',  ROOT .'ob_modules'. DS);
 | FCPATH      - The full server path to THIS file
 | PHP_PATH    - The php path of your server
 | FPATH       - The full server path without file
-| ROOT        - The root path of your server
-| BASE        - The full server path to the "obullo" folder
-| APP         - The full server path to the "application" folder
-| MODULES     - The full server path to the "modules" folder
-| TASK_FILE   - Set your task (CLI) file name that we use it in task helper.
 */
+define('DS',   DIRECTORY_SEPARATOR);
 define('EXT',  '.php');
+define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 define('FCPATH', __FILE__);
 define('PHP_PATH', '/usr/bin/php'); 
-define('FPATH', dirname(__FILE__));  
-define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+define('FPATH', dirname(__FILE__));
+
+/**
+|---------------------------------------------------------------
+| UNDERSTANDING APP CONSTANTS
+|---------------------------------------------------------------
+| ROOT        - The root path of your server
+| APP         - The full server path to the "app" folder
+| MODULES     - The full server path to the "modules" folder
+| OB_MODULES  - The full server path to the "ob" folder
+| TASK_FILE   - Set your task (CLI) file name that we use it in task helper.
+*/
+define('ROOT',  realpath(dirname(__FILE__)) . DS);
+define('APP',  ROOT .'app'. DS);
+define('MODULES',  ROOT .'modules'. DS);
+define('OB_MODULES',  ROOT .'ob'. DS);
 define('TASK_FILE', 'task');
 
 /**
@@ -174,7 +165,7 @@ if(defined('STDIN'))
 // --------------------------------------------------------------------
 
 /**
-* Loads the (static) config or language files.
+* Loads the (static) config files.
 *
 * @access    private
 * @author    Obullo Team
@@ -199,16 +190,13 @@ function get_static($filename = 'config', $var = '', $folder = '')
             $var = &$filename;
         }
 
-        if($filename != 'autoload' AND $filename != 'constants')
+        if ( ! isset($$var) OR ! is_array($$var))
         {
-            if ( ! isset($$var) OR ! is_array($$var))
-            {
-                $error_msg = 'The static file '. $folder. DS .$filename. EXT .' file does not appear to be formatted correctly.';
-                
-                log_me('debug', $error_msg);
-                
-                throw new Exception($error_msg);
-            }
+            $error_msg = 'The static file '. $folder. DS .$filename. EXT .' file does not appear to be formatted correctly.';
+
+            log_me('debug', $error_msg);
+
+            throw new Exception($error_msg);
         }
 
         $variables[$key] =& $$var;
@@ -243,7 +231,6 @@ function get_config($filename = 'config', $var = '', $folder = '')
 }
 
 $packages = get_config('packages');
-
 
 // --------------------------------------------------------------------
 

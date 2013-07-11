@@ -1,0 +1,40 @@
+{
+  "name": "uri",
+  "description": "Uri class, parses framework uri and determines routing.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ersin Güvenç",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
+  "component" : "library",
+  "keywords": [
+    "uri",
+    "url",
+    "url parser",
+    "request url",
+    "query string",
+    "request uri"
+  ],
+  "homepage": "https://github.com/obullo/uri",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/uri.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/uri/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.2.4",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/uri/issues",
+    "email": "eguvenc@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

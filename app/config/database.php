@@ -4,15 +4,17 @@
 |--------------------------------------------------------------------------
 | Database Settings
 |--------------------------------------------------------------------------
-| Choose your database layer
-  Put your static database configurations here and decide your db variable
-| name. 
-| You will use it in your application using $this->db .
+| Put your database configurations here and decide your db variable name.
+| You database variable will available like following the example.
 | 
-| $database['db']['option']  db variable name ( default is 'db' )
+|   $this->db->method();
 | 
-| Prototype: 
-|   $database['db']['options']  = array( PDO::ATTR_PERSISTENT => FALSE ); 
+| $database['db']  default variable name is 'db'.
+| 
+| Prototypes: 
+|
+|   $database['db']['hostname']  = 'localhost';
+|   $database['db']['options']   = array( PDO::ATTR_PERSISTENT => FALSE ); 
 | 
 */
 $database['db']['hostname']  = 'localhost';

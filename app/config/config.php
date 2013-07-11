@@ -6,11 +6,11 @@
 |--------------------------------------------------------------------------
 |
 |    Base Url      "/"                       URL to your Obullo root, generally a '/' trailing slash.
-|    Domain Name   "Domain Name"             Name of your domain like Obullo. ( without .com ).
+|    Domain Root   "http://your-domain.com"  Full url of your domain.
 |
 */
 $config['base_url']              = '/';
-$config['domain_name']           = 'yourdomainname';
+$config['domain_root']           = (ENV == 'LIVE') ? 'http://your-domain.com' : 'http://localhost';
 
 /*
 |--------------------------------------------------------------------------
@@ -43,11 +43,8 @@ $config['public_url']            = '/';
 | Obullo use error_reporting function default as error_reporting(0), 
 | however Obullo can catch all php errors and show them friendly.
 |
-| @see error constants http://usphp.com/manual/en/errorfunc.constants.php
-|
 |   0 - Turn off all error reporting (0)
 |   1 - All errors  = E_ALL;
-|   OR String (Custom Regex)
 |
 |   String - Custom Regex Mode Examples:
 |
