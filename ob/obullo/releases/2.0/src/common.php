@@ -23,23 +23,18 @@ function obullo_autoloader($realname)
    
     $packages = get_config('packages');
     
-    if($realname == 'Model') // Database files.
+    if($realname == 'Ob\Model') // Database files.
     {
         require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'model'. EXT);
-        
         return;
     }
-    
-    if($realname == 'Model\\Model') // Database files.
-    {
-        require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'model'. EXT);
         
-        return;
-    }
-    
-    if($realname == 'Model\\Odm') // Database files.
-    {
-        require(OB_MODULES .'odm'. DS .'releases'. DS .$packages['dependencies']['odm']['version']. DS .'odm'. EXT);
+    if(strpos($realname, 'Ob\\') === 0)  // Call Obullo modules from ob/ directory.
+    {  
+        $ob_parts   = explode('\\', $realname);
+        $ob_library = strtolower($ob_parts[1]);
+        
+        require(OB_MODULES .$ob_library. DS .'releases'. DS .$packages['dependencies'][$ob_library]['version']. DS .$ob_library. EXT);
         return;
     }
     
@@ -54,19 +49,21 @@ function obullo_autoloader($realname)
 
         if(isset($model_parts[2]))  //  Directory Request
         {
+            if($model_parts[2] == 'Odm')
+            {
+                require(OB_MODULES .'odm'. DS .'releases'. DS .$packages['dependencies']['odm']['version']. DS .'odm'. EXT);
+                return;
+            }
+            
             $model_name = $model_parts[2];
             $model_path = MODULES .strtolower($model_parts[1]) . DS .'models'. DS .strtolower($model_name). EXT;
         } 
         else 
-        {   $model_name = $model_parts[1];
+        {   
+            $model_name = $model_parts[1];
             $model_path = MODULES .'models'. DS .strtolower($model_name). EXT;
         }
-        
-        if(class_exists($model_name))
-        {
-            return;
-        }
-        
+
         require($model_path);
         return;
     }

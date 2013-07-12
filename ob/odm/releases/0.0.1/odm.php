@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
  * OBJECT DATA MODEL
