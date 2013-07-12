@@ -81,7 +81,7 @@ Class Obullo
         
         if ( ! class_exists($router->fetch_class()) OR $router->fetch_method() == 'controller' 
               OR $router->fetch_method() == '_output'       // security fix.
-              OR $router->fetch_method() == '_instance'
+              OR $router->fetch_method() == '_ob_getInstance_'
               OR in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods('Controller')))
             )
         {

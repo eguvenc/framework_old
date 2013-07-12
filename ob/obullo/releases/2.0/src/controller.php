@@ -83,7 +83,7 @@ Class Controller {
     * @param type $new_instance
     * @return type 
     */
-    public static function __obullo_instance($new_instance = '')
+    public static function _ob_getInstance_($new_instance = '')
     {   
         if(is_object($new_instance))
         {
@@ -106,10 +106,10 @@ function getInstance($new_instance = '')
 { 
     if(is_object($new_instance))  // fixed HMVC object type of integer bug in php 5.1.6
     {
-        Controller::__obullo_instance($new_instance);
+        Controller::_ob_getInstance_($new_instance);
     }
     
-    return Controller::__obullo_instance(); 
+    return Controller::_ob_getInstance_(); 
 }
 
 // END Controller Class
