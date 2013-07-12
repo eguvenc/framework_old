@@ -1,26 +1,29 @@
 <?php
+namespace Ob {
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
- * Obullo Error Helper
- *
- * @package     Obullo
- * @subpackage  error
- * @category    Helpers
- * @author      Obullo Team
- * @link        
- */
-
-/**
-* Catch All Exceptions
-* 
-* @param  object $e
-* @return void
-*/
-if( ! function_exists('Obullo_Exception_Handler')) 
-{
-    function Obullo_Exception_Handler($e, $type = '')
+    /**
+    * Error Helper
+    *
+    * @package     Obullo
+    * @subpackage  error
+    * @category    Helpers
+    * @author      Obullo Team
+    * @link        
+    */
+    Class error
+    {
+        // Constructor
+    }
+    
+    /**
+    * Catch All Exceptions
+    * 
+    * @param  object $e
+    * @return void
+    */
+    function exception_handler($e, $type = '')
     {   
         $shutdown_errors = array(
         'ERROR'            => 'ERROR',            // E_ERROR 
@@ -28,106 +31,103 @@ if( ! function_exists('Obullo_Exception_Handler'))
         'COMPILE ERROR'    => 'COMPILE ERROR',    // E_COMPILE_ERROR   
         'USER FATAL ERROR' => 'USER FATAL ERROR', // E_USER_ERROR
         );
-        
+
         if(isset($shutdown_errors[$type]))  // We couldn't use any object for shutdown errors.
         {
             $type  = ucwords(strtolower($type));
             $code  = $e->getCode();
             $level = config('error_reporting');
-    
+
             if(defined('STDIN'))  // If Command Line Request.
             {
                 echo $type .': '. $e->getMessage(). ' File: ' .error_secure_path($e->getFile()). ' Line: '. $e->getLine(). "\n";
-                
+
                 $cmd_type = (defined('TASK')) ? 'Task' : 'Cmd';
-                
+
                 log_me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), true);
-                
+
                 return;
             }
-    
+
             if($level > 0 OR is_string($level))  // If user want to display all errors
             {
                 // $errors = error_get_defined_errors();
-                
+
                 if(is_numeric($level)) 
                 {
                     switch ($level) 
                     {              
-                       case  0: return; break; 
-                       case  1: include(APP .'errors'. DS .'ob_exception'. EXT); return; break;
+                        case  0: return; break; 
+                        case  1: include(APP .'errors'. DS .'ob_exception'. EXT); return; break;
                     }   
                 }       
-                                 
+
                 $rules = error_parse_regex($level); 
-                
+
                 if($rules == FALSE) 
                 {
                     return;
                 }
-                
+
                 $allowed_errors = error_get_allowed_errors($rules);  // Check displaying error enabled for current error.
-    
+
                 if(isset($allowed_errors[$code]))
                 {
                     include(APP .'errors'. DS .'ob_exception'. EXT);
                 }
-                
+
             }
             else  // If error_reporting = 0, we show a blank page template.
             {
                 include(APP .'errors'. DS .'ob_disabled_error'. EXT);
             }
-            
+
             log_me('error', $type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), true); 
-             
+
         } 
         else  // Is It Exception ?
         {             
-            $exception = new Exceptions();
-            
+            $exception = new Ob\Exception();
+
             if(is_object($exception)) 
             {           
                 $exception->write($e, $type);
             }
         }
-        
+
         return;
-    }    
-}   
+    }
 
-// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-/**
-* Main Error Handler
-* Predefined error constants
-* http://usphp.com/manual/en/errorfunc.constants.php
-* 
-* 1     E_ERROR
-* 2     E_WARNING
-* 4     E_PARSE
-* 8     E_NOTICE
-* 16    E_CORE_ERROR
-* 32    E_CORE_WARNING
-* 64    E_COMPILE_ERROR
-* 128   E_COMPILE_WARNING
-* 256   E_USER_ERROR
-* 512   E_USER_WARNING
-* 1024  E_USER_NOTICE
-* 2048  E_STRICT
-* 4096  E_RECOVERABLE_ERROR
-* 8192  E_DEPRECATED
-* 16384 E_USER_DEPRECATED
-* 30719 E_ALL
-* 
-* @param int $errno
-* @param string $errstr
-* @param string $errfile
-* @param int $errline
-*/
-if( ! function_exists('Obullo_Error_Handler')) 
-{
-    function Obullo_Error_Handler($errno, $errstr, $errfile, $errline)
+    /**
+    * Main Error Handler
+    * Predefined error constants
+    * http://usphp.com/manual/en/errorfunc.constants.php
+    * 
+    * 1     E_ERROR
+    * 2     E_WARNING
+    * 4     E_PARSE
+    * 8     E_NOTICE
+    * 16    E_CORE_ERROR
+    * 32    E_CORE_WARNING
+    * 64    E_COMPILE_ERROR
+    * 128   E_COMPILE_WARNING
+    * 256   E_USER_ERROR
+    * 512   E_USER_WARNING
+    * 1024  E_USER_NOTICE
+    * 2048  E_STRICT
+    * 4096  E_RECOVERABLE_ERROR
+    * 8192  E_DEPRECATED
+    * 16384 E_USER_DEPRECATED
+    * 30719 E_ALL
+    * 
+    * @param int $errno
+    * @param string $errstr
+    * @param string $errfile
+    * @param int $errline
+    */
+    function error_handler($errno, $errstr, $errfile, $errline)
     {                           
         if ($errno == 0) return;  
         
@@ -151,36 +151,18 @@ if( ! function_exists('Obullo_Error_Handler'))
             case '30719':   $type = 'ERROR'; break;             // E_ALL
         }
         
-        Obullo_Exception_Handler(new ErrorException( $errstr, $errno, 0, $errfile, $errline), $type);   
-        
+        exception_handler(new \ErrorException($errstr, $errno, 0, $errfile, $errline), $type);   
         return;
-    }          
-}
-    
-// -------------------------------------------------------------------- 
-
-/**
- * Fix the error_get_last() function
- * if php version < 5.2.0
- */
-if( ! function_exists('error_get_last') )
-{
-    function error_get_last()
-    {
-        return FALSE;
     }
-}
 
-// -------------------------------------------------------------------- 
+    // -------------------------------------------------------------------- 
 
-/**
-* Catch last occured errors.
-* 
-* @return void
-*/
-if( ! function_exists('Obullo_Shutdown_Handler')) 
-{
-    function Obullo_Shutdown_Handler()
+    /**
+    * Catch last occured errors.
+    * 
+    * @return void
+    */
+    function shutdown_handler()
     {                      
         $error = error_get_last();
                          
@@ -196,22 +178,19 @@ if( ! function_exists('Obullo_Shutdown_Handler'))
         );
 
         $type = (isset($shutdown_errors[$error['type']])) ? $shutdown_errors[$error['type']] : '';
-        
-        Obullo_Exception_Handler(new ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']), $type);
+
+        exception_handler(new \ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']), $type);
     }
-}
 
-// --------------------------------------------------------------------  
+    // --------------------------------------------------------------------  
 
-/**
-* Don't show root paths for security
-* reason.
-* 
-* @param  string $file
-* @return 
-*/
-if( ! function_exists('error_secure_path')) 
-{
+    /**
+    * Don't show root paths for security
+    * reason.
+    * 
+    * @param  string $file
+    * @return 
+    */
     function error_secure_path($file, $search_paths = FALSE)
     {
         if($search_paths)
@@ -240,22 +219,19 @@ if( ! function_exists('error_secure_path'))
 
         return $file;  
     }
-}
 
-// --------------------------------------------------------------------
- 
-/**
-* Dump arguments
-* This function borrowed from Kohana Php Framework
-* 
-* @author Ersin Guvenc
-* @param  mixed $var
-* @param  integer $length
-* @param  integer $level
-* @return mixed
-*/
-if( ! function_exists('error_dump_argument')) 
-{
+    // --------------------------------------------------------------------
+
+    /**
+    * Dump arguments
+    * This function borrowed from Kohana Php Framework
+    * 
+    * @author Ersin Guvenc
+    * @param  mixed $var
+    * @param  integer $length
+    * @param  integer $level
+    * @return mixed
+    */
     function error_dump_argument(& $var, $length = 128, $level = 0)
     {
         if ($var === NULL)
@@ -423,23 +399,20 @@ if( ! function_exists('error_dump_argument'))
             return '<small>'.gettype($var).'</small> '.htmlspecialchars(print_r($var, TRUE), ENT_NOQUOTES, config('charset'));
         }
     }
-}
 
-// -------------------------------------------------------------------- 
+    // -------------------------------------------------------------------- 
 
-/**
-* Write File Source
-* This function borrowed from Kohana Php Framework.
-* 
-* @author Ersin Guvenc
-* @param  resource $file
-* @param  mixed $line
-* @param  mixed $padding
-* 
-* @return boolean | string
-*/
-if( ! function_exists('error_write_file_source')) 
-{
+    /**
+    * Write File Source
+    * This function borrowed from Kohana Php Framework.
+    * 
+    * @author Ersin Guvenc
+    * @param  resource $file
+    * @param  mixed $line
+    * @param  mixed $padding
+    * 
+    * @return boolean | string
+    */
     function error_write_file_source($trace, $key = 0, $prefix = '')
     {
         $debug = config('debug_backtrace'); 
@@ -492,17 +465,14 @@ if( ! function_exists('error_write_file_source'))
         
         return '<div id="error_toggle_'.$prefix.$key.'" '.$display.'><pre class="source"><code>'.$source.'</code></pre></div>';
     }
-}
 
-// -------------------------------------------------------------------- 
+    // -------------------------------------------------------------------- 
 
-/**
-* Debug Backtrace
-* 
-* @param mixed $e
-*/
-if( ! function_exists('error_debug_backtrace')) 
-{
+    /**
+    * Debug Backtrace
+    * 
+    * @param mixed $e
+    */
     function error_debug_backtrace($e)
     {
         $trace = $e->getTrace();      // Get the exception backtrace
@@ -527,20 +497,18 @@ if( ! function_exists('error_debug_backtrace'))
         
         return $trace;
     }
-}
 
-//-----------------------------------------------------------------------
+    //-----------------------------------------------------------------------
 
-/**
-* Get Defined Php and Obullo Errors
-* 
-* @return array
-*/
-if( ! function_exists('error_get_defined_errors')) 
-{
+    /**
+    * Get Defined Php and Obullo Errors
+    * 
+    * @return array
+    */
     function error_get_defined_errors()
     {
         $errors = array();
+        
         // Shutdown Errors
         //------------------------------------------------------------------------ 
         $errors['1']     = 'E_ERROR';             // ERROR
@@ -570,22 +538,19 @@ if( ! function_exists('error_get_defined_errors'))
                 
         return $errors;
     }
-}
     
-//-----------------------------------------------------------------------
+    //-----------------------------------------------------------------------
 
-/**
-* Parse php native error notations 
-* e.g. E_NOTICE | E_WARNING
-* 
-* @author Ersin Guvenc
-* @param  mixed $string
-* @return array
-*/
-if( ! function_exists('error_parse_regex')) 
-{
-    function error_parse_regex($string)
-    {
+    /**
+    * Parse php native error notations 
+    * e.g. E_NOTICE | E_WARNING
+    * 
+    * @author Ersin Guvenc
+    * @param  mixed $string
+    * @return array
+    */
+     function error_parse_regex($string)
+     {
         if(strpos($string, '(') > 0)  // (E_NOTICE | E_WARNING)     
         {
             if(preg_match('/\(.*?\)/s', $string, $matches))
@@ -642,63 +607,60 @@ if( ! function_exists('error_parse_regex'))
         
         return FALSE;
     }
-}
 
-//-----------------------------------------------------------------------
+    //-----------------------------------------------------------------------
 
-/**
-* Parse allowed errors
-* 
-* @param array $rules
-*/
-if( ! function_exists('error_get_allowed_errors')) 
-{
+    /**
+    * Parse allowed errors
+    * 
+    * @param array $rules
+    */
     function error_get_allowed_errors($rules) 
     {
         if( ! isset($rules['IN'])) return array();
-        
+
         $defined_errors = array_flip(error_get_defined_errors());
         $all_errors     = array_keys($defined_errors);
-        
+
         if(count($rules['IN']) > 0)
         {
             $allow_errors = array_values($rules['IN']); 
-            
+
             if(in_array('E_ALL', $rules['IN'], TRUE))
             {
                 $allow_errors = array_unique(array_merge($all_errors, array_values($rules['IN'])));
             }
-        
+
             if(count($rules['OUT']) > 0)
             {
                 $allowed_errors = array_diff($allow_errors, $rules['OUT']);
             }
-                             
+
             unset($allow_errors);
-                        
+
             $error_result = array();     
             foreach($allowed_errors as $error)
             {
                 if(isset($defined_errors[$error]))
                 {
-                   $error_result[$defined_errors[$error]] = $error;
+                    $error_result[$defined_errors[$error]] = $error;
                 }
             }
-            
+
             unset($allowed_errors);
-            
+
             return $error_result;
         }
     }
-}
                
-// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-set_error_handler('Obullo_Error_Handler');   
-set_exception_handler('Obullo_Exception_Handler');
-register_shutdown_function('Obullo_Shutdown_Handler');  
-
-// Enable the Obullo shutdown handler, which catches E_FATAL errors.
+    set_error_handler('Ob\error_handler');   
+    set_exception_handler('Ob\exception_handler');
+    register_shutdown_function('Ob\shutdown_handler');
+    
+    // Enable the Obullo shutdown handler, which catches E_FATAL errors.
+}
 
 // END error.php File
 

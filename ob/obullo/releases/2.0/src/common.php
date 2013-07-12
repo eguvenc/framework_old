@@ -15,7 +15,7 @@
  * @return
  */
 function obullo_autoloader($realname)
-{    
+{           
     if(class_exists($realname))
     {
         return;
@@ -31,6 +31,12 @@ function obullo_autoloader($realname)
         
     if(strpos($realname, 'Ob\\') === 0)  // Call Obullo modules from ob/ directory.
     {  
+        $package_filename = substr(mb_strtolower($realname, config('charset')),3);
+        if( ! isset($packages['dependencies'][$package_filename]['component'])) //  check package Installed.
+        {
+            exit('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');
+        }
+
         $ob_parts   = explode('\\', $realname);
         $ob_library = strtolower($ob_parts[1]);
         
@@ -67,46 +73,9 @@ function obullo_autoloader($realname)
         require($model_path);
         return;
     }
-    
-    $package_filename = mb_strtolower($realname, config('charset'));
-
-    if(isset($packages['dependencies'][$package_filename]['component']) AND $packages['dependencies'][$package_filename]['component'] == 'library') //  check package Installed.
-    {
-        require(OB_MODULES .$package_filename. DS .'releases'. DS .$packages['dependencies'][$package_filename]['version']. DS .$package_filename. EXT);
-        return;
-    } 
 }
 
 spl_autoload_register('obullo_autoloader', true);
-
-// --------------------------------------------------------------------
-
-/**
-* Error and Debug Logging
-*
-* We use this as a simple mechanism to access the logging
-* functions and send messages to be logged.
-*
-* @access    public
-* @return    void
-*/
-if( ! function_exists('log_me') ) 
-{
-    function log_me($level = 'error', $message = '')
-    {    
-        if (config('log_threshold') == 0)
-        {
-            return;
-        }
-        
-        if(package_exists('log'))
-        {
-            log_write($level, $message);
-        }
-        
-        return;
-    }
-}
 
 // --------------------------------------------------------------------
 
@@ -232,32 +201,6 @@ function is_really_writable($file)
     fclose($fp);
     
     return TRUE;
-}
-
-// --------------------------------------------------------------------
-
-/**
-* Determines if the current version of PHP is greater then the supplied value
-*
-* Since there are a few places where we conditionally test for PHP > 5
-* we'll set a static variable.
-*
-* @access   public
-* @param    string
-* @return   bool
-*/
-function is_php($version = '5.0.0')
-{
-    static $_is_php = array();
-    
-    $version = (string)$version;
-
-    if ( ! isset($_is_php[$version]))
-    {
-        $_is_php[$version] = (version_compare(PHP_VERSION, $version) < 0) ? FALSE : TRUE;
-    }
-
-    return $_is_php[$version];
 }
 
 // ------------------------------------------------------------------------

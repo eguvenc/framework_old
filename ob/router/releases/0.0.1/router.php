@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
  /**
  * Router Class
@@ -81,6 +82,7 @@ Class Router {
         $this->_set_routing();         
         
         log_me('debug', 'Router Class Initialized');
+   
     }
     
     // --------------------------------------------------------------------
@@ -529,4 +531,4 @@ Class Router {
 // END Router Class
 
 /* End of file Router.php */
-/* Location: ./ob/router/releases/0.0.1/Router.php */
+/* Location: ./ob/router/releases/0.0.1/router.php */

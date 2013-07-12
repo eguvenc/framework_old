@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
 * Fetch a item of text from the language array
@@ -8,15 +9,12 @@
 * @return   string
 */
 
-if( ! function_exists('lang') ) 
+function lang($item = '')
 {
-    function lang($item = '')
-    {
-        $locale = Locale::getInstance();
-        $item = ($item == '' OR ! isset($locale->language[$item])) ? FALSE : $locale->language[$item];
-        
-        return $item;
-    }
+    $locale = Locale::getInstance();
+    $item = ($item == '' OR ! isset($locale->language[$item])) ? FALSE : $locale->language[$item];
+
+    return $item;
 }
 
 // --------------------------------------------------------------------

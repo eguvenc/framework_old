@@ -12,7 +12,7 @@
 $packages = array(
     'name' => 'Obullo',
     'version' => '2.0',
-    'db_class' => 'Database_PDO',
+    'db_class' => 'Database_Pdo',
     'dependencies' => array(
         'auth'  => array('version' => '0.0.1', 'component' => 'library'),
         'agent'  => array('version' => '0.0.1', 'component' => 'library'),

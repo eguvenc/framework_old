@@ -19,22 +19,24 @@ Class Obullo
     {   
         $packages = get_config('packages');
         
-        require (APP  .'config'. DS .'constants'. EXT);  // application constants.
+        require (APP  .'config'. DS .'constants'. EXT);  // app constants.
         require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'common'. EXT);
         require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'loader'. EXT);
 
-        if ( ! is_php('5.3')) // Kill magic quotes 
+        if(package_exists('log')) // check log package is installed.
         {
-            @set_magic_quotes_runtime(0); 
-        }   
+            new Ob\log();
+        }
+        
+        if(package_exists('error')) // check log package is installed.
+        {
+            new Ob\error();
+        }
+        
+        $uri    = Ob\Uri::getInstance(); 
+        $router = Ob\Router::getInstance();
 
-        loader::helper('ob/log');
-        loader::helper('ob/error');
-
-        $uri    = Uri::getInstance(); 
-        $router = Router::getInstance();
-
-        Locale::getInstance();
+        Ob\Locale::getInstance();
         Benchmark::getInstance();
         Input::getInstance();
         

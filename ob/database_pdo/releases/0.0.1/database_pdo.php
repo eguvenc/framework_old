@@ -15,7 +15,7 @@ require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies
  * @version         0.1
  * 
  */
-Class Database_PDO {
+Class Database_Pdo {
     
     /**
     * Constructor

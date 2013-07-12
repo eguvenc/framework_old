@@ -1,4 +1,6 @@
 <?php
+namespace Ob;
+
 
 /**
  * Exceptions Class
@@ -8,7 +10,7 @@
  * @category      Exceptions
  * @link
  */
-Class Exceptions {
+Class Exception {
 
     function __construct()
     {
