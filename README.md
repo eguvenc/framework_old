@@ -24,10 +24,10 @@ Obullo-2.0 WILL HAVE THESE FEATURES:
         Ob\i\get('');
 
         // Initializing a model
-        $model = Model\User;
+        $model = new Model\User;
 
         // Initializing a package
-        $email = Ob\Email();
+        $email = new Ob\Email();
         $email->init();
 
         // Sessions
@@ -39,6 +39,6 @@ Obullo-2.0 WILL HAVE THESE FEATURES:
         echo Ob\view\get('welcome');
         
         // loading database        
-        Ob\database\load();
+        new Ob\Database;
         
         $results = $this->db->select()->get('table');
