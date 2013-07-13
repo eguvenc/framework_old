@@ -15,7 +15,7 @@ Obullo-2.0 WILL HAVE THESE FEATURES:
 - Extended Mongodb Support
 - Derived from Codeigniter
 - Php5 Namespaces & Autoloaders
-- some examples
+- Programming enjoyable with Obullo !
         
         // logging
         Ob\log\me('debug', 'this is my first log');
