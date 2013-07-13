@@ -25,7 +25,7 @@ Class Zip {
     
     public function __construct()
     {
-        log_me('debug', "Zip Compression Class Initialized");
+        log\me('debug', "Zip Compression Class Initialized");
     }
 
     // --------------------------------------------------------------------

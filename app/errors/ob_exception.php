@@ -57,7 +57,7 @@ function Obullo_Error_Toggle(obj){
 </script>
 
 <div id="exception_content">
-<b>(<?php echo $type ?>):  <?php echo Ob\error_secure_path($e->getMessage(), true); ?></b><br />
+<b>(<?php echo $type ?>):  <?php echo Ob\error\secure_path($e->getMessage(), true); ?></b><br />
 <?php 
 if(isset($sql)) 
 {
@@ -65,16 +65,16 @@ if(isset($sql))
 }
 ?>
 <?php $code = ($e->getCode() != 0) ? ' Code : '. $e->getCode() : ''; ?> 
-<span class="errorfile"><?php echo Ob\error_secure_path($e->getFile()) ?><? echo $code; ?><? echo ' ( Line : '.$e->getLine().' ) '; ?></span>
+<span class="errorfile"><?php echo Ob\error\secure_path($e->getFile()) ?><? echo $code; ?><? echo ' ( Line : '.$e->getLine().' ) '; ?></span>
 <?php 
-$debug  = config('debug_backtrace');
+$debug  = Ob\config('debug_backtrace');
 if($debug['enabled'] === TRUE OR $debug['enabled'] == 1)  // Covert to readable format
 {
     $debug['enabled'] = 'E_ALL';
 } 
-$rules  = Ob\error_parse_regex($debug['enabled']);
-$e_code = (substr($e->getMessage(),0,3) == 'SQL') ? 'SQL' : $e->getCode(); 
-$allowed_errors =Ob\error_get_allowed_errors($rules);  
+$rules  = Ob\error\parse_regex($debug['enabled']);
+$e_code = (substr($e->getMessage(),0,3) == 'SQL') ? 'SQL' : $e->getCode();
+$allowed_errors = Ob\error\get_allowed_errors($rules);  
 
 if(is_string($debug['enabled'])) 
 {
@@ -83,7 +83,7 @@ if(is_string($debug['enabled']))
     $e_trace['file'] = $e->getFile();
     $e_trace['line'] = $e->getLine();
 
-    echo Ob\error_write_file_source($e_trace);
+    echo Ob\error\write_file_source($e_trace);
     
     if( ! isset($allowed_errors[$e_code]))   // Check debug_backtrace enabled for current error. 
     {
@@ -92,7 +92,7 @@ if(is_string($debug['enabled']))
     
     // ------------------------------------------------------------------------
     
-    $full_traces = Ob\error_debug_backtrace($e);
+    $full_traces = Ob\error\debug_backtrace($e);
 
     $debug_traces = array();
     foreach($full_traces as $key => $val)
@@ -161,7 +161,7 @@ if(is_string($debug['enabled']))
                                 } 
                                 else 
                                 {
-                                    $class_info.= '<td>'.Ob\error_dump_argument($arg_val).'</td>';
+                                    $class_info.= '<td>'.Ob\error\dump_argument($arg_val).'</td>';
                                 }
                                 
                                 $class_info.= '</tr>'; 
@@ -188,14 +188,14 @@ if(is_string($debug['enabled']))
                 ?>
                 
                 <span class="errorfile" style="line-height: 1.8em;">
-                <a href="javascript:void(0);" onclick="Obullo_Error_Toggle('error_toggle_' + '<?php echo $prefix.$key?>');"><?php echo error_secure_path($trace['file']); echo ' ( '?><?php echo ' Line : '.$trace['line'].' ) '; ?></a>
+                <a href="javascript:void(0);" onclick="Obullo_Error_Toggle('error_toggle_' + '<?php echo $prefix.$key?>');"><?php echo Ob\error\secure_path($trace['file']); echo ' ( '?><?php echo ' Line : '.$trace['line'].' ) '; ?></a>
                 </span>
         
                 <?php 
                 // Show source codes foreach traces
                 // ------------------------------------------------------------------------
                 
-                echo Ob\error_write_file_source($trace, $key, $prefix);
+                echo Ob\error\write_file_source($trace, $key, $prefix);
                 
                 // ------------------------------------------------------------------------
                 ?>

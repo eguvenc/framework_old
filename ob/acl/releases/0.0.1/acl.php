@@ -30,7 +30,7 @@ Class Acl {
     */
     public function __construct()
     {
-        log_me('debug', "Acl Class Initialized");
+        log\me('debug', "Acl Class Initialized");
     }
    
     /**

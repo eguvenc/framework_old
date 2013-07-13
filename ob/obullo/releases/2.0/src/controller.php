@@ -33,7 +33,7 @@ Class Controller {
         
         $autoload = get_static('autoload', '', APP .'config');
         
-        log_me('debug', 'Application Autoload Initialized');
+        log\me('debug', 'Application Autoload Initialized');
 
         if(is_array($autoload))
         {
@@ -54,7 +54,7 @@ Class Controller {
         
         $autorun = get_static('autorun', '', APP .'config');
         
-        log_me('debug', 'Application Autorun Initialized');
+        log\me('debug', 'Application Autorun Initialized');
 
         if(isset($autorun['function']))
         {

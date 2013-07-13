@@ -30,7 +30,7 @@ Class View {
     */
     public function __construct()
     {
-        log_me('debug', "View Class Initialized");
+        log\me('debug', "View Class Initialized");
     }
     
     // ------------------------------------------------------------------------
@@ -92,7 +92,7 @@ Class View {
 
         include($path . $filename . EXT);
         
-        log_me('debug', ucfirst($func).' file loaded: '.error_secure_path($path). $filename . EXT);
+        log\me('debug', ucfirst($func).' file loaded: '.error_secure_path($path). $filename . EXT);
 
         if($string === TRUE)
         {

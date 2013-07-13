@@ -16,7 +16,7 @@ Class Doly extends Controller {
        
         echo br(2);
         
-        log_me('debug', 'Default module example log message saved to /MODULES/default/core/logs/ folder !');
+        log\me('debug', 'Default module example log message saved to /MODULES/default/core/logs/ folder !');
         
         echo anchor('default/subdir', 'Try Subfolder !');
     }

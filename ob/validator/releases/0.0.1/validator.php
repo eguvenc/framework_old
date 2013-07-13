@@ -38,7 +38,7 @@ Class Validator {
             mb_internal_encoding(config('charset'));
         }
     
-        log_me('debug', "Validator Class Initialized");
+        log\me('debug', "Validator Class Initialized");
     }
 
     // --------------------------------------------------------------------
@@ -335,7 +335,7 @@ Class Validator {
             // We're we able to set the rules correctly?
             if (count($this->_field_data) == 0)
             {
-                log_me('debug', "Unable to find validation rules");
+                log\me('debug', "Unable to find validation rules");
                 return FALSE;
             }
         }

@@ -51,7 +51,7 @@ Class Hmvc
     
     public function __construct()
     {
-        log_me('debug', "Hmvc Class Initialized");
+        log\me('debug', "Hmvc Class Initialized");
     }
 
     // --------------------------------------------------------------------
@@ -423,8 +423,8 @@ Class Hmvc
 
         $this->_reset_router();    
                        
-        log_me('debug', 'Hmvc process completed succesfully.');
-        log_me('info', 'Hmvc output: '.$this->_response());
+        log\me('debug', 'Hmvc process completed succesfully.');
+        log\me('info', 'Hmvc output: '.$this->_response());
         
         return $this->_response();
     }
@@ -474,7 +474,7 @@ Class Hmvc
 
             $end_time = ob_request_timer('end'); // Profiler
 
-            log_me('info', 'Hmvc request: '.$URI->uri_string.' time: '.number_format($end_time - self::$start_time, 4));
+            log\me('info', 'Hmvc request: '.$URI->uri_string.' time: '.number_format($end_time - self::$start_time, 4));
             
             // self::$request_times[$URI->uri_string] = $end_time - self::$start_time;
         }

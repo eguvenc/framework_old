@@ -42,7 +42,7 @@ Class Uri
         // the URI Class at Bootstrap. When you try loading any library
         // you will get a Fatal Error.
         
-        log_me('debug', 'URI Class Initialized'); // core level log 
+        log\me('debug', 'URI Class Initialized'); // core level log 
     }
 
     // --------------------------------------------------------------------

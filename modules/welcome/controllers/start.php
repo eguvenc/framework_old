@@ -19,7 +19,7 @@ Class Start extends Controller {
                 your <b>/modules/welcome/</b> folder');
         }
         
-        log_me('debug', '[ welcome ]: Example log, who want to keep the logs in different color.');
+        log\me('debug', '[ welcome ]: Example log, who want to keep the logs in different color.');
     }         
 
     public function index()

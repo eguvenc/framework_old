@@ -63,7 +63,7 @@ Class Security {
         // Set the CSRF hash
         $this->_csrf_set_hash();
 
-        log_me('debug', "Security Class Initialized");
+        log\me('debug', "Security Class Initialized");
     }
         
     // --------------------------------------------------------------------
@@ -116,7 +116,7 @@ Class Security {
         $this->_csrf_set_hash();
         $this->csrf_set_cookie();
 
-        log_me('debug', "CSRF token verified ");
+        log\me('debug', "CSRF token verified ");
 
         return $this;
     }
@@ -149,7 +149,7 @@ Class Security {
 
         setcookie($this->_csrf_cookie_name, $this->_csrf_hash, $expire, config('cookie_path'), config('cookie_domain'), $secure_cookie);
 
-        log_me('debug', "CRSF cookie Set");
+        log\me('debug', "CRSF cookie Set");
 
         return $this;
     }
@@ -422,7 +422,7 @@ Class Security {
                 return ($str == $converted_string) ? TRUE: FALSE;
         }
 
-        log_me('debug', "XSS Filtering completed");
+        log\me('debug', "XSS Filtering completed");
         
         return $str;
     }

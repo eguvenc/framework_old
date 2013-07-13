@@ -50,7 +50,7 @@ Class Cart {
             $this->_cart_contents['total_items'] = 0;        
         }
     
-        log_me('debug', "Cart Class Initialized");
+        log\me('debug', "Cart Class Initialized");
     }
 
     // --------------------------------------------------------------------
@@ -67,7 +67,7 @@ Class Cart {
         // Was any cart data passed? No? Bah...
         if ( ! is_array($items) OR count($items) == 0)
         {
-            log_me('error', 'The insert method must be passed an array containing data.');
+            log\me('error', 'The insert method must be passed an array containing data.');
             return FALSE;
         }
                 
@@ -122,7 +122,7 @@ Class Cart {
         // Was any cart data passed? No? Bah...
         if ( ! is_array($items) OR count($items) == 0)
         {
-            log_me('error', 'The insert method must be passed an array containing data.');
+            log\me('error', 'The insert method must be passed an array containing data.');
             return FALSE;
         }
         
@@ -131,7 +131,7 @@ Class Cart {
         // Does the $items array contain an id, quantity, price, and name?  These are required
         if ( ! isset($items['id']) OR ! isset($items['qty']) OR ! isset($items['price']) OR ! isset($items['name']))
         {
-            log_me('error', 'The cart array must contain a product ID, quantity, price, and name.');
+            log\me('error', 'The cart array must contain a product ID, quantity, price, and name.');
             return FALSE;
         }
 
@@ -155,7 +155,7 @@ Class Cart {
         // Note: These can be user-specified by setting the $this->product_id_rules variable.
         if ( ! preg_match("/^[".$this->product_id_rules."]+$/i", $items['id']))
         {
-            log_me('error', 'Invalid product ID.  The product ID can only contain alpha-numeric characters, dashes, and underscores');
+            log\me('error', 'Invalid product ID.  The product ID can only contain alpha-numeric characters, dashes, and underscores');
             return FALSE;
         }
 
@@ -165,7 +165,7 @@ Class Cart {
         // Note: These can be user-specified by setting the $this->product_name_rules variable.
         if ( ! preg_match("/^[".$this->product_name_rules."]+$/i", $items['name']))
         {
-            log_me('error', 'An invalid name was submitted as the product name: '.$items['name'].' The name can only contain alpha-numeric characters, dashes, underscores, colons, and spaces');
+            log\me('error', 'An invalid name was submitted as the product name: '.$items['name'].' The name can only contain alpha-numeric characters, dashes, underscores, colons, and spaces');
             return FALSE;
         }
 
@@ -179,7 +179,7 @@ Class Cart {
         // Is the price a valid number?
         if ( ! is_numeric($items['price']))
         {
-            log_me('error', 'An invalid price was submitted for product ID: '.$items['id']);
+            log\me('error', 'An invalid price was submitted for product ID: '.$items['id']);
             return FALSE;
         }
 

@@ -21,16 +21,16 @@ Class Obullo
         
         require (APP  .'config'. DS .'constants'. EXT);  // app constants.
         require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'common'. EXT);
-        require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'loader'. EXT);
+        // require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'loader'. EXT);
 
-        if(package_exists('log')) // check log package is installed.
+        if(Ob\package_exists('log')) // check log package is installed.
         {
-            new Ob\log();
+            new Ob\log\log();
         }
         
-        if(package_exists('error')) // check log package is installed.
+        if(Ob\package_exists('error')) // check log package is installed.
         {
-            new Ob\error();
+            new Ob\error\error();
         }
         
         $uri    = Ob\Uri::getInstance(); 

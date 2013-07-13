@@ -30,7 +30,7 @@ Class Input {
         $this->enable_xss       = (config('global_xss_filtering') === TRUE) ? TRUE : FALSE;
         $this->enable_csrf      = (config('csrf_protection') === TRUE) ? TRUE : FALSE;
 
-        log_me('debug', "Input Class Initialized");
+        log\me('debug', "Input Class Initialized");
     }
     
     // --------------------------------------------------------------------
@@ -132,7 +132,7 @@ Class Input {
         
         $_COOKIE = $this->_clean_input_data($_COOKIE);
 
-        log_me('debug', "Global POST and COOKIE data sanitized");
+        log\me('debug', "Global POST and COOKIE data sanitized");
     }
     
     // ------------------------------------------------------------------------

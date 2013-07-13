@@ -28,7 +28,7 @@ Class Benchmark {
     
     public function __construct()
     {
-        log_me('debug', "Benchmark Class Initialized");
+        log\me('debug', "Benchmark Class Initialized");
     }
     
     // --------------------------------------------------------------------
