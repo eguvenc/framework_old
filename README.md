@@ -37,3 +37,8 @@ Obullo-2.0 WILL HAVE THESE FEATURES:
         
         // Views
         echo Ob\view\get('welcome');
+        
+        // loading database        
+        Ob\database\load();
+        
+        $results = $this->db->select()->get('table');
