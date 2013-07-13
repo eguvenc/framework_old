@@ -5,6 +5,8 @@ Class Welcome extends Controller {
     function __construct()
     {           
         parent::__construct();
+        
+        new Ob\Database;
     }
     
     public function index()
@@ -14,8 +16,14 @@ Class Welcome extends Controller {
         // $user = new Model\Welcome\User();
         
         // $email = new Ob\Email();
+        Ob\view\set_var('');
         
-        view('view_welcome', '', false);
+        Ob\log\me('debug', 'test');
+        
+        Ob\i\post('');
+        Ob\i\get('');
+        
+        Ob\view\get('view_welcome', '', false);
     }
     
     function hmvc()

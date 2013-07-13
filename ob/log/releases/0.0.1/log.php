@@ -1,5 +1,5 @@
 <?php
-namespace Ob {
+namespace Ob\log {
     
     // ------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ namespace Ob {
     * @access    public
     * @return    void
     */
-    function log_me($level = 'error', $message = '')
+    function me($level = 'error', $message = '')
     {    
         if (config('log_threshold') == 0)
         {
