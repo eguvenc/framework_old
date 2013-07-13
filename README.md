@@ -14,7 +14,7 @@ Obullo-2.0 WILL HAVE THESE FEATURES:
 - Log Monitoring from Command Line
 - Extended Mongodb Support
 - Derived from Codeigniter
-- Php5 Namespaces
+- Php5 Namespaces & Autoloaders
 - some examples
         
         // logging
