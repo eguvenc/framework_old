@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
  * Security Class
@@ -240,7 +241,7 @@ Class Security {
         /*
          * Remove Invisible Characters
          */
-        $str = remove_invisible_characters($str);
+        $str = Ob\remove_invisible_characters($str);
 
         // Validate Entities in URLs
         $str = $this->_validate_entities($str);
@@ -273,7 +274,7 @@ Class Security {
         /*
          * Remove Invisible Characters Again!
          */
-        $str = remove_invisible_characters($str);
+        $str = Ob\remove_invisible_characters($str);
 
         /*
          * Convert all tabs to spaces
@@ -553,7 +554,7 @@ Class Security {
             $bad[] = '/';
         }
 
-        $str = remove_invisible_characters($str, FALSE);
+        $str = Ob\remove_invisible_characters($str, FALSE);
         return stripslashes(str_replace($bad, '', $str));
     }
     

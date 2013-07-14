@@ -16,7 +16,7 @@ $packages = array(
     'dependencies' => array(
         'auth'  => array('version' => '0.0.1', 'component' => 'library'),
         'agent'  => array('version' => '0.0.1', 'component' => 'library'),
-        'benchmark' => array('version' => '0.0.1', 'component' => 'library'),
+        'bench' => array('version' => '0.0.1', 'component' => 'helper'),
         'config' => array( 'repo' => 'https://github.com/eguvenc/config.git', 'version' =>  '0.0.1', 'component' => 'library'),
         'database_pdo' => array('version' => '0.0.1', 'component' => 'library'),
         'error' => array('version' => '0.0.1', 'component' => 'helper'),
@@ -24,6 +24,7 @@ $packages = array(
         'form' => array('version' => '0.0.1', 'component' => 'helper'),
         'form_json' => array('version' => '0.0.1', 'component' => 'helper'),
         'html' => array('version' => '0.0.1', 'component' => 'helper'),
+        'i' => array('version' => '0.0.1', 'component' => 'helper'),
         'input' => array('version' => '0.0.1', 'component' => 'library'),
         'log' => array('version' => '0.0.1', 'component' => 'helper'),
         'locale' => array('version' => '0.0.1', 'component' => 'library'),

@@ -1,6 +1,6 @@
 {
-  "name": "input",
-  "description": "Control the inputs.",
+  "name": "log",
+  "description": "Log writing helper, control the log writing.",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",
@@ -9,28 +9,27 @@
   },
   "component" : "helper",
   "dependencies": {
-    "i": "*",
-    "security": "*"
+    "input": "*"
   },
   "keywords": [
-    "input",
-    "post",
-    "get",
-    "request"
+    "log",
+    "logging",
+    "log write",
+    "debug"
   ],
-  "homepage": "https://github.com/obullo/input",
+  "homepage": "https://github.com/obullo/log",
   "repo": {
     "type": "git",
-    "url": "https://github.com/obullo/input.git",
+    "url": "https://github.com/obullo/log.git",
     "archive" : "zip",
-    "archive_url": "https://github.com/obullo/input/archive/master.zip"
+    "archive_url": "https://github.com/obullo/log/archive/master.zip"
   },
   "requires": {
     "php": ">= 5.1.2",
     "extensions": ["none"]
   },
   "bugs": {
-    "url": "https://github.com/obullo/input/issues",
+    "url": "https://github.com/obullo/log/issues",
     "email": "eguvenc@gmail.com"
   },
   "licenses": [

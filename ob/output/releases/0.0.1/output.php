@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
  * Output Class
@@ -178,7 +179,7 @@ Class Output {
         // Parse out the elapsed time and memory usage,
         // then swap the pseudo-variables with the data
         
-        $elapsed = benchmark_elapsed_time('total_execution_time_start', 'total_execution_time_end');        
+        $elapsed = \Ob\bench\elapsed_time('total_execution_time_start', 'total_execution_time_end');        
         $output  = str_replace('{elapsed_time}', $elapsed, $output);
                 
         if ($this->parse_exec_vars === TRUE)
@@ -226,7 +227,7 @@ Class Output {
             
             log\me('debug', "Final output sent to browser");
             
-            if (config('log_benchmark') == TRUE)
+            if (\config('log_benchmark') == TRUE)
             {
                 log\me('bench', "Total execution time: ".$elapsed);
             }
@@ -251,7 +252,7 @@ Class Output {
                 
         // Do we need to generate profile data?        
         // If so, load the Profile class and run it.
-        if (config('log_benchmark') == TRUE)
+        if (\config('log_benchmark') == TRUE)
         {
             if (function_exists('memory_get_usage') && ($usage = memory_get_usage()) != '')
             {
@@ -262,7 +263,7 @@ Class Output {
                 $memory_usage = "memory_get_usage() function not found on your php configuration.";
             }
 
-            $bench = Benchmark::getInstance(); // init to bencmark for profiling.
+            $bench = Bench::getInstance(); // init to bencmark for profiling.
 
             $profile = array();
             foreach ($bench->marker as $key => $val)
