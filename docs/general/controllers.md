@@ -13,7 +13,7 @@ Controllers are the heart of your application, as they determine how HTTP reques
 - [Class Constructors]()
 - [Reserved Function Names]()
 
-What is a Controller? {#what}
+What is a Controller? 
 ------
 **A Controller is simply a class file that is named in a way that can be associated with a URI.**
 
@@ -25,7 +25,7 @@ In the above example, Obullo would attempt to find a MODULE named <dfn>/blog</df
 
 **When a controller's name matches the second segment of a URI, it will be loaded.**
 
-Let's try it: Hello World! {#hello}
+Let's try it: Hello World! 
 -------
 Let's create a simple controller so you can see it in action. Create a directory called <samp>blog</samp> in the modules folder
 
@@ -83,7 +83,7 @@ Class start extends Controller
 ```
 Also, always make sure your controller <dfn>extends</dfn> the parent controller class so that it can inherit all its functions.
 
-Functions {#functions}
+Functions 
 ------
 In the above example the function name is <dfn>index()</dfn>. The "index" function is always loaded by default if the **third segment** of the URI is empty. Another way to show your "Hello World" message would be this:
 ```php
@@ -115,7 +115,7 @@ example.com/index.php/blog/start/comments/
 ```
 You should see your new message.
 
-Passing URI Segments to your Functions {#passinguri}
+Passing URI Segments to your Functions 
 ------
 If your URI contains more then two segments they will be passed to your function as parameters.
 
