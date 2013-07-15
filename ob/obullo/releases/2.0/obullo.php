@@ -42,7 +42,6 @@ Class Obullo
         
         Ob\bench\mark('total_execution_time_start');
         Ob\bench\mark('loading_time_base_classes_start');
-
         
         Ob\Input::getInstance()->_sanitize_globals();  // Initalize to input filter. ( Sanitize must be above the GLOBALS !! )             
 
