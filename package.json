@@ -1,7 +1,7 @@
 {
   "name": "Obullo",
   "version": "2.0",
-  "db_class": "Database_PDO",
+  "db_layer": "Database_Pdo",
   "dependencies": {
     "auth" : "*",
     "router": "*",

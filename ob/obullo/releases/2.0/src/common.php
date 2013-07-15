@@ -36,6 +36,7 @@ namespace Ob {
             $ob_library = strtolower($ob_parts[1]);
 
             $package_filename = mb_strtolower($ob_library, config('charset'));
+            echo $package_filename.'<br>';
             if( ! isset($packages['dependencies'][$package_filename]['component'])) //  check package Installed.
             {
                 exit('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');

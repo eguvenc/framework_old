@@ -21,7 +21,6 @@ Class Obullo
         
         require (APP  .'config'. DS .'constants'. EXT);  // app constants.
         require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'common'. EXT);
-        // require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'loader'. EXT);
 
         if(Ob\package_exists('log')) // check log package is installed.
         {
@@ -44,6 +43,7 @@ Class Obullo
         Ob\bench\mark('total_execution_time_start');
         Ob\bench\mark('loading_time_base_classes_start');
 
+        
         Ob\Input::getInstance()->_sanitize_globals();  // Initalize to input filter. ( Sanitize must be above the GLOBALS !! )             
 
         $output = Ob\Output::getInstance();

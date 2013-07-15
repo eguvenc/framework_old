@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 $packages = get_config('packages');
 
@@ -29,17 +30,16 @@ Class Database_Pdo {
     }
     
     /**
-    * Connect Requested PDO Driver
-    * 
-    * @param    mixed   $param database parameters
-    * @param    string  $db_var database variable
-    * @return   object of PDO Instance.
+    * Connect to Pdo Driver
+     * 
+    * @param string $dbdriver
+    * @param string $options
+    * @return object
+    * @throws Exception 
     */
-    public static function connect($db_var = 'db', $param = '')
+    public static function connect($dbdriver = 'mysql', $options = array())
     {                                      
-        $dbdriver = is_array($param) ? $param['dbdriver'] : db_item('dbdriver', $db_var); 
         $driver_name = '';
-                     
         switch (strtolower($dbdriver))
         {   
            // MySQL 3.x/4.x/5.x  
@@ -91,51 +91,18 @@ Class Database_Pdo {
            case 'cubrid':
            $driver_name = 'cubrid';
              break;
-         
-           // MONGO   
-           case 'mongodb':
-           $driver_name = 'mongodb';
-             break;
            
           default:
-          throw new Exception('Obullo database library does not support: '. $dbdriver); 
+          throw new Exception('The Database pdo library does not support: '. $dbdriver); 
            
-        } // end switch.
-        
-        $hostname = db_item('hostname', $db_var);
-        
-        if($hostname == FALSE)
-        {
-            throw new Exception('The ' . $db_var . ' database configuration undefined in your config/database.php file !');
         }
-        
-        //----------- MONGO PACKAGE SUPPORT ------------//
-        
-        if($driver_name == 'mongodb') 
-        {
-            $mongo = new Mongo_DB();
-            
-            return $mongo->connect();
-        }
-        
-        //----------- MONGO PACKAGE SUPPORT END ------------//
-        
-        if ( ! in_array($dbdriver, PDO::getAvailableDrivers()))  // check the PDO driver is available
+
+        if ( ! in_array($dbdriver, \PDO::getAvailableDrivers()))  // check the PDO driver is available
         {
             throw new Exception('The PDO' . $dbdriver . ' driver is not currently installed on your server !');
         }
         
-        if(is_array($param))
-        {
-            $options = array_merge($param, array('default_db' => $db_var));
-        }
-        else
-        {
-            $options = array('default_db' => $db_var);
-        }
-        
         $db_classname = 'Pdo_'.ucfirst($driver_name);
-        
         $DB = new $db_classname($options);
         $DB->__wakeup();
         

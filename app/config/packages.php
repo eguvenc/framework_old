@@ -12,12 +12,13 @@
 $packages = array(
     'name' => 'Obullo',
     'version' => '2.0',
-    'db_class' => 'Database_Pdo',
+    'db_layer' => 'Database_Pdo',
     'dependencies' => array(
         'auth'  => array('version' => '0.0.1', 'component' => 'library'),
         'agent'  => array('version' => '0.0.1', 'component' => 'library'),
         'bench' => array('version' => '0.0.1', 'component' => 'helper'),
-        'config' => array( 'repo' => 'https://github.com/eguvenc/config.git', 'version' =>  '0.0.1', 'component' => 'library'),
+        'config' => array('version' =>  '0.0.1', 'component' => 'library'),
+        'database' => array('version' => '0.0.1', 'component' => 'library'),
         'database_pdo' => array('version' => '0.0.1', 'component' => 'library'),
         'error' => array('version' => '0.0.1', 'component' => 'helper'),
         'exceptions' => array('version' => '0.0.1', 'component' => 'library'),
