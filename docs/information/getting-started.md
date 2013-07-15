@@ -19,6 +19,7 @@ Obullo is installed in five steps:
 4. If you intend to use a database, Obullo use PDO for database operations. Mysql and SQLite drivers installed as default for PHP 5 and newer versions.
 If you want use another Db driver you must enable your PDO Driver in your php.ini file.For more details look at Php.net http://www.php.net/manual/en/pdo.installation.php
 5. Open the **app/config/database.php** file with a text editor and set your database settings.
+
 If you wish to increase security by hiding the location of your Obullo files you can rename the base folder to something more private. If you do rename it, you must open your main index.php file and set the BASE constant in the page with the new name you've chosen.
 
 That's it!
