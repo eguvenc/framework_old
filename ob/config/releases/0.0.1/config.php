@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
  * Config Class
@@ -111,7 +112,7 @@ Class Config
         
         unset($config);
 
-        log_me('debug', 'Config file loaded: '.$file);
+        log\me('debug', 'Config file loaded: '.$file);
         
         return TRUE;
     }
@@ -134,7 +135,7 @@ Class Config
         {    
             if ( ! isset($this->config[$item]))
             {
-                log_me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
+                log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
                 return FALSE;
             }
@@ -145,14 +146,14 @@ Class Config
         {
             if ( ! isset($this->config[$index]))
             {
-                log_me('info', 'Requested config index "'.$item.'" not found, be sure providing to right name.');
+                log\me('info', 'Requested config index "'.$item.'" not found, be sure providing to right name.');
                 
                 return FALSE;
             }
 
             if ( ! isset($this->config[$index][$item]))
             {
-                log_me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
+                log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
                 return FALSE;
             }

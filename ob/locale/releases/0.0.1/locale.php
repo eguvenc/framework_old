@@ -31,7 +31,7 @@ Class Locale {
         // Set Default language from $_COOKIE['__langlocale']
         // $this->set_language();
         
-        log_me('debug', "Locale Library Initialized");    
+        log\me('debug', "Locale Library Initialized");    
     }
 
     // --------------------------------------------------------------------
@@ -93,7 +93,7 @@ Class Locale {
 
         if ( ! isset($lang))
         {
-            log_me('error', 'Locale file does not contain $lang variable: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
+            log\me('error', 'Locale file does not contain $lang variable: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
             
             return;
         }
@@ -108,7 +108,7 @@ Class Locale {
 
         unset($lang);
 
-        log_me('debug', 'Locale file loaded: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
+        log\me('debug', 'Locale file loaded: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
         
         return TRUE;
     }

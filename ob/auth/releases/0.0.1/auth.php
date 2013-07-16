@@ -60,7 +60,7 @@ Class Auth {
 
         $this->db = loader::database($this->db_var, TRUE);
         
-        log_me('debug', "Auth Class Initialized");
+        log\me('debug', "Auth Class Initialized");
     }
     
     // --------------------------------------------------------------------

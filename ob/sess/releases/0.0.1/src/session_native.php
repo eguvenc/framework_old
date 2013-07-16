@@ -11,7 +11,7 @@ if( ! function_exists('_sess_start') )
 {
     function _sess_start($params = array())
     {                       
-        log_me('debug', "Session Native Driver Initialized"); 
+        log\me('debug', "Session Native Driver Initialized"); 
 
         $sess   = Session::getInstance();
 
@@ -76,7 +76,7 @@ if( ! function_exists('_sess_start') )
         // mark all new flashdata as old (data will be deleted before next request)
         _flashdata_mark();
 
-        log_me('debug', "Session routines successfully run"); 
+        log\me('debug', "Session routines successfully run"); 
 
         return TRUE;
     }

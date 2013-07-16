@@ -73,7 +73,7 @@ if( ! function_exists('utf8_str_pad'))
             return $pad_left.$str.$pad_right;
         }
 
-        log_me('UTF8 str_pad: Unknown padding type ('.$pad_type.') in this string: '.$str);
+        log\me('UTF8 str_pad: Unknown padding type ('.$pad_type.') in this string: '.$str);
     }
 
 }

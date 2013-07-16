@@ -40,7 +40,7 @@ if ( ! function_exists('task_run'))
             // $output = trim(preg_replace('/\n/', '#', $output), "\n");
             $output = preg_replace(array('/\033\[36m/','/\033\[31m/','/\033\[0m/'), array('','',''), shell_exec($shell));
             
-            log_me('debug', 'Task function output -> '. $output);
+            log\me('debug', 'Task function output -> '. $output);
             
             return $output;
         }
@@ -51,7 +51,7 @@ if ( ! function_exists('task_run'))
             shell_exec($shell.' > /dev/null &');
         }
 
-        log_me('debug', 'Task function command -> '. $shell);
+        log\me('debug', 'Task function command -> '. $shell);
     }
 }
 

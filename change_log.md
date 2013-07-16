@@ -83,7 +83,7 @@ functionality helpers/session/cookie_driver.php and database_driver.php files.  
     - removed Obullo/Obullo.php moved all obullo.php contents to Controller.php. Updated Bootstrap.php
     - Depreciated using parent::__global() func in all controllers. We moved it to Obullo/Controller.php , parent::__global() function
 works automatically from now on.
-    - added log_me(); function to common.php just alias of log_message();
+    - added log\me(); function to common.php just alias of log_message();
     - added profiler_set($type, key, msg) and profiler_get($key) functions to common.php file, updated all libraries, removed ssc:intance()->_profiler_ variables.
     - added a new controller called App_controller to application/parents folder.
     - Major changes in Global Controllers removed config/parents.php and updated global controller functionality.

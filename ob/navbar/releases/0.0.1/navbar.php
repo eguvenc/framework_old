@@ -40,7 +40,7 @@ Class Navbar {
             $this->{$key} = $val;
         }
 
-        log_me('debug', "Navbar Class Initialized");
+        log\me('debug', "Navbar Class Initialized");
     }
     
     // ------------------------------------------------------------------------

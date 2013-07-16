@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
  * PDO MySQL Db Adapter Class
@@ -49,7 +50,7 @@ Class Pdo_Mysql extends Pdo_Database_Adapter
         
         if(defined('PDO::MYSQL_ATTR_USE_BUFFERED_QUERY')) // Automatically use buffered queries.
         {
-            $this->options[PDO::MYSQL_ATTR_USE_BUFFERED_QUERY] = TRUE;
+            $this->options[\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY] = TRUE;
         }
         
         // array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES $this->char_set") it occurs an error !
@@ -61,7 +62,7 @@ Class Pdo_Mysql extends Pdo_Database_Adapter
         }
 
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
-        $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->_conn->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         
         // PDO::ERRMODE_SILENT
     }
@@ -159,12 +160,12 @@ Class Pdo_Mysql extends Pdo_Database_Adapter
         {
             if(strpos($str, ':') === FALSE)
             {
-                $str = $this->quote($str, PDO::PARAM_STR);
+                $str = $this->quote($str, \PDO::PARAM_STR);
             }
         }
         else
         {
-           $str = $this->quote($str, PDO::PARAM_STR);
+           $str = $this->quote($str, \PDO::PARAM_STR);
         }
 
         return $str;

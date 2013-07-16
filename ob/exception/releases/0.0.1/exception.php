@@ -14,7 +14,7 @@ Class Exception {
 
     function __construct()
     {
-        log_me('debug', "Exception Class Initialized");
+        log\me('debug', "Exception Class Initialized");
     }
  
     /**
@@ -34,7 +34,7 @@ Class Exception {
         
         if(config('error_reporting') == '0')
         {
-            log_me('debug', 'Error reporting seems Off, check the config.php file $config[\'error_reporting\'].');
+            log\me('debug', 'Error reporting seems Off, check the config.php file $config[\'error_reporting\'].');
             
             return;
         }
@@ -66,7 +66,7 @@ Class Exception {
             
             $cmd_type = (defined('TASK')) ? 'Task' : 'Cmd';
             
-            log_me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), TRUE); 
+            log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), TRUE); 
             
             return;
         }
@@ -86,7 +86,7 @@ Class Exception {
         // Log Php Errors
         //-----------------------------------------------------------------------
         
-        log_me('error', $type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), true); 
+        log\me('error', $type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), true); 
              
         // Displaying Errors
         //-----------------------------------------------------------------------            

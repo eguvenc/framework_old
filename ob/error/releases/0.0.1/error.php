@@ -1,5 +1,5 @@
 <?php
-namespace Ob {
+namespace Ob\error {
 
     // ------------------------------------------------------------------------
 
@@ -36,22 +36,22 @@ namespace Ob {
         {
             $type  = ucwords(strtolower($type));
             $code  = $e->getCode();
-            $level = config('error_reporting');
+            $level = \Ob\config('error_reporting');
 
             if(defined('STDIN'))  // If Command Line Request.
             {
-                echo $type .': '. $e->getMessage(). ' File: ' .error_secure_path($e->getFile()). ' Line: '. $e->getLine(). "\n";
+                echo $type .': '. $e->getMessage(). ' File: ' .secure_path($e->getFile()). ' Line: '. $e->getLine(). "\n";
 
                 $cmd_type = (defined('TASK')) ? 'Task' : 'Cmd';
 
-                log_me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), true);
+                log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.secure_path($e->getFile()).' '.$e->getLine(), true);
 
                 return;
             }
 
             if($level > 0 OR is_string($level))  // If user want to display all errors
             {
-                // $errors = error_get_defined_errors();
+                // $errors = get_defined_errors();
 
                 if(is_numeric($level)) 
                 {
@@ -62,14 +62,14 @@ namespace Ob {
                     }   
                 }       
 
-                $rules = error_parse_regex($level); 
+                $rules = parse_regex($level); 
 
                 if($rules == FALSE) 
                 {
                     return;
                 }
 
-                $allowed_errors = error_get_allowed_errors($rules);  // Check displaying error enabled for current error.
+                $allowed_errors = get_allowed_errors($rules);  // Check displaying error enabled for current error.
 
                 if(isset($allowed_errors[$code]))
                 {
@@ -82,7 +82,7 @@ namespace Ob {
                 include(APP .'errors'. DS .'ob_disabled_error'. EXT);
             }
 
-            log_me('error', $type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), true); 
+            log\me('error', $type.': '.$e->getMessage(). ' '.secure_path($e->getFile()).' '.$e->getLine(), true); 
 
         } 
         else  // Is It Exception ?
@@ -129,7 +129,10 @@ namespace Ob {
     */
     function error_handler($errno, $errstr, $errfile, $errline)
     {                           
-        if ($errno == 0) return;  
+        if ($errno == 0)
+        {
+            return;  
+        }
         
         switch ($errno)
         {
@@ -166,7 +169,10 @@ namespace Ob {
     {                      
         $error = error_get_last();
                          
-        if( ! $error) return;
+        if( ! $error) 
+        {
+            return;
+        }
         
         ob_get_level() AND ob_clean(); // Clean the output buffer
 
@@ -191,7 +197,7 @@ namespace Ob {
     * @param  string $file
     * @return 
     */
-    function error_secure_path($file, $search_paths = FALSE)
+    function secure_path($file, $search_paths = FALSE)
     {
         if($search_paths)
         {
@@ -232,7 +238,7 @@ namespace Ob {
     * @param  integer $level
     * @return mixed
     */
-    function error_dump_argument(& $var, $length = 128, $level = 0)
+    function dump_argument(& $var, $length = 128, $level = 0)
     {
         if ($var === NULL)
         {
@@ -260,11 +266,11 @@ namespace Ob {
                     {
                         if (stream_is_local($file))  // Only exists on PHP >= 5.2.4
                         {
-                            $file = error_secure_path($file);
+                            $file = secure_path($file);
                         }
                     }
 
-                    return '<small>resource</small><span>('.$type.')</span> '.htmlspecialchars($file, ENT_NOQUOTES, config('charset'));
+                    return '<small>resource</small><span>('.$type.')</span> '.htmlspecialchars($file, ENT_NOQUOTES, \Ob\config('charset'));
                 }
             }
             else
@@ -275,7 +281,7 @@ namespace Ob {
         elseif (is_string($var))
         {
             // Encode the string
-            $str = htmlspecialchars($var, ENT_NOQUOTES, config('charset'));
+            $str = htmlspecialchars($var, ENT_NOQUOTES, \Ob\config('charset'));
             
             return '<small>string</small><span>('.strlen($var).')</span> "'.$str.'"';
         }
@@ -312,10 +318,10 @@ namespace Ob {
                     if ($key === $marker) continue;
                     if ( ! is_int($key))
                     {
-                        $key = '"'.htmlspecialchars($key, ENT_NOQUOTES, config('charset')).'"';
+                        $key = '"'.htmlspecialchars($key, ENT_NOQUOTES, \Ob\config('charset')).'"';
                     }
 
-                    $output[] = "$space$s$key => ".error_dump_argument($val, $length, $level + 1);
+                    $output[] = "$space$s$key => ".dump_argument($val, $length, $level + 1);
                 }
                 unset($var[$marker]);
 
@@ -379,7 +385,7 @@ namespace Ob {
                         $access = '<small>public</small>';
                     }
 
-                    $output[] = "$space$s$access $key => ".error_dump_argument($val, $length, $level + 1);
+                    $output[] = "$space$s$access $key => ".dump_argument($val, $length, $level + 1);
                 }
                 unset($objects[$hash]);
 
@@ -396,7 +402,7 @@ namespace Ob {
         }
         else
         {
-            return '<small>'.gettype($var).'</small> '.htmlspecialchars(print_r($var, TRUE), ENT_NOQUOTES, config('charset'));
+            return '<small>'.gettype($var).'</small> '.htmlspecialchars(print_r($var, TRUE), ENT_NOQUOTES, \Ob\config('charset'));
         }
     }
 
@@ -413,9 +419,9 @@ namespace Ob {
     * 
     * @return boolean | string
     */
-    function error_write_file_source($trace, $key = 0, $prefix = '')
+    function write_file_source($trace, $key = 0, $prefix = '')
     {
-        $debug = config('debug_backtrace'); 
+        $debug = \Ob\config('debug_backtrace'); 
         
         $file  = $trace['file'];
         $line_number = $trace['line'];
@@ -442,7 +448,7 @@ namespace Ob {
 
             if ($line >= $range['start'])
             {
-                $row = htmlspecialchars($row, ENT_NOQUOTES, config('charset'));  // Make the row safe for output
+                $row = htmlspecialchars($row, ENT_NOQUOTES, \Ob\config('charset'));  // Make the row safe for output
 
                 $row = '<span class="number">'.sprintf($format, $line).'</span> '.$row;  // Trim whitespace and sanitize the row
 
@@ -473,7 +479,7 @@ namespace Ob {
     * 
     * @param mixed $e
     */
-    function error_debug_backtrace($e)
+    function debug_backtrace($e)
     {
         $trace = $e->getTrace();      // Get the exception backtrace
 
@@ -505,7 +511,7 @@ namespace Ob {
     * 
     * @return array
     */
-    function error_get_defined_errors()
+    function get_defined_errors()
     {
         $errors = array();
         
@@ -549,7 +555,7 @@ namespace Ob {
     * @param  mixed $string
     * @return array
     */
-     function error_parse_regex($string)
+     function parse_regex($string)
      {
         if(strpos($string, '(') > 0)  // (E_NOTICE | E_WARNING)     
         {
@@ -615,11 +621,11 @@ namespace Ob {
     * 
     * @param array $rules
     */
-    function error_get_allowed_errors($rules) 
+    function get_allowed_errors($rules) 
     {
         if( ! isset($rules['IN'])) return array();
 
-        $defined_errors = array_flip(error_get_defined_errors());
+        $defined_errors = array_flip(get_defined_errors());
         $all_errors     = array_keys($defined_errors);
 
         if(count($rules['IN']) > 0)
@@ -655,9 +661,9 @@ namespace Ob {
                
     // --------------------------------------------------------------------
 
-    set_error_handler('Ob\error_handler');   
-    set_exception_handler('Ob\exception_handler');
-    register_shutdown_function('Ob\shutdown_handler');
+    set_error_handler('Ob\error\error_handler');   
+    set_exception_handler('Ob\error\exception_handler');
+    register_shutdown_function('Ob\error\shutdown_handler');
     
     // Enable the Obullo shutdown handler, which catches E_FATAL errors.
 }

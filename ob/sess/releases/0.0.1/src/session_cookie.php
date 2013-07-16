@@ -11,7 +11,7 @@ if( ! function_exists('_sess_start') )
 {
     function _sess_start($params = array())
     {                       
-        log_me('debug', "Session Cookie Driver Initialized"); 
+        log\me('debug', "Session Cookie Driver Initialized"); 
 
         $sess   = Session::getInstance();
         
@@ -59,7 +59,7 @@ if( ! function_exists('_sess_start') )
         // Delete expired sessions if necessary
         _sess_gc();
 
-        log_me('debug', "Session routines successfully run"); 
+        log\me('debug', "Session routines successfully run"); 
 
         return TRUE;
     }
@@ -84,7 +84,7 @@ if( ! function_exists('sess_read') )
         // No cookie?  Goodbye cruel world!...
         if ($session === FALSE)
         {               
-            log_me('debug', 'A session cookie was not found.');
+            log\me('debug', 'A session cookie was not found.');
             return FALSE;
         }
         
@@ -103,7 +103,7 @@ if( ! function_exists('sess_read') )
             // Does the md5 hash match?  This is to prevent manipulation of session data in userspace
             if ($hash !==  md5($session . $sess->encryption_key))
             {
-                log_me('error', 'The session cookie data did not match what was expected. This could be a possible hacking attempt.');
+                log\me('error', 'The session cookie data did not match what was expected. This could be a possible hacking attempt.');
                 
                 sess_destroy();
                 return FALSE;

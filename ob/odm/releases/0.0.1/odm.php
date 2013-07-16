@@ -73,7 +73,7 @@ Class Odm extends Model {
         
         unset($this->schema_fields['config']);
         
-        log_me('debug', "Odm Class Initialized");
+        log\me('debug', "Odm Class Initialized");
     }
     
     // --------------------------------------------------------------------

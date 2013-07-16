@@ -57,7 +57,7 @@ Class Agent {
             }
         }
 
-        log_me('debug', "User Agent Class Initialized");
+        log\me('debug', "User Agent Class Initialized");
     }
     
     // ------------------------------------------------------------------------

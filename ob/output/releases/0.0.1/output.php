@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
  * Output Class
@@ -23,7 +24,7 @@ Class Output {
     
     public function __construct()
     {
-        log_me('debug', "Output Class Initialized");
+        log\me('debug', "Output Class Initialized");
     }
     
     // --------------------------------------------------------------------
@@ -178,7 +179,7 @@ Class Output {
         // Parse out the elapsed time and memory usage,
         // then swap the pseudo-variables with the data
         
-        $elapsed = benchmark_elapsed_time('total_execution_time_start', 'total_execution_time_end');        
+        $elapsed = \Ob\bench\elapsed_time('total_execution_time_start', 'total_execution_time_end');        
         $output  = str_replace('{elapsed_time}', $elapsed, $output);
                 
         if ($this->parse_exec_vars === TRUE)
@@ -224,11 +225,11 @@ Class Output {
         {
             echo $output;
             
-            log_me('debug', "Final output sent to browser");
+            log\me('debug', "Final output sent to browser");
             
-            if (config('log_benchmark') == TRUE)
+            if (\config('log_benchmark') == TRUE)
             {
-                log_me('bench', "Total execution time: ".$elapsed);
+                log\me('bench', "Total execution time: ".$elapsed);
             }
             
             return TRUE;
@@ -247,11 +248,11 @@ Class Output {
             echo $output;  // Send it to the browser!
         }
         
-        log_me('debug', "Final output sent to browser");
+        log\me('debug', "Final output sent to browser");
                 
         // Do we need to generate profile data?        
         // If so, load the Profile class and run it.
-        if (config('log_benchmark') == TRUE)
+        if (\config('log_benchmark') == TRUE)
         {
             if (function_exists('memory_get_usage') && ($usage = memory_get_usage()) != '')
             {
@@ -262,7 +263,7 @@ Class Output {
                 $memory_usage = "memory_get_usage() function not found on your php configuration.";
             }
 
-            $bench = Benchmark::getInstance(); // init to bencmark for profiling.
+            $bench = Bench::getInstance(); // init to bencmark for profiling.
 
             $profile = array();
             foreach ($bench->marker as $key => $val)
@@ -282,10 +283,10 @@ Class Output {
             {
                 $key = ucwords(str_replace(array('_', '-'), ' ', $key));
                 
-                log_me('bench', "$key: ". $val); 
+                log\me('bench', "$key: ". $val); 
             }
              
-            log_me('bench', "Memory Usage: ". $memory_usage); 
+            log\me('bench', "Memory Usage: ". $memory_usage); 
         } 
     }    
     
@@ -314,7 +315,7 @@ Class Output {
 
         if ( ! $fp = @fopen($cache_path, FOPEN_WRITE_CREATE_DESTRUCTIVE))
         {
-            log_me('error', 'Unable to write cache file: '.$cache_path);
+            log\me('error', 'Unable to write cache file: '.$cache_path);
             return;
         }
         
@@ -328,14 +329,14 @@ Class Output {
         }
         else
         {
-            log_me('error', 'Unable to secure a file lock for file at: '.$cache_path);
+            log\me('error', 'Unable to secure a file lock for file at: '.$cache_path);
             return;
         }
         
         fclose($fp);
         @chmod($cache_path, DIR_WRITE_MODE);
 
-        log_me('debug', "Cache file written: ".$cache_path);
+        log\me('debug', "Cache file written: ".$cache_path);
     }
 
     // --------------------------------------------------------------------
@@ -389,7 +390,7 @@ Class Output {
             {
                 @unlink($filepath);
                 
-                log_me('debug', 'Cache file has expired. File deleted');
+                log\me('debug', 'Cache file has expired. File deleted');
                 
                 return FALSE;
             }
@@ -398,7 +399,7 @@ Class Output {
         // Display the cache
         $this->_display(str_replace($match['0'], '', $cache_data));
         
-        log_me('debug', 'Cache file is current. Sending it to browser.');
+        log\me('debug', 'Cache file is current. Sending it to browser.');
         
         return TRUE;
     }

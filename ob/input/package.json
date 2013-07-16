@@ -8,6 +8,10 @@
     "url": "https://github.com/eguvenc"
   },
   "component" : "helper",
+  "dependencies": {
+    "i": "*",
+    "security": "*"
+  },
   "keywords": [
     "input",
     "post",

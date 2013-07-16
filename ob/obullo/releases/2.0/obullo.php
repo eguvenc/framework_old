@@ -21,32 +21,32 @@ Class Obullo
         
         require (APP  .'config'. DS .'constants'. EXT);  // app constants.
         require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'common'. EXT);
-        require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'loader'. EXT);
 
-        if(package_exists('log')) // check log package is installed.
+        if(Ob\package_exists('log')) // check log package is installed.
         {
-            new Ob\log();
+            new Ob\log\log();
         }
         
-        if(package_exists('error')) // check log package is installed.
+        if(Ob\package_exists('error')) // check error package is installed.
         {
-            new Ob\error();
+            new Ob\error\error();
         }
         
         $uri    = Ob\Uri::getInstance(); 
         $router = Ob\Router::getInstance();
 
-        Ob\Locale::getInstance();
-        Benchmark::getInstance();
-        Input::getInstance();
+        new Ob\bench\bench();
         
-        benchmark_mark('total_execution_time_start');
-        benchmark_mark('loading_time_base_classes_start');
+        Ob\Locale::getInstance();
+        Ob\Input::getInstance();
+        
+        Ob\bench\mark('total_execution_time_start');
+        Ob\bench\mark('loading_time_base_classes_start');
+        
+        Ob\Input::getInstance()->_sanitize_globals();  // Initalize to input filter. ( Sanitize must be above the GLOBALS !! )             
 
-        Input::getInstance()->_sanitize_globals();  // Initalize to input filter. ( Sanitize must be above the GLOBALS !! )             
-
-        $output = Output::getInstance();
-        $config = Config::getInstance(); 
+        $output = Ob\Output::getInstance();
+        $config = Ob\Config::getInstance(); 
 
         if ($output->_display_cache($config, $uri, $router) == TRUE) { exit; }  // Check REQUEST uri if there is a Cached file exist 
 
@@ -72,9 +72,8 @@ Class Obullo
         
         // --------------------------------------------------------------------  
 
-        benchmark_mark('loading_time_base_classes_end');  // Set a mark point for benchmarking  
-        benchmark_mark('execution_time_( '.$page_uri.' )_start');  // Mark a start point so we can benchmark the controller 
-
+        Ob\bench\mark('loading_time_base_classes_end');  // Set a mark point for benchmarking  
+        Ob\bench\mark('execution_time_( '.$page_uri.' )_start');  // Mark a start point so we can benchmark the controller 
         
         require ($controller);  // call the controller.
 
@@ -85,7 +84,7 @@ Class Obullo
               OR in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods('Controller')))
             )
         {
-            show_404($page_uri);
+            Ob\show_404($page_uri);
         }
 
         $Class = $router->fetch_class();
@@ -94,7 +93,7 @@ Class Obullo
 
         if ( ! in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods($OB))))  // Check method exist or not 
         {
-            show_404($page_uri);
+            Ob\show_404($page_uri);
         }
 
         $arguments = array_slice($OB->uri->rsegments, 3);
@@ -104,22 +103,29 @@ Class Obullo
         // will be passed to the method for convenience
         call_user_func_array(array($OB, $router->fetch_method()), $arguments);
 
-        benchmark_mark('execution_time_( '.$page_uri.' )_end');  // Mark a benchmark end point 
+        Ob\bench\mark('execution_time_( '.$page_uri.' )_end');  // Mark a benchmark end point 
 
         // Write Cache file if cache on ! and Send the final rendered output to the browser
         $output->_display();
 
         while (ob_get_level() > 0) // close all buffers.  
-        { 
-            ob_end_flush();    
+        {
+            ob_end_flush();
         }
         
         // Close the connections.
+        ############## // Bu bölümün modelin içerisinde olması gerekli !!!
+        #
+        #
+        #
+        ##
         $this->_close();
 
     }
 
     // Close the connections.
+    // 
+    // Bu bölümün modelin içerisinde olması gerekli !!!
     // --------------------------------------------------------------------  
 
     private function _close()

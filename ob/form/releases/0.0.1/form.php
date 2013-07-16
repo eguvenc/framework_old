@@ -852,7 +852,7 @@ if( ! function_exists('form_error') )
             
             if($model->errors('transaction') != '')
             {
-                log_me('debug', 'System Error: '. $model->errors('transaction'));
+                log\me('debug', 'System Error: '. $model->errors('transaction'));
                 
                 return lang('odm_sys_error') . $model->errors('transaction');
             }
@@ -926,7 +926,7 @@ if( ! function_exists('form_msg'))
        
         if($model->errors('transaction') != '')
         {
-            log_me('debug', 'System Error: '. $model->errors('transaction'));
+            log\me('debug', 'System Error: '. $model->errors('transaction'));
 
             $msg =  $model->errors('msg') .' '. lang('odm_sys_error') . $model->errors('transaction');
             

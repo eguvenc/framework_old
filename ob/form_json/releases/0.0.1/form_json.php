@@ -46,7 +46,7 @@ if ( ! function_exists('form_json_error'))
            
             if($model->errors('transaction') != '')
             {
-                log_me('debug', 'System Error: '. $model->errors('transaction'));
+                log\me('debug', 'System Error: '. $model->errors('transaction'));
                 
                 return json_encode(array('success' => false, 'errors' => array('sys_error' => lang('odm_sys_error').$model->errors('transaction'))));
             }

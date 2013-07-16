@@ -22,18 +22,18 @@ Class Controller {
         // Load Obullo Core Libraries
         // ------------------------------------
       
-        $this->config = Config::getInstance();
-        $this->router = Router::getInstance();
-        $this->uri    = Uri::getInstance();
-        $this->output = Output::getInstance();
-        $this->locale = Locale::getInstance();
+        $this->config = Ob\Config::getInstance();
+        $this->router = Ob\Router::getInstance();
+        $this->uri    = Ob\Uri::getInstance();
+        $this->output = Ob\Output::getInstance();
+        $this->locale = Ob\Locale::getInstance();
         
         // Initialize to Autoloaders
         // ------------------------------------
         
         $autoload = get_static('autoload', '', APP .'config');
         
-        log_me('debug', 'Application Autoload Initialized');
+        Ob\log\me('debug', 'Application Autoload Initialized');
 
         if(is_array($autoload))
         {
@@ -43,7 +43,7 @@ Class Controller {
                 {                    
                     foreach($autoload[$key] as $filename)
                     {
-                        loader::$key($filename);
+                        // loader::$key($filename);
                     }
                 }
             }
@@ -54,7 +54,7 @@ Class Controller {
         
         $autorun = get_static('autorun', '', APP .'config');
         
-        log_me('debug', 'Application Autorun Initialized');
+        Ob\log\me('debug', 'Application Autorun Initialized');
 
         if(isset($autorun['function']))
         {

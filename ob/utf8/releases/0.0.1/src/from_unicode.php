@@ -48,7 +48,7 @@ if( ! function_exists('utf8_from_unicode'))
             elseif ($arr[$k] >= 0xD800 AND $arr[$k] <= 0xDFFF)              // Test for illegal surrogates
             {
                 // Found a surrogate
-                log_me('debug', 'UTF8 from_unicode: Illegal surrogate at index: '.$k.', value: '.$arr[$k]);
+                log\me('debug', 'UTF8 from_unicode: Illegal surrogate at index: '.$k.', value: '.$arr[$k]);
                 return FALSE;
             }
             elseif ($arr[$k] <= 0xffff)              // 3 byte sequence
@@ -66,7 +66,7 @@ if( ! function_exists('utf8_from_unicode'))
             }
             else                // Out of range
             {
-                log_me('debug', 'UTF8 from_unicode: Codepoint out of Unicode range at index: '.$k.', value: '.$arr[$k]);
+                log\me('debug', 'UTF8 from_unicode: Codepoint out of Unicode range at index: '.$k.', value: '.$arr[$k]);
                 return FALSE;
             }
         }

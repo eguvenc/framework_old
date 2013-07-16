@@ -1,0 +1,41 @@
+{
+  "name": "log",
+  "description": "Log writing helper, control the log writing.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ersin Güvenç",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
+  "component" : "helper",
+  "dependencies": {
+    "input": "*"
+  },
+  "keywords": [
+    "log",
+    "logging",
+    "log write",
+    "debug"
+  ],
+  "homepage": "https://github.com/obullo/log",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/log.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/log/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.1.2",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/log/issues",
+    "email": "eguvenc@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
  * Security Class
@@ -63,7 +64,7 @@ Class Security {
         // Set the CSRF hash
         $this->_csrf_set_hash();
 
-        log_me('debug', "Security Class Initialized");
+        log\me('debug', "Security Class Initialized");
     }
         
     // --------------------------------------------------------------------
@@ -116,7 +117,7 @@ Class Security {
         $this->_csrf_set_hash();
         $this->csrf_set_cookie();
 
-        log_me('debug', "CSRF token verified ");
+        log\me('debug', "CSRF token verified ");
 
         return $this;
     }
@@ -149,7 +150,7 @@ Class Security {
 
         setcookie($this->_csrf_cookie_name, $this->_csrf_hash, $expire, config('cookie_path'), config('cookie_domain'), $secure_cookie);
 
-        log_me('debug', "CRSF cookie Set");
+        log\me('debug', "CRSF cookie Set");
 
         return $this;
     }
@@ -240,7 +241,7 @@ Class Security {
         /*
          * Remove Invisible Characters
          */
-        $str = remove_invisible_characters($str);
+        $str = Ob\remove_invisible_characters($str);
 
         // Validate Entities in URLs
         $str = $this->_validate_entities($str);
@@ -273,7 +274,7 @@ Class Security {
         /*
          * Remove Invisible Characters Again!
          */
-        $str = remove_invisible_characters($str);
+        $str = Ob\remove_invisible_characters($str);
 
         /*
          * Convert all tabs to spaces
@@ -422,7 +423,7 @@ Class Security {
                 return ($str == $converted_string) ? TRUE: FALSE;
         }
 
-        log_me('debug', "XSS Filtering completed");
+        log\me('debug', "XSS Filtering completed");
         
         return $str;
     }
@@ -553,7 +554,7 @@ Class Security {
             $bad[] = '/';
         }
 
-        $str = remove_invisible_characters($str, FALSE);
+        $str = Ob\remove_invisible_characters($str, FALSE);
         return stripslashes(str_replace($bad, '', $str));
     }
     

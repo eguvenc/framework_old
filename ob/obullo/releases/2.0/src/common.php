@@ -1,355 +1,299 @@
 <?php
+namespace Ob {
 
-/**
-* Common.php
-*
-* @version 1.0
-*/
+    /**
+    * Common.php
+    *
+    * @version 1.0
+    */
 
-// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-/**
- * Autoload php5 files.
+    /**
+    * Autoload php5 files.
 
- * @param string $realname
- * @return
- */
-function obullo_autoloader($realname)
-{           
-    if(class_exists($realname))
-    {
-        return;
-    }
-   
-    $packages = get_config('packages');
-    
-    if($realname == 'Ob\Model') // Database files.
-    {
-        require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'model'. EXT);
-        return;
-    }
-        
-    if(strpos($realname, 'Ob\\') === 0)  // Call Obullo modules from ob/ directory.
-    {  
-        $package_filename = substr(mb_strtolower($realname, config('charset')),3);
-        if( ! isset($packages['dependencies'][$package_filename]['component'])) //  check package Installed.
-        {
-            exit('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');
-        }
-
-        $ob_parts   = explode('\\', $realname);
-        $ob_library = strtolower($ob_parts[1]);
-        
-        require(OB_MODULES .$ob_library. DS .'releases'. DS .$packages['dependencies'][$ob_library]['version']. DS .$ob_library. EXT);
-        return;
-    }
-    
-    if(strpos($realname, 'Model\\') === 0)
-    {   
+    * @param string $realname
+    * @return
+    */
+    function autoloader($realname)
+    {           
         if(class_exists($realname))
         {
             return;
         }
-        
-        $model_parts = explode('\\', $realname);
 
-        if(isset($model_parts[2]))  //  Directory Request
+        $packages = get_config('packages');
+
+        if($realname == 'Ob\Model') // Database files.
         {
-            if($model_parts[2] == 'Odm')
+            require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'model'. EXT);
+            return;
+        }
+
+        if(strpos($realname, 'Ob\\') === 0)  // Call Obullo modules from ob/ directory.
+        {  
+            $ob_parts   = explode('\\', $realname);
+            $ob_library = strtolower($ob_parts[1]);
+
+            $package_filename = mb_strtolower($ob_library, config('charset'));
+            echo $package_filename.'<br>';
+            if( ! isset($packages['dependencies'][$package_filename]['component'])) //  check package Installed.
             {
-                require(OB_MODULES .'odm'. DS .'releases'. DS .$packages['dependencies']['odm']['version']. DS .'odm'. EXT);
-                return;
+                exit('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');
             }
-            
-            $model_name = $model_parts[2];
-            $model_path = MODULES .strtolower($model_parts[1]) . DS .'models'. DS .strtolower($model_name). EXT;
-        } 
-        else 
-        {   
-            $model_name = $model_parts[1];
-            $model_path = MODULES .'models'. DS .strtolower($model_name). EXT;
+
+            require(OB_MODULES .$ob_library. DS .'releases'. DS .$packages['dependencies'][$ob_library]['version']. DS .$ob_library. EXT);
+            return;
         }
 
-        require($model_path);
-        return;
-    }
-}
-
-spl_autoload_register('obullo_autoloader', true);
-
-// --------------------------------------------------------------------
-
-/**
-* Gets a config item
-*
-* @access    public
-* @param     string $config_name file name
-* @version   0.1
-* @version   0.2 added $config_name var
-*            multiple config support
-* @return    mixed
-*/
-function config($item, $config_name = 'config')
-{
-    static $config_item = array();
-
-    if ( ! isset($config_item[$item]))
-    {
-        $config_name = get_config($config_name);
-
-        if ( ! isset($config_name[$item]))
+        if(strpos($realname, 'Model\\') === 0)
         {
-            return FALSE;
-        }
+            $model_parts = explode('\\', $realname);
 
-        $config_item[$item] = $config_name[$item];
+            if(isset($model_parts[2]))  //  Directory Request
+            {
+                if($model_parts[2] == 'Odm')
+                {
+                    require(OB_MODULES .'odm'. DS .'releases'. DS .$packages['dependencies']['odm']['version']. DS .'odm'. EXT);
+                    return;
+                }
+
+                $model_name = $model_parts[2];
+                $model_path = MODULES .strtolower($model_parts[1]) . DS .'models'. DS .strtolower($model_name). EXT;
+            } 
+            else 
+            {   
+                $model_name = $model_parts[1];
+                $model_path = MODULES .'models'. DS .strtolower($model_name). EXT;
+            }
+
+            require($model_path);
+            return;
+        }
     }
 
-    return $config_item[$item];
-}
+    spl_autoload_register('Ob\autoloader', true);
 
-// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-/**
-* Gets a db configuration items
-*
-* @access    public
-* @param     string $item
-* @param     string $index 'default'
-* @version   0.1
-* @version   0.2 added multiple config fetch
-* @return    mixed
-*/
-function db_item($item, $index = 'db')
-{
-    static $db_item = array();
-
-    if ( ! isset($db_item[$index][$item]))
+    /**
+    * Gets a config item
+    *
+    * @access    public
+    * @param     string $config_name file name
+    * @version   0.1
+    * @version   0.2 added $config_name var
+    *            multiple config support
+    * @return    mixed
+    */
+    function config($item, $config_name = 'config')
     {
-        $database = get_config('database');
-        
-        if ( ! isset($database[$index][$item]))
+        static $config_item = array();
+
+        if ( ! isset($config_item[$item]))
         {
-            return FALSE;
+            $config_name = get_config($config_name);
+
+            if ( ! isset($config_name[$item]))
+            {
+                return FALSE;
+            }
+
+            $config_item[$item] = $config_name[$item];
         }
-        
-        $db_item[$index][$item] = $database[$index][$item];
+
+        return $config_item[$item];
     }
 
-    return $db_item[$index][$item];
-}
+    // --------------------------------------------------------------------
 
-// --------------------------------------------------------------------
-
-/**
- *  Check requested obullo package
- *  whether to installed.
- */
-function package_exists($package)
-{
-    $packages = get_config('packages');
-    
-    if(isset($packages['dependencies'][$package]['component']))
+    /**
+    * Gets a db configuration items
+    *
+    * @access    public
+    * @param     string $item
+    * @param     string $index 'default'
+    * @version   0.1
+    * @version   0.2 added multiple config fetch
+    * @return    mixed
+    */
+    function db_item($item, $index = 'db')
     {
-        return TRUE;
-    }
-    
-    return FALSE;
-}
+        static $db_item = array();
 
-// --------------------------------------------------------------------
-
-/**
-* Tests for file writability
-*
-* is_writable() returns TRUE on Windows servers when you really can't write to
-* the file, based on the read-only attribute.  is_writable() is also unreliable
-* on Unix servers if safe_mode is on.
-*
-* @access    private
-* @return    void
-*/
-function is_really_writable($file)
-{
-    // If we're on a Unix server with safe_mode off we call is_writable
-    if (DS == '/' AND @ini_get("safe_mode") == FALSE)
-    {
-        return is_writable($file);
-    }
-
-    // For windows servers and safe_mode "on" installations we'll actually
-    // write a file then read it.  Bah...
-    if (is_dir($file))
-    {
-        $file = rtrim($file, DS). DS .md5(rand(1,100));
-
-        if (($fp = @fopen($file, 'ab')) === FALSE)
+        if ( ! isset($db_item[$index][$item]))
         {
-            return FALSE;
+            $database = get_config('database');
+
+            if ( ! isset($database[$index][$item]))
+            {
+                return FALSE;
+            }
+
+            $db_item[$index][$item] = $database[$index][$item];
         }
 
-        fclose($fp);
-        @chmod($file, '0777');
-        @unlink($file);
-        return TRUE;
+        return $db_item[$index][$item];
     }
-    elseif (($fp = @fopen($file, 'ab')) === FALSE)
+
+    // --------------------------------------------------------------------
+
+    /**
+    *  Check requested obullo package
+    *  whether to installed.
+    */
+    function package_exists($package)
     {
+        $packages = get_config('packages');
+
+        if(isset($packages['dependencies'][$package]['component']))
+        {
+            return TRUE;
+        }
+
         return FALSE;
     }
 
-    fclose($fp);
-    
-    return TRUE;
-}
+    // ------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------
-
-/**
-* Set HTTP Status Header
-*
-* @access   public
-* @param    int     the status code
-* @param    string    
-* @return   void
-*/
-function set_status_header($code = 200, $text = '')
-{
-    $stati = array(
-                        200    => 'OK',
-                        201    => 'Created',
-                        202    => 'Accepted',
-                        203    => 'Non-Authoritative Information',
-                        204    => 'No Content',
-                        205    => 'Reset Content',
-                        206    => 'Partial Content',
-
-                        300    => 'Multiple Choices',
-                        301    => 'Moved Permanently',
-                        302    => 'Found',
-                        304    => 'Not Modified',
-                        305    => 'Use Proxy',
-                        307    => 'Temporary Redirect',
-
-                        400    => 'Bad Request',
-                        401    => 'Unauthorized',
-                        403    => 'Forbidden',
-                        404    => 'Not Found',
-                        405    => 'Method Not Allowed',
-                        406    => 'Not Acceptable',
-                        407    => 'Proxy Authentication Required',
-                        408    => 'Request Timeout',
-                        409    => 'Conflict',
-                        410    => 'Gone',
-                        411    => 'Length Required',
-                        412    => 'Precondition Failed',
-                        413    => 'Request Entity Too Large',
-                        414    => 'Request-URI Too Long',
-                        415    => 'Unsupported Media Type',
-                        416    => 'Requested Range Not Satisfiable',
-                        417    => 'Expectation Failed',
-
-                        500    => 'Internal Server Error',
-                        501    => 'Not Implemented',
-                        502    => 'Bad Gateway',
-                        503    => 'Service Unavailable',
-                        504    => 'Gateway Timeout',
-                        505    => 'HTTP Version Not Supported'
-                    );
-
-    if ($code == '' OR ! is_numeric($code))
+    /**
+    * Set HTTP Status Header
+    *
+    * @access   public
+    * @param    int     the status code
+    * @param    string    
+    * @return   void
+    */
+    function set_status_header($code = 200, $text = '')
     {
-        show_error('Status codes must be numeric', 500);
+        $stati = array(
+                            200    => 'OK',
+                            201    => 'Created',
+                            202    => 'Accepted',
+                            203    => 'Non-Authoritative Information',
+                            204    => 'No Content',
+                            205    => 'Reset Content',
+                            206    => 'Partial Content',
+
+                            300    => 'Multiple Choices',
+                            301    => 'Moved Permanently',
+                            302    => 'Found',
+                            304    => 'Not Modified',
+                            305    => 'Use Proxy',
+                            307    => 'Temporary Redirect',
+
+                            400    => 'Bad Request',
+                            401    => 'Unauthorized',
+                            403    => 'Forbidden',
+                            404    => 'Not Found',
+                            405    => 'Method Not Allowed',
+                            406    => 'Not Acceptable',
+                            407    => 'Proxy Authentication Required',
+                            408    => 'Request Timeout',
+                            409    => 'Conflict',
+                            410    => 'Gone',
+                            411    => 'Length Required',
+                            412    => 'Precondition Failed',
+                            413    => 'Request Entity Too Large',
+                            414    => 'Request-URI Too Long',
+                            415    => 'Unsupported Media Type',
+                            416    => 'Requested Range Not Satisfiable',
+                            417    => 'Expectation Failed',
+
+                            500    => 'Internal Server Error',
+                            501    => 'Not Implemented',
+                            502    => 'Bad Gateway',
+                            503    => 'Service Unavailable',
+                            504    => 'Gateway Timeout',
+                            505    => 'HTTP Version Not Supported'
+                        );
+
+        if ($code == '' OR ! is_numeric($code))
+        {
+            show_error('Status codes must be numeric', 500);
+        }
+
+        if (isset($stati[$code]) AND $text == '')
+        {                
+            $text = $stati[$code];
+        }
+
+        if ($text == '')
+        {
+            show_error('No status text available.  Please check your status code number or supply your own message text.', 500);
+        }
+
+        $server_protocol = (isset($_SERVER['SERVER_PROTOCOL'])) ? $_SERVER['SERVER_PROTOCOL'] : FALSE;
+
+        if (substr(php_sapi_name(), 0, 3) == 'cgi')
+        {
+            header("Status: {$code} {$text}", TRUE);
+        }
+        elseif ($server_protocol == 'HTTP/1.1' OR $server_protocol == 'HTTP/1.0')
+        {
+            header($server_protocol." {$code} {$text}", TRUE, $code);
+        }
+        else
+        {
+            header("HTTP/1.1 {$code} {$text}", TRUE, $code);
+        }
     }
 
-    if (isset($stati[$code]) AND $text == '')
-    {                
-        $text = $stati[$code];
-    }
-    
-    if ($text == '')
-    {
-        show_error('No status text available.  Please check your status code number or supply your own message text.', 500);
-    }
-    
-    $server_protocol = (isset($_SERVER['SERVER_PROTOCOL'])) ? $_SERVER['SERVER_PROTOCOL'] : FALSE;
+    //----------------------------------------------------------------------- 
 
-    if (substr(php_sapi_name(), 0, 3) == 'cgi')
-    {
-        header("Status: {$code} {$text}", TRUE);
-    }
-    elseif ($server_protocol == 'HTTP/1.1' OR $server_protocol == 'HTTP/1.0')
-    {
-        header($server_protocol." {$code} {$text}", TRUE, $code);
-    }
-    else
-    {
-        header("HTTP/1.1 {$code} {$text}", TRUE, $code);
-    }
-}
-
-//----------------------------------------------------------------------- 
-
-/**
-* 404 Page Not Found Handler
-*
-* @access   private
-* @param    string
-* @return   string
-*/
-if( ! function_exists('show_404')) 
-{
+    /**
+    * 404 Page Not Found Handler
+    *
+    * @access   private
+    * @param    string
+    * @return   string
+    */
     function show_404($page = '')
     {    
-        log_me('error', '404 Page Not Found --> '.$page, false, true);
+        Ob\log\me('error', '404 Page Not Found --> '.$page, false, true);
 
         echo show_http_error('404 Page Not Found', $page, 'ob_404', 404);
 
         exit();
     }
-}
 
-// -------------------------------------------------------------------- 
+    // -------------------------------------------------------------------- 
 
-/**
-* Manually Set General Http Errors
-* 
-* @param string $message
-* @param int    $status_code
-* @param int    $heading
-* 
-* @version 0.1
-* @version 0.2  added custom $heading params for users
-*/
-if( ! function_exists('show_error')) 
-{
+    /**
+    * Manually Set General Http Errors
+    * 
+    * @param string $message
+    * @param int    $status_code
+    * @param int    $heading
+    * 
+    * @version 0.1
+    * @version 0.2  added custom $heading params for users
+    */
     function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered')
     {
-        log_me('error', 'HTTP Error --> '.$message, false, true);
-        
+        Ob\log\me('error', 'HTTP Error --> '.$message, false, true);
+
         // Some times we use utf8 chars in errors.
         header('Content-type: text/html; charset='.config('charset')); 
-        
+
         echo show_http_error($heading, $message, 'ob_general', $status_code);
-        
+
         exit();
     }
-}
-                   
-// --------------------------------------------------------------------
 
-/**
- * General Http Errors
- *
- * @access   private
- * @param    string    the heading
- * @param    string    the message
- * @param    string    the template name
- * @param    int       header status code
- * @return   string
- */
-if( ! function_exists('show_http_error')) 
-{
+                   
+    // --------------------------------------------------------------------
+
+    /**
+    * General Http Errors
+    *
+    * @access   private
+    * @param    string    the heading
+    * @param    string    the message
+    * @param    string    the template name
+    * @param    int       header status code
+    * @return   string
+    */
     function show_http_error($heading, $message, $template = 'ob_general', $status_code = 500)
     {
         set_status_header($status_code);
@@ -367,22 +311,65 @@ if( ! function_exists('show_http_error'))
         
         return $buffer;
     }
-}
 
-// -------------------------------------------------------------------- 
+    // --------------------------------------------------------------------
 
-/**
- * Remove Invisible Characters
- *
- * This prevents sandwiching null characters
- * between ascii characters, like Java\0script.
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('remove_invisible_characters'))
-{
+    /**
+    * Tests for file writability
+    *
+    * is_writable() returns TRUE on Windows servers when you really can't write to
+    * the file, based on the read-only attribute.  is_writable() is also unreliable
+    * on Unix servers if safe_mode is on.
+    *
+    * @access    private
+    * @return    void
+    */
+    function is_really_writable($file)
+    {
+        // If we're on a Unix server with safe_mode off we call is_writable
+        if (DS == '/' AND @ini_get("safe_mode") == FALSE)
+        {
+            return is_writable($file);
+        }
+
+        // For windows servers and safe_mode "on" installations we'll actually
+        // write a file then read it.  Bah...
+        if (is_dir($file))
+        {
+            $file = rtrim($file, DS). DS .md5(rand(1,100));
+
+            if (($fp = @fopen($file, 'ab')) === FALSE)
+            {
+                return FALSE;
+            }
+
+            fclose($fp);
+            @chmod($file, '0777');
+            @unlink($file);
+            return TRUE;
+        }
+        elseif (($fp = @fopen($file, 'ab')) === FALSE)
+        {
+            return FALSE;
+        }
+
+        fclose($fp);
+
+        return TRUE;
+    }
+    
+    // -------------------------------------------------------------------- 
+
+    /**
+    * Remove Invisible Characters
+    *
+    * This prevents sandwiching null characters
+    * between ascii characters, like Java\0script.
+    *
+    * @access	public
+    * @param	string
+    * @return	string
+    */
     function remove_invisible_characters($str, $url_encoded = TRUE)
     {
         $non_displayables = array();
@@ -406,6 +393,7 @@ if ( ! function_exists('remove_invisible_characters'))
 
         return $str;
     }
+    
 }
 
 // END common.php File

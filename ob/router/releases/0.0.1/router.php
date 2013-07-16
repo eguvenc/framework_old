@@ -81,7 +81,7 @@ Class Router {
         
         $this->_set_routing();         
         
-        log_me('debug', 'Router Class Initialized');
+        log\me('debug', 'Router Class Initialized');
    
     }
     
@@ -219,7 +219,7 @@ Class Router {
             // re-index the routed segments array so it starts with 1 rather than 0
             // $this->uri->_reindex_segments();
 
-            log_me('debug', "No URI present. Default controller set.");
+            log\me('debug', "No URI present. Default controller set.");
             
             return;
         }
@@ -350,7 +350,7 @@ Class Router {
         {
             $this->hmvc_response = 'Hmvc request not found.';
 
-            log_me('debug', 'Hmvc request not found.');
+            log\me('debug', 'Hmvc request not found.');
             
             return FALSE;
         }

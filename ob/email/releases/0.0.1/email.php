@@ -77,7 +77,7 @@ class Email {
             $this->_safe_mode = ((boolean)@ini_get("safe_mode") === FALSE) ? FALSE : TRUE;
         }
 
-        log_me('debug', "Email Class Initialized");
+        log\me('debug', "Email Class Initialized");
     }
     
     
