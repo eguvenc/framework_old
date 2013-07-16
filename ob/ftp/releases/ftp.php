@@ -580,7 +580,7 @@ Class Ftp {
      */
     private function _error($line)
     {
-        getInstance()->locale->load('obullo'); // load framework language file.
+        \Ob\getInstance()->locale->load('obullo'); // load framework language file.
         
         show_error(lang($line));
     }

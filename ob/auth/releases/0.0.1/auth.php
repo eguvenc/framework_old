@@ -259,7 +259,7 @@ Class Auth {
         if( ! $this->check())  // auth is NOT ok ?
         {  
             $redirect_url = ($redirect == '') ? base_url($this->fail_url) : base_url($redirect);
-            $redirect_url = $redirect_url.'?redirect='.getInstance()->uri->request_uri($urlencode);
+            $redirect_url = $redirect_url.'?redirect='.\Ob\getInstance()->uri->request_uri($urlencode);
 
             redirect($redirect_url); 
         }

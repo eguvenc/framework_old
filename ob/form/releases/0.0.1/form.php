@@ -20,7 +20,7 @@ if( ! function_exists('form_open') )
             $attributes = 'method="post"';
         }
 
-        $action = ( strpos($action, '://') === FALSE) ? getInstance()->config->site_url($action) : $action;
+        $action = ( strpos($action, '://') === FALSE) ? \Ob\getInstance()->config->site_url($action) : $action;
 
         $form = '<form action="'.$action.'"';
 

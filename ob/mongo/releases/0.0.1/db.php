@@ -2,14 +2,12 @@
 
 /**
  * Mongo DB Class.
- * Derived from MongoDB Active Record Library.
  *
  * A library to interface for NoSQL database MongoDB. For more information see http://www.mongodb.org
  *
  * @package		Obullo
  * @author		Alex Bilbie | www.alexbilbie.com | alex@alexbilbie.com ( Original Library )
  * @author		Ersin Güvenç. ( Porting to Obullo )
- * @copyright          Copyright (c) 2012, Obullo Team
  * @license		http://www.opensource.org/licenses/mit-license.php
  * @link		http://alexbilbie.com
  * @version		Version 0.0.1
@@ -125,7 +123,7 @@ Class Db {
      * Set a collection.
      * 
      * @param type $collection 
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function from($collection = '')
     {
@@ -153,7 +151,7 @@ Class Db {
      * 
      * @param type $wheres
      * @param type $value
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function where($wheres, $value = null, $mongo_id = TRUE)
     {
@@ -217,7 +215,7 @@ Class Db {
      * @usage : $this->db->or_where(array('foo'=>'bar', 'bar'=>'foo'))->get('foobar');
      * 
      * @param type $wheres
-     * @return \OB_Mongo 
+     * @return Db
      */
     public function or_where($wheres, $value = null)
     {
@@ -246,7 +244,7 @@ Class Db {
      * 
      * @param type $field
      * @param type $in
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function where_in($field = "", $in = array())
     {
@@ -276,7 +274,7 @@ Class Db {
      * 
      * @param type $field
      * @param type $in
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function where_in_all($field = "", $in = array())
     {
@@ -383,7 +381,7 @@ Class Db {
      * @usage : $this->db->order_by('foo', 'ASC'))->get('foobar');
      * 
      * @param type $fields
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function order_by($col, $direction  = 'ASC')
     {
@@ -407,7 +405,7 @@ Class Db {
      * @usage : $this->db->limit($x);
      * 
      * @param type $x
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function limit($x = 99999)
     {
@@ -427,7 +425,7 @@ Class Db {
      * @usage : $this->db->offset($x);
      * 
      * @param type $x
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function offset($x = 0)
     {
@@ -741,7 +739,7 @@ Class Db {
      * 
      * @param type $fields
      * @param type $value
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function inc($fields = array(), $value = 0)
     {
@@ -771,7 +769,7 @@ Class Db {
      * 
      * @param type $fields
      * @param type $value
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function dec($fields = array(), $value = 0)
     {
@@ -802,7 +800,7 @@ Class Db {
      * 
      * @param type $fields
      * @param type $value
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function set($fields, $value = NULL)
     {
@@ -832,7 +830,7 @@ Class Db {
      * @usage: $this->db->where(array('blog_id'=>123))->set(array('posted','time'))->update('blog_posts');
      * 
      * @param type $fields
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function unset_field($fields)
     {
@@ -863,7 +861,7 @@ Class Db {
      * 
      * @param type $field
      * @param type $values
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function addtoset($field, $values)
     {
@@ -891,7 +889,7 @@ Class Db {
      * 
      * @param type $fields
      * @param type $value
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function push($fields, $value = array())
     {
@@ -922,7 +920,7 @@ Class Db {
      * @usage: $this->db->where(array('blog_id'=>123))->pop(array('comments', 'viewed_by'))->update('blog_posts');
      * 
      * @param type $field
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function pop($field)
     {
@@ -953,7 +951,7 @@ Class Db {
      * 
      * @param type $field
      * @param type $value
-     * @return \OB_Mongo 
+     * @return \Db
      */
     public function pull($field = "", $value = array())
     {

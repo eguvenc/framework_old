@@ -7,10 +7,9 @@ namespace Ob\log {
     * Log Helper
     *
     * @package     Obullo
-    * @subpackage  error
-    * @category    Helpers
+    * @subpackage  log
+    * @category    log
     * @author      Obullo Team
-    * @link        
     */
     Class start
     { 

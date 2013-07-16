@@ -1906,7 +1906,7 @@ class Email {
      */
     private function _set_error_message($msg, $val = '')
     {
-        getInstance()->locale->load('obullo');
+        \Ob\getInstance()->locale->load('obullo');
 
         if (FALSE === ($line = lang($msg)))
         {

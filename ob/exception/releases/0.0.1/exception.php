@@ -44,10 +44,10 @@ Class Exception {
         
         $code = $e->getCode();
         $last_query = '';
-        if(isset(getInstance()->db))
+        if(isset(\Ob\getInstance()->db))
         {
-            $prepare    = (isset(getInstance()->db->prepare)) ? getInstance()->db->prepare : false;
-            $last_query = getInstance()->db->last_query($prepare);
+            $prepare    = (isset(\Ob\getInstance()->db->prepare)) ? \Ob\getInstance()->db->prepare : false;
+            $last_query = \Ob\getInstance()->db->last_query($prepare);
         }
         
         if( ! empty($last_query))

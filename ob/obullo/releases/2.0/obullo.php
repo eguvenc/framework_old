@@ -80,8 +80,8 @@ Class Obullo
             Ob\show_404($page_uri);
         }
         
-        $Namespace_Class = '\Ob\\'.$router->fetch_class();
-        $OB = new $Namespace_Class();           // If Everyting ok Declare Called Controller ! 
+        $Class = '\Ob\\'.$router->fetch_class();
+        $OB = new $Class();           // If Everyting ok Declare Called Controller ! 
 
         if ( ! in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods($OB))))  // Check method exist or not 
         {

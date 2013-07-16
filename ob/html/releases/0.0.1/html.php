@@ -1,89 +1,98 @@
 <?php
+namespace Ob\html {
+    
+    // --------------------------------------------------------------------
+    
+    /**
+    * Obullo Html Helper
+    *
+    * @package     Obullo
+    * @subpackage  Helpers
+    * @category    Html
+    * @author      Obullo Team
+    * @link
+    */
+    // --------------------------------------------------------------------
 
-/**
- * Obullo Html Helper
- *
- * @package     Obullo
- * @subpackage  Helpers
- * @category    Html
- * @author      Obullo Team
- * @link
- */
-// --------------------------------------------------------------------
-
-/**
-* Build css files.
-*
-* css('welcome.css');
-* css(array('welcome.css', 'hello.css')); // array type
-*
-* @author   Obullo
-* @param    string $href
-* @param    string $title
-* @param    string $media
-* @param    string $rel
-* @param    boolean $index_page
-* @return   string
-*/
-function css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)
-{
-    $ext = substr(strrchr($href, '.'), 1);   // file extension
-    if($ext == FALSE)   // WE UNDERSTAND THIS IS A FOLDER 
-    {
-        $files  = '';
-        $folder = get_filenames(ROOT .'assets'. DS .'css'. DS . str_replace('/', DS, $href));
-        foreach ($folder as $filename)
+    Class start
+    { 
+        function __construct()
         {
-            $files .= _css($href.'/'.$filename, $title, $media, $rel, $index_page = FALSE);
+            \Ob\log\me('debug', 'Html Helper Initialized.');
         }
-        
-        return $files;
     }
     
-    return _css($href, $title, $media, $rel, $index_page);
-}
-
-// ------------------------------------------------------------------------
-
-/**
-* Build css files.
-*
-* css('welcome.css');
-* css(array('welcome.css', 'hello.css')); // array type
-*
-* @author   Obullo
-* @param    string $href
-* @param    string $title
-* @param    string $media
-* @param    string $rel
-* @param    boolean $index_page
-* @return   string
-*/
-function js($src, $arguments = '', $type = 'text/javascript', $index_page = FALSE)
-{
-    $ext = substr(strrchr($src, '.'), 1);   // file extension
-    if($ext == FALSE)  // WE UNDERSTAND THIS IS A FOLDER 
+    /**
+    * Build css files.
+    *
+    * css('welcome.css');
+    * css(array('welcome.css', 'hello.css')); // array type
+    *
+    * @author   Obullo
+    * @param    string $href
+    * @param    string $title
+    * @param    string $media
+    * @param    string $rel
+    * @param    boolean $index_page
+    * @return   string
+    */
+    function css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)
     {
-        $files  = '';
-        $folder = get_filenames(ROOT .'assets'. DS .'js'. DS . str_replace('/', DS, $src));
-        foreach ($folder as $filename)
+        if(strpos($src, '/*') !== FALSE)   // WE UNDERSTAND THIS IS A FOLDER 
         {
-            $files .= _js($src.'/'.$filename, $arguments, $type, $index_page = FALSE);
+            $str = substr($src, 0, -2);
+            $files  = '';
+            $folder = get_filenames(ROOT .'assets'. DS .'css'. DS . str_replace('/', DS, $href));
+            foreach ($folder as $filename)
+            {
+                $files .= _css($href.'/'.$filename, $title, $media, $rel, $index_page = FALSE);
+            }
+
+            return $files;
         }
-        
-        return $files;
+
+        return _css($href, $title, $media, $rel, $index_page);
     }
-    
-    return _js($src, $arguments, $type, $index_page);
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Build css files private function.
-*/
-if( ! function_exists('_css') )
-{
+    /**
+    * Build css files.
+    *
+    * css('welcome.css');
+    * css(array('welcome.css', 'hello.css')); // array type
+    *
+    * @author   Obullo
+    * @param    string $href
+    * @param    string $title
+    * @param    string $media
+    * @param    string $rel
+    * @param    boolean $index_page
+    * @return   string
+    */
+    function js($src, $arguments = '', $type = 'text/javascript', $index_page = FALSE)
+    {
+        if(strpos($src, '/*') !== FALSE)  // WE UNDERSTAND THIS IS A FOLDER 
+        {
+            $str = substr($src, 0, -2);
+            $files  = '';
+            $folder = get_filenames(ROOT .'assets'. DS .'js'. DS . str_replace('/', DS, $src));
+            foreach ($folder as $filename)
+            {
+                $files .= _js($src.'/'.$filename, $arguments, $type, $index_page = FALSE);
+            }
+
+            return $files;
+        }
+
+        return _js($src, $arguments, $type, $index_page);
+    }
+
+    // ------------------------------------------------------------------------
+
+    /**
+    * Build css files private function.
+    */
     function _css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)
     {
         $link = '<link ';           
@@ -124,16 +133,13 @@ if( ! function_exists('_css') )
         $link .= "/>\n";
         
         return $link;
-    }
-}                       
+    }         
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Build js files private function.
-*/
-if( ! function_exists('_js') )
-{
+    /**
+    * Build js files private function.
+    */
     function _js($src, $arguments = '', $type = 'text/javascript', $index_page = FALSE)
     {
         $link = '<script type="'.$type.'" ';        
@@ -157,24 +163,21 @@ if( ! function_exists('_js') )
        
         return $link;
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Image
-*
-* Generates an <img /> element
-*
-* @access   public
-* @param    mixed    $src  sources folder image path via filename
-* @param    boolean  $index_page
-* @param    string   $attributes
-* @version  0.1
-* @return   string
-*/
-if( ! function_exists('img') ) 
-{
+    /**
+    * Image
+    *
+    * Generates an <img /> element
+    *
+    * @access   public
+    * @param    mixed    $src  sources folder image path via filename
+    * @param    boolean  $index_page
+    * @param    string   $attributes
+    * @version  0.1
+    * @return   string
+    */
     function img($src = '', $attributes = '', $index_page = FALSE)
     {
         if ( ! is_array($src) )
@@ -209,20 +212,17 @@ if( ! function_exists('img') )
 
         return $img;
     }
-}
 
-// ------------------------------------------------------------------------ 
+    // ------------------------------------------------------------------------ 
 
-/**
-* Get assets directory path
-*
-* @access   private
-* @param    mixed $file_url
-* @param    mixed $extra_path
-* @return   string | FALSE
-*/
-if( ! function_exists('_get_public_path') )
-{
+    /**
+    * Get assets directory path
+    *
+    * @access   private
+    * @param    mixed $file_url
+    * @param    mixed $extra_path
+    * @return   string | FALSE
+    */
     function _get_public_path($file_url, $extra_path = '', $ext = '')
     {                              
         $filename = $file_url;          
@@ -251,21 +251,18 @@ if( ! function_exists('_get_public_path') )
         
         return $config->public_url('', true) .'assets/'. $extra_path . $folder . $sub_path . $filename;
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
- * Get folder filenames.
- * 
- * @staticvar array $_filedata
- * @param string $source_dir
- * @param bool $include_path
- * @param bool $_recursion
- * @return boolean | array
- */
-if( ! function_exists('get_filenames'))
-{
+    /**
+    * Get folder filenames.
+    * 
+    * @staticvar array $_filedata
+    * @param string $source_dir
+    * @param bool $include_path
+    * @param bool $_recursion
+    * @return boolean | array
+    */
     function get_filenames($source_dir, $include_path = FALSE, $_recursion = FALSE)
     {
         static $_filedata = array();
@@ -297,7 +294,8 @@ if( ! function_exists('get_filenames'))
         {
             return FALSE;
         }
-    } 
+    }
+
 }
 
 /* End of file html.php */

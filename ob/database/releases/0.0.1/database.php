@@ -22,7 +22,7 @@ Class Db {
             return $this;
         }
         
-        getInstance()->{$db_var} = $this->connect($db_var, $params);
+        \Ob\getInstance()->{$db_var} = $this->connect($db_var, $params);
         
         \Ob\log\me('debug', 'Database Class Initialized.');
     }

@@ -7,7 +7,6 @@ namespace Ob {
     * @version 1.0
     */
     
-    
     // -------------------------------------------------------------------- 
 
     /**
@@ -35,7 +34,6 @@ namespace Ob {
     */
     function autoloader($realname)
     {           
-     
         if(class_exists($realname))
         {  
             return;
@@ -71,16 +69,31 @@ namespace Ob {
                     return;
                 }
 
-                $model_name = $model_parts[2];
-                $model_path = MODULES .strtolower($model_parts[1]) . DS .'models'. DS .strtolower($model_name). EXT;
+                $model_path = MODULES .strtolower($model_parts[1]) . DS .'models'. DS .strtolower($model_parts[2]). EXT;
             } 
             else 
             {   
-                $model_name = $model_parts[1];
-                $model_path = MODULES .'models'. DS .strtolower($model_name). EXT;
+                $model_path = MODULES .'models'. DS .strtolower($model_parts[1]). EXT;
             }
 
             require($model_path);
+            return;
+        }
+        
+        if(strpos($realname, 'Ob\vi\\') === 0)
+        {
+            $view_parts = explode('\\', $realname);
+
+            if(isset($view_parts[2]))  //  Directory Request
+            {
+                $view_path = MODULES .strtolower($view_parts[1]) . DS .'views'. DS .strtolower($view_parts[2]). EXT;
+            } 
+            else 
+            {   
+                $view_path = MODULES .'views'. DS .strtolower($view_parts[1]). EXT;
+            }
+
+            require($view_path);
             return;
         }
         
@@ -99,25 +112,7 @@ namespace Ob {
             require_once(OB_MODULES .$ob_library. DS .'releases'. DS .$packages['dependencies'][$ob_library]['version']. DS .$ob_library. EXT);
             return;
         }
-        
-        if(strpos($realname, 'Ob\vi\\') === 0)
-        {
-            $view_parts = explode('\\', $realname);
 
-            if(isset($model_parts[2]))  //  Directory Request
-            {
-                $model_name = $model_parts[2];
-                $model_path = MODULES .strtolower($model_parts[1]) . DS .'views'. DS .strtolower($model_name). EXT;
-            } 
-            else 
-            {   
-                $model_name = $model_parts[1];
-                $model_path = MODULES .'models'. DS .strtolower($model_name). EXT;
-            }
-
-            require($model_path);
-            return;
-        }
     }
 
     spl_autoload_register('Ob\autoloader', true);
