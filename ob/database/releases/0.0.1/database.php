@@ -1,8 +1,8 @@
 <?php
-namespace Ob;
+namespace Ob\Database;
 
 /**
- * Database Connection Class.
+ * Db Connection Class.
  *
  * @package         Obullo 
  * @subpackage      Obullo.database     
@@ -10,7 +10,7 @@ namespace Ob;
  * @version         0.1
  * 
  */
-Class Database {
+Class Db {
     
     /**
     * Constructor
@@ -24,7 +24,7 @@ Class Database {
         
         getInstance()->{$db_var} = $this->connect($db_var, $params);
         
-        log\me('debug', 'Database Class Initialized.');
+        \Ob\log\me('debug', 'Database Class Initialized.');
     }
     
     /**
@@ -36,8 +36,8 @@ Class Database {
     */
     public function connect($db_var = 'db', $params = '')
     {                                      
-        $dbdriver = is_array($params) ? $params['dbdriver'] : db_item('dbdriver', $db_var); 
-        $hostname = db_item('hostname', $db_var);
+        $dbdriver = is_array($params) ? $params['dbdriver'] : \Ob\db_item('dbdriver', $db_var); 
+        $hostname = \Ob\db_item('hostname', $db_var);
         
         if(is_array($params))
         {
@@ -57,7 +57,7 @@ Class Database {
         
         if(strtolower($dbdriver) == 'mongodb') 
         {
-            $mongo = new Mongo_DB();
+            $mongo = new \Ob\Mongo\Db();
             
             return $mongo->connect();
         }
@@ -68,7 +68,7 @@ Class Database {
         
         if($packages['db_layer'] == 'Database_Pdo')
         {
-            $database = new Database_Pdo();
+            $database = new \Ob\Database_Pdo\Database_Pdo();
             return $database->connect();
         }
         

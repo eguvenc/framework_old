@@ -21,15 +21,15 @@ Class Obullo
         
         require (APP  .'config'. DS .'constants'. EXT);  // app constants.
         require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'common'. EXT);
-
+        
         if(Ob\package_exists('log')) // check log package is installed.
         {
-            new Ob\log\log();
+            new Ob\log\start();
         }
-        
+               
         if(Ob\package_exists('error')) // check error package is installed.
         {
-            new Ob\error\error();
+            new Ob\error\start();
         }
         
         $uri    = Ob\Uri::getInstance(); 
@@ -66,30 +66,22 @@ Class Obullo
         $page_uri   = "{$router->fetch_directory()} / {$router->fetch_class()} / {$router->fetch_method()}";
         $controller = MODULES .$router->fetch_directory(). DS .$folder. DS .$router->fetch_class(). EXT;
 
-        // --------------------------------------------------------------------  
-        
-        require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'controller'. EXT); 
-        
-        // --------------------------------------------------------------------  
-
         Ob\bench\mark('loading_time_base_classes_end');  // Set a mark point for benchmarking  
         Ob\bench\mark('execution_time_( '.$page_uri.' )_start');  // Mark a start point so we can benchmark the controller 
         
         require ($controller);  // call the controller.
 
-        
-        if ( ! class_exists($router->fetch_class()) OR $router->fetch_method() == 'controller' 
+        if ( ! class_exists('\Ob\\'.$router->fetch_class()) OR $router->fetch_method() == 'controller' 
               OR $router->fetch_method() == '_output'       // security fix.
               OR $router->fetch_method() == '_ob_getInstance_'
-              OR in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods('Controller')))
+              OR in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods('Ob\Controller')))
             )
         {
             Ob\show_404($page_uri);
         }
-
-        $Class = $router->fetch_class();
-
-        $OB = new $Class();           // If Everyting ok Declare Called Controller ! 
+        
+        $Namespace_Class = '\Ob\\'.$router->fetch_class();
+        $OB = new $Namespace_Class();           // If Everyting ok Declare Called Controller ! 
 
         if ( ! in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods($OB))))  // Check method exist or not 
         {
@@ -119,7 +111,7 @@ Class Obullo
         #
         #
         ##
-        $this->_close();
+        // $this->_close();
 
     }
 

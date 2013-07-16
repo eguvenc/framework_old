@@ -12,7 +12,15 @@ namespace Ob\i {
     * @author      Obullo Team
     * @link        
     */
-
+    Class start
+    {
+        function __construct()
+        {
+            // 
+        }
+    }
+    
+    
     /**
     * Fetch an item from the GET array
     *

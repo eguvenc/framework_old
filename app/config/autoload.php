@@ -19,10 +19,10 @@
 | -------------------------------------------------------------------
 | Prototypes:
 |
-|       $autoload['helper'] = array('ob/view', 'ob/html', 'ob/url');
+|       $autoload['helper'] = array('vi', 'html', 'url');
 */
 
-$autoload['helper']     = array('ob/view', 'ob/html', 'ob/url');
+$autoload['helper']     = array('vi', 'html', 'url');
 
 /*
 | -------------------------------------------------------------------

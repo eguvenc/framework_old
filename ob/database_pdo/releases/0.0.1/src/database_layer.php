@@ -10,8 +10,8 @@ function ob_query_timer($mark = '')
 
 $packages = get_config('packages');
 
-require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'pdo_database_constants'. EXT);
-require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'pdo_database_crud'. EXT);
+require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'database_constants'. EXT);
+require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'database_crud'. EXT);
 
 /**
  * PDO Layer.
@@ -23,7 +23,7 @@ require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies
  * 
  */
 
-Class Pdo_Database_Layer extends Pdo_Database_Crud {
+Class Database_Layer extends Database_Crud {
     
     public $prepare                 = FALSE;    // prepare switch
     public $p_opt                   = array();  // prepare options

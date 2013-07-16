@@ -227,7 +227,7 @@ Class Output {
             
             log\me('debug', "Final output sent to browser");
             
-            if (\config('log_benchmark') == TRUE)
+            if (config('log_benchmark') == TRUE)
             {
                 log\me('bench', "Total execution time: ".$elapsed);
             }

@@ -12,9 +12,12 @@ namespace Ob\log {
     * @author      Obullo Team
     * @link        
     */
-    Class log
+    Class start
     { 
-        // constructor
+        function __construct()
+        {
+            me('debug', 'Log Helper Initialized.');
+        }
     }
     
     // --------------------------------------------------------------------

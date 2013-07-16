@@ -6,6 +6,24 @@ namespace Ob {
     *
     * @version 1.0
     */
+    
+    
+    // -------------------------------------------------------------------- 
+
+    /**
+    * Grab Obullo Super Object
+    *
+    * @param object $new_istance  
+    */
+    function getInstance($new_instance = '') 
+    { 
+        if(is_object($new_instance))  // fixed HMVC object type of integer bug in php 5.1.6
+        {
+            Controller::_ob_getInstance_($new_instance);
+        }
+
+        return Controller::_ob_getInstance_(); 
+    }
 
     // --------------------------------------------------------------------
 
@@ -17,36 +35,31 @@ namespace Ob {
     */
     function autoloader($realname)
     {           
+     
         if(class_exists($realname))
-        {
-            return;
-        }
-
-        $packages = get_config('packages');
-
-        if($realname == 'Ob\Model') // Database files.
-        {
-            require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'model'. EXT);
-            return;
-        }
-
-        if(strpos($realname, 'Ob\\') === 0)  // Call Obullo modules from ob/ directory.
         {  
-            $ob_parts   = explode('\\', $realname);
-            $ob_library = strtolower($ob_parts[1]);
-
-            $package_filename = mb_strtolower($ob_library, config('charset'));
-            echo $package_filename.'<br>';
-            if( ! isset($packages['dependencies'][$package_filename]['component'])) //  check package Installed.
-            {
-                exit('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');
-            }
-
-            require(OB_MODULES .$ob_library. DS .'releases'. DS .$packages['dependencies'][$ob_library]['version']. DS .$ob_library. EXT);
             return;
         }
-
-        if(strpos($realname, 'Model\\') === 0)
+           echo $realname.'<br>';
+        /*            
+        if($class !== 'Ob\log\log' AND $class == 'Ob\error\error')
+        {
+           print_r(get_declared_classes()); exit;
+        }
+                if(in_array((string)$class, get_declared_classes(), true))
+        { 
+            return;
+        }
+        */
+        $packages = get_config('packages');
+        
+        if($realname == 'Ob\Model') // Core model file.
+        {
+            require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['dependencies']['model']['version']. DS .'model'. EXT);
+            return;
+        }
+        
+        if(strpos($realname, 'Ob\Model\\') === 0) // User model files.
         {
             $model_parts = explode('\\', $realname);
 
@@ -60,6 +73,41 @@ namespace Ob {
 
                 $model_name = $model_parts[2];
                 $model_path = MODULES .strtolower($model_parts[1]) . DS .'models'. DS .strtolower($model_name). EXT;
+            } 
+            else 
+            {   
+                $model_name = $model_parts[1];
+                $model_path = MODULES .'models'. DS .strtolower($model_name). EXT;
+            }
+
+            require($model_path);
+            return;
+        }
+        
+        if(strpos($realname, 'Ob\\') === 0)  // Call Obullo modules from ob/ directory.
+        {  
+            $ob_parts   = explode('\\', $realname);
+            $ob_library = strtolower($ob_parts[1]);
+
+            $package_filename = mb_strtolower($ob_library, config('charset'));
+
+            if( ! isset($packages['dependencies'][$package_filename]['component'])) //  check package Installed.
+            {
+                exit('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');
+            }
+
+            require_once(OB_MODULES .$ob_library. DS .'releases'. DS .$packages['dependencies'][$ob_library]['version']. DS .$ob_library. EXT);
+            return;
+        }
+        
+        if(strpos($realname, 'Ob\vi\\') === 0)
+        {
+            $view_parts = explode('\\', $realname);
+
+            if(isset($model_parts[2]))  //  Directory Request
+            {
+                $model_name = $model_parts[2];
+                $model_path = MODULES .strtolower($model_parts[1]) . DS .'views'. DS .strtolower($model_name). EXT;
             } 
             else 
             {   
@@ -250,7 +298,7 @@ namespace Ob {
     */
     function show_404($page = '')
     {    
-        Ob\log\me('error', '404 Page Not Found --> '.$page, false, true);
+        \Ob\log\me('error', '404 Page Not Found --> '.$page, false, true);
 
         echo show_http_error('404 Page Not Found', $page, 'ob_404', 404);
 
@@ -271,7 +319,7 @@ namespace Ob {
     */
     function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered')
     {
-        Ob\log\me('error', 'HTTP Error --> '.$message, false, true);
+        \Ob\log\me('error', 'HTTP Error --> '.$message, false, true);
 
         // Some times we use utf8 chars in errors.
         header('Content-type: text/html; charset='.config('charset')); 

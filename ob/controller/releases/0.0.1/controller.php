@@ -1,5 +1,6 @@
 <?php
- 
+namespace Ob; 
+
  /**
  * Controller Class.
  *
@@ -22,18 +23,18 @@ Class Controller {
         // Load Obullo Core Libraries
         // ------------------------------------
       
-        $this->config = Ob\Config::getInstance();
-        $this->router = Ob\Router::getInstance();
-        $this->uri    = Ob\Uri::getInstance();
-        $this->output = Ob\Output::getInstance();
-        $this->locale = Ob\Locale::getInstance();
+        $this->config = Config::getInstance();
+        $this->router = Router::getInstance();
+        $this->uri    = Uri::getInstance();
+        $this->output = Output::getInstance();
+        $this->locale = Locale::getInstance();
         
         // Initialize to Autoloaders
         // ------------------------------------
         
         $autoload = get_static('autoload', '', APP .'config');
         
-        Ob\log\me('debug', 'Application Autoload Initialized');
+        log\me('debug', 'Application Autoload Initialized');
 
         if(is_array($autoload))
         {
@@ -43,7 +44,21 @@ Class Controller {
                 {                    
                     foreach($autoload[$key] as $filename)
                     {
-                        // loader::$key($filename);
+                        $class = '\Ob\\'.$filename;
+                        
+                        if($key == 'helper')
+                        {
+                            $class = $class.'\start';
+                            
+                            new $class();
+                        } 
+                        
+                        /*
+                        if($key == 'library' || $key == 'model')
+                        {
+                            new $class();
+                        }
+                        */
                     }
                 }
             }
@@ -54,7 +69,7 @@ Class Controller {
         
         $autorun = get_static('autorun', '', APP .'config');
         
-        Ob\log\me('debug', 'Application Autorun Initialized');
+        log\me('debug', 'Application Autorun Initialized');
 
         if(isset($autorun['function']))
         {
@@ -64,10 +79,10 @@ Class Controller {
                 {
                     if( ! function_exists($function))
                     {
-                        throw new Exception('The autorun function '. $function . ' not found, please define it in APP/config/autoload.php');
+                        throw new \Exception('The autorun function '. $function . ' not found, please define it in APP/config/autoload.php');
                     }
 
-                    call_user_func_array($function, $arguments);   // Run autorun function.
+                    \call_user_func_array($function, $arguments);   // Run autorun function.
                 }
             }
         }  
@@ -95,24 +110,7 @@ Class Controller {
     
 }
 
-// -------------------------------------------------------------------- 
-
-/**
-* Grab Obullo Super Object
-*
-* @param object $new_istance  
-*/
-function getInstance($new_instance = '') 
-{ 
-    if(is_object($new_instance))  // fixed HMVC object type of integer bug in php 5.1.6
-    {
-        Controller::_ob_getInstance_($new_instance);
-    }
-    
-    return Controller::_ob_getInstance_(); 
-}
-
 // END Controller Class
 
 /* End of file controller.php */
-/* Location: ./ob/obullo/releases/2.0/src/controller.php */
+/* Location: ./ob/controller/releases/0.1/controller.php */

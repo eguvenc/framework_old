@@ -12,9 +12,13 @@ namespace Ob\error {
     * @author      Obullo Team
     * @link        
     */
-    Class error
+    Class start
     {
         // Constructor
+        function __construct()
+        {
+            \Ob\log\me('debug', 'Error Helper Initialized.');
+        }
     }
     
     /**
@@ -23,7 +27,7 @@ namespace Ob\error {
     * @param  object $e
     * @return void
     */
-    function exception_handler($e, $type = '')
+    function exceptions_handler($e, $type = '')
     {   
         $shutdown_errors = array(
         'ERROR'            => 'ERROR',            // E_ERROR 
@@ -44,7 +48,7 @@ namespace Ob\error {
 
                 $cmd_type = (defined('TASK')) ? 'Task' : 'Cmd';
 
-                log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.secure_path($e->getFile()).' '.$e->getLine(), true);
+                \Ob\log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.secure_path($e->getFile()).' '.$e->getLine(), true);
 
                 return;
             }
@@ -82,12 +86,12 @@ namespace Ob\error {
                 include(APP .'errors'. DS .'ob_disabled_error'. EXT);
             }
 
-            log\me('error', $type.': '.$e->getMessage(). ' '.secure_path($e->getFile()).' '.$e->getLine(), true); 
+            \Ob\log\me('error', $type.': '.$e->getMessage(). ' '.secure_path($e->getFile()).' '.$e->getLine(), true); 
 
         } 
         else  // Is It Exception ?
         {             
-            $exception = new Ob\Exception();
+            $exception = new \Ob\Exception\Exception();
 
             if(is_object($exception)) 
             {           
@@ -153,8 +157,8 @@ namespace Ob\error {
             case '16384':   $type = 'USER DEPRECATED ERROR'; break; // E_USER_DEPRECATED
             case '30719':   $type = 'ERROR'; break;             // E_ALL
         }
-        
-        exception_handler(new \ErrorException($errstr, $errno, 0, $errfile, $errline), $type);   
+            
+        exceptions_handler(new \ErrorException($errstr, $errno, 0, $errfile, $errline), $type);   
         return;
     }
 
@@ -185,7 +189,7 @@ namespace Ob\error {
 
         $type = (isset($shutdown_errors[$error['type']])) ? $shutdown_errors[$error['type']] : '';
 
-        exception_handler(new \ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']), $type);
+        exceptions_handler(new \ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']), $type);
     }
 
     // --------------------------------------------------------------------  
@@ -652,18 +656,17 @@ namespace Ob\error {
                     $error_result[$defined_errors[$error]] = $error;
                 }
             }
-
             unset($allowed_errors);
-
+            
             return $error_result;
         }
     }
                
     // --------------------------------------------------------------------
 
-    set_error_handler('Ob\error\error_handler');   
-    set_exception_handler('Ob\error\exception_handler');
-    register_shutdown_function('Ob\error\shutdown_handler');
+    set_error_handler('\Ob\error\error_handler');   
+    set_exception_handler('\Ob\error\exceptions_handler');
+    register_shutdown_function('\Ob\error\shutdown_handler');
     
     // Enable the Obullo shutdown handler, which catches E_FATAL errors.
 }

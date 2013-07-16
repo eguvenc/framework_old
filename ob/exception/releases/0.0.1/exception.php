@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Exception;
 
 
 /**
@@ -14,7 +14,7 @@ Class Exception {
 
     function __construct()
     {
-        log\me('debug', "Exception Class Initialized");
+        \Ob\log\me('debug', "Exception Class Initialized");
     }
  
     /**
@@ -32,9 +32,9 @@ Class Exception {
         // If user want to close error_reporting in some parts of the application.
         //-----------------------------------------------------------------------
         
-        if(config('error_reporting') == '0')
+        if(\Ob\config('error_reporting') == '0')
         {
-            log\me('debug', 'Error reporting seems Off, check the config.php file $config[\'error_reporting\'].');
+            \Ob\log\me('debug', 'Error reporting seems Off, check the config.php file $config[\'error_reporting\'].');
             
             return;
         }
@@ -62,11 +62,11 @@ Class Exception {
         
         if(defined('STDIN'))  // If Command Line Request. 
         {
-            echo $type .': '. $e->getMessage(). ' File: ' .error_secure_path($e->getFile()). ' Line: '. $e->getLine(). "\n";
+            echo $type .': '. $e->getMessage(). ' File: ' .\Ob\error\secure_path($e->getFile()). ' Line: '. $e->getLine(). "\n";
             
             $cmd_type = (defined('TASK')) ? 'Task' : 'Cmd';
             
-            log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), TRUE); 
+            \Ob\log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.\Ob\error\secure_path($e->getFile()).' '.$e->getLine(), TRUE); 
             
             return;
         }
@@ -86,12 +86,12 @@ Class Exception {
         // Log Php Errors
         //-----------------------------------------------------------------------
         
-        log\me('error', $type.': '.$e->getMessage(). ' '.error_secure_path($e->getFile()).' '.$e->getLine(), true); 
+        \Ob\log\me('error', $type.': '.$e->getMessage(). ' '.\Ob\error\secure_path($e->getFile()).' '.$e->getLine(), true); 
              
         // Displaying Errors
         //-----------------------------------------------------------------------            
         
-        $level  = config('error_reporting');
+        $level  = \Ob\config('error_reporting');
 
         if(is_numeric($level)) 
         {
@@ -102,14 +102,14 @@ Class Exception {
             }   
         }       
     
-        $rules = error_parse_regex($level);
+        $rules = \Ob\error\parse_regex($level);
         
         if($rules == FALSE) 
         {
             return;
         }
         
-        $allowed_errors = error_get_allowed_errors($rules);  // Check displaying error enabled for current error.
+        $allowed_errors = \Ob\error\get_allowed_errors($rules);  // Check displaying error enabled for current error.
     
         if(isset($allowed_errors[$code]))
         {

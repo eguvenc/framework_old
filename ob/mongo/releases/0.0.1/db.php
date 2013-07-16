@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Obullo Mongo DB Class.
+ * Mongo DB Class.
  * Derived from MongoDB Active Record Library.
  *
  * A library to interface for NoSQL database MongoDB. For more information see http://www.mongodb.org
@@ -16,7 +16,7 @@
  *
  */
 
-Class Mongo_DB {
+Class Db {
 
     private $db;
     public  $connection;    // ! do not remove we close the connection in the bootstrap.

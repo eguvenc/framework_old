@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Pdo_Mysql;
 
 /**
  * PDO MySQL Db Adapter Class
@@ -11,7 +11,7 @@ namespace Ob;
  * @link
  */
 
-Class Pdo_Mysql extends Pdo_Database_Adapter
+Class Pdo_Mysql extends \Database_Pdo\src\Database_Adapter
 {
     /**
     * The character used for escaping

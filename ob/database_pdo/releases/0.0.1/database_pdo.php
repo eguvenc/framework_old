@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Database_Pdo;
 
 $packages = get_config('packages');
 
@@ -8,7 +8,7 @@ require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies
 // ------------------------------------------------------------------------
 
 /**
- * Obullo Database Connection Class.
+ * Pdo Connection Class.
  *
  * @package         Obullo 
  * @subpackage      Obullo.database     
@@ -42,53 +42,43 @@ Class Database_Pdo {
         $driver_name = '';
         switch (strtolower($dbdriver))
         {   
-           // MySQL 3.x/4.x/5.x  
-           case ($dbdriver == 'mysql'): 
+           case ($dbdriver == 'mysql'): // MySQL 3.x/4.x/5.x  
            $driver_name = 'mysql';
              break;
-             
-           // IBM - DB2 / Informix not yet ..
-           case ($dbdriver == 'ibm' || $dbdriver == 'db2'):
+         
+           case ($dbdriver == 'ibm' || $dbdriver == 'db2'):  // IBM - DB2 / Informix not yet ..
            $driver_name = 'ibm';
              break;
-             
-           // MSSQL / DBLIB / FREETDS / SYBASE
-           case ($dbdriver == 'dblib' || $dbdriver == 'mssql' || $dbdriver == 'freetds' || $dbdriver == 'sybase'):
+         
+           case ($dbdriver == 'dblib' || $dbdriver == 'mssql' || $dbdriver == 'freetds' || $dbdriver == 'sybase'):            // MSSQL / DBLIB / FREETDS / SYBASE
            $driver_name = 'mssql';
              break;
-           
-           // OCI (ORACLE)
-           case ($dbdriver == 'oci' || $dbdriver == 'oracle'):
+          
+           case ($dbdriver == 'oci' || $dbdriver == 'oracle'):            // OCI (ORACLE)
            $driver_name = 'oci';
              break;
-             
-           // ODBC
-           case ($dbdriver == 'odbc'):
+           
+           case ($dbdriver == 'odbc'): // ODBC
            $driver_name = 'odbc';
              break;
-             
-           // PGSQL
-           case ($dbdriver == 'pgsql'):
+
+           case ($dbdriver == 'pgsql'): // PostgreSQL
            $driver_name = 'pgsql';
              break;
              
-           // SQLITE
-           case ($dbdriver == 'sqlite' || $dbdriver == 'sqlite2' || $dbdriver == 'sqlite3'):
+           case ($dbdriver == 'sqlite' || $dbdriver == 'sqlite2' || $dbdriver == 'sqlite3'):   // SQLITE
            $driver_name = 'sqlite';
              break;
              
-           // Firebird
-           case 'firebird':
+           case 'firebird':            // Firebird
            $driver_name = 'firebird';
              break;
-             
-           // 4D
-           case '4d':
+            
+           case '4d':            // 4D
            $driver_name = '4d';
              break;
-         
-           // CUBRID    
-           case 'cubrid':
+           
+           case 'cubrid':            // CUBRID  
            $driver_name = 'cubrid';
              break;
            
@@ -99,11 +89,11 @@ Class Database_Pdo {
 
         if ( ! in_array($dbdriver, \PDO::getAvailableDrivers()))  // check the PDO driver is available
         {
-            throw new Exception('The PDO' . $dbdriver . ' driver is not currently installed on your server !');
+            throw new Exception('The PDO' . $dbdriver . ' driver is not currently installed on your server.');
         }
         
-        $db_classname = 'Pdo_'.ucfirst($driver_name);
-        $DB = new $db_classname($options);
+        $classname = '\Ob\Pdo_'.ucfirst($driver_name).'\Pdo_'.ucfirst($driver_name);
+        $DB = new $classname($options);
         $DB->__wakeup();
         
         return $DB->get_connection();

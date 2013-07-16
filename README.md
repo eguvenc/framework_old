@@ -18,27 +18,34 @@ Obullo-2.0 WILL HAVE THESE FEATURES:
 - Programming enjoyable with Obullo !
         
         // logging
-        Ob\log\me('debug', 'this is my first log');
+        log\me('debug', 'this is my first log');
 
-        Ob\i\post('');  // Input Post
-        Ob\i\get('');
+        i\post('');  // Input Post
+        i\get('');
 
         // Initializing a model
-        $model = new Model\User;
+        $model = new Model\User(false);
+        $model->save();
 
         // Initializing a package
-        $email = new Ob\Email();
+        new Email\Smtp();
+        $this->email->to();
+        $this->email->send();
+
+        or
+
+        $email = new Email\Smtp(false);
         $email->init();
 
         // Sessions
-        Ob\sess\start();
-        Ob\sess\set('foo');
-        Ob\sess\get('foo');
+        sess\start();
+        sess\set('foo');
+        sess\get('foo');
         
         // Views
-        echo Ob\view\get('welcome');
+        echo view\get('welcome');
         
         // loading database        
-        new Ob\Database;
+        new Ob\Database\Db;
         
         $results = $this->db->select()->get('table');

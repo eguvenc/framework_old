@@ -9,7 +9,7 @@
  * @version         0.1
  */
  
-Class Pdo_Database_Crud  {
+Class Database_Crud  {
                                          
     public $ar_select              = array();
     public $ar_distinct            = FALSE;
