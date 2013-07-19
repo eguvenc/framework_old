@@ -1,4 +1,5 @@
 <?php
+namespace Ob\request {
 
 /**
 * Call HMVC Request using HMVC Class.
@@ -7,19 +8,31 @@
 * @param    string method
 * @param    string  $request
 * @param    integer | bool | array  $cache_time_or_config
-* @return   string response | object of HMVC class
+* @return   string response
 */
-if( ! function_exists('request') )
-{
-    function request($method = 'get', $request_uri = '', $params = array(), $cache_time_or_config = '0')
-    {
-        if( ! class_exists('Hmvc'))
-        { 
-            $packages = get_config('packages');
     
-            require(OB_MODULES .'request'. DS .'releases'. DS .$packages['dependencies']['request']['version']. DS .'src'. DS .'hmvc'. EXT);
-        }
-        
+    function get($uri, $params, $cache_time_or_config)
+    {
+        return exec('get', $uri, $params, $cache_time_or_config);
+    }
+    
+    function post($uri, $params, $cache_time_or_config)
+    {
+        return exec('post', $uri, $params, $cache_time_or_config);
+    }
+    
+    function put($uri, $params, $cache_time_or_config)
+    {
+        return exec('post', $uri, $params, $cache_time_or_config);
+    }
+    
+    function delete($uri, $params, $cache_time_or_config)
+    {
+        return exec('post', $uri, $params, $cache_time_or_config);
+    }
+    
+    function exec($method = 'get', $request_uri = '', $params = array(), $cache_time_or_config = '0')
+    {
         // Supported request methods
         $methods = array('GET' => '', 'POST' => '', 'PUT' => '', 'DELETE' => '');
 
@@ -43,7 +56,7 @@ if( ! function_exists('request') )
 
                 $hmvc->request($method);
 
-                return $hmvc;
+                return $hmvc->exec();
                 // $hmvc->set_method($method, $params);
                 // $hmvc->exec();
             }
@@ -57,9 +70,9 @@ if( ! function_exists('request') )
         $hmvc->request($request_uri, $cache_time_or_config);
         $hmvc->set_method($method, $params);
     
-        return $hmvc;   // return to hmvc object
+        return $hmvc->exec();   // return to hmvc object
     }
-
+    
 }
 
 /* End of file request.php */
