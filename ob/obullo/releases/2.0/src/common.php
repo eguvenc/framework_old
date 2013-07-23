@@ -38,7 +38,8 @@ namespace Ob {
         {  
             return;
         }
-           echo $realname.'<br>';
+        echo $realname.'<br>';
+        
         /*            
         if($class !== 'Ob\log\log' AND $class == 'Ob\error\error')
         {
@@ -50,6 +51,27 @@ namespace Ob {
         }
         */
         $packages = get_config('packages');
+
+        //--------------- OB PACKAGE LOADER ---------------//
+        
+        if(strpos($realname, 'Ob\\') === 0)  // get modules from ob/ directory.
+        {  
+            $ob_parts   = explode('\\', $realname);
+            $ob_library = strtolower($ob_parts[1]);
+
+            $package_filename = mb_strtolower($ob_library, config('charset'));
+
+            if( ! isset($packages['dependencies'][$package_filename]['component'])) //  check package Installed.
+            {
+                exit('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');
+            }
+
+            require_once(OB_MODULES .$ob_library. DS .'releases'. DS .$packages['dependencies'][$ob_library]['version']. DS .$ob_library. EXT);
+            return;
+        }
+
+                
+        //--------------- MODEL LOADER ---------------//
         
         if($realname == 'Ob\Model') // Core model file.
         {
@@ -80,39 +102,27 @@ namespace Ob {
             return;
         }
         
+        //--------------- VIEW LOADER ---------------//
+        
         if(strpos($realname, 'Ob\vi\\') === 0)
         {
             $view_parts = explode('\\', $realname);
 
-            if(isset($view_parts[2]))  //  Directory Request
+            if(isset($view_parts[3]))  //  Directory Request
             {
-                $view_path = MODULES .strtolower($view_parts[1]) . DS .'views'. DS .strtolower($view_parts[2]). EXT;
+                $view_path = MODULES .strtolower($view_parts[1]) . DS .'vi'. DS .strtolower($view_parts[2]). EXT;
             } 
             else 
             {   
-                $view_path = MODULES .'views'. DS .strtolower($view_parts[1]). EXT;
+                $view_path = MODULES .'vi'. DS .strtolower($view_parts[1]). EXT;
+                
+                // echo $view_path; exit;
             }
 
             require($view_path);
             return;
         }
         
-        if(strpos($realname, 'Ob\\') === 0)  // Call Obullo modules from ob/ directory.
-        {  
-            $ob_parts   = explode('\\', $realname);
-            $ob_library = strtolower($ob_parts[1]);
-
-            $package_filename = mb_strtolower($ob_library, config('charset'));
-
-            if( ! isset($packages['dependencies'][$package_filename]['component'])) //  check package Installed.
-            {
-                exit('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');
-            }
-
-            require_once(OB_MODULES .$ob_library. DS .'releases'. DS .$packages['dependencies'][$ob_library]['version']. DS .$ob_library. EXT);
-            return;
-        }
-
     }
 
     spl_autoload_register('Ob\autoloader', true);
