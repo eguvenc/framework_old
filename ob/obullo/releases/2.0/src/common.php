@@ -106,17 +106,17 @@ namespace Ob {
         
         if(strpos($realname, 'Ob\vi\\') === 0)
         {
+            exit('ok');
             $view_parts = explode('\\', $realname);
 
             if(isset($view_parts[3]))  //  Directory Request
-            {
+            {                
                 $view_path = MODULES .strtolower($view_parts[1]) . DS .'vi'. DS .strtolower($view_parts[2]). EXT;
             } 
             else 
             {   
                 $view_path = MODULES .'vi'. DS .strtolower($view_parts[1]). EXT;
-                
-                // echo $view_path; exit;
+                echo $view_path; exit;
             }
 
             require($view_path);

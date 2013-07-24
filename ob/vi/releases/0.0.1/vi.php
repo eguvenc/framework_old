@@ -18,21 +18,39 @@ namespace Ob\vi {
     }
     
     // ------------------------------------------------------------------------
-
+    
     /**
-    * Load local view file
+    * Load module view file
     *
     * @param string  $filename
     * @param array   $data
     * @param boolean $string default TRUE
     * @return void
     */
-    function get($file_url, $data = '', $string = TRUE)
+    function get($filename, $data = '', $string = TRUE)
     {
-        $file_data = loader::getpath($file_url, 'views', FALSE, FALSE);
-        
-        return View::getInstance()->load($file_data['path'], $file_data['filename'], $data, $string, FALSE);
+        return \Ob\View::getInstance()->load($filename, $data, $string);
     }
+
+    // ------------------------------------------------------------------------
+    
+    /**
+    * Load view file form MODULES\views folder.
+    *
+    * @param string  $filename
+    * @param array   $data
+    * @param boolean $string default TRUE
+    * @return void
+    */
+    function views($filename, $data = '', $string = TRUE)
+    {
+        $view = \Ob\View::getInstance();
+        $view->set_path(); // set views path
+        
+        return get($filename, $data, $string);
+    }
+    
+    // ------------------------------------------------------------------------
     
     /**
     * Create view variables for layouts
@@ -50,7 +68,7 @@ namespace Ob\vi {
             return set_array($key, $val);
         }
         
-        $view->view_var[$key][] = $val;
+        $view->var[$key][] = $val;
 
         return;
     }
@@ -67,10 +85,10 @@ namespace Ob\vi {
     {
         $view = View::getInstance();
         
-        if(isset($view->view_var[$key]))
+        if(isset($view->var[$key]))
         {
             $var = '';
-            foreach($view->view_var[$key] as $value)
+            foreach($view->var[$key] as $value)
             {
                 $var .= $value;
             }
@@ -79,6 +97,8 @@ namespace Ob\vi {
         }
     }
 
+    // ------------------------------------------------------------------------
+    
     /**
     * Create array variables for layouts
     * 
@@ -95,7 +115,7 @@ namespace Ob\vi {
         
         foreach($val as $value)
         {
-            $view->view_array[$key][] = $value;
+            $view->array[$key][] = $value;
         }
         
         return;
@@ -116,10 +136,10 @@ namespace Ob\vi {
     {
         $view = View::getInstance();
     
-        if(isset($view->view_array[$key]))
+        if(isset($view->array[$key]))
         {
             $var = array();
-            foreach($view->view_array[$key] as $value)
+            foreach($view->array[$key] as $value)
             {
                 $var[] = $value;
             }

@@ -26,7 +26,7 @@ Class Welcome extends Controller {
         
         i\post('');
         i\get('');
-
+        
         vi\get('welcome', '', false); // current module view
         // vi\views\get('welcome', '', false); // modules/views
     }
