@@ -343,8 +343,8 @@ switch($this->uri->extension())
 ## Controllers
 Controllers are the heart of your application, as they determine how HTTP requests should be handled.
 
-- [What is a Controller?](#what)
-- [Hello World](#hello)
+- [What is a Controller?](#what-is-a-controller)
+- [Hello World](#lets-try-it-hello-world)
 - [Functions](#functions)
 - [Passing URI Segments to Your Functions](#passinguri)
 - [Defining a Default Controller](#default)
