@@ -1,7 +1,8 @@
 
 
 # Table of Contents
-1. [Getting Started](#gettingstarted)
+1. [Introduction](#gettingstarted)
+    
 
 # Getting Started
 
