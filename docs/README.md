@@ -349,7 +349,7 @@ Controllers are the heart of your application, as they determine how HTTP reques
 - [Passing URI Segments to Your Functions](#passing-uri-segments-to-your-functions)
 - [Defining a Default Controller](#defining-a-default-controller)
 - [Remapping Function Calls](#remapping-function-calls)
-- [Controlling Output Data](#controlling-output-data)
+- [Controlling Output Data](#processing-output)
 - [Private Functions](#private-functions)
 - [Class Constructors](#class-constructors)
 - [Reserved Function Names](#reserved-function-names)
