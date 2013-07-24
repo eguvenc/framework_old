@@ -1,10 +1,17 @@
 
 
 # Table of Contents
-1. [Introduction](#gettingstarted)
-    
+1. [Introduction](#introduction)
+  * [Getting Started] (#getting-started)
+  * [Installation Steps](#installation-steps)
+2. [General Features](#general-features)
+3. [General Topic] (#general-topics)
+   * [Obullo URLs](#obullo-urls)
+   * [Controllers](#controllers)
+# Introduction
+======
 
-# Getting Started
+## Getting Started
 
 
 Getting Started With Obullo 2.0
@@ -15,7 +22,7 @@ Read General Topics
 ------
 Next, read each of the General Topics pages in order. Each topic builds on the previous one, and includes code examples that you are encouraged to try.Once you understand the basics you'll be ready to explore the package reference pages to learn to utilize the packages and helper components.
 
-Installation Steps
+## Installation Steps
 ------
 Obullo is installed in five steps:
 
