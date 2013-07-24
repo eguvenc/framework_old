@@ -347,7 +347,7 @@ Controllers are the heart of your application, as they determine how HTTP reques
 - [Hello World](#lets-try-it-hello-world)
 - [Functions](#functions)
 - [Passing URI Segments to Your Functions](#passing-uri-segments-to-your-functions)
-- [Defining a Default Controller](#Defining-a-Default-Controller)
+- [Defining a Default Controller](#defining-a-default-controller)
 - [Remapping Function Calls]()
 - [Controlling Output Data]()
 - [Private Functions]()
