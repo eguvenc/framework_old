@@ -14,9 +14,10 @@ namespace Ob;
 
 Class View {
 
-    public $view_var          = array(); // String type view variables
-    public $view_array        = array(); // Array type view variables
-    public $view_data         = array(); // Mixed type view variables
+    public $var          = array(); // String type view variables
+    public $array        = array(); // Array type view variables
+    public $data         = array(); // Mixed type view variables
+    public $path         = NULL;
     
     public static $instance;
     
@@ -31,6 +32,8 @@ Class View {
     */
     public function __construct()
     {
+        $this->path = MODULES .getInstance()->router->fetch_directory(). DS .'views'. DS;
+        
         log\me('debug', "View Class Initialized");
     }
     
@@ -49,20 +52,34 @@ Class View {
     // --------------------------------------------------------------------
     
     /**
+     * Set view path
+     * 
+     * @param string $path 
+     */
+    public function set_path($path = '')
+    {
+        $this->path = ($path == '') ? MODULES .'views'. DS : MODULES .str_replace('/', DS, trim($path, '/')). DS .'views'. DS;
+    }
+    
+    // --------------------------------------------------------------------
+    
+    public function get_path()
+    {
+        return (string)$this->path;
+    }
+    
+    // --------------------------------------------------------------------
+    
+    /**
     * Load view files.
     * 
-    * @param string $path the view file path
     * @param string $filename view name
     * @param mixed  $data view data
     * @param booelan $string fetch the file as string or include file
-    * @param booealan $return return false and don't show view file errors
-    * @param string $func default view
     * @return void | string
     */
-    public function load($path, $filename, $data = '', $string = FALSE, $return = '', $func = 'view')
+    public function load($filename, $data = '', $string = FALSE)
     {
-        $return = NULL; // @deprecated
-        
         if(function_exists('getInstance') AND  is_object(getInstance()))
         {
             foreach(array_keys(get_object_vars(getInstance())) as $key) // This allows to using "$this" variable in all views files.
@@ -77,7 +94,7 @@ Class View {
         
         //-----------------------------------
                 
-        $data = $this->_set_view_data($data); // Enables you to set data that is persistent in all views.
+        $data = $this->_set_data($data); // Enables you to set data that is persistent in all views.
 
         //-----------------------------------
 
@@ -91,9 +108,9 @@ Class View {
         // If the PHP installation does not support short tags we'll
         // Please open it your php.ini file. ( short_tag = on ).
 
-        include($path . $filename . EXT);
+        include($this->path . $filename . EXT);
         
-        log\me('debug', ucfirst($func).' file loaded: '.error\secure_path($path). $filename . EXT);
+        log\me('debug', 'View file loaded: '.error\secure_path($this->path). $filename . EXT);
 
         if($string === TRUE)
         {
@@ -124,7 +141,7 @@ Class View {
     * @access public
     * @return void
     */
-    public function _set_view_data($data = '')
+    public function _set_data($data = '')
     {
         if($data == '')
         {
@@ -136,16 +153,16 @@ Class View {
             return get_object_vars($data);
         }
         
-        if(is_array($data) AND count($data) > 0 AND count($this->view_data) > 0)
+        if(is_array($data) AND count($data) > 0 AND count($this->data) > 0)
         {
-            $this->view_data = array_merge((array)$this->view_data, (array)$data);
+            $this->data = array_merge((array)$this->data, (array)$data);
         }
         else 
         {
-            $this->view_data = $data;
+            $this->data = $data;
         }
         
-        return $this->view_data;
+        return $this->data;
     }
     
 }
