@@ -706,6 +706,7 @@ Since your controller classes will extend the main application controller you mu
 - $GLOBALS['c']
 - $GLOBALS['m']
 - $GLOBALS['s']
+
 #### Constants
 ------
 - DS
