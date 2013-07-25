@@ -27,24 +27,39 @@ Obullo-2.0 WILL HAVE THESE FEATURES:
         $model = new Model\User(false);
         $model->save();
 
-        // Initializing a package
-        new Email\Smtp();
+        // Initializing a model for modules\models directory
+        $model = new Model\Models\User(false);
+        $model->save();
+
+        // Email component ( library )
+        new Email\Email();
         $this->email->to();
         $this->email->send();
 
         or
-
-        $email = new Email\Smtp(false);
+        // Email component ( library )
+        $email = new Email\Email(false);
         $email->init();
 
-        // Sessions
-        sess\start();
+        // Session component ( helper )
+        new sess\start();
         sess\set('foo');
         sess\get('foo');
+
+        // Cookie component ( helper )
+        new cookie\start();
+        cookie\set('key', 'value');
+        cookie\get('key');
+
+        // Task component ( helper )
         
-        // Views
-        echo view\get('welcome');
+        // Loading view files
+        // Vi component ( helper )
+        echo vi\get('welcome');  // ( loaded by framework autoloader as default no need to vi\start(); function. )
         
-        // loading database        
+        // Initializing a view for modules\views directory
+        echo vi\views('footer');
+
+        // loading database package
         new Database\Db;
         $results = $this->db->select()->get('table');
