@@ -8,7 +8,11 @@
 3. [General Topic] (#general-topics)
    * [Obullo URLs](#obullo-urls)
    * [Controllers](#controllers)
-
+   * [Working with Parent Controllers](#working-with-parent-controllers)
+   * [Reserved Names](#reserved-names)
+   * [Views](#views)
+   * [Models](#models)
+   
 # Introduction
 
 
@@ -567,3 +571,82 @@ Since your controller classes will extend the main application controller you mu
 ### That's it!
 ------
 That, in a nutshell, is all there is to know about controllers.
+## Working with Parent Controllers
+
+### Parent Controllers
+------
+You can define your custom Controllers, The Parent Controllers are the parent of your main controller file, it control the <strong>extra jobs</strong> in the application. There are <strong>two</strong> Libraries folder called <strong>/libraries</strong> and it can be locate in your MODULES or APPLICATION directory.
+
+### Application Parent Controllers
+------
+All your controllers in the framework simply can extend to My_Controller class which is located in your <dfn>app/libraries</dfn> folder. Obullo autoloaders will load the your parent controller simply when you extend to it.
+
+This is an example parent controller we put it to <dfn>app/libraries</dfn> folder.
+```php
+<?php
+Class My_Controller extends Controller
+{                                     
+    public function __construct()
+    {
+        parent::__construct();
+
+        loader::helper('filename');
+    }
+}
+?>
+```
+After that you need extend your custom controller like below the example by the way you can change the My_Contoller name anything you want.
+```php
+<?php Class Start extends My_Controller
+{
+    function __construct()
+    {
+        parent::__construct(); 
+    }
+    
+    public function index()
+    {
+        view_var('title',  'Hello World !');
+        
+        view('example',  '', FALSE);
+    }
+    
+}
+?> 
+```
+### Module Parent Controllers
+------
+You can define a Module Controller in current module. Obullo autoloaders will load it from your <dfn>modulename/libraries</dfn> folder simply when you extend to it.
+```php
+<?php
+Class Welcome_Controller extends Controller
+{                                     
+    public function __construct()
+    {
+        parent::__construct();
+
+        loader::helper('filename');
+    }
+}
+?>
+```
+After that you need extend your custom controller like below the example
+```php
+<?php Class Start extends Welcome_Controller
+{
+    function __construct()
+    {
+        parent::__construct(); 
+    }
+    
+    public function index()
+    {
+        view_var('title',  'Hello World !');
+        
+        view('example', '', FALSE);
+    }
+    
+}
+?> 
+```
+You can find the Welcome Controller example in <dfn>modules/welcome/libraries</dfn> folder.
