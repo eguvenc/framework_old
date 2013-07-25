@@ -666,8 +666,8 @@ Since your controller classes will extend the main application controller you mu
 - _output()
 - _output_hmvc()
 
-Functions
-
+#### Functions
+------
 - ob_include_files()
 - ob_set_headers()
 - ob_system_run()
@@ -691,19 +691,22 @@ Functions
 - this()
 - __merge_autoloaders()
 - All Helper Functions
-### Variables
+
+#### Variables
 ------
 - $_ob
 - $config
 - $lang
 - $routes
-### Reserved $GLOBALS variables
+
+#### Reserved $GLOBALS variables
 ------
+
 - $GLOBALS['d']
 - $GLOBALS['c']
 - $GLOBALS['m']
 - $GLOBALS['s']
-### Constants
+#### Constants
 ------
 - DS
 - EXT
