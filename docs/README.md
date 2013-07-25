@@ -566,7 +566,7 @@ Constructors are useful if you need to set some default values, or run a default
 
 ### Reserved Function Names
 ------
-Since your controller classes will extend the main application controller you must be careful not to name your functions identically to the ones used by that class, otherwise your local functions will override them. See [Reserved Names](http://obullo.com/user_guide/en/1.0.1/reserved-names.html) for a full list.
+Since your controller classes will extend the main application controller you must be careful not to name your functions identically to the ones used by that class, otherwise your local functions will override them. See [Reserved Names](#reserved-names) for a full list.
 
 ### That's it!
 ------
@@ -650,3 +650,117 @@ After that you need extend your custom controller like below the example
 ?> 
 ```
 You can find the Welcome Controller example in <dfn>modules/welcome/libraries</dfn> folder.
+
+### Reserved Names
+------
+In order to help out, Obullo uses a series of functions and names in its operation. Because of this, some names cannot be used by a developer. Following is a list of reserved names that cannot be used.
+
+### Controller names
+------
+Since your controller classes will extend the main application controller you must be careful not to name your functions identically to the ones used by that class, otherwise your local functions will override them. The following is a list of reserved names. Do not name your controller functions any of these:
+
+- Controller
+- _instance()
+- index()
+- _remap()
+- _output()
+- _output_hmvc()
+
+Functions
+
+- ob_include_files()
+- ob_set_headers()
+- ob_system_run()
+- ob_system_close()
+- is_really_writable()
+- set_status_header()
+- ob_autoload()
+- load_class()
+- get_static()
+- get_config()
+- config_item()
+- db_item()
+- is_php()
+- show_http_error()
+- Obullo_ErrorTemplate()
+- Obullo_ErrorHandler()
+- show_error()
+- show_404()
+- log_me()
+- lang()
+- this()
+- __merge_autoloaders()
+- All Helper Functions
+### Variables
+------
+- $_ob
+- $config
+- $lang
+- $routes
+### Reserved $GLOBALS variables
+------
+- $GLOBALS['d']
+- $GLOBALS['c']
+- $GLOBALS['m']
+- $GLOBALS['s']
+### Constants
+------
+- DS
+- EXT
+- ROOT
+- MODULES
+- PHP_PATH
+- FCPATH
+- SELF
+- BASE
+- APP
+- CMD
+- TASK
+- OBULLO_VERSION
+##### File Constants
+
+* FILE_READ_MODE
+* FILE_WRITE_MODE
+* DIR_READ_MODE
+* DIR_WRITE_MODE
+* FOPEN_READ
+* FOPEN_READ_WRITE
+* FOPEN_WRITE_CREATE_DESTRUCTIVE
+* FOPEN_READ_WRITE_CREATE_DESTRUCTIVE
+* FOPEN_WRITE_CREATE
+* FOPEN_READ_WRITE_CREATE
+* FOPEN_WRITE_CREATE_STRICT
+* FOPEN_READ_WRITE_CREATE_STRICT
+##### Database Constants
+
+* param_null
+* param_int
+* param_str
+* param_lob
+* param_stmt
+* param_bool
+* param_inout
+* lazy
+* assoc
+* num
+* both
+* obj
+* row
+* bound
+* column
+* as_class
+* into
+* func
+* named
+* key_pair
+* group
+* unique
+* class_type
+* serialize
+* props_late
+* ori_next
+* ori_prior
+* ori_first
+* ori_last
+* ori_abs
+* ori_rel
