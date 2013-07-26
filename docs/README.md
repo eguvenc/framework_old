@@ -389,8 +389,7 @@ Then create <samp>controllers, helpers, models, views</samp> folders and which f
 ```
 Using your text editor, create file called <dfn>start.php</dfn> in the <dfn>blog/controllers</dfn> folder, and put the following code in it:
 ```php
-<?php
-namespace ob;
+<?php namespace ob;
 
 Class Start extends Controller 
 {
@@ -412,8 +411,7 @@ If you did it right, you should see <samp>Hello World!</samp>.
 
 **Note**: Class names must start with an uppercase letter. In other words, this is valid:
 ```php
-<?php
-namespace ob;
+<?php namespace ob;
 Class Start extends Controller
 {
 
@@ -442,8 +440,7 @@ example.com/index.php/blog/start/index/
 
 Let's try it. Add a new function to your controller:
 ```php
-<?php 
-namespace ob;
+<?php namespace ob;
 Class Start extends Controller
 {
     public function index()
@@ -475,8 +472,7 @@ example.com/index.php/shop/products/cars/classic/123
 ```
 Your function will be passed URI segments number 4 and 5 ("classic" and "123"):
 ```php
-<?php
-namespace ob;
+<?php namespace ob;
 
 Class Products extends Controller
 {
@@ -560,8 +556,7 @@ parent::__construct();
 ```
 The reason this line is necessary is because your local constructor will be overriding the one in the parent controller class so we need to manually call it.
 ```php
-<?php
-namespace ob;
+<?php namespace ob;
 class Start extends Controller
 {
     function __construct()
