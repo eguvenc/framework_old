@@ -390,6 +390,8 @@ Then create <samp>controllers, helpers, models, views</samp> folders and which f
 Using your text editor, create file called <dfn>start.php</dfn> in the <dfn>blog/controllers</dfn> folder, and put the following code in it:
 ```php
 <?php
+namespace ob;
+
 Class Start extends Controller 
 {
     public function index()
@@ -411,6 +413,7 @@ If you did it right, you should see <samp>Hello World!</samp>.
 **Note**: Class names must start with an uppercase letter. In other words, this is valid:
 ```php
 <?php
+namespace ob;
 Class Start extends Controller
 {
 
@@ -420,6 +423,7 @@ Class Start extends Controller
 This is **not** valid:
 ```php
 <?php
+namespace ob;
 Class start extends Controller
 {
     
@@ -439,6 +443,7 @@ example.com/index.php/blog/start/index/
 Let's try it. Add a new function to your controller:
 ```php
 <?php 
+namespace ob;
 Class Start extends Controller
 {
     public function index()
@@ -471,6 +476,8 @@ example.com/index.php/shop/products/cars/classic/123
 Your function will be passed URI segments number 4 and 5 ("classic" and "123"):
 ```php
 <?php
+namespace ob;
+
 Class Products extends Controller
 {
     public function cars($type, $id)
@@ -505,6 +512,7 @@ public function _remap()
 **Important:** If your controller contains a function named <samp>_remap()</samp>, it will **always** get called regardless of what your URI contains. It overrides the normal behavior in which the URI determines which function is called, allowing you to define your own function routing rules.
 The overridden function call (typically the second segment of the URI) will be passed as a parameter the <samp>_remap()</samp> function:
 ```php
+
 public function _remap($method)
 {
     if ($method == 'some_method')
@@ -553,6 +561,7 @@ parent::__construct();
 The reason this line is necessary is because your local constructor will be overriding the one in the parent controller class so we need to manually call it.
 ```php
 <?php
+namespace ob;
 class Start extends Controller
 {
     function __construct()
@@ -583,21 +592,22 @@ All your controllers in the framework simply can extend to My_Controller class w
 
 This is an example parent controller we put it to <dfn>app/libraries</dfn> folder.
 ```php
-<?php
+<?php namespace Ob;
 Class My_Controller extends Controller
 {                                     
     public function __construct()
     {
         parent::__construct();
 
-        loader::helper('filename');
+        new helpername\start();
     }
 }
 ?>
 ```
 After that you need extend your custom controller like below the example by the way you can change the My_Contoller name anything you want.
 ```php
-<?php Class Start extends My_Controller
+<?php namespace Ob;
+Class Start extends My_Controller
 {
     function __construct()
     {
@@ -606,9 +616,9 @@ After that you need extend your custom controller like below the example by the 
     
     public function index()
     {
-        view_var('title',  'Hello World !');
+        vi\set_var('title',  'Hello World !');
         
-        view('example',  '', FALSE);
+        vi\get('example',  '', FALSE);
     }
     
 }
@@ -625,7 +635,7 @@ Class Welcome_Controller extends Controller
     {
         parent::__construct();
 
-        loader::helper('filename');
+        new helpername\start();
     }
 }
 ?>
@@ -641,9 +651,9 @@ After that you need extend your custom controller like below the example
     
     public function index()
     {
-        view_var('title',  'Hello World !');
+        vi\set_var('title',  'Hello World !');
         
-        view('example', '', FALSE);
+        vi\get('example', '', FALSE);
     }
     
 }
