@@ -2,12 +2,12 @@
 
 # Table of Contents
 1. [Introduction](#introduction)
-  * [Getting Started] (#getting-started)
+  * [Getting Started] (https://github.com/obullo/obullo-2.0/tree/master/docs/information#getting-started)
   * [Installation Steps](#installation-steps)
 2. [General Features](#general-features)
 3. [General Topic] (#general-topics)
    * [Obullo URLs](#obullo-urls)
-   * [Controllers](#controllers)
+   * [Controllers](https://github.com/obullo/obullo-2.0/tree/master/docs#controllers)
    * [Working with Parent Controllers](#working-with-parent-controllers)
    * [Reserved Names](#reserved-names)
    * [Views](#views)
