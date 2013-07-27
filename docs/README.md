@@ -11,8 +11,6 @@
    * [Views](#views)
    * [Models](#models)
    
-
-
 #General Topics
 
 ## Obullo URLs
