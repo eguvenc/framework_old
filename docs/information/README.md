@@ -58,8 +58,8 @@ example.com/{submodule}/{module}/news/article/345
 ```
 Note: By default the **index.php** file is included in the URL but it can be removed using a simple .htaccess OR a nginx vhost file.
 
-## Simple HMVC Library
-
+### Simple HMVC Library
+------
 Obullo has a simple HMVC library so you can write your own using extend it.
 
 ### Tasks - CLI and Ajax Support
