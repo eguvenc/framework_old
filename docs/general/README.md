@@ -700,9 +700,10 @@ Using your text editor, create a file called <dfn>header.php</dfn>, and put this
 <body>
 ```
 Using your text editor, create a file called <dfn>footer.php</dfn>, and put this in it:
-
+```php
 </body>
 </html>
+```
 ### Loading a Module and Application View File
 ------
 To load a view file you will use the following function:
