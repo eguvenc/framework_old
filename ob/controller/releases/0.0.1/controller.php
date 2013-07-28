@@ -82,7 +82,7 @@ Class Controller {
                 {
                     if( ! function_exists($function))
                     {
-                        throw new \Exception('The autorun function '. $function . ' not found, please define it in APP/config/autoload.php');
+                        throw new \Exception('The autorun function '. $function . ' not found, please define it in app/config/autoload.php');
                     }
 
                     \call_user_func_array($function, $arguments);   // Run autorun function.

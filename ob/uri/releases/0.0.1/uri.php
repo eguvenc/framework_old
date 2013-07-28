@@ -96,7 +96,7 @@ Class Uri
     {
         if($filter) // Filter out control characters
         {
-            $uri = Ob\remove_invisible_characters($uri, FALSE);
+            $uri = \Ob\remove_invisible_characters($uri, FALSE);
         }
         
         $this->uri_string = $uri;

@@ -4,6 +4,17 @@
  * Obullo English Locale Items.
  */
 
+// Odm
+//-----------------------------------------------------------------
+$lang['Data updated succesfully.']    = 'Data updated succesfully.';
+$lang['Data not saved, please do some changes.'] = 'Data not saved, please do some changes.';
+$lang['Data inserted succesfully.']   = 'Data inserted succesfully.';
+$lang['Data insert error.']           = 'Data insert error.';
+$lang['Data deleted succesfully.']    = 'Data deleted succesfully.';
+$lang['Delete error or record already deleted.'] = 'Delete error or record already deleted.';
+$lang['We couldn\'t save data at this time please try again. Error: '] = "'We couldn\'t save data at this time please try again. Error: '";
+$lang['There are some errors in the form fields.'] = 'There are some errors in the form fields.';
+
 // Validator
 //-----------------------------------------------------------------
 $lang['required']               = "The %s field is required.";
@@ -27,18 +38,6 @@ $lang['is_natural']             = "The %s field must contain only positive numbe
 $lang['is_natural_no_zero']     = "The %s field must contain a number greater than zero.";
 $lang['no_space']               = "The %s field can not contain space characters.";
 $lang['valid_date']             = "The %s field must contain a valid date.";
-
-// Odm
-//-----------------------------------------------------------------
-$lang['odm_update_success']    = 'Data updated succesfully.';
-$lang['odm_update_fail']       = 'No data changed, please change your data then do update.';
-$lang['odm_insert_success']    = 'Data inserted succesfully.';
-$lang['odm_insert_fail']       = 'Insert error.';
-$lang['odm_delete_success']    = 'Data deleted succesfully.';
-$lang['odm_delete_fail']       = 'Delete error or record already deleted.';
-$lang['odm_sys_error']         = "We couldn't save data at this time please try again or contact us. Error: ";
-$lang['odm_form_error']        = 'There are some errors in the form fields.';
-$lang['odm_form_save']         = 'Data saved succesfully.';
 
 // Ftp
 //-----------------------------------------------------------------

@@ -38,7 +38,7 @@ namespace Ob {
         {  
             return;
         }
-        echo $realname.'<br>';
+        // echo $realname.'<br>';
         
         /*            
         if($class !== 'Ob\log\log' AND $class == 'Ob\error\error')

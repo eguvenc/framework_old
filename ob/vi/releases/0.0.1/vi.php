@@ -13,7 +13,7 @@ namespace Ob\vi {
     {
         function __construct()
         {
-            // 
+            \Ob\log\me('debug', 'Vi Helper Initialized.');
         }
     }
     
@@ -61,7 +61,7 @@ namespace Ob\vi {
     */
     function set_var($key, $val = '')
     {
-        $view = View::getInstance();
+        $view = \Ob\View::getInstance();
    
         if($val == array())
         {
@@ -83,7 +83,7 @@ namespace Ob\vi {
     */
     function get_var($key)
     {
-        $view = View::getInstance();
+        $view = \Ob\View::getInstance();
         
         if(isset($view->var[$key]))
         {
@@ -110,7 +110,7 @@ namespace Ob\vi {
     */
     function set_array($key, $val = array())
     {
-        $view = View::getInstance();
+        $view = \Ob\View::getInstance();
         $val  = (array)$val;
         
         foreach($val as $value)
@@ -134,7 +134,7 @@ namespace Ob\vi {
     */
     function get_array($key)
     {
-        $view = View::getInstance();
+        $view = \Ob\View::getInstance();
     
         if(isset($view->array[$key]))
         {

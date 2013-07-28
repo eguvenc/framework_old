@@ -1,9 +1,11 @@
+<?php namespace Ob ?>
+<?php new html\start() ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <title>Welcome to HMVC !</title>
 
-<?php echo css('welcome.css') ?>
+<?php echo html\css('welcome.css') ?>
 
 </head>
 <body>

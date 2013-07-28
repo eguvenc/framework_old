@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
  * Auth Class
@@ -54,7 +55,7 @@ Class Auth {
             $this->{$key} = $val;
         }
         
-        loader::helper('ob/session');
+        new sess\start();
         
         sess_start();
 

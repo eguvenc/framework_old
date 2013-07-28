@@ -27,9 +27,9 @@ namespace Ob\url {
     * @access    public
     * @return    string
     */
-    function base_url($uri = '')
+    function base($uri = '')
     {
-        return Config::getInstance()->base_url($uri);
+        return \Ob\Config::getInstance()->base_url($uri);
     }
 
     // ------------------------------------------------------------------------
@@ -44,9 +44,9 @@ namespace Ob\url {
     * @abstract  bool $no_slash  no trailing slash
     * @return    string
     */
-    function public_url($uri = '', $no_ext_uri_slash = FALSE, $no_folder = FALSE)
+    function assets($uri = '', $no_ext_uri_slash = FALSE, $no_folder = FALSE)
     {
-        return Config::getInstance()->public_url($uri, $no_folder, $no_ext_uri_slash);
+        return \Ob\Config::getInstance()->public_url($uri, $no_folder, $no_ext_uri_slash);
     }
     
     // ------------------------------------------------------------------------
@@ -62,9 +62,9 @@ namespace Ob\url {
     * @param     bool  $suffix switch off suffix by manually if its true in config.php
     * @return    string
     */
-    function site_url($uri = '', $suffix = TRUE)
+    function site($uri = '', $suffix = TRUE)
     {
-        return Config::getInstance()->site_url($uri, $suffix);
+        return \Ob\Config::getInstance()->site_url($uri, $suffix);
     }
     
     // ------------------------------------------------------------------------
@@ -75,9 +75,9 @@ namespace Ob\url {
     * @access   public
     * @return   string
     */
-    function current_url()
+    function current()
     {
-        return Config::getInstance()->site_url(Uri::getInstance()->uri_string());
+        return \Ob\Config::getInstance()->site_url(\Uri::getInstance()->uri_string());
     }
 
     // ------------------------------------------------------------------------
@@ -91,7 +91,7 @@ namespace Ob\url {
     */
     function module($uri = '')
     {
-        $module = getInstance()->router->fetch_directory();
+        $module = \Ob\getInstance()->router->fetch_directory();
         
         if($uri == '')
         {
@@ -144,11 +144,11 @@ namespace Ob\url {
 
         if ( ! is_array($uri))
         {
-            $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? getInstance()->config->site_url($uri, $suffix) : $uri;
+            $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? \Ob\getInstance()->config->site_url($uri, $suffix) : $uri;
         }
         else
         {
-            $site_url = getInstance()->config->site_url($uri, $suffix);
+            $site_url = \Ob\getInstance()->config->site_url($uri, $suffix);
         }
 
         if ($title == '')
@@ -219,7 +219,7 @@ namespace Ob\url {
 
         $title = (string) $title;
 
-        $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? getInstance()->uri->site_url($uri, $suffix) : $uri;
+        $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? \Ob\getInstance()->uri->site_url($uri, $suffix) : $uri;
 
         # if ssl used do not use https:// for standart anchors.
         # if your HTTP server NGINX add below the line to your fastcgi_params file.
@@ -280,7 +280,7 @@ namespace Ob\url {
     * @param	string	the URL
     * @return	string
     */
-    function prep_url($str = '')
+    function prep($str = '')
     {
         if ($str == 'http://' OR $str == '')
         {
@@ -313,13 +313,13 @@ namespace Ob\url {
     {
         if ($separator == 'dash')
         {
-                $search		= '_';
-                $replace	= '-';
+            $search		= '_';
+            $replace	= '-';
         }
         else
         {
-                $search		= '-';
-                $replace	= '_';
+            $search		= '-';
+            $replace	= '_';
         }
 
         $trans = array(
@@ -377,7 +377,7 @@ namespace Ob\url {
                 $sharp     = TRUE;
             }
 
-            $uri = getInstance()->config->site_url($uri, $suffix);
+            $uri = \Ob\getInstance()->config->site_url($uri, $suffix);
 
             if($sharp == TRUE AND isset($sharp_uri[1]))
             {

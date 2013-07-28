@@ -38,9 +38,9 @@ namespace Ob\html {
     */
     function css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)
     {
-        if(strpos($src, '/*') !== FALSE)   // WE UNDERSTAND THIS IS A FOLDER 
+        if(strpos($href, '/*') !== FALSE)   // WE UNDERSTAND THIS IS A FOLDER 
         {
-            $str = substr($src, 0, -2);
+            $href   = substr($href, 0, -2);
             $files  = '';
             $folder = get_filenames(ROOT .'assets'. DS .'css'. DS . str_replace('/', DS, $href));
             foreach ($folder as $filename)
@@ -74,7 +74,7 @@ namespace Ob\html {
     {
         if(strpos($src, '/*') !== FALSE)  // WE UNDERSTAND THIS IS A FOLDER 
         {
-            $str = substr($src, 0, -2);
+            $src    = substr($src, 0, -2);
             $files  = '';
             $folder = get_filenames(ROOT .'assets'. DS .'js'. DS . str_replace('/', DS, $src));
             foreach ($folder as $filename)
@@ -111,7 +111,7 @@ namespace Ob\html {
         }
         elseif ($index_page === TRUE)
         {
-            $link .= ' href="'. getInstance()->config->site_url($href, false) .'" ';
+            $link .= ' href="'. \Ob\getInstance()->config->site_url($href, false) .'" ';
         }
         else
         {
@@ -151,7 +151,7 @@ namespace Ob\html {
         }
         elseif ($index_page === TRUE)  // .js file as PHP
         {
-            $link .= ' src="'. getInstance()->config->site_url($src, false) .'" ';
+            $link .= ' src="'. \Ob\getInstance()->config->site_url($src, false) .'" ';
         }
         else
         {
@@ -195,7 +195,7 @@ namespace Ob\html {
             {
                 if ($index_page === TRUE)
                 {
-                    $img .= ' src="'. getInstance()->config->site_url($v, false).'" ';
+                    $img .= ' src="'. \Ob\getInstance()->config->site_url($v, false).'" ';
                 }
                 else
                 {
@@ -247,7 +247,7 @@ namespace Ob\html {
             $folder = '';
         }
 
-        $config = getInstance()->config;
+        $config = \Ob\getInstance()->config;
         
         return $config->public_url('', true) .'assets/'. $extra_path . $folder . $sub_path . $filename;
     }
@@ -272,20 +272,20 @@ namespace Ob\html {
             // reset the array and make sure $source_dir has a trailing slash on the initial call
             if ($_recursion === FALSE)
             {
-                    $_filedata = array();
-                    $source_dir = rtrim(realpath($source_dir), DS). DS;
+                $_filedata = array();
+                $source_dir = rtrim(realpath($source_dir), DS). DS;
             }
 
             while (FALSE !== ($file = readdir($fp)))
             {
-                    if (@is_dir($source_dir.$file) && strncmp($file, '.', 1) !== 0)
-                    {
-                             get_filenames($source_dir.$file. DS, $include_path, TRUE);
-                    }
-                    elseif (strncmp($file, '.', 1) !== 0)
-                    {
-                            $_filedata[] = ($include_path == TRUE) ? $source_dir.$file : $file;
-                    }
+                if (@is_dir($source_dir.$file) && strncmp($file, '.', 1) !== 0)
+                {
+                            get_filenames($source_dir.$file. DS, $include_path, TRUE);
+                }
+                elseif (strncmp($file, '.', 1) !== 0)
+                {
+                        $_filedata[] = ($include_path == TRUE) ? $source_dir.$file : $file;
+                }
             }
             
             return $_filedata;
