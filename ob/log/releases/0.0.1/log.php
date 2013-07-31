@@ -37,7 +37,7 @@ namespace Ob\log {
             return;
         }
        
-        log_write($level, $message);
+        write($level, $message);
     }
     
     // --------------------------------------------------------------------
@@ -52,7 +52,7 @@ namespace Ob\log {
     * @param    string    the error message
     * @return   bool
     */
-    function log_write($level = 'error', $msg = '')
+    function write($level = 'error', $msg = '')
     {   
         // Convert new lines to a temp symbol, than we replace it and read for console debugs.
         $msg = trim(preg_replace('/\n/', '[@]', $msg), "\n");

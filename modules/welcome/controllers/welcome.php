@@ -7,7 +7,8 @@ Class Welcome extends Controller {
     {           
         parent::__construct();
        
-        // new Database\Db;
+        // new Db\Connect();
+        new Auth\Start();
     }
     
     public function index()

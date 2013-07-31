@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Auth;
 
 /**
  * Auth Class
@@ -13,7 +13,7 @@ namespace Ob;
  * @link
  */
 
-Class Auth {
+Class Start {
    
     public $session_prefix     = 'auth_';
     public $db_var             = 'db';   // database connection variable
@@ -55,9 +55,9 @@ Class Auth {
             $this->{$key} = $val;
         }
         
-        new sess\start();
+        new \Ob\sess\start();
         
-        sess_start();
+        \Ob\sess_start();
 
         $this->db = loader::database($this->db_var, TRUE);
         

@@ -38,27 +38,28 @@ namespace Ob {
         {  
             return;
         }
-        // echo $realname.'<br>';
-        
-        /*            
-        if($class !== 'Ob\log\log' AND $class == 'Ob\error\error')
+        echo $realname.'<br>';
+
+        /*
+        if($realname !== 'Ob\log\start' AND $realname== 'Ob\error\error')
         {
            print_r(get_declared_classes()); exit;
         }
-                if(in_array((string)$class, get_declared_classes(), true))
+        
+        if(in_array((string)$realname, get_declared_classes(), true))
         { 
             return;
         }
-        */
+*/
         $packages = get_config('packages');
 
         //--------------- OB PACKAGE LOADER ---------------//
         
         if(strpos($realname, 'Ob\\') === 0)  // get modules from ob/ directory.
-        {  
+        { 
             $ob_parts   = explode('\\', $realname);
             $ob_library = strtolower($ob_parts[1]);
-
+            
             $package_filename = mb_strtolower($ob_library, config('charset'));
 
             if( ! isset($packages['dependencies'][$package_filename]['component'])) //  check package Installed.

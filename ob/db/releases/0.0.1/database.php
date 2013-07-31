@@ -1,8 +1,8 @@
 <?php
-namespace Ob\Database;
+namespace Ob\Db;
 
 /**
- * Db Connection Class.
+ * Database Connection Class.
  *
  * @package         Obullo 
  * @subpackage      Obullo.database     
@@ -10,7 +10,8 @@ namespace Ob\Database;
  * @version         0.1
  * 
  */
-Class Db {
+
+Class Connect {
     
     /**
     * Constructor
@@ -22,7 +23,7 @@ Class Db {
             return $this;
         }
         
-        \Ob\getInstance()->{$db_var} = $this->connect($db_var, $params);
+        \Ob\getInstance()->{$db_var} = $this->_connect($db_var, $params);
         
         \Ob\log\me('debug', 'Database Class Initialized.');
     }
@@ -34,7 +35,7 @@ Class Db {
     * @param    string  $db_var database variable
     * @return   object of PDO Instance.
     */
-    public function connect($db_var = 'db', $params = '')
+    public function _connect($db_var = 'db', $params = '')
     {                                      
         $dbdriver = is_array($params) ? $params['dbdriver'] : \Ob\db_item('dbdriver', $db_var); 
         $hostname = \Ob\db_item('hostname', $db_var);
@@ -68,7 +69,7 @@ Class Db {
         
         if($packages['db_layer'] == 'Database_Pdo')
         {
-            $database = new \Ob\Database_Pdo\Database_Pdo();
+            $database = new \Ob\Database_Pdo();
             return $database->connect();
         }
         
