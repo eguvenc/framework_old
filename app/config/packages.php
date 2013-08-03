@@ -19,7 +19,7 @@ $packages = array(
         'bench' => array('version' => '0.0.1', 'component' => 'helper'),
         'config' => array('version' =>  '0.0.1', 'component' => 'library'),
         'controller' => array('version' =>  '0.0.1', 'component' => 'library'),
-        'database' => array('version' => '0.0.1', 'component' => 'library'),
+        'db' => array('version' => '0.0.1', 'component' => 'library'),
         'database_pdo' => array('version' => '0.0.1', 'component' => 'library'),
         'error' => array('version' => '0.0.1', 'component' => 'helper'),
         'exception' => array('version' => '0.0.1', 'component' => 'library'),

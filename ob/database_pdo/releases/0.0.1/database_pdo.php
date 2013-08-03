@@ -1,9 +1,9 @@
 <?php
-namespace Ob;
+namespace Ob\Database_Pdo;
 
 $packages = get_config('packages');
 
-require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'database_adapter'. EXT);
+require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'adapter'. EXT);
 
 // ------------------------------------------------------------------------
 

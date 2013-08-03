@@ -1,5 +1,5 @@
 <?php
-defined('STDIN') or die('Access Denied');
+namespace Ob; defined('STDIN') or die('Access Denied');
 
 Class Export extends Controller {
     

@@ -1,35 +1,33 @@
 {
-  "name": "log",
-  "description": "Log writing helper, control the log writing.",
+  "name": "db",
+  "description": "Database connection class.",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",
     "email": "eguvenc@gmail.com",
     "url": "https://github.com/eguvenc"
   },
-  "component" : "helper",
-  "dependencies": {
-    "input": "*"
-  },
+  "component" : "library",
+  "dependencies": {},
   "keywords": [
-    "log",
-    "logging",
-    "log write",
-    "debug"
+    "database",
+    "connect",
+    "db",
+    "load"
   ],
-  "homepage": "https://github.com/obullo/log",
+  "homepage": "https://github.com/obullo/db",
   "repo": {
     "type": "git",
-    "url": "https://github.com/obullo/log.git",
+    "url": "https://github.com/obullo/db.git",
     "archive" : "zip",
-    "archive_url": "https://github.com/obullo/log/archive/master.zip"
+    "archive_url": "https://github.com/obullo/db/archive/master.zip"
   },
   "requires": {
     "php": ">= 5.1.2",
     "extensions": ["none"]
   },
   "bugs": {
-    "url": "https://github.com/obullo/log/issues",
+    "url": "https://github.com/obullo/db/issues",
     "email": "eguvenc@gmail.com"
   },
   "licenses": [

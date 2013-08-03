@@ -71,6 +71,11 @@ Class Connect {
         {
             $database = new \Ob\Database_Pdo();
             return $database->connect();
+        } 
+        else // Native database support.
+        {
+            $database = new \Ob\Database();
+            return $database->connect();
         }
         
         return FALSE;        
