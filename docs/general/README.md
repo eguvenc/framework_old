@@ -803,7 +803,7 @@ Models are <strong>optionally</strong> available for those who want to use a mor
 - [What is a Model?](#what-is-a-model)
 - [Anatomy of a Model](#anatomy-of-a-model)
 - [Loading a Model](#loading-a-model)
-- [Auto-Loading a Model](#autoloading-models)
+- [Auto-Loading a Model](#auto-loading-models)
 - [Connecting to your Database](#connecting-to-your-database)
 
 ### What is a Model?
