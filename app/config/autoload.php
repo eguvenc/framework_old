@@ -22,7 +22,7 @@
 |       $autoload['helper'] = array('vi', 'html', 'url');
 */
 
-$autoload['helper']     = array('vi', 'html', 'url');
+$autoload['helper']     = array('vi');
 
 /*
 | -------------------------------------------------------------------

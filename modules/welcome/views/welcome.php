@@ -1,15 +1,18 @@
+<?php namespace Ob;
+new html\start();
+new url\start();
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <title>Welcome to Obullo !</title>
 <meta charset="utf-8"></meta>
-<?php echo css('welcome.css') ?>
+<?php echo html\css('welcome.css') ?>
 </head>
 <body>
     
 <h1>Welcome to Obullo !</h1> 
-
-<?php         echo lang('odm_update_success'); ?>
 
 <div id="main">
     <div class="fieldset"> 
@@ -18,19 +21,18 @@
                <div class="inner">
                
                     <p>If you would like to edit <b>Welcome Module</b> you'll find files located at</p>
-                    
                     <br />
                     
-                    <code><b>modules / </b><samp>views</samp> / footer.php <kbd>( View Footer )</kbd></code> 
+                    <code><b>modules / </b><samp>views</samp> / footer.php <kbd>( Footer )</kbd></code> 
                     
-                    <code><b>modules / welcome / </b><samp>views</samp> / view_welcome.php <kbd>( View )</kbd></code>
+                    <code><b>modules / welcome / </b><samp>views</samp> / welcome.php <kbd>( View )</kbd></code>
                     
                     <code><b>modules / welcome / </b><samp>controllers</samp> / welcome.php <kbd>( Controller )</kbd></code>
                    
                     <br />
-                    <div class="test"><?php echo anchor('/welcome/hmvc', 'Try to New HMVC Feature'); ?></div>
-                    <div class="test"><?php echo anchor('/welcome/start', 'Try to New Odm'); ?></div>
-                    <div class="test"><?php echo anchor('/welcome/task', 'Try to New Task Feature'); ?></div>
+                    <div class="test"><?php echo url\anchor('/welcome/hmvc', 'Try to New HMVC Feature'); ?></div>
+                    <div class="test"><?php echo url\anchor('/welcome/start', 'Try to New Odm'); ?></div>
+                    <div class="test"><?php echo url\anchor('/welcome/task', 'Try to New Task Feature'); ?></div>
                     <br />
                     
                     <p><b>Note:</b> If you are new to Obullo, you should start by 
@@ -40,7 +42,7 @@
           </div> 
     </div> 
 
-<?php echo view('../footer') ?>
+<?php echo vi\views('footer') ?>
 
 </div> 
 

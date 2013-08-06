@@ -80,15 +80,15 @@ Class View {
     */
     public function load($filename, $data = '', $string = FALSE)
     {
-        if(function_exists('getInstance') AND  is_object(getInstance()))
+        if(function_exists('\Ob\getInstance') AND  is_object(\Ob\getInstance()))
         {
-            foreach(array_keys(get_object_vars(getInstance())) as $key) // This allows to using "$this" variable in all views files.
+            foreach(array_keys(get_object_vars(\Ob\getInstance())) as $key) // This allows to using "$this" variable in all views files.
             {
                 // Don't do lazy loading => isset() in here object variables always
                 // must be ## NEW ##. 
                 // e.g. $this->config->item('myitem')
                 
-                $this->{$key} = &getInstance()->$key;          
+                $this->{$key} = \Ob\getInstance()->$key;          
             }
         }
         
@@ -124,7 +124,7 @@ Class View {
         $output = ob_get_contents();
         
         // Set Layout views inside to Output Class for caching functionality.
-        Output::getInstance()->append_output($output);
+        \Ob\Output::getInstance()->append_output($output);
 
         @ob_end_clean();
 

@@ -1,17 +1,16 @@
 <?php 
+namespace Ob\sess {
 
-/**
-* Procedural Session Implementation. 
-* Less coding and More Control.
-* 
-* @author      Obullo Team.
-* @version     0.1
-*/
-if( ! function_exists('_sess_start') ) 
-{
-    function _sess_start($params = array())
+    /**
+    * Procedural Session Implementation. 
+    * Less coding and More Control.
+    * 
+    * @author      Obullo Team.
+    * @version     0.1
+    */
+    function start($params = array())
     {                       
-        log\me('debug', "Session Cookie Driver Initialized"); 
+        \Ob\log\me('debug', "Session Cookie Driver Initialized"); 
 
         $sess   = Session::getInstance();
         
@@ -19,11 +18,11 @@ if( ! function_exists('_sess_start') )
         'sess_match_useragent', 'sess_cookie_name', 'cookie_path', 'cookie_domain', 
         'sess_time_to_update', 'time_reference', 'cookie_prefix', 'encryption_key') as $key)
         {
-            $sess->$key = (isset($params[$key])) ? $params[$key] : config($key);
+            $sess->$key = (isset($params[$key])) ? $params[$key] : \Ob\config($key);
         }
 
         // _unserialize func. use strip_slashes() func.
-        loader::helper('ob/string');
+        new \Ob\string\start();
 
         $sess->now = _get_time();
 
@@ -41,13 +40,13 @@ if( ! function_exists('_sess_start') )
         
         // Run the Session routine. If a session doesn't exist we'll 
         // create a new one.  If it does, we'll update it.
-        if ( ! sess_read())
+        if ( ! read())
         {
-            sess_create();
+            create();
         }
         else
         {    
-            sess_update();
+            update();
         }
 
         // Delete 'old' flashdata (from last request)
@@ -57,13 +56,13 @@ if( ! function_exists('_sess_start') )
         _flashdata_mark();
 
         // Delete expired sessions if necessary
-        _sess_gc();
+        _gc();
 
         log\me('debug', "Session routines successfully run"); 
 
         return TRUE;
     }
-}
+    
 // --------------------------------------------------------------------
 
 /**
@@ -72,9 +71,7 @@ if( ! function_exists('_sess_start') )
 * @access    public
 * @return    array() sessions.
 */
-if( ! function_exists('sess_read') ) 
-{
-    function sess_read()
+    function read()
     {    
         $sess = Session::getInstance();
         
@@ -105,7 +102,7 @@ if( ! function_exists('sess_read') )
             {
                 log\me('error', 'The session cookie data did not match what was expected. This could be a possible hacking attempt.');
                 
-                sess_destroy();
+                destroy();
                 return FALSE;
             }
         }
@@ -118,28 +115,28 @@ if( ! function_exists('sess_read') )
         OR ! isset($session['ip_address']) OR ! isset($session['user_agent']) 
         OR ! isset($session['last_activity'])) 
         {               
-            sess_destroy();
+            destroy();
             return FALSE;
         }
         
         // Is the session current?
         if (($session['last_activity'] + $sess->sess_expiration) < $sess->now)
         {
-            sess_destroy();
+            destroy();
             return FALSE;
         }
 
         // Does the IP Match?
         if ($sess->sess_match_ip == TRUE AND $session['ip_address'] != i_ip_address())
         {
-            sess_destroy();
+            destroy();
             return FALSE;
         }
         
         // Does the User Agent Match?
         if ($sess->sess_match_useragent == TRUE AND trim($session['user_agent']) != trim(substr(i_user_agent(), 0, 50)))
         {
-            sess_destroy();
+            destroy();
             return FALSE;
         }
         
@@ -152,7 +149,7 @@ if( ! function_exists('sess_read') )
         
         return TRUE;
     }
-}
+    
 // --------------------------------------------------------------------
 
 /**
@@ -161,25 +158,20 @@ if( ! function_exists('sess_read') )
 * @access    public
 * @return    void
 */
-if( ! function_exists('sess_write') ) 
-{
-    function sess_write()
+    function write()
     {
         _set_cookie();
         
         return; 
     }
-}
-
+    
 /**
 * Create a new session
 *
 * @access    public
 * @return    void
 */
-if( ! function_exists('sess_create') ) 
-{
-    function sess_create()
+    function create()
     {    
         $sess = Session::getInstance();
         
@@ -207,7 +199,7 @@ if( ! function_exists('sess_create') )
         // Write the cookie
         _set_cookie(); 
     }
-}
+    
 // --------------------------------------------------------------------
 
 /**
@@ -216,9 +208,7 @@ if( ! function_exists('sess_create') )
 * @access    public
 * @return    void
 */
-if( ! function_exists('sess_update') ) 
-{
-    function sess_update()
+    function update()
     {
         $sess = Session::getInstance();
         
@@ -230,7 +220,7 @@ if( ! function_exists('sess_update') )
 
         // Save the old session id so we know which record to 
         // update in the database if we need it
-        $old_sessid = $sess->userdata['session_id'];
+        // $old_sessid = $sess->userdata['session_id'];
         $new_sessid = '';
         
         while (strlen($new_sessid) < 32)
@@ -260,7 +250,7 @@ if( ! function_exists('sess_update') )
         // Write the cookie
         _set_cookie($cookie_data);
     }
-}
+
 // --------------------------------------------------------------------
 
 /**
@@ -269,9 +259,7 @@ if( ! function_exists('sess_update') )
 * @access    public
 * @return    void
 */
-if( ! function_exists('sess_destroy') ) 
-{
-    function sess_destroy()
+    function destroy()
     {   
         $sess = Session::getInstance();
         
@@ -285,7 +273,7 @@ if( ! function_exists('sess_destroy') )
                     FALSE
         );
     }
-}
+    
 // --------------------------------------------------------------------
 
 /**
@@ -295,31 +283,27 @@ if( ! function_exists('sess_destroy') )
 * @param    string
 * @return   string
 */        
-if( ! function_exists('sess_get') ) 
-{
-    function sess_get($item, $prefix = '')
+    function get($item, $prefix = '')
     {
         $sess = Session::getInstance();
         
         return ( ! isset($sess->userdata[$prefix.$item])) ? FALSE : $sess->userdata[$prefix.$item];
     }
-}
+    
 // --------------------------------------------------------------------
 
 /**
-* Alias of sess_get(); function.
+* Alias of get(); function.
 *
 * @access   public
 * @param    string
 * @return   string
 */
-if( ! function_exists('sess') ) 
-{
-    function sess($item, $prefix = '')
+    function data($item, $prefix = '')
     {
-        return sess_get($prefix.$item);
+        return get($prefix.$item);
     }
-}
+    
 // --------------------------------------------------------------------
 
 /**
@@ -328,15 +312,13 @@ if( ! function_exists('sess') )
 * @access    public
 * @return    mixed
 */
-if( ! function_exists('sess_alldata') ) 
-{
-    function sess_alldata()
+    function alldata()
     {
         $sess = Session::getInstance();
         
         return ( ! isset($sess->userdata)) ? FALSE : $sess->userdata;
     }
-}
+    
 // --------------------------------------------------------------------
 
 /**
@@ -347,9 +329,8 @@ if( ! function_exists('sess_alldata') )
 * @param    string
 * @return   void
 */       
-if( ! function_exists('sess_set') ) 
-{ 
-    function sess_set($newdata = array(), $newval = '', $prefix = '')
+    
+    function set($newdata = array(), $newval = '', $prefix = '')
     {
         $sess = Session::getInstance();
         
@@ -366,9 +347,9 @@ if( ! function_exists('sess_set') )
             }
         }
 
-        sess_write();
+        write();
     }
-}
+
 // --------------------------------------------------------------------
 
 /**
@@ -377,9 +358,7 @@ if( ! function_exists('sess_set') )
 * @access    array
 * @return    void
 */       
-if( ! function_exists('sess_unset') ) 
-{ 
-    function sess_unset($newdata = array(), $prefix = '')
+    function remove($newdata = array(), $prefix = '')
     {
         $sess = Session::getInstance();
         
@@ -396,9 +375,9 @@ if( ! function_exists('sess_unset') )
             }
         }
 
-        sess_write();
+        write();
     }
-}
+
 // ------------------------------------------------------------------------
 
 /**
@@ -410,9 +389,7 @@ if( ! function_exists('sess_unset') )
 * @param    string
 * @return   void
 */
-if( ! function_exists('sess_set_flash') ) 
-{ 
-    function sess_set_flash($newdata = array(), $newval = '')  // ( obullo changes ... )
+    function set_flash($newdata = array(), $newval = '')  // ( obullo changes ... )
     {
         $sess = Session::getInstance();
         
@@ -426,11 +403,10 @@ if( ! function_exists('sess_set_flash') )
             foreach ($newdata as $key => $val)
             {
                 $flashdata_key = $sess->flashdata_key.':new:'.$key;
-                sess_set($flashdata_key, $val);
+                set($flashdata_key, $val);
             }
         }
     } 
-}
 // ------------------------------------------------------------------------
 
 /**
@@ -440,9 +416,7 @@ if( ! function_exists('sess_set_flash') )
 * @param    string
 * @return   void
 */
-if( ! function_exists('sess_keep_flash') ) 
-{ 
-    function sess_keep_flash($key) // ( obullo changes ...)
+    function keep_flash($key) // ( obullo changes ...)
     {
         $sess = Session::getInstance();
         
@@ -451,12 +425,12 @@ if( ! function_exists('sess_keep_flash') )
         // Note the function will return FALSE if the $key 
         // provided cannot be found
         $old_flashdata_key = $sess->flashdata_key.':old:'.$key;
-        $value = sess_get($old_flashdata_key);
+        $value = get($old_flashdata_key);
 
         $new_flashdata_key = $sess->flashdata_key.':new:'.$key;
-        sess_set($new_flashdata_key, $value);
+        set($new_flashdata_key, $value);
     }
-}
+    
 // ------------------------------------------------------------------------
 
 /**
@@ -472,15 +446,13 @@ if( ! function_exists('sess_keep_flash') )
 * 
 * @return   string
 */
-if( ! function_exists('sess_get_flash') ) 
-{ 
-    function sess_get_flash($key, $prefix = '', $suffix = '')  // obullo changes ...
+    function get_flash($key, $prefix = '', $suffix = '')  // obullo changes ...
     {
         $sess = Session::getInstance();
         
         $flashdata_key = $sess->flashdata_key.':old:'.$key;
         
-        $value = sess_get($flashdata_key);
+        $value = get($flashdata_key);
         
         if($value == '')
         {
@@ -490,20 +462,16 @@ if( ! function_exists('sess_get_flash') )
         
         return $prefix.$value.$suffix;
     }
-}
 
 // ------------------------------------------------------------------------
 
 /**
 *  Alias of sess_get_flash. 
 */
-if( ! function_exists('sess_flash'))
-{
     function sess_flash($key, $prefix = '', $suffix = '')
     {
-        return sess_get_flash($key, $prefix, $suffix);
+        return get_flash($key, $prefix, $suffix);
     }
-}
 
 // ------------------------------------------------------------------------
 
@@ -514,8 +482,6 @@ if( ! function_exists('sess_flash'))
 * @access    private
 * @return    void
 */
-if( ! function_exists('_flashdata_mark') ) 
-{ 
     function _flashdata_mark()
     {
         $sess = Session::getInstance();
@@ -527,12 +493,12 @@ if( ! function_exists('_flashdata_mark') )
             if (is_array($parts) && count($parts) === 2)
             {
                 $new_name = $sess->flashdata_key.':old:'.$parts[1];
-                sess_set($new_name, $value);
-                sess_unset($name);
+                set($new_name, $value);
+                remove($name);
             }
         }
     }
-}
+    
 // ------------------------------------------------------------------------
 
 /**
@@ -541,8 +507,7 @@ if( ! function_exists('_flashdata_mark') )
 * @access    private
 * @return    void
 */
-if( ! function_exists('_flashdata_sweep') ) 
-{
+    
     function _flashdata_sweep()
     {              
         $userdata = sess_alldata();
@@ -550,11 +515,11 @@ if( ! function_exists('_flashdata_sweep') )
         {
             if (strpos($key, ':old:'))
             {
-                sess_unset($key);
+                remove($key);
             }
         }
     }
-}
+
 // --------------------------------------------------------------------
 
 /**
@@ -563,8 +528,6 @@ if( ! function_exists('_flashdata_sweep') )
 * @access    private
 * @return    string
 */
-if( ! function_exists('_get_time') ) 
-{
     function _get_time()
     {   
         $sess = Session::getInstance();
@@ -583,7 +546,7 @@ if( ! function_exists('_get_time') )
         }
         return $time;
     }
-}
+    
 // --------------------------------------------------------------------
 
 /**
@@ -592,8 +555,6 @@ if( ! function_exists('_get_time') )
 * @access    public
 * @return    void
 */
-if( ! function_exists('_set_cookie') ) 
-{
     function _set_cookie($cookie_data = NULL)
     {
         $sess = Session::getInstance();
@@ -630,7 +591,7 @@ if( ! function_exists('_set_cookie') )
                     0
                 );
     }
-}
+
 // --------------------------------------------------------------------
 
 /**
@@ -643,8 +604,7 @@ if( ! function_exists('_set_cookie') )
 * @param    array
 * @return   string
 */    
-if( ! function_exists('_serialize') ) 
-{
+
     function _serialize($data)
     {
         if (is_array($data))
@@ -663,7 +623,7 @@ if( ! function_exists('_serialize') )
         
         return serialize($data);
     }
-}
+
 // --------------------------------------------------------------------
 
 /**
@@ -676,8 +636,7 @@ if( ! function_exists('_serialize') )
 * @param    array
 * @return    string
 */
-if( ! function_exists('_unserialize') ) 
-{
+
     function _unserialize($data)
     {
         $data = @unserialize(strip_slashes($data));
@@ -695,7 +654,7 @@ if( ! function_exists('_unserialize') )
         
         return (is_string($data)) ? str_replace('{{slash}}', '\\', $data) : $data;
     }
-}
+
 // --------------------------------------------------------------------
 
 /**
@@ -707,12 +666,11 @@ if( ! function_exists('_unserialize') )
 * @access    public
 * @return    void
 */
-if( ! function_exists('_sess_gc') ) 
-{
-    function _sess_gc()
+    function _gc()
     {
         return;
     }
+    
 }
 
 /* End of file session_cookie.php */

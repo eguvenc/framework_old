@@ -542,7 +542,7 @@ Class Odm extends Model {
     */
     public function save()
     {
-        getInstance()->locale->load('obullo');
+        \Ob\getInstance()->locale->load('obullo');
                    
         $v_data = array();   // validation fields data
         $s_data = array();   // mysql insert / update fields data
@@ -668,7 +668,7 @@ Class Odm extends Model {
                     $this->db->commit();    // commit the transaction
                     
                     $this->errors[$table]['success'] = 1;
-                    $this->errors[$table]['msg']     = lang('odm_update_success');
+                    $this->errors[$table]['msg']     = lang('Data updated succesfully.');
                     
                     $this->clear();    // reset validator data
 
@@ -679,7 +679,7 @@ Class Odm extends Model {
                     $this->db->rollback();       // roll back the transaction if we fail
 
                     $this->errors[$table]['success'] = 0;
-                    $this->errors[$table]['msg']     = lang('odm_update_fail');
+                    $this->errors[$table]['msg']     = lang('Data not saved, please do some changes.');
                     $this->errors[$table]['transaction_error'] = $e->getMessage();
                     
                     $this->clear();    // reset validator data
@@ -705,7 +705,7 @@ Class Odm extends Model {
                     $this->db->commit();    // commit the transaction
                     
                     $this->errors[$table]['success'] = 1;
-                    $this->errors[$table]['msg']     = lang('odm_insert_success');
+                    $this->errors[$table]['msg']     = lang('Data inserted succesfully.');
                     
                     $this->clear();    // reset validator data  // reset validator data
 
@@ -716,7 +716,7 @@ Class Odm extends Model {
                     $this->db->rollback();       // roll back the transaction if we fail
 
                     $this->errors[$table]['success'] = 0;
-                    $this->errors[$table]['msg']     = lang('odm_insert_fail');
+                    $this->errors[$table]['msg']     = lang('Data insert error.');
                     $this->errors[$table]['transaction_error'] = $e->getMessage();
                     
                     $this->clear();    // reset validator data  // reset validator data
@@ -924,7 +924,7 @@ Class Odm extends Model {
                 $this->db->commit();    // commit the transaction
                 
                 $this->errors[$table]['success'] = 1;
-                $this->errors[$table]['msg']     = lang('odm_delete_success');
+                $this->errors[$table]['msg']     = lang('Data deleted succesfully.');
                 
                 $this->clear();    // reset validator data
 
@@ -935,7 +935,7 @@ Class Odm extends Model {
                 $this->db->rollback();       // roll back the transaction if we fail
 
                 $this->errors[$table]['success'] = 0;
-                $this->errors[$table]['msg']     = lang('odm_delete_fail');
+                $this->errors[$table]['msg']     = lang('Delete error or record already deleted.');
                 $this->errors[$table]['transaction_error'] = $e->getMessage();
 
                 $this->clear();    // reset validator data 

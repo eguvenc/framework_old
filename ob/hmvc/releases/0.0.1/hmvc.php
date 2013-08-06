@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 function ob_request_timer($mark = '')
 {
@@ -210,17 +211,17 @@ Class Hmvc
         $method = $this->request_method = strtoupper($method);
 
         $this->_set_conn_string($method);        // Set Unique connection string foreach HMVC requests
-        $this->_set_conn_string(\serialize($params_or_data));
+        $this->_set_conn_string(serialize($params_or_data));
 
         if($this->query_string != '')
         {
             $query_str_params = $this->parse_query($this->query_string);
 
-            if(\count($query_str_params) > 0 AND ($method == 'GET' || $method == 'DELETE'))
+            if(count($query_str_params) > 0 AND ($method == 'GET' || $method == 'DELETE'))
             {
-                if(\is_array($params_or_data) AND \count($params_or_data) > 0)
+                if(is_array($params_or_data) AND count($params_or_data) > 0)
                 {
-                    $params_or_data = \array_merge($query_str_params, $params_or_data);
+                    $params_or_data = array_merge($query_str_params, $params_or_data);
                 }
             }
         }
@@ -280,7 +281,7 @@ Class Hmvc
             {
                 foreach($params_or_data as $key => $val)
                 {
-                    $_REQUEST[$key] = \urldecode($val);
+                    $_REQUEST[$key] = urldecode($val);
 
                     $this->request_keys[$key] = '';
                 }
@@ -315,7 +316,7 @@ Class Hmvc
             return array();
         }
 
-        \parse_str(\html_entity_decode($query_string), $segments);
+        parse_str(html_entity_decode($query_string), $segments);
 
         return $segments;
     }
@@ -382,7 +383,7 @@ Class Hmvc
         if ( ! class_exists('\Ob\\'.$router->fetch_class()) OR $router->fetch_method() == 'controller' 
               OR $router->fetch_method() == '_output'       // security fix.
               OR $router->fetch_method() == '_ob_getInstance_'
-              OR in_array(strtolower($router->fetch_method()), \array_map('strtolower', \get_class_methods('Ob\Controller')))
+              OR in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods('Ob\Controller')))
             )
         {
             $this->set_response('404 - Hmvc request not found: '.$hmvc_uri);
@@ -397,7 +398,7 @@ Class Hmvc
         $OB = new $Class();
 
         // Check method exist or not
-        if ( ! in_array(\strtolower($router->fetch_method()), \array_map('strtolower', \get_class_methods($OB))))
+        if ( ! in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods($OB))))
         {
             $this->set_response('404 - Hmvc request not found: '.$hmvc_uri);
 
@@ -406,16 +407,16 @@ Class Hmvc
             return $this->_response();
         }
         
-        \ob_start();
+        ob_start();
 
         // Call the requested method.                1       2       3
         // Any URI segments present (besides the directory/class/method)
         // will be passed to the method for convenience
-        \call_user_func_array(array($OB, $router->fetch_method()), array_slice($URI->rsegments, 3));
+        call_user_func_array(array($OB, $router->fetch_method()), array_slice($URI->rsegments, 3));
 
-        $content = \ob_get_contents();       
+        $content = ob_get_contents();       
 
-        if(\ob_get_level() > 0)  \ob_end_clean();      
+        if(ob_get_level() > 0)  ob_end_clean();      
                                         
         $this->set_response($content); 
 
@@ -453,9 +454,9 @@ Class Hmvc
         
         $URI = \Ob\getInstance()->uri;
         
-        $this->_this->uri     = \Ob\Uri\Uri::setInstance($this->uri);
-        $this->_this->router  = \Ob\Router\Router::setInstance($this->router);
-        $this->_this->config  = \Ob\Config\Config::setInstance($this->config);
+        $this->_this->uri     = \Ob\Uri::setInstance($this->uri);
+        $this->_this->router  = \Ob\Router::setInstance($this->router);
+        $this->_this->config  = \Ob\Config::setInstance($this->config);
         
         \Ob\getInstance($this->_this);         // Set original $this to controller instance that we backup before
     
@@ -472,7 +473,7 @@ Class Hmvc
 
             $end_time = ob_request_timer('end'); // Profiler
 
-            log\me('info', 'Hmvc request: '.$URI->uri_string.' time: '.\number_format($end_time - self::$start_time, 4));
+            log\me('info', 'Hmvc request: '.$URI->uri_string.' time: '.number_format($end_time - self::$start_time, 4));
             
             // self::$request_times[$URI->uri_string] = $end_time - self::$start_time;
         }
@@ -562,7 +563,7 @@ Class Hmvc
     */
     protected function _get_id()
     {
-        return \md5(\trim($this->_conn_string));
+        return md5(trim($this->_conn_string));
     }
 
     // --------------------------------------------------------------------
@@ -592,4 +593,4 @@ Class Hmvc
 // END Hmvc Class
 
 /* End of file hmvc.php */
-/* Location: ./ob/request/releases/0.0.1/src/hmvc.php */
+/* Location: ./ob/hmvc/releases/0.0.1/hmvc.php */

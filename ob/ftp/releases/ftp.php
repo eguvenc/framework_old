@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
  * Ftp Class

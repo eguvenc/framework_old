@@ -30,7 +30,7 @@ if( ! function_exists('form_open') )
         
         if (config('csrf_protection') === TRUE) // CSRF Support
         {
-            $security = Security::getInstance();
+            $security = \Ob\Security::getInstance();
             
             $hidden[$security->get_csrf_token_name()] = $security->get_csrf_hash();
         }
@@ -854,7 +854,7 @@ if( ! function_exists('form_error') )
             {
                 log\me('debug', 'System Error: '. $model->errors('transaction'));
                 
-                return lang('odm_sys_error') . $model->errors('transaction');
+                return lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
             }
 
             if($model->errors('success') == 0)
@@ -928,7 +928,7 @@ if( ! function_exists('form_msg'))
         {
             log\me('debug', 'System Error: '. $model->errors('transaction'));
 
-            $msg =  $model->errors('msg') .' '. lang('odm_sys_error') . $model->errors('transaction');
+            $msg =  $model->errors('msg') .' '. lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
             
             return ($msg == '') ? '' : $prefix.$msg.$suffix;
         }
@@ -947,7 +947,7 @@ if( ! function_exists('form_msg'))
         
         if($model->errors('success') == 0)
         {
-            $msg = lang('odm_form_error');
+            $msg = lang('There are some errors in the form fields.');
 
             if( ! empty($form_msg))
             {

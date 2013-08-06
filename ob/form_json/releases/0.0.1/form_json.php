@@ -48,7 +48,7 @@ if ( ! function_exists('form_json_error'))
             {
                 log\me('debug', 'System Error: '. $model->errors('transaction'));
                 
-                return json_encode(array('success' => false, 'errors' => array('sys_error' => lang('odm_sys_error').$model->errors('transaction'))));
+                return json_encode(array('success' => false, 'errors' => array('sys_error' => lang('We couldn\'t save data at this time please try again. Error: ').$model->errors('transaction'))));
             }
 
             if($model->errors('redirect') != '')

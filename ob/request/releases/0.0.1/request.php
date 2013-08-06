@@ -1,40 +1,97 @@
 <?php
 namespace Ob\request {
 
-/**
-* Call HMVC Request using HMVC Class.
-*
-* @access   public
-* @param    string method
-* @param    string  $request
-* @param    integer | bool | array  $cache_time_or_config
-* @return   string response
-*/
+    /**
+    * Do Request to another controller calling HMVC Class.
+    *
+    * @access   public
+    * @param    string method
+    * @param    string  $request
+    * @param    integer | bool | array  $cache_time_or_config
+    * @return   string response
+    */
+    Class start
+    {
+        function __construct()
+        {
+            \Ob\log\me('debug', 'Request Helper Initialized.');
+        }
+    }
     
-    function get($uri, $params, $cache_time_or_config)
+    // ------------------------------------------------------------------------
+    
+    /**
+     * GET Method
+     * 
+     * @param string $uri
+     * @param array $params
+     * @param int | array $cache_time_or_config
+     * @return string
+     */
+    function get($uri, $params = array(), $cache_time_or_config = '0')
     {
         return exec('get', $uri, $params, $cache_time_or_config);
     }
     
-    function post($uri, $params, $cache_time_or_config)
+    // ------------------------------------------------------------------------
+    
+    /**
+     * POST method
+     * 
+     * @param string $uri
+     * @param array $params
+     * @param int | array $cache_time_or_config
+     * @return string
+     */
+    function post($uri, $params = array(), $cache_time_or_config = '0')
     {
         return exec('post', $uri, $params, $cache_time_or_config);
     }
     
-    function put($uri, $params, $cache_time_or_config)
+    // ------------------------------------------------------------------------
+    
+    /**
+     * PUT method
+     * 
+     * @param string $uri
+     * @param array $params
+     * @param int | array $cache_time_or_config
+     * @return string
+     */
+    function put($uri, $params = array(), $cache_time_or_config = '0')
     {
         return exec('post', $uri, $params, $cache_time_or_config);
     }
     
-    function delete($uri, $params, $cache_time_or_config)
+    // ------------------------------------------------------------------------
+    
+    /**
+     * DELETE method
+     * 
+     * @param string $uri
+     * @param array $params
+     * @param int | array $cache_time_or_config
+     * @return string
+     */
+    function delete($uri, $params = array(), $cache_time_or_config = '0')
     {
         return exec('post', $uri, $params, $cache_time_or_config);
     }
     
+    // ------------------------------------------------------------------------
+    
+    /**
+     * Execute the request
+     * 
+     * @param string $method
+     * @param string $request_uri
+     * @param array $params
+     * @param int | array $cache_time_or_config
+     * @return string
+     */
     function exec($method = 'get', $request_uri = '', $params = array(), $cache_time_or_config = '0')
     {
-        // Supported request methods
-        $methods = array('GET' => '', 'POST' => '', 'PUT' => '', 'DELETE' => '');
+        $methods = array('GET' => '', 'POST' => '', 'PUT' => '', 'DELETE' => ''); // Supported request methods
 
         if( ! isset($methods[strtoupper($method)]))
         {
@@ -51,11 +108,10 @@ namespace Ob\request {
             // Long Access request
             if($request_uri === FALSE)
             {   
-                $hmvc = new Hmvc();   // Every hmvc request must create new instance (true == new instance).
+                $hmvc = new \Ob\Hmvc();   // Every hmvc request must create new instance (true == new instance).
                 $hmvc->clear();       // Clear variables for each request.
 
                 $hmvc->request($method);
-
                 return $hmvc->exec();
                 // $hmvc->set_method($method, $params);
                 // $hmvc->exec();
@@ -65,7 +121,7 @@ namespace Ob\request {
             $method      = 'GET';   // Set default method
         }
 
-        $hmvc = new Hmvc();
+        $hmvc = new \Ob\Hmvc();
         $hmvc->clear();                       
         $hmvc->request($request_uri, $cache_time_or_config);
         $hmvc->set_method($method, $params);
