@@ -803,8 +803,9 @@ Models are <strong>optionally</strong> available for those who want to use a mor
 - [What is a Model?](#what-is-a-model)
 - [Anatomy of a Model](#anatomy-of-a-model)
 - [Loading a Model](#loading-a-model)
-- [Auto-Loading a Model](#autoloading-a-model)
+- [Auto-Loading a Model](#autoloading-a-models)
 - [Connecting to your Database](#connecting-to-your-database)
+
 ### What is a Model?
 ------
 Models are PHP classes that are designed to work with information in your database. For example, let's say you use Obullo to manage a blog. You might have a model class that contains functions to insert, update, and retrieve your blog data. Here is an example of what such a model class might look like:
