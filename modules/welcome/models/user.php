@@ -1,5 +1,5 @@
 <?php
-namespace Model\Welcome;
+namespace Model;
 use Ob;
 
 Class User extends Ob\Odm

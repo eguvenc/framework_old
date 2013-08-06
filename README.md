@@ -61,5 +61,5 @@ Obullo-2.0 WILL HAVE THESE FEATURES:
         echo vi\views('footer');
 
         // loading database package
-        new Database\Db;
+        new Db\Connect();
         $results = $this->db->select()->get('table');
