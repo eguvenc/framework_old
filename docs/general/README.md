@@ -1063,6 +1063,7 @@ $this->db2->query(  ....  );
 echo db_item('hostname', 'db2');   // output localhost 
 ```
 This will give you hostname parameter of second database connection setting which before defined in <dfn>application/config/database.php</dfn> file.
+
 <strong>Note:</strong>If you want to use a library inside Model, we does not assign all libraries to a Model class so you must assign your library manually using <strong>this();</strong> word Like this ..
 ```php
 <?php namespace ob;
