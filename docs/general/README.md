@@ -849,12 +849,14 @@ Class Model_blog extends Model
     }
 
 }
-  
+ 
 ?>
 ```
+
 <strong>Note:</strong> The functions in the above example use the [Active Record Class](https://github.com/obullo/obullo-2.0/tree/master/docs/database#active_record_class) database functions.
 
 <strong>Note:</strong> Please don't use $_POST variables as directly. Use <samp>i\post();</samp> function instead of php native $_POST variables.We have a Input Helper for the secure inputs.
+
 ### Anatomy of a Model
 ------
 Model classes are stored in your <dfn>application/models/</dfn> folder. They can be locate in your local model folder if you create a <dfn>/model</dfn> folder under the <dfn>application/directories/{controller}/</dfn> path.
