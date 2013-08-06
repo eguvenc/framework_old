@@ -851,6 +851,7 @@ Class Model_blog extends Model
 }
  
 ?>
+
 ```
 
 <strong>Note:</strong> The functions in the above example use the [Active Record Class](https://github.com/obullo/obullo-2.0/tree/master/docs/database#active_record_class) database functions.
