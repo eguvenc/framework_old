@@ -1,5 +1,5 @@
 <?php
-namespace Model\Welcome;
+namespace Model;
 
 Class UserSchema 
 {

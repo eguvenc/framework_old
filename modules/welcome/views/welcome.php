@@ -1,4 +1,5 @@
-<?php namespace Ob;
+<?php 
+namespace Ob;
 new html\start();
 new url\start();
 ?>
