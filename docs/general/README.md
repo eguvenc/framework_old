@@ -18,41 +18,6 @@ By default, URLs in Obullo are designed to be search-engine and human friendly. 
 ``` php
 example.com/{module}/news/article/my_article
 ```
-**_Tip_**: Query string URLs can be optionally enabled, as described below.
-### Sub Modules
-------
-If you have a sub module like 'sub.backend' first you need to call sub module name.
-```php
-example.com/{submodule}/{module}/news/article/my_article
-```
-### URI Segments
------
-The segments in the URL, in following with the Model-View-Controller approach, usually represent:
-```php
-example.com/module/class/method/ID
-```
-1. The first segment represents the **module** that should be invoked.
-```php
-$this->uri->segment(0);
-```
-2. The second segment represents the controller **class** that should be invoked.
-```php
-$this->uri->segment(1);
-```
-3. The third segment represents the class **method**, or function, that should be called.
-```php
-$this->uri->segment(2);
-```
-4. The fourth, and any additional segments, represent the ID and any variables that will be passed to the controller.
-```php
-$this->uri->segment(3);
-```
-The [URI Class](http://obullo.com/user_guide/en/1.0.1/uri-class.html) and the [URL Helper](http://obullo.com/user_guide/en/1.0.1/url-helper.html) contain functions that make it easy to work with your URI data. In addition, your URLs can be remapped using the [URI Routing](http://obullo.com/user_guide/en/1.0.1/uri-routing.html) feature for more flexibility.
-
-If you have a **Sub Module** you can fetch sub module using $this->uri->segment('sub'), if submodule not found function returns to FALSE.
-```php
-$this->uri->segment('sub');
-```
 ### Removing the index.php file
 ------
 By default, the **index.php** file will be included in your URLs:
