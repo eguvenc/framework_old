@@ -847,11 +847,8 @@ Class Model_blog extends Model
         $this->db->where('id', i\post('id'));
         $this->db->update('blog_entries',$data);
     }
-
 }
- 
 ?>
-
 ```
 
 <strong>Note:</strong> The functions in the above example use the [Active Record Class](https://github.com/obullo/obullo-2.0/tree/master/docs/database#active_record_class) database functions.
@@ -863,6 +860,7 @@ Class Model_blog extends Model
 Model classes are stored in your <dfn>application/models/</dfn> folder. They can be locate in your local model folder if you create a <dfn>/model</dfn> folder under the <dfn>application/directories/{controller}/</dfn> path.
 
 The basic prototype for a model class is this:
+
 ```php
 namespace ob;
 
@@ -874,6 +872,7 @@ Class Model_name extends Model
     }
 }
 ```
+
 Where <dfn>Model_name</dfn> is the name of your class. Class names <strong>must</strong> have the first letter capitalized with the rest of the name lowercase. Make sure your class extends the base Model class.
 
 The file name will be a lower case version of your class name. For example, if your class is this:
