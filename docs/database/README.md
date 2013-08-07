@@ -287,6 +287,7 @@ $database['system']['active_record'] = TRUE;
 * _char_set_ - The character set used in communicating with the database.
 * _dsn_ - Data source name.If you want to use dsn, you will not need to supply other parameters.
 * _options_ - Pdo set attribute options.
+
 <strong>Note:</strong> Depending on what database platform you are using (MySQL, Postgres, etc.) not all values will be needed. For example, when using SQLite you will not need to supply a username or password, and the database name will be the path to your database file. The information above assumes you are using MySQL.
 ### Database Connection
 ------
