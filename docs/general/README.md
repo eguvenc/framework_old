@@ -863,7 +863,8 @@ Model classes are stored in your <dfn>application/models/</dfn> folder. They can
 
 The basic prototype for a model class is this:
 
-```php namespace Model;
+```php 
+namespace Model;
 use Ob;
 
 Class Model_name extends Model
@@ -878,6 +879,7 @@ Class Model_name extends Model
 Where <dfn>Model_name</dfn> is the name of your class. Class names <strong>must</strong> have the first letter capitalized with the rest of the name lowercase. Make sure your class extends the base Model class.
 
 The file name will be a lower case version of your class name. For example, if your class is this:
+
 ```php namespace Model;
 use Ob;
 
@@ -889,10 +891,13 @@ Class Model_user extends Model
     }
 }
 ```
+
 Your file should be like this:
+
 ```php
 application/models/model_user.php
 ```
+
 ### Loading a Model
 ------
 Your models will typically be loaded and called from within your [controller](https://github.com/obullo/obullo-2.0/tree/master/docs/general#controllers) functions. To load a application model you will use the following function:
@@ -932,13 +937,17 @@ $user = new Model\User(false);
 
 $user->save();
 ```
+
 #### Subfolders
 
 You can load model from subfolders
+
 ```php
 new Model\SubFolder\Blog();
 ```
+
 If you would like provide __construct parameters you can do it like this:
+
 ```php
 $config['param1'] = 'hehe';
 $config['param2'] = 'blabla';
@@ -947,6 +956,7 @@ new Model\User($config);
 ```
 
 Here is an example of a controller, that loads a model, then serves a view:
+
 ```php
 <?php namespace Model;
 use Ob;
