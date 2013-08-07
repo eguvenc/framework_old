@@ -810,7 +810,8 @@ Models are <strong>optionally</strong> available for those who want to use a mor
 ------
 Models are PHP classes that are designed to work with information in your database. For example, let's say you use Obullo to manage a blog. You might have a model class that contains functions to insert, update, and retrieve your blog data. Here is an example of what such a model class might look like:
 ```php
-<?php namespace ob;
+<?php namespace Model;
+use Ob;
 Class Model_blog extends Model
 {
     function __constuct()
@@ -862,8 +863,9 @@ Model classes are stored in your <dfn>application/models/</dfn> folder. They can
 
 The basic prototype for a model class is this:
 
-```php
-namespace ob;
+```php 
+namespace Model;
+use Ob;
 
 Class Model_name extends Model
 {
@@ -877,8 +879,10 @@ Class Model_name extends Model
 Where <dfn>Model_name</dfn> is the name of your class. Class names <strong>must</strong> have the first letter capitalized with the rest of the name lowercase. Make sure your class extends the base Model class.
 
 The file name will be a lower case version of your class name. For example, if your class is this:
-```php
-namespace ob;
+
+```php 
+namespace Model;
+use Ob;
 
 Class Model_user extends Model
 {
@@ -888,10 +892,13 @@ Class Model_user extends Model
     }
 }
 ```
+
 Your file should be like this:
+
 ```php
 application/models/model_user.php
 ```
+
 ### Loading a Model
 ------
 Your models will typically be loaded and called from within your [controller](https://github.com/obullo/obullo-2.0/tree/master/docs/general#controllers) functions. To load a application model you will use the following function:
@@ -931,13 +938,17 @@ $user = new Model\User(false);
 
 $user->save();
 ```
+
 #### Subfolders
 
 You can load model from subfolders
+
 ```php
 new Model\SubFolder\Blog();
 ```
+
 If you would like provide __construct parameters you can do it like this:
+
 ```php
 $config['param1'] = 'hehe';
 $config['param2'] = 'blabla';
@@ -946,8 +957,10 @@ new Model\User($config);
 ```
 
 Here is an example of a controller, that loads a model, then serves a view:
+
 ```php
-<?php namespace ob;
+<?php namespace Model;
+use Ob;
 Class Start extends Controller
 {
     function __construct()
@@ -993,7 +1006,10 @@ When a model is loaded it does  <strong>NOT</strong> connect automatically to yo
 You can connect using the database methods [described here](https://github.com/obullo/obullo-2.0/tree/master/docs/database#database-configuration-and-connect), either from within your Controller class or your Model class. You must declare <samp>new Db/Connect()</samp> function in your model or controller class.
 
 Putting this code into your Controller or Model __construct() function enough for the current database connection which is defined in the <dfn>application/config/database.php</dfn>
-```php
+
+```php 
+namespace Model;
+use Ob;
 Class Model_user extends Model
 {
     function __construct()
@@ -1009,7 +1025,9 @@ Class Model_user extends Model
     
 }
 ```
+
 If your second database connection setting before defined in <dfn>application/config/database.php</dfn> file like this
+
 ```php
 // second database
 $database['db2']['hostname'] = "localhost";
@@ -1022,13 +1040,17 @@ $database['db2']['char_set'] = "utf8";
 $database['db2']['dsn']      = "";
 $database['db2']['options']  = array();
 ```
+
 Then you can connect to <samp>db2</samp> database just providing the db variable like this
+
 ```php
 new Db\Connect("db2");
 
 $this->db2->query(" .... ");
 ```
+
 Also you can manually pass database connectivity settings via the first parameter of your new Db\Connect() function:
+
 ```php
 $config = array(
      'variable' => 'db',
@@ -1046,7 +1068,9 @@ $config = array(
 
 $this->db->query(  ....  );
 ```
+
 If you are provide a dsn connection string you don't need to provide other parameters into <samp>$config</samp> data.
+
 ```php
 $config = array(
      'variable' => 'db2',
@@ -1058,15 +1082,20 @@ $config = array(
 
 $this->db2->query(  ....  );
 ```
+
 <strong>Tip:</strong> You can reach your database connectivity settings by a [common function](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#common-functions) called <samp>db_item();</samp> .Look at below the code.
+
 ```php
 echo db_item('hostname', 'db2');   // output localhost 
 ```
+
 This will give you hostname parameter of second database connection setting which before defined in <dfn>application/config/database.php</dfn> file.
 
 <strong>Note:</strong>If you want to use a library inside Model, we does not assign all libraries to a Model class so you must assign your library manually using <strong>this();</strong> word Like this ..
+
 ```php
-<?php namespace ob;
+<?php namespace Model;
+use Ob;
 
 Class Model_blog extends Model
 {
