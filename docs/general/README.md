@@ -1007,7 +1007,8 @@ You can connect using the database methods [described here](https://github.com/o
 
 Putting this code into your Controller or Model __construct() function enough for the current database connection which is defined in the <dfn>application/config/database.php</dfn>
 
-```php namespace Model;
+```php 
+namespace Model;
 use Ob;
 Class Model_user extends Model
 {
@@ -1094,7 +1095,6 @@ This will give you hostname parameter of second database connection setting whic
 
 ```php
 <?php namespace Model;
-
 use Ob;
 
 Class Model_blog extends Model
