@@ -10,7 +10,7 @@
    * [Reserved Names](https://github.com/obullo/obullo-2.0/tree/master/docs/general#reserved-names)
    * [Views](https://github.com/obullo/obullo-2.0/tree/master/docs/general#views)
    * [Models](https://github.com/obullo/obullo-2.0/tree/master/docs/general#models)
-4.
+4. [Advanced Topics](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced)
 5. [Database](https://github.com/obullo/obullo-2.0/tree/master/docs/database)
    *[Quick Usage PDO Examples](https://github.com/obullo/obullo-2.0/tree/master/docs/database#quick-usage-pdo-examples)
    *[Database Configuration and Connect](https://github.com/obullo/obullo-2.0/tree/master/docs/database#database-configuration-and-connect)
