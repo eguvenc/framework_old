@@ -880,7 +880,8 @@ Where <dfn>Model_name</dfn> is the name of your class. Class names <strong>must<
 
 The file name will be a lower case version of your class name. For example, if your class is this:
 
-```php namespace Model;
+```php 
+namespace Model;
 use Ob;
 
 Class Model_user extends Model
