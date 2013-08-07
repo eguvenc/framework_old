@@ -810,7 +810,8 @@ Models are <strong>optionally</strong> available for those who want to use a mor
 ------
 Models are PHP classes that are designed to work with information in your database. For example, let's say you use Obullo to manage a blog. You might have a model class that contains functions to insert, update, and retrieve your blog data. Here is an example of what such a model class might look like:
 ```php
-<?php namespace ob;
+<?php namespace Model;
+use Ob;
 Class Model_blog extends Model
 {
     function __constuct()
@@ -862,8 +863,8 @@ Model classes are stored in your <dfn>application/models/</dfn> folder. They can
 
 The basic prototype for a model class is this:
 
-```php
-namespace ob;
+```php namespace Model;
+use Ob;
 
 Class Model_name extends Model
 {
@@ -877,8 +878,8 @@ Class Model_name extends Model
 Where <dfn>Model_name</dfn> is the name of your class. Class names <strong>must</strong> have the first letter capitalized with the rest of the name lowercase. Make sure your class extends the base Model class.
 
 The file name will be a lower case version of your class name. For example, if your class is this:
-```php
-namespace ob;
+```php namespace Model;
+use Ob;
 
 Class Model_user extends Model
 {
@@ -947,7 +948,8 @@ new Model\User($config);
 
 Here is an example of a controller, that loads a model, then serves a view:
 ```php
-<?php namespace ob;
+<?php namespace Model;
+use Ob;
 Class Start extends Controller
 {
     function __construct()
@@ -993,7 +995,8 @@ When a model is loaded it does  <strong>NOT</strong> connect automatically to yo
 You can connect using the database methods [described here](https://github.com/obullo/obullo-2.0/tree/master/docs/database#database-configuration-and-connect), either from within your Controller class or your Model class. You must declare <samp>new Db/Connect()</samp> function in your model or controller class.
 
 Putting this code into your Controller or Model __construct() function enough for the current database connection which is defined in the <dfn>application/config/database.php</dfn>
-```php
+```php namespace Model;
+use Ob;
 Class Model_user extends Model
 {
     function __construct()
@@ -1066,7 +1069,9 @@ This will give you hostname parameter of second database connection setting whic
 
 <strong>Note:</strong>If you want to use a library inside Model, we does not assign all libraries to a Model class so you must assign your library manually using <strong>this();</strong> word Like this ..
 ```php
-<?php namespace ob;
+<?php namespace Model;
+
+use Ob;
 
 Class Model_blog extends Model
 {
