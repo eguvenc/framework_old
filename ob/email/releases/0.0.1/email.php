@@ -1,4 +1,5 @@
 <?php
+namespace Ob\Email;
 
 /**
  * Obullo Email Class

@@ -13,7 +13,7 @@ namespace Ob\Auth;
  * @link
  */
 
-Class Start {
+Class Auth {
    
     public $session_prefix     = 'auth_';
     public $db_var             = 'db';   // database connection variable

@@ -47,5 +47,5 @@ namespace Ob\sess {
     }
 }
 
-/* End of file view.php */
-/* Location: ./ob/view/releases/0.0.1/view.php */
+/* End of file sess.php */
+/* Location: ./ob/sess/releases/0.0.1/sess.php */
