@@ -16,15 +16,14 @@ Class Controller {
 
     private static $instance;
 
+    public $config,$router,$uri,$output,$locale;
+    
     public function __construct()       
     {   
         self::$instance = &$this;
-
-        // Load Obullo Core Libraries
+        
+        // Default Loaded Core Libraries
         // ------------------------------------
-      
-        // BU yüklemeler herbir classın kendi içinde olacak.
-        // mesela config class ın içerisinde Config::getInstance metodu içinde getInstance()->config = self::$instance; olacak;
         
         $this->config = Config::getInstance();
         $this->router = Router::getInstance();

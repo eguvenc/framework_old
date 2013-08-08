@@ -46,7 +46,7 @@ Class Config
        {
            self::$instance = new self();
        } 
-       
+   
        return self::$instance;
     }
     

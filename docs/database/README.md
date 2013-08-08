@@ -11,7 +11,7 @@ The following page contains example code showing how the database class is used.
 
 The following code loads and initializes the database class based on your [configuration](https://github.com/obullo/obullo-2.0/tree/master/docs/database#database-configuration-and-connect) settings:
 ```php
-new Db\Connect();
+new Db\Db();
 ```
 Once loaded the class is ready to be used as described below.
 
@@ -34,6 +34,16 @@ echo 'Total Results: ' . $query->num_rows();  // Pdo does not supported some dat
 row_count func via SELECT statement .(Mysql is ok.) 
 ```
 The above <dfn>result()</dfn> function returns an array of <strong>objects</strong>. Example: $row->title
+
+### Grabbing Database Object
+
+```php
+$database = new Db\Db(false);
+$db = $database->connect();
+
+print_r($db->get('users')->result_array());
+```
+The above the example returns to Database Instance if you want to grab it.
 
 ### Standard Query With Multiple Results (Array Version)
 ------

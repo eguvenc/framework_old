@@ -1,17 +1,13 @@
 <?php
-
+namespace Ob\Database_Pdo\Src;
 
 function ob_query_timer($mark = '')
 {
+    $mark = null;
     list($sm, $ss) = explode(' ', microtime());
 
     return ($sm + $ss);
 }
-
-$packages = get_config('packages');
-
-require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'database_constants'. EXT);
-require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'database_crud'. EXT);
 
 /**
  * PDO Layer.
@@ -69,7 +65,7 @@ Class Database_Layer extends Database_Crud {
     */
     public function pdo_connect($dsn, $user = NULL, $pass = NULL, $options = NULL)
     {
-        $this->_conn = new PDO($dsn, $user, $pass, $options);
+        $this->_conn = new \PDO($dsn, $user, $pass, $options);
 
         return $this;
     }
@@ -124,9 +120,9 @@ Class Database_Layer extends Database_Crud {
         
         //------------------------------------
         
-        if(config('log_queries'))
+        if(\Ob\config('log_queries'))
         {
-            log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', $sql), "\n").' time: '.number_format($end_time - $start_time, 4));   
+            \Ob\log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', $sql), "\n").' time: '.number_format($end_time - $start_time, 4));   
         }
         
         ++$this->query_count;
@@ -219,7 +215,7 @@ Class Database_Layer extends Database_Crud {
         {
             if( ! $this->is_assoc_array($array))
             {
-                throw new Exception("PDO bind data must be associative array.");
+                throw new \Exception("PDO bind data must be associative array.");
             }
         }
 
@@ -238,11 +234,11 @@ Class Database_Layer extends Database_Crud {
         // $this->benchmark += $end_time - $start_time;
         // $this->query_times['cached'][] = $end_time - $start_time;
         
-        if(config('log_queries'))
+        if(\Ob\config('log_queries'))
         {
             if(sizeof($this->prep_queries) > 0)
             {
-                log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Prepared Query ) time: '.number_format($end_time - $start_time, 4));
+                \Ob\log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Prepared Query ) time: '.number_format($end_time - $start_time, 4));
             }
         }
 
@@ -300,11 +296,11 @@ Class Database_Layer extends Database_Crud {
         $end_time   = ob_query_timer('end');
         //------------------------------------
 
-        if(config('log_queries'))
+        if(\Ob\config('log_queries'))
         {
             if(sizeof($this->prep_queries) > 0)
             {
-                log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Exec Query ) time: '.number_format($end_time - $start_time, 4));
+                \Ob\log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Exec Query ) time: '.number_format($end_time - $start_time, 4));
             }
         }
 
@@ -425,7 +421,7 @@ Class Database_Layer extends Database_Crud {
     */
     public function assoc()
     {
-        return current($this->Stmt->fetchAll(PDO::FETCH_ASSOC));
+        return current($this->Stmt->fetchAll(\PDO::FETCH_ASSOC));
     }
 
     // --------------------------------------------------------------------
@@ -449,7 +445,7 @@ Class Database_Layer extends Database_Crud {
     */
     public function row()
     {
-        return $this->Stmt->fetch(PDO::FETCH_OBJ);
+        return $this->Stmt->fetch(\PDO::FETCH_OBJ);
     }
 
     // --------------------------------------------------------------------
@@ -649,7 +645,7 @@ Class Database_Layer extends Database_Crud {
     */
     public function both()
     {
-        return current($this->Stmt->fetchAll(PDO::FETCH_BOTH));
+        return current($this->Stmt->fetchAll(\PDO::FETCH_BOTH));
     }
 
     // --------------------------------------------------------------------
@@ -669,7 +665,7 @@ Class Database_Layer extends Database_Crud {
         switch (sizeof($arg))
         {
            case 0:
-           return $this->Stmt->fetch(PDO::FETCH_OBJ);
+           return $this->Stmt->fetch(\PDO::FETCH_OBJ);
              break;
            case 1:
            return $this->Stmt->fetch($arg[0]);
@@ -701,7 +697,7 @@ Class Database_Layer extends Database_Crud {
         switch (sizeof($arg))
         {
            case 0:
-           return $this->Stmt->fetchAll(PDO::FETCH_OBJ);
+           return $this->Stmt->fetchAll(\PDO::FETCH_OBJ);
              break;
            case 1:
            return $this->Stmt->fetchAll($arg[0]);
@@ -736,7 +732,7 @@ Class Database_Layer extends Database_Crud {
     */
     public function result()
     {
-        return $this->Stmt->fetchAll(PDO::FETCH_OBJ);
+        return $this->Stmt->fetchAll(\PDO::FETCH_OBJ);
     }
     
     // --------------------------------------------------------------------
@@ -748,7 +744,7 @@ Class Database_Layer extends Database_Crud {
     */
     public function result_array()
     {
-        return $this->Stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->Stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     // --------------------------------------------------------------------
@@ -761,7 +757,7 @@ Class Database_Layer extends Database_Crud {
     */
     public function row_array()
     {
-        return $this->Stmt->fetch(PDO::FETCH_ASSOC);
+        return $this->Stmt->fetch(\PDO::FETCH_ASSOC);
     }
  
     // --------------------------------------------------------------------
@@ -780,5 +776,42 @@ Class Database_Layer extends Database_Crud {
     
 }
 
-/* End of file pdo_database_layer.php */
-/* Location: ./ob/database_pdo/releases/0.0.1/src/pdo_database_layer.php */
+/**
+| PDO paramater type constants
+| @link http://php.net/manual/en/pdo.constants.php
+| These prefs are used when working with query results.
+*/
+define('param_null', 0);  // null
+define('param_int' , 1);  // integer
+define('param_str' , 2);  // string
+define('param_lob' , 3);  // integer  Large Object Data (lob)
+define('param_stmt', 4);  // integer  Represents a recordset type ( Not currently supported by any drivers).
+define('param_bool', 5);  // boolean                                
+define('param_inout' , -2147483648); // PDO::PARAM_INPUT_OUTPUT integer
+define('lazy', 1);
+define('assoc', 2);
+define('num', 3);
+define('both', 4);
+define('obj', 5);
+define('row', 5);
+define('bound', 6);
+define('column', 7);
+define('as_class', 8);
+define('func', 10);
+define('named', 11);
+define('key_pair', 12);
+define('group', 65536);
+define('unique', 196608);
+define('class_type', 262144);
+define('serialize', 524288);
+define('props_late', 1048576);
+define('ori_next', 0);
+define('ori_prior', 1);
+define('ori_first', 2);
+define('ori_last', 3);
+define('ori_abs', 4);
+define('ori_rel', 5);
+define('into', 9);
+
+/* End of file database_layer.php */
+/* Location: ./ob/database_pdo/releases/0.0.1/src/database_layer.php */

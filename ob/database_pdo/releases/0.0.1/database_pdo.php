@@ -1,12 +1,6 @@
 <?php
 namespace Ob\Database_Pdo;
 
-$packages = get_config('packages');
-
-require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'adapter'. EXT);
-
-// ------------------------------------------------------------------------
-
 /**
  * Pdo Connection Class.
  *
@@ -37,8 +31,8 @@ Class Database_Pdo {
     * @return object
     * @throws Exception 
     */
-    public static function connect($dbdriver = 'mysql', $options = array())
-    {                                      
+    public static function connect($dbdriver = '', $options = array())
+    {  
         $driver_name = '';
         switch (strtolower($dbdriver))
         {   
@@ -81,15 +75,16 @@ Class Database_Pdo {
            case 'cubrid':            // CUBRID  
            $driver_name = 'cubrid';
              break;
-           
-          default:
-          throw new Exception('The Database pdo library does not support: '. $dbdriver); 
-           
         }
 
+        if($driver_name == '')
+        {
+            throw new \Exception('The Database pdo library does not support: '. $dbdriver); 
+        }
+        
         if ( ! in_array($dbdriver, \PDO::getAvailableDrivers()))  // check the PDO driver is available
         {
-            throw new Exception('The PDO' . $dbdriver . ' driver is not currently installed on your server.');
+            throw new \Exception('The PDO' . $dbdriver . ' driver is not currently installed on your server.');
         }
         
         $classname = '\Ob\Pdo_'.ucfirst($driver_name).'\Pdo_'.ucfirst($driver_name);

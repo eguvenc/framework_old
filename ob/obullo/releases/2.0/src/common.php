@@ -3,11 +3,7 @@ namespace Ob {
 
     /**
     * Common.php
-    *
-    * @version 1.0
     */
-    
-    // -------------------------------------------------------------------- 
 
     /**
     * Grab Obullo Super Object
@@ -38,10 +34,10 @@ namespace Ob {
         {  
             return;
         }
-        echo $realname.'<br>';
+        // echo $realname.'<br>';
 
         /*
-        if($realname !== 'Ob\log\start' AND $realname== 'Ob\error\error')
+        if($realname == 'Database_Pdo\Src\Database_Adapter')
         {
            print_r(get_declared_classes()); exit;
         }
@@ -50,15 +46,23 @@ namespace Ob {
         { 
             return;
         }
-*/
+        */
+        
         $packages = get_config('packages');
 
         //--------------- OB PACKAGE LOADER ---------------//
         
         if(strpos($realname, 'Ob\\') === 0)  // get modules from ob/ directory.
-        { 
+        {
             $ob_parts   = explode('\\', $realname);
             $ob_library = strtolower($ob_parts[1]);
+            // print_r($parts);
+            
+            $src = '';
+            if(isset($ob_parts[2]) AND $ob_parts[2] == 'Src')
+            {
+                $src = 'src'. DS;
+            }
             
             $package_filename = mb_strtolower($ob_library, config('charset'));
 
@@ -67,11 +71,31 @@ namespace Ob {
                 exit('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');
             }
 
-            require_once(OB_MODULES .$ob_library. DS .'releases'. DS .$packages['dependencies'][$ob_library]['version']. DS .$ob_library. EXT);
+            $class = $package_filename;
+            if($packages['dependencies'][$package_filename]['component'] == 'library')
+            {
+                $class = mb_strtolower(end($ob_parts));
+            }
+
+            require_once(OB_MODULES .$package_filename. DS .'releases'. DS .$packages['dependencies'][$package_filename]['version']. DS .$src.$class. EXT);
             return;
+        } 
+        else 
+        {
+            if(strpos($realname, '\\') > 0)
+            {
+                $user_parts  = explode('\\', $realname);
+                $class_name = mb_strtolower($user_parts[0], config('charset')); // User Classes
+            
+                require_once(CLASSES .$class_name. DS .$class_name. EXT);
+                return;
+            }
+            
+            $class_name = mb_strtolower($realname, config('charset')); // User Classes
+            
+            require_once(CLASSES .$class_name. DS .$class_name. EXT);
         }
 
-                
         //--------------- MODEL LOADER ---------------//
         
         if($realname == 'Ob\Model') // Core model file.

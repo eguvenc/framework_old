@@ -11,21 +11,19 @@ namespace Ob\Db;
  * 
  */
 
-Class Connect {
+Class Db {
     
     /**
     * Constructor
     */
     function __construct($db_var = 'db', $params = '')
     {
-        if($db_var === FALSE) // no instantiate.
+        if($db_var !== FALSE)
         {
-            return $this;
+            \Ob\getInstance()->{$db_var} = $this->connect($db_var, $params);
         }
         
-        \Ob\getInstance()->{$db_var} = $this->_connect($db_var, $params);
-        
-        \Ob\log\me('debug', 'Database Class Initialized.');
+        \Ob\log\me('debug', 'Db Class Initialized.');
     }
     
     /**
@@ -35,8 +33,8 @@ Class Connect {
     * @param    string  $db_var database variable
     * @return   object of PDO Instance.
     */
-    public function _connect($db_var = 'db', $params = '')
-    {                                      
+    public function connect($db_var = 'db', $params = '')
+    {   
         $dbdriver = is_array($params) ? $params['dbdriver'] : \Ob\db_item('dbdriver', $db_var); 
         $hostname = \Ob\db_item('hostname', $db_var);
         
@@ -58,7 +56,7 @@ Class Connect {
         
         if(strtolower($dbdriver) == 'mongodb') 
         {
-            $mongo = new \Ob\Mongo\Db();
+            $mongo = new \Ob\Mongo\Mongo();
             
             return $mongo->connect();
         }
@@ -69,13 +67,13 @@ Class Connect {
         
         if($packages['db_layer'] == 'Database_Pdo')
         {
-            $database = new \Ob\Database_Pdo();
-            return $database->connect();
+            $database = new \Ob\Database_Pdo\Database_Pdo();
+            return $database->connect($dbdriver, $options);
         } 
         else // Native database support.
         {
-            $database = new \Ob\Database();
-            return $database->connect();
+            $database = new \Ob\Database\Database();
+            return $database->connect($dbdriver, $options);
         }
         
         return FALSE;        

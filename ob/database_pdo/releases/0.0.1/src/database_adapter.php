@@ -1,10 +1,5 @@
 <?php
-
-$packages = get_config('packages');
-
-require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies']['database_pdo']['version']. DS .'src'. DS .'pdo_database_layer'. EXT);
-        
-// ------------------------------------------------------------------------
+namespace Ob\Database_Pdo\Src;
 
 /**
  * Database Adapter Class
@@ -15,7 +10,7 @@ require (OB_MODULES .'database_pdo'. DS .'releases'. DS .$packages['dependencies
  * @author        Obullo Team
  * @link
  */
-Abstract Class Pdo_Database_Adapter extends Pdo_Database_Layer {
+Abstract Class Database_Adapter extends Database_Layer {
     
     public $hostname = '';
     public $username = '';
@@ -80,17 +75,17 @@ Abstract Class Pdo_Database_Adapter extends Pdo_Database_Layer {
         } else 
         {
             // Config.database connection
-            $this->hostname = db_item('hostname',$db_var); 
-            $this->username = db_item('username',$db_var); 
-            $this->password = db_item('password',$db_var); 
-            $this->database = db_item('database',$db_var);
-            $this->dbdriver = strtolower(db_item('dbdriver',$db_var));
-            $this->dbprefix = strtolower(db_item('dbprefix',$db_var));
-            $this->swap_pre = strtolower(db_item('swap_pre',$db_var));
-            $this->char_set = db_item('char_set',$db_var);
-            $this->dbh_port = db_item('dbh_port',$db_var);
-            $this->dsn      = db_item('dsn'     ,$db_var);
-            $this->options  = db_item('options' ,$db_var);
+            $this->hostname = \Ob\db_item('hostname',$db_var); 
+            $this->username = \Ob\db_item('username',$db_var); 
+            $this->password = \Ob\db_item('password',$db_var); 
+            $this->database = \Ob\db_item('database',$db_var);
+            $this->dbdriver = strtolower(\Ob\db_item('dbdriver',$db_var));
+            $this->dbprefix = strtolower(\Ob\db_item('dbprefix',$db_var));
+            $this->swap_pre = strtolower(\Ob\db_item('swap_pre',$db_var));
+            $this->char_set = \Ob\db_item('char_set',$db_var);
+            $this->dbh_port = \Ob\db_item('dbh_port',$db_var);
+            $this->dsn      = \Ob\db_item('dsn'     ,$db_var);
+            $this->options  = \Ob\db_item('options' ,$db_var);
         }  
         
         if( ! is_array($this->options) ) $this->options = array();
@@ -288,5 +283,5 @@ Abstract Class Pdo_Database_Adapter extends Pdo_Database_Layer {
     
 }
 
-/* End of file pdo_database_adapter.php */
-/* Location: ./ob/database_pdo/releases/0.0.1/src/pdo_database_adapter.php */
+/* End of file database_adapter.php */
+/* Location: ./ob/database_pdo/releases/0.0.1/src/database_adapter.php */

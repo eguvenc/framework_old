@@ -1,4 +1,6 @@
 <?php
+namespace Ob\Database_Pdo\Src;
+
 
 /**
  * CRUD ( CREATE - READ - UPDATE - DELETE ) Class for ** PDO.
@@ -9,7 +11,7 @@
  * @version         0.1
  */
  
-Class Database_Crud  {
+Class Database_Crud {
                                          
     public $ar_select              = array();
     public $ar_distinct            = FALSE;
@@ -1657,5 +1659,5 @@ Class Database_Crud  {
                                   
 }
 
-/* End of file pdo_database_crud.php */
-/* Location: ./ob/database_pdo/releases/0.0.1/src/pdo_database_crud.php */
+/* End of file database_crud.php */
+/* Location: ./ob/database_pdo/releases/0.0.1/src/database_crud.php */

@@ -11,7 +11,7 @@ namespace Ob\Email;
  * @author        Obullo Team
  * @link          
  */
-class Email {
+Class Email {
 
     public    $useragent       = "Obullo";
     public    $mailpath        = "/usr/sbin/sendmail";    // Sendmail path
@@ -78,7 +78,7 @@ class Email {
             $this->_safe_mode = ((boolean)@ini_get("safe_mode") === FALSE) ? FALSE : TRUE;
         }
 
-        log\me('debug', "Email Class Initialized");
+        \Ob\log\me('debug', "Email Class Initialized");
     }
     
     

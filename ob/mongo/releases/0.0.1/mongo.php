@@ -15,7 +15,7 @@ namespace Ob\Mongo;
  *
  */
 
-Class Db {
+Class Mongo {
 
     private $db;
     public  $connection;    // ! do not remove we close the connection in the bootstrap.

@@ -11,7 +11,7 @@ namespace Ob\Pdo_Mysql;
  * @link
  */
 
-Class Pdo_Mysql extends \Database_Pdo\src\Database_Adapter
+Class Pdo_Mysql extends \Ob\Database_Pdo\Src\Database_Adapter
 {
     /**
     * The character used for escaping

@@ -56,8 +56,6 @@ Class Auth {
         }
         
         new \Ob\sess\start();
-        
-        \Ob\sess_start();
 
         $this->db = loader::database($this->db_var, TRUE);
         

@@ -102,6 +102,7 @@ define('FPATH', dirname(__FILE__));
 define('ROOT',  realpath(dirname(__FILE__)) . DS);
 define('APP',  ROOT .'app'. DS);
 define('MODULES',  ROOT .'modules'. DS);
+define('CLASSES',  ROOT .'classes'. DS);
 define('OB_MODULES',  ROOT .'ob'. DS);
 define('TASK_FILE', 'task');
 
