@@ -14,12 +14,12 @@ namespace Ob\bench {
     */
     
     /**
-    * Benchmark Class.
+    * Bench Class.
     *
     * This class enables you to mark points and calculate the time difference
     * between them.  Memory consumption can also be displayed.
     */
-    Class bench {
+    Class Bench {
 
         var $marker = array();
 
@@ -27,7 +27,7 @@ namespace Ob\bench {
 
         public function __construct()
         {
-            \Ob\log\me('debug', "Benchmark Class Initialized");
+            \Ob\log\me('debug', "Bench Class Initialized");
         }
 
         // --------------------------------------------------------------------

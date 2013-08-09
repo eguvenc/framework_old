@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
  * User Agent Class
@@ -57,7 +58,7 @@ Class Agent {
             }
         }
 
-        log\me('debug', "User Agent Class Initialized");
+        log\me('debug', "Agent Class Initialized");
     }
     
     // ------------------------------------------------------------------------

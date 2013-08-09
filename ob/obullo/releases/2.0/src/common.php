@@ -50,6 +50,41 @@ namespace Ob {
         
         $packages = get_config('packages');
 
+        //--------------- MODEL LOADER ---------------//
+        
+        if(strpos($realname, 'Model\\') === 0 || strpos($realname, 'Models\\') === 0) // User model files.
+        {
+            $model_parts = explode('\\', $realname);         
+            
+            if(strpos($realname, 'Models\\') === 0)
+            {
+                if($model_parts[1] == 'Schema')
+                {
+                    $model_path = MODULES .'models'. DS .'schemas'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
+                    require($model_path);
+                    return;
+                }
+                
+                $model_path = MODULES .'models'. DS .mb_strtolower($model_parts[1], config('charset')). EXT;
+            } 
+            else // 'Model\\'
+            {
+                $router = Router::getInstance();
+                
+                if($model_parts[1] == 'Schema')
+                { 
+                    $model_path = MODULES .$router->fetch_directory(). DS .'models'. DS .'schemas'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
+                    require($model_path);
+                    return;
+                }
+
+                $model_path = MODULES .$router->fetch_directory(). DS .'models'. DS .mb_strtolower($model_parts[1], config('charset')). EXT;
+            }
+           
+            require($model_path);
+            return;
+        }
+        
         //--------------- OB PACKAGE LOADER ---------------//
         
         if(strpos($realname, 'Ob\\') === 0)  // get modules from ob/ directory.
@@ -95,38 +130,7 @@ namespace Ob {
             
             require_once(CLASSES .$class_name. DS .$class_name. EXT);
         }
-
-        //--------------- MODEL LOADER ---------------//
-        
-        if($realname == 'Ob\Model') // Core model file.
-        {
-            require(OB_MODULES .'obullo'. DS .'releases'. DS .$packages['dependencies']['model']['version']. DS .'model'. EXT);
-            return;
-        }
-        
-        if(strpos($realname, 'Ob\Model\\') === 0) // User model files.
-        {
-            $model_parts = explode('\\', $realname);
-
-            if(isset($model_parts[2]))  //  Directory Request
-            {
-                if($model_parts[2] == 'Odm')
-                {
-                    require(OB_MODULES .'odm'. DS .'releases'. DS .$packages['dependencies']['odm']['version']. DS .'odm'. EXT);
-                    return;
-                }
-
-                $model_path = MODULES .strtolower($model_parts[1]) . DS .'models'. DS .strtolower($model_parts[2]). EXT;
-            } 
-            else 
-            {   
-                $model_path = MODULES .'models'. DS .strtolower($model_parts[1]). EXT;
-            }
-
-            require($model_path);
-            return;
-        }
-     
+   
     }
 
     spl_autoload_register('Ob\autoloader', true);

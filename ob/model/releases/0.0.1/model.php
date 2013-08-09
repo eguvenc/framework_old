@@ -14,43 +14,49 @@ namespace Ob;
 
 Class Model {
 
-    public function __construct()
-    {
-        $this->_assign_db_objects();
-
-        log\me('debug', "Model Class Initialized");
-    }
-    
     /**
-    * Assign all db objects to all Models.
-    * 
-    * Very bad idea assign all library objects to model !!!
-    * We assign just db objects.
-    */
-    protected function _assign_db_objects()
+     * Model db loader
+     * Database Connection Switch.
+     * 
+     * @param mixed $db 
+     */
+    public function __construct($db = TRUE)
     {
-           
-        /*
-        foreach(loader::$_databases as $db_var)
+        log\me('debug', "Model Class Initialized");
+        
+        $db_var = 'db';
+        if(is_string($db))
         {
-            if(method_exists($this, '__get') OR method_exists($this, '__set'))
+            $db_var = $db;
+        }
+        
+        $assign_db = FALSE;
+        if(is_bool($db) AND $db == TRUE)
+        {
+            $assign_db = TRUE;
+        }
+        
+        if($assign_db)
+        {
+            if( ! isset(getInstance()->{$db_var})) // If database connection not available.
             {
-                if(isset(getInstance()->$db_var) AND is_object(getInstance()->$db_var))
-                {
-                    $this->$db_var = getInstance()->$db_var;  // to prevent some reference errors
-                }
+                $database = new Db\Db(); // Create new Database Instance.
+                $this->{$db_var} = $database->connect($db_var);
             }
-            else
+            
+            if(is_object(getInstance()->{$db_var}))
             {
-                if(isset(getInstance()->$db_var) AND is_object(getInstance()->$db_var))
+                if(method_exists($this, '__get') OR method_exists($this, '__set'))
                 {
-                    $this->$db_var = &getInstance()->$db_var;  // to prevent some reference errors
+                    $this->{$db_var} = getInstance()->{$db_var}; // to prevent some reference errors
+                }
+                else
+                {
+                    $this->{$db_var} = &getInstance()->{$db_var}; // to prevent some reference errors
                 }
             }
         }
-        */
-    }
-      
+    } 
 }
 
 // END Model Class

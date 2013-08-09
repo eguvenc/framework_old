@@ -2,11 +2,19 @@
 namespace Model;
 use Ob;
 
-Class User extends Ob\Odm
+Class User extends Ob\Model // extends Ob\Odm
 {
     function __construct()
     {
-        parent::__construct(new UserSchema);
+        // parent::__construct(new Schema\User());
+        parent::__construct(); // db connection false.
+    }
+    
+    function test()
+    {
+        print_r($this->db->get('users')->result_array());
+        
+        echo 'test';
     }
 }
 

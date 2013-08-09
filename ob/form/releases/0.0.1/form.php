@@ -1,19 +1,34 @@
 <?php
+namespace Ob\form {
+    
+    /**
+    * Form Helper
+    *
+    * @package     Obullo
+    * @subpackage  Helpers
+    * @category    Form
+    * @link
+    */
+    Class start
+    {
+        function __construct()
+        {
+            \Ob\log\me('debug', 'Form Helper Initialized.');
+        }
+    }
 
-/**
-* Form Declaration
-*
-* Creates the opening portion of the form.
-*
-* @access	public
-* @param	string	the URI segments of the form destination
-* @param	array	a key/value pair of attributes
-* @param	array	a key/value pair hidden data
-* @return	string
-*/
-if( ! function_exists('form_open') ) 
-{
-    function form_open($action = '', $attributes = '', $hidden = array())
+    /**
+    * Form Declaration
+    *
+    * Creates the opening portion of the form.
+    *
+    * @access	public
+    * @param	string	the URI segments of the form destination
+    * @param	array	a key/value pair of attributes
+    * @param	array	a key/value pair hidden data
+    * @return	string
+    */
+    function open($action = '', $attributes = '', $hidden = array())
     {
         if ($attributes == '')
         {
@@ -37,28 +52,26 @@ if( ! function_exists('form_open') )
 
         if (is_array($hidden) AND count($hidden) > 0)
         {
-            $form .= sprintf("<div style=\"display:none\">%s</div>", form_hidden($hidden));
+            $form .= sprintf("<div style=\"display:none\">%s</div>", hidden($hidden));
         }
 
         return $form;
     }
-}
-// ------------------------------------------------------------------------
+    
+    // ------------------------------------------------------------------------
 
-/**
-* Form Declaration - Multipart type
-*
-* Creates the opening portion of the form, but with "multipart/form-data".
-*
-* @access	public
-* @param	string	the URI segments of the form destination
-* @param	array	a key/value pair of attributes
-* @param	array	a key/value pair hidden data
-* @return	string
-*/
-if( ! function_exists('form_open_multipart') ) 
-{    
-    function form_open_multipart($action, $attributes = array(), $hidden = array())
+    /**
+    * Form Declaration - Multipart type
+    *
+    * Creates the opening portion of the form, but with "multipart/form-data".
+    *
+    * @access	public
+    * @param	string	the URI segments of the form destination
+    * @param	array	a key/value pair of attributes
+    * @param	array	a key/value pair hidden data
+    * @return	string
+    */ 
+    function open_multipart($action, $attributes = array(), $hidden = array())
     {
         if (is_string($attributes))
         {
@@ -71,23 +84,21 @@ if( ! function_exists('form_open_multipart') )
 
 	return form_open($action, $attributes, $hidden);
     }
-}
-// ------------------------------------------------------------------------
 
-/**
-* Hidden Input Field
-*
-* Generates hidden fields.  You can pass a simple key/value string or an associative
-* array with multiple values.
-*
-* @access	public
-* @param	mixed
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_hidden') ) 
-{    
-    function form_hidden($name, $value = '', $extra = '', $recursing = FALSE)
+    // ------------------------------------------------------------------------
+
+    /**
+    * Hidden Input Field
+    *
+    * Generates hidden fields.  You can pass a simple key/value string or an associative
+    * array with multiple values.
+    *
+    * @access	public
+    * @param	mixed
+    * @param	string
+    * @return	string
+    */
+    function hidden($name, $value = '', $extra = '', $recursing = FALSE)
     {
         static $form;
 
@@ -100,63 +111,60 @@ if( ! function_exists('form_hidden') )
         {
             foreach ($name as $key => $val)
             {
-                form_hidden($key, $val, '', TRUE);
+                hidden($key, $val, '', TRUE);
             }
+            
             return $form;
         }
 
         if ( ! is_array($value))
         {
-            $form .= '<input type="hidden" name="'.$name.'" value="'.form_prep($value, $name).'"'. $extra . '/>'."\n";
+            $form .= '<input type="hidden" name="'.$name.'" value="'.prep($value, $name).'"'. $extra . '/>'."\n";
         }
         else
         {
             foreach ($value as $k => $v)
             {
                 $k = (is_int($k)) ? '' : $k; 
-                form_hidden($name.'['.$k.']', $v, '', TRUE);
+                hidden($name.'['.$k.']', $v, '', TRUE);
             }
         }
 
         return $form;
-}
-}
-// ------------------------------------------------------------------------
+    }
+    
+    // ------------------------------------------------------------------------
 
-/**
-* Text Input Field
-*
-* @access	public
-* @param	mixed
-* @param	string
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_input') ) 
-{  
-    function form_input($data = '', $value = '', $extra = '')
+    /**
+    * Text Input Field
+    *
+    * @access	public
+    * @param	mixed
+    * @param	string
+    * @param	string
+    * @return	string
+    */
+    function input($data = '', $value = '', $extra = '')
     {
         $defaults = array('type' => 'text', 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
 
         return "<input "._parse_form_attributes($data, $defaults).$extra." />";
     }
-}
-// ------------------------------------------------------------------------
 
-/**
-* Password Field
-*
-* Identical to the input function but adds the "password" type
-*
-* @access	public
-* @param	mixed
-* @param	string
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_password') ) 
-{ 
-    function form_password($data = '', $value = '', $extra = '')
+    // ------------------------------------------------------------------------
+
+    /**
+    * Password Field
+    *
+    * Identical to the input function but adds the "password" type
+    *
+    * @access	public
+    * @param	mixed
+    * @param	string
+    * @param	string
+    * @return	string
+    */
+    function password($data = '', $value = '', $extra = '')
     {
         if ( ! is_array($data))
         {
@@ -164,25 +172,23 @@ if( ! function_exists('form_password') )
         }
 
         $data['type'] = 'password';
-        return form_input($data, $value, $extra);
+        return input($data, $value, $extra);
     }
-}
-// ------------------------------------------------------------------------
 
-/**
-* Upload Field
-*
-* Identical to the input function but adds the "file" type
-*
-* @access	public
-* @param	mixed
-* @param	string
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_upload') ) 
-{ 
-    function form_upload($data = '', $value = '', $extra = '')
+    // ------------------------------------------------------------------------
+
+    /**
+    * Upload Field
+    *
+    * Identical to the input function but adds the "file" type
+    *
+    * @access	public
+    * @param	mixed
+    * @param	string
+    * @param	string
+    * @return	string
+    */
+    function upload($data = '', $value = '', $extra = '')
     {
         if ( ! is_array($data))
         {
@@ -190,23 +196,21 @@ if( ! function_exists('form_upload') )
         }
         
         $data['type'] = 'file';
-        return form_input($data, $value, $extra);
+        return input($data, $value, $extra);
     }
-}
-// ------------------------------------------------------------------------
 
-/**
-* Textarea field
-*
-* @access	public
-* @param	mixed
-* @param	string
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_textarea') ) 
-{ 
-    function form_textarea($data = '', $value = '', $extra = '')
+    // ------------------------------------------------------------------------
+
+    /**
+    * Textarea field
+    *
+    * @access	public
+    * @param	mixed
+    * @param	string
+    * @param	string
+    * @return	string
+    */
+    function textarea($data = '', $value = '', $extra = '')
     {
         $defaults = array('name' => (( ! is_array($data)) ? $data : ''), 'cols' => '90', 'rows' => '12');
 
@@ -221,49 +225,44 @@ if( ! function_exists('form_textarea') )
         }
 
         $name = (is_array($data)) ? $data['name'] : $data;
-        return "<textarea "._parse_form_attributes($data, $defaults).$extra.">".form_prep($val, $name)."</textarea>";
+        return "<textarea "._parse_form_attributes($data, $defaults).$extra.">".prep($val, $name)."</textarea>";
     }
-}
-// ------------------------------------------------------------------------
 
-/**
-* Multi-select menu
-*
-* @access	public
-* @param	string
-* @param	array
-* @param	mixed
-* @param	string
-* @return	type
-*/
-if( ! function_exists('form_multiselect') ) 
-{ 
-    function form_multiselect($name = '', $options = array(), $selected = array(), $extra = '')
+    // ------------------------------------------------------------------------
+
+    /**
+    * Multi-select menu
+    *
+    * @access	public
+    * @param	string
+    * @param	array
+    * @param	mixed
+    * @param	string
+    * @return	type
+    */
+    function multiselect($name = '', $options = array(), $selected = array(), $extra = '')
     {
         if ( ! strpos($extra, 'multiple'))
         {
-                $extra .= ' multiple="multiple"';
+            $extra .= ' multiple="multiple"';
         }
 
-        return form_dropdown($name, $options, $selected, $extra);
+        return dropdown($name, $options, $selected, $extra);
     }
-}
 
-// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-/**
-* Drop-down Menu
-*
-* @access	public
-* @param	string
-* @param	array
-* @param	string
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_dropdown') ) 
-{
-    function form_dropdown($name = '', $options = array(), $selected = array(), $extra = '')
+    /**
+    * Drop-down Menu
+    *
+    * @access	public
+    * @param	string
+    * @param	array
+    * @param	string
+    * @param	string
+    * @return	string
+    */
+    function dropdown($name = '', $options = array(), $selected = array(), $extra = '')
     {
         if($selected === FALSE)   // False == "0" bug fix, FALSE is not a Integer.
         {
@@ -324,22 +323,20 @@ if( ! function_exists('form_dropdown') )
 
         return $form;
     }
-}
-// ------------------------------------------------------------------------
 
-/**
-* Checkbox Field
-*
-* @access	public
-* @param	mixed
-* @param	string
-* @param	bool
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_checkbox') ) 
-{ 
-    function form_checkbox($data = '', $value = '', $checked = FALSE, $extra = '')
+    // ------------------------------------------------------------------------
+
+    /**
+    * Checkbox Field
+    *
+    * @access	public
+    * @param	mixed
+    * @param	string
+    * @param	bool
+    * @param	string
+    * @return	string
+    */
+    function checkbox($data = '', $value = '', $checked = FALSE, $extra = '')
     {
         $defaults = array('type' => 'checkbox', 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
 
@@ -368,23 +365,20 @@ if( ! function_exists('form_checkbox') )
 
         return "<input "._parse_form_attributes($data, $defaults).$extra." />";
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Radio Button
-*
-* @access	public
-* @param	mixed
-* @param	string
-* @param	bool
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_radio') ) 
-{ 
-    function form_radio($data = '', $value = '', $checked = FALSE, $extra = '')
+    /**
+    * Radio Button
+    *
+    * @access	public
+    * @param	mixed
+    * @param	string
+    * @param	bool
+    * @param	string
+    * @return	string
+    */
+    function radio($data = '', $value = '', $checked = FALSE, $extra = '')
     {
         if ( ! is_array($data))
         {
@@ -392,66 +386,57 @@ if( ! function_exists('form_radio') )
         }
 
         $data['type'] = 'radio';
-        return form_checkbox($data, $value, $checked, $extra);
+        return checkbox($data, $value, $checked, $extra);
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Submit Button
-*
-* @access	public
-* @param	mixed
-* @param	string
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_submit') ) 
-{ 
-    function form_submit($data = '', $value = '', $extra = '')
+    /**
+    * Submit Button
+    *
+    * @access	public
+    * @param	mixed
+    * @param	string
+    * @param	string
+    * @return	string
+    */
+    function submit($data = '', $value = '', $extra = '')
     {
         $defaults = array('type' => 'submit', 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
 
         return "<input "._parse_form_attributes($data, $defaults).$extra." />";
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Reset Button
-*
-* @access    public
-* @param    mixed
-* @param    string
-* @param    string
-* @return    string
-*/
-if( ! function_exists('form_reset') ) 
-{ 
-    function form_reset($data = '', $value = '', $extra = '')
+    /**
+    * Reset Button
+    *
+    * @access    public
+    * @param    mixed
+    * @param    string
+    * @param    string
+    * @return    string
+    */
+    function reset($data = '', $value = '', $extra = '')
     {
         $defaults = array('type' => 'reset', 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
 
         return "<input "._parse_form_attributes($data, $defaults).$extra." />";
     }
-}
+    
+    // ------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------
-
-/**
-* Form Button
-*
-* @access	public
-* @param	mixed
-* @param	string
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_button') ) 
-{ 
-    function form_button($data = '', $content = '', $extra = '')
+    /**
+    * Form Button
+    *
+    * @access	public
+    * @param	mixed
+    * @param	string
+    * @param	string
+    * @return	string
+    */
+    function button($data = '', $content = '', $extra = '')
     {
         $defaults = array('name' => (( ! is_array($data)) ? $data : ''), 'type' => 'button');
 
@@ -463,22 +448,19 @@ if( ! function_exists('form_button') )
 
         return "<button "._parse_form_attributes($data, $defaults).$extra.">".$content."</button>";
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Form Label Tag
-*
-* @access	public
-* @param	string	The text to appear onscreen
-* @param	string	The id the label applies to
-* @param	string	Additional attributes
-* @return	string
-*/
-if( ! function_exists('form_label') ) 
-{ 
-    function form_label($label_text = '', $id = '', $attributes = array())
+    /**
+    * Form Label Tag
+    *
+    * @access	public
+    * @param	string	The text to appear onscreen
+    * @param	string	The id the label applies to
+    * @param	string	Additional attributes
+    * @return	string
+    */
+    function label($label_text = '', $id = '', $attributes = array())
     {
         $label = '<label';
 
@@ -499,24 +481,21 @@ if( ! function_exists('form_label') )
 
         return $label;
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Fieldset Tag
-*
-* Used to produce <fieldset><legend>text</legend>.  To close fieldset
-* use form_fieldset_close()
-*
-* @access	public
-* @param	string	The legend text
-* @param	string	Additional attributes
-* @return	string
-*/
-if( ! function_exists('form_fieldset') ) 
-{ 
-    function form_fieldset($legend_text = '', $attributes = array())
+    /**
+    * Fieldset Tag
+    *
+    * Used to produce <fieldset><legend>text</legend>.  To close fieldset
+    * use form_fieldset_close()
+    *
+    * @access	public
+    * @param	string	The legend text
+    * @param	string	Additional attributes
+    * @return	string
+    */
+    function fieldset($legend_text = '', $attributes = array())
     {
         $fieldset = "<fieldset";
 
@@ -531,62 +510,54 @@ if( ! function_exists('form_fieldset') )
 
         return $fieldset;
     }
-}
-// ------------------------------------------------------------------------
+    
+    // ------------------------------------------------------------------------
 
-/**
-* Fieldset Close Tag
-*
-* @access	public
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_fieldset_close') ) 
-{ 
-    function form_fieldset_close($extra = '')
+    /**
+    * Fieldset Close Tag
+    *
+    * @access	public
+    * @param	string
+    * @return	string
+    */
+    function fieldset_close($extra = '')
     {
         return "</fieldset>".$extra;
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Form Close Tag
-*
-* @access	public
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_close') ) 
-{ 
-    function form_close($extra = '')
+    /**
+    * Form Close Tag
+    *
+    * @access	public
+    * @param	string
+    * @return	string
+    */
+    function close($extra = '')
     {
         return "</form>".$extra;
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Form Prep
-*
-* Formats text so that it can be safely placed in a form field in the event it has HTML tags.
-*
-* @access	public
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_prep') ) 
-{ 
-    function form_prep($str = '')
+    /**
+    * Form Prep
+    *
+    * Formats text so that it can be safely placed in a form field in the event it has HTML tags.
+    *
+    * @access	public
+    * @param	string
+    * @return	string
+    */
+    function prep($str = '')
     {
         // if the field name is an array we do this recursively
         if (is_array($str))
         {
             foreach ($str as $key => $val)
             {
-                $str[$key] = form_prep($val);
+                $str[$key] = prep($val);
             }
 
             return $str;
@@ -615,24 +586,20 @@ if( ! function_exists('form_prep') )
 
         return $str;
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Form Value
-*
-* Grabs a value from the POST array for the specified field so you can
-* re-populate an input field or textarea.  If Form Validation
-* is active it retrieves the info from the validation class
-*
-* @access	public
-* @param	string
-* @return	mixed
-*/
-
-if( ! function_exists('set_value') ) 
-{ 
+    /**
+    * Form Value
+    *
+    * Grabs a value from the POST array for the specified field so you can
+    * re-populate an input field or textarea.  If Form Validation
+    * is active it retrieves the info from the validation class
+    *
+    * @access	public
+    * @param	string
+    * @return	mixed
+    */
     function set_value($field = '', $default = '')
     {
         if (FALSE === ($OBJ = _get_validation_object()))
@@ -644,35 +611,32 @@ if( ! function_exists('set_value') )
 
             if(isset($_REQUEST[$field]))
             {
-                return form_prep($_REQUEST[$field], $field);
+                return prep($_REQUEST[$field], $field);
             }   
         } 
 
         if($OBJ->set_value($field, $default) == '' &&  isset($_REQUEST[$field]))
         {
-            return form_prep($_REQUEST[$field], $field);
+            return prep($_REQUEST[$field], $field);
         }
 
-        return form_prep($OBJ->set_value($field, $default), $field);
+        return prep($OBJ->set_value($field, $default), $field);
     }
-}
+    
+    // ------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------
-
-/**
-* Set Select
-*
-* Let's you set the selected value of a <select> menu via data in the POST array.
-* If Form Validation is active it retrieves the info from the validation class
-*
-* @access	public
-* @param	string
-* @param	string
-* @param	bool
-* @return	string
-*/
-if( ! function_exists('set_select') ) 
-{ 
+    /**
+    * Set Select
+    *
+    * Let's you set the selected value of a <select> menu via data in the POST array.
+    * If Form Validation is active it retrieves the info from the validation class
+    *
+    * @access	public
+    * @param	string
+    * @param	string
+    * @param	bool
+    * @return	string
+    */
     function set_select($field = '', $value = '', $default = FALSE)
     {
         $OBJ = _get_validation_object();
@@ -711,24 +675,21 @@ if( ! function_exists('set_select') )
 
         return $OBJ->set_select($field, $value, $default);
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Set Checkbox
-*
-* Let's you set the selected value of a checkbox via the value in the POST array.
-* If Form Validation is active it retrieves the info from the validation class
-*
-* @access	public
-* @param	string
-* @param	string
-* @param	bool
-* @return	string
-*/
-if( ! function_exists('set_checkbox') ) 
-{ 
+    /**
+    * Set Checkbox
+    *
+    * Let's you set the selected value of a checkbox via the value in the POST array.
+    * If Form Validation is active it retrieves the info from the validation class
+    *
+    * @access	public
+    * @param	string
+    * @param	string
+    * @param	bool
+    * @return	string
+    */
     function set_checkbox($field = '', $value = '', $default = FALSE)
     {
         $OBJ = _get_validation_object();
@@ -766,24 +727,21 @@ if( ! function_exists('set_checkbox') )
 
         return $OBJ->set_checkbox($field, $value, $default);
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Set Radio
-*
-* Let's you set the selected value of a radio field via info in the POST array.
-* If Form Validation is active it retrieves the info from the validation class
-*
-* @access	public
-* @param	string
-* @param	string
-* @param	bool
-* @return	string
-*/
-if( ! function_exists('set_radio') ) 
-{ 
+    /**
+    * Set Radio
+    *
+    * Let's you set the selected value of a radio field via info in the POST array.
+    * If Form Validation is active it retrieves the info from the validation class
+    *
+    * @access	public
+    * @param	string
+    * @param	string
+    * @param	bool
+    * @return	string
+    */
     function set_radio($field = '', $value = '', $default = FALSE)
     {
         $OBJ = _get_validation_object();
@@ -822,25 +780,23 @@ if( ! function_exists('set_radio') )
 
         return $OBJ->set_radio($field, $value, $default);
     }
-}
-// ------------------------------------------------------------------------
+    
+    // ------------------------------------------------------------------------
 
-/**
-* Form Error
-*
-* Returns the error for a specific form field.  This is a helper for the
-* form validation class.
-*
-* @access	public
-* @param	string | object
-* @param	string
-* @param	string
-* @return	string
-*/
-if( ! function_exists('form_error') ) 
-{ 
-    function form_error($field = '', $prefix = '<p>', $suffix = '</p>')
-    {        
+    /**
+    * Form Error
+    *
+    * Returns the error for a specific form field.  This is a helper for the
+    * form validation class.
+    *
+    * @access	public
+    * @param	string | object
+    * @param	string
+    * @param	string
+    * @return	string
+    */
+    function error($field = '', $prefix = '<p>', $suffix = '</p>')
+    {       
         if(isset($_GET['errors'][$field])) // GET Support
         {
             return $prefix.$_GET['errors'][$field].$suffix;
@@ -872,52 +828,41 @@ if( ! function_exists('form_error') )
 
         return $OBJ->error($field, $prefix, $suffix);
     }
-}
 
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
- * Check form field is return to error
- * if $return_string not empty it returns to
- * string otherwise it returns to booelan.
- * 
- * @param string $field
- * @param string $return_string
- * @return booelan | string
- */
-function form_is_error($field = '', $return_string = '')
-{
-    $error = form_error($field);
-    
-    if($error != '')
+    /**
+    * Check form field is return to error
+    * if $return_string not empty it returns to
+    * string otherwise it returns to booelan.
+    * 
+    * @param string $field
+    * @param string $return_string
+    * @return booelan | string
+    */
+    function is_error($field = '', $return_string = '')
     {
-        return ($return_string != '') ? $return_string : TRUE;
+        $error = error($field);
+
+        if($error != '')
+        {
+            return ($return_string != '') ? $return_string : TRUE;
+        }
+
+        return ($return_string != '') ? '' : FALSE;
     }
+
+    // ------------------------------------------------------------------------
     
-    return ($return_string != '') ? '' : FALSE;
-}
-
-// ------------------------------------------------------------------------
-
-/**
- * Form (Validation Model) Head Error
- * 
- * @param object $model
- * @param string $save_msg
- * @return string 
- */
-
-/**
- * Form (Validation Model) Head Error
- * 
- * @param object $model
- * @param string $save_msg
- * @return string 
- */
-if( ! function_exists('form_msg'))
-{
-    function form_message($model = '', $form_msg = '', $prefix = '<div class="notification error">', $suffix = '</div>')
+    /**
+    * Form (Validation Model) Head Error
+    * 
+    * @param object $model
+    * @param string $save_msg
+    * @return string 
+    */
+    function message($model = '', $message = '', $prefix = '<div class="notification error">', $suffix = '</div>')
     {
         if( ! is_object($model))
         {
@@ -940,7 +885,7 @@ if( ! function_exists('form_msg'))
             return ($msg == '') ? '' : $prefix.$msg.$suffix;
         }
         
-        if($form_msg === FALSE)
+        if($message === FALSE)
         {
             return;
         }
@@ -949,36 +894,33 @@ if( ! function_exists('form_msg'))
         {
             $msg = lang('There are some errors in the form fields.');
 
-            if( ! empty($form_msg))
+            if( ! empty($message))
             {
-                $msg = $form_msg;
+                $msg = $message;
             }
             
             if($model->validation())  // If validation ok but we have a transaction error ?
             {
-                $msg = form_error($model);
+                $msg = error($model);
             }
 
             return ($msg == '') ? '' : $prefix.$msg.$suffix;
         }
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Validation Error String
-*
-* Returns all the errors associated with a form submission.  This is a helper
-* function for the form validation class.
-*
-* @access	public
-* @param	string
-* @param	string
-* @return	string
-*/
-if( ! function_exists('validation_errors') ) 
-{ 
+    /**
+    * Validation Error String
+    *
+    * Returns all the errors associated with a form submission.  This is a helper
+    * function for the form validation class.
+    *
+    * @access	public
+    * @param	string
+    * @param	string
+    * @return	string
+    */
     function validation_errors($prefix = '', $suffix = '')  // Obullo changes ..
     {
         if (FALSE === ($OBJ = _get_validation_object()))
@@ -988,22 +930,19 @@ if( ! function_exists('validation_errors') )
 
         return $OBJ->error_string($prefix, $suffix);
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Parse the form attributes
-*
-* Helper function used by some of the form helpers
-*
-* @access	private
-* @param	array
-* @param	array
-* @return	string
-*/
-if( ! function_exists('_parse_form_attributes') ) 
-{ 
+    /**
+    * Parse the form attributes
+    *
+    * Helper function used by some of the form helpers
+    *
+    * @access	private
+    * @param	array
+    * @param	array
+    * @return	string
+    */
     function _parse_form_attributes($attributes, $default)
     {
         if (is_array($attributes))
@@ -1029,7 +968,7 @@ if( ! function_exists('_parse_form_attributes') )
         {
             if ($key == 'value')
             {
-                $val = form_prep($val, $default['name']);
+                $val = prep($val, $default['name']);
             }
 
             $att .= $key . '="' . $val . '" ';
@@ -1037,22 +976,19 @@ if( ! function_exists('_parse_form_attributes') )
 
         return $att;
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Attributes To String
-*
-* Helper function used by some of the form helpers
-*
-* @access	private
-* @param	mixed
-* @param	bool
-* @return	string
-*/
-if( ! function_exists('_attributes_to_string') ) 
-{ 
+    /**
+    * Attributes To String
+    *
+    * Helper function used by some of the form helpers
+    *
+    * @access	private
+    * @param	mixed
+    * @param	bool
+    * @return	string
+    */
     function _attributes_to_string($attributes, $formtag = FALSE)
     {
         if (is_string($attributes) AND strlen($attributes) > 0)
@@ -1087,32 +1023,29 @@ if( ! function_exists('_attributes_to_string') )
             return $atts;
         }
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* Validation Object
-*
-* Determines what the form validation class was instantiated as, fetches
-* the object and returns it.
-*
-* @access	private
-* @return	mixed
-*/
-if( ! function_exists('_get_validation_object') ) 
-{ 
+    /**
+    * Validation Object
+    *
+    * Determines what the form validation class was instantiated as, fetches
+    * the object and returns it.
+    *
+    * @access	private
+    * @return	mixed
+    */
     function _get_validation_object()
     {
-        if ( ! class_exists('Validator'))  // Obullo Changes ..
+        if ( ! class_exists('Ob\Validator'))  // Obullo Changes ..
         {
             return FALSE;
         }
         
-        return Validator::getInstance();
+        return \Ob\Validator::getInstance();
     }
-}
 
+}
 
 /* End of file form.php */
 /* Location: ./ob/form/releases/0.0.1/form.php */

@@ -50,10 +50,11 @@ Class User extends Odm
 }
 
 
-$userSchema = new UserSchema();
-$userSchema->user_id['rules'] = 'trim|integer';  // Change default user_id validation rules.
+// $userSchema = new UserSchema();
+// $userSchema->user_id['rules'] = 'trim|integer';  // Change default user_id validation rules.
 
-$user = new User($userSchema);
+$user = new User();
+$user->schema->user_id['rules'] = 'trim|integer';
 $user->save();
 
 /* End of file User.php */

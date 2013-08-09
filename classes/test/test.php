@@ -4,10 +4,10 @@ namespace Test {
 
     Class start {
 
-            function __construct()
-            {
-                echo 'Hellow World !';
-            }       
+        function __construct()
+        {
+            echo 'Hellow World !';
+        }       
     }
     
     function me()

@@ -7,8 +7,8 @@ namespace Ob;
  * Display html files.
  *
  * @package       Obullo
- * @subpackage    view
- * @category      templates
+ * @subpackage    View
+ * @category      Templates
  * @author        Obullo Team
  */
 
@@ -63,6 +63,11 @@ Class View {
     
     // --------------------------------------------------------------------
     
+    /**
+     * Get view path
+     * 
+     * @return string
+     */
     public function get_path()
     {
         return (string)$this->path;
@@ -88,7 +93,7 @@ Class View {
                 // must be ## NEW ##. 
                 // e.g. $this->config->item('myitem')
                 
-                $this->{$key} = \Ob\getInstance()->$key;          
+                $this->{$key} = \Ob\getInstance()->{$key};          
             }
         }
         

@@ -1,7 +1,7 @@
 <?php
-namespace Model;
+namespace Models\Schema;
 
-Class UserSchema 
+Class User
 {
     public $config = array(
     'database' => 'db',
@@ -10,7 +10,7 @@ Class UserSchema
     );
     public $user_id = array(
     'label' => 'ID',
-    'type' => 'int',
+    'type'  => 'int',
     'rules' => 'trim|integer'
     );
     public $user_password = array(

@@ -18,9 +18,14 @@ Class Db {
     */
     function __construct($db_var = 'db', $params = '')
     {
+        if(isset(\Ob\getInstance()->{$db_var}) AND is_object(\Ob\getInstance()->{$db_var}))
+        {
+           return;   // Lazy Loading.  
+        }
+        
         if($db_var !== FALSE)
         {
-            \Ob\getInstance()->{$db_var} = $this->connect($db_var, $params);
+           \Ob\getInstance()->{$db_var} = $this->connect($db_var, $params); 
         }
         
         \Ob\log\me('debug', 'Db Class Initialized.');
@@ -35,6 +40,11 @@ Class Db {
     */
     public function connect($db_var = 'db', $params = '')
     {   
+        if(isset(\Ob\getInstance()->{$db_var}) AND is_object(\Ob\getInstance()->{$db_var}))
+        {
+           return;   // Lazy Loading.  
+        }
+        
         $dbdriver = is_array($params) ? $params['dbdriver'] : \Ob\db_item('dbdriver', $db_var); 
         $hostname = \Ob\db_item('hostname', $db_var);
         
@@ -78,7 +88,6 @@ Class Db {
         
         return FALSE;        
     }
-
 }
 
 /* End of file database.php */

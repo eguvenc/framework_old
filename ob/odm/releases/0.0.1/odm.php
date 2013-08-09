@@ -55,7 +55,8 @@ Class Odm extends Model {
                  
         if($db != '' AND $db != 'no')
         {
-            $this->db = loader::database($db, TRUE); // Cannot assign by reference to overloaded object 
+            $database = new Db\Db(false);
+            $this->db = $database->connect(); // Cannot assign by reference to overloaded object 
         }
                             
         if( ! isset($this->schema->config['table'])) // create random table name
@@ -814,7 +815,7 @@ Class Odm extends Model {
             
         if($type == 'string')
         {
-            return form_prep($value);  
+            return form\prep($value);  
         }
         
         if($type == 'int' OR $type == 'integer')

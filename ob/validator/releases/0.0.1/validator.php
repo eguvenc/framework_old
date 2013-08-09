@@ -1,4 +1,5 @@
 <?php
+namespace Ob;
 
 /**
  * Validator Class
@@ -29,8 +30,8 @@ Class Validator {
         // Validation rules can be stored in a config file.
         $this->_config_rules = $rules;
         
-        // Automatically load the form helper
-        loader::helper('ob/form');
+        // load the form helper
+        new form\start();
             
         // Set the character encoding in MB.
         if (function_exists('mb_internal_encoding'))
@@ -622,13 +623,13 @@ Class Validator {
             
             if($hmvc_callback === TRUE) //  Call the hmvc function
             {
-                loader::helper('ob/request');
+                new request\start();
                 
                 $result = FALSE;
                 
                 if($param !== FALSE)
                 {
-                    $response = request($param, $second_param)->exec();
+                    $response = request\get($second_param);
                     
                     if($response === '1' || strtolower($response) === 'true')
                     {
