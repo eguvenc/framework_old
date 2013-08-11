@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Security;
 
 /**
  * Security Class
@@ -49,7 +49,7 @@ Class Security {
     {
         foreach(array('csrf_expire', 'csrf_token_name', 'csrf_cookie_name') as $key)  // CSRF config
         {
-            if (FALSE !== ($val = config($key)))
+            if (FALSE !== ($val = \Ob\config($key)))
             {
                 $this->{'_'.$key} = $val;
             }
@@ -64,7 +64,7 @@ Class Security {
         // Set the CSRF hash
         $this->_csrf_set_hash();
 
-        log\me('debug', "Security Class Initialized");
+        \Ob\log\me('debug', "Security Class Initialized");
     }
         
     // --------------------------------------------------------------------
@@ -117,7 +117,7 @@ Class Security {
         $this->_csrf_set_hash();
         $this->csrf_set_cookie();
 
-        log\me('debug', "CSRF token verified ");
+        \Ob\log\me('debug', "CSRF token verified ");
 
         return $this;
     }
@@ -132,7 +132,7 @@ Class Security {
     public function csrf_set_cookie()
     {
         $expire = time() + $this->_csrf_expire;
-        $secure_cookie = (config('cookie_secure') === TRUE) ? 1 : 0;
+        $secure_cookie = (\Ob\config('cookie_secure') === TRUE) ? 1 : 0;
 
         if ($secure_cookie)
         {
@@ -148,9 +148,9 @@ Class Security {
             }
         }
 
-        setcookie($this->_csrf_cookie_name, $this->_csrf_hash, $expire, config('cookie_path'), config('cookie_domain'), $secure_cookie);
+        setcookie($this->_csrf_cookie_name, $this->_csrf_hash, $expire, \Ob\config('cookie_path'), \Ob\config('cookie_domain'), $secure_cookie);
 
-        log\me('debug', "CRSF cookie Set");
+        \Ob\log\me('debug', "CRSF cookie Set");
 
         return $this;
     }
@@ -164,7 +164,7 @@ Class Security {
     */
     public function csrf_show_error()
     {
-        show_error('The action you have requested is not allowed.');
+        \Ob\show_error('The action you have requested is not allowed.');
     }
     
     // --------------------------------------------------------------------
@@ -230,12 +230,12 @@ Class Security {
          */
         if (is_array($str))
         {
-                while (list($key) = each($str))
-                {
-                        $str[$key] = $this->xss_clean($str[$key]);
-                }
+            while (list($key) = each($str))
+            {
+                $str[$key] = $this->xss_clean($str[$key]);
+            }
 
-                return $str;
+            return $str;
         }
 
         /*
@@ -268,7 +268,6 @@ Class Security {
          */
 
         $str = preg_replace_callback("/[a-z]+=([\'\"]).*?\\1/si", array($this, '_convert_attribute'), $str);
-
         $str = preg_replace_callback("/<\w+.*?(?=>|<|$)/si", array($this, '_decode_entity'), $str);
 
         /*
@@ -287,7 +286,7 @@ Class Security {
 
         if (strpos($str, "\t") !== FALSE)
         {
-                $str = str_replace("\t", ' ', $str);
+            $str = str_replace("\t", ' ', $str);
         }
 
         /*
@@ -336,7 +335,7 @@ Class Security {
 
             for ($i = 0, $wordlen = strlen($word); $i < $wordlen; $i++)
             {
-                    $temp .= substr($word, $i, 1)."\s*";
+                $temp .= substr($word, $i, 1)."\s*";
             }
 
             // We only want to do this when it is followed by a non-word character
@@ -356,17 +355,17 @@ Class Security {
 
             if (preg_match("/<a/i", $str))
             {
-                    $str = preg_replace_callback("#<a\s+([^>]*?)(>|$)#si", array($this, '_js_link_removal'), $str);
+                $str = preg_replace_callback("#<a\s+([^>]*?)(>|$)#si", array($this, '_js_link_removal'), $str);
             }
 
             if (preg_match("/<img/i", $str))
             {
-                    $str = preg_replace_callback("#<img\s+([^>]*?)(\s?/?>|$)#si", array($this, '_js_img_removal'), $str);
+                $str = preg_replace_callback("#<img\s+([^>]*?)(\s?/?>|$)#si", array($this, '_js_img_removal'), $str);
             }
 
             if (preg_match("/script/i", $str) OR preg_match("/xss/i", $str))
             {
-                    $str = preg_replace("#<(/*)(script|xss)(.*?)\>#si", '[removed]', $str);
+                $str = preg_replace("#<(/*)(script|xss)(.*?)\>#si", '[removed]', $str);
             }
         }
         while($original != $str);
@@ -420,10 +419,10 @@ Class Security {
 
         if ($is_image === TRUE)
         {
-                return ($str == $converted_string) ? TRUE: FALSE;
+            return ($str == $converted_string) ? TRUE: FALSE;
         }
 
-        log\me('debug', "XSS Filtering completed");
+        \Ob\log\me('debug', "XSS Filtering completed");
         
         return $str;
     }

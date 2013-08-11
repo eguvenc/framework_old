@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Input;
 
 /**
  * Input Class
@@ -27,11 +27,11 @@ Class Input {
     */
     public function __construct()
     { 
-        $this->_allow_get_array = (config('enable_query_strings') === TRUE) ? TRUE : FALSE;
-        $this->enable_xss       = (config('global_xss_filtering') === TRUE) ? TRUE : FALSE;
-        $this->enable_csrf      = (config('csrf_protection') === TRUE) ? TRUE : FALSE;
+        $this->_allow_get_array = (\Ob\config('enable_query_strings') === TRUE) ? TRUE : FALSE;
+        $this->enable_xss       = (\Ob\config('global_xss_filtering') === TRUE) ? TRUE : FALSE;
+        $this->enable_csrf      = (\Ob\config('csrf_protection') === TRUE) ? TRUE : FALSE;
 
-        log\me('debug', "Input Class Initialized");
+        \Ob\log\me('debug', "Input Class Initialized");
     }
     
     // --------------------------------------------------------------------
@@ -118,7 +118,7 @@ Class Input {
         // CSRF Protection check
         if ($this->enable_csrf == TRUE)
         {
-            Security::getInstance()->csrf_verify();
+            \Ob\Security\Security::getInstance()->csrf_verify();
         }
         
         // Clean $_COOKIE Data
@@ -133,7 +133,7 @@ Class Input {
         
         $_COOKIE = $this->_clean_input_data($_COOKIE);
 
-        log\me('debug', "Global POST and COOKIE data sanitized");
+        \Ob\log\me('debug', "Global POST and COOKIE data sanitized");
     }
     
     // ------------------------------------------------------------------------
@@ -151,14 +151,14 @@ Class Input {
             return $this->ip_address;
         }
 
-        if (config('proxy_ips') != '' && $_SERVER['HTTP_X_FORWARDED_FOR'] && $_SERVER['REMOTE_ADDR'])
+        if (\Ob\config('proxy_ips') != '' && isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['REMOTE_ADDR'])
         {
-            $proxies = preg_split('/[\s,]/', config('proxy_ips'), -1, PREG_SPLIT_NO_EMPTY);
+            $proxies = preg_split('/[\s,]/', \Ob\config('proxy_ips'), -1, PREG_SPLIT_NO_EMPTY);
             $proxies = is_array($proxies) ? $proxies : array($proxies);
 
             $this->ip_address = in_array($_SERVER['REMOTE_ADDR'], $proxies) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
         }
-        elseif ($_SERVER['REMOTE_ADDR'] AND $_SERVER['HTTP_CLIENT_IP'])
+        elseif ($_SERVER['REMOTE_ADDR'] AND isset($_SERVER['HTTP_CLIENT_IP']))
         {
             $this->ip_address = $_SERVER['HTTP_CLIENT_IP'];
         }
@@ -166,11 +166,11 @@ Class Input {
         {
             $this->ip_address = $_SERVER['REMOTE_ADDR'];
         }
-        elseif ($_SERVER['HTTP_CLIENT_IP'])
+        elseif (isset($_SERVER['HTTP_CLIENT_IP']))
         {
             $this->ip_address = $_SERVER['HTTP_CLIENT_IP'];
         }
-        elseif ($_SERVER['HTTP_X_FORWARDED_FOR'])
+        elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
         {
             $this->ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
@@ -189,7 +189,7 @@ Class Input {
             $this->ip_address = trim(end($x));
         }
 
-        if ( ! i_valid_ip($this->ip_address))
+        if ( ! $this->valid_ip($this->ip_address))
         {
             $this->ip_address = '0.0.0.0';
         }
@@ -268,12 +268,12 @@ Class Input {
         }  
 
         // Remove control characters
-	$str = remove_invisible_characters($str);
+	$str = \Ob\remove_invisible_characters($str);
         
         // Should we filter the input data?
         if ($this->enable_xss === TRUE)
         {
-            $str = Security::getInstance()->xss_clean($str);
+            $str = \Ob\Security\Security::getInstance()->xss_clean($str);
         }
 
         // Standardize newlines if needed
@@ -333,7 +333,7 @@ Class Input {
 
         if ($xss_clean === TRUE)
         {
-            return Security::getInstance()->xss_clean($array[$index]);
+            return \Ob\Security\Security::getInstance()->xss_clean($array[$index]);
         }
 
         return $array[$index];

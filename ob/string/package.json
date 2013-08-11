@@ -1,6 +1,6 @@
 {
   "name": "string",
-  "description": "String management helper",
+  "description": "String manipulation helper",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",

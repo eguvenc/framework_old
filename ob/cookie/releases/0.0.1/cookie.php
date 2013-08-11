@@ -1,23 +1,40 @@
-<?php 
-
-/**
-* Set cookie
-*
-* Accepts six parameter, or you can submit an associative
-* array in the first parameter containing all the values.
-*
-* @access   public
-* @param    mixed
-* @param    string    the value of the cookie
-* @param    string    the number of seconds until expiration
-* @param    string    the cookie domain.  Usually:  .yourdomain.com
-* @param    string    the cookie path
-* @param    string    the cookie prefix
-* @return   void
-*/
-if( ! function_exists('set_cookie') ) 
-{
-    function set_cookie($name = '', $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = FALSE)
+<?php
+namespace Ob\cookie {
+    
+    /**
+    * Cookie Helper
+    *
+    * @package     Obullo
+    * @subpackage  Helpers
+    * @category    Cookies
+    * @link
+    */
+    Class start
+    {
+        function __construct()
+        {
+            \Ob\log\me('debug', 'Cookie Helper Initialized.');
+        }
+    }
+    
+    // --------------------------------------------------------------------
+    
+    /**
+    * Set cookie
+    *
+    * Accepts six parameter, or you can submit an associative
+    * array in the first parameter containing all the values.
+    *
+    * @access   public
+    * @param    mixed
+    * @param    string    the value of the cookie
+    * @param    string    the number of seconds until expiration
+    * @param    string    the cookie domain.  Usually:  .yourdomain.com
+    * @param    string    the cookie path
+    * @param    string    the cookie prefix
+    * @return   void
+    */
+    function set($name = '', $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = FALSE)
     {
         if (is_array($name))
         {        
@@ -30,24 +47,24 @@ if( ! function_exists('set_cookie') )
             }
         }
 
-        if ($prefix == '' AND config('cookie_prefix') != '')
+        if ($prefix == '' AND \Ob\config('cookie_prefix') != '')
         {
-            $prefix = config('cookie_prefix');
+            $prefix = \Ob\config('cookie_prefix');
         }
         
-        if ($domain == '' AND config('cookie_domain') != '')
+        if ($domain == '' AND \Ob\config('cookie_domain') != '')
         {
-            $domain = config('cookie_domain');
+            $domain = \Ob\config('cookie_domain');
         }
         
-        if ($path   == '/' AND config('cookie_path') != '/')
+        if ($path   == '/' AND \Ob\config('cookie_path') != '/')
         {
-            $path   = config('cookie_path');
+            $path   = \Ob\config('cookie_path');
         }
         
-        if ($secure == FALSE AND config('cookie_secure') != FALSE)
+        if ($secure == FALSE AND \Ob\config('cookie_secure') != FALSE)
         {
-            $secure = config('cookie_secure');
+            $secure = \Ob\config('cookie_secure');
         }
         
         if ( ! is_numeric($expire))
@@ -68,50 +85,45 @@ if( ! function_exists('set_cookie') )
 
         setcookie($prefix.$name, $value, $expire, $path, $domain, $secure);
     }
-}
     
-// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-/**
-* Fetch an item from the COOKIE array
-*
-* @access   public
-* @param    string
-* @param    bool
-* @return   mixed
-*/
-if( ! function_exists('get_cookie') ) 
-{
-    function get_cookie($index = '', $xss_clean = FALSE)
+    /**
+    * Fetch an item from the COOKIE array
+    *
+    * @access   public
+    * @param    string
+    * @param    bool
+    * @return   mixed
+    */
+    function get($index = '', $xss_clean = FALSE)
     {
         $prefix = '';
         
-        if ( ! isset($_COOKIE[$index]) AND config('cookie_prefix') != '')
+        if ( ! isset($_COOKIE[$index]) AND \Ob\config('cookie_prefix') != '')
         {
-            $prefix = config('cookie_prefix');
+            $prefix = \Ob\config('cookie_prefix');
         }
         
-        return i_cookie($prefix.$index, $xss_clean);
+        return \Ob\i\cookie($prefix.$index, $xss_clean);
     }
-}
 
-// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-/**
-* Delete a COOKIE
-*
-* @param    mixed
-* @param    string    the cookie domain.  Usually:  .yourdomain.com
-* @param    string    the cookie path
-* @param    string    the cookie prefix
-* @return   void
-*/
-if( ! function_exists('delete_cookie') ) 
-{
-    function delete_cookie($name = '', $domain = '', $path = '/', $prefix = '')
+    /**
+    * Delete a COOKIE
+    *
+    * @param    mixed
+    * @param    string    the cookie domain.  Usually:  .yourdomain.com
+    * @param    string    the cookie path
+    * @param    string    the cookie prefix
+    * @return   void
+    */
+    function delete($name = '', $domain = '', $path = '/', $prefix = '')
     {
-        set_cookie($name, '', '', $domain, $path, $prefix);
-    }
+        set($name, '', '', $domain, $path, $prefix);
+    }   
+    
 }
 
 /* End of file cookie.php */

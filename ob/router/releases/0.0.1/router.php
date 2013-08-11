@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Router;
 
  /**
  * Router Class
@@ -42,11 +42,11 @@ Class Router {
         // the Router Class at Bootstrap loading level. When you try load any library
         // you will get a Fatal Error.
         
-        $this->uri = Uri::getInstance();
+        $this->uri = \Ob\Uri\Uri::getInstance();
 
         ############## Clone URI Object ############## 
         
-        $uri = clone Uri::getInstance();
+        $uri = clone \Ob\Uri\Uri::getInstance();
         
         ############## Clone URI Object ############## 
         
@@ -81,7 +81,7 @@ Class Router {
         
         $this->_set_routing();         
         
-        log\me('debug', 'Router Class Initialized');
+        \Ob\log\me('debug', 'Router Class Initialized');
    
     }
     
@@ -117,7 +117,7 @@ Class Router {
     */
     public function clear()
     {
-        $this->uri                 = Uri::getInstance();   // reset cloned URI object.
+        $this->uri                 = \Ob\Uri\Uri::getInstance();   // reset cloned URI object.
         $this->config              = '';
         $this->hmvc                = FALSE;
         $this->hmvc_response       = '';
@@ -162,15 +162,15 @@ Class Router {
         {
             // Are query strings enabled in the config file?
             // If so, we're done since segment based URIs are not used with query strings.
-            if (config('enable_query_strings') === TRUE AND isset($_GET[config('controller_trigger')]) AND 
-                    isset($_GET[config('directory_trigger')]))
+            if (\Ob\config('enable_query_strings') === TRUE AND isset($_GET[\Ob\config('controller_trigger')]) AND 
+                    isset($_GET[Ob\config('directory_trigger')]))
             {
-                $this->set_directory(trim($this->uri->_filter_uri($_GET[config('directory_trigger')])));
-                $this->set_class(trim($this->uri->_filter_uri($_GET[config('controller_trigger')])));
+                $this->set_directory(trim($this->uri->_filter_uri($_GET[\Ob\config('directory_trigger')])));
+                $this->set_class(trim($this->uri->_filter_uri($_GET[\Ob\config('controller_trigger')])));
 
-                if (isset($_GET[config('function_trigger')]))
+                if (isset($_GET[\Ob\config('function_trigger')]))
                 {
-                    $this->set_method(trim($this->uri->_filter_uri($_GET[config('function_trigger')])));
+                    $this->set_method(trim($this->uri->_filter_uri($_GET[\Ob\config('function_trigger')])));
                 }
 
                 return;
@@ -195,7 +195,7 @@ Class Router {
                     return FALSE;
                 }
 
-                show_error('Unable to determine what should be displayed. A default route has not been specified in the routing file.', 404);
+                \Ob\show_error('Unable to determine what should be displayed. A default route has not been specified in the routing file.', 404);
             }
 
             // Turn the default route into an array.  We explode it in the event that
@@ -219,7 +219,7 @@ Class Router {
             // re-index the routed segments array so it starts with 1 rather than 0
             // $this->uri->_reindex_segments();
 
-            log\me('debug', "No URI present. Default controller set.");
+            \Ob\log\me('debug', "No URI present. Default controller set.");
             
             return;
         }
@@ -350,7 +350,7 @@ Class Router {
         {
             $this->hmvc_response = 'Hmvc request not found.';
 
-            log\me('debug', 'Hmvc request not found.');
+            \Ob\log\me('debug', 'Hmvc request not found.');
             
             return FALSE;
         }
@@ -370,7 +370,7 @@ Class Router {
 
         $error_page = (isset($segments[1])) ? $segments[0].'/'.$segments[1] : $segments[0];
 
-        show_404($error_page);
+        \Ob\show_404($error_page);
     }
                
     // --------------------------------------------------------------------

@@ -59,7 +59,7 @@ Class Db {
         
         if($hostname == FALSE)
         {
-            throw new Exception('The ' . $db_var . ' database configuration undefined in your config/database.php file.');
+            throw new \Exception('The ' . $db_var . ' database configuration undefined in your config/database.php file.');
         }
         
         //----------- MONGO PACKAGE SUPPORT ------------//
@@ -90,5 +90,5 @@ Class Db {
     }
 }
 
-/* End of file database.php */
-/* Location: ./ob/database/releases/0.0.1/database.php */
+/* End of file db.php */
+/* Location: ./ob/db/releases/0.0.1/db.php */

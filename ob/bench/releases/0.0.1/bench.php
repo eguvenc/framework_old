@@ -19,7 +19,7 @@ namespace Ob\bench {
     * This class enables you to mark points and calculate the time difference
     * between them.  Memory consumption can also be displayed.
     */
-    Class Bench {
+    Class start {
 
         var $marker = array();
 
@@ -99,6 +99,15 @@ namespace Ob\bench {
         }
 
     }
+    
+    /**
+     * Get instance of Bench Class.
+     * @return object
+     */
+    function getInstance()
+    {
+        return start::getInstance();
+    }
 
     // Benchmark Functions.
     // -------------------------------------------------------------------- 
@@ -115,7 +124,7 @@ namespace Ob\bench {
     */
     function mark($name)
     {
-        Bench::getInstance()->mark($name);
+        getInstance()->mark($name);
     }
     
     // -------------------------------------------------------------------- 
@@ -131,7 +140,7 @@ namespace Ob\bench {
     */
     function elapsed_time($point1 = '', $point2 = '', $decimals = 4)
     {        
-        return Bench::getInstance()->elapsed_time($point1, $point2, $decimals);
+        return getInstance()->elapsed_time($point1, $point2, $decimals);
     }
     
     // -------------------------------------------------------------------- 

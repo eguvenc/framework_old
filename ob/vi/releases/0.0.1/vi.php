@@ -29,7 +29,7 @@ namespace Ob\vi {
     */
     function get($filename, $data = '', $string = TRUE)
     {
-        return \Ob\View::getInstance()->load($filename, $data, $string);
+        return \Ob\View\View::getInstance()->load($filename, $data, $string);
     }
 
     // ------------------------------------------------------------------------
@@ -44,7 +44,7 @@ namespace Ob\vi {
     */
     function views($filename, $data = '', $string = TRUE)
     {
-        $view = \Ob\View::getInstance();
+        $view = \Ob\View\View::getInstance();
         $view->set_path(); // set views path
         
         return get($filename, $data, $string);
@@ -61,7 +61,7 @@ namespace Ob\vi {
     */
     function set_var($key, $val = '')
     {
-        $view = \Ob\View::getInstance();
+        $view = \Ob\View\View::getInstance();
    
         if($val == array())
         {
@@ -83,7 +83,7 @@ namespace Ob\vi {
     */
     function get_var($key)
     {
-        $view = \Ob\View::getInstance();
+        $view = \Ob\View\View::getInstance();
         
         if(isset($view->var[$key]))
         {
@@ -110,7 +110,7 @@ namespace Ob\vi {
     */
     function set_array($key, $val = array())
     {
-        $view = \Ob\View::getInstance();
+        $view = \Ob\View\View::getInstance();
         $val  = (array)$val;
         
         foreach($val as $value)
@@ -134,7 +134,7 @@ namespace Ob\vi {
     */
     function get_array($key)
     {
-        $view = \Ob\View::getInstance();
+        $view = \Ob\View\View::getInstance();
     
         if(isset($view->array[$key]))
         {

@@ -2,7 +2,7 @@
 namespace Ob {
 
     /**
-    * Common.php
+    * Common Functions
     */
 
     /**
@@ -37,17 +37,18 @@ namespace Ob {
         // echo $realname.'<br>';
 
         /*
-        if($realname == 'Database_Pdo\Src\Database_Adapter')
+        if($realname == 'Ob\Sess\Src\Sess_Cookie')
         {
-           print_r(get_declared_classes()); exit;
+            // echo $realname;
+            // exit;
+           // print_r(get_declared_classes()); exit;
         }
-        
         if(in_array((string)$realname, get_declared_classes(), true))
         { 
             return;
         }
         */
-        
+
         $packages = get_config('packages');
 
         //--------------- MODEL LOADER ---------------//
@@ -69,7 +70,7 @@ namespace Ob {
             } 
             else // 'Model\\'
             {
-                $router = Router::getInstance();
+                $router = Router\Router::getInstance();
                 
                 if($model_parts[1] == 'Schema')
                 { 
@@ -107,7 +108,7 @@ namespace Ob {
             }
 
             $class = $package_filename;
-            if($packages['dependencies'][$package_filename]['component'] == 'library')
+            if($src != '') // Driver Request.
             {
                 $class = mb_strtolower(end($ob_parts));
             }
@@ -311,7 +312,7 @@ namespace Ob {
     */
     function show_404($page = '')
     {    
-        \Ob\log\me('error', '404 Page Not Found --> '.$page, false, true);
+        log\me('error', '404 Page Not Found --> '.$page, false, true);
 
         echo show_http_error('404 Page Not Found', $page, 'ob_404', 404);
 
@@ -332,7 +333,7 @@ namespace Ob {
     */
     function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered')
     {
-        \Ob\log\me('error', 'HTTP Error --> '.$message, false, true);
+        log\me('error', 'HTTP Error --> '.$message, false, true);
 
         // Some times we use utf8 chars in errors.
         header('Content-type: text/html; charset='.config('charset')); 

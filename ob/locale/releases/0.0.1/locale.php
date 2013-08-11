@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Locale;
 
 /**
 * Fetch a item of text from the language array
@@ -31,7 +31,7 @@ Class Locale {
         // Set Default language from $_COOKIE['__langlocale']
         // $this->set_language();
         
-        log\me('debug', "Locale Library Initialized");    
+        \Ob\log\me('debug', "Locale Library Initialized");    
     }
 
     // --------------------------------------------------------------------
@@ -75,7 +75,7 @@ Class Locale {
     {
         if ($idiom == '')
         {
-            $default = config('language');
+            $default = \Ob\config('language');
             $idiom   = ($default == '') ? 'english' : $default;
         }
         
@@ -86,14 +86,14 @@ Class Locale {
         
         if( ! is_dir(APP .'locale'. DS .$idiom))
         {
-            throw new Exception('The locale folder '.APP .'locale'. DS .$idiom.' seems not a folder.');
+            throw new \Exception('The locale folder '.APP .'locale'. DS .$idiom.' seems not a folder.');
         }
         
         require(APP .'locale'. DS .$idiom. DS .$filename. EXT);
 
         if ( ! isset($lang))
         {
-            log\me('error', 'Locale file does not contain $lang variable: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
+            \Ob\log\me('error', 'Locale file does not contain $lang variable: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
             
             return;
         }
@@ -108,7 +108,7 @@ Class Locale {
 
         unset($lang);
 
-        log\me('debug', 'Locale file loaded: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
+        \Ob\log\me('debug', 'Locale file loaded: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
         
         return TRUE;
     }

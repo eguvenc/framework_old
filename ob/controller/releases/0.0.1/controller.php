@@ -25,11 +25,11 @@ Class Controller {
         // Default Loaded Core Libraries
         // ------------------------------------
         
-        $this->config = Config::getInstance();
-        $this->router = Router::getInstance();
-        $this->uri    = Uri::getInstance();
-        $this->output = Output::getInstance();
-        $this->locale = Locale::getInstance();
+        $this->config = Config\Config::getInstance();
+        $this->router = Router\Router::getInstance();
+        $this->uri    = Uri\Uri::getInstance();
+        $this->output = Output\Output::getInstance();
+        $this->locale = Locale\Locale::getInstance();
         
         // Initialize to Autoloaders
         // ------------------------------------
@@ -84,7 +84,7 @@ Class Controller {
                         throw new \Exception('The autorun function '. $function . ' not found, please define it in app/config/autoload.php');
                     }
 
-                    \call_user_func_array($function, $arguments);   // Run autorun function.
+                    call_user_func_array($function, $arguments);   // Run autorun function.
                 }
             }
         }  

@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Config;
 
 /**
  * Config Class
@@ -88,7 +88,7 @@ Class Config
 
         if ( ! isset($config) OR ! is_array($config))
         {
-            throw new Exception('Your <b>'. $file .'</b> file does not appear to contain a valid configuration array. Please create 
+            throw new \Exception('Your <b>'. $file .'</b> file does not appear to contain a valid configuration array. Please create 
             <b>$config</b> variables in your ' . $file);
         }
         
@@ -112,7 +112,7 @@ Class Config
         
         unset($config);
 
-        log\me('debug', 'Config file loaded: '.$file);
+        \Ob\log\me('debug', 'Config file loaded: '.$file);
         
         return TRUE;
     }
@@ -135,7 +135,7 @@ Class Config
         {    
             if ( ! isset($this->config[$item]))
             {
-                log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
+                \Ob\log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
                 return FALSE;
             }
@@ -146,14 +146,14 @@ Class Config
         {
             if ( ! isset($this->config[$index]))
             {
-                log\me('info', 'Requested config index "'.$item.'" not found, be sure providing to right name.');
+                \Ob\log\me('info', 'Requested config index "'.$item.'" not found, be sure providing to right name.');
                 
                 return FALSE;
             }
 
             if ( ! isset($this->config[$index][$item]))
             {
-                log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
+                \Ob\log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
                 return FALSE;
             }
@@ -243,7 +243,6 @@ Class Config
     /**
     * Public URL (Get the url for static media files)
     *
-    * @author   Ersin Guvenc
     * @access   public
     * @param    string uri
     * @param    bool $no_slash  no trailing slashes

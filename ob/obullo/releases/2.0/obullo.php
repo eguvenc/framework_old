@@ -20,7 +20,7 @@ Class Obullo
         $packages = get_config('packages');
         
         require (APP  .'config'. DS .'constants'. EXT);  // app constants.
-        require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'common'. EXT);
+        require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'ob'. EXT);
         
         if(Ob\package_exists('log')) // check log package is installed.
         {
@@ -32,23 +32,23 @@ Class Obullo
             new Ob\error\start();
         }
         
-        $uri    = Ob\Uri::getInstance(); 
-        $router = Ob\Router::getInstance();
+        $uri    = Ob\Uri\Uri::getInstance(); 
+        $router = Ob\Router\Router::getInstance();
 
-        new Ob\bench\bench();
+        new Ob\bench\start();
         
-        Ob\Locale::getInstance();
-        Ob\Input::getInstance();
+        Ob\Locale\Locale::getInstance();
         
         Ob\bench\mark('total_execution_time_start');
         Ob\bench\mark('loading_time_base_classes_start');
         
-        Ob\Input::getInstance()->_sanitize_globals();  // Initalize to input filter. ( Sanitize must be above the GLOBALS !! )             
+        $input = Ob\Input\Input::getInstance();
+        $input->_sanitize_globals();  // Initalize to input filter. ( Sanitize must be above the GLOBALS !! )             
 
-        $output = Ob\Output::getInstance();
-        $config = Ob\Config::getInstance(); 
+        $output = Ob\Output\Output::getInstance();
+        $config = Ob\Config\Config::getInstance(); 
 
-        if ($output->_display_cache($config, $uri, $router) == TRUE) { exit; }  // Check REQUEST uri if there is a Cached file exist 
+        if ($output->_display_cache($config, $uri) == TRUE) { exit; }  // Check REQUEST uri if there is a Cached file exist 
 
         $folder = 'controllers';
 
@@ -105,37 +105,24 @@ Class Obullo
             ob_end_flush();
         }
         
-        // Close the connections.
-        ############## // Bu bölümün modelin içerisinde olması gerekli !!!
-        #
-        #
-        #
-        ##
-        // $this->_close();
+        // Close the Db connection.
+        ##############
 
-    }
-
-    // Close the connections.
-    // 
-    // Bu bölümün modelin içerisinde olması gerekli !!!
-    // --------------------------------------------------------------------  
-
-    private function _close()
-    {
-        foreach(loader::$_databases as $db_var)  // Close all PDO connections..  
-        {   
-            $driver = db_item('dbdriver', $db_var);
-
-            if($driver == 'mongodb' AND is_object(getInstance()->{$db_var}->connection))
-            {
-                getInstance()->{$db_var}->connection->close();
-            } 
-            else
-            {
-                getInstance()->{$db_var} = NULL;
-            }
+        $driver = Ob\db_item('dbdriver');
+        
+        if($driver == 'mongodb' AND isset(Ob\getInstance()->db->connection) AND is_object(Ob\getInstance()->db->connection))
+        {
+            Ob\getInstance()->db->connection->close();
         } 
+        else
+        {
+            if(isset(Ob\getInstance()->db) AND is_object(Ob\getInstance()->db))
+            {
+                Ob\getInstance()->db = NULL;
+            }
+        }
     }
+    
 }
 
 // END obullo.php File

@@ -16,7 +16,7 @@ namespace Ob\i {
     {
         function __construct()
         {
-            // 
+            \Ob\log\me('debug', 'I Helper Initialized.');
         }
     }
     
@@ -34,7 +34,7 @@ namespace Ob\i {
     {
         $GET = ($use_global_var) ? $GLOBALS['_GET_BACKUP']: $_GET; // _GET_BACKUP = Hmvc local get values
         
-        return \Ob\Input::getInstance()->_fetch_from_array($GET, $index, $xss_clean);
+        return \Ob\Input\Input::getInstance()->_fetch_from_array($GET, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -52,7 +52,7 @@ namespace Ob\i {
     {
         $POST = ($use_global_var) ? $GLOBALS['_POST_BACKUP']: $_POST; // _POST_BACKUP = Hmvc local post values
 
-        return \Ob\Input::getInstance()->_fetch_from_array($POST, $index, $xss_clean);
+        return \Ob\Input\Input::getInstance()->_fetch_from_array($POST, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -70,7 +70,7 @@ namespace Ob\i {
     {
         $REQUEST = ($use_global_var) ? $GLOBALS['_REQUEST_BACKUP']: $_REQUEST; // _REQUEST_BACKUP = Hmvc local request values
 
-        return \Ob\Input::getInstance()->_fetch_from_array($REQUEST, $index, $xss_clean);
+        return \Ob\Input\Input::getInstance()->_fetch_from_array($REQUEST, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -94,7 +94,7 @@ namespace Ob\i {
         }
         else
         {
-            return ipost($index, $xss_clean, $use_global_var);
+            return post($index, $xss_clean, $use_global_var);
         }
     }
     
@@ -110,7 +110,7 @@ namespace Ob\i {
     */
     function cookie($index = '', $xss_clean = FALSE)
     {
-        return \Ob\Input::getInstance()->_fetch_from_array($_COOKIE, $index, $xss_clean);
+        return \Ob\Input\Input::getInstance()->_fetch_from_array($_COOKIE, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -123,7 +123,7 @@ namespace Ob\i {
     */
     function ip_address()
     {
-        return \Ob\Input::getInstance()->ip_address();
+        return \Ob\Input\Input::getInstance()->ip_address();
     }
 
     // --------------------------------------------------------------------
@@ -139,7 +139,7 @@ namespace Ob\i {
     */
     function valid_ip($ip)
     {        
-        return \Ob\Input::getInstance()->valid_ip($ip);
+        return \Ob\Input\Input::getInstance()->valid_ip($ip);
     }
     
     // --------------------------------------------------------------------
@@ -152,7 +152,7 @@ namespace Ob\i {
     */
     function user_agent()
     {
-        $input = \Ob\Input::getInstance();
+        $input = \Ob\Input\Input::getInstance();
 
         if ($input->user_agent !== FALSE)
         {
@@ -279,7 +279,7 @@ namespace Ob\i {
     */
     function hmvc()
     {    
-        if(\Ob\Router::getInstance()->is_hmvc())
+        if(\Ob\Router\Router::getInstance()->is_hmvc())
         {
             return TRUE;
         }
