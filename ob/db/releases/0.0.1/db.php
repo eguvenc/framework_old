@@ -64,7 +64,7 @@ Class Db {
         
         //----------- MONGO PACKAGE SUPPORT ------------//
         
-        if(strtolower($dbdriver) == 'mongodb') 
+        if(strtolower($dbdriver) == 'mongodb' || strtolower($dbdriver) == 'mongo') 
         {
             $mongo = new \Ob\Mongo\Mongo();
             

@@ -71,27 +71,27 @@ Class Sess_Database {
         // Database settings
         // --------------------------------------------------------------------
 
-        $params = array();
-        $params['variable'] = $this->sess_db_var;
-        $params['hostname'] = \Ob\db_item('hostname', $this->sess_db_var);
-        $params['username'] = \Ob\db_item('username', $this->sess_db_var);
-        $params['password'] = \Ob\db_item('password', $this->sess_db_var);
-        $params['database'] = \Ob\db_item('database', $this->sess_db_var);
-        $params['dbdriver'] = \Ob\db_item('dbdriver', $this->sess_db_var);
-        $params['dbprefix'] = \Ob\db_item('dbprefix', $this->sess_db_var);
-        $params['swap_pre'] = \Ob\db_item('swap_pre', $this->sess_db_var);
-        $params['dbh_port'] = \Ob\db_item('dbh_port', $this->sess_db_var);
-        $params['charset']  = \Ob\db_item('charset', $this->sess_db_var);
+        $db_params = array();
+        $db_params['variable'] = $this->sess_db_var;
+        $db_params['hostname'] = \Ob\db_item('hostname', $this->sess_db_var);
+        $db_params['username'] = \Ob\db_item('username', $this->sess_db_var);
+        $db_params['password'] = \Ob\db_item('password', $this->sess_db_var);
+        $db_params['database'] = \Ob\db_item('database', $this->sess_db_var);
+        $db_params['dbdriver'] = \Ob\db_item('dbdriver', $this->sess_db_var);
+        $db_params['dbprefix'] = \Ob\db_item('dbprefix', $this->sess_db_var);
+        $db_params['swap_pre'] = \Ob\db_item('swap_pre', $this->sess_db_var);
+        $db_params['dbh_port'] = \Ob\db_item('dbh_port', $this->sess_db_var);
+        $db_params['charset']  = \Ob\db_item('charset', $this->sess_db_var);
         
         if(\Ob\db_item('dsn', $this->sess_db_var) != '')
         {
-            $params['dsn']  = \Ob\db_item('dsn', $this->sess_db_var);
+            $db_params['dsn']  = \Ob\db_item('dsn', $this->sess_db_var);
         }
         
-        $params['options']  = \Ob\db_item('options', $this->sess_db_var);
+        $db_params['options']  = \Ob\db_item('options', $this->sess_db_var);
         
         $database = new \Ob\Db\Db(false);
-        $this->db = $database->connect();
+        $this->db = $database->connect($this->sess_db_var, $db_params);
 
         // Run the Session routine. If a session doesn't exist we'll 
         // create a new one.  If it does, we'll update it.

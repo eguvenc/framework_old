@@ -2,12 +2,12 @@
 namespace Ob\Sess\Src;
 
 /**
-* Session Database Driver.
+* Session Mongodb Driver.
 * 
 * @author      Obullo Team.
 * @version     0.1
 */
-Class Sess_Database {
+Class Sess_Mongo {
     
     public $db;
     public $sess_encrypt_cookie  = FALSE;
@@ -193,8 +193,13 @@ Class Sess_Database {
         
         $query = $this->db->get($this->sess_table_name);
 
+        // Mongo db changes
+        // -------------------------------------------------------------------- 
+        
         // Is there custom data?  If so, add it to the main session array
-        $row = $query->row();
+        $row = $query->hasNext();
+        
+        // -------------------------------------------------------------------- 
         
         // No result?  Kill it!
         if ($row == FALSE)      // Obullo changes ..
@@ -202,6 +207,13 @@ Class Sess_Database {
             $this->destroy();
             return FALSE;
         }  
+        
+        // Mongo db changes
+        // -------------------------------------------------------------------- 
+        
+        $row = (object)$query->getNext();
+        
+        // -------------------------------------------------------------------- 
            
         if (isset($row->user_data) AND $row->user_data != '')
         {

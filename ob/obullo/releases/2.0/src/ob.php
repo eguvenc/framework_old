@@ -104,7 +104,7 @@ namespace Ob {
 
             if( ! isset($packages['dependencies'][$package_filename]['component'])) //  check package Installed.
             {
-                exit('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');
+                throw new \Exception('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');
             }
 
             $class = $package_filename;

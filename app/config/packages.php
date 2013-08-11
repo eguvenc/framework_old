@@ -34,6 +34,7 @@ $packages = array(
         'log' => array('version' => '0.0.1', 'component' => 'helper'),
         'locale' => array('version' => '0.0.1', 'component' => 'library'),
         'model' => array('version' => '0.0.1', 'component' => 'library'),
+        'mongo' => array('version' => '0.0.1', 'component' => 'library'),
         'odm'  => array('version' => '0.0.1', 'component' => 'library'),
         'output'  => array('version' => '0.0.1', 'component' => 'library'),
         'pager'  => array('version' => '0.0.1', 'component' => 'library'),

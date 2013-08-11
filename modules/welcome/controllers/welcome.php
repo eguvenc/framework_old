@@ -7,6 +7,7 @@ Class Welcome extends Controller {
     {           
         parent::__construct();
 
+        // new \stdClass();
         // new Db\Db();
         // print_r($this->db->get('users')->result_array());
         // new Auth\Auth();
