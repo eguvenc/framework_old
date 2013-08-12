@@ -306,11 +306,12 @@ $database['system']['active_record'] = TRUE;
 Putting this code into your Controller or Model <samp>__construct()</samp> or inside to any function, enough for the current database connection.
 A controller file.
 ```php
+namespace Ob;
 Class Start extends Controller
 {
     function __construct()
     {    
-        new Db\Connect();
+        new Db\Db();
         parent::__construct();
     }
     
@@ -325,7 +326,7 @@ A <strong>helper</strong> file.
 ```php
 function blog_dropdown()
 {
-    new Db\Connect();   // If loader:database declared before in the controller
+    new Db\Db();   // If loader:database declared before in the controller
                           or model you don't need to write it again. 
     $ob = this();
     
@@ -334,11 +335,12 @@ function blog_dropdown()
 ```
 A <strong>model</strong> file.
 ```php
+namespace Ob;
 Class Model_user extends Model
 {
     function __construct()
     {
-        new Db\Connect();
+        new Db\Db();
         parent::__construct();
     }
     
@@ -364,8 +366,8 @@ $database['db2']['dsn']      = "";
 $database['db2']['options']  = array();
 ```
 Then you can connect to <samp>db2</samp> database just providing the db variable like this ..
-```phph
-new Db\Connect('db2');
+```php
+new Db\Db('db2');
   
 $this->db2->query(" .... ");
 ```
@@ -383,7 +385,7 @@ $config = array(
      'options'  => array( PDO::ATTR_PERSISTENT => TRUE )
  );                                
 
- new Db\Connect($config);
+ new Db\Db($config);
 
 $this->db3->query(  ....  );
 ```
@@ -397,7 +399,7 @@ $config = array(
      'dsn'      => 'mysql:host=localhost;port=3307;dbname=test_db;username=root;password=1234;'
  );
 
- new Db\Connect($config);
+ new Db\Db($config);
 
 $this->db2->query(  ....  );
 ```
@@ -415,7 +417,7 @@ $db = new Db\Connect('db', TRUE);  // provide your database variable
                                    
 $db->query(" ... "); 
 
-$db2 = new Db\Connect('db2', TRUE);  // second db
+$db2 = new Db\Db('db2', TRUE);  // second db
                                       
 $db2->query(" ... ");
 ```
@@ -423,7 +425,7 @@ $db2->query(" ... ");
 
 You can close the database instantiate using first parameter to FALSE. And if you extend to Database class you can instantiate it to manually. ( Look at [extending to core classes](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#extending-to-core-classes) for more details. )
 ```php
-new Db\Connect('FALSE');
+new Db\Db('FALSE');
 
 $db = new MY_Database();
 $db = $db->connect('db');
