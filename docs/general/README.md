@@ -251,7 +251,7 @@ Controllers are the heart of your application, as they determine how HTTP reques
 - [Class Constructors](#class-constructors)
 - [Reserved Function Names](#reserved-function-names)
 
-### What is a Controller? 
+### [What is a Controller?](#what-is-a-controller)
 
 ------
 
