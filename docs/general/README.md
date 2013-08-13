@@ -3,7 +3,8 @@
 
 ## Obullo URLs
 By default, URLs in Obullo are designed to be search-engine and human friendly. Rather than using the standard "query string" approach to URLs that is synonymous with dynamic systems, Obullo uses a segment-based approach:
-``` php
+
+```php
 example.com/{module}/news/article/my_article
 ```
 
@@ -12,9 +13,11 @@ example.com/{module}/news/article/my_article
 ------
 
 By default, the **index.php** file will be included in your URLs:
+
 ```php
 example.com/index.php/module/news/article/my_article
 ```
+
 ### Apache HTTP Server
 
 ------
