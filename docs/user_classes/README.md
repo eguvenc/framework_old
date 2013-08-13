@@ -1,6 +1,6 @@
 ## User Classes
 
-```<?php
+```php
 namespace Test {
 
     Class start {
@@ -39,11 +39,10 @@ $test->me(); // outpput Hello !;
 
 ## Include User Classes
 
-```
-<?php
+```php
 namespace Test {
 
-    require CLASSES .'test/inc/otherclass.php';
+    require CLASSES .'test/src/otherclass.php';
     
     Class Test
     {

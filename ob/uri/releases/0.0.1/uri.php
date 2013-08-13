@@ -69,6 +69,8 @@ Class Uri
         return self::$instance;
     }
     
+    // --------------------------------------------------------------------
+    
     /**
     * When we use HMVC we need to Clean
     * all data.
@@ -92,11 +94,11 @@ Class Uri
     *
     * @param mixed $uri
     */
-    public function set_uri_string($uri = '', $filter = TRUE)
+    public function setUriString($uri = '', $filter = true)
     {
         if($filter) // Filter out control characters
         {
-            $uri = \Ob\remove_invisible_characters($uri, FALSE);
+            $uri = \Ob\removeInvisibleCharacters($uri, false);
         }
         
         $this->uri_string = $uri;
@@ -111,7 +113,7 @@ Class Uri
      * @param     $hvmc  boolean
      * @return    string
      */
-    public function _fetch_uri_string()
+    public function _fetchUriString()
     {
         if($this->uri_string != '') 
         {
@@ -169,7 +171,7 @@ Class Uri
             if ($protocol == 'REQUEST_URI')
             {
                 $this->uri_protocol = $protocol;
-                $this->uri_string   = $this->_parse_request_uri();
+                $this->uri_string   = $this->_parseRequestUri();
                 return;
             }
 
@@ -195,7 +197,7 @@ Class Uri
      * @access    private
      * @return    string
      */
-    public function _parse_request_uri()
+    public function _parseRequestUri()
     {
         if ( ! isset($_SERVER['REQUEST_URI']) OR $_SERVER['REQUEST_URI'] == '')
         {
@@ -210,7 +212,7 @@ Class Uri
         }
 
         $fc_path = FCPATH.SELF;
-        if (strpos($request_uri, '?') !== FALSE)
+        if (strpos($request_uri, '?') !== false)
         {
             $fc_path .= '?';
         }
@@ -251,9 +253,9 @@ Class Uri
     * @param  string $segment
     * @return string
     */
-    public function _parse_segment_extension($segment)
+    public function _parseSegmentExtension($segment)
     {
-        if(strpos($segment, '.') !== FALSE)
+        if(strpos($segment, '.') !== false)
         {
             $allowed_extensions = \Ob\config('uri_extensions');
             
@@ -297,17 +299,17 @@ Class Uri
      * @param    string
      * @return   string
      */
-    public function _filter_uri($str)
+    public function _filterUri($str)
     {
         // $class = lib('anyClass');  // Don't use any class in this level this will occur fatal errors !!!
 
-    	if ($str != '' && \Ob\config('permitted_uri_chars') != '' && \Ob\config('enable_query_strings') == FALSE)
+    	if ($str != '' && \Ob\config('permitted_uri_chars') != '' && \Ob\config('enable_query_strings') == false)
         {
             // preg_quote() in PHP 5.3 escapes -, so the str_replace() and addition of - to preg_quote() is to maintain backwards
             // compatibility as many are unaware of how characters in the permitted_uri_chars will be parsed as a regex pattern
             if ( ! preg_match('|^['.str_replace(array('\\-', '\-'), '-', preg_quote(\Ob\config('permitted_uri_chars'), '-')).']+$|i', $str))
             {
-                \Ob\show_error('The URI you submitted has disallowed characters.', 400);
+                \Ob\showError('The URI you submitted has disallowed characters.', 400);
             }
         }
 
@@ -326,7 +328,7 @@ Class Uri
      * @access    private
      * @return    void
      */
-    public function _remove_url_suffix()
+    public function _removeUrlSuffix()
     {
         if  (\Ob\config('url_suffix') != "")
         {
@@ -343,16 +345,16 @@ Class Uri
      * @access    private
      * @return    void
      */
-    public function _explode_segments()
+    public function _explodeSegments()
     {
         foreach(explode("/", preg_replace("|/*(.+?)/*$|", "\\1", $this->uri_string)) as $val)
         {
             // Filter segments for security
-            $val = trim($this->_filter_uri($val));
+            $val = trim($this->_filterUri($val));
 
             if ($val != '')
             {
-                $this->segments[] = $this->_parse_segment_extension($val);
+                $this->segments[] = $this->_parseSegmentExtension($val);
             }
         }
     }
@@ -369,7 +371,7 @@ Class Uri
      * @param    bool
      * @return   string
      */
-    public function segment($n, $no_result = FALSE)
+    public function segment($n, $no_result = false)
     {
         return ( ! isset($this->segments[$n])) ? $no_result : $this->segments[$n];
     }
@@ -388,7 +390,7 @@ Class Uri
      * @param    bool
      * @return   string
      */
-    public function rsegment($n, $no_result = FALSE)
+    public function rSegment($n, $no_result = false)
     {
         return ( ! isset($this->rsegments[$n])) ? $no_result : $this->rsegments[$n];
     }
@@ -416,9 +418,9 @@ Class Uri
     * @param    array    an array of default values
     * @return   array
     */
-    public function uri_to_assoc($n = 3, $default = array())
+    public function uri2Assoc($n = 3, $default = array())
     {
-         return $this->_uri_to_assoc($n, $default, 'segment');
+         return $this->_uri2Assoc($n, $default, 'segment');
     }
 
     // --------------------------------------------------------------------
@@ -427,9 +429,9 @@ Class Uri
      * Identical to above only it uses the re-routed segment array
      *
      */
-    public function ruri_to_assoc($n = 3, $default = array())
+    public function rUri2Assoc($n = 3, $default = array())
     {
-         return $this->_uri_to_assoc($n, $default, 'rsegment');
+         return $this->_uri2Assoc($n, $default, 'rsegment');
     }
 
     // --------------------------------------------------------------------
@@ -443,7 +445,7 @@ Class Uri
      * @param    string    which array we should use
      * @return   array
      */
-    public function _uri_to_assoc($n = 3, $default = array(), $which = 'segment')
+    public function _uri2Assoc($n = 3, $default = array(), $which = 'segment')
     {
         if ($which == 'segment')
         {
@@ -466,7 +468,7 @@ Class Uri
             return $this->keyval[$n];
         }
 
-        if ($this->$total_segments() < $n)
+        if ($this->$totalSegments() < $n)
         {
             if (count($default) == 0)
             {
@@ -476,12 +478,12 @@ Class Uri
             $retval = array();
             foreach ($default as $val)
             {
-                $retval[$val] = FALSE;
+                $retval[$val] = false;
             }
             return $retval;
         }
 
-        $segments = array_slice($this->$segment_array(), ($n - 1));
+        $segments = array_slice($this->$segmentArray(), ($n - 1));
 
         $i = 0;
         $lastval = '';
@@ -494,7 +496,7 @@ Class Uri
             }
             else
             {
-                $retval[$seg] = FALSE;
+                $retval[$seg] = false;
                 $lastval = $seg;
             }
 
@@ -507,7 +509,7 @@ Class Uri
             {
                 if ( ! array_key_exists($val, $retval))
                 {
-                    $retval[$val] = FALSE;
+                    $retval[$val] = false;
                 }
             }
         }
@@ -528,7 +530,7 @@ Class Uri
      * @param    array    an associative array of key/values
      * @return   array
      */
-    public function assoc_to_uri($array)
+    public function assoc2Uri($array)
     {
         $temp = array();
         foreach ((array)$array as $key => $val)
@@ -550,9 +552,9 @@ Class Uri
      * @param    string
      * @return   string
      */
-    public function slash_segment($n, $where = 'trailing')
+    public function slashSegment($n, $where = 'trailing')
     {
-        return $this->_slash_segment($n, $where, 'segment');
+        return $this->_slashSegment($n, $where, 'segment');
     }
 
     // --------------------------------------------------------------------
@@ -565,9 +567,9 @@ Class Uri
      * @param    string
      * @return   string
      */
-    public function slash_rsegment($n, $where = 'trailing')
+    public function slashRSegment($n, $where = 'trailing')
     {
-        return $this->_slash_segment($n, $where, 'rsegment');
+        return $this->_slashSegment($n, $where, 'rsegment');
     }
 
     // --------------------------------------------------------------------
@@ -581,7 +583,7 @@ Class Uri
      * @param    string
      * @return   string
      */
-    public function _slash_segment($n, $where = 'trailing', $which = 'segment')
+    public function _slashSegment($n, $where = 'trailing', $which = 'segment')
     {
         if ($where == 'trailing')
         {
@@ -609,7 +611,7 @@ Class Uri
      * @access    public
      * @return    array
      */
-    public function segment_array()
+    public function segmentArray()
     {
         return $this->segments;
     }
@@ -622,7 +624,7 @@ Class Uri
      * @access    public
      * @return    array
      */
-    public function rsegment_array()
+    public function rsegmentArray()
     {
         return $this->rsegments;
     }
@@ -635,7 +637,7 @@ Class Uri
      * @access    public
      * @return    integer
      */
-    public function total_segments()
+    public function totalSegments()
     {
         return count($this->segments);
     }
@@ -648,7 +650,7 @@ Class Uri
      * @access    public
      * @return    integer
      */
-    public function total_rsegments()
+    public function totalRoutedSegments()
     {
         return count($this->rsegments);
     }
@@ -661,7 +663,7 @@ Class Uri
      * @access    public
      * @return    string
      */
-    public function uri_string()
+    public function uriString()
     {
         return $this->uri_string;
     }
@@ -674,9 +676,9 @@ Class Uri
      * @access    public
      * @return    string
      */
-    public function ruri_string()
+    public function routedUriString()
     {
-        return '/'.implode('/', $this->rsegment_array()).'/';
+        return '/'.implode('/', $this->rsegmentArray()).'/';
     }
 
     // --------------------------------------------------------------------
@@ -703,14 +705,14 @@ Class Uri
      * @param  boolean $urlencode
      * @return string
      */
-    public function request_uri($urlencode = FALSE)
+    public function requestUri($urlencode = false)
     {
        if(isset($_SERVER[$this->protocol()]))
        {
            return ($urlencode) ? urlencode($_SERVER[$this->protocol()]) : $_SERVER[$this->protocol()];
        }
        
-       return FALSE;
+       return false;
     }
 
 }

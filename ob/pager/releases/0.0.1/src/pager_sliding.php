@@ -1,4 +1,5 @@
 <?php
+namespace Ob\Pager\Src;
 
 /**
  * Pager Sliding Driver
@@ -38,9 +39,9 @@ Class Pager_Sliding extends Pager_Common
         //set custom options
         $res = $this->set_options($options);
         
-        if ($res !== TRUE) 
+        if ($res !== true) 
         {
-            throw new Exception('Pager Unknown Error.');
+            throw new \Exception('Pager Unknown Error.');
         }
         
         $this->build();
@@ -74,7 +75,7 @@ Class Pager_Sliding extends Pager_Common
     * @return array  First and last offsets
     * @access public
     */
-    public function get_page_range_by_page($page_id = NULL)
+    public function get_page_range_by_page($page_id = null)
     {
         $page_id = isset($page_id) ? (int)$page_id : $this->_current_page;
         
@@ -117,7 +118,7 @@ Class Pager_Sliding extends Pager_Common
     * @return array back/pages/next/first/last/all links
     * @access public
     */
-    public function get_links($page_id = NULL, $dummy = '')
+    public function get_links($page_id = null, $dummy = '')
     {
         if ( ! is_null($page_id)) 
         {
@@ -149,7 +150,7 @@ Class Pager_Sliding extends Pager_Common
         $link_tags   = $this->link_tags;
         $link_tags_raw = $this->link_tags_raw;
 
-        if (!is_null($page_id)) 
+        if ( ! is_null($page_id)) 
         {
             $this->_current_page = $_sav;
         }
@@ -216,7 +217,7 @@ Class Pager_Sliding extends Pager_Common
                 {
                     $print_separator_flag = ($i != $this->_current_page + $this->_delta); // && ($i != $this->_total_pages - 1)
                     
-                    $this->range[$i] = FALSE;
+                    $this->range[$i] = false;
                     
                     $this->_link_data[$this->_url_var] = $i;
                     $links .= $this->_render_link(str_replace('%d', $i, $this->_alt_page), $i)
@@ -239,12 +240,12 @@ Class Pager_Sliding extends Pager_Common
 
                 if ($i == $this->_current_page) 
                 {
-                    $this->range[$i] = TRUE;
+                    $this->range[$i] = true;
                     $links .= $this->_cur_page_span_pre . $i . $this->_cur_page_span_post;
                 } 
                 else 
                 {
-                    $this->range[$i] = FALSE;
+                    $this->range[$i] = false;
                     $this->_link_data[$this->_url_var] = $i;
                     $links .= $this->_render_link(str_replace('%d', $i, $this->_alt_page), $i);
                 }
@@ -259,7 +260,7 @@ Class Pager_Sliding extends Pager_Common
                 for ($i = $this->_current_page + $this->_delta +1; $expansion_after; $expansion_after--, $i++) 
                 {
                     $print_separator_flag = ($expansion_after != 1);
-                    $this->range[$i] = FALSE;
+                    $this->range[$i] = false;
                     
                     $this->_link_data[$this->_url_var] = $i;
                     $links .= $this->_render_link(str_replace('%d', $i, $this->_alt_page), $i)
@@ -276,14 +277,14 @@ Class Pager_Sliding extends Pager_Common
             {
                 if ($i != $this->_current_page) 
                 {
-                    $this->range[$i] = FALSE;
+                    $this->range[$i] = false;
                     
                     $this->_link_data[$this->_url_var] = $i;
                     $links .= $this->_render_link(str_replace('%d', $i, $this->_alt_page), $i);
                 } 
                 else 
                 {
-                    $this->range[$i] = TRUE;
+                    $this->range[$i] = true;
                     $links .= $this->_cur_page_span_pre . $i . $this->_cur_page_span_post;
                 }
                 
@@ -299,4 +300,4 @@ Class Pager_Sliding extends Pager_Common
 // END Pager_sliding Class
 
 /* End of file Pager_sliding.php */
-/* Location: ./ob/pager/releases/0.0.1/pager_sliding.php */
+/* Location: ./ob/pager/releases/0.0.1/src/pager_sliding.php */

@@ -26,7 +26,7 @@
 */
 if( ! function_exists('utf8_strspn'))
 {
-    function utf8_strspn($str, $mask, $offset = NULL, $length = NULL)
+    function utf8_strspn($str, $mask, $offset = null, $length = null)
     {
         $utf8 = lib('ob/utf8');
         
@@ -37,11 +37,11 @@ if( ! function_exists('utf8_strspn'))
 
         if($utf8->is_ascii($str) AND $utf8->is_ascii($mask))
         {
-            return ($offset === NULL) ? strspn($str, $mask) : (($length === NULL) 
+            return ($offset === null) ? strspn($str, $mask) : (($length === null) 
                     ? strspn($str, $mask, $offset) : strspn($str, $mask, $offset, $length));
         }
 
-        if($offset !== NULL OR $length !== NULL)
+        if($offset !== null OR $length !== null)
         {
             $str = $utf8->substr($str, $offset, $length);
         }

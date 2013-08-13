@@ -1,7 +1,7 @@
 <?php
-namespace Ob;
+namespace Ob\Hmvc;
 
-function ob_request_timer($mark = '')
+function requestTimer($mark = '')
 {
     list($sm, $ss) = explode(' ', microtime());
 
@@ -22,7 +22,7 @@ function ob_request_timer($mark = '')
 Class Hmvc
 {
     // Cloned objects
-    public $_this          = NULL;     // Clone original getInstance(); ( Controller instance)
+    public $_this            = null;     // Clone original getInstance(); ( Controller instance)
 
     // Request, Response, Reset
     public $uri_string       = '';
@@ -30,9 +30,9 @@ Class Hmvc
     public $response         = '';
     public $request_keys     = array();
     public $request_method   = 'GET';
-    public $no_loop          = FALSE;
+    public $no_loop          = false;
     public $cache_time       = '';
-    public $is_reset         = FALSE;
+    public $is_reset         = false;
 
     // Global variables
     public $_GET_BACKUP      = '';
@@ -41,7 +41,7 @@ Class Hmvc
     public $_SERVER_BACKUP   = '';
 
     // Cache and Connection
-    public $hmvc_connect         = TRUE;
+    public $hmvc_connect         = true;
     protected $_conn_string      = '';       // Unique HMVC connection string that we need to convert it to conn_id.
     protected static $_conn_id   = array();  // Static HMVC Connection ids.
 
@@ -52,7 +52,7 @@ Class Hmvc
     
     public function __construct()
     {
-        log\me('debug', "Hmvc Class Initialized");
+        \Ob\log\me('debug', "Hmvc Class Initialized");
     }
 
     // --------------------------------------------------------------------
@@ -67,13 +67,13 @@ Class Hmvc
     */
     public function request($hmvc_uri = '', $cache_time = 0)
     {
-        $this->_set_conn_string($hmvc_uri);
+        $this->_setConnString($hmvc_uri);
 
         // Don't clone getInstance(), we just do backup.
         #######################################
         
         $this->_this  = \Ob\getInstance();      // We need create backup $this object of main controller
-                                     // becuse of it will change when using HMVC requests.
+                                                // becuse of it will change when HMVC process is done.
         
         #######################################
         
@@ -99,7 +99,7 @@ Class Hmvc
 
             #######################################
             
-            $Router->hmvc = TRUE;    // We need to know Router class whether to use HMVC.
+            $Router->hmvc = true;    // We need to know Router class whether to use HMVC.
 
             #######################################
             
@@ -111,21 +111,21 @@ Class Hmvc
                 $uri_part = explode('?', urldecode($this->uri_string));  // support any possible url encode operation
                 $this->query_string = $uri_part[1];
 
-                $URI->set_uri_string($uri_part[0], FALSE); // FALSE null filter
+                $URI->setUriString($uri_part[0], false); // false null filter
             }
             else
             {
-                $URI->set_uri_string($this->uri_string);
+                $URI->setUriString($this->uri_string);
             }
                     
-            $this->hmvc_connect = $Router->_set_routing();      
+            $this->hmvc_connect = $Router->_setRouting();      
 
             return $this;
         }
 
         $this->uri_string = '';
 
-        return $this;
+        return ($this);
     }
 
     // --------------------------------------------------------------------
@@ -145,8 +145,8 @@ Class Hmvc
 
         $this->reponse      = '';
         $this->request_keys = array();
-        $this->hmvc_connect = TRUE;
-        $this->no_loop      = FALSE;
+        $this->hmvc_connect = true;
+        $this->no_loop      = false;
 
         // Clone objects
          $this->uri          = '';
@@ -176,7 +176,7 @@ Class Hmvc
     {
         $this->cache_time = $time;
         
-        return $this;
+        return ($this);
     }
     
     // --------------------------------------------------------------------
@@ -184,17 +184,17 @@ Class Hmvc
     /**
     * Warning !!!
     * When we use HMVC in Parent Controllers (e.g. Welcome_Controller)
-    * HMVC request will be in a unlimited loop, no_loop() function
+    * HMVC request will be in a unlimited loop, noLoop() function
     * will prevent this loop and any possible http server crashes (ersin).
     *
     * @param  bool $default
     * @return void
     */
-    public function no_loop($default = TRUE)
+    public function noLoop($default = true)
     {
         $this->no_loop = $default;
 
-        return $this;
+        return ($this);
     }
 
     // --------------------------------------------------------------------
@@ -206,16 +206,16 @@ Class Hmvc
     * @param    mixed  $params_or_data
     * @return   void
     */
-    public function set_method($method = 'GET' , $params_or_data = array())
+    public function setMethod($method = 'GET' , $params_or_data = array())
     {
         $method = $this->request_method = strtoupper($method);
 
-        $this->_set_conn_string($method);        // Set Unique connection string foreach HMVC requests
-        $this->_set_conn_string(serialize($params_or_data));
+        $this->_setConnString($method);        // Set Unique connection string foreach HMVC requests
+        $this->_setConnString(serialize($params_or_data));
 
         if($this->query_string != '')
         {
-            $query_str_params = $this->parse_query($this->query_string);
+            $query_str_params = $this->parseQuery($this->query_string);
 
             if(count($query_str_params) > 0 AND ($method == 'GET' || $method == 'DELETE'))
             {
@@ -246,7 +246,7 @@ Class Hmvc
         {
            case 'POST':
             
-            if( ! \is_array($params_or_data))
+            if( ! is_array($params_or_data))
             {
                 throw new \Exception('Data must be array when using HMVC POST methods.');
             }
@@ -255,7 +255,6 @@ Class Hmvc
             {
                 $_POST[$key]    = urldecode($val);
                 $_REQUEST[$key] = urldecode($val);
-
                 $this->request_keys[$key] = '';
             }
              break;
@@ -269,9 +268,8 @@ Class Hmvc
                
             foreach($params_or_data as $key => $val)
             {
-                $_GET[$key]     = \urldecode($val);
-                $_REQUEST[$key] = \urldecode($val);
-
+                $_GET[$key]     = urldecode($val);
+                $_REQUEST[$key] = urldecode($val);
                 $this->request_keys[$key] = '';
             }
              break;
@@ -282,7 +280,6 @@ Class Hmvc
                 foreach($params_or_data as $key => $val)
                 {
                     $_REQUEST[$key] = urldecode($val);
-
                     $this->request_keys[$key] = '';
                 }
             }
@@ -294,10 +291,10 @@ Class Hmvc
         }
 
         $_SERVER['REQUEST_METHOD']   = $method;  // Set request method ..
-        $_SERVER['HMVC_REQUEST']     = TRUE;
+        $_SERVER['HMVC_REQUEST']     = true;
         $_SERVER['HMVC_REQUEST_URI'] = $this->uri_string;
         
-        return $this;
+        return ($this);
     }
 
     // --------------------------------------------------------------------
@@ -309,7 +306,7 @@ Class Hmvc
     * @param  string $query_string
     * @return array  $segments
     */
-    public function parse_query($query_string = '')
+    public function parseQuery($query_string = '')
     {
         if($query_string == '')
         {
@@ -332,11 +329,11 @@ Class Hmvc
     {
         if($this->no_loop)
         {
-            $conn_id = $this->_get_id();
+            $conn_id = $this->_getId();
 
             if( isset(self::$_conn_id[$conn_id]) )   // We need that to prevent HMVC loops if someone use hmvc request
             {                                        // in Application or Module Controller.
-                $this->_reset_router(TRUE);
+                $this->_resetRouter(true);
 
                 return $this->_response();
             }
@@ -348,31 +345,31 @@ Class Hmvc
         $router = \Ob\getInstance()->router;
 
         //------------------------------------
-        self::$start_time = ob_request_timer('start');
+        self::$start_time = requestTimer('start');
 
-        if($this->hmvc_connect === FALSE)
+        if($this->hmvc_connect === false)
         {
-            $this->set_response($router->hmvc_response);
-            $this->_reset_router();
+            $this->setResponse($router->hmvc_response);
+            $this->_resetRouter();
 
             return $this->_response();
         }
         
         // A Hmvc uri must be unique otherwise may collission with standart uri, 
         // also we need it for cache functionality.
-        $URI->uri_string = rtrim($URI->uri_string, '/').'/_id_'. $this->_get_id();
+        $URI->uri_string = rtrim($URI->uri_string, '/').'/_id_'. $this->_getId();
         $URI->cache_time = $this->cache_time ;
     
         // @todo do ob_start(); HMVC CACHE if(ob_get_level() > 0) ob_end_clean();
         
-        $hmvc_uri   = "{$router->fetch_directory()} / {$router->fetch_class()} / {$router->fetch_method()}";
-        $controller = MODULES .$router->fetch_directory(). DS .'controllers'. DS .$router->fetch_class(). EXT;
+        $hmvc_uri   = "{$router->fetchDirectory()} / {$router->fetchClass()} / {$router->fetchMethod()}";
+        $controller = MODULES .$router->fetchDirectory(). DS .'controllers'. DS .$router->fetchClass(). EXT;
 
         // Check the controller exists or not
         if ( ! file_exists($controller))
         {
-            $this->set_response('404 - Hmvc request not found: Unable to load your controller.');
-            $this->_reset_router();
+            $this->setResponse('404 - Hmvc request not found: Unable to load your controller.');
+            $this->_resetRouter();
 
             return $this->_response();
         }
@@ -380,29 +377,28 @@ Class Hmvc
         // Call the controller.
         require_once($controller);
 
-        if ( ! class_exists('\Ob\\'.$router->fetch_class()) OR $router->fetch_method() == 'controller' 
-              OR $router->fetch_method() == '_output'       // security fix.
-              OR $router->fetch_method() == '_ob_getInstance_'
-              OR in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods('Ob\Controller')))
+        if ( ! class_exists('\Ob\\'.$router->fetchClass()) OR $router->fetchMethod() == 'controller' 
+              OR $router->fetchMethod() == '_output'       // security fix.
+              OR $router->fetchMethod() == '_ob_getInstance_'
+              OR in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods('Ob\Controller')))
             )
         {
-            $this->set_response('404 - Hmvc request not found: '.$hmvc_uri);
-            $this->_reset_router();
+            $this->setResponse('404 - Hmvc request not found: '.$hmvc_uri);
+            $this->_resetRouter();
 
             return $this->_response();
         }
 
-        $Class = '\Ob\\'.$router->fetch_class();
+        $Class = '\Ob\\'.$router->fetchClass();
         
         // If Everyting ok Declare Called Controller !
         $OB = new $Class();
 
         // Check method exist or not
-        if ( ! in_array(strtolower($router->fetch_method()), array_map('strtolower', get_class_methods($OB))))
+        if ( ! in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods($OB))))
         {
-            $this->set_response('404 - Hmvc request not found: '.$hmvc_uri);
-
-            $this->_reset_router();
+            $this->setResponse('404 - Hmvc request not found: '.$hmvc_uri);
+            $this->_resetRouter();
 
             return $this->_response();
         }
@@ -412,18 +408,18 @@ Class Hmvc
         // Call the requested method.                1       2       3
         // Any URI segments present (besides the directory/class/method)
         // will be passed to the method for convenience
-        call_user_func_array(array($OB, $router->fetch_method()), array_slice($URI->rsegments, 3));
+        call_user_func_array(array($OB, $router->fetchMethod()), array_slice($URI->rsegments, 3));
 
         $content = ob_get_contents();       
 
         if(ob_get_level() > 0)  ob_end_clean();      
                                         
-        $this->set_response($content); 
+        $this->setResponse($content); 
 
-        $this->_reset_router();    
+        $this->_resetRouter();    
                        
-        log\me('debug', 'Hmvc process completed succesfully.');
-        log\me('info', 'Hmvc output: '.$this->_response());
+        \Ob\log\me('debug', 'Hmvc process is done.');
+        \Ob\log\me('info', 'Hmvc output: '.$this->_response());
         
         return $this->_response();
     }
@@ -437,7 +433,7 @@ Class Hmvc
     * @param    boolean $no_loop anti loop
     * @return   void
     */
-    protected function _reset_router($no_loop = FALSE)
+    protected function _resetRouter($no_loop = false)
     {
         $GLOBALS['PUT'] = $_SERVER = $_POST = $_GET = $_REQUEST = array();
         
@@ -454,9 +450,9 @@ Class Hmvc
         
         $URI = \Ob\getInstance()->uri;
         
-        $this->_this->uri     = \Ob\Uri::setInstance($this->uri);
-        $this->_this->router  = \Ob\Router::setInstance($this->router);
-        $this->_this->config  = \Ob\Config::setInstance($this->config);
+        $this->_this->uri     = \Ob\Uri\Uri::setInstance($this->uri);
+        $this->_this->router  = \Ob\Router\Router::setInstance($this->router);
+        $this->_this->config  = \Ob\Config\Config::setInstance($this->config);
         
         \Ob\getInstance($this->_this);         // Set original $this to controller instance that we backup before
     
@@ -467,19 +463,19 @@ Class Hmvc
         
         ######################################
 
-        if($no_loop == FALSE)
+        if($no_loop == false)
         {
             ++self::$request_count;
 
-            $end_time = ob_request_timer('end'); // Profiler
+            $end_time = requestTimer('end'); // Profiler
 
-            log\me('info', 'Hmvc request: '.$URI->uri_string.' time: '.number_format($end_time - self::$start_time, 4));
+            \Ob\log\me('info', 'Hmvc request: '.$URI->uri_string.' time: '.number_format($end_time - self::$start_time, 4));
             
             // self::$request_times[$URI->uri_string] = $end_time - self::$start_time;
         }
         
-        $this->is_reset = TRUE;  // This means hmvc process completed succesfully without any errors.
-                                 // If is_reset == FALSE we say to destruct method reset the router
+        $this->is_reset = true;  // This means hmvc process completed succesfully without any errors.
+                                 // If is_reset == false we say to destruct method reset the router
                                  // variables and turn back to orginial vars of obullo which we had reset them before.        
     }
 
@@ -492,11 +488,11 @@ Class Hmvc
     * @param string $key
     * @param mixed  $val
     */
-    public function set_server($key, $val)
+    public function setServer($key, $val)
     {
         $_SERVER[$key] = $val;
 
-        $this->_set_conn_string($key.$val);
+        $this->_setConnString($key.$val);
         
         return $this;
     }
@@ -509,7 +505,7 @@ Class Hmvc
     * @param    mixed $data
     * @return   void
     */
-    public function set_response($data = '')
+    public function setResponse($data = '')
     {
         $this->response = $data;
     }
@@ -548,7 +544,7 @@ Class Hmvc
     *
     * @param    mixed $id
     */
-    protected function _set_conn_string($id)
+    protected function _setConnString($id)
     {
         $this->_conn_string .= $id;
     }
@@ -561,7 +557,7 @@ Class Hmvc
     *
     * @return   string
     */
-    protected function _get_id()
+    protected function _getId()
     {
         return md5(trim($this->_conn_string));
     }
@@ -579,14 +575,14 @@ Class Hmvc
     */
     public function __destruct()
     {                 
-        if($this->is_reset == FALSE)         
+        if($this->is_reset == false)         
         {                                   
-            $this->_reset_router($this->no_loop);
+            $this->_resetRouter($this->no_loop);
             
             return;
         }
 
-        $this->is_reset = FALSE;
+        $this->is_reset = false;
     }
 
 }

@@ -158,7 +158,7 @@ if( ! function_exists('ascii_to_entities') )
 */
 if( ! function_exists('entities_to_ascii') ) 
 {
-    function entities_to_ascii($str, $all = TRUE)
+    function entities_to_ascii($str, $all = true)
     {
        if (preg_match_all('/\&#(\d+)\;/', $str, $matches))
        {
@@ -275,7 +275,7 @@ if( ! function_exists('highlight_code') )
         $str = '<?php '.$str.' ?>'; // <?
 
         // All the magic happens here, baby!	
-        $str = highlight_string($str, TRUE);
+        $str = highlight_string($str, true);
 
         // Prior to PHP 5, the highligh function used icky <font> tags
         // so we'll replace them with <span> tags.
@@ -339,7 +339,7 @@ if( ! function_exists('highlight_phrase') )
 */
 if( ! function_exists('word_wrap') ) 
 {
-    function word_wrap($str, $charlim = '76')
+    function wordWrap($str, $charlim = '76')
     {
         // Se the character limit
         if ( ! is_numeric($charlim))
@@ -349,7 +349,7 @@ if( ! function_exists('word_wrap') )
         $str = preg_replace("| +|", " ", $str);
 
         // Standardize newlines
-        if (strpos($str, "\r") !== FALSE)
+        if (strpos($str, "\r") !== false)
         {
                 $str = str_replace(array("\r\n", "\r"), "\n", $str);			
         }
@@ -367,9 +367,9 @@ if( ! function_exists('word_wrap') )
         }
 
         // Use PHP's native function to do the initial wordwrap.  
-        // We set the cut flag to FALSE so that any individual words that are 
+        // We set the cut flag to false so that any individual words that are 
         // too long get left alone.  In the next step we'll deal with them.
-        $str = wordwrap($str, $charlim, "\n", FALSE);
+        $str = wordwrap($str, $charlim, "\n", false);
 
         // Split the string into individual lines of text and cycle through them
         $output = "";

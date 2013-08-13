@@ -75,7 +75,7 @@ namespace Ob\bench {
         * @param	integer	the number of decimal places
         * @return	mixed
         */
-        public function elapsed_time($point1 = '', $point2 = '', $decimals = 4)
+        public function elapsedTime($point1 = '', $point2 = '', $decimals = 4)
         {
             if ($point1 == '')
             {
@@ -138,20 +138,20 @@ namespace Ob\bench {
     * @param    integer   the number of decimal places
     * @return   mixed
     */
-    function elapsed_time($point1 = '', $point2 = '', $decimals = 4)
+    function elapsedTime($point1 = '', $point2 = '', $decimals = 4)
     {        
-        return getInstance()->elapsed_time($point1, $point2, $decimals);
+        return getInstance()->elapsedTime($point1, $point2, $decimals);
     }
     
     // -------------------------------------------------------------------- 
-
+    
     /**
     * Memory Usage
     *
     * @access    public
     * @return    string
     */
-    function memory_usage()
+    function memoryUsage()
     {
         return '{memory_usage}';
     }

@@ -35,19 +35,19 @@ namespace Ob\form {
             $attributes = 'method="post"';
         }
 
-        $action = ( strpos($action, '://') === FALSE) ? \Ob\getInstance()->config->site_url($action) : $action;
+        $action = ( strpos($action, '://') === false) ? \Ob\getInstance()->config->siteUrl($action) : $action;
 
-        $form = '<form action="'.$action.'"';
-
-        $form .= _attributes_to_string($attributes, TRUE);
+        $form  = '<form action="'.$action.'"';
+        
+        $form .= _attributes2string($attributes, true);
 
         $form .= '>';
         
-        if (config('csrf_protection') === TRUE) // CSRF Support
+        if (\Ob\config('csrf_protection') === true) // CSRF Support
         {
-            $security = \Ob\Security::getInstance();
+            $security = \Ob\Security\Security::getInstance();
             
-            $hidden[$security->get_csrf_token_name()] = $security->get_csrf_hash();
+            $hidden[$security->getCsrfTokenName()] = $security->getCsrfHash();
         }
 
         if (is_array($hidden) AND count($hidden) > 0)
@@ -71,7 +71,7 @@ namespace Ob\form {
     * @param	array	a key/value pair hidden data
     * @return	string
     */ 
-    function open_multipart($action, $attributes = array(), $hidden = array())
+    function openMultipart($action, $attributes = array(), $hidden = array())
     {
         if (is_string($attributes))
         {
@@ -82,7 +82,7 @@ namespace Ob\form {
             $attributes['enctype'] = 'multipart/form-data';
         }
 
-	return form_open($action, $attributes, $hidden);
+	return open($action, $attributes, $hidden);
     }
 
     // ------------------------------------------------------------------------
@@ -98,11 +98,11 @@ namespace Ob\form {
     * @param	string
     * @return	string
     */
-    function hidden($name, $value = '', $extra = '', $recursing = FALSE)
+    function hidden($name, $value = '', $extra = '', $recursing = false)
     {
         static $form;
 
-        if ($recursing === FALSE)
+        if ($recursing === false)
         {
             $form = "\n";
         }
@@ -111,7 +111,7 @@ namespace Ob\form {
         {
             foreach ($name as $key => $val)
             {
-                hidden($key, $val, '', TRUE);
+                hidden($key, $val, '', true);
             }
             
             return $form;
@@ -126,7 +126,7 @@ namespace Ob\form {
             foreach ($value as $k => $v)
             {
                 $k = (is_int($k)) ? '' : $k; 
-                hidden($name.'['.$k.']', $v, '', TRUE);
+                hidden($name.'['.$k.']', $v, '', true);
             }
         }
 
@@ -148,7 +148,7 @@ namespace Ob\form {
     {
         $defaults = array('type' => 'text', 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
 
-        return "<input "._parse_form_attributes($data, $defaults).$extra." />";
+        return "<input "._parseFormAttributes($data, $defaults).$extra." />";
     }
 
     // ------------------------------------------------------------------------
@@ -225,7 +225,7 @@ namespace Ob\form {
         }
 
         $name = (is_array($data)) ? $data['name'] : $data;
-        return "<textarea "._parse_form_attributes($data, $defaults).$extra.">".prep($val, $name)."</textarea>";
+        return "<textarea "._parseFormAttributes($data, $defaults).$extra.">".prep($val, $name)."</textarea>";
     }
 
     // ------------------------------------------------------------------------
@@ -264,7 +264,7 @@ namespace Ob\form {
     */
     function dropdown($name = '', $options = array(), $selected = array(), $extra = '')
     {
-        if($selected === FALSE)   // False == "0" bug fix, FALSE is not a Integer.
+        if($selected === false)   // False == "0" bug fix, false is not a Integer.
         {
             $selected_option = array_keys($options);
             $selected = $selected_option[0];
@@ -278,11 +278,11 @@ namespace Ob\form {
         // If no selected state was submitted we will attempt to set it automatically
         if (count($selected) === 0)
         {
-                // If the form name appears in the $_POST array we have a winner!
-                if (isset($_POST[$name]))
-                {
-                        $selected = array($_POST[$name]);
-                }
+            // If the form name appears in the $_POST array we have a winner!
+            if (isset($_POST[$name]))
+            {
+                $selected = array($_POST[$name]);
+            }
         }
 
         if ($extra != '') 
@@ -290,33 +290,33 @@ namespace Ob\form {
             $extra = ' '.$extra;
         }
 
-        $multiple = (count($selected) > 1 && strpos($extra, 'multiple') === FALSE) ? ' multiple="multiple"' : '';
+        $multiple = (count($selected) > 1 && strpos($extra, 'multiple') === false) ? ' multiple="multiple"' : '';
 
         $form = '<select name="'.$name.'"'.$extra.$multiple.">\n";
 
         foreach ($options as $key => $val)
         {
-                $key = (string) $key;
+            $key = (string) $key;
+            
+            if (is_array($val))
+            {
+                $form .= '<optgroup label="'.$key.'">'."\n";
 
-                if (is_array($val))
+                foreach ($val as $optgroup_key => $optgroup_val)
                 {
-                        $form .= '<optgroup label="'.$key.'">'."\n";
-
-                        foreach ($val as $optgroup_key => $optgroup_val)
-                        {
-                                $sel = (in_array($optgroup_key, $selected, true)) ? ' selected="selected"' : '';
-
-                                $form .= '<option value="'.$optgroup_key.'"'.$sel.'>'.(string) $optgroup_val."</option>\n";
-                        }
-
-                        $form .= '</optgroup>'."\n";
+                    $sel = (in_array($optgroup_key, $selected, true)) ? ' selected="selected"' : '';
+                    
+                    $form .= '<option value="'.$optgroup_key.'"'.$sel.'>'.(string) $optgroup_val."</option>\n";
                 }
-                else
-                {
-                        $sel = (in_array($key, $selected, true)) ? ' selected="selected"' : '';
 
-                        $form .= '<option value="'.$key.'"'.$sel.'>'.(string) $val."</option>\n";
-                }
+                $form .= '</optgroup>'."\n";
+            }
+            else
+            {
+                $sel = (in_array($key, $selected, true)) ? ' selected="selected"' : '';
+                
+                $form .= '<option value="'.$key.'"'.$sel.'>'.(string) $val."</option>\n";
+            }
         }
 
         $form .= '</select>';
@@ -336,7 +336,7 @@ namespace Ob\form {
     * @param	string
     * @return	string
     */
-    function checkbox($data = '', $value = '', $checked = FALSE, $extra = '')
+    function checkbox($data = '', $value = '', $checked = false, $extra = '')
     {
         $defaults = array('type' => 'checkbox', 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
 
@@ -344,7 +344,7 @@ namespace Ob\form {
         {
             $checked = $data['checked'];
 
-            if ($checked == FALSE)
+            if ($checked == false)
             {
                 unset($data['checked']);
             }
@@ -354,7 +354,7 @@ namespace Ob\form {
             }
         }
 
-        if ($checked == TRUE)
+        if ($checked == true)
         {
             $defaults['checked'] = 'checked';
         }
@@ -363,7 +363,7 @@ namespace Ob\form {
             unset($defaults['checked']);
         }
 
-        return "<input "._parse_form_attributes($data, $defaults).$extra." />";
+        return "<input "._parseFormAttributes($data, $defaults).$extra." />";
     }
 
     // ------------------------------------------------------------------------
@@ -378,7 +378,7 @@ namespace Ob\form {
     * @param	string
     * @return	string
     */
-    function radio($data = '', $value = '', $checked = FALSE, $extra = '')
+    function radio($data = '', $value = '', $checked = false, $extra = '')
     {
         if ( ! is_array($data))
         {
@@ -404,7 +404,7 @@ namespace Ob\form {
     {
         $defaults = array('type' => 'submit', 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
 
-        return "<input "._parse_form_attributes($data, $defaults).$extra." />";
+        return "<input "._parseFormAttributes($data, $defaults).$extra." />";
     }
 
     // ------------------------------------------------------------------------
@@ -422,7 +422,7 @@ namespace Ob\form {
     {
         $defaults = array('type' => 'reset', 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
 
-        return "<input "._parse_form_attributes($data, $defaults).$extra." />";
+        return "<input "._parseFormAttributes($data, $defaults).$extra." />";
     }
     
     // ------------------------------------------------------------------------
@@ -446,7 +446,7 @@ namespace Ob\form {
             unset($data['content']); // content is not an attribute
         }
 
-        return "<button "._parse_form_attributes($data, $defaults).$extra.">".$content."</button>";
+        return "<button "._parseFormAttributes($data, $defaults).$extra.">".$content."</button>";
     }
 
     // ------------------------------------------------------------------------
@@ -473,7 +473,7 @@ namespace Ob\form {
         {
             foreach ($attributes as $key => $val)
             {
-                    $label .= ' '.$key.'="'.$val.'"';
+                $label .= ' '.$key.'="'.$val.'"';
             }
         }
 
@@ -499,7 +499,7 @@ namespace Ob\form {
     {
         $fieldset = "<fieldset";
 
-        $fieldset .= _attributes_to_string($attributes, FALSE);
+        $fieldset .= _attributes2string($attributes, false);
 
         $fieldset .= ">\n";
 
@@ -520,7 +520,7 @@ namespace Ob\form {
     * @param	string
     * @return	string
     */
-    function fieldset_close($extra = '')
+    function fieldsetClose($extra = '')
     {
         return "</fieldset>".$extra;
     }
@@ -600,9 +600,9 @@ namespace Ob\form {
     * @param	string
     * @return	mixed
     */
-    function set_value($field = '', $default = '')
+    function setValue($field = '', $default = '')
     {
-        if (FALSE === ($OBJ = _get_validation_object()))
+        if (false === ($OBJ = _getValidationObject()))
         {
             if ( ! isset($_REQUEST[$field]))
             {
@@ -615,12 +615,12 @@ namespace Ob\form {
             }   
         } 
 
-        if($OBJ->set_value($field, $default) == '' &&  isset($_REQUEST[$field]))
+        if($OBJ->setValue($field, $default) == '' &&  isset($_REQUEST[$field]))
         {
             return prep($_REQUEST[$field], $field);
         }
 
-        return prep($OBJ->set_value($field, $default), $field);
+        return prep($OBJ->setValue($field, $default), $field);
     }
     
     // ------------------------------------------------------------------------
@@ -637,15 +637,15 @@ namespace Ob\form {
     * @param	bool
     * @return	string
     */
-    function set_select($field = '', $value = '', $default = FALSE)
+    function setSelect($field = '', $value = '', $default = false)
     {
-        $OBJ = _get_validation_object();
+        $OBJ = _getValidationObject();
 
-        if ($OBJ === FALSE)
+        if ($OBJ === false)
         {
             if ( ! isset($_REQUEST[$field]))
             {
-                if (count($_REQUEST) === 0 AND $default == TRUE)
+                if (count($_REQUEST) === 0 AND $default == true)
                 {
                     return ' selected="selected"';
                 }
@@ -673,7 +673,7 @@ namespace Ob\form {
             return ' selected="selected"';
         }
 
-        return $OBJ->set_select($field, $value, $default);
+        return $OBJ->setSelect($field, $value, $default);
     }
 
     // ------------------------------------------------------------------------
@@ -690,15 +690,15 @@ namespace Ob\form {
     * @param	bool
     * @return	string
     */
-    function set_checkbox($field = '', $value = '', $default = FALSE)
+    function setCheckbox($field = '', $value = '', $default = false)
     {
-        $OBJ = _get_validation_object();
+        $OBJ = _getValidationObject();
 
-        if ($OBJ === FALSE)
+        if ($OBJ === false)
         { 
             if ( ! isset($_REQUEST[$field]))
             {
-                if (count($_REQUEST) === 0 AND $default == TRUE)
+                if (count($_REQUEST) === 0 AND $default == true)
                 {
                         return ' checked="checked"';
                 }
@@ -725,7 +725,7 @@ namespace Ob\form {
             return ' checked="checked"';
         }
 
-        return $OBJ->set_checkbox($field, $value, $default);
+        return $OBJ->setCheckbox($field, $value, $default);
     }
 
     // ------------------------------------------------------------------------
@@ -742,15 +742,15 @@ namespace Ob\form {
     * @param	bool
     * @return	string
     */
-    function set_radio($field = '', $value = '', $default = FALSE)
+    function setRadio($field = '', $value = '', $default = false)
     {
-        $OBJ = _get_validation_object();
+        $OBJ = _getValidationObject();
 
-        if ($OBJ === FALSE)
+        if ($OBJ === false)
         {
             if ( ! isset($_REQUEST[$field]))
             {
-                if (count($_REQUEST) === 0 AND $default == TRUE)
+                if (count($_REQUEST) === 0 AND $default == true)
                 {
                     return ' checked="checked"';
                 }
@@ -778,7 +778,7 @@ namespace Ob\form {
             return ' checked="checked"';
         }
 
-        return $OBJ->set_radio($field, $value, $default);
+        return $OBJ->setRadio($field, $value, $default);
     }
     
     // ------------------------------------------------------------------------
@@ -810,7 +810,7 @@ namespace Ob\form {
             {
                 log\me('debug', 'System Error: '. $model->errors('transaction'));
                 
-                return lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
+                return \Ob\lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
             }
 
             if($model->errors('success') == 0)
@@ -821,7 +821,7 @@ namespace Ob\form {
             return;
         }
         
-        if (FALSE === ($OBJ = _get_validation_object()))
+        if (false === ($OBJ = _getValidationObject()))
         {
             return '';
         }
@@ -841,16 +841,16 @@ namespace Ob\form {
     * @param string $return_string
     * @return booelan | string
     */
-    function is_error($field = '', $return_string = '')
+    function isError($field = '', $return_string = '')
     {
         $error = error($field);
 
         if($error != '')
         {
-            return ($return_string != '') ? $return_string : TRUE;
+            return ($return_string != '') ? $return_string : true;
         }
 
-        return ($return_string != '') ? '' : FALSE;
+        return ($return_string != '') ? '' : false;
     }
 
     // ------------------------------------------------------------------------
@@ -873,7 +873,7 @@ namespace Ob\form {
         {
             log\me('debug', 'System Error: '. $model->errors('transaction'));
 
-            $msg =  $model->errors('msg') .' '. lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
+            $msg =  $model->errors('msg') .' '. \Ob\lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
             
             return ($msg == '') ? '' : $prefix.$msg.$suffix;
         }
@@ -885,14 +885,14 @@ namespace Ob\form {
             return ($msg == '') ? '' : $prefix.$msg.$suffix;
         }
         
-        if($message === FALSE)
+        if($message === false)
         {
             return;
         }
         
         if($model->errors('success') == 0)
         {
-            $msg = lang('There are some errors in the form fields.');
+            $msg = \Ob\lang('There are some errors in the form fields.');
 
             if( ! empty($message))
             {
@@ -921,14 +921,14 @@ namespace Ob\form {
     * @param	string
     * @return	string
     */
-    function validation_errors($prefix = '', $suffix = '')  // Obullo changes ..
+    function validationErrors($prefix = '', $suffix = '')  // Obullo changes ..
     {
-        if (FALSE === ($OBJ = _get_validation_object()))
+        if (false === ($OBJ = _getValidationObject()))
         {
             return '';
         }
 
-        return $OBJ->error_string($prefix, $suffix);
+        return $OBJ->errorString($prefix, $suffix);
     }
 
     // ------------------------------------------------------------------------
@@ -943,7 +943,7 @@ namespace Ob\form {
     * @param	array
     * @return	string
     */
-    function _parse_form_attributes($attributes, $default)
+    function _parseFormAttributes($attributes, $default)
     {
         if (is_array($attributes))
         {
@@ -989,11 +989,11 @@ namespace Ob\form {
     * @param	bool
     * @return	string
     */
-    function _attributes_to_string($attributes, $formtag = FALSE)
+    function _attributes2string($attributes, $formtag = false)
     {
         if (is_string($attributes) AND strlen($attributes) > 0)
         {
-            if ($formtag == TRUE AND strpos($attributes, 'method=') === FALSE)
+            if ($formtag == true AND strpos($attributes, 'method=') === false)
             {
                 $attributes .= ' method="post"';
             }
@@ -1010,7 +1010,7 @@ namespace Ob\form {
         {
             $atts = '';
 
-            if ( ! isset($attributes['method']) AND $formtag === TRUE)
+            if ( ! isset($attributes['method']) AND $formtag === true)
             {
                 $atts .= ' method="post"';
             }
@@ -1035,11 +1035,11 @@ namespace Ob\form {
     * @access	private
     * @return	mixed
     */
-    function _get_validation_object()
+    function _getValidationObject()
     {
         if ( ! class_exists('Ob\Validator'))  // Obullo Changes ..
         {
-            return FALSE;
+            return false;
         }
         
         return \Ob\Validator::getInstance();

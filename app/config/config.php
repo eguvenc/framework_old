@@ -23,7 +23,7 @@ $config['domain_root']           = (ENV == 'LIVE') ? 'http://your-domain.com' : 
 |
 | then $_SERVER['HTTPS'] variable will be available for PHP (fastcgi).
 */
-$config['ssl']                   = (ENV == 'LIVE') ? TRUE : FALSE;
+$config['ssl']                   = (ENV == 'LIVE') ? true : false;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,12 +40,10 @@ $config['public_url']            = '/';
 | Obullo Error Handler Enable / Disable Displaying Errors
 |--------------------------------------------------------------------------
 |  
-| Obullo use error_reporting function default as error_reporting(0), 
-| however Obullo can catch all php errors and show them friendly.
+| Obullo use default as error_reporting(0), however Obullo can catch all php errors and show them friendly.
 |
 |   0 - Turn off all error reporting (0)
 |   1 - All errors  = E_ALL;
-|
 |   String - Custom Regex Mode Examples:
 |
 |   Running errors
@@ -72,7 +70,7 @@ $config['error_reporting']       = (ENV == 'LIVE') ? 0 : 1;
 | For Object dump you will need 32M php memory.To dumping large objects
 | increase your memory_limit from your php.ini file.
 |       
-|   To Disable Debugging: array('enabled' => FALSE, 'padding' => 5);
+|   To Disable Debugging: array('enabled' => false, 'padding' => 5);
 |   
 |   Custom regexs same as error reporting.
 */
@@ -98,13 +96,13 @@ $config['debug_backtrace']       = array('enabled' => 'E_ALL ^ (E_NOTICE | E_WAR
 | For a live site you'll usually only enable Errors (1) to be logged otherwise
 | your log files will fill up very fast.
 |
-|  o When $config['log_queries']   == TRUE ALL Database SQL Queries goes to the log file.
-|  o When $config['log_benchmark'] == TRUE ALL framework benchmarks goes to the log file.
+|  o When $config['log_queries']   == true ALL Database SQL Queries goes to the log file.
+|  o When $config['log_benchmark'] == true ALL framework benchmarks goes to the log file.
 |
 */
 $config['log_threshold']         = (ENV == 'LIVE') ? 1 : 5;
-$config['log_queries']           = (ENV == 'LIVE') ? FALSE : TRUE;
-$config['log_benchmark']         = (ENV == 'LIVE') ? FALSE : TRUE;
+$config['log_queries']           = (ENV == 'LIVE') ? false : true;
+$config['log_benchmark']         = (ENV == 'LIVE') ? false : true;
 $config['log_date_format']       = 'Y-m-d H:i:s';
 
 /*
@@ -209,7 +207,6 @@ $config['charset']               = 'UTF-8';
 | This lets you specify with a regular expression which characters are permitted
 | within your URLs.  When someone tries to submit a URL with disallowed
 | characters they will get a warning message.
-|
 | As a security measure you are STRONGLY encouraged to restrict URLs to
 | as few characters as possible.  By default only these are allowed: a-z 0-9~%.:_-
 |
@@ -231,7 +228,7 @@ $config['permitted_uri_chars']   = 'a-z 0-9~%.:_-';
 | You can optionally enable standard query string based URLs:
 | example.com?who=me&what=something&where=here
 |
-| Options are: TRUE or FALSE (boolean)
+| Options are: true or false (boolean)
 |
 | The other items let you set the query string "words" that will
 | invoke your controllers and its functions:
@@ -242,7 +239,7 @@ $config['permitted_uri_chars']   = 'a-z 0-9~%.:_-';
 | use segment based URLs.
 |
 */
-$config['enable_query_strings']  = TRUE;
+$config['enable_query_strings']  = true;
 $config['directory_trigger']     = 'd';   
 $config['controller_trigger']    = 'c';
 $config['function_trigger']      = 'm';
@@ -257,32 +254,6 @@ $config['function_trigger']      = 'm';
 |
 */
 $config['encryption_key']        = "write-your-secret-key";
-
-/*
-|--------------------------------------------------------------------------
-| Session Variables
-|--------------------------------------------------------------------------
-|
-| 'sess_cookie_name'    = the name you want for the cookie
-| 'sess_encrypt_cookie' = TRUE/FALSE (boolean).  Whether to encrypt the cookie
-| 'sess_expiration'     = the number of SECONDS you want the session to last.
-| 'sess_die_cookie'     = If set TRUE all sessions  will destroy when the browser closed.
-|  by default sessions last 7200 seconds (two hours).  Set to zero for no expiration.
-| 'time_to_update'      = how many seconds between Obullo refreshing Session Information
-| 'sess_db_var'         = normally Obullo use standart '$this->db' variable for session database
-|                         crud operations, you can change it like db2, db3 .. 
-|
-*/
-$config['sess_cookie_name']      = 'ob_session';
-$config['sess_expiration']       = 7200;
-$config['sess_die_cookie']       = FALSE;
-$config['sess_encrypt_cookie']   = TRUE;
-$config['sess_driver']           = 'mongo';  // cookie | database | mongo | native
-$config['sess_db_var']           = 'db';            
-$config['sess_table_name']       = 'ob_sessions';
-$config['sess_match_ip']         = FALSE;
-$config['sess_match_useragent']  = TRUE;
-$config['sess_time_to_update']   = 300;
 
 /*
 |--------------------------------------------------------------------------
@@ -302,7 +273,7 @@ $config['cookie_prefix']         = '';
 $config['cookie_domain']         = (ENV == 'LIVE') ? '.your-domain.com' : '';
 $config['cookie_path']           = '/';
 $config['cookie_time']           = (7 * 24 * 60 * 60) + time();
-$config['cookie_secure']	 = FALSE;
+$config['cookie_secure']	 = false;
 
 /*
 |--------------------------------------------------------------------------
@@ -311,10 +282,10 @@ $config['cookie_secure']	 = FALSE;
 |
 | If your PHP installation does not have short tag support enabled, Obullo
 | can rewrite the tags on-the-fly, enabling you to utilize that syntax
-| in your view files.  Options are TRUE or FALSE (boolean)
+| in your view files.  Options are true or false (boolean)
 |
 */
-$config['rewrite_short_tags']    = FALSE;
+$config['rewrite_short_tags']    = false;
 
 /*
 |--------------------------------------------------------------------------
@@ -325,13 +296,13 @@ $config['rewrite_short_tags']    = FALSE;
 | COOKIE data is encountered
 |
 */
-$config['global_xss_filtering']  = FALSE;
+$config['global_xss_filtering']  = false;
                             
 /*
 |--------------------------------------------------------------------------
 | Cross Site Request Forgery
 |--------------------------------------------------------------------------
-| Enables a CSRF cookie token to be set. When set to TRUE, token will be
+| Enables a CSRF cookie token to be set. When set to true, token will be
 | checked on a submitted form. If you are accepting user data, it is strongly
 | recommended CSRF protection be enabled.
 |
@@ -339,7 +310,7 @@ $config['global_xss_filtering']  = FALSE;
 | 'csrf_cookie_name' = The cookie name
 | 'csrf_expire'      = The number in seconds the token should expire.
 */
-$config['csrf_protection']       = FALSE;
+$config['csrf_protection']       = false;
 $config['csrf_token_name']       = 'csrf_token_name';
 $config['csrf_cookie_name']      = 'csrf_cookie_name';
 $config['csrf_expire']           = 7200;
@@ -374,7 +345,7 @@ $config['proxy_ips']             = '';
 | by the output class.  Do not "echo" any values with compression enabled.
 |
 */
-$config['compress_output']       = FALSE;
+$config['compress_output']       = false;
 
 
 /* End of file config.php */

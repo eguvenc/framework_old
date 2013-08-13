@@ -21,22 +21,22 @@ Class Email {
     public    $smtp_pass       = "";        // SMTP Password
     public    $smtp_port       = "25";        // SMTP Port
     public    $smtp_timeout    = 5;        // SMTP Timeout in seconds
-    public    $wordwrap        = TRUE;        // TRUE/FALSE  Turns word-wrap on/off
+    public    $wordwrap        = true;        // true/false  Turns word-wrap on/off
     public    $wrapchars       = "76";        // Number of characters to wrap at.
     public    $mailtype        = "text";    // text/html  Defines email formatting
     public    $charset         = "utf-8";    // Default char set: iso-8859-1 or us-ascii
     public    $multipart       = "mixed";    // "mixed" (in the body) or "related" (separate)
     public    $alt_message     = '';        // Alternative message for HTML emails
-    public    $validate        = FALSE;    // TRUE/FALSE.  Enables email validation
+    public    $validate        = false;    // true/false.  Enables email validation
     public    $priority        = "3";        // Default priority (1 - 5)
     public    $newline         = "\n";        // Default newline. "\r\n" or "\n" (Use "\r\n" to comply with RFC 822)
     public    $crlf            = "\n";        // The RFC 2045 compliant CRLF for quoted-printable is "\r\n".  Apparently some servers,
                                     // even on the receiving end think they need to muck with CRLFs, so using "\n", while
                                     // distasteful, is the only thing that seems to work for all environments.
-    public    $send_multipart    = TRUE;        // TRUE/FALSE - Yahoo does not like multipart alternative, so this is an override.  Set to FALSE for Yahoo.
-    public    $bcc_batch_mode    = FALSE;    // TRUE/FALSE  Turns on/off Bcc batch feature
-    public    $bcc_batch_size    = 200;        // If bcc_batch_mode = TRUE, sets max number of Bccs in each batch
-    public    $_safe_mode        = FALSE;
+    public    $send_multipart    = true;        // true/false - Yahoo does not like multipart alternative, so this is an override.  Set to false for Yahoo.
+    public    $bcc_batch_mode    = false;    // true/false  Turns on/off Bcc batch feature
+    public    $bcc_batch_size    = 200;        // If bcc_batch_mode = true, sets max number of Bccs in each batch
+    public    $_safe_mode        = false;
     public    $_subject          = "";
     public    $_body             = "";
     public    $_finalbody        = "";
@@ -45,9 +45,8 @@ Class Email {
     public    $_header_str       = "";
     public    $_smtp_connect     = "";
     public    $_encoding         = "8bit";
-    public    $_IP               = FALSE;
-    public    $_smtp_auth        = FALSE;
-    public    $_replyto_flag     = FALSE;
+    public    $_smtp_auth        = false;
+    public    $_replyto_flag     = false;
     public    $_debug_msg        = array();
     public    $_recipients       = array();
     public    $_cc_array         = array();
@@ -66,16 +65,21 @@ Class Email {
     *
     * The constructor can be passed an array of config values
     */
-    function __construct($config = array())
+    function __construct($no_instance = true, $config = array())
     {
+        if($no_instance)
+        {
+            \Ob\getInstance()->email = $this; // Make available it in the controller $this->email->method();
+        }
+        
         if (count($config) > 0)
         {
             $this->init($config);
         }
         else
         {
-            $this->_smtp_auth = ($this->smtp_user == '' AND $this->smtp_pass == '') ? FALSE : TRUE;
-            $this->_safe_mode = ((boolean)@ini_get("safe_mode") === FALSE) ? FALSE : TRUE;
+            $this->_smtp_auth = ($this->smtp_user == '' AND $this->smtp_pass == '') ? false : true;
+            $this->_safe_mode = ((boolean)@ini_get("safe_mode") === false) ? false : true;
         }
 
         \Ob\log\me('debug', "Email Class Initialized");
@@ -107,8 +111,8 @@ Class Email {
             }
         }
 
-        $this->_smtp_auth = ($this->smtp_user == '' AND $this->smtp_pass == '') ? FALSE : TRUE;
-        $this->_safe_mode = ((boolean)@ini_get("safe_mode") === FALSE) ? FALSE : TRUE;
+        $this->_smtp_auth = ($this->smtp_user == '' AND $this->smtp_pass == '') ? false : true;
+        $this->_safe_mode = ((boolean)@ini_get("safe_mode") === false) ? false : true;
         
         return $this;
     }
@@ -121,21 +125,21 @@ Class Email {
      * @access    public
      * @return    void
      */
-    public function clear($clear_attachments = FALSE)
+    public function clear($clear_attachments = false)
     {
         $this->_subject        = "";
         $this->_body           = "";
         $this->_finalbody      = "";
         $this->_header_str     = "";
-        $this->_replyto_flag   = FALSE;
+        $this->_replyto_flag   = false;
         $this->_recipients     = array();
         $this->_headers        = array();
         $this->_debug_msg      = array();
 
-        $this->_set_header('User-Agent', $this->useragent);
-        $this->_set_header('Date', $this->_set_date());
+        $this->_setHeader('User-Agent', $this->useragent);
+        $this->_setHeader('Date', $this->_setDate());
 
-        if ($clear_attachments !== FALSE)
+        if ($clear_attachments !== false)
         {
             $this->_attach_name = array();
             $this->_attach_type = array();
@@ -162,7 +166,7 @@ Class Email {
 
         if ($this->validate)
         {
-            $this->validate_email($this->_str_to_array($from));
+            $this->validateEmail($this->_str2array($from));
         }
 
         // prepare the display name
@@ -176,12 +180,12 @@ Class Email {
             }
             else
             {
-                $name = $this->_prep_q_encoding($name, TRUE);
+                $name = $this->_prepQencoding($name, true);
             }
         }
 
-        $this->_set_header('From', $name.' <'.$from.'>');
-        $this->_set_header('Return-Path', '<'.$from.'>');
+        $this->_setHeader('From', $name.' <'.$from.'>');
+        $this->_setHeader('Return-Path', '<'.$from.'>');
     }
   
     // --------------------------------------------------------------------
@@ -194,7 +198,7 @@ Class Email {
      * @param    string
      * @return    void
      */
-    public function reply_to($replyto, $name = '')
+    public function replyTo($replyto, $name = '')
     {
         if (preg_match( '/\<(.*)\>/', $replyto, $match))
         {
@@ -203,7 +207,7 @@ Class Email {
 
         if ($this->validate)
         {
-            $this->validate_email($this->_str_to_array($replyto));
+            $this->validateEmail($this->_str2array($replyto));
         }
 
         if ($name == '')
@@ -216,8 +220,8 @@ Class Email {
             $name = '"'.$name.'"';
         }
 
-        $this->_set_header('Reply-To', $name.' <'.$replyto.'>');
-        $this->_replyto_flag = TRUE;
+        $this->_setHeader('Reply-To', $name.' <'.$replyto.'>');
+        $this->_replyto_flag = true;
     }
   
     // --------------------------------------------------------------------
@@ -231,20 +235,20 @@ Class Email {
      */
     public function to($to)
     {
-        $to = $this->_str_to_array($to);
-        $to = $this->clean_email($to);
+        $to = $this->_str2array($to);
+        $to = $this->cleanEmail($to);
 
         if ($this->validate)
         {
-            $this->validate_email($to);
+            $this->validateEmail($to);
         }
 
-        if ($this->_get_protocol() != 'mail')
+        if ($this->_getProtocol() != 'mail')
         {
-            $this->_set_header('To', implode(", ", $to));
+            $this->_setHeader('To', implode(", ", $to));
         }
 
-        switch ($this->_get_protocol())
+        switch ($this->_getProtocol())
         {
             case 'smtp'        : $this->_recipients = $to;
             break;
@@ -266,17 +270,17 @@ Class Email {
      */
     public function cc($cc)
     {
-        $cc = $this->_str_to_array($cc);
-        $cc = $this->clean_email($cc);
+        $cc = $this->_str2array($cc);
+        $cc = $this->cleanEmail($cc);
 
         if ($this->validate)
         {
-            $this->validate_email($cc);
+            $this->validateEmail($cc);
         }
 
-        $this->_set_header('Cc', implode(", ", $cc));
+        $this->_setHeader('Cc', implode(", ", $cc));
 
-        if ($this->_get_protocol() == "smtp")
+        if ($this->_getProtocol() == "smtp")
         {
             $this->_cc_array = $cc;
         }
@@ -296,25 +300,25 @@ Class Email {
     {
         if ($limit != '' && is_numeric($limit))
         {
-            $this->bcc_batch_mode = TRUE;
+            $this->bcc_batch_mode = true;
             $this->bcc_batch_size = $limit;
         }
 
-        $bcc = $this->_str_to_array($bcc);
-        $bcc = $this->clean_email($bcc);
+        $bcc = $this->_str2array($bcc);
+        $bcc = $this->cleanEmail($bcc);
 
         if ($this->validate)
         {
-            $this->validate_email($bcc);
+            $this->validateEmail($bcc);
         }
 
-        if (($this->_get_protocol() == "smtp") OR ($this->bcc_batch_mode && count($bcc) > $this->bcc_batch_size))
+        if (($this->_getProtocol() == "smtp") OR ($this->bcc_batch_mode && count($bcc) > $this->bcc_batch_size))
         {
             $this->_bcc_array = $bcc;
         }
         else
         {
-            $this->_set_header('Bcc', implode(", ", $bcc));
+            $this->_setHeader('Bcc', implode(", ", $bcc));
         }
     }
   
@@ -329,8 +333,8 @@ Class Email {
      */
     public function subject($subject)
     {
-        $subject = $this->_prep_q_encoding($subject);
-        $this->_set_header('Subject', $subject);
+        $subject = $this->_prepQencoding($subject);
+        $this->_setHeader('Subject', $subject);
     }
   
     // --------------------------------------------------------------------
@@ -364,7 +368,7 @@ Class Email {
         $mimes = explode('.', $file);
         $mimes = next($mimes);
         
-        $this->_attach_type[] = $this->_mime_types($mimes);
+        $this->_attach_type[] = $this->_mimeTypes($mimes);
         $this->_attach_disp[] = $disposition; // Can also be 'inline'  Not sure if it matters
     }
 
@@ -378,7 +382,7 @@ Class Email {
      * @param    string
      * @return    void
      */
-    private function _set_header($header, $value)
+    private function _setHeader($header, $value)
     {
         $this->_headers[$header] = $value;
     }
@@ -392,11 +396,11 @@ Class Email {
      * @param    string
      * @return    array
      */
-    public function _str_to_array($email)
+    public function _str2array($email)
     {
         if ( ! is_array($email))
         {
-            if (strpos($email, ',') !== FALSE)
+            if (strpos($email, ',') !== false)
             {
                 $email = preg_split('/[\s,]/', $email, -1, PREG_SPLIT_NO_EMPTY);
             }
@@ -418,7 +422,7 @@ Class Email {
      * @param    string
      * @return    void
      */
-    public function set_alt_message($str = '')
+    public function setAltMessage($str = '')
     {
         $this->alt_message = ($str == '') ? '' : $str;
     }
@@ -432,7 +436,7 @@ Class Email {
      * @param    string
      * @return    void
      */
-    public function set_mailtype($type = 'text')
+    public function setMailtype($type = 'text')
     {
         $this->mailtype = ($type == 'html') ? 'html' : 'text';
     }
@@ -446,9 +450,9 @@ Class Email {
      * @param    string
      * @return    void
      */
-    public function set_wordwrap($wordwrap = TRUE)
+    public function setWordwrap($wordwrap = true)
     {
-        $this->wordwrap = ($wordwrap === FALSE) ? FALSE : TRUE;
+        $this->wordwrap = ($wordwrap === false) ? false : true;
     }
   
     // --------------------------------------------------------------------
@@ -460,9 +464,9 @@ Class Email {
      * @param    string
      * @return    void
      */
-    public function set_protocol($protocol = 'mail')
+    public function setProtocol($protocol = 'mail')
     {
-        $this->protocol = ( ! in_array($protocol, $this->_protocols, TRUE)) ? 'mail' : strtolower($protocol);
+        $this->protocol = ( ! in_array($protocol, $this->_protocols, true)) ? 'mail' : strtolower($protocol);
     }
   
     // --------------------------------------------------------------------
@@ -474,7 +478,7 @@ Class Email {
      * @param    integer
      * @return    void
      */
-    public function set_priority($n = 3)
+    public function setPriority($n = 3)
     {
         if ( ! is_numeric($n))
         {
@@ -500,15 +504,15 @@ Class Email {
      * @param    string
      * @return    void
      */
-    public function set_newline($newline = "\n")
+    public function setNewline($newline = "\n")
     {
         if ($newline != "\n" AND $newline != "\r\n" AND $newline != "\r")
         {
-            $this->newline    = "\n";
+            $this->newline = "\n";
             return;
         }
 
-        $this->newline    = $newline;
+        $this->newline = $newline;
     }
   
     // --------------------------------------------------------------------
@@ -520,15 +524,15 @@ Class Email {
      * @param    string
      * @return    void
      */
-    public function set_crlf($crlf = "\n")
+    public function setCrlf($crlf = "\n")
     {
         if ($crlf != "\n" AND $crlf != "\r\n" AND $crlf != "\r")
         {
-            $this->crlf    = "\n";
+            $this->crlf = "\n";
             return;
         }
 
-        $this->crlf    = $crlf;
+        $this->crlf = $crlf;
     }
   
     // --------------------------------------------------------------------
@@ -539,7 +543,7 @@ Class Email {
      * @access    private
      * @return    void
      */
-    private function _set_boundaries()
+    private function _setBoundaries()
     {
         $this->_alt_boundary = "B_ALT_".uniqid(''); // multipart/alternative
         $this->_atc_boundary = "B_ATC_".uniqid(''); // attachment boundary
@@ -553,7 +557,7 @@ Class Email {
      * @access    private
      * @return    string
      */
-    private function _get_message_id()
+    private function _getMessageId()
     {
         $from = $this->_headers['Return-Path'];
         $from = str_replace(">", "", $from);
@@ -571,12 +575,12 @@ Class Email {
      * @param    bool
      * @return    string
      */
-    private function _get_protocol($return = TRUE)
+    private function _getProtocol($return = true)
     {
         $this->protocol = strtolower($this->protocol);
-        $this->protocol = ( ! in_array($this->protocol, $this->_protocols, TRUE)) ? 'mail' : $this->protocol;
+        $this->protocol = ( ! in_array($this->protocol, $this->_protocols, true)) ? 'mail' : $this->protocol;
 
-        if ($return == TRUE)
+        if ($return == true)
         {
             return $this->protocol;
         }
@@ -591,7 +595,7 @@ Class Email {
      * @param    bool
      * @return    string
      */
-    private function _get_encoding($return = TRUE)
+    private function _getEncoding($return = true)
     {
         $this->_encoding = ( ! in_array($this->_encoding, $this->_bit_depths)) ? '8bit' : $this->_encoding;
 
@@ -603,7 +607,7 @@ Class Email {
             }
         }
 
-        if ($return == TRUE)
+        if ($return == true)
         {
             return $this->_encoding;
         }
@@ -617,17 +621,17 @@ Class Email {
      * @access    private
      * @return    string
      */
-    private function _get_content_type()
+    private function _getContentType()
     {
-        if    ($this->mailtype == 'html' &&  count($this->_attach_name) == 0)
+        if ($this->mailtype == 'html' &&  count($this->_attach_name) == 0)
         {
             return 'html';
         }
-        elseif    ($this->mailtype == 'html' &&  count($this->_attach_name)  > 0)
+        elseif ($this->mailtype == 'html' &&  count($this->_attach_name)  > 0)
         {
             return 'html-attach';
         }
-        elseif    ($this->mailtype == 'text' &&  count($this->_attach_name)  > 0)
+        elseif ($this->mailtype == 'text' &&  count($this->_attach_name)  > 0)
         {
             return 'plain-attach';
         }
@@ -645,14 +649,14 @@ Class Email {
      * @access    private
      * @return    string
      */
-    private function _set_date()
+    private function _setDate()
     {
         $timezone = date("Z");
         $operator = (strncmp($timezone, '-', 1) == 0) ? '-' : '+';
-        $timezone = abs($timezone);
-        $timezone = floor($timezone/3600) * 100 + ($timezone % 3600 ) / 60;
+        $abs = abs($abs);
+        $floor_timezone = floor($abs/3600) * 100 + ($abs % 3600 ) / 60;
 
-        return sprintf("%s %s%04d", date("D, j M Y H:i:s"), $operator, $timezone);
+        return sprintf("%s %s%04d", date("D, j M Y H:i:s"), $operator, $floor_timezone);
     }
   
     // --------------------------------------------------------------------
@@ -663,7 +667,7 @@ Class Email {
      * @access    private
      * @return    string
      */
-    private function _get_mime_message()
+    private function _getMimeMessage()
     {
         return "This is a multi-part message in MIME format.".$this->newline."Your email application may not support this format.";
     }
@@ -677,24 +681,24 @@ Class Email {
      * @param    string
      * @return    bool
      */
-    public function validate_email($email)
+    public function validateEmail($email)
     {
         if ( ! is_array($email))
         {
-            $this->_set_error_message('email_must_be_array');
-            return FALSE;
+            $this->_setErrorMessage('email_must_be_array');
+            return false;
         }
 
         foreach ($email as $val)
         {
-            if ( ! $this->valid_email($val))
+            if ( ! $this->validEmail($val))
             {
-                $this->_set_error_message('email_invalid_address', $val);
-                return FALSE;
+                $this->_setErrorMessage('email_invalid_address', $val);
+                return false;
             }
         }
 
-        return TRUE;
+        return true;
     }
   
     // --------------------------------------------------------------------
@@ -706,9 +710,9 @@ Class Email {
      * @param    string
      * @return    bool
      */
-    public function valid_email($address)
+    public function validEmail($address)
     {
-        return ( ! preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $address)) ? FALSE : TRUE;
+        return ( ! preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $address)) ? false : true;
     }
   
     // --------------------------------------------------------------------
@@ -720,7 +724,7 @@ Class Email {
      * @param    string
      * @return    string
      */
-    public function clean_email($email)
+    public function cleanEmail($email)
     {
         if ( ! is_array($email))
         {
@@ -764,11 +768,11 @@ Class Email {
      * @access    private
      * @return    string
      */
-    private function _get_alt_message()
+    private function _getAltMessage()
     {
         if ($this->alt_message != "")
         {
-            return $this->word_wrap($this->alt_message, '76');
+            return $this->wordWrap($this->alt_message, '76');
         }
 
         if (preg_match('/\<body.*?\>(.*)\<\/body\>/si', $this->_body, $match))
@@ -796,7 +800,7 @@ Class Email {
             $body = str_replace($n, "\n\n", $body);
         }
 
-        return $this->word_wrap($body, '76');
+        return $this->wordWrap($body, '76');
     }
   
     // --------------------------------------------------------------------
@@ -809,7 +813,7 @@ Class Email {
      * @param    integer
      * @return    string
      */
-    public function word_wrap($str, $charlim = '')
+    public function wordWrap($str, $charlim = '')
     {
         // Se the character limit
         if ($charlim == '')
@@ -821,7 +825,7 @@ Class Email {
         $str = preg_replace("| +|", " ", $str);
 
         // Standardize newlines
-        if (strpos($str, "\r") !== FALSE)
+        if (strpos($str, "\r") !== false)
         {
             $str = str_replace(array("\r\n", "\r"), "\n", $str);
         }
@@ -839,9 +843,9 @@ Class Email {
         }
 
         // Use PHP's native function to do the initial wordwrap.
-        // We set the cut flag to FALSE so that any individual words that are
+        // We set the cut flag to false so that any individual words that are
         // too long get left alone.  In the next step we'll deal with them.
-        $str = wordwrap($str, $charlim, "\n", FALSE);
+        $str = wordwrap($str, $charlim, "\n", false);
 
         // Split the string into individual lines of text and cycle through them
         $output = "";
@@ -904,13 +908,13 @@ Class Email {
      * @param    string
      * @return    string
      */
-    private function _build_headers()
+    private function _buildHeaders()
     {
-        $this->_set_header('X-Sender', $this->clean_email($this->_headers['From']));
-        $this->_set_header('X-Mailer', $this->useragent);
-        $this->_set_header('X-Priority', $this->_priorities[$this->priority - 1]);
-        $this->_set_header('Message-ID', $this->_get_message_id());
-        $this->_set_header('Mime-Version', '1.0');
+        $this->_setHeader('X-Sender', $this->cleanEmail($this->_headers['From']));
+        $this->_setHeader('X-Mailer', $this->useragent);
+        $this->_setHeader('X-Priority', $this->_priorities[$this->priority - 1]);
+        $this->_setHeader('Message-ID', $this->_getMessageId());
+        $this->_setHeader('Mime-Version', '1.0');
     }
   
     // --------------------------------------------------------------------
@@ -921,7 +925,7 @@ Class Email {
      * @access    private
      * @return    void
      */
-    private function _write_headers()
+    private function _writeHeaders()
     {
         if ($this->protocol == 'mail')
         {
@@ -942,7 +946,7 @@ Class Email {
             }
         }
 
-        if ($this->_get_protocol() == 'mail')
+        if ($this->_getProtocol() == 'mail')
         {
             $this->_header_str = rtrim($this->_header_str);
         }
@@ -956,26 +960,26 @@ Class Email {
      * @access    private
      * @return    void
      */
-    private function _build_message()
+    private function _buildMessage()
     {
-        if ($this->wordwrap === TRUE  AND  $this->mailtype != 'html')
+        if ($this->wordwrap === true  AND  $this->mailtype != 'html')
         {
-            $this->_body = $this->word_wrap($this->_body);
+            $this->_body = $this->wordWrap($this->_body);
         }
 
-        $this->_set_boundaries();
-        $this->_write_headers();
+        $this->_setBoundaries();
+        $this->_writeHeaders();
 
-        $hdr = ($this->_get_protocol() == 'mail') ? $this->newline : '';
+        $hdr = ($this->_getProtocol() == 'mail') ? $this->newline : '';
 
-        switch ($this->_get_content_type())
+        switch ($this->_getContentType())
         {
             case 'plain' :
 
                 $hdr .= "Content-Type: text/plain; charset=" . $this->charset . $this->newline;
-                $hdr .= "Content-Transfer-Encoding: " . $this->_get_encoding();
+                $hdr .= "Content-Transfer-Encoding: " . $this->_getEncoding();
 
-                if ($this->_get_protocol() == 'mail')
+                if ($this->_getProtocol() == 'mail')
                 {
                     $this->_header_str .= $hdr;
                     $this->_finalbody = $this->_body;
@@ -991,7 +995,7 @@ Class Email {
             break;
             case 'html' :
 
-                if ($this->send_multipart === FALSE)
+                if ($this->send_multipart === false)
                 {
                     $hdr .= "Content-Type: text/html; charset=" . $this->charset . $this->newline;
                     $hdr .= "Content-Transfer-Encoding: quoted-printable";
@@ -999,25 +1003,25 @@ Class Email {
                 else
                 {
                     $hdr .= "Content-Type: multipart/alternative; boundary=\"" . $this->_alt_boundary . "\"" . $this->newline . $this->newline;
-                    $hdr .= $this->_get_mime_message() . $this->newline . $this->newline;
+                    $hdr .= $this->_getMimeMessage() . $this->newline . $this->newline;
                     $hdr .= "--" . $this->_alt_boundary . $this->newline;
 
                     $hdr .= "Content-Type: text/plain; charset=" . $this->charset . $this->newline;
-                    $hdr .= "Content-Transfer-Encoding: " . $this->_get_encoding() . $this->newline . $this->newline;
-                    $hdr .= $this->_get_alt_message() . $this->newline . $this->newline . "--" . $this->_alt_boundary . $this->newline;
+                    $hdr .= "Content-Transfer-Encoding: " . $this->_getEncoding() . $this->newline . $this->newline;
+                    $hdr .= $this->_getAltMessage() . $this->newline . $this->newline . "--" . $this->_alt_boundary . $this->newline;
 
                     $hdr .= "Content-Type: text/html; charset=" . $this->charset . $this->newline;
                     $hdr .= "Content-Transfer-Encoding: quoted-printable";
                 }
 
-                $this->_body = $this->_prep_quoted_printable($this->_body);
+                $this->_body = $this->_prepQuotedPrintable($this->_body);
 
-                if ($this->_get_protocol() == 'mail')
+                if ($this->_getProtocol() == 'mail')
                 {
                     $this->_header_str .= $hdr;
                     $this->_finalbody = $this->_body . $this->newline . $this->newline;
 
-                    if ($this->send_multipart !== FALSE)
+                    if ($this->send_multipart !== false)
                     {
                         $this->_finalbody .= "--" . $this->_alt_boundary . "--";
                     }
@@ -1028,7 +1032,7 @@ Class Email {
                 $hdr .= $this->newline . $this->newline;
                 $hdr .= $this->_body . $this->newline . $this->newline;
 
-                if ($this->send_multipart !== FALSE)
+                if ($this->send_multipart !== false)
                 {
                     $hdr .= "--" . $this->_alt_boundary . "--";
                 }
@@ -1040,13 +1044,13 @@ Class Email {
             case 'plain-attach' :
 
                 $hdr .= "Content-Type: multipart/".$this->multipart."; boundary=\"" . $this->_atc_boundary."\"" . $this->newline . $this->newline;
-                $hdr .= $this->_get_mime_message() . $this->newline . $this->newline;
+                $hdr .= $this->_getMimeMessage() . $this->newline . $this->newline;
                 $hdr .= "--" . $this->_atc_boundary . $this->newline;
 
                 $hdr .= "Content-Type: text/plain; charset=" . $this->charset . $this->newline;
-                $hdr .= "Content-Transfer-Encoding: " . $this->_get_encoding();
+                $hdr .= "Content-Transfer-Encoding: " . $this->_getEncoding();
 
-                if ($this->_get_protocol() == 'mail')
+                if ($this->_getProtocol() == 'mail')
                 {
                     $this->_header_str .= $hdr;
 
@@ -1060,22 +1064,22 @@ Class Email {
             case 'html-attach' :
 
                 $hdr .= "Content-Type: multipart/".$this->multipart."; boundary=\"" . $this->_atc_boundary."\"" . $this->newline . $this->newline;
-                $hdr .= $this->_get_mime_message() . $this->newline . $this->newline;
+                $hdr .= $this->_getMimeMessage() . $this->newline . $this->newline;
                 $hdr .= "--" . $this->_atc_boundary . $this->newline;
 
                 $hdr .= "Content-Type: multipart/alternative; boundary=\"" . $this->_alt_boundary . "\"" . $this->newline .$this->newline;
                 $hdr .= "--" . $this->_alt_boundary . $this->newline;
 
                 $hdr .= "Content-Type: text/plain; charset=" . $this->charset . $this->newline;
-                $hdr .= "Content-Transfer-Encoding: " . $this->_get_encoding() . $this->newline . $this->newline;
-                $hdr .= $this->_get_alt_message() . $this->newline . $this->newline . "--" . $this->_alt_boundary . $this->newline;
+                $hdr .= "Content-Transfer-Encoding: " . $this->_getEncoding() . $this->newline . $this->newline;
+                $hdr .= $this->_getAltMessage() . $this->newline . $this->newline . "--" . $this->_alt_boundary . $this->newline;
 
                 $hdr .= "Content-Type: text/html; charset=" . $this->charset . $this->newline;
                 $hdr .= "Content-Transfer-Encoding: quoted-printable";
 
-                $this->_body = $this->_prep_quoted_printable($this->_body);
+                $this->_body = $this->_prepQuotedPrintable($this->_body);
 
-                if ($this->_get_protocol() == 'mail')
+                if ($this->_getProtocol() == 'mail')
                 {
                     $this->_header_str .= $hdr;
 
@@ -1102,8 +1106,8 @@ Class Email {
 
             if ( ! file_exists($filename))
             {
-                $this->_set_error_message('email_attachment_missing', $filename);
-                return FALSE;
+                $this->_setErrorMessage('email_attachment_missing', $filename);
+                return false;
             }
 
             $h  = "--".$this->_atc_boundary.$this->newline;
@@ -1117,15 +1121,15 @@ Class Email {
 
             if ( ! $fp = fopen($filename, FOPEN_READ))
             {
-                $this->_set_error_message('email_attachment_unreadable', $filename);
-                return FALSE;
+                $this->_setErrorMessage('email_attachment_unreadable', $filename);
+                return false;
             }
 
             $attachment[$z++] = chunk_split(base64_encode(fread($fp, $file)));
             fclose($fp);
         }
 
-        if ($this->_get_protocol() == 'mail')
+        if ($this->_getProtocol() == 'mail')
         {
             $this->_finalbody = $body . implode($this->newline, $attachment).$this->newline."--".$this->_atc_boundary."--";
 
@@ -1150,7 +1154,7 @@ Class Email {
      * @param    integer
      * @return    string
      */
-    private function _prep_quoted_printable($str, $charlim = '')
+    private function _prepQuotedPrintable($str, $charlim = '')
     {
         // Set the character limit
         // Don't allow over 76, as that will make servers and MUAs barf
@@ -1167,7 +1171,7 @@ Class Email {
         $str = preg_replace('/\x00+/', '', $str);
 
         // Standardize newlines
-        if (strpos($str, "\r") !== FALSE)
+        if (strpos($str, "\r") !== false)
         {
             $str = str_replace(array("\r\n", "\r"), "\n", $str);
         }
@@ -1240,10 +1244,10 @@ Class Email {
      *
      * @access    public
      * @param    str
-     * @param    bool    // set to TRUE for processing From: headers
+     * @param    bool    // set to true for processing From: headers
      * @return    str
      */
-    public function _prep_q_encoding($str, $from = FALSE)
+    public function _prepQencoding($str, $from = false)
     {
         $str = str_replace(array("\r", "\n"), array('', ''), $str);
 
@@ -1254,7 +1258,7 @@ Class Email {
         // these special characters must be converted too
         $convert = array('_', '=', '?');
 
-        if ($from === TRUE)
+        if ($from === true)
         {
             $convert[] = ',';
             $convert[] = ';';
@@ -1312,36 +1316,36 @@ Class Email {
      */
     public function send()
     {
-        if ($this->_replyto_flag == FALSE)
+        if ($this->_replyto_flag == false)
         {
-            $this->reply_to($this->_headers['From']);
+            $this->replyTo($this->_headers['From']);
         }
 
         if (( ! isset($this->_recipients) AND ! isset($this->_headers['To']))  AND
             ( ! isset($this->_bcc_array) AND ! isset($this->_headers['Bcc'])) AND
             ( ! isset($this->_headers['Cc'])))
         {
-            $this->_set_error_message('email_no_recipients');
-            return FALSE;
+            $this->_setErrorMessage('email_no_recipients');
+            return false;
         }
 
-        $this->_build_headers();
+        $this->_buildHeaders();
 
         if ($this->bcc_batch_mode  AND  count($this->_bcc_array) > 0)
         {
             if (count($this->_bcc_array) > $this->bcc_batch_size)
-                return $this->batch_bcc_send();
+                return $this->batchBccSend();
         }
 
-        $this->_build_message();
+        $this->_buildMessage();
 
-        if ( ! $this->_spool_email())
+        if ( ! $this->_spoolEmail())
         {
-            return FALSE;
+            return false;
         }
         else
         {
-            return TRUE;
+            return true;
         }
     }
   
@@ -1353,7 +1357,7 @@ Class Email {
      * @access    public
      * @return    bool
      */
-    public function batch_bcc_send()
+    public function batchBccSend()
     {
         $float = $this->bcc_batch_size -1;
 
@@ -1386,20 +1390,20 @@ Class Email {
             unset($this->_headers['Bcc']);
             unset($bcc);
 
-            $bcc = $this->_str_to_array($chunk[$i]);
-            $bcc = $this->clean_email($bcc);
+            $bcc = $this->_str2array($chunk[$i]);
+            $bcc = $this->cleanEmail($bcc);
 
             if ($this->protocol != 'smtp')
             {
-                $this->_set_header('Bcc', implode(", ", $bcc));
+                $this->_setHeader('Bcc', implode(", ", $bcc));
             }
             else
             {
                 $this->_bcc_array = $bcc;
             }
 
-            $this->_build_message();
-            $this->_spool_email();
+            $this->_buildMessage();
+            $this->_spoolEmail();
         }
     }
   
@@ -1411,9 +1415,9 @@ Class Email {
      * @access    private
      * @return    void
      */
-    private function _unwrap_specials()
+    private function _unwrapSpecials()
     {
-        $this->_finalbody = preg_replace_callback("/\{unwrap\}(.*?)\{\/unwrap\}/si", array($this, '_remove_nl_callback'), $this->_finalbody);
+        $this->_finalbody = preg_replace_callback("/\{unwrap\}(.*?)\{\/unwrap\}/si", array($this, '_removeNlCallback'), $this->_finalbody);
     }
   
     // --------------------------------------------------------------------
@@ -1424,9 +1428,9 @@ Class Email {
      * @access    private
      * @return    string
      */
-    private function _remove_nl_callback($matches)
+    private function _removeNlCallback($matches)
     {
-        if (strpos($matches[1], "\r") !== FALSE OR strpos($matches[1], "\n") !== FALSE)
+        if (strpos($matches[1], "\r") !== false OR strpos($matches[1], "\n") !== false)
         {
             $matches[1] = str_replace(array("\r\n", "\r", "\n"), '', $matches[1]);
         }
@@ -1442,41 +1446,41 @@ Class Email {
      * @access    private
      * @return    bool
      */
-    private function _spool_email()
+    private function _spoolEmail()
     {
-        $this->_unwrap_specials();
+        $this->_unwrapSpecials();
 
-        switch ($this->_get_protocol())
+        switch ($this->_getProtocol())
         {
             case 'mail'    :
 
-                    if ( ! $this->_send_with_mail())
+                    if ( ! $this->_sendWithMail())
                     {
-                        $this->_set_error_message('email_send_failure_phpmail');
-                        return FALSE;
+                        $this->_setErrorMessage('email_send_failure_phpmail');
+                        return false;
                     }
             break;
             case 'sendmail'    :
 
-                    if ( ! $this->_send_with_sendmail())
+                    if ( ! $this->_sendWithSendmail())
                     {
-                        $this->_set_error_message('email_send_failure_sendmail');
-                        return FALSE;
+                        $this->_setErrorMessage('email_send_failure_sendmail');
+                        return false;
                     }
             break;
             case 'smtp'    :
 
-                    if ( ! $this->_send_with_smtp())
+                    if ( ! $this->_sendWithSmtp())
                     {
-                        $this->_set_error_message('email_send_failure_smtp');
-                        return FALSE;
+                        $this->_setErrorMessage('email_send_failure_smtp');
+                        return false;
                     }
             break;
 
         }
 
-        $this->_set_error_message('email_sent', $this->_get_protocol());
-        return TRUE;
+        $this->_setErrorMessage('email_sent', $this->_getProtocol());
+        return true;
     }
   
     // --------------------------------------------------------------------
@@ -1487,30 +1491,30 @@ Class Email {
      * @access    private
      * @return    bool
      */
-    private function _send_with_mail()
+    private function _sendWithMail()
     {
-        if ($this->_safe_mode == TRUE)
+        if ($this->_safe_mode == true)
         {
             if ( ! mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str))
             {
-                return FALSE;
+                return false;
             }
             else
             {
-                return TRUE;
+                return true;
             }
         }
         else
         {
             // most documentation of sendmail using the "-f" flag lacks a space after it, however
             // we've encountered servers that seem to require it to be in place.
-            if ( ! mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str, "-f ".$this->clean_email($this->_headers['From'])))
+            if ( ! mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str, "-f ".$this->cleanEmail($this->_headers['From'])))
             {
-                return FALSE;
+                return false;
             }
             else
             {
-                return TRUE;
+                return true;
             }
         }
     }
@@ -1523,14 +1527,14 @@ Class Email {
      * @access    private
      * @return    bool
      */
-    private function _send_with_sendmail()
+    private function _sendWithSendmail()
     {
-        $fp = @popen($this->mailpath . " -oi -f ".$this->clean_email($this->_headers['From'])." -t", 'w');
+        $fp = @popen($this->mailpath . " -oi -f ".$this->cleanEmail($this->_headers['From'])." -t", 'w');
 
-        if ($fp === FALSE OR $fp === NULL)
+        if ($fp === false OR $fp === null)
         {
             // server probably has popen disabled, so nothing we can do to get a verbose error.
-            return FALSE;
+            return false;
         }
         
         fputs($fp, $this->_header_str);
@@ -1545,12 +1549,12 @@ Class Email {
     
         if ($status != 0)
         {
-            $this->_set_error_message('email_exit_status', $status);
-            $this->_set_error_message('email_no_socket');
-            return FALSE;
+            $this->_setErrorMessage('email_exit_status', $status);
+            $this->_setErrorMessage('email_no_socket');
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
   
     // --------------------------------------------------------------------
@@ -1561,22 +1565,22 @@ Class Email {
      * @access    private
      * @return    bool
      */
-    private function _send_with_smtp()
+    private function _sendWithSmtp()
     {
         if ($this->smtp_host == '')
         {
-            $this->_set_error_message('email_no_hostname');
-            return FALSE;
+            $this->_setErrorMessage('email_no_hostname');
+            return false;
         }
 
-        $this->_smtp_connect();
-        $this->_smtp_authenticate();
+        $this->_smtpConnect();
+        $this->_smtpAuthenticate();
 
-        $this->_send_command('from', $this->clean_email($this->_headers['From']));
+        $this->_sendCommand('from', $this->cleanEmail($this->_headers['From']));
 
         foreach($this->_recipients as $val)
         {
-            $this->_send_command('to', $val);
+            $this->_sendCommand('to', $val);
         }
 
         if (count($this->_cc_array) > 0)
@@ -1585,7 +1589,7 @@ Class Email {
             {
                 if ($val != "")
                 {
-                    $this->_send_command('to', $val);
+                    $this->_sendCommand('to', $val);
                 }
             }
         }
@@ -1596,30 +1600,30 @@ Class Email {
             {
                 if ($val != "")
                 {
-                    $this->_send_command('to', $val);
+                    $this->_sendCommand('to', $val);
                 }
             }
         }
 
-        $this->_send_command('data');
+        $this->_sendCommand('data');
 
         // perform dot transformation on any lines that begin with a dot
-        $this->_send_data($this->_header_str . preg_replace('/^\./m', '..$1', $this->_finalbody));
+        $this->_sendData($this->_header_str . preg_replace('/^\./m', '..$1', $this->_finalbody));
 
-        $this->_send_data('.');
+        $this->_sendData('.');
 
-        $reply = $this->_get_smtp_data();
+        $reply = $this->_getSmtpData();
 
-        $this->_set_error_message($reply);
+        $this->_setErrorMessage($reply);
 
         if (strncmp($reply, '250', 3) != 0)
         {
-            $this->_set_error_message('email_smtp_error', $reply);
-            return FALSE;
+            $this->_setErrorMessage('email_smtp_error', $reply);
+            return false;
         }
 
-        $this->_send_command('quit');
-        return TRUE;
+        $this->_sendCommand('quit');
+        return true;
     }
   
     // --------------------------------------------------------------------
@@ -1631,7 +1635,7 @@ Class Email {
      * @param    string
      * @return    string
      */
-    private function _smtp_connect()
+    private function _smtpConnect()
     {
         $this->_smtp_connect = fsockopen($this->smtp_host,
                                         $this->smtp_port,
@@ -1641,12 +1645,12 @@ Class Email {
 
         if( ! is_resource($this->_smtp_connect))
         {
-            $this->_set_error_message('email_smtp_error', $errno." ".$errstr);
-            return FALSE;
+            $this->_setErrorMessage('email_smtp_error', $errno." ".$errstr);
+            return false;
         }
 
-        $this->_set_error_message($this->_get_smtp_data());
-        return $this->_send_command('hello');
+        $this->_setErrorMessage($this->_getSmtpData());
+        return $this->_sendCommand('hello');
     }
   
     // --------------------------------------------------------------------
@@ -1659,53 +1663,53 @@ Class Email {
      * @param    string
      * @return    string
      */
-    private function _send_command($cmd, $data = '')
+    private function _sendCommand($cmd, $data = '')
     {
         switch ($cmd)
         {
             case 'hello' :
 
-                    if ($this->_smtp_auth OR $this->_get_encoding() == '8bit')
-                        $this->_send_data('EHLO '.$this->_get_hostname());
+                    if ($this->_smtp_auth OR $this->_getEncoding() == '8bit')
+                        $this->_sendData('EHLO '.$this->_getHostname());
                     else
-                        $this->_send_data('HELO '.$this->_get_hostname());
+                        $this->_sendData('HELO '.$this->_getHostname());
 
                         $resp = 250;
             break;
             case 'from' :
 
-                        $this->_send_data('MAIL FROM:<'.$data.'>');
+                        $this->_sendData('MAIL FROM:<'.$data.'>');
 
                         $resp = 250;
             break;
             case 'to'    :
 
-                        $this->_send_data('RCPT TO:<'.$data.'>');
+                        $this->_sendData('RCPT TO:<'.$data.'>');
 
                         $resp = 250;
             break;
             case 'data'    :
 
-                        $this->_send_data('DATA');
+                        $this->_sendData('DATA');
 
                         $resp = 354;
             break;
             case 'quit'    :
 
-                        $this->_send_data('QUIT');
+                        $this->_sendData('QUIT');
 
                         $resp = 221;
             break;
         }
 
-        $reply = $this->_get_smtp_data();
+        $reply = $this->_getSmtpData();
 
         $this->_debug_msg[] = "<pre>".$cmd.": ".$reply."</pre>";
 
         if (substr($reply, 0, 3) != $resp)
         {
-            $this->_set_error_message('email_smtp_error', $reply);
-            return FALSE;
+            $this->_setErrorMessage('email_smtp_error', $reply);
+            return false;
         }
 
         if ($cmd == 'quit')
@@ -1713,7 +1717,7 @@ Class Email {
             fclose($this->_smtp_connect);
         }
 
-        return TRUE;
+        return true;
     }
   
     // --------------------------------------------------------------------
@@ -1724,50 +1728,50 @@ Class Email {
      * @access    private
      * @return    bool
      */
-    private function _smtp_authenticate()
+    private function _smtpAuthenticate()
     {
         if ( ! $this->_smtp_auth)
         {
-            return TRUE;
+            return true;
         }
 
         if ($this->smtp_user == ""  AND  $this->smtp_pass == "")
         {
-            $this->_set_error_message('email_no_smtp_unpw');
-            return FALSE;
+            $this->_setErrorMessage('email_no_smtp_unpw');
+            return false;
         }
 
-        $this->_send_data('AUTH LOGIN');
+        $this->_sendData('AUTH LOGIN');
 
-        $reply = $this->_get_smtp_data();
+        $reply = $this->_getSmtpData();
 
         if (strncmp($reply, '334', 3) != 0)
         {
-            $this->_set_error_message('email_failed_smtp_login', $reply);
-            return FALSE;
+            $this->_setErrorMessage('email_failed_smtp_login', $reply);
+            return false;
         }
 
-        $this->_send_data(base64_encode($this->smtp_user));
+        $this->_sendData(base64_encode($this->smtp_user));
 
-        $reply = $this->_get_smtp_data();
+        $reply = $this->_getSmtpData();
 
         if (strncmp($reply, '334', 3) != 0)
         {
-            $this->_set_error_message('email_smtp_auth_un', $reply);
-            return FALSE;
+            $this->_setErrorMessage('email_smtp_auth_un', $reply);
+            return false;
         }
 
-        $this->_send_data(base64_encode($this->smtp_pass));
+        $this->_sendData(base64_encode($this->smtp_pass));
 
-        $reply = $this->_get_smtp_data();
+        $reply = $this->_getSmtpData();
 
         if (strncmp($reply, '235', 3) != 0)
         {
-            $this->_set_error_message('email_smtp_auth_pw', $reply);
-            return FALSE;
+            $this->_setErrorMessage('email_smtp_auth_pw', $reply);
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
   
     // --------------------------------------------------------------------
@@ -1778,16 +1782,16 @@ Class Email {
      * @access    private
      * @return    bool
      */
-    private function _send_data($data)
+    private function _sendData($data)
     {
         if ( ! fwrite($this->_smtp_connect, $data . $this->newline))
         {
-            $this->_set_error_message('email_smtp_data_failure', $data);
-            return FALSE;
+            $this->_setErrorMessage('email_smtp_data_failure', $data);
+            return false;
         }
         else
         {
-            return TRUE;
+            return true;
         }
     }
   
@@ -1799,7 +1803,7 @@ Class Email {
      * @access    private
      * @return    string
      */
-    private function _get_smtp_data()
+    private function _getSmtpData()
     {
         $data = "";
 
@@ -1824,51 +1828,9 @@ Class Email {
      * @access    private
      * @return    string
      */
-    private function _get_hostname()
+    private function _getHostname()
     {
         return (isset($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : 'localhost.localdomain';
-    }
-  
-    // --------------------------------------------------------------------
-
-    /**
-     * Get IP
-     *
-     * @access    private
-     * @return    string
-     */
-    private function _get_ip()
-    {
-        if ($this->_IP !== FALSE)
-        {
-            return $this->_IP;
-        }
-
-        $cip = (isset($_SERVER['HTTP_CLIENT_IP']) AND $_SERVER['HTTP_CLIENT_IP'] != "") ? $_SERVER['HTTP_CLIENT_IP'] : FALSE;
-        $rip = (isset($_SERVER['REMOTE_ADDR']) AND $_SERVER['REMOTE_ADDR'] != "") ? $_SERVER['REMOTE_ADDR'] : FALSE;
-        $fip = (isset($_SERVER['HTTP_X_FORWARDED_FOR']) AND $_SERVER['HTTP_X_FORWARDED_FOR'] != "") ? $_SERVER['HTTP_X_FORWARDED_FOR'] : FALSE;
-
-        if ($cip && $rip)    $this->_IP = $cip;
-        elseif ($rip)        $this->_IP = $rip;
-        elseif ($cip)        $this->_IP = $cip;
-        elseif ($fip)        $this->_IP = $fip;
-
-        if (strstr($this->_IP, ','))
-        {
-            $x = explode(',', $this->_IP);
-            $this->_IP = end($x);
-        }
-
-        if ( ! preg_match( "/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/", $this->_IP))
-        {
-            $this->_IP = '0.0.0.0';
-        }
-
-        unset($cip);
-        unset($rip);
-        unset($fip);
-
-        return $this->_IP;
     }
   
     // --------------------------------------------------------------------
@@ -1879,7 +1841,7 @@ Class Email {
      * @access    public
      * @return    string
      */
-    public function print_debugger()
+    public function printDebugger()
     {
         $msg = '';
 
@@ -1905,11 +1867,11 @@ Class Email {
      * @param    string
      * @return    string
      */
-    private function _set_error_message($msg, $val = '')
+    private function _setErrorMessage($msg, $val = '')
     {
         \Ob\getInstance()->locale->load('obullo');
 
-        if (FALSE === ($line = lang($msg)))
+        if (false === ($line = \Ob\lang($msg)))
         {
             $this->_debug_msg[] = str_replace('%s', $val, $msg)."<br />";
         }
@@ -1928,7 +1890,7 @@ Class Email {
      * @param    string
      * @return    string
      */
-    private function _mime_types($ext = "")
+    private function _mimeTypes($ext = "")
     {
         $mimes = array(    'hqx'    =>    'application/mac-binhex40',
                         'cpt'    =>    'application/mac-compactpro',
@@ -2006,7 +1968,7 @@ Class Email {
                         'rtf'    =>    'text/rtf',
                         'xml'    =>    'text/xml',
                         'xsl'    =>    'text/xml',
-                        'mpeg'    =>    'video/mpeg',
+                        'mpeg'    =>   'video/mpeg',
                         'mpg'    =>    'video/mpeg',
                         'mpe'    =>    'video/mpeg',
                         'qt'    =>    'video/quicktime',
@@ -2025,5 +1987,5 @@ Class Email {
 }
 // END email class
 
-/* End of file email.php */
+/* End of file Email.php */
 /* Location: ./ob/email/releases/0.0.1/email.php */

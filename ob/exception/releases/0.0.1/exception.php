@@ -47,7 +47,7 @@ Class Exception {
         if(isset(\Ob\getInstance()->db))
         {
             $prepare    = (isset(\Ob\getInstance()->db->prepare)) ? \Ob\getInstance()->db->prepare : false;
-            $last_query = \Ob\getInstance()->db->last_query($prepare);
+            $last_query = \Ob\getInstance()->db->lastQuery($prepare);
         }
         
         if( ! empty($last_query))
@@ -62,11 +62,11 @@ Class Exception {
         
         if(defined('STDIN'))  // If Command Line Request. 
         {
-            echo $type .': '. $e->getMessage(). ' File: ' .\Ob\error\secure_path($e->getFile()). ' Line: '. $e->getLine(). "\n";
+            echo $type .': '. $e->getMessage(). ' File: ' .\Ob\error\securePath($e->getFile()). ' Line: '. $e->getLine(). "\n";
             
             $cmd_type = (defined('TASK')) ? 'Task' : 'Cmd';
             
-            \Ob\log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.\Ob\error\secure_path($e->getFile()).' '.$e->getLine(), TRUE); 
+            \Ob\log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.\Ob\error\securePath($e->getFile()).' '.$e->getLine(), true); 
             
             return;
         }
@@ -86,7 +86,7 @@ Class Exception {
         // Log Php Errors
         //-----------------------------------------------------------------------
         
-        \Ob\log\me('error', $type.': '.$e->getMessage(). ' '.\Ob\error\secure_path($e->getFile()).' '.$e->getLine(), true); 
+        \Ob\log\me('error', $type.': '.$e->getMessage(). ' '.\Ob\error\securePath($e->getFile()).' '.$e->getLine(), true); 
              
         // Displaying Errors
         //-----------------------------------------------------------------------            
@@ -102,14 +102,14 @@ Class Exception {
             }   
         }       
     
-        $rules = \Ob\error\parse_regex($level);
+        $rules = \Ob\error\parseRegex($level);
         
-        if($rules == FALSE) 
+        if($rules == false) 
         {
             return;
         }
         
-        $allowed_errors = \Ob\error\get_allowed_errors($rules);  // Check displaying error enabled for current error.
+        $allowed_errors = \Ob\error\getAllowedErrors($rules);  // Check displaying error enabled for current error.
     
         if(isset($allowed_errors[$code]))
         {

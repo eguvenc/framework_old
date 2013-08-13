@@ -2,23 +2,14 @@
 namespace Ob\Locale;
 
 /**
-* Fetch a item of text from the language array
-*
-* @access   public
-* @param    string  $item the language item
-* @return   string
-*/
-
-function lang($item = '')
-{
-    $locale = Locale::getInstance();
-    $item = ($item == '' OR ! isset($locale->language[$item])) ? FALSE : $locale->language[$item];
-
-    return $item;
-}
-
-// --------------------------------------------------------------------
-
+ * Locale Class ( Language )
+ *
+ * @package       Obullo
+ * @subpackage    cart
+ * @category      language
+ * @author        Obullo Team
+ * @link
+ */
 Class Locale {
     
     public $language  = array();
@@ -31,7 +22,7 @@ Class Locale {
         // Set Default language from $_COOKIE['__langlocale']
         // $this->set_language();
         
-        \Ob\log\me('debug', "Locale Library Initialized");    
+        \Ob\log\me('debug', "Locale Class Initialized");    
     }
 
     // --------------------------------------------------------------------
@@ -46,20 +37,6 @@ Class Locale {
        return self::$instance;
     }
     
-    /**
-     * Set default user language to cookie.
-     * @param type $default 
-     */
-    public function set_cookie($default = 'en'){}
-    
-    
-    /**
-     * Change default language
-     * 
-     * @param type $default 
-     */
-    public function set_default($default = 'en'){}
-    
     // --------------------------------------------------------------------
     
     /**
@@ -71,7 +48,7 @@ Class Locale {
     * @param    bool     $return return to $lang variable if you don't merge
     * @return   mixed
     */
-    public function load($filename = '', $idiom = '', $return = FALSE)
+    public function load($filename = '', $idiom = '', $return = false)
     {
         if ($idiom == '')
         {
@@ -79,7 +56,7 @@ Class Locale {
             $idiom   = ($default == '') ? 'english' : $default;
         }
         
-        if (in_array($filename, $this->is_loaded, TRUE))
+        if (in_array($filename, $this->is_loaded, true))
         {
             return;
         }
@@ -110,7 +87,7 @@ Class Locale {
 
         \Ob\log\me('debug', 'Locale file loaded: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
         
-        return TRUE;
+        return true;
     }
 }
 

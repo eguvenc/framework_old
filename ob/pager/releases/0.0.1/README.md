@@ -6,7 +6,7 @@ $params = array(
     'per_page'     => 8,
     'delta'        => 2,
     'http_method'  => 'GET',
-    'query_string' => FALSE,
+    'query_string' => false,
     'current_page' => $this->uri->segment(2),
     'base_url'     => '/welcome/index/',
 );

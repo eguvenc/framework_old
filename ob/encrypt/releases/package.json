@@ -14,7 +14,8 @@
     "encryption",
     "mcrypt",
     "aes",
-    "blowfish"
+    "blowfish",
+    "cyrpto"
   ],
   "homepage": "https://github.com/obullo/encrypt",
   "repo": {

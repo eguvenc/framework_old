@@ -49,7 +49,7 @@ if( ! function_exists('utf8_from_unicode'))
             {
                 // Found a surrogate
                 log\me('debug', 'UTF8 from_unicode: Illegal surrogate at index: '.$k.', value: '.$arr[$k]);
-                return FALSE;
+                return false;
             }
             elseif ($arr[$k] <= 0xffff)              // 3 byte sequence
             {
@@ -67,7 +67,7 @@ if( ! function_exists('utf8_from_unicode'))
             else                // Out of range
             {
                 log\me('debug', 'UTF8 from_unicode: Codepoint out of Unicode range at index: '.$k.', value: '.$arr[$k]);
-                return FALSE;
+                return false;
             }
         }
 

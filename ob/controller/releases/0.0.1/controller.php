@@ -15,7 +15,6 @@ namespace Ob;
 Class Controller {
 
     private static $instance;
-
     public $config,$router,$uri,$output,$locale;
     
     public function __construct()       
@@ -34,7 +33,7 @@ Class Controller {
         // Initialize to Autoloaders
         // ------------------------------------
         
-        $autoload = get_static('autoload', '', APP .'config');
+        $autoload = getStatic('autoload', '', APP .'config');
         
         log\me('debug', 'Application Autoload Initialized');
 
@@ -51,16 +50,24 @@ Class Controller {
                         if($key == 'helper')
                         {
                             $class = $class.'\start';
-                            
                             new $class();
                         } 
                         
-                        /*
-                        if($key == 'library' || $key == 'model')
+                        if($key == 'library')
                         {
-                            new $class();
+                            $classname = '\Ob\\'.ucfirst($filename).'\\'.ucfirst($filename);
+                            new $classname();
                         }
-                        */
+                        
+                        if($key == 'config')
+                        {
+                            $this->config->load($filename);
+                        }
+                        
+                        if($key == 'locale')
+                        {
+                            $this->locale->load($filename);
+                        }
                     }
                 }
             }
@@ -69,7 +76,7 @@ Class Controller {
         // Initialize to Autorun
         // ------------------------------------
         
-        $autorun = get_static('autorun', '', APP .'config');
+        $autorun = getStatic('autorun', '', APP .'config');
         
         log\me('debug', 'Application Autorun Initialized');
 

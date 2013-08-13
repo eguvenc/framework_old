@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Validator;
 
 /**
  * Validator Class
@@ -19,9 +19,9 @@ Class Validator {
     public $_error_prefix       = '<p>';
     public $_error_suffix       = '</p>';
     public $error_string        = '';
-    public $_safe_form_data     = FALSE;
+    public $_safe_form_data     = false;
     public $_globals            = array();  // $_POST, $_GET ,$_FILES
-    public $_callback_object    = NULL;
+    public $_callback_object    = null;
     
     public static $instance;
     
@@ -31,7 +31,7 @@ Class Validator {
         $this->_config_rules = $rules;
         
         // load the form helper
-        new form\start();
+        new \Ob\form\start();
             
         // Set the character encoding in MB.
         if (function_exists('mb_internal_encoding'))
@@ -65,9 +65,9 @@ Class Validator {
         $this->_error_prefix       = '<p>';
         $this->_error_suffix       = '</p>';
         $this->_error_string        = '';
-        $this->_safe_form_data     = FALSE;
+        $this->_safe_form_data     = false;
         $this->_globals            = array();  // $_POST, $_GET ,$_FILES
-        $this->_callback_object    = NULL;
+        $this->_callback_object    = null;
     }
 
     // --------------------------------------------------------------------
@@ -138,7 +138,7 @@ Class Validator {
         // Is the field name an array?  We test for the existence of a bracket "[" in
         // the field name to determine this.  If it is an array, we break it apart
         // into its components so that we can fetch the corresponding POST data later        
-        if (strpos($field, '[') !== FALSE AND preg_match_all('/\[(.*?)\]/', $field, $matches))
+        if (strpos($field, '[') !== false AND preg_match_all('/\[(.*?)\]/', $field, $matches))
         {    
             // Note: Due to a bug in current() that affects some versions
             // of PHP we can not pass function call directly into it
@@ -153,12 +153,12 @@ Class Validator {
                 }
             }
             
-            $is_array = TRUE;
+            $is_array = true;
         }
         else
         {
             $indexes     = array();
-            $is_array    = FALSE;        
+            $is_array    = false;        
         }
         
         // Build our master array        
@@ -168,7 +168,7 @@ Class Validator {
                                             'rules'                => $rules,
                                             'is_array'            => $is_array,
                                             'keys'                => $indexes,
-                                            'postdata'            => NULL,
+                                            'postdata'            => null,
                                             'error'                => ''
                                             );
     }
@@ -232,7 +232,7 @@ Class Validator {
             return '';
         }
         
-        if($prefix == NULL AND $suffix == NULL)
+        if($prefix == null AND $suffix == null)
         {
             return $this->_field_data[$field]['error'];
         }
@@ -262,7 +262,7 @@ Class Validator {
      * @param    string
      * @return    str
      */    
-    public function error_string($prefix = '', $suffix = '')
+    public function errorString($prefix = '', $suffix = '')
     {
         // No errrors, validation passes!
         if (count($this->_error_array) === 0)
@@ -308,7 +308,7 @@ Class Validator {
         // Do we even have any data to process?  Mm?
         if (count($this->_globals) == 0)
         {
-            return FALSE;
+            return false;
         }
         
         // Does the _field_data array containing the validation rules exist?
@@ -318,11 +318,11 @@ Class Validator {
             // No validation rules?  We're done...
             if (count($this->_config_rules) == 0)
             {
-                return FALSE;
+                return false;
             }
             
             // Is there a validation rule for the particular URI being accessed?
-            $uri = ($group == '') ? trim(Uri::getInstance()->ruri_string(), '/') : $group;
+            $uri = ($group == '') ? trim(Uri::getInstance()->routedUriString(), '/') : $group;
             
             if ($uri != '' AND isset($this->_config_rules[$uri]))
             {
@@ -337,7 +337,7 @@ Class Validator {
             if (count($this->_field_data) == 0)
             {
                 log\me('debug', "Unable to find validation rules");
-                return FALSE;
+                return false;
             }
         }
     
@@ -352,7 +352,7 @@ Class Validator {
             // Fetch the data from the corresponding $this->_globals array and cache it in the _field_data array.
             // Depending on whether the field name is an array or a string will determine where we get it from.
             
-            if ($row['is_array'] == TRUE)
+            if ($row['is_array'] == true)
             {
                 $this->_field_data[$field]['postdata'] = $this->_reduce_array($this->_globals, $row['keys']);
             }
@@ -372,7 +372,7 @@ Class Validator {
 
         if ($total_errors > 0)
         {
-            $this->_safe_form_data = TRUE;
+            $this->_safe_form_data = true;
         }
 
         // Now we need to re-set the POST data with the new, processed data
@@ -381,11 +381,11 @@ Class Validator {
         // No errors, validation passes!
         if ($total_errors == 0)
         {
-            return TRUE;
+            return true;
         }
 
         // Validation fails
-        return FALSE;
+        return false;
     }
 
     // --------------------------------------------------------------------
@@ -411,7 +411,7 @@ Class Validator {
                 }
                 else
                 {
-                    return NULL;
+                    return null;
                 }
             }
             else
@@ -437,7 +437,7 @@ Class Validator {
         {
             if ( ! is_null($row['postdata']))
             {
-                if ($row['is_array'] == FALSE)
+                if ($row['is_array'] == false)
                 {
                     if (isset($this->_globals[$row['field']]))
                     {
@@ -493,7 +493,7 @@ Class Validator {
      * @param    integer
      * @return   mixed
      */    
-    private function _execute($row, $rules, $postdata = NULL, $cycles = 0)
+    private function _execute($row, $rules, $postdata = null, $cycles = 0)
     {
         // If the $this->_globals data is an array we will run a recursive call
         if (is_array($postdata))
@@ -510,13 +510,13 @@ Class Validator {
         // --------------------------------------------------------------------
 
         // If the field is blank, but NOT required, no further tests are necessary
-        $callback = FALSE;
+        $callback = false;
         if ( ! in_array('required', $rules) AND is_null($postdata))
         {
             // Before we bail out, does the rule contain a callback?
             if (preg_match("/(callback_\w+)/", implode(' ', $rules), $match))
             {
-                $callback = TRUE;
+                $callback = true;
                 $rules = (array('1' => $match[1]));
             }
             else
@@ -528,16 +528,16 @@ Class Validator {
         // --------------------------------------------------------------------
         
         // Isset Test. Typically this rule will only apply to checkboxes.
-        if (is_null($postdata) AND $callback == FALSE)
+        if (is_null($postdata) AND $callback == false)
         {
-            if (in_array('isset', $rules, TRUE) OR in_array('required', $rules))
+            if (in_array('isset', $rules, true) OR in_array('required', $rules))
             {
                 // Set the message type
                 $type = (in_array('required', $rules)) ? 'required' : 'isset';
             
                 if ( ! isset($this->_error_messages[$type]))
                 {
-                    if (FALSE === ($line = lang($type)))
+                    if (false === ($line = \Ob\lang($type)))
                     {
                         $line = 'The field was not set';
                     }                            
@@ -567,11 +567,11 @@ Class Validator {
         // Cycle through each rule and run it
         foreach ($rules As $rule)
         {
-            $_in_array = FALSE;
+            $_in_array = false;
             
             // We set the $postdata variable with the current data in our master array so that
             // each cycle of the loop is dealing with the processed data from the last cycle
-            if ($row['is_array'] == TRUE AND is_array($this->_field_data[$row['field']]['postdata']))
+            if ($row['is_array'] == true AND is_array($this->_field_data[$row['field']]['postdata']))
             {
                 // We shouldn't need this safety, but just in case there isn't an array index
                 // associated with this cycle we'll bail out
@@ -581,7 +581,7 @@ Class Validator {
                 }
             
                 $postdata = $this->_field_data[$row['field']]['postdata'][$cycles];
-                $_in_array = TRUE;
+                $_in_array = true;
             }
             else
             {
@@ -592,19 +592,19 @@ Class Validator {
             // --------------------------------------------------------------------
             // Is the rule hmvc callback ?
             
-            $hmvc_callback = FALSE;             
-            $callback      = FALSE;      
+            $hmvc_callback = false;             
+            $callback      = false;      
             if (substr($rule, 0, 16) == 'callback_request')
             {
                 $rule = substr($rule, 9);
-                $hmvc_callback = TRUE;
+                $hmvc_callback = true;
             }
             else
             {
                 if (substr($rule, 0, 9) == 'callback_')  // Is the rule a callback? 
                 {
                     $rule = substr($rule, 9);
-                    $callback = TRUE;
+                    $callback = true;
                 }
             }
             
@@ -612,7 +612,7 @@ Class Validator {
             
             // Strip the parameter (if exists) from the rule
             // Rules can contain parameters: max_len[5], callback_request[get][/module/class/method]
-            $param = FALSE;
+            $param = false;
             if (preg_match_all("/(.*?)\[(.*?)\]/", $rule, $matches))
             {
                 $rule    = $matches[1][0];
@@ -621,24 +621,24 @@ Class Validator {
             }
             
             
-            if($hmvc_callback === TRUE) //  Call the hmvc function
+            if($hmvc_callback === true) //  Call the hmvc function
             {
                 new request\start();
                 
-                $result = FALSE;
+                $result = false;
                 
-                if($param !== FALSE)
+                if($param !== false)
                 {
                     $response = request\get($second_param);
                     
                     if($response === '1' || strtolower($response) === 'true')
                     {
-                        $result = TRUE;
+                        $result = true;
                     }
                 }
                 
                 // Re-assign the result to the master data array
-                if ($_in_array == TRUE)
+                if ($_in_array == true)
                 {
                     $this->_field_data[$row['field']]['postdata'][$cycles] = (is_bool($result)) ? $postdata : $result;
                 }
@@ -648,7 +648,7 @@ Class Validator {
                 }
                                 
             }
-            elseif ($callback === TRUE)  // Call the function that corresponds to the rule
+            elseif ($callback === true)  // Call the function that corresponds to the rule
             {
                 if(is_object($this->_callback_object))  // This is for VM model class
                 {                                       // we set VM object as callback
@@ -670,7 +670,7 @@ Class Validator {
                 $result = $this->_this->$rule($postdata, $param);
 
                 // Re-assign the result to the master data array
-                if ($_in_array == TRUE)
+                if ($_in_array == true)
                 {
                     $this->_field_data[$row['field']]['postdata'][$cycles] = (is_bool($result)) ? $postdata : $result;
                 }
@@ -680,7 +680,7 @@ Class Validator {
                 }
             
                 // If the field isn't required and we just processed a callback we'll move on...
-                if ( ! in_array('required', $rules, TRUE) AND $result !== FALSE)
+                if ( ! in_array('required', $rules, true) AND $result !== false)
                 {
                     continue;
                 }
@@ -695,7 +695,7 @@ Class Validator {
                     {
                         $result = $rule($postdata);
                                             
-                        if ($_in_array == TRUE)
+                        if ($_in_array == true)
                         {
                             $this->_field_data[$row['field']]['postdata'][$cycles] = (is_bool($result)) ? $postdata : $result;
                         }
@@ -710,7 +710,7 @@ Class Validator {
 
                 $result = $this->$rule($postdata, $param);
 
-                if ($_in_array == TRUE)
+                if ($_in_array == true)
                 {
                     $this->_field_data[$row['field']]['postdata'][$cycles] = (is_bool($result)) ? $postdata : $result;
                 }
@@ -721,11 +721,11 @@ Class Validator {
             }
                             
             // Did the rule test negatively?  If so, grab the error.
-            if ($result === FALSE)
+            if ($result === false)
             {            
                 if ( ! isset($this->_error_messages[$rule]))
                 {
-                    if (FALSE === ($line = lang($rule)))
+                    if (false === ($line = \Ob\lang($rule)))
                     {
                         $line = 'Unable to access an error message corresponding to your field name.';
                     }                        
@@ -778,7 +778,7 @@ Class Validator {
             $line = substr($fieldname, 5);            
             
             // Were we able to translate the field name?  If not we use $line
-            if (FALSE === ($fieldname = lang($line)))
+            if (false === ($fieldname = \Ob\lang($line)))
             {
                 return $line;
             }
@@ -800,7 +800,7 @@ Class Validator {
      * @param    string
      * @return   void
      */    
-    public function set_value($field = '', $default = '')
+    public function setValue($field = '', $default = '')
     {
         if ( ! isset($this->_field_data[$field]))
         {
@@ -832,11 +832,11 @@ Class Validator {
      * @param    string
      * @return   string
      */    
-    public function set_select($field = '', $value = '', $default = FALSE)
+    public function setSelect($field = '', $value = '', $default = false)
     {        
         if ( ! isset($this->_field_data[$field]) OR ! isset($this->_field_data[$field]['postdata']))
         {
-            if ($default === TRUE AND count($this->_field_data) === 0)
+            if ($default === true AND count($this->_field_data) === 0)
             {
                 return ' selected="selected"';
             }
@@ -876,11 +876,11 @@ Class Validator {
      * @param    string
      * @return    string
      */    
-    public function set_radio($field = '', $value = '', $default = FALSE)
+    public function setRadio($field = '', $value = '', $default = false)
     {
         if ( ! isset($this->_field_data[$field]) OR ! isset($this->_field_data[$field]['postdata']))
         {
-            if ($default === TRUE AND count($this->_field_data) === 0)
+            if ($default === true AND count($this->_field_data) === 0)
             {
                 return ' checked="checked"';
             }
@@ -920,11 +920,11 @@ Class Validator {
      * @param    string
      * @return    string
      */    
-    public function set_checkbox($field = '', $value = '', $default = FALSE)
+    public function setCheckbox($field = '', $value = '', $default = false)
     {
         if ( ! isset($this->_field_data[$field]) OR ! isset($this->_field_data[$field]['postdata']))
         {
-            if ($default === TRUE AND count($this->_field_data) === 0)
+            if ($default === true AND count($this->_field_data) === 0)
             {
                 return ' checked="checked"';
             }
@@ -964,7 +964,7 @@ Class Validator {
     {
         if ( ! is_array($str))
         {
-            return (trim($str) == '') ? FALSE : TRUE;
+            return (trim($str) == '') ? false : true;
         }
         else
         {
@@ -986,12 +986,12 @@ Class Validator {
     {
         if ( ! isset($this->_globals[$field]))
         {
-            return FALSE;                
+            return false;                
         }
         
         $field = $this->_globals[$field];
 
-        return ($str !== $field) ? FALSE : TRUE;
+        return ($str !== $field) ? false : true;
     }
     
     // --------------------------------------------------------------------
@@ -1008,10 +1008,10 @@ Class Validator {
     {
         if (preg_match("/[^0-9]/", $val))
         {
-            return FALSE;
+            return false;
         }
         
-        return (mb_strlen($str) < $val) ? FALSE : TRUE;
+        return (mb_strlen($str) < $val) ? false : true;
     }
     
     // --------------------------------------------------------------------
@@ -1028,10 +1028,10 @@ Class Validator {
     {
         if (preg_match("/[^0-9]/", $val))
         {
-            return FALSE;
+            return false;
         }
 
-        return (mb_strlen($str) > $val) ? FALSE : TRUE;        
+        return (mb_strlen($str) > $val) ? false : true;        
     }
     
     // --------------------------------------------------------------------
@@ -1048,10 +1048,10 @@ Class Validator {
     {
         if (preg_match("/[^0-9]/", $val))
         {
-            return FALSE;
+            return false;
         }
 
-        return (mb_strlen($str) != $val) ? FALSE : TRUE;
+        return (mb_strlen($str) != $val) ? false : true;
     }
     
     // --------------------------------------------------------------------
@@ -1063,9 +1063,9 @@ Class Validator {
      * @param    string
      * @return   bool
      */    
-    public function valid_email($str)
+    public function validEmail($str)
     {
-        return ( ! preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str)) ? FALSE : TRUE;
+        return ( ! preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str)) ? false : true;
     }
 
     // --------------------------------------------------------------------
@@ -1079,19 +1079,19 @@ Class Validator {
      */
     public function valid_email_dns($str)
     {
-        if($this->valid_email($str) === TRUE)
+        if($this->validEmail($str) === true)
         {
             list($username,$domain) = explode('@',$str);
             
             if( ! checkdnsrr($domain,'MX'))
             {
-                return FALSE;
+                return false;
             }
 
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     // --------------------------------------------------------------------
@@ -1108,25 +1108,25 @@ Class Validator {
         $dns_check = strtoupper($dns_check);
         
         $dns = '';
-        if($dns_check == 'TRUE' OR $dns_check == 1)
+        if($dns_check == 'true' OR $dns_check == 1)
         {
             $dns = '_dns';
         }
         
-        if (strpos($str, ',') === FALSE)
+        if (strpos($str, ',') === false)
         {
             return $this->{'valid_email'.$dns}(trim($str));
         }
         
         foreach(explode(',', $str) as $email)
         {
-            if (trim($email) != '' && $this->{'valid_email'.$dns}(trim($email)) === FALSE)
+            if (trim($email) != '' && $this->{'valid_email'.$dns}(trim($email)) === false)
             {
-                return FALSE;
+                return false;
             }
         }
         
-        return TRUE;
+        return true;
     }
     
     // --------------------------------------------------------------------
@@ -1145,7 +1145,7 @@ Class Validator {
         
         if(strpos($date, ' ') > 0 OR strlen($date) > 10 OR strlen($date) < 10) // well format and no time
         {
-            return FALSE;
+            return false;
         }
         
         // get the date symbols.
@@ -1154,7 +1154,7 @@ Class Validator {
 
         if( ! isset($date_array[0]) AND ! isset($format_array[0]))
         {
-            return FALSE;
+            return false;
         }
         
         $format = str_replace($format_array[0], '.', $format);
@@ -1193,7 +1193,7 @@ Class Validator {
      * @param    string
      * @return   string
      */
-    public function valid_ip($ip)
+    public function validIp($ip)
     {
         return i_valid_ip($ip);
     }
@@ -1209,7 +1209,7 @@ Class Validator {
      */        
     public function alpha($str)
     {
-        return ( ! preg_match("/^([a-z])+$/i", $str)) ? FALSE : TRUE;
+        return ( ! preg_match("/^([a-z])+$/i", $str)) ? false : true;
     }
     
     // --------------------------------------------------------------------
@@ -1223,7 +1223,7 @@ Class Validator {
      */    
     public function alpha_numeric($str)
     {
-        return ( ! preg_match("/^([a-z0-9])+$/i", $str)) ? FALSE : TRUE;
+        return ( ! preg_match("/^([a-z0-9])+$/i", $str)) ? false : true;
     }
     
     // --------------------------------------------------------------------
@@ -1237,7 +1237,7 @@ Class Validator {
      */    
     public function alpha_dash($str)
     {
-        return ( ! preg_match("/^([-a-z0-9_-])+$/i", $str)) ? FALSE : TRUE;
+        return ( ! preg_match("/^([-a-z0-9_-])+$/i", $str)) ? false : true;
     }
     
     // --------------------------------------------------------------------
@@ -1265,7 +1265,7 @@ Class Validator {
      */
     public function is_numeric($str)
     {
-        return ( ! is_numeric($str)) ? FALSE : TRUE;
+        return ( ! is_numeric($str)) ? false : true;
     } 
 
     // --------------------------------------------------------------------
@@ -1309,15 +1309,15 @@ Class Validator {
     {
         if ( ! preg_match( '/^[0-9]+$/', $str))
         {
-            return FALSE;
+            return false;
         }
         
         if ($str == 0)
         {
-            return FALSE;
+            return false;
         }
     
-           return TRUE;
+           return true;
     }
     
     // --------------------------------------------------------------------
@@ -1348,7 +1348,7 @@ Class Validator {
      */
     public function no_space($str)
     {
-       return (preg_match("#\s#", $str)) ? FALSE : TRUE;
+       return (preg_match("#\s#", $str)) ? false : true;
     } 
 
     // --------------------------------------------------------------------
@@ -1375,7 +1375,7 @@ Class Validator {
             return $data;
         }
         
-        if ($this->_safe_form_data == FALSE OR $data === '')
+        if ($this->_safe_form_data == false OR $data === '')
         {
             return $data;
         }
@@ -1416,9 +1416,9 @@ Class Validator {
      * @param    string
      * @return    string
      */    
-    public function strip_image_tags($str)
+    public function stripImageTags($str)
     {
-        return Security::getInstance()->strip_image_tags($str);
+        return Security::getInstance()->stripImageTags($str);
     }
     
     // --------------------------------------------------------------------
@@ -1430,9 +1430,9 @@ Class Validator {
      * @param    string
      * @return    string
      */    
-    public function xss_clean($str)
+    public function xssClean($str)
     {
-        return Security::getInstance()->xss_clean($str);
+        return Security::getInstance()->xssClean($str);
     }
     
     // --------------------------------------------------------------------
@@ -1444,7 +1444,7 @@ Class Validator {
      * @param    string
      * @return   string
      */    
-    public function encode_php_tags($str)
+    public function encodePhpTags($str)
     {
         return str_replace(array('<?php', '<?PHP', '<?', '?>'),  array('&lt;?php', '&lt;?PHP', '&lt;?', '?&gt;'), $str);
     }

@@ -16,7 +16,7 @@ Class Odm extends Model {
     public $errors     = array();  // Validation errors.
     public $values     = array();  // Filtered safe values.
     public $no_save    = array();  // No save fields, so save function will not save selected fields to database.
-    public $validation = FALSE;    // If form validation success we set it to true.
+    public $validation = false;    // If form validation success we set it to true.
     
     public $function   = array();
     
@@ -27,7 +27,7 @@ Class Odm extends Model {
     public $where_not_in    = array();
     public $or_where_not_in = array();
     
-    public $schema = NULL;
+    public $schema = null;
     public $schema_fields = array();
     
     /**
@@ -41,14 +41,14 @@ Class Odm extends Model {
         
         if( ! is_object($schema))
         {
-            throw new Exception('You must provide a $schema object.');
+            throw new \Exception('You must provide a $schema object.');
         }
         
         $this->schema = $schema;
         
         if( ! isset($this->schema->config['database'])) 
         {
-            throw new Exception('Check your model it must be contains $schema->config[\'database\'] array.');
+            throw new \Exception('Check your model it must be contains $schema->config[\'database\'] array.');
         }
         
         $db = $this->schema->config['database'];
@@ -124,9 +124,9 @@ Class Odm extends Model {
                 $this->values[$table][$key] = $this->_set_value($key, $this->{$key});
             }
             
-            $this->validation = TRUE;
+            $this->validation = true;
             
-            return TRUE;
+            return true;
         }
         else 
         {
@@ -134,7 +134,7 @@ Class Odm extends Model {
             {
                if(isset($validator->_field_data[$key]['error']))
                {
-                   $error = $validator->error($key, NULL, NULL);
+                   $error = $validator->error($key, null, null);
 
                    if( ! empty($error))
                    {
@@ -146,9 +146,9 @@ Class Odm extends Model {
                $this->values[$table][$key] = $this->_set_value($key, $this->{$key});
             }
             
-            $this->validation = FALSE;
+            $this->validation = false;
             
-            return FALSE;
+            return false;
         }
     }
     
@@ -343,7 +343,7 @@ Class Odm extends Model {
     *
     * @param string $type
     */
-    public function custom_key($type = 'name')
+    public function customKey($type = 'name')
     {   
        $table = $this->schema->config['table'];
         
@@ -351,10 +351,10 @@ Class Odm extends Model {
        {
            if(isset($this->function[$table]['name']))
            {
-               return TRUE;
+               return true;
            }
            
-           return FALSE;
+           return false;
        }
        
        if(isset($this->function[$table][$type]))
@@ -362,7 +362,7 @@ Class Odm extends Model {
            return $this->function[$table][$type];
        }
        
-       return FALSE;
+       return false;
     }
     
     // --------------------------------------------------------------------
@@ -372,7 +372,7 @@ Class Odm extends Model {
     *
     * @param string $key or $field
     */
-    public function set_value($key, $value)
+    public function setValue($key, $value)
     {
         $this->values[$this->schema->config['table']][$key] = $value;
     }
@@ -407,7 +407,7 @@ Class Odm extends Model {
         } 
         else 
         {
-            return(NULL);
+            return(null);
         }
     }
     
@@ -450,7 +450,7 @@ Class Odm extends Model {
      * @param string $key
      * @param string $val 
      */
-    public function or_where($key = '', $val = '')
+    public function orWhere($key = '', $val = '')
     {
         $this->{$key} = $val;  // set data for validation
         
@@ -466,7 +466,7 @@ Class Odm extends Model {
      * @param string $key
      * @param array $val 
      */
-    public function where_in($key = '', $val = array())
+    public function whereIn($key = '', $val = array())
     {
         foreach($val as $v)
         {
@@ -485,7 +485,7 @@ Class Odm extends Model {
      * @param string $key
      * @param array $val 
      */
-    public function or_where_in($key = '', $val = array())
+    public function orWhereIn($key = '', $val = array())
     {
         foreach($val as $v)
         {
@@ -504,7 +504,7 @@ Class Odm extends Model {
      * @param string $key
      * @param array $val 
      */
-    public function where_not_in($key = '', $val = array())
+    public function whereNotIn($key = '', $val = array())
     {
         foreach($val as $v)
         {
@@ -523,7 +523,7 @@ Class Odm extends Model {
      * @param string $key
      * @param array $val 
      */
-    public function or_where_not_in($key = '', $val = array())
+    public function orWhereNotIn($key = '', $val = array())
     {
         foreach($val as $v)
         {
@@ -539,7 +539,7 @@ Class Odm extends Model {
     * Do update if ID exists otherwise
     * do insert.
     * 
-    * @return  FALSE | Integer
+    * @return  false | Integer
     */
     public function save()
     {
@@ -558,7 +558,7 @@ Class Odm extends Model {
             }
         }
 
-        $has_rules = FALSE;
+        $has_rules = false;
         
         foreach($this->schema_fields as $k => $v)
         {
@@ -569,7 +569,7 @@ Class Odm extends Model {
             
             if(isset($this->schema_fields[$k]['rules']))  // validation used or not
             {
-                $has_rules = TRUE;
+                $has_rules = true;
             }
             
             if($this->{$k} != '')
@@ -641,7 +641,7 @@ Class Odm extends Model {
         }
         else
         {
-            $validator = TRUE;  // don't do validation
+            $validator = true;  // don't do validation
         }
         
         if($validator)  // if validation success !
@@ -661,7 +661,7 @@ Class Odm extends Model {
 
                     $this->_before_save();
                                     
-                    $this->_compile_select();                
+                    $this->_compileSelect();                
                     $this->errors[$table]['affected_rows'] = $this->db->update($table, $s_data);
                     
                     $this->_after_save();
@@ -669,23 +669,23 @@ Class Odm extends Model {
                     $this->db->commit();    // commit the transaction
                     
                     $this->errors[$table]['success'] = 1;
-                    $this->errors[$table]['msg']     = lang('Data updated succesfully.');
+                    $this->errors[$table]['msg']     = \Ob\lang('Data updated succesfully.');
                     
                     $this->clear();    // reset validator data
 
-                    return TRUE;
+                    return true;
 
                 } catch(Exception $e)
                 {
                     $this->db->rollback();       // roll back the transaction if we fail
 
                     $this->errors[$table]['success'] = 0;
-                    $this->errors[$table]['msg']     = lang('Data not saved, please do some changes.');
+                    $this->errors[$table]['msg']     = \Ob\lang('Data not saved, please do some changes.');
                     $this->errors[$table]['transaction_error'] = $e->getMessage();
                     
                     $this->clear();    // reset validator data
 
-                    return FALSE;
+                    return false;
                 }
                 
             }
@@ -697,32 +697,32 @@ Class Odm extends Model {
                     
                     $this->_before_save();
                      
-                    $this->_compile_select();    
+                    $this->_compileSelect();    
                     $this->errors[$table]['affected_rows'] = $this->db->insert($table, $s_data);
-                    $this->values[$table][$id] = $this->db->insert_id();  // add last inserted id.
+                    $this->values[$table][$id] = $this->db->insertId();  // add last inserted id.
 
                     $this->_after_save();
                     
                     $this->db->commit();    // commit the transaction
                     
                     $this->errors[$table]['success'] = 1;
-                    $this->errors[$table]['msg']     = lang('Data inserted succesfully.');
+                    $this->errors[$table]['msg']     = \Ob\lang('Data inserted succesfully.');
                     
                     $this->clear();    // reset validator data  // reset validator data
 
-                    return TRUE;
+                    return true;
 
                 } catch(Exception $e)
                 {
                     $this->db->rollback();       // roll back the transaction if we fail
 
                     $this->errors[$table]['success'] = 0;
-                    $this->errors[$table]['msg']     = lang('Data insert error.');
+                    $this->errors[$table]['msg']     = \Ob\lang('Data insert error.');
                     $this->errors[$table]['transaction_error'] = $e->getMessage();
                     
                     $this->clear();    // reset validator data  // reset validator data
 
-                    return FALSE;
+                    return false;
                 }
                 
             }
@@ -733,7 +733,7 @@ Class Odm extends Model {
             $this->errors[$table]['success'] = 0;
         }
         
-        return FALSE;
+        return false;
     }
     
     // --------------------------------------------------------------------
@@ -743,7 +743,7 @@ Class Odm extends Model {
     * 
     * @return void
     */
-    public function _compile_select()
+    public function _compileSelect()
     {
         if(count($this->where) > 0)
         {
@@ -757,7 +757,7 @@ Class Odm extends Model {
         {
             foreach($this->or_where as $key => $val)
             {
-                $this->db->or_where($key, $val);
+                $this->db->orWhere($key, $val);
             }
         }
         
@@ -765,7 +765,7 @@ Class Odm extends Model {
         {
             foreach($this->where_in as $key => $val)
             {
-                $this->db->where_in($key, $val);
+                $this->db->whereIn($key, $val);
             }
         }
         
@@ -773,7 +773,7 @@ Class Odm extends Model {
         {
             foreach($this->or_where_in as $key => $val)
             {
-                $this->db->or_where_in($key, $val);
+                $this->db->orWhereIn($key, $val);
             }
         }
         
@@ -781,7 +781,7 @@ Class Odm extends Model {
         {
             foreach($this->where_not_in as $key => $val)
             {
-                $this->db->where_not_in($key, $val);
+                $this->db->whereNotIn($key, $val);
             }
         }
         
@@ -789,7 +789,7 @@ Class Odm extends Model {
         {
             foreach($this->or_where_not_in as $key => $val)
             {
-                $this->db->or_where_not_in($key, $val);
+                $this->db->orWhereNotIn($key, $val);
             }
         }
     }
@@ -811,7 +811,7 @@ Class Odm extends Model {
         }
         
         $type  = strtolower($this->schema_fields[$field]['type']);
-        $value = Validator::getInstance()->set_value($field, $default);
+        $value = Validator::getInstance()->setValue($field, $default);
             
         if($type == 'string')
         {
@@ -850,7 +850,7 @@ Class Odm extends Model {
         
         if($type == 'null')
         {
-            return 'NULL';
+            return 'null';
         }
         
         return $value;   // Unknown type.
@@ -875,12 +875,12 @@ Class Odm extends Model {
         $table  = $this->schema->config['table'];
         $id     = ($this->schema->config['primary_key'] != '') ? $this->schema->config['primary_key'] : 'id';
         
-        $has_rules = FALSE;
+        $has_rules = false;
         foreach($this->schema_fields as $k => $v)
         {
             if(isset($this->schema_fields[$k]['rules']))  // validation used or not
             {
-                $has_rules = TRUE;
+                $has_rules = true;
             }
             
             if(isset($this->property[$k])) // set validations.
@@ -897,7 +897,7 @@ Class Odm extends Model {
         
         if(count($this->where) == 0 AND count($this->where_in) == 0)
         {
-            throw new Exception('Please set an ID using $model->where() before the delete operation.');
+            throw new \Exception('Please set an ID using $model->where() before the delete operation.');
         }
         
         if($has_rules)  // if we have validation rules ..
@@ -906,7 +906,7 @@ Class Odm extends Model {
         }
         else
         {
-            $validator = TRUE;  // don't do validation
+            $validator = true;  // don't do validation
         }
 
         if($validator)
@@ -917,7 +917,7 @@ Class Odm extends Model {
 
                 $this->_before_delete();
                 
-                $this->_compile_select();
+                $this->_compileSelect();
                 $this->errors[$table]['affected_rows'] = $this->db->delete($table);
 
                 $this->_after_delete();
@@ -925,23 +925,23 @@ Class Odm extends Model {
                 $this->db->commit();    // commit the transaction
                 
                 $this->errors[$table]['success'] = 1;
-                $this->errors[$table]['msg']     = lang('Data deleted succesfully.');
+                $this->errors[$table]['msg']     = \Ob\lang('Data deleted succesfully.');
                 
                 $this->clear();    // reset validator data
 
-                return TRUE;
+                return true;
 
             } catch(Exception $e)
             {
                 $this->db->rollback();       // roll back the transaction if we fail
 
                 $this->errors[$table]['success'] = 0;
-                $this->errors[$table]['msg']     = lang('Delete error or record already deleted.');
+                $this->errors[$table]['msg']     = \Ob\lang('Delete error or record already deleted.');
                 $this->errors[$table]['transaction_error'] = $e->getMessage();
 
                 $this->clear();    // reset validator data 
 
-                return FALSE;
+                return false;
             }
 
         }
@@ -951,7 +951,7 @@ Class Odm extends Model {
             $this->errors[$table]['success'] = 0;
         }
             
-        return FALSE;
+        return false;
     }
 
     // --------------------------------------------------------------------
@@ -976,7 +976,7 @@ Class Odm extends Model {
     {
         if(is_object($this->db))
         {
-            $this->db->_reset_select();  // Reset CRUD variables.
+            $this->db->_resetSelect();  // Reset CRUD variables.
         }
         
         Validator::getInstance()->clear(); // Clear validation settings.
@@ -991,7 +991,7 @@ Class Odm extends Model {
         $this->function   = array();
         $this->property   = array();
         $this->no_save    = array(); 
-        $this->validation = FALSE;
+        $this->validation = false;
 
         // DON'T reset below the variables
         /*

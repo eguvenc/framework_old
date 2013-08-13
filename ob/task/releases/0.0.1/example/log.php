@@ -78,22 +78,22 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
                 {
                     if(isset($out[5]))
                     {
-                        if(strpos($out[5], '[') !== FALSE)  // module logs.
+                        if(strpos($out[5], '[') !== false)  // module logs.
                         {
                             $line = "\033[0;33m".$line."\033[0m";
                         }               
-                        if(strpos($out[5],'SQL') !== FALSE)
+                        if(strpos($out[5],'SQL') !== false)
                         {
                             $line = "\033[0;32m".$line."\033[0m";
                         }
-                        if(strpos($out[5], 'Task') !== FALSE)
+                        if(strpos($out[5], 'Task') !== false)
                         {
                             $line = "\033[0;36m".$line."\033[0m";
                         }
                     }
                 }
      
-                if(strpos($line, 'DEBUG') !== FALSE)
+                if(strpos($line, 'DEBUG') !== false)
                 {
                     if($level == '' OR $level == 'debug')
                     {
@@ -101,7 +101,7 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
                         echo $line."\n";
                     }
                 }
-                if(strpos($line, 'ERROR') !== FALSE)
+                if(strpos($line, 'ERROR') !== false)
                 {
                     if($level == '' OR $level == 'error')
                     {
@@ -109,7 +109,7 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
                         echo $line."\n";
                     }
                 }
-                if(strpos($line, 'INFO') !== FALSE)
+                if(strpos($line, 'INFO') !== false)
                 {
                     if($level == '' OR $level == 'info')
                     {
@@ -117,7 +117,7 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
                         echo $line."\n";
                     }
                 }
-                if(strpos($line, 'BENCH') !== FALSE)
+                if(strpos($line, 'BENCH') !== false)
                 {
                     if($level == '' OR $level == 'bench')
                     {

@@ -20,7 +20,7 @@ Class Model {
      * 
      * @param mixed $db 
      */
-    public function __construct($db = TRUE)
+    public function __construct($db = true)
     {
         log\me('debug', "Model Class Initialized");
         
@@ -30,10 +30,10 @@ Class Model {
             $db_var = $db;
         }
         
-        $assign_db = FALSE;
-        if(is_bool($db) AND $db == TRUE)
+        $assign_db = false;
+        if(is_bool($db) AND $db == true)
         {
-            $assign_db = TRUE;
+            $assign_db = true;
         }
         
         if($assign_db)

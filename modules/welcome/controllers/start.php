@@ -12,9 +12,9 @@ Class Start extends Controller {
         
         sess_start();
         
-        if(db_item('username') == '')
+        if(db('username') == '')
         {
-            show_error('<b>SETUP ERROR</b> - Please create a test database called <b>obullo</b> 
+            showError('<b>SETUP ERROR</b> - Please create a test database called <b>obullo</b> 
                 and configure it from <b>/app/config/database.php</b>, then run the <b>test.sql</b> which is located in 
                 your <b>/modules/welcome/</b> folder');
         }
@@ -66,7 +66,7 @@ Class Start extends Controller {
         {
             if(i_ajax()) // Ajax request
             {
-                echo form_json_error($user);
+                echo formJsonError($user);
                 return;
             }
         }

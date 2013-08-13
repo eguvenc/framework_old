@@ -26,7 +26,7 @@
 
 if( ! function_exists('utf8_str_ireplace'))
 {
-    function utf8_str_ireplace($search, $replace, $str, & $count = NULL)
+    function utf8_str_ireplace($search, $replace, $str, & $count = null)
     {
         $utf8 = lib('ob/utf8');
 

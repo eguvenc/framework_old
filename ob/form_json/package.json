@@ -1,6 +1,6 @@
 {
   "name": "form_json",
-  "description": "Control the ajax operations.",
+  "description": "Control the ajax form elements.",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",

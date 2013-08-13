@@ -27,7 +27,7 @@ $mongo['dsn']          = ''; // mongodb://connection_string
 | 
 | Options:
 |   
-|   fysnc = Boolean, defaults to FALSE. Forces the insert to be synced to disk before returning success.
+|   fysnc = Boolean, defaults to false. Forces the insert to be synced to disk before returning success.
 |   wtimewout = How long to wait for WriteConcern acknowledgement.The default value for MongoClient is 10000 milliseconds.
 |   timeout = If acknowledged writes are used, this sets how long (in milliseconds) for the client to wait for a database response.
 |  
@@ -49,13 +49,13 @@ $mongo['query_safety'] = array('w' => 0, 'j' => 1);
 |--------------------------------------------------------------------------
 | Connection Flag
 |--------------------------------------------------------------------------
-| If you are having connection problems try change set to TRUE.
+| If you are having connection problems try change set to true.
 |
 | if set true db will available end of the the connection string.
 | mongodb://[username:password@]/host/{dbname} 
 |
 */
-$mongo['dbname_flag'] = FALSE;
+$mongo['dbname_flag'] = false;
 
 /* End of file mongo.php */
 /* Location: .app/config/mongo.php */

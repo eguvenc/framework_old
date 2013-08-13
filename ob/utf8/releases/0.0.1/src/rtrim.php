@@ -23,9 +23,9 @@
  */
 if(function_exists('utf8_rtrim'))
 {
-    function utf8_rtrim($str, $charlist = NULL)
+    function utf8_rtrim($str, $charlist = null)
     {
-        if ($charlist === NULL)
+        if ($charlist === null)
         {
             return rtrim($str);
         }	

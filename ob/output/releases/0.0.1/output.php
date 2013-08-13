@@ -18,7 +18,7 @@ Class Output {
     public $final_output;
     public $cache_expiration    = 0;
     public $headers             = array();
-    public $parse_exec_vars     = TRUE;    // whether or not to parse variables like {elapsed_time} and {memory_usage}
+    public $parse_exec_vars     = true;    // whether or not to parse variables like {elapsed_time} and {memory_usage}
     
     public static $instance;
     
@@ -49,7 +49,7 @@ Class Output {
     * @access    public
     * @return    string
     */    
-    public function get_output()
+    public function getOutput()
     {
         return $this->final_output;
     }
@@ -65,7 +65,7 @@ Class Output {
     * @param     string
     * @return    void
     */    
-    public function set_output($output)
+    public function setOutput($output)
     {
         $this->final_output = $output;
     }
@@ -81,7 +81,7 @@ Class Output {
     * @param     string
     * @return    void
     */    
-    public function append_output($output)
+    public function appendOutput($output)
     {
         if ($this->final_output == '')
         {
@@ -107,7 +107,7 @@ Class Output {
     * @param    string
     * @return    void
     */    
-    public function set_header($header, $replace = TRUE)
+    public function setHeader($header, $replace = true)
     {
         $this->headers[] = array($header, $replace);
     }
@@ -123,9 +123,9 @@ Class Output {
     * @param    string    
     * @return   void
     */    
-    public function set_status_header($code = 200, $text = '')
+    public function setStatusHeader($code = 200, $text = '')
     {
-        \Ob\set_status_header($code, $text);
+        \Ob\setStatusHeader($code, $text);
     }
     
     // --------------------------------------------------------------------
@@ -171,7 +171,7 @@ Class Output {
         // Do we need to write a cache file?
         if ($this->cache_expiration > 0)
         {
-            $this->_write_cache($output);
+            $this->_writeCache($output);
         }
         
         // --------------------------------------------------------------------
@@ -179,10 +179,10 @@ Class Output {
         // Parse out the elapsed time and memory usage,
         // then swap the pseudo-variables with the data
         
-        $elapsed = \Ob\bench\elapsed_time('total_execution_time_start', 'total_execution_time_end');        
+        $elapsed = \Ob\bench\elapsedTime('total_execution_time_start', 'total_execution_time_end');        
         $output  = str_replace('{elapsed_time}', $elapsed, $output);
                 
-        if ($this->parse_exec_vars === TRUE)
+        if ($this->parse_exec_vars === true)
         {
             $memory = ( ! function_exists('memory_get_usage')) ? '0' : round(memory_get_usage()/1024/1024, 2).'MB';
             $output = str_replace('{elapsed_time}', $elapsed, $output);
@@ -192,11 +192,11 @@ Class Output {
         // Is compression requested?  
         // --------------------------------------------------------------------
         
-        if (\Ob\config('compress_output') === TRUE)
+        if (\Ob\config('compress_output') === true)
         {
             if (extension_loaded('zlib'))
             {             
-                if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) AND strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE)
+                if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) AND strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false)
                 {   
                     ob_start('ob_gzhandler');
                 }
@@ -227,12 +227,12 @@ Class Output {
             
             \Ob\log\me('debug', "Final output sent to browser");
             
-            if (\Ob\config('log_benchmark') == TRUE)
+            if (\Ob\config('log_benchmark') == true)
             {
                 \Ob\log\me('bench', "Total execution time: ".$elapsed);
             }
             
-            return TRUE;
+            return true;
         }
         
         // Does the controller contain a function named _output()?
@@ -252,7 +252,7 @@ Class Output {
                 
         // Do we need to generate profile data?        
         // If so, load the Profile class and run it.
-        if (\Ob\config('log_benchmark') == TRUE)
+        if (\Ob\config('log_benchmark') == true)
         {
             if (function_exists('memory_get_usage') && ($usage = memory_get_usage()) != '')
             {
@@ -274,7 +274,7 @@ Class Output {
                 {             
                     if (isset($bench->marker[$match[1].'_end']) AND isset($bench->marker[$match[1].'_start']))
                     {
-                        $profile[$match[1]] = \Ob\bench\elapsed_time($match[1].'_start', $key);
+                        $profile[$match[1]] = \Ob\bench\elapsedTime($match[1].'_start', $key);
                     }
                 }
             }
@@ -298,18 +298,18 @@ Class Output {
     * @access    public
     * @return    void
     */    
-    public function _write_cache($output)
+    public function _writeCache($output)
     {
         $OB = \Ob\getInstance();
         $cache_path = APP .'cache'. DS;
 
-        if ( ! is_dir(rtrim($cache_path, DS)) OR ! is_really_writable(rtrim($cache_path, DS)))
+        if ( ! is_dir(rtrim($cache_path, DS)) OR ! isReallyWritable(rtrim($cache_path, DS)))
         {
             return;
         }
 
-        $uri_string = $OB->uri->uri_string();  // Standart Uri
-        $uri        = $OB->config->base_url() . $OB->config->item('index_page'). $uri_string;
+        $uri_string = $OB->uri->uriString();  // Standart Uri
+        $uri        = $OB->config->baseUrl() . $OB->config->item('index_page'). $uri_string;
 
         $cache_path .= md5($uri);
 
@@ -347,23 +347,23 @@ Class Output {
     * @access    public
     * @return    void
     */    
-    public function _display_cache(&$config, &$URI)
+    public function _displayCache(&$config, &$URI)
     {        
         $cache_path = APP .'cache'. DS;
         
         // Build the file path.  The file name is an MD5 hash of the full URI
-        $uri =  $config->base_url() . $config->item('index_page') . $URI->uri_string;
+        $uri =  $config->baseUrl() . $config->item('index_page') . $URI->uri_string;
         
         $filepath = $cache_path . md5($uri);
 
         if ( ! @file_exists($filepath))
         {
-            return FALSE;
+            return false;
         }
 
         if ( ! $fp = @fopen($filepath, FOPEN_READ))
         {
-            return FALSE;
+            return false;
         }
             
         flock($fp, LOCK_SH);
@@ -380,19 +380,19 @@ Class Output {
         // Strip out the embedded timestamp        
         if ( ! preg_match("/(\d+TS--->)/", $cache_data, $match))
         {
-            return FALSE;
+            return false;
         }
         
         // Has the file expired? If so we'll delete it.
         if (time() >= trim(str_replace('TS--->', '', $match['1'])))
         {        
-            if (is_really_writable($cache_path))
+            if (isReallyWritable($cache_path))
             {
                 @unlink($filepath);
                 
                 \Ob\log\me('debug', 'Cache file has expired. File deleted');
                 
-                return FALSE;
+                return false;
             }
         }
 
@@ -401,7 +401,7 @@ Class Output {
         
         \Ob\log\me('debug', 'Cache file is current. Sending it to browser.');
         
-        return TRUE;
+        return true;
     }
 
 

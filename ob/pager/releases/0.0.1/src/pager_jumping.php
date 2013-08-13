@@ -1,4 +1,5 @@
 <?php
+namespace Ob\Pager\Src;
 
 /**
  * Pager Jumping Driver
@@ -25,9 +26,9 @@ Class Pager_Jumping extends Pager_Common
     {
         $res = $this->set_options($options);
         
-        if ($res !== TRUE) 
+        if ($res !== true) 
         {
-            throw new Exception('Pager Unknown Error.');
+            throw new \Exception('Pager Unknown Error.');
         }
     
         $this->build();
@@ -120,13 +121,13 @@ Class Pager_Jumping extends Pager_Common
     *
     * @return array Back/pages/next links
     */
-    public function get_links($page_id = NULL, $next_html = '')
+    public function get_links($page_id = null, $next_html = '')
     {
         //BC hack
         if ( ! empty($next_html)) 
         {
             $back_html = $page_id;
-            $page_id    = NULL;
+            $page_id    = null;
         } 
         else 
         {
@@ -220,13 +221,13 @@ Class Pager_Jumping extends Pager_Common
         {
             if ($i != $this->_current_page) 
             {
-                $this->range[$i] = FALSE;
+                $this->range[$i] = false;
                 $this->_link_data[$this->_url_var] = $i;
                 $links .= $this->_render_link(str_replace('%d', $i, $this->_alt_page), $i);
             } 
             else 
             {
-                $this->range[$i] = TRUE;
+                $this->range[$i] = true;
                 $links .= $this->_cur_page_span_pre . $i . $this->_cur_page_span_post;
             }
             
@@ -241,4 +242,4 @@ Class Pager_Jumping extends Pager_Common
 // END Pager_Jumping Class
 
 /* End of file Pager_Jumping.php */
-/* Location: ./ob/pager/releases/0.0.1/pager_jumping.php */
+/* Location: ./ob/pager/releases/0.0.1/src/pager_jumping.php */

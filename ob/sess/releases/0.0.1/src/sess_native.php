@@ -10,15 +10,15 @@ namespace Ob\Sess\Src;
 Class Sess_Native {
     
     public $db;
-    public $sess_encrypt_cookie  = FALSE;
-    public $sess_expiration      = '7200';
-    public $sess_match_ip        = FALSE;
-    public $sess_match_useragent = TRUE;
-    public $sess_cookie_name     = 'ob_session';
+    public $encrypt_cookie       = false;
+    public $expiration           = '7200';
+    public $match_ip             = false;
+    public $match_useragent      = true;
+    public $cookie_name          = 'ob_session';
     public $cookie_prefix        = '';
     public $cookie_path          = '';
     public $cookie_domain        = '';
-    public $sess_time_to_update  = 300;
+    public $time_to_update       = 300;
     public $encryption_key       = '';
     public $flashdata_key        = 'flash';
     public $time_reference       = 'time';
@@ -46,16 +46,16 @@ Class Sess_Native {
     {
         \Ob\log\me('debug', "Session Native Driver Initialized"); 
         
-        foreach (array('sess_encrypt_cookie','sess_expiration', 'sess_die_cookie', 'sess_match_ip', 
-        'sess_match_useragent', 'sess_cookie_name', 'cookie_path', 'cookie_domain', 
-        'sess_time_to_update', 'time_reference', 'cookie_prefix', 'encryption_key') as $key)
+        foreach (array('encrypt_cookie','expiration', 'expire_on_close', 'match_ip', 
+        'match_useragent', 'cookie_name', 'cookie_path', 'cookie_domain', 
+        'time_to_update', 'time_reference', 'cookie_prefix', 'encryption_key') as $key)
         {
-            $this->$key = (isset($params[$key])) ? $params[$key] : \Ob\config($key);
+            $this->$key = (isset($params[$key])) ? $params[$key] : \Ob\config($key, 'sess');
         }
         
         // @todo _unserialize func. use strip_slashes() func. We can add it later if we need it in Native Library. ?
                 
-        if($this->sess_die_cookie)
+        if($this->expire_on_close)
         {
             session_set_cookie_params(0);
             
@@ -64,27 +64,27 @@ Class Sess_Native {
         } 
         else 
         {
-            session_set_cookie_params($this->sess_expiration, $this->cookie_path, $this->cookie_domain);
+            session_set_cookie_params($this->expiration, $this->cookie_path, $this->cookie_domain);
             
             // Configure garbage collection
             ini_set('session.gc_divisor', 100);
-            ini_set('session.gc_maxlifetime', ($this->sess_expiration == 0) ? 7200 : $this->sess_expiration);
+            ini_set('session.gc_maxlifetime', ($this->expiration == 0) ? 7200 : $this->expiration);
         }
         
-        $this->now = $this->_get_time();
+        $this->now = $this->_getTime();
 
-        session_name($this->cookie_prefix . $this->sess_cookie_name);
+        session_name($this->cookie_prefix . $this->cookie_name);
         
         if( ! isset($_SESSION) ) // If another session_start() func is started before ?
         {
             session_start();
         }
 
-        if (is_numeric($this->sess_expiration))
+        if (is_numeric($this->expiration))
         {
-            if ($this->sess_expiration > 0)
+            if ($this->expiration > 0)
             {
-                $this->sess_id_ttl = $this->sess_expiration;
+                $this->sess_id_ttl = $this->expiration;
             }
             else
             {
@@ -93,22 +93,22 @@ Class Sess_Native {
         }
 
         // check if session id needs regeneration
-        if ( $this->_session_id_expired() )
+        if ( $this->_sessionIdExpired() )
         {
             // regenerate session id (session data stays the
             // same, but old session storage is destroyed)
-            $this->_session_regenerate_id();
+            $this->_sessionRegenerateId();
         }
 
         // delete old flashdata (from last request)
-        $this->_flashdata_sweep();
+        $this->_flashdataSweep();
 
         // mark all new flashdata as old (data will be deleted before next request)
-        $this->_flashdata_mark();
+        $this->_flashdataMark();
 
         \Ob\log\me('debug', "Session routines successfully run"); 
 
-        return TRUE;
+        return true;
     }
     
     // --------------------------------------------------------------------
@@ -118,7 +118,7 @@ Class Sess_Native {
      * 
      * @return void 
      */
-    function _session_regenerate_id()
+    function _sessionRegenerateId()
     {
         // copy old session data, including its id
         $old_session_id = session_id();
@@ -140,7 +140,7 @@ Class Sess_Native {
         $_SESSION = $old_session_data;
 
         // update the session creation time
-        $_SESSION['regenerated'] = $this->_get_time();
+        $_SESSION['regenerated'] = $this->_getTime();
 
         // end the current session and store session data.
         session_write_close();
@@ -160,7 +160,7 @@ Class Sess_Native {
         
         if ( isset( $_COOKIE[session_name()] ) )
         {
-            setcookie(session_name(), '', ($this->_get_time() - 42000), $this->cookie_path, $this->cookie_domain);
+            setcookie(session_name(), '', ($this->_getTime() - 42000), $this->cookie_path, $this->cookie_domain);
         }
         
         session_destroy();
@@ -183,7 +183,7 @@ Class Sess_Native {
         }
         else
         {
-            return ( ! isset($_SESSION[$prefix.$item])) ? FALSE : $_SESSION[$prefix.$item];
+            return ( ! isset($_SESSION[$prefix.$item])) ? false : $_SESSION[$prefix.$item];
         }
     }
     
@@ -197,7 +197,7 @@ Class Sess_Native {
     */
     function alldata()
     {
-        return ( ! isset($_SESSION)) ? FALSE : $_SESSION;
+        return ( ! isset($_SESSION)) ? false : $_SESSION;
     }
     
     // --------------------------------------------------------------------
@@ -257,23 +257,23 @@ Class Sess_Native {
      * 
      * @return boolean 
      */
-    function _session_id_expired()
+    function _sessionIdExpired()
     {
         if ( ! isset( $_SESSION['regenerated'] ) )
         {
-            $_SESSION['regenerated'] = $this->_get_time();
+            $_SESSION['regenerated'] = $this->_getTime();
             
-            return FALSE;
+            return false;
         }
 
         $expiry_time = time() - $this->sess_id_ttl;
 
         if ( $_SESSION['regenerated'] <=  $expiry_time )
         {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
     
     // ------------------------------------------------------------------------
@@ -287,7 +287,7 @@ Class Sess_Native {
     * @param    string
     * @return   void
     */
-    function set_flash($newdata = array(), $newval = '')  // ( obullo changes ... )
+    function setFlash($newdata = array(), $newval = '')  // ( obullo changes ... )
     {
         if (is_string($newdata))
         {
@@ -313,11 +313,11 @@ Class Sess_Native {
     * @param    string
     * @return   void
     */
-    function keep_flash($key) // ( obullo changes ...)
+    function keepFlash($key) // ( obullo changes ...)
     {
         // 'old' flashdata gets removed.  Here we mark all 
-        // flashdata as 'new' to preserve it from _flashdata_sweep()
-        // Note the function will return FALSE if the $key 
+        // flashdata as 'new' to preserve it from _flashdataSweep()
+        // Note the function will return false if the $key 
         // provided cannot be found
         $old_flashdata_key = $this->flashdata_key.':old:'.$key;
         $value = $this->get($old_flashdata_key);
@@ -340,7 +340,7 @@ Class Sess_Native {
     * @version  0.2     added prefix and suffix parameters.
     * @return   string
     */
-    function get_flash($key, $prefix = '', $suffix = '')  // obullo changes ...
+    function getFlash($key, $prefix = '', $suffix = '')  // obullo changes ...
     {
         $flashdata_key = $this->flashdata_key.':old:'.$key;
         
@@ -359,12 +359,12 @@ Class Sess_Native {
 
     /**
     * Identifies flashdata as 'old' for removal
-    * when _flashdata_sweep() runs.
+    * when _flashdataSweep() runs.
     *
     * @access    private
     * @return    void
     */
-    function _flashdata_mark()
+    function _flashdataMark()
     {
         $userdata = $this->alldata();
         
@@ -389,7 +389,7 @@ Class Sess_Native {
     * @access    private
     * @return    void
     */  
-    function _flashdata_sweep()
+    function _flashdataSweep()
     {              
         $userdata = $this->alldata();
         foreach ($userdata as $key => $value)
@@ -409,7 +409,7 @@ Class Sess_Native {
     * @access    private
     * @return    string
     */
-    function _get_time()
+    function _getTime()
     {
         $time = time();
         if (strtolower($this->time_reference) == 'gmt')

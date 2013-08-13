@@ -20,21 +20,19 @@ Class Auth {
     public $tablename          = '';     // The name of the database tablename
     public $username_col       = 'username';  // The name of the table field that contains the username.
     public $password_col       = 'password';  // The name of the table field that contains the password.
-    public $md5                = TRUE;        // Whether to use md5 hash.
-    public $allow_login        = TRUE;        // Whether to allow logins to be performed on this page.
+    public $md5                = true;        // Whether to use md5 hash.
+    public $allow_login        = true;        // Whether to allow logins to be performed on this page.
 
     public $post_username      = '';     // The name of the form field that contains the username to authenticate.
     public $post_password      = '';     // The name of the form field that contains the password to authenticate.
-    public $advanced_security  = TRUE;   // Whether to enable the advanced security features.
-    public $query_binding      = TRUE;   // Whether to enable the PDO query binding feature for security.
-    public $regenerate_sess_id = FALSE;  // Set to TRUE to regenerate the session id on every page load or leave as FALSE to regenerate only upon new login.
+    public $advanced_security  = true;   // Whether to enable the advanced security features.
+    public $query_binding      = true;   // Whether to enable the PDO query binding feature for security.
+    public $regenerate_sess_id = false;  // Set to true to regenerate the session id on every page load or leave as false to regenerate only upon new login.
     
     public $fail_url           = '/login';
     public $ok_url             = '/dashboard';
     public $fields             = array();
-    public $row                = FALSE;    // SQL Query result as row
-    
-    public static $instance;
+    public $row                = false;    // SQL Query result as row
     
     /**
     * Constructor
@@ -45,9 +43,32 @@ Class Auth {
     * @access    public
     * @return    void
     */
-    public function __construct($params = array())
+    public function __construct($no_instance = true, $config = array())
     {   
-        $auth   = get_config('auth');
+        if($no_instance)
+        {
+            \Ob\getInstance()->auth = $this; // Make available it in the controller $this->auth->method();
+        }
+   
+        if (count($config) > 0)
+        {
+            $this->init($config);
+        }
+        
+        \Ob\log\me('debug', "Auth Class Initialized");
+    }
+    
+    // --------------------------------------------------------------------
+    
+    /**
+     * Initalize and grab instance of the auth.
+     * 
+     * @param array $params
+     * @return object
+     */
+    public function init($params = array())
+    {
+        $auth   = getConfig('auth');
         $config = array_merge($auth , $params);
 
         foreach($config as $key => $val)
@@ -57,23 +78,12 @@ Class Auth {
         
         new \Ob\sess\start();
 
-        $this->db = loader::database($this->db_var, TRUE);
+        $database = new \Ob\Db\Db(false);
+        $this->db = $database->connect($this->db_var);
         
-        log\me('debug', "Auth Class Initialized");
+        return ($this);
     }
     
-    // --------------------------------------------------------------------
-
-    public static function getInstance($params = array())
-    {
-       if( ! self::$instance instanceof self)
-       {
-           self::$instance = new self($params);
-       } 
-       
-       return self::$instance;
-    }
-
     // --------------------------------------------------------------------
     
     /**
@@ -113,26 +123,26 @@ Class Auth {
     */
     public function attempt($username = '', $password = '')
     {
-        if($this->item('allow_login') == FALSE)
+        if($this->item('allow_login') == false)
         {
-            return FALSE;
+            return false;
         }
         
         if( empty($username) AND empty($password) )
         {
-            $username = i_get_post($this->post_username, $this->advanced_security);
-            $password = i_get_post($this->post_password);            
+            $username = \Ob\i\getPost($this->post_username, $this->advanced_security);
+            $password = \Ob\i\getPost($this->post_password);            
         } 
         
         $username = trim($username);
         $password = trim($password);
 
-        if($this->md5 AND ! $this->_is_md5($password))
+        if($this->md5 AND ! $this->_isMd5($password))
         {
             $password = md5($password);
         }
 
-        if(db_item('dbdriver') == 'mongodb')
+        if(db('dbdriver') == 'mongo')
         {
             $this->db->select($this->select_data);
             $this->db->where($this->username_col, $username);
@@ -142,19 +152,19 @@ Class Auth {
             
             if( ! $docs->hasNext())
             {
-                return FALSE;
+                return false;
             }
             
             $this->row = (object) $docs->getNext();
 
-            if($this->row != NULL AND isset($this->row->{$this->username_col}))
+            if($this->row != null AND isset($this->row->{$this->username_col}))
             {
                 return $this->row;
             }
         }
         else 
         {
-            if($this->query_binding)         // High Secure Pdo Query
+            if($this->query_binding)         // Use bind ( Secure Pdo Query ).
             {
                 $this->db->prep();      
                 $this->db->select(implode(',', $this->select_data));
@@ -162,8 +172,8 @@ Class Auth {
                 $this->db->where($this->password_col, ':password');
                 $this->db->get($this->tablename);
 
-                $this->db->bind_param(':username', $username, param_str, $this->username_length); // String (int Length)
-                $this->db->bind_param(':password', $password, param_str, $this->password_length); // String (int Length)
+                $this->db->bindParam(':username', $username, PARAM_STR, $this->username_length); // String (int Length)
+                $this->db->bindParam(':password', $password, PARAM_STR, $this->password_length); // String (int Length)
 
                 $query = $this->db->exec();
                 $this->row = $query->row();
@@ -184,7 +194,7 @@ Class Auth {
             }
         }
       
-        return FALSE;
+        return false;
     }
     
     // ------------------------------------------------------------------------
@@ -194,24 +204,24 @@ Class Auth {
      * 
      * @return bool
      */
-    public function set($fake_auth = FALSE)
+    public function set($fake_auth = false)
     {
         if($fake_auth)
         {
-            sess_set('ok', 1, $this->session_prefix);  // Just authenticate the user.
+            \Ob\sess\set('ok', 1, $this->session_prefix);  // Just authenticate the user.
             return;
         }
         
-        $row = $this->get_row();
+        $row = $this->getRow();
         
         if(is_object($row) AND isset($row->{$this->username_col}))
         {            
-            $this->set_auth($this->select_data);  // auth is ok ?
+            $this->setAuth($this->select_data);  // auth is ok ?
             
-            return TRUE;
+            return true;
         }
         
-        return FALSE;
+        return false;
     }
     
     // ------------------------------------------------------------------------
@@ -221,7 +231,7 @@ Class Auth {
      *
      * @return type 
      */
-    public function get_row()
+    public function getRow()
     {
         return $this->row;
     }
@@ -230,18 +240,18 @@ Class Auth {
     
     /**
      * Get User is authenticated 
-     * if its ok it returns to TRUE otherwise FALSE
+     * if its ok it returns to true otherwise false
      * 
      * @return boolean 
      */
     public function check()
     {
-        if(sess('ok', $this->session_prefix) == 1)  // auth is ok ?
+        if(\Ob\sess\get('ok', $this->session_prefix) == 1)  // auth is ok ?
         {
-            return TRUE;
+            return true;
         }
         
-        return FALSE;
+        return false;
     }
     
     // ------------------------------------------------------------------------
@@ -253,12 +263,12 @@ Class Auth {
      * @param type $params
      * @return boolean | void ( callback function )
      */
-    public function redirect($redirect = '', $urlencode = TRUE)
+    public function redirect($redirect = '', $urlencode = true)
     {
         if( ! $this->check())  // auth is NOT ok ?
         {  
-            $redirect_url = ($redirect == '') ? base_url($this->fail_url) : base_url($redirect);
-            $redirect_url = $redirect_url.'?redirect='.\Ob\getInstance()->uri->request_uri($urlencode);
+            $redirect_url = ($redirect == '') ? baseUrl($this->fail_url) : baseUrl($redirect);
+            $redirect_url = $redirect_url.'?redirect='.\Ob\getInstance()->uri->requestUri($urlencode);
 
             redirect($redirect_url); 
         }
@@ -278,10 +288,10 @@ Class Auth {
     {
         if($key == '')
         {
-            return sess_alldata();
+            return \Ob\sess\alldata();
         }
         
-        return sess($key, $this->session_prefix);
+        return \Ob\sess\get($key, $this->session_prefix);
     }
     
     // ------------------------------------------------------------------------
@@ -292,15 +302,15 @@ Class Auth {
     * @param string $key
     * @return void
     */
-    public function set_data($key, $val = '')
+    public function setData($key, $val = '')
     {
         if(is_array($key))
         {
-            sess_set($key, '', $this->session_prefix);
+            \Ob\sess\set($key, '', $this->session_prefix);
             return;
         }
         
-        sess_set($key, $val, $this->session_prefix);
+        \Ob\sess\set($key, $val, $this->session_prefix);
     }
     
     // ------------------------------------------------------------------------
@@ -311,15 +321,15 @@ Class Auth {
     * @param string $key
     * @return void
     */
-    public function unset_data($key)
+    public function unsetData($key)
     {
         if(is_array($key))
         {
-            sess_unset($key, $this->session_prefix);
+            \Ob\sess\remove($key, $this->session_prefix);
             return;
         }
         
-        sess_unset($key, $this->session_prefix);
+        \Ob\sess\remove($key, $this->session_prefix);
     }
     
     // ------------------------------------------------------------------------
@@ -330,7 +340,7 @@ Class Auth {
      * @param string $key
      * @param mixed $val 
      */
-    public function set_item($key, $val)
+    public function setItem($key, $val)
     {
         $this->{$key} = $val;
     }
@@ -350,8 +360,8 @@ Class Auth {
     
     //-------------------------------------------------------------------------
     
-    public function set_expire() {}
-    public function set_idle() {}
+    public function setExpire() {}
+    public function setIdle() {}
     
     // ------------------------------------------------------------------------
     
@@ -362,11 +372,11 @@ Class Auth {
      * @param string $md5
      * @return boolean 
      */
-    public function _is_md5($md5)
+    public function _isMd5($md5)
     {
         if(empty($md5)) 
         {
-            return FALSE;
+            return false;
         }
         
         return preg_match('/^[a-f0-9]{32}$/', $md5);
@@ -380,9 +390,9 @@ Class Auth {
      * @param array $data 
      * @return void
      */
-    public function set_auth($data = array())
+    public function setAuth($data = array())
     {
-        $row = $this->get_row();
+        $row = $this->getRow();
 
         sess_set('ok', 1, $this->session_prefix);  // Authenticate the user.
         
@@ -392,7 +402,7 @@ Class Auth {
             $sess_data[$key] = $row->{$key};
         }
         
-        sess_set($sess_data, '', $this->session_prefix);   // Store user data to session container.
+        Ob\sess\set($sess_data, '', $this->session_prefix);   // Store user data to session container.
     }
     
     // ------------------------------------------------------------------------
@@ -403,18 +413,18 @@ Class Auth {
     * @param bool $sess_destroy whether to use session destroy function
     * @return void 
     */
-    public function logout($sess_destroy = TRUE)
+    public function logout($sess_destroy = true)
     {
-        sess_unset('ok', $this->session_prefix);
+        \Ob\sess\remove('ok', $this->session_prefix);
         
         if($sess_destroy)
         {
-            sess_destroy();
+            \Ob\sess\destroy();
             return;
         }
         
-        $user_data = sess_alldata();
-        sess_unset($user_data, $this->session_prefix);
+        $user_data = \Ob\sess\alldata();
+        \Ob\sess\remove($user_data, $this->session_prefix);
     }
     
 }

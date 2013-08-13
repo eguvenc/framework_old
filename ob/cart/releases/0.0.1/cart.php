@@ -1,4 +1,5 @@
 <?php
+namespace Ob\Cart;
 
 /**
  * Shopping Cart Class
@@ -14,18 +15,34 @@ Class Cart {
     // These are the regular expression rules that we use to validate the product ID and product name
     public $product_id_rules    = '\.a-z0-9_-'; // alpha-numeric, dashes, underscores, or periods
     public $product_name_rules  = '\.\:\-_ a-z0-9'; // alpha-numeric, dashes, underscores, colons or periods
-    
-    public $_cart_contents    = array();
+    public $_cart_contents      = array();
 
     /**
     * Shopping Class Constructor
     *
-    * The constructor loads the Session class, used to store the shopping cart contents.
+    * The constructor loads the Sess helper, used to store the shopping cart contents.
     */        
-    public function __construct($params = array())
-    {    
-        // Are any config settings being passed manually?  If so, set them
-        $config = array();
+    public function __construct($no_instance = true, $params = array())
+    {   
+        if($no_instance)
+        {
+            \Ob\getInstance()->cart = $this; // Make available it in the controller $this->cart->method();
+        }
+   
+        $this->init($params);
+            
+        \Ob\log\me('debug', "Cart Class Initialized");
+    }
+
+    /**
+     * Initialize params and grab the cart object
+     * 
+     * @param array $params
+     * @return object
+     */
+    function init($params = array())
+    {
+        $config = array();         // Are any config settings being passed manually?  If so, set them
         if (count($params) > 0)
         {
             foreach ($params as $key => $val)
@@ -33,15 +50,13 @@ Class Cart {
                 $config[$key] = $val;
             }
         }
-
-        loader::helper('ob/session');
         
-        sess_start($params);   
+        new \Ob\sess\start($params);
          
         // Grab the shopping cart array from the session table, if it exists
-        if (sess_get('cart_contents') !== FALSE)
+        if (\Ob\sess\get('cart_contents') !== false)
         {
-            $this->_cart_contents = sess_get('cart_contents');
+            $this->_cart_contents = \Ob\sess\get('cart_contents');
         }
         else
         {
@@ -49,10 +64,8 @@ Class Cart {
             $this->_cart_contents['cart_total']  = 0;        
             $this->_cart_contents['total_items'] = 0;        
         }
-    
-        log\me('debug', "Cart Class Initialized");
     }
-
+    
     // --------------------------------------------------------------------
     
     /**
@@ -67,8 +80,8 @@ Class Cart {
         // Was any cart data passed? No? Bah...
         if ( ! is_array($items) OR count($items) == 0)
         {
-            log\me('error', 'The insert method must be passed an array containing data.');
-            return FALSE;
+            \Ob\log\me('error', 'The insert method must be passed an array containing data.');
+            return false;
         }
                 
         // You can either insert a single product using a one-dimensional array, 
@@ -76,12 +89,12 @@ Class Cart {
         // determine the array type is by looking for a required array key named "id"
         // at the top level. If it's not found, we will assume it's a multi-dimensional array.
     
-        $save_cart = FALSE;        
+        $save_cart = false;        
         if (isset($items['id']))
         {            
-            if ($this->_insert($items) == TRUE)
+            if ($this->_insert($items) == true)
             {
-                $save_cart = TRUE;
+                $save_cart = true;
             }
         }
         else
@@ -90,22 +103,22 @@ Class Cart {
             {
                 if (is_array($val) AND isset($val['id']))
                 {
-                    if ($this->_insert($val) == TRUE)
+                    if ($this->_insert($val) == true)
                     {
-                        $save_cart = TRUE;
+                        $save_cart = true;
                     }
                 }            
             }
         }
 
         // Save the cart data if the insert was successful
-        if ($save_cart == TRUE)
+        if ($save_cart == true)
         {
-            $this->_save_cart();
-            return TRUE;
+            $this->_saveCart();
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     // --------------------------------------------------------------------
@@ -123,7 +136,7 @@ Class Cart {
         if ( ! is_array($items) OR count($items) == 0)
         {
             log\me('error', 'The insert method must be passed an array containing data.');
-            return FALSE;
+            return false;
         }
         
         // --------------------------------------------------------------------
@@ -132,7 +145,7 @@ Class Cart {
         if ( ! isset($items['id']) OR ! isset($items['qty']) OR ! isset($items['price']) OR ! isset($items['name']))
         {
             log\me('error', 'The cart array must contain a product ID, quantity, price, and name.');
-            return FALSE;
+            return false;
         }
 
         // --------------------------------------------------------------------
@@ -145,7 +158,7 @@ Class Cart {
         // If the quantity is zero or blank there's nothing for us to do
         if ( ! is_numeric($items['qty']) OR $items['qty'] == 0)
         {
-            return FALSE;
+            return false;
         }
                 
         // --------------------------------------------------------------------
@@ -155,8 +168,8 @@ Class Cart {
         // Note: These can be user-specified by setting the $this->product_id_rules variable.
         if ( ! preg_match("/^[".$this->product_id_rules."]+$/i", $items['id']))
         {
-            log\me('error', 'Invalid product ID.  The product ID can only contain alpha-numeric characters, dashes, and underscores');
-            return FALSE;
+            \Ob\log\me('error', 'Invalid product ID.  The product ID can only contain alpha-numeric characters, dashes, and underscores');
+            return false;
         }
 
         // --------------------------------------------------------------------
@@ -165,8 +178,8 @@ Class Cart {
         // Note: These can be user-specified by setting the $this->product_name_rules variable.
         if ( ! preg_match("/^[".$this->product_name_rules."]+$/i", $items['name']))
         {
-            log\me('error', 'An invalid name was submitted as the product name: '.$items['name'].' The name can only contain alpha-numeric characters, dashes, underscores, colons, and spaces');
-            return FALSE;
+            \Ob\log\me('error', 'An invalid name was submitted as the product name: '.$items['name'].' The name can only contain alpha-numeric characters, dashes, underscores, colons, and spaces');
+            return false;
         }
 
         // --------------------------------------------------------------------
@@ -179,8 +192,8 @@ Class Cart {
         // Is the price a valid number?
         if ( ! is_numeric($items['price']))
         {
-            log\me('error', 'An invalid price was submitted for product ID: '.$items['id']);
-            return FALSE;
+            \Ob\log\me('error', 'An invalid price was submitted for product ID: '.$items['id']);
+            return false;
         }
 
         // --------------------------------------------------------------------
@@ -224,7 +237,7 @@ Class Cart {
         }
 
         // Woot!
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -247,19 +260,19 @@ Class Cart {
         // Was any cart data passed?
         if ( ! is_array($items) OR count($items) == 0)
         {
-            return FALSE;
+            return false;
         }
             
         // You can either update a single product using a one-dimensional array, 
         // or multiple products using a multi-dimensional one.  The way we
         // determine the array type is by looking for a required array key named "id".
         // If it's not found we assume it's a multi-dimensional array
-        $save_cart = FALSE;
+        $save_cart = false;
         if (isset($items['rowid']) AND isset($items['qty']))
         {
-            if ($this->_update($items) == TRUE)
+            if ($this->_update($items) == true)
             {
-                $save_cart = TRUE;
+                $save_cart = true;
             }
         }
         else
@@ -268,22 +281,22 @@ Class Cart {
             {
                 if (is_array($val) AND isset($val['rowid']) AND isset($val['qty']))
                 {
-                    if ($this->_update($val) == TRUE)
+                    if ($this->_update($val) == true)
                     {
-                        $save_cart = TRUE;
+                        $save_cart = true;
                     }
                 }            
             }
         }
 
         // Save the cart data if the insert was successful
-        if ($save_cart == TRUE)
+        if ($save_cart == true)
         {
-            $this->_save_cart();
-            return TRUE;
+            $this->_saveCart();
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     // --------------------------------------------------------------------
@@ -305,7 +318,7 @@ Class Cart {
         // Without these array indexes there is nothing we can do
         if ( ! isset($items['qty']) OR ! isset($items['rowid']) OR ! isset($this->_cart_contents[$items['rowid']]))
         {
-            return FALSE;
+            return false;
         }
         
         // Prep the quantity
@@ -314,14 +327,14 @@ Class Cart {
         // Is the quantity a number?
         if ( ! is_numeric($items['qty']))
         {
-            return FALSE;
+            return false;
         }
         
         // Is the new quantity different than what is already saved in the cart?
         // If it's the same there's nothing to do
         if ($this->_cart_contents[$items['rowid']]['qty'] == $items['qty'])
         {
-            return FALSE;
+            return false;
         }
 
         // Is the quantity zero?  If so we will remove the item from the cart.
@@ -335,7 +348,7 @@ Class Cart {
             $this->_cart_contents[$items['rowid']]['qty'] = $items['qty'];
         }
         
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -346,7 +359,7 @@ Class Cart {
      * @access    private
      * @return    bool
      */
-    private function _save_cart()
+    private function _saveCart()
     {
         // Unset these so our total can be calculated correctly below
         unset($this->_cart_contents['total_items']);
@@ -375,18 +388,16 @@ Class Cart {
         // Is our cart empty?  If so we delete it from the session
         if (count($this->_cart_contents) <= 2)
         {
-            sess_unset('cart_contents');
-            
-            // Nothing more to do... coffee time!
-            return FALSE;
+            Ob\sess\remove('cart_contents'); // Nothing more to do... coffee time!
+            return false;
         }
 
         // If we made it this far it means that our cart has data.
         // Let's pass it to the Session class so it can be stored
-        sess_set(array('cart_contents' => $this->_cart_contents));
+        Ob\sess\set(array('cart_contents' => $this->_cart_contents));
 
         // Woot!
-        return TRUE;    
+        return true;    
     }
 
     // --------------------------------------------------------------------
@@ -412,7 +423,7 @@ Class Cart {
      * @access    public
      * @return    integer
      */
-    public function total_items()
+    public function totalItems()
     {
         return $this->_cart_contents['total_items'];
     }
@@ -443,20 +454,20 @@ Class Cart {
     /**
      * Has options
      *
-     * Returns TRUE if the rowid passed to this function correlates to an item
+     * Returns true if the rowid passed to this function correlates to an item
      * that has options associated with it.
      *
      * @access    public
      * @return    array
      */
-    public function has_options($rowid = '')
+    public function hasOptions($rowid = '')
     {
         if ( ! isset($this->_cart_contents[$rowid]['options']) OR count($this->_cart_contents[$rowid]['options']) === 0)
         {
-            return FALSE;
+            return false;
         }
         
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -469,7 +480,7 @@ Class Cart {
      * @access    public
      * @return    array
      */
-    public function product_options($rowid = '')
+    public function productOptions($rowid = '')
     {
         if ( ! isset($this->_cart_contents[$rowid]['options']))
         {
@@ -489,7 +500,7 @@ Class Cart {
      * @access    public
      * @return    integer
      */
-    public function format_number($n = '')
+    public function formatNumber($n = '')
     {
         if ($n == '')
         {
@@ -519,12 +530,13 @@ Class Cart {
         $this->_cart_contents['cart_total'] = 0;        
         $this->_cart_contents['total_items'] = 0;        
 
-        sess_unset('cart_contents');
+        Ob\sess\remove('cart_contents');
     }
 
 
 }
+
 // END Cart Class
 
 /* End of file Cart.php */
-/* Location: ./obullo/libraries/Cart.php */
+/* Location: ./ob/cart/releases/0.0.1/cart.php */

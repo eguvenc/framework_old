@@ -26,12 +26,12 @@ if( ! function_exists('utf8_transliterate_to_ascii'))
 {
     function utf8_transliterate_to_ascii($str, $case = 0)
     {
-        static $utf8_lower_accents = NULL;
-        static $utf8_upper_accents = NULL;
+        static $utf8_lower_accents = null;
+        static $utf8_upper_accents = null;
 
         if($case <= 0)
         {
-            if ($utf8_lower_accents === NULL)
+            if ($utf8_lower_accents === null)
             {
                 $utf8_lower_accents = array(
                         'à' => 'a',  'ô' => 'o',  'ď' => 'd',  'ḟ' => 'f',  'ë' => 'e',  'š' => 's',  'ơ' => 'o',
@@ -61,7 +61,7 @@ if( ! function_exists('utf8_transliterate_to_ascii'))
 
         if($case >= 0)
         {
-            if ($utf8_upper_accents === NULL)
+            if ($utf8_upper_accents === null)
             {
                     $utf8_upper_accents = array(
                             'À' => 'A',  'Ô' => 'O',  'Ď' => 'D',  'Ḟ' => 'F',  'Ë' => 'E',  'Š' => 'S',  'Ơ' => 'O',

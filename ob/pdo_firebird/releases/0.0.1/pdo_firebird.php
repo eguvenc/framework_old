@@ -46,7 +46,7 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
         
         $dsn = empty($this->dsn) ? 'firebird:dbname='.$this->database : $this->dsn;
              
-        $this->_pdo = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
+        $this->_pdo = $this->pdoConnect($dsn, $this->username, $this->password, $this->options);
         
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
         $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -63,7 +63,7 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
      * @param    string
      * @return   string
      */
-    public function _escape_identifiers($item)
+    public function _escapeIdentifiers($item)
     {
         if ($this->_escape_char == '')
         {
@@ -72,7 +72,7 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
 
         foreach ($this->_reserved_identifiers as $id)
         {
-            if (strpos($item, '.'.$id) !== FALSE)
+            if (strpos($item, '.'.$id) !== false)
             {
                 $str = $this->_escape_char. str_replace('.', $this->_escape_char.'.', $item);  
                 
@@ -81,7 +81,7 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
             }        
         }
         
-        if (strpos($item, '.') !== FALSE)
+        if (strpos($item, '.') !== false)
         {
             $str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;            
         }
@@ -104,20 +104,20 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
     * @param    bool    whether or not the string will be used in a LIKE condition
     * @return   string
     */
-    public function escape_str($str, $like = FALSE, $side = 'both')    
+    public function escapeStr($str, $like = false, $side = 'both')    
     {    
         if (is_array($str))
         {
             foreach($str as $key => $val)
             {
-                $str[$key] = $this->escape_str($val, $like);
+                $str[$key] = $this->escapeStr($val, $like);
             }
 
             return $str;
         }
     
         // escape LIKE condition wildcards
-        if ($like === TRUE)
+        if ($like === true)
         {
             $str = str_replace(array('%', '_'), array('\\%', '\\_'), $str);
             
@@ -136,14 +136,14 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
             }
             
             // not need to quote for who use prepare and :like bind.
-            if($this->prepare == TRUE AND $this->is_like_bind)   
+            if($this->prepare == true AND $this->is_like_bind)   
             return $str;
         } 
         
         // make sure is it bind value, if not ...
-        if($this->prepare === TRUE)
+        if($this->prepare === true)
         {
-            if(strpos($str, ':') === FALSE)
+            if(strpos($str, ':') === false)
             {
                 $str = $this->quote($str, PDO::PARAM_STR);
             }
@@ -167,7 +167,7 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
     * @param   int    $type
     * @return
     */
-    public function quote($str, $type = NULL)
+    public function quote($str, $type = null)
     {
          return $this->_conn->quote($str, $type);
     }
@@ -184,7 +184,7 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
     * @param    type
     * @return   type
     */
-    public function _from_tables($tables)
+    public function _fromTables($tables)
     {
         if ( ! is_array($tables))
         {
@@ -247,7 +247,7 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
      * @param   array   the where clause
      * @return  string
      */
-    public function _update($table, $where = array(), $like = array(), $limit = FALSE)
+    public function _update($table, $where = array(), $like = array(), $limit = false)
     {
         foreach($values as $key => $val)
         {
@@ -269,7 +269,7 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
      * @param    array    the where clause
      * @return   string
      */
-    public function _delete($table, $where = array(), $like = array(), $limit = FALSE)
+    public function _delete($table, $where = array(), $like = array(), $limit = false)
     {
         return "DELETE FROM ".$this->_escape_table($table)." WHERE ".implode(" ", $where);
     }
@@ -301,7 +301,7 @@ Class Pdo_Firebird extends Pdo_Database_Adapter
         }
 
         // remember that we used limits
-        // $this->limit_used = TRUE;
+        // $this->limit_used = true;
 
         return $newsql;
     }

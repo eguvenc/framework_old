@@ -58,7 +58,7 @@ Class Obm_Server {
                echo json_encode(array('errors' => $this->errors));
             } else {
                 foreach($package_json['dependencies'] as $key => $row) {
-                    if($this->package_exists($key)){
+                    if($this->packageExists($key)){
                         if( ! is_object($row[$key])){
                             $package_update_list[$key] = $this->get_package_json($key);
                         }
@@ -72,15 +72,15 @@ Class Obm_Server {
         // }    
     }
     
-    function package_exists($name){
+    function packageExists($name){
         $packages = array(
             'task' => '',
             'auth' => ''
         );
         if(isset($packages[$name])){
-            return TRUE;
+            return true;
         }
-        return FALSE;
+        return false;
     }
     
     function get_package_json($name){

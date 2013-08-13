@@ -1,8 +1,5 @@
 <?php
-
-$packages = get_config('packages');
-    
-require(OB_MODULES .'pager'. DS .'releases'. DS .$packages['dependencies']['pager']['version']. DS .'src'. DS .'pager_common'. EXT);
+namespace Ob\Pager;
 
 /**                 
  * Obullo Pager Class
@@ -30,31 +27,18 @@ Class Pager
     public function init($options = array())
     {
         $mode = (isset($options['mode']) ? strtolower($options['mode']) : 'jumping');
-    
-        $classname = 'pager_' . $mode;
-        
-        if ( ! class_exists($classname)) 
+        $classname = '\Ob\Pager\Src\Pager_'. ucfirst($mode); 
+            
+        if(count($options) > 0)
         {
-            $packages = get_config('packages');
-    
-            require_once(OB_MODULES .'pager'. DS .'releases'. DS .$packages['dependencies']['pager']['version']. DS .'src'. DS .$classname. EXT);
-        }                                    
-        
-        if (class_exists($classname))   // If the class exists, return a new instance of it.  
-        {               
-            if(count($options) > 0)
-            {
-                $instance = new $classname($options);
-            } 
-            else 
-            {
-                $instance = new $classname(); 
-            }
-
-            return $instance;
+            $instance = new $classname($options);
+        } 
+        else 
+        {
+            $instance = new $classname(); 
         }
 
-        return NULL;
+        return $instance;
     }
 }
 

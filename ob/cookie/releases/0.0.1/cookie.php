@@ -13,7 +13,7 @@ namespace Ob\cookie {
     {
         function __construct()
         {
-            \Ob\log\me('debug', 'Cookie Helper Initialized.');
+            \Ob\log\me('debug', 'Cookie Helper Initialized');
         }
     }
     
@@ -34,7 +34,7 @@ namespace Ob\cookie {
     * @param    string    the cookie prefix
     * @return   void
     */
-    function set($name = '', $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = FALSE)
+    function set($name = '', $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = false)
     {
         if (is_array($name))
         {        
@@ -62,7 +62,7 @@ namespace Ob\cookie {
             $path   = \Ob\config('cookie_path');
         }
         
-        if ($secure == FALSE AND \Ob\config('cookie_secure') != FALSE)
+        if ($secure == false AND \Ob\config('cookie_secure') != false)
         {
             $secure = \Ob\config('cookie_secure');
         }
@@ -96,7 +96,7 @@ namespace Ob\cookie {
     * @param    bool
     * @return   mixed
     */
-    function get($index = '', $xss_clean = FALSE)
+    function get($index = '', $xss_clean = false)
     {
         $prefix = '';
         

@@ -32,7 +32,7 @@ Class Navbar {
     */
     public function __construct($params = array())
     {   
-        $auth   = get_config('navbar');
+        $auth   = getConfig('navbar');
         $config = array_merge($auth , $params);
         
         foreach($config as $key => $val)
@@ -57,7 +57,7 @@ Class Navbar {
     public function top_level()
     {
         $top_level  = array();
-        $module     = Uri::getInstance()->rsegment(0); // * Get routed segments
+        $module     = Uri::getInstance()->rSegment(0); // * Get routed segments
         
         foreach($this->top_level as $key => $val)
         {
@@ -85,8 +85,8 @@ Class Navbar {
     public function sub_level()
     {
         $sub_level  = array();
-        $module     = Uri::getInstance()->rsegment(0); // * Get routed segments
-        $controller = Uri::getInstance()->rsegment(1);
+        $module     = Uri::getInstance()->rSegment(0); // * Get routed segments
+        $controller = Uri::getInstance()->rSegment(1);
 
         if(isset($this->sub_level[$module]))
         {

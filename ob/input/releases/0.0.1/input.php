@@ -15,21 +15,21 @@ Class Input {
         
     public static $instance;
     
-    public $ip_address            = FALSE;
-    public $user_agent            = FALSE;
-    public $_allow_get_array      = FALSE;
-    public $_standardize_newlines = TRUE;
-    public $enable_csrf           = FALSE;
-    public $enable_xss            = FALSE;
+    public $ip_address            = false;
+    public $user_agent            = false;
+    public $_allow_get_array      = false;
+    public $_standardize_newlines = true;
+    public $enable_csrf           = false;
+    public $enable_xss            = false;
     
     /**
     * Constructor
     */
     public function __construct()
     { 
-        $this->_allow_get_array = (\Ob\config('enable_query_strings') === TRUE) ? TRUE : FALSE;
-        $this->enable_xss       = (\Ob\config('global_xss_filtering') === TRUE) ? TRUE : FALSE;
-        $this->enable_csrf      = (\Ob\config('csrf_protection') === TRUE) ? TRUE : FALSE;
+        $this->_allow_get_array = (\Ob\config('enable_query_strings') === true) ? true : false;
+        $this->enable_xss       = (\Ob\config('global_xss_filtering') === true) ? true : false;
+        $this->enable_csrf      = (\Ob\config('csrf_protection') === true) ? true : false;
 
         \Ob\log\me('debug', "Input Class Initialized");
     }
@@ -59,7 +59,7 @@ Class Input {
     * @access    private
     * @return    void
     */
-    public function _sanitize_globals()
+    public function _sanitizeGlobals()
     {
         // Would kind of be "wrong" to unset any of these GLOBALS
         $protected = array('_SERVER', '_GET', '_POST', '_FILES', '_REQUEST', '_SESSION', '_ENV', '_controller',
@@ -100,25 +100,25 @@ Class Input {
         }
 
         // Is $_GET data allowed? If not we'll set the $_GET to an empty array
-        if ($this->_allow_get_array == FALSE)
+        if ($this->_allow_get_array == false)
         {
             $_GET = array();
         }
         else
         {
-            $_GET = $this->_clean_input_data($_GET);
+            $_GET = $this->_cleanInputData($_GET);
         }
 
         // Clean $_POST Data
-        $_POST = $this->_clean_input_data($_POST);
+        $_POST = $this->_cleanInputData($_POST);
 
         // Sanitize PHP_SELF
         $_SERVER['PHP_SELF'] = strip_tags($_SERVER['PHP_SELF']);
 
         // CSRF Protection check
-        if ($this->enable_csrf == TRUE)
+        if ($this->enable_csrf == true)
         {
-            \Ob\Security\Security::getInstance()->csrf_verify();
+            \Ob\Security\Security::getInstance()->csrfVerify();
         }
         
         // Clean $_COOKIE Data
@@ -131,7 +131,7 @@ Class Input {
         unset($_COOKIE['$Path']);
         unset($_COOKIE['$Domain']);
         
-        $_COOKIE = $this->_clean_input_data($_COOKIE);
+        $_COOKIE = $this->_cleanInputData($_COOKIE);
 
         \Ob\log\me('debug', "Global POST and COOKIE data sanitized");
     }
@@ -144,9 +144,9 @@ Class Input {
     * @access    public
     * @return    string
     */
-    public function ip_address()
+    public function ip()
     {
-        if ($this->ip_address !== FALSE)
+        if ($this->ip_address !== false)
         {
             return $this->ip_address;
         }
@@ -175,7 +175,7 @@ Class Input {
             $this->ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
 
-        if ($this->ip_address === FALSE)
+        if ($this->ip_address === false)
         {
             $this->ip_address = '0.0.0.0';
             
@@ -189,7 +189,7 @@ Class Input {
             $this->ip_address = trim(end($x));
         }
 
-        if ( ! $this->valid_ip($this->ip_address))
+        if ( ! $this->validIp($this->ip_address))
         {
             $this->ip_address = '0.0.0.0';
         }
@@ -208,19 +208,19 @@ Class Input {
     * @param    string
     * @return   string
     */
-    public function valid_ip($ip)
+    public function validIp($ip)
     {
         $ip_segments = explode('.', $ip);
 
         // Always 4 segments needed
         if (count($ip_segments) != 4)
         {
-            return FALSE;
+            return false;
         }
         // IP can not start with 0
         if ($ip_segments[0][0] == '0')
         {
-            return FALSE;
+            return false;
         }
         // Check each segment
         foreach ($ip_segments as $segment)
@@ -229,11 +229,11 @@ Class Input {
             // longer than 3 digits or greater then 255
             if ($segment == '' OR preg_match("/[^0-9]/", $segment) OR $segment > 255 OR strlen($segment) > 3)
             {
-                return FALSE;
+                return false;
             }
         }
 
-        return TRUE;
+        return true;
     }
    
     // ------------------------------------------------------------------------
@@ -248,14 +248,14 @@ Class Input {
     * @param    string
     * @return   string
     */
-    public function _clean_input_data($str)
+    public function _cleanInputData($str)
     {
         if (is_array($str))
         {
             $new_array = array();
             foreach ($str as $key => $val)
             {
-                $new_array[$this->_clean_input_keys($key)] = $this->_clean_input_data($val);
+                $new_array[$this->_cleanInputKeys($key)] = $this->_cleanInputData($val);
             }
             
             return $new_array;
@@ -268,18 +268,18 @@ Class Input {
         }  
 
         // Remove control characters
-	$str = \Ob\remove_invisible_characters($str);
+	$str = \Ob\removeInvisibleCharacters($str);
         
         // Should we filter the input data?
-        if ($this->enable_xss === TRUE)
+        if ($this->enable_xss === true)
         {
-            $str = \Ob\Security\Security::getInstance()->xss_clean($str);
+            $str = \Ob\Security\Security::getInstance()->xssClean($str);
         }
 
         // Standardize newlines if needed
-        if ($this->_standardize_newlines == TRUE)
+        if ($this->_standardize_newlines == true)
         {
-            if (strpos($str, "\r") !== FALSE)
+            if (strpos($str, "\r") !== false)
             {
                 $str = str_replace(array("\r\n", "\r", "\r\n\n"), PHP_EOL, $str);
             }
@@ -301,7 +301,7 @@ Class Input {
     * @param    string
     * @return   string
     */
-    public function _clean_input_keys($str)
+    public function _cleanInputKeys($str)
     {
         if ( ! preg_match("/^[a-z0-9:_\/-]+$/i", $str))
         {
@@ -324,16 +324,16 @@ Class Input {
     * @param    bool
     * @return   string
     */
-    public function _fetch_from_array(&$array, $index = '', $xss_clean = FALSE)
+    public function _fetchFromArray(&$array, $index = '', $xssClean = false)
     {
         if ( ! isset($array[$index]))
         {
-            return FALSE;
+            return false;
         }
 
-        if ($xss_clean === TRUE)
+        if ($xssClean === true)
         {
-            return \Ob\Security\Security::getInstance()->xss_clean($array[$index]);
+            return \Ob\Security\Security::getInstance()->xssClean($array[$index]);
         }
 
         return $array[$index];

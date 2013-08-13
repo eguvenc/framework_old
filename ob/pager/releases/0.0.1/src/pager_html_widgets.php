@@ -1,4 +1,5 @@
 <?php
+namespace Ob\Pager\Src;
 
 /**
  * Pager Html Widgets
@@ -15,7 +16,7 @@
 
 Class Pager_Html_Widgets
 {
-    public $pager = NULL;
+    public $pager = null;
 
     /**
     * Constructor
@@ -30,7 +31,7 @@ Class Pager_Html_Widgets
     /**
     * Returns a string with a XHTML SELECT menu,
     * useful for letting the user choose how many items per page should be
-    * displayed. If parameter useSessions is TRUE, this value is stored in
+    * displayed. If parameter useSessions is true, this value is stored in
     * a session var. The string isn't echoed right now so you can use it
     * with template engines.
     *
@@ -46,17 +47,17 @@ Class Pager_Html_Widgets
     *                  <select> tag
     *                - 'check_max_limit': if true, Pager checks if $end is bigger
     *                  than $totalItems, and doesn't show the extra select options
-    *                - 'auto_submit': if TRUE, add some js code
+    *                - 'auto_submit': if true, add some js code
     *                  to submit the form on the onChange event
     *
     * @return string xhtml select box
     * @access public
     */
-    public function get_per_page_select_box($start = 5, $end = 30, $step = 5, $show_all_data = FALSE, $extra_params = array())
+    public function get_per_page_select_box($start = 5, $end = 30, $step = 5, $show_all_data = false, $extra_params = array())
     {
         $option_text     = '%d';  // FIXME: needs POST support
         $attributes      = '';
-        $check_max_limit = FALSE;
+        $check_max_limit = false;
         
         if (is_string($extra_params)) 
         {
@@ -81,7 +82,7 @@ Class Pager_Html_Widgets
 
         if ( ! strstr($option_text, '%d')) 
         {
-            throw new Exception('Page class invalid format - use "%d" as placeholder.');
+            throw new \Exception('Page class invalid format - use "%d" as placeholder.');
         }
         
         $start = (int)$start;
@@ -200,7 +201,7 @@ Class Pager_Html_Widgets
     * @param array  $params          - 'option_text': text to show in each option.
     *                                  Use '%d' where you want to see the number
     *                                  of pages selected.
-    *                                - 'auto_submit': if TRUE, add some js code
+    *                                - 'auto_submit': if true, add some js code
     *                                  to submit the form on the onChange event
     * @param string $extraAttributes (html attributes) Tag attributes or
     *                                HTML attributes (id="foo" pairs), will be
@@ -219,7 +220,7 @@ Class Pager_Html_Widgets
 
         if ( ! strstr($option_text, '%d')) 
         {
-            throw new Exception('invalid format - use "%d" as placeholder.');
+            throw new \Exception('invalid format - use "%d" as placeholder.');
         }
         
         $tmp = '<select name="'.$this->pager->_url_var.'"';

@@ -78,22 +78,22 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
                 {
                     if(isset($out[5]))
                     {
-                        if(strpos($out[5], '[') !== FALSE)  // module logs.
+                        if(strpos($out[5], '[') !== false)  // module logs.
                         {
                             $line = "\033[0;33m".$line."\033[0m";
                         }               
-                        if(strpos($out[5],'SQL') !== FALSE)
+                        if(strpos($out[5],'SQL') !== false)
                         {
                             $line = "\033[0;32m".$line."\033[0m";
                         }
-                        if(strpos($out[5], 'Task') !== FALSE)
+                        if(strpos($out[5], 'Task') !== false)
                         {
                             $line = "\033[0;36m".$line."\033[0m";
                         }
                     }
                 }
      
-                if(strpos($line, 'DEBUG') !== FALSE)
+                if(strpos($line, 'DEBUG') !== false)
                 {
                     if($level == '' OR $level == 'debug')
                     {
@@ -101,7 +101,7 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
                         echo $line."\n";
                     }
                 }
-                if(strpos($line, 'ERROR') !== FALSE)
+                if(strpos($line, 'ERROR') !== false)
                 {
                     if($level == '' OR $level == 'error')
                     {
@@ -109,7 +109,7 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
                         echo $line."\n";
                     }
                 }
-                if(strpos($line, 'INFO') !== FALSE)
+                if(strpos($line, 'INFO') !== false)
                 {
                     if($level == '' OR $level == 'info')
                     {
@@ -117,7 +117,7 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
                         echo $line."\n";
                     }
                 }
-                if(strpos($line, 'BENCH') !== FALSE)
+                if(strpos($line, 'BENCH') !== false)
                 {
                     if($level == '' OR $level == 'bench')
                     {
@@ -153,27 +153,27 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
         $configs = array();
         foreach(Config::getInstance()->is_loaded as $config)
         {
-            $configs[] = error\secure_path($config);
+            $configs[] = error\securePath($config);
         }
         
         $locales   = array();
         foreach(Locale::getInstance()->is_loaded as $locale)
         { 
-            $locales[] = error\secure_path($locale); 
+            $locales[] = error\securePath($locale); 
         }
 
-        $autoload = get_config('autoload');
+        $autoload = getConfig('autoload');
 
         $helpers = array();
         foreach($autoload['helper'] as $helper)
         { 
-            $helpers[] = error\secure_path(ROOT .'ob'. DS .$helper. DS .$helper. EXT);
+            $helpers[] = error\securePath(ROOT .'ob'. DS .$helper. DS .$helper. EXT);
         }
         
         $libraries = array();
         foreach($autoload['library'] as $library)
         { 
-            $libraries[] = error\secure_path(ROOT .'ob'. DS .$library. DS .$library. EXT);
+            $libraries[] = error\securePath(ROOT .'ob'. DS .$library. DS .$library. EXT);
         }
         
         $output  = "\33[0;36m________LOADED FILES______________________________________________________";

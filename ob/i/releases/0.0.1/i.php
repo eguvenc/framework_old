@@ -30,11 +30,11 @@ namespace Ob\i {
     * @param    bool    Use global get values instead of HMVC values.
     * @return   string
     */
-    function get($index = '', $xss_clean = FALSE, $use_global_var = FALSE)
+    function get($index = '', $xss_clean = false, $use_global_var = false)
     {
         $GET = ($use_global_var) ? $GLOBALS['_GET_BACKUP']: $_GET; // _GET_BACKUP = Hmvc local get values
         
-        return \Ob\Input\Input::getInstance()->_fetch_from_array($GET, $index, $xss_clean);
+        return \Ob\Input\Input::getInstance()->_fetchFromArray($GET, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -48,11 +48,11 @@ namespace Ob\i {
     * @param    bool    Use global post values instead of HMVC values.
     * @return   string
     */
-    function post($index = '', $xss_clean = FALSE, $use_global_var = FALSE)
+    function post($index = '', $xss_clean = false, $use_global_var = false)
     {
         $POST = ($use_global_var) ? $GLOBALS['_POST_BACKUP']: $_POST; // _POST_BACKUP = Hmvc local post values
 
-        return \Ob\Input\Input::getInstance()->_fetch_from_array($POST, $index, $xss_clean);
+        return \Ob\Input\Input::getInstance()->_fetchFromArray($POST, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -66,11 +66,11 @@ namespace Ob\i {
     * @param    bool    Use global request values instead of HMVC values.
     * @return   string
     */
-    function request($index = '', $xss_clean = FALSE, $use_global_var = FALSE)
+    function request($index = '', $xss_clean = false, $use_global_var = false)
     {
         $REQUEST = ($use_global_var) ? $GLOBALS['_REQUEST_BACKUP']: $_REQUEST; // _REQUEST_BACKUP = Hmvc local request values
 
-        return \Ob\Input\Input::getInstance()->_fetch_from_array($REQUEST, $index, $xss_clean);
+        return \Ob\Input\Input::getInstance()->_fetchFromArray($REQUEST, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -84,7 +84,7 @@ namespace Ob\i {
     *@param    bool    Use global post values instead of HMVC values.
     * @return   string
     */
-    function get_post($index = '', $xss_clean = FALSE, $use_global_var = FALSE)
+    function getPost($index = '', $xss_clean = false, $use_global_var = false)
     {
         $POST = ($use_global_var) ? $GLOBALS['_POST_BACKUP'] : $_POST; //  _POST_BACKUP = Hmvc local post values.
 
@@ -108,9 +108,9 @@ namespace Ob\i {
     * @param    bool
     * @return   string
     */
-    function cookie($index = '', $xss_clean = FALSE)
+    function cookie($index = '', $xss_clean = false)
     {
-        return \Ob\Input\Input::getInstance()->_fetch_from_array($_COOKIE, $index, $xss_clean);
+        return \Ob\Input\Input::getInstance()->_fetchFromArray($_COOKIE, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -121,9 +121,9 @@ namespace Ob\i {
     * @access    public
     * @return    string
     */
-    function ip_address()
+    function ip()
     {
-        return \Ob\Input\Input::getInstance()->ip_address();
+        return \Ob\Input\Input::getInstance()->ip();
     }
 
     // --------------------------------------------------------------------
@@ -137,9 +137,9 @@ namespace Ob\i {
     * @param    string
     * @return   string
     */
-    function valid_ip($ip)
+    function validIp($ip)
     {        
-        return \Ob\Input\Input::getInstance()->valid_ip($ip);
+        return \Ob\Input\Input::getInstance()->validIp($ip);
     }
     
     // --------------------------------------------------------------------
@@ -150,16 +150,16 @@ namespace Ob\i {
     * @access    public
     * @return    string
     */
-    function user_agent()
+    function userAgent()
     {
         $input = \Ob\Input\Input::getInstance();
 
-        if ($input->user_agent !== FALSE)
+        if ($input->user_agent !== false)
         {
             return $input->user_agent;
         }
 
-        $input->user_agent = ( ! isset($_SERVER['HTTP_USER_AGENT'])) ? FALSE : $_SERVER['HTTP_USER_AGENT'];
+        $input->user_agent = ( ! isset($_SERVER['HTTP_USER_AGENT'])) ? false : $_SERVER['HTTP_USER_AGENT'];
 
         return $input->user_agent;
     }
@@ -173,7 +173,7 @@ namespace Ob\i {
     * @param    string
     * @return   string
     */
-    function filename_security($str)
+    function filenameSecurity($str)
     {
         $bad = array(
                         "../",
@@ -229,7 +229,7 @@ namespace Ob\i {
             return ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest');
         }
         
-        return FALSE;
+        return false;
     } 
 
     // --------------------------------------------------------------------
@@ -243,15 +243,15 @@ namespace Ob\i {
     {    
         if(defined('TASK'))
         {
-            return FALSE;
+            return false;
         }
         
         if(defined('STDIN'))
         {
-            return TRUE;
+            return true;
         }
         
-        return FALSE;
+        return false;
     } 
 
     // --------------------------------------------------------------------
@@ -265,10 +265,10 @@ namespace Ob\i {
     {    
         if(defined('TASK'))
         {
-            return TRUE;
+            return true;
         }
         
-        return FALSE;
+        return false;
     } 
     // --------------------------------------------------------------------
 
@@ -279,12 +279,15 @@ namespace Ob\i {
     */
     function hmvc()
     {    
-        if(\Ob\Router\Router::getInstance()->is_hmvc())
+        if(\Ob\Router\Router::getInstance()->isHmvc())
         {
-            return TRUE;
+            return true;
         }
         
-        return FALSE;
+        return false;
     }
     
 }
+
+/* End of file i.php */
+/* Location: ./ob/i/releases/0.0.1/i.php */

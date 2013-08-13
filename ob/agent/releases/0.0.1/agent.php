@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Agent;
 
 /**
  * User Agent Class
@@ -14,11 +14,11 @@ namespace Ob;
  */
 Class Agent {
 
-    public $agent        = NULL;
+    public $agent        = null;
 
-    public $is_browser   = FALSE;
-    public $is_robot     = FALSE;
-    public $is_mobile    = FALSE;
+    public $is_browser   = false;
+    public $is_robot     = false;
+    public $is_mobile    = false;
 
     public $languages    = array();
     public $charsets     = array();
@@ -43,8 +43,13 @@ Class Agent {
      * @access    public
      * @return    void
      */
-    public function __construct()
-    {
+    public function __construct($no_instance = true)
+    {   
+        if($no_instance)
+        {
+            \Ob\getInstance()->agent = $this; // Make available it in the controller $this->agent->method();
+        }
+        
         if (isset($_SERVER['HTTP_USER_AGENT']))
         {
             $this->agent = trim($_SERVER['HTTP_USER_AGENT']);
@@ -52,15 +57,27 @@ Class Agent {
 
         if ( ! is_null($this->agent))
         {
-            if ($this->_load_agent_file())
+            if ($this->_loadAgentFile())
             {
-                $this->_compile_data();
+                $this->_compileData();
             }
         }
 
-        log\me('debug', "Agent Class Initialized");
+        \Ob\log\me('debug', "Agent Class Initialized");
     }
     
+    // ------------------------------------------------------------------------
+    
+    /**
+     * Initialize to Class.
+     * 
+     * @return object
+     */
+    public function init()
+    {
+        return ($this);
+    }
+        
     // ------------------------------------------------------------------------
     
     /**
@@ -69,38 +86,38 @@ Class Agent {
      * @access    private
      * @return    bool
      */
-    public function _load_agent_file()
+    public function _loadAgentFile()
     {
-        $user_agents = get_config('agents');  // obullo changes ..
+        $user_agents = getConfig('agents');  // obullo changes ..
 
-        $return = FALSE;
+        $return = false;
 
         if (isset($user_agents['platforms']))
         {
             $this->platforms = &$user_agents['platforms'];
             unset($user_agents['platforms']);
-            $return = TRUE;
+            $return = true;
         }
 
         if (isset($user_agents['browsers']))
         {
             $this->browsers  = &$user_agents['browsers'];
             unset($user_agents['browsers']);
-            $return = TRUE;
+            $return = true;
         }
 
         if (isset($user_agents['mobiles']))
         {
             $this->mobiles   = &$user_agents['mobiles'];
             unset($user_agents['mobiles']);
-            $return = TRUE;
+            $return = true;
         }
 
         if (isset($user_agents['robots']))
         {
             $this->robots    = &$user_agents['robots'];
             unset($robots);
-            $return = TRUE;
+            $return = true;
         }
 
         return $return;
@@ -114,13 +131,13 @@ Class Agent {
      * @access    private
      * @return    bool
      */
-    public function _compile_data()
+    public function _compileData()
     {
-        $this->_set_platform();
+        $this->_setPlatform();
 
-        foreach (array('_set_browser', '_set_robot', '_set_mobile') as $function)
+        foreach (array('_setBrowser', '_setRobot', '_setMobile') as $function)
         {
-            if ($this->$function() === TRUE)
+            if ($this->$function() === true)
             {
                 break;
             }
@@ -135,7 +152,7 @@ Class Agent {
      * @access    private
      * @return    mixed
      */
-    public function _set_platform()
+    public function _setPlatform()
     {
         if (is_array($this->platforms) AND count($this->platforms) > 0)
         {
@@ -144,7 +161,7 @@ Class Agent {
                 if (preg_match("|".preg_quote($key)."|i", $this->agent))
                 {
                     $this->platform = $val;
-                    return TRUE;
+                    return true;
                 }
             }
         }
@@ -159,7 +176,7 @@ Class Agent {
      * @access    private
      * @return    bool
      */
-    public function _set_browser()
+    public function _setBrowser()
     {
         if (is_array($this->browsers) AND count($this->browsers) > 0)
         {
@@ -167,15 +184,15 @@ Class Agent {
             {
                 if (preg_match("|".preg_quote($key).".*?([0-9\.]+)|i", $this->agent, $match))
                 {
-                    $this->is_browser = TRUE;
+                    $this->is_browser = true;
                     $this->version = $match[1];
                     $this->browser = $val;
                     $this->_set_mobile();
-                    return TRUE;
+                    return true;
                 }
             }
         }
-        return FALSE;
+        return false;
     }
 
     // --------------------------------------------------------------------
@@ -186,7 +203,7 @@ Class Agent {
      * @access    private
      * @return    bool
      */
-    public function _set_robot()
+    public function _setRobot()
     {
         if (is_array($this->robots) AND count($this->robots) > 0)
         {
@@ -194,13 +211,13 @@ Class Agent {
             {
                 if (preg_match("|".preg_quote($key)."|i", $this->agent))
                 {
-                    $this->is_robot = TRUE;
+                    $this->is_robot = true;
                     $this->robot = $val;
-                    return TRUE;
+                    return true;
                 }
             }
         }
-        return FALSE;
+        return false;
     }
 
     // --------------------------------------------------------------------
@@ -211,21 +228,21 @@ Class Agent {
      * @access    private
      * @return    bool
      */
-    public function _set_mobile()
+    public function _setMobile()
     {
         if (is_array($this->mobiles) AND count($this->mobiles) > 0)
         {
             foreach ($this->mobiles as $key => $val)
             {
-                if (FALSE !== (strpos(mb_strtolower($this->agent, config('charset')), $key)))
+                if (false !== (strpos(mb_strtolower($this->agent, \Ob\config('charset')), $key)))
                 {
-                    $this->is_mobile = TRUE;
+                    $this->is_mobile = true;
                     $this->mobile = $val;
-                    return TRUE;
+                    return true;
                 }
             }
         }
-        return FALSE;
+        return false;
     }
 
     // --------------------------------------------------------------------
@@ -236,7 +253,7 @@ Class Agent {
      * @access    private
      * @return    void
      */
-    public function _set_languages()
+    public function _setLanguages()
     {
         if ((count($this->languages) == 0) AND isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) 
         AND $_SERVER['HTTP_ACCEPT_LANGUAGE'] != ''
@@ -261,7 +278,7 @@ Class Agent {
      * @access    private
      * @return    void
      */
-    public function _set_charsets()
+    public function _setCharsets()
     {  
         if ((count($this->charsets) == 0) AND isset($_SERVER['HTTP_ACCEPT_CHARSET']) 
         AND $_SERVER['HTTP_ACCEPT_CHARSET'] != '' 
@@ -287,7 +304,7 @@ Class Agent {
      * @access    public
      * @return    bool
      */
-    public function is_browser()
+    public function isBrowser()
     {
         return $this->is_browser;
     }
@@ -300,7 +317,7 @@ Class Agent {
      * @access    public
      * @return    bool
      */
-    public function is_robot()
+    public function isRobot()
     {
         return $this->is_robot;
     }
@@ -313,7 +330,7 @@ Class Agent {
      * @access    public
      * @return    bool
      */
-    public function is_mobile()
+    public function isMobile()
     {
         return $this->is_mobile;
     }
@@ -321,14 +338,14 @@ Class Agent {
     // --------------------------------------------------------------------
 
     /**
-     * Is this a referral from another site?
+     * Is this a referral from another site ?
      *
      * @access    public
      * @return    bool
      */
-    public function is_referral()
+    public function isReferral()
     {
-        return ( ! isset($_SERVER['HTTP_REFERER']) OR $_SERVER['HTTP_REFERER'] == '') ? FALSE : TRUE;
+        return ( ! isset($_SERVER['HTTP_REFERER']) OR $_SERVER['HTTP_REFERER'] == '') ? false : true;
     }
 
     // --------------------------------------------------------------------
@@ -339,7 +356,7 @@ Class Agent {
      * @access    public
      * @return    string
      */
-    public function agent_string()
+    public function agentString()
     {
         return $this->agent;
     }
@@ -433,7 +450,7 @@ Class Agent {
     {
         if (count($this->languages) == 0)
         {
-            $this->_set_languages();
+            $this->_setLanguages();
         }
 
         return $this->languages;
@@ -451,7 +468,7 @@ Class Agent {
     {
         if (count($this->charsets) == 0)
         {
-            $this->_set_charsets();
+            $this->_setCharsets();
         }
 
         return $this->charsets;
@@ -465,9 +482,9 @@ Class Agent {
      * @access    public
      * @return    bool
      */
-    public function accept_lang($lang = 'en')
+    public function acceptLang($lang = 'en')
     {
-        return (in_array(strtolower($lang), $this->languages(), TRUE)) ? TRUE : FALSE;
+        return (in_array(strtolower($lang), $this->languages(), true)) ? true : false;
     }
 
     // --------------------------------------------------------------------
@@ -478,9 +495,9 @@ Class Agent {
      * @access    public
      * @return    bool
      */
-    public function accept_charset($charset = 'utf-8')
+    public function acceptCharset($charset = 'utf-8')
     {
-        return (in_array(strtolower($charset), $this->charsets(), TRUE)) ? TRUE : FALSE;
+        return (in_array(strtolower($charset), $this->charsets(), true)) ? true : false;
     }
     
 }

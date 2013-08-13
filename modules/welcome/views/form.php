@@ -33,7 +33,7 @@
         <td style="width:20%;"><?php echo form_label('Email') ?></td>
         <td>
         <?php echo form_error('user_email', '<div class="input-error">', '</div>'); ?>
-        <?php echo form_input('user_email', set_value('user_email'), " id='email' ");?>
+        <?php echo form_input('user_email', setValue('user_email'), " id='email' ");?>
         </td>
     </tr>
     <tr>
@@ -69,8 +69,8 @@
         <td><pre><?php echo form_error('usr_username') ?></pre></td>
     </tr>
     <tr>
-        <td>validation_errors()</td>
-        <td><pre><?php echo validation_errors(' | ', ' | '); ?></pre></td>
+        <td>validationErrors()</td>
+        <td><pre><?php echo validationErrors(' | ', ' | '); ?></pre></td>
     </tr>
     <tr>
         <td>print_r($user->errors())</td>

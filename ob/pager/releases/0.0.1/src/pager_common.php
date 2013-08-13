@@ -1,4 +1,5 @@
 <?php
+namespace Ob\Pager\Src;
 
 /**
  * Pager Common
@@ -24,17 +25,17 @@ Class Pager_Common
     public $_class_string   = '';       // string wrapper for CSS class name
     public $_base_url       = '';       // string base_url  // pear pager $_path / PAGER_CURRENT_PATHNAME
     public $_filename       = '';       // string file name
-    public $_fix_filename   = TRUE;     // boolean If false, don't override the fileName option. Use at your own risk.
+    public $_fix_filename   = true;     // boolean If false, don't override the fileName option. Use at your own risk.
     public $_http_method    = 'GET';    // string specifies which HTTP method to use
     public $_form_id        = '';       // string specifies which HTML form to use
-    public $_import_query   = TRUE;     // boolean whether or not to import submitted data
-    public $_query_string   = TRUE;     // boolean whether or not to import submitted data
+    public $_import_query   = true;     // boolean whether or not to import submitted data
+    public $_query_string   = true;     // boolean whether or not to import submitted data
     public $_url_var        = 'page';   // string name of the querystring var for page
     public $_link_data      = array();  // array data to pass through the link
     public $_extra_vars     = array();  // array additional URL vars
     public $_exclude_vars   = array();  // array URL vars to ignore
-    public $_expanded       = TRUE;     // boolean TRUE => expanded mode (for Pager_Sliding)
-    public $_accesskey      = FALSE;    // boolean TRUE => show accesskey attribute on <a> tags
+    public $_expanded       = true;     // boolean true => expanded mode (for Pager_Sliding)
+    public $_accesskey      = false;    // boolean true => show accesskey attribute on <a> tags
     public $_attributes     = '';       // string extra attributes for the <a> tag
     public $_onclick        = '';       // string onclick
      
@@ -45,10 +46,10 @@ Class Pager_Common
     public $_alt_page       = 'page';             // string alt text for "page" (use optional "%d" placeholder for page number)
     
     public $_prev_img       = '&lt;&lt; Back';    // string image/text to use as "prev" link
-    public $_prev_img_empty = NULL;               // image/text to use as "prev" link when no prev link is needed  (e.g. on the first page)
+    public $_prev_img_empty = null;               // image/text to use as "prev" link when no prev link is needed  (e.g. on the first page)
     public $_next_img       = 'Next &gt;&gt;';    // string image/text to use as "next" link
-    public $_next_img_empty = NULL;               // image/text to use as "next" link when no next link is needed (e.g. on the last page)
-                                                  // NULL deactivates it
+    public $_next_img_empty = null;               // image/text to use as "next" link when no next link is needed (e.g. on the last page)
+                                                  // null deactivates it
                                                 
     public $_separator                = '';        // string link separator
     public $_spaces_before_separator  = 0;         // integer number of spaces before separator
@@ -71,10 +72,10 @@ Class Pager_Common
     public $_last_link_title       = 'last page';       // string String used as title in <link rel="last"> tag
 
     public $_show_all_text         = '';        // string Text to be used for the 'show all' option in the select box
-    public $_item_data             = NULL;      // array data to be paged
-    public $_clear_if_void         = TRUE;      // boolean If TRUE and there's only one page, links aren't shown
-    public $_use_sessions          = FALSE;     // boolean Use session for storing the number of items per page
-    public $_close_session         = FALSE;     // boolean Close the session when finished reading/writing data
+    public $_item_data             = null;      // array data to be paged
+    public $_clear_if_void         = true;      // boolean If true and there's only one page, links aren't shown
+    public $_use_sessions          = false;     // boolean Use session for storing the number of items per page
+    public $_close_session         = false;     // boolean Close the session when finished reading/writing data
     public $_session_var           = 'set_per_page';  // string name of the session var for number of items per page
     
     public $links                  = '';        // string Complete set of links
@@ -190,7 +191,7 @@ Class Pager_Common
     * @return array Page data
     * @access public
     */
-    public function get_page_data($page_id = NULL)
+    public function get_page_data($page_id = null)
     {
         $page_id = empty($page_id) ? $this->_current_page : $page_id;
 
@@ -218,7 +219,7 @@ Class Pager_Common
     * @return array  First and last offsets
     * @access public
     */
-    public function get_offset_by_page($page_id = NULL)
+    public function get_offset_by_page($page_id = null)
     {
         $page_id = isset($page_id) ? $page_id : $this->_current_page;
         
@@ -254,7 +255,7 @@ Class Pager_Common
 
     /**
      * Returns next page ID. If current page is last page
-     * this function returns FALSE
+     * this function returns false
      *
      * @return mixed Next page ID or false
      * @access public
@@ -268,7 +269,7 @@ Class Pager_Common
     
     /**
      * Returns previous page ID. If current page is first page
-     * this function returns FALSE
+     * this function returns false
      *
      * @return mixed Previous page ID or false
      * @access public
@@ -394,14 +395,12 @@ Class Pager_Common
     */
     public function _render_link($alt_text, $link_text)
     {
-        $OB = getInstance();
-        
         if ($this->_http_method == 'GET') 
         {
             $href = '?' . $this->_http_build_query_wrapper($this->_link_data);
 
             // Is query string false, use Obullo style urls  ( Obullo Changes )
-            if($this->_query_string == FALSE)
+            if($this->_query_string == false)
             {   
                  $href = $this->_link_data[$this->_url_var]; 
             }
@@ -470,9 +469,9 @@ Class Pager_Common
     {
         if ( ! is_array($data))   // Check we have an array to work with
         {
-            throw new Exception('_generateForm() Parameter 1 expected to be Array or Object. Incorrect value given.');
+            throw new \Exception('_generateForm() Parameter 1 expected to be Array or Object. Incorrect value given.');
             
-            return FALSE;
+            return false;
         }
 
         if ( ! empty($this->_form_id)) 
@@ -747,7 +746,7 @@ Class Pager_Common
                   . $this->_render_link($this->_alt_next, $this->_next_img)
                   . $this->_spaces_before . $this->_spaces_after;
         } 
-        else if ($this->_next_img_empty !== NULL AND $this->_total_pages > 1) 
+        else if ($this->_next_img_empty !== null AND $this->_total_pages > 1) 
         {
             $next = $this->_spaces_after
                   . $this->_next_img_empty
@@ -767,7 +766,7 @@ Class Pager_Common
     * @return mixed string with html link tag or separated as array
     * @access private
     */
-    public function _get_first_link_tag($raw = FALSE)
+    public function _get_first_link_tag($raw = false)
     {
         if ($this->is_first_page() OR ($this->_http_method != 'GET')) 
         {
@@ -829,7 +828,7 @@ Class Pager_Common
     * @return mixed string with html link tag or separated as array
     * @access private
     */
-    public function _get_next_link_tag($raw = FALSE)
+    public function _get_next_link_tag($raw = false)
     {
         if ($this->is_last_page() OR ($this->_http_method != 'GET')) 
         {
@@ -903,7 +902,7 @@ Class Pager_Common
     /**
     * Returns a string with a XHTML SELECT menu,
     * useful for letting the user choose how many items per page should be
-    * displayed. If parameter useSessions is TRUE, this value is stored in
+    * displayed. If parameter useSessions is true, this value is stored in
     * a session var. The string isn't echoed right now so you can use it
     * with template engines.
     *
@@ -921,12 +920,8 @@ Class Pager_Common
     * @return string xhtml select box
     * @access public
     */
-    public function get_per_page_select_box($start = 5, $end = 30, $step = 5, $show_all_data = FALSE, $extra_params = array())
+    public function get_per_page_select_box($start = 5, $end = 30, $step = 5, $show_all_data = false, $extra_params = array())
     {
-        $packages = get_config('packages');
-    
-        require_once(OB_MODULES .'pager'. DS .'releases'. DS .$packages['dependencies']['pager']['version']. DS .'src'. DS .'pager_html_widgets'. EXT);
-        
         $widget = new Pager_Html_Widgets(array('pager' => $this));
         
         return $widget->get_per_page_select_box($start, $end, $step, $show_all_data, $extra_params);
@@ -941,7 +936,7 @@ Class Pager_Common
     * @param array  $params          - 'optionText': text to show in each option.
     *                                  Use '%d' where you want to see the number
     *                                  of pages selected.
-    *                                - 'autoSubmit': if TRUE, add some js code
+    *                                - 'autoSubmit': if true, add some js code
     *                                  to submit the form on the onChange event
     * @param string $extra_attributes (html attributes) Tag attributes or
     *                                HTML attributes (id="foo" pairs), will be
@@ -952,10 +947,6 @@ Class Pager_Common
     */
     public function get_page_select_box($params = array(), $extra_attributes = '')
     {   
-        $packages = get_config('packages');
-    
-        require_once(OB_MODULES .'pager'. DS .'releases'. DS .$packages['dependencies']['pager']['version']. DS .'src'. DS .'pager_html_widgets'. EXT);
-        
         $widget = new Pager_Html_Widgets(array('pager' => $this));
         
         return $widget->get_page_select_box($params, $extra_attributes);
@@ -1126,7 +1117,7 @@ Class Pager_Common
     *
     * @param mixed $options An associative array of option names and their values
     *
-    * @return boolean TRUE if success
+    * @return boolean true if success
     * @access public
     */
     public function set_options($options)
@@ -1223,7 +1214,7 @@ Class Pager_Common
         $this->_current_page = max($this->_current_page, 1);
         $this->_link_data = $this->_get_links_data();
 
-        return TRUE;
+        return true;
     }
 
 }

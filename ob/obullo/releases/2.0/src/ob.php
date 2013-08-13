@@ -4,7 +4,21 @@ namespace Ob {
     /**
     * Common Functions
     */
+    
+    /**
+     * Fetch language item
+     * 
+     * @param string $item
+     * @return string
+     */
+    function lang($item = '')
+    {
+        $locale = Locale\Locale::getInstance();
+        $item = ($item == '' OR ! isset($locale->language[$item])) ? false : $locale->language[$item];
 
+        return $item;
+    }
+    
     /**
     * Grab Obullo Super Object
     *
@@ -49,7 +63,7 @@ namespace Ob {
         }
         */
 
-        $packages = get_config('packages');
+        $packages = getConfig('packages');
 
         //--------------- MODEL LOADER ---------------//
         
@@ -74,12 +88,12 @@ namespace Ob {
                 
                 if($model_parts[1] == 'Schema')
                 { 
-                    $model_path = MODULES .$router->fetch_directory(). DS .'models'. DS .'schemas'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
+                    $model_path = MODULES .$router->fetchDirectory(). DS .'models'. DS .'schemas'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
                     require($model_path);
                     return;
                 }
 
-                $model_path = MODULES .$router->fetch_directory(). DS .'models'. DS .mb_strtolower($model_parts[1], config('charset')). EXT;
+                $model_path = MODULES .$router->fetchDirectory(). DS .'models'. DS .mb_strtolower($model_parts[1], config('charset')). EXT;
             }
            
             require($model_path);
@@ -92,7 +106,7 @@ namespace Ob {
         {
             $ob_parts   = explode('\\', $realname);
             $ob_library = strtolower($ob_parts[1]);
-            // print_r($parts);
+            // print_r($ob_parts);
             
             $src = '';
             if(isset($ob_parts[2]) AND $ob_parts[2] == 'Src')
@@ -120,7 +134,7 @@ namespace Ob {
         {
             if(strpos($realname, '\\') > 0)
             {
-                $user_parts  = explode('\\', $realname);
+                $user_parts = explode('\\', $realname);
                 $class_name = mb_strtolower($user_parts[0], config('charset')); // User Classes
             
                 require_once(CLASSES .$class_name. DS .$class_name. EXT);
@@ -154,11 +168,11 @@ namespace Ob {
 
         if ( ! isset($config_item[$item]))
         {
-            $config_name = get_config($config_name);
+            $config_name = getConfig($config_name);
 
             if ( ! isset($config_name[$item]))
             {
-                return FALSE;
+                return false;
             }
 
             $config_item[$item] = $config_name[$item];
@@ -179,17 +193,17 @@ namespace Ob {
     * @version   0.2 added multiple config fetch
     * @return    mixed
     */
-    function db_item($item, $index = 'db')
+    function db($item, $index = 'db')
     {
         static $db_item = array();
 
         if ( ! isset($db_item[$index][$item]))
         {
-            $database = get_config('database');
+            $database = getConfig('database');
 
             if ( ! isset($database[$index][$item]))
             {
-                return FALSE;
+                return false;
             }
 
             $db_item[$index][$item] = $database[$index][$item];
@@ -204,16 +218,16 @@ namespace Ob {
     *  Check requested obullo package
     *  whether to installed.
     */
-    function package_exists($package)
+    function packageExists($package)
     {
-        $packages = get_config('packages');
+        $packages = getConfig('packages');
 
         if(isset($packages['dependencies'][$package]['component']))
         {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     // ------------------------------------------------------------------------
@@ -226,7 +240,7 @@ namespace Ob {
     * @param    string    
     * @return   void
     */
-    function set_status_header($code = 200, $text = '')
+    function setStatusHeader($code = 200, $text = '')
     {
         $stati = array(
                             200    => 'OK',
@@ -272,7 +286,7 @@ namespace Ob {
 
         if ($code == '' OR ! is_numeric($code))
         {
-            show_error('Status codes must be numeric', 500);
+            showError('Status codes must be numeric', 500);
         }
 
         if (isset($stati[$code]) AND $text == '')
@@ -282,22 +296,22 @@ namespace Ob {
 
         if ($text == '')
         {
-            show_error('No status text available.  Please check your status code number or supply your own message text.', 500);
+            showError('No status text available.  Please check your status code number or supply your own message text.', 500);
         }
 
-        $server_protocol = (isset($_SERVER['SERVER_PROTOCOL'])) ? $_SERVER['SERVER_PROTOCOL'] : FALSE;
+        $server_protocol = (isset($_SERVER['SERVER_PROTOCOL'])) ? $_SERVER['SERVER_PROTOCOL'] : false;
 
         if (substr(php_sapi_name(), 0, 3) == 'cgi')
         {
-            header("Status: {$code} {$text}", TRUE);
+            header("Status: {$code} {$text}", true);
         }
         elseif ($server_protocol == 'HTTP/1.1' OR $server_protocol == 'HTTP/1.0')
         {
-            header($server_protocol." {$code} {$text}", TRUE, $code);
+            header($server_protocol." {$code} {$text}", true, $code);
         }
         else
         {
-            header("HTTP/1.1 {$code} {$text}", TRUE, $code);
+            header("HTTP/1.1 {$code} {$text}", true, $code);
         }
     }
 
@@ -310,11 +324,11 @@ namespace Ob {
     * @param    string
     * @return   string
     */
-    function show_404($page = '')
+    function show404($page = '')
     {    
         log\me('error', '404 Page Not Found --> '.$page, false, true);
 
-        echo show_http_error('404 Page Not Found', $page, 'ob_404', 404);
+        echo showHttpError('404 Page Not Found', $page, 'ob_404', 404);
 
         exit();
     }
@@ -331,14 +345,14 @@ namespace Ob {
     * @version 0.1
     * @version 0.2  added custom $heading params for users
     */
-    function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered')
+    function showError($message, $status_code = 500, $heading = 'An Error Was Encountered')
     {
         log\me('error', 'HTTP Error --> '.$message, false, true);
 
         // Some times we use utf8 chars in errors.
         header('Content-type: text/html; charset='.config('charset')); 
 
-        echo show_http_error($heading, $message, 'ob_general', $status_code);
+        echo showHttpError($heading, $message, 'ob_general', $status_code);
 
         exit();
     }
@@ -356,9 +370,9 @@ namespace Ob {
     * @param    int       header status code
     * @return   string
     */
-    function show_http_error($heading, $message, $template = 'ob_general', $status_code = 500)
+    function showHttpError($heading, $message, $template = 'ob_general', $status_code = 500)
     {
-        set_status_header($status_code);
+        setStatusHeader($status_code);
 
         $message = implode('<br />', ( ! is_array($message)) ? array($message) : $message);
         
@@ -379,17 +393,17 @@ namespace Ob {
     /**
     * Tests for file writability
     *
-    * is_writable() returns TRUE on Windows servers when you really can't write to
+    * is_writable() returns true on Windows servers when you really can't write to
     * the file, based on the read-only attribute.  is_writable() is also unreliable
     * on Unix servers if safe_mode is on.
     *
     * @access    private
     * @return    void
     */
-    function is_really_writable($file)
+    function isReallyWritable($file)
     {
         // If we're on a Unix server with safe_mode off we call is_writable
-        if (DS == '/' AND @ini_get("safe_mode") == FALSE)
+        if (DS == '/' AND @ini_get("safe_mode") == false)
         {
             return is_writable($file);
         }
@@ -400,24 +414,24 @@ namespace Ob {
         {
             $file = rtrim($file, DS). DS .md5(rand(1,100));
 
-            if (($fp = @fopen($file, 'ab')) === FALSE)
+            if (($fp = @fopen($file, 'ab')) === false)
             {
-                return FALSE;
+                return false;
             }
 
             fclose($fp);
             @chmod($file, '0777');
             @unlink($file);
-            return TRUE;
+            return true;
         }
-        elseif (($fp = @fopen($file, 'ab')) === FALSE)
+        elseif (($fp = @fopen($file, 'ab')) === false)
         {
-            return FALSE;
+            return false;
         }
 
         fclose($fp);
 
-        return TRUE;
+        return true;
     }
     
     // -------------------------------------------------------------------- 
@@ -432,7 +446,7 @@ namespace Ob {
     * @param	string
     * @return	string
     */
-    function remove_invisible_characters($str, $url_encoded = TRUE)
+    function removeInvisibleCharacters($str, $url_encoded = true)
     {
         $non_displayables = array();
 

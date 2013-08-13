@@ -21,7 +21,7 @@
 */
 if ( ! function_exists('xml_convert'))
 {
-    function xml_convert($str, $protect_all = FALSE)
+    function xml_convert($str, $protect_all = false)
     {
         $temp = '__TEMP_AMPERSANDS__';
 
@@ -29,7 +29,7 @@ if ( ! function_exists('xml_convert'))
         // ampersands won't get messed up    
         $str = preg_replace("/&#(\d+);/", "$temp\\1;", $str);
 
-        if ($protect_all === TRUE)
+        if ($protect_all === true)
         {
             $str = preg_replace("/&(\w+);/",  "$temp\\1;", $str);
         }
@@ -41,7 +41,7 @@ if ( ! function_exists('xml_convert'))
         // Decode the temp markers back to entities        
         $str = preg_replace("/$temp(\d+);/","&#\\1;",$str);
 
-        if ($protect_all === TRUE)
+        if ($protect_all === true)
         {
             $str = preg_replace("/$temp(\w+);/","&\\1;", $str);
         }
@@ -61,11 +61,11 @@ if ( ! function_exists('xml_convert'))
 */
 if( ! function_exists('xml_writer'))
 {
-    function xml_writer($data, $cdata = FALSE, $encoding = 'UTF-8')
+    function xml_writer($data, $cdata = false, $encoding = 'UTF-8')
     { 
         if ( ! extension_loaded('libxml') )
         {
-            throw new Exception('PECL libxml extension not loaded on your server !');
+            throw new \Exception('PECL libxml extension not loaded on your server !');
         }
 
         $xml = new XMLWriter();

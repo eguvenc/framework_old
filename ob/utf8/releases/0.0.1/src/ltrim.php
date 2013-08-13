@@ -25,9 +25,9 @@
  */
 if( ! function_exists('utf8_ltrim'))
 {
-    function utf8_ltrim($str, $charlist = NULL)
+    function utf8_ltrim($str, $charlist = null)
     {
-        if ($charlist === NULL)
+        if ($charlist === null)
         {
             return ltrim($str);
         }

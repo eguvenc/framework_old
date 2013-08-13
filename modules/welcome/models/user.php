@@ -12,7 +12,7 @@ Class User extends Ob\Model // extends Ob\Odm
     
     function test()
     {
-        // print_r($this->db->get('users')->result_array());
+        // print_r($this->db->get('users')->resultArray());
         // echo 'test';
     }
 }

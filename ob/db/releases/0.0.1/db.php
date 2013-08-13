@@ -23,7 +23,7 @@ Class Db {
            return;   // Lazy Loading.  
         }
         
-        if($db_var !== FALSE)
+        if($db_var !== false)
         {
            \Ob\getInstance()->{$db_var} = $this->connect($db_var, $params); 
         }
@@ -45,8 +45,8 @@ Class Db {
            return;   // Lazy Loading.  
         }
         
-        $dbdriver = is_array($params) ? $params['dbdriver'] : \Ob\db_item('dbdriver', $db_var); 
-        $hostname = \Ob\db_item('hostname', $db_var);
+        $dbdriver = is_array($params) ? $params['dbdriver'] : \Ob\db('dbdriver', $db_var); 
+        $hostname = \Ob\db('hostname', $db_var);
         
         if(is_array($params))
         {
@@ -57,14 +57,14 @@ Class Db {
             $options = array('default_db' => $db_var);
         }
         
-        if($hostname == FALSE)
+        if($hostname == false)
         {
             throw new \Exception('The ' . $db_var . ' database configuration undefined in your config/database.php file.');
         }
         
         //----------- MONGO PACKAGE SUPPORT ------------//
         
-        if(strtolower($dbdriver) == 'mongodb' || strtolower($dbdriver) == 'mongo') 
+        if(strtolower($dbdriver) == 'mongo') 
         {
             $mongo = new \Ob\Mongo\Mongo();
             
@@ -73,7 +73,7 @@ Class Db {
         
         //----------- MONGO PACKAGE SUPPORT END ------------//
 
-        $packages = get_config('packages');
+        $packages = getConfig('packages');
         
         if($packages['db_layer'] == 'Database_Pdo')
         {
@@ -86,7 +86,7 @@ Class Db {
             return $database->connect($dbdriver, $options);
         }
         
-        return FALSE;        
+        return false;        
     }
 }
 

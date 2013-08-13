@@ -17,7 +17,7 @@ Class View {
     public $var          = array(); // String type view variables
     public $array        = array(); // Array type view variables
     public $data         = array(); // Mixed type view variables
-    public $path         = NULL;
+    public $path         = null;
     
     public static $instance;
     
@@ -32,7 +32,7 @@ Class View {
     */
     public function __construct()
     {
-        $this->path = MODULES .\Ob\getInstance()->router->fetch_directory(). DS .'views'. DS;
+        $this->path = MODULES .\Ob\getInstance()->router->fetchDirectory(). DS .'views'. DS;
         
         \Ob\log\me('debug', "View Class Initialized");
     }
@@ -83,7 +83,7 @@ Class View {
     * @param booelan $string fetch the file as string or include file
     * @return void | string
     */
-    public function load($filename, $data = '', $string = FALSE)
+    public function load($filename, $data = '', $string = false)
     {
         if(function_exists('\Ob\getInstance') AND  is_object(\Ob\getInstance()))
         {
@@ -115,9 +115,9 @@ Class View {
 
         include($this->path . $filename . EXT);
         
-        \Ob\log\me('debug', 'View file loaded: '.\Ob\error\secure_path($this->path). $filename . EXT);
+        \Ob\log\me('debug', 'View file loaded: '.\Ob\error\securePath($this->path). $filename . EXT);
 
-        if($string === TRUE)
+        if($string === true)
         {
             $output = ob_get_contents();
             @ob_end_clean();
@@ -129,7 +129,7 @@ Class View {
         $output = ob_get_contents();
         
         // Set Layout views inside to Output Class for caching functionality.
-        \Ob\Output\Output::getInstance()->append_output($output);
+        \Ob\Output\Output::getInstance()->appendOutput($output);
 
         @ob_end_clean();
 

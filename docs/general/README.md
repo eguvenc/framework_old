@@ -160,12 +160,12 @@ index.php?d=shop&c=products&m=view&id=345
 ```
 Obullo optionally supports this capability, which can be enabled in your application/config.php file. If you open your config file you'll see these items:
 ```php
-$config['enable_query_strings'] = FALSE;
+$config['enable_query_strings'] = false;
 $config['directory_trigger']  = 'd';
 $config['controller_trigger'] = 'c';
 $config['function_trigger'] = 'm';
 ```
-If you change "enable_query_strings" to TRUE this feature will become active. Your controllers and functions will then be accessible using the "trigger" words you've set to invoke your directory, controllers and methods:
+If you change "enable_query_strings" to true this feature will become active. Your controllers and functions will then be accessible using the "trigger" words you've set to invoke your directory, controllers and methods:
 ```php
 index.php?d=directory&c=controller&m=method
 ```
@@ -465,9 +465,9 @@ Class Start extends My_Controller
     
     public function index()
     {
-        vi\set_var('title',  'Hello World !');
+        vi\setVar('title',  'Hello World !');
         
-        vi\get('example',  '', FALSE);
+        vi\get('example',  '', false);
     }
     
 }
@@ -501,9 +501,9 @@ Class Start extends Welcome_Controller
     
     public function index()
     {
-        vi\set_var('title',  'Hello World !');
+        vi\setVar('title',  'Hello World !');
         
-        vi\get('example', '', FALSE);
+        vi\get('example', '', false);
     }
     
 }
@@ -532,22 +532,22 @@ Since your controller classes will extend the main application controller you mu
 - ob_set_headers()
 - ob_system_run()
 - ob_system_close()
-- is_really_writable()
-- set_status_header()
+- isReallyWritable()
+- setStatusHeader()
 - ob_autoload()
 - load_class()
-- get_static()
-- get_config()
+- getStatic()
+- getConfig()
 - config_item()
-- db_item()
+- db()
 - is_php()
-- show_http_error()
+- showHttpError()
 - Obullo_ErrorTemplate()
 - Obullo_ErrorHandler()
-- show_error()
-- show_404()
+- showError()
+- show404()
 - log_me()
-- lang()
+- \Ob\lang()
 - this()
 - __merge_autoloaders()
 - All Helper Functions
@@ -668,13 +668,13 @@ vi/views('filename');
 ------
 To load a global view file you will use the following function:
 ```php
-vi/set_var('key', 'val');
+vi/setVar('key', 'val');
 ```
 You can store values multiple times...
 ```php
-vi/set_var('title', 'Hello ');
-vi/set_var('title', 'My ');
-vi/set_var('title', 'Dear !');
+vi/setVar('title', 'Hello ');
+vi/setVar('title', 'My ');
+vi/setVar('title', 'Dear !');
 ```
 echo view_var('title');   // Hello My Dear !
 Now, open the controller file you made earlier called <dfn>blog/start.php</dfn>, and replace the echo statement with the view loading function:
@@ -689,9 +689,9 @@ Class Start extends Controller
     
     public function index()
     {
-        vi/set_var('title', 'Welcome to My Blog !');
+        vi/setVar('title', 'Welcome to My Blog !');
         
-        vi/get('view_blog', '', FALSE);     // it includes your local view file 
+        vi/get('view_blog', '', false);     // it includes your local view file 
     }
 }
 ?>
@@ -711,7 +711,7 @@ $data = array(
                'message' => 'My Message'
           );
 
-vi/get('view_blog', $data, FALSE);
+vi/get('view_blog', $data, false);
 
 ?>
 ```
@@ -732,7 +732,7 @@ Class Start extends Controller
                'message' => 'My Message'
           );
         
-        vi/get('view_blog', $data, FALSE);
+        vi/get('view_blog', $data, false);
     }
 } 
 ?>
@@ -792,7 +792,7 @@ $string = vi/views('myfile');  // Default framework behaviour
 ```
 View ( as include)
 ```php
-vi/views('myfile', '', FALSE);
+vi/views('myfile', '', false);
 ```
 For more functions look at View Helper file.
 
@@ -824,7 +824,7 @@ Class Model_blog extends Model
     {
         $query = $this->db->get('blog_entries', 10);
         
-        return $query->result_array();
+        return $query->resultArray();
     }
 
     public function insert_entry()
@@ -932,7 +932,7 @@ $this->model_name->function();
 
 #### Using No Instantiate
 
-If you set second param to FALSE, you can instantiate the your model manually.
+If you set second param to false, you can instantiate the your model manually.
 ```php
 $user = new Model\User(false);
 
@@ -974,11 +974,11 @@ Class Start extends Controller
     {
         $query  = $this->Blog->get_last_ten_entries();
         
-        $data['results'] = $query->result_array();
+        $data['results'] = $query->resultArray();
         
-        vi\set_var('body',  view('view_blog', $data));
+        vi\setVar('body',  view('view_blog', $data));
         
-        vi\get_var('layouts/blog');
+        vi\getVar('layouts/blog');
     }
 }
 ?>
@@ -1061,7 +1061,7 @@ $config = array(
      'dbdriver' => 'mysql',
      'dbh_port' => '',
      'char_set' => 'utf8',
-     'options'  => array( PDO::ATTR_PERSISTENT => TRUE )
+     'options'  => array( PDO::ATTR_PERSISTENT => true )
  );                                
 
  new Db/Connect($config);
@@ -1083,10 +1083,10 @@ $config = array(
 $this->db2->query(  ....  );
 ```
 
-<strong>Tip:</strong> You can reach your database connectivity settings by a [common function](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#common-functions) called <samp>db_item();</samp> .Look at below the code.
+<strong>Tip:</strong> You can reach your database connectivity settings by a [common function](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#common-functions) called <samp>db();</samp> .Look at below the code.
 
 ```php
-echo db_item('hostname', 'db2');   // output localhost 
+echo db('hostname', 'db2');   // output localhost 
 ```
 
 This will give you hostname parameter of second database connection setting which before defined in <dfn>application/config/database.php</dfn> file.

@@ -59,7 +59,7 @@ namespace Ob\log {
 
         $threshold = 1;
         $date_fmt  = 'Y-m-d H:i:s';
-        $enabled   = TRUE;
+        $enabled   = true;
         $levels    = array('ERROR' => '1', 'DEBUG' => '2',  'INFO' => '3', 'BENCH' => '4', 'ALL' => '5');
         $level     = strtoupper($level);
 
@@ -75,15 +75,15 @@ namespace Ob\log {
         {
             if(isset($_SERVER['argv'][1]) AND $_SERVER['argv'][1] == 'clear') //  Do not keep clear command logs.
             {
-                return FALSE;
+                return false;
             }
 
             $log_path = rtrim($log_path, DS) . DS .'cmd' . DS; 
         }         
 
-        if ( ! is_dir(rtrim($log_path, DS)) OR ! \Ob\is_really_writable($log_path))
+        if ( ! is_dir(rtrim($log_path, DS)) OR ! \Ob\isReallyWritable($log_path))
         {
-            $enabled = FALSE;
+            $enabled = false;
         }
 
         if (is_numeric($log_threshold))
@@ -96,14 +96,14 @@ namespace Ob\log {
             $date_fmt = $log_date_format;
         }
 
-        if ($enabled === FALSE)
+        if ($enabled === false)
         {
-            return FALSE;
+            return false;
         }
 
         if ( ! isset($levels[$level]) OR ($levels[$level] > $threshold))
         {
-            return FALSE;
+            return false;
         }
 
         $filepath = $log_path .'log-'. date('Y-m-d').EXT;
@@ -118,7 +118,7 @@ namespace Ob\log {
 
         if ( ! $fp = @fopen($filepath, 'ab'))
         {
-            return FALSE;
+            return false;
         }
 
         flock($fp, LOCK_EX);    
@@ -128,7 +128,7 @@ namespace Ob\log {
 
         @chmod($filepath, '0666');
 
-        return TRUE;
+        return true;
     }
 }
 

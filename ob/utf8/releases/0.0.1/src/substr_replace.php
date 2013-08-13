@@ -26,16 +26,16 @@
 */
 if( ! function_exists('utf8_substr_replace'))
 {
-    function utf8_substr_replace($str, $replacement, $offset, $length = NULL)
+    function utf8_substr_replace($str, $replacement, $offset, $length = null)
     {
         $utf8 = lib('ob/utf8');
         
         if($utf8->is_ascii($str))
         {
-            return ($length === NULL) ? substr_replace($str, $replacement, $offset) : substr_replace($str, $replacement, $offset, $length);
+            return ($length === null) ? substr_replace($str, $replacement, $offset) : substr_replace($str, $replacement, $offset, $length);
         }
                 
-        $length = ($length === NULL) ? $utf8->strlen($str) : (int) $length;
+        $length = ($length === null) ? $utf8->strlen($str) : (int) $length;
         
         preg_match_all('/./us', $str, $str_array);
         preg_match_all('/./us', $replacement, $replacement_array);

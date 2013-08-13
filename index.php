@@ -112,7 +112,7 @@ define('TASK_FILE', 'task');
 |--------------------------------------------------------------------------
 |
 | Enable compatibility mode with Zend Engine 1 (PHP 4). It affects the cloning, 
-| casting (objects with no properties cast to FALSE or 0), and comparing of objects. 
+| casting (objects with no properties cast to false or 0), and comparing of objects. 
 | In this mode, objects are passed by value instead of reference by default.
 | 
 | This feature has been DEPRECATED and REMOVED as of PHP 5.3.0. 
@@ -175,7 +175,7 @@ if(defined('STDIN'))
 * @param     string $folder folder of the file
 * @return    array
 */
-function get_static($filename = 'config', $var = '', $folder = '')
+function getStatic($filename = 'config', $var = '', $folder = '')
 {
     static $loaded    = array();
     static $variables = array();
@@ -215,21 +215,21 @@ function get_static($filename = 'config', $var = '', $folder = '')
 * @param    string $var
 * @return   array
 */
-function get_config($filename = 'config', $var = '', $folder = '')
+function getConfig($filename = 'config', $var = '', $folder = '')
 {
     $folder = ($folder == '') ? APP .'config' : $folder;
     
     if($filename == 'database')
     {
-        $database   = get_static($filename, $var, APP .'config');
+        $database   = getStatic($filename, $var, APP .'config');
 
         return $database;
     }
     
-    return get_static($filename, $var, $folder);
+    return getStatic($filename, $var, $folder);
 }
 
-$packages = get_config('packages');
+$packages = getConfig('packages');
 
 // --------------------------------------------------------------------
 

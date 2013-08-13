@@ -36,16 +36,16 @@ namespace Ob\html {
     * @param    boolean $index_page
     * @return   string
     */
-    function css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)
+    function css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = false)
     {
-        if(strpos($href, '/*') !== FALSE)   // WE UNDERSTAND THIS IS A FOLDER 
+        if(strpos($href, '/*') !== false)   // WE UNDERSTAND THIS IS A FOLDER 
         {
             $href   = substr($href, 0, -2);
             $files  = '';
             $folder = get_filenames(ROOT .'assets'. DS .'css'. DS . str_replace('/', DS, $href));
             foreach ($folder as $filename)
             {
-                $files .= _css($href.'/'.$filename, $title, $media, $rel, $index_page = FALSE);
+                $files .= _css($href.'/'.$filename, $title, $media, $rel, $index_page = false);
             }
 
             return $files;
@@ -70,16 +70,16 @@ namespace Ob\html {
     * @param    boolean $index_page
     * @return   string
     */
-    function js($src, $arguments = '', $type = 'text/javascript', $index_page = FALSE)
+    function js($src, $arguments = '', $type = 'text/javascript', $index_page = false)
     {
-        if(strpos($src, '/*') !== FALSE)  // WE UNDERSTAND THIS IS A FOLDER 
+        if(strpos($src, '/*') !== false)  // WE UNDERSTAND THIS IS A FOLDER 
         {
             $src    = substr($src, 0, -2);
             $files  = '';
             $folder = get_filenames(ROOT .'assets'. DS .'js'. DS . str_replace('/', DS, $src));
             foreach ($folder as $filename)
             {
-                $files .= _js($src.'/'.$filename, $arguments, $type, $index_page = FALSE);
+                $files .= _js($src.'/'.$filename, $arguments, $type, $index_page = false);
             }
 
             return $files;
@@ -93,7 +93,7 @@ namespace Ob\html {
     /**
     * Build css files private function.
     */
-    function _css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)
+    function _css($href, $title = '', $media = '', $rel = 'stylesheet', $index_page = false)
     {
         $link = '<link ';           
         $ext  = 'css';
@@ -105,13 +105,13 @@ namespace Ob\html {
 
         $href = ltrim($href, '/');  // remove first slash
 
-        if ( strpos($href, '://') !== FALSE)
+        if ( strpos($href, '://') !== false)
         {
             $link .= ' href="'.$href.'" ';
         }
-        elseif ($index_page === TRUE)
+        elseif ($index_page === true)
         {
-            $link .= ' href="'. \Ob\getInstance()->config->site_url($href, false) .'" ';
+            $link .= ' href="'. \Ob\getInstance()->config->siteUrl($href, false) .'" ';
         }
         else
         {
@@ -140,18 +140,18 @@ namespace Ob\html {
     /**
     * Build js files private function.
     */
-    function _js($src, $arguments = '', $type = 'text/javascript', $index_page = FALSE)
+    function _js($src, $arguments = '', $type = 'text/javascript', $index_page = false)
     {
         $link = '<script type="'.$type.'" ';        
         $src  = ltrim($src, '/');   // remove first slash
 
-        if ( strpos($src, '://') !== FALSE)
+        if ( strpos($src, '://') !== false)
         {
             $link .= ' src="'. $src .'" ';
         }
-        elseif ($index_page === TRUE)  // .js file as PHP
+        elseif ($index_page === true)  // .js file as PHP
         {
-            $link .= ' src="'. \Ob\getInstance()->config->site_url($src, false) .'" ';
+            $link .= ' src="'. \Ob\getInstance()->config->siteUrl($src, false) .'" ';
         }
         else
         {
@@ -178,7 +178,7 @@ namespace Ob\html {
     * @version  0.1
     * @return   string
     */
-    function img($src = '', $attributes = '', $index_page = FALSE)
+    function img($src = '', $attributes = '', $index_page = false)
     {
         if ( ! is_array($src) )
         {
@@ -191,11 +191,11 @@ namespace Ob\html {
         {
             $v = ltrim($v, '/');   // remove first slash
             
-            if ($k == 'src' AND strpos($v, '://') === FALSE)
+            if ($k == 'src' AND strpos($v, '://') === false)
             {
-                if ($index_page === TRUE)
+                if ($index_page === true)
                 {
-                    $img .= ' src="'. \Ob\getInstance()->config->site_url($v, false).'" ';
+                    $img .= ' src="'. \Ob\getInstance()->config->siteUrl($v, false).'" ';
                 }
                 else
                 {
@@ -221,13 +221,13 @@ namespace Ob\html {
     * @access   private
     * @param    mixed $file_url
     * @param    mixed $extra_path
-    * @return   string | FALSE
+    * @return   string | false
     */
     function _get_public_path($file_url, $extra_path = '', $ext = '')
     {                              
         $filename = $file_url;          
         $paths    = array();
-        if( strpos($filename, '/') !== FALSE)
+        if( strpos($filename, '/') !== false)
         {
             $paths      = explode('/', $filename);
             $filename   = array_pop($paths);
@@ -249,7 +249,7 @@ namespace Ob\html {
 
         $config = \Ob\getInstance()->config;
         
-        return $config->public_url('', true) .'assets/'. $extra_path . $folder . $sub_path . $filename;
+        return $config->publicUrl('', true) .'assets/'. $extra_path . $folder . $sub_path . $filename;
     }
 
     // ------------------------------------------------------------------------
@@ -263,28 +263,28 @@ namespace Ob\html {
     * @param bool $_recursion
     * @return boolean | array
     */
-    function get_filenames($source_dir, $include_path = FALSE, $_recursion = FALSE)
+    function get_filenames($source_dir, $include_path = false, $_recursion = false)
     {
         static $_filedata = array();
 
         if ($fp = @opendir($source_dir))
         {
             // reset the array and make sure $source_dir has a trailing slash on the initial call
-            if ($_recursion === FALSE)
+            if ($_recursion === false)
             {
                 $_filedata = array();
                 $source_dir = rtrim(realpath($source_dir), DS). DS;
             }
 
-            while (FALSE !== ($file = readdir($fp)))
+            while (false !== ($file = readdir($fp)))
             {
                 if (@is_dir($source_dir.$file) && strncmp($file, '.', 1) !== 0)
                 {
-                            get_filenames($source_dir.$file. DS, $include_path, TRUE);
+                            get_filenames($source_dir.$file. DS, $include_path, true);
                 }
                 elseif (strncmp($file, '.', 1) !== 0)
                 {
-                        $_filedata[] = ($include_path == TRUE) ? $source_dir.$file : $file;
+                        $_filedata[] = ($include_path == true) ? $source_dir.$file : $file;
                 }
             }
             
@@ -292,7 +292,7 @@ namespace Ob\html {
         }
         else
         {
-            return FALSE;
+            return false;
         }
     }
 

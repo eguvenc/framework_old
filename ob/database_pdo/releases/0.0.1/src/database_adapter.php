@@ -30,7 +30,7 @@ Abstract Class Database_Adapter extends Database_Layer {
     * 
     * @var string
     */
-    public $_pdo = NULL;  
+    public $_pdo = null;  
     
     /**
     * The character used for escaping
@@ -75,17 +75,17 @@ Abstract Class Database_Adapter extends Database_Layer {
         } else 
         {
             // Config.database connection
-            $this->hostname = \Ob\db_item('hostname',$db_var); 
-            $this->username = \Ob\db_item('username',$db_var); 
-            $this->password = \Ob\db_item('password',$db_var); 
-            $this->database = \Ob\db_item('database',$db_var);
-            $this->dbdriver = strtolower(\Ob\db_item('dbdriver',$db_var));
-            $this->dbprefix = strtolower(\Ob\db_item('dbprefix',$db_var));
-            $this->swap_pre = strtolower(\Ob\db_item('swap_pre',$db_var));
-            $this->char_set = \Ob\db_item('char_set',$db_var);
-            $this->dbh_port = \Ob\db_item('dbh_port',$db_var);
-            $this->dsn      = \Ob\db_item('dsn'     ,$db_var);
-            $this->options  = \Ob\db_item('options' ,$db_var);
+            $this->hostname = \Ob\db('hostname',$db_var); 
+            $this->username = \Ob\db('username',$db_var); 
+            $this->password = \Ob\db('password',$db_var); 
+            $this->database = \Ob\db('database',$db_var);
+            $this->dbdriver = strtolower(\Ob\db('dbdriver',$db_var));
+            $this->dbprefix = strtolower(\Ob\db('dbprefix',$db_var));
+            $this->swap_pre = strtolower(\Ob\db('swap_pre',$db_var));
+            $this->char_set = \Ob\db('char_set',$db_var);
+            $this->dbh_port = \Ob\db('dbh_port',$db_var);
+            $this->dsn      = \Ob\db('dsn'     ,$db_var);
+            $this->options  = \Ob\db('options' ,$db_var);
         }  
         
         if( ! is_array($this->options) ) $this->options = array();
@@ -113,7 +113,7 @@ Abstract Class Database_Adapter extends Database_Layer {
         $dsn  = empty($this->dsn) ? 'mysql:host='.$this->hostname.';'.$port.'dbname='.$this->database : $this->dsn;
         
         // array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES $this->char_set") it occurs an error !
-        $this->_pdo = $this->pdo_connect($dsn, $this->username, $this->password, $this->options);
+        $this->_pdo = $this->pdoConnect($dsn, $this->username, $this->password, $this->options);
              
         if( ! empty($this->char_set) )
         $this->_conn->exec("SET NAMES '" . $this->char_set . "'");
@@ -128,7 +128,7 @@ Abstract Class Database_Adapter extends Database_Layer {
     * Get PDO Instance
     * for DBFactory Class ..
     */
-    public function get_connection()
+    public function getConnection()
     {
        return $this->_pdo;
     }
@@ -140,7 +140,7 @@ Abstract Class Database_Adapter extends Database_Layer {
      *
      * @return boolean
      */
-    public function is_connected()
+    public function isConnected()
     {
         return ((bool) ($this->_conn instanceof PDO));
     }
@@ -263,7 +263,7 @@ Abstract Class Database_Adapter extends Database_Layer {
     * @param type $key
     * @param type $val 
     */
-    public function set_attribute($key, $val)
+    public function setAttribute($key, $val)
     {
         $this->_conn->setAttribute($key, $val);
     }

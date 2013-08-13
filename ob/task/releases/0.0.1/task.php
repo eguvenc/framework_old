@@ -17,7 +17,7 @@
 */
 if ( ! function_exists('task_run'))
 {
-    function task_run($uri, $debug = FALSE)
+    function task_run($uri, $debug = false)
     {
         $uri    = explode('/', trim($uri));
         $module = array_shift($uri);

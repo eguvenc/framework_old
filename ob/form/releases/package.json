@@ -1,6 +1,6 @@
 {
   "name": "form",
-  "description": "Control the form operations.",
+  "description": "Control the html form elements.",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",
@@ -10,7 +10,7 @@
   "component" : "helper",
   "keywords": [
     "form",
-    "form html"
+    "html"
   ],
   "homepage": "https://github.com/obullo/form",
   "repo": {

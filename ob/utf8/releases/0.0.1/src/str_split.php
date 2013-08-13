@@ -37,7 +37,7 @@ if( ! function_exists('utf8_str_split'))
 
         if($split_length < 1)
         {
-            return FALSE;
+            return false;
         }
 
         if($utf8->strlen($str) <= $split_length)

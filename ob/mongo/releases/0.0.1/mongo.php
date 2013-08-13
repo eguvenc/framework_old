@@ -38,7 +38,7 @@ Class Mongo {
     private $last_inserted_id = ''; // Last inserted id.
     
     private $collection = ''; // Set collection name using $this->db->from() ?
-    public $use_mongo_id = TRUE; // Use or not use mongoid object
+    public $use_mongo_id = true; // Use or not use mongoid object
 
     /**
     * Constructor
@@ -152,7 +152,7 @@ Class Mongo {
      * @param type $value
      * @return \Db
      */
-    public function where($wheres, $value = null, $mongo_id = TRUE)
+    public function where($wheres, $value = null, $mongo_id = true)
     {
         if(is_string($wheres) AND strpos(ltrim($wheres), ' ') > 0)
         {
@@ -211,12 +211,12 @@ Class Mongo {
     /**
      * Get the documents where the value of a $field may be something else
      * 
-     * @usage : $this->db->or_where(array('foo'=>'bar', 'bar'=>'foo'))->get('foobar');
+     * @usage : $this->db->orWhere(array('foo'=>'bar', 'bar'=>'foo'))->get('foobar');
      * 
      * @param type $wheres
      * @return Db
      */
-    public function or_where($wheres, $value = null)
+    public function orWhere($wheres, $value = null)
     {
         if (is_array($value))
         {
@@ -238,14 +238,14 @@ Class Mongo {
     /**
      * Get the documents where the value of a $field is in a given $in array().
      * 
-     * @usage : $this->db->where_in('foo', array('bar', 'zoo', 'blah'))->get('foobar');
-     * @usage : $this->db->where_in('foo !=', array('bar', 'zoo', 'blah'))->get('foobar');
+     * @usage : $this->db->whereIn('foo', array('bar', 'zoo', 'blah'))->get('foobar');
+     * @usage : $this->db->whereIn('foo !=', array('bar', 'zoo', 'blah'))->get('foobar');
      * 
      * @param type $field
      * @param type $in
      * @return \Db
      */
-    public function where_in($field = "", $in = array())
+    public function whereIn($field = "", $in = array())
     {
         if(strpos($field, '!=') > 0)
         {
@@ -300,31 +300,31 @@ Class Mongo {
      * 		u = match unicode
      *
      * 	@param $enable_start_wildcard
-     * 	If set to anything other than TRUE, a starting line character "^" will be prepended
+     * 	If set to anything other than true, a starting line character "^" will be prepended
      * 	to the search value, representing only searching for a value at the start of
      * 	a new line.
      *
      * 	@param $enable_end_wildcard
-     * 	If set to anything other than TRUE, an ending line character "$" will be appended
+     * 	If set to anything other than true, an ending line character "$" will be appended
      * 	to the search value, representing only searching for a value at the end of
      * 	a line.
      *
-     * 	@usage : $this->db->like('foo', 'bar', 'im', FALSE, TRUE);
+     * 	@usage : $this->db->like('foo', 'bar', 'im', false, true);
      * 	@since v1.0.0
      *
      */
-    public function like($field = "", $value = "", $flags = "i", $enable_start_wildcard = TRUE, $enable_end_wildcard = TRUE)
+    public function like($field = "", $value = "", $flags = "i", $enable_start_wildcard = true, $enable_end_wildcard = true)
     {
         $field = (string) trim($field);
         $this->_where_init($field);
         $value = (string) trim($value);
         $value = quotemeta($value);
 
-        if ($enable_start_wildcard !== TRUE)
+        if ($enable_start_wildcard !== true)
         {
             $value = "^" . $value;
         }
-        if ($enable_end_wildcard !== TRUE)
+        if ($enable_end_wildcard !== true)
         {
             $value .= "$";
         }
@@ -341,7 +341,7 @@ Class Mongo {
      *
      * @since v1.0.0
      */
-    public function or_like($field, $like = array())
+    public function orLike($field, $like = array())
     {
         $this->_where_init('$or');
         if (is_array($like) && count($like) > 0)
@@ -361,7 +361,7 @@ Class Mongo {
      *
      * @since v1.0.0
      */
-    public function not_like($field, $like = array())
+    public function notLike($field, $like = array())
     {
         $this->_where_init($field);
         if (is_array($like) && count($like) > 0)
@@ -377,12 +377,12 @@ Class Mongo {
      // --------------------------------------------------------------------
     
     /**
-     * @usage : $this->db->order_by('foo', 'ASC'))->get('foobar');
+     * @usage : $this->db->orderBy('foo', 'ASC'))->get('foobar');
      * 
      * @param type $fields
      * @return \Db
      */
-    public function order_by($col, $direction  = 'ASC')
+    public function orderBy($col, $direction  = 'ASC')
     {
         if (strtolower($direction) == 'desc')
         {
@@ -408,7 +408,7 @@ Class Mongo {
      */
     public function limit($x = 99999)
     {
-        if ($x !== NULL && is_numeric($x) && $x >= 1)
+        if ($x !== null && is_numeric($x) && $x >= 1)
         {
             $this->limit = (int) $x;
         }
@@ -428,7 +428,7 @@ Class Mongo {
      */
     public function offset($x = 0)
     {
-        if ($x !== NULL && is_numeric($x) && $x >= 1)
+        if ($x !== null && is_numeric($x) && $x >= 1)
         {
             $this->offset = (int) $x;
         }
@@ -462,7 +462,7 @@ Class Mongo {
         $docs = $this->db->{$this->collection}->find($re_criteria, array_merge($this->selects, $fields))
                 ->limit((int) $this->limit)->skip((int) $this->offset)->sort($this->sorts);
         
-        $this->_reset_select();         // Reset
+        $this->_resetSelect();         // Reset
         
         return $docs;
     }
@@ -492,7 +492,7 @@ Class Mongo {
         
         $docs = $this->db->{$this->collection}->findOne($re_criteria, array_merge($this->selects, $fields));
         
-        $this->_reset_select();         // Reset
+        $this->_resetSelect();         // Reset
         
         return $docs;
     }
@@ -520,7 +520,7 @@ Class Mongo {
         $docs = $this->db->{$collection}->find($this->wheres, $this->selects)
             ->limit((int) $this->limit)->skip((int) $this->offset)->sort($this->sorts);
         
-        $this->_reset_select();         // Reset
+        $this->_resetSelect();         // Reset
         
         return $docs;
     }
@@ -606,7 +606,7 @@ Class Mongo {
             }
             else
             {
-                return (FALSE);
+                return (false);
             }
         }
         catch (\MongoCursorException $e)
@@ -651,7 +651,7 @@ Class Mongo {
             }
             else
             {
-                return (FALSE);
+                return (false);
             }
         }
         catch (\MongoCursorException $e)
@@ -695,16 +695,16 @@ Class Mongo {
             '$pullAll' => '', '$inc' => '', '$each' => '', '$addToSet' => '', '$rename' => '', '$bit' => '');
         
         // Multiple update behavior like MYSQL.
-        $default_options = array_merge(array('multiple' => TRUE), $this->query_safety);
+        $default_options = array_merge(array('multiple' => true), $this->query_safety);
         
         ##  If any modifier used remove the default modifier ( $set ).
         $used_modifier = array_keys($this->updates);
-        $modifier      = (isset($used_modifier[0])) ? $used_modifier[0] : NULL;
+        $modifier      = (isset($used_modifier[0])) ? $used_modifier[0] : null;
         
-        if($modifier != NULL AND isset($mods[$modifier]))
+        if($modifier != null AND isset($mods[$modifier]))
         {
             $updates = $this->updates;
-            $default_options['multiple'] = FALSE;
+            $default_options['multiple'] = false;
         }
         else 
         {
@@ -716,7 +716,7 @@ Class Mongo {
         try
         {
             $this->db->{$collection}->update($this->wheres, $updates, $options);
-            $this->_reset_select();
+            $this->_resetSelect();
             return $this->db->{$collection}->find($updates)->count();
         }
         catch (\MongoCursorException $e)
@@ -797,7 +797,7 @@ Class Mongo {
      * @param type $value
      * @return \Db
      */
-    public function set($fields, $value = NULL)
+    public function set($fields, $value = null)
     {
         $this->_update_init('$set');
 
@@ -984,9 +984,9 @@ Class Mongo {
         {
             $affected_rows = $this->db->{$collection}->find($this->wheres)->count();
             
-            $this->db->{$collection}->remove($this->wheres, array_merge($this->query_safety, array('justOne' => FALSE)));
+            $this->db->{$collection}->remove($this->wheres, array_merge($this->query_safety, array('justOne' => false)));
             
-            $this->_reset_select();
+            $this->_resetSelect();
             
             return $affected_rows;
         }
@@ -1045,7 +1045,7 @@ Class Mongo {
      */
     private function connection_string() 
     {
-        $config = get_config('mongo');
+        $config = getConfig('mongo');
         
         if($config['dsn'] != '')
         {
@@ -1093,7 +1093,7 @@ Class Mongo {
             $connection_string .= "{$this->host}";
         }
 
-        if ($dbname_flag === TRUE)
+        if ($dbname_flag === true)
         {
             $this->connection_string = trim($connection_string) . '/' . $this->dbname;
         }
@@ -1108,7 +1108,7 @@ Class Mongo {
     /**
      *  Resets the class variables to default settings
      */
-    public function _reset_select()
+    public function _resetSelect()
     {
         $this->selects	= array();
         $this->updates	= array();
@@ -1116,7 +1116,7 @@ Class Mongo {
         $this->limit	= 999999;
         $this->offset	= 0;
         $this->sorts	= array();
-        $this->find     = FALSE;
+        $this->find     = false;
     }
     
     // --------------------------------------------------------------------
@@ -1156,7 +1156,7 @@ Class Mongo {
      * 
      * @return string
      */
-    public function insert_id()
+    public function insertId()
     {
         return $this->last_inserted_id;
     }
@@ -1188,7 +1188,7 @@ Class Mongo {
     public function transaction() {}
     public function commit() {}
     public function rollback() {}
-    public function last_query() {
+    public function lastQuery() {
         // @todo: mongodb query output.
         // any idea ? how we do it ?
     }

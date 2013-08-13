@@ -2,19 +2,20 @@
 namespace Ob\request {
 
     /**
-    * Do Request to another controller calling HMVC Class.
+    * Hmvc Request Helper
+    * Do Request to another controller using HMVC Class.
     *
-    * @access   public
-    * @param    string method
-    * @param    string  $request
-    * @param    integer | bool | array  $cache_time_or_config
-    * @return   string response
+    * @package     Obullo
+    * @subpackage  Helpers
+    * @category    Hmvc
+    * @link
     */
+
     Class start
     {
         function __construct()
         {
-            \Ob\log\me('debug', 'Request Helper Initialized.');
+            \Ob\log\me('debug', 'Request Helper Initialized');
         }
     }
     
@@ -60,7 +61,7 @@ namespace Ob\request {
      */
     function put($uri, $params = array(), $cache_time_or_config = '0')
     {
-        return exec('post', $uri, $params, $cache_time_or_config);
+        return exec('put', $uri, $params, $cache_time_or_config);
     }
     
     // ------------------------------------------------------------------------
@@ -75,7 +76,7 @@ namespace Ob\request {
      */
     function delete($uri, $params = array(), $cache_time_or_config = '0')
     {
-        return exec('post', $uri, $params, $cache_time_or_config);
+        return exec('delete', $uri, $params, $cache_time_or_config);
     }
     
     // ------------------------------------------------------------------------
@@ -106,14 +107,14 @@ namespace Ob\request {
             }
 
             // Long Access request
-            if($request_uri === FALSE)
+            if($request_uri === false)
             {   
-                $hmvc = new \Ob\Hmvc();   // Every hmvc request must create new instance (true == new instance).
-                $hmvc->clear();       // Clear variables for each request.
+                $hmvc = new \Ob\Hmvc\Hmvc();  // Every hmvc request must create new instance.
+                $hmvc->clear();               // Clear variables for each request.
 
                 $hmvc->request($method);
                 return $hmvc->exec();
-                // $hmvc->set_method($method, $params);
+                // $hmvc->setMethod($method, $params);
                 // $hmvc->exec();
             }
             
@@ -121,10 +122,10 @@ namespace Ob\request {
             $method      = 'GET';   // Set default method
         }
 
-        $hmvc = new \Ob\Hmvc();
+        $hmvc = new \Ob\Hmvc\Hmvc();
         $hmvc->clear();                       
         $hmvc->request($request_uri, $cache_time_or_config);
-        $hmvc->set_method($method, $params);
+        $hmvc->setMethod($method, $params);
     
         return $hmvc->exec();   // return to hmvc object
     }

@@ -24,9 +24,9 @@
 */
 if( ! function_exists('utf8_trim'))
 {
-    function utf8_trim($str, $charlist = NULL)
+    function utf8_trim($str, $charlist = null)
     {
-        if ($charlist === NULL)
+        if ($charlist === null)
         {
             return trim($str);
         }

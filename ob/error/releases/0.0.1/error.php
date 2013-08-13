@@ -27,16 +27,16 @@ namespace Ob\error {
     * @param  object $e
     * @return void
     */
-    function exceptions_handler($e, $type = '')
+    function exceptionsHandler($e, $type = '')
     {   
-        $shutdown_errors = array(
+        $shutdownErrors = array(
         'ERROR'            => 'ERROR',            // E_ERROR 
         'PARSE ERROR'      => 'PARSE ERROR',      // E_PARSE
         'COMPILE ERROR'    => 'COMPILE ERROR',    // E_COMPILE_ERROR   
         'USER FATAL ERROR' => 'USER FATAL ERROR', // E_USER_ERROR
         );
 
-        if(isset($shutdown_errors[$type]))  // We couldn't use any object for shutdown errors.
+        if(isset($shutdownErrors[$type]))  // We couldn't use any object for shutdown errors.
         {
             $type  = ucwords(strtolower($type));
             $code  = $e->getCode();
@@ -44,18 +44,18 @@ namespace Ob\error {
 
             if(defined('STDIN'))  // If Command Line Request.
             {
-                echo $type .': '. $e->getMessage(). ' File: ' .secure_path($e->getFile()). ' Line: '. $e->getLine(). "\n";
+                echo $type .': '. $e->getMessage(). ' File: ' .securePath($e->getFile()). ' Line: '. $e->getLine(). "\n";
 
-                $cmd_type = (defined('TASK')) ? 'Task' : 'Cmd';
+                $cmdType = (defined('TASK')) ? 'Task' : 'Cmd';
 
-                \Ob\log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.secure_path($e->getFile()).' '.$e->getLine(), true);
+                \Ob\log\me('error', '('.$cmdType.') '.$type.': '.$e->getMessage(). ' '.securePath($e->getFile()).' '.$e->getLine(), true);
 
                 return;
             }
 
             if($level > 0 OR is_string($level))  // If user want to display all errors
             {
-                // $errors = get_defined_errors();
+                // $errors = getDefinedErrors();
 
                 if(is_numeric($level)) 
                 {
@@ -66,16 +66,16 @@ namespace Ob\error {
                     }   
                 }       
 
-                $rules = parse_regex($level); 
+                $rules = parseRegex($level); 
 
-                if($rules == FALSE) 
+                if($rules == false) 
                 {
                     return;
                 }
 
-                $allowed_errors = get_allowed_errors($rules);  // Check displaying error enabled for current error.
+                $allowedErrors = getAllowedErrors($rules);  // Check displaying error enabled for current error.
 
-                if(isset($allowed_errors[$code]))
+                if(isset($allowedErrors[$code]))
                 {
                     include(APP .'errors'. DS .'ob_exception'. EXT);
                 }
@@ -86,7 +86,7 @@ namespace Ob\error {
                 include(APP .'errors'. DS .'ob_disabled_error'. EXT);
             }
 
-            \Ob\log\me('error', $type.': '.$e->getMessage(). ' '.secure_path($e->getFile()).' '.$e->getLine(), true); 
+            \Ob\log\me('error', $type.': '.$e->getMessage(). ' '.securePath($e->getFile()).' '.$e->getLine(), true); 
 
         } 
         else  // Is It Exception ?
@@ -131,7 +131,7 @@ namespace Ob\error {
     * @param string $errfile
     * @param int $errline
     */
-    function error_handler($errno, $errstr, $errfile, $errline)
+    function errorHandler($errno, $errstr, $errfile, $errline)
     {                           
         if ($errno == 0)
         {
@@ -158,7 +158,7 @@ namespace Ob\error {
             case '30719':   $type = 'ERROR'; break;             // E_ALL
         }
             
-        exceptions_handler(new \ErrorException($errstr, $errno, 0, $errfile, $errline), $type);   
+        exceptionsHandler(new \ErrorException($errstr, $errno, 0, $errfile, $errline), $type);   
         return;
     }
 
@@ -169,7 +169,7 @@ namespace Ob\error {
     * 
     * @return void
     */
-    function shutdown_handler()
+    function shutdownHandler()
     {                      
         $error = error_get_last();
                          
@@ -189,7 +189,7 @@ namespace Ob\error {
 
         $type = (isset($shutdown_errors[$error['type']])) ? $shutdown_errors[$error['type']] : '';
 
-        exceptions_handler(new \ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']), $type);
+        exceptionsHandler(new \ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']), $type);
     }
 
     // --------------------------------------------------------------------  
@@ -201,12 +201,11 @@ namespace Ob\error {
     * @param  string $file
     * @return 
     */
-    function secure_path($file, $search_paths = FALSE)
+    function securePath($file, $searchPaths = false)
     {
-        if($search_paths)
+        if($searchPaths)
         {
             $replace = array('APP'. DS, 'MODULES'. DS, 'ROOT'. DS, 'OB_MODULES'. DS);
-            
             return str_replace(array(APP, MODULES, ROOT, OB_MODULES), $replace, $file);
         }
         
@@ -242,15 +241,15 @@ namespace Ob\error {
     * @param  integer $level
     * @return mixed
     */
-    function dump_argument(& $var, $length = 128, $level = 0)
+    function dumpArgument(& $var, $length = 128, $level = 0)
     {
-        if ($var === NULL)
+        if ($var === null)
         {
-            return '<small>NULL</small>';
+            return '<small>null</small>';
         }
         elseif (is_bool($var))
         {
-            return '<small>bool</small> '.($var ? 'TRUE' : 'FALSE');
+            return '<small>bool</small> '.($var ? 'true' : 'false');
         }
         elseif (is_float($var))
         {
@@ -270,7 +269,7 @@ namespace Ob\error {
                     {
                         if (stream_is_local($file))  // Only exists on PHP >= 5.2.4
                         {
-                            $file = secure_path($file);
+                            $file = securePath($file);
                         }
                     }
 
@@ -298,7 +297,7 @@ namespace Ob\error {
 
             static $marker;
 
-            if ($marker === NULL)
+            if ($marker === null)
             {
                 // Make a unique marker
                 $marker = uniqid("\x00");
@@ -316,7 +315,7 @@ namespace Ob\error {
             {
                 $output[] = "<span>(";
 
-                $var[$marker] = TRUE;
+                $var[$marker] = true;
                 foreach ($var as $key => & $val)
                 {
                     if ($key === $marker) continue;
@@ -325,7 +324,7 @@ namespace Ob\error {
                         $key = '"'.htmlspecialchars($key, ENT_NOQUOTES, \Ob\config('charset')).'"';
                     }
 
-                    $output[] = "$space$s$key => ".dump_argument($val, $length, $level + 1);
+                    $output[] = "$space$s$key => ".dumpArgument($val, $length, $level + 1);
                 }
                 unset($var[$marker]);
 
@@ -373,7 +372,7 @@ namespace Ob\error {
             {
                 $output[] = "<pre>{";
 
-                $objects[$hash] = TRUE;
+                $objects[$hash] = true;
                 foreach ($array as $key => & $val)
                 {
                     if ($key[0] === "\x00")
@@ -389,7 +388,7 @@ namespace Ob\error {
                         $access = '<small>public</small>';
                     }
 
-                    $output[] = "$space$s$access $key => ".dump_argument($val, $length, $level + 1);
+                    $output[] = "$space$s$access $key => ".dumpArgument($val, $length, $level + 1);
                 }
                 unset($objects[$hash]);
 
@@ -406,7 +405,7 @@ namespace Ob\error {
         }
         else
         {
-            return '<small>'.gettype($var).'</small> '.htmlspecialchars(print_r($var, TRUE), ENT_NOQUOTES, \Ob\config('charset'));
+            return '<small>'.gettype($var).'</small> '.htmlspecialchars(print_r($var, true), ENT_NOQUOTES, \Ob\config('charset'));
         }
     }
 
@@ -423,7 +422,7 @@ namespace Ob\error {
     * 
     * @return boolean | string
     */
-    function write_file_source($trace, $key = 0, $prefix = '')
+    function writeFileSource($trace, $key = 0, $prefix = '')
     {
         $debug = \Ob\config('debug_backtrace'); 
         
@@ -432,7 +431,7 @@ namespace Ob\error {
             
         if ( ! $file OR ! is_readable($file))
         {
-            return FALSE;   // Continuing will cause errors
+            return false;   // Continuing will cause errors
         }
         
         // Open the file and set the line position
@@ -445,7 +444,7 @@ namespace Ob\error {
         $format = '% '.strlen($range['end']).'d';    // Set the zero-padding amount for line numbers
 
         $source = '';
-        while (($row = fgets($file)) !== FALSE)
+        while (($row = fgets($file)) !== false)
         {
             if (++$line > $range['end'])  // Increment the line number
                 break;
@@ -483,7 +482,7 @@ namespace Ob\error {
     * 
     * @param mixed $e
     */
-    function debug_backtrace($e)
+    function debugBacktrace($e)
     {
         $trace = $e->getTrace();      // Get the exception backtrace
 
@@ -515,7 +514,7 @@ namespace Ob\error {
     * 
     * @return array
     */
-    function get_defined_errors()
+    function getDefinedErrors()
     {
         $errors = array();
         
@@ -559,7 +558,7 @@ namespace Ob\error {
     * @param  mixed $string
     * @return array
     */
-     function parse_regex($string)
+     function parseRegex($string)
      {
         if(strpos($string, '(') > 0)  // (E_NOTICE | E_WARNING)     
         {
@@ -615,7 +614,7 @@ namespace Ob\error {
             return $data;
         }
         
-        return FALSE;
+        return false;
     }
 
     //-----------------------------------------------------------------------
@@ -625,18 +624,18 @@ namespace Ob\error {
     * 
     * @param array $rules
     */
-    function get_allowed_errors($rules) 
+    function getAllowedErrors($rules) 
     {
         if( ! isset($rules['IN'])) return array();
 
-        $defined_errors = array_flip(get_defined_errors());
+        $defined_errors = array_flip(getDefinedErrors());
         $all_errors     = array_keys($defined_errors);
 
         if(count($rules['IN']) > 0)
         {
             $allow_errors = array_values($rules['IN']); 
 
-            if(in_array('E_ALL', $rules['IN'], TRUE))
+            if(in_array('E_ALL', $rules['IN'], true))
             {
                 $allow_errors = array_unique(array_merge($all_errors, array_values($rules['IN'])));
             }
@@ -664,9 +663,9 @@ namespace Ob\error {
                
     // --------------------------------------------------------------------
 
-    set_error_handler('\Ob\error\error_handler');   
-    set_exception_handler('\Ob\error\exceptions_handler');
-    register_shutdown_function('\Ob\error\shutdown_handler');
+    set_error_handler('\Ob\error\errorHandler');   
+    set_exception_handler('\Ob\error\exceptionsHandler');
+    register_shutdown_function('\Ob\error\shutdownHandler');
     
     // Enable the Obullo shutdown handler, which catches E_FATAL errors.
 }

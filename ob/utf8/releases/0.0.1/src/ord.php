@@ -34,7 +34,7 @@ if( ! function_exists('utf8_ord'))
         if ( ! isset($chr[1]))
         {
             log\me('debug', 'Short sequence - at least 2 bytes expected, only 1 seen in this char: '. $chr);
-            return FALSE;
+            return false;
         }
 
         $ord1 = ord($chr[1]);
@@ -47,7 +47,7 @@ if( ! function_exists('utf8_ord'))
         if ( ! isset($chr[2]))
         {
             log\me('debug', 'Short sequence - at least 3 bytes expected, only 2 seen in this char: '. $chr);
-            return FALSE;
+            return false;
         }
 
         $ord2 = ord($chr[2]);
@@ -60,7 +60,7 @@ if( ! function_exists('utf8_ord'))
         if ( ! isset($chr[3]))
         {
             log\me('debug', 'Short sequence - at least 4 bytes expected, only 3 seen in this char: '. $chr);
-            return FALSE;
+            return false;
         }
 
         $ord3 = ord($chr[3]);
@@ -73,7 +73,7 @@ if( ! function_exists('utf8_ord'))
         if ( ! isset($chr[4]))
         {
             log\me('debug', 'Short sequence - at least 5 bytes expected, only 4 seen in this char: '. $chr);
-            return FALSE;
+            return false;
         }
 
         $ord4 = ord($chr[4]);
@@ -86,7 +86,7 @@ if( ! function_exists('utf8_ord'))
         if ( ! isset($chr[5]))
         {
             log\me('debug', 'Short sequence - at least 6 bytes expected, only 5 seen in this char: '. $chr);
-            return FALSE;
+            return false;
         }
 
         if ($ord0 >= 252 AND $ord0 <= 253)
@@ -97,7 +97,7 @@ if( ! function_exists('utf8_ord'))
         if ($ord0 >= 254 AND $ord0 <= 255)
         {
             log\me('debug', 'Invalid UTF-8 with surrogate ordinal '.$ord0 . 'in this char: '. $chr);
-            return FALSE;
+            return false;
         }
     }
     

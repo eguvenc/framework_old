@@ -120,10 +120,10 @@ if(isset($_SERVER['argv'][0])){
         // print_r($response);
         foreach($response as $key => $package_json){
             $pack = json_decode(trim($package_json));
-            if($pack == NULL){
+            if($pack == null){
                 error("The package $key could not parsed, probably there is a syntax error in package.json file.");
             } 
-            if($pack != NULL){
+            if($pack != null){
                 // wget -O framework.zip https://github.com/obullo/framework/zipball/dev
                 // unzip framework.zip
                 // mv obullo-framework* obullo_modules/framework
@@ -138,7 +138,7 @@ if(isset($_SERVER['argv'][0])){
                 } else {
                         $shell 	= "curl -s --head ".trim($pack->repo->archive_url)." | head -n 1 | grep \"HTTP/1.[01] [23]..\"";
                         $output = shell_exec($shell);
-                        if($output == NULL){
+                        if($output == null){
                            line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' '.trim($pack->repo->archive_url).' - url could not be resolved.');
                         } else {
                             $code = explode(" ", $output);

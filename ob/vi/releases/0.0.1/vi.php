@@ -24,10 +24,10 @@ namespace Ob\vi {
     *
     * @param string  $filename
     * @param array   $data
-    * @param boolean $string default TRUE
+    * @param boolean $string default true
     * @return void
     */
-    function get($filename, $data = '', $string = TRUE)
+    function get($filename, $data = '', $string = true)
     {
         return \Ob\View\View::getInstance()->load($filename, $data, $string);
     }
@@ -39,10 +39,10 @@ namespace Ob\vi {
     *
     * @param string  $filename
     * @param array   $data
-    * @param boolean $string default TRUE
+    * @param boolean $string default true
     * @return void
     */
-    function views($filename, $data = '', $string = TRUE)
+    function views($filename, $data = '', $string = true)
     {
         $view = \Ob\View\View::getInstance();
         $view->set_path(); // set views path
@@ -57,15 +57,15 @@ namespace Ob\vi {
     * 
     * @param  string $key
     * @param  string $val
-    * @return  string | NULL
+    * @return  string | null
     */
-    function set_var($key, $val = '')
+    function setVar($key, $val = '')
     {
         $view = \Ob\View\View::getInstance();
    
         if($val == array())
         {
-            return set_array($key, $val);
+            return setArray($key, $val);
         }
         
         $view->var[$key][] = $val;
@@ -79,9 +79,9 @@ namespace Ob\vi {
     * Get the view variables for layouts
     * 
     * @param  string $key
-    * @return string | NULL
+    * @return string | null
     */
-    function get_var($key)
+    function getVar($key)
     {
         $view = \Ob\View\View::getInstance();
         
@@ -106,9 +106,9 @@ namespace Ob\vi {
     * @param  array $val
     * @param  boolean $use_layout
     * @param  array $layout_data
-    * @return  string | NULL
+    * @return  string | null
     */
-    function set_array($key, $val = array())
+    function setArray($key, $val = array())
     {
         $view = \Ob\View\View::getInstance();
         $val  = (array)$val;
@@ -130,9 +130,9 @@ namespace Ob\vi {
     * @param  array $val
     * @param  boolean $use_layout
     * @param  array $layout_data
-    * @return  string | NULL
+    * @return  string | null
     */
-    function get_array($key)
+    function getArray($key)
     {
         $view = \Ob\View\View::getInstance();
     

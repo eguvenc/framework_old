@@ -19,7 +19,7 @@ Class Database_Pdo {
     {
         if ( ! extension_loaded('pdo') )
         {
-            throw new Exception('The PDO extension is required but extension is not loaded.');
+            throw new \Exception('The PDO extension is required but extension is not loaded.');
         }
     }
     
@@ -91,7 +91,7 @@ Class Database_Pdo {
         $DB = new $classname($options);
         $DB->__wakeup();
         
-        return $DB->get_connection();
+        return $DB->getConnection();
     }
     
 }

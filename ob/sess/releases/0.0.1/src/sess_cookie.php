@@ -10,15 +10,15 @@ namespace Ob\Sess\Src;
 Class Sess_Cookie {
     
     public $db;
-    public $sess_encrypt_cookie  = FALSE;
-    public $sess_expiration      = '7200';
-    public $sess_match_ip        = FALSE;
-    public $sess_match_useragent = TRUE;
-    public $sess_cookie_name     = 'ob_session';
+    public $encrypt_cookie       = false;
+    public $expiration           = '7200';
+    public $match_ip             = false;
+    public $match_useragent      = true;
+    public $cookie_name          = 'ob_session';
     public $cookie_prefix        = '';
     public $cookie_path          = '';
     public $cookie_domain        = '';
-    public $sess_time_to_update  = 300;
+    public $time_to_update  = 300;
     public $encryption_key       = '';
     public $flashdata_key        = 'flash';
     public $time_reference       = 'time';
@@ -46,26 +46,26 @@ Class Sess_Cookie {
     {
         \Ob\log\me('debug', "Session Cookie Driver Initialized"); 
         
-        foreach (array('sess_encrypt_cookie','sess_expiration', 'sess_die_cookie', 'sess_match_ip', 
-        'sess_match_useragent', 'sess_cookie_name', 'cookie_path', 'cookie_domain', 
-        'sess_time_to_update', 'time_reference', 'cookie_prefix', 'encryption_key') as $key)
+        foreach (array('encrypt_cookie','expiration', 'expire_on_close', 'match_ip', 
+        'match_useragent', 'cookie_name', 'cookie_path', 'cookie_domain', 
+        'time_to_update', 'time_reference', 'cookie_prefix', 'encryption_key') as $key)
         {
-            $this->$key = (isset($params[$key])) ? $params[$key] : \Ob\config($key);
+            $this->$key = (isset($params[$key])) ? $params[$key] : \Ob\config($key, 'sess');
         }
         
         // _unserialize func. use strip_slashes() func.
         new \Ob\string\start();
 
-        $this->now = $this->_get_time();
+        $this->now = $this->_getTime();
 
         // Set the expiration two years from now.
-        if ($this->sess_expiration == 0)
+        if ($this->expiration == 0)
         {
-            $this->sess_expiration = (60 * 60 * 24 * 365 * 2);
+            $this->expiration = (60 * 60 * 24 * 365 * 2);
         }
 
         // Set the cookie name
-        $this->sess_cookie_name = $this->cookie_prefix . $this->sess_cookie_name;
+        $this->cookie_name = $this->cookie_prefix . $this->cookie_name;
         
         // Cookie driver changes ...
         // -------------------------------------------------------------------- 
@@ -82,17 +82,17 @@ Class Sess_Cookie {
         }
 
         // Delete 'old' flashdata (from last request)
-        $this->_flashdata_sweep();
+        $this->_flashdataSweep();
 
         // Mark all new flashdata as old (data will be deleted before next request)
-        $this->_flashdata_mark();
+        $this->_flashdataMark();
 
         // Delete expired sessions if necessary
-        $this->_gc();
+        $this->_gC();
 
         \Ob\log\me('debug', "Session routines successfully run"); 
 
-        return TRUE;
+        return true;
     }
     
     // --------------------------------------------------------------------
@@ -106,19 +106,19 @@ Class Sess_Cookie {
     function _read()
     {
         // Fetch the cookie
-        $session = \Ob\i\cookie($this->sess_cookie_name);
+        $session = \Ob\i\cookie($this->cookie_name);
 
         // No cookie?  Goodbye cruel world!...
-        if ($session === FALSE)
+        if ($session === false)
         {               
             \Ob\log\me('debug', 'A session cookie was not found.');
-            return FALSE;
+            return false;
         }
         
         // Decrypt the cookie data
-        if ($this->sess_encrypt_cookie == TRUE)  // Obullo Changes "Encrypt Library Header redirect() Bug Fixed !"
+        if ($this->encrypt_cookie == true)  // Obullo Changes "Encrypt Library Header redirect() Bug Fixed !"
         {
-            $key     = \Ob\config('encryption_key');
+            $key     = \Ob\config('encryption_key', 'sess');
             $session = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($session), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
         }
         else
@@ -132,7 +132,7 @@ Class Sess_Cookie {
             {
                 \Ob\log\me('error', 'The session cookie data did not match what was expected. This could be a possible hacking attempt.');
                 $this->destroy();
-                return FALSE;
+                return false;
             }
         }
         
@@ -145,28 +145,28 @@ Class Sess_Cookie {
         OR ! isset($session['last_activity'])) 
         {               
             $this->destroy();
-            return FALSE;
+            return false;
         }
         
         // Is the session current?
-        if (($session['last_activity'] + $this->sess_expiration) < $this->now)
+        if (($session['last_activity'] + $this->expiration) < $this->now)
         {
             $this->destroy();
-            return FALSE;
+            return false;
         }
 
         // Does the IP Match?
-        if ($this->sess_match_ip == TRUE AND $session['ip_address'] != \Ob\i\ip_address())
+        if ($this->match_ip == true AND $session['ip_address'] != \Ob\i\ip())
         {
             $this->destroy();
-            return FALSE;
+            return false;
         }
         
         // Does the User Agent Match?
-        if ($this->sess_match_useragent == TRUE AND trim($session['user_agent']) != trim(substr(\Ob\i\user_agent(), 0, 50)))
+        if ($this->match_useragent == true AND trim($session['user_agent']) != trim(substr(\Ob\i\userAgent(), 0, 50)))
         {
             $this->destroy();
-            return FALSE;
+            return false;
         }
         
         // Cookie driver changes ...
@@ -176,7 +176,7 @@ Class Sess_Cookie {
         $this->userdata = $session;
         unset($session);
         
-        return TRUE;
+        return true;
     }
     
     // --------------------------------------------------------------------
@@ -189,7 +189,7 @@ Class Sess_Cookie {
     */
     function _write()
     {
-        $this->_set_cookie();
+        $this->_setCookie();
         
         return; 
     }
@@ -211,21 +211,21 @@ Class Sess_Cookie {
         }
         
         // To make the session ID even more secure we'll combine it with the user's IP
-        $sessid .= \Ob\i\ip_address();
+        $sessid .= \Ob\i\ip();
 
         $this->userdata = array(
-                            'session_id'     => md5(uniqid($sessid, TRUE)),
-                            'ip_address'     => \Ob\i\ip_address(),
-                            'user_agent'     => substr(\Ob\i\user_agent(), 0, 50),
+                            'session_id'     => md5(uniqid($sessid, true)),
+                            'ip_address'     => \Ob\i\ip(),
+                            'user_agent'     => substr(\Ob\i\userAgent(), 0, 50),
                             'last_activity'  => $this->now
                             );
         
         // Write the cookie
-        // none abstract $this->_set_cookie();
+        // none abstract $this->_setCookie();
         
         // --------------------------------------------------------------------  
         // Write the cookie
-        $this->_set_cookie(); 
+        $this->_setCookie(); 
     }
     
     // --------------------------------------------------------------------
@@ -239,7 +239,7 @@ Class Sess_Cookie {
     function _update()
     {
         // We only update the session every five minutes by default
-        if (($this->userdata['last_activity'] + $this->sess_time_to_update) >= $this->now)
+        if (($this->userdata['last_activity'] + $this->time_to_update) >= $this->now)
         {
             return;
         }
@@ -254,26 +254,26 @@ Class Sess_Cookie {
         }
         
         // To make the session ID even more secure we'll combine it with the user's IP
-        $new_sessid .= \Ob\i\ip_address();
+        $new_sessid .= \Ob\i\ip();
         
         // Turn it into a hash
-        $new_sessid = md5(uniqid($new_sessid, TRUE));
+        $new_sessid = md5(uniqid($new_sessid, true));
         
         // Update the session data in the session data array
         $this->userdata['session_id']    = $new_sessid;
         $this->userdata['last_activity'] = $this->now;
         
-        // _set_cookie() will handle this for us if we aren't using database sessions
+        // _setCookie() will handle this for us if we aren't using database sessions
         // by pushing all userdata to the cookie.
-        $cookie_data = NULL;
+        $cookie_data = null;
         
         // Write the cookie
-        // none abstract $this->_set_cookie($cookie_data);
+        // none abstract $this->_setCookie($cookie_data);
         
         // --------------------------------------------------------------------  
         
         // Write the cookie
-        $this->_set_cookie($cookie_data);
+        $this->_setCookie($cookie_data);
     }
 
     // --------------------------------------------------------------------
@@ -288,12 +288,12 @@ Class Sess_Cookie {
     {
         // Kill the cookie
         setcookie(           
-                    $this->sess_cookie_name, 
+                    $this->cookie_name, 
                     addslashes(serialize(array())), 
                     ($this->now - 31500000), 
                     $this->cookie_path, 
                     $this->cookie_domain, 
-                    FALSE
+                    false
         );
     }
     
@@ -308,7 +308,7 @@ Class Sess_Cookie {
     */        
     function get($item, $prefix = '')
     {
-        return ( ! isset($this->userdata[$prefix.$item])) ? FALSE : $this->userdata[$prefix.$item];
+        return ( ! isset($this->userdata[$prefix.$item])) ? false : $this->userdata[$prefix.$item];
     }
     
     // --------------------------------------------------------------------
@@ -321,7 +321,7 @@ Class Sess_Cookie {
     */
     function alldata()
     {
-        return ( ! isset($this->userdata)) ? FALSE : $this->userdata;
+        return ( ! isset($this->userdata)) ? false : $this->userdata;
     }
     
     // --------------------------------------------------------------------
@@ -389,7 +389,7 @@ Class Sess_Cookie {
     * @param    string
     * @return   void
     */
-    function set_flash($newdata = array(), $newval = '')  // ( obullo changes ... )
+    function setFlash($newdata = array(), $newval = '')  // ( obullo changes ... )
     {
         if (is_string($newdata))
         {
@@ -415,11 +415,11 @@ Class Sess_Cookie {
     * @param    string
     * @return   void
     */
-    function keep_flash($key) // ( obullo changes ...)
+    function keepFlash($key) // ( obullo changes ...)
     {
         // 'old' flashdata gets removed.  Here we mark all 
-        // flashdata as 'new' to preserve it from _flashdata_sweep()
-        // Note the function will return FALSE if the $key 
+        // flashdata as 'new' to preserve it from _flashdataSweep()
+        // Note the function will return false if the $key 
         // provided cannot be found
         $old_flashdata_key = $this->flashdata_key.':old:'.$key;
         $value = $this->get($old_flashdata_key);
@@ -442,7 +442,7 @@ Class Sess_Cookie {
     * @version  0.2     added prefix and suffix parameters.
     * @return   string
     */
-    function get_flash($key, $prefix = '', $suffix = '')  // obullo changes ...
+    function getFlash($key, $prefix = '', $suffix = '')  // obullo changes ...
     {
         $flashdata_key = $this->flashdata_key.':old:'.$key;
         
@@ -461,12 +461,12 @@ Class Sess_Cookie {
 
     /**
     * Identifies flashdata as 'old' for removal
-    * when _flashdata_sweep() runs.
+    * when _flashdataSweep() runs.
     *
     * @access    private
     * @return    void
     */
-    function _flashdata_mark()
+    function _flashdataMark()
     {
         $userdata = $this->alldata();
         
@@ -490,7 +490,7 @@ Class Sess_Cookie {
     * @access    private
     * @return    void
     */  
-    function _flashdata_sweep()
+    function _flashdataSweep()
     {              
         $userdata = $this->alldata();
         foreach ($userdata as $key => $value)
@@ -510,7 +510,7 @@ Class Sess_Cookie {
     * @access    private
     * @return    string
     */
-    function _get_time()
+    function _getTime()
     {
         $time = time();
         if (strtolower($this->time_reference) == 'gmt')
@@ -535,7 +535,7 @@ Class Sess_Cookie {
     * @access    public
     * @return    void
     */
-    function _set_cookie($cookie_data = NULL)
+    function _setCookie($cookie_data = null)
     {
         if (is_null($cookie_data))
         {
@@ -545,9 +545,9 @@ Class Sess_Cookie {
         // Serialize the userdata for the cookie
         $cookie_data = $this->_serialize($cookie_data);
         
-        if ($this->sess_encrypt_cookie == TRUE) // Obullo Changes "Encrypt Library Header redirect() Bug Fixed !"
+        if ($this->encrypt_cookie == true) // Obullo Changes "Encrypt Library Header redirect() Bug Fixed !"
         {
-            $key         = \Ob\config('encryption_key');
+            $key         = \Ob\config('encryption_key', 'sess');
             $cookie_data = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $cookie_data, MCRYPT_MODE_CBC, md5(md5($key))));
         }
         else
@@ -557,11 +557,11 @@ Class Sess_Cookie {
         }
         
         // ( Obullo Changes .. set cookie life time 0 )
-        $expiration = (\Ob\config('sess_die_cookie')) ? 0 : $this->sess_expiration + time();
+        $expiration = (\Ob\config('expire_on_close', 'sess')) ? 0 : $this->expiration + time();
 
         // Set the cookie
         setcookie(
-                    $this->sess_cookie_name,
+                    $this->cookie_name,
                     $cookie_data,
                     $expiration,
                     $this->cookie_path,
@@ -648,7 +648,7 @@ Class Sess_Cookie {
     * @access    public
     * @return    void
     */
-    function _gc()
+    function _gC()
     {
         return;
     }

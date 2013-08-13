@@ -37,7 +37,7 @@ Class Utf8 {
     {
         if( ! extension_loaded('mbstring'))
         {
-            throw new Exception('Mbstring extension not loaded.');
+            throw new \Exception('Mbstring extension not loaded.');
         }
     }
     
@@ -58,7 +58,7 @@ Class Utf8 {
     * @uses    OB_Utf8->strip_ascii_ctrl
     * @uses    OB_Utf8->is_ascii
     */
-    public function clean($var, $charset = NULL)
+    public function clean($var, $charset = null)
     {
         if ( ! $charset)
         {
@@ -158,7 +158,7 @@ Class Utf8 {
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT;
 
-            self::$called[__FUNCTION__] = TRUE;  // Function has been called
+            self::$called[__FUNCTION__] = true;  // Function has been called
         }
 
         return utf8_transliterate_to_ascii($str, $case);
@@ -193,7 +193,7 @@ Class Utf8 {
     * @param   string   needle
     * @param   integer  offset from which character in haystack to start searching
     * @return  integer  position of needle
-    * @return  boolean  FALSE if the needle is not found
+    * @return  boolean  false if the needle is not found
     */
     public function strpos($str, $search, $offset = 0)
     {
@@ -213,7 +213,7 @@ Class Utf8 {
     * @param   string   needle
     * @param   integer  offset from which character in haystack to start searching
     * @return  integer  position of needle
-    * @return  boolean  FALSE if the needle is not found
+    * @return  boolean  false if the needle is not found
     */
     public function strrpos($str, $search, $offset = 0)
     {
@@ -236,9 +236,9 @@ Class Utf8 {
     * @uses    UTF8::$server_utf8
     * @uses    config('charset');
     */
-    public function substr($str, $offset, $length = NULL)
+    public function substr($str, $offset, $length = null)
     {
-        return ($length === NULL) 
+        return ($length === null) 
             ? mb_substr($str, $offset, mb_strlen($str), config('charset')) 
                     : mb_substr($str, $offset, $length, config('charset'));
 
@@ -258,13 +258,13 @@ Class Utf8 {
     * @param   integer  offset
     * @return  string
     */
-    public function substr_replace($str, $replacement, $offset, $length = NULL)
+    public function substr_replace($str, $replacement, $offset, $length = null)
     {
         if ( ! isset(self::$called[__FUNCTION__]))
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE; // Function has been called
+            self::$called[__FUNCTION__] = true; // Function has been called
         }
 
         return utf8_substr_replace($str, $replacement, $offset, $length);
@@ -286,7 +286,7 @@ Class Utf8 {
     */
     public function strtolower($str)
     {
-        if(strpos($str, 'İ') !== FALSE)  // İ - i problem in just one Turkish Character.
+        if(strpos($str, 'İ') !== false)  // İ - i problem in just one Turkish Character.
         {
             $str = str_replace('İ', 'i', $str);
         }
@@ -329,7 +329,7 @@ Class Utf8 {
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
             
-            self::$called[__FUNCTION__] = TRUE; // Function has been called
+            self::$called[__FUNCTION__] = true; // Function has been called
         }
 
         return utf8_ucfirst($str);
@@ -353,7 +353,7 @@ Class Utf8 {
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE; // Function has been called
+            self::$called[__FUNCTION__] = true; // Function has been called
         }
 
         if(strpos($str, 'i') === 0)  // i - I problem in Turkish Characters .
@@ -384,7 +384,7 @@ Class Utf8 {
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE;  // Function has been called
+            self::$called[__FUNCTION__] = true;  // Function has been called
         }
 
         return utf8_strcasecmp($str1, $str2);
@@ -407,13 +407,13 @@ Class Utf8 {
     * @return  string        if the input was a string
     * @return  array         if the input was an array
     */
-    public function str_ireplace($search, $replace, $str, & $count = NULL)
+    public function str_ireplace($search, $replace, $str, & $count = null)
     {
         if ( ! isset(self::$called[__FUNCTION__]))
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE;  // Function has been called
+            self::$called[__FUNCTION__] = true;  // Function has been called
         }
 
         return utf8_str_ireplace($search, $replace, $str, $count);
@@ -431,7 +431,7 @@ Class Utf8 {
     * @param   string  input string
     * @param   string  needle
     * @return  string  matched substring if found
-    * @return  FALSE   if the substring was not found
+    * @return  false   if the substring was not found
     */
     public function stristr($str, $search)
     {
@@ -439,7 +439,7 @@ Class Utf8 {
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE;  // Function has been called
+            self::$called[__FUNCTION__] = true;  // Function has been called
         }
 
         return utf8_stristr($str, $search);
@@ -459,13 +459,13 @@ Class Utf8 {
     * @param   integer  length of the string to examine
     * @return  integer  length of the initial segment that contains characters in the mask
     */
-    public function strspn($str, $mask, $offset = NULL, $length = NULL)
+    public function strspn($str, $mask, $offset = null, $length = null)
     {
         if ( ! isset(self::$called[__FUNCTION__]))
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE; // Function has been called
+            self::$called[__FUNCTION__] = true; // Function has been called
         }
 
         return utf8_strspn($str, $mask, $offset, $length);
@@ -485,13 +485,13 @@ Class Utf8 {
     * @param   integer  length of the string to examine
     * @return  integer  length of the initial segment that contains characters not in the mask
     */
-    public function strcspn($str, $mask, $offset = NULL, $length = NULL)
+    public function strcspn($str, $mask, $offset = null, $length = null)
     {
         if ( ! isset(self::$called[__FUNCTION__]))
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE;  // Function has been called
+            self::$called[__FUNCTION__] = true;  // Function has been called
         }
 
         return utf8_strcspn($str, $mask, $offset, $length);
@@ -517,7 +517,7 @@ Class Utf8 {
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE;  // Function has been called
+            self::$called[__FUNCTION__] = true;  // Function has been called
         }
 
         return utf8_str_pad($str, $final_str_length, $pad_str, $pad_type);
@@ -541,7 +541,7 @@ Class Utf8 {
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
             
-            self::$called[__FUNCTION__] = TRUE; // Function has been called
+            self::$called[__FUNCTION__] = true; // Function has been called
         }
 
         return utf8_str_split($str, $split_length);
@@ -563,7 +563,7 @@ Class Utf8 {
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE;  // Function has been called
+            self::$called[__FUNCTION__] = true;  // Function has been called
         }
 
         return utf8_strrev($str);
@@ -581,13 +581,13 @@ Class Utf8 {
     * @param   string   string of characters to remove
     * @return  string
     */
-    public function trim($str, $charlist = NULL)
+    public function trim($str, $charlist = null)
     {
         if ( ! isset(self::$called[__FUNCTION__]))
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE; // Function has been called
+            self::$called[__FUNCTION__] = true; // Function has been called
         }
 
         return utf8_trim($str, $charlist);
@@ -605,13 +605,13 @@ Class Utf8 {
     * @param   string   string of characters to remove
     * @return  string
     */
-    public function ltrim($str, $charlist = NULL)
+    public function ltrim($str, $charlist = null)
     {
         if ( ! isset(self::$called[__FUNCTION__]))
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE; // Function has been called
+            self::$called[__FUNCTION__] = true; // Function has been called
         }
 
         return utf8_ltrim($str, $charlist);
@@ -629,13 +629,13 @@ Class Utf8 {
     * @param   string   string of characters to remove
     * @return  string
     */
-    public function rtrim($str, $charlist = NULL)
+    public function rtrim($str, $charlist = null)
     {
         if ( ! isset(self::$called[__FUNCTION__]))
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE; // Function has been called
+            self::$called[__FUNCTION__] = true; // Function has been called
         }
 
         return utf8_rtrim($str, $charlist);
@@ -658,7 +658,7 @@ Class Utf8 {
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
 
-            self::$called[__FUNCTION__] = TRUE;  // Function has been called
+            self::$called[__FUNCTION__] = true;  // Function has been called
         }
 
         return utf8_ord($chr);
@@ -681,7 +681,7 @@ Class Utf8 {
     *
     * @param   string  UTF-8 encoded string
     * @return  array   unicode code points
-    * @return  FALSE   if the string is invalid
+    * @return  false   if the string is invalid
     */
     public function to_unicode($str)
     {
@@ -689,7 +689,7 @@ Class Utf8 {
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
             
-            self::$called[__FUNCTION__] = TRUE; // Function has been called
+            self::$called[__FUNCTION__] = true; // Function has been called
         }
 
         return utf8_to_unicode($str);
@@ -712,7 +712,7 @@ Class Utf8 {
     *
     * @param   array    unicode code points representing a string
     * @return  string   utf8 string of characters
-    * @return  boolean  FALSE if a code point cannot be found
+    * @return  boolean  false if a code point cannot be found
     */
     public function from_unicode($arr)
     {
@@ -720,7 +720,7 @@ Class Utf8 {
         {
             require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
             
-            self::$called[__FUNCTION__] = TRUE; // Function has been called
+            self::$called[__FUNCTION__] = true; // Function has been called
         }
 
         return utf8_from_unicode($arr);

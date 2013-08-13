@@ -30,7 +30,7 @@ foreach ($query->result() as $row)   // CODEIGNITER  DB FUNCTIONS ARE AVAILABLE
     echo $row->email;
 }
 
-echo 'Total Results: ' . $query->num_rows();  // Pdo does not supported some database using 
+echo 'Total Results: ' . $query->numRows();  // Pdo does not supported some database using 
 row_count func via SELECT statement .(Mysql is ok.) 
 ```
 The above <dfn>result()</dfn> function returns an array of <strong>objects</strong>. Example: $row->title
@@ -41,7 +41,7 @@ The above <dfn>result()</dfn> function returns an array of <strong>objects</stro
 $database = new Db\Db(false);
 $db = $database->connect();
 
-print_r($db->get('users')->result_array());
+print_r($db->get('users')->resultArray());
 ```
 The above the example returns to Database Instance if you want to grab it.
 
@@ -51,14 +51,14 @@ The above the example returns to Database Instance if you want to grab it.
 ```php
 $query = $this->db->query('SELECT name, title, email FROM my_table');
 
-foreach ($query->result_array() as $row)
+foreach ($query->resultArray() as $row)
 {
     echo $row['title'];
     echo $row['name'];
     echo $row['email'];
 }
 ```
-The above <dfn>result_array()</dfn> function returns an array of standard array indexes. Example: $row['title']
+The above <dfn>resultArray()</dfn> function returns an array of standard array indexes. Example: $row['title']
 
 ### Testing for Results
 ------
@@ -73,7 +73,7 @@ $query = $this->db->prep()    // pdo prepare switch
 if($query->row())
 {
     $query = $query->exec();  // get cached query..
-    $b = $query->result_array();
+    $b = $query->resultArray();
 
     print_r($b);    // output array( ... )   
 }
@@ -83,9 +83,9 @@ If your database support using row_count function via the SELECT statement you c
 $this->db->where('ip_address', '127.0.0.1')
 ->get('ob_sessions')    // from this table 
 
-if($query->row_count() > 0)
+if($query->rowCount() > 0)
 {
-    $b = $query->result_array();
+    $b = $query->resultArray();
 
     print_r($b);    // output array( ... )   
 }
@@ -108,11 +108,11 @@ The above <dfn>row()</dfn> function returns an <strong>object</strong>. Example:
 ```php
 $query = $this->db->query('SELECT name FROM my_table LIMIT 1');
 
-$row = $query->row_array();
+$row = $query->rowArray();
 
 echo $row['name'];
 ```
-The above <dfn>row_array()</dfn> function returns an <strong>array</strong>. Example: $row['name']
+The above <dfn>rowArray()</dfn> function returns an <strong>array</strong>. Example: $row['name']
 
 ### Standard Insert
 ------
@@ -121,7 +121,7 @@ The above <dfn>row_array()</dfn> function returns an <strong>array</strong>. Exa
 $sql = "INSERT INTO mytable (title, name)
         VALUES (".$this->db->escape($title).", ".$this->db->escape($name).")";
 
-$affected_rows = $this->db->exec_query($sql);
+$affected_rows = $this->db->execQuery($sql);
 
 // We use exec_query function for <b>native</b> insert, delete, update operations 
 
@@ -129,7 +129,7 @@ echo $affected_rows;
 ```
 <strong>$this->db->escape()</strong> function just alias of <strong>PDO::quote($str, PDO::PARAM_STR);</strong> function.
 
-We use <strong>exec_query()</strong> function for, insert, delete, update operations... It return to affected rows automatically.
+We use <strong>execQuery()</strong> function for, insert, delete, update operations... It return to affected rows automatically.
 
 ### High Secure Insert
 ------
@@ -142,7 +142,7 @@ Dou you want to <strong>more security ?</strong>
 $sql = "INSERT INTO mytable (title, number)
         VALUES (".$this->db->escape((string)$title).", ".$this->db->escape((int)$number).")";
 
-$affected_rows = $this->db->exec_query($sql);
+$affected_rows = $this->db->execQuery($sql);
 
 echo $affected_rows;
 ```
@@ -218,7 +218,7 @@ $database['db']['dbdriver'] = "mysql";
 ------
 | Driver Name | Connection Name | Database Name |
 | ------------- |:-------------:| -----:|
-| mongodb | mongodb | MONGO |
+| mongodb | mongo | MONGO |
 
 Obullo has a config file that lets you store your database connection values (username, password, database name, etc.). The config file is located at:
 
@@ -268,21 +268,21 @@ $database['db3']['options']  = array();
 
 There is a global <strong>PDO options</strong> parameter in your database configuration. You can <strong>set connection attributes</strong> for each connection if you want. For example if you want to do  <strong>Persistent Connection</strong> you will do it like this..
 ```phph
-$database['db']['options']  = array( PDO::ATTR_PERSISTENT => TRUE );
+$database['db']['options']  = array( PDO::ATTR_PERSISTENT => true );
 ```
 Persistent Connection will improve your database performance.
 
 You can add more attributes in your option array like this..
 ```php
-$database['db']['options']  = array( PDO::ATTR_PERSISTENT => FALSE , 
-                                     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => TRUE );
+$database['db']['options']  = array( PDO::ATTR_PERSISTENT => false , 
+                                     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true );
 ```
 <strong>Tip:</strong>You can learn more details about PDO Predefined Constants.
 #### Active Record
 
-The [Active Record Class](https://github.com/obullo/obullo-2.0/tree/master/docs/database#active-record-class) is globally enabled or disabled by setting the 'active_record' variable in the database configuration file to TRUE/FALSE (boolean). If you are not using the active record class, setting it to FALSE will utilize fewer resources when the database classes are initialized.
+The [Active Record Class](https://github.com/obullo/obullo-2.0/tree/master/docs/database#active-record-class) is globally enabled or disabled by setting the 'active_record' variable in the database configuration file to true/false (boolean). If you are not using the active record class, setting it to false will utilize fewer resources when the database classes are initialized.
 ```php
-$database['system']['active_record'] = TRUE;
+$database['system']['active_record'] = true;
 ```
 <strong>Note:</strong> that some Obullo classes such as Sessions require Active Records be enabled to access certain functionality.
 
@@ -380,7 +380,7 @@ $config = array(
      'dbdriver' => 'mysql',
      'dbh_port' => '',
      'char_set' => 'utf8',
-     'options'  => array( PDO::ATTR_PERSISTENT => TRUE )
+     'options'  => array( PDO::ATTR_PERSISTENT => true )
  );                                
 
  new Db\Connect($config);
@@ -401,33 +401,33 @@ $config = array(
 
 $this->db2->query(  ....  );
 ```
-<strong>Tip:</strong> You can reach your database connectivity settings by a  [common function](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#common-functions) called <samp>db_item()</samp>. Look at below the code.
+<strong>Tip:</strong> You can reach your database connectivity settings by a  [common function](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#common-functions) called <samp>db()</samp>. Look at below the code.
 ```php
-echo db_item('password', 'db2');   // output localhost 
+echo db('password', 'db2');   // output localhost 
 ```
 This will give you password parameter of second database connection setting which is before defined in <dfn>application/config/database.php</dfn> file.
 #### Returning to database object
 
 If you want to grab the database object turn return object switch to true.
 ```php
-$db = new Db\Connect('db', TRUE);  // provide your database variable
-                                     // and turn db return object switch to TRUE.
+$db = new Db\Connect('db', true);  // provide your database variable
+                                     // and turn db return object switch to true.
                                    
 $db->query(" ... "); 
 
-$db2 = new Db\Connect('db2', TRUE);  // second db
+$db2 = new Db\Connect('db2', true);  // second db
                                       
 $db2->query(" ... ");
 ```
 #### Using Your DB Class
 
-You can close the database instantiate using first parameter to FALSE. And if you extend to Database class you can instantiate it to manually. ( Look at [extending to core classes](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#extending-to-core-classes) for more details. )
+You can close the database instantiate using first parameter to false. And if you extend to Database class you can instantiate it to manually. ( Look at [extending to core classes](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#extending-to-core-classes) for more details. )
 ```php
-new Db\Connect('FALSE');
+new Db\Connect('false');
 
 $db = new MY_Database();
 $db = $db->connect('db');
 
-$results = $db->query('SELECT * FROM ob_users')->result_array();
+$results = $db->query('SELECT * FROM ob_users')->resultArray();
 print_r($results);
 ```

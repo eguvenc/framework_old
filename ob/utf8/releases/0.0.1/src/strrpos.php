@@ -40,13 +40,13 @@ if( ! function_exists('utf8_strrpos'))
         {
             $array = explode($search, $str, -1);
             
-            return isset($array[0]) ? $utf8->strlen(implode($search, $array)) : FALSE;
+            return isset($array[0]) ? $utf8->strlen(implode($search, $array)) : false;
         }
 
         $str = $utf8->substr($str, $offset);
         $pos = $utf8->strrpos($str, $search);
         
-        return ($pos === FALSE) ? FALSE : ($pos + $offset);
+        return ($pos === false) ? false : ($pos + $offset);
     }
 }
 

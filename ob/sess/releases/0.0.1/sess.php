@@ -16,17 +16,17 @@ namespace Ob\sess {
         {
             \Ob\log\me('debug', 'Session Helper Initialized.');
             
-            static $session_start = NULL;
+            static $session_start = null;
 
-            if ($session_start == NULL)
+            if ($session_start == null)
             {
-                $driver = (isset($params['sess_driver'])) ? $params['sess_driver'] : \Ob\config('sess_driver');
+                $driver = (isset($params['driver'])) ? $params['driver'] : \Ob\config('driver', 'sess');
 
                 $Class = '\Ob\Sess\Src\Sess_'.ucfirst(strtolower($driver));
                 self::$driver = $Class::getInstance();
                 self::$driver->init($params); // Start the sessions
 
-                $session_start = TRUE;
+                $session_start = true;
             }
         }
     }
@@ -117,7 +117,7 @@ namespace Ob\sess {
     * @param    string
     * @return   void
     */
-    function set_flash($key = array(), $val = '')
+    function setFlash($key = array(), $val = '')
     {
         return getInstance()->remove($key, $val);
     }
@@ -133,9 +133,9 @@ namespace Ob\sess {
     * @param    string  $suffix html close tag
     * @return   string
     */
-    function get_flash($key, $prefix = '', $suffix = '')
+    function getFlash($key, $prefix = '', $suffix = '')
     {
-        return getInstance()->get_flash($key, $prefix, $suffix);
+        return getInstance()->getFlash($key, $prefix, $suffix);
     }
     
     // --------------------------------------------------------------------
@@ -147,9 +147,9 @@ namespace Ob\sess {
     * @param    string
     * @return   void
     */
-    function keep_flash($key)
+    function keepFlash($key)
     {
-        return getInstance()->keep_flash($key);
+        return getInstance()->keepFlash($key);
     }
 }
 

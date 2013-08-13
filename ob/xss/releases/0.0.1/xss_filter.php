@@ -19,9 +19,9 @@
  */
 if ( ! function_exists('xss_clean'))
 {
-    function xss_clean($str, $is_image = FALSE)
+    function xssClean($str, $is_image = false)
     {
-        return Security::getInstance()->xss_clean($str, $is_image);
+        return Security::getInstance()->xssClean($str, $is_image);
     }
 }
 
@@ -36,9 +36,9 @@ if ( ! function_exists('xss_clean'))
  */
 if ( ! function_exists('sanitize_filename'))
 {
-    function sanitize_filename($filename)
+    function sanitizeFilename($filename)
     {
-        return Security::getInstance()->sanitize_filename($filename);
+        return Security::getInstance()->sanitizeFilename($filename);
     }
 }
 
@@ -53,7 +53,7 @@ if ( ! function_exists('sanitize_filename'))
  */
 if ( ! function_exists('strip_image_tags'))
 {
-    function strip_image_tags($str)
+    function stripImageTags($str)
     {
         $str = preg_replace("#<img\s+.*?src\s*=\s*[\"'](.+?)[\"'].*?\>#", "\\1", $str);
         $str = preg_replace("#<img\s+.*?src\s*=\s*(.+?).*?\>#", "\\1", $str);
@@ -73,7 +73,7 @@ if ( ! function_exists('strip_image_tags'))
  */
 if ( ! function_exists('encode_php_tags'))
 {
-    function encode_php_tags($str)
+    function encodePhpTags($str)
     {
         return str_replace(array('<?php', '<?PHP', '<?', '?>'),  array('&lt;?php', '&lt;?PHP', '&lt;?', '?&gt;'), $str);
     }

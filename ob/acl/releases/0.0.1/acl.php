@@ -1,4 +1,5 @@
 <?php
+namespace Ob\Acl;
 
 /**
  * ACL Class
@@ -23,29 +24,49 @@ Class Acl {
     * Constructor
     *
     * Sets the variables and runs the compilation routine
-    *
+    * 
+    * @param mixed $no_instance
     * @version   0.1
     * @access    public
     * @return    void
     */
-    public function __construct()
+    public function __construct($no_instance = true)
     {
-        log\me('debug', "Acl Class Initialized");
+        if($no_instance)
+        {
+            \Ob\getInstance()->acl = $this; // Available it in the contoller $this->auth->method();
+        }
+        
+        \Ob\log\me('debug', "Acl Class Initialized");
     }
    
+    // ------------------------------------------------------------------------
+    
+    /**
+     * Initialize to Class.
+     * 
+     * @return object
+     */
+    public function init()
+    {
+        return ($this);
+    }
+    
+    // ------------------------------------------------------------------------
+    
     /**
     * Create a Group
     * 
     * @param string $group_name
     * @throws Exception 
     */
-    public function add_group($group_name)
+    public function addGroup($group_name)
     {
         $group_name = mb_strtolower($group_name);
         
         if(strpos($group_name, '@') !== 0)
         {
-            throw new Exception('The group name must be have @ prefix e.g. @admin.');
+            throw new \Exception('The group name must be have @ prefix e.g. @admin.');
         }
         
         $this->groups[$group_name] = array();
@@ -60,11 +81,11 @@ Class Acl {
     * @param string $group_name
     * @throws Exception 
     */
-    public function add_member($member, $group_name)
+    public function addMember($member, $group_name)
     {
         if(strpos($group_name, '@') !== 0)
         {
-            throw new Exception('The group name must be have @ prefix e.g. @admin.');
+            throw new \Exception('The group name must be have @ prefix e.g. @admin.');
         }
         
         $this->groups[$group_name][$member] = $member;
@@ -80,11 +101,11 @@ Class Acl {
     * @param string $group_name
     * @throws Exception 
     */
-    public function del_member($member, $group_name)
+    public function delMember($member, $group_name)
     {
         if(strpos($group_name, '@') !== 0)
         {
-            throw new Exception('The group name must be have @ prefix e.g. @admin.');
+            throw new \Exception('The group name must be have @ prefix e.g. @admin.');
         }
         
         unset($this->groups[$group_name][$member]);
@@ -102,7 +123,7 @@ Class Acl {
     * @return void
     * @throws Exception 
     */
-    public function allow($name, $operation, $deny = FALSE)
+    public function allow($name, $operation, $deny = false)
     {
         if(strpos($name, '@') === 0) // group process .. 
         {
@@ -112,17 +133,17 @@ Class Acl {
                 {
                     foreach($operation as $o_name)
                     {
-                        $this->access_list[$name][$o_name] = ($deny) ? FALSE : TRUE;
+                        $this->access_list[$name][$o_name] = ($deny) ? false : true;
                     }
                 } 
                 else 
                 {
-                    $this->access_list[$name][$operation] = ($deny) ? FALSE : TRUE;
+                    $this->access_list[$name][$operation] = ($deny) ? false : true;
                 }
             }
             else
             {
-                throw new Exception('Undefined group name <b>'.$name.'</b>, please add a group using <b>$acl->add_group()</b> method.');
+                throw new \Exception('Undefined group name <b>'.$name.'</b>, please add a group using <b>$acl->add_group()</b> method.');
             }
             
             return;
@@ -139,7 +160,7 @@ Class Acl {
     */
     public function deny($name, $operation)
     {
-        $this->allow($name, $operation, $deny = TRUE);
+        $this->allow($name, $operation, $deny = true);
     }
     
     // ------------------------------------------------------------------------
@@ -149,10 +170,10 @@ Class Acl {
     * 
     * @param string $name group or member name
     * @param string $operation user task
-    * @return boolean if has access return TRUE else FALSE
+    * @return boolean if has access return true else false
     * @throws Exception 
     */
-    public function is_allowed($name, $operation)
+    public function isAllowed($name, $operation)
     {        
         if(strpos($name, '@') === 0) // group process .. 
         {
@@ -160,35 +181,35 @@ Class Acl {
             {
                 if( ! isset($this->access_list[$name][$operation])) // check operation is defined ?
                 {
-                    throw new Exception('Undefined operation <b>'.$operation.'</b> for <b>'.$name.'</b>, please add a operation using <b>$acl->allow('.$name.', \'operation\')</b> method.');
+                    throw new \Exception('Undefined operation <b>'.$operation.'</b> for <b>'.$name.'</b>, please add a operation using <b>$acl->allow('.$name.', \'operation\')</b> method.');
                 }
                 
                 if($this->access_list[$name][$operation])
                 {
-                    return TRUE;
+                    return true;
                 }
             }
             else
             {
-                throw new Exception('Undefined group name <b>'.$name.'</b>, please add a group using <b>$acl->add_group()</b> method.');
+                throw new \Exception('Undefined group name <b>'.$name.'</b>, please add a group using <b>$acl->add_group()</b> method.');
             }
             
-            return FALSE;
+            return false;
         }
         
         if( ! isset($this->members[$name]))   // check really is it member ?
         {
-            throw new Exception('Undefined member name <b>'.$name.'</b>, please add a member using <b>$acl->add_member(\'membername\', \'groupname\')</b> method.');
+            throw new \Exception('Undefined member name <b>'.$name.'</b>, please add a member using <b>$acl->add_member(\'membername\', \'groupname\')</b> method.');
         }
 
         $group = $this->members[$name];   
        
         if(isset($this->groups[$group]))          // check member is a member of the group ? 
         {
-            return $this->is_allowed($group, $operation);
+            return $this->isAllowed($group, $operation);
         } 
   
-        return FALSE;
+        return false;
     }
     
 }

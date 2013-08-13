@@ -48,7 +48,7 @@ if( ! function_exists('utf8_stristr'))
             return substr($str, strlen($matches[1]));
         } 
 
-        return FALSE;
+        return false;
     }
 }
 

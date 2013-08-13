@@ -1,4 +1,5 @@
 <?php
+namespace Ob\Encrypt;
 
 /**
  * Obullo Encryption Class
@@ -15,7 +16,7 @@ Class Encrypt {
 
     public $encryption_key    = '';
     public $_hash_type        = 'sha1';
-    public $_mcrypt_exists    = FALSE;
+    public $_mcrypt_exists    = false;
     public $_mcrypt_cipher;
     public $_mcrypt_mode;
     
@@ -25,11 +26,16 @@ Class Encrypt {
     * Simply determines whether the mcrypt library exists.
     *
     */
-    public function __construct()
-    {
-        $this->_mcrypt_exists = ( ! function_exists('mcrypt_encrypt')) ? FALSE : TRUE;
+    public function __construct($no_instance = true)
+    {   
+        if($no_instance)
+        {
+            \Ob\getInstance()->encrypt = $this; // Make available it in the controller $this->encrypt->method();
+        }
         
-        log\me('debug', "Encrypt Class Initialized");
+        $this->_mcrypt_exists = ( ! function_exists('mcrypt_encrypt')) ? false : true;
+        
+        \Ob\log\me('debug', "Encrypt Class Initialized");
     }
 
     // --------------------------------------------------------------------
@@ -44,7 +50,7 @@ Class Encrypt {
     * @param    string
     * @return   string
     */
-    public function get_key($key = '')
+    public function getKey($key = '')
     {
         if ($key == '')
         {
@@ -53,12 +59,11 @@ Class Encrypt {
                 return $this->encryption_key;
             }
 
-            $key = config('encryption_key');
+            $key = \Ob\config('encryption_key');
 
-            if ($key === FALSE)
+            if ($key === false)
             {
-                throw new Exception('In order to use the encryption class requires that you set 
-                an encryption key in your config file.');
+                throw new \Exception('In order to use the encryption class requires that you set an encryption key in your config file.');
             }
         }
 
@@ -74,7 +79,7 @@ Class Encrypt {
     * @param    string
     * @return   void
     */
-    public function set_key($key = '')
+    public function setKey($key = '')
     {
         $this->encryption_key = $key;
     }
@@ -99,12 +104,12 @@ Class Encrypt {
     */
     public function encode($string, $key = '')
     {
-        $key = $this->get_key($key);
-        $enc = $this->_xor_encode($string, $key);
+        $key = $this->getKey($key);
+        $enc = $this->_xorEncode($string, $key);
         
-        if ($this->_mcrypt_exists === TRUE)
+        if ($this->_mcrypt_exists === true)
         {
-            $enc = $this->mcrypt_encode($enc, $key);
+            $enc = $this->mcryptEncode($enc, $key);
         }
         return base64_encode($enc);
     }
@@ -123,24 +128,24 @@ Class Encrypt {
     */
     public function decode($string, $key = '')
     {
-        $key = $this->get_key($key);
+        $key = $this->getKey($key);
         
         if (preg_match('/[^a-zA-Z0-9\/\+=]/', $string))
         {
-            return FALSE;
+            return false;
         }
 
         $dec = base64_decode($string);
 
-        if ($this->_mcrypt_exists === TRUE)
+        if ($this->_mcrypt_exists === true)
         {
-            if (($dec = $this->mcrypt_decode($dec, $key)) === FALSE)
+            if (($dec = $this->mcryptDecode($dec, $key)) === false)
             {
-                return FALSE;
+                return false;
             }
         }
 
-        return $this->_xor_decode($dec, $key);
+        return $this->_xorDecode($dec, $key);
     }
 
     // --------------------------------------------------------------------
@@ -156,7 +161,7 @@ Class Encrypt {
     * @param    string
     * @return   string
     */
-    private function _xor_encode($string, $key)
+    private function _xorEncode($string, $key)
     {
         $rand = '';
         while (strlen($rand) < 32)
@@ -164,7 +169,7 @@ Class Encrypt {
             $rand .= mt_rand(0, mt_getrandmax());
         }
 
-        $rand = $this->hash_encode($rand);
+        $rand = $this->hash($rand);
 
         $enc = '';
         for ($i = 0; $i < strlen($string); $i++)
@@ -172,7 +177,7 @@ Class Encrypt {
             $enc .= substr($rand, ($i % strlen($rand)), 1).(substr($rand, ($i % strlen($rand)), 1) ^ substr($string, $i, 1));
         }
 
-        return $this->_xor_merge($enc, $key);
+        return $this->_xorMerge($enc, $key);
     }
 
     // --------------------------------------------------------------------
@@ -188,9 +193,9 @@ Class Encrypt {
     * @param    string
     * @return   string
     */
-    private function _xor_decode($string, $key)
+    private function _xorDecode($string, $key)
     {
-        $string = $this->_xor_merge($string, $key);
+        $string = $this->_xorMerge($string, $key);
 
         $dec = '';
         for ($i = 0; $i < strlen($string); $i++)
@@ -213,9 +218,9 @@ Class Encrypt {
     * @param    string
     * @return   string
     */
-    private function _xor_merge($string, $key)
+    private function _xorMerge($string, $key)
     {
-        $hash = $this->hash_encode($key);
+        $hash = $this->hash($key);
         $str = '';
         for ($i = 0; $i < strlen($string); $i++)
         {
@@ -235,11 +240,12 @@ Class Encrypt {
     * @param    string
     * @return   string
     */
-    private function mcrypt_encode($data, $key)
+    private function mcryptEncode($data, $key)
     {
-        $init_size = mcrypt_get_iv_size($this->_get_cipher(), $this->_get_mode());
+        $init_size = mcrypt_get_iv_size($this->_getCipher(), $this->_getMode());
         $init_vect = mcrypt_create_iv($init_size, MCRYPT_RAND);
-        return $this->_add_cipher_noise($init_vect.mcrypt_encrypt($this->_get_cipher(), $key, $data, $this->_get_mode(), $init_vect), $key);
+        
+        return $this->_addCipherNoise($init_vect.mcrypt_encrypt($this->_getCipher(), $key, $data, $this->_getMode(), $init_vect), $key);
     }
 
     // --------------------------------------------------------------------
@@ -252,19 +258,20 @@ Class Encrypt {
     * @param    string
     * @return   string
     */
-    private function mcrypt_decode($data, $key)
+    private function mcryptDecode($data, $key)
     {
-        $data = $this->_remove_cipher_noise($data, $key);
-        $init_size = mcrypt_get_iv_size($this->_get_cipher(), $this->_get_mode());
+        $data = $this->_removeCipherNoise($data, $key);
+        $init_size = mcrypt_get_iv_size($this->_getCipher(), $this->_getMode());
 
         if ($init_size > strlen($data))
         {
-            return FALSE;
+            return false;
         }
 
         $init_vect = substr($data, 0, $init_size);
         $data = substr($data, $init_size);
-        return rtrim(mcrypt_decrypt($this->_get_cipher(), $key, $data, $this->_get_mode(), $init_vect), "\0");
+        
+        return rtrim(mcrypt_decrypt($this->_getCipher(), $key, $data, $this->_getMode(), $init_vect), "\0");
     }
 
     // --------------------------------------------------------------------
@@ -281,10 +288,10 @@ Class Encrypt {
     * @param    string
     * @return   string
     */
-    private function _add_cipher_noise($data, $key)
+    private function _addCipherNoise($data, $key)
     {
-        $keyhash = $this->hash_encode($key);
-        $keylen = strlen($keyhash);
+        $keyhash = $this->hash($key);
+        $keylen  = strlen($keyhash);
         $str = '';
 
         for ($i = 0, $j = 0, $len = strlen($data); $i < $len; ++$i, ++$j)
@@ -304,7 +311,7 @@ Class Encrypt {
 
     /**
     * Removes permuted noise from the IV + encrypted data, reversing
-    * _add_cipher_noise()
+    * _addCipherNoise()
     *
     * Function description
     *
@@ -312,9 +319,9 @@ Class Encrypt {
     * @param    type
     * @return   type
     */
-    private function _remove_cipher_noise($data, $key)
+    private function _removeCipherNoise($data, $key)
     {
-        $keyhash = $this->hash_encode($key);
+        $keyhash = $this->hash($key);
         $keylen = strlen($keyhash);
         $str = '';
 
@@ -347,7 +354,7 @@ Class Encrypt {
     * @param    constant
     * @return   string
     */
-    public function set_cipher($cipher)
+    public function setCipher($cipher)
     {
         $this->_mcrypt_cipher = $cipher;
     }
@@ -361,7 +368,7 @@ Class Encrypt {
     * @param    constant
     * @return   string
     */
-    public function set_mode($mode)
+    public function setMode($mode)
     {
         $this->_mcrypt_mode = $mode;
     }
@@ -374,7 +381,7 @@ Class Encrypt {
     * @access    private
     * @return    string
     */
-    private function _get_cipher()
+    private function _getCipher()
     {
         if ($this->_mcrypt_cipher == '')
         {
@@ -392,7 +399,7 @@ Class Encrypt {
     * @access    private
     * @return    string
     */
-    private function _get_mode()
+    private function _getMode()
     {
         if ($this->_mcrypt_mode == '')
         {
@@ -411,7 +418,7 @@ Class Encrypt {
     * @param    string
     * @return   string
     */
-    public function set_hash($type = 'sha1')
+    public function setHash($type = 'sha1')
     {
         $this->_hash_type = ($type != 'sha1' AND $type != 'md5') ? 'sha1' : $type;
     }
@@ -425,25 +432,10 @@ Class Encrypt {
     * @param    string
     * @return   string
     */    
-    private function hash_encode($str)
+    private function hash($str)
     {
         return ($this->_hash_type == 'sha1') ? sha1($str) : md5($str);
     }
-
-    // --------------------------------------------------------------------
-
-    /**
-    * Generate an SHA1 Hash
-    *
-    * @access   public
-    * @param    string
-    * @return   string
-    */
-    public function sha1($str)
-    {
-        return sha1($str);
-    }
-    
 }
 
 // END Encrypt class

@@ -137,7 +137,7 @@ Class Zip {
      * @param    string
      * @return    void
      */    
-    public function add_data($filepath, $data = NULL)
+    public function add_data($filepath, $data = null)
     {    
         if (is_array($filepath))
         {
@@ -218,26 +218,26 @@ Class Zip {
      * @access    public
      * @return    bool
      */    
-    public function read_file($path, $preserve_filepath = FALSE)
+    public function read_file($path, $preserve_filepath = false)
     {
         if ( ! file_exists($path))
         {
-            return FALSE;
+            return false;
         }
 
-        if (FALSE !== ($data = file_get_contents($path)))
+        if (false !== ($data = file_get_contents($path)))
         {
             $name = str_replace("\\", "/", $path);
             
-            if ($preserve_filepath === FALSE)
+            if ($preserve_filepath === false)
             {
                 $name = preg_replace("|.*/(.+)|", "\\1", $name);
             }
 
             $this->add_data($name, $data);
-            return TRUE;
+            return true;
         }
-        return FALSE;
+        return false;
     }
 
     // ------------------------------------------------------------------------
@@ -253,20 +253,20 @@ Class Zip {
      * @param    string    path to source
      * @return    bool
      */
-    public function read_dir($path, $preserve_filepath = TRUE, $root_path = NULL)
+    public function read_dir($path, $preserve_filepath = true, $root_path = null)
     {
         if ( ! $fp = @opendir($path))
         {
-            return FALSE;
+            return false;
         }
 
         // Set the original directory root for child dir's to use as relative
-        if ($root_path === NULL)
+        if ($root_path === null)
         {
             $root_path = dirname($path).'/';
         }
 
-        while (FALSE !== ($file = readdir($fp)))
+        while (false !== ($file = readdir($fp)))
         {
             if(substr($file, 0, 1) == '.')
             {
@@ -279,11 +279,11 @@ Class Zip {
             }
             else
             {
-                if (FALSE !== ($data = file_get_contents($path.$file)))
+                if (false !== ($data = file_get_contents($path.$file)))
                 {
                     $name = str_replace("\\", "/", $path);
 
-                    if ($preserve_filepath === FALSE)
+                    if ($preserve_filepath === false)
                     {
                         $name = str_replace($root_path, '', $name);
                     }
@@ -293,7 +293,7 @@ Class Zip {
             }
         }
 
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -309,7 +309,7 @@ Class Zip {
         // Is there any data to return?
         if ($this->entries == 0)
         {
-            return FALSE;
+            return false;
         }
 
         $zip_data = $this->zipdata;
@@ -338,7 +338,7 @@ Class Zip {
     {
         if ( ! ($fp = @fopen($filepath, FOPEN_WRITE_CREATE_DESTRUCTIVE)))
         {
-            return FALSE;
+            return false;
         }
 
         flock($fp, LOCK_EX);    
@@ -346,7 +346,7 @@ Class Zip {
         flock($fp, LOCK_UN);
         fclose($fp);
 
-        return TRUE;    
+        return true;    
     }
 
     // --------------------------------------------------------------------
@@ -371,9 +371,9 @@ Class Zip {
 
            // Try to determine if the filename includes a file extension.
         // We need it in order to set the MIME type
-        if (FALSE === strpos($filename, '.'))
+        if (false === strpos($filename, '.'))
         {
-            return FALSE;
+            return false;
         }
 
         // Grab the file extension
@@ -381,7 +381,7 @@ Class Zip {
         $extension = end($x);
 
         // Load the mime types
-        $mimes = get_config('mimes');  // Obullo changes ..
+        $mimes = getConfig('mimes');  // Obullo changes ..
 
         // Set a default mime if we can't find it
         if ( ! isset($mimes[$extension]))

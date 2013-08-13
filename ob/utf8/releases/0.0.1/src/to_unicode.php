@@ -98,7 +98,7 @@ if( ! function_exists('utf8_to_unicode'))
                 {
                     // Current octet is neither in the US-ASCII range nor a legal first octet of a multi-octet sequence.
                     log\me('UTF8 to_unicode: Illegal sequence identifier in UTF-8 at byte '.$i. 'in this string: '.$str);
-                    return FALSE;
+                    return false;
                 }
             }
             else
@@ -128,7 +128,7 @@ if( ! function_exists('utf8_to_unicode'))
                                 ($m_ucs4 > 0x10FFFF))
                         {
                             log\me('UTF8 to_unicode: Illegal sequence or codepoint in UTF-8 at byte '.$i.' in this string: '.$str);
-                            return FALSE;
+                            return false;
                         }
 
                         if (0xFEFF != $m_ucs4)
@@ -148,7 +148,7 @@ if( ! function_exists('utf8_to_unicode'))
                     // ((0xC0 & (*in) != 0x80) AND (m_state != 0))
                     // Incomplete multi-octet sequence
                     log\me('UTF8 to_unicode: Incomplete multi-octet sequence in UTF-8 at byte '.$i. 'in this string: '.$str);
-                    return FALSE;
+                    return false;
                 }
             }
         }

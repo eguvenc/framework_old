@@ -29,7 +29,7 @@ namespace Ob\url {
     */
     function base($uri = '')
     {
-        return \Ob\Config::getInstance()->base_url($uri);
+        return \Ob\Config::getInstance()->baseUrl($uri);
     }
 
     // ------------------------------------------------------------------------
@@ -44,9 +44,9 @@ namespace Ob\url {
     * @abstract  bool $no_slash  no trailing slash
     * @return    string
     */
-    function assets($uri = '', $no_ext_uri_slash = FALSE, $no_folder = FALSE)
+    function assets($uri = '', $no_ext_uri_slash = false, $no_folder = false)
     {
-        return \Ob\Config::getInstance()->public_url($uri, $no_folder, $no_ext_uri_slash);
+        return \Ob\Config::getInstance()->publicUrl($uri, $no_folder, $no_ext_uri_slash);
     }
     
     // ------------------------------------------------------------------------
@@ -62,9 +62,9 @@ namespace Ob\url {
     * @param     bool  $suffix switch off suffix by manually if its true in config.php
     * @return    string
     */
-    function site($uri = '', $suffix = TRUE)
+    function site($uri = '', $suffix = true)
     {
-        return \Ob\Config::getInstance()->site_url($uri, $suffix);
+        return \Ob\Config::getInstance()->siteUrl($uri, $suffix);
     }
     
     // ------------------------------------------------------------------------
@@ -77,7 +77,7 @@ namespace Ob\url {
     */
     function current()
     {
-        return \Ob\Config::getInstance()->site_url(\Uri::getInstance()->uri_string());
+        return \Ob\Config::getInstance()->siteUrl(\Uri::getInstance()->uriString());
     }
 
     // ------------------------------------------------------------------------
@@ -91,7 +91,7 @@ namespace Ob\url {
     */
     function module($uri = '')
     {
-        $module = \Ob\getInstance()->router->fetch_directory();
+        $module = \Ob\getInstance()->router->fetchDirectory();
         
         if($uri == '')
         {
@@ -118,37 +118,37 @@ namespace Ob\url {
     * @version   0.3       Added $suffix parameter
     * @return    string
     */
-    function anchor($uri = '', $title = '', $attributes = '', $suffix = TRUE)
+    function anchor($uri = '', $title = '', $attributes = '', $suffix = true)
     {
-        $ssl = FALSE;  // ssl support
+        $ssl = false;  // ssl support
         if(strpos($uri, 'https://') === 0)
         {
             if(config('ssl')) // Global ssl config.
             {
-                $ssl = TRUE;
+                $ssl = true;
             }
             
             $uri = str_replace('https://',  '',  $uri);
         }
 
         $title = (string) $title;
-        $sharp = FALSE;
+        $sharp = false;
 
         // ' # ' sharp support for anchors. ( Obullo changes )..
         if(strpos($uri, '#') > 0)
         {
             $sharp_uri = explode('#', $uri);
             $uri       = $sharp_uri[0];
-            $sharp     = TRUE;
+            $sharp     = true;
         }
 
         if ( ! is_array($uri))
         {
-            $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? \Ob\getInstance()->config->site_url($uri, $suffix) : $uri;
+            $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? \Ob\getInstance()->config->siteUrl($uri, $suffix) : $uri;
         }
         else
         {
-            $site_url = \Ob\getInstance()->config->site_url($uri, $suffix);
+            $site_url = \Ob\getInstance()->config->siteUrl($uri, $suffix);
         }
 
         if ($title == '')
@@ -161,7 +161,7 @@ namespace Ob\url {
             $attributes = _parse_attributes($attributes);
         }
 
-        if($sharp == TRUE AND isset($sharp_uri[1]))
+        if($sharp == true AND isset($sharp_uri[1]))
         {
             $site_url = $site_url.'#'.$sharp_uri[1];  // Obullo changes..
         }
@@ -173,7 +173,7 @@ namespace Ob\url {
 
         if(isset($_SERVER['HTTPS']) AND $_SERVER['HTTPS'] != '' AND $_SERVER['HTTPS'] != 'off')
         {
-            if($ssl == FALSE)
+            if($ssl == false)
             {
                 $site_url = rtrim(config('domain_root'), '/') . $site_url;
             }
@@ -204,14 +204,14 @@ namespace Ob\url {
     * @version  0.1     added suffix parameters
     * @return	string
     */
-    function anchor_popup($uri = '', $title = '', $attributes = FALSE, $suffix = TRUE)
+    function anchor_popup($uri = '', $title = '', $attributes = false, $suffix = true)
     {
-        $ssl = FALSE;  // ssl support
+        $ssl = false;  // ssl support
         if(strpos($uri, 'https://') === 0)
         {
             if(config('ssl')) // Global ssl config.
             {
-                $ssl = TRUE;
+                $ssl = true;
             }
             
             $uri = str_replace('https://',  '',  $uri);
@@ -219,7 +219,7 @@ namespace Ob\url {
 
         $title = (string) $title;
 
-        $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? \Ob\getInstance()->uri->site_url($uri, $suffix) : $uri;
+        $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? \Ob\getInstance()->uri->siteUrl($uri, $suffix) : $uri;
 
         # if ssl used do not use https:// for standart anchors.
         # if your HTTP server NGINX add below the line to your fastcgi_params file.
@@ -228,7 +228,7 @@ namespace Ob\url {
 
         if(isset($_SERVER['HTTPS']) AND $_SERVER['HTTPS'] != '' AND $_SERVER['HTTPS'] != 'off')
         {
-            if($ssl == FALSE)
+            if($ssl == false)
             {
                 $site_url = rtrim(config('domain_root'), '/') . $site_url;
             }
@@ -245,7 +245,7 @@ namespace Ob\url {
             $title = $site_url;
         }
 
-        if ($attributes === FALSE)
+        if ($attributes === false)
         {
             return "<a href='javascript:void(0);' onclick=\"window.open('".$site_url."', '_blank');\">".$title."</a>";
         }
@@ -266,7 +266,7 @@ namespace Ob\url {
             $attributes = _parse_attributes($attributes);
         }
 
-        return "<a href='javascript:void(0);' onclick=\"window.open('".$site_url."', '_blank', '"._parse_attributes($atts, TRUE)."');\"$attributes>".$title."</a>";
+        return "<a href='javascript:void(0);' onclick=\"window.open('".$site_url."', '_blank', '"._parse_attributes($atts, true)."');\"$attributes>".$title."</a>";
     }
     
     // ------------------------------------------------------------------------
@@ -309,7 +309,7 @@ namespace Ob\url {
     * @param	string	the separator: dash, or underscore
     * @return	string
     */
-    function title($str, $separator = 'dash', $lowercase = FALSE)
+    function title($str, $separator = 'dash', $lowercase = false)
     {
         if ($separator == 'dash')
         {
@@ -340,7 +340,7 @@ namespace Ob\url {
             $str = preg_replace("#".$key."#i", $val, $str);
         }
 
-        if ($lowercase === TRUE)
+        if ($lowercase === true)
         {
             $str = strtolower($str);
         }
@@ -355,7 +355,7 @@ namespace Ob\url {
     *
     * Header redirect in two flavors
     * For very fine grained control over headers, you could use the Output
-    * Library's set_header() function.
+    * Library's setHeader() function.
     *
     * @access   public
     * @param    string    the URL
@@ -363,23 +363,23 @@ namespace Ob\url {
     * @version  0.1       added sharp support and suffix parameter
     * @return   string
     */
-    function redirect($uri = '', $method = 'location', $http_response_code = 302, $suffix = TRUE)
+    function redirect($uri = '', $method = 'location', $http_response_code = 302, $suffix = true)
     {
         if ( ! preg_match('#^https?://#i', $uri))
         {
-            $sharp = FALSE;
+            $sharp = false;
 
             // ' # ' sharp support for urls. ( Obullo changes )..
             if(strpos($uri, '#') > 0)
             {
                 $sharp_uri = explode('#', $uri);
                 $uri       = $sharp_uri[0];
-                $sharp     = TRUE;
+                $sharp     = true;
             }
 
-            $uri = \Ob\getInstance()->config->site_url($uri, $suffix);
+            $uri = \Ob\getInstance()->config->siteUrl($uri, $suffix);
 
-            if($sharp == TRUE AND isset($sharp_uri[1]))
+            if($sharp == true AND isset($sharp_uri[1]))
             {
                 $uri = $uri.'#'.$sharp_uri[1];  // Obullo changes..
             }
@@ -398,7 +398,7 @@ namespace Ob\url {
         {
             case 'refresh'    : header("Refresh:0;url=".$uri);
                 break;
-            default           : header("Location: ".$uri, TRUE, $http_response_code);
+            default           : header("Location: ".$uri, true, $http_response_code);
                 break;
         }
         exit;
@@ -416,7 +416,7 @@ namespace Ob\url {
     * @param	bool
     * @return	string
     */
-    function _parse_attributes($attributes, $javascript = FALSE)
+    function _parse_attributes($attributes, $javascript = false)
     {
         if (is_string($attributes))
         {
@@ -426,7 +426,7 @@ namespace Ob\url {
         $att = '';
         foreach ($attributes as $key => $val)
         {
-            if ($javascript == TRUE)
+            if ($javascript == true)
             {
                 $att .= $key . '=' . $val . ',';
             }
@@ -436,7 +436,7 @@ namespace Ob\url {
             }
         }
 
-        if ($javascript == TRUE AND $att != '')
+        if ($javascript == true AND $att != '')
         {
             $att = substr($att, 0, -1);
         }

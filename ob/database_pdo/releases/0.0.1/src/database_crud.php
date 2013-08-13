@@ -1,7 +1,6 @@
 <?php
 namespace Ob\Database_Pdo\Src;
 
-
 /**
  * CRUD ( CREATE - READ - UPDATE - DELETE ) Class for ** PDO.
  *
@@ -14,16 +13,16 @@ namespace Ob\Database_Pdo\Src;
 Class Database_Crud {
                                          
     public $ar_select              = array();
-    public $ar_distinct            = FALSE;
+    public $ar_distinct            = false;
     public $ar_from                = array();
     public $ar_join                = array();
     public $ar_where               = array();
     public $ar_like                = array();
     public $ar_groupby             = array();
     public $ar_having              = array();
-    public $ar_limit               = FALSE;
-    public $ar_offset              = FALSE;
-    public $ar_order               = FALSE;
+    public $ar_limit               = false;
+    public $ar_offset              = false;
+    public $ar_order               = false;
     public $ar_orderby             = array();
     public $ar_set                 = array();    
     public $ar_wherein             = array();
@@ -31,7 +30,7 @@ Class Database_Crud {
     public $ar_store_array         = array();
     
     // Active Record Caching variables
-    public $ar_caching             = FALSE;
+    public $ar_caching             = false;
     public $ar_cache_exists        = array();
     public $ar_cache_select        = array();
     public $ar_cache_from          = array();
@@ -44,11 +43,11 @@ Class Database_Crud {
     public $ar_cache_set           = array();    
     
     // Private variables
-    public $_protect_identifiers    = TRUE;
+    public $_protect_identifiers    = true;
     public $_reserved_identifiers   = array('*'); // Identifiers that should NOT be escaped
     
     /**
-    * Store $this->_compile_select();
+    * Store $this->_compileSelect();
     * result into $sql var
     * 
     * @var string
@@ -62,10 +61,10 @@ Class Database_Crud {
     * 
     * @var mixed
     */
-    public $is_like_bind = FALSE;
+    public $is_like_bind = false;
                                     
     
-    public function select($select = '*', $escape = NULL)
+    public function select($select = '*', $escape = null)
     {
         // Set the global value if this was sepecified    
         if (is_bool($escape))
@@ -86,7 +85,7 @@ Class Database_Crud {
             {
                 $this->ar_select[] = $val;
 
-                if ($this->ar_caching === TRUE)
+                if ($this->ar_caching === true)
                 {
                     $this->ar_cache_select[] = $val;
                     $this->ar_cache_exists[] = 'select';
@@ -108,9 +107,9 @@ Class Database_Crud {
     * @param    bool
     * @return   object
     */
-    public function distinct($val = TRUE)
+    public function distinct($val = true)
     {
-        $this->ar_distinct = (is_bool($val)) ? $val : TRUE;
+        $this->ar_distinct = (is_bool($val)) ? $val : true;
         
         return $this;
     }
@@ -121,16 +120,16 @@ Class Database_Crud {
     {   
        foreach ((array)$from as $val) // beta 1.0 rc1 changes 
        {
-            if (strpos($val, ',') !== FALSE)
+            if (strpos($val, ',') !== false)
             {
                 foreach (explode(',', $val) as $v)
                 {
                     $v = trim($v);
-                    $this->_track_aliases($v);
+                    $this->_trackAliases($v);
 
-                    $this->ar_from[] = $this->_protect_identifiers($v, TRUE, NULL, FALSE);
+                    $this->ar_from[] = $this->_protectIdentifiers($v, true, null, false);
                     
-                    if ($this->ar_caching === TRUE)
+                    if ($this->ar_caching === true)
                     {
                         $this->ar_cache_from[] = $v;
                         $this->ar_cache_exists[] = 'from';
@@ -143,13 +142,13 @@ Class Database_Crud {
 
                 // Extract any aliases that might exist.  We use this information
                 // in the _protect_identifiers to know whether to add a table prefix 
-                $this->_track_aliases($val);
+                $this->_trackAliases($val);
 
-                $this->ar_from[] = $this->_protect_identifiers($val, TRUE, NULL, FALSE);
+                $this->ar_from[] = $this->_protectIdentifiers($val, true, null, false);
                 
-                if ($this->ar_caching === TRUE)
+                if ($this->ar_caching === true)
                 {
-                    $this->ar_cache_from[] = $this->_protect_identifiers($val, TRUE, NULL, FALSE);
+                    $this->ar_cache_from[] = $this->_protectIdentifiers($val, true, null, false);
                     $this->ar_cache_exists[] = 'from';
                 }
                 
@@ -180,22 +179,22 @@ Class Database_Crud {
 
         // Extract any aliases that might exist.  We use this information
         // in the _protect_identifiers to know whether to add a table prefix 
-        $this->_track_aliases($table);
+        $this->_trackAliases($table);
 
         // Strip apart the condition and protect the identifiers
         if (preg_match('/([\w\.]+)([\W\s]+)(.+)/', $cond, $match))
         {
-            $match[1] = $this->_protect_identifiers($match[1]);
-            $match[3] = $this->_protect_identifiers($match[3]);
+            $match[1] = $this->_protectIdentifiers($match[1]);
+            $match[3] = $this->_protectIdentifiers($match[3]);
         
             $cond = $match[1].$match[2].$match[3];        
         }
         
         // Assemble the JOIN statement
-        $join = $type.'JOIN '.$this->_protect_identifiers($table, TRUE, NULL, FALSE).' ON '.$cond;
+        $join = $type.'JOIN '.$this->_protectIdentifiers($table, true, null, false).' ON '.$cond;
 
         $this->ar_join[] = $join;
-        if ($this->ar_caching === TRUE)
+        if ($this->ar_caching === true)
         {
             $this->ar_cache_join[] = $join;
             $this->ar_cache_exists[] = 'join';
@@ -206,14 +205,14 @@ Class Database_Crud {
     
     // --------------------------------------------------------------------
     
-    public function where($key, $value = NULL, $escape = TRUE)
+    public function where($key, $value = null, $escape = true)
     {
         return $this->_where($key, $value, 'AND ', $escape);
     }
     
     // --------------------------------------------------------------------
     
-    public function or_where($key, $value = NULL, $escape = TRUE)
+    public function orWhere($key, $value = null, $escape = true)
     {
         return $this->_where($key, $value, 'OR ', $escape);
     }
@@ -232,7 +231,7 @@ Class Database_Crud {
     * @version  0.1
     * @return   void
     */
-    private function _where($key, $value = NULL, $type = 'AND ', $escape = NULL)
+    private function _where($key, $value = null, $type = 'AND ', $escape = null)
     {
         if ( ! is_array($key))
         $key = array($key => $value);
@@ -247,14 +246,14 @@ Class Database_Crud {
         {   
             $prefix = (count($this->ar_where) == 0 AND count($this->ar_cache_where) == 0) ? '' : $type;
             
-            if (is_null($v) && ! self::_has_operator($k))
-            $k .= ' IS NULL';  // value appears not to have been set, assign the test to IS NULL  
+            if (is_null($v) && ! self::_hasOperator($k))
+            $k .= ' IS null';  // value appears not to have been set, assign the test to IS null  
         
             if ( ! is_null($v))
             {
-                if ($escape === TRUE)
+                if ($escape === true)
                 {
-                    $k = $this->_protect_identifiers($k, FALSE, $escape);
+                    $k = $this->_protectIdentifiers($k, false, $escape);
                     
                     $v = ' '.$this->escape($v);
                 
@@ -262,26 +261,28 @@ Class Database_Crud {
                 {   
                     // obullo changes.. 
                     // make sure is it bind value, if not ... 
-                    if( strpos($v, ':') === FALSE || strpos($v, ':') > 0)
+                    if( strpos($v, ':') === false || strpos($v, ':') > 0)
                     {
                          if(is_string($v))
-                         $v = "'{$v}'";  // obullo changes..
+                         {
+                             $v = "'{$v}'";  // obullo PDO changes..
+                         }
                     }
                 }
                 
-                if ( ! self::_has_operator($k))
+                if ( ! self::_hasOperator($k))
                 {
                     $k .= ' =';
                 }
             
             } else 
             {
-                $k = $this->_protect_identifiers($k, FALSE, $escape);
+                $k = $this->_protectIdentifiers($k, false, $escape);
             }
              
             $this->ar_where[] = $prefix.$k.$v;
             
-            if ($this->ar_caching === TRUE)
+            if ($this->ar_caching === true)
             {
                 $this->ar_cache_where[] = $prefix.$k.$v;
                 $this->ar_cache_exists[] = 'where';
@@ -289,35 +290,35 @@ Class Database_Crud {
             
         }
         
-        return $this;
+        return ($this);
     }
 
     // -------------------------------------------------------------------- 
     
-    public function where_in($key = NULL, $values = NULL)
+    public function whereIn($key = null, $values = null)
     {
-        return $this->_where_in($key, $values);
+        return $this->_whereIn($key, $values);
     }
     
     // --------------------------------------------------------------------
 
-    public function or_where_in($key = NULL, $values = NULL)
+    public function orWhereIn($key = null, $values = null)
     {
-        return $this->_where_in($key, $values, FALSE, 'OR ');
+        return $this->_whereIn($key, $values, false, 'OR ');
     }
 
     // --------------------------------------------------------------------
 
-    public function where_not_in($key = NULL, $values = NULL)
+    public function whereNotIn($key = null, $values = null)
     {
-        return $this->_where_in($key, $values, TRUE);
+        return $this->_whereIn($key, $values, true);
     }
     
     // --------------------------------------------------------------------
 
-    public function or_where_not_in($key = NULL, $values = NULL)
+    public function orWhereNotIn($key = null, $values = null)
     {
-        return $this->_where_in($key, $values, TRUE, 'OR ');
+        return $this->_whereIn($key, $values, true, 'OR ');
     }
     
     // -------------------------------------------------------------------- 
@@ -334,9 +335,9 @@ Class Database_Crud {
     * @param    string    
     * @return   object
     */
-    public function _where_in($key = NULL, $values = NULL, $not = FALSE, $type = 'AND ')
+    public function _whereIn($key = null, $values = null, $not = false, $type = 'AND ')
     {
-        if ($key === NULL OR $values === NULL)
+        if ($key === null OR $values === null)
         return;
         
         if ( ! is_array($values))
@@ -353,10 +354,10 @@ Class Database_Crud {
 
         $prefix = (count($this->ar_where) == 0) ? '' : $type;
  
-        $where_in = $prefix . $this->_protect_identifiers($key) . $not . " IN (" . implode(", ", $this->ar_wherein) . ") ";
+        $where_in = $prefix . $this->_protectIdentifiers($key) . $not . " IN (" . implode(", ", $this->ar_wherein) . ") ";
 
         $this->ar_where[] = $where_in;
-        if ($this->ar_caching === TRUE)
+        if ($this->ar_caching === true)
         {
             $this->ar_cache_where[] = $where_in;
             $this->ar_cache_exists[] = 'where';
@@ -368,6 +369,8 @@ Class Database_Crud {
         return $this;
     }
     
+    // --------------------------------------------------------------------
+    
     public function like($field, $match = '', $side = 'both')
     {
         return $this->_like($field, $match, 'AND ', $side);
@@ -375,30 +378,23 @@ Class Database_Crud {
 
     // --------------------------------------------------------------------
 
-    public function not_like($field, $match = '', $side = 'both')
+    public function notLike($field, $match = '', $side = 'both')
     {
         return $this->_like($field, $match, 'AND ', $side, 'NOT');
     }
         
     // --------------------------------------------------------------------
 
-    public function or_like($field, $match = '', $side = 'both')
+    public function orLike($field, $match = '', $side = 'both')
     {
         return $this->_like($field, $match, 'OR ', $side);
     }
 
     // --------------------------------------------------------------------
 
-    public function or_not_like($field, $match = '', $side = 'both')
+    public function orNotLike($field, $match = '', $side = 'both')
     {
         return $this->_like($field, $match, 'OR ', $side, 'NOT');
-    }
-    
-    // --------------------------------------------------------------------
-
-    public function orlike($field, $match = '', $side = 'both')
-    {
-        return $this->or_like($field, $match, $side);
     }
     
     // --------------------------------------------------------------------
@@ -423,22 +419,22 @@ Class Database_Crud {
      
         foreach ($field as $k => $v)
         {
-            $k = $this->_protect_identifiers($k);
+            $k = $this->_protectIdentifiers($k);
             
             $prefix = (count($this->ar_like) == 0) ? '' : $type;
         
             // Obullo changes ..
             // if not bind value ... 
-            if( strpos($v, ':') === FALSE || strpos($v, ':') > 0) // Obullo rc1 Changes...
+            if( strpos($v, ':') === false || strpos($v, ':') > 0) // Obullo rc1 Changes...
             {
-               $like_statement = $prefix." $k $not LIKE ".$this->escape_like($v, $side);
+               $like_statement = $prefix." $k $not LIKE ".$this->escapeLike($v, $side);
             } 
             else 
             {
                 // !!IMPORTANT if pdo Bind value used , remove "%" operators..
                 // don't do this->db->escape_like
                 // because of user must be filter '%like%' values from outside.
-               $this->is_like_bind = TRUE;
+               $this->is_like_bind = true;
                 
                $like_statement = $prefix." $k $not LIKE ".$v;   
             }
@@ -450,7 +446,8 @@ Class Database_Crud {
             }
             
             $this->ar_like[] = $like_statement;
-            if ($this->ar_caching === TRUE)
+            
+            if ($this->ar_caching === true)
             {
                 $this->ar_cache_like[]   = $like_statement;
                 $this->ar_cache_exists[] = 'like';
@@ -469,7 +466,7 @@ Class Database_Crud {
     * @param    string
     * @return   object
     */
-    public function group_by($by)
+    public function groupBy($by)
     {
         if (is_string($by))
         {
@@ -482,11 +479,11 @@ Class Database_Crud {
         
             if ($val != '')
             {
-                $this->ar_groupby[] = $this->_protect_identifiers($val);
+                $this->ar_groupby[] = $this->_protectIdentifiers($val);
                 
-                if ($this->ar_caching === TRUE)
+                if ($this->ar_caching === true)
                 {
-                    $this->ar_cache_groupby[] = $this->_protect_identifiers($val);
+                    $this->ar_cache_groupby[] = $this->_protectIdentifiers($val);
                     $this->ar_cache_exists[] = 'groupby';
                 }
             }
@@ -495,30 +492,16 @@ Class Database_Crud {
         return $this;
     }
     
-    // --------------------------------------------------------------------
-
-    public function groupby($by)
-    {
-        return $this->group_by($by);
-    }    
-    
     // -------------------------------------------------------------------- 
     
-    public function having($key, $value = '', $escape = TRUE)
+    public function having($key, $value = '', $escape = true)
     {
         return $this->_having($key, $value, 'AND ', $escape);
     }
-
-    // -------------------------------------------------------------------- 
-
-    public function orhaving($key, $value = '', $escape = TRUE)
-    {
-        return $this->or_having($key, $value, $escape);
-    }    
     
     // --------------------------------------------------------------------
     
-    public function or_having($key, $value = '', $escape = TRUE)
+    public function orHaving($key, $value = '', $escape = true)
     {
         return $this->_having($key, $value, 'OR ', $escape);
     }
@@ -528,14 +511,14 @@ Class Database_Crud {
     /**
     * Sets the HAVING values
     *
-    * Called by having() or or_having()
+    * Called by having() or orHaving()
     *
     * @access   private
     * @param    string
     * @param    string
     * @return   object
     */
-    private function _having($key, $value = '', $type = 'AND ', $escape = TRUE)
+    private function _having($key, $value = '', $type = 'AND ', $escape = true)
     {
         if ( ! is_array($key))
         {
@@ -546,12 +529,12 @@ Class Database_Crud {
         {
             $prefix = (count($this->ar_having) == 0) ? '' : $type;
 
-            if ($escape === TRUE)
+            if ($escape === true)
             {
-                $k = $this->_protect_identifiers($k);
+                $k = $this->_protectIdentifiers($k);
             }
 
-            if ( ! self::_has_operator($k))
+            if ( ! self::_hasOperator($k))
             {
                 $k .= ' = ';
             }
@@ -562,7 +545,7 @@ Class Database_Crud {
             }
             
             $this->ar_having[] = $prefix.$k.$v;
-            if ($this->ar_caching === TRUE)
+            if ($this->ar_caching === true)
             {
                 $this->ar_cache_having[] = $prefix.$k.$v;
                 $this->ar_cache_exists[] = 'having';
@@ -582,7 +565,7 @@ Class Database_Crud {
     * @param    string    direction: asc or desc
     * @return   object
     */
-    public function order_by($orderby, $direction = '')
+    public function orderBy($orderby, $direction = '')
     {
         $direction = strtoupper(trim($direction));
         
@@ -603,7 +586,7 @@ Class Database_Crud {
             }
         }
                             
-        if (strpos($orderby, ',') !== FALSE)
+        if (strpos($orderby, ',') !== false)
         {
             $temp = array();
             foreach (explode(',', $orderby) as $part)
@@ -611,7 +594,7 @@ Class Database_Crud {
                 $part = trim($part);
                 if ( ! in_array($part, $this->ar_aliased_tables))
                 {
-                    $part = $this->_protect_identifiers(trim($part));
+                    $part = $this->_protectIdentifiers(trim($part));
                 }
                 
                 $temp[] = $part;
@@ -621,13 +604,13 @@ Class Database_Crud {
         }
         else
         {
-            $orderby = $this->_protect_identifiers($orderby);
+            $orderby = $this->_protectIdentifiers($orderby);
         }
     
         $orderby_statement  = $orderby.$direction;
         $this->ar_orderby[] = $orderby_statement;
         
-        if ($this->ar_caching === TRUE)
+        if ($this->ar_caching === true)
         {
             $this->ar_cache_orderby[] = $orderby_statement;
             $this->ar_cache_exists[]  = 'orderby';
@@ -636,14 +619,7 @@ Class Database_Crud {
         return $this;
 
     }
-    
-    // --------------------------------------------------------------------
-    
-    public function orderby($orderby, $direction = '')
-    {
-        return $this->order_by($orderby, $direction);
-    }
-    
+   
     // --------------------------------------------------------------------
 
     public function limit($value, $offset = '')
@@ -676,9 +652,9 @@ Class Database_Crud {
     * @param    boolean
     * @return   void
     */
-    public function set($key, $value = '', $escape = TRUE)
+    public function set($key, $value = '', $escape = true)
     {
-        $key = $this->_object_to_array($key);
+        $key = $this->_object2Array($key);
         
         if ( ! is_array($key))
         {
@@ -687,11 +663,11 @@ Class Database_Crud {
 
         foreach ($key as $k => $v)
         {
-            if ($escape === FALSE)                      
+            if ($escape === false)                      
             {                                           
                 // obullo changes.. 
                 // make sure is it bind value, if not ... 
-                if( strpos($v, ':') === FALSE || strpos($v, ':') > 0)
+                if( strpos($v, ':') === false || strpos($v, ':') > 0)
                 {
                      if(is_string($v))
                      {
@@ -701,11 +677,11 @@ Class Database_Crud {
                 }
             
                 // obullo changes..
-                $this->ar_set[$this->_protect_identifiers($k)] = $v;
+                $this->ar_set[$this->_protectIdentifiers($k)] = $v;
             }
             else
             {
-                $this->ar_set[$this->_protect_identifiers($k)] = $this->escape($v);
+                $this->ar_set[$this->_protectIdentifiers($k)] = $this->escape($v);
             }
         }
         
@@ -730,7 +706,7 @@ Class Database_Crud {
     {
         if ($table != '') 
         {   
-            $this->_track_aliases($table);
+            $this->_trackAliases($table);
             $this->from($table);
         }
         
@@ -739,19 +715,19 @@ Class Database_Crud {
             $this->limit($limit, $offset);
         }
             
-        $this->sql = $this->_compile_select();
+        $this->sql = $this->_compileSelect();
         
-        if($this->prepare == FALSE)    // obullo changes ..
+        if($this->prepare == false)    // obullo changes ..
         {
             $result = $this->query($this->sql);
-            $this->_reset_select();
+            $this->_resetSelect();
             
             return $result;
         
         } elseif($this->prepare) // passive mode...
         {
             $this->query($this->sql);  
-            $this->_reset_select();
+            $this->_resetSelect();
             
             return $this;    // obullo changes ..
         }
@@ -770,7 +746,7 @@ Class Database_Crud {
     * @param    array    an associative array of insert values
     * @return   PDO exec number of affected rows.
     */
-    public function insert($table = '', $set = NULL)
+    public function insert($table = '', $set = null)
     {    
         if ( ! is_null($set))
         {
@@ -779,30 +755,30 @@ Class Database_Crud {
         
         if (count($this->ar_set) == 0)
         {
-            throw new Exception('Please set values for insert operation.');
+            throw new \Exception('Please set values for insert operation.');
             
-            return FALSE;
+            return false;
         }
 
         if ($table == '')
         {
             if ( ! isset($this->ar_from[0]))
             {
-                throw new Exception('Please set values for insert operation.');
+                throw new \Exception('Please set values for insert operation.');
                 
-                return FALSE;
+                return false;
             }
             
             $table = $this->ar_from[0];
         }
 
-        $sql = $this->_insert($this->_protect_identifiers($table, TRUE, NULL, FALSE), array_keys($this->ar_set), array_values($this->ar_set));
+        $sql = $this->_insert($this->_protectIdentifiers($table, true, null, false), array_keys($this->ar_set), array_values($this->ar_set));
         
-        $this->_reset_write();
+        $this->_resetWrite();
         
-        $this->prepare = FALSE;
+        $this->prepare = false;
         
-        return $this->exec_query($sql);  // return affected rows ( PDO support )
+        return $this->execQuery($sql);  // return affected rows ( PDO support )
     }
     
     // --------------------------------------------------------------------
@@ -816,7 +792,7 @@ Class Database_Crud {
      * @param	array	an associative array of insert values
      * @return	object
      */
-    public function replace($table = '', $set = NULL)
+    public function replace($table = '', $set = null)
     {
         if ( ! is_null($set))
         {
@@ -825,22 +801,22 @@ Class Database_Crud {
 
         if (count($this->ar_set) == 0)
         {
-            throw new Exception('Please set values for replace operation.');
+            throw new \Exception('Please set values for replace operation.');
         }
 
         if ($table == '')
         {
             if ( ! isset($this->ar_from[0]))
             {
-                throw new Exception('Please set from for replace operation.');
+                throw new \Exception('Please set from for replace operation.');
             }
 
             $table = $this->ar_from[0];
         }
 
-        $sql = $this->_replace($this->_protect_identifiers($table, TRUE, NULL, FALSE), array_keys($this->ar_set), array_values($this->ar_set));
+        $sql = $this->_replace($this->_protectIdentifiers($table, true, null, false), array_keys($this->ar_set), array_values($this->ar_set));
 
-        $this->_reset_write();
+        $this->_resetWrite();
         
         return $this->query($sql);
     }
@@ -862,7 +838,7 @@ Class Database_Crud {
         
         foreach($data as $key => $val)
         {
-            $fields[] = $this->_escape_identifiers($key);
+            $fields[] = $this->_escapeIdentifiers($key);
             $values[] = $this->escape($val);
         }
                 
@@ -885,10 +861,10 @@ Class Database_Crud {
     * @param    mixed    the where clause
     * @return   PDO exec number of affected rows
     */
-    public function update($table = '', $set = NULL, $where = NULL, $limit = NULL)
+    public function update($table = '', $set = null, $where = null, $limit = null)
     {
         // Combine any cached components with the current statements
-        $this->_merge_cache();
+        $this->_mergeCache();
         
         if ( ! is_null($set))
         {
@@ -897,40 +873,40 @@ Class Database_Crud {
     
         if (count($this->ar_set) == 0)
         {
-            throw new Exception('Please set values for update operation.');
+            throw new \Exception('Please set values for update operation.');
             
-            return FALSE;
+            return false;
         }
                                          
         if ($table == '')
         {
             if ( ! isset($this->ar_from[0]))
             {
-                throw new Exception('Please set values for update operation.'); 
+                throw new \Exception('Please set values for update operation.'); 
                 
-                return FALSE;
+                return false;
             }
             
             $table = $this->ar_from[0];
         }
         
-        if ($where != NULL)
+        if ($where != null)
         {
             $this->where($where);
         }
         
-        if ($limit != NULL)
+        if ($limit != null)
         {
             $this->limit($limit);   
         }       
         
-        $sql = $this->_update($this->_protect_identifiers($table, TRUE, NULL, FALSE), $this->ar_set, $this->ar_where, $this->ar_orderby, $this->ar_limit);
+        $sql = $this->_update($this->_protectIdentifiers($table, true, null, false), $this->ar_set, $this->ar_where, $this->ar_orderby, $this->ar_limit);
                  
-        $this->_reset_write();
+        $this->_resetWrite();
         
-        $this->prepare = FALSE;
+        $this->prepare = false;
         
-        return $this->exec_query($sql);  // return number of affected rows.  
+        return $this->execQuery($sql);  // return number of affected rows.  
     }
     
     // _update function in ?_driver.php file.
@@ -950,13 +926,13 @@ Class Database_Crud {
     {
         if ($where == '')
         {
-            return FALSE;
+            return false;
         }
                     
         $fields = array();
         foreach($data as $key => $val)
         {
-            $fields[$this->_protect_identifiers($key)] = $this->escape($val);
+            $fields[$this->_protectIdentifiers($key)] = $this->escape($val);
         }
 
         if ( ! is_array($where))
@@ -972,7 +948,7 @@ Class Database_Crud {
     
                 if ($val !== '')
                 {
-                    if ( ! self::_has_operator($key))
+                    if ( ! self::_hasOperator($key))
                     {
                         $key .= ' =';
                     }
@@ -984,7 +960,7 @@ Class Database_Crud {
             }
         }        
 
-        return $this->_update($this->_protect_identifiers($table, TRUE, NULL, FALSE), $fields, $dest);
+        return $this->_update($this->_protectIdentifiers($table, true, null, false), $fields, $dest);
     }
     
     // --------------------------------------------------------------------
@@ -1003,18 +979,18 @@ Class Database_Crud {
     * @param    boolean
     * @return   object
     */
-    public function delete($table = '', $where = '', $limit = NULL, $reset_data = TRUE)
+    public function delete($table = '', $where = '', $limit = null, $reset_data = true)
     {
         // Combine any cached components with the current statements
-        $this->_merge_cache();
+        $this->_mergeCache();
 
         if ($table == '')
         {
             if ( ! isset($this->ar_from[0]))
             {
-                throw new Exception('Please set table for delete operation.');
+                throw new \Exception('Please set table for delete operation.');
                 
-                return FALSE;
+                return false;
             }
 
             $table = $this->ar_from[0];
@@ -1023,14 +999,14 @@ Class Database_Crud {
         {
             foreach($table as $single_table)
             {
-                $this->delete($single_table, $where, $limit, FALSE);   
+                $this->delete($single_table, $where, $limit, false);   
             }
         
-            $this->_reset_write();
+            $this->_resetWrite();
             return;
         } else 
         {
-            $table = $this->_protect_identifiers($table, TRUE, NULL, FALSE);
+            $table = $this->_protectIdentifiers($table, true, null, false);
         }
 
         if ($where != '')
@@ -1038,28 +1014,28 @@ Class Database_Crud {
             $this->where($where);
         }
 
-        if ($limit != NULL)
+        if ($limit != null)
         {
             $this->limit($limit);
         }
         
         if (count($this->ar_where) == 0 && count($this->ar_wherein) == 0 && count($this->ar_like) == 0)
         {
-            throw new Exception("Deletes are not allowed unless they contain a 'where' or 'like' clause.");
+            throw new \Exception("Deletes are not allowed unless they contain a 'where' or 'like' clause.");
             
-            return FALSE;
+            return false;
         }        
 
         $sql = $this->_delete($table, $this->ar_where, $this->ar_like, $this->ar_limit);
         
         if ($reset_data)
         {
-            $this->_reset_write();
+            $this->_resetWrite();
         }
         
-        $this->prepare = FALSE;
+        $this->prepare = false;
         
-        return $this->exec_query($sql); // return number of  affected rows
+        return $this->execQuery($sql); // return number of  affected rows
     
     } 
     
@@ -1074,26 +1050,26 @@ Class Database_Crud {
     * @param     string    The table to inspect
     * @return    string
     */    
-    private function _track_aliases($table)
+    private function _trackAliases($table)
     {
         if (is_array($table))
         {
             foreach ($table as $t)
             {
-                $this->_track_aliases($t);
+                $this->_trackAliases($t);
             }
             return;
         }
         
         // Does the string contain a comma?  If so, we need to separate
         // the string into discreet statements
-        if (strpos($table, ',') !== FALSE)
+        if (strpos($table, ',') !== false)
         {
-            return $this->_track_aliases(explode(',', $table));
+            return $this->_trackAliases(explode(',', $table));
         }
     
         // if a table alias is used we can recognize it by a space
-        if (strpos($table, " ") !== FALSE)
+        if (strpos($table, " ") !== false)
         {
             // if the alias is written with the AS keyword, remove it
             $table = preg_replace('/ AS /i', ' ', $table);
@@ -1120,16 +1096,16 @@ Class Database_Crud {
     * @access    private
     * @return    string
     */
-    private function _compile_select($select_override = FALSE)
+    private function _compileSelect($select_override = false)
     {
         // Combine any cached components with the current statements
-        $this->_merge_cache();
+        $this->_mergeCache();
 
         // ----------------------------------------------------------------
         
         // Write the "select" portion of the query
 
-        if ($select_override !== FALSE)
+        if ($select_override !== false)
         {
             $sql = $select_override;
         }
@@ -1148,7 +1124,7 @@ Class Database_Crud {
                 // is because until the user calls the from() function we don't know if there are aliases
                 foreach ($this->ar_select as $key => $val)
                 {
-                    $this->ar_select[$key] = $this->_protect_identifiers($val);
+                    $this->ar_select[$key] = $this->_protectIdentifiers($val);
                 }
                 
                 $sql .= implode(', ', $this->ar_select);
@@ -1163,7 +1139,7 @@ Class Database_Crud {
         {
             $sql .= "\nFROM ";
 
-            $sql .= $this->_from_tables($this->ar_from);
+            $sql .= $this->_fromTables($this->ar_from);
         }
 
         // ----------------------------------------------------------------
@@ -1234,7 +1210,7 @@ Class Database_Crud {
             $sql .= "\nORDER BY ";
             $sql .= implode(', ', $this->ar_orderby);
             
-            if ($this->ar_order !== FALSE)
+            if ($this->ar_order !== false)
             {
                 $sql .= ($this->ar_order == 'desc') ? ' DESC' : ' ASC';
             }        
@@ -1266,7 +1242,7 @@ Class Database_Crud {
     * @param    object
     * @return   array
     */
-    public function _object_to_array($object)
+    public function _object2Array($object)
     {
         if ( ! is_object($object))
         {
@@ -1286,6 +1262,8 @@ Class Database_Crud {
         return $array;
     }
     
+    // --------------------------------------------------------------------
+   
     /**
     * Start Cache
     *
@@ -1294,9 +1272,9 @@ Class Database_Crud {
     * @access    public
     * @return    void
     */        
-    public function start_cache()
+    public function startCache()
     {
-        $this->ar_caching = TRUE;
+        $this->ar_caching = true;
     }
 
     // --------------------------------------------------------------------
@@ -1309,9 +1287,9 @@ Class Database_Crud {
     * @access    public
     * @return    void
     */        
-    public function stop_cache()
+    public function stopCache()
     {
-        $this->ar_caching = FALSE;
+        $this->ar_caching = false;
     }
 
     // --------------------------------------------------------------------
@@ -1324,9 +1302,9 @@ Class Database_Crud {
     * @access    public
     * @return    void
     */    
-    public function flush_cache()
+    public function flushCache()
     {    
-        $this->_reset_run(
+        $this->_resetRun(
                             array(
                                     'ar_cache_select'   => array(), 
                                     'ar_cache_from'     => array(), 
@@ -1353,7 +1331,7 @@ Class Database_Crud {
     * @access    private
     * @return    void
     */
-    private function _merge_cache()
+    private function _mergeCache()
     {
         if (count($this->ar_cache_exists) == 0)
         return;
@@ -1379,7 +1357,7 @@ Class Database_Crud {
     * @param    array    An array of fields to reset
     * @return   void
     */
-    private function _reset_run($ar_reset_items)
+    private function _resetRun($ar_reset_items)
     {
         foreach ($ar_reset_items as $item => $default_value)
         {
@@ -1399,7 +1377,7 @@ Class Database_Crud {
     * @access    private
     * @return    void
     */
-    public function _reset_select()
+    public function _resetSelect()
     {
         $ar_reset_items = array(
                                 'ar_select'         => array(), 
@@ -1412,13 +1390,13 @@ Class Database_Crud {
                                 'ar_orderby'        => array(), 
                                 'ar_wherein'        => array(), 
                                 'ar_aliased_tables' => array(),
-                                'ar_distinct'       => FALSE, 
-                                'ar_limit'          => FALSE, 
-                                'ar_offset'         => FALSE, 
-                                'ar_order'          => FALSE,
+                                'ar_distinct'       => false, 
+                                'ar_limit'          => false, 
+                                'ar_offset'         => false, 
+                                'ar_order'          => false,
                             );
         
-        $this->_reset_run($ar_reset_items);
+        $this->_resetRun($ar_reset_items);
     }
     
     // --------------------------------------------------------------------
@@ -1431,7 +1409,7 @@ Class Database_Crud {
     * @access    private
     * @return    void
     */
-    private function _reset_write()
+    private function _resetWrite()
     {    
         $ar_reset_items = array(
                                 'ar_set'        => array(), 
@@ -1439,11 +1417,11 @@ Class Database_Crud {
                                 'ar_where'      => array(), 
                                 'ar_like'       => array(),
                                 'ar_orderby'    => array(), 
-                                'ar_limit'      => FALSE, 
-                                'ar_order'      => FALSE
+                                'ar_limit'      => false, 
+                                'ar_order'      => false
                                 );
 
-        $this->_reset_run($ar_reset_items);
+        $this->_resetRun($ar_reset_items);
     }
 
     // --------------------------------------------------------------------
@@ -1455,15 +1433,15 @@ Class Database_Crud {
     * @param    string
     * @return   bool
     */ 
-    private static function _has_operator($str)
+    private static function _hasOperator($str)
     {
         $str = trim($str);
         if ( ! preg_match("/(\s|<|>|!|=|is null|is not null)/i", $str))
         {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
     
      // --------------------------------------------------------------------
@@ -1477,9 +1455,9 @@ Class Database_Crud {
     * @param    mixed    the item to escape
     * @return   mixed    the item with backticks
     */
-    private function protect_identifiers($item, $prefix_single = FALSE)
+    private function protect_identifiers($item, $prefix_single = false)
     {
-        return $this->_protect_identifiers($item, $prefix_single);
+        return $this->_protectIdentifiers($item, $prefix_single);
     }
 
     // --------------------------------------------------------------------
@@ -1511,7 +1489,7 @@ Class Database_Crud {
     * @param    bool
     * @return   string
     */
-    public function _protect_identifiers($item, $prefix_single = FALSE, $protect_identifiers = NULL, $field_exists = TRUE)
+    public function _protectIdentifiers($item, $prefix_single = false, $protect_identifiers = null, $field_exists = true)
     {
         if ( ! is_bool($protect_identifiers))
         {
@@ -1524,7 +1502,7 @@ Class Database_Crud {
 
             foreach($item as $k => $v)
             {
-                $escaped_array[$this->_protect_identifiers($k)] = $this->_protect_identifiers($v);
+                $escaped_array[$this->_protectIdentifiers($k)] = $this->_protectIdentifiers($v);
             }
 
             return $escaped_array;
@@ -1536,7 +1514,7 @@ Class Database_Crud {
         // If the item has an alias declaration we remove it and set it aside.
         // Basically we remove everything to the right of the first space
         $alias = '';
-        if (strpos($item, ' ') !== FALSE)
+        if (strpos($item, ' ') !== false)
         {
             $alias = strstr($item, " ");
             $item  = substr($item, 0, - strlen($alias));
@@ -1546,7 +1524,7 @@ Class Database_Crud {
         // If a parenthesis is found we know that we do not need to
         // escape the data or add a prefix.  There's probably a more graceful
         // way to deal with this, but I'm not thinking of it -- Rick
-        if (strpos($item, '(') !== FALSE)
+        if (strpos($item, '(') !== false)
         {
             return $item.$alias;
         }
@@ -1554,7 +1532,7 @@ Class Database_Crud {
         // Break the string apart if it contains periods, then insert the table prefix
         // in the correct location, assuming the period doesn't indicate that we're dealing
         // with an alias. While we're at it, we will escape the components
-        if (strpos($item, '.') !== FALSE)
+        if (strpos($item, '.') !== false)
         {
             $parts = explode('.', $item);
 
@@ -1563,13 +1541,13 @@ Class Database_Crud {
             // we have nothing more to do other than escape the item
             if (in_array($parts[0], $this->ar_aliased_tables))
             {
-                if ($protect_identifiers === TRUE)
+                if ($protect_identifiers === true)
                 {
                     foreach ($parts as $key => $val)
                     {
                         if ( ! in_array($val, $this->_reserved_identifiers))
                         {
-                            $parts[$key] = $this->_escape_identifiers($val);
+                            $parts[$key] = $this->_escapeIdentifiers($val);
                         }
                     }
 
@@ -1603,7 +1581,7 @@ Class Database_Crud {
 
                 // This flag is set when the supplied $item does not contain a field name.
                 // This can happen when this function is being called from a JOIN.
-                if ($field_exists == FALSE)
+                if ($field_exists == false)
                 {
                     $i++;
                 }
@@ -1624,9 +1602,9 @@ Class Database_Crud {
                 $item = implode('.', $parts);
             }
 
-            if ($protect_identifiers === TRUE)
+            if ($protect_identifiers === true)
             {
-                $item = $this->_escape_identifiers($item);
+                $item = $this->_escapeIdentifiers($item);
             }
 
             return $item.$alias;
@@ -1642,15 +1620,15 @@ Class Database_Crud {
             }
 
             // Do we prefix an item with no segments?
-            if ($prefix_single == TRUE AND substr($item, 0, strlen($this->dbprefix)) != $this->dbprefix)
+            if ($prefix_single == true AND substr($item, 0, strlen($this->dbprefix)) != $this->dbprefix)
             {
                 $item = $this->dbprefix.$item;
             }
         }
 
-        if ($protect_identifiers === TRUE AND ! in_array($item, $this->_reserved_identifiers))
+        if ($protect_identifiers === true AND ! in_array($item, $this->_reserved_identifiers))
         {
-            $item = $this->_escape_identifiers($item);
+            $item = $this->_escapeIdentifiers($item);
         }
 
         return $item.$alias;

@@ -168,13 +168,13 @@ namespace Ob\link {
     * @param	bool 	whether to create pop-up links
     * @return	string
     */
-    function auto_link($str, $type = 'both', $popup = FALSE)
+    function auto_link($str, $type = 'both', $popup = false)
     {
         if ($type != 'email')
         {
             if (preg_match_all("#(^|\s|\()((http(s?)://)|(www\.))(\w+[^\s\)\<]+)#i", $str, $matches))
             {
-                $pop = ($popup == TRUE) ? " target=\"_blank\" " : "";
+                $pop = ($popup == true) ? " target=\"_blank\" " : "";
 
                 for ($i = 0; $i < count($matches['0']); $i++)
                 {

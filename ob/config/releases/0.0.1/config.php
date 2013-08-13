@@ -35,7 +35,7 @@ Class Config
         // the Config class __construct() method at Bootstrap loading level. When you try loading any library
         // in here you will get a Fatal Error.
         
-        $this->config = get_config();
+        $this->config = getConfig();
     }
       
     // --------------------------------------------------------------------
@@ -71,13 +71,13 @@ Class Config
     * @param    string    the config file name
     * @return   boolean   if the file was loaded correctly
     */    
-    public function load($filename = '', $use_sections = FALSE)
+    public function load($filename = '', $use_sections = false)
     {
         $file = APP .'config'. DS .$filename. EXT;
 
-        if (in_array($file, $this->is_loaded, TRUE))
+        if (in_array($file, $this->is_loaded, true))
         {
-            return TRUE;
+            return true;
         }
     
         ######################
@@ -88,11 +88,10 @@ Class Config
 
         if ( ! isset($config) OR ! is_array($config))
         {
-            throw new \Exception('Your <b>'. $file .'</b> file does not appear to contain a valid configuration array. Please create 
-            <b>$config</b> variables in your ' . $file);
+            throw new \Exception('Your '. $file .' file does not appear to contain a valid configuration array. Please create $config variables in your ' .$file);
         }
         
-        if ($use_sections === TRUE)
+        if ($use_sections === true)
         {
             if (isset($this->config[$file]))
             {
@@ -114,7 +113,7 @@ Class Config
 
         \Ob\log\me('debug', 'Config file loaded: '.$file);
         
-        return TRUE;
+        return true;
     }
     
     // --------------------------------------------------------------------
@@ -137,7 +136,7 @@ Class Config
             {
                 \Ob\log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
-                return FALSE;
+                return false;
             }
 
             $pref = $this->config[$item];
@@ -148,14 +147,14 @@ Class Config
             {
                 \Ob\log\me('info', 'Requested config index "'.$item.'" not found, be sure providing to right name.');
                 
-                return FALSE;
+                return false;
             }
 
             if ( ! isset($this->config[$index][$item]))
             {
                 \Ob\log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
-                return FALSE;
+                return false;
             }
 
             $pref = $this->config[$index][$item];
@@ -177,11 +176,11 @@ Class Config
     * @param    bool
     * @return   string
     */
-    public function slash_item($item)
+    public function slashItem($item)
     {
         if ( ! isset($this->config[$item]))
         {
-            return FALSE;
+            return false;
         }
 
         $pref = $this->config[$item];
@@ -204,7 +203,7 @@ Class Config
     * @param    boolean   switch off suffix by manually
     * @return   string
     */
-    public function site_url($uri = '', $suffix = TRUE)
+    public function siteUrl($uri = '', $suffix = true)
     {
         if (is_array($uri))
         {
@@ -213,13 +212,13 @@ Class Config
         
         if ($uri == '')
         {
-            return $this->base_url() . $this->item('index_page');
+            return $this->baseUrl() . $this->item('index_page');
         }
         else
         {
-            $suffix = ($this->item('url_suffix') == FALSE OR $suffix == FALSE) ? '' : $this->item('url_suffix');
+            $suffix = ($this->item('url_suffix') == false OR $suffix == false) ? '' : $this->item('url_suffix');
             
-            return $this->base_url() . $this->slash_item('index_page'). trim($uri, '/') . $suffix;
+            return $this->baseUrl() . $this->slashItem('index_page'). trim($uri, '/') . $suffix;
         }
     }
     
@@ -233,9 +232,9 @@ Class Config
     * @param string $uri
     * @return string
     */
-    public function base_url($uri = '')
+    public function baseUrl($uri = '')
     {
-        return $this->slash_item('base_url').ltrim($uri,'/');
+        return $this->slashItem('base_url').ltrim($uri,'/');
     }
     
     // --------------------------------------------------------------------
@@ -248,7 +247,7 @@ Class Config
     * @param    bool $no_slash  no trailing slashes
     * @return   string
     */
-    public function public_url($uri = '', $no_folder = FALSE, $no_ext_uri_slash = FALSE)
+    public function publicUrl($uri = '', $no_folder = false, $no_ext_uri_slash = false)
     {
         $extra_uri     = (trim($uri, '/') != '') ? trim($uri, '/').'/' : '';
         $public_folder = ($no_folder) ? '' : 'assets/';
@@ -258,7 +257,7 @@ Class Config
             $extra_uri = trim($extra_uri, '/');
         }
         
-        return $this->slash_item('public_url') .$public_folder. $extra_uri;
+        return $this->slashItem('public_url') .$public_folder. $extra_uri;
     }
     
     // --------------------------------------------------------------------
@@ -269,26 +268,11 @@ Class Config
     * @access    public
     * @return    string
     */
-    public function base_folder()
+    public function baseFolder()
     {
         $x = explode("/", preg_replace("|/*(.+?)/*$|", "\\1", trim(OB_MODULES, DS)));
         
-        return $this->base_url() . end($x).'/';
-    }
-      
-    // --------------------------------------------------------------------
-    
-    /**
-    * Set a config file item
-    *
-    * @access   public
-    * @param    string    the config item key
-    * @param    string    the config item value
-    * @return   void
-    */
-    public function set_item($item, $value)
-    {
-        return $this->set($item, $value);
+        return $this->baseUrl() . end($x).'/';
     }
     
     // --------------------------------------------------------------------
@@ -302,7 +286,7 @@ Class Config
     * @param    string    the config item value
     * @return   void
     */
-    public function set($item, $value)
+    public function setItem($item, $value)
     {
         $this->config[$item] = $value;
     }

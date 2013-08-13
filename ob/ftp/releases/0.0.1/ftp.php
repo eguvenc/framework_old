@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Ob\Ftp;
 
 /**
  * Ftp Class
@@ -16,23 +16,28 @@ Class Ftp {
     public $username    = '';
     public $password    = '';
     public $port        = 21;
-    public $passive     = TRUE;
-    public $debug       = FALSE;
-    public $conn_id     = FALSE;
+    public $passive     = true;
+    public $debug       = false;
+    public $conn_id     = false;
     
     /**
     * Constructor - Sets Preferences
     *
     * The constructor can be passed an array of config values
     */
-    function __construct($config = array())
-    {
+    public function __construct($no_instance = true, $config = array())
+    {   
+        if($no_instance)
+        {
+            \Ob\getInstance()->ftp = $this; // Make available it in the controller $this->ftp->method();
+        }
+        
         if (count($config) > 0)
         {
             $this->init($config);
         }
 
-        log\me('debug', "FTP Class Initialized");
+        \Ob\log\me('debug', "FTP Class Initialized");
     }
     
     // --------------------------------------------------------------------
@@ -56,6 +61,8 @@ Class Ftp {
 
         // Prep the hostname
         $this->hostname = preg_replace('|.+?://|', '', $this->hostname);
+        
+        return ($this);
     }
     
     // --------------------------------------------------------------------
@@ -74,31 +81,31 @@ Class Ftp {
             $this->init($config);
         }
 
-        if (FALSE === ($this->conn_id = @ftp_connect($this->hostname, $this->port)))
+        if (false === ($this->conn_id = @ftp_connect($this->hostname, $this->port)))
         {
-            if ($this->debug == TRUE)
+            if ($this->debug == true)
             {
                 $this->_error('ftp_unable_to_connect');
             }
-            return FALSE;
+            return false;
         }
 
         if ( ! $this->_login())
         {
-            if ($this->debug == TRUE)
+            if ($this->debug == true)
             {
                 $this->_error('ftp_unable_to_login');
             }
-            return FALSE;
+            return false;
         }
 
         // Set passive mode if needed
-        if ($this->passive == TRUE)
+        if ($this->passive == true)
         {
-            ftp_pasv($this->conn_id, TRUE);
+            ftp_pasv($this->conn_id, true);
         }
 
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -122,17 +129,19 @@ Class Ftp {
      * @access    private
      * @return    bool
      */
-    private function _is_conn()
+    private function _isConn()
     {
         if ( ! is_resource($this->conn_id))
         {
-            if ($this->debug == TRUE)
+            if ($this->debug == true)
             {
                 $this->_error('ftp_no_connection');
             }
-            return FALSE;
+            
+            return false;
         }
-        return TRUE;
+        
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -152,25 +161,25 @@ Class Ftp {
      * @param    bool
      * @return    bool
      */
-    public function changedir($path = '', $supress_debug = FALSE)
+    public function changeDir($path = '', $supress_debug = false)
     {
-        if ($path == '' OR ! $this->_is_conn())
+        if ($path == '' OR ! $this->_isConn())
         {
-            return FALSE;
+            return false;
         }
 
         $result = @ftp_chdir($this->conn_id, $path);
 
-        if ($result === FALSE)
+        if ($result === false)
         {
-            if ($this->debug == TRUE AND $supress_debug == FALSE)
+            if ($this->debug == true AND $supress_debug == false)
             {
                 $this->_error('ftp_unable_to_changedir');
             }
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -182,22 +191,22 @@ Class Ftp {
      * @param    string
      * @return    bool
      */
-    public function mkdir($path = '', $permissions = NULL)
+    public function mkDir($path = '', $permissions = null)
     {
-        if ($path == '' OR ! $this->_is_conn())
+        if ($path == '' OR ! $this->_isConn())
         {
-            return FALSE;
+            return false;
         }
 
         $result = @ftp_mkdir($this->conn_id, $path);
 
-        if ($result === FALSE)
+        if ($result === false)
         {
-            if ($this->debug == TRUE)
+            if ($this->debug == true)
             {
                 $this->_error('ftp_unable_to_makdir');
             }
-            return FALSE;
+            return false;
         }
 
         // Set file permissions if needed
@@ -206,7 +215,7 @@ Class Ftp {
             $this->chmod($path, (int)$permissions);
         }
 
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -220,38 +229,38 @@ Class Ftp {
      * @param    string
      * @return    bool
      */
-    public function upload($locpath, $rempath, $mode = 'auto', $permissions = NULL)
+    public function upload($locpath, $rempath, $mode = 'auto', $permissions = null)
     {
-        if ( ! $this->_is_conn())
+        if ( ! $this->_isConn())
         {
-            return FALSE;
+            return false;
         }
 
         if ( ! file_exists($locpath))
         {
             $this->_error('ftp_no_source_file');
-            return FALSE;
+            return false;
         }
 
         // Set the mode if not specified
         if ($mode == 'auto')
         {
             // Get the file extension so we can set the upload type
-            $ext = $this->_getext($locpath);
-            $mode = $this->_settype($ext);
+            $ext  = $this->_geText($locpath);
+            $mode = $this->_setType($ext);
         }
 
         $mode = ($mode == 'ascii') ? FTP_ASCII : FTP_BINARY;
 
         $result = @ftp_put($this->conn_id, $rempath, $locpath, $mode);
 
-        if ($result === FALSE)
+        if ($result === false)
         {
-            if ($this->debug == TRUE)
+            if ($this->debug == true)
             {
                 $this->_error('ftp_unable_to_upload');
             }
-            return FALSE;
+            return false;
         }
 
         // Set file permissions if needed
@@ -260,7 +269,7 @@ Class Ftp {
             $this->chmod($rempath, (int)$permissions);
         }
 
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -274,27 +283,27 @@ Class Ftp {
      * @param    bool
      * @return    bool
      */
-    public function rename($old_file, $new_file, $move = FALSE)
+    public function rename($old_file, $new_file, $move = false)
     {
-        if ( ! $this->_is_conn())
+        if ( ! $this->_isConn())
         {
-            return FALSE;
+            return false;
         }
 
         $result = @ftp_rename($this->conn_id, $old_file, $new_file);
 
-        if ($result === FALSE)
+        if ($result === false)
         {
-            if ($this->debug == TRUE)
+            if ($this->debug == true)
             {
-                $msg = ($move == FALSE) ? 'ftp_unable_to_rename' : 'ftp_unable_to_move';
+                $msg = ($move == false) ? 'ftp_unable_to_rename' : 'ftp_unable_to_move';
 
                 $this->_error($msg);
             }
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -309,7 +318,7 @@ Class Ftp {
      */
     public function move($old_file, $new_file)
     {
-        return $this->rename($old_file, $new_file, TRUE);
+        return $this->rename($old_file, $new_file, true);
     }
 
     // --------------------------------------------------------------------
@@ -321,25 +330,25 @@ Class Ftp {
      * @param    string
      * @return    bool
      */
-    public function delete_file($filepath)
+    public function deleteFile($filepath)
     {
-        if ( ! $this->_is_conn())
+        if ( ! $this->_isConn())
         {
-            return FALSE;
+            return false;
         }
 
         $result = @ftp_delete($this->conn_id, $filepath);
 
-        if ($result === FALSE)
+        if ($result === false)
         {
-            if ($this->debug == TRUE)
+            if ($this->debug == true)
             {
                 $this->_error('ftp_unable_to_delete');
             }
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -352,43 +361,43 @@ Class Ftp {
      * @param    string
      * @return    bool
      */
-    public function delete_dir($filepath)
+    public function deleteDir($filepath)
     {
-        if ( ! $this->_is_conn())
+        if ( ! $this->_isConn())
         {
-            return FALSE;
+            return false;
         }
 
         // Add a trailing slash to the file path if needed
         $filepath = preg_replace("/(.+?)\/*$/", "\\1/",  $filepath);
 
-        $list = $this->list_files($filepath);
+        $list = $this->listFiles($filepath);
 
-        if ($list !== FALSE AND count($list) > 0)
+        if ($list !== false AND count($list) > 0)
         {
             foreach ($list as $item)
             {
                 // If we can't delete the item it's probaly a folder so
-                // we'll recursively call delete_dir()
+                // we'll recursively call deleteDir()
                 if ( ! @ftp_delete($this->conn_id, $item))
                 {
-                    $this->delete_dir($item);
+                    $this->deleteDir($item);
                 }
             }
         }
 
         $result = @ftp_rmdir($this->conn_id, $filepath);
 
-        if ($result === FALSE)
+        if ($result === false)
         {
-            if ($this->debug == TRUE)
+            if ($this->debug == true)
             {
                 $this->_error('ftp_unable_to_delete');
             }
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -403,23 +412,23 @@ Class Ftp {
      */
     public function chmod($path, $perm)
     {
-        if ( ! $this->_is_conn())
+        if ( ! $this->_isConn())
         {
-            return FALSE;
+            return false;
         }
 
         $result = @ftp_chmod($this->conn_id, $perm, $path);
 
-        if ($result === FALSE)
+        if ($result === false)
         {
-            if ($this->debug == TRUE)
+            if ($this->debug == true)
             {
                 $this->_error('ftp_unable_to_chmod');
             }
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     // --------------------------------------------------------------------
@@ -430,11 +439,11 @@ Class Ftp {
      * @access    public
      * @return    array
      */
-    public function list_files($path = '.')
+    public function listFiles($path = '.')
     {
-        if ( ! $this->_is_conn())
+        if ( ! $this->_isConn())
         {
-            return FALSE;
+            return false;
         }
 
         return ftp_nlist($this->conn_id, $path);
@@ -456,26 +465,26 @@ Class Ftp {
      */
     public function mirror($locpath, $rempath)
     {
-        if ( ! $this->_is_conn())
+        if ( ! $this->_isConn())
         {
-            return FALSE;
+            return false;
         }
 
         // Open the local file path
         if ($fp = @opendir($locpath))
         {
             // Attempt to open the remote file path.
-            if ( ! $this->changedir($rempath, TRUE))
+            if ( ! $this->changeDir($rempath, true))
             {
                 // If it doesn't exist we'll attempt to create the direcotory
-                if ( ! $this->mkdir($rempath) OR ! $this->changedir($rempath))
+                if ( ! $this->mkDir($rempath) OR ! $this->changeDir($rempath))
                 {
-                    return FALSE;
+                    return false;
                 }
             }
 
             // Recursively read the local directory
-            while (FALSE !== ($file = readdir($fp)))
+            while (false !== ($file = readdir($fp)))
             {
                 if (@is_dir($locpath.$file) && substr($file, 0, 1) != '.')
                 {
@@ -484,16 +493,16 @@ Class Ftp {
                 elseif (substr($file, 0, 1) != ".")
                 {
                     // Get the file extension so we can se the upload type
-                    $ext = $this->_getext($file);
-                    $mode = $this->_settype($ext);
+                    $ext  = $this->_geText($file);
+                    $mode = $this->_setType($ext);
 
                     $this->upload($locpath.$file, $rempath.$file, $mode);
                 }
             }
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
 
@@ -506,9 +515,9 @@ Class Ftp {
      * @param    string
      * @return    string
      */
-    private function _getext($filename)
+    private function _geText($filename)
     {
-        if (FALSE === strpos($filename, '.'))
+        if (false === strpos($filename, '.'))
         {
             return 'txt';
         }
@@ -527,7 +536,7 @@ Class Ftp {
      * @param    string
      * @return    string
      */
-    private function _settype($ext)
+    private function _setType($ext)
     {
         $text_types = array(
                             'txt',
@@ -562,9 +571,9 @@ Class Ftp {
      */
     public function close()
     {
-        if ( ! $this->_is_conn())
+        if ( ! $this->_isConn())
         {
-            return FALSE;
+            return false;
         }
 
         @ftp_close($this->conn_id);
@@ -583,12 +592,11 @@ Class Ftp {
     {
         \Ob\getInstance()->locale->load('obullo'); // load framework language file.
         
-        show_error(lang($line));
+        \Ob\showError(\Ob\lang($line));
     }
 
-
 }
-// END FTP Class
+// END Ftp Class
 
 /* End of file Ftp.php */
 /* Location: ./ob/ftp/releases/0.0.1/ftp.php */

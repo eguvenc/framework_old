@@ -116,14 +116,14 @@ namespace Ob\string {
     * @access	public
     * @param	string
     * @param	string	the character you wish to reduce
-    * @param	bool	TRUE/FALSE - whether to trim the character from the beginning/end
+    * @param	bool	true/false - whether to trim the character from the beginning/end
     * @return	string
     */
-    function reduce_multiples($str, $character = ',', $trim = FALSE)
+    function reduce_multiples($str, $character = ',', $trim = false)
     {
         $str = preg_replace('#'.preg_quote($character, '#').'{2,}#', $character, $str);
 
-        if ($trim === TRUE)
+        if ($trim === true)
         {
             $str = trim($str, $character);
         }
@@ -186,7 +186,7 @@ namespace Ob\string {
               break;
             case 'encrypt'    : 
             case 'sha1'       : 
-                        return sha1(uniqid(mt_rand(), TRUE));
+                        return sha1(uniqid(mt_rand(), true));
               break;
         }
     }
