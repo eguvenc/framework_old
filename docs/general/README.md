@@ -4,7 +4,7 @@
 ## Obullo URLs
 By default, URLs in Obullo are designed to be search-engine and human friendly. Rather than using the standard "query string" approach to URLs that is synonymous with dynamic systems, Obullo uses a segment-based approach:
 
-```php
+```
 example.com/{module}/news/article/my_article
 ```
 
@@ -24,7 +24,7 @@ example.com/index.php/module/news/article/my_article
 
 If you use Apache HTTP Server you can easily remove this file by using a **.htaccess** file with some simple rules. Here is an example of such a file, using the **"negative"** method in which everything is redirected except the specified items:
 
-```php
+```
 DirectoryIndex index.php
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -152,7 +152,7 @@ server {
 
 Finally you should do some changes in your **application/config/config.php** file.
 
-```php
+```
 $config['index_page'] = "";
 $config['uri_protocol'] = "REQUEST_URI";   // QUERY_STRING
 ```
