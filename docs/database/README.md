@@ -239,11 +239,11 @@ $database['db']['dbdriver'] = "mysql";
 ------
 
 <table>
-<th>
-<td>PDO Driver Name</td>
-<td>Obullo Connection Name</td>
-<td>Database Name</td>
-</th>
+<tr>
+<th>PDO Driver Name</th>
+<th>Obullo Connection Name</th>
+<th>Database Name</th>
+</tr>
 <tr>
 <td>PDO_DBLIB</td>
 <td>dblib / mssql / sybase / freetds</td>
@@ -294,8 +294,6 @@ $database['db']['dbdriver'] = "mysql";
 <td>cubrid</td>
 <td>Cubrid</td>
 </tr>
-
-
 </table>
 
 ### Supported NOSQL Database Types
