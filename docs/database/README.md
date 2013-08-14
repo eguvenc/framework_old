@@ -300,9 +300,18 @@ $database['db']['dbdriver'] = "mysql";
 
 ------
 
-| Driver Name | Connection Name | Database Name |
-| ------------- |:-------------:| -----:|
-| mongodb | mongo | MONGO |
+<table>
+<tr>
+<th>Driver Name</th>
+<th>Connection Name</th>
+<th>Database Name</th>
+</tr>
+<tr>
+<td>mongodb</td>
+<td>mongo</td>
+<td>MONGO</td>
+</tr>
+</table>
 
 Obullo has a config file that lets you store your database connection values (username, password, database name, etc.). The config file is located at:
 
