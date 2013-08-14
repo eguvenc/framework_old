@@ -1,5 +1,5 @@
 <?php
-namespace Ob\sess {
+namespace sess {
     
     /**
     * Session Helper
@@ -14,15 +14,15 @@ namespace Ob\sess {
         
         function __construct($params = array())
         {
-            \Ob\log\me('debug', 'Session Helper Initialized.');
+            log\me('debug', 'Session Helper Initialized.');
             
             static $session_start = null;
 
             if ($session_start == null)
             {
-                $driver = (isset($params['driver'])) ? $params['driver'] : \Ob\config('driver', 'sess');
+                $driver = (isset($params['driver'])) ? $params['driver'] : config('driver', 'sess');
 
-                $Class = '\Ob\Sess\Src\Sess_'.ucfirst(strtolower($driver));
+                $Class = 'Sess\Src\Sess_'.ucfirst(strtolower($driver));
                 self::$driver = $Class::getInstance();
                 self::$driver->init($params); // Start the sessions
 

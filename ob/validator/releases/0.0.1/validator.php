@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Validator;
+namespace Validator;
 
 /**
  * Validator Class
@@ -31,7 +31,7 @@ Class Validator {
         $this->_config_rules = $rules;
         
         // load the form helper
-        new \Ob\form\start();
+        new form\start();
             
         // Set the character encoding in MB.
         if (function_exists('mb_internal_encoding'))
@@ -537,7 +537,7 @@ Class Validator {
             
                 if ( ! isset($this->_error_messages[$type]))
                 {
-                    if (false === ($line = \Ob\lang($type)))
+                    if (false === ($line = lang($type)))
                     {
                         $line = 'The field was not set';
                     }                            
@@ -725,7 +725,7 @@ Class Validator {
             {            
                 if ( ! isset($this->_error_messages[$rule]))
                 {
-                    if (false === ($line = \Ob\lang($rule)))
+                    if (false === ($line = lang($rule)))
                     {
                         $line = 'Unable to access an error message corresponding to your field name.';
                     }                        
@@ -778,7 +778,7 @@ Class Validator {
             $line = substr($fieldname, 5);            
             
             // Were we able to translate the field name?  If not we use $line
-            if (false === ($fieldname = \Ob\lang($line)))
+            if (false === ($fieldname = lang($line)))
             {
                 return $line;
             }

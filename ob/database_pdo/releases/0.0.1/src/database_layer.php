@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Database_Pdo\Src;
+namespace Database_Pdo\Src;
 
 function QueryTimer($mark = '')
 {
@@ -120,9 +120,9 @@ Class Database_Layer extends Database_Crud {
         
         //------------------------------------
         
-        if(\Ob\config('log_queries'))
+        if(config('log_queries'))
         {
-            \Ob\log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', $sql), "\n").' time: '.number_format($end_time - $start_time, 4));   
+            log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', $sql), "\n").' time: '.number_format($end_time - $start_time, 4));   
         }
         
         ++$this->query_count;
@@ -229,11 +229,11 @@ Class Database_Layer extends Database_Crud {
         
         //------------------------------------
         
-        if(\Ob\config('log_queries'))
+        if(config('log_queries'))
         {
             if(sizeof($this->prep_queries) > 0)
             {
-                \Ob\log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Prepared Query ) time: '.number_format($end_time - $start_time, 4));
+                log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Prepared Query ) time: '.number_format($end_time - $start_time, 4));
             }
         }
 
@@ -291,11 +291,11 @@ Class Database_Layer extends Database_Crud {
         $end_time   = QueryTimer('end');
         //------------------------------------
 
-        if(\Ob\config('log_queries'))
+        if(config('log_queries'))
         {
             if(sizeof($this->prep_queries) > 0)
             {
-                \Ob\log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Exec Query ) time: '.number_format($end_time - $start_time, 4));
+                log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Exec Query ) time: '.number_format($end_time - $start_time, 4));
             }
         }
 

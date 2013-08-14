@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Security;
+namespace Security;
 
 /**
  * Security Class
@@ -49,7 +49,7 @@ Class Security {
     {
         foreach(array('csrf_expire', 'csrf_token_name', 'csrf_cookie_name') as $key)  // CSRF config
         {
-            if (false !== ($val = \Ob\config($key)))
+            if (false !== ($val = config($key)))
             {
                 $this->{'_'.$key} = $val;
             }
@@ -64,7 +64,7 @@ Class Security {
         // Set the CSRF hash
         $this->_csrfSetHash();
 
-        \Ob\log\me('debug', "Security Class Initialized");
+        log\me('debug', "Security Class Initialized");
     }
         
     // --------------------------------------------------------------------
@@ -116,7 +116,7 @@ Class Security {
         $this->_csrfSetHash();
         $this->csrfSetCookie();
 
-        \Ob\log\me('debug', "CSRF token verified ");
+        log\me('debug', "CSRF token verified ");
 
         return $this;
     }
@@ -131,7 +131,7 @@ Class Security {
     public function csrfSetCookie()
     {
         $expire = time() + $this->_csrf_expire;
-        $secure_cookie = (\Ob\config('cookie_secure') === true) ? 1 : 0;
+        $secure_cookie = (config('cookie_secure') === true) ? 1 : 0;
 
         if ($secure_cookie)
         {
@@ -147,9 +147,9 @@ Class Security {
             }
         }
 
-        setcookie($this->_csrf_cookie_name, $this->_csrf_hash, $expire, \Ob\config('cookie_path'), \Ob\config('cookie_domain'), $secure_cookie);
+        setcookie($this->_csrf_cookie_name, $this->_csrf_hash, $expire, config('cookie_path'), config('cookie_domain'), $secure_cookie);
 
-        \Ob\log\me('debug', "CRSF cookie Set");
+        log\me('debug', "CRSF cookie Set");
 
         return $this;
     }
@@ -163,7 +163,7 @@ Class Security {
     */
     public function csrfShowError()
     {
-        \Ob\showError('The action you have requested is not allowed.');
+        showError('The action you have requested is not allowed.');
     }
     
     // --------------------------------------------------------------------
@@ -240,7 +240,7 @@ Class Security {
         /*
          * Remove Invisible Characters
          */
-        $str = Ob\removeInvisibleCharacters($str);
+        $str = removeInvisibleCharacters($str);
 
         // Validate Entities in URLs
         $str = $this->_validateEntities($str);
@@ -272,7 +272,7 @@ Class Security {
         /*
          * Remove Invisible Characters Again!
          */
-        $str = Ob\removeInvisibleCharacters($str);
+        $str = removeInvisibleCharacters($str);
 
         /*
          * Convert all tabs to spaces
@@ -421,7 +421,7 @@ Class Security {
             return ($str == $converted_string) ? true: false;
         }
 
-        \Ob\log\me('debug', "XSS Filtering completed");
+        log\me('debug', "XSS Filtering completed");
         
         return $str;
     }
@@ -552,7 +552,7 @@ Class Security {
             $bad[] = '/';
         }
 
-        $str = Ob\removeInvisibleCharacters($str, false);
+        $str = removeInvisibleCharacters($str, false);
         return stripslashes(str_replace($bad, '', $str));
     }
     

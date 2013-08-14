@@ -669,7 +669,7 @@ Since your controller classes will extend the main application controller you mu
 - showError()
 - show404()
 - log_me()
-- \Ob\lang()
+- lang()
 - this()
 - __merge_autoloaders()
 - All Helper Functions

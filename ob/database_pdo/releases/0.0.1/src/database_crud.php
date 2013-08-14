@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Database_Pdo\Src;
+namespace Database_Pdo\Src;
 
 /**
  * CRUD ( CREATE - READ - UPDATE - DELETE ) Class for ** PDO.

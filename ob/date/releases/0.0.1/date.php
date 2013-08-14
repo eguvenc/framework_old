@@ -1,5 +1,5 @@
 <?php
-namespace Ob\date {
+namespace date {
 
     /**
      * Obullo Date Helper
@@ -14,7 +14,7 @@ namespace Ob\date {
      {
         function __construct()
         {
-            \Ob\log\me('debug', 'Date Helper Initialized');
+            log\me('debug', 'Date Helper Initialized');
         }
      }
 
@@ -30,7 +30,7 @@ namespace Ob\date {
     */
     function now()
     {
-        $time_ref = \Ob\config('time_reference');
+        $time_ref = config('time_reference');
         if (strtolower($time_ref) == 'gmt')
         {
             $now = time();
@@ -45,7 +45,7 @@ namespace Ob\date {
             if (strlen($system_time) < 10)
             {
                 $system_time = time();
-                \Ob\log\me('error', 'The Date class could not set a proper GMT timestamp so the local time() value was used.');
+                log\me('error', 'The Date class could not set a proper GMT timestamp so the local time() value was used.');
             } 
 
             return $system_time;
@@ -164,7 +164,7 @@ namespace Ob\date {
 
         if ($years > 0)
         {	
-            $str .= $years.' '.\Ob\lang((($years > 1) ? 'date_years' : 'date_year')).', ';
+            $str .= $years.' '.lang((($years > 1) ? 'date_years' : 'date_year')).', ';
         }	
 
         $seconds -= $years * 31536000;
@@ -174,7 +174,7 @@ namespace Ob\date {
         {
             if ($months > 0)
             {	
-                    $str .= $months.' '.\Ob\lang((($months > 1) ? 'date_months' : 'date_month')).', ';
+                    $str .= $months.' '.lang((($months > 1) ? 'date_months' : 'date_month')).', ';
             }	
 
             $seconds -= $months * 2628000;
@@ -186,7 +186,7 @@ namespace Ob\date {
         {
             if ($weeks > 0)
             {	
-                    $str .= $weeks.' '.\Ob\lang((($weeks > 1) ? 'date_weeks' : 'date_week')).', ';
+                    $str .= $weeks.' '.lang((($weeks > 1) ? 'date_weeks' : 'date_week')).', ';
             }
 
             $seconds -= $weeks * 604800;
@@ -198,7 +198,7 @@ namespace Ob\date {
         {
             if ($days > 0)
             {	
-                    $str .= $days.' '.\Ob\lang((($days	> 1) ? 'date_days' : 'date_day')).', ';
+                    $str .= $days.' '.lang((($days	> 1) ? 'date_days' : 'date_day')).', ';
             }
 
             $seconds -= $days * 86400;
@@ -210,7 +210,7 @@ namespace Ob\date {
         {
             if ($hours > 0)
             {
-                    $str .= $hours.' '.\Ob\lang((($hours > 1) ? 'date_hours' : 'date_hour')).', ';
+                    $str .= $hours.' '.lang((($hours > 1) ? 'date_hours' : 'date_hour')).', ';
             }
 
             $seconds -= $hours * 3600;
@@ -222,7 +222,7 @@ namespace Ob\date {
         {
             if ($minutes > 0)
             {	
-                    $str .= $minutes.' '.\Ob\lang((($minutes > 1) ? 'date_minutes' : 'date_minute')).', ';
+                    $str .= $minutes.' '.lang((($minutes > 1) ? 'date_minutes' : 'date_minute')).', ';
             }
 
             $seconds -= $minutes * 60;
@@ -230,7 +230,7 @@ namespace Ob\date {
 
         if ($str == '')
         {
-            $str .= $seconds.' '.\Ob\lang((($seconds	> 1) ? 'date_seconds' : 'date_second')).', ';
+            $str .= $seconds.' '.lang((($seconds	> 1) ? 'date_seconds' : 'date_second')).', ';
         }
 
         return substr(trim($str), 0, -1);
@@ -494,7 +494,7 @@ namespace Ob\date {
         foreach (timezones() as $key => $val)
         {
             $selected = ($default == $key) ? " selected='selected'" : '';
-            $menu .= "<option value='{$key}'{$selected}>".\Ob\lang($key)."</option>\n";
+            $menu .= "<option value='{$key}'{$selected}>".lang($key)."</option>\n";
         }
 
         $menu .= "</select>";

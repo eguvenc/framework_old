@@ -7,7 +7,7 @@ Class Welcome extends Controller {
         parent::__construct();
 
         // new \stdClass();
-        // new Db\Db();
+        new Db\Db();
         // print_r($this->db->get('users')->resultArray());
         
         // new Ftp\Ftp();

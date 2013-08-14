@@ -62,7 +62,7 @@ fetch data as object by default. $this->db->fetch(assoc); fetch data as associat
     - Head tag helper, added script(), script_app(), script_base(), doctype() functions to head tag helper. -- added to user guide
     - added session helper driver extend support, added to all helpers extend support. -- added to user guide
     - added i_request() function to base input helper. -- added to user guide
-    - renamed lang_item() function as \Ob\lang() in lang.php, updated all libraries. -- added to user guide
+    - renamed lang_item() function as lang() in lang.php, updated all libraries. -- added to user guide
     - added alnum_upper and alnum_lower options to random_string() function (string helper) -- added to user guide
     - added short_open_tag support to view helper.
     - added sess(); function ( alias of sess_get() ).  -- added to userguide

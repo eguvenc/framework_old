@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Auth;
+namespace Auth;
 
 /**
  * Auth Class
@@ -47,7 +47,7 @@ Class Auth {
     {   
         if($no_instance)
         {
-            \Ob\getInstance()->auth = $this; // Make available it in the controller $this->auth->method();
+            getInstance()->auth = $this; // Make available it in the controller $this->auth->method();
         }
    
         if (count($config) > 0)
@@ -55,7 +55,7 @@ Class Auth {
             $this->init($config);
         }
         
-        \Ob\log\me('debug', "Auth Class Initialized");
+        log\me('debug', "Auth Class Initialized");
     }
     
     // --------------------------------------------------------------------
@@ -76,9 +76,9 @@ Class Auth {
             $this->{$key} = $val;
         }
         
-        new \Ob\sess\start();
+        new sess\start();
 
-        $database = new \Ob\Db\Db(false);
+        $database = new Db\Db(false);
         $this->db = $database->connect($this->db_var);
         
         return ($this);
@@ -130,8 +130,8 @@ Class Auth {
         
         if( empty($username) AND empty($password) )
         {
-            $username = \Ob\i\getPost($this->post_username, $this->advanced_security);
-            $password = \Ob\i\getPost($this->post_password);            
+            $username = i\getPost($this->post_username, $this->advanced_security);
+            $password = i\getPost($this->post_password);            
         } 
         
         $username = trim($username);
@@ -208,7 +208,7 @@ Class Auth {
     {
         if($fake_auth)
         {
-            \Ob\sess\set('ok', 1, $this->session_prefix);  // Just authenticate the user.
+            sess\set('ok', 1, $this->session_prefix);  // Just authenticate the user.
             return;
         }
         
@@ -246,7 +246,7 @@ Class Auth {
      */
     public function check()
     {
-        if(\Ob\sess\get('ok', $this->session_prefix) == 1)  // auth is ok ?
+        if(sess\get('ok', $this->session_prefix) == 1)  // auth is ok ?
         {
             return true;
         }
@@ -268,7 +268,7 @@ Class Auth {
         if( ! $this->check())  // auth is NOT ok ?
         {  
             $redirect_url = ($redirect == '') ? baseUrl($this->fail_url) : baseUrl($redirect);
-            $redirect_url = $redirect_url.'?redirect='.\Ob\getInstance()->uri->requestUri($urlencode);
+            $redirect_url = $redirect_url.'?redirect='.getInstance()->uri->requestUri($urlencode);
 
             redirect($redirect_url); 
         }
@@ -288,10 +288,10 @@ Class Auth {
     {
         if($key == '')
         {
-            return \Ob\sess\alldata();
+            return sess\alldata();
         }
         
-        return \Ob\sess\get($key, $this->session_prefix);
+        return sess\get($key, $this->session_prefix);
     }
     
     // ------------------------------------------------------------------------
@@ -306,11 +306,11 @@ Class Auth {
     {
         if(is_array($key))
         {
-            \Ob\sess\set($key, '', $this->session_prefix);
+            sess\set($key, '', $this->session_prefix);
             return;
         }
         
-        \Ob\sess\set($key, $val, $this->session_prefix);
+        sess\set($key, $val, $this->session_prefix);
     }
     
     // ------------------------------------------------------------------------
@@ -325,11 +325,11 @@ Class Auth {
     {
         if(is_array($key))
         {
-            \Ob\sess\remove($key, $this->session_prefix);
+            sess\remove($key, $this->session_prefix);
             return;
         }
         
-        \Ob\sess\remove($key, $this->session_prefix);
+        sess\remove($key, $this->session_prefix);
     }
     
     // ------------------------------------------------------------------------
@@ -402,7 +402,7 @@ Class Auth {
             $sess_data[$key] = $row->{$key};
         }
         
-        Ob\sess\set($sess_data, '', $this->session_prefix);   // Store user data to session container.
+        sess\set($sess_data, '', $this->session_prefix);   // Store user data to session container.
     }
     
     // ------------------------------------------------------------------------
@@ -415,16 +415,16 @@ Class Auth {
     */
     public function logout($sess_destroy = true)
     {
-        \Ob\sess\remove('ok', $this->session_prefix);
+        sess\remove('ok', $this->session_prefix);
         
         if($sess_destroy)
         {
-            \Ob\sess\destroy();
+            sess\destroy();
             return;
         }
         
-        $user_data = \Ob\sess\alldata();
-        \Ob\sess\remove($user_data, $this->session_prefix);
+        $user_data = sess\alldata();
+        sess\remove($user_data, $this->session_prefix);
     }
     
 }

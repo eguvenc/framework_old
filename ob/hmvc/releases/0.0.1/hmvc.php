@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Hmvc;
+namespace Hmvc;
 
 function requestTimer($mark = '')
 {
@@ -52,7 +52,7 @@ Class Hmvc
     
     public function __construct()
     {
-        \Ob\log\me('debug', "Hmvc Class Initialized");
+        log\me('debug', "Hmvc Class Initialized");
     }
 
     // --------------------------------------------------------------------
@@ -72,16 +72,16 @@ Class Hmvc
         // Don't clone getInstance(), we just do backup.
         #######################################
         
-        $this->_this  = \Ob\getInstance();      // We need create backup $this object of main controller
+        $this->_this  = getInstance();      // We need create backup $this object of main controller
                                                 // becuse of it will change when HMVC process is done.
         
         #######################################
         
         if($hmvc_uri != '')
         {
-            $URI     = \Ob\getInstance()->uri;
-            $Router  = \Ob\getInstance()->router;
-            $Config  = \Ob\getInstance()->config;
+            $URI     = getInstance()->uri;
+            $Router  = getInstance()->router;
+            $Config  = getInstance()->config;
             
             # CLONE
             #######################################
@@ -94,8 +94,8 @@ Class Hmvc
             # CLEAR
             #######################################
 
-            \Ob\getInstance()->uri->clear();           // Reset uri objects we will reuse it for hmvc
-            \Ob\getInstance()->router->clear();        // Reset router objects we will reuse it for hmvc.
+            getInstance()->uri->clear();           // Reset uri objects we will reuse it for hmvc
+            getInstance()->router->clear();        // Reset router objects we will reuse it for hmvc.
 
             #######################################
             
@@ -341,8 +341,8 @@ Class Hmvc
             self::$_conn_id[$conn_id] = $conn_id;    // store connection id.
         }
 
-        $URI    = \Ob\getInstance()->uri;
-        $router = \Ob\getInstance()->router;
+        $URI    = getInstance()->uri;
+        $router = getInstance()->router;
 
         //------------------------------------
         self::$start_time = requestTimer('start');
@@ -377,10 +377,10 @@ Class Hmvc
         // Call the controller.
         require_once($controller);
 
-        if ( ! class_exists('\Ob\\'.$router->fetchClass()) OR $router->fetchMethod() == 'controller' 
+        if ( ! class_exists('\'.$router->fetchClass()) OR $router->fetchMethod() == 'controller' 
               OR $router->fetchMethod() == '_output'       // security fix.
               OR $router->fetchMethod() == '_ob_getInstance_'
-              OR in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods('Ob\Controller')))
+              OR in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods('Controller')))
             )
         {
             $this->setResponse('404 - Hmvc request not found: '.$hmvc_uri);
@@ -389,7 +389,7 @@ Class Hmvc
             return $this->_response();
         }
 
-        $Class = '\Ob\\'.$router->fetchClass();
+        $Class = '\'.$router->fetchClass();
         
         // If Everyting ok Declare Called Controller !
         $OB = new $Class();
@@ -418,8 +418,8 @@ Class Hmvc
 
         $this->_resetRouter();    
                        
-        \Ob\log\me('debug', 'Hmvc process is done.');
-        \Ob\log\me('info', 'Hmvc output: '.$this->_response());
+        log\me('debug', 'Hmvc process is done.');
+        log\me('info', 'Hmvc output: '.$this->_response());
         
         return $this->_response();
     }
@@ -448,13 +448,13 @@ Class Hmvc
         # Set original objects foreach HMVC requests we backup before  ..
         ######################################
         
-        $URI = \Ob\getInstance()->uri;
+        $URI = getInstance()->uri;
         
-        $this->_this->uri     = \Ob\Uri\Uri::setInstance($this->uri);
-        $this->_this->router  = \Ob\Router\Router::setInstance($this->router);
-        $this->_this->config  = \Ob\Config\Config::setInstance($this->config);
+        $this->_this->uri     = Uri\Uri::setInstance($this->uri);
+        $this->_this->router  = Router\Router::setInstance($this->router);
+        $this->_this->config  = Config\Config::setInstance($this->config);
         
-        \Ob\getInstance($this->_this);         // Set original $this to controller instance that we backup before
+        getInstance($this->_this);         // Set original $this to controller instance that we backup before
     
         # Assign Obullo global variables ..
         ######################################
@@ -469,7 +469,7 @@ Class Hmvc
 
             $end_time = requestTimer('end'); // Profiler
 
-            \Ob\log\me('info', 'Hmvc request: '.$URI->uri_string.' time: '.number_format($end_time - self::$start_time, 4));
+            log\me('info', 'Hmvc request: '.$URI->uri_string.' time: '.number_format($end_time - self::$start_time, 4));
             
             // self::$request_times[$URI->uri_string] = $end_time - self::$start_time;
         }

@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Encrypt;
+namespace Encrypt;
 
 /**
  * Obullo Encryption Class
@@ -30,12 +30,12 @@ Class Encrypt {
     {   
         if($no_instance)
         {
-            \Ob\getInstance()->encrypt = $this; // Make available it in the controller $this->encrypt->method();
+            getInstance()->encrypt = $this; // Make available it in the controller $this->encrypt->method();
         }
         
         $this->_mcrypt_exists = ( ! function_exists('mcrypt_encrypt')) ? false : true;
         
-        \Ob\log\me('debug', "Encrypt Class Initialized");
+        log\me('debug', "Encrypt Class Initialized");
     }
 
     // --------------------------------------------------------------------
@@ -59,7 +59,7 @@ Class Encrypt {
                 return $this->encryption_key;
             }
 
-            $key = \Ob\config('encryption_key');
+            $key = config('encryption_key');
 
             if ($key === false)
             {

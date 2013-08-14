@@ -2,7 +2,7 @@
 namespace Model;
 use Ob;
 
-Class User extends Ob\Model // extends Ob\Odm
+Class User extends Model // extends Odm
 {
     function __construct()
     {

@@ -195,7 +195,7 @@ function getStatic($filename = 'config', $var = '', $folder = '')
         {
             $error_msg = 'The static file '. $folder. DS .$filename. EXT .' file does not appear to be formatted correctly.';
 
-            Ob\log\me('error', $error_msg);
+            log\me('error', $error_msg);
         }
 
         $variables[$key] =& $$var;

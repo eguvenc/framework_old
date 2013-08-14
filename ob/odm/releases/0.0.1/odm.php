@@ -1,5 +1,5 @@
 <?php
-namespace Ob;
+namespace Odm;
 
 /**
  * OBJECT DATA MODEL
@@ -121,7 +121,7 @@ Class Odm extends Model {
         {            
             foreach($fields as $key => $val)  // Set filtered values
             {
-                $this->values[$table][$key] = $this->_set_value($key, $this->{$key});
+                $this->values[$table][$key] = $this->_setValue($key, $this->{$key});
             }
             
             $this->validation = true;
@@ -143,7 +143,7 @@ Class Odm extends Model {
                }
               
                // Set filtered values
-               $this->values[$table][$key] = $this->_set_value($key, $this->{$key});
+               $this->values[$table][$key] = $this->_setValue($key, $this->{$key});
             }
             
             $this->validation = false;
@@ -181,11 +181,11 @@ Class Odm extends Model {
         {
             if($this->{$k} != '')
             {
-                $v_data[$k] = $this->_set_value($k, $this->{$k});
+                $v_data[$k] = $this->_setValue($k, $this->{$k});
             }
             else
             {
-                $v_data[$k] = $this->_set_value($k, i_get_post($k));
+                $v_data[$k] = $this->_setValue($k, i_get_post($k));
             }
         }
         
@@ -543,7 +543,7 @@ Class Odm extends Model {
     */
     public function save()
     {
-        \Ob\getInstance()->locale->load('obullo');
+        getInstance()->locale->load('obullo');
                    
         $v_data = array();   // validation fields data
         $s_data = array();   // mysql insert / update fields data
@@ -574,7 +574,7 @@ Class Odm extends Model {
             
             if($this->{$k} != '')
             {
-                $v_data[$k] = $this->_set_value($k, $this->property[$k]);
+                $v_data[$k] = $this->_setValue($k, $this->property[$k]);
             }
             
             if($this->{$k} != '')
@@ -623,7 +623,7 @@ Class Odm extends Model {
                     $s_data[$k] = '';
                 }
 
-                $v_data[$k] = $this->_set_value($k, i_get_post($k));
+                $v_data[$k] = $this->_setValue($k, i_get_post($k));
             }
             
             // ************ do not save if field selected via where() function
@@ -669,7 +669,7 @@ Class Odm extends Model {
                     $this->db->commit();    // commit the transaction
                     
                     $this->errors[$table]['success'] = 1;
-                    $this->errors[$table]['msg']     = \Ob\lang('Data updated succesfully.');
+                    $this->errors[$table]['msg']     = lang('Data updated succesfully.');
                     
                     $this->clear();    // reset validator data
 
@@ -680,7 +680,7 @@ Class Odm extends Model {
                     $this->db->rollback();       // roll back the transaction if we fail
 
                     $this->errors[$table]['success'] = 0;
-                    $this->errors[$table]['msg']     = \Ob\lang('Data not saved, please do some changes.');
+                    $this->errors[$table]['msg']     = lang('Data not saved, please do some changes.');
                     $this->errors[$table]['transaction_error'] = $e->getMessage();
                     
                     $this->clear();    // reset validator data
@@ -706,7 +706,7 @@ Class Odm extends Model {
                     $this->db->commit();    // commit the transaction
                     
                     $this->errors[$table]['success'] = 1;
-                    $this->errors[$table]['msg']     = \Ob\lang('Data inserted succesfully.');
+                    $this->errors[$table]['msg']     = lang('Data inserted succesfully.');
                     
                     $this->clear();    // reset validator data  // reset validator data
 
@@ -717,7 +717,7 @@ Class Odm extends Model {
                     $this->db->rollback();       // roll back the transaction if we fail
 
                     $this->errors[$table]['success'] = 0;
-                    $this->errors[$table]['msg']     = \Ob\lang('Data insert error.');
+                    $this->errors[$table]['msg']     = lang('Data insert error.');
                     $this->errors[$table]['transaction_error'] = $e->getMessage();
                     
                     $this->clear();    // reset validator data  // reset validator data
@@ -803,7 +803,7 @@ Class Odm extends Model {
     * @param mixed $default
     * @return string
     */
-    public function _set_value($field, $default = '')
+    public function _setValue($field, $default = '')
     {
         if( ! isset($this->schema_fields[$field]['type']))
         {
@@ -915,17 +915,17 @@ Class Odm extends Model {
 
                 $this->db->transaction(); // begin the transaction
 
-                $this->_before_delete();
+                $this->_beforeDelete();
                 
                 $this->_compileSelect();
                 $this->errors[$table]['affected_rows'] = $this->db->delete($table);
 
-                $this->_after_delete();
+                $this->_afterDelete();
                 
                 $this->db->commit();    // commit the transaction
                 
                 $this->errors[$table]['success'] = 1;
-                $this->errors[$table]['msg']     = \Ob\lang('Data deleted succesfully.');
+                $this->errors[$table]['msg']     = lang('Data deleted succesfully.');
                 
                 $this->clear();    // reset validator data
 
@@ -936,7 +936,7 @@ Class Odm extends Model {
                 $this->db->rollback();       // roll back the transaction if we fail
 
                 $this->errors[$table]['success'] = 0;
-                $this->errors[$table]['msg']     = \Ob\lang('Delete error or record already deleted.');
+                $this->errors[$table]['msg']     = lang('Delete error or record already deleted.');
                 $this->errors[$table]['transaction_error'] = $e->getMessage();
 
                 $this->clear();    // reset validator data 
@@ -1007,11 +1007,11 @@ Class Odm extends Model {
     * 
     * @return void
     */
-    public function _before_save()
+    public function _beforeSave()
     {
-        if(method_exists($this, 'before_save'))
+        if(method_exists($this, 'beforeSave'))
         {
-            $this->before_save();
+            $this->beforeSave();
         }
     }
     
@@ -1022,11 +1022,11 @@ Class Odm extends Model {
     * 
     * @return void
     */
-    public function _after_save()
+    public function _afterSave()
     {
-        if(method_exists($this, 'after_save'))
+        if(method_exists($this, 'afterSave'))
         {
-            $this->after_save();
+            $this->afterSave();
         }
     }
     
@@ -1037,11 +1037,11 @@ Class Odm extends Model {
     * 
     * @return void
     */
-    public function _before_delete()
+    public function _beforeDelete()
     {
-        if(method_exists($this, 'before_delete'))
+        if(method_exists($this, 'beforeDelete'))
         {
-            $this->before_delete();
+            $this->beforeDelete();
         }
     }
     
@@ -1052,11 +1052,11 @@ Class Odm extends Model {
     * 
     * @return void
     */
-    public function _after_delete()
+    public function _afterDelete()
     {
-        if(method_exists($this, 'after_delete'))
+        if(method_exists($this, 'afterDelete'))
         {
-            $this->after_delete();
+            $this->afterDelete();
         }
     }
     

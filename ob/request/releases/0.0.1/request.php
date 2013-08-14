@@ -1,5 +1,5 @@
 <?php
-namespace Ob\request {
+namespace request {
 
     /**
     * Hmvc Request Helper
@@ -15,7 +15,7 @@ namespace Ob\request {
     {
         function __construct()
         {
-            \Ob\log\me('debug', 'Request Helper Initialized');
+            log\me('debug', 'Request Helper Initialized');
         }
     }
     
@@ -109,7 +109,7 @@ namespace Ob\request {
             // Long Access request
             if($request_uri === false)
             {   
-                $hmvc = new \Ob\Hmvc\Hmvc();  // Every hmvc request must create new instance.
+                $hmvc = new Hmvc\Hmvc();  // Every hmvc request must create new instance.
                 $hmvc->clear();               // Clear variables for each request.
 
                 $hmvc->request($method);
@@ -122,7 +122,7 @@ namespace Ob\request {
             $method      = 'GET';   // Set default method
         }
 
-        $hmvc = new \Ob\Hmvc\Hmvc();
+        $hmvc = new Hmvc\Hmvc();
         $hmvc->clear();                       
         $hmvc->request($request_uri, $cache_time_or_config);
         $hmvc->setMethod($method, $params);

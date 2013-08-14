@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Acl;
+namespace Acl;
 
 /**
  * ACL Class
@@ -34,10 +34,10 @@ Class Acl {
     {
         if($no_instance)
         {
-            \Ob\getInstance()->acl = $this; // Available it in the contoller $this->auth->method();
+            getInstance()->acl = $this; // Available it in the contoller $this->auth->method();
         }
         
-        \Ob\log\me('debug', "Acl Class Initialized");
+        log\me('debug', "Acl Class Initialized");
     }
    
     // ------------------------------------------------------------------------

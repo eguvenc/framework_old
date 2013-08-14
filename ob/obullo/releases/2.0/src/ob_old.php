@@ -51,7 +51,7 @@ namespace Ob {
         // echo $realname.'<br>';
 
         /*
-        if($realname == 'Ob\Sess\Src\Sess_Cookie')
+        if($realname == 'Sess\Src\Sess_Cookie')
         {
             // echo $realname;
             // exit;
@@ -102,7 +102,7 @@ namespace Ob {
         
         //--------------- OB PACKAGE LOADER ---------------//
         
-        if(strpos($realname, 'Ob\\') === 0)  // get modules from ob/ directory.
+        if(strpos($realname, '\') === 0)  // get modules from ob/ directory.
         {
             $ob_parts   = explode('\\', $realname);
             $ob_library = strtolower($ob_parts[1]);
@@ -148,7 +148,7 @@ namespace Ob {
    
     }
 
-    spl_autoload_register('Ob\autoloader', true);
+    spl_autoload_register('autoloader', true);
 
     // --------------------------------------------------------------------
 

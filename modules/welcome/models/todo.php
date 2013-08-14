@@ -45,8 +45,8 @@ Class User extends Odm
         return parent::save();
     }
     
-    // function before_save(){}
-    // function after_save(){}
+    // function beforeSave(){}
+    // function afterSave(){}
 }
 
 

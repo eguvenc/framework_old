@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Mongo;
+namespace Mongo;
 
 /**
  * Mongo DB Class.

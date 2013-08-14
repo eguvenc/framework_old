@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Email;
+namespace Email;
 
 /**
  * Obullo Email Class
@@ -69,7 +69,7 @@ Class Email {
     {
         if($no_instance)
         {
-            \Ob\getInstance()->email = $this; // Make available it in the controller $this->email->method();
+            getInstance()->email = $this; // Make available it in the controller $this->email->method();
         }
         
         if (count($config) > 0)
@@ -82,7 +82,7 @@ Class Email {
             $this->_safe_mode = ((boolean)@ini_get("safe_mode") === false) ? false : true;
         }
 
-        \Ob\log\me('debug', "Email Class Initialized");
+        log\me('debug', "Email Class Initialized");
     }
     
     
@@ -1869,9 +1869,9 @@ Class Email {
      */
     private function _setErrorMessage($msg, $val = '')
     {
-        \Ob\getInstance()->locale->load('obullo');
+        getInstance()->locale->load('obullo');
 
-        if (false === ($line = \Ob\lang($msg)))
+        if (false === ($line = lang($msg)))
         {
             $this->_debug_msg[] = str_replace('%s', $val, $msg)."<br />";
         }

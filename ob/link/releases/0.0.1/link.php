@@ -1,5 +1,5 @@
 <?php
-namespace Ob\link {
+namespace link {
     
     // ------------------------------------------------------------------------
     
@@ -15,7 +15,7 @@ namespace Ob\link {
     { 
         function __construct()
         {
-            \Ob\log\me('debug', 'Link Helper Initialized.');
+            log\me('debug', 'Link Helper Initialized.');
         }
     }
     

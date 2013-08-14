@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Agent;
+namespace Agent;
 
 /**
  * User Agent Class
@@ -47,7 +47,7 @@ Class Agent {
     {   
         if($no_instance)
         {
-            \Ob\getInstance()->agent = $this; // Make available it in the controller $this->agent->method();
+            getInstance()->agent = $this; // Make available it in the controller $this->agent->method();
         }
         
         if (isset($_SERVER['HTTP_USER_AGENT']))
@@ -63,7 +63,7 @@ Class Agent {
             }
         }
 
-        \Ob\log\me('debug', "Agent Class Initialized");
+        log\me('debug', "Agent Class Initialized");
     }
     
     // ------------------------------------------------------------------------
@@ -234,7 +234,7 @@ Class Agent {
         {
             foreach ($this->mobiles as $key => $val)
             {
-                if (false !== (strpos(mb_strtolower($this->agent, \Ob\config('charset')), $key)))
+                if (false !== (strpos(mb_strtolower($this->agent, config('charset')), $key)))
                 {
                     $this->is_mobile = true;
                     $this->mobile = $val;

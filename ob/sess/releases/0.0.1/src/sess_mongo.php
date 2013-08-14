@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Sess\Src;
+namespace Sess\Src;
 
 /**
 * Session Mongodb Driver.
@@ -45,17 +45,17 @@ Class Sess_Mongo {
 
     function init($params = array())
     {
-        \Ob\log\me('debug', "Session Database Driver Initialized"); 
+        log\me('debug', "Session Database Driver Initialized"); 
         
         foreach (array('db_var', 'table_name', 'encrypt_cookie','expiration', 'expire_on_close', 'match_ip', 
         'match_useragent', 'cookie_name', 'cookie_path', 'cookie_domain', 
         'time_to_update', 'time_reference', 'cookie_prefix', 'encryption_key') as $key)
         {
-            $this->$key = (isset($params[$key])) ? $params[$key] : \Ob\config($key, 'sess');
+            $this->$key = (isset($params[$key])) ? $params[$key] : config($key, 'sess');
         }
 
         // _unserialize func. use strip_slashes() func.
-        new \Ob\string\start();
+        new string\start();
 
         $this->now = $this->_getTime();
 
@@ -71,7 +71,7 @@ Class Sess_Mongo {
         // Mongo Database Connection
         // --------------------------------------------------------------------
         
-        $database = new \Ob\Db\Db(false);
+        $database = new Db\Db(false);
         $this->db = $database->connect('db', array('dbdriver' => 'mongo'));
         
         // --------------------------------------------------------------------
@@ -96,7 +96,7 @@ Class Sess_Mongo {
         // Delete expired sessions if necessary
         $this->_gC();
 
-        \Ob\log\me('debug', "Session routines successfully run"); 
+        log\me('debug', "Session routines successfully run"); 
 
         return true;
     }
@@ -112,19 +112,19 @@ Class Sess_Mongo {
     function _read()
     {
         // Fetch the cookie
-        $session = \Ob\i\cookie($this->cookie_name);
+        $session = i\cookie($this->cookie_name);
 
         // No cookie?  Goodbye cruel world!...
         if ($session === false)
         {               
-            \Ob\log\me('debug', 'A session cookie was not found.');
+            log\me('debug', 'A session cookie was not found.');
             return false;
         }
         
         // Decrypt the cookie data
         if ($this->encrypt_cookie == true)  // Obullo Changes "Encrypt Library Header redirect() Bug Fixed !"
         {
-            $key     = \Ob\config('encryption_key', 'sess');
+            $key     = config('encryption_key', 'sess');
             $session = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($session), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
         }
         else
@@ -136,7 +136,7 @@ Class Sess_Mongo {
             // Does the md5 hash match?  This is to prevent manipulation of session data in userspace
             if ($hash !==  md5($session . $this->encryption_key))
             {
-                \Ob\log\me('error', 'The session cookie data did not match what was expected. This could be a possible hacking attempt.');
+                log\me('error', 'The session cookie data did not match what was expected. This could be a possible hacking attempt.');
                 $this->destroy();
                 return false;
             }
@@ -162,14 +162,14 @@ Class Sess_Mongo {
         }
 
         // Does the IP Match?
-        if ($this->match_ip == true AND $session['ip_address'] != \Ob\i\ip())
+        if ($this->match_ip == true AND $session['ip_address'] != i\ip())
         {
             $this->destroy();
             return false;
         }
         
         // Does the User Agent Match?
-        if ($this->match_useragent == true AND trim($session['user_agent']) != trim(substr(\Ob\i\userAgent(), 0, 50)))
+        if ($this->match_useragent == true AND trim($session['user_agent']) != trim(substr(i\userAgent(), 0, 50)))
         {
             $this->destroy();
             return false;
@@ -296,12 +296,12 @@ Class Sess_Mongo {
         }
         
         // To make the session ID even more secure we'll combine it with the user's IP
-        $sessid .= \Ob\i\ip();
+        $sessid .= i\ip();
 
         $this->userdata = array(
                             'session_id'     => md5(uniqid($sessid, true)),
-                            'ip_address'     => \Ob\i\ip(),
-                            'user_agent'     => substr(\Ob\i\userAgent(), 0, 50),
+                            'ip_address'     => i\ip(),
+                            'user_agent'     => substr(i\userAgent(), 0, 50),
                             'last_activity'  => $this->now
                             );
         
@@ -340,7 +340,7 @@ Class Sess_Mongo {
         }
         
         // To make the session ID even more secure we'll combine it with the user's IP
-        $new_sessid .= \Ob\i\ip();
+        $new_sessid .= i\ip();
         
         // Turn it into a hash
         $new_sessid = md5(uniqid($new_sessid, true));
@@ -655,7 +655,7 @@ Class Sess_Mongo {
         
         if ($this->encrypt_cookie == true) // Obullo Changes "Encrypt Library Header redirect() Bug Fixed !"
         {
-            $key         = \Ob\config('encryption_key', 'sess');
+            $key         = config('encryption_key', 'sess');
             $cookie_data = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $cookie_data, MCRYPT_MODE_CBC, md5(md5($key))));
         }
         else
@@ -665,7 +665,7 @@ Class Sess_Mongo {
         }
         
         // ( Obullo Changes .. set cookie life time 0 )
-        $expiration = (\Ob\config('expire_on_close', 'sess')) ? 0 : $this->expiration + time();
+        $expiration = (config('expire_on_close', 'sess')) ? 0 : $this->expiration + time();
 
         // Set the cookie
         setcookie(
@@ -727,7 +727,7 @@ Class Sess_Mongo {
     */
     function _unserialize($data)
     {
-        $data = @unserialize(\Ob\string\strip_slashes($data));
+        $data = @unserialize(string\strip_slashes($data));
         
         if (is_array($data))
         {
@@ -767,7 +767,7 @@ Class Sess_Mongo {
             $this->db->where("last_activity < {$expire}");
             $this->db->delete($this->table_name);
 
-            \Ob\log\me('debug', 'Session garbage collection performed.');
+            log\me('debug', 'Session garbage collection performed.');
         }
     }
     

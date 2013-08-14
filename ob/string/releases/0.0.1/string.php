@@ -1,5 +1,5 @@
 <?php
-namespace Ob\string {
+namespace string {
     
     /**
     * String Helper
@@ -13,7 +13,7 @@ namespace Ob\string {
     {
         function __construct()
         {
-            \Ob\log\me('debug', 'String Helper Initialized.');
+            log\me('debug', 'String Helper Initialized.');
         }
     }
     

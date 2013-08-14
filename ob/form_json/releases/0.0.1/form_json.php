@@ -1,5 +1,5 @@
 <?php
-namespace Ob\form_Json {
+namespace form_Json {
     
     /**
      * Form Json Helper
@@ -14,7 +14,7 @@ namespace Ob\form_Json {
     {
        function __construct()
        {
-          \Ob\log\me('debug', 'Form Json Helper Initialized.');
+          log\me('debug', 'Form Json Helper Initialized.');
        }
     }
     
@@ -22,7 +22,7 @@ namespace Ob\form_Json {
 
     function error($model = '', $no_cache = true)
     {
-        if(\Ob\getInstance()->uri->extension() == 'json' AND ! headers_sent() ) // Check uri extension 
+        if(getInstance()->uri->extension() == 'json' AND ! headers_sent() ) // Check uri extension 
         {
             /*
             * The first two headers prevent the browser from caching the 
@@ -47,9 +47,9 @@ namespace Ob\form_Json {
 
             if($model->errors('transaction') != '')
             {
-                \Ob\log\me('debug', 'System Error: '. $model->errors('transaction'));
+                log\me('debug', 'System Error: '. $model->errors('transaction'));
 
-                return json_encode(array('success' => false, 'errors' => array('sys_error' => \Ob\lang('We couldn\'t save data at this time please try again. Error: ').$model->errors('transaction'))));
+                return json_encode(array('success' => false, 'errors' => array('sys_error' => lang('We couldn\'t save data at this time please try again. Error: ').$model->errors('transaction'))));
             }
 
             if($model->errors('redirect') != '')
@@ -78,7 +78,7 @@ namespace Ob\form_Json {
     */
     function success($model = '', $no_cache = true)
     {
-        if(\Ob\getInstance()->uri->extension() == 'json' AND ! headers_sent() ) // Check uri extension 
+        if(getInstance()->uri->extension() == 'json' AND ! headers_sent() ) // Check uri extension 
         {
             /*
             * The first two headers prevent the browser from caching the 
@@ -124,7 +124,7 @@ namespace Ob\form_Json {
     */
     function redirect($redirect_url, $top_redirect = false)
     {
-        if(\Ob\getInstance()->uri->extension() == 'json' AND ! headers_sent() ) // Check uri extension 
+        if(getInstance()->uri->extension() == 'json' AND ! headers_sent() ) // Check uri extension 
         {
             header('Content-type: application/json;charset=UTF-8');
         }
@@ -149,7 +149,7 @@ namespace Ob\form_Json {
     */
     function forward($forward_url)
     {
-        if(\Ob\getInstance()->uri->extension() == 'json' AND ! headers_sent() ) // Check uri extension 
+        if(getInstance()->uri->extension() == 'json' AND ! headers_sent() ) // Check uri extension 
         {
             header('Content-type: application/json;charset=UTF-8');
         }

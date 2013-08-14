@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Database_Pdo;
+namespace Database_Pdo;
 
 /**
  * Pdo Connection Class.
@@ -87,7 +87,7 @@ Class Database_Pdo {
             throw new \Exception('The PDO' . $dbdriver . ' driver is not currently installed on your server.');
         }
         
-        $classname = '\Ob\Pdo_'.ucfirst($driver_name).'\Pdo_'.ucfirst($driver_name);
+        $classname = 'Pdo_'.ucfirst($driver_name).'\Pdo_'.ucfirst($driver_name);
         $DB = new $classname($options);
         $DB->__wakeup();
         

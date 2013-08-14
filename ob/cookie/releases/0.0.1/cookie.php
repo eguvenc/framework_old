@@ -1,5 +1,5 @@
 <?php
-namespace Ob\cookie {
+namespace cookie {
     
     /**
     * Cookie Helper
@@ -13,7 +13,7 @@ namespace Ob\cookie {
     {
         function __construct()
         {
-            \Ob\log\me('debug', 'Cookie Helper Initialized');
+            log\me('debug', 'Cookie Helper Initialized');
         }
     }
     
@@ -47,24 +47,24 @@ namespace Ob\cookie {
             }
         }
 
-        if ($prefix == '' AND \Ob\config('cookie_prefix') != '')
+        if ($prefix == '' AND config('cookie_prefix') != '')
         {
-            $prefix = \Ob\config('cookie_prefix');
+            $prefix = config('cookie_prefix');
         }
         
-        if ($domain == '' AND \Ob\config('cookie_domain') != '')
+        if ($domain == '' AND config('cookie_domain') != '')
         {
-            $domain = \Ob\config('cookie_domain');
+            $domain = config('cookie_domain');
         }
         
-        if ($path   == '/' AND \Ob\config('cookie_path') != '/')
+        if ($path   == '/' AND config('cookie_path') != '/')
         {
-            $path   = \Ob\config('cookie_path');
+            $path   = config('cookie_path');
         }
         
-        if ($secure == false AND \Ob\config('cookie_secure') != false)
+        if ($secure == false AND config('cookie_secure') != false)
         {
-            $secure = \Ob\config('cookie_secure');
+            $secure = config('cookie_secure');
         }
         
         if ( ! is_numeric($expire))
@@ -100,12 +100,12 @@ namespace Ob\cookie {
     {
         $prefix = '';
         
-        if ( ! isset($_COOKIE[$index]) AND \Ob\config('cookie_prefix') != '')
+        if ( ! isset($_COOKIE[$index]) AND config('cookie_prefix') != '')
         {
-            $prefix = \Ob\config('cookie_prefix');
+            $prefix = config('cookie_prefix');
         }
         
-        return \Ob\i\cookie($prefix.$index, $xss_clean);
+        return i\cookie($prefix.$index, $xss_clean);
     }
 
     // --------------------------------------------------------------------

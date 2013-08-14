@@ -7,7 +7,7 @@ namespace Test {
 
         function __construct()
         {
-            \Ob\log\me('Test Helper Initialized !');
+            log\me('Test Helper Initialized !');
         }       
     }
     
@@ -48,7 +48,7 @@ namespace Test {
     {
         function __construct()
         {
-            \Ob\log\me('Test Class Initialized !');
+            log\me('Test Class Initialized !');
         }
     }
 

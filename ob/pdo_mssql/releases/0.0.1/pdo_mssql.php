@@ -1,4 +1,5 @@
 <?php
+namespace Pdo_Mssql;
 
 /**
  * MSSQL Database Adapter Class
@@ -107,9 +108,7 @@ Class Pdo_Mssql extends Pdo_Database_Adapter
             return $str;
         }
         
-        loader::helper('ob/security');
-        
-        $str = _removeInvisibleCharacters($str);
+        $str = removeInvisibleCharacters($str);
         
         // If pdo::quote() not work Escape single quotes
         // $str = str_replace("'", "''", _removeInvisibleCharacters($str));
@@ -354,7 +353,7 @@ Class Pdo_Mssql extends Pdo_Database_Adapter
         {
             $stmt = $this->_conn->query("SELECT SERVERPROPERTY('productversion')");
             
-            $result = $stmt->fetchAll(PDO::FETCH_NUM);
+            $result = $stmt->fetchAll(\PDO::FETCH_NUM);
             
             if (count($result))
             {
@@ -363,7 +362,7 @@ Class Pdo_Mssql extends Pdo_Database_Adapter
             
             return null;
         
-        } catch (PDOException $e)
+        } catch (\PDOException $e)
         {
             return null;
         }

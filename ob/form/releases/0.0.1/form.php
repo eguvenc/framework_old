@@ -1,5 +1,5 @@
 <?php
-namespace Ob\form {
+namespace form {
     
     /**
     * Form Helper
@@ -13,7 +13,7 @@ namespace Ob\form {
     {
         function __construct()
         {
-            \Ob\log\me('debug', 'Form Helper Initialized.');
+            log\me('debug', 'Form Helper Initialized.');
         }
     }
 
@@ -35,7 +35,7 @@ namespace Ob\form {
             $attributes = 'method="post"';
         }
 
-        $action = ( strpos($action, '://') === false) ? \Ob\getInstance()->config->siteUrl($action) : $action;
+        $action = ( strpos($action, '://') === false) ? getInstance()->config->siteUrl($action) : $action;
 
         $form  = '<form action="'.$action.'"';
         
@@ -43,9 +43,9 @@ namespace Ob\form {
 
         $form .= '>';
         
-        if (\Ob\config('csrf_protection') === true) // CSRF Support
+        if (config('csrf_protection') === true) // CSRF Support
         {
-            $security = \Ob\Security\Security::getInstance();
+            $security = Security\Security::getInstance();
             
             $hidden[$security->getCsrfTokenName()] = $security->getCsrfHash();
         }
@@ -810,7 +810,7 @@ namespace Ob\form {
             {
                 log\me('debug', 'System Error: '. $model->errors('transaction'));
                 
-                return \Ob\lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
+                return lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
             }
 
             if($model->errors('success') == 0)
@@ -873,7 +873,7 @@ namespace Ob\form {
         {
             log\me('debug', 'System Error: '. $model->errors('transaction'));
 
-            $msg =  $model->errors('msg') .' '. \Ob\lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
+            $msg =  $model->errors('msg') .' '. lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
             
             return ($msg == '') ? '' : $prefix.$msg.$suffix;
         }
@@ -892,7 +892,7 @@ namespace Ob\form {
         
         if($model->errors('success') == 0)
         {
-            $msg = \Ob\lang('There are some errors in the form fields.');
+            $msg = lang('There are some errors in the form fields.');
 
             if( ! empty($message))
             {
@@ -1037,12 +1037,12 @@ namespace Ob\form {
     */
     function _getValidationObject()
     {
-        if ( ! class_exists('Ob\Validator'))  // Obullo Changes ..
+        if ( ! class_exists('Validator'))  // Obullo Changes ..
         {
             return false;
         }
         
-        return \Ob\Validator::getInstance();
+        return Validator::getInstance();
     }
 
 }

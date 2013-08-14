@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Sess\Src;
+namespace Sess\Src;
 
 /**
 * Session Native Driver.
@@ -44,13 +44,13 @@ Class Sess_Native {
 
     function init($params = array())
     {
-        \Ob\log\me('debug', "Session Native Driver Initialized"); 
+        log\me('debug', "Session Native Driver Initialized"); 
         
         foreach (array('encrypt_cookie','expiration', 'expire_on_close', 'match_ip', 
         'match_useragent', 'cookie_name', 'cookie_path', 'cookie_domain', 
         'time_to_update', 'time_reference', 'cookie_prefix', 'encryption_key') as $key)
         {
-            $this->$key = (isset($params[$key])) ? $params[$key] : \Ob\config($key, 'sess');
+            $this->$key = (isset($params[$key])) ? $params[$key] : config($key, 'sess');
         }
         
         // @todo _unserialize func. use strip_slashes() func. We can add it later if we need it in Native Library. ?
@@ -106,7 +106,7 @@ Class Sess_Native {
         // mark all new flashdata as old (data will be deleted before next request)
         $this->_flashdataMark();
 
-        \Ob\log\me('debug', "Session routines successfully run"); 
+        log\me('debug', "Session routines successfully run"); 
 
         return true;
     }

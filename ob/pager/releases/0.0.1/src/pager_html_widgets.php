@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Pager\Src;
+namespace Pager\Src;
 
 /**
  * Pager Html Widgets

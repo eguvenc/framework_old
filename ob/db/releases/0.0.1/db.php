@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Db;
+namespace Db;
 
 /**
  * Database Connection Class.
@@ -18,17 +18,17 @@ Class Db {
     */
     function __construct($db_var = 'db', $params = '')
     {
-        if(isset(\Ob\getInstance()->{$db_var}) AND is_object(\Ob\getInstance()->{$db_var}))
+        if(isset(getInstance()->{$db_var}) AND is_object(getInstance()->{$db_var}))
         {
            return;   // Lazy Loading.  
         }
         
         if($db_var !== false)
         {
-           \Ob\getInstance()->{$db_var} = $this->connect($db_var, $params); 
+           getInstance()->{$db_var} = $this->connect($db_var, $params); 
         }
         
-        \Ob\log\me('debug', 'Db Class Initialized.');
+        \log\me('debug', 'Db Class Initialized.');
     }
     
     /**
@@ -40,13 +40,13 @@ Class Db {
     */
     public function connect($db_var = 'db', $params = '')
     {   
-        if(isset(\Ob\getInstance()->{$db_var}) AND is_object(\Ob\getInstance()->{$db_var}))
+        if(isset(getInstance()->{$db_var}) AND is_object(getInstance()->{$db_var}))
         {
            return;   // Lazy Loading.  
         }
         
-        $dbdriver = is_array($params) ? $params['dbdriver'] : \Ob\db('dbdriver', $db_var); 
-        $hostname = \Ob\db('hostname', $db_var);
+        $dbdriver = is_array($params) ? $params['dbdriver'] : db('dbdriver', $db_var); 
+        $hostname = db('hostname', $db_var);
         
         if(is_array($params))
         {
@@ -66,7 +66,7 @@ Class Db {
         
         if(strtolower($dbdriver) == 'mongo') 
         {
-            $mongo = new \Ob\Mongo\Mongo();
+            $mongo = new \Mongo\Mongo();
             
             return $mongo->connect();
         }
@@ -77,12 +77,12 @@ Class Db {
         
         if($packages['db_layer'] == 'Database_Pdo')
         {
-            $database = new \Ob\Database_Pdo\Database_Pdo();
+            $database = new \Database_Pdo\Database_Pdo();
             return $database->connect($dbdriver, $options);
         } 
         else // Native database support.
         {
-            $database = new \Ob\Database\Database();
+            $database = new \Database\Database();
             return $database->connect($dbdriver, $options);
         }
         

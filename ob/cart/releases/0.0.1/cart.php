@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Cart;
+namespace Cart;
 
 /**
  * Shopping Cart Class
@@ -26,12 +26,12 @@ Class Cart {
     {   
         if($no_instance)
         {
-            \Ob\getInstance()->cart = $this; // Make available it in the controller $this->cart->method();
+            getInstance()->cart = $this; // Make available it in the controller $this->cart->method();
         }
    
         $this->init($params);
             
-        \Ob\log\me('debug', "Cart Class Initialized");
+        log\me('debug', "Cart Class Initialized");
     }
 
     /**
@@ -51,12 +51,12 @@ Class Cart {
             }
         }
         
-        new \Ob\sess\start($params);
+        new sess\start($params);
          
         // Grab the shopping cart array from the session table, if it exists
-        if (\Ob\sess\get('cart_contents') !== false)
+        if (sess\get('cart_contents') !== false)
         {
-            $this->_cart_contents = \Ob\sess\get('cart_contents');
+            $this->_cart_contents = sess\get('cart_contents');
         }
         else
         {
@@ -80,7 +80,7 @@ Class Cart {
         // Was any cart data passed? No? Bah...
         if ( ! is_array($items) OR count($items) == 0)
         {
-            \Ob\log\me('error', 'The insert method must be passed an array containing data.');
+            log\me('error', 'The insert method must be passed an array containing data.');
             return false;
         }
                 
@@ -168,7 +168,7 @@ Class Cart {
         // Note: These can be user-specified by setting the $this->product_id_rules variable.
         if ( ! preg_match("/^[".$this->product_id_rules."]+$/i", $items['id']))
         {
-            \Ob\log\me('error', 'Invalid product ID.  The product ID can only contain alpha-numeric characters, dashes, and underscores');
+            log\me('error', 'Invalid product ID.  The product ID can only contain alpha-numeric characters, dashes, and underscores');
             return false;
         }
 
@@ -178,7 +178,7 @@ Class Cart {
         // Note: These can be user-specified by setting the $this->product_name_rules variable.
         if ( ! preg_match("/^[".$this->product_name_rules."]+$/i", $items['name']))
         {
-            \Ob\log\me('error', 'An invalid name was submitted as the product name: '.$items['name'].' The name can only contain alpha-numeric characters, dashes, underscores, colons, and spaces');
+            log\me('error', 'An invalid name was submitted as the product name: '.$items['name'].' The name can only contain alpha-numeric characters, dashes, underscores, colons, and spaces');
             return false;
         }
 
@@ -192,7 +192,7 @@ Class Cart {
         // Is the price a valid number?
         if ( ! is_numeric($items['price']))
         {
-            \Ob\log\me('error', 'An invalid price was submitted for product ID: '.$items['id']);
+            log\me('error', 'An invalid price was submitted for product ID: '.$items['id']);
             return false;
         }
 
@@ -388,13 +388,13 @@ Class Cart {
         // Is our cart empty?  If so we delete it from the session
         if (count($this->_cart_contents) <= 2)
         {
-            Ob\sess\remove('cart_contents'); // Nothing more to do... coffee time!
+            sess\remove('cart_contents'); // Nothing more to do... coffee time!
             return false;
         }
 
         // If we made it this far it means that our cart has data.
         // Let's pass it to the Session class so it can be stored
-        Ob\sess\set(array('cart_contents' => $this->_cart_contents));
+        sess\set(array('cart_contents' => $this->_cart_contents));
 
         // Woot!
         return true;    
@@ -530,7 +530,7 @@ Class Cart {
         $this->_cart_contents['cart_total'] = 0;        
         $this->_cart_contents['total_items'] = 0;        
 
-        Ob\sess\remove('cart_contents');
+        sess\remove('cart_contents');
     }
 
 

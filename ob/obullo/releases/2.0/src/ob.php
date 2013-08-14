@@ -50,7 +50,7 @@
         // echo $realname.'<br>';
 
         /*
-        if($realname == 'Ob\Sess\Src\Sess_Cookie')
+        if($realname == 'Sess\Src\Sess_Cookie')
         {
             // echo $realname;
             // exit;

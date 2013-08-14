@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Pager;
+namespace Pager;
 
 /**                 
  * Obullo Pager Class
@@ -27,7 +27,7 @@ Class Pager
     public function init($options = array())
     {
         $mode = (isset($options['mode']) ? strtolower($options['mode']) : 'jumping');
-        $classname = '\Ob\Pager\Src\Pager_'. ucfirst($mode); 
+        $classname = 'Pager\Src\Pager_'. ucfirst($mode); 
             
         if(count($options) > 0)
         {
