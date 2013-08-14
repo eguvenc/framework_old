@@ -438,7 +438,7 @@ public function _remap()
 }
 ```
 
-**Important:** If your controller contains a function named <samp>_remap()</samp>, it will **always** get called regardless of what your URI contains. It overrides the normal behavior in which the URI determines which function is called, allowing you to define your own function routing rules.
+**Important:** If your controller contains a function named <samp>remap()</samp> , it will **always** get called regardless of what your URI contains. It overrides the normal behavior in which the URI determines which function is called, allowing you to define your own function routing rules.
 The overridden function call (typically the second segment of the URI) will be passed as a parameter the <samp>_remap()</samp> function:
 
 ```php
