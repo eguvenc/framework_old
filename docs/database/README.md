@@ -239,11 +239,14 @@ $database['db']['dbdriver'] = "mysql";
 ------
 
 <table>
+<thead>
 <tr>
 <th>PDO Driver Name</th>
 <th>Obullo Connection Name</th>
 <th>Database Name</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td>PDO_DBLIB</td>
 <td>dblib / mssql / sybase / freetds</td>
@@ -294,6 +297,7 @@ $database['db']['dbdriver'] = "mysql";
 <td>cubrid</td>
 <td>Cubrid</td>
 </tr>
+</tbody>
 </table>
 
 ### Supported NOSQL Database Types
@@ -301,16 +305,19 @@ $database['db']['dbdriver'] = "mysql";
 ------
 
 <table>
+<thead>
 <tr>
 <th>Driver Name</th>
 <th>Connection Name</th>
 <th>Database Name</th>
-</tr>
+</tr></thead>
+<tbody>
 <tr>
 <td>mongodb</td>
 <td>mongo</td>
 <td>MONGO</td>
 </tr>
+</tbody>
 </table>
 
 Obullo has a config file that lets you store your database connection values (username, password, database name, etc.). The config file is located at:
