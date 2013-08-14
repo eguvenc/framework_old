@@ -460,7 +460,7 @@ public function _remap($method)
 
 ------
 
-Obullo has an output class that takes care of sending your final rendered data to the web browser automatically. More information on this can be found in the [Views](http://obullo.com/user_guide/en/1.0.1/views.html) and [Output](http://obullo.com/user_guide/en/1.0.1/output-class.html) class pages. In some cases, however, you might want to post-process the finalized data in some way and send it to the browser yourself. Obullo permits you to add a function named <dfn>_output()</dfn> to your controller that will receive the finalized output data.
+Obullo has an output class that takes care of sending your final rendered data to the web browser automatically. More information on this can be found in the [Views](#views) and [Output](http://obullo.com/user_guide/en/1.0.1/output-class.html) class pages. In some cases, however, you might want to post-process the finalized data in some way and send it to the browser yourself. Obullo permits you to add a function named <dfn>_output()</dfn> to your controller that will receive the finalized output data.
 
 **Important:** If your controller contains a function named <samp>_output()</samp>, it will always be called by the output class instead of echoing the finalized data directly. The first parameter of the function will contain the finalized output.
 
@@ -1081,7 +1081,7 @@ application/models/model_user.php
 
 ------
 
-Your models will typically be loaded and called from within your [controller](https://github.com/obullo/obullo-2.0/tree/master/docs/general#controllers) functions. To load a application model you will use the following function:
+Your models will typically be loaded and called from within your [controller](#controllers) functions. To load a application model you will use the following function:
 
 ```php
 -  application
