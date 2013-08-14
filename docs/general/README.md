@@ -193,13 +193,10 @@ $config['directory_trigger']  = 'd';
 $config['controller_trigger'] = 'c';
 $config['function_trigger'] = 'm';
 ```
-<<<<<<< HEAD
-If you change "enable_query_strings" to true this feature will become active. Your controllers and functions will then be accessible using the "trigger" words you've set to invoke your directory, controllers and methods:
-=======
+
 
 If you change "enable_query_strings" to TRUE this feature will become active. Your controllers and functions will then be accessible using the "trigger" words you've set to invoke your directory, controllers and methods:
 
->>>>>>> 199c264ab5c8831dfc117e6903a64bbefeb326d8
 ```php
 index.php?d=directory&c=controller&m=method
 ```
@@ -823,16 +820,9 @@ vi/setVar('key', 'val');
 You can store values multiple times...
 
 ```php
-<<<<<<< HEAD
-vi/setVar('title', 'Hello ');
-vi/setVar('title', 'My ');
-vi/setVar('title', 'Dear !');
-```
-=======
 vi/set_var('title', 'Hello ');
 vi/set_var('title', 'My ');
 vi/set_var('title', 'Dear !');
->>>>>>> 199c264ab5c8831dfc117e6903a64bbefeb326d8
 echo view_var('title');   // Hello My Dear !
 ```
 
@@ -1127,12 +1117,8 @@ $this->model_name->function();
 
 #### Using No Instantiate
 
-<<<<<<< HEAD
-If you set second param to false, you can instantiate the your model manually.
-=======
 If you set second param to FALSE, you can instantiate the your model manually.
 
->>>>>>> 199c264ab5c8831dfc117e6903a64bbefeb326d8
 ```php
 $user = new Model\User(false);
 
