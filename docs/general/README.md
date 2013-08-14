@@ -380,7 +380,7 @@ example.com/index.php/blog/start/comments/
 
 You should see your new message.
 
-### Passing URI Segments to your Functions <a name="passing-uri-segments-to-your-functions></a>
+### Passing URI Segments to your Functions <a name="passing-uri-segments-to-your-functions"></a>
 
 ------
 
