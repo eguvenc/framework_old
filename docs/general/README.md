@@ -1,14 +1,14 @@
 
-#General Topics
+#General Topics <a name="general-topics"></a>
 
-## Obullo URLs
+## Obullo URLs <a name="obullo-urls"></a>
 By default, URLs in Obullo are designed to be search-engine and human friendly. Rather than using the standard "query string" approach to URLs that is synonymous with dynamic systems, Obullo uses a segment-based approach:
 
 ```php
 example.com/{module}/news/article/my_article
 ```
 
-### Removing the index.php file
+### Removing the index.php file 
 
 ------
 
@@ -18,7 +18,7 @@ By default, the **index.php** file will be included in your URLs:
 example.com/index.php/module/news/article/my_article
 ```
 
-### Apache HTTP Server
+### Apache HTTP Server <a name="apache-http-server"></a>
 
 ------
 
@@ -45,7 +45,7 @@ If the request is for a file that exists already on the server, index.php isn't 
 **RewriteRule ^(.*)$ /index.php**
 All other requests are sent to index.php.
 
-### Nginx HTTP Server
+### Nginx HTTP Server <a name="nginx-http-server"></a>
 
 ------
 
@@ -159,7 +159,7 @@ $config['uri_protocol'] = "REQUEST_URI";   // QUERY_STRING
 
 If you can't get uri requests try to change your uri protocol which is defined **application/config/config.php** file.
 
-### Adding a URL Suffix
+### Adding a URL Suffix <a name="adding-a-url-suffix"></a>
 
 ------
 
@@ -175,7 +175,7 @@ You can optionally add a suffix, like **.html**, making the page appear to be of
 example.com/index.php/shop/products/view/shoes.html
 ```
 
-### Enabling Query Strings
+### Enabling Query Strings <a name="enabling-query-strings"></a>
 
 ------
 
@@ -203,7 +203,7 @@ index.php?d=directory&c=controller&m=method
 
 **_Please note:_** If you are using query strings you will have to build your own URLs, rather than utilizing the URL helpers (and other helpers that generate URLs, like some of the form helpers) as these are designed to work with segment based URLs.
 
-### URI Extensions
+### URI Extensions <a name="uri-extensions"></a>
 
 -------
 
@@ -237,7 +237,7 @@ switch($this->uri->extension())
 }
 ```
 
-## Controllers
+## Controllers <a name="controllers"></a>
 
 Controllers are the heart of your application, as they determine how HTTP requests should be handled.
 
