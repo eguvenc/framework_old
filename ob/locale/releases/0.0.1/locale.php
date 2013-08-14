@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Locale;
+namespace Locale;
 
 /**
  * Locale Class ( Language )
@@ -22,7 +22,7 @@ Class Locale {
         // Set Default language from $_COOKIE['__langlocale']
         // $this->set_language();
         
-        \Ob\log\me('debug', "Locale Class Initialized");    
+        \log\me('debug', "Locale Class Initialized");    
     }
 
     // --------------------------------------------------------------------
@@ -52,7 +52,7 @@ Class Locale {
     {
         if ($idiom == '')
         {
-            $default = \Ob\config('language');
+            $default = config('language');
             $idiom   = ($default == '') ? 'english' : $default;
         }
         
@@ -70,7 +70,7 @@ Class Locale {
 
         if ( ! isset($lang))
         {
-            \Ob\log\me('error', 'Locale file does not contain $lang variable: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
+            \log\me('error', 'Locale file does not contain $lang variable: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
             
             return;
         }
@@ -85,7 +85,7 @@ Class Locale {
 
         unset($lang);
 
-        \Ob\log\me('debug', 'Locale file loaded: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
+        \log\me('debug', 'Locale file loaded: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
         
         return true;
     }

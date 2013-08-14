@@ -22,31 +22,31 @@ Class Obullo
         require (APP  .'config'. DS .'constants'. EXT);  // app constants.
         require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'ob'. EXT);
         
-        if(Ob\packageExists('log')) // check log package is installed.
+        if(packageExists('log')) // check log package is installed.
         {
-            new Ob\log\start();
+            new log\start();
         }
                
-        if(Ob\packageExists('error')) // check error package is installed.
+        if(packageExists('error')) // check error package is installed.
         {
-            new Ob\error\start();
+            new error\start();
         }
         
-        $uri    = Ob\Uri\Uri::getInstance(); 
-        $router = Ob\Router\Router::getInstance();
+        $uri    = Uri\Uri::getInstance(); 
+        $router = Router\Router::getInstance();
 
-        new Ob\bench\start();
+        new bench\start();
         
-        Ob\Locale\Locale::getInstance();
+        Locale\Locale::getInstance();
         
-        Ob\bench\mark('total_execution_time_start');
-        Ob\bench\mark('loading_time_base_classes_start');
+        bench\mark('total_execution_time_start');
+        bench\mark('loading_time_base_classes_start');
         
-        $input = Ob\Input\Input::getInstance();
+        $input = Input\Input::getInstance();
         $input->_sanitizeGlobals();  // Initalize to input filter. ( Sanitize must be above the GLOBALS !! )             
 
-        $output = Ob\Output\Output::getInstance();
-        $config = Ob\Config\Config::getInstance(); 
+        $output = Output\Output::getInstance();
+        $config = Config\Config::getInstance(); 
 
         if ($output->_displayCache($config, $uri) == true) { exit; }  // Check REQUEST uri if there is a Cached file exist 
 
@@ -66,26 +66,26 @@ Class Obullo
         $page_uri   = "{$router->fetchDirectory()} / {$router->fetchClass()} / {$router->fetchMethod()}";
         $controller = MODULES .$router->fetchDirectory(). DS .$folder. DS .$router->fetchClass(). EXT;
 
-        Ob\bench\mark('loading_time_base_classes_end');  // Set a mark point for benchmarking  
-        Ob\bench\mark('execution_time_( '.$page_uri.' )_start');  // Mark a start point so we can benchmark the controller 
+        bench\mark('loading_time_base_classes_end');  // Set a mark point for benchmarking  
+        bench\mark('execution_time_( '.$page_uri.' )_start');  // Mark a start point so we can benchmark the controller 
         
         require ($controller);  // call the controller.
 
-        if ( ! class_exists('\Ob\\'.$router->fetchClass()) OR $router->fetchMethod() == 'controller' 
+        if ( ! class_exists($router->fetchClass()) OR $router->fetchMethod() == 'controller' 
               OR $router->fetchMethod() == '_output'       // security fix.
               OR $router->fetchMethod() == '_ob_getInstance_'
-              OR in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods('Ob\Controller')))
+              OR in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods('Controller')))
             )
         {
-            Ob\show404($page_uri);
+            show404($page_uri);
         }
         
-        $Class = '\Ob\\'.$router->fetchClass();
+        $Class = $router->fetchClass();
         $OB = new $Class();           // If Everyting ok Declare Called Controller ! 
 
         if ( ! in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods($OB))))  // Check method exist or not 
         {
-            Ob\show404($page_uri);
+            show404($page_uri);
         }
 
         $arguments = array_slice($OB->uri->rsegments, 3);
@@ -95,7 +95,7 @@ Class Obullo
         // will be passed to the method for convenience
         call_user_func_array(array($OB, $router->fetchMethod()), $arguments);
 
-        Ob\bench\mark('execution_time_( '.$page_uri.' )_end');  // Mark a benchmark end point 
+        bench\mark('execution_time_( '.$page_uri.' )_end');  // Mark a benchmark end point 
 
         // Write Cache file if cache on ! and Send the final rendered output to the browser
         $output->_display();
@@ -108,17 +108,17 @@ Class Obullo
         // Close the Db connection.
         ##############
 
-        $driver = Ob\db('dbdriver');
+        $driver = db('dbdriver');
         
-        if($driver == 'mongodb' AND isset(Ob\getInstance()->db->connection) AND is_object(Ob\getInstance()->db->connection))
+        if($driver == 'mongodb' AND isset(getInstance()->db->connection) AND is_object(getInstance()->db->connection))
         {
-            Ob\getInstance()->db->connection->close();
+            getInstance()->db->connection->close();
         } 
         else
         {
-            if(isset(Ob\getInstance()->db) AND is_object(Ob\getInstance()->db))
+            if(isset(getInstance()->db) AND is_object(getInstance()->db))
             {
-                Ob\getInstance()->db = null;
+                getInstance()->db = null;
             }
         }
     }

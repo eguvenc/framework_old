@@ -1,5 +1,4 @@
 <?php
-namespace Ob; 
 
  /**
  * Controller Class.
@@ -45,7 +44,7 @@ Class Controller {
                 {                    
                     foreach($autoload[$key] as $filename)
                     {
-                        $class = '\Ob\\'.$filename;
+                        $class = $filename;
                         
                         if($key == 'helper')
                         {
@@ -55,7 +54,7 @@ Class Controller {
                         
                         if($key == 'library')
                         {
-                            $classname = '\Ob\\'.ucfirst($filename).'\\'.ucfirst($filename);
+                            $classname = ucfirst($filename).'\\'.ucfirst($filename);
                             new $classname();
                         }
                         

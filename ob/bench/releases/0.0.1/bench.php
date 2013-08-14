@@ -1,5 +1,5 @@
 <?php
-namespace Ob\bench {
+namespace bench {
 
     // --------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ namespace Ob\bench {
 
         public function __construct()
         {
-            \Ob\log\me('debug', "Bench Class Initialized");
+            \log\me('debug', "Bench Class Initialized");
         }
 
         // --------------------------------------------------------------------

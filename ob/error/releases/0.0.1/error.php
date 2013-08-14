@@ -1,5 +1,5 @@
 <?php
-namespace Ob\error {
+namespace error {
 
     // ------------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ namespace Ob\error {
         // Constructor
         function __construct()
         {
-            \Ob\log\me('debug', 'Error Helper Initialized.');
+            \log\me('debug', 'Error Helper Initialized.');
         }
     }
     
@@ -40,7 +40,7 @@ namespace Ob\error {
         {
             $type  = ucwords(strtolower($type));
             $code  = $e->getCode();
-            $level = \Ob\config('error_reporting');
+            $level = config('error_reporting');
 
             if(defined('STDIN'))  // If Command Line Request.
             {
@@ -48,7 +48,7 @@ namespace Ob\error {
 
                 $cmdType = (defined('TASK')) ? 'Task' : 'Cmd';
 
-                \Ob\log\me('error', '('.$cmdType.') '.$type.': '.$e->getMessage(). ' '.securePath($e->getFile()).' '.$e->getLine(), true);
+                \log\me('error', '('.$cmdType.') '.$type.': '.$e->getMessage(). ' '.securePath($e->getFile()).' '.$e->getLine(), true);
 
                 return;
             }
@@ -86,12 +86,12 @@ namespace Ob\error {
                 include(APP .'errors'. DS .'ob_disabled_error'. EXT);
             }
 
-            \Ob\log\me('error', $type.': '.$e->getMessage(). ' '.securePath($e->getFile()).' '.$e->getLine(), true); 
+            \log\me('error', $type.': '.$e->getMessage(). ' '.securePath($e->getFile()).' '.$e->getLine(), true); 
 
         } 
         else  // Is It Exception ?
         {             
-            $exception = new \Ob\Exception\Exception();
+            $exception = new \Exception\Exception();
 
             if(is_object($exception)) 
             {           
@@ -273,7 +273,7 @@ namespace Ob\error {
                         }
                     }
 
-                    return '<small>resource</small><span>('.$type.')</span> '.htmlspecialchars($file, ENT_NOQUOTES, \Ob\config('charset'));
+                    return '<small>resource</small><span>('.$type.')</span> '.htmlspecialchars($file, ENT_NOQUOTES, config('charset'));
                 }
             }
             else
@@ -284,7 +284,7 @@ namespace Ob\error {
         elseif (is_string($var))
         {
             // Encode the string
-            $str = htmlspecialchars($var, ENT_NOQUOTES, \Ob\config('charset'));
+            $str = htmlspecialchars($var, ENT_NOQUOTES, config('charset'));
             
             return '<small>string</small><span>('.strlen($var).')</span> "'.$str.'"';
         }
@@ -321,7 +321,7 @@ namespace Ob\error {
                     if ($key === $marker) continue;
                     if ( ! is_int($key))
                     {
-                        $key = '"'.htmlspecialchars($key, ENT_NOQUOTES, \Ob\config('charset')).'"';
+                        $key = '"'.htmlspecialchars($key, ENT_NOQUOTES, config('charset')).'"';
                     }
 
                     $output[] = "$space$s$key => ".dumpArgument($val, $length, $level + 1);
@@ -405,7 +405,7 @@ namespace Ob\error {
         }
         else
         {
-            return '<small>'.gettype($var).'</small> '.htmlspecialchars(print_r($var, true), ENT_NOQUOTES, \Ob\config('charset'));
+            return '<small>'.gettype($var).'</small> '.htmlspecialchars(print_r($var, true), ENT_NOQUOTES, config('charset'));
         }
     }
 
@@ -424,7 +424,7 @@ namespace Ob\error {
     */
     function writeFileSource($trace, $key = 0, $prefix = '')
     {
-        $debug = \Ob\config('debug_backtrace'); 
+        $debug = config('debug_backtrace'); 
         
         $file  = $trace['file'];
         $line_number = $trace['line'];
@@ -451,7 +451,7 @@ namespace Ob\error {
 
             if ($line >= $range['start'])
             {
-                $row = htmlspecialchars($row, ENT_NOQUOTES, \Ob\config('charset'));  // Make the row safe for output
+                $row = htmlspecialchars($row, ENT_NOQUOTES, config('charset'));  // Make the row safe for output
 
                 $row = '<span class="number">'.sprintf($format, $line).'</span> '.$row;  // Trim whitespace and sanitize the row
 
@@ -486,7 +486,7 @@ namespace Ob\error {
     {
         $trace = $e->getTrace();      // Get the exception backtrace
 
-        if ($e instanceof ErrorException)
+        if ($e instanceof \ErrorException)
         {
              if (version_compare(PHP_VERSION, '5.3', '<'))
              {
@@ -663,9 +663,9 @@ namespace Ob\error {
                
     // --------------------------------------------------------------------
 
-    set_error_handler('\Ob\error\errorHandler');   
-    set_exception_handler('\Ob\error\exceptionsHandler');
-    register_shutdown_function('\Ob\error\shutdownHandler');
+    set_error_handler('error\errorHandler');   
+    set_exception_handler('error\exceptionsHandler');
+    register_shutdown_function('error\shutdownHandler');
     
     // Enable the Obullo shutdown handler, which catches E_FATAL errors.
 }

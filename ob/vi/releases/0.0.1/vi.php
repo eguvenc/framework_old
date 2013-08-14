@@ -1,5 +1,5 @@
 <?php
-namespace Ob\vi {
+namespace vi {
     
     /**
     * View Helper
@@ -13,7 +13,7 @@ namespace Ob\vi {
     {
         function __construct()
         {
-            \Ob\log\me('debug', 'Vi Helper Initialized.');
+            \log\me('debug', 'Vi Helper Initialized.');
         }
     }
     
@@ -29,7 +29,7 @@ namespace Ob\vi {
     */
     function get($filename, $data = '', $string = true)
     {
-        return \Ob\View\View::getInstance()->load($filename, $data, $string);
+        return \View\View::getInstance()->load($filename, $data, $string);
     }
 
     // ------------------------------------------------------------------------
@@ -44,8 +44,8 @@ namespace Ob\vi {
     */
     function views($filename, $data = '', $string = true)
     {
-        $view = \Ob\View\View::getInstance();
-        $view->set_path(); // set views path
+        $view = \View\View::getInstance();
+        $view->setPath(); // set views path
         
         return get($filename, $data, $string);
     }
@@ -61,7 +61,7 @@ namespace Ob\vi {
     */
     function setVar($key, $val = '')
     {
-        $view = \Ob\View\View::getInstance();
+        $view = \View\View::getInstance();
    
         if($val == array())
         {
@@ -83,7 +83,7 @@ namespace Ob\vi {
     */
     function getVar($key)
     {
-        $view = \Ob\View\View::getInstance();
+        $view = \View\View::getInstance();
         
         if(isset($view->var[$key]))
         {
@@ -110,7 +110,7 @@ namespace Ob\vi {
     */
     function setArray($key, $val = array())
     {
-        $view = \Ob\View\View::getInstance();
+        $view = \View\View::getInstance();
         $val  = (array)$val;
         
         foreach($val as $value)
@@ -134,7 +134,7 @@ namespace Ob\vi {
     */
     function getArray($key)
     {
-        $view = \Ob\View\View::getInstance();
+        $view = \View\View::getInstance();
     
         if(isset($view->array[$key]))
         {

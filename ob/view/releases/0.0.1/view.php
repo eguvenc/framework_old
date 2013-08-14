@@ -1,5 +1,5 @@
 <?php
-namespace Ob\View;
+namespace View;
 
 /**
  * View Class
@@ -32,9 +32,9 @@ Class View {
     */
     public function __construct()
     {
-        $this->path = MODULES .\Ob\getInstance()->router->fetchDirectory(). DS .'views'. DS;
+        $this->path = MODULES .getInstance()->router->fetchDirectory(). DS .'views'. DS;
         
-        \Ob\log\me('debug', "View Class Initialized");
+        \log\me('debug', "View Class Initialized");
     }
     
     // ------------------------------------------------------------------------
@@ -56,7 +56,7 @@ Class View {
      * 
      * @param string $path 
      */
-    public function set_path($path = '')
+    public function setPath($path = '')
     {
         $this->path = ($path == '') ? MODULES .'views'. DS : MODULES .str_replace('/', DS, trim($path, '/')). DS .'views'. DS;
     }
@@ -68,7 +68,7 @@ Class View {
      * 
      * @return string
      */
-    public function get_path()
+    public function getPath()
     {
         return (string)$this->path;
     }
@@ -85,21 +85,21 @@ Class View {
     */
     public function load($filename, $data = '', $string = false)
     {
-        if(function_exists('\Ob\getInstance') AND  is_object(\Ob\getInstance()))
+        if(function_exists('getInstance') AND  is_object(getInstance()))
         {
-            foreach(array_keys(get_object_vars(\Ob\getInstance())) as $key) // This allows to using "$this" variable in all views files.
+            foreach(array_keys(get_object_vars(getInstance())) as $key) // This allows to using "$this" variable in all views files.
             {
                 // Don't do lazy loading => isset() in here object variables always
                 // must be ## NEW ##. 
                 // e.g. $this->config->item('myitem')
                 
-                $this->{$key} = \Ob\getInstance()->{$key};          
+                $this->{$key} = getInstance()->{$key};          
             }
         }
         
         //-----------------------------------
                 
-        $data = $this->_set_data($data); // Enables you to set data that is persistent in all views.
+        $data = $this->_setData($data); // Enables you to set data that is persistent in all views.
 
         //-----------------------------------
 
@@ -115,7 +115,7 @@ Class View {
 
         include($this->path . $filename . EXT);
         
-        \Ob\log\me('debug', 'View file loaded: '.\Ob\error\securePath($this->path). $filename . EXT);
+        \log\me('debug', 'View file loaded: '.\error\securePath($this->path). $filename . EXT);
 
         if($string === true)
         {
@@ -129,7 +129,7 @@ Class View {
         $output = ob_get_contents();
         
         // Set Layout views inside to Output Class for caching functionality.
-        \Ob\Output\Output::getInstance()->appendOutput($output);
+        \Output\Output::getInstance()->appendOutput($output);
 
         @ob_end_clean();
 
@@ -146,7 +146,7 @@ Class View {
     * @access public
     * @return void
     */
-    public function _set_data($data = '')
+    public function _setData($data = '')
     {
         if($data == '')
         {

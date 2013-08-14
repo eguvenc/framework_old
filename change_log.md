@@ -106,8 +106,8 @@ works automatically from now on.
     
 
 - added public_folder item to config.php
-- added _get_public_path() function to common.php file, updated head_tag and body_tag helper.  
-- updated Config.php and url helper publicUrl() function.
+- added _getAssetPath() function to common.php file, updated head_tag and body_tag helper.  
+- updated Config.php and url helper assetUrl() function.
 - added [no_space] rule to Validator.php
 - added [valid_email_dns] rule to Validator library
 - added callback_request[method][request_uri] rule to Validator library
