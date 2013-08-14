@@ -14,7 +14,7 @@ If you wish to increase security by hiding the location of your Obullo files you
 
 That's it!
 
-If you're new to Obullo, please read the [Getting Started](docs/introduction/#getting-started) section of the Manual to begin learning how to build dynamic PHP applications.
+If you're new to Obullo, please read the [Getting Started](/docs/introduction/#getting-started) section of the Manual to begin learning how to build dynamic PHP applications.
 
 [We have a wiki page installation instructions for Ubuntu OS.](http://wiki.obullo.com/#setting_up_php_and_obullo_framework_under_the_ubuntu)
 

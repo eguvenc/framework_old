@@ -993,7 +993,7 @@ Class Model_blog extends Model
     function __constuct()
     {
         parent::__constuct();  // Call the Model constructor 
-        new Db\Connect();    // Connect to current database setting.
+        new Db\Db();    // Connect to current database setting.
     }
     
     public function get_last_ten_entries()
@@ -1243,7 +1243,7 @@ new Db\Db("db2");
 $this->db2->query(" .... ");
 ```
 
-Also you can manually pass database connectivity settings via the first parameter of your new Db\Connect() function:
+Also you can manually pass database connectivity settings via the first parameter of your new Db\Db() function:
 
 ```php
 $config = array(
