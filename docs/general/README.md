@@ -1029,7 +1029,7 @@ Class Model_blog extends Model
 ?>
 ```
 
-<strong>Note:</strong> The functions in the above example use the [Active Record Class](/docs/database#active_record_class) database functions.
+<strong>Note:</strong> The functions in the above example use the [Active Record Class](/docs/database/#active_record_class) database functions.
 
 <strong>Note:</strong> Please don't use $_POST variables as directly. Use <samp>i\post();</samp> function instead of php native $_POST variables.We have a Input Helper for the secure inputs.
 
@@ -1197,7 +1197,7 @@ $autoload['model']      = array('model1', 'model2', 'app/model', '../module/mode
 
 When a model is loaded it does  <strong>NOT</strong> connect automatically to your database. The following options for connecting are available to you:
 
-You can connect using the database methods [described here](/docs/database#database-configuration-and-connect), either from within your Controller class or your Model class. You must declare <samp>new Db/Db()</samp> function in your model or controller class.
+You can connect using the database methods [described here](/docs/database/#database-configuration-and-connect), either from within your Controller class or your Model class. You must declare <samp>new Db/Db()</samp> function in your model or controller class.
 
 Putting this code into your Controller or Model __construct() function enough for the current database connection which is defined in the <dfn>application/config/database.php</dfn>
 
