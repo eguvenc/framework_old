@@ -1,14 +1,14 @@
 
-#General Topics
+#General Topics <a name="general-topics"></a>
 
-## Obullo URLs
+## Obullo URLs <a name="obullo-urls"></a>
 By default, URLs in Obullo are designed to be search-engine and human friendly. Rather than using the standard "query string" approach to URLs that is synonymous with dynamic systems, Obullo uses a segment-based approach:
 
 ```php
 example.com/{module}/news/article/my_article
 ```
 
-### Removing the index.php file
+### Removing the index.php file 
 
 ------
 
@@ -18,7 +18,7 @@ By default, the **index.php** file will be included in your URLs:
 example.com/index.php/module/news/article/my_article
 ```
 
-### Apache HTTP Server
+### Apache HTTP Server <a name="apache-http-server"></a>
 
 ------
 
@@ -45,7 +45,7 @@ If the request is for a file that exists already on the server, index.php isn't 
 **RewriteRule ^(.*)$ /index.php**
 All other requests are sent to index.php.
 
-### Nginx HTTP Server
+### Nginx HTTP Server <a name="nginx-http-server"></a>
 
 ------
 
@@ -150,16 +150,16 @@ server {
 
 **Edit your config.php**
 
-Finally you should do some changes in your **application/config/config.php** file.
+Finally you should do some changes in your **app/config/config.php** file.
 
 ```php
 $config['index_page'] = "";
 $config['uri_protocol'] = "REQUEST_URI";   // QUERY_STRING
 ```
 
-If you can't get uri requests try to change your uri protocol which is defined **application/config/config.php** file.
+If you can't get uri requests try to change your uri protocol which is defined **app/config/config.php** file.
 
-### Adding a URL Suffix
+### Adding a URL Suffix <a name="adding-a-url-suffix"></a>
 
 ------
 
@@ -175,7 +175,7 @@ You can optionally add a suffix, like **.html**, making the page appear to be of
 example.com/index.php/shop/products/view/shoes.html
 ```
 
-### Enabling Query Strings
+### Enabling Query Strings <a name="enabling-query-strings"></a>
 
 ------
 
@@ -193,20 +193,17 @@ $config['directory_trigger']  = 'd';
 $config['controller_trigger'] = 'c';
 $config['function_trigger'] = 'm';
 ```
-<<<<<<< HEAD
-If you change "enable_query_strings" to true this feature will become active. Your controllers and functions will then be accessible using the "trigger" words you've set to invoke your directory, controllers and methods:
-=======
+
 
 If you change "enable_query_strings" to TRUE this feature will become active. Your controllers and functions will then be accessible using the "trigger" words you've set to invoke your directory, controllers and methods:
 
->>>>>>> 199c264ab5c8831dfc117e6903a64bbefeb326d8
 ```php
 index.php?d=directory&c=controller&m=method
 ```
 
 **_Please note:_** If you are using query strings you will have to build your own URLs, rather than utilizing the URL helpers (and other helpers that generate URLs, like some of the form helpers) as these are designed to work with segment based URLs.
 
-### URI Extensions
+### URI Extensions <a name="uri-extensions"></a>
 
 -------
 
@@ -216,7 +213,7 @@ You can use uri extensions when you use ajax, xml, rss, json.. requests, you can
 example.com/module/class/post.json
 ```
 
-You can define allowed extensions from your application/config/config.php file, default allowed URI extensions listed below.
+You can define allowed extensions from your app/config/config.php file, default allowed URI extensions listed below.
 - php
 - html
 - json
@@ -240,7 +237,7 @@ switch($this->uri->extension())
 }
 ```
 
-## Controllers
+## Controllers <a name="controllers"></a>
 
 Controllers are the heart of your application, as they determine how HTTP requests should be handled.
 
@@ -271,7 +268,7 @@ In the above example, Obullo would attempt to find a MODULE named <dfn>/blog</df
 
 **When a controller's name matches the second segment of a URI, it will be loaded.**
 
-### Let's try it: Hello World! 
+### Let's try it: Hello World! <a name="lets-try-it-hello-world"></a>
 
 -------
 
@@ -343,7 +340,7 @@ Class start extends Controller
 
 Also, always make sure your controller <dfn>extends</dfn> the parent controller class so that it can inherit all its functions.
 
-### Functions 
+### Functions <a name="functions"></a>
 
 ------
 
@@ -383,7 +380,7 @@ example.com/index.php/blog/start/comments/
 
 You should see your new message.
 
-### Passing URI Segments to your Functions 
+### Passing URI Segments to your Functions <a name="passing-uri-segments-to-your-functions"></a>
 
 ------
 
@@ -416,11 +413,11 @@ Class Products extends Controller
 
 **Important:** If you are using the [URI Routing](http://obullo.com/user_guide/en/1.0.1/uri-routing.html) feature, the segments passed to your function will be the re-routed ones.
 
-### Defining a Default Controller
+### Defining a Default Controller <a name="defining-a-default-controller"></a>
 
 ------
 
-Obullo can be told to load a default controller when a URI is not present, as will be the case when only your site root URL is requested. To specify a default controller, open your <dfn>application/config/routes.php</dfn> file and set this variable:
+Obullo can be told to load a default controller when a URI is not present, as will be the case when only your site root URL is requested. To specify a default controller, open your <dfn>app/config/routes.php</dfn> file and set this variable:
 
 ```php
 $route['default_controller'] = 'blog/start';
@@ -428,7 +425,7 @@ $route['default_controller'] = 'blog/start';
 
 Where <var>Blog</var> is the name of the <samp>directory</samp> and <var>Start</var> controller class you want used. If you now load your main index.php file without specifying any URI segments you'll see your Hello World message by default.
 
-### Remapping Function Calls
+### Remapping Function Calls <a name="remapping-function-calls"></a>
 
 -------
 
@@ -441,7 +438,7 @@ public function _remap()
 }
 ```
 
-**Important:** If your controller contains a function named <samp>_remap()</samp>, it will **always** get called regardless of what your URI contains. It overrides the normal behavior in which the URI determines which function is called, allowing you to define your own function routing rules.
+**Important:** If your controller contains a function named <samp>remap()</samp> , it will **always** get called regardless of what your URI contains. It overrides the normal behavior in which the URI determines which function is called, allowing you to define your own function routing rules.
 The overridden function call (typically the second segment of the URI) will be passed as a parameter the <samp>_remap()</samp> function:
 
 ```php
@@ -459,11 +456,11 @@ public function _remap($method)
 }
 ```
 
-### Processing Output
+### Processing Output <a name="processing-output"></a>
 
 ------
 
-Obullo has an output class that takes care of sending your final rendered data to the web browser automatically. More information on this can be found in the [Views](http://obullo.com/user_guide/en/1.0.1/views.html) and [Output](http://obullo.com/user_guide/en/1.0.1/output-class.html) class pages. In some cases, however, you might want to post-process the finalized data in some way and send it to the browser yourself. Obullo permits you to add a function named <dfn>_output()</dfn> to your controller that will receive the finalized output data.
+Obullo has an output class that takes care of sending your final rendered data to the web browser automatically. More information on this can be found in the [Views](#views) and [Output](http://obullo.com/user_guide/en/1.0.1/output-class.html) class pages. In some cases, however, you might want to post-process the finalized data in some way and send it to the browser yourself. Obullo permits you to add a function named <dfn>_output()</dfn> to your controller that will receive the finalized output data.
 
 **Important:** If your controller contains a function named <samp>_output()</samp>, it will always be called by the output class instead of echoing the finalized data directly. The first parameter of the function will contain the finalized output.
 
@@ -478,7 +475,7 @@ public function _output($output)
 
 Please note that your <dfn>_output()</dfn> function will receive the data in its finalized state. Benchmark and memory usage data will be rendered, cache files written (if you have caching enabled), and headers will be sent (if you use that [feature](http://obullo.com/user_guide/en/1.0.1/output-class.html)) before it is handed off to the _output() function. If you are using this feature the page execution timer and memory usage stats might not be perfectly accurate since they will not take into acccount any further processing you do. For an alternate way to control output <em>before</em> any of the final processing is done, please see the available methods in the [Output Class](http://obullo.com/user_guide/en/1.0.1/output-class.html).
 
-### Private Functions
+### Private Functions <a name="private-functions"></a>
 
 ------
 
@@ -497,7 +494,7 @@ Trying to access it via the URL, like this, will not work and Obullo will show "
 example.com/index.php/blog/start/utility/
 ```
 
-### Class Constructors
+### Class Constructors <a name="class-constructors"></a>
 
 ------
 
@@ -523,7 +520,7 @@ class Start extends Controller
 
 Constructors are useful if you need to set some default values, or run a default process when your class is instantiated. Constructors can't return a value, but they can do some default work.
 
-### Reserved Function Names
+### Reserved Function Names <a name="reserved-function-names"></a>
 
 ------
 
@@ -537,13 +534,13 @@ That, in a nutshell, is all there is to know about controllers.
 
 ## Working with Parent Controllers
 
-### Parent Controllers
+### Parent Controllers <a name="parent-controllers"></a>
 
 ------
 
 You can define your custom Controllers, The Parent Controllers are the parent of your main controller file, it control the <strong>extra jobs</strong> in the application. There are <strong>two</strong> Libraries folder called <strong>/libraries</strong> and it can be locate in your MODULES or APPLICATION directory.
 
-### Application Parent Controllers
+### Application Parent Controllers <a name="application-parent-controllers"></a>
 
 ------
 
@@ -587,7 +584,7 @@ Class Start extends My_Controller
 ?> 
 ```
 
-### Module Parent Controllers
+### Module Parent Controllers <a name="module-parent-controllers"></a>
 
 ------
 
@@ -630,13 +627,13 @@ Class Start extends Welcome_Controller
 ```
 You can find the Welcome Controller example in <dfn>modules/welcome/libraries</dfn> folder.
 
-### Reserved Names
+### Reserved Names <a name="reserved-names"></a>
 
 ------
 
 In order to help out, Obullo uses a series of functions and names in its operation. Because of this, some names cannot be used by a developer. Following is a list of reserved names that cannot be used.
 
-### Controller names
+### Controller names <a name="controller-names"></a>
 
 ------
 
@@ -761,7 +758,7 @@ Since your controller classes will extend the main application controller you mu
 * ori_abs
 * ori_rel
 
-## Views
+## Views <a name="views"></a>
 
 A view is simply a web page, or a page fragment, like a header, footer, sidebar, etc. In fact, views can flexibly be embedded within other views (within other views, etc., etc.) if you need this type of hierarchy.
 
@@ -769,7 +766,7 @@ Views are never called directly, they must be loaded by a controller. Remember t
 
 Using the example controller you created in the controller page, let's add a view to it.
 
-### Creating a View
+### Creating a View <a name="creating-a-view"></a>
 
 ------
 
@@ -810,7 +807,7 @@ vi/views('filename');
 
 <strong>Tip</strong>: This function normally loads a file as string. If you want to use include functionality, use it like this <samp>view('name', '', false);</samp>
 
-### Creating Variables for Layouts
+### Creating Variables for Layouts <a name="creating-variables-for-layouts"></a>
 
 ------
 
@@ -823,16 +820,9 @@ vi/setVar('key', 'val');
 You can store values multiple times...
 
 ```php
-<<<<<<< HEAD
-vi/setVar('title', 'Hello ');
-vi/setVar('title', 'My ');
-vi/setVar('title', 'Dear !');
-```
-=======
 vi/set_var('title', 'Hello ');
 vi/set_var('title', 'My ');
 vi/set_var('title', 'Dear !');
->>>>>>> 199c264ab5c8831dfc117e6903a64bbefeb326d8
 echo view_var('title');   // Hello My Dear !
 ```
 
@@ -863,7 +853,7 @@ If you visit the your site using the URL you did earlier you should see your new
 example.com/index.php/blog/start/
 ```
 
-### Adding Dynamic Data to the View
+### Adding Dynamic Data to the View <a name="adding-dynamic-data-to-the-view"></a>
 
 ------
 
@@ -921,7 +911,7 @@ echo vi/views('../footer)';
 
 Then load the page at the URL you've been using and you should see the variables replaced.
 
-### Creating Loops
+### Creating Loops <a name="creating-loops"></a>
 
 ------
 
@@ -979,7 +969,7 @@ vi/views('myfile', '', false);
 
 For more functions look at View Helper file.
 
-## Models
+## Models <a name="models"></a>
 
 Models are <strong>optionally</strong> available for those who want to use a more traditional MVC approach.
 
@@ -989,7 +979,7 @@ Models are <strong>optionally</strong> available for those who want to use a mor
 - [Auto-Loading a Model](#auto-loading-models)
 - [Connecting to your Database](#connecting-to-your-database)
 
-### What is a Model?
+### What is a Model? <a name="what-is-a-model"></a>
 
 ------
 
@@ -1003,7 +993,7 @@ Class Model_blog extends Model
     function __constuct()
     {
         parent::__constuct();  // Call the Model constructor 
-        new Db\Connect();    // Connect to current database setting.
+        new Db\Db();    // Connect to current database setting.
     }
     
     public function get_last_ten_entries()
@@ -1039,15 +1029,15 @@ Class Model_blog extends Model
 ?>
 ```
 
-<strong>Note:</strong> The functions in the above example use the [Active Record Class](https://github.com/obullo/obullo-2.0/tree/master/docs/database#active_record_class) database functions.
+<strong>Note:</strong> The functions in the above example use the [Active Record Class](/docs/database/#active_record_class) database functions.
 
 <strong>Note:</strong> Please don't use $_POST variables as directly. Use <samp>i\post();</samp> function instead of php native $_POST variables.We have a Input Helper for the secure inputs.
 
-### Anatomy of a Model
+### Anatomy of a Model <a name="anatomy-of-a-model"></a>
 
 ------
 
-Model classes are stored in your <dfn>application/models/</dfn> folder. They can be locate in your local model folder if you create a <dfn>/model</dfn> folder under the <dfn>application/directories/{controller}/</dfn> path.
+Model classes are stored in your <dfn>app/models/</dfn> folder. They can be locate in your local model folder if you create a <dfn>/model</dfn> folder under the <dfn>app/directories/{controller}/</dfn> path.
 
 The basic prototype for a model class is this:
 
@@ -1084,14 +1074,14 @@ Class Model_user extends Model
 Your file should be like this:
 
 ```php
-application/models/model_user.php
+app/models/model_user.php
 ```
 
-### Loading a Model
+### Loading a Model <a name="loading-a-model"></a>
 
 ------
 
-Your models will typically be loaded and called from within your [controller](https://github.com/obullo/obullo-2.0/tree/master/docs/general#controllers) functions. To load a application model you will use the following function:
+Your models will typically be loaded and called from within your [controller](#controllers) functions. To load a application model you will use the following function:
 
 ```php
 -  application
@@ -1125,21 +1115,17 @@ new Model\Blog();
 $this->model_name->function();
 ```
 
-#### Using No Instantiate
+#### Using No Instantiate <a name="using-no-instantiate"></a>
 
-<<<<<<< HEAD
-If you set second param to false, you can instantiate the your model manually.
-=======
 If you set second param to FALSE, you can instantiate the your model manually.
 
->>>>>>> 199c264ab5c8831dfc117e6903a64bbefeb326d8
 ```php
 $user = new Model\User(false);
 
 $user->save();
 ```
 
-#### Subfolders
+#### Subfolders <a name="subfolders"></a>
 
 You can load model from subfolders
 
@@ -1195,25 +1181,25 @@ and view file should be like this ..
 <?php endforeach; ?> 
 ```
 
-### Auto-loading Models
+### Auto-loading Models <a name="auto-loading-models"></a>
 
 -------
 
-Open your application/config/autoload.php or create a autoload.php into <dfn>modules/modulename/config/autoload.php</dfn> file and define the model file
+Open your app/config/autoload.php or create a autoload.php into <dfn>modules/modulename/config/autoload.php</dfn> file and define the model file
 
 ```php
 $autoload['model']      = array('model1', 'model2', 'app/model', '../module/model');
 ```
 
-### Connecting to your Database
+### Connecting to your Database <a name="connecting-to-your-database"></a>
 
 ------
 
 When a model is loaded it does  <strong>NOT</strong> connect automatically to your database. The following options for connecting are available to you:
 
-You can connect using the database methods [described here](https://github.com/obullo/obullo-2.0/tree/master/docs/database#database-configuration-and-connect), either from within your Controller class or your Model class. You must declare <samp>new Db/Connect()</samp> function in your model or controller class.
+You can connect using the database methods [described here](/docs/database/#database-configuration-and-connect), either from within your Controller class or your Model class. You must declare <samp>new Db/Db()</samp> function in your model or controller class.
 
-Putting this code into your Controller or Model __construct() function enough for the current database connection which is defined in the <dfn>application/config/database.php</dfn>
+Putting this code into your Controller or Model __construct() function enough for the current database connection which is defined in the <dfn>app/config/database.php</dfn>
 
 ```php 
 namespace Model;
@@ -1234,7 +1220,7 @@ Class Model_user extends Model
 }
 ```
 
-If your second database connection setting before defined in <dfn>application/config/database.php</dfn> file like this
+If your second database connection setting before defined in <dfn>app/config/database.php</dfn> file like this
 
 ```php
 // second database
@@ -1257,7 +1243,7 @@ new Db\Db("db2");
 $this->db2->query(" .... ");
 ```
 
-Also you can manually pass database connectivity settings via the first parameter of your new Db\Connect() function:
+Also you can manually pass database connectivity settings via the first parameter of your new Db\Db() function:
 
 ```php
 $config = array(
@@ -1297,7 +1283,7 @@ $this->db2->query(  ....  );
 echo db('hostname', 'db2');   // output localhost 
 ```
 
-This will give you hostname parameter of second database connection setting which before defined in <dfn>application/config/database.php</dfn> file.
+This will give you hostname parameter of second database connection setting which before defined in <dfn>app/config/database.php</dfn> file.
 
 <strong>Note:</strong>If you want to use a library inside Model, we does not assign all libraries to a Model class so you must assign your library manually using <strong>this();</strong> word Like this ..
 
