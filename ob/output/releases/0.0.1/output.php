@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Output;
+namespace Output;
 
 /**
  * Output Class
@@ -24,7 +24,7 @@ Class Output {
     
     public function __construct()
     {
-        \Ob\log\me('debug', "Output Class Initialized");
+        \log\me('debug', "Output Class Initialized");
     }
     
     // --------------------------------------------------------------------
@@ -125,7 +125,7 @@ Class Output {
     */    
     public function setStatusHeader($code = 200, $text = '')
     {
-        \Ob\setStatusHeader($code, $text);
+        setStatusHeader($code, $text);
     }
     
     // --------------------------------------------------------------------
@@ -179,7 +179,7 @@ Class Output {
         // Parse out the elapsed time and memory usage,
         // then swap the pseudo-variables with the data
         
-        $elapsed = \Ob\bench\elapsedTime('total_execution_time_start', 'total_execution_time_end');        
+        $elapsed = \bench\elapsedTime('total_execution_time_start', 'total_execution_time_end');        
         $output  = str_replace('{elapsed_time}', $elapsed, $output);
                 
         if ($this->parse_exec_vars === true)
@@ -192,7 +192,7 @@ Class Output {
         // Is compression requested?  
         // --------------------------------------------------------------------
         
-        if (\Ob\config('compress_output') === true)
+        if (config('compress_output') === true)
         {
             if (extension_loaded('zlib'))
             {             
@@ -225,11 +225,11 @@ Class Output {
         {
             echo $output;
             
-            \Ob\log\me('debug', "Final output sent to browser");
+            \log\me('debug', "Final output sent to browser");
             
-            if (\Ob\config('log_benchmark') == true)
+            if (config('log_benchmark') == true)
             {
-                \Ob\log\me('bench', "Total execution time: ".$elapsed);
+                \log\me('bench', "Total execution time: ".$elapsed);
             }
             
             return true;
@@ -237,7 +237,7 @@ Class Output {
         
         // Does the controller contain a function named _output()?
         // If so send the output there.  Otherwise, echo it.
-        $ob = \Ob\getInstance();
+        $ob = getInstance();
         
         if (method_exists($ob, '_output'))
         {
@@ -248,11 +248,11 @@ Class Output {
             echo $output;  // Send it to the browser!
         }
         
-        \Ob\log\me('debug', "Final output sent to browser");
+        \log\me('debug', "Final output sent to browser");
                 
         // Do we need to generate profile data?        
         // If so, load the Profile class and run it.
-        if (\Ob\config('log_benchmark') == true)
+        if (config('log_benchmark') == true)
         {
             if (function_exists('memory_get_usage') && ($usage = memory_get_usage()) != '')
             {
@@ -263,7 +263,7 @@ Class Output {
                 $memory_usage = "memory_get_usage() function not found on your php configuration.";
             }
 
-            $bench = \Ob\bench\getInstance(); // init to bencmark for profiling.
+            $bench = \bench\getInstance(); // init to bencmark for profiling.
             
             $profile = array();
             foreach ($bench->marker as $key => $val)
@@ -274,7 +274,7 @@ Class Output {
                 {             
                     if (isset($bench->marker[$match[1].'_end']) AND isset($bench->marker[$match[1].'_start']))
                     {
-                        $profile[$match[1]] = \Ob\bench\elapsedTime($match[1].'_start', $key);
+                        $profile[$match[1]] = \bench\elapsedTime($match[1].'_start', $key);
                     }
                 }
             }
@@ -283,10 +283,10 @@ Class Output {
             {
                 $key = ucwords(str_replace(array('_', '-'), ' ', $key));
                 
-                \Ob\log\me('bench', "$key: ". $val); 
+                \log\me('bench', "$key: ". $val); 
             }
              
-            \Ob\log\me('bench', "Memory Usage: ". $memory_usage); 
+            \log\me('bench', "Memory Usage: ". $memory_usage); 
         } 
     }    
     
@@ -300,7 +300,7 @@ Class Output {
     */    
     public function _writeCache($output)
     {
-        $OB = \Ob\getInstance();
+        $OB = getInstance();
         $cache_path = APP .'cache'. DS;
 
         if ( ! is_dir(rtrim($cache_path, DS)) OR ! isReallyWritable(rtrim($cache_path, DS)))
@@ -315,7 +315,7 @@ Class Output {
 
         if ( ! $fp = @fopen($cache_path, FOPEN_WRITE_CREATE_DESTRUCTIVE))
         {
-            \Ob\log\me('error', 'Unable to write cache file: '.$cache_path);
+            \log\me('error', 'Unable to write cache file: '.$cache_path);
             return;
         }
         
@@ -329,14 +329,14 @@ Class Output {
         }
         else
         {
-            \Ob\log\me('error', 'Unable to secure a file lock for file at: '.$cache_path);
+            \log\me('error', 'Unable to secure a file lock for file at: '.$cache_path);
             return;
         }
         
         fclose($fp);
         @chmod($cache_path, DIR_WRITE_MODE);
 
-        \Ob\log\me('debug', "Cache file written: ".$cache_path);
+        \log\me('debug', "Cache file written: ".$cache_path);
     }
 
     // --------------------------------------------------------------------
@@ -390,7 +390,7 @@ Class Output {
             {
                 @unlink($filepath);
                 
-                \Ob\log\me('debug', 'Cache file has expired. File deleted');
+                \log\me('debug', 'Cache file has expired. File deleted');
                 
                 return false;
             }
@@ -399,7 +399,7 @@ Class Output {
         // Display the cache
         $this->_display(str_replace($match['0'], '', $cache_data));
         
-        \Ob\log\me('debug', 'Cache file is current. Sending it to browser.');
+        \log\me('debug', 'Cache file is current. Sending it to browser.');
         
         return true;
     }

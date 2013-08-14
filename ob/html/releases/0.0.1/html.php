@@ -1,5 +1,5 @@
 <?php
-namespace Ob\html {
+namespace html {
     
     // --------------------------------------------------------------------
     
@@ -18,7 +18,7 @@ namespace Ob\html {
     { 
         function __construct()
         {
-            \Ob\log\me('debug', 'Html Helper Initialized.');
+            \log\me('debug', 'Html Helper Initialized.');
         }
     }
     
@@ -42,7 +42,8 @@ namespace Ob\html {
         {
             $href   = substr($href, 0, -2);
             $files  = '';
-            $folder = get_filenames(ROOT .'assets'. DS .'css'. DS . str_replace('/', DS, $href));
+            $folder = getFilenames(ROOT .'assets'. DS .'css'. DS . str_replace('/', DS, $href));
+            
             foreach ($folder as $filename)
             {
                 $files .= _css($href.'/'.$filename, $title, $media, $rel, $index_page = false);
@@ -76,7 +77,8 @@ namespace Ob\html {
         {
             $src    = substr($src, 0, -2);
             $files  = '';
-            $folder = get_filenames(ROOT .'assets'. DS .'js'. DS . str_replace('/', DS, $src));
+            $folder = getFilenames(ROOT .'assets'. DS .'js'. DS . str_replace('/', DS, $src));
+            
             foreach ($folder as $filename)
             {
                 $files .= _js($src.'/'.$filename, $arguments, $type, $index_page = false);
@@ -111,11 +113,11 @@ namespace Ob\html {
         }
         elseif ($index_page === true)
         {
-            $link .= ' href="'. \Ob\getInstance()->config->siteUrl($href, false) .'" ';
+            $link .= ' href="'. getInstance()->config->siteUrl($href, false) .'" ';
         }
         else
         {
-            $link .= ' href="'. _get_public_path($href, $extra_path = '', $ext) .'" ';
+            $link .= ' href="'. _getAssetPath($href, $extra_path = '', $ext) .'" ';
         }
 
         $link .= 'rel="'.$rel.'" type="text/css" ';
@@ -151,11 +153,11 @@ namespace Ob\html {
         }
         elseif ($index_page === true)  // .js file as PHP
         {
-            $link .= ' src="'. \Ob\getInstance()->config->siteUrl($src, false) .'" ';
+            $link .= ' src="'. getInstance()->config->siteUrl($src, false) .'" ';
         }
         else
         {
-            $link .= ' src="'. _get_public_path($src, $extra_path = '', 'js') .'" ';
+            $link .= ' src="'. _getAssetPath($src, $extra_path = '', 'js') .'" ';
         }
 
         $link .= $arguments;
@@ -195,11 +197,11 @@ namespace Ob\html {
             {
                 if ($index_page === true)
                 {
-                    $img .= ' src="'. \Ob\getInstance()->config->siteUrl($v, false).'" ';
+                    $img .= ' src="'. getInstance()->config->siteUrl($v, false).'" ';
                 }
                 else
                 {
-                    $img .= ' src="' . _get_public_path($v, 'images'. $extra_path = '') .'" ';
+                    $img .= ' src="' . _getAssetPath($v, 'images'. $extra_path = '') .'" ';
                 }
             }
             else
@@ -223,7 +225,7 @@ namespace Ob\html {
     * @param    mixed $extra_path
     * @return   string | false
     */
-    function _get_public_path($file_url, $extra_path = '', $ext = '')
+    function _getAssetPath($file_url, $extra_path = '', $ext = '')
     {                              
         $filename = $file_url;          
         $paths    = array();
@@ -247,9 +249,9 @@ namespace Ob\html {
             $folder = '';
         }
 
-        $config = \Ob\getInstance()->config;
+        $config = getInstance()->config;
         
-        return $config->publicUrl('', true) .'assets/'. $extra_path . $folder . $sub_path . $filename;
+        return $config->assetUrl('', true) .'assets/'. $extra_path . $folder . $sub_path . $filename;
     }
 
     // ------------------------------------------------------------------------
@@ -263,7 +265,7 @@ namespace Ob\html {
     * @param bool $_recursion
     * @return boolean | array
     */
-    function get_filenames($source_dir, $include_path = false, $_recursion = false)
+    function getFilenames($source_dir, $include_path = false, $_recursion = false)
     {
         static $_filedata = array();
 
@@ -280,7 +282,7 @@ namespace Ob\html {
             {
                 if (@is_dir($source_dir.$file) && strncmp($file, '.', 1) !== 0)
                 {
-                            get_filenames($source_dir.$file. DS, $include_path, true);
+                            getFilenames($source_dir.$file. DS, $include_path, true);
                 }
                 elseif (strncmp($file, '.', 1) !== 0)
                 {

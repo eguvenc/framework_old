@@ -39,7 +39,7 @@ namespace Ob\link {
                 $title = $email;
         }
 
-        $attributes = _parse_attributes($attributes);
+        $attributes = _parseAttributes($attributes);
 
         return '<a href="mailto:'.$email.'"'.$attributes.'>'.$title.'</a>';
     }

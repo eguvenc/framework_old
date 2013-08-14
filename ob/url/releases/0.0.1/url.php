@@ -1,5 +1,5 @@
 <?php
-namespace Ob\url {
+namespace url {
     
     // ------------------------------------------------------------------------
     
@@ -15,7 +15,7 @@ namespace Ob\url {
     { 
         function __construct()
         {
-            \Ob\log\me('debug', 'Url Helper Initialized.');
+            \log\me('debug', 'Url Helper Initialized.');
         }
     }
     
@@ -29,7 +29,7 @@ namespace Ob\url {
     */
     function base($uri = '')
     {
-        return \Ob\Config::getInstance()->baseUrl($uri);
+        return \Config::getInstance()->baseUrl($uri);
     }
 
     // ------------------------------------------------------------------------
@@ -46,7 +46,7 @@ namespace Ob\url {
     */
     function assets($uri = '', $no_ext_uri_slash = false, $no_folder = false)
     {
-        return \Ob\Config::getInstance()->publicUrl($uri, $no_folder, $no_ext_uri_slash);
+        return \Config::getInstance()->assetUrl($uri, $no_folder, $no_ext_uri_slash);
     }
     
     // ------------------------------------------------------------------------
@@ -64,7 +64,7 @@ namespace Ob\url {
     */
     function site($uri = '', $suffix = true)
     {
-        return \Ob\Config::getInstance()->siteUrl($uri, $suffix);
+        return \Config::getInstance()->siteUrl($uri, $suffix);
     }
     
     // ------------------------------------------------------------------------
@@ -77,7 +77,7 @@ namespace Ob\url {
     */
     function current()
     {
-        return \Ob\Config::getInstance()->siteUrl(\Uri::getInstance()->uriString());
+        return \Config::getInstance()->siteUrl(\Uri::getInstance()->uriString());
     }
 
     // ------------------------------------------------------------------------
@@ -91,7 +91,7 @@ namespace Ob\url {
     */
     function module($uri = '')
     {
-        $module = \Ob\getInstance()->router->fetchDirectory();
+        $module = getInstance()->router->fetchDirectory();
         
         if($uri == '')
         {
@@ -144,11 +144,11 @@ namespace Ob\url {
 
         if ( ! is_array($uri))
         {
-            $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? \Ob\getInstance()->config->siteUrl($uri, $suffix) : $uri;
+            $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? getInstance()->config->siteUrl($uri, $suffix) : $uri;
         }
         else
         {
-            $site_url = \Ob\getInstance()->config->siteUrl($uri, $suffix);
+            $site_url = getInstance()->config->siteUrl($uri, $suffix);
         }
 
         if ($title == '')
@@ -158,7 +158,7 @@ namespace Ob\url {
 
         if ($attributes != '')
         {
-            $attributes = _parse_attributes($attributes);
+            $attributes = _parseAttributes($attributes);
         }
 
         if($sharp == true AND isset($sharp_uri[1]))
@@ -204,7 +204,7 @@ namespace Ob\url {
     * @version  0.1     added suffix parameters
     * @return	string
     */
-    function anchor_popup($uri = '', $title = '', $attributes = false, $suffix = true)
+    function anchorPopup($uri = '', $title = '', $attributes = false, $suffix = true)
     {
         $ssl = false;  // ssl support
         if(strpos($uri, 'https://') === 0)
@@ -219,7 +219,7 @@ namespace Ob\url {
 
         $title = (string) $title;
 
-        $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? \Ob\getInstance()->uri->siteUrl($uri, $suffix) : $uri;
+        $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? getInstance()->uri->siteUrl($uri, $suffix) : $uri;
 
         # if ssl used do not use https:// for standart anchors.
         # if your HTTP server NGINX add below the line to your fastcgi_params file.
@@ -263,10 +263,10 @@ namespace Ob\url {
 
         if ($attributes != '')
         {
-            $attributes = _parse_attributes($attributes);
+            $attributes = _parseAttributes($attributes);
         }
 
-        return "<a href='javascript:void(0);' onclick=\"window.open('".$site_url."', '_blank', '"._parse_attributes($atts, true)."');\"$attributes>".$title."</a>";
+        return "<a href='javascript:void(0);' onclick=\"window.open('".$site_url."', '_blank', '"._parseAttributes($atts, true)."');\"$attributes>".$title."</a>";
     }
     
     // ------------------------------------------------------------------------
@@ -377,7 +377,7 @@ namespace Ob\url {
                 $sharp     = true;
             }
 
-            $uri = \Ob\getInstance()->config->siteUrl($uri, $suffix);
+            $uri = getInstance()->config->siteUrl($uri, $suffix);
 
             if($sharp == true AND isset($sharp_uri[1]))
             {
@@ -416,7 +416,7 @@ namespace Ob\url {
     * @param	bool
     * @return	string
     */
-    function _parse_attributes($attributes, $javascript = false)
+    function _parseAttributes($attributes, $javascript = false)
     {
         if (is_string($attributes))
         {

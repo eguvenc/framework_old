@@ -1,4 +1,3 @@
-<?php namespace Ob ?>
 <style type="text/css">
 #exception_content {
 font-family : Verdana, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, Geneva, Arial, Sans-serif;

@@ -143,7 +143,7 @@ Class Acl {
             }
             else
             {
-                throw new \Exception('Undefined group name <b>'.$name.'</b>, please add a group using <b>$acl->add_group()</b> method.');
+                throw new \Exception('Undefined group name <b>'.$name.'</b>, please add a group using <b>$acl->addGroup()</b> method.');
             }
             
             return;
@@ -191,7 +191,7 @@ Class Acl {
             }
             else
             {
-                throw new \Exception('Undefined group name <b>'.$name.'</b>, please add a group using <b>$acl->add_group()</b> method.');
+                throw new \Exception('Undefined group name <b>'.$name.'</b>, please add a group using <b>$acl->addGroup()</b> method.');
             }
             
             return false;
@@ -199,7 +199,7 @@ Class Acl {
         
         if( ! isset($this->members[$name]))   // check really is it member ?
         {
-            throw new \Exception('Undefined member name <b>'.$name.'</b>, please add a member using <b>$acl->add_member(\'membername\', \'groupname\')</b> method.');
+            throw new \Exception('Undefined member name <b>'.$name.'</b>, please add a member using <b>$acl->addMember(\'membername\', \'groupname\')</b> method.');
         }
 
         $group = $this->members[$name];   

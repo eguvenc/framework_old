@@ -1,4 +1,5 @@
 <?php
+namespace Ob {
 
     /**
     * Common Functions
@@ -30,7 +31,7 @@
             Controller::_ob_getInstance_($new_instance);
         }
 
-        return  Controller::_ob_getInstance_(); 
+        return Controller::_ob_getInstance_(); 
     }
 
     // --------------------------------------------------------------------
@@ -42,7 +43,7 @@
     * @return
     */
     function autoloader($realname)
-    {
+    {           
         if(class_exists($realname))
         {  
             return;
@@ -98,30 +99,28 @@
             require($model_path);
             return;
         }
-
+        
         //--------------- OB PACKAGE LOADER ---------------//
-
-        $ob_parts   = explode('\\', $realname);
-        $ob_library = strtolower($ob_parts[0]);
-        // print_r($ob_parts); exit;
-
-        $src = '';
-        if(isset($ob_parts[1]) AND $ob_parts[1] == 'Src')
-        {
-            $src = 'src'. DS;
-        }
         
-        if($ob_library == 'ob') { exit($realname); }
-
-        $package_filename = mb_strtolower($ob_library, config('charset'));
-        
-        if(isset($packages['dependencies'][$package_filename]['component'])) //  check is it Obullo Package ?
+        if(strpos($realname, 'Ob\\') === 0)  // get modules from ob/ directory.
         {
-            if($packages['dependencies'][$package_filename]['component'] == 'helper')
+            $ob_parts   = explode('\\', $realname);
+            $ob_library = strtolower($ob_parts[1]);
+            // print_r($ob_parts);
+            
+            $src = '';
+            if(isset($ob_parts[2]) AND $ob_parts[2] == 'Src')
             {
-                
+                $src = 'src'. DS;
             }
             
+            $package_filename = mb_strtolower($ob_library, config('charset'));
+
+            if( ! isset($packages['dependencies'][$package_filename]['component'])) //  check package Installed.
+            {
+                throw new \Exception('The package '.$package_filename.' not installed. Please update your package.json and run obm update.');
+            }
+
             $class = $package_filename;
             if($src != '') // Driver Request.
             {
@@ -130,27 +129,26 @@
 
             require_once(OB_MODULES .$package_filename. DS .'releases'. DS .$packages['dependencies'][$package_filename]['version']. DS .$src.$class. EXT);
             return;
-        }
+        } 
         else 
         {
             if(strpos($realname, '\\') > 0)
             {
                 $user_parts = explode('\\', $realname);
                 $class_name = mb_strtolower($user_parts[0], config('charset')); // User Classes
-
-                // print_r($user_parts); exit;
-                
+            
                 require_once(CLASSES .$class_name. DS .$class_name. EXT);
                 return;
             }
-
+            
             $class_name = mb_strtolower($realname, config('charset')); // User Classes
-            require_once(CLASSES .$class_name. DS .$class_name. EXT);   
+            
+            require_once(CLASSES .$class_name. DS .$class_name. EXT);
         }
    
     }
 
-    spl_autoload_register('autoloader', true);
+    spl_autoload_register('Ob\autoloader', true);
 
     // --------------------------------------------------------------------
 
@@ -471,6 +469,8 @@
 
         return $str;
     }
+    
+}
 
 // END common.php File
 

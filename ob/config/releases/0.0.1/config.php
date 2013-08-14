@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Config;
+namespace Config;
 
 /**
  * Config Class
@@ -111,7 +111,7 @@ Class Config
         
         unset($config);
 
-        \Ob\log\me('debug', 'Config file loaded: '.$file);
+        \log\me('debug', 'Config file loaded: '.$file);
         
         return true;
     }
@@ -134,7 +134,7 @@ Class Config
         {    
             if ( ! isset($this->config[$item]))
             {
-                \Ob\log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
+                \log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
                 return false;
             }
@@ -145,14 +145,14 @@ Class Config
         {
             if ( ! isset($this->config[$index]))
             {
-                \Ob\log\me('info', 'Requested config index "'.$item.'" not found, be sure providing to right name.');
+                \log\me('info', 'Requested config index "'.$item.'" not found, be sure providing to right name.');
                 
                 return false;
             }
 
             if ( ! isset($this->config[$index][$item]))
             {
-                \Ob\log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
+                \log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
                 return false;
             }
@@ -247,17 +247,17 @@ Class Config
     * @param    bool $no_slash  no trailing slashes
     * @return   string
     */
-    public function publicUrl($uri = '', $no_folder = false, $no_ext_uri_slash = false)
+    public function assetUrl($uri = '', $no_folder = false, $no_ext_uri_slash = false)
     {
         $extra_uri     = (trim($uri, '/') != '') ? trim($uri, '/').'/' : '';
-        $public_folder = ($no_folder) ? '' : 'assets/';
+        $asset_folder  = ($no_folder) ? '' : 'assets/';
         
         if($no_ext_uri_slash)
-        {
+        { 
             $extra_uri = trim($extra_uri, '/');
         }
         
-        return $this->slashItem('public_url') .$public_folder. $extra_uri;
+        return $this->slashItem('asset_url') .$asset_folder. $extra_uri;
     }
     
     // --------------------------------------------------------------------

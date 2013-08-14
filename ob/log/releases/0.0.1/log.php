@@ -1,5 +1,5 @@
 <?php
-namespace Ob\log {
+namespace log {
     
     // ------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ namespace Ob\log {
     */
     function me($level = 'error', $message = '')
     {    
-        if (\Ob\config('log_threshold') == 0)
+        if (config('log_threshold') == 0)
         {
             return;
         }
@@ -64,8 +64,8 @@ namespace Ob\log {
         $level     = strtoupper($level);
 
         $log_path        = APP .'logs'. DS;
-        $log_threshold   = \Ob\config('log_threshold');
-        $log_date_format = \Ob\config('log_date_format');
+        $log_threshold   = config('log_threshold');
+        $log_date_format = config('log_date_format');
 
         if (defined('STDIN') AND defined('TASK'))   // Internal Task Request
         {
@@ -81,7 +81,7 @@ namespace Ob\log {
             $log_path = rtrim($log_path, DS) . DS .'cmd' . DS; 
         }         
 
-        if ( ! is_dir(rtrim($log_path, DS)) OR ! \Ob\isReallyWritable($log_path))
+        if ( ! is_dir(rtrim($log_path, DS)) OR ! isReallyWritable($log_path))
         {
             $enabled = false;
         }

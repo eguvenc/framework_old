@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Exception;
+namespace Exception;
 
 
 /**
@@ -14,7 +14,7 @@ Class Exception {
 
     function __construct()
     {
-        \Ob\log\me('debug', "Exception Class Initialized");
+        \log\me('debug', "Exception Class Initialized");
     }
  
     /**
@@ -32,9 +32,9 @@ Class Exception {
         // If user want to close error_reporting in some parts of the application.
         //-----------------------------------------------------------------------
         
-        if(\Ob\config('error_reporting') == '0')
+        if(config('error_reporting') == '0')
         {
-            \Ob\log\me('debug', 'Error reporting seems Off, check the config.php file $config[\'error_reporting\'].');
+            \log\me('debug', 'Error reporting seems Off, check the config.php file $config[\'error_reporting\'].');
             
             return;
         }
@@ -44,10 +44,10 @@ Class Exception {
         
         $code = $e->getCode();
         $last_query = '';
-        if(isset(\Ob\getInstance()->db))
+        if(isset(getInstance()->db))
         {
-            $prepare    = (isset(\Ob\getInstance()->db->prepare)) ? \Ob\getInstance()->db->prepare : false;
-            $last_query = \Ob\getInstance()->db->lastQuery($prepare);
+            $prepare    = (isset(getInstance()->db->prepare)) ? getInstance()->db->prepare : false;
+            $last_query = getInstance()->db->lastQuery($prepare);
         }
         
         if( ! empty($last_query))
@@ -62,11 +62,11 @@ Class Exception {
         
         if(defined('STDIN'))  // If Command Line Request. 
         {
-            echo $type .': '. $e->getMessage(). ' File: ' .\Ob\error\securePath($e->getFile()). ' Line: '. $e->getLine(). "\n";
+            echo $type .': '. $e->getMessage(). ' File: ' .\error\securePath($e->getFile()). ' Line: '. $e->getLine(). "\n";
             
             $cmd_type = (defined('TASK')) ? 'Task' : 'Cmd';
             
-            \Ob\log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.\Ob\error\securePath($e->getFile()).' '.$e->getLine(), true); 
+            \log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.\error\securePath($e->getFile()).' '.$e->getLine(), true); 
             
             return;
         }
@@ -86,12 +86,12 @@ Class Exception {
         // Log Php Errors
         //-----------------------------------------------------------------------
         
-        \Ob\log\me('error', $type.': '.$e->getMessage(). ' '.\Ob\error\securePath($e->getFile()).' '.$e->getLine(), true); 
+        \log\me('error', $type.': '.$e->getMessage(). ' '.\error\securePath($e->getFile()).' '.$e->getLine(), true); 
              
         // Displaying Errors
         //-----------------------------------------------------------------------            
         
-        $level  = \Ob\config('error_reporting');
+        $level  = config('error_reporting');
 
         if(is_numeric($level)) 
         {
@@ -102,14 +102,14 @@ Class Exception {
             }   
         }       
     
-        $rules = \Ob\error\parseRegex($level);
+        $rules = \error\parseRegex($level);
         
         if($rules == false) 
         {
             return;
         }
         
-        $allowed_errors = \Ob\error\getAllowedErrors($rules);  // Check displaying error enabled for current error.
+        $allowed_errors = \error\getAllowedErrors($rules);  // Check displaying error enabled for current error.
     
         if(isset($allowed_errors[$code]))
         {

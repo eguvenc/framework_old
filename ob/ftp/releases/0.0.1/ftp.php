@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Ftp;
+namespace Ftp;
 
 /**
  * Ftp Class
@@ -29,7 +29,7 @@ Class Ftp {
     {   
         if($no_instance)
         {
-            \Ob\getInstance()->ftp = $this; // Make available it in the controller $this->ftp->method();
+            getInstance()->ftp = $this; // Make available it in the controller $this->ftp->method();
         }
         
         if (count($config) > 0)
@@ -37,7 +37,7 @@ Class Ftp {
             $this->init($config);
         }
 
-        \Ob\log\me('debug', "FTP Class Initialized");
+        \log\me('debug', "FTP Class Initialized");
     }
     
     // --------------------------------------------------------------------
@@ -590,9 +590,9 @@ Class Ftp {
      */
     private function _error($line)
     {
-        \Ob\getInstance()->locale->load('obullo'); // load framework language file.
+        getInstance()->locale->load('obullo'); // load framework language file.
         
-        \Ob\showError(\Ob\lang($line));
+        showError(lang($line));
     }
 
 }

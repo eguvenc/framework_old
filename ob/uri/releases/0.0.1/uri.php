@@ -1,5 +1,5 @@
 <?php
-namespace Ob\Uri;
+namespace Uri;
 
  /**
  * URI Class
@@ -42,7 +42,7 @@ Class Uri
         // the URI Class at Bootstrap. When you try loading any library
         // you will get a Fatal Error.
         
-        \Ob\log\me('debug', 'URI Class Initialized'); // core level log 
+        \log\me('debug', 'URI Class Initialized'); // core level log 
     }
 
     // --------------------------------------------------------------------
@@ -98,7 +98,7 @@ Class Uri
     {
         if($filter) // Filter out control characters
         {
-            $uri = \Ob\removeInvisibleCharacters($uri, false);
+            $uri = removeInvisibleCharacters($uri, false);
         }
         
         $this->uri_string = $uri;
@@ -120,7 +120,7 @@ Class Uri
             return;
         }
 
-        $protocol = strtoupper(\Ob\config('uri_protocol'));
+        $protocol = strtoupper(config('uri_protocol'));
         
         if ($protocol == 'AUTO')
         {
@@ -257,7 +257,7 @@ Class Uri
     {
         if(strpos($segment, '.') !== false)
         {
-            $allowed_extensions = \Ob\config('uri_extensions');
+            $allowed_extensions = config('uri_extensions');
             
             $extension = explode('.', $segment);
             $extension = end($extension);
@@ -303,13 +303,13 @@ Class Uri
     {
         // $class = lib('anyClass');  // Don't use any class in this level this will occur fatal errors !!!
 
-    	if ($str != '' && \Ob\config('permitted_uri_chars') != '' && \Ob\config('enable_query_strings') == false)
+    	if ($str != '' && config('permitted_uri_chars') != '' && config('enable_query_strings') == false)
         {
             // preg_quote() in PHP 5.3 escapes -, so the str_replace() and addition of - to preg_quote() is to maintain backwards
             // compatibility as many are unaware of how characters in the permitted_uri_chars will be parsed as a regex pattern
-            if ( ! preg_match('|^['.str_replace(array('\\-', '\-'), '-', preg_quote(\Ob\config('permitted_uri_chars'), '-')).']+$|i', $str))
+            if ( ! preg_match('|^['.str_replace(array('\\-', '\-'), '-', preg_quote(config('permitted_uri_chars'), '-')).']+$|i', $str))
             {
-                \Ob\showError('The URI you submitted has disallowed characters.', 400);
+                showError('The URI you submitted has disallowed characters.', 400);
             }
         }
 
@@ -330,9 +330,9 @@ Class Uri
      */
     public function _removeUrlSuffix()
     {
-        if  (\Ob\config('url_suffix') != "")
+        if  (config('url_suffix') != "")
         {
-            $this->uri_string = preg_replace("|".preg_quote(\Ob\config('url_suffix'))."$|", "", $this->uri_string);
+            $this->uri_string = preg_replace("|".preg_quote(config('url_suffix'))."$|", "", $this->uri_string);
         }
     }
 
