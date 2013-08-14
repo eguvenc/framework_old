@@ -1,8 +1,8 @@
 # Table of Contents
-1. [Introduction](https://github.com/obullo/obullo-2.0/tree/master/docs/information#introduction)
-  * [Getting Started] (https://github.com/obullo/obullo-2.0/tree/master/docs/information#getting-started)
+1. [Introduction](https://github.com/obullo/obullo-2.0/tree/master/docs/introduction#introduction)
+  * [Getting Started] (https://github.com/obullo/obullo-2.0/tree/master/docs/introduction#getting-started)
   * [Installation Steps](https://github.com/obullo/obullo-2.0/tree/master/docs/installation#installation-steps)
-2. [General Features](https://github.com/obullo/obullo-2.0/tree/master/docs/information#general-features)
+2. [General Features](https://github.com/obullo/obullo-2.0/tree/master/docs/introduction#general-features)
 3. [General Topic] (https://github.com/obullo/obullo-2.0/tree/master/docs/general#general-topics)
    * [Obullo URLs](https://github.com/obullo/obullo-2.0/tree/master/docs/general#obullo-urls)
    * [Controllers](https://github.com/obullo/obullo-2.0/tree/master/docs/general#controllers)
