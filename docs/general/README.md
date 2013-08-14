@@ -1029,7 +1029,7 @@ Class Model_blog extends Model
 ?>
 ```
 
-<strong>Note:</strong> The functions in the above example use the [Active Record Class](/database#active_record_class) database functions.
+<strong>Note:</strong> The functions in the above example use the [Active Record Class](/docs/database#active_record_class) database functions.
 
 <strong>Note:</strong> Please don't use $_POST variables as directly. Use <samp>i\post();</samp> function instead of php native $_POST variables.We have a Input Helper for the secure inputs.
 
