@@ -238,7 +238,7 @@ $database['db']['dbdriver'] = "mysql";
 
 ------
 
-<table>
+<table class="span9">
 <thead>
 <tr>
 <th>PDO Driver Name</th>
@@ -304,7 +304,7 @@ $database['db']['dbdriver'] = "mysql";
 
 ------
 
-<table>
+<table class="span9">
 <thead>
 <tr>
 <th>Driver Name</th>
