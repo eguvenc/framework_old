@@ -150,14 +150,14 @@ server {
 
 **Edit your config.php**
 
-Finally you should do some changes in your **application/config/config.php** file.
+Finally you should do some changes in your **app/config/config.php** file.
 
 ```php
 $config['index_page'] = "";
 $config['uri_protocol'] = "REQUEST_URI";   // QUERY_STRING
 ```
 
-If you can't get uri requests try to change your uri protocol which is defined **application/config/config.php** file.
+If you can't get uri requests try to change your uri protocol which is defined **app/config/config.php** file.
 
 ### Adding a URL Suffix <a name="adding-a-url-suffix"></a>
 
@@ -213,7 +213,7 @@ You can use uri extensions when you use ajax, xml, rss, json.. requests, you can
 example.com/module/class/post.json
 ```
 
-You can define allowed extensions from your application/config/config.php file, default allowed URI extensions listed below.
+You can define allowed extensions from your app/config/config.php file, default allowed URI extensions listed below.
 - php
 - html
 - json
@@ -417,7 +417,7 @@ Class Products extends Controller
 
 ------
 
-Obullo can be told to load a default controller when a URI is not present, as will be the case when only your site root URL is requested. To specify a default controller, open your <dfn>application/config/routes.php</dfn> file and set this variable:
+Obullo can be told to load a default controller when a URI is not present, as will be the case when only your site root URL is requested. To specify a default controller, open your <dfn>app/config/routes.php</dfn> file and set this variable:
 
 ```php
 $route['default_controller'] = 'blog/start';
@@ -1037,7 +1037,7 @@ Class Model_blog extends Model
 
 ------
 
-Model classes are stored in your <dfn>application/models/</dfn> folder. They can be locate in your local model folder if you create a <dfn>/model</dfn> folder under the <dfn>application/directories/{controller}/</dfn> path.
+Model classes are stored in your <dfn>app/models/</dfn> folder. They can be locate in your local model folder if you create a <dfn>/model</dfn> folder under the <dfn>app/directories/{controller}/</dfn> path.
 
 The basic prototype for a model class is this:
 
@@ -1074,7 +1074,7 @@ Class Model_user extends Model
 Your file should be like this:
 
 ```php
-application/models/model_user.php
+app/models/model_user.php
 ```
 
 ### Loading a Model <a name="loading-a-model"></a>
@@ -1185,7 +1185,7 @@ and view file should be like this ..
 
 -------
 
-Open your application/config/autoload.php or create a autoload.php into <dfn>modules/modulename/config/autoload.php</dfn> file and define the model file
+Open your app/config/autoload.php or create a autoload.php into <dfn>modules/modulename/config/autoload.php</dfn> file and define the model file
 
 ```php
 $autoload['model']      = array('model1', 'model2', 'app/model', '../module/model');
@@ -1199,7 +1199,7 @@ When a model is loaded it does  <strong>NOT</strong> connect automatically to yo
 
 You can connect using the database methods [described here](/docs/database/#database-configuration-and-connect), either from within your Controller class or your Model class. You must declare <samp>new Db/Db()</samp> function in your model or controller class.
 
-Putting this code into your Controller or Model __construct() function enough for the current database connection which is defined in the <dfn>application/config/database.php</dfn>
+Putting this code into your Controller or Model __construct() function enough for the current database connection which is defined in the <dfn>app/config/database.php</dfn>
 
 ```php 
 namespace Model;
@@ -1220,7 +1220,7 @@ Class Model_user extends Model
 }
 ```
 
-If your second database connection setting before defined in <dfn>application/config/database.php</dfn> file like this
+If your second database connection setting before defined in <dfn>app/config/database.php</dfn> file like this
 
 ```php
 // second database
@@ -1283,7 +1283,7 @@ $this->db2->query(  ....  );
 echo db('hostname', 'db2');   // output localhost 
 ```
 
-This will give you hostname parameter of second database connection setting which before defined in <dfn>application/config/database.php</dfn> file.
+This will give you hostname parameter of second database connection setting which before defined in <dfn>app/config/database.php</dfn> file.
 
 <strong>Note:</strong>If you want to use a library inside Model, we does not assign all libraries to a Model class so you must assign your library manually using <strong>this();</strong> word Like this ..
 
