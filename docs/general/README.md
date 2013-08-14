@@ -268,7 +268,7 @@ In the above example, Obullo would attempt to find a MODULE named <dfn>/blog</df
 
 **When a controller's name matches the second segment of a URI, it will be loaded.**
 
-### Let's try it: Hello World! 
+### Let's try it: Hello World! <a name="lets-try-it-hello-world"></a>
 
 -------
 
@@ -340,7 +340,7 @@ Class start extends Controller
 
 Also, always make sure your controller <dfn>extends</dfn> the parent controller class so that it can inherit all its functions.
 
-### Functions 
+### Functions <a name="functions"></a>
 
 ------
 
@@ -380,7 +380,7 @@ example.com/index.php/blog/start/comments/
 
 You should see your new message.
 
-### Passing URI Segments to your Functions 
+### Passing URI Segments to your Functions <a name="passing-uri-segments-to-your-functions></a>
 
 ------
 
@@ -413,7 +413,7 @@ Class Products extends Controller
 
 **Important:** If you are using the [URI Routing](http://obullo.com/user_guide/en/1.0.1/uri-routing.html) feature, the segments passed to your function will be the re-routed ones.
 
-### Defining a Default Controller
+### Defining a Default Controller <a name="defining-a-default-controller"></a>
 
 ------
 
@@ -425,7 +425,7 @@ $route['default_controller'] = 'blog/start';
 
 Where <var>Blog</var> is the name of the <samp>directory</samp> and <var>Start</var> controller class you want used. If you now load your main index.php file without specifying any URI segments you'll see your Hello World message by default.
 
-### Remapping Function Calls
+### Remapping Function Calls <a name="remapping-function-calls"></a>
 
 -------
 
@@ -456,7 +456,7 @@ public function _remap($method)
 }
 ```
 
-### Processing Output
+### Processing Output <a name="processing-output"></a>
 
 ------
 
@@ -475,7 +475,7 @@ public function _output($output)
 
 Please note that your <dfn>_output()</dfn> function will receive the data in its finalized state. Benchmark and memory usage data will be rendered, cache files written (if you have caching enabled), and headers will be sent (if you use that [feature](http://obullo.com/user_guide/en/1.0.1/output-class.html)) before it is handed off to the _output() function. If you are using this feature the page execution timer and memory usage stats might not be perfectly accurate since they will not take into acccount any further processing you do. For an alternate way to control output <em>before</em> any of the final processing is done, please see the available methods in the [Output Class](http://obullo.com/user_guide/en/1.0.1/output-class.html).
 
-### Private Functions
+### Private Functions <a name="private-functions"></a>
 
 ------
 
@@ -494,7 +494,7 @@ Trying to access it via the URL, like this, will not work and Obullo will show "
 example.com/index.php/blog/start/utility/
 ```
 
-### Class Constructors
+### Class Constructors <a name="class-constructors"></a>
 
 ------
 
@@ -520,7 +520,7 @@ class Start extends Controller
 
 Constructors are useful if you need to set some default values, or run a default process when your class is instantiated. Constructors can't return a value, but they can do some default work.
 
-### Reserved Function Names
+### Reserved Function Names <a name="reserved-function-names"></a>
 
 ------
 
@@ -534,13 +534,13 @@ That, in a nutshell, is all there is to know about controllers.
 
 ## Working with Parent Controllers
 
-### Parent Controllers
+### Parent Controllers <a name="parent-controllers"></a>
 
 ------
 
 You can define your custom Controllers, The Parent Controllers are the parent of your main controller file, it control the <strong>extra jobs</strong> in the application. There are <strong>two</strong> Libraries folder called <strong>/libraries</strong> and it can be locate in your MODULES or APPLICATION directory.
 
-### Application Parent Controllers
+### Application Parent Controllers <a name="application-parent-controllers"></a>
 
 ------
 
@@ -584,7 +584,7 @@ Class Start extends My_Controller
 ?> 
 ```
 
-### Module Parent Controllers
+### Module Parent Controllers <a name="module-parent-controllers"></a>
 
 ------
 
@@ -627,13 +627,13 @@ Class Start extends Welcome_Controller
 ```
 You can find the Welcome Controller example in <dfn>modules/welcome/libraries</dfn> folder.
 
-### Reserved Names
+### Reserved Names <a name="reserved-names"></a>
 
 ------
 
 In order to help out, Obullo uses a series of functions and names in its operation. Because of this, some names cannot be used by a developer. Following is a list of reserved names that cannot be used.
 
-### Controller names
+### Controller names <a name="controller-names"></a>
 
 ------
 
@@ -758,7 +758,7 @@ Since your controller classes will extend the main application controller you mu
 * ori_abs
 * ori_rel
 
-## Views
+## Views <a name="views"></a>
 
 A view is simply a web page, or a page fragment, like a header, footer, sidebar, etc. In fact, views can flexibly be embedded within other views (within other views, etc., etc.) if you need this type of hierarchy.
 
@@ -766,7 +766,7 @@ Views are never called directly, they must be loaded by a controller. Remember t
 
 Using the example controller you created in the controller page, let's add a view to it.
 
-### Creating a View
+### Creating a View <a name="creating-a-view"></a>
 
 ------
 
@@ -807,7 +807,7 @@ vi/views('filename');
 
 <strong>Tip</strong>: This function normally loads a file as string. If you want to use include functionality, use it like this <samp>view('name', '', false);</samp>
 
-### Creating Variables for Layouts
+### Creating Variables for Layouts <a name="creating-variables-for-layouts"></a>
 
 ------
 
@@ -853,7 +853,7 @@ If you visit the your site using the URL you did earlier you should see your new
 example.com/index.php/blog/start/
 ```
 
-### Adding Dynamic Data to the View
+### Adding Dynamic Data to the View <a name="adding-dynamic-data-to-the-view"></a>
 
 ------
 
@@ -911,7 +911,7 @@ echo vi/views('../footer)';
 
 Then load the page at the URL you've been using and you should see the variables replaced.
 
-### Creating Loops
+### Creating Loops <a name="creating-loops"></a>
 
 ------
 
@@ -969,7 +969,7 @@ vi/views('myfile', '', false);
 
 For more functions look at View Helper file.
 
-## Models
+## Models <a name="models"></a>
 
 Models are <strong>optionally</strong> available for those who want to use a more traditional MVC approach.
 
@@ -979,7 +979,7 @@ Models are <strong>optionally</strong> available for those who want to use a mor
 - [Auto-Loading a Model](#auto-loading-models)
 - [Connecting to your Database](#connecting-to-your-database)
 
-### What is a Model?
+### What is a Model? <a name="what-is-a-model"></a>
 
 ------
 
@@ -1033,7 +1033,7 @@ Class Model_blog extends Model
 
 <strong>Note:</strong> Please don't use $_POST variables as directly. Use <samp>i\post();</samp> function instead of php native $_POST variables.We have a Input Helper for the secure inputs.
 
-### Anatomy of a Model
+### Anatomy of a Model <a name="anatomy-of-a-model"></a>
 
 ------
 
@@ -1077,7 +1077,7 @@ Your file should be like this:
 application/models/model_user.php
 ```
 
-### Loading a Model
+### Loading a Model <a name="loading-a-model"></a>
 
 ------
 
@@ -1114,8 +1114,8 @@ new Model\Blog();
 
 $this->model_name->function();
 ```
-
-#### Using No Instantiate
+t
+#### Using No Instantiate <a name="using-no-instantiate"></a>
 
 If you set second param to FALSE, you can instantiate the your model manually.
 
@@ -1125,7 +1125,7 @@ $user = new Model\User(false);
 $user->save();
 ```
 
-#### Subfolders
+#### Subfolders <a name="subfolders"></a>
 
 You can load model from subfolders
 
@@ -1181,7 +1181,7 @@ and view file should be like this ..
 <?php endforeach; ?> 
 ```
 
-### Auto-loading Models
+### Auto-loading Models <a name="auto-loading-models"></a>
 
 -------
 
@@ -1191,7 +1191,7 @@ Open your application/config/autoload.php or create a autoload.php into <dfn>mod
 $autoload['model']      = array('model1', 'model2', 'app/model', '../module/model');
 ```
 
-### Connecting to your Database
+### Connecting to your Database <a name="connecting-to-your-database"></a>
 
 ------
 
