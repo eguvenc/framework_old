@@ -1197,7 +1197,7 @@ $autoload['model']      = array('model1', 'model2', 'app/model', '../module/mode
 
 When a model is loaded it does  <strong>NOT</strong> connect automatically to your database. The following options for connecting are available to you:
 
-You can connect using the database methods [described here](database#database-configuration-and-connect), either from within your Controller class or your Model class. You must declare <samp>new Db/Connect()</samp> function in your model or controller class.
+You can connect using the database methods [described here](//database#database-configuration-and-connect), either from within your Controller class or your Model class. You must declare <samp>new Db/Connect()</samp> function in your model or controller class.
 
 Putting this code into your Controller or Model __construct() function enough for the current database connection which is defined in the <dfn>application/config/database.php</dfn>
 
