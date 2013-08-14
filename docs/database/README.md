@@ -134,6 +134,7 @@ echo $row['name'];
 The above <dfn>rowArray()</dfn> function returns an <strong>array</strong>. Example: $row['name']
 
 ### Standard Insert
+
 ------
 
 ```php
@@ -152,6 +153,7 @@ echo $affected_rows;
 We use <strong>execQuery()</strong> function for, insert, delete, update operations... It return to affected rows automatically.
 
 ### High Secure Insert
+
 ------
 
 Dou you want to <strong>more security ?</strong>
@@ -236,19 +238,65 @@ $database['db']['dbdriver'] = "mysql";
 
 ------
 
-| PDO Driver Name | Obullo Connection Name | Database Name |
-| ------------- |:-------------:| -----:|
-| PDO_DBLIB | dblib / mssql / sybase / freetds | FreeTDS / Microsoft SQL Server / Sybase |
-| PDO_FIREBIRD | firebird      |   Firebird/Interbase 6 |
-| PDO_IBM | ibm / db2      |    IBM DB2 |
-| PDO_MYSQL | mysql | MySQL 3.x/4.x/5.x |
-| PDO_OCI  | oracle / (or alias oci)      |   Oracle Call Interface |
-| PDO_ODBC | odbc      |    ODBC v3 (IBM DB2, unixODBC and win32 ODBC) |
-| PDO_PGSQL | pgsql | PostgreSQL |
-| PDO_SQLITE | sqlite / sqlite2 / sqlite3 |   SQLite 3 and SQLite 2 |
-| PDO_4D | 4D |    4D |
-| PDO_CUBRID | cubrid |    Cubrid |
+<table>
+<th>
+<td>PDO Driver Name</td>
+<td>Obullo Connection Name</td>
+<td>Database Name</td>
+</th>
+<tr>
+<td>PDO_DBLIB</td>
+<td>dblib / mssql / sybase / freetds</td>
+<td>FreeTDS / Microsoft SQL Server / Sybase</td>
+</tr>
+<tr>
+<td>PDO_FIREBIRD</td>
+<td>firebird</td>
+<td>Firebird/Interbase 6</td>
+</tr>
+<tr>
+<td>PDO_IBM</td>
+<td>ibm / db2</td>
+<td>IBM DB2</td>
+</tr>
+<tr>
+<td>PDO_MYSQL</td>
+<td>mysql</td>
+<td>MySQL 3.x/4.x/5.x</td>
+</tr>
+<tr>
+<td>PDO_OCI</td>
+<td>oracle / (or alias oci)</td>
+<td>Oracle Call Interface</td>
+</tr>
+<tr>
+<td>PDO_ODBC</td>
+<td>odbc</td>
+<td>ODBC v3 (IBM DB2, unixODBC and win32 ODBC)</td>
+</tr>
+<tr>
+<td>PDO_PGSQL</td>
+<td>pgsql</td>
+<td>PostgreSQL</td>
+</tr>
+<tr>
+<td>PDO_SQLITE</td>
+<td>sqlite / sqlite2 / sqlite3</td>
+<td>SQLite 3 and SQLite 2</td>
+</tr>
+<tr>
+<td>PDO_4D</td>
+<td>4D</td>
+<td>4D</td>
+</tr>
+<tr>
+<td>PDO_CUBRID</td>
+<td>cubrid</td>
+<td>Cubrid</td>
+</tr>
 
+
+</table>
 
 ### Supported NOSQL Database Types
 
