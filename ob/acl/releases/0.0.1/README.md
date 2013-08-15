@@ -13,7 +13,7 @@ new Acl();
 $this->acl->method();
 ```
 
-Once loaded, the Acl object will be available using: $this->acl->method();
+Once loaded, the Acl object will be available using: <dfn>$this->acl->method();</dfn>
 
 ### Quick Access To Library
 
