@@ -1,12 +1,12 @@
 # Database 
 
-## Quick Usage: PDO Examples
+## Quick Usage: PDO Examples <a name="quick-usage-pdo-examples"></a>
 
 Why Obullo use PDO for database operations ? , download this [document](http://ilia.ws/files/quebec_PDO.pdf) it will give you some introductory information about PDO.
 
 The following page contains example code showing how the database class is used. For complete details please read the individual pages describing each function.
 
-### Initializing the Database Class
+### Initializing the Database Class <a name="initializing-the-database-class"></a>
 
 ------
 
@@ -204,7 +204,7 @@ $affected_rows = $this->db->insert('mytable', $data);
 // Query Output: INSERT INTO mytable (title, name, date) VALUES ($title, $name, $date) 
 ```
 
-## Database Configuration
+## Database Configuration <a name="database-configuration"></a>
 
 ### Server Requirements
 
