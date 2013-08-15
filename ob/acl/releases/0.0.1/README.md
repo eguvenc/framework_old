@@ -1,10 +1,10 @@
-### Acl Class
+## Acl Class
 
 -------
 
 Acl Class provides a lightweight and simple access control list (ACL) implementation for privileges management.
 
-###Initializing the Class
+### Initializing the Class
 
 -------
 
