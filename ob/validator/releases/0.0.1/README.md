@@ -6,7 +6,7 @@ Obullo provides a comprehensive form validation and data prepping class that hel
 
 <ul>
 <li><a href="#overview">Overview</a></li>
-<li><a href="#form-valitadion-tutorial">Form Validation Tutorial</a>
+<li><a href="#form-validation-tutorial">Form Validation Tutorial</a>
     <ul>
         <li><a href="#the-form">The Form</a></li>
         <li><a href="#the-success-page">The Success Page</a></li>
@@ -25,10 +25,10 @@ Obullo provides a comprehensive form validation and data prepping class that hel
         <li><a href="#using-arrays-as-field-name">Using Arrays as Field Name</a></li>
     </ul>    
 </li>
-<li>Rule Reference</li>    
-<li>Prepping Reference</li>    
-<li>Function Reference</li>    
-<li>Helper Reference</li>    
+<li><a href="#rule-reference">Rule Reference</a></li>    
+<li><a href="#prepping-reference">Prepping Reference</a></li>    
+<li><a href="#function-reference">Function Reference</a></li>    
+<li><a href="#helper-reference">Helper Reference</a></li>    
 
 ### Overview <a name="overview"></a>
 
@@ -233,7 +233,7 @@ Class Form extends Controller {
 
 **Note:** The form fields are not yet being re-populated with the data when there is an error. We'll get to that shortly.
 
-### Setting Rules Using an Array <a name="setting-rules-using-an-array"></a>
+### Setting Rules Using an Array <a name="setting-validation-rules-using-an-array"></a>
 
 ------
 
