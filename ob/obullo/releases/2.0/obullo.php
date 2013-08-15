@@ -32,21 +32,21 @@ Class Obullo
             new error\start();
         }
         
-        $uri    = Uri\Uri::getInstance(); 
-        $router = Router\Router::getInstance();
+        $uri    = Uri::getInstance(); 
+        $router = Router::getInstance();
 
         new bench\start();
         
-        Locale\Locale::getInstance();
+        Locale::getInstance();
         
         bench\mark('total_execution_time_start');
         bench\mark('loading_time_base_classes_start');
         
-        $input = Input\Input::getInstance();
+        $input = Input::getInstance();
         $input->_sanitizeGlobals();  // Initalize to input filter. ( Sanitize must be above the GLOBALS !! )             
 
-        $output = Output\Output::getInstance();
-        $config = Config\Config::getInstance(); 
+        $output = Output::getInstance();
+        $config = Config::getInstance(); 
 
         if ($output->_displayCache($config, $uri) == true) { exit; }  // Check REQUEST uri if there is a Cached file exist 
 

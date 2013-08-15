@@ -1,5 +1,4 @@
 <?php
-namespace Output;
 
 /**
  * Output Class
@@ -24,7 +23,7 @@ Class Output {
     
     public function __construct()
     {
-        \log\me('debug', "Output Class Initialized");
+        log\me('debug', "Output Class Initialized");
     }
     
     // --------------------------------------------------------------------
@@ -179,7 +178,7 @@ Class Output {
         // Parse out the elapsed time and memory usage,
         // then swap the pseudo-variables with the data
         
-        $elapsed = \bench\elapsedTime('total_execution_time_start', 'total_execution_time_end');        
+        $elapsed = bench\elapsedTime('total_execution_time_start', 'total_execution_time_end');        
         $output  = str_replace('{elapsed_time}', $elapsed, $output);
                 
         if ($this->parse_exec_vars === true)
@@ -225,11 +224,11 @@ Class Output {
         {
             echo $output;
             
-            \log\me('debug', "Final output sent to browser");
+            log\me('debug', "Final output sent to browser");
             
             if (config('log_benchmark') == true)
             {
-                \log\me('bench', "Total execution time: ".$elapsed);
+                log\me('bench', "Total execution time: ".$elapsed);
             }
             
             return true;
@@ -248,7 +247,7 @@ Class Output {
             echo $output;  // Send it to the browser!
         }
         
-        \log\me('debug', "Final output sent to browser");
+        log\me('debug', "Final output sent to browser");
                 
         // Do we need to generate profile data?        
         // If so, load the Profile class and run it.
@@ -283,10 +282,10 @@ Class Output {
             {
                 $key = ucwords(str_replace(array('_', '-'), ' ', $key));
                 
-                \log\me('bench', "$key: ". $val); 
+                log\me('bench', "$key: ". $val); 
             }
              
-            \log\me('bench', "Memory Usage: ". $memory_usage); 
+            log\me('bench', "Memory Usage: ". $memory_usage); 
         } 
     }    
     
@@ -315,7 +314,7 @@ Class Output {
 
         if ( ! $fp = @fopen($cache_path, FOPEN_WRITE_CREATE_DESTRUCTIVE))
         {
-            \log\me('error', 'Unable to write cache file: '.$cache_path);
+            log\me('error', 'Unable to write cache file: '.$cache_path);
             return;
         }
         
@@ -329,14 +328,14 @@ Class Output {
         }
         else
         {
-            \log\me('error', 'Unable to secure a file lock for file at: '.$cache_path);
+            log\me('error', 'Unable to secure a file lock for file at: '.$cache_path);
             return;
         }
         
         fclose($fp);
         @chmod($cache_path, DIR_WRITE_MODE);
 
-        \log\me('debug', "Cache file written: ".$cache_path);
+        log\me('debug', "Cache file written: ".$cache_path);
     }
 
     // --------------------------------------------------------------------
@@ -390,7 +389,7 @@ Class Output {
             {
                 @unlink($filepath);
                 
-                \log\me('debug', 'Cache file has expired. File deleted');
+                log\me('debug', 'Cache file has expired. File deleted');
                 
                 return false;
             }
@@ -399,7 +398,7 @@ Class Output {
         // Display the cache
         $this->_display(str_replace($match['0'], '', $cache_data));
         
-        \log\me('debug', 'Cache file is current. Sending it to browser.');
+        log\me('debug', 'Cache file is current. Sending it to browser.');
         
         return true;
     }

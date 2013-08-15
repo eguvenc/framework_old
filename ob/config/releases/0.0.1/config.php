@@ -1,5 +1,4 @@
 <?php
-namespace Config;
 
 /**
  * Config Class
@@ -88,7 +87,7 @@ Class Config
 
         if ( ! isset($config) OR ! is_array($config))
         {
-            throw new \Exception('Your '. $file .' file does not appear to contain a valid configuration array. Please create $config variables in your ' .$file);
+            throw new Exception('Your '. $file .' file does not appear to contain a valid configuration array. Please create $config variables in your ' .$file);
         }
         
         if ($use_sections === true)
@@ -111,7 +110,7 @@ Class Config
         
         unset($config);
 
-        \log\me('debug', 'Config file loaded: '.$file);
+        log\me('debug', 'Config file loaded: '.$file);
         
         return true;
     }
@@ -134,7 +133,7 @@ Class Config
         {    
             if ( ! isset($this->config[$item]))
             {
-                \log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
+                log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
                 return false;
             }
@@ -145,14 +144,14 @@ Class Config
         {
             if ( ! isset($this->config[$index]))
             {
-                \log\me('info', 'Requested config index "'.$item.'" not found, be sure providing to right name.');
+                log\me('info', 'Requested config index "'.$item.'" not found, be sure providing to right name.');
                 
                 return false;
             }
 
             if ( ! isset($this->config[$index][$item]))
             {
-                \log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
+                log\me('info', 'Requested config item "'.$item.'" not found, be sure providing to right name.');
                 
                 return false;
             }

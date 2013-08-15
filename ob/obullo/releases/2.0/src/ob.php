@@ -103,7 +103,11 @@
 
         $ob_parts   = explode('\\', $realname);
         $ob_library = strtolower($ob_parts[0]);
-        // print_r($ob_parts); exit;
+        
+        if($realname == 'Email\Mail')
+        {
+            // print_r($ob_parts); exit();
+        }
 
         $src = '';
         if(isset($ob_parts[1]) AND $ob_parts[1] == 'Src')
@@ -126,6 +130,11 @@
             if($src != '') // Driver Request.
             {
                 $class = mb_strtolower(end($ob_parts));
+            }  
+            // a request example new Email\Mail(); $ob_parts[1] = 'Mail';
+            elseif($packages['dependencies'][$package_filename]['component'] == 'library' AND isset($ob_parts[1]))
+            {
+                $class = mb_strtolower($ob_parts[1]);
             }
 
             require_once(OB_MODULES .$package_filename. DS .'releases'. DS .$packages['dependencies'][$package_filename]['version']. DS .$src.$class. EXT);

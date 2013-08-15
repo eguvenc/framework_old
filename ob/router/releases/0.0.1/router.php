@@ -1,5 +1,4 @@
 <?php
-namespace Router;
 
  /**
  * Router Class
@@ -42,11 +41,11 @@ Class Router {
         // the Router Class at Bootstrap loading level. When you try load any library
         // you will get a Fatal Error.
         
-        $this->uri = \Uri\Uri::getInstance();
+        $this->uri = Uri::getInstance();
 
         ############## Clone URI Object ############## 
         
-        $uri = clone \Uri\Uri::getInstance();
+        $uri = clone Uri::getInstance();
         
         ############## Clone URI Object ############## 
         
@@ -81,7 +80,7 @@ Class Router {
         
         $this->_setRouting();         
         
-        \log\me('debug', 'Router Class Initialized');
+        log\me('debug', 'Router Class Initialized');
    
     }
     
@@ -117,7 +116,7 @@ Class Router {
     */
     public function clear()
     {
-        $this->uri                 = \Uri\Uri::getInstance();   // reset cloned URI object.
+        $this->uri                 = Uri::getInstance();   // reset cloned URI object.
         $this->config              = '';
         $this->hmvc                = false;
         $this->hmvc_response       = '';
@@ -219,7 +218,7 @@ Class Router {
             // re-index the routed segments array so it starts with 1 rather than 0
             // $this->uri->_reindex_segments();
 
-            \log\me('debug', "No URI present. Default controller set.");
+            log\me('debug', "No URI present. Default controller set.");
             
             return;
         }
@@ -350,7 +349,7 @@ Class Router {
         {
             $this->hmvc_response = 'Hmvc request not found.';
 
-            \log\me('debug', 'Hmvc request not found.');
+            log\me('debug', 'Hmvc request not found.');
             
             return false;
         }

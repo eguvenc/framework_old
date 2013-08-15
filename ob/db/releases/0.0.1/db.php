@@ -1,5 +1,4 @@
 <?php
-namespace Db;
 
 /**
  * Database Connection Class.
@@ -28,7 +27,7 @@ Class Db {
            getInstance()->{$db_var} = $this->connect($db_var, $params); 
         }
         
-        \log\me('debug', 'Db Class Initialized.');
+        log\me('debug', 'Db Class Initialized.');
     }
     
     /**
@@ -59,14 +58,14 @@ Class Db {
         
         if($hostname == false)
         {
-            throw new \Exception('The ' . $db_var . ' database configuration undefined in your config/database.php file.');
+            throw new Exception('The ' . $db_var . ' database configuration undefined in your config/database.php file.');
         }
         
         //----------- MONGO PACKAGE SUPPORT ------------//
         
         if(strtolower($dbdriver) == 'mongo') 
         {
-            $mongo = new \Mongo\Mongo();
+            $mongo = new Mongo();
             
             return $mongo->connect();
         }
@@ -77,12 +76,12 @@ Class Db {
         
         if($packages['db_layer'] == 'Database_Pdo')
         {
-            $database = new \Database_Pdo\Database_Pdo();
+            $database = new Database_Pdo();
             return $database->connect($dbdriver, $options);
         } 
         else // Native database support.
         {
-            $database = new \Database\Database();
+            $database = new Database();
             return $database->connect($dbdriver, $options);
         }
         

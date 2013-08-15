@@ -6,12 +6,12 @@ Class Welcome extends Controller {
     {           
         parent::__construct();
 
-        // new \stdClass();
-        new Db\Db();
-        // print_r($this->db->get('users')->resultArray());
-        
-        // new Ftp\Ftp();
+        // new Email();
 
+        
+        // new Acl();
+        new Db();
+        print_r($this->db->get('users')->resultArray());
         
         // var_dump($this->ftp);
     }
@@ -40,7 +40,7 @@ Class Welcome extends Controller {
         // echo sess\get('test');
         
         vi\get('welcome', '', false); // current module view
-        // vi\views\get('welcome', '', false); // modules/views
+        // vi\views('welcome', '', false); // modules/views
     }
     
     function hmvc()

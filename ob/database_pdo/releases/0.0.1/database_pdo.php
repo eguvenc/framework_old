@@ -1,5 +1,4 @@
 <?php
-namespace Database_Pdo;
 
 /**
  * Pdo Connection Class.
@@ -19,7 +18,7 @@ Class Database_Pdo {
     {
         if ( ! extension_loaded('pdo') )
         {
-            throw new \Exception('The PDO extension is required but extension is not loaded.');
+            throw new Exception('The PDO extension is required but extension is not loaded.');
         }
     }
     
@@ -79,15 +78,15 @@ Class Database_Pdo {
 
         if($driver_name == '')
         {
-            throw new \Exception('The Database pdo library does not support: '. $dbdriver); 
+            throw new Exception('The Database pdo library does not support: '. $dbdriver); 
         }
         
-        if ( ! in_array($dbdriver, \PDO::getAvailableDrivers()))  // check the PDO driver is available
+        if ( ! in_array($dbdriver, PDO::getAvailableDrivers()))  // check the PDO driver is available
         {
-            throw new \Exception('The PDO' . $dbdriver . ' driver is not currently installed on your server.');
+            throw new Exception('The PDO' . $dbdriver . ' driver is not currently installed on your server.');
         }
         
-        $classname = 'Pdo_'.ucfirst($driver_name).'\Pdo_'.ucfirst($driver_name);
+        $classname = 'Pdo_'.ucfirst($driver_name);
         $DB = new $classname($options);
         $DB->__wakeup();
         

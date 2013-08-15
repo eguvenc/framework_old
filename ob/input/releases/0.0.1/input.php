@@ -1,5 +1,4 @@
 <?php
-namespace Input;
 
 /**
  * Input Class
@@ -31,7 +30,7 @@ Class Input {
         $this->enable_xss       = (config('global_xss_filtering') === true) ? true : false;
         $this->enable_csrf      = (config('csrf_protection') === true) ? true : false;
 
-        \log\me('debug', "Input Class Initialized");
+        log\me('debug', "Input Class Initialized");
     }
     
     // --------------------------------------------------------------------
@@ -118,7 +117,7 @@ Class Input {
         // CSRF Protection check
         if ($this->enable_csrf == true)
         {
-            \Security\Security::getInstance()->csrfVerify();
+            Security::getInstance()->csrfVerify();
         }
         
         // Clean $_COOKIE Data
@@ -273,7 +272,7 @@ Class Input {
         // Should we filter the input data?
         if ($this->enable_xss === true)
         {
-            $str = \Security\Security::getInstance()->xssClean($str);
+            $str = Security::getInstance()->xssClean($str);
         }
 
         // Standardize newlines if needed
@@ -333,7 +332,7 @@ Class Input {
 
         if ($xss_clean === true)
         {
-            return \Security\Security::getInstance()->xssClean($array[$index]);
+            return Security::getInstance()->xssClean($array[$index]);
         }
 
         return $array[$index];

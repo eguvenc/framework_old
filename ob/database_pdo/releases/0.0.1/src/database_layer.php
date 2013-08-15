@@ -122,7 +122,7 @@ Class Database_Layer extends Database_Crud {
         
         if(config('log_queries'))
         {
-            log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', $sql), "\n").' time: '.number_format($end_time - $start_time, 4));   
+            \log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', $sql), "\n").' time: '.number_format($end_time - $start_time, 4));   
         }
         
         ++$this->query_count;
@@ -233,7 +233,7 @@ Class Database_Layer extends Database_Crud {
         {
             if(sizeof($this->prep_queries) > 0)
             {
-                log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Prepared Query ) time: '.number_format($end_time - $start_time, 4));
+                \log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Prepared Query ) time: '.number_format($end_time - $start_time, 4));
             }
         }
 
@@ -295,7 +295,7 @@ Class Database_Layer extends Database_Crud {
         {
             if(sizeof($this->prep_queries) > 0)
             {
-                log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Exec Query ) time: '.number_format($end_time - $start_time, 4));
+                \log\me('debug', 'SQL: '.trim(preg_replace('/\n/', ' ', end($this->prep_queries)), "\n").' ( Exec Query ) time: '.number_format($end_time - $start_time, 4));
             }
         }
 

@@ -1,7 +1,6 @@
 <?php
 namespace Exception;
 
-
 /**
  * Exceptions Class
  *
@@ -10,11 +9,11 @@ namespace Exception;
  * @category      Exceptions
  * @link
  */
-Class Exception {
+Class Core {
 
     function __construct()
     {
-        \log\me('debug', "Exception Class Initialized");
+        \log\me('debug', "Exception\Core Class Initialized");
     }
  
     /**

@@ -91,7 +91,7 @@ namespace error {
         } 
         else  // Is It Exception ?
         {             
-            $exception = new \Exception\Exception();
+            $exception = new \Exception\Core();
 
             if(is_object($exception)) 
             {           

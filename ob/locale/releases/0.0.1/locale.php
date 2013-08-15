@@ -1,11 +1,10 @@
 <?php
-namespace Locale;
 
 /**
  * Locale Class ( Language )
  *
  * @package       Obullo
- * @subpackage    cart
+ * @subpackage    locale
  * @category      language
  * @author        Obullo Team
  * @link
@@ -22,7 +21,7 @@ Class Locale {
         // Set Default language from $_COOKIE['__langlocale']
         // $this->set_language();
         
-        \log\me('debug', "Locale Class Initialized");    
+        log\me('debug', "Locale Class Initialized");    
     }
 
     // --------------------------------------------------------------------
@@ -63,14 +62,14 @@ Class Locale {
         
         if( ! is_dir(APP .'locale'. DS .$idiom))
         {
-            throw new \Exception('The locale folder '.APP .'locale'. DS .$idiom.' seems not a folder.');
+            throw new Exception('The locale folder '.APP .'locale'. DS .$idiom.' seems not a folder.');
         }
         
         require(APP .'locale'. DS .$idiom. DS .$filename. EXT);
 
         if ( ! isset($lang))
         {
-            \log\me('error', 'Locale file does not contain $lang variable: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
+            log\me('error', 'Locale file does not contain $lang variable: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
             
             return;
         }
@@ -85,7 +84,7 @@ Class Locale {
 
         unset($lang);
 
-        \log\me('debug', 'Locale file loaded: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
+        log\me('debug', 'Locale file loaded: '. APP .'locale'. DS .$idiom. DS .$filename. EXT);
         
         return true;
     }

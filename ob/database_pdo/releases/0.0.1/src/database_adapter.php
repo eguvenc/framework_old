@@ -119,7 +119,7 @@ Abstract Class Database_Adapter extends Database_Layer {
         $this->_conn->exec("SET NAMES '" . $this->char_set . "'");
         
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
-        $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        $this->_conn->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
     }     
     
     // --------------------------------------------------------------------
@@ -142,7 +142,7 @@ Abstract Class Database_Adapter extends Database_Layer {
      */
     public function isConnected()
     {
-        return ((bool) ($this->_conn instanceof PDO));
+        return ((bool) ($this->_conn instanceof \PDO));
     }
 
     // --------------------------------------------------------------------
@@ -175,9 +175,9 @@ Abstract Class Database_Adapter extends Database_Layer {
         
         try
         {
-            $version = $this->_conn->getAttribute(PDO::ATTR_SERVER_VERSION);
+            $version = $this->_conn->getAttribute(\PDO::ATTR_SERVER_VERSION);
             
-        } catch (PDOException $e)  // don't show excepiton
+        } catch (\PDOException $e)  // don't show excepiton
         {
             // If the driver doesn't support getting attributes
             return null;

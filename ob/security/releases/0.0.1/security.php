@@ -1,5 +1,4 @@
 <?php
-namespace Security;
 
 /**
  * Security Class

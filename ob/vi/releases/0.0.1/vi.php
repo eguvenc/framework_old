@@ -29,7 +29,7 @@ namespace vi {
     */
     function get($filename, $data = '', $string = true)
     {
-        return \View\View::getInstance()->load($filename, $data, $string);
+        return \View::getInstance()->load($filename, $data, $string);
     }
 
     // ------------------------------------------------------------------------
@@ -44,7 +44,7 @@ namespace vi {
     */
     function views($filename, $data = '', $string = true)
     {
-        $view = \View\View::getInstance();
+        $view = \View::getInstance();
         $view->setPath(); // set views path
         
         return get($filename, $data, $string);
@@ -61,7 +61,7 @@ namespace vi {
     */
     function setVar($key, $val = '')
     {
-        $view = \View\View::getInstance();
+        $view = \View::getInstance();
    
         if($val == array())
         {
@@ -83,7 +83,7 @@ namespace vi {
     */
     function getVar($key)
     {
-        $view = \View\View::getInstance();
+        $view = \View::getInstance();
         
         if(isset($view->var[$key]))
         {
@@ -110,7 +110,7 @@ namespace vi {
     */
     function setArray($key, $val = array())
     {
-        $view = \View\View::getInstance();
+        $view = \View::getInstance();
         $val  = (array)$val;
         
         foreach($val as $value)
@@ -134,7 +134,7 @@ namespace vi {
     */
     function getArray($key)
     {
-        $view = \View\View::getInstance();
+        $view = \View::getInstance();
     
         if(isset($view->array[$key]))
         {

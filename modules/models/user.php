@@ -1,6 +1,5 @@
 <?php
 namespace Models;
-use Ob;
 
 Class User extends Model
 {

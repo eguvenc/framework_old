@@ -1,5 +1,4 @@
 <?php
-namespace View;
 
 /**
  * View Class
@@ -34,7 +33,7 @@ Class View {
     {
         $this->path = MODULES .getInstance()->router->fetchDirectory(). DS .'views'. DS;
         
-        \log\me('debug', "View Class Initialized");
+        log\me('debug', "View Class Initialized");
     }
     
     // ------------------------------------------------------------------------
@@ -115,7 +114,7 @@ Class View {
 
         include($this->path . $filename . EXT);
         
-        \log\me('debug', 'View file loaded: '.\error\securePath($this->path). $filename . EXT);
+        log\me('debug', 'View file loaded: '.\error\securePath($this->path). $filename . EXT);
 
         if($string === true)
         {
@@ -129,7 +128,7 @@ Class View {
         $output = ob_get_contents();
         
         // Set Layout views inside to Output Class for caching functionality.
-        \Output\Output::getInstance()->appendOutput($output);
+        Output::getInstance()->appendOutput($output);
 
         @ob_end_clean();
 
