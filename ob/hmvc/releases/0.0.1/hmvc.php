@@ -377,7 +377,7 @@ Class Hmvc
         // Call the controller.
         require_once($controller);
 
-        if ( ! class_exists('\'.$router->fetchClass()) OR $router->fetchMethod() == 'controller' 
+        if ( ! class_exists($router->fetchClass()) OR $router->fetchMethod() == 'controller' 
               OR $router->fetchMethod() == '_output'       // security fix.
               OR $router->fetchMethod() == '_ob_getInstance_'
               OR in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods('Controller')))
@@ -389,7 +389,7 @@ Class Hmvc
             return $this->_response();
         }
 
-        $Class = '\'.$router->fetchClass();
+        $Class = $router->fetchClass();
         
         // If Everyting ok Declare Called Controller !
         $OB = new $Class();
