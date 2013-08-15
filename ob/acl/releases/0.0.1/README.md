@@ -88,39 +88,27 @@ if(  $acl->is_allowed('@admin', 'delete_user'))
 
 ------
 
-### $acl->addGroup('@groupname')
-
-------
+#### $acl->addGroup('@groupname')
 
 Creates a group ( role ), the group name must be have "@" prefix e.g. @admin.
 
-
-### $acl->allow('@groupname', mixed 'operation')
-
-------
+#### $acl->allow('@groupname', mixed 'operation')
 
 Add operation access to access list for provided group.
 
-### $acl->deny('@groupname', mixed 'operation')
-
-------
+#### $acl->deny('@groupname', mixed 'operation')
 
 Delete operation access to access list for provided group.
 
-### $acl->addMember('membername', '@groupname')
-
-------
+#### $acl->addMember('membername', '@groupname')
 
 Add member to provided group.
 
-### $acl->delMember('membername', '@groupname')
-
-------
+#### $acl->delMember('membername', '@groupname')
 
 Delete member from provided group.
 
-### $acl->isAllowed('member_or_@group, 'operation_name')
+#### $acl->isAllowed('member_or_@group, 'operation_name')
 
-------
 Check user or group has access for provided operation.
 
