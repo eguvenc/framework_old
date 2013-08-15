@@ -204,7 +204,7 @@ $affected_rows = $this->db->insert('mytable', $data);
 // Query Output: INSERT INTO mytable (title, name, date) VALUES ($title, $name, $date) 
 ```
 
-## Database Configuration <a name="database-configuration"></a>
+## Database Configuration <a name="database-configuration-and-connect"></a>
 
 ### Server Requirements
 
