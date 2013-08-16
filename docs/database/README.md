@@ -691,7 +691,7 @@ Obullo offers PDO bindValue and bindParam functionality, using bind operations w
             <td>NULL</td>
         </tr>
         <tr>
-            <td>param_int</td>
+            <td>PARAM_INT</td>
             <td>PDO::PARAM_INT</td>
             <td>String</td>
         </tr>
@@ -716,7 +716,7 @@ Obullo offers PDO bindValue and bindParam functionality, using bind operations w
 $this->db->prep();   // tell to db class use pdo prepare 
 $this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
 
-$this->db->bind_value(':id', 1, param_int);  // Integer 
+$this->db->bind_value(':id', 1, PARAM_INT);  // Integer 
 $this->db->bind_value(':code', 'i see dead people', param_str); // String      
 
 $this->db->exec();  // execute query
@@ -735,7 +735,7 @@ The **double dots** in the query are automatically replaced with the values of *
 $this->db->prep();   // tell to db class use pdo prepare 
 $this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
 
-$this->db->bind_param(':id', 1, param_int, 11);   // Integer 
+$this->db->bind_param(':id', 1, PARAM_INT, 11);   // Integer 
 $this->db->bind_param(':code', 'i see dead people', param_str, 20); // String (int Length)      
 
 $this->db->exec();  // execute query
@@ -753,8 +753,8 @@ The secondary benefit of using binds is that the values are automatically escape
 $this->db->prep();   
 $query = $this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
 
-$query->bind_value(':id', 1, param_int);  
-$query->bind_value(':code', 'i-see-dead-people', param_str); 
+$query->bindValue(':id', 1, PARAM_INT);  
+$query->bindValue(':code', 'i-see-dead-people', PARAM_STR); 
 
 $query->exec();
 $a = $query->fetch(assoc); 
@@ -775,4 +775,284 @@ $this->db->exec($values);
 $a = $this->db->fetch(assoc);
 print_r($a);
 ```
-**Important:** Obullo does not support Question Mark binding at this time. 
+**Important:** Obullo does not support Question Mark binding at this time.
+
+ ## Generating Query Results  <a name="generating-query-results"></a>
+
+### Obullo support CodeIgniter Database Functions
+
+------
+
+#### result()
+
+This function returns the query result as object.
+
+#### resultArray();
+
+This function returns the query result as a pure array, or an empty array when no result is produced.
+
+#### rowArray();
+
+Identical to the above row() function, except it returns an array.
+
+#### numRows();
+
+Return to number of rows.
+
+```php
+$query = $this->db->query("YOUR QUERY");
+
+if ($query->num_rows() > 0)
+{
+   $row = $query->row_array();
+
+   echo $row['title'];
+   echo $row['name'];
+   echo $row['body'];
+} 
+```
+
+In addition, you can walk forward/backwards/first/last through your results using these variations:
+
+<strong>
+$row = $query->firstRow()
+$row = $query->lastRow()
+$row = $query->nextRow()
+$row = $query->previousRow()
+</strong>
+
+By default they return an object unless you put the word "array" in the parameter:
+<strong>
+$row = $query->firstRow(assoc)
+$row = $query->lastRow(assoc)
+$row = $query->nextRow(assoc)
+$row = $query->previousRow(assoc)
+</strong>
+
+### Standart Query Result Functions
+
+-------
+
+There are several ways to generate query results:
+
+#### assoc()
+
+This function **fetch one item** and returns query result as an associative array or **an empty array** on failure.
+
+```php
+$query = $this->db->query("YOUR QUERY");
+
+$result = $query->assoc();
+```
+
+**Tip:** 4You can use $this instead of assigning a $query variable ...
+
+```php
+$this->db->query("YOUR QUERY");
+
+$result = $this->db->assoc();
+```
+
+#### obj()
+
+This function fetch one item and returns query result as object or null on failure.
+
+```php
+$query = $this->db->query("YOUR QUERY");
+
+$result = $query->obj();
+```
+
+#### row()
+
+Just alias of obj()
+$query = $this->db->query("YOUR QUERY");
+
+$result = $query->row();
+both()
+
+Get column names and numbers.
+$query = $this->db->query("SELECT article_id FROM table");
+
+$result = $query->both(); 
+// output  Array ( [article_id] => 1 [0] => 1 )  
+row_count()
+
+Returns the number of rows affected by the execution of the last INSERT, DELETE, or UPDATE statement.
+
+The most popular PDO database drivers like MySQL support to row_count(); function for SELECT statement but some database drivers does not support row_count() function like SQLite.If you develop a portable applications do not use row_count(); function via SELECT statements.
+$query = $this->db->query("INSERT UPDATE DELETE QUERY");
+
+$result = $query->row_count(); 
+
+About number of rows ..
+// row_count() Function support just
+
+$query = $this->db->query("INSERT INTO articles 
+(title, article) VALUES('test..','blabla..')");
+
+echo $this->db->row_count();  // output 1
+
+Active record already return to affected rows not necassary to use row_count();
+$data['title']   = 'row count test';
+$data['article'] = 'blablabla ...';
+
+$affected_rows = $this->db->insert('articles', $data);
+echo $affected_rows;  // output 1
+
+If your Pdo driver does not support row_count(), to finding number of rows for the SELECT statement you can use native sql COUNT(*)
+echo $this->db->select("COUNT(*) as num")
+->get('articles')->row()->num; // output 7
+
+// or 
+
+$query = $this->db->query("SELECT COUNT(*) as num FROM articles");
+echo $query->row()->num; // output 7
+
+An alternative way If data is not large and you already use fetch_all then you can use php count(); function
+$query = $this->db->query("SELECT * FROM articles");
+$a = $query->fetch_all(assoc);
+
+echo count($a);   // output 7
+Testing for Results
+
+If you run queries that might not produce a result, you are encouraged to test for a result first using the row() and prepare function:
+$query = $this->db->prep()  // pdo prepare() switch 
+->where('ip_address', '127.0.0.1')
+->get('ob_sessions')    // from this table
+->exec();
+
+if($query->row())
+{
+    $query = $query->exec();  // get cached query..
+    $b = $query->fetch_all(assoc);
+
+    print_r($b);    // output array( ... )   
+}
+
+If row_count() function available in your db driver you can use it ..
+$query = $this->db->where('ip_address', '127.0.0.1')
+->get('ob_sessions');
+
+if($query->row_count() > 0)
+{
+    $b = $query->fetch_all(assoc);
+
+    print_r($b);    // output array( ... )   
+}
+Flexible Query Results
+
+Just two function fetch and fetch_all, you should use them instead of standart query result functions (assoc(), row(), obj() and both()). Using to fetch and fetch_all functions will help you for the some standardisation.
+fetch(int $fetch_style, int $cursor_orientation = ' ', int $cursor_offset = ' ')
+
+Use this function to fetch one item.
+$query = $this->db->query(" ... ");
+
+$result = $query->fetch(assoc);
+
+ // output array( .. ) 
+
+By default all fetch functions return an object unless you put the word assoc in the parameter
+$query = $this->db->query(" ... ");
+
+$result = $query->fetch();
+
+ // output object( .. ) 
+fetch_all(int $fetch_style, int column index = 0, array ctor_args = array())
+
+Use this function to fetch all items.
+$query = $this->db->query(" ... ");
+
+$result = $query->fetch_all(assoc);
+
+// output array( [0]=> array( 'field' => '', field2=> '' ), [1] => array(), ..)  
+
+You can change the result type like this
+$query = $this->db->query(" ... ");
+
+$result = $query->fetch_all();    // default object 
+
+// output Array ( [0] => stdClass Object ( 'field' => '', ..) , [1] => stdClass Object ( )  ... )   
+Result Types (Result Constants)
+
+Below the table show available result types.
+Function 	Description
+assoc 	Fetch query result as an associative array
+obj 	Fetch query result as object
+lazy 	Fetch each row as an object with variable names that correspond to the column names.
+named 	Fetch each row as an array indexed by column name
+num 	Fetch each row as an array indexed by column number
+both 	Fetch each row as an array indexed by both column name and numbers
+bound 	Specifies that the fetch method shall return TRUE and assign the values of the columns in the result set to the PHP variables to which they were bound with the PDO bindParam() or PDO bindColumn() methods.
+column 	Specifies that the fetch method shall return only a single requested column from the next row in the result set
+as_class 	Specifies that the fetch method shall return a new instance of the requested class, mapping the columns to named properties in the class.
+into 	Specifies that the fetch method shall update an existing instance of the requested class, mapping the columns to named properties in the class.
+key_pair 	Fetch into an array where the 1st column is a key and all subsequent columns are value. Note: Available since PHP 5.2.3
+class_type 	Determine the class name from the value of first column.
+serialize 	As into constant but object is provided as a serialized string.
+props_late 	Note: Available since PHP 5.2.3
+func 	
+group 	
+unique 	
+ori_next 	Fetch the next row in the result set. Valid only for scrollable cursors.
+ori_prior 	Fetch the previous row in the result set. Valid only for scrollable cursors.
+ori_first 	Fetch the first row in the result set. Valid only for scrollable cursors.
+ori_last 	Fetch the last row in the result set. Valid only for scrollable cursors.
+ori_abs 	Fetch the requested row by row number from the result set. Valid only for scrollable cursors.
+ori_rel 	Fetch the requested row by relative position from the current position of the cursor in the result set.
+
+You can learn more details about PDO Predefined Constants.
+Fetching Column Names
+This is just a simple example, you don't need to extra effort for fetching column names. $query = $this->db->query("SELECT * FROM articles");
+$a = $query->fetch(assoc);
+
+print_r(array_keys($a)); 
+
+// Array ( [0] => article_id [1] => title [2] => article [3] => link [4] => creation_date )
+fetch_column(int 'col number')
+
+Fecth column is a good pdo function, below the example shows an usage of fetch_column function.
+
+Forexample you have a table like this and you want to fetch value of one column..
+// column numbers
+Col no: 0           1           2           3           4
+ _ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __
+|                                                                |
+| article_id  |   title  |  article     |  link  | creation_date |
+ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ _
+|             |          |              |        |               |
+|     1       |  hello   |  blabla      |        | 2009-02-10    |
+|             |          |              |        |               |
+|     2       |  bonjour |  hello world |        | 2009-03-10    |
+|             |          |              |        |               |
+|     3       |  selam   |  selam dunya |        | 2009-04-10    |
+| __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ |
+
+I want to get values of column number 1 so code will be like this ..
+$query = $this->db->query("SELECT * FROM articles");
+
+echo $query->fetch_column(1).'<br />';
+echo $query->fetch_column(1).'<br />';
+echo $query->fetch_column(1).'<br />';
+Now you want to fetch values of column number 1 and 2 , to getting multiple values we should use PDO query caching functionality like this ..
+$this->db->prep();   // tell to db class use pdo prepare
+$this->db->query("SELECT * FROM articles");
+
+$query = $this->db->exec();
+
+echo $query->fetch_column(1).'<br />';  // hello
+echo $query->fetch_column(1).'<br />';  // bonjour
+echo $query->fetch_column(1).'<br />';  // selam
+
+echo '<br />';
+
+$query = $this->db->exec();  // run cached query SELECT * FROM articles ..
+
+echo $query->fetch_column(2).'<br />';  // blabla
+echo $query->fetch_column(2).'<br />';  // hello world
+echo $query->fetch_column(2).'<br />';  // selam dunya
+
+Now we have multiple column values and we build it very fast ..
+
+Note: This pdo function especially designed for fetching a single column in the next row of a result set. 
+

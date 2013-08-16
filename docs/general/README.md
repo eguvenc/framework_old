@@ -727,7 +727,7 @@ Since your controller classes will extend the main application controller you mu
 ##### Database Constants
 
 * param_null
-* param_int
+* PARAM_INT
 * param_str
 * param_lob
 * param_stmt
