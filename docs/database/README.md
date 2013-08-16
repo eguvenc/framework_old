@@ -845,7 +845,7 @@ $query = $this->db->query("YOUR QUERY");
 $result = $query->assoc();
 ```
 
-**Tip:** 4You can use $this instead of assigning a $query variable ...
+**Tip:** You can use <samp>$this</samp> instead of assigning a **$query** variable ...
 
 ```php
 $this->db->query("YOUR QUERY");
@@ -855,7 +855,7 @@ $result = $this->db->assoc();
 
 #### obj()
 
-This function fetch one item and returns query result as object or null on failure.
+This function **fetch one item** and returns query result as object or **null** on failure.
 
 ```php
 $query = $this->db->query("YOUR QUERY");
@@ -865,42 +865,58 @@ $result = $query->obj();
 
 #### row()
 
-Just alias of obj()
+Just alias of **obj()**
 $query = $this->db->query("YOUR QUERY");
 
 $result = $query->row();
-both()
+
+#### both()
 
 Get column names and numbers.
+
+```php
 $query = $this->db->query("SELECT article_id FROM table");
 
 $result = $query->both(); 
 // output  Array ( [article_id] => 1 [0] => 1 )  
-row_count()
+```
+
+#### rowCount()
 
 Returns the number of rows affected by the execution of the last INSERT, DELETE, or UPDATE statement.
 
-The most popular PDO database drivers like MySQL support to row_count(); function for SELECT statement but some database drivers does not support row_count() function like SQLite.If you develop a portable applications do not use row_count(); function via SELECT statements.
+The most popular PDO database drivers like **MySQL** support to **rowCount();** function for SELECT statement but some database drivers does not support row_count() function like **SQLite**.If you develop a portable applications **do not use** row_count(); function via **SELECT** statements.
+
+```php
 $query = $this->db->query("INSERT UPDATE DELETE QUERY");
 
-$result = $query->row_count(); 
+$result = $query->rowCount(); 
+```
 
 About number of rows ..
-// row_count() Function support just
+
+```php
+// rowCount() Function support just
 
 $query = $this->db->query("INSERT INTO articles 
 (title, article) VALUES('test..','blabla..')");
 
-echo $this->db->row_count();  // output 1
+echo $this->db->rowCount();  // output 1
+```
 
-Active record already return to affected rows not necassary to use row_count();
+Active record already return to affected rows not necassary to use rowCount();
+
+```php
 $data['title']   = 'row count test';
 $data['article'] = 'blablabla ...';
 
 $affected_rows = $this->db->insert('articles', $data);
 echo $affected_rows;  // output 1
+```
 
-If your Pdo driver does not support row_count(), to finding number of rows for the SELECT statement you can use native sql COUNT(*)
+If your Pdo driver **does not** support **rowCount()**, to finding number of rows for the **SELECT** statement you can use native sql COUNT(*)
+
+```php
 echo $this->db->select("COUNT(*) as num")
 ->get('articles')->row()->num; // output 7
 
@@ -908,15 +924,23 @@ echo $this->db->select("COUNT(*) as num")
 
 $query = $this->db->query("SELECT COUNT(*) as num FROM articles");
 echo $query->row()->num; // output 7
+```
 
 An alternative way If data is not large and you already use fetch_all then you can use php count(); function
+
+```php
 $query = $this->db->query("SELECT * FROM articles");
-$a = $query->fetch_all(assoc);
+$a = $query->fetchAll(assoc);
 
 echo count($a);   // output 7
-Testing for Results
+```
 
-If you run queries that might not produce a result, you are encouraged to test for a result first using the row() and prepare function:
+### Testing for Results
+
+------
+If you run queries that might not produce a result, you are encouraged to test for a result first using the **row()** and **prepare** function:
+
+```php
 $query = $this->db->prep()  // pdo prepare() switch 
 ->where('ip_address', '127.0.0.1')
 ->get('ob_sessions')    // from this table
@@ -925,95 +949,208 @@ $query = $this->db->prep()  // pdo prepare() switch
 if($query->row())
 {
     $query = $query->exec();  // get cached query..
-    $b = $query->fetch_all(assoc);
+    $b = $query->fetchAll(assoc);
 
     print_r($b);    // output array( ... )   
 }
+```
 
-If row_count() function available in your db driver you can use it ..
+If **rowCount()** function available in your db driver you can use it ..
+
+```php
 $query = $this->db->where('ip_address', '127.0.0.1')
 ->get('ob_sessions');
 
 if($query->row_count() > 0)
 {
-    $b = $query->fetch_all(assoc);
+    $b = $query->fetchAll(assoc);
 
     print_r($b);    // output array( ... )   
 }
-Flexible Query Results
+```
 
-Just two function fetch and fetch_all, you should use them instead of standart query result functions (assoc(), row(), obj() and both()). Using to fetch and fetch_all functions will help you for the some standardisation.
-fetch(int $fetch_style, int $cursor_orientation = ' ', int $cursor_offset = ' ')
+### Flexible Query Results
 
-Use this function to fetch one item.
+------
+
+Just two function **fetch** and **fetchAll**, you should use them instead of standart query result functions (assoc(), row(), obj() and both()). Using to fetch and fetchAll functions will help you for the some **standardisation**.
+
+#### fetch(int $fetch_style, int $cursor_orientation = ' ', int $cursor_offset = ' ')
+
+Use this function to fetch **one item**.
+
+```php
 $query = $this->db->query(" ... ");
 
 $result = $query->fetch(assoc);
 
  // output array( .. ) 
+```
 
-By default all fetch functions return an object unless you put the word assoc in the parameter
+By default all fetch functions return an object unless you put the word **assoc** in the parameter
+
+```php
 $query = $this->db->query(" ... ");
 
 $result = $query->fetch();
 
  // output object( .. ) 
-fetch_all(int $fetch_style, int column index = 0, array ctor_args = array())
+```
 
-Use this function to fetch all items.
+#### fetchAll(int $fetch_style, int column index = 0, array ctor_args = array())
+
+
+Use this function to fetch **all items**.
+
+```php
 $query = $this->db->query(" ... ");
 
 $result = $query->fetch_all(assoc);
 
 // output array( [0]=> array( 'field' => '', field2=> '' ), [1] => array(), ..)  
+```
 
 You can change the result type like this
+
+```php
 $query = $this->db->query(" ... ");
 
-$result = $query->fetch_all();    // default object 
+$result = $query->fetchAll();    // default object 
 
 // output Array ( [0] => stdClass Object ( 'field' => '', ..) , [1] => stdClass Object ( )  ... )   
-Result Types (Result Constants)
+```
 
+#### Result Types (Result Constants)
+
+------
+    
 Below the table show available result types.
-Function 	Description
-assoc 	Fetch query result as an associative array
-obj 	Fetch query result as object
-lazy 	Fetch each row as an object with variable names that correspond to the column names.
-named 	Fetch each row as an array indexed by column name
-num 	Fetch each row as an array indexed by column number
-both 	Fetch each row as an array indexed by both column name and numbers
-bound 	Specifies that the fetch method shall return TRUE and assign the values of the columns in the result set to the PHP variables to which they were bound with the PDO bindParam() or PDO bindColumn() methods.
-column 	Specifies that the fetch method shall return only a single requested column from the next row in the result set
-as_class 	Specifies that the fetch method shall return a new instance of the requested class, mapping the columns to named properties in the class.
-into 	Specifies that the fetch method shall update an existing instance of the requested class, mapping the columns to named properties in the class.
-key_pair 	Fetch into an array where the 1st column is a key and all subsequent columns are value. Note: Available since PHP 5.2.3
-class_type 	Determine the class name from the value of first column.
-serialize 	As into constant but object is provided as a serialized string.
-props_late 	Note: Available since PHP 5.2.3
-func 	
-group 	
-unique 	
-ori_next 	Fetch the next row in the result set. Valid only for scrollable cursors.
-ori_prior 	Fetch the previous row in the result set. Valid only for scrollable cursors.
-ori_first 	Fetch the first row in the result set. Valid only for scrollable cursors.
-ori_last 	Fetch the last row in the result set. Valid only for scrollable cursors.
-ori_abs 	Fetch the requested row by row number from the result set. Valid only for scrollable cursors.
-ori_rel 	Fetch the requested row by relative position from the current position of the cursor in the result set.
 
-You can learn more details about PDO Predefined Constants.
-Fetching Column Names
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>    
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ASSOC</td>
+            <td>Fetch query result as an associative array</td>
+        </tr>
+        <tr>
+            <td>OBJ</td>
+            <td>Fetch query result as object</td>
+        </tr>
+        <tr>
+            <td>LAZY</td>
+            <td>Fetch each row as an object with variable names that correspond to the column names.</td>
+        </tr>
+        <tr>
+            <td>NAMED</td>
+            <td>Fetch each row as an array indexed by column name</td>
+        </tr>
+        <tr>
+            <td>NUM</td>
+            <td>Fetch each row as an array indexed by column number</td>
+        </tr>
+        <tr>
+            <td>BOTH</td>
+            <td>Fetch each row as an array indexed by both column name and numbers</td>
+        </tr>
+        <tr>
+            <td>BOUND</td>
+            <td>Specifies that the fetch method shall return TRUE and assign the values of the columns in the result set to the PHP variables to which they were bound with the PDO bindParam() or PDO bindColumn() methods.</td>
+        </tr>
+        <tr>
+            <td>COLUMN</td>
+            <td>Specifies that the fetch method shall return only a single requested column from the next row in the result set</td>
+        </tr>
+        <tr>
+            <td>AS_CLASS</td>
+            <td>Specifies that the fetch method shall return a new instance of the requested class, mapping the columns to named properties in the class.</td>
+        </tr>
+        <tr>
+            <td>INTO</td>
+            <td>Specifies that the fetch method shall update an existing instance of the requested class, mapping the columns to named properties in the class.</td>
+        </tr>
+        <tr>
+            <td>KEY_PAIR</td>
+            <td>Fetch into an array where the 1st column is a key and all subsequent columns are value. Note: Available since PHP 5.2.3</td>
+        </tr>
+        <tr>
+            <td>CLASS_TYPE</td>
+            <td>Determine the class name from the value of first column.</td>
+        </tr>
+        <tr>
+            <td>SERIALIZE</td>
+            <td>As into constant but object is provided as a serialized string.</td>
+        </tr>
+        <tr>
+            <td>PROPS_LATE</td>
+            <td>Note: Available since PHP 5.2.3</td>
+        </tr>
+        <tr>
+            <td>FUNC</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>GROUP</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>UNIQUE</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>ORI_NEXT</td>
+            <td>Fetch the next row in the result set. Valid only for scrollable cursors.</td>
+        </tr>
+        <tr>
+            <td>ORI_PRIOR</td>
+            <td>Fetch the previous row in the result set. Valid only for scrollable cursors.</td>
+        </tr>
+        <tr>
+            <td>ORI_FIRST</td>
+            <td>Fetch the first row in the result set. Valid only for scrollable cursors.</td>
+        </tr>
+        <tr>
+            <td>ORI_LAST</td>
+            <td>Fetch the last row in the result set. Valid only for scrollable cursors.</td>
+        </tr>
+        <tr>
+            <td>ORI_ABS</td>
+            <td>Fetch the requested row by row number from the result set. Valid only for scrollable cursors.</td>
+        </tr>
+        <tr>
+            <td>ORI_REL</td>
+            <td>Fetch the requested row by relative position from the current position of the cursor in the result set.</td>
+        </tr>
+    </tbody>
+</table>
+
+You can learn more details about [PDO Predefined Constants](http://php.net/manual/en/pdo.constants.php).
+
+### Fetching Column Names
+
+------
+
 This is just a simple example, you don't need to extra effort for fetching column names. $query = $this->db->query("SELECT * FROM articles");
+
+```php
 $a = $query->fetch(assoc);
 
 print_r(array_keys($a)); 
 
 // Array ( [0] => article_id [1] => title [2] => article [3] => link [4] => creation_date )
-fetch_column(int 'col number')
+
+#### fetchColumn(int 'col number')
 
 Fecth column is a good pdo function, below the example shows an usage of fetch_column function.
 
 Forexample you have a table like this and you want to fetch value of one column..
+
+```php
 // column numbers
 Col no: 0           1           2           3           4
  _ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __
@@ -1027,32 +1164,40 @@ Col no: 0           1           2           3           4
 |             |          |              |        |               |
 |     3       |  selam   |  selam dunya |        | 2009-04-10    |
 | __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ |
+```
 
 I want to get values of column number 1 so code will be like this ..
+
+```php
 $query = $this->db->query("SELECT * FROM articles");
 
-echo $query->fetch_column(1).'<br />';
-echo $query->fetch_column(1).'<br />';
-echo $query->fetch_column(1).'<br />';
-Now you want to fetch values of column number 1 and 2 , to getting multiple values we should use PDO query caching functionality like this ..
+echo $query->fetchColumn(1).'<br />';
+echo $query->fetchColumn(1).'<br />';
+echo $query->fetchColumn(1).'<br />';
+```
+
+Now you want to fetch values of column number **1** and **2** , to getting multiple values we should use **PDO query caching** functionality like this ..
+
+```php
 $this->db->prep();   // tell to db class use pdo prepare
 $this->db->query("SELECT * FROM articles");
 
 $query = $this->db->exec();
 
-echo $query->fetch_column(1).'<br />';  // hello
-echo $query->fetch_column(1).'<br />';  // bonjour
-echo $query->fetch_column(1).'<br />';  // selam
+echo $query->fetchColumn(1).'<br />';  // hello
+echo $query->fetchColumn(1).'<br />';  // bonjour
+echo $query->fetchColumn(1).'<br />';  // selam
 
 echo '<br />';
 
 $query = $this->db->exec();  // run cached query SELECT * FROM articles ..
 
-echo $query->fetch_column(2).'<br />';  // blabla
-echo $query->fetch_column(2).'<br />';  // hello world
-echo $query->fetch_column(2).'<br />';  // selam dunya
+echo $query->fetchColumn(2).'<br />';  // blabla
+echo $query->fetchColumn(2).'<br />';  // hello world
+echo $query->fetchColumn(2).'<br />';  // selam dunya
+```
 
 Now we have multiple column values and we build it very fast ..
 
-Note: This pdo function especially designed for fetching a single column in the next row of a result set. 
+**Note:** This pdo function especially designed for fetching a single column in the next row of a result set. 
 
