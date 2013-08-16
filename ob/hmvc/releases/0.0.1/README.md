@@ -3,7 +3,7 @@
 
 ------
 
-Using Obullo's simple hmvc library you can execute hmvc requests between your modules, the HMVC technology offers more flexibility. About HMVC structure you can find more information in [Advanced Topics / HMVC section](http://obullo.com/user_guide/en/1.0.1/simple-hmvc.html).
+Using Obullo's simple hmvc library you can execute hmvc requests between your modules, the HMVC technology offers more flexibility. About HMVC structure you can find more information in [Advanced Topics / HMVC section](/docs/database/).
 
 ### Initializing the Class
 
