@@ -1,44 +1,107 @@
 
+## Hmvc Class
 
-$params = array(
-    'mode'         => 'Sliding',  // Jumping
-    'per_page'     => 8,
-    'delta'        => 2,
-    'http_method'  => 'GET',
-    'query_string' => false,
-    'current_page' => $this->uri->segment(2),
-    'base_url'     => '/welcome/index/',
-);
+------
 
-// just dummy data
-$params['item_data']  = range(1, 1000);
+Using Obullo's simple hmvc library you can execute hmvc requests between your modules, the HMVC technology offers more flexibility. About HMVC structure you can find more information in [Advanced Topics / HMVC section](/docs/advanced/#hmvc).
 
-$pagerClass = new Pager();
-$pager = $pagerClass->init($params);
+### Initializing the Class
 
-$data  = $pager->get_page_data();
-$links = $pager->get_links();
+------
 
-// $links is an ordered + associative array with 'back'/'pages'/'next'/'first'/'last'/'all' links.
-// NB: $links['all'] is the same as $pager->links;
+Unlike other classes we can call the HMVC library inside from request() function using [request helper](/docs/helpers/request-helper).
 
-echo $links['all'];
+```php
+ $request = request('module/controller/method', FALSE);
+```
 
-echo '<hr />';
+Once loaded, the Calendar object will be available using: <dfn>$request->method();</dfn>
 
-// Show data for current page:
-echo 'PAGED DATA: '; print_r($data);
+### Example Hmvc Request
 
-echo '<hr />';
+------
 
-// Results from methods:
-echo 'get_current_page()...: '; var_dump($pager->get_current_page());
-echo 'get_next_page()......: '; var_dump($pager->get_next_page());
-echo 'get_prev_page()......: '; var_dump($pager->get_prev_page());
-echo 'num_items()..........: '; var_dump($pager->num_items());
-echo 'num_pages()..........: '; var_dump($pager->num_pages());
-echo 'is_first_page()......: '; var_dump($pager->is_first_page());
-echo 'is_last_page().......: '; var_dump($pager->is_last_page());
-echo 'is_last_page_end()...: '; var_dump($pager->is_last_page_end());
-echo '$pager->range........: '; var_dump($pager->range);
-   
+Here is a very simple example showing how you can call a hmvc request using HMVC object methods.
+
+```php
+$request = request('/module/controller/method/arguments', FALSE);
+
+$request->setMethod('get', $params = array());
+echo $request->exec();
+```
+
+### Ouick Access
+
+------
+
+Normally first parameter assigned for request method but if you not choose a method , Obullo request helper will do atuomatically $_GET request don't forget Obullo also store get and post data into $_REQUEST global variable.
+
+```php
+echo request('blog/blog/read')->exec(); 
+```
+
+Quick Decoding JSON Format 
+
+```php
+$row = request('module/controller/method')->decode('json')->exec();
+
+echo $row->key; // output value
+```
+
+### HMVC Requests in Sub Modules
+
+------
+If you want to call a HMVC request in the sub.module, you need to provide sub.modulename otherwise Obullo will call a request outside of your sub.module folder.
+
+```php
+echo request('sub.module/module/controller/method')->exec();
+```
+
+### Function Reference
+
+------
+
+####$request->setMethod($method = 'get', $params = 'mixed');
+
+------
+
+Set the hmvc request method.
+
+*Available Query Methods*
+
+<ul>
+   <li>POST</li>
+   <li>GET</li>
+    <li>UPDATE</li>
+    <li>DELETE</li>
+    <li>PUT ( When we use PUT method we provide data as string using third parameter instead of array. )</li></ul>
+
+#### $request->cache($time = 0 int);
+
+------
+
+You can do cache for your static hmvc requests. When a hmvc request called the first time, the cache file will be written to your application/core/cache folder. You can learn more details about ouput [caching](/docs/advanced/#caching-and-compression).
+
+#### $request->setServer($key = '', $val = '');
+
+------
+
+Set the $_SERVER headers for current hmvc scope.
+
+$request->noLoop($turn_on = true boolean);
+
+------
+
+Some users some times use the HMVC requests in the [parent controllers](/docs/advanced/#working-with-parent-controllers) in this case normally a HMVC library do a unlimited loop and this may cause server crashes, beware if you use hmvc requests in parent controllers you have to use no_loop(); method for each requests.
+
+#### $request->exec();
+
+------
+
+Execute hmvc call and return to response.
+
+#### $request->decode($format = 'json')->exec();
+
+------
+
+Before the execute of the results you can decode response in JSON format.
