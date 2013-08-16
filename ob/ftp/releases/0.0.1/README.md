@@ -1,28 +1,27 @@
 ## FTP Class
 
-------
 
 Obullo's FTP Class permits files to be transfered to a remote server. Remote files can also be moved, renamed, and deleted. The FTP class also includes a "mirroring" function that permits an entire local directory to be recreated remotely via FTP.
 
-*Note:*  SFTP and SSL FTP protocols are not supported, only standard FTP.
+**Note:**  SFTP and SSL FTP protocols are not supported, only standard FTP.
 
 ### Initializing the Class
 
 ------
 
 ```php
-loader::lib('ob/ftp');
+new Ftp();
 ```
-Once loaded, the FTP object will be available using: <dfn>$ftp = ftp::instance(); $ftp->method()</dfn>; or <dfn>$this->ftp->method()</dfn>
+Once loaded, the FTP object will be available using: <dfn>$this->ftp->method()</dfn>
 
-### Quick Access To Library
+### Grabbing the Instance
 
 ------
 
-Also using lib(); function you can grab the instance of Obullo libraries.
+Also using new Ftp(false); boolean you can grab the instance of Obullo libraries,"$this->ftp->method()" will not available in the controller.
 
 ```php
-$ftp = lib('ob/ftp');
+$ftp = new Ftp(false);
 
 $ftp->method();
 ```
@@ -56,7 +55,7 @@ $config['debug'] = TRUE;
 
 $this->ftp->connect($config);
 
-$list = $this->ftp->list_files('/public_html/');
+$list = $this->ftp->listFiles('/public_html/');
 
 print_r($list);
 
@@ -153,7 +152,7 @@ $this->ftp->move('/public_html/joe/blog.html', '/public_html/fred/blog.html');
 
 Note: if the destination file name is different the file will be renamed.
 
-#### $this->ftp->delete_file()
+#### $this->ftp->deleteFile()
 
 ------
 
@@ -163,7 +162,7 @@ Lets you delete a file. Supply the source path with the file name.
 $this->ftp->delete_file('/public_html/joe/blog.html');
 ```
 
-#### $this->ftp->delete_dir()
+#### $this->ftp->deleteDir()
 
 ------
 
@@ -175,7 +174,7 @@ Lets you delete a directory and everything it contains. Supply the source path t
 $this->ftp->delete_dir('/public_html/path/to/folder/');
 ```
 
-#### $this->ftp->list_files()
+#### $this->ftp->listFiles()
 
 ------
 
