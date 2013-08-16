@@ -42,7 +42,7 @@ echo $this->email->print_debugger();
 
 ------
 
-Also using lib(); function you can grab the instance of Obullo libraries.
+Also using new Email(FALSE); function you can grab the instance of Obullo libraries.
 
 ```php
 $email = new Email(FALSE);
