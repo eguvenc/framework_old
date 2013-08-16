@@ -128,11 +128,11 @@ Class Form extends Controller {
                 
         if ($form->run() == FALSE)
         {
-            view('view_myform', '', FALSE);
+            vi/get('view_myform', '', FALSE);
         }
         else
         {
-            view('view_success', '', FALSE);
+            vi/get('view_success', '', FALSE);
         }
     }
     
@@ -217,11 +217,11 @@ Class Form extends Controller {
                 
         if ($form->run() == FALSE)
         {
-             view('view_myform', '', FALSE);
+             vi/get('view_myform', '', FALSE);
         }
         else
         {
-             view('view_success', '', FALSE);
+             vi/get('view_success', '', FALSE);
         }
     }
     
@@ -386,11 +386,11 @@ Class Form extends Controller {
                 
         if ($form->run() == FALSE)
         {
-            view('view_myform', '', FALSE);
+            vi/get('view_myform', '', FALSE);
         }
         else
         {
-             view('view_success', '', FALSE);
+             vi/get('view_success', '', FALSE);
         }
     }
 
@@ -641,11 +641,11 @@ In order to call a specific group you will pass its name to the run() function. 
 ```php
 if ($form->run('signup') == FALSE)
 {
-    view('view_myform', '', FALSE);
+    vi/get('view_myform', '', FALSE);
 }
 else
 {
-     view('view_success', '', FALSE);
+     vi/get('view_success', '', FALSE);
 }
 ```
 
@@ -662,11 +662,11 @@ Class Member extends Controller {
             
       if ($form->run() == FALSE)
       {
-          view('view_myform', '', FALSE);
+          vi/get('view_myform', '', FALSE);
       }
       else
       {
-          view('view_success', '', FALSE);
+          vi/get('view_success', '', FALSE);
       }
    }
 
