@@ -3,17 +3,17 @@
 
 Obullo's robust Email Class supports the following features:
 
-    <ul>
-    <li>Multiple Protocols: Mail, Sendmail, and SMTP</li>
-    <li>Multiple recipients</li>
-    <li>CC and BCCs</li>
-    <li>HTML or Plaintext email</li>
-    <li>Attachments</li>
-    <li>Word wrapping</li>
-    <li>Priorities</li>
-    <li>BCC Batch Mode, enabling large email lists to be broken into small BCC batches.</li>
-    <li>Email Debugging tools</li>
-    </ul>
+  
+- Multiple Protocols: Mail, Sendmail, and SMTP
+- Multiple recipients
+- CC and BCCs
+- HTML or Plaintext email
+- Attachments
+- Word wrapping
+- Priorities
+- BCC Batch Mode, enabling large email lists to be broken into small BCC batches.
+- Email Debugging tools
+
 
 ### Sending Email
 
