@@ -76,7 +76,7 @@ If you prefer not to set preferences using the above method, you can instead put
 
 ------
 
-The following is a list of all the preferences that can be set when sending email.
+The following is a list of all the preferences that can be set when sending email:
 
 <table>
 <thead>

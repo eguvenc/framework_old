@@ -122,7 +122,7 @@ Redirect user to <b>/login</b> page for unauthenticated page views. Redirect pag
 $this->auth->redirect(); http://example.com/settings?a=1&b=2 Unauthenticated user request
 ```
 
-For example if an <b>unauthenticated</b> user want to display your <b>/settings</b> page <b>$this->auth->redirect()</b> function will redirect to user this url
+For example if an <b>unauthenticated</b> user want to display your <b>/settings</b> page <b>$this->auth->redirect()</b> function will redirect to user this url.
 
 ```php
 http://example.com/login?redirect=%2Fsettings%3Fa%3D1%26b%3D2
