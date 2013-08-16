@@ -116,7 +116,7 @@ Class Obullo
         } 
         else
         {
-            if(isset(getInstance()->db) AND is_object(getInstance()->db))
+            if(isset(getInstance()->db))
             {
                 getInstance()->db = null;
             }

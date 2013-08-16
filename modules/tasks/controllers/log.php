@@ -1,5 +1,5 @@
 <?php
-namespace Ob; defined('STDIN') or die('Access Denied');
+defined('STDIN') or die('Access Denied');
 
 Class Log extends Controller {
     

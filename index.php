@@ -123,7 +123,7 @@ ini_set('zend.ze1_compatibility_mode', 0);
              
 /**
 |--------------------------------------------------------------------------
-| Obullo Command Line
+| Obullo Command Line ( Tasks )
 |--------------------------------------------------------------------------
 |  @see User Guide: Chapters / General Topics / Tasks
 |
@@ -135,7 +135,7 @@ if(defined('STDIN'))
     | Set Command Line Server Headers
     |--------------------------------------------------------------------------
     */ 
-    $_SERVER['HTTP_USER_AGENT']     = 'Obullo Command Line';
+    $_SERVER['HTTP_USER_AGENT']     = 'Obullo CLI';
     $_SERVER['HTTP_ACCEPT_CHARSET'] = 'utf-8';
 
     /**
@@ -221,7 +221,7 @@ function getConfig($filename = 'config', $var = '', $folder = '')
     
     if($filename == 'database')
     {
-        $database   = getStatic($filename, $var, APP .'config');
+        $database = getStatic('database', $var, APP .'config');
 
         return $database;
     }

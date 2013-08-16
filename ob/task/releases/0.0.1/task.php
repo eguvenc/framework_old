@@ -1,23 +1,22 @@
 <?php
+namespace task {
 
-/**
- * Task Helper
- *
- * @package     Task
- * @subpackage  0.0.1
- * @version     0.0.1
- * @link
- */
+    /**
+     * Task Helper
+     *
+     * @package     Task
+     * @subpackage  0.0.1
+     * @version     0.0.1
+     * @link
+     */
 
-/**
-* Run Command Line Tasks
-*
-* @param  array $uri
-* @return void
-*/
-if ( ! function_exists('task_run'))
-{
-    function task_run($uri, $debug = false)
+    /**
+    * Run Command Line Tasks
+    *
+    * @param  array $uri
+    * @return void
+    */
+    function run($uri, $debug = false)
     {
         $uri    = explode('/', trim($uri));
         $module = array_shift($uri);
@@ -39,20 +38,21 @@ if ( ! function_exists('task_run'))
             // clear console colors
             // $output = trim(preg_replace('/\n/', '#', $output), "\n");
             $output = preg_replace(array('/\033\[36m/','/\033\[31m/','/\033\[0m/'), array('','',''), shell_exec($shell));
-            
+
             log\me('debug', 'Task function output -> '. $output);
-            
+
             return $output;
         }
         else   // continious task
         {
             // @todo escapeshellcmd();
-            
+
             shell_exec($shell.' > /dev/null &');
         }
 
         log\me('debug', 'Task function command -> '. $shell);
     }
+
 }
 
 /* End of file task.php */

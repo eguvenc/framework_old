@@ -1,5 +1,4 @@
 <?php
-namespace Hmvc;
 
 function requestTimer($mark = '')
 {
@@ -248,7 +247,7 @@ Class Hmvc
             
             if( ! is_array($params_or_data))
             {
-                throw new \Exception('Data must be array when using HMVC POST methods.');
+                throw new Exception('Data must be array when using HMVC POST methods.');
             }
                
             foreach($params_or_data as $key => $val)
@@ -263,7 +262,7 @@ Class Hmvc
             
             if( ! is_array($params_or_data))
             {
-                throw new \Exception('Data must be array when using HMVC GET or DELETE methods.');
+                throw new Exception('Data must be array when using HMVC GET or DELETE methods.');
             }
                
             foreach($params_or_data as $key => $val)
@@ -450,9 +449,9 @@ Class Hmvc
         
         $URI = getInstance()->uri;
         
-        $this->_this->uri     = Uri\Uri::setInstance($this->uri);
-        $this->_this->router  = Router\Router::setInstance($this->router);
-        $this->_this->config  = Config\Config::setInstance($this->config);
+        $this->_this->uri     = Uri::setInstance($this->uri);
+        $this->_this->router  = Router::setInstance($this->router);
+        $this->_this->config  = Config::setInstance($this->config);
         
         getInstance($this->_this);         // Set original $this to controller instance that we backup before
     

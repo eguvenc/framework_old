@@ -1,5 +1,5 @@
 <?php
-namespace Ob; defined('STDIN') or die('Access Denied');
+defined('STDIN') or die('Access Denied');
 
 Class Clear extends Controller {
     
@@ -37,7 +37,7 @@ Class Clear extends Controller {
         # delete app directory log files.
         # help https://help.ubuntu.com/community/find
         find \$APP_LOG_DIR -name 'log-*.php' -exec rm -rf {} \;
-        echo \"\33[0m\33[0;32mClear log files task succesfully done.\33[0m\";";
+        echo \"\33[0m\33[0;32mAll log files deleted.\33[0m\";";
         
         echo shell_exec($clear_sh);
     }
