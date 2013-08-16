@@ -8,8 +8,6 @@ Obullo's Zip Encoding Class classes permit you to create Zip archives. Archives 
 
 ------
 
-Unlike most other classes in Obullo, the Zip class is initialized in your controller using the <dfn>$this->zip = zip::instance();</dfn> function:
-
 ```php
 new Zip();
 ```
