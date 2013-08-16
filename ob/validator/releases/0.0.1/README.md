@@ -76,24 +76,24 @@ Using a text editor, create a form called view_myform.php. In it, place this cod
 ```php
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('forms/form'); ?>
+<?php echo form\open('forms/form'); ?>
 
 <h5>Username</h5>
 
-<?php echo form_input('username', '', "size='50'"); ?>
+<?php echo form\input('username', '', "size='50'"); ?>
 
 <h5>Password</h5>
-<?php echo form_password('password', '', "size='50'"); ?>
+<?php echo form\password('password', '', "size='50'"); ?>
 
 <h5>Password Confirm</h5>
-<?php echo form_password('passconf', '', "size='50'"); ?>
+<?php echo form\password('passconf', '', "size='50'"); ?>
 
 <h5>Email Address</h5>
 <?php echo form_input('email', '', "size='50'"); ?>
 
-<div><?php echo form_submit('send_data', 'Send Form'); ?></div>
+<div><?php echo form\submit('send_data', 'Send Form'); ?></div>
 
-<?php echo form_close(); ?>
+<?php echo form\close(); ?>
 ```
 
 ### The Success Page <a name="the-success-page"></a>
@@ -323,23 +323,23 @@ Open your <dfn<view_myform.php</dfn> view file and update the **value** in each 
 ```php
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('forms/form'); ?>
+<?php echo form\open('forms/form'); ?>
 
 <h5>Username</h5>
-<?php echo form_input('username', setValue('username'), "size='50'"); ?>
+<?php echo form\input('username', setValue('username'), "size='50'"); ?>
 
 <h5>Password</h5>
-<?php echo form_password('password', setValue('password'), "size='50'"); ?>
+<?php echo form\password('password', setValue('password'), "size='50'"); ?>
 
 <h5>Password Confirm</h5>
-<?php echo form_password('passconf', setValue('passconf'), "size='50'"); ?>
+<?php echo form\password('passconf', setValue('passconf'), "size='50'"); ?>
 
 <h5>Email Address</h5>
-<?php echo form_input('email', setValue('email'), "size='50'"); ?>
+<?php echo form\input('email', setValue('email'), "size='50'"); ?>
 
-<div><?php echo form_submit('send_data', 'Send Form'); ?></div>
+<div><?php echo form\submit('send_data', 'Send Form'); ?></div>
 
-<?php echo form_close(); ?>
+<?php echo form\close(); ?>
 ```
 
 <dfn>Now reload your page and submit the form so that it triggers an error. Your form fields should now be re-populated</dfn>
@@ -351,7 +351,7 @@ Open your <dfn<view_myform.php</dfn> view file and update the **value** in each 
 <?php echo form_input('colors[]', setValue('colors[]'), "size='50'"); ?>
 ```
 
-For more info please see the [Using Arrays as Field Names](#using-arrays-as-field-names) section below.
+For more info please see the [Using Arrays as Field Names](#using-arrays-as-field-name) section below.
 
 ### Callbacks: Your own Validation Functions <a name="callbacks"></a>
 
@@ -495,7 +495,7 @@ By default, the Validator Class adds a paragraph tag (
    Each of the two error generating functions shown in this tutorial can be supplied their own delimiters as follows:
 
 ```php
-<?php echo form_error('field name', '<div class="error">', '</div>'); ?>
+<?php echo form\error('field name', '<div class="error">', '</div>'); ?>
 ```
 
 Or:
@@ -508,25 +508,25 @@ Or:
 
 ------
 
-If you prefer to show an error message next to each form field, rather than as a list, you can use the <dfn>form_error()</dfn> function.
+If you prefer to show an error message next to each form field, rather than as a list, you can use the <dfn>form\error()</dfn> function.
 
 Try it! Change your form so that it looks like this:
 
 ```php
 <h5>Username</h5>
-<?php echo form_error('username'); ?>
+<?php echo form\error('username'); ?>
 <input type="text" name="username" value="<?php echo set_value('username'); ?>" size="50" />
 
 <h5>Password</h5>
-<?php echo form_error('password'); ?>
+<?php echo form\error('password'); ?>
 <input type="text" name="password" value="<?php echo set_value('password'); ?>" size="50" />
 
 <h5>Password Confirm</h5>
-<?php echo form_error('passconf'); ?>
+<?php echo form\error('passconf'); ?>
 <input type="text" name="passconf" value="<?php echo set_value('passconf'); ?>" size="50" />
 
 <h5>Email Address</h5>
-<?php echo form_error('email'); ?>
+<?php echo form\error('email'); ?>
 <input type="text" name="email" value="<?php echo set_value('email'); ?>" size="50" />
 ```
 
@@ -535,11 +535,11 @@ If there are no errors, nothing will be shown. If there is an error, the message
 **Important Note:** If you use an array as the name of a form field, you must supply it as an array to the function. Example:
 
 ```php
-<?php echo form_error('options[size]'); ?>
+<?php echo form\error('options[size]'); ?>
 <input type="text" name="options[size]" value="<?php echo set_value("options[size]"); ?>" size="50" /> 
 ```
 
-For more info please see the [Using Arrays as Field Names](#using-arrays-as-field-names) section below.
+For more info please see the [Using Arrays as Field Names](#using-arrays-as-field-name) section below.
 
 ### Saving Sets of Validation Rules to a Config File <a name="saving-sets-of-validation"></a>
 
@@ -726,7 +726,7 @@ $form->setRules('options[]', 'Options', 'required');
 Or, to show an error for the above field you would use:
 
 ```php
-<?php echo form_error('options[]'); ?>
+<?php echo form\error('options[]'); ?>
 ```
 
 Or to re-populate the field you would use:
@@ -750,7 +750,7 @@ Or even:
 As with our first example, you must use the exact array name in the helper functions:
 
 ```php
-<?php echo form_error('sports[nba][basketball]'); ?>
+<?php echo form\error('sports[nba][basketball]'); ?>
 ```
 
 If you are using checkboxes (or other fields) that have multiple options, don't forget to leave an empty bracket after each option, so that all selections will be added to the POST array:
@@ -772,7 +772,7 @@ Or if you use a multidimensional array:
 When you use a helper function you'll include the bracket as well:
 
 ```php
-<?php echo form_error('options[color][]'); ?>
+<?php echo form\error('options[color][]'); ?>
 ```
 
 ### Rule Reference <a name="rule-reference"></a>
@@ -1003,7 +1003,7 @@ Permits you to set validation rules, as described in the tutorial sections above
 
 Runs the validation routines. Returns boolean TRUE on success and FALSE on failure. You can optionally pass the name of the validation group via the function, as described in: [Saving Groups of Validation Rules to a Config File](#saving-sets-of-validation).
 
-#### $form->set_message();
+#### $form->setMessage();
 
 Permits you to set custom error messages. See [Setting Error Messages](#setting-error-messages) above.
 
@@ -1013,32 +1013,32 @@ Permits you to set custom error messages. See [Setting Error Messages](#setting-
 
 The following helper functions are available for use in the view files containing your forms. Note that these are procedural functions, so they **do not** require you to prepend them with $form.
 
-#### form_error()
+#### form\error()
 
 Shows an individual error message associated with the field name supplied to the function. Example:
 
 ```php
-<?php echo form_error('username'); ?>
+<?php echo form\error('username'); ?>
 ```
 
 The error delimiters can be optionally specified. See the [Changing the Error Delimiters](#changing-the-error-delimiters) section above.
 
-#### form_is_error($field, $return_string = 'error')
+#### form\isError($field, $return_string = 'error')
 
 Shows an individual error message associated with the field name supplied to the function and it returns to string if supplied an error string otherwise it returns to **booelan**
 
 ```php
-<?php var_dump( form_is_error('username') );  // boolean 
-echo form_is_error('username', 'error');  //  "error" string
+<?php var_dump( form\isError('username') );  // boolean 
+echo form\isError('username', 'error');  //  "error" string
 ?>
 ```
 
-#### validation_errors()
+#### validationErrors()
 
 Shows all error messages as a string: Example:
 
 ```php
-<?php echo validation_errors(); ?>
+<?php echo validationErrors(); ?>
 ```
 
 The error delimiters can be optionally specified. See the [Changing the Error Delimiters](#changing-the-error-delimiters) section above.
