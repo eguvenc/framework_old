@@ -11,7 +11,7 @@ Please note that the Cart Class ONLY provides the core "cart" functionality. It 
 <strong>Important:</strong> The Cart class utilizes Obullo's [Session Helper](/user_guide/en/1.0.1/session-helper.html) to save the cart information to a database, so before using the Cart class you must set up a database table as indicated in the [Session Documentation](/user_guide/en/1.0.1/session-helper.html) , and set the session preferences in your <kbd>application/config/config.php</kbd> file to utilize a database.
 
 ```php
-loader::lib('ob/cart');
+loader::lib('ob/cart'); 
 ```
 
 Once loaded, the Cart object will be available using: <dfn>$this->cart->method();</dfn>
