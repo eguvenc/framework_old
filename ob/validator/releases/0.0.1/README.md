@@ -351,7 +351,7 @@ Open your <dfn<view_myform.php</dfn> view file and update the **value** in each 
 <?php echo form_input('colors[]', setValue('colors[]'), "size='50'"); ?>
 ```
 
-For more info please see the [Using Arrays as Field Names](#using-arrays-as-field-names) section below.
+For more info please see the [Using Arrays as Field Names](#using-arrays-as-field-name) section below.
 
 ### Callbacks: Your own Validation Functions <a name="callbacks"></a>
 
@@ -539,7 +539,7 @@ If there are no errors, nothing will be shown. If there is an error, the message
 <input type="text" name="options[size]" value="<?php echo set_value("options[size]"); ?>" size="50" /> 
 ```
 
-For more info please see the [Using Arrays as Field Names](#using-arrays-as-field-names) section below.
+For more info please see the [Using Arrays as Field Names](#using-arrays-as-field-name) section below.
 
 ### Saving Sets of Validation Rules to a Config File <a name="saving-sets-of-validation"></a>
 
