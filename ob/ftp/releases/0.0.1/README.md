@@ -159,7 +159,7 @@ Note: if the destination file name is different the file will be renamed.
 Lets you delete a file. Supply the source path with the file name.
 
 ```php
-$this->ftp->delete_file('/public_html/joe/blog.html');
+$this->ftp->deleteFile('/public_html/joe/blog.html');
 ```
 
 #### $this->ftp->deleteDir()
@@ -168,10 +168,10 @@ $this->ftp->delete_file('/public_html/joe/blog.html');
 
 Lets you delete a directory and everything it contains. Supply the source path to the directory with a trailing slash.
 
-*Important*  Be VERY careful with this function. It will recursively delete <b>everything</b> within the supplied path, including sub-folders and all files. Make absolutely sure your path is correct. Try using the <kbd>list_files()</kbd> function first to verify that your path is correct.
+*Important*  Be VERY careful with this function. It will recursively delete <b>everything</b> within the supplied path, including sub-folders and all files. Make absolutely sure your path is correct. Try using the <kbd>listFiles()</kbd> function first to verify that your path is correct.
 
 ```php
-$this->ftp->delete_dir('/public_html/path/to/folder/');
+$this->ftp->deleteDir('/public_html/path/to/folder/');
 ```
 
 #### $this->ftp->listFiles()
@@ -181,7 +181,7 @@ $this->ftp->delete_dir('/public_html/path/to/folder/');
 Permits you to retrieve a list of files on your server returned as an <dfn>array</dfn>. You must supply the path to the desired directory.
 
 ```php
-$list = $this->ftp->list_files('/public_html/');
+$list = $this->ftp->listFiles('/public_html/');
 print_r($list);
 ```
 
