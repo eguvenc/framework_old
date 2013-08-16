@@ -570,3 +570,126 @@ $db = $db->connect('db');
 $results = $db->query('SELECT * FROM ob_users')->resultArray();
 print_r($results);
 ```
+
+## Running and Escaping Queries
+
+### Direct Query
+
+------
+
+To submit a query, use the following function:
+
+```php
+$this->db->query('YOUR QUERY HERE');
+```
+
+The <dfn>query()</dfn> function returns a database result object when "read" type queries are run, which you can use to show your results. When retrieving data you will typically assign the query to your own variable, like this:
+$query = $this->db->query('YOUR QUERY HERE');
+PDO Exec Query
+
+This query type same as direct query just it returns to $affected_rows automatically. You should use exec_query function for INSERT, UPDATE, DELETE operations.
+$affected_rows = $this->db->exec_query('INSERT QUERY'); 
+
+echo $affected_rows;   //output  1
+Escaping Queries
+
+It's a very good security practice to escape your data before submitting it into your database. Obullo has three methods that help you do this:
+$this->db->escape()
+This function determines the data type so that it can escape only string data. It also automatically adds single quotes around the data and it can automatically determine data types. $sql = "INSERT INTO table (title) VALUES(".$this->db->escape((string)$title).")";
+
+Supported data types: (int), (string), (boolean)
+$this->escape_str();
+
+This function escapes the data passed to it, regardless of type. Most of the time you'll use the above function rather than this one. Use the function like this:
+$$sql = "INSERT INTO table (title) VALUES('".$this->db->escape_str($title)."')";
+$this->db->escape_like()
+This method should be used when strings are to be used in LIKE conditions so that LIKE wildcards ('%', '_') in the string are also properly escaped. $search = '20% raise';<br />
+$sql = "SELECT id FROM table WHERE column LIKE '%".$this->db->escape_like($search)."%'";
+
+Note: You don't need to $this->escape_like function when you use active record class because of active record class use auto escape foreach like condition.
+$query = $this->db->select("*")
+->like('article','%%blabla')
+->or_like('article', 'blabla')
+->get('articles');
+
+echo $this->db->last_query();
+
+// Output
+
+However when you use query bind for like operators you must use $this->escape_like function like this
+$this->db->prep()    // tell to db class use pdo prepare()
+->select("*")
+->like('article',":like")
+->get('articles');
+
+$value = "%%%some";
+$this->db->exec(array(':like' => $this->db->escape_like($value)));
+$this->db->fetch_all(assoc);
+
+echo $this->db->last_query();
+
+// Output
+Query Bindings
+
+Obullo offers PDO bindValue and bindParam functionality, using bind operations will help you for the performance and security:
+Bind Types
+Obullo Friendly Constant 	PDO CONSTANT 	Description
+param_bool 	PDO::PARAM_BOOL 	Boolean
+param_null 	PDO::PARAM_NULL 	NULL
+param_int 	PDO::PARAM_INT 	Integer
+param_str 	PDO::PARAM_STR 	String
+param_lob 	PDO::PARAM_LOB 	Large Object Data (LOB)
+Bind Value Example
+$this->db->bind_value($paramater, $value, $data_type)
+$this->db->prep();   // tell to db class use pdo prepare 
+$this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
+
+$this->db->bind_value(':id', 1, param_int);  // Integer 
+$this->db->bind_value(':code', 'i see dead people', param_str); // String      
+
+$this->db->exec();  // execute query
+$a = $this->db->fetch(assoc);
+
+print_r($a);
+
+The double dots in the query are automatically replaced with the values of bind_value functions.
+Bind Param Example
+$this->db->bind_param($paramater, $variable, $data_type, $data_length, $driver_options = array())
+$this->db->prep();   // tell to db class use pdo prepare 
+$this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
+
+$this->db->bind_param(':id', 1, param_int, 11);   // Integer 
+$this->db->bind_param(':code', 'i see dead people', param_str, 20); // String (int Length)      
+
+$this->db->exec();  // execute query
+$a = $this->db->fetch(assoc);
+
+print_r($a);
+
+The double dots in the query are automatically replaced with the values of bind_param functions.
+
+The secondary benefit of using binds is that the values are automatically escaped, producing safer queries. You don't have to remember to manually escape data; the engine does it automatically for you.
+
+A Short Way ..
+$this->db->prep();   
+$query = $this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
+
+$query->bind_value(':id', 1, param_int);  
+$query->bind_value(':code', 'i-see-dead-people', param_str); 
+
+$query->exec();
+$a = $query->fetch(assoc); 
+print_r($a);
+Automatically Bind Query
+$this->db->prep();  
+$this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
+
+$values[':id']   = '1';
+$values[':code'] = 'i see dead people';
+
+$this->db->exec($values);
+
+$a = $this->db->fetch(assoc);
+print_r($a);
+
+Important: Obullo does not support Question Mark binding at this time. 
