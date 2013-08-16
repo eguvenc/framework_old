@@ -1,44 +1,57 @@
 
+## Hmvc Class
 
-$params = array(
-    'mode'         => 'Sliding',  // Jumping
-    'per_page'     => 8,
-    'delta'        => 2,
-    'http_method'  => 'GET',
-    'query_string' => false,
-    'current_page' => $this->uri->segment(2),
-    'base_url'     => '/welcome/index/',
-);
+------
 
-// just dummy data
-$params['item_data']  = range(1, 1000);
+Using Obullo's simple hmvc library you can execute hmvc requests between your modules, the HMVC technology offers more flexibility. About HMVC structure you can find more information in [Advanced Topics / HMVC section](http://obullo.com/user_guide/en/1.0.1/simple-hmvc.html).
 
-$pagerClass = new Pager();
-$pager = $pagerClass->init($params);
+### Initializing the Class
 
-$data  = $pager->get_page_data();
-$links = $pager->get_links();
+------
 
-// $links is an ordered + associative array with 'back'/'pages'/'next'/'first'/'last'/'all' links.
-// NB: $links['all'] is the same as $pager->links;
+Unlike other classes we can call the HMVC library inside from request() function using [request helper](http://obullo.com/user_guide/en/1.0.1/request-helper.html). $request = request('module/controller/method', FALSE);
 
-echo $links['all'];
+Once loaded, the Calendar object will be available using: $request->method();
+Example Hmvc Request
 
-echo '<hr />';
+Here is a very simple example showing how you can call a hmvc request using HMVC object methods.
+$request = request('/module/controller/method/arguments', FALSE);
 
-// Show data for current page:
-echo 'PAGED DATA: '; print_r($data);
+$request->set_method('get', $params = array());
+echo $request->exec();
+Ouick Access
 
-echo '<hr />';
+Normally first parameter assigned for request method but if you not choose a method , Obullo request helper will do atuomatically $_GET request don't forget Obullo also store get and post data into $_REQUEST global variable.
+echo request('blog/blog/read')->exec(); Quick Decoding JSON Format $row = request('module/controller/method')->decode('json')->exec();
 
-// Results from methods:
-echo 'get_current_page()...: '; var_dump($pager->get_current_page());
-echo 'get_next_page()......: '; var_dump($pager->get_next_page());
-echo 'get_prev_page()......: '; var_dump($pager->get_prev_page());
-echo 'num_items()..........: '; var_dump($pager->num_items());
-echo 'num_pages()..........: '; var_dump($pager->num_pages());
-echo 'is_first_page()......: '; var_dump($pager->is_first_page());
-echo 'is_last_page().......: '; var_dump($pager->is_last_page());
-echo 'is_last_page_end()...: '; var_dump($pager->is_last_page_end());
-echo '$pager->range........: '; var_dump($pager->range);
-   
+echo $row->key; // output value
+HMVC Requests in Sub Modules
+
+If you want to call a HMVC request in the sub.module, you need to provide sub.modulename otherwise Obullo will call a request outside of your sub.module folder.
+echo request('sub.module/module/controller/method')->exec();
+Function Reference
+$request->set_method($method = 'get', $params = 'mixed');
+
+Set the hmvc request method.
+Available Query Methods
+
+    POST
+    GET
+    UPDATE
+    DELETE
+    PUT ( When we use PUT method we provide data as string using third parameter instead of array. )
+
+$request->cache($time = 0 int);
+
+You can do cache for your static hmvc requests. When a hmvc request called the first time, the cache file will be written to your application/core/cache folder. You can learn more details about ouput caching.
+$request->set_server($key = '', $val = '');
+
+Set the $_SERVER headers for current hmvc scope.
+$request->no_loop($turn_on = true boolean);
+Some users some times use the HMVC requests in the parent controllers in this case normally a HMVC library do a unlimited loop and this may cause server crashes, beware if you use hmvc requests in parent controllers you have to use no_loop(); method for each requests.
+$request->exec();
+
+Execute hmvc call and return to response.
+$request->decode($format = 'json')->exec();
+
+Before the execute of the results you can decode response in JSON format.
