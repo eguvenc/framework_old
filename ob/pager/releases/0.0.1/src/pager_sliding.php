@@ -64,7 +64,7 @@ Class Pager_Sliding extends Pager_Common
 
     /**
     * Given a page_id, it returns the limits of the range of pages displayed.
-    * While get_offset_by_page() returns the offset of the data within the
+    * While getOffsetByPage() returns the offset of the data within the
     * current page, this method returns the offsets of the page numbers interval.
     * E.g., if you have page_id=5 and delta=2, it will return (3, 7).
     * page_id of 9 would give you (4, 8).
@@ -81,7 +81,7 @@ Class Pager_Sliding extends Pager_Common
         
         if ( ! isset($this->_page_data)) 
         {
-            $this->_generate_page_data();
+            $this->_generatePageData();
         }
         
         if (isset($this->_page_data[$page_id]) OR is_null($this->_item_data)) 
@@ -128,24 +128,24 @@ Class Pager_Sliding extends Pager_Common
             $this->links = '';
             if ($this->_total_pages > (2 * $this->_delta + 1)) 
             {
-                $this->links .= $this->_print_first_page();
+                $this->links .= $this->_printFirstPage();
             }
             
-            $this->links .= $this->_get_back_link();
-            $this->links .= $this->_get_page_links();
-            $this->links .= $this->_get_next_link();
+            $this->links .= $this->_getBackLink();
+            $this->links .= $this->_getPageLinks();
+            $this->links .= $this->_getNextLink();
             
             if ($this->_total_pages > (2 * $this->_delta + 1)) 
             {
-                $this->links .= $this->_print_last_page();
+                $this->links .= $this->_printLastPage();
             }
         }
 
-        $back        = str_replace('&nbsp;', '', $this->_get_back_link());
-        $next        = str_replace('&nbsp;', '', $this->_get_next_link());
-        $pages       = $this->_get_page_links();
-        $first       = $this->_print_first_page();
-        $last        = $this->_print_last_page();
+        $back        = str_replace('&nbsp;', '', $this->_getBackLink());
+        $next        = str_replace('&nbsp;', '', $this->_getNextLink());
+        $pages       = $this->_getPageLinks();
+        $first       = $this->_printFirstPage();
+        $last        = $this->_printLastPage();
         $all         = $this->links;
         $link_tags   = $this->link_tags;
         $link_tags_raw = $this->link_tags_raw;
@@ -184,7 +184,7 @@ Class Pager_Sliding extends Pager_Common
     * @return string Links
     * @access private
     */
-    public function _get_page_links($url = '')
+    public function _getPageLinks($url = '')
     {
         //legacy setting... the preferred way to set an option now
         //is adding it to the constuctor

@@ -153,31 +153,31 @@ Class Pager_Common
         $this->link_tags     = '';
         $this->link_tags_raw = array();
 
-        $this->_generate_page_data();
-        $this->_set_first_last_text();
+        $this->_generatePageData();
+        $this->_setFirstLastText();
 
         if ($this->_total_pages > (2 * $this->_delta + 1)) 
         {
-            $this->links .= $this->_print_first_page();
+            $this->links .= $this->_printFirstPage();
         }
 
-        $this->links .= $this->_get_back_link();
-        $this->links .= $this->_get_page_links();
-        $this->links .= $this->_get_next_link();
+        $this->links .= $this->_getBackLink();
+        $this->links .= $this->_getPageLinks();
+        $this->links .= $this->_getNextLink();
 
-        $this->link_tags .= $this->_get_first_link_tag();
-        $this->link_tags .= $this->_get_prev_link_tag();
-        $this->link_tags .= $this->_get_next_link_tag();
-        $this->link_tags .= $this->_get_last_link_tag();
+        $this->link_tags .= $this->_getFirstLinkTag();
+        $this->link_tags .= $this->_getPrevLinkTag();
+        $this->link_tags .= $this->_getNextLinkTag();
+        $this->link_tags .= $this->_getLastLinkTag();
         
-        $this->link_tags_raw['first'] = $this->_get_first_link_tag(true);
-        $this->link_tags_raw['prev']  = $this->_get_prev_link_tag(true);
-        $this->link_tags_raw['next']  = $this->_get_next_link_tag(true);
-        $this->link_tags_raw['last']  = $this->_get_last_link_tag(true);
+        $this->link_tags_raw['first'] = $this->_getFirstLinkTag(true);
+        $this->link_tags_raw['prev']  = $this->_getPrevLinkTag(true);
+        $this->link_tags_raw['next']  = $this->_getNextLinkTag(true);
+        $this->link_tags_raw['last']  = $this->_getLastLinkTag(true);
         
         if ($this->_total_pages > (2 * $this->_delta + 1)) 
         {
-            $this->links .= $this->_print_last_page();
+            $this->links .= $this->_printLastPage();
         }
     }
 
@@ -191,13 +191,13 @@ Class Pager_Common
     * @return array Page data
     * @access public
     */
-    public function get_page_data($page_id = null)
+    public function getPageData($page_id = null)
     {
         $page_id = empty($page_id) ? $this->_current_page : $page_id;
 
         if ( ! isset($this->_page_data)) 
         {
-            $this->_generate_page_data();
+            $this->_generatePageData();
         }
         
         if ( ! empty($this->_page_data[$page_id])) 
@@ -219,13 +219,13 @@ Class Pager_Common
     * @return array  First and last offsets
     * @access public
     */
-    public function get_offset_by_page($page_id = null)
+    public function getOffsetByPage($page_id = null)
     {
         $page_id = isset($page_id) ? $page_id : $this->_current_page;
         
         if ( ! isset($this->_page_data)) 
         {
-            $this->_generate_page_data();
+            $this->_generatePageData();
         }
 
         if (isset($this->_page_data[$page_id]) OR is_null($this->_item_data)) 
@@ -352,7 +352,7 @@ Class Pager_Common
     * @return void
     * @access private
     */
-    public function _generate_page_data()
+    public function _generatePageData()
     {   
         if ( ! is_null($this->_item_data))  // Been supplied an array of data?
         {
@@ -683,7 +683,7 @@ Class Pager_Common
     * @return string The link
     * @access private
     */
-    public function _get_back_link($url = '', $link = '')
+    public function _getBackLink($url = '', $link = '')
     {
         //legacy settings... the preferred way to set an option
         //now is passing it to the factory
@@ -724,7 +724,7 @@ Class Pager_Common
     * @return string The link
     * @access private
     */
-    public function _get_next_link($url = '', $link = '')
+    public function _getNextLink($url = '', $link = '')
     {
         //legacy settings... the preferred way to set an option
         //now is passing it to the factory
@@ -766,7 +766,7 @@ Class Pager_Common
     * @return mixed string with html link tag or separated as array
     * @access private
     */
-    public function _get_first_link_tag($raw = false)
+    public function _getFirstLinkTag($raw = false)
     {
         if ($this->is_first_page() OR ($this->_http_method != 'GET')) 
         {
@@ -797,7 +797,7 @@ Class Pager_Common
     * @return mixed string with html link tag or separated as array
     * @access private
     */
-    public function _get_prev_link_tag($raw = false)
+    public function _getPrevLinkTag($raw = false)
     {
         if ($this->is_first_page() OR ($this->_http_method != 'GET')) 
         {
@@ -828,7 +828,7 @@ Class Pager_Common
     * @return mixed string with html link tag or separated as array
     * @access private
     */
-    public function _get_next_link_tag($raw = false)
+    public function _getNextLinkTag($raw = false)
     {
         if ($this->is_last_page() OR ($this->_http_method != 'GET')) 
         {
@@ -859,7 +859,7 @@ Class Pager_Common
     * @return mixed string with html link tag or separated as array
     * @access private
     */
-    public function _get_last_link_tag($raw = false)
+    public function _getLastLinkTag($raw = false)
     {
         if ($this->is_last_page() OR ($this->_http_method != 'GET')) 
         {
@@ -961,7 +961,7 @@ Class Pager_Common
     *                or empty string if this is the 1st page.
     * @access private
     */
-    public function _print_first_page()
+    public function _printFirstPage()
     {
         if ($this->is_first_page()) 
         {
@@ -985,7 +985,7 @@ Class Pager_Common
     *                or empty string if this is the 1st page.
     * @access private
     */
-    public function _print_last_page()
+    public function _printLastPage()
     {
         if ($this->is_last_page()) 
         {
@@ -1009,7 +1009,7 @@ Class Pager_Common
     * @return void
     * @access private
     */
-    public function _set_first_last_text()
+    public function _setFirstLastText()
     {
         if ($this->_first_page_text == '') 
         {

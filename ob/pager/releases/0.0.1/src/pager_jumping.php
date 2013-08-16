@@ -47,7 +47,7 @@ Class Pager_Jumping extends Pager_Common
     {
         if (!isset($this->_page_data)) 
         {
-            $this->_generate_page_data();
+            $this->_generatePageData();
         }
 
         if (($index % $this->_per_page) > 0) 
@@ -66,7 +66,7 @@ Class Pager_Jumping extends Pager_Common
     
     /**
     * Given a page_id, it returns the limits of the range of pages displayed.
-    * While get_offset_by_page() returns the offset of the data within the
+    * While getOffsetByPage() returns the offset of the data within the
     * current page, this method returns the offsets of the page numbers interval.
     * E.g., if you have page_id=3 and delta=10, it will return (1, 10).
     * page_id of 8 would give you (1, 10) as well, because 1 <= 8 <= 10.
@@ -139,27 +139,27 @@ Class Pager_Jumping extends Pager_Common
             $this->links = '';
             if ($this->_total_pages > $this->_delta) 
             {
-                $this->links .= $this->_print_first_page();
+                $this->links .= $this->_printFirstPage();
             }
 
             $_sav = $this->_current_page;
             $this->_current_page = $page_id;
 
-            $this->links .= $this->_get_back_link('', $back_html);
-            $this->links .= $this->_get_page_links();
-            $this->links .= $this->_get_next_link('', $next_html);
+            $this->links .= $this->_getBackLink('', $back_html);
+            $this->links .= $this->_getPageLinks();
+            $this->links .= $this->_getNextLink('', $next_html);
             
             if ($this->_total_pages > $this->_delta) 
             {
-                $this->links .= $this->_print_last_page();
+                $this->links .= $this->_printLastPage();
             }
         }
 
-        $back        = str_replace('&nbsp;', '', $this->_get_back_link());
-        $next        = str_replace('&nbsp;', '', $this->_get_next_link());
-        $pages       = $this->_get_page_links();
-        $first       = $this->_print_first_page();
-        $last        = $this->_print_last_page();
+        $back        = str_replace('&nbsp;', '', $this->_getBackLink());
+        $next        = str_replace('&nbsp;', '', $this->_getNextLink());
+        $pages       = $this->_getPageLinks();
+        $first       = $this->_printFirstPage();
+        $last        = $this->_printLastPage();
         $all         = $this->links;
         $link_tags   = $this->link_tags;
         $link_tags_raw = $this->link_tags_raw;
@@ -199,7 +199,7 @@ Class Pager_Jumping extends Pager_Common
     * @return string Links
     * @access private
     */
-    public function _get_page_links($url = '')
+    public function _getPageLinks($url = '')
     {
         // legacy setting... the preferred way to set an option now
         // is adding it to the constuctor

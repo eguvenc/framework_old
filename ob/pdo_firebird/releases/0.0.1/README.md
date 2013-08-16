@@ -16,7 +16,7 @@ $params['item_data']  = range(1, 1000);
 $pagerClass = new Pager();
 $pager = $pagerClass->init($params);
 
-$data  = $pager->get_page_data();
+$data  = $pager->getPageData();
 $links = $pager->get_links();
 
 // $links is an ordered + associative array with 'back'/'pages'/'next'/'first'/'last'/'all' links.
