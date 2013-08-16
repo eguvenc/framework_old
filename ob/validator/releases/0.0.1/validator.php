@@ -94,7 +94,7 @@ Class Validator {
      * @param    string
      * @return   void
      */
-    public function set_rules($field, $label = '', $rules = '')
+    public function setRules($field, $label = '', $rules = '')
     {
         // Obullo Changes .. 
         $this->_globals = (count($this->_globals) == 0) ? $_POST : $this->_globals;
@@ -121,7 +121,7 @@ Class Validator {
                 $label = ( ! isset($row['label'])) ? $row['field'] : $row['label'];
 
                 // Here we go!
-                $this->set_rules($row['field'], $label, $row['rules']);
+                $this->setRules($row['field'], $label, $row['rules']);
             }
             return;
         }
@@ -326,11 +326,11 @@ Class Validator {
             
             if ($uri != '' AND isset($this->_config_rules[$uri]))
             {
-                $this->set_rules($this->_config_rules[$uri]);
+                $this->setRules($this->_config_rules[$uri]);
             }
             else
             {
-                $this->set_rules($this->_config_rules);
+                $this->setRules($this->_config_rules);
             }
     
             // We're we able to set the rules correctly?

@@ -65,7 +65,7 @@ Class Router {
         }
 
         // Clean Unnecessary slashes !!
-        // $routes = array_map(create_function( '$a', 'return trim($a, "/");' ), $routes);
+        $routes = array_map(create_function( '$a', 'return trim($a, "/");' ), $routes);
         
         ##############
         
@@ -305,17 +305,17 @@ Class Router {
     {   
         if( ! isset($segments[0]) ) return $segments;
         
-        $folder = 'controllers';
+        $folder = 'controller';
         
         if(defined('STDIN') AND $this->hmvc == false)  // Command Line Request
         {
-            if(is_dir(MODULES .$segments[0]. DS .'tasks')) 
+            if(is_dir(MODULES .$segments[0]. DS .'task')) 
             {                   
-                $folder = 'tasks'; 
+                $folder = 'task'; 
             }
             else
             {
-                array_unshift($segments, 'tasks');
+                array_unshift($segments, 'task');
             }
         }
                                         
@@ -331,8 +331,7 @@ Class Router {
                 }
             }
             
-            // Merge Segments
-            if (file_exists(MODULES .$this->fetchDirectory(). DS .$folder. DS .$this->fetchDirectory(). EXT))
+            if (file_exists(MODULES .$this->fetchDirectory(). DS .$folder. DS .$this->fetchDirectory(). EXT))  // Merge Segments
             {
                 array_unshift($segments, $this->fetchDirectory());
 

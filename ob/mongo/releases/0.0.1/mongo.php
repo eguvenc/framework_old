@@ -1,5 +1,4 @@
 <?php
-namespace Mongo;
 
 /**
  * Mongo DB Class.
@@ -52,15 +51,27 @@ Class Mongo {
     {
         if ( ! class_exists('Mongo'))
         {
-            throw new \Exception("The MongoDB PECL extension has not been installed or enabled.");
+            throw new Exception("The MongoDB PECL extension has not been installed or enabled.");
         }
         
-        $this->connection_string();
+        $this->connectionString();
+    }
+    
+    // ------------------------------------------------------------------------
+    
+    /**
+     * Initialize to Class.
+     * 
+     * @return object
+     */
+    public function init()
+    {
+        return ($this);
     }
     
     // --------------------------------------------------------------------
     
-    public function use_mongoid($bool = true)
+    public function useMongoid($bool = true)
     {
         $this->use_mongo_id = $bool;
     }
@@ -74,13 +85,13 @@ Class Mongo {
      * 
      * If you want to only choose fields to exclude, leave $includes an empty array().
      * 
-     * @usage: $this->db->select(array('foo', 'bar'))->get('foobar');
+     * @usage: $this->db->select('foo,bar'))->get('foobar');
      * 
      * @param type $includes
      * @param array $excludes
      * @return type 
      */
-    public function select($includes = array(), $excludes = array())
+    public function select($includes = '', $excludes = array())
     {
         if(is_string($includes) AND strpos($includes, ',') > 0)
         {
@@ -138,7 +149,7 @@ Class Mongo {
      * be an associative array with the field as the key and the value as the search
      * criteria.
      * 
-     * @usage : $this->db->where(array('foo' => 'bar'))->get('foobar');
+     * @usage : $this->db->where('foo','bar'))->get('foobar');
      * @usage : $this->db->where('foo >', 20)->get('foobar');
      * @usage : $this->db->where('foo <', 20)->get('foobar');
      * @usage : $this->db->where('foo >=', 20)->get('foobar');
@@ -160,7 +171,7 @@ Class Mongo {
             $field    = $array[0];
             $criteria = $array[1];
             
-            $this->_where_init($field);
+            $this->_whereInit($field);
             
             switch ($criteria)
             {
@@ -181,7 +192,7 @@ Class Mongo {
                     break;
                 
                 case '!=':   // not equal to
-                    $this->wheres[$field]['$ne']  = $this->_is_mongo_id($field, $value);
+                    $this->wheres[$field]['$ne']  = $this->_isMongoId($field, $value);
                     break;
                 
                 default:
@@ -195,12 +206,12 @@ Class Mongo {
         {
             foreach ($wheres as $wh => $val)
             {
-                $this->wheres[$wh] = $this->_is_mongo_id($wh, $val);
+                $this->wheres[$wh] = $this->_isMongoId($wh, $val);
             }
         }
         else
         {
-            $this->wheres[$wheres] = $this->_is_mongo_id($wheres, $value);   
+            $this->wheres[$wheres] = $this->_isMongoId($wheres, $value);   
         }
 
         return ($this);
@@ -211,7 +222,7 @@ Class Mongo {
     /**
      * Get the documents where the value of a $field may be something else
      * 
-     * @usage : $this->db->orWhere(array('foo'=>'bar', 'bar'=>'foo'))->get('foobar');
+     * @usage : $this->db->orWhere('foo','bar')->get('foobar');
      * 
      * @param type $wheres
      * @return Db
@@ -222,12 +233,12 @@ Class Mongo {
         {
             foreach ($value as $wh => $val)
             {
-                $this->wheres['$or'][][$wh] = $this->_is_mongo_id($wh, $val);
+                $this->wheres['$or'][][$wh] = $this->_isMongoId($wh, $val);
             }
         }
         else
         {
-            $this->wheres['$or'][][$wheres] = $this->_is_mongo_id($wheres, $value);
+            $this->wheres['$or'][][$wheres] = $this->_isMongoId($wheres, $value);
         }
         
         return ($this);
@@ -252,13 +263,13 @@ Class Mongo {
             $array = explode('!=', $field);
             $field = trim($array[0]);
             
-            $this->_where_init($field);
+            $this->_whereInit($field);
             $this->wheres[$field]['$nin'] = $in;
             
             return ($this);
         }
         
-        $this->_where_init($field);
+        $this->_whereInit($field);
         $this->wheres[$field]['$in'] = $in;
         
         return ($this);
@@ -269,15 +280,15 @@ Class Mongo {
     /**
      * Get the documents where the value of a $field is in all of a given $in array().
      * 
-     * @usage : $this->db->where_in_all('foo', array('bar', 'zoo', 'blah'))->get('foobar');
+     * @usage : $this->db->whereInAll('foo', array('bar', 'zoo', 'blah'))->get('foobar');
      * 
      * @param type $field
      * @param type $in
      * @return \Db
      */
-    public function where_in_all($field = "", $in = array())
+    public function whereInAll($field = "", $in = array())
     {
-        $this->_where_init($field);
+        $this->_whereInit($field);
         $this->wheres[$field]['$all'] = $in;
         
         return ($this);
@@ -316,7 +327,7 @@ Class Mongo {
     public function like($field = "", $value = "", $flags = "i", $enable_start_wildcard = true, $enable_end_wildcard = true)
     {
         $field = (string) trim($field);
-        $this->_where_init($field);
+        $this->_whereInit($field);
         $value = (string) trim($value);
         $value = quotemeta($value);
 
@@ -343,7 +354,7 @@ Class Mongo {
      */
     public function orLike($field, $like = array())
     {
-        $this->_where_init('$or');
+        $this->_whereInit('$or');
         if (is_array($like) && count($like) > 0)
         {
             foreach ($like as $admitted)
@@ -363,7 +374,7 @@ Class Mongo {
      */
     public function notLike($field, $like = array())
     {
-        $this->_where_init($field);
+        $this->_whereInit($field);
         if (is_array($like) && count($like) > 0)
         {
             foreach ($like as $admitted)
@@ -450,13 +461,13 @@ Class Mongo {
     {
         if($this->collection == '')
         {
-            throw new \Exception('You need to set a collection name using <b>$this->db->from("collection")</b> function.');
+            throw new Exception('You need to set a collection name using $this->db->from("collection") function.');
         }
         
         $re_criteria = array();
         foreach ($criteria as $key => $value)
         {
-            $re_criteria[$key] = $this->_is_mongo_id($key, $value);
+            $re_criteria[$key] = $this->_isMongoId($key, $value);
         }
         
         $docs = $this->db->{$this->collection}->find($re_criteria, array_merge($this->selects, $fields))
@@ -470,24 +481,24 @@ Class Mongo {
     // --------------------------------------------------------------------
     
      /**
-     * @usage : $this->select()->from('collection')->find_one($criteria);
+     * @usage : $this->select()->from('collection')->findOne($criteria);
      * 
      * @param type $criteria
      * @param type $fields
      * @return Mongo::Cursor Object
      * @throws Exception 
      */
-    public function find_one($criteria = array(), $fields = array())
+    public function findOne($criteria = array(), $fields = array())
     {
         if($this->collection == '')
         {
-            throw new \Exception('You need to set a collection name using <b>$this->db->from("collection")</b> function.');
+            throw new Exception('You need to set a collection name using $this->db->from("collection") function.');
         }
 
         $re_criteria = array();
         foreach ($criteria as $key => $value)
         {
-            $re_criteria[$key] = $this->_is_mongo_id($key, $value);
+            $re_criteria[$key] = $this->_isMongoId($key, $value);
         }
         
         $docs = $this->db->{$this->collection}->findOne($re_criteria, array_merge($this->selects, $fields));
@@ -514,7 +525,7 @@ Class Mongo {
         
         if (empty($collection))
         {
-            throw new \Exception('You need to set a collection name using <b>$this->db->from("collection")</b> function.');
+            throw new Exception('You need to set a collection name using $this->db->from("collection") function.');
         }
         
         $docs = $this->db->{$collection}->find($this->wheres, $this->selects)
@@ -553,7 +564,7 @@ Class Mongo {
         
         if (empty($collection))
         {
-            throw new \Exception('You need to set a collection name using <b>$this->db->from("collection")</b> function.');
+            throw new Exception('You need to set a collection name using <b>$this->db->from("collection")</b> function.');
         }
         
         if(is_array($options))
@@ -586,12 +597,12 @@ Class Mongo {
     {
         if (empty($collection))
         {
-            throw new \Exception("No Mongo collection selected to insert into.");
+            throw new Exception("No Mongo collection selected to insert into.");
         }
 
         if (count($insert) == 0 || ! is_array($insert))
         {
-            throw new \Exception("Nothing to insert into Mongo collection or insert is not an array.");
+            throw new Exception("Nothing to insert into Mongo collection or insert is not an array.");
         }
 
         try
@@ -609,9 +620,9 @@ Class Mongo {
                 return (false);
             }
         }
-        catch (\MongoCursorException $e)
+        catch (MongoCursorException $e)
         {
-            throw new \Exception("Insert of data into MongoDB failed: ".$e->getMessage());
+            throw new Exception("Insert of data into MongoDB failed: ".$e->getMessage());
         }
     }
 
@@ -622,23 +633,23 @@ Class Mongo {
      * 
      * Insert a multiple new document into the passed collection.
      * 
-     * @usage : $this->db->batch_insert('foo', $data = array());
+     * @usage : $this->db->batchInsert('foo', $data = array());
      * 
      * @param type $collection
      * @param type $insert
      * @return type
      * @throws Exception 
      */
-    public function batch_insert($collection = "", $insert = array())
+    public function batchInsert($collection = "", $insert = array())
     {
         if (empty($collection))
         {
-            throw new \Exception("No Mongo collection selected to insert operation.");
+            throw new Exception("No Mongo collection selected to insert operation.");
         }
 
         if (count($insert) == 0 || ! is_array($insert))
         {
-            throw new \Exception("Nothing to insert into Mongo collection or insert is not an array.");
+            throw new Exception("Nothing to insert into Mongo collection or insert is not an array.");
         }
 
         try
@@ -654,9 +665,9 @@ Class Mongo {
                 return (false);
             }
         }
-        catch (\MongoCursorException $e)
+        catch (MongoCursorException $e)
         {
-            throw new \Exception("Insert of data into MongoDB failed: ".$e->getMessage());
+            throw new Exception("Insert of data into MongoDB failed: ".$e->getMessage());
         }
     }
 
@@ -677,7 +688,7 @@ Class Mongo {
     {
         if (empty($collection))
         {
-            throw new \Exception("No Mongo collection selected to update.");
+            throw new Exception("No Mongo collection selected to update.");
         }
 
         if (is_array($data) AND count($data) > 0)
@@ -687,7 +698,7 @@ Class Mongo {
 
         if (count($this->updates) == 0)
         {
-            throw new \Exception("Nothing to update in Mongo collection or update is not an array.");
+            throw new Exception("Nothing to update in Mongo collection or update is not an array.");
         }
 
         // Update Modifiers  http://www.mongodb.org/display/DOCS/Updating
@@ -719,9 +730,9 @@ Class Mongo {
             $this->_resetSelect();
             return $this->db->{$collection}->find($updates)->count();
         }
-        catch (\MongoCursorException $e)
+        catch (MongoCursorException $e)
         {
-            throw new \Exception("Update of data into MongoDB failed: ".$e->getMessage());
+            throw new Exception("Update of data into MongoDB failed: ".$e->getMessage());
         }
     }
     
@@ -730,15 +741,15 @@ Class Mongo {
     /**
      * Increments the value of a field.
      * 
-     * @usage: $this->db->where(array('blog_id'=>123))->inc(array('num_comments' => 1))->update('blog_posts');
+     * @usage: $this->db->where(blog_id, 123)->inc('num_comments', 1))->update('blog_posts');
      * 
      * @param type $fields
      * @param type $value
      * @return \Db
      */
-    public function inc($fields = array(), $value = 0)
+    public function inc($fields = '', $value = 0)
     {
-        $this->_update_init('$inc');
+        $this->_updateInit('$inc');
 
         if (is_string($fields))
         {
@@ -760,15 +771,15 @@ Class Mongo {
     /**
      * Decrements the value of a field.
      * 
-     * @usage: $this->db->where(array('blog_id'=>123))->dec(array('num_comments' => 1))->update('blog_posts');
+     * @usage: $this->db->where('blog_id', 123))->dec('num_comments', 1))->update('blog_posts');
      * 
      * @param type $fields
      * @param type $value
      * @return \Db
      */
-    public function dec($fields = array(), $value = 0)
+    public function dec($fields = '', $value = 0)
     {
-        $this->_update_init('$inc');
+        $this->_updateInit('$inc');
 
         if (is_string($fields))
         {
@@ -790,8 +801,8 @@ Class Mongo {
     /**
      * Sets a field to a value.
      * 
-     * @usage: $this->db->where(array('blog_id'=>123))->set('posted', 1)->update('blog_posts');
-     * @usage: $this->db->where(array('blog_id'=>123))->set(array('posted' => 1, 'time' => time()))->update('blog_posts');
+     * @usage: $this->db->where('blog_id',123)->set('posted', 1)->update('blog_posts');
+     * @usage: $this->db->where('blog_id',123)->set(array('posted' => 1, 'time' => time()))->update('blog_posts');
      * 
      * @param type $fields
      * @param type $value
@@ -799,7 +810,7 @@ Class Mongo {
      */
     public function set($fields, $value = null)
     {
-        $this->_update_init('$set');
+        $this->_updateInit('$set');
 
         if (is_string($fields))
         {
@@ -821,15 +832,15 @@ Class Mongo {
     /**
      * Unsets a field (or fields).
      * 
-     * @usage: $this->db->where(array('blog_id'=>123))->unset('posted')->update('blog_posts');
-     * @usage: $this->db->where(array('blog_id'=>123))->set(array('posted','time'))->update('blog_posts');
+     * @usage: $this->db->where('blog_id', 123)->unset('posted')->update('blog_posts');
+     * @usage: $this->db->where('blog_id', 123)->set('posted','time')->update('blog_posts');
      * 
      * @param type $fields
      * @return \Db
      */
-    public function unset_field($fields)
+    public function unsetField($fields)
     {
-        $this->_update_init('$unset');
+        $this->_updateInit('$unset');
 
         if (is_string($fields))
         {
@@ -851,16 +862,16 @@ Class Mongo {
     /**
      * Adds value to the array only if its not in the array already.
      * 
-     * @usage: $this->db->where(array('blog_id'=>123))->addtoset('tags', 'php')->update('blog_posts');
-     * @usage: $this->db->where(array('blog_id'=>123))->addtoset('tags', array('php', 'obullo', 'mongodb'))->update('blog_posts');
+     * @usage: $this->db->where('blog_id', 123))->add2set('tags', 'php')->update('blog_posts');
+     * @usage: $this->db->where('blog_id', 123))->add2set('tags', array('php', 'obullo', 'mongodb'))->update('blog_posts');
      * 
      * @param type $field
      * @param type $values
      * @return \Db
      */
-    public function addtoset($field, $values)
+    public function add2set($field, $values)
     {
-        $this->_update_init('$addToSet');
+        $this->_updateInit('$addToSet');
 
         if (is_string($values))
         {
@@ -879,8 +890,8 @@ Class Mongo {
     /**
      * Pushes values into a field (field must be an array).
      * 
-     * @usage: $this->db->where(array('blog_id'=>123))->push('comments', array('text'=>'Hello world'))->update('blog_posts');
-     * @usage: $this->db->where(array('blog_id'=>123))->push(array('comments' => array('text'=>'Hello world')), 'viewed_by' => array('Alex')->update('blog_posts');
+     * @usage: $this->db->where('blog_id', 123)->push('comments', array('text'=>'Hello world'))->update('blog_posts');
+     * @usage: $this->db->where('blog_id', 123)->push(array('comments' => array('text'=>'Hello world')), 'viewed_by' => array('Alex'))->update('blog_posts');
      * 
      * @param type $fields
      * @param type $value
@@ -888,7 +899,7 @@ Class Mongo {
      */
     public function push($fields, $value = array())
     {
-        $this->_update_init('$push');
+        $this->_updateInit('$push');
 
         if (is_string($fields))
         {
@@ -911,15 +922,15 @@ Class Mongo {
     /**
      * Pops the last value from a field (field must be an array).
      *  
-     * @usage: $this->db->where(array('blog_id'=>123))->pop('comments')->update('blog_posts');
-     * @usage: $this->db->where(array('blog_id'=>123))->pop(array('comments', 'viewed_by'))->update('blog_posts');
+     * @usage: $this->db->where('blog_id', 123))->pop('comments')->update('blog_posts');
+     * @usage: $this->db->where('blog_id', 123))->pop(array('comments', 'viewed_by'))->update('blog_posts');
      * 
      * @param type $field
      * @return \Db
      */
     public function pop($field)
     {
-        $this->_update_init('$pop');
+        $this->_updateInit('$pop');
 
         if (is_string($field))
         {
@@ -950,7 +961,7 @@ Class Mongo {
      */
     public function pull($field = "", $value = array())
     {
-        $this->_update_init('$pull');
+        $this->_updateInit('$pull');
 
         $this->updates['$pull'] = array($field => $value);
 
@@ -972,12 +983,12 @@ Class Mongo {
     {
         if (empty($collection))
         {
-            throw new \Exception("No Mongo collection selected to delete.");
+            throw new Exception("No Mongo collection selected to delete.");
         }
 
         if (isset($this->wheres['_id']) AND ! ($this->wheres['_id'] instanceof \MongoId))
         {
-            $this->wheres['_id'] = new \MongoId($this->wheres['_id']);
+            $this->wheres['_id'] = new MongoId($this->wheres['_id']);
         }
 
         try
@@ -990,9 +1001,9 @@ Class Mongo {
             
             return $affected_rows;
         }
-        catch (\MongoCursorException $e)
+        catch (MongoCursorException $e)
         {
-            throw new \Exception("MongoDB data delete operation failed: ".$e->getMessage());
+            throw new Exception("MongoDB data delete operation failed: ".$e->getMessage());
         }
     }
 
@@ -1000,7 +1011,7 @@ Class Mongo {
     
     /**
      * Establish a connection to MongoDB using the connection string generated in
-     * the connection_string() method.  If 'mongo_persist_key' was set to true in the
+     * the connectionString() method.  If 'mongo_persist_key' was set to true in the
      * config file, establish a persistent connection.
      * 
      * We allow for only the 'persist'
@@ -1013,14 +1024,14 @@ Class Mongo {
     {
         try
         {
-            $this->connection = new \Mongo($this->connection_string);
+            $this->connection = new Mongo($this->connection_string);
             $this->db = $this->connection->{$this->dbname};
             
             return ($this);	
         } 
-        catch (\MongoConnectionException $e)
+        catch (MongoConnectionException $e)
         {
-            throw new \Exception("Unable to connect to MongoDB: ".$e->getMessage());
+            throw new Exception("Unable to connect to MongoDB: ".$e->getMessage());
         }
     }
 
@@ -1043,7 +1054,7 @@ Class Mongo {
      * 
      * @throws Exception 
      */
-    private function connection_string() 
+    private function connectionString() 
     {
         $config = getConfig('mongo');
         
@@ -1063,7 +1074,7 @@ Class Mongo {
         
         if($this->dbname == '')
         {
-            throw new \Exception('Please set a $mongo[\'database\'] from app/config/mongo.php.');
+            throw new Exception('Please set a $mongo[\'database\'] from app/config/mongo.php.');
         }
         
         $dbname_flag = (bool)$config['dbname_flag'];
@@ -1071,12 +1082,12 @@ Class Mongo {
 
         if (empty($this->host))
         {
-            throw new \Exception("You need to specify a hostname connect to MongoDB.");
+            throw new Exception("You need to specify a hostname connect to MongoDB.");
         }
 
         if (empty($this->dbname))
         {
-            throw new \Exception("You need to specify a database name connect to MongoDB.");
+            throw new Exception("You need to specify a database name connect to MongoDB.");
         }
 
         if ( ! empty($this->user) AND ! empty($this->pass))
@@ -1126,7 +1137,7 @@ Class Mongo {
      * 
      * @param type $param 
      */
-    private function _where_init($param)
+    private function _whereInit($param)
     {
         if ( ! isset($this->wheres[$param]))
         {
@@ -1141,7 +1152,7 @@ Class Mongo {
      * 
      * @param type $method 
      */
-    private function _update_init($method)
+    private function _updateInit($method)
     {
         if ( ! isset($this->updates[$method]))
         {
@@ -1169,13 +1180,13 @@ Class Mongo {
      * @param type $string
      * @return \MongoId 
      */
-    private function _is_mongo_id($string = '', $value = '')
+    private function _isMongoId($string = '', $value = '')
     {
         if($this->use_mongo_id)
         {
             if($string == '_id' AND ! is_object($value))
             {
-                return new \MongoId($value);
+                return new MongoId($value);
             }
         }
         
@@ -1190,7 +1201,7 @@ Class Mongo {
     public function rollback() {}
     public function lastQuery() {
         // @todo: mongodb query output.
-        // any idea ? how we do it ?
+        // any idea ? how can we do it ?
     }
     
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Navigation Bar Class v1.0
+ * Navigation Bar Class
  *
  * A simple navigation link control class.
  *
@@ -32,15 +32,33 @@ Class Navbar {
     */
     public function __construct($params = array())
     {   
-        $auth   = getConfig('navbar');
-        $config = array_merge($auth , $params);
+        if(count($params > 0))
+        {
+            $this->init($params);
+        }
+
+        log\me('debug', "Navbar Class Initialized");
+    }
+    
+    // ------------------------------------------------------------------------
+    
+    /**
+     * Initialize to Class.
+     * 
+     * @param array $params
+     * @return object
+     */
+    public function init($params = array())
+    {
+        $navbar = getConfig('navbar');
+        $config = array_merge($navbar , $params);
         
         foreach($config as $key => $val)
         {
             $this->{$key} = $val;
         }
-
-        log\me('debug', "Navbar Class Initialized");
+        
+        return ($this);
     }
     
     // ------------------------------------------------------------------------
@@ -54,7 +72,7 @@ Class Navbar {
      * 
      * @return array 
      */
-    public function top_level()
+    public function topLevel()
     {
         $top_level  = array();
         $module     = Uri::getInstance()->rSegment(0); // * Get routed segments
@@ -82,7 +100,7 @@ Class Navbar {
      * 
      * @return array
      */
-    public function sub_level()
+    public function subLevel()
     {
         $sub_level  = array();
         $module     = Uri::getInstance()->rSegment(0); // * Get routed segments

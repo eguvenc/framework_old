@@ -1,7 +1,7 @@
 <?php
 namespace Database_Pdo\Src;
 
-function QueryTimer($mark = '')
+function queryTimer($mark = '')
 {
     $mark = null;
     list($sm, $ss) = explode(' ', microtime());
@@ -112,11 +112,11 @@ Class Database_Layer extends Database_Crud {
 
         //------------------------------------
         
-        $start_time = QueryTimer('start');
+        $start_time = queryTimer('start');
 
         $this->Stmt = $this->_conn->query($sql);
 
-        $end_time   = QueryTimer('end');
+        $end_time   = queryTimer('end');
         
         //------------------------------------
         
@@ -221,11 +221,11 @@ Class Database_Layer extends Database_Crud {
 
         //------------------------------------
         
-        $start_time = QueryTimer('start');
+        $start_time = queryTimer('start');
         
         $this->Stmt->execute($array);
         
-        $end_time   = QueryTimer('end');
+        $end_time   = queryTimer('end');
         
         //------------------------------------
         
@@ -284,11 +284,11 @@ Class Database_Layer extends Database_Crud {
         $this->last_sql = $sql;
 
         //------------------------------------
-        $start_time = QueryTimer('start');
+        $start_time = queryTimer('start');
 
         $affected_rows = $this->_conn->exec($sql);
 
-        $end_time   = QueryTimer('end');
+        $end_time   = queryTimer('end');
         //------------------------------------
 
         if(config('log_queries'))

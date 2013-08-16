@@ -14,7 +14,7 @@ namespace form_Json {
     {
        function __construct()
        {
-          log\me('debug', 'Form Json Helper Initialized.');
+           \log\me('debug', 'Form Json Helper Initialized.');
        }
     }
     
@@ -47,7 +47,7 @@ namespace form_Json {
 
             if($model->errors('transaction') != '')
             {
-                log\me('debug', 'System Error: '. $model->errors('transaction'));
+                \log\me('debug', 'System Error: '. $model->errors('transaction'));
 
                 return json_encode(array('success' => false, 'errors' => array('sys_error' => lang('We couldn\'t save data at this time please try again. Error: ').$model->errors('transaction'))));
             }

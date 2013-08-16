@@ -453,7 +453,7 @@ Class Hmvc
         $this->_this->router  = Router::setInstance($this->router);
         $this->_this->config  = Config::setInstance($this->config);
         
-        getInstance($this->_this);         // Set original $this to controller instance that we backup before
+        getInstance($this->_this);         // Set original $this to controller instance that we backup before.
     
         # Assign Obullo global variables ..
         ######################################
@@ -473,9 +473,9 @@ Class Hmvc
             // self::$request_times[$URI->uri_string] = $end_time - self::$start_time;
         }
         
-        $this->is_reset = true;  // This means hmvc process completed succesfully without any errors.
-                                 // If is_reset == false we say to destruct method reset the router
-                                 // variables and turn back to orginial vars of obullo which we had reset them before.        
+        $this->is_reset = true;  // This means hmvc process done without any errors.
+                                 // If is_reset == false we say to destruct method "reset the router" variables 
+                                 // and return to original variables of Obullo that we clone them before the hmvc request. 
     }
 
     // --------------------------------------------------------------------

@@ -1,5 +1,4 @@
 <?php
-namespace Auth;
 
 /**
  * Auth Class
@@ -78,7 +77,7 @@ Class Auth {
         
         new sess\start();
 
-        $database = new Db\Db(false);
+        $database = new Db(false);
         $this->db = $database->connect($this->db_var);
         
         return ($this);
@@ -394,7 +393,7 @@ Class Auth {
     {
         $row = $this->getRow();
 
-        sess_set('ok', 1, $this->session_prefix);  // Authenticate the user.
+        sess\set('ok', 1, $this->session_prefix);  // Authenticate the user.
         
         $sess_data = array();
         foreach($data as $key)

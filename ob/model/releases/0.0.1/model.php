@@ -1,5 +1,4 @@
 <?php
-namespace Ob;
 
 /**
  * Model Class.
@@ -40,7 +39,7 @@ Class Model {
         {
             if( ! isset(getInstance()->{$db_var})) // If database connection not available.
             {
-                $database = new Db\Db(); // Create new Database Instance.
+                $database = new Db(); // Create new Database Instance.
                 $this->{$db_var} = $database->connect($db_var);
             }
             

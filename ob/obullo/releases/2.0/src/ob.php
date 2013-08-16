@@ -12,7 +12,7 @@
      */
     function lang($item = '')
     {
-        $locale = Locale\Locale::getInstance();
+        $locale = Locale::getInstance();
         $item = ($item == '' OR ! isset($locale->language[$item])) ? false : $locale->language[$item];
 
         return $item;
@@ -67,14 +67,14 @@
         //--------------- MODEL LOADER ---------------//
         
         if(strpos($realname, 'Model\\') === 0 || strpos($realname, 'Models\\') === 0) // User model files.
-        {
+        {            
             $model_parts = explode('\\', $realname);         
-            
+
             if(strpos($realname, 'Models\\') === 0)
             {
                 if($model_parts[1] == 'Schema')
                 {
-                    $model_path = MODULES .'models'. DS .'schemas'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
+                    $model_path = MODULES .'models'. DS .'schema'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
                     require($model_path);
                     return;
                 }
@@ -83,19 +83,20 @@
             } 
             else // 'Model\\'
             {
-                $router = Router\Router::getInstance();
+                $router = Router::getInstance();
                 
                 if($model_parts[1] == 'Schema')
                 { 
-                    $model_path = MODULES .$router->fetchDirectory(). DS .'models'. DS .'schemas'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
+                    $model_path = MODULES .$router->fetchDirectory(). DS .'model'. DS .'schema'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
                     require($model_path);
                     return;
                 }
 
-                $model_path = MODULES .$router->fetchDirectory(). DS .'models'. DS .mb_strtolower($model_parts[1], config('charset')). EXT;
+                $model_path = MODULES .$router->fetchDirectory(). DS .'model'. DS .mb_strtolower($model_parts[1], config('charset')). EXT;
             }
            
             require($model_path);
+                            
             return;
         }
 
@@ -121,17 +122,11 @@
         
         if(isset($packages['dependencies'][$package_filename]['component'])) //  check is it Obullo Package ?
         {
-            if($packages['dependencies'][$package_filename]['component'] == 'helper')
-            {
-                
-            }
-            
             $class = $package_filename;
             if($src != '') // Driver Request.
             {
                 $class = mb_strtolower(end($ob_parts));
-            }  
-            // a request example new Email\Mail(); $ob_parts[1] = 'Mail';
+            }   // a request example new Email\Mail(); $ob_parts[1] = 'Mail';
             elseif($packages['dependencies'][$package_filename]['component'] == 'library' AND isset($ob_parts[1]))
             {
                 $class = mb_strtolower($ob_parts[1]);

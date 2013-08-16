@@ -1,5 +1,4 @@
 <?php
-namespace Odm;
 
 /**
  * OBJECT DATA MODEL
@@ -41,21 +40,21 @@ Class Odm extends Model {
         
         if( ! is_object($schema))
         {
-            throw new \Exception('You must provide a $schema object.');
+            throw new Exception('You must provide a $schema object.');
         }
         
         $this->schema = $schema;
         
         if( ! isset($this->schema->config['database'])) 
         {
-            throw new \Exception('Check your model it must be contains $schema->config[\'database\'] array.');
+            throw new Exception('Check your model it must be contains $schema->config[\'database\'] array.');
         }
         
         $db = $this->schema->config['database'];
                  
         if($db != '' AND $db != 'no')
         {
-            $database = new Db\Db(false);
+            $database = new Db(false);
             $this->db = $database->connect(); // Cannot assign by reference to overloaded object 
         }
                             
@@ -112,7 +111,7 @@ Class Odm extends Model {
             {
                 if(isset($val['rules']) AND $val['rules'] != '')
                 {
-                    $validator->set_rules($key, $val['label'], $val['rules']);
+                    $validator->setRules($key, $val['label'], $val['rules']);
                 }
             }
         }
@@ -258,7 +257,7 @@ Class Odm extends Model {
      * errors[user_password]=Wrond%20Password!&errors['user_email']=Wrong%20Email%20Address!
      * @return type 
      */
-    public function build_query_errors()
+    public function buildQueryErrors()
     {
         $table = $this->schema->config['table'];
         
@@ -309,7 +308,7 @@ Class Odm extends Model {
     *
     * @param string $key or $field
     */
-    public function set_error($key, $error)
+    public function setError($key, $error)
     {
         $table = $this->schema->config['table'];
         
@@ -328,7 +327,7 @@ Class Odm extends Model {
     *
     * @param string $key name of function
     */
-    public function set_custom_key($name, $val)
+    public function setCustomKey($name, $val)
     {
         $table = $this->schema->config['table'];
         
@@ -416,11 +415,11 @@ Class Odm extends Model {
     /**
     * Some times we don't want save some fields or that 
     * the fields which we haven't got in the db tables we have to validate them.
-    * To overcome to this problem we use the $model->no_save(); function.
+    * To overcome to this problem we use the $model->noSave(); function.
     * 
     * @param type $key
     */
-    public function no_save($key)
+    public function noSave($key)
     {
         $this->no_save[$key] = $key;
     }
@@ -659,12 +658,12 @@ Class Odm extends Model {
 
                     $this->db->transaction(); // begin the transaction
 
-                    $this->_before_save();
+                    $this->_beforeSave();
                                     
                     $this->_compileSelect();                
                     $this->errors[$table]['affected_rows'] = $this->db->update($table, $s_data);
                     
-                    $this->_after_save();
+                    $this->_afterSave();
                     
                     $this->db->commit();    // commit the transaction
                     
@@ -695,13 +694,13 @@ Class Odm extends Model {
 
                     $this->db->transaction(); // begin the transaction
                     
-                    $this->_before_save();
+                    $this->_beforeSave();
                      
                     $this->_compileSelect();    
                     $this->errors[$table]['affected_rows'] = $this->db->insert($table, $s_data);
                     $this->values[$table][$id] = $this->db->insertId();  // add last inserted id.
 
-                    $this->_after_save();
+                    $this->_afterSave();
                     
                     $this->db->commit();    // commit the transaction
                     
@@ -728,7 +727,7 @@ Class Odm extends Model {
             }
         }
         
-        if( ! i_ajax())  // If request not AJAX, add success key for native posts.
+        if( ! i\ajax())  // If request not AJAX, add success key for native posts.
         {
             $this->errors[$table]['success'] = 0;
         }
@@ -897,7 +896,7 @@ Class Odm extends Model {
         
         if(count($this->where) == 0 AND count($this->where_in) == 0)
         {
-            throw new \Exception('Please set an ID using $model->where() before the delete operation.');
+            throw new Exception('Please set an ID using $model->where() before the delete operation.');
         }
         
         if($has_rules)  // if we have validation rules ..

@@ -50,7 +50,7 @@ Class Obullo
 
         if ($output->_displayCache($config, $uri) == true) { exit; }  // Check REQUEST uri if there is a Cached file exist 
 
-        $folder = 'controllers';
+        $folder = 'controller';
 
         if(defined('STDIN'))  // Command Line Request
         {                

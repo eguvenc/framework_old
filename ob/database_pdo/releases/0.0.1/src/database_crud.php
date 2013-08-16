@@ -831,7 +831,7 @@ Class Database_Crud {
     * @param    array    an associative array data of key/values
     * @return   string        
     */    
-    public function insert_string($table, $data)
+    public function insertString($table, $data)
     {
         $fields = array();
         $values = array();
@@ -922,7 +922,7 @@ Class Database_Crud {
     * @param    mixed    the "where" statement
     * @return   string        
     */    
-    public function update_string($table, $data, $where)
+    public function updateString($table, $data, $where)
     {
         if ($where == '')
         {
@@ -1455,7 +1455,7 @@ Class Database_Crud {
     * @param    mixed    the item to escape
     * @return   mixed    the item with backticks
     */
-    private function protect_identifiers($item, $prefix_single = false)
+    private function protectIdentifiers($item, $prefix_single = false)
     {
         return $this->_protectIdentifiers($item, $prefix_single);
     }

@@ -1,5 +1,4 @@
 <?php
-namespace Cart;
 
 /**
  * Shopping Cart Class
@@ -509,7 +508,7 @@ Class Cart {
     
         // Remove anything that isn't a number or decimal point.
         $n = trim(preg_replace('/([^0-9\.])/i', '', $n));
-    
+
         return number_format($n, 2, '.', ',');
     }
         

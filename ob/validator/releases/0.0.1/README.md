@@ -362,7 +362,7 @@ The validation system supports callbacks to your own validation functions. This 
 In your controller, change the "username" rule to this:
 
 ```php
-$form->set_rules('username', 'Username', 'callback_username_check');
+$form->setRules('username', 'Username', 'callback_username_check');
 ```
 
 Then add a new function called <dfn>username_check</dfn> to your controller. Here's how your controller should now look:

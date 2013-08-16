@@ -15,7 +15,7 @@ namespace link {
     { 
         function __construct()
         {
-            log\me('debug', 'Link Helper Initialized.');
+            \log\me('debug', 'Link Helper Initialized.');
         }
     }
     
@@ -30,7 +30,7 @@ namespace link {
     * @param	mixed 	any attributes
     * @return	string
     */
-    function mailto($email, $title = '', $attributes = '')
+    function mailTo($email, $title = '', $attributes = '')
     {
         $title = (string) $title;
 
@@ -57,7 +57,7 @@ namespace link {
     * @param	mixed 	any attributes
     * @return	string
     */
-    function safe_mailto($email, $title = '', $attributes = '')
+    function safeMailto($email, $title = '', $attributes = '')
     {
         $title = (string) $title;
 
@@ -168,7 +168,7 @@ namespace link {
     * @param	bool 	whether to create pop-up links
     * @return	string
     */
-    function auto_link($str, $type = 'both', $popup = false)
+    function autoLink($str, $type = 'both', $popup = false)
     {
         if ($type != 'email')
         {
@@ -211,7 +211,7 @@ namespace link {
                         $matches['3'][$i] = substr($matches['3'][$i], 0, -1);
                     }
 
-                    $str = str_replace($matches['0'][$i], safe_mailto($matches['1'][$i].'@'.$matches['2'][$i].'.'.$matches['3'][$i]).$period, $str);
+                    $str = str_replace($matches['0'][$i], safeMailto($matches['1'][$i].'@'.$matches['2'][$i].'.'.$matches['3'][$i]).$period, $str);
                 }
             }
         }

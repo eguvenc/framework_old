@@ -27,8 +27,8 @@ Class Welcome extends Controller {
         // echo request\get('welcome/test/1/2/3');
         // echo request\get('welcome/test/4/5/6');
           
-        //$user  = new \Models\User();
-        //$user->test();
+        // $user  = new \Model\User();
+        // $user->test();
         // $user  = new Model\User();
         // $email = new Email(false);
         // $this->db->get('users');
@@ -38,8 +38,8 @@ Class Welcome extends Controller {
         
         // sess\set('test', 1234);
         // echo sess\get('test');
-        
-        vi\ew('welcome', '', false); // current module view
+        vi\view('welcome', '', false); // current module view
+        //
         // vi\views('welcome', '', false); // modules/views
     }
     
@@ -51,7 +51,7 @@ Class Welcome extends Controller {
         $data['response_a'] = request\get('welcome/test/1/2/3');
         $data['response_b'] = request\get('welcome/test/4/5/6');
         
-        vi\get('hmvc', $data, false);
+        vi\view('hmvc', $data, false);
     }
     
     function test($arg1 = '', $arg2 = '', $arg3 = '')

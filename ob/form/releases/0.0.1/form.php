@@ -13,7 +13,7 @@ namespace form {
     {
         function __construct()
         {
-            log\me('debug', 'Form Helper Initialized.');
+            \log\me('debug', 'Form Helper Initialized.');
         }
     }
 
@@ -45,7 +45,7 @@ namespace form {
         
         if (config('csrf_protection') === true) // CSRF Support
         {
-            $security = Security\Security::getInstance();
+            $security = Security::getInstance();
             
             $hidden[$security->getCsrfTokenName()] = $security->getCsrfHash();
         }
@@ -808,7 +808,7 @@ namespace form {
             
             if($model->errors('transaction') != '')
             {
-                log\me('debug', 'System Error: '. $model->errors('transaction'));
+                \log\me('debug', 'System Error: '. $model->errors('transaction'));
                 
                 return lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
             }
@@ -871,7 +871,7 @@ namespace form {
        
         if($model->errors('transaction') != '')
         {
-            log\me('debug', 'System Error: '. $model->errors('transaction'));
+            \log\me('debug', 'System Error: '. $model->errors('transaction'));
 
             $msg =  $model->errors('msg') .' '. lang('We couldn\'t save data at this time please try again. Error: ') . $model->errors('transaction');
             

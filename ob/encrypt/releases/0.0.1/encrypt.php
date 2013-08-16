@@ -1,5 +1,4 @@
 <?php
-namespace Encrypt;
 
 /**
  * Obullo Encryption Class
@@ -37,6 +36,18 @@ Class Encrypt {
         
         log\me('debug', "Encrypt Class Initialized");
     }
+    
+    // ------------------------------------------------------------------------
+    
+    /**
+     * Initialize to Class.
+     * 
+     * @return object
+     */
+    public function init()
+    {
+        return ($this);
+    }
 
     // --------------------------------------------------------------------
 
@@ -63,7 +74,7 @@ Class Encrypt {
 
             if ($key === false)
             {
-                throw new \Exception('In order to use the encryption class requires that you set an encryption key in your config file.');
+                throw new Exception('In order to use the encryption class requires that you set an encryption key in your config file.');
             }
         }
 

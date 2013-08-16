@@ -1,5 +1,4 @@
 <?php
-namespace Agent;
 
 /**
  * User Agent Class

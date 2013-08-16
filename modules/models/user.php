@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-Class User extends Model
+Class User extends \Model
 {
     function __construct()
     {
