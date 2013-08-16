@@ -15,11 +15,11 @@ $this->acl->method();
 
 Once loaded, the Acl object will be available using: <dfn>$this->acl->method();</dfn>
 
-### Quick Access To Library
+### Grabbing the Instance
 
 ------
 
-Also using Acl(false); function you can grab the instance of Obullo libraries.
+Also using new Acl(false); boolean you can grab the instance of Obullo libraries,"$this->acl->method()" will not available in the controller.
 
 ```php
 $acl = new Acl(false);
@@ -33,12 +33,12 @@ $acl->method();
 ```php
 $acl = new Acl(false);
 
-$acl->add_group('@admin');
+$acl->addGroup('@admin');
 $acl->allow('@admin', 'create_user');
 
-$acl->add_member('obullo', '@admin');
+$acl->addMember('obullo', '@admin');
 
-if($acl->is_allowed('obullo', 'delete_user'))
+if($acl->isAllowed('obullo', 'delete_user'))
 {
      echo 'Obullo has a create user access !';
 }
@@ -51,18 +51,18 @@ if($acl->is_allowed('obullo', 'delete_user'))
 ```php
 $acl = new Acl(false);
 
-$acl->add_group('@admin');
-$acl->add_group('@editor');
+$acl->addGroup('@admin');
+$acl->addGroup('@editor');
 
 $acl->allow('@admin', array('create_user', 'delete_user'));
 $acl->allow('@editor', array('create_user', 'delete_user'));
 
 $acl->deny('@editor', 'delete_user');
 
-$acl->add_member('obullo', '@admin');
-$acl->add_member('john', '@editor');
+$acl->addMember('obullo', '@admin');
+$acl->addMember('john', '@editor');
 
-if(  ! $acl->is_allowed('john', 'delete_user'))
+if(  ! $acl->isAllowed('john', 'delete_user'))
 {
      echo 'John hasn't got delete user access !';
 }
@@ -73,12 +73,12 @@ if(  ! $acl->is_allowed('john', 'delete_user'))
 ------
 
 ```php
-$acl = lib('ob/Acl');
+$acl = new Acl(false);
 
-$acl->add_group('@admin');
+$acl->addGroup('@admin');
 $acl->allow('@admin', array('create_user', 'delete_user'));
 
-if(  $acl->is_allowed('@admin', 'delete_user'))
+if(  $acl->isAllowed('@admin', 'delete_user'))
 {
      echo 'Great @admin group has got delete user access !';
 }

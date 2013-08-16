@@ -195,7 +195,7 @@ Class Sess_Native {
     * @access    public
     * @return    mixed
     */
-    function alldata()
+    function allData()
     {
         return ( ! isset($_SESSION)) ? false : $_SESSION;
     }
@@ -366,7 +366,7 @@ Class Sess_Native {
     */
     function _flashdataMark()
     {
-        $userdata = $this->alldata();
+        $userdata = $this->allData();
         
         foreach ($userdata as $name => $value)
         {
@@ -391,7 +391,7 @@ Class Sess_Native {
     */  
     function _flashdataSweep()
     {              
-        $userdata = $this->alldata();
+        $userdata = $this->allData();
         foreach ($userdata as $key => $value)
         {
             if (strpos($key, ':old:'))

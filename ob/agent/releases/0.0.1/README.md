@@ -15,14 +15,14 @@ $this->agent->method();
 
 Once loaded, the Agent object will be available using: <dfn>$this->agent->method();</dfn>
 
-### Quick Access To Library
+### Grabbing the Instance
 
 ------
 
-Also using lib(); function you can grab the instance of Obullo libraries.
+Also using new Agent(false); boolean you can grab the instance of Obullo libraries,"$this->agent->method()" will not available in the controller.
 
 ```php
-$agent = lib('ob/agent');
+$agent = new Agent(false);
 $agent->method();
 ```
 
@@ -37,7 +37,7 @@ The user agent name definitions are located in a config file located at: <dfn>ap
 When the User Agent class is initialized it will attempt to determine whether the user agent browsing your site is a web browser, a mobile device, or a robot. It will also gather the platform information if it is available.
 
 ```php
-loader::lib('ob/agent');
+new Agent();
 
 if ($this->agent->isBrowser())
 {

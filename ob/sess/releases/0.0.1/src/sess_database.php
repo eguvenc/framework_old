@@ -430,7 +430,7 @@ Class Sess_Database {
     * @access    public
     * @return    mixed
     */
-    function alldata()
+    function allData()
     {
         return ( ! isset($this->userdata)) ? false : $this->userdata;
     }
@@ -590,7 +590,7 @@ Class Sess_Database {
     */
     function _flashdataMark()
     {
-        $userdata = $this->alldata();
+        $userdata = $this->allData();
         
         foreach ($userdata as $name => $value)
         {
@@ -615,7 +615,7 @@ Class Sess_Database {
     */  
     function _flashdataSweep()
     {              
-        $userdata = $this->alldata();
+        $userdata = $this->allData();
         foreach ($userdata as $key => $value)
         {
             if (strpos($key, ':old:'))

@@ -73,9 +73,9 @@ namespace sess {
     * @param    string
     * @return   void
     */ 
-    function alldata()
+    function allData()
     {
-        return getInstance()->alldata();
+        return getInstance()->allData();
     }
     
     // --------------------------------------------------------------------

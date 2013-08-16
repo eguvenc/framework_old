@@ -319,7 +319,7 @@ Class Sess_Cookie {
     * @access    public
     * @return    mixed
     */
-    function alldata()
+    function allData()
     {
         return ( ! isset($this->userdata)) ? false : $this->userdata;
     }
@@ -468,7 +468,7 @@ Class Sess_Cookie {
     */
     function _flashdataMark()
     {
-        $userdata = $this->alldata();
+        $userdata = $this->allData();
         
         foreach ($userdata as $name => $value)
         {
@@ -492,7 +492,7 @@ Class Sess_Cookie {
     */  
     function _flashdataSweep()
     {              
-        $userdata = $this->alldata();
+        $userdata = $this->allData();
         foreach ($userdata as $key => $value)
         {
             if (strpos($key, ':old:'))

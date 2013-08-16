@@ -9,19 +9,19 @@ Auth Class provides a lightweight and simple auth implementation for user authen
 ------
 
 ```php
-loader::lib('ob/auth');
+new Auth();
 ```
 
 Once loaded, the Auth object will be available using: <dfn>$this->auth->method();</dfn>
 
-### Quick Access To Library
+### Grabbing the Instance
 
 ------
 
-Also using lib(); function you can grab the instance of Obullo libraries.
+Also using new Auth(false); boolean you can grab the instance of Obullo libraries,"$this->auth->method()" will not available in the controller.
 
 ```php
-$auth = lib('ob/auth');
+$auth = new Auth(false);
 
 $auth->method();
 ```
@@ -70,7 +70,7 @@ $auth['fields']              = array(       // Session Container db table fields
 ------
 
 ```php
-$auth = lib('ob/Auth');
+$auth = new Auth(false);
 $auth->select('user_username, user_password, user_active');
 $row = $auth->get();
         
@@ -92,7 +92,7 @@ if($row ! == FALSE)
 ------
 
 ```php
-loader::lib('ob/Auth');
+new Auth();
 
 if($this->auth->check())
 {
@@ -106,7 +106,7 @@ if($this->auth->check())
 ------
 
 ```php
-$auth = lib('ob/Auth');
+$auth = new Auth(false);
 
 if($auth->check())
 {
@@ -133,8 +133,8 @@ Don't forget we use $this->auth->redirect() function for <b>unauthenticated</b> 
 And you may want to create hidden redirect input element to your login screen.
 
 ```php
-<?php echo form_open('/login/post', array('method' => 'POST')); ?>
-<?php echo form_hidden('redirect', i_get('redirect')); ?>
+<?php echo form\open('/login/post', array('method' => 'POST')); ?>
+<?php echo form\hidden('redirect', i_get('redirect')); ?>
 ```
 
 So now you able to redirect user the redirect url. You need to check redirect input using i_get('redirect') function in your login.

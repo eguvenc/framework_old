@@ -33,19 +33,19 @@ It's important for you to know that the encoded messages the encryption function
 ------
 
 ```php
-loader::lib('ob/encrypt');
+new Encrypt();
 ```
 
 Once loaded, the Encrypt library object will be available using: <dfn>$this->encrypt->method()</dfn>;
 
-### Quick Access To Library
+### Grabbing the Instance
 
 ------
 
-Also using lib(); function you can grab the instance of Obullo libraries.
+Also using new Encrypt(false); boolean you can grab the instance of Obullo libraries,"$this->encrypt->method()" will not available in the controller.
 
 ```php
-$encrypt = lib('ob/encrypt ');
+$encrypt = new Encrypt(false);
 
 $encrypt->method();
 ```
@@ -83,14 +83,14 @@ $plaintext_string = $this->encrypt->decode($encrypted_string);
 ```
 
 
-#### $this->encrypt->set_cipher();
+#### $this->encrypt->setCipher();
 
 ------
 
 Permits you to set an Mcrypt cipher. By default it uses <samp>MCRYPT_RIJNDAEL_256</samp>. Example:
 
 ```php
-$encrypt->set_cipher(MCRYPT_BLOWFISH);
+$encrypt->setCipher(MCRYPT_BLOWFISH);
 ```
 
 Please visit php.net for a list of [available ciphers](http://php.net/mcrypt).
@@ -101,14 +101,14 @@ If you'd like to manually test whether your server supports Mcrypt you can use:
 echo ( ! function_exists('mcrypt_encrypt')) ? 'Nope' : 'Yup';
 ```
 
-#### $this->encrypt->set_mode();
+#### $this->encrypt->setMode();
 
 ------
 
 Permits you to set an Mcrypt mode. By default it uses <samp>MCRYPT_MODE_ECB</samp>. Example:
 
 ```php
-$this->encrypt->set_mode(MCRYPT_MODE_CFB);
+$this->encrypt->setMode(MCRYPT_MODE_CFB);
 ```
 
 Please visit php.net for a list of [available modes](http://php.net/mcrypt).

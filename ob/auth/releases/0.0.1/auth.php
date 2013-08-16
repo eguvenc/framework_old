@@ -288,7 +288,7 @@ Class Auth {
     {
         if($key == '')
         {
-            return sess\alldata();
+            return sess\allData();
         }
         
         return sess\get($key, $this->session_prefix);
@@ -423,7 +423,7 @@ Class Auth {
             return;
         }
         
-        $user_data = sess\alldata();
+        $user_data = sess\allData();
         sess\remove($user_data, $this->session_prefix);
     }
     

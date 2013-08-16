@@ -14,11 +14,11 @@ new Zip();
 
 Once loaded, the Zip library object will be available using: <dfn>$this->zip->method();</dfn>
 
-### Quick Access To Library
+### Grabbing the Instance
 
 ------
 
-Also using new Zip(false); function you grab the instance of Obullo libraries.
+Also using new Zip(false); boolean you can grab the instance of Obullo libraries,"$this->zip->method()" will not available in the controller.
 
 ```php
 $zip = new Zip(false);

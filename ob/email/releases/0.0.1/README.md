@@ -38,14 +38,14 @@ $this->email->send();
 echo $this->email->print_debugger();
 ```
 
-### Quick Access To Library
+### Grabbing the Instance
 
 ------
 
-Also using new Email(FALSE); function you can grab the instance of Obullo libraries.
+Also using new Email(false); boolean you can grab the instance of Obullo libraries,"$this->email->method()" will not available in the controller.
 
 ```php
-$email = new Email(FALSE);
+$email = new Email(false);
 
 $email->method();
 ```
@@ -114,12 +114,12 @@ Sets the email address and name of the person sending the email:
 $this->email->from('you@example.com', 'Your Name');
 ```
 
-#### $this->email->reply_to()
+#### $this->email->replyTo()
 
 Sets the reply-to address. If the information is not provided the information in the "from" function is used. Example:
 
 ```php
-$this->email->reply_to('you@example.com', 'Your Name');
+$this->email->replyTo('you@example.com', 'Your Name');
 ```
 
 #### $this->email->to()
@@ -163,12 +163,12 @@ Sets the email message body:
 $this->email->message('This is my message');
 ```
 
-#### $this->email->set_alt_message()
+#### $this->email->setAltMessage()
 
 Sets the alternative email message body:
 
 ```php
-$this->email->set_alt_message('This is the alternative message');
+$this->email->setAltMessage('This is the alternative message');
 ```
 
 This is an optional message string which can be used if you send HTML formatted email. It lets you specify an alternative message with no HTML formatting which is added to the header string for people who do not accept HTML email. If you do not set your own message Obullo will extract the message from your HTML email and strip the tags.
@@ -178,7 +178,7 @@ This is an optional message string which can be used if you send HTML formatted 
 Initializes all the email variables to an empty state. This function is intended for use if you run the email sending function in a loop, permitting the data to be reset between cycles.
 
 ```php
-$email = lib('ob/email');
+$email = new Email(false);
 
 foreach ($list as $name => $address)
 {
@@ -221,7 +221,7 @@ $this->email->attach('/path/to/photo3.jpg');
 $this->email->send();
 ```
 
-#### $this->email->print_debugger()
+#### $this->email->printDebugger()
 
 Returns a string containing any server messages, the email headers, and the email messsage. Useful for debugging.
 ### Overriding Word Wrapping
