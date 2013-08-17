@@ -571,7 +571,7 @@ $results = $db->query('SELECT * FROM ob_users')->resultArray();
 print_r($results);
 ```
 
-## Running and Escaping Queries
+## Running and Escaping Queries <a name="running-and-escaping-queries"></a>
 
 ### Direct Query
 
@@ -1346,8 +1346,6 @@ The following functions allow you to build SQL <b>SELECT</b> statements.
 
 #### $this->db->get();
 
-------
-
 Runs the selection query and returns the result. Can be used by itself to retrieve all records from a table:
 
 ```php
@@ -1376,9 +1374,7 @@ foreach($query->fetch_all() as $row)
 
 Please visit the [result functions](/docs/database/#generating-query-results) page for a full discussion regarding result generation.
 
-#### $this->db->get_where();
-
-------
+#### $this->db->getWhere();
 
 Identical to the above function except that it permits you to add a "where" clause in the second parameter, instead of using the db->where() function:
 
@@ -1387,8 +1383,6 @@ $query = $this->db->get_where('mytable', array('id' => $id), $limit, $offset);
 ```
 
 #### $this->db->select();
-
-------
 
 Permits you to write the SELECT portion of your query:
 
@@ -1432,20 +1426,28 @@ AVG(age) as avg_age,
 DATE_FORMAT(field, '%d-%m-%Y') as date
 FROM mytable
 WHERE active = '1'
-$this->db->from();
+```
+
+#### $this->db->from();
 
 Permits you to write the FROM portion of your query:
+
+```php
 $this->db->select('title, content, date');
 $this->db->from('mytable');
 
 $query = $this->db->get();
 
 // Produces: SELECT title, content, date FROM mytable
+```
 
-Note: As shown earlier, the FROM portion of your query can be specified in the $this->db->get() function, so use whichever method you prefer.
-$this->db->join();
+**Note:** As shown earlier, the FROM portion of your query can be specified in the <dfn>$this->db->get()</dfn> function, so use whichever method you prefer.
+
+#### $this->db->join();
 
 Permits you to write the JOIN portion of your query:
+
+```php
 $this->db->select('*');
 $this->db->from('blogs');
 $this->db->join('comments', 'comments.id = blogs.id');
@@ -1453,7 +1455,7 @@ $this->db->join('comments', 'comments.id = blogs.id');
 $query = $this->db->get();
 
 // Produces:
-
+```
 Multiple function calls can be made if you need several joins in one query.
 
 If you need something other than a natural JOIN you can specify it via the third parameter of the function. Options are: left, right, outer, inner, left outer, and right outer.
