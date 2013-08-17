@@ -12,7 +12,7 @@
  *                4D/4D_v11_SQL/4D_v11_SQL_Reference_r4.pdf                           
  */
 
-Class Pdo_4d extends Pdo_Database_Adapter
+Class Pdo_4d extends Database_Pdo\Src\Database_Adapter
 {
     /**
     * The character used for escaping
@@ -50,10 +50,10 @@ Class Pdo_4d extends Pdo_Database_Adapter
         $charset = empty($this->char_set) ? '' : ';charset='.$this->char_set;
         $dsn     = empty($this->dsn) ? '4D:host='.$this->hostname.$port.$charset : $this->dsn;
              
-        $this->_pdo  = $this->pdoConnect($dsn, $this->username, $this->password, $this->options);
+        $this->_pdo = $this->pdoConnect($dsn, $this->username, $this->password, $this->options);
 
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
-        $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        $this->_conn->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
     } 
 
     // --------------------------------------------------------------------
@@ -149,12 +149,12 @@ Class Pdo_4d extends Pdo_Database_Adapter
         {
             if(strpos($str, ':') === false)
             {
-                $str = $this->quote($str, PDO::PARAM_STR);
+                $str = $this->quote($str, \PDO::PARAM_STR);
             }
         }
         else
         {
-           $str = $this->quote($str, PDO::PARAM_STR);
+           $str = $this->quote($str, \PDO::PARAM_STR);
         }
         
         return $str;

@@ -43,7 +43,7 @@ Class Pager_Jumping extends Pager_Common
     *
     * @return int page_id for given offset
     */
-    public function get_page_by_offset($index)
+    public function getPageByOffset($index)
     {
         if (!isset($this->_page_data)) 
         {

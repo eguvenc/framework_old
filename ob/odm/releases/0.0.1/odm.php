@@ -16,7 +16,6 @@ Class Odm extends Model {
     public $values     = array();  // Filtered safe values.
     public $no_save    = array();  // No save fields, so save function will not save selected fields to database.
     public $validation = false;    // If form validation success we set it to true.
-    
     public $function   = array();
     
     public $where           = array();
@@ -26,7 +25,7 @@ Class Odm extends Model {
     public $where_not_in    = array();
     public $or_where_not_in = array();
     
-    public $schema = null;
+    public $schema        = null;
     public $schema_fields = array();
     
     /**
@@ -163,13 +162,12 @@ Class Odm extends Model {
     {
         getInstance()->locale->load('obullo');  // Load the language file
         
-        $v_data = array();   // validation fields data
+        $v_data    = array();   // validation fields data
         $db_fields = $this->schema_fields;
         
         if(count($fields) > 0)
         {
             unset($db_fields);
-            
             foreach($fields as $f_key => $v)
             {
                 $db_fields[$f_key] = $this->schema_fields[$f_key];

@@ -65,8 +65,7 @@ Class Db {
         
         if(strtolower($driver) == 'mongo') 
         {
-            $mongo = new Mongo();
-            
+            $mongo = new Mongo_Db(false);
             return $mongo->connect();
         }
         

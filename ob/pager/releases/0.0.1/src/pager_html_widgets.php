@@ -289,4 +289,4 @@ Class Pager_Html_Widgets
 // END Pager_Html_Widgets Class
 
 /* End of file Pager_Html_Widgets.php */
-/* Location: ./ob/pager/releases/0.0.1/pager_html_widgets.php */
+/* Location: ./ob/pager/releases/0.0.1/src/pager_html_widgets.php */

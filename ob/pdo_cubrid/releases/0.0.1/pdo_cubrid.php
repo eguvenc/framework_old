@@ -10,7 +10,7 @@
  * @link
  */
 
-Class Pdo_Cubrid extends Pdo_Database_Adapter
+Class Pdo_Cubrid extends Database_Pdo\Src\Database_Adapter
 {
     /**
     * The character used for escaping
@@ -56,7 +56,7 @@ Class Pdo_Cubrid extends Pdo_Database_Adapter
 	// its normal process.
 
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
-        $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->_conn->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         
         // PDO::ERRMODE_SILENT
     }
@@ -147,7 +147,9 @@ Class Pdo_Cubrid extends Pdo_Database_Adapter
 
             // not need to quote for who use prepare and :like bind.
             if($this->prepare == true AND $this->is_like_bind)
-            return $str;
+            {
+                return $str; 
+            }
         }
 
         // make sure is it bind value, if not ...
@@ -155,12 +157,12 @@ Class Pdo_Cubrid extends Pdo_Database_Adapter
         {
             if(strpos($str, ':') === false)
             {
-                $str = $this->quote($str, PDO::PARAM_STR);
+                $str = $this->quote($str, \PDO::PARAM_STR);
             }
         }
         else
         {
-           $str = $this->quote($str, PDO::PARAM_STR);
+           $str = $this->quote($str, \PDO::PARAM_STR);
         }
 
         return $str;

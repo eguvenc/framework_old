@@ -58,7 +58,7 @@ Class Pager_Sliding extends Pager_Common
     * @deprecated
     * @access public
     */
-    public function get_page_by_offset($index) {}
+    public function getPageByOffset($index) {}
 
     // ------------------------------------------------------------------------
 

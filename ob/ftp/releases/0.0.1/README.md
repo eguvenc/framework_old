@@ -203,7 +203,7 @@ Lets you create a directory on your server. Supply the path ending in the folder
 
 ```php
 // Creates a folder named "bar"
-$this->ftp->mkdir('/public_html/foo/bar/', DIR_WRITE_MODE);
+$this->ftp->mkdir('/public_html/foo/bar/', 0777);
 ```
 
 #### $this->ftp->chmod()
@@ -214,7 +214,7 @@ Permits you to set file permissions. Supply the path to the file or folder you w
 
 ```php
 // Chmod "bar" to 777
-$this->ftp->chmod('/public_html/foo/bar/', DIR_WRITE_MODE);
+$this->ftp->chmod('/public_html/foo/bar/', 0777);
 ```
 
 #### $this->ftp->close();

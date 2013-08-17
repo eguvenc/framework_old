@@ -41,16 +41,15 @@ Class Controller {
             foreach(array_keys($autoload) as $key)
             {
                 if(count($autoload[$key]) > 0)
-                {                    
+                {
                     foreach($autoload[$key] as $filename)
                     {
                         $class = $filename;
-                        
                         if($key == 'helper')
-                        {
+                        {                            
                             $class = $class.'\start';
                             new $class();
-                        } 
+                        }
                         
                         if($key == 'library')
                         {

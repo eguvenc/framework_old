@@ -1193,7 +1193,10 @@ Class Pager_Common
             }
         }
 
-        $session_var = \sess\get($this->_session_var);
+        if ($this->_use_sessions) 
+        {
+            $session_var = \sess\get($this->_session_var);
+        }
         
         if ( ! empty($session_var) AND $this->_use_sessions) 
         {
@@ -1224,4 +1227,4 @@ Class Pager_Common
 // END Pager_Common Class
 
 /* End of file Pager_Common.php */
-/* Location: ./ob/pager/releases/0.0.1/pager_common.php */
+/* Location: ./ob/pager/releases/0.0.1/src/pager_common.php */

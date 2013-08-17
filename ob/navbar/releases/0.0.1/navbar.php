@@ -30,11 +30,16 @@ Class Navbar {
     * @access    public
     * @return    void
     */
-    public function __construct($params = array())
-    {   
+    public function __construct($no_instance = true, $params = array())
+    {           
         if(count($params > 0))
         {
             $this->init($params);
+        }
+        
+        if($no_instance)
+        {
+            getInstance()->navbar = $this; // Available it in the contoller $this->navbar->method();
         }
 
         log\me('debug', "Navbar Class Initialized");
@@ -79,8 +84,8 @@ Class Navbar {
         
         foreach($this->top_level as $key => $val)
         {
-            $val   = array_keys($val);
-            $level = $val[0];
+            $val         = array_keys($val);
+            $level       = $val[0];
             $active      = (isset($this->top_level[$key][$module])) ? ' class="'.$this->top_active_class.'" ' : ' class="'.$this->top_inactive_class.'" ';
             $top_level[] = anchor($this->top_level[$key][$level]['url'], $this->top_level[$key][$level]['label'], $active);
         }

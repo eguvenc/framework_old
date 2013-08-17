@@ -1118,7 +1118,7 @@ Class Email {
             $attachment[$z++] = $h;
             $file = filesize($filename) +1;
 
-            if ( ! $fp = fopen($filename, FOPEN_READ))
+            if ( ! $fp = fopen($filename, 'rb'))
             {
                 $this->_setErrorMessage('email_attachment_unreadable', $filename);
                 return false;

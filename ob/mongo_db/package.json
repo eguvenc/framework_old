@@ -1,6 +1,6 @@
 {
   "name": "mongo_db",
-  "description": "Mongo db crud class.Control mongodb create,read,update and delete operations.",
+  "description": "Mongo db crud class. Control the mongodb create,read,update and delete operations.",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",
@@ -9,9 +9,10 @@
   },
   "component" : "library",
   "keywords": [
-    "mongodb",
-    "mongodb crud",
-    "mongo"
+    "mongo",
+    "mongo_db",
+    "nosql",
+    "crud"
   ],
   "homepage": "https://github.com/obullo/mongo_db",
   "repo": {

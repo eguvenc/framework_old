@@ -282,11 +282,11 @@ namespace html {
             {
                 if (@is_dir($source_dir.$file) && strncmp($file, '.', 1) !== 0)
                 {
-                            getFilenames($source_dir.$file. DS, $include_path, true);
+                    getFilenames($source_dir.$file. DS, $include_path, true);
                 }
                 elseif (strncmp($file, '.', 1) !== 0)
                 {
-                        $_filedata[] = ($include_path == true) ? $source_dir.$file : $file;
+                    $_filedata[] = ($include_path == true) ? $source_dir.$file : $file;
                 }
             }
             
