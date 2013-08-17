@@ -272,7 +272,7 @@ if($member_form)
 
 #### $model->noSave($field);
 
-Some times we don't want to save some fields or that the fields which we haven't got in the db tables we have to validate them.Overcome to this problem we use $model->no_save(); function.
+Some times we don't want to save some fields or that the fields which we haven't got in the db tables we have to validate them.Overcome to this problem we use $model->noSave(); function.
 
 ```php
 $member = new Model\Member(false);
@@ -459,7 +459,7 @@ you can control the form plugin functions using the class <b>attribute</b>
 
 ------
 
-After that load the <b>Obullo JQuery Form Plugin</b> just create a doPost() function in your controller then you need add a <samp>form_open('module/controller/doPost.json');</samp> code in your view file, remember we have a ajax form tutorial in modules/test folder. You can look at there for more details.
+After that load the <b>Obullo JQuery Form Plugin</b> just create a doPost() function in your controller then you need add a <samp>form\open('module/controller/doPost.json');</samp> code in your view file, remember we have a ajax form tutorial in modules/test folder. You can look at there for more details.
 
 ```php
 function doPost() 
@@ -659,7 +659,7 @@ If the config variable name in the file is not same via filename then you can gr
 $conf = getConfig('myconfig', 'conf'); print_r($conf);
 ```
 
-**Note:** You can't grab diffrerent multiple variables in one config file via *get_config()* function. One variable must be per file.
+**Note:** You can't grab diffrerent multiple variables in one config file via *getConfig()* function. One variable must be per file.
 
 **Tip:** If you have multiple config variables in a config file you can use associative arrays <b>$your_conf_var = array( 'setting1' => '', 'setting2' => '');</b>
 
@@ -722,14 +722,6 @@ setStatusHeader(401);
 // Sets the header as:  Unauthorized
 ```
 [See here](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) for a full list of headers.
-
-#### lib();
-
-Load the obullo libraries
-
-```php
-$email = new Email(false);
-```
  
 ## Sh Commands<a name="sh-commands"></a>
 
@@ -827,7 +819,7 @@ HMVC pattern offers more flexibility in your application. You can call multiple 
 -------------------------------------------------------------------------------------
 ```
 
-Another example, we created a <b>captcha</b> module using hmvc methods download the latest version of Obullo and look at the captcha module. And just an idea you can create a login service creating a <b>login</b> folder then you can do request from your controllers using HMVC. Learn more details about Obullo's HMVC library click [Request helper](/docs/helpers/request-helper) link.
+Another example, we created a <b>captcha</b> module using hmvc methods download the latest version of Obullo and look at the captcha module. And just an idea you can create a login service creating a <b>login</b> folder then you can do request from your controllers using HMVC. Learn more details about Obullo's HMVC library click [Request helper](/docs/packages/#request-helper) link.
 
 ## URI Routing <a name="uri-routing"></a>
 
@@ -1498,7 +1490,7 @@ Although Obullo is quite fast, the amount of dynamic information you display in 
 
 ------
 
-Caching can be enabled on a per-page basis, and you can set the length of time that a page should remain cached before being refreshed. When a page is loaded for the first time, the cache file will be written to your application/system/cache folder. On subsequent page loads the cache file will be retrieved and sent to the requesting user's browser. If it has expired, it will be deleted and refreshed before being sent to the browser.
+Caching can be enabled on a per-page basis, and you can set the length of time that a page should remain cached before being refreshed. When a page is loaded for the first time, the cache file will be written to your app/cache folder. On subsequent page loads the cache file will be retrieved and sent to the requesting user's browser. If it has expired, it will be deleted and refreshed before being sent to the browser.
 
 Note: The Benchmark tag is not cached so you can still view your page load speed when caching is enabled.
 
@@ -1518,7 +1510,7 @@ The above tag can go anywhere within a function. It is not affected by the order
 
 **Warning:** Because of the way Obullo stores content for output, caching will only work if you are generating display for your controller with a [view](/docs/general/#views).
 
-**Note:** Before the cache files can be written you must set the file permissions on your <dfn>app/system/cache</dfn> folder such that it is writable.
+**Note:** Before the cache files can be written you must set the file permissions on your <dfn>app/cache</dfn> folder such that it is writable.
 
 ### Deleting Caches
 
