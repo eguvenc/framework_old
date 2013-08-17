@@ -10,7 +10,7 @@
  * @link                              
  */
 
-Class Pdo_Firebird extends Pdo_Database_Adapter
+Class Pdo_Firebird extends Database_Pdo\Src\Database_Adapter
 {
     /**
     * The character used for escaping

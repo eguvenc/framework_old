@@ -53,7 +53,7 @@ Class Pdo_4d extends Database_Pdo\Src\Database_Adapter
         $this->_pdo = $this->pdoConnect($dsn, $this->username, $this->password, $this->options);
 
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
-        $this->_conn->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
+        $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     } 
 
     // --------------------------------------------------------------------
@@ -149,12 +149,12 @@ Class Pdo_4d extends Database_Pdo\Src\Database_Adapter
         {
             if(strpos($str, ':') === false)
             {
-                $str = $this->quote($str, \PDO::PARAM_STR);
+                $str = $this->quote($str, PDO::PARAM_STR);
             }
         }
         else
         {
-           $str = $this->quote($str, \PDO::PARAM_STR);
+           $str = $this->quote($str, PDO::PARAM_STR);
         }
         
         return $str;

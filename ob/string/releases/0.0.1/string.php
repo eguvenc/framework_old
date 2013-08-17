@@ -18,7 +18,7 @@ namespace string {
     }
     
     // ------------------------------------------------------------------------
-
+    
     /**
     * Strip Slashes
     *
@@ -28,13 +28,13 @@ namespace string {
     * @param	mixed	string or array
     * @return	mixed	string or array
     */
-    function strip_slashes($str)
+    function strip_Slashes($str)
     {
         if (is_array($str))
         {	
             foreach ($str as $key => $val)
             {
-                $str[$key] = strip_slashes($val);
+                $str[$key] = strip_Slashes($val);
             }
         }
         else
@@ -56,7 +56,7 @@ namespace string {
     * @param	string
     * @return	string
     */
-    function strip_quotes($str)
+    function stripQuotes($str)
     {
         return str_replace(array('"', "'"), '', $str);
     }
@@ -72,7 +72,7 @@ namespace string {
     * @param	string
     * @return	string
     */
-    function quotes_to_entities($str)
+    function quotes2entities($str)
     {
         return str_replace(array("\'","\"","'",'"'), array("&#39;","&quot;","&#39;","&quot;"), $str);
     }
@@ -95,7 +95,7 @@ namespace string {
     * @param	string
     * @return	string
     */
-    function reduce_double_slashes($str)
+    function reduceDoubleSlashes($str)
     {
         return preg_replace("#(^|[^:])//+#", "\\1/", $str);
     }
@@ -119,7 +119,7 @@ namespace string {
     * @param	bool	true/false - whether to trim the character from the beginning/end
     * @return	string
     */
-    function reduce_multiples($str, $character = ',', $trim = false)
+    function reduceMultiples($str, $character = ',', $trim = false)
     {
         $str = preg_replace('#'.preg_quote($character, '#').'{2,}#', $character, $str);
 

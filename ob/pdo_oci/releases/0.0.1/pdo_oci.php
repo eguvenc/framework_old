@@ -10,7 +10,7 @@
  * @link                              
  */
 
-Class Pdo_Oci extends Pdo_Database_Adapter
+Class Pdo_Oci extends Database_Pdo\Src\Database_Adapter
 {
     /**
     * The character used for escaping
@@ -74,9 +74,7 @@ Class Pdo_Oci extends Pdo_Database_Adapter
             return $str;
         }
 
-        loader::helper('ob/security');
-        
-        $str = _removeInvisibleCharacters($str);
+        $str = removeInvisibleCharacters($str);
         
         // escape LIKE condition wildcards
         if ($like === true)

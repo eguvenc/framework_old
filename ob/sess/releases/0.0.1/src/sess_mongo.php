@@ -54,7 +54,7 @@ Class Sess_Mongo {
             $this->$key = (isset($params[$key])) ? $params[$key] : config($key, 'sess');
         }
 
-        // _unserialize func. use strip_slashes() func.
+        // _unserialize func. use strip_Slashes() func.
         new \string\start();
 
         $this->now = $this->_getTime();
@@ -727,7 +727,7 @@ Class Sess_Mongo {
     */
     function _unserialize($data)
     {
-        $string = \string\strip_slashes($data);
+        $string = \string\strip_Slashes($data);
         $data = @unserialize($string);
         
         if (is_array($data))
