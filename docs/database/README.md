@@ -1143,6 +1143,7 @@ $a = $query->fetch(assoc);
 print_r(array_keys($a)); 
 
 // Array ( [0] => article_id [1] => title [2] => article [3] => link [4] => creation_date )
+```
 
 #### fetchColumn(int 'col number')
 
@@ -1151,7 +1152,6 @@ Fecth column is a good pdo function, below the example shows an usage of fetchCo
 For example you have a table like this and you want to fetch value of one column..
 
 ```php
-
 // column numbers
 Col no: 0           1           2           3           4
  _ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __
@@ -1165,7 +1165,6 @@ Col no: 0           1           2           3           4
 |             |          |              |        |               |
 |     3       |  selam   |  selam dunya |        | 2009-04-10    |
 | __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ |
-
 ```
 
 I want to get values of column number 1 so code will be like this ..
