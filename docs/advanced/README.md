@@ -1703,7 +1703,7 @@ Obullo provides the following functions to assist in this process:
     <li><h3>Validate the data</h3></li>
     <hr>
 
-    Obullo has a [Validator Class](/docs/libraries/#validator-class) that assists you in validating, filtering, and prepping your data.
+    Obullo has a <a href="/ob/validator/releases/0.0.1/#validator-class">Validator Class</a> that assists you in validating, filtering, and prepping your data.
     <li><h3>Escape all data before database insertion</h3></li>
         <hr>
-    Never insert information into your database without escaping it. Please see the section that discusses <a href="/docs/db/#running-and-escaping-queries">running queries</a> for more information.</ul>
+    Never insert information into your database without escaping it. Please see the section that discusses <a href="/docs/database/#running-and-escaping-queries">running queries</a> for more information.</ul>
