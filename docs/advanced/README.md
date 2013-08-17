@@ -86,8 +86,6 @@ http://localhost/framework/index.php/welcome/start
 
 #### $model->errors($field = '');
 
-------
-
 This function return to all errors in array format if you don't provide any fieldname, otherwise it will return to <b>one field</b> error.
 
 ```php
@@ -118,13 +116,9 @@ if($model->errors('transaction') != '')
 
 #### $model->setError($field = '', $message = '');
 
-------
-
 You can set custom errors.
 
 #### $model->setField($field = '', $type = 'rules', $val = ' new value ');
-
-------
 
 Using set field function you can override to $settings or validation rules.
 
@@ -146,8 +140,6 @@ if($model->delete())
 
 #### $model->values($field = '');
 
-------
-
 Function return to <b>filtered secure</b> value after that the validation according to your variable <b>type</b> of your validation rules in your model <var>$settings</var> .
 
 ```php
@@ -164,8 +156,6 @@ Array
 ```
 
 #### $model->save();
-
-------
 
 Function will save the all variables to database which are the fields matches in your model class $settings => fields section.
 
@@ -206,8 +196,6 @@ print_r($errors);
 ```
 
 #### $model->delete();
-
-------
 
 Function will delete the all variables to database which are the fields matches in your model class $settings => fields section.
 
@@ -568,7 +556,7 @@ When your application start to work, if would you like to load automatically som
 Autoloading files loading path styles same as loader class.
 
 ```php
-$autoload['helper']  = array('ob/view' => '', 'ob/html' => '', '../mymodule/myhelper' => '', 'app/myhelper' => '');
+$autoload['helper']  = array('vi', 'html');
 ```
 
 ### Autoloading Libraries
@@ -578,16 +566,10 @@ $autoload['helper']  = array('ob/view' => '', 'ob/html' => '', '../mymodule/myhe
 Autoloading files loading path styles same as loader class.
 
 ```php
-$autoload['lib'] = array('ob/calendar' => '', 'app/my_lib' => '', '../module/mylib' => '');
+$autoload['library'] = array('calendar', 'classes/myLib', );
 ```
 
-You can close to class instantiate using FALSE param or you can provide construct params using an array()
-
-```php
-$autoload['lib'] = array('app/auth' => array(FALSE), 'app/my_library' => array( array($construct_params) ) );
-```
-
-### Autoloading Lang Files
+### Autoloading Locale Files
 
 ------
 
@@ -605,12 +587,6 @@ Same as helper files.
 
 Same as library files.
 
-### Module Autoload.php
-
-------
-
-You can create an autoload.php in your <dfn>module/config/</dfn> folder. Obullo will merge module autoload.php and application autoload.php variables.
-
 ### Autorun Functions
 
 ------
@@ -620,46 +596,16 @@ Obullo has a <b>autorun.php</b> functionality that is located in your <dfn>app/c
 When your application start to work, if would you like to run automatically some autoloaded <b>helper</b> functions for whole framework , you should define function names and arguments to $autorun variable.
 
 ```php
-$autorun['function']['sess_start']   = array('');  This configuration run the Obullo sess_start(); function.
+$autorun['function'] = array('sess\start');  This configuration run the Obullo sess_start(); function.
 ```
 
 You can use arguments
 
 ```php
-$autorun['function']['my_function']   = array('arg1', 'arg2');
+$autorun['function']['my\function']   = array('arg1', 'arg2');
 ```
 
-Above the configuration run this function <samp>my_function('arg1', 'arg2');</samp> before if you load the function helper.
-
-### Module Autorun.php
-
-------
-
-You can create an autorun.php in your <dfn>module/config/</dfn> folder. Obullo will <b>merge</b> module autorun.php and application autorun.php variables.
-
-### Module Config.php
-
-------
-
-You can create an config.php in your <dfn>module/config/</dfn> folder which has contains <var>$config</var> variables. Obullo will <b>merge</b> module config.php and application config.php variables.
-
-### Module Routes.php
-
-------
-
-You can create an routes.php in your <dfn>module/config/</dfn> folder which has contains <var>$routes</var> variables. Obullo will <b>merge</b> module routes.php and application routes.php variables.
-
-### Module Constants.php
-
-------
-
-You can create an constants.php in your <dfn>module/config/</dfn> folder. Obullo will <b>include</b> module constants.php variables to application.
-
-### SubModule Autoloaders
-
-------
-
-You can create multi applications in modules directory and sub module autoloaders works like modules they have a <b>/sub.module/config</b> folder.
+Above the configuration run this function <samp>my\function('arg1', 'arg2');</samp> before if you load the function helper.
 
 ## Common Functions <a name="common-functions"></a>
 
@@ -669,7 +615,7 @@ You can create multi applications in modules directory and sub module autoloader
 
 Obullo uses a few functions for its operation that are globally defined, and are available to you at any point. These do not require loading any libraries or helpers.
 
-### this()
+### getInstance()
 
 ------
 
@@ -678,13 +624,13 @@ This function returns the Obullo super object. Normally from within your control
 First, assign the Obullo object to a variable:
 
 ```php
-$ob = this();
+$ob = getInstance();
 ```
 
 Once you've assigned the object to a variable, you'll use that variable instead of <var>$this</var>:
 
 ```php
-$ob = this();
+$ob = getInstance();
 
 $ob->config->item('base_url');
 

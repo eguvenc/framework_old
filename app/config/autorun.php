@@ -17,7 +17,7 @@
 | 
 | $autorun['function']['function_name'] = array('arg1', 'arg2');
 | 
-| e.g.  $autorun['function']['sess_start'] = array();
+| e.g.  $autorun['function'] = array('sess\start');
 |
 */
 
