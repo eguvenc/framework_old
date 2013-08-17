@@ -21,7 +21,7 @@
 |
 */
 
-$autorun['function']['sess\start']   = array();
+$autorun['function'] = array();
 
 
 /* End of file autorun.php */
