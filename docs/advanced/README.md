@@ -272,7 +272,7 @@ if($member_form)
 
 #### $model->noSave($field);
 
-Some times we don't want to save some fields or that the fields which we haven't got in the db tables we have to validate them.Overcome to this problem we use $model->no_save(); function.
+Some times we don't want to save some fields or that the fields which we haven't got in the db tables we have to validate them.Overcome to this problem we use $model->noSave(); function.
 
 ```php
 $member = new Model\Member(false);
@@ -442,7 +442,7 @@ If you use ajax requests you need to [Form Send Helper](/docs/packages/#form-sen
 you can control the form plugin functions using the class <b>attribute</b>
 
 ```php
-<? echo formOpen('/welcome/start/do_post.json', array('method' => 'POST', 'class' => 'hide-form no-top-msg'));?>
+<? echo form\open('/welcome/start/doPost.json', array('method' => 'POST', 'class' => 'hide-form no-top-msg'));?>
 ```
 
 ### Ajax Form Plugin Attributes
@@ -459,13 +459,13 @@ you can control the form plugin functions using the class <b>attribute</b>
 
 ------
 
-After that load the <b>Obullo JQuery Form Plugin</b> just create a do_post() function in your controller then you need add a <samp>form_open('module/controller/do_post.json');</samp> code in your view file, remember we have a ajax form tutorial in modules/test folder. You can look at there for more details.
+After that load the <b>Obullo JQuery Form Plugin</b> just create a doPost() function in your controller then you need add a <samp>form\open('module/controller/doPost.json');</samp> code in your view file, remember we have a ajax form tutorial in modules/test folder. You can look at there for more details.
 
 ```php
 function doPost() 
 {
     $user = new Model\User(false);  // Include user model
-    loader::helper('ob/form_send');
+    new form_Json\start();
 
     $user->usr_username = i\getPost('usr_username');
     $user->usr_password = i\getPost('usr_password');
@@ -492,7 +492,7 @@ function doPost()
 function doPost() 
 {
     $user = new Model\User(false);  // Include user model
-    loader::helper('ob/form_send'); new Form\Send
+    new form_Json\start();
 
     
     $user->usr_username = i\getPost('usr_username');
@@ -566,7 +566,7 @@ $autoload['helper']  = array('vi', 'html');
 Autoloading files loading path styles same as loader class.
 
 ```php
-$autoload['library'] = array('calendar', 'classes/myLib', );
+$autoload['library'] = array('calendar', 'myLib', );
 ```
 
 ### Autoloading Locale Files
@@ -596,7 +596,7 @@ Obullo has a <b>autorun.php</b> functionality that is located in your <dfn>app/c
 When your application start to work, if would you like to run automatically some autoloaded <b>helper</b> functions for whole framework , you should define function names and arguments to $autorun variable.
 
 ```php
-$autorun['function'] = array('sess\start');  This configuration run the Obullo sess_start(); function.
+$autorun['function']['sess\start'] = array();  This configuration run the Obullo sess_start(); function.
 ```
 
 You can use arguments
@@ -615,9 +615,7 @@ Above the configuration run this function <samp>my\function('arg1', 'arg2');</sa
 
 Obullo uses a few functions for its operation that are globally defined, and are available to you at any point. These do not require loading any libraries or helpers.
 
-### getInstance()
-
-------
+#### getInstance()
 
 This function returns the Obullo super object. Normally from within your controller functions you will call any of the available Obullo functions using the <var>$this</var> variable. <var>$this</var>, however, only works directly within your controllers, <b>not</b> models, and <b>not</b> your views. If you would like to use Obullo's classes from within your own custom classes , models or views you can do so as follows:
 
@@ -644,9 +642,7 @@ $ob->output->cache(60);
 
 *Note:* For Model files <var>$this</var> variable just available for <b>database</b> operations.To using libraries inside to model you must use <samp>this()</samp> function.
 
-### getConfig($config_filename, $variable = '')
-
-------
+#### getConfig($config_filename, $variable = '')
 
 getConfig is a pretty function to getting configuration variables from <dfn>app/config</dfn> folder. You can use it like this
 
@@ -663,15 +659,13 @@ If the config variable name in the file is not same via filename then you can gr
 $conf = getConfig('myconfig', 'conf'); print_r($conf);
 ```
 
-**Note:** You can't grab diffrerent multiple variables in one config file via *get_config()* function. One variable must be per file.
+**Note:** You can't grab diffrerent multiple variables in one config file via *getConfig()* function. One variable must be per file.
 
 **Tip:** If you have multiple config variables in a config file you can use associative arrays <b>$your_conf_var = array( 'setting1' => '', 'setting2' => '');</b>
 
 First parameter is filename and the second is <b>$variable</b> name you want to fetch.
 
-### configItem('item_key', $filename = '')
-
-------
+#### configItem('item_key', $filename = '')
 
 The [Config library](/docs/core-libraries/config-class) is the preferred way of accessing configuration information, however configItem() can be used to retrieve single keys. See Config library documentation for more information.
 
@@ -685,9 +679,7 @@ If you want to get config item another folder use it like this
 echo configItem('html4-trans', 'doctypes'); 
 ```
 
-### dbItem('item_key', index = '')
-
-------
+#### dbItem('item_key', index = '')
 
 Get db configuration items which is defined in <dfn>app/config/database.php</dfn> file.
 
@@ -702,24 +694,7 @@ Grab another database settings
 echo dbItem('hostname', 'db2');   //output localhost  
 ```
 
-isPhp('version_number')
-
-------
-
-isPhp() determines of the PHP version being used is greater than the supplied <var>version_number</var>.
-
-```php
-if (isPhp('5.3.0'))
-{
-    $str = quoted_printable_encode($str);
-}
-```
-
-Returns boolean <kbd>TRUE</kbd> if the installed version of PHP is equal to or greater than the supplied version number. Returns <kbd>FALSE</kbd> if the installed version of PHP is lower than the supplied version number.
-
-isReallyWritable('path/to/file')
-
-------
+#### isReallyWritable('path/to/file')
 
 isWritable() returns TRUE on Windows servers when you really can't write to the file as the OS reports to PHP as FALSE only if the read-only attribute is marked. This function determines if a file is actually writable by attempting to write to it first. Generally only recommended on platforms where this information may be unreliable.
 
@@ -734,15 +709,11 @@ else
 }
 ```
 
-showError('message'), show_404('page'), logMe('level', 'message')
-
-------
+#### showError('message'), show_404('page'), logMe('level', 'message')
 
 These are each outlined on the [Error Handling](#) page.
 
-### setStatusHeader(code, 'text');
-
-------
+#### setStatusHeader(code, 'text');
 
 Permits you to manually set a server status header. Example:
 
@@ -751,24 +722,12 @@ setStatusHeader(401);
 // Sets the header as:  Unauthorized
 ```
 [See here](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) for a full list of headers.
-
-lib();
-
-------
-
-Load the obullo libraries
-
-```php
-$email = lib('ob/email');
-```
  
 ## Sh Commands<a name="sh-commands"></a>
 
 If you work under the *nix operating systems, we have useful sh commands.
 
 #### Clear.sh ( Clear logs and cache files )
-
-------
 
 When you move your project to another server you need to clear all log files and caches. Go your terminal and type your project path and run the clear.sh
 
@@ -777,8 +736,6 @@ root@localhost:/var/www/framework$ sh clear.sh // Great, temporary files clear j
 ```
 
 #### Export.sh ( Export project files )
-
-------
 
 When you upload project files to your live server you need export it. Export command remove all .svn and .git files and save the project to export folder.
 
@@ -833,7 +790,7 @@ HMVC (Layered MVC)
                                 ------        -------    
 ```
 
-HMVC pattern offers more flexibility in your application. You can call multiple requests using Obullo's [Request helper](/docs/helpers/#request-helper).
+HMVC pattern offers more flexibility in your application. You can call multiple requests using Obullo's [Request helper](/docs/packages/#request-helper).
 
 ```php
 ------------------------------------------------------------------------------------
@@ -862,9 +819,9 @@ HMVC pattern offers more flexibility in your application. You can call multiple 
 -------------------------------------------------------------------------------------
 ```
 
-Another example, we created a <b>captcha</b> module using hmvc methods download the latest version of Obullo and look at the captcha module. And just an idea you can create a login service creating a <b>login</b> folder then you can do request from your controllers using HMVC. Learn more details about Obullo's HMVC library click [Reuest helper](/docs/helpers/request-helper) link.
+Another example, we created a <b>captcha</b> module using hmvc methods download the latest version of Obullo and look at the captcha module. And just an idea you can create a login service creating a <b>login</b> folder then you can do request from your controllers using HMVC. Learn more details about Obullo's HMVC library click [Request helper](/docs/packages/#request-helper) link.
 
-## URI Routing<a name="uri-routing"></a>
+## URI Routing <a name="uri-routing"></a>
 
 ### URI Routing
 
@@ -949,11 +906,12 @@ You can match literal values or you can use two wildcard types:
 :any
 ```
 <b>:num</b> will match a segment containing only numbers.
+
 <b>:any</b> will match a segment containing any character.
 
 **Note:** Routes will run in the order they are defined. Higher routes will always take precedence over lower ones.
 
-Examples
+### Examples
 
 ------
 
@@ -1063,7 +1021,7 @@ This route indicates which controller class should be loaded if the URI contains
 
 **Important:** The reserved routes must come before any wildcard or regular expression routes.
 
-##Tasks and CLI Requests<a name="tasks-and-cli-requests"></a> 
+##Tasks and CLI Requests <a name="tasks-and-cli-requests"></a> 
 
 Obullo has a integrated task functionality and Command Line Interface support who want to create command line tasks. You can run <b>controllers</b> from command line.
 
@@ -1140,7 +1098,7 @@ The Start Controller Index function successfully works !
 
 **Note:** When you use the CLI operations *cookies* and *sessions* will not works as normal. Please use the tasks for advanced Command Line structures.
 
-Tasks
+### Tasks
 
 ------
 
@@ -1161,7 +1119,7 @@ Obullo has <b>three</b> tasks folder called APPLICATON, MODULES and YOUR MODULE 
     - tasks
        - controllers
            hello.php
-
+```
 
 #### MODULES TASK FOLDER
 
@@ -1173,6 +1131,7 @@ Obullo has <b>three</b> tasks folder called APPLICATON, MODULES and YOUR MODULE 
    - tasks
        - controllers
             start.php
+```
 
 #### YOUR MODULE TASK FOLDER
 
@@ -1193,12 +1152,12 @@ Obullo has <b>three</b> tasks folder called APPLICATON, MODULES and YOUR MODULE 
 
 All command line request goes to Obullo <b>task.php</b> which is located in your root directory. Obullo has a <b>/tasks</b> folder in the application directory if you want to create application tasks just create your controllers, models, helpers .. files in this folder.
 
-Using [Task Helper](/docs/helpers/#task-helper) you can run your tasks as a command in the background. Function run like CLI but don't use the task.php.
+Using [Task Helper](/docs/packages/#task-helper) you can run your tasks as a command in the background. Function run like CLI but don't use the task.php.
 
 ```php
-new Task\Start();
+new task\start();
 
-task_run('hello help', $debug = TRUE);
+task\run('hello help', $debug = TRUE);
 ```
 
 Running MODULE Tasks
@@ -1206,9 +1165,9 @@ Running MODULE Tasks
 ------
 
 ```php
-new Task\Start();
+new task\start();
 
-task_run('start help', $debug = TRUE);
+task\run('start help', $debug = TRUE);
 ```
 
 ### Running YOUR MODULE Tasks
@@ -1216,20 +1175,20 @@ task_run('start help', $debug = TRUE);
 ------
 
 ```php
-new Task\Start();
+new task\start();
 
-task_run('welcome start/index/arg1/arg2', $debug = TRUE);
+task\run('welcome start/index/arg1/arg2', $debug = TRUE);
 ```
 
 <b>An Important thing</b> we use the second argument <b>$debug = true</b> just for test don't use this argument except the testing or use it as false.
 
 ```php
-task_run('welcome hello/index/arg1/arg2', FALSE);
+task\run('welcome hello/index/arg1/arg2', FALSE);
 ```
 
 **Note:** When you use the task function, debug mode should be <samp>FALSE</samp>, or don't use a second argument except the test otherwise shell command will print output the screen.
 
-## Alternate PHP Syntax for View Files<a name="alternate-php-syntax"></a
+## Alternate PHP Syntax for View Files <a name="alternate-php-syntax"></a>
 
 ### Alternate PHP Syntax for View Files
 
@@ -1237,7 +1196,7 @@ task_run('welcome hello/index/arg1/arg2', FALSE);
 
 If you do not utilize Obullo's [template engine](#), you'll be using pure PHP in your View files. To minimize the PHP code in these files, and to make it easier to identify the code blocks it is recommended that you use PHPs alternative syntax for control structures and short tag echo statements. If you are not familiar with this syntax, it allows you to eliminate the braces from your code, and eliminate "echo" statements.
 
-Short Tag Support
+### Short Tag Support
 
 ------
 
@@ -1245,7 +1204,7 @@ Short Tag Support
 
 **Important:** If your server does not support *short_tag_open* functionality then all your php codes will shown as string which is used short tags.
 
-Alternative Echos
+### Alternative Echos
 
 ------
 
@@ -1339,7 +1298,7 @@ Obullo lets you build error reporting into your applications using the functions
 
 ------
 
-Using your <dfn>application/config/config.php</dfn> you can control the all application errors.
+Using your <dfn>app/config/config.php</dfn> you can control the all application errors.
 
 ```php
 $config['error_reporting']       = 1;
@@ -1452,7 +1411,7 @@ If you want to keep releated module log files in your current module or extensio
 log\me('debug', '[ welcome ]: Example message !');
 ```
 
-Exceptions
+#### Exceptions
 
 ------
 
@@ -1516,3 +1475,227 @@ MODULES/welcome/controllers/welcome.php Code : 8 ( Line : 14 )
 16         $data['var'] = 'and generated by ';
 17 
 ```
+
+## Caching and Compression<a name="caching-compression"></a>
+
+### Web Page Caching
+
+------
+
+Obullo lets you cache your pages in order to achieve maximum performance.
+
+Although Obullo is quite fast, the amount of dynamic information you display in your pages will correlate directly to the server resources, memory, and processing cycles utilized, which affect your page load speeds. By caching your pages, since they are saved in their fully rendered state, you can achieve performance that nears that of static web pages.
+
+### How Does Caching Work?
+
+------
+
+Caching can be enabled on a per-page basis, and you can set the length of time that a page should remain cached before being refreshed. When a page is loaded for the first time, the cache file will be written to your app/cache folder. On subsequent page loads the cache file will be retrieved and sent to the requesting user's browser. If it has expired, it will be deleted and refreshed before being sent to the browser.
+
+Note: The Benchmark tag is not cached so you can still view your page load speed when caching is enabled.
+
+### Enabling Caching
+
+------
+
+To enable caching, put the following tag in any of your controller functions:
+
+```php
+$this->output->cache(n);
+```
+
+Where <var>n</var> is the number of <b>minutes</b> you wish the page to remain cached between refreshes.
+
+The above tag can go anywhere within a function. It is not affected by the order that it appears, so place it wherever it seems most logical to you. Once the tag is in place, your pages will begin being cached.
+
+**Warning:** Because of the way Obullo stores content for output, caching will only work if you are generating display for your controller with a [view](/docs/general/#views).
+
+**Note:** Before the cache files can be written you must set the file permissions on your <dfn>app/cache</dfn> folder such that it is writable.
+
+### Deleting Caches
+
+------
+
+If you no longer wish to cache a file you can remove the caching tag and it will no longer be refreshed when it expires.
+
+**Note:** Removing the tag will not delete the cache immediately. It will have to expire normally. If you need to remove it earlier you will need to manually delete it from your cache folder.
+
+### Gzip Compression
+
+------
+
+Gzip enables output compression for faster page loads. When enabled, the output class will test whether your server supports Gzip. Even if it does, however, not all browsers support compression so enable only if you are reasonably sure your visitors can handle it.
+
+To enable gzip compression go <dfn>app/config/cache.php</dfn> and change compress_ouput value. 
+
+```php
+$cache['compress_output']       = TRUE;  // Compress switch
+$cache['compression_level']     = 8;     // Compress level
+```
+
+### How Can I Test the Page is Compressed ?
+
+------
+
+There are three way to make sure you are actually serving up compressed content.
+<ol>
+    <li>View the headers: Use <a href="https://addons.mozilla.org/en-US/firefox/addon/live-http-headers/">Live HTTP Headers</a> to examine the response. Look for a line that says "Content-encoding: gzip".</li>
+   <li>Firefox browser: Use Web Developer Toolbar > Information > View Document Size to see whether the page is compressed.</li>
+    <li>Online: Use the <a href="http://www.gidnetwork.com/tools/gzip-test.php">online gzip test</a> to check whether your page is compressed.</li></ol>
+
+**Note:** Above the topics related about online test not for the localhost.
+
+If you are getting a blank page when compression is enabled it means you are prematurely outputting something to your browser. It could even be a line of whitespace at the end of one of your scripts. For compression to work, nothing can be sent before the output buffer is called by the output class.
+
+**Critical:** Do not *"echo"* any values with compression enabled this may cause server crashes.
+
+## Profiling Your Application<a name="profiling-your-application"></a>
+
+### Profiling Your Application
+
+------
+
+The Profiler Class will display benchmark results, queries you have run, and $_POST data at the bottom of your pages. This information can be useful during development in order to help with debugging and optimization.
+
+### Initializing the Profiler Class
+
+------
+
+**Important:**  This class does <kbd>NOT</kbd> need to be initialized. It is loaded automatically by the [Output Class](/docs/packages/#output-class) if profiling is enabled as shown below.
+
+### Enabling the Profiler
+
+------
+
+To enable the profiler place the following function anywhere within your [Controller](/docs/general/#controllers) functions:
+
+```php
+$this->output->profiler();
+```
+
+When enabled a report will be generated in a <b>popup window</b>.
+
+To disable the profiler you will use:
+
+```php
+$this->output->profiler(FALSE);
+```
+
+Profiler popup window content looks like this
+
+```php
+URI String
+No URI data exists
+
+Directory / Class / Method
+welcome / start / index
+
+Memory Usage
+1,009,576 bytes
+
+Benchmarks
+Loading Time Base Classes      0.0095
+
+Execution Time ( Welcome / Start / Index )      0.0103
+Total Execution Time      0.0199
+
+GET Data
+No GET data exists
+
+POST Data
+No POST data exists
+
+Loaded Files
+Config Files      
+Lang Files              profiler
+Base Helpers            view
+                        head_tag
+head_tag
+Application Helpers      -
+Loaded Helpers          input
+                        lang
+                        benchmark
+lang
+benchmark
+Local Helpers           -
+Libraries               -
+Models                  -
+Databases               -
+Scripts                 welcome
+Local Views             MODULES\welcome\views\view_welcome.php
+Application Views       APP\views\view_base_layout.php
+```
+
+### Setting Benchmark Points
+
+------
+
+In order for the Profiler to compile and display your benchmark data you must name your mark points using specific syntax.
+
+Please read the information on setting Benchmark points in [Benchmark Helper](/docs/packages/#benchmarking-helper) page.
+
+## Security<a name="security"></a>
+
+### Security
+
+------
+
+This page describes some "best practices" regarding web security, and details Obullo's internal security features.
+
+### URI Security
+
+------
+
+Obullo is fairly restrictive regarding which characters it allows in your URI strings in order to help minimize the possibility that malicious data can be passed to your application. URIs may only contain the following:
+
+<ul>
+    <li>Alpha-numeric text</li>
+    <li>Tilde: ~</li>
+    <li>Period: .</li>
+    <li>Colon: :</li>
+    <li>Underscore: _</li>
+    <li>Dash: -</li></ul>
+
+### GET, POST, and COOKIE Data
+
+------
+
+GET data is simply disallowed by Obullo since the system utilizes URI segments rather than traditional URL query strings (unless you have the query string option enabled in your config file). The global GET array is <b>unset</b> by the Input class during system initialization.
+
+### Register_globals
+
+------
+
+During system initialization all global variables are unset, except those found in the $_POST and $_COOKIE arrays. The unsetting routine is effectively the same as register_globals = off.
+
+### magic_quotes_runtime
+
+------
+
+The magic_quotes_runtime directive is turned off during system initialization so that you don't have to remove slashes when retrieving data from your database.
+
+### Best Practices
+
+------
+
+Before accepting any data into your application, whether it be POST data from a form submission, COOKIE data, URI data, XML-RPC data, or even data from the SERVER array, you are encouraged to practice this three step approach:
+
+<ol>
+    <li>Filter the data as if it were tainted.</li>
+    <li>Validate the data to ensure it conforms to the correct type, length, size, etc. (sometimes this step can replace step one)</li>
+    <li>Escape the data before submitting it into your database.</li></ol>
+
+Obullo provides the following functions to assist in this process:
+
+<ul>
+    <li><h3>XSS Filtering</h3></li>
+<hr>
+
+    Obullo comes with a Cross Site Scripting filter. This filter looks for commonly used techniques to embed malicious Javascript into your data, or other types of code that attempt to hijack cookies or do other malicious things. The XSS Filter is described <a href="/docs/packages/#security-helpers">here</a>.
+    <li><h3>Validate the data</h3></li>
+    <hr>
+
+    Obullo has a <a href="/ob/validator/releases/0.0.1/#validator-class">Validator Class</a> that assists you in validating, filtering, and prepping your data.
+    <li><h3>Escape all data before database insertion</h3></li>
+        <hr>
+    Never insert information into your database without escaping it. Please see the section that discusses <a href="/docs/database/#running-and-escaping-queries">running queries</a> for more information.</ul>

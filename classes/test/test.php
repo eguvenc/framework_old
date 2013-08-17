@@ -1,12 +1,15 @@
 <?php
-
-namespace Test {
+/*
+ * test helper
+ * 
+ */
+namespace test {
 
     Class start {
 
         function __construct()
         {
-            echo 'Hellow World !';
+            echo 'Hellow World ! helper';
         }       
     }
     
@@ -14,12 +17,4 @@ namespace Test {
     {
        echo 'Hello me !';
     }
-    
-    Class Test
-    {
-        function me(){
-            echo 'hello';
-        }
-    }
-
 }

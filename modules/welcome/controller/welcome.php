@@ -56,7 +56,7 @@ Class Welcome extends Controller {
     
     function test($arg1 = '', $arg2 = '', $arg3 = '')
     {
-        echo '<pre>Response: '.$arg1 .' - '.$arg2. ' - '.$arg3.'</pre>';
+        echo '<pre>Response: '.$arg1 .' - '.$arg2. ' - '.$arg3.'</pre>';      
     }
      
     function task($mode = '')
