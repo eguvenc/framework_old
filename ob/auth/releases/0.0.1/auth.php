@@ -141,7 +141,7 @@ Class Auth {
             $password = md5($password);
         }
 
-        if(db('dbdriver') == 'mongo')
+        if(db('driver') == 'mongo')
         {
             $this->db->select($this->select_data);
             $this->db->where($this->username_col, $username);

@@ -24,7 +24,7 @@ Class Pager_Jumping extends Pager_Common
     */
     function __construct($options = array())
     {
-        $res = $this->set_options($options);
+        $res = $this->setOptions($options);
         
         if ($res !== true) 
         {
@@ -223,7 +223,7 @@ Class Pager_Jumping extends Pager_Common
             {
                 $this->range[$i] = false;
                 $this->_link_data[$this->_url_var] = $i;
-                $links .= $this->_render_link(str_replace('%d', $i, $this->_alt_page), $i);
+                $links .= $this->_renderLink(str_replace('%d', $i, $this->_alt_page), $i);
             } 
             else 
             {

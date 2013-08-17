@@ -53,7 +53,7 @@ Class Pager_Html_Widgets
     * @return string xhtml select box
     * @access public
     */
-    public function get_per_page_select_box($start = 5, $end = 30, $step = 5, $show_all_data = false, $extra_params = array())
+    public function getPerPageSelectBox($start = 5, $end = 30, $step = 5, $show_all_data = false, $extra_params = array())
     {
         $option_text     = '%d';  // FIXME: needs POST support
         $attributes      = '';
@@ -120,11 +120,11 @@ Class Pager_Html_Widgets
                 $tmp_link_data = $this->pager->_link_data;
                 if (isset($tmp_link_data[$this->pager->_url_var])) 
                 {
-                    $tmp_link_data[$this->pager->_url_var] = $this->pager->get_current_page();
+                    $tmp_link_data[$this->pager->_url_var] = $this->pager->getCurrentPage();
                 }
                 
                 $tmp_link_data[$this->pager->_session_var] = '1';
-                $href = '?' . $this->pager->_http_build_query_wrapper($tmp_link_data);
+                $href = '?' . $this->pager->_httpBuildQueryWrapper($tmp_link_data);
                 $href = htmlentities($this->pager->_url, ENT_COMPAT, 'UTF-8'). preg_replace(
                     '/(&|&amp;|\?)('.$this->pager->_session_var.'=)(\d+)/',
                     '\\1\\2'.$selector,
@@ -140,7 +140,7 @@ Class Pager_Html_Widgets
             elseif ($this->pager->_http_method == 'POST') 
             {
                 $tmp .= " onchange='"
-                     . $this->pager->_generate_form_onclick($this->pager->_url, $this->pager->_link_data)
+                     . $this->pager->_generateFormOnclick($this->pager->_url, $this->pager->_link_data)
                      . "'";
                 $tmp = preg_replace(
                     '/(input\.name = \"'.$this->pager->_session_var.'\"; input\.value =) \"(\d+)\";/',
@@ -210,7 +210,7 @@ Class Pager_Html_Widgets
     * @return string xhtml select box
     * @access public
     */
-    public function get_page_select_box($params = array(), $extra_attributes = '')
+    public function getPageSelectBox($params = array(), $extra_attributes = '')
     {
         $option_text = '%d';
         if (array_key_exists('option_text', $params)) 
@@ -238,7 +238,7 @@ Class Pager_Html_Widgets
                 
                 // ( Obullo Changes ..)
                 
-                $href = '?' . $this->pager->_http_build_query_wrapper($this->pager->_link_data);
+                $href = '?' . $this->pager->_httpBuildQueryWrapper($this->pager->_link_data);
                 $href = htmlentities($this->pager->_url, ENT_COMPAT, 'UTF-8'). preg_replace(
                     '/(&|&amp;|\?)('.$this->pager->_url_var.'=)(\d+)/',
                     '\\1\\2'.$selector,
@@ -254,7 +254,7 @@ Class Pager_Html_Widgets
             elseif ($this->pager->_http_method == 'POST') 
             {
                 $tmp .= " onchange='"
-                     . $this->pager->_generate_form_onclick($this->pager->_url, $this->pager->_link_data)
+                     . $this->pager->_generateFormOnclick($this->pager->_url, $this->pager->_link_data)
                      . "'";
                 $tmp = preg_replace(
                     '/(input\.name = \"'.$this->pager->_url_var.'\"; input\.value =) \"(\d+)\";/',
@@ -265,8 +265,8 @@ Class Pager_Html_Widgets
         }
         $tmp .= '>';
         $start    = 1;
-        $end      = $this->pager->num_pages();
-        $selected = $this->pager->get_current_page();
+        $end      = $this->pager->numPages();
+        $selected = $this->pager->getCurrentPage();
         
         for ($i=$start; $i<=$end; $i++) 
         {

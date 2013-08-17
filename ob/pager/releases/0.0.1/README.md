@@ -71,14 +71,14 @@ echo 'PAGED DATA: '; print_r($data);
 echo '<hr />';
 
 // Results from methods:
-echo 'get_current_page()...: '; var_dump($pager->get_current_page());
-echo 'get_next_page()......: '; var_dump($pager->get_next_page());
-echo 'get_prev_page()......: '; var_dump($pager->get_prev_page());
-echo 'num_items()..........: '; var_dump($pager->num_items());
-echo 'num_pages()..........: '; var_dump($pager->num_pages());
-echo 'is_first_page()......: '; var_dump($pager->is_first_page());
-echo 'is_last_page().......: '; var_dump($pager->is_last_page());
-echo 'is_last_page_end()...: '; var_dump($pager->is_last_page_end());
+echo 'getCurrentPage()...: '; var_dump($pager->getCurrentPage());
+echo 'getNextPage()......: '; var_dump($pager->getNextPage());
+echo 'getPrevPage()......: '; var_dump($pager->getPrevPage());
+echo 'numItems()..........: '; var_dump($pager->numItems());
+echo 'numPages()..........: '; var_dump($pager->numPages());
+echo 'isFirstPage()......: '; var_dump($pager->isFirstPage());
+echo 'isLastPage().......: '; var_dump($pager->isLastPage());
+echo 'isLastPageEnd()...: '; var_dump($pager->isLastPageEnd());
 echo '$pager->range........: '; var_dump($pager->range);
 ```
 
@@ -299,7 +299,7 @@ return FALSE;">Page Number</a>
 
 You have two HTML widgets called <samp>Per Page Select Box</samp> and <samp>Page Select Box</samp>
 
-#### get_per_page_select_box($start = integer, $end = integer, $step = integer, $show_all_data = FALSE, $extra_params = array() );
+#### getPerPageSelectBox($start = integer, $end = integer, $step = integer, $show_all_data = FALSE, $extra_params = array() );
 
 ------
 
@@ -354,7 +354,7 @@ Class Start extends Controller {
         
         $data['params'] = $params;
         $data['links']  = $pager->get_links();
-        $data['per_page_select_box']  = $pager->get_per_page_select_box(5, 50, 5, FALSE);
+        $data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, FALSE);
 
         view('view_pager_test', $data, FALSE);
     }
@@ -397,10 +397,10 @@ http://localhost/obullo/index.php?d=welcome&c=start&m=index
  If you want to use <samp>onchange = ""</samp> for selectbox instead SEND button you must provide <samp>auto_submit</samp> as extra parameter. Remove <b>form_helper</b> functions from the view_test_pager and add extra parameter to get_per_page_select_box in start controller. 
 
 ```php
-$pager->get_per_page_select_box(5, 50, 5, FALSE, array('auto_submit' => TRUE));
+$pager->getPerPageSelectBox(5, 50, 5, FALSE, array('auto_submit' => TRUE));
 ```
 
-#### get_page_select_box($extra_params = array() );
+#### getPageSelectBox($extra_params = array() );
 
 ------
 
@@ -454,8 +454,8 @@ Class Start extends Controller {
         $data['params'] = $params;
         $data['links']  = $pager->get_links();
         
-        $data['page_select_box']      = $pager->get_page_select_box(array('auto_submit' => TRUE));  // auto submit
-        $data['per_page_select_box']  = $pager->get_per_page_select_box(5, 50, 5, FALSE, array('auto_submit' => TRUE));
+        $data['page_select_box']      = $pager->getPageSelectBox(array('auto_submit' => TRUE));  // auto submit
+        $data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, FALSE, array('auto_submit' => TRUE));
         
         view('view_pager_test', $data, FALSE); 
     }
@@ -490,8 +490,8 @@ Additionaly you can set <samp>option_text</samp> parameter to customize select m
 $page_options     = array('auto_submit' => TRUE, 'option_text' => 'Go to page %d');
 $per_page_options = array('auto_submit' => TRUE, 'option_text' => 'Show %d data');
 
-$data['page_select_box']      = $pager->get_page_select_box($page_options);
-$data['per_page_select_box']  = $pager->get_per_page_select_box(5, 50, 5, FALSE, $per_page_options); 
+$data['page_select_box']      = $pager->getPageSelectBox($page_options);
+$data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, FALSE, $per_page_options); 
 ```
 
 The last changes will give you below the output.

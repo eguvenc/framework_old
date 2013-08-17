@@ -25,41 +25,41 @@ Class Database_Pdo {
     /**
     * Connect to Pdo Driver
      * 
-    * @param string $dbdriver
+    * @param string $driver
     * @param string $options
     * @return object
     * @throws Exception 
     */
-    public static function connect($dbdriver = '', $options = array())
+    public static function connect($driver = '', $options = array())
     {  
         $driver_name = '';
-        switch (strtolower($dbdriver))
+        switch (strtolower($driver))
         {   
-           case ($dbdriver == 'mysql'): // MySQL 3.x/4.x/5.x  
+           case ($driver == 'mysql'): // MySQL 3.x/4.x/5.x  
            $driver_name = 'mysql';
              break;
          
-           case ($dbdriver == 'ibm' || $dbdriver == 'db2'):  // IBM - DB2 / Informix not yet ..
+           case ($driver == 'ibm' || $driver == 'db2'):  // IBM - DB2 / Informix not yet ..
            $driver_name = 'ibm';
              break;
          
-           case ($dbdriver == 'dblib' || $dbdriver == 'mssql' || $dbdriver == 'freetds' || $dbdriver == 'sybase'):            // MSSQL / DBLIB / FREETDS / SYBASE
+           case ($driver == 'dblib' || $driver == 'mssql' || $driver == 'freetds' || $driver == 'sybase'):            // MSSQL / DBLIB / FREETDS / SYBASE
            $driver_name = 'mssql';
              break;
           
-           case ($dbdriver == 'oci' || $dbdriver == 'oracle'):            // OCI (ORACLE)
+           case ($driver == 'oci' || $driver == 'oracle'):            // OCI (ORACLE)
            $driver_name = 'oci';
              break;
            
-           case ($dbdriver == 'odbc'): // ODBC
+           case ($driver == 'odbc'): // ODBC
            $driver_name = 'odbc';
              break;
 
-           case ($dbdriver == 'pgsql'): // PostgreSQL
+           case ($driver == 'pgsql'): // PostgreSQL
            $driver_name = 'pgsql';
              break;
              
-           case ($dbdriver == 'sqlite' || $dbdriver == 'sqlite2' || $dbdriver == 'sqlite3'):   // SQLITE
+           case ($driver == 'sqlite' || $driver == 'sqlite2' || $driver == 'sqlite3'):   // SQLITE
            $driver_name = 'sqlite';
              break;
              
@@ -78,12 +78,12 @@ Class Database_Pdo {
 
         if($driver_name == '')
         {
-            throw new Exception('The Database pdo library does not support: '. $dbdriver); 
+            throw new Exception('The Database pdo library does not support: '. $driver); 
         }
         
-        if ( ! in_array($dbdriver, PDO::getAvailableDrivers()))  // check the PDO driver is available
+        if ( ! in_array($driver, PDO::getAvailableDrivers()))  // check the PDO driver is available
         {
-            throw new Exception('The PDO' . $dbdriver . ' driver is not currently installed on your server.');
+            throw new Exception('The PDO' . $driver . ' driver is not currently installed on your server.');
         }
         
         $classname = 'Pdo_'.ucfirst($driver_name);

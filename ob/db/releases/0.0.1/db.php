@@ -44,7 +44,7 @@ Class Db {
            return;   // Lazy Loading.  
         }
         
-        $dbdriver = is_array($params) ? $params['dbdriver'] : db('dbdriver', $db_var); 
+        $driver = is_array($params) ? $params['driver'] : db('driver', $db_var); 
         $hostname = db('hostname', $db_var);
         
         if(is_array($params))
@@ -63,7 +63,7 @@ Class Db {
         
         //----------- MONGO PACKAGE SUPPORT ------------//
         
-        if(strtolower($dbdriver) == 'mongo') 
+        if(strtolower($driver) == 'mongo') 
         {
             $mongo = new Mongo();
             
@@ -77,12 +77,12 @@ Class Db {
         if($packages['db_layer'] == 'Database_Pdo')
         {
             $database = new Database_Pdo();
-            return $database->connect($dbdriver, $options);
+            return $database->connect($driver, $options);
         } 
         else // Native database support.
         {
             $database = new Database();
-            return $database->connect($dbdriver, $options);
+            return $database->connect($driver, $options);
         }
         
         return false;        

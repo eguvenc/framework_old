@@ -37,7 +37,7 @@ Class Pager_Sliding extends Pager_Common
         $this->_cur_page_span_post      = '</b>';
         
         //set custom options
-        $res = $this->set_options($options);
+        $res = $this->setOptions($options);
         
         if ($res !== true) 
         {
@@ -220,7 +220,7 @@ Class Pager_Sliding extends Pager_Common
                     $this->range[$i] = false;
                     
                     $this->_link_data[$this->_url_var] = $i;
-                    $links .= $this->_render_link(str_replace('%d', $i, $this->_alt_page), $i)
+                    $links .= $this->_renderLink(str_replace('%d', $i, $this->_alt_page), $i)
                            . $this->_spaces_before
                            . ($print_separator_flag ? $this->_separator.$this->_spaces_after : '');
                 }
@@ -247,7 +247,7 @@ Class Pager_Sliding extends Pager_Common
                 {
                     $this->range[$i] = false;
                     $this->_link_data[$this->_url_var] = $i;
-                    $links .= $this->_render_link(str_replace('%d', $i, $this->_alt_page), $i);
+                    $links .= $this->_renderLink(str_replace('%d', $i, $this->_alt_page), $i);
                 }
                 
                 $links .= $this->_spaces_before
@@ -263,7 +263,7 @@ Class Pager_Sliding extends Pager_Common
                     $this->range[$i] = false;
                     
                     $this->_link_data[$this->_url_var] = $i;
-                    $links .= $this->_render_link(str_replace('%d', $i, $this->_alt_page), $i)
+                    $links .= $this->_renderLink(str_replace('%d', $i, $this->_alt_page), $i)
                       . $this->_spaces_before
                       . ($print_separator_flag ? $this->_separator.$this->_spaces_after : '');
                 }
@@ -280,7 +280,7 @@ Class Pager_Sliding extends Pager_Common
                     $this->range[$i] = false;
                     
                     $this->_link_data[$this->_url_var] = $i;
-                    $links .= $this->_render_link(str_replace('%d', $i, $this->_alt_page), $i);
+                    $links .= $this->_renderLink(str_replace('%d', $i, $this->_alt_page), $i);
                 } 
                 else 
                 {

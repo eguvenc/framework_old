@@ -34,7 +34,7 @@ namespace i {
     {
         $GET = ($use_global_var) ? $GLOBALS['_GET_BACKUP']: $_GET; // _GET_BACKUP = Hmvc local get values
         
-        return Input::getInstance()->_fetchFromArray($GET, $index, $xss_clean);
+        return \Input::getInstance()->_fetchFromArray($GET, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -52,7 +52,7 @@ namespace i {
     {
         $POST = ($use_global_var) ? $GLOBALS['_POST_BACKUP']: $_POST; // _POST_BACKUP = Hmvc local post values
 
-        return Input::getInstance()->_fetchFromArray($POST, $index, $xss_clean);
+        return \Input::getInstance()->_fetchFromArray($POST, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -70,7 +70,7 @@ namespace i {
     {
         $REQUEST = ($use_global_var) ? $GLOBALS['_REQUEST_BACKUP']: $_REQUEST; // _REQUEST_BACKUP = Hmvc local request values
 
-        return Input::getInstance()->_fetchFromArray($REQUEST, $index, $xss_clean);
+        return \Input::getInstance()->_fetchFromArray($REQUEST, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -110,7 +110,7 @@ namespace i {
     */
     function cookie($index = '', $xss_clean = false)
     {
-        return Input::getInstance()->_fetchFromArray($_COOKIE, $index, $xss_clean);
+        return \Input::getInstance()->_fetchFromArray($_COOKIE, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -123,7 +123,7 @@ namespace i {
     */
     function ip()
     {
-        return Input::getInstance()->ip();
+        return \Input::getInstance()->ip();
     }
 
     // --------------------------------------------------------------------
@@ -139,7 +139,7 @@ namespace i {
     */
     function validIp($ip)
     {        
-        return Input::getInstance()->validIp($ip);
+        return \Input::getInstance()->validIp($ip);
     }
     
     // --------------------------------------------------------------------
@@ -152,7 +152,7 @@ namespace i {
     */
     function userAgent()
     {
-        $input = Input::getInstance();
+        $input = \Input::getInstance();
 
         if ($input->user_agent !== false)
         {
@@ -279,7 +279,7 @@ namespace i {
     */
     function hmvc()
     {    
-        if(Router::getInstance()->isHmvc())
+        if(\Router::getInstance()->isHmvc())
         {
             return true;
         }

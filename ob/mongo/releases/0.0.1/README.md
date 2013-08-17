@@ -14,7 +14,7 @@ $database['db']['hostname']  = "localhost";
 $database['db']['username']  = "root";
 $database['db']['password']  = "12345";
 $database['db']['database']  = "yourdbname";
-$database['db']['dbdriver']  = "mongodb";
+$database['db']['driver']  = "mongodb";
 ```
 
 ### Initializing the Class

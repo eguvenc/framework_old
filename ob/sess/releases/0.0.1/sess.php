@@ -14,7 +14,7 @@ namespace sess {
         
         function __construct($params = array())
         {
-            log\me('debug', 'Session Helper Initialized.');
+            \log\me('debug', 'Session Helper Initialized.');
             
             static $session_start = null;
 

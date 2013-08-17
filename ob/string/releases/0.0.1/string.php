@@ -13,7 +13,7 @@ namespace string {
     {
         function __construct()
         {
-            log\me('debug', 'String Helper Initialized.');
+            \log\me('debug', 'String Helper Initialized.');
         }
     }
     
