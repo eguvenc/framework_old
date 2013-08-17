@@ -61,8 +61,7 @@ Class Pager_Html_Widgets
         
         if (is_string($extra_params)) 
         {
-            //old behavior, BC maintained
-            $option_text = $extra_params;
+            $option_text = $extra_params;  // old behavior, BC maintained
         } 
         else 
         {
@@ -89,9 +88,11 @@ Class Pager_Html_Widgets
         $end   = (int)$end;
         $step  = (int)$step;
         
-        if ( ! empty($_SESSION[$this->pager->_session_var])) 
+        $session_var = \sess\get($this->pager->_session_var);
+        
+        if ( ! empty($session_var)) 
         {
-            $selected = (int)$_SESSION[$this->pager->_session_var];
+            $selected = (int)$session_var;
         } 
         else 
         {
@@ -115,7 +116,7 @@ Class Pager_Html_Widgets
             {
                 $selector = '\' + '.'this.options[this.selectedIndex].value + \'';
                 
-                // ( Obullo Changes ..)
+                ##########  ( Obullo Changes ..)  ##########  
                 
                 $tmp_link_data = $this->pager->_link_data;
                 if (isset($tmp_link_data[$this->pager->_url_var])) 
@@ -131,7 +132,7 @@ Class Pager_Html_Widgets
                     htmlentities($href, ENT_COMPAT, 'UTF-8')
                 );
 
-                // ( Obullo Changes ..)
+                ##########  ( Obullo Changes ..)  ##########
                 
                 $tmp .= ' onchange="document.location.href=\''
                      . $href .'\''
@@ -220,7 +221,7 @@ Class Pager_Html_Widgets
 
         if ( ! strstr($option_text, '%d')) 
         {
-            throw new \Exception('invalid format - use "%d" as placeholder.');
+            throw new \Exception('Invalid format - use "%d" as placeholder.');
         }
         
         $tmp = '<select name="'.$this->pager->_url_var.'"';

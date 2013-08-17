@@ -38,7 +38,7 @@ $params['item_data']  = range(1, 1000); // just dummy data
 $pager = $pagerClass->init($params);
 
 $data  = $pager->getPageData();
-$links = $pager->get_links();
+$links = $pager->getLinks();
 
 // $links is an ordered + associative array with 'back'/'pages'/'next'/'first'/'last'/'all' links.
 // NB: $links['all'] is the same as $pager->links;

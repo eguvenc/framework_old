@@ -78,7 +78,7 @@ Class Pager_Jumping extends Pager_Common
     * @return array  First and last offsets
     * @access public
     */
-    public function get_page_range_by_page($page_id = null)
+    public function getPageRangeByPage($page_id = null)
     {
         $page_id = isset($page_id) ? (int)$page_id : $this->_current_page;
         
@@ -121,7 +121,7 @@ Class Pager_Jumping extends Pager_Common
     *
     * @return array Back/pages/next links
     */
-    public function get_links($page_id = null, $next_html = '')
+    public function getLinks($page_id = null, $next_html = '')
     {
         //BC hack
         if ( ! empty($next_html)) 
@@ -155,13 +155,13 @@ Class Pager_Jumping extends Pager_Common
             }
         }
 
-        $back        = str_replace('&nbsp;', '', $this->_getBackLink());
-        $next        = str_replace('&nbsp;', '', $this->_getNextLink());
-        $pages       = $this->_getPageLinks();
-        $first       = $this->_printFirstPage();
-        $last        = $this->_printLastPage();
-        $all         = $this->links;
-        $link_tags   = $this->link_tags;
+        $back          = str_replace('&nbsp;', '', $this->_getBackLink());
+        $next          = str_replace('&nbsp;', '', $this->_getNextLink());
+        $pages         = $this->_getPageLinks();
+        $first         = $this->_printFirstPage();
+        $last          = $this->_printLastPage();
+        $all           = $this->links;
+        $link_tags     = $this->link_tags;
         $link_tags_raw = $this->link_tags_raw;
 
         if ( ! is_null($page_id)) 
@@ -214,8 +214,8 @@ Class Pager_Jumping extends Pager_Common
             return '';
         }
 
-        $links = '';
-        $limits = $this->get_page_range_by_page($this->_current_page);
+        $links  = '';
+        $limits = $this->getPageRangeByPage($this->_current_page);
 
         for ($i=$limits[0]; $i<=min($limits[1], $this->_total_pages); $i++) 
         {

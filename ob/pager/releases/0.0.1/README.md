@@ -56,7 +56,7 @@ $params['item_data']  = range(1, 1000);
 
 $data  = $pager->getPageData();
 $pager = lib('ob/pager')->init($params);
-$links = $pager->get_links();
+$links = $pager->getLinks();
 
 // $links is an ordered + associative array with 'back'/'pages'/'next'/'first'/'last'/'all' links.
 // NB: $links['all'] is the same as $pager->links;
@@ -113,14 +113,14 @@ Change mode parameter as <samp>Jumping</samp> and increase <samp>Delta</samp> pa
 [1]  << Back 1  2  3  4  5  Next >>  [33]
 ```
 
-### $pager->get_links();
+### $pager->getLinks();
 
 ------
 
-get_links() function also will give you <b>link rel</b> = "" tags, You can get link rel style tags using <b>$links['link_tags'] or $link['link_tags_raw']</b>
+getLinks() function also will give you <b>link rel</b> = "" tags, You can get link rel style tags using <b>$links['link_tags'] or $link['link_tags_raw']</b>
 
 ```php
-$links = $pager->get_links();
+$links = $pager->getLinks();
 print_r($links);
 
 Array
@@ -353,7 +353,7 @@ Class Start extends Controller {
         $data['rows'] = $this->db->result();
         
         $data['params'] = $params;
-        $data['links']  = $pager->get_links();
+        $data['links']  = $pager->getLinks();
         $data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, FALSE);
 
         view('view_pager_test', $data, FALSE);
@@ -452,7 +452,7 @@ Class Start extends Controller {
         $data['rows'] = $this->db->result();
         
         $data['params'] = $params;
-        $data['links']  = $pager->get_links();
+        $data['links']  = $pager->getLinks();
         
         $data['page_select_box']      = $pager->getPageSelectBox(array('auto_submit' => TRUE));  // auto submit
         $data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, FALSE, array('auto_submit' => TRUE));
