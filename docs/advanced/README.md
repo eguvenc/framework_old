@@ -596,7 +596,7 @@ Obullo has a <b>autorun.php</b> functionality that is located in your <dfn>app/c
 When your application start to work, if would you like to run automatically some autoloaded <b>helper</b> functions for whole framework , you should define function names and arguments to $autorun variable.
 
 ```php
-$autorun['function'] = array('sess\start');  This configuration run the Obullo sess_start(); function.
+$autorun['function']['sess\start'] = array();  This configuration run the Obullo sess_start(); function.
 ```
 
 You can use arguments
@@ -615,9 +615,7 @@ Above the configuration run this function <samp>my\function('arg1', 'arg2');</sa
 
 Obullo uses a few functions for its operation that are globally defined, and are available to you at any point. These do not require loading any libraries or helpers.
 
-### getInstance()
-
-------
+#### getInstance()
 
 This function returns the Obullo super object. Normally from within your controller functions you will call any of the available Obullo functions using the <var>$this</var> variable. <var>$this</var>, however, only works directly within your controllers, <b>not</b> models, and <b>not</b> your views. If you would like to use Obullo's classes from within your own custom classes , models or views you can do so as follows:
 
@@ -644,9 +642,7 @@ $ob->output->cache(60);
 
 *Note:* For Model files <var>$this</var> variable just available for <b>database</b> operations.To using libraries inside to model you must use <samp>this()</samp> function.
 
-### getConfig($config_filename, $variable = '')
-
-------
+#### getConfig($config_filename, $variable = '')
 
 getConfig is a pretty function to getting configuration variables from <dfn>app/config</dfn> folder. You can use it like this
 
@@ -669,9 +665,7 @@ $conf = getConfig('myconfig', 'conf'); print_r($conf);
 
 First parameter is filename and the second is <b>$variable</b> name you want to fetch.
 
-### configItem('item_key', $filename = '')
-
-------
+#### configItem('item_key', $filename = '')
 
 The [Config library](/docs/core-libraries/config-class) is the preferred way of accessing configuration information, however configItem() can be used to retrieve single keys. See Config library documentation for more information.
 
@@ -685,9 +679,7 @@ If you want to get config item another folder use it like this
 echo configItem('html4-trans', 'doctypes'); 
 ```
 
-### dbItem('item_key', index = '')
-
-------
+#### dbItem('item_key', index = '')
 
 Get db configuration items which is defined in <dfn>app/config/database.php</dfn> file.
 
@@ -702,24 +694,7 @@ Grab another database settings
 echo dbItem('hostname', 'db2');   //output localhost  
 ```
 
-isPhp('version_number')
-
-------
-
-isPhp() determines of the PHP version being used is greater than the supplied <var>version_number</var>.
-
-```php
-if (isPhp('5.3.0'))
-{
-    $str = quoted_printable_encode($str);
-}
-```
-
-Returns boolean <kbd>TRUE</kbd> if the installed version of PHP is equal to or greater than the supplied version number. Returns <kbd>FALSE</kbd> if the installed version of PHP is lower than the supplied version number.
-
-isReallyWritable('path/to/file')
-
-------
+#### isReallyWritable('path/to/file')
 
 isWritable() returns TRUE on Windows servers when you really can't write to the file as the OS reports to PHP as FALSE only if the read-only attribute is marked. This function determines if a file is actually writable by attempting to write to it first. Generally only recommended on platforms where this information may be unreliable.
 
@@ -734,15 +709,11 @@ else
 }
 ```
 
-showError('message'), show_404('page'), logMe('level', 'message')
-
-------
+#### showError('message'), show_404('page'), logMe('level', 'message')
 
 These are each outlined on the [Error Handling](#) page.
 
-### setStatusHeader(code, 'text');
-
-------
+#### setStatusHeader(code, 'text');
 
 Permits you to manually set a server status header. Example:
 
@@ -768,8 +739,6 @@ If you work under the *nix operating systems, we have useful sh commands.
 
 #### Clear.sh ( Clear logs and cache files )
 
-------
-
 When you move your project to another server you need to clear all log files and caches. Go your terminal and type your project path and run the clear.sh
 
 ```php
@@ -777,8 +746,6 @@ root@localhost:/var/www/framework$ sh clear.sh // Great, temporary files clear j
 ```
 
 #### Export.sh ( Export project files )
-
-------
 
 When you upload project files to your live server you need export it. Export command remove all .svn and .git files and save the project to export folder.
 
@@ -833,7 +800,7 @@ HMVC (Layered MVC)
                                 ------        -------    
 ```
 
-HMVC pattern offers more flexibility in your application. You can call multiple requests using Obullo's [Request helper](/docs/helpers/#request-helper).
+HMVC pattern offers more flexibility in your application. You can call multiple requests using Obullo's [Request helper](/docs/packages/#request-helper).
 
 ```php
 ------------------------------------------------------------------------------------
@@ -1196,9 +1163,9 @@ All command line request goes to Obullo <b>task.php</b> which is located in your
 Using [Task Helper](/docs/helpers/#task-helper) you can run your tasks as a command in the background. Function run like CLI but don't use the task.php.
 
 ```php
-new Task\Start();
+new Task\start();
 
-task_run('hello help', $debug = TRUE);
+Task\run('hello help', $debug = TRUE);
 ```
 
 Running MODULE Tasks
@@ -1206,9 +1173,9 @@ Running MODULE Tasks
 ------
 
 ```php
-new Task\Start();
+new Task\start();
 
-task_run('start help', $debug = TRUE);
+Task\run('start help', $debug = TRUE);
 ```
 
 ### Running YOUR MODULE Tasks
@@ -1216,20 +1183,20 @@ task_run('start help', $debug = TRUE);
 ------
 
 ```php
-new Task\Start();
+new Task\start();
 
-task_run('welcome start/index/arg1/arg2', $debug = TRUE);
+Task\run('welcome start/index/arg1/arg2', $debug = TRUE);
 ```
 
 <b>An Important thing</b> we use the second argument <b>$debug = true</b> just for test don't use this argument except the testing or use it as false.
 
 ```php
-task_run('welcome hello/index/arg1/arg2', FALSE);
+Task\run('welcome hello/index/arg1/arg2', FALSE);
 ```
 
 **Note:** When you use the task function, debug mode should be <samp>FALSE</samp>, or don't use a second argument except the test otherwise shell command will print output the screen.
 
-## Alternate PHP Syntax for View Files<a name="alternate-php-syntax"></a
+## Alternate PHP Syntax for View Files <a name="alternate-php-syntax"></a>
 
 ### Alternate PHP Syntax for View Files
 
@@ -1442,17 +1409,17 @@ There are three message types:
 
 **Note:** In order for the log file to actually be written, the "logs" folder must be writable which is located at <dfn>app/core/logs</dfn>. In addition, you must set the "threshold" for logging. You might, for example, only want error messages to be logged, and not the other two types. If you set it to zero logging will be disabled. (Look at <dfn>app/config/config.php</dfn>)
 
-#### log\me('level', '[ module ]: message')
+#### Log\me('level', '[ module ]: message')
 
 ------
 
 If you want to keep releated module log files in your current module or extension, create a <dfn>module/core/logs</dfn> folder and give the write access it, then you need to use <b>'[ module ] : '</b> string before the start of the log message. For example if you have a <b>welcome</b> module you need to use log function like this.
 
 ```php
-log\me('debug', '[ welcome ]: Example message !');
+Log\me('debug', '[ welcome ]: Example message !');
 ```
 
-Exceptions
+#### Exceptions
 
 ------
 
