@@ -442,7 +442,7 @@ If you use ajax requests you need to [Form Send Helper](/docs/packages/#form-sen
 you can control the form plugin functions using the class <b>attribute</b>
 
 ```php
-<? echo formOpen('/welcome/start/do_post.json', array('method' => 'POST', 'class' => 'hide-form no-top-msg'));?>
+<? echo form\open('/welcome/start/doPost.json', array('method' => 'POST', 'class' => 'hide-form no-top-msg'));?>
 ```
 
 ### Ajax Form Plugin Attributes
@@ -459,13 +459,13 @@ you can control the form plugin functions using the class <b>attribute</b>
 
 ------
 
-After that load the <b>Obullo JQuery Form Plugin</b> just create a do_post() function in your controller then you need add a <samp>form_open('module/controller/do_post.json');</samp> code in your view file, remember we have a ajax form tutorial in modules/test folder. You can look at there for more details.
+After that load the <b>Obullo JQuery Form Plugin</b> just create a doPost() function in your controller then you need add a <samp>form_open('module/controller/doPost.json');</samp> code in your view file, remember we have a ajax form tutorial in modules/test folder. You can look at there for more details.
 
 ```php
 function doPost() 
 {
     $user = new Model\User(false);  // Include user model
-    loader::helper('ob/form_send');
+    new form_Json\start();
 
     $user->usr_username = i\getPost('usr_username');
     $user->usr_password = i\getPost('usr_password');
@@ -492,7 +492,7 @@ function doPost()
 function doPost() 
 {
     $user = new Model\User(false);  // Include user model
-    loader::helper('ob/form_send'); new Form\Send
+    new form_Json\start();
 
     
     $user->usr_username = i\getPost('usr_username');
@@ -566,7 +566,7 @@ $autoload['helper']  = array('vi', 'html');
 Autoloading files loading path styles same as loader class.
 
 ```php
-$autoload['library'] = array('calendar', 'classes/myLib', );
+$autoload['library'] = array('calendar', 'myLib', );
 ```
 
 ### Autoloading Locale Files
@@ -723,14 +723,12 @@ setStatusHeader(401);
 ```
 [See here](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) for a full list of headers.
 
-lib();
-
-------
+#### lib();
 
 Load the obullo libraries
 
 ```php
-$email = lib('ob/email');
+$email = new Email(false);
 ```
  
 ## Sh Commands<a name="sh-commands"></a>
@@ -829,9 +827,9 @@ HMVC pattern offers more flexibility in your application. You can call multiple 
 -------------------------------------------------------------------------------------
 ```
 
-Another example, we created a <b>captcha</b> module using hmvc methods download the latest version of Obullo and look at the captcha module. And just an idea you can create a login service creating a <b>login</b> folder then you can do request from your controllers using HMVC. Learn more details about Obullo's HMVC library click [Reuest helper](/docs/helpers/request-helper) link.
+Another example, we created a <b>captcha</b> module using hmvc methods download the latest version of Obullo and look at the captcha module. And just an idea you can create a login service creating a <b>login</b> folder then you can do request from your controllers using HMVC. Learn more details about Obullo's HMVC library click [Request helper](/docs/helpers/request-helper) link.
 
-## URI Routing<a name="uri-routing"></a>
+## URI Routing <a name="uri-routing"></a>
 
 ### URI Routing
 
@@ -916,11 +914,12 @@ You can match literal values or you can use two wildcard types:
 :any
 ```
 <b>:num</b> will match a segment containing only numbers.
+
 <b>:any</b> will match a segment containing any character.
 
 **Note:** Routes will run in the order they are defined. Higher routes will always take precedence over lower ones.
 
-Examples
+### Examples
 
 ------
 
@@ -1030,7 +1029,7 @@ This route indicates which controller class should be loaded if the URI contains
 
 **Important:** The reserved routes must come before any wildcard or regular expression routes.
 
-##Tasks and CLI Requests<a name="tasks-and-cli-requests"></a> 
+##Tasks and CLI Requests <a name="tasks-and-cli-requests"></a> 
 
 Obullo has a integrated task functionality and Command Line Interface support who want to create command line tasks. You can run <b>controllers</b> from command line.
 
@@ -1107,7 +1106,7 @@ The Start Controller Index function successfully works !
 
 **Note:** When you use the CLI operations *cookies* and *sessions* will not works as normal. Please use the tasks for advanced Command Line structures.
 
-Tasks
+### Tasks
 
 ------
 
@@ -1128,7 +1127,7 @@ Obullo has <b>three</b> tasks folder called APPLICATON, MODULES and YOUR MODULE 
     - tasks
        - controllers
            hello.php
-
+```
 
 #### MODULES TASK FOLDER
 
@@ -1140,6 +1139,7 @@ Obullo has <b>three</b> tasks folder called APPLICATON, MODULES and YOUR MODULE 
    - tasks
        - controllers
             start.php
+```
 
 #### YOUR MODULE TASK FOLDER
 
@@ -1160,12 +1160,12 @@ Obullo has <b>three</b> tasks folder called APPLICATON, MODULES and YOUR MODULE 
 
 All command line request goes to Obullo <b>task.php</b> which is located in your root directory. Obullo has a <b>/tasks</b> folder in the application directory if you want to create application tasks just create your controllers, models, helpers .. files in this folder.
 
-Using [Task Helper](/docs/helpers/#task-helper) you can run your tasks as a command in the background. Function run like CLI but don't use the task.php.
+Using [Task Helper](/docs/packages/#task-helper) you can run your tasks as a command in the background. Function run like CLI but don't use the task.php.
 
 ```php
-new Task\start();
+new task\start();
 
-Task\run('hello help', $debug = TRUE);
+task\run('hello help', $debug = TRUE);
 ```
 
 Running MODULE Tasks
@@ -1173,9 +1173,9 @@ Running MODULE Tasks
 ------
 
 ```php
-new Task\start();
+new task\start();
 
-Task\run('start help', $debug = TRUE);
+task\run('start help', $debug = TRUE);
 ```
 
 ### Running YOUR MODULE Tasks
@@ -1183,15 +1183,15 @@ Task\run('start help', $debug = TRUE);
 ------
 
 ```php
-new Task\start();
+new task\start();
 
-Task\run('welcome start/index/arg1/arg2', $debug = TRUE);
+task\run('welcome start/index/arg1/arg2', $debug = TRUE);
 ```
 
 <b>An Important thing</b> we use the second argument <b>$debug = true</b> just for test don't use this argument except the testing or use it as false.
 
 ```php
-Task\run('welcome hello/index/arg1/arg2', FALSE);
+task\run('welcome hello/index/arg1/arg2', FALSE);
 ```
 
 **Note:** When you use the task function, debug mode should be <samp>FALSE</samp>, or don't use a second argument except the test otherwise shell command will print output the screen.
@@ -1204,7 +1204,7 @@ Task\run('welcome hello/index/arg1/arg2', FALSE);
 
 If you do not utilize Obullo's [template engine](#), you'll be using pure PHP in your View files. To minimize the PHP code in these files, and to make it easier to identify the code blocks it is recommended that you use PHPs alternative syntax for control structures and short tag echo statements. If you are not familiar with this syntax, it allows you to eliminate the braces from your code, and eliminate "echo" statements.
 
-Short Tag Support
+### Short Tag Support
 
 ------
 
@@ -1212,7 +1212,7 @@ Short Tag Support
 
 **Important:** If your server does not support *short_tag_open* functionality then all your php codes will shown as string which is used short tags.
 
-Alternative Echos
+### Alternative Echos
 
 ------
 
@@ -1306,7 +1306,7 @@ Obullo lets you build error reporting into your applications using the functions
 
 ------
 
-Using your <dfn>application/config/config.php</dfn> you can control the all application errors.
+Using your <dfn>app/config/config.php</dfn> you can control the all application errors.
 
 ```php
 $config['error_reporting']       = 1;
@@ -1409,14 +1409,14 @@ There are three message types:
 
 **Note:** In order for the log file to actually be written, the "logs" folder must be writable which is located at <dfn>app/core/logs</dfn>. In addition, you must set the "threshold" for logging. You might, for example, only want error messages to be logged, and not the other two types. If you set it to zero logging will be disabled. (Look at <dfn>app/config/config.php</dfn>)
 
-#### Log\me('level', '[ module ]: message')
+#### log\me('level', '[ module ]: message')
 
 ------
 
 If you want to keep releated module log files in your current module or extension, create a <dfn>module/core/logs</dfn> folder and give the write access it, then you need to use <b>'[ module ] : '</b> string before the start of the log message. For example if you have a <b>welcome</b> module you need to use log function like this.
 
 ```php
-Log\me('debug', '[ welcome ]: Example message !');
+log\me('debug', '[ welcome ]: Example message !');
 ```
 
 #### Exceptions
@@ -1520,7 +1520,7 @@ The above tag can go anywhere within a function. It is not affected by the order
 
 **Note:** Before the cache files can be written you must set the file permissions on your <dfn>app/system/cache</dfn> folder such that it is writable.
 
-Deleting Caches
+### Deleting Caches
 
 ------
 
@@ -1547,9 +1547,9 @@ $cache['compression_level']     = 8;     // Compress level
 
 There are three way to make sure you are actually serving up compressed content.
 <ol>
-    <li>View the headers: Use [Live HTTP Headers](https://addons.mozilla.org/en-US/firefox/addon/live-http-headers/) to examine the response. Look for a line that says "Content-encoding: gzip".</li>
+    <li>View the headers: Use <a href="https://addons.mozilla.org/en-US/firefox/addon/live-http-headers/">Live HTTP Headers</a> to examine the response. Look for a line that says "Content-encoding: gzip".</li>
    <li>Firefox browser: Use Web Developer Toolbar > Information > View Document Size to see whether the page is compressed.</li>
-    <li>Online: Use the [online gzip test](http://www.gidnetwork.com/tools/gzip-test.php) to check whether your page is compressed.</li></ol>
+    <li>Online: Use the <a href="http://www.gidnetwork.com/tools/gzip-test.php">online gzip test</a> to check whether your page is compressed.</li></ol>
 
 **Note:** Above the topics related about online test not for the localhost.
 
@@ -1699,7 +1699,7 @@ Obullo provides the following functions to assist in this process:
     <li><h3>XSS Filtering</h3></li>
 <hr>
 
-    Obullo comes with a Cross Site Scripting filter. This filter looks for commonly used techniques to embed malicious Javascript into your data, or other types of code that attempt to hijack cookies or do other malicious things. The XSS Filter is described [here](/docs/helpers/#security-helpers).
+    Obullo comes with a Cross Site Scripting filter. This filter looks for commonly used techniques to embed malicious Javascript into your data, or other types of code that attempt to hijack cookies or do other malicious things. The XSS Filter is described <a href="/docs/packages/#security-helpers">here</a>.
     <li><h3>Validate the data</h3></li>
     <hr>
 
