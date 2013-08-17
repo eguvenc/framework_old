@@ -872,47 +872,86 @@ Setting your MODULE routing rules
 ------
 
 Sub module available uri routing example
+
+```php
 example.com/submodule/module/class/function/id/
+```
 
-You can create routing rules for the current module just you need to create a routes.php in your module /config directory. You must do an array called $routes that permits you to specify your own routing criteria for the module.
+You can create routing rules for the current module just you need to create a <var>routes.php</var> in your module <dfn>/config</dfn> directory. You must do an array called <dfn>$routes</dfn> that permits you to specify your own routing criteria for the module.
 
-Important:If you want to define routing rules for a module your module name and routing rules first segment must be same , otherwise router library can't parse your route settings .Look at the example.
+**Important:**If you want to define routing rules for a module your module name and routing rules first segment must be same , otherwise router library can't parse your route settings .Look at the example.
+
+```php
 $routes['modulename'] = 'modulename/users/login';   
+```
+
 Setting your SUBMODULE / MODULE routing rules
 
-You can create routing rules your routes.php in your module /config directory which is located in your SUBMODULE.
-$routes['backend/(:any)'] = 'welcome/index/$1';    You don't need write again submodule name to routing values the route rule which is located in a submodule.
-Wildcards
+------
+
+You can create routing rules your <var>routes.php</var> in your module <dfn>/config</dfn> directory which is located in your <b>SUBMODULE</b>.
+
+```php
+$routes['backend/(:any)'] = 'welcome/index/$1';    
+```
+
+You <b>don't need write again submodule name</b> to routing values the route rule which is located in a submodule.
+
+### Wildcards
+
+-------
 
 A typical wildcard route might look something like this:
-$routes['shop/product/:num'] = "shop/show/product";
 
-In a route, the array key contains the URI to be matched, while the array value contains the destination it should be re-routed to. In the above example, if the literal word "shop" is found in the first segment of the URL, and "product" is found in the second segment and a number is found in the third segment then "shop" directory and the "product" class are instead used.
+```php
+$routes['shop/product/:num'] = "shop/show/product";
+```
+
+In a route, the array key contains the URI to be matched, while the array value contains the destination it should be re-routed to. In the above example, if the literal word "shop" is found in the <dfn>first</dfn> segment of the URL, and "product" is found in the <dfn>second</dfn> segment and a number is found in the <dfn>third</dfn> segment then "shop" directory and the "product" class are instead used.
 
 You can match literal values or you can use two wildcard types:
+
+```php
 :num
 :any
+```
+<b>:num</b> will match a segment containing only numbers.
+<b>:any</b> will match a segment containing any character.
 
-:num will match a segment containing only numbers.
-:any will match a segment containing any character.
+**Note:** Routes will run in the order they are defined. Higher routes will always take precedence over lower ones.
 
-Note: Routes will run in the order they are defined. Higher routes will always take precedence over lower ones.
 Examples
 
+------
+
 Here are a few routing examples:
+
+```php
 $routes['blog'] = "blog/start";
+```
 
 A URL containing the word "blog" in the first segment will be remapped to the "blog" directory and "start" class.
+
+```php
 $routes['blog/users'] = "blogs/start/users/34";
+```
 
 A URL containing the segments blog/users will be remapped to the "blogs" directory , "start" class and the "users" method. The ID will be set to "34".
-$routes['shop/product/:any'] = "shop/show/product";
 
+```php
+$routes['shop/product/:any'] = "shop/show/product";
+```
 A URL with "shop/product" as the first segment, and anything in the second will be remapped to the "show" class and the "product" method.
+
+```php
 $routes['product/(:num)'] = "shop/show/product/$1";
+```
 
 A URL with "product" as the first segment, and anything in the second will be remapped to the "shop" directory, "show" class and the "product" method passing in the match as a variable to the function.
-We can tell the process via schema like this // This is your url request           // This process will work in background
+We can tell the process via schema like this 
+
+```php
+// This is your url request           // This process will work in background
 example.com/index.php/product/4
           _ _ _ _ _ _ _                   _ _ _ _ _ _ _ _
                 |                                |
@@ -927,39 +966,520 @@ $routes['product/(:num)']         =   "shop/show/product/$1";
                                 |
                         // process in background 
                        "shop/show/product/4";      
+```
 
-Important: Do not use leading/trailing slashes.
-Regular Expressions
+**Important:** Do not use leading/trailing slashes.
+
+### Regular Expressions
+
+------
 
 If you prefer you can use regular expressions to define your routing rules. Any valid regular expression is allowed, as are back-references.
 
-Note: If you use back-references you must use the dollar syntax rather than the double backslash syntax.
+**Note:** If you use back-references you must use the dollar syntax rather than the double backslash syntax.
 
 A typical RegEx route might look something like this:
-$routes['products/([a-z]+)/(\d+)'] = "$1/id_$2";
 
-In the above example, a URI similar to shop/products/shirts/123 would instead call the shirts controller class and the id_123 function.
+```php
+$routes['products/([a-z]+)/(\d+)'] = "$1/id_$2";
+```
+
+In the above example, a URI similar to <dfn>shop/products/shirts/123</dfn> would instead call the <dfn>shirts</dfn> controller class and the <dfn>id_123</dfn> function.
 
 You can also mix and match wildcards with regular expressions.
-A Real Example
-When we was prepare the Obullo User Guide pages we had some long urls like this http://obullo.com/user_guide/show/page/4/29/uri-routing.html
+
+### A Real Example
+
+------
+
+When we was prepare the Obullo User Guide pages we had some <b>long urls</b> like this 
+
+```php
+http://obullo.com/user_guide/show/page/4/29/uri-routing.html
 http://obullo.com/user_guide/show/chapter/1/base-information.html
 http://obullo.com/user_guide/show.html
+```
 
-As you can see above the example we had a user_guide directory and show class, we decided to remove "show" segment from uri and we did it like this ..
+As you can see above the example we had a <b>user_guide</b> directory and show class, we decided to <b>remove "show"</b> segment from uri and we did it like this ..
+
+```php
 $routes['user_guide/page/(:num)/(:num)/:any']  = "user_guide/show/page/$1/$2";
 $routes['user_guide/chapter/(:num)/:any']      = "user_guide/show/chapter/$1";
-$routes['user_guide/chapters']  = "user_guide/show"; and result http://obullo.com/user_guide/page/4/29/uri-routing.html
+$routes['user_guide/chapters']  = "user_guide/show";
+```
+
+and result 
+
+```php
+http://obullo.com/user_guide/page/4/29/uri-routing.html
 http://obullo.com/user_guide/chapter/1/base-information.html
 http://obullo.com/user_guide/chapters.html
-Reserved Routes
+```
+
+### Reserved Routes
+
+------
 
 There is a one reserved route:
+
+```php
 $routes['default_controller'] = 'welcome/start';
+```
 
 This route indicates which controller class should be loaded if the URI contains no data, which will be the case when people load your root URL. In the above example, the "start" class would be loaded. You are encouraged to always have a default route otherwise a 404 page will appear by default.
 
 **Important:** The reserved routes must come before any wildcard or regular expression routes.
 
+##Tasks and CLI Requests<a name="tasks-and-cli-requests"></a> 
+
+Obullo has a integrated task functionality and Command Line Interface support who want to create command line tasks. You can run <b>controllers</b> from command line.
+
+### CLI (Command Line Interface) Requests
+
+------
+
+To run task controller which is located in app/task folder just type below the codes in your Terminal. Below the example we use <samp>/var/www</samp> path this is your webroot and it depends on your configuration.
+
+First of all go your framework root folder.
+
+```php
+$cd /var/www/framework/
+```
+
+Do a request, all command line requests goes to Obullo <b>task.php</b> which is located in your root directory.
+
+```php
+$php task.php hello
+```
+
+This request call the <samp>hello</samp> controller from <b>tasks</b> folder which is located in your /<samp>app/tasks</samp> directory.
+
+```php
+        _____      ________     __     __  __        __          _______
+      / ___  /    / ____   \   / /    / / / /       / /         / ___   /
+    /  /   /  /  / /____/  /  / /    / / / /       / /        /  /   /  /
+   /  /   /  /  / _____  /   / /    / / / /       / /        /  /   /  /
+  /  /___/  /  / /____/  \  / /____/ / / /____   / /_____   /  /__ /  /
+  /_______/   /__________/ /________/ /_______/ /_______ /  /_______/ 
+  
+                Welcome to Obullo Task Manager (c) 2011.
+     Please run this command [$php task.php hello help] for help ! 
+                YOU ARE IN /APP/TASKS FOLDER
+```
+
+If you see this screen your command successfully run <b>otherwise</b> check your <b>php path</b> running by this command
+
+```php
+$which php // command output /usr/bin/php 
+```
+
+If your current php path not <b>/usr/bin/php</b> open the index.php which is located in your framework root and define your php path like this 
+
+```php
+define('PHP_PATH', 'your_php_path_that_you_learned_by_which_command'); 
+```
+
+### Running Module Tasks
+
+------
+
+Running below the code will call the another task controller from <dfn>/MODULES/tasks</dfn> directory.
+
+```php
+$php task.php start
+```
+
+Running below the code will call the another task controller from your <dfn>/MODULES/welcome/tasks</dfn> directory.
+
+```php
+$php task.php welcome start index arg1 arg2
+```
+
+If above the command successful you will see this screen
+
+```php
+Module: welcome
+Hello World !
+Argument 1: arg1
+Argument 2: arg2
+The Start Controller Index function successfully works !
+```
+
+**Note:** When you use the CLI operations *cookies* and *sessions* will not works as normal. Please use the tasks for advanced Command Line structures.
+
+Tasks
+
+------
+
+Tasks are same thing like controller model view structure. The <b>main difference from CLI</b> in the <b>task mode</b> framework rules works like browsing a web page <b>sessions</b> and another some things works well in this mode.To working with tasks just we call the controller from the command line and we have special directories for this operation called tasks.
+
+Obullo has <b>three</b> tasks folder called APPLICATON, MODULES and YOUR MODULE TASKS folder.
+
+#### APPLICATION TASK FOLDER
+
+```php
+- app
+    + config
+    + core
+    + helpers
+    + libraries
+    + models
+    + parents
+    - tasks
+       - controllers
+           hello.php
 
 
+#### MODULES TASK FOLDER
+
+```php
++ app
+- modules
+   + captcha
+   + default
+   - tasks
+       - controllers
+            start.php
+
+#### YOUR MODULE TASK FOLDER
+
+```php
++ app
+- modules
+   + captcha
+   + default
+   - welcome
+      - tasks
+        - start
+           start.php
+```
+
+### Running APPLICATION Tasks
+
+------
+
+All command line request goes to Obullo <b>task.php</b> which is located in your root directory. Obullo has a <b>/tasks</b> folder in the application directory if you want to create application tasks just create your controllers, models, helpers .. files in this folder.
+
+Using [Task Helper](/docs/helpers/#task-helper) you can run your tasks as a command in the background. Function run like CLI but don't use the task.php.
+
+```php
+new Task\Start();
+
+task_run('hello help', $debug = TRUE);
+```
+
+Running MODULE Tasks
+
+------
+
+```php
+new Task\Start();
+
+task_run('start help', $debug = TRUE);
+```
+
+### Running YOUR MODULE Tasks
+
+------
+
+```php
+new Task\Start();
+
+task_run('welcome start/index/arg1/arg2', $debug = TRUE);
+```
+
+<b>An Important thing</b> we use the second argument <b>$debug = true</b> just for test don't use this argument except the testing or use it as false.
+
+```php
+task_run('welcome hello/index/arg1/arg2', FALSE);
+```
+
+**Note:** When you use the task function, debug mode should be <samp>FALSE</samp>, or don't use a second argument except the test otherwise shell command will print output the screen.
+
+## Alternate PHP Syntax for View Files<a name="alternate-php-syntax"></a
+
+### Alternate PHP Syntax for View Files
+
+------
+
+If you do not utilize Obullo's [template engine](#), you'll be using pure PHP in your View files. To minimize the PHP code in these files, and to make it easier to identify the code blocks it is recommended that you use PHPs alternative syntax for control structures and short tag echo statements. If you are not familiar with this syntax, it allows you to eliminate the braces from your code, and eliminate "echo" statements.
+
+Short Tag Support
+
+------
+
+**Note:** Obullo does not support php short tags at this time. You can open *'short_tag_open'* value from your php.ini file.If you use shared hosting don't use short tags for now.
+
+**Important:** If your server does not support *short_tag_open* functionality then all your php codes will shown as string which is used short tags.
+
+Alternative Echos
+
+------
+
+Normally to echo, or print out a variable you would do this:
+
+```php
+<?php echo $variable; ?>
+```
+
+With the alternative syntax you can instead do it this way:
+
+```php
+<?=$variable?>
+```
+
+### Alternative Control Structures
+
+------
+
+Controls structures, like <var>if</var>, <var>for</var>, <var>foreach</var>, and <var>while</var> can be written in a simplified format as well. Here is an example using foreach:
+
+```php
+<ul>
+
+<?php foreach($todo as $item): ?>
+
+<li><?=$item?></li>
+
+<?php endforeach; ?>
+
+</ul>
+```
+
+Notice that there are no braces. Instead, the end brace is replaced with endforeach. Each of the control structures listed above has a similar closing syntax: <var>endif</var>, <var>endfor</var>, <var>endforeach</var>, and <var>endwhile</var>
+
+Also notice that instead of using a semicolon after each structure (except the last one), there is a colon. This is important!
+
+
+Here is another example, using if/elseif/else. Notice the colons:
+
+```php
+<?php if ($username == 'sally'): ?>
+
+   <h3>Hi Sally</h3>
+
+<?php elseif ($username == 'joe'): ?>
+
+   <h3>Hi Joe</h3>
+
+<?php else: ?>
+
+   <h3>Hi unknown user</h3>
+
+<?php endif; ?>
+```
+
+## Error Handling and Debugging<a name="error-handling-and-debugging"></a>
+
+### Error Handling
+
+------
+
+Error Codes and Error Constants
+
+```php
+http://usphp.com/manual/en/errorfunc.constants.php
+ 
+1     E_ERROR
+2     E_WARNING
+4     E_PARSE
+8     E_NOTICE
+16    E_CORE_ERROR
+32    E_CORE_WARNING
+64    E_COMPILE_ERROR
+128   E_COMPILE_WARNING
+256   E_USER_ERROR
+512   E_USER_WARNING
+1024  E_USER_NOTICE
+2048  E_STRICT
+4096  E_RECOVERABLE_ERROR
+8192  E_DEPRECATED
+16384 E_USER_DEPRECATED
+30719 E_ALL
+```
+
+Obullo lets you build error reporting into your applications using the functions described below. In addition, it has an error logging class that permits error and debugging messages to be saved as text files.
+
+**Note:** By default, Obullo displays all PHP errors. You might wish to change this behavior once your development is complete. Disabling error reporting will NOT prevent log files from being written if there are errors.
+
+### Enable / Disable Errors
+
+------
+
+Using your <dfn>application/config/config.php</dfn> you can control the all application errors.
+
+```php
+$config['error_reporting']       = 1;
+```
+
+this configuration will enable all errors you can use PHP ERROR CONSTANTS like this
+
+```php
+$config['error_reporting']       = 'E_ALL';
+```
+
+this configuration will disable all errors.
+
+```php
+$config['error_reporting']       = 0;
+```
+
+You can do more using php error constants. Look at below the examples.
+
+```php
+|   String - Custom Regex Mode Examples:
+|
+|   Running errors
+|       $config['error_reporting'] = 'E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR';
+|   
+|   Running errors + notices
+|       $config['error_reporting'] = 'E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_NOTICE';
+|   
+|   All errors except notices, warnings, exceptions and database errors
+|       $config['error_reporting'] = 'E_ALL ^ (E_NOTICE | E_WARNING | E_EXCEPTION | E_DATABASE)';
+|       
+|   All errors except notices 
+|       $config['error_reporting'] = 'E_ALL ^ E_NOTICE';
+```
+
+Unlike most systems in Obullo, the error functions are simple procedural interfaces that are available globally throughout the application. This approach permits error messages to get triggered without having to worry about class/function scoping.
+
+#### error\reporting()
+
+------
+
+Sometimes you may want to disable framework <b>error reporting</b> functionality to some line of codes, in procedural way php allows to you closing error reporting manualy using '@' symbol.
+
+But this functionality will not work in Obullo becasue of Obullo use its own <b>debugging functionality</b> and it disables native error functionality. However Obullo has ob_error_reporting(); function and it will do nearly same effect.
+
+```php
+error\reporting(0);   // Close error reporting. 
+
+$fp = fopen('filename.txt', 'wb');    // error reporting closed for this function. 
+
+error\reporting(1);  // Restore old value of error reporting. 
+```
+
+The following functions let you generate errors:
+
+#### showError('message' [, int $status_code= 500 ] )
+
+------
+
+This function will display the error message supplied to it using the following error template:
+
+You can <b>customize</b> this template which is located at <samp>app/core/errors/ob_general.php</samp>
+
+The optional parameter $status_code determines what HTTP status code should be sent with the error.
+
+#### show404('page')
+
+------
+
+This function will display the 404 error message supplied to it using the following error template:
+
+You can <b>customize</b> this template which is located at <samp>app/core/errors/ob_404.php</samp>
+
+The function expects the string passed to it to be the file path to the page that isn't found. Note that Obullo automatically shows 404 messages if controllers are not found.
+
+#### log\me('level', 'message')
+
+------
+
+This function lets you write messages to your log files. You must supply one of three "levels" in the first parameter, indicating what type of message it is (debug, error, info), with the message itself in the second parameter. Example:
+
+```php
+if ($some_var == "")
+{
+    log\me('error', 'Some variable did not contain a value.');
+}
+else
+{
+    log\me('debug', 'Some variable was correctly set');
+}
+
+log\me('info', 'The purpose of some variable is to provide some value.');
+```
+
+There are three message types:
+<ol>
+   <li>Error Messages. These are actual errors, such as PHP errors or user errors.</li>
+    <li>Debug Messages. These are messages that assist in debugging. For example, if a class has been initialized, you could log this as debugging info.</li>
+    <li>Informational Messages. These are the lowest priority messages, simply giving information regarding some process. Obullo doesn't natively generate any info messages but you may want to in your application.</li></ol>
+
+**Note:** In order for the log file to actually be written, the "logs" folder must be writable which is located at <dfn>app/core/logs</dfn>. In addition, you must set the "threshold" for logging. You might, for example, only want error messages to be logged, and not the other two types. If you set it to zero logging will be disabled. (Look at <dfn>app/config/config.php</dfn>)
+
+#### log\me('level', '[ module ]: message')
+
+------
+
+If you want to keep releated module log files in your current module or extension, create a <dfn>module/core/logs</dfn> folder and give the write access it, then you need to use <b>'[ module ] : '</b> string before the start of the log message. For example if you have a <b>welcome</b> module you need to use log function like this.
+
+```php
+log\me('debug', '[ welcome ]: Example message !');
+```
+
+Exceptions
+
+------
+
+We catch all exceptions with php <samp>set_exception_handler()</samp> function.You can customize exception error template which is located <dfn>app/core/errors/ob_exception.php</dfn>.
+
+```php
+<div id="exception_content">
+<b>(<?php echo $type ?>):  <?php echo error\securePath($e->getMessage(), true) ?></b><br/>
+<?php 
+if(isset($sql)) 
+{
+    echo '<span class="errorfile"><b>SQL :</b> '.$sql.'</span>';
+}
+?>
+</div>
+```
+
+**Tip:**You can manually catch your special exceptions in try {} catch {} blocks like this...
+
+```php
+try
+{
+    throw new Exception('blabla');
+    
+} catch(Exception $e)
+{
+    echo $e->getMessage();  //output blabla 
+}
+```
+
+### Debugging
+
+------
+
+Obullo lets you build user friendly debugging into your applications using the configurations described below. Open your <dfn>app/config/config.php</dfn> and look at the <var>$config['debug_backtrace']</var>
+
+```php
+$config['debug_backtrace']  = array('enabled' => 'E_ALL ^ (E_NOTICE | E_WARNING)', 'padding' => 5);
+```
+
+You can enable or disable debugging functionality or you can disable it using native php error regex strings.
+
+```php
+$config['debug_backtrace']  = array('enabled' => FALSE, 'padding' => 5)
+```
+
+If you change the padding option debugging lines will be smaller.
+
+```php
+$config['debug_backtrace']  = array('enabled' => 'E_ALL ^ (E_NOTICE | E_WARNING)', 'padding' => 3); (
+```
+
+```php
+Notice): Undefined variable: undefined 
+MODULES/welcome/controllers/welcome.php Code : 8 ( Line : 14 )
+
+12     {   
+13 
+14         echo $undefined;
+15         
+16         $data['var'] = 'and generated by ';
+17 
+```
