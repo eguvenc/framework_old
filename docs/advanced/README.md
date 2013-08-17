@@ -1697,17 +1697,13 @@ Obullo provides the following functions to assist in this process:
 
 <ul>
     <li><h3>XSS Filtering</h3></li>
-
-------
+<hr>
 
     Obullo comes with a Cross Site Scripting filter. This filter looks for commonly used techniques to embed malicious Javascript into your data, or other types of code that attempt to hijack cookies or do other malicious things. The XSS Filter is described [here](/docs/helpers/#security-helpers).
     <li><h3>Validate the data</h3></li>
-
-------
+    <hr>
 
     Obullo has a [Validator Class](/docs/libraries/#validator-class) that assists you in validating, filtering, and prepping your data.
     <li><h3>Escape all data before database insertion</h3></li>
-
-------
-
-    Never insert information into your database without escaping it. Please see the section that discusses [running queries](/docs/db/#running-and-escaping-queries) for more information.</ul>
+        <hr>
+    Never insert information into your database without escaping it. Please see the section that discusses <a href="/docs/db/#running-and-escaping-queries">running queries</a> for more information.</ul>
