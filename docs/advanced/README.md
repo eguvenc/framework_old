@@ -587,12 +587,6 @@ Same as helper files.
 
 Same as library files.
 
-### Module Autoload.php
-
-------
-
-You can create an autoload.php in your <dfn>module/config/</dfn> folder. Obullo will merge module autoload.php and application autoload.php variables.
-
 ### Autorun Functions
 
 ------
@@ -613,36 +607,6 @@ $autorun['function']['my\function']   = array('arg1', 'arg2');
 
 Above the configuration run this function <samp>my\function('arg1', 'arg2');</samp> before if you load the function helper.
 
-### Module Autorun.php
-
-------
-
-You can create an autorun.php in your <dfn>module/config/</dfn> folder. Obullo will <b>merge</b> module autorun.php and application autorun.php variables.
-
-### Module Config.php
-
-------
-
-You can create an config.php in your <dfn>module/config/</dfn> folder which has contains <var>$config</var> variables. Obullo will <b>merge</b> module config.php and application config.php variables.
-
-### Module Routes.php
-
-------
-
-You can create an routes.php in your <dfn>module/config/</dfn> folder which has contains <var>$routes</var> variables. Obullo will <b>merge</b> module routes.php and application routes.php variables.
-
-### Module Constants.php
-
-------
-
-You can create an constants.php in your <dfn>module/config/</dfn> folder. Obullo will <b>include</b> module constants.php variables to application.
-
-### SubModule Autoloaders
-
-------
-
-You can create multi applications in modules directory and sub module autoloaders works like modules they have a <b>/sub.module/config</b> folder.
-
 ## Common Functions <a name="common-functions"></a>
 
 ### Common Functions
@@ -651,7 +615,7 @@ You can create multi applications in modules directory and sub module autoloader
 
 Obullo uses a few functions for its operation that are globally defined, and are available to you at any point. These do not require loading any libraries or helpers.
 
-### this()
+### getInstance()
 
 ------
 
@@ -660,13 +624,13 @@ This function returns the Obullo super object. Normally from within your control
 First, assign the Obullo object to a variable:
 
 ```php
-$ob = this();
+$ob = getInstance();
 ```
 
 Once you've assigned the object to a variable, you'll use that variable instead of <var>$this</var>:
 
 ```php
-$ob = this();
+$ob = getInstance();
 
 $ob->config->item('base_url');
 
