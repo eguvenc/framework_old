@@ -86,8 +86,6 @@ http://localhost/framework/index.php/welcome/start
 
 #### $model->errors($field = '');
 
-------
-
 This function return to all errors in array format if you don't provide any fieldname, otherwise it will return to <b>one field</b> error.
 
 ```php
@@ -118,13 +116,9 @@ if($model->errors('transaction') != '')
 
 #### $model->setError($field = '', $message = '');
 
-------
-
 You can set custom errors.
 
 #### $model->setField($field = '', $type = 'rules', $val = ' new value ');
-
-------
 
 Using set field function you can override to $settings or validation rules.
 
@@ -146,8 +140,6 @@ if($model->delete())
 
 #### $model->values($field = '');
 
-------
-
 Function return to <b>filtered secure</b> value after that the validation according to your variable <b>type</b> of your validation rules in your model <var>$settings</var> .
 
 ```php
@@ -164,8 +156,6 @@ Array
 ```
 
 #### $model->save();
-
-------
 
 Function will save the all variables to database which are the fields matches in your model class $settings => fields section.
 
@@ -206,8 +196,6 @@ print_r($errors);
 ```
 
 #### $model->delete();
-
-------
 
 Function will delete the all variables to database which are the fields matches in your model class $settings => fields section.
 
@@ -568,7 +556,7 @@ When your application start to work, if would you like to load automatically som
 Autoloading files loading path styles same as loader class.
 
 ```php
-$autoload['helper']  = array('ob/view' => '', 'ob/html' => '', '../mymodule/myhelper' => '', 'app/myhelper' => '');
+$autoload['helper']  = array('vi', 'html');
 ```
 
 ### Autoloading Libraries
@@ -578,16 +566,10 @@ $autoload['helper']  = array('ob/view' => '', 'ob/html' => '', '../mymodule/myhe
 Autoloading files loading path styles same as loader class.
 
 ```php
-$autoload['lib'] = array('ob/calendar' => '', 'app/my_lib' => '', '../module/mylib' => '');
+$autoload['library'] = array('calendar', 'classes/myLib', );
 ```
 
-You can close to class instantiate using FALSE param or you can provide construct params using an array()
-
-```php
-$autoload['lib'] = array('app/auth' => array(FALSE), 'app/my_library' => array( array($construct_params) ) );
-```
-
-### Autoloading Lang Files
+### Autoloading Locale Files
 
 ------
 
@@ -620,16 +602,16 @@ Obullo has a <b>autorun.php</b> functionality that is located in your <dfn>app/c
 When your application start to work, if would you like to run automatically some autoloaded <b>helper</b> functions for whole framework , you should define function names and arguments to $autorun variable.
 
 ```php
-$autorun['function']['sess_start']   = array('');  This configuration run the Obullo sess_start(); function.
+$autorun['function'] = array('sess\start');  This configuration run the Obullo sess_start(); function.
 ```
 
 You can use arguments
 
 ```php
-$autorun['function']['my_function']   = array('arg1', 'arg2');
+$autorun['function']['my\function']   = array('arg1', 'arg2');
 ```
 
-Above the configuration run this function <samp>my_function('arg1', 'arg2');</samp> before if you load the function helper.
+Above the configuration run this function <samp>my\function('arg1', 'arg2');</samp> before if you load the function helper.
 
 ### Module Autorun.php
 
