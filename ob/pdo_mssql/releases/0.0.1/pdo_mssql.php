@@ -48,7 +48,7 @@ Class Pdo_Mssql extends Pdo_Database_Adapter
         
         $type = '';
         
-         switch ($this->dbdriver)
+         switch ($this->driver)
          {
             case 'freetds':
                 $type = 'freetds';

@@ -231,7 +231,7 @@ Look at for more details http://www.php.net/manual/en/pdo.installation.php
 <strong>Tip:</strong> To edit your app/config/database.php , choose your <u>Obullo Connection Name</u> bottom of the table and change it like below the example.
 
 ```php
-$database['db']['dbdriver'] = "mysql";
+$database['db']['driver'] = "mysql";
 ```
 
 ### Supported Database Types
@@ -331,7 +331,7 @@ $database['db']['hostname'] = "localhost";
 $database['db']['username'] = "root";
 $database['db']['password'] = "";
 $database['db']['database'] = "example_db";
-$database['db']['dbdriver'] = "mysql";
+$database['db']['driver'] = "mysql";
 $database['db']['dbh_port'] = "";
 $database['db']['char_set'] = "utf8";
 $database['db']['dsn']      = "";
@@ -348,7 +348,7 @@ $database['db2']['hostname'] = "localhost";
 $database['db2']['username'] = "root";
 $database['db2']['password'] = "";
 $database['db2']['database'] = "example_db2";
-$database['db2']['dbdriver'] = "mysql";
+$database['db2']['driver'] = "mysql";
 $database['db2']['dbh_port'] = "";
 $database['db2']['char_set'] = "utf8";
 $database['db2']['dsn']      = "";
@@ -363,7 +363,7 @@ $database['db3']['hostname'] = "";
 $database['db3']['username'] = "";
 $database['db3']['password'] = "";
 $database['db3']['database'] = "";
-$database['db3']['dbdriver'] = "";
+$database['db3']['driver'] = "";
 $database['db3']['dbh_port'] = "";
 $database['db3']['char_set'] = "utf8";
 $database['db3']['dsn']      = "mysql:host=localhost;port=3307;dbname=test_db;username=root;password=1234;";
@@ -484,7 +484,7 @@ $database['db2']['hostname'] = "localhost";
 $database['db2']['username'] = "root";
 $database['db2']['password'] = "";
 $database['db2']['database'] = "example_db2";
-$database['db2']['dbdriver'] = "mysql";
+$database['db2']['driver'] = "mysql";
 $database['db2']['dbh_port'] = "";
 $database['db2']['char_set'] = "utf8";
 $database['db2']['dsn']      = "";
@@ -508,7 +508,7 @@ $config = array(
      'username' => 'root',
      'password' => '',
      'database' => 'test_db',
-     'dbdriver' => 'mysql',
+     'driver' => 'mysql',
      'dbh_port' => '',
      'char_set' => 'utf8',
      'options'  => array( PDO::ATTR_PERSISTENT => true )

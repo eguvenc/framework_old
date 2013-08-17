@@ -1557,7 +1557,7 @@ Class Database_Crud {
             }
 
             // Is there a table prefix defined in the config file?  If not, no need to do anything
-            if ($this->dbprefix != '')
+            if ($this->prefix != '')
             {
                 // We now add the table prefix based on some logic.
                 // Do we have 4 segments (hostname.database.table.column)?
@@ -1589,13 +1589,13 @@ Class Database_Crud {
                 // Verify table prefix and replace if necessary
                 if ($this->swap_pre != '' && strncmp($parts[$i], $this->swap_pre, strlen($this->swap_pre)) === 0)
                 {
-                    $parts[$i] = preg_replace("/^".$this->swap_pre."(\S+?)/", $this->dbprefix."\\1", $parts[$i]);
+                    $parts[$i] = preg_replace("/^".$this->swap_pre."(\S+?)/", $this->prefix."\\1", $parts[$i]);
                 }
 
                 // We only add the table prefix if it does not already exist
-                if (substr($parts[$i], 0, strlen($this->dbprefix)) != $this->dbprefix)
+                if (substr($parts[$i], 0, strlen($this->prefix)) != $this->prefix)
                 {
-                    $parts[$i] = $this->dbprefix.$parts[$i];
+                    $parts[$i] = $this->prefix.$parts[$i];
                 }
 
                 // Put the parts back together
@@ -1611,18 +1611,18 @@ Class Database_Crud {
         }
 
         // Is there a table prefix?  If not, no need to insert it
-        if ($this->dbprefix != '')
+        if ($this->prefix != '')
         {
             // Verify table prefix and replace if necessary
             if ($this->swap_pre != '' && strncmp($item, $this->swap_pre, strlen($this->swap_pre)) === 0)
             {
-                $item = preg_replace("/^".$this->swap_pre."(\S+?)/", $this->dbprefix."\\1", $item);
+                $item = preg_replace("/^".$this->swap_pre."(\S+?)/", $this->prefix."\\1", $item);
             }
 
             // Do we prefix an item with no segments?
-            if ($prefix_single == true AND substr($item, 0, strlen($this->dbprefix)) != $this->dbprefix)
+            if ($prefix_single == true AND substr($item, 0, strlen($this->prefix)) != $this->prefix)
             {
-                $item = $this->dbprefix.$item;
+                $item = $this->prefix.$item;
             }
         }
 

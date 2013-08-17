@@ -50,21 +50,8 @@ Class Obullo
 
         if ($output->_displayCache($config, $uri) == true) { exit; }  // Check REQUEST uri if there is a Cached file exist 
 
-        $folder = 'controller';
-
-        if(defined('STDIN'))  // Command Line Request
-        {                
-            if($router->fetchDirectory() != 'tasks')    // Check module and application folders.
-            {                    
-                if(is_dir(MODULES .$router->fetchDirectory(). DS .'tasks'))
-                {
-                    $folder = 'tasks';
-                } 
-            }
-        }
-
         $page_uri   = "{$router->fetchDirectory()} / {$router->fetchClass()} / {$router->fetchMethod()}";
-        $controller = MODULES .$router->fetchDirectory(). DS .$folder. DS .$router->fetchClass(). EXT;
+        $controller = MODULES .$router->fetchDirectory(). DS .'controller'. DS .$router->fetchClass(). EXT;
 
         bench\mark('loading_time_base_classes_end');  // Set a mark point for benchmarking  
         bench\mark('execution_time_( '.$page_uri.' )_start');  // Mark a start point so we can benchmark the controller 
@@ -105,11 +92,9 @@ Class Obullo
             ob_end_flush();
         }
         
-        // Close the Db connection.
-        ##############
+        ############## Close the Db connection.
 
-        $driver = db('dbdriver');
-        
+        $driver = db('driver');
         if($driver == 'mongodb' AND isset(getInstance()->db->connection) AND is_object(getInstance()->db->connection))
         {
             getInstance()->db->connection->close();

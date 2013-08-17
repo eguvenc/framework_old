@@ -45,7 +45,7 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
         if ($this->_conn) { return; }
         
         $type = '';
-         switch ($this->dbdriver)
+         switch ($this->driver)
          {
             case 'sqlite':
                 $type = 'sqlite';

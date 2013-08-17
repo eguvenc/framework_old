@@ -44,7 +44,7 @@ Class Sess_Native {
 
     function init($params = array())
     {
-        log\me('debug', "Session Native Driver Initialized"); 
+        \log\me('debug', "Session Native Driver Initialized"); 
         
         foreach (array('encrypt_cookie','expiration', 'expire_on_close', 'match_ip', 
         'match_useragent', 'cookie_name', 'cookie_path', 'cookie_domain', 
@@ -106,7 +106,7 @@ Class Sess_Native {
         // mark all new flashdata as old (data will be deleted before next request)
         $this->_flashdataMark();
 
-        log\me('debug', "Session routines successfully run"); 
+        \log\me('debug', "Session routines successfully run"); 
 
         return true;
     }

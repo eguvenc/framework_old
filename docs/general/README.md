@@ -1228,7 +1228,7 @@ $database['db2']['hostname'] = "localhost";
 $database['db2']['username'] = "root";
 $database['db2']['password'] = "";
 $database['db2']['database'] = "example_db2";
-$database['db2']['dbdriver'] = "mysql";
+$database['db2']['driver'] = "mysql";
 $database['db2']['dbh_port'] = "";
 $database['db2']['char_set'] = "utf8";
 $database['db2']['dsn']      = "";
@@ -1252,7 +1252,7 @@ $config = array(
      'username' => 'root',
      'password' => '',
      'database' => 'test_db',
-     'dbdriver' => 'mysql',
+     'driver' => 'mysql',
      'dbh_port' => '',
      'char_set' => 'utf8',
      'options'  => array( PDO::ATTR_PERSISTENT => true )

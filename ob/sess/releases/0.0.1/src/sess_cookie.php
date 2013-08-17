@@ -18,7 +18,7 @@ Class Sess_Cookie {
     public $cookie_prefix        = '';
     public $cookie_path          = '';
     public $cookie_domain        = '';
-    public $time_to_update  = 300;
+    public $time_to_update       = 300;
     public $encryption_key       = '';
     public $flashdata_key        = 'flash';
     public $time_reference       = 'time';
@@ -44,7 +44,7 @@ Class Sess_Cookie {
 
     function init($params = array())
     {
-        log\me('debug', "Session Cookie Driver Initialized"); 
+        \log\me('debug', "Session Cookie Driver Initialized"); 
         
         foreach (array('encrypt_cookie','expiration', 'expire_on_close', 'match_ip', 
         'match_useragent', 'cookie_name', 'cookie_path', 'cookie_domain', 
@@ -54,7 +54,7 @@ Class Sess_Cookie {
         }
         
         // _unserialize func. use strip_slashes() func.
-        new string\start();
+        new \string\start();
 
         $this->now = $this->_getTime();
 
@@ -90,7 +90,7 @@ Class Sess_Cookie {
         // Delete expired sessions if necessary
         $this->_gC();
 
-        log\me('debug', "Session routines successfully run"); 
+        \log\me('debug', "Session routines successfully run"); 
 
         return true;
     }
@@ -106,12 +106,12 @@ Class Sess_Cookie {
     function _read()
     {
         // Fetch the cookie
-        $session = i\cookie($this->cookie_name);
+        $session = \i\cookie($this->cookie_name);
 
         // No cookie?  Goodbye cruel world!...
         if ($session === false)
         {               
-            log\me('debug', 'A session cookie was not found.');
+            \log\me('debug', 'A session cookie was not found.');
             return false;
         }
         
@@ -130,7 +130,7 @@ Class Sess_Cookie {
             // Does the md5 hash match?  This is to prevent manipulation of session data in userspace
             if ($hash !==  md5($session . $this->encryption_key))
             {
-                log\me('error', 'The session cookie data did not match what was expected. This could be a possible hacking attempt.');
+                \log\me('error', 'The session cookie data did not match what was expected. This could be a possible hacking attempt.');
                 $this->destroy();
                 return false;
             }
@@ -156,14 +156,14 @@ Class Sess_Cookie {
         }
 
         // Does the IP Match?
-        if ($this->match_ip == true AND $session['ip_address'] != i\ip())
+        if ($this->match_ip == true AND $session['ip_address'] != \i\ip())
         {
             $this->destroy();
             return false;
         }
         
         // Does the User Agent Match?
-        if ($this->match_useragent == true AND trim($session['user_agent']) != trim(substr(i\userAgent(), 0, 50)))
+        if ($this->match_useragent == true AND trim($session['user_agent']) != trim(substr(\i\userAgent(), 0, 50)))
         {
             $this->destroy();
             return false;
@@ -211,12 +211,12 @@ Class Sess_Cookie {
         }
         
         // To make the session ID even more secure we'll combine it with the user's IP
-        $sessid .= i\ip();
+        $sessid .= \i\ip();
 
         $this->userdata = array(
                             'session_id'     => md5(uniqid($sessid, true)),
-                            'ip_address'     => i\ip(),
-                            'user_agent'     => substr(i\userAgent(), 0, 50),
+                            'ip_address'     => \i\ip(),
+                            'user_agent'     => substr(\i\userAgent(), 0, 50),
                             'last_activity'  => $this->now
                             );
         
@@ -254,7 +254,7 @@ Class Sess_Cookie {
         }
         
         // To make the session ID even more secure we'll combine it with the user's IP
-        $new_sessid .= i\ip();
+        $new_sessid .= \i\ip();
         
         // Turn it into a hash
         $new_sessid = md5(uniqid($new_sessid, true));
@@ -619,7 +619,8 @@ Class Sess_Cookie {
     */
     function _unserialize($data)
     {
-        $data = @unserialize(string\strip_slashes($data));
+        $string = \string\strip_slashes($data);
+        $data = @unserialize($string);
         
         if (is_array($data))
         {

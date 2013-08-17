@@ -16,13 +16,13 @@ Abstract Class Database_Adapter extends Database_Layer {
     public $username = '';
     public $password = '';
     public $database = '';
-    public $dbdriver = '';
+    public $driver = '';
     public $char_set = '';
     public $dbh_port = '';
     public $dsn      = '';
     public $options  = array();
     
-    public $dbprefix = '';
+    public $prefix = '';
     public $swap_pre = '';
     
     /**
@@ -45,12 +45,12 @@ Abstract Class Database_Adapter extends Database_Layer {
     {
         $db_var = $param['default_db'];
         
-        if(isset($param['dbdriver']))
+        if(isset($param['driver']))
         {    
             // Dsn Connection..
             if( isset($param['dsn']) ) 
             {
-                $this->dbdriver = strtolower($param['dbdriver']);  // required
+                $this->driver = strtolower($param['driver']);  // required
                 $this->username = isset($param['username']) ? $param['username'] : '';    // optional
                 $this->password = isset($param['password']) ? $param['password'] : '';    // optional
                 $this->char_set = isset($param['char_set']) ? $param['char_set'] : '';    // optional
@@ -64,8 +64,8 @@ Abstract Class Database_Adapter extends Database_Layer {
                 $this->username = $param['username'];             // required
                 $this->password = $param['password'];             // required
                 $this->database = $param['database'];             // required
-                $this->dbdriver = strtolower($param['dbdriver']); // required
-                $this->dbprefix = strtolower($param['dbprefix']); // optional
+                $this->driver = strtolower($param['driver']); // required
+                $this->prefix = strtolower($param['prefix']); // optional
                 $this->swap_pre = strtolower($param['swap_pre']); // optional
                 $this->char_set = isset($param['char_set']) ? $param['char_set'] : '';    // optional
                 $this->dbh_port = isset($param['dbh_port']) ? $param['dbh_port'] : '';    // optional
@@ -79,8 +79,8 @@ Abstract Class Database_Adapter extends Database_Layer {
             $this->username = db('username',$db_var); 
             $this->password = db('password',$db_var); 
             $this->database = db('database',$db_var);
-            $this->dbdriver = strtolower(db('dbdriver',$db_var));
-            $this->dbprefix = strtolower(db('dbprefix',$db_var));
+            $this->driver = strtolower(db('driver',$db_var));
+            $this->prefix = strtolower(db('prefix',$db_var));
             $this->swap_pre = strtolower(db('swap_pre',$db_var));
             $this->char_set = db('char_set',$db_var);
             $this->dbh_port = db('dbh_port',$db_var);
@@ -241,7 +241,7 @@ Abstract Class Database_Adapter extends Database_Layer {
         'username', 
         'password', 
         'database', 
-        'dbdriver', 
+        'driver', 
         'char_set', 
         'dbh_port', 
         'dsn', 

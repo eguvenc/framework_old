@@ -32,13 +32,13 @@ echo 'PAGED DATA: '; print_r($data);
 echo '<hr />';
 
 // Results from methods:
-echo 'get_current_page()...: '; var_dump($pager->get_current_page());
-echo 'get_next_page()......: '; var_dump($pager->get_next_page());
-echo 'get_prev_page()......: '; var_dump($pager->get_prev_page());
-echo 'num_items()..........: '; var_dump($pager->num_items());
-echo 'num_pages()..........: '; var_dump($pager->num_pages());
-echo 'is_first_page()......: '; var_dump($pager->is_first_page());
-echo 'is_last_page().......: '; var_dump($pager->is_last_page());
-echo 'is_last_page_end()...: '; var_dump($pager->is_last_page_end());
+echo 'getCurrentPage()...: '; var_dump($pager->getCurrentPage());
+echo 'getNextPage()......: '; var_dump($pager->getNextPage());
+echo 'getPrevPage()......: '; var_dump($pager->getPrevPage());
+echo 'numItems()..........: '; var_dump($pager->numItems());
+echo 'numPages()..........: '; var_dump($pager->numPages());
+echo 'isFirstPage()......: '; var_dump($pager->isFirstPage());
+echo 'isLastPage().......: '; var_dump($pager->isLastPage());
+echo 'isLastPageEnd()...: '; var_dump($pager->isLastPageEnd());
 echo '$pager->range........: '; var_dump($pager->range);
    

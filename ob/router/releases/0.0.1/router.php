@@ -55,7 +55,6 @@ Class Router {
         $uri->_explodeSegments();
         
         $routes = getConfig('routes'); //  Get the application routes.
-
         $module = ($uri->segment(0) == '' AND $uri->segment(0) != false) ? $routes['default_controller'] : $uri->segment(0);
 
         if(strpos(trim($module, '/'), '/') > 0) // Check possible module route slash
@@ -303,35 +302,33 @@ Class Router {
     */
     public function _validateRequest($segments)
     {   
-        if( ! isset($segments[0]) ) return $segments;
+        if( ! isset($segments[0]) )
+        { 
+            return $segments;
+        }
         
-        $folder = 'controller';
+        ### tasks ###
         
         if(defined('STDIN') AND $this->hmvc == false)  // Command Line Request
-        {
-            if(is_dir(MODULES .$segments[0]. DS .'task')) 
-            {                   
-                $folder = 'task'; 
-            }
-            else
-            {
-                array_unshift($segments, 'task');
-            }
+        { 
+            array_unshift($segments, 'tasks');
         }
-                                        
-        if (is_dir(MODULES .$segments[0]) OR defined('STDIN'))  // Check module
-        {
+        
+        ### tasks ###
+        
+        if (is_dir(MODULES .$segments[0]))  // Check module
+        {        
             $this->setDirectory($segments[0]);
 
             if( ! empty($segments[1]))
-            {                    
-                if (file_exists(MODULES .$this->fetchDirectory(). DS .$folder. DS .$segments[1]. EXT))
-                {
+            {              
+                if (file_exists(MODULES .$this->fetchDirectory(). DS .'controller'. DS .$segments[1]. EXT))
+                {  
                     return $segments; 
                 }
             }
             
-            if (file_exists(MODULES .$this->fetchDirectory(). DS .$folder. DS .$this->fetchDirectory(). EXT))  // Merge Segments
+            if (file_exists(MODULES .$this->fetchDirectory(). DS .'controller'. DS .$this->fetchDirectory(). EXT))  // Merge Segments
             {
                 array_unshift($segments, $this->fetchDirectory());
 
@@ -347,7 +344,6 @@ Class Router {
         if($this->hmvc)
         {
             $this->hmvc_response = 'Hmvc request not found.';
-
             log\me('debug', 'Hmvc request not found.');
             
             return false;
