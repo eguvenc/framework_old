@@ -1163,9 +1163,9 @@ All command line request goes to Obullo <b>task.php</b> which is located in your
 Using [Task Helper](/docs/helpers/#task-helper) you can run your tasks as a command in the background. Function run like CLI but don't use the task.php.
 
 ```php
-new Task\Start();
+new Task\start();
 
-task_run('hello help', $debug = TRUE);
+Task\run('hello help', $debug = TRUE);
 ```
 
 Running MODULE Tasks
@@ -1173,9 +1173,9 @@ Running MODULE Tasks
 ------
 
 ```php
-new Task\Start();
+new Task\start();
 
-task_run('start help', $debug = TRUE);
+Task\run('start help', $debug = TRUE);
 ```
 
 ### Running YOUR MODULE Tasks
@@ -1183,20 +1183,20 @@ task_run('start help', $debug = TRUE);
 ------
 
 ```php
-new Task\Start();
+new Task\start();
 
-task_run('welcome start/index/arg1/arg2', $debug = TRUE);
+Task\run('welcome start/index/arg1/arg2', $debug = TRUE);
 ```
 
 <b>An Important thing</b> we use the second argument <b>$debug = true</b> just for test don't use this argument except the testing or use it as false.
 
 ```php
-task_run('welcome hello/index/arg1/arg2', FALSE);
+Task\run('welcome hello/index/arg1/arg2', FALSE);
 ```
 
 **Note:** When you use the task function, debug mode should be <samp>FALSE</samp>, or don't use a second argument except the test otherwise shell command will print output the screen.
 
-## Alternate PHP Syntax for View Files<a name="alternate-php-syntax"></a
+## Alternate PHP Syntax for View Files <a name="alternate-php-syntax"></a>
 
 ### Alternate PHP Syntax for View Files
 
@@ -1409,17 +1409,17 @@ There are three message types:
 
 **Note:** In order for the log file to actually be written, the "logs" folder must be writable which is located at <dfn>app/core/logs</dfn>. In addition, you must set the "threshold" for logging. You might, for example, only want error messages to be logged, and not the other two types. If you set it to zero logging will be disabled. (Look at <dfn>app/config/config.php</dfn>)
 
-#### log\me('level', '[ module ]: message')
+#### Log\me('level', '[ module ]: message')
 
 ------
 
 If you want to keep releated module log files in your current module or extension, create a <dfn>module/core/logs</dfn> folder and give the write access it, then you need to use <b>'[ module ] : '</b> string before the start of the log message. For example if you have a <b>welcome</b> module you need to use log function like this.
 
 ```php
-log\me('debug', '[ welcome ]: Example message !');
+Log\me('debug', '[ welcome ]: Example message !');
 ```
 
-Exceptions
+#### Exceptions
 
 ------
 
