@@ -122,7 +122,7 @@ if($model->errors('transaction') != '')
 
 You can set custom errors.
 
-#### $model->set_field($field = '', $type = 'rules', $val = ' new value ');
+#### $model->setField($field = '', $type = 'rules', $val = ' new value ');
 
 ------
 
@@ -264,11 +264,9 @@ Functions will return to <b>TRUE</b> if success, otherwise they will return to <
 
 #### $model->validation();
 
-------
-
 Function will return FALSE if $model validation success.
 
-### $model->validate($fields = array());
+#### $model->validate($fields = array());
 
 If you don't want to save fields to database, just want to validation you can use the validation requests function, if you provide any array data fields, function validate just them, otherwise function validate the all fields.
 
@@ -311,10 +309,9 @@ Fetch items from your model <var>$settings</var> variable.
 echo $model->item('primary_key');  // usr_id
 
 print_r($model->item("fields[usr_id]"));  // Array ( [label] => ID [type] => int [rules] => trim|integer )
+```
 
 #### parent::validate($fields);
-
-------
 
 Using a parent validate function you can validate the items when you work inside the model.
 
@@ -356,8 +353,6 @@ Class User extends Vmodel
 
 #### $this->beforeSave();
 
-------
-
 Creating a before save function in your model, you can control the saving extra jobs <b>before</b> the saving data to current table. For example you can keep the user logs into database using it.
 
 ```php
@@ -369,7 +364,7 @@ function beforeSave()
 }
 ```
 
-### $this->afterSave();
+#### $this->afterSave();
 
 Creating a after save function in your model, you can control the saving extra jobs <b>after</b> the saving data to current table. For example you can keep the saved data as log into database using it.
 
@@ -389,8 +384,6 @@ function afterSave()
 ```
 
 #### $this->buildQueryErrors();
-
-------
 
 Build Httpd GET friendly errors using query strings.
 
@@ -444,8 +437,6 @@ The following is a list of all the prepping functions that are available to use:
 
 #### $model->debug();
 
-------
-
 Returns latest sql query if your environment not set to LIVE.
 
 ```php
@@ -458,7 +449,7 @@ echo $model->debug();
 
 ------
 
-If you use ajax requests you need to [Form Send Helper](/docs/helpers/#form-send-helper) to encode Validaton Model Response in Json format. If you use Obullo Jquery Form Plugin the following is a list of all the Form plugin functions that are available to use
+If you use ajax requests you need to [Form Send Helper](/docs/packages/#form-send-helper) to encode Validaton Model Response in Json format. If you use Obullo Jquery Form Plugin the following is a list of all the Form plugin functions that are available to use
 
 you can control the form plugin functions using the class <b>attribute</b>
 
@@ -558,4 +549,4 @@ else
 
 ------
 
-Vmodel Library automatically support the transactions if your table engine setted correctly as INNODB. If you want to learn more details about transactions look at [database transactions](/docs/database/database-transactions) section.
+Vmodel Library automatically support the transactions if your table engine setted correctly as INNODB. If you want to learn more details about transactions look at [database transactions](/docs/database/#database-transactions) section.
