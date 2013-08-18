@@ -65,7 +65,7 @@ Class Acl {
         
         if(strpos($group_name, '@') !== 0)
         {
-            throw new Exception('The group name must be have @ prefix e.g. @admin.');
+            throw new Exception('The group name must have @ prefix e.g. @admin.');
         }
         
         $this->groups[$group_name] = array();
@@ -84,7 +84,7 @@ Class Acl {
     {
         if(strpos($group_name, '@') !== 0)
         {
-            throw new Exception('The group name must be have @ prefix e.g. @admin.');
+            throw new Exception('The group name must have @ prefix e.g. @admin.');
         }
         
         $this->groups[$group_name][$member] = $member;
@@ -104,7 +104,7 @@ Class Acl {
     {
         if(strpos($group_name, '@') !== 0)
         {
-            throw new Exception('The group name must be have @ prefix e.g. @admin.');
+            throw new Exception('The group name must have @ prefix e.g. @admin.');
         }
         
         unset($this->groups[$group_name][$member]);
@@ -142,7 +142,7 @@ Class Acl {
             }
             else
             {
-                throw new Exception('Undefined group name <b>'.$name.'</b>, please add a group using <b>$acl->addGroup()</b> method.');
+                throw new Exception('Undefined group name '.$name.', please add a group using $acl->addGroup() method.');
             }
             
             return;
@@ -180,7 +180,7 @@ Class Acl {
             {
                 if( ! isset($this->access_list[$name][$operation])) // check operation is defined ?
                 {
-                    throw new Exception('Undefined operation <b>'.$operation.'</b> for <b>'.$name.'</b>, please add a operation using <b>$acl->allow('.$name.', \'operation\')</b> method.');
+                    throw new Exception('Undefined operation '.$operation.' for '.$name.', please add a operation using $acl->allow('.$name.', \'operation\') method.');
                 }
                 
                 if($this->access_list[$name][$operation])
@@ -190,7 +190,7 @@ Class Acl {
             }
             else
             {
-                throw new Exception('Undefined group name <b>'.$name.'</b>, please add a group using <b>$acl->addGroup()</b> method.');
+                throw new Exception('Undefined group name '.$name.', please add a group using $acl->addGroup() method.');
             }
             
             return false;
@@ -198,7 +198,7 @@ Class Acl {
         
         if( ! isset($this->members[$name]))   // check really is it member ?
         {
-            throw new Exception('Undefined member name <b>'.$name.'</b>, please add a member using <b>$acl->addMember(\'membername\', \'groupname\')</b> method.');
+            throw new Exception('Undefined member name '.$name.', please add a member using $acl->addMember(\'membername\', \'groupname\') method.');
         }
 
         $group = $this->members[$name];   

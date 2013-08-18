@@ -7,6 +7,8 @@ Class Welcome extends Controller {
         parent::__construct();
 
         // new Email();
+        new form_Json\start();
+        // function hasUpperCaseLetter($string)
         
         // new Acl();
         // new Db();

@@ -35,9 +35,9 @@ namespace url {
     // ------------------------------------------------------------------------
 
     /**
-    * Public URL
+    * Asset folder URL
     *
-    * Returns the "public_url" item from your config file
+    * Returns the "assets" using configuration item
     *
     * @access    public
     * @param     string url
