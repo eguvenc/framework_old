@@ -30,7 +30,7 @@ The third parameter is an optional suffix added to the string. By default it add
 
 #### characterLimiter()
 
-Truncates a string to the number of characters specified. It maintains the integrity of words so the character count may be slightly more or less then what you specify. Example:
+Truncates a string to the number of **characters** specified. It maintains the integrity of words so the character count may be slightly more or less then what you specify. Example:
 
 ```php
 $string = "Here is a nice text string consisting of eleven words.";
@@ -90,7 +90,7 @@ Here is a <span style="color:#990000">nice text</span> string about nothing in p
 
 #### wordWrap()
 
-Wraps text at the specified character count while maintaining complete words. Example:
+Wraps text at the specified **character** count while maintaining complete words. Example:
 
 ```php
 $string = "Here is a simple string of text that will help us demonstrate this Function.";
