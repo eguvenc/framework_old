@@ -2,7 +2,9 @@
 
 The Link Helper file contains functions that assist in working with URLs.
 
-Loading this Helper
+### Loading this Helper
+
+-------
 
 This helper is loaded using the following code:
 
