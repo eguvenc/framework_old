@@ -1,10 +1,10 @@
-## Validation in Model (Vmodel Class)<a name="validation-in-model"></a>
+## ODM (Object Database Model)<a name="object-database-model"></a>
 
-### What is the Validation in Model
+### What is the ODM
 
-Obullo has a Vmodel model class who want to do validation in model instead of controller. Validation model class use [Validator Class](/ob/validator/releases/0.0.1) to form validations. Using Validation Model you can create Native or <b>Ajax</b> forms easily.
+Obullo has a Odm class who want to do validation in model instead of controller. Odm class use [Validator Class](/ob/validator/releases/0.0.1) to form validations. Using Validation Model you can create Native or <b>Ajax</b> forms easily.
 
-If you want to use Vmodel Class simply extend your model to it.
+If you want to use Odm Class simply extend your model to it.
 
 ```php
 <?php Class User extends Odm
