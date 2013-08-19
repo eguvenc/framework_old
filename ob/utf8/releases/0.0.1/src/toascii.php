@@ -1,7 +1,7 @@
 <?php
 namespace Utf8\Src;
 
-Class Transliterate2ascii {
+Class ToAscii {
 
     // ------------------------------------------------------------------------
 
