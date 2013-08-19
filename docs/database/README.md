@@ -559,7 +559,7 @@ $db2->query(" ... ");
 
 #### Using Your DB Class
 
-You can close the database instantiate using first parameter to false. And if you extend to Database class you can instantiate it to manually. ( Look at [extending to core classes](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#extending-to-core-classes) for more details. )
+You can close the database instantiate using first parameter to false. And if you extend to Database class you can instantiate it to manually. ( Look at [extending to core classes]/docs/advanced/#extending-to-core-classes) for more details. )
 
 ```php
 new Db(false);
@@ -1673,7 +1673,7 @@ $this->db->notLike('title', 'match');
 
 #### $this->db->orNotLike();
 
-This function is identical to <b>not_like()</b>, except that multiple instances are joined by OR:
+This function is identical to <b>notLike()</b>, except that multiple instances are joined by OR:
 
 ```php
 $this->db->notLike('title', 'match');
@@ -2004,8 +2004,8 @@ $query = $this->db->prep()  // tell to db class use pdo prepare
 ->where('title', ':title')
 ->where('title', ':title2')
 ->get('articles')           // get Function will be passive when u use prep()
-->bindValue(':title', 'my title', param_str) 
-->bindValue(':title2', 'my title', param_str)
+->bindValue(':title', 'my title', PARAM_STR) 
+->bindValue(':title2', 'my title', PARAM_STR)
 ->exec();
 
 $a = $query->fetchAll(assoc);
@@ -2078,11 +2078,11 @@ Obullo offers PDO <b>bindValue</b> and <b>bindParam</b> functionalities, using t
 
 <table><thead><tr>
 <th>Obullo Friendly Constant</th><th>PDO CONSTANT</th><th>Description</th></tr></thead><tbody>
-<tr><td>param_bool</td><td>PDO::PARAM_BOOL</td><td>Boolean</td></tr>
-<tr><td>param_null</td><td>PDO::PARAM_NULL</td><td>NULL</td></tr>
-<tr><td>param_int</td><td>PDO::PARAM_INT</td><td>Integer</td></tr>
-<tr><td>param_str</td><td>PDO::PARAM_STR</td><td>String</td></tr>
-<tr><td>param_lob</td><td>PDO::PARAM_LOB</td><td>Large Object Data (LOB)</td></tr></tbody></table>
+<tr><td>PARAM_BOOL</td><td>PDO::PARAM_BOOL</td><td>Boolean</td></tr>
+<tr><td>PARAM_NULL</td><td>PDO::PARAM_NULL</td><td>NULL</td></tr>
+<tr><td>PARAM_INT</td><td>PDO::PARAM_INT</td><td>Integer</td></tr>
+<tr><td>PARAM_STR</td><td>PDO::PARAM_STR</td><td>String</td></tr>
+<tr><td>PARAM_LOB</td><td>PDO::PARAM_LOB</td><td>Large Object Data (LOB)</td></tr></tbody></table>
 
 ### Bind Value Example
 
@@ -2103,7 +2103,7 @@ $a = $this->db->rowArray();
 print_r($a);
 ```
 
-The <b>double dots</b> in the query are automatically replaced with the values of <b>bind_value</b> functions.
+The <b>double dots</b> in the query are automatically replaced with the values of <b>bindValue</b> functions.
 
 ### Bind Param Example
 
@@ -2124,7 +2124,7 @@ $a = $this->db->rowArray();
 print_r($a);
 ```
 
-The <b>double dots</b> in the query are automatically replaced with the values of <b>bind_param</b> functions.
+The <b>double dots</b> in the query are automatically replaced with the values of <b>bindParam</b> functions.
 
 <b>The secondary benefit of using binds is that the values are automatically escaped, producing safer queries. You don't have to remember to manually escape data; the engine does it automatically for you.</b>
 
@@ -2134,8 +2134,8 @@ The <b>double dots</b> in the query are automatically replaced with the values o
 $query = $this->db->prep()
  ->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
 
-$query->bindValue(':id', 1, param_int);  
-$query->bindValue(':code', 'i-see-dead-people', param_str); 
+$query->bindValue(':id', 1, PARAM_INT);  
+$query->bindValue(':code', 'i-see-dead-people', PARAM_STR); 
 
 $query->exec();
 $a = $query->rowArray(); 
@@ -2194,8 +2194,8 @@ $this->db
 ->where('active', ':active')
 ->get('articles');   
 
-$this->db->bindParam(':title', 'some title', param_str, 20); // String (int Length)
-$this->db->bindParam(':active', 1, param_bool);          // Int (int Length)
+$this->db->bindParam(':title', 'some title', PARAM_STR, 20); // String (int Length)
+$this->db->bindParam(':active', 1, PARAM_BOOL);          // Int (int Length)
 
 $query = $this->db->exec();
 $a = $query->resultArray();
@@ -2276,13 +2276,13 @@ try {
     
     // INSERT statements
     
-    $this->db->exec_query("INSERT INTO persons (person_type, person_name) 
+    $this->db->execQuery("INSERT INTO persons (person_type, person_name) 
     VALUES ('lazy', 'ersin')");
     
-    $this->db->exec_query("INSERT INTO persons (person_type, person_name) 
+    $this->db->execQuery("INSERT INTO persons (person_type, person_name) 
     VALUES ('clever', 'john')");
     
-    $this->db->exec_query("INSERT INTO persons (person_type, person_name) 
+    $this->db->execQuery("INSERT INTO persons (person_type, person_name) 
     VALUES ('funny', 'bob')");
 
 
