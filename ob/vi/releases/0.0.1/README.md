@@ -2,7 +2,7 @@
 
 ------
 
-Obullo has a Vi helper that is always active and it declared in your [Autoload](/docs/advanced/#auto-loading-and-auto-running) file.
+Obullo has a Vi helper that is always active and it declared in your [Autoload](/docs/advanced/#auto-loading) file.
 
 ### Function Reference
 
