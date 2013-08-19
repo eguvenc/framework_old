@@ -1549,7 +1549,7 @@ $this->db->orWhere('id >', $id);
 // Produces: WHERE name != 'Joe' OR id > 50
 ```
 
-**Note:** or_where() was formerly known as orwhere(), which has been deprecated.
+**Note:** orWhere() was formerly known as orwhere(), which has been deprecated.
 
 #### $this->db->whereIn();
 
@@ -1965,7 +1965,7 @@ Generates a delete SQL string and runs the query.
 ```php
 $this->db->delete('mytable', array('id' => $id));
 ```
-The first parameter is the table name, the second is the where clause. You can also use the <dfn>where()</dfn> or <dfn>or_where()</dfn> functions instead of passing the data to the second parameter of the function:
+The first parameter is the table name, the second is the where clause. You can also use the <dfn>where()</dfn> or <dfn>orWhere()</dfn> functions instead of passing the data to the second parameter of the function:
 
 ```php
 $this->db->where('id', $id);
