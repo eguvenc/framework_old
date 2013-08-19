@@ -559,7 +559,7 @@ $db2->query(" ... ");
 
 #### Using Your DB Class
 
-You can close the database instantiate using first parameter to false. And if you extend to Database class you can instantiate it to manually. ( Look at [extending to core classes](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#extending-to-core-classes) for more details. )
+You can close the database instantiate using first parameter to false. And if you extend to Database class you can instantiate it to manually. ( Look at [extending to core classes]/docs/advanced/#extending-to-core-classes) for more details. )
 
 ```php
 new Db(false);
@@ -1361,7 +1361,7 @@ $query = $this->db->get('mytable', 10, 20);
 
 // Produces: SELECT * FROM mytable LIMIT 20, 10 (in MySQL. Other databases have slightly different syntax)
 ```
-You'll notice that the above function is assigned to a variable named <samp>$query</samp>, which can be used to show the results:
+You will notice that the above function is assigned to a variable named <samp>$query</samp>, which can be used to show the results:
 
 ```php
 $query = $this->db->get('mytable');
@@ -1459,211 +1459,352 @@ $query = $this->db->get();
 Multiple function calls can be made if you need several joins in one query.
 
 If you need something other than a natural JOIN you can specify it via the third parameter of the function. Options are: left, right, outer, inner, left outer, and right outer.
+
+```php
 $this->db->join('comments', 'comments.id = blogs.id', 'left');
 
 // Produces: LEFT JOIN comments ON comments.id = blogs.id
-$this->db->where();
+```
 
-This function enables you to set WHERE clauses using one of four methods:
+#### $this->db->where();
 
-Note: All values passed to this function are escaped automatically, producing safer queries except the LIKE statement, for like statements you should use $this->escapeLike() function for more details look at this page running and escaping queries.
+This function enables you to set <b>WHERE</b> clauses using one of four methods:
 
-    Simple key/value method: $this->db->where('name', $name);
+**Note:** All values passed to this function are escaped automatically, producing safer queries except the LIKE statement, for like statements you should use $this->escapeLike() function for more details look at this page [running and escaping queries](/docs/database/running-and-escaping-queries).
 
-    // Produces: WHERE name = 'Joe'
+    <ol><li><h4>Simple key/value method:</h4></li> 
 
-    Notice that the equal sign is added for you.
+```php
+$this->db->where('name', $name);
 
-    If you use multiple function calls they will be chained together with AND between them:
+// Produces: WHERE name = 'Joe'
+```
+
+Notice that the equal sign is added for you.
+
+If you use multiple function calls they will be chained together with <var>AND</var> between them:
+
+```php
     $this->db->where('name', $name);
     $this->db->where('title', $title);
     $this->db->where('status', $status);
 
     // WHERE name 'Joe' AND title = 'boss' AND status = 'active'
-    Custom key/value method:
+```
+    
+<li><h4>Custom key/value method:</h4></li>
 
     You can include an operator in the first parameter in order to control the comparison:
+
+```php
     $this->db->where('name !=', $name);
     $this->db->where('id <', $id);
 
     // Produces: WHERE name != 'Joe' AND id < 45 
-    Associative array method: $array = array('name' => $name, 'title' => $title, 'status' => $status);
+```    
 
-    $this->db->where($array);
+<li><h4>Associative array method:</h4></li> 
+    
+```php    
+$array = array('name' => $name, 'title' => $title, 'status' => $status);
 
-    // Produces: WHERE name = 'Joe' AND title = 'boss' AND status = 'active'
+$this->db->where($array);
 
-    You can include your own operators using this method as well:
-    $array = array('name !=' => $name, 'id <' => $id, 'date >' => $date);
+// Produces: WHERE name = 'Joe' AND title = 'boss' AND status = 'active'
+```
 
-    $this->db->where($array);
-    Custom string:
+You can include your own operators using this method as well:
 
-    You can write your own clauses manually:
-    $where = "name='Joe' AND status='boss' OR status='active'";
+```php
+$array = array('name !=' => $name, 'id <' => $id, 'date >' => $date);
 
-    $this->db->where($where);
+$this->db->where($array);
+```
+
+<li><h4>Custom string:</h4></li>
+
+You can write your own clauses manually:
+
+```php
+$where = "name='Joe' AND status='boss' OR status='active'";
+
+$this->db->where($where);
+```
 
 $this->db->where() accepts an optional third parameter. If you set it to FALSE, Obullo will not try to protect your field or table names with backticks.
+
+```php
 $this->db->where('MATCH (field) AGAINST ("value")', NULL, FALSE);
-$this->db->orWhere();
+
+```</ol>
+
+#### $this->db->orWhere();
 
 This function is identical to the one above, except that multiple instances are joined by OR:
+
+```php
 $this->db->where('name !=', $name);
 $this->db->orWhere('id >', $id);
 
 // Produces: WHERE name != 'Joe' OR id > 50
+```
 
-Note: orWhere() was formerly known as orwhere(), which has been deprecated.
-$this->db->whereIn();
+**Note:** orWhere() was formerly known as orwhere(), which has been deprecated.
+
+#### $this->db->whereIn();
+
+**Note:** orWhere() was formerly known as orwhere(), which has been deprecated.
+
+#### $this->db->whereIn();
 
 Generates a WHERE field IN ('item', 'item') SQL query joined with AND if appropriate
+
+```php
 $names = array('Hassan', 'Bob', 'Yokamoto');
 $this->db->whereIn('username', $names);
 
 // Produces: WHERE username IN ('Hassan', 'Bob', 'Yokamoto')
-$this->db->orWhereIn();
+```
+
+#### $this->db->orWhereIn();
 
 Generates a WHERE field IN ('item', 'item') SQL query joined with OR if appropriate
+
+```php
 $names = array('Frank', 'Todd', 'James');
 $this->db->whereIn('username', $names);
 
 // Produces: WHERE username IN ('Frank', 'Todd', 'James')
-$this->db->whereNotIn();
+```
+
+#### $this->db->whereNotIn();
 
 Generates a WHERE field NOT IN ('item', 'item') SQL query joined with AND if appropriate
+
+```php
 $names = array('Frank', 'Todd', 'James');
 $this->db->whereNotIn('username', $names);
 
 // Produces: WHERE username NOT IN ('Frank', 'Todd', 'James')
-$this->db->orWhereNotIn();
+
+```
+
+#### $this->db->orWhereNotIn();
 
 Generates a WHERE field NOT IN ('item', 'item') SQL query joined with OR if appropriate
+
+```php
 $names = array('Frank', 'Todd', 'James');
 $this->db->orWhereNotIn('username', $names);
 
 // Produces: OR username NOT IN ('Frank', 'Todd', 'James')
-$this->db->like();
+```
 
-This function enables you to generate LIKE clauses, useful for doing searches.
+#### $this->db->like();
 
-Note: All values passed to this function are escaped automatically but if you use query bind functionality you must be use $this->db->escapeLike() function manually, look at next page.
+This function enables you to generate <b>LIKE</b> clauses, useful for doing searches.
 
-    Simple key/value method: $this->db->like('title', 'match');
+
+**Note:** All values passed to this function are escaped automatically but if you use query bind functionality you must be use *$this->db->escape_like()* function manually, look at next page.
+
+<ol>    
+<li><h4>Simple key/value method:</h4></li>
+
+```
+ $this->db->like('title', 'match');
 
     // Produces: WHERE title LIKE '%match%' 
+```
 
-    If you use multiple function calls they will be chained together with AND between them:
-    $this->db->like('title', 'match');
-    $this->db->like('body', 'match');
+    If you use multiple function calls they will be chained together with <var>AND</var> between them:
+    
+```php
+$this->db->like('title', 'match');
+$this->db->like('body', 'match');
 
-    // WHERE title LIKE '%match%' AND body LIKE '%match% If you want to control where the wildcard (%) is placed, you can use an optional third argument. Your options are 'before', 'after' and 'both' (which is the default). $this->db->like('title', 'match', 'before');
+// WHERE title LIKE '%match%' AND body LIKE '%match% 
+```
+
+If you want to control where the wildcard (%) is placed, you can use an optional third argument. Your options are 'before', 'after' and 'both' (which is the default). 
+
+```php
+$this->db->like('title', 'match', 'before');
     // Produces: WHERE title LIKE '%match'
 
-    $this->db->like('title', 'match', 'after');
+ $this->db->like('title', 'match', 'after');
     // Produces: WHERE title LIKE 'match%'
 
-    $this->db->like('title', 'match', 'both');
+ $this->db->like('title', 'match', 'both');
     // Produces: WHERE title LIKE '%match%'
-    Associative array method: $array = array('title' => $match, 'page1' => $match, 'page2' => $match);
+```   
+ 
+<li><h4>Associative array method:</h4></li> 
 
-    $this->db->like($array);
+```php
+$array = array('title' => $match, 'page1' => $match, 'page2' => $match);
 
-    // WHERE title LIKE '%match%' AND page1 LIKE '%match%' AND page2 LIKE '%match%'
+$this->db->like($array);
 
-$this->db->orLike();
+// WHERE title LIKE '%match%' AND page1 LIKE '%match%' AND page2 LIKE '%match%'
+```</ol>
+
+
+#### $this->db->orLike();
 
 This function is identical to the one above, except that multiple instances are joined by OR:
+
+```php
 $this->db->like('title', 'match');
 $this->db->orLike('body', $match);
 
 // WHERE title LIKE '%match%' OR body LIKE '%match%'
-$this->db->notLike();
 
-This function is identical to like(), except that it generates NOT LIKE statements:
+```
+
+#### $this->db->notLike();
+
+This function is identical to <b>like()</b>, except that it generates NOT LIKE statements:
+
+```php
 $this->db->notLike('title', 'match');
 
 // WHERE title NOT LIKE '%match%
-$this->db->orNotLike();
+```
 
-This function is identical to notLike(), except that multiple instances are joined by OR:
-$this->db->like('title', 'match');
+#### $this->db->orNotLike();
+
+This function is identical to <b>notLike()</b>, except that multiple instances are joined by OR:
+
+```php
+$this->db->notLike('title', 'match');
 $this->db->orNotLike('body', 'match');
 
-// WHERE title LIKE '%match% OR body NOT LIKE '%match%'
-$this->db->groupBy();
+// WHERE title NOT LIKE '%match%
+```
+
+#### $this->db->groupBy();
 
 Permits you to write the GROUP BY portion of your query:
+
+```php
 $this->db->groupBy("title");
 
 // Produces: GROUP BY title
+```
 
 You can also pass an array of multiple values as well:
+
+
+```php
 $this->db->groupBy(array("title", "date"));
 
 // Produces: GROUP BY title, date
-$this->db->distinct();
+```
 
-Adds the DISTINCT keyword to a query
+#### $this->db->distinct();
+
+Adds the <b>DISTINCT</b> keyword to a query
+
+```php
 $this->db->distinct();
 $this->db->get('table');
 
 // Produces: SELECT DISTINCT * FROM table
-$this->db->having();
+```
+
+#### $this->db->having();
 
 Permits you to write the HAVING portion of your query. There are 2 possible syntaxe, 1 argument or 2:
+
+```php
 $this->db->having('user_id = 45');
 // Produces: HAVING user_id = 45
 
 $this->db->having('user_id', 45);
 // Produces: HAVING user_id = 45
+```
 
 You can also pass an array of multiple values as well:
+
+```php
 $this->db->having(array('title =' => 'My Title', 'id <' => $id));
 
 // Produces: HAVING title = 'My Title', id < 45
+```
 
 If you are using a database that Obullo escapes queries for, you can prevent escaping content by passing an optional third argument, and setting it to FALSE.
+
+```php
 $this->db->having('user_id', 45);
 // Produces: HAVING `user_id` = 45 in some databases such as MySQL
 
 $this->db->having('user_id', 45, FALSE);
 // Produces: HAVING user_id = 45
-$this->db->orHaving();
 
-Identical to having(), only separates multiple clauses with OR
-$this->db->orderBy();
+```
+
+#### $this->db->orHaving();
+
+Identical to having(), only separates multiple clauses with <b>OR</b>
+
+#### $this->db->orderBy();
+
+Lets you set an ORDER BY clause. The first parameter contains the name of the column you would like to order by. The second parameter lets you set the direction of the result. Options are <kbd>asc</kbd> or <kbd>desc</kbd>
 
 Lets you set an ORDER BY clause. The first parameter contains the name of the column you would like to order by. The second parameter lets you set the direction of the result. Options are asc or desc
+
+```php
 $this->db->orderBy("title", "desc");
 
 // Produces: ORDER BY title DESC 
+```
 
 You can also pass your own string in the first parameter:
+
+
+```php
 $this->db->orderBy('title desc, name asc');
 
 // Produces: ORDER BY title DESC, name ASC
+```
 
 Or multiple function calls can be made if you need multiple fields.
+
+```php
 $this->db->orderBy("title", "desc");
 $this->db->orderBy("name", "asc");
 
+
 // Produces: ORDER BY title DESC, name ASC
-$this->db->limit();
+```
+
+#### $this->db->limit();
 
 Lets you limit the number of rows you would like returned by the query:
+
+```php
 $this->db->limit(10);
 
 // Produces: LIMIT 10
+```
 
 The second parameter lets you set a result offset.
+
+```php
 $this->db->limit(10, 20);
 
 // Produces: LIMIT 20, 10 // in MySQL. Other databases have slightly different syntax
-Inserting Data
-$this->db->insert();
+```
 
-Generates an insert string based on the data you supply, and runs the query. You can either pass an array or an object to the function. Here is an example using an array:
+### Inserting Data
+
+------
+
+#### $this->db->insert();
+
+Generates an insert string based on the data you supply, and runs the query. You can either pass an <b>array</b> or an <b>object</b> to the function. Here is an example using an array:
+
+```php
 $data = array(
                'title' => 'My title' ,
                'name' => 'My Name' ,
@@ -1673,10 +1814,12 @@ $data = array(
 $this->db->insert('mytable', $data);
 
 // Produces: INSERT INTO mytable (title, name, date) VALUES ('My title', 'My name', 'My date')
-
+```
 The first parameter will contain the table name, the second is an associative array of values.
 
 Here is an example using an object:
+
+```php
 /*
     class Myclass {
         public $title = 'My Title';
@@ -1690,27 +1833,37 @@ $object = new Myclass;
 $this->db->insert('mytable', $object);
 
 // Produces: INSERT INTO mytable (title, content, date) VALUES ('My Title', 'My Content', 'My Date')
+```
 
 The first parameter will contain the table name, the second is an associative array of values.
 
-Note: All values are escaped automatically producing safer queries.
-$this->db->set();
+**Note:** All values are escaped automatically producing safer queries.
 
-This function enables you to set values for inserts or updates.
+#### $this->db->set();
 
-It can be used instead of passing a data array directly to the insert or update functions:
+This function enables you to set values for <dfn>inserts</dfn> or <dfn>updates</dfn>.
+
+<b>It can be used instead of passing a data array directly to the insert or update functions:</b>
+
+```php
 $this->db->set('name', $name);
 $this->db->insert('mytable');
 
 // Produces: INSERT INTO mytable (name) VALUES ('{$name}')
+```
 
 If you use multiple function called they will be assembled properly based on whether you are doing an insert or an update:
+
+```php
 $this->db->set('name', $name);
 $this->db->set('title', $title);
 $this->db->set('status', $status);
 $this->db->insert('mytable');
+```
 
-set() will also accept an optional third parameter ($escape), that will prevent data from being escaped if set to FALSE. To illustrate the difference, here is set() used both with and without the escape parameter.
+<b>set()</b> will also accept an optional third parameter ($escape), that will prevent data from being escaped if set to FALSE. To illustrate the difference, here is set() used both with and without the escape parameter.
+
+```php
 $this->db->set('field', 'field+1', FALSE);
 $this->db->insert('mytable');
 // gives INSERT INTO mytable (field) VALUES (field+1)
@@ -1718,14 +1871,20 @@ $this->db->insert('mytable');
 $this->db->set('field', 'field+1');
 $this->db->insert('mytable');
 // gives INSERT INTO mytable (field) VALUES ('field+1')
+```
 
 You can also pass an associative array to this function:
+
+```php
 $array = array('name' => $name, 'title' => $title, 'status' => $status);
 
 $this->db->set($array);
 $this->db->insert('mytable'); 
+```
 
 Or an object:
+
+```php
 /*
     class Myclass {
         public $title = 'My Title';
@@ -1739,12 +1898,19 @@ $object = new Myclass;
 $this->db->set($object);
 $affected_rows = $this->db->insert('mytable'); 
 echo $affected_rows;  // 1
+```
 
-Note: INSERT , UPDATE and DELETE operations returns to affected rows automatically. You don't need to rowCount() function for these methods.
-Updating Data
-$this->db->update();
+**Note:** INSERT , UPDATE and DELETE operations returns to affected rows automatically. You don't need to *rowCount()* function for these methods.
 
-Generates an update string and runs the query based on the data you supply. You can pass an array or an object to the function. Here is an example using an array:
+### Updating Data <a name="updating-data"></a>
+
+------
+
+#### $this->db->update();
+
+Generates an update string and runs the query based on the data you supply. You can pass an <b>array</b> or an <b>object</b> to the function. Here is an example using an array:
+
+```php
 $data = array(
                'title' => $title,
                'name' => $name,
@@ -1754,8 +1920,11 @@ $data = array(
 $this->db->where('id', $id);
 $affected_rows = $this->db->update('mytable', $data);
 echo $affected_rows;  // 1
+```
 
 Or you can supply an object:
+
+```php
 /*
     class Myclass {
         var $title = 'My Title';
@@ -1768,42 +1937,68 @@ $object = new Myclass;
 
 $this->db->where('id', $id);
 $this->db->update('mytable', $object);
+```
 
-Note: All values are escaped automatically producing safer queries.
+**Note:** All values are escaped automatically producing safer queries.
 
 You'll notice the use of the $this->db->where() function, enabling you to set the WHERE clause. You can optionally pass this information directly into the update function as a string:
+
+```php
 $this->db->update('mytable', $data, "id = 4");
-
+```
 Or as an array:
-$this->db->update('mytable', $data, array('id' => $id));
 
-You may also use the $this->db->set() function described above when performing updates.
-Deleting Data
-$this->db->delete();
+```php
+$this->db->update('mytable', $data, array('id' => $id));
+```
+
+You may also use the <dfn>$this->db->set()</dfn> function described above when performing updates.
+
+### Deleting Data <a name="deleting-data"></a>
+
+------
+
+#### $this->db->delete();
 
 Generates a delete SQL string and runs the query.
-$this->db->delete('mytable', array('id' => $id));
 
-The first parameter is the table name, the second is the where clause. You can also use the where() or orWhere() functions instead of passing the data to the second parameter of the function:
+```php
+$this->db->delete('mytable', array('id' => $id));
+```
+The first parameter is the table name, the second is the where clause. You can also use the <dfn>where()</dfn> or <dfn>orWhere()</dfn> functions instead of passing the data to the second parameter of the function:
+
+```php
 $this->db->where('id', $id);
 $affected_rows = $this->db->delete('mytable');
 echo $affected_rows;  // 1
+```
 
 An array of table names can be passed into delete() if you would like to delete data from more than 1 table.
+
+```php
 $tables = array('table1', 'table2', 'table3');
 $this->db->where('id', '5');
 $this->db->delete($tables);
-Method Chaining
+```
+
+### Method Chaining<a name="method-chaining"></a>
+
+------
 
 Method chaining allows you to simplify your syntax by connecting multiple functions. Consider this example:
+
+```php
 $this->db
 ->select('title')
 ->from('mytable')
 ->where('id', $id)
 ->limit(10, 20)
 ->get();
+```
 
 You can also use query binding ..
+
+```php
 $query = $this->db->prep()  // tell to db class use pdo prepare
 ->select("DATE_FORMAT(creation_date, '%d-%m-%Y') as date, title",FALSE)
 ->where('title', ':title')
@@ -1820,22 +2015,32 @@ print_r($a); // Array ( [0] => Array ( [date] => 00-00-0000 [title] => my title 
 echo $this->db->lastQuery(TRUE);
 
 // Query output:
-Active Record Caching
+```
 
-While not true caching, Active Record enables you to save (or cache) certain parts of your queries for reuse at a later point in your script's execution. Normally, when an Active Record call is completed, all stored information is reset for the next call. With caching, you can prevent this reset, and reuse information easily.
+### Active Record Caching<a name="active-record-chaining"></a>
+
+------
+
+While not <b>true</b> caching, Active Record enables you to save (or <b>cache</b>) certain parts of your queries for reuse at a later point in your script's execution. Normally, when an Active Record call is completed, all stored information is reset for the next call. With caching, you can prevent this reset, and reuse information easily.
 
 Cached calls are cumulative. If you make 2 cached select() calls, and then 2 uncached select() calls, this will result in 4 select() calls. There are three Caching functions available:
-$this->db->startCache()
+
+
+#### $this->db->startCache()
 
 This function must be called to begin caching. All Active Record queries of the correct type (see below for supported queries) are stored for later use.
-$this->db->stopCache()
+
+#### $this->db->stopCache()
 
 This function can be called to stop caching.
-$this->db->flushCache()
+
+#### $this->db->flushCache()
 
 This function deletes all items from the Active Record cache.
 
 Here's a usage example:
+
+```php
 $this->db->startCache();
 $this->db->select('field1');
 $this->db->stopCache();
@@ -1855,5 +2060,279 @@ $this->db->select('field2');
 $this->db->get('tablename');
 
 //Generates: SELECT `field2` FROM (`tablename`)
+```
 
-Note: The following statements can be cached: select, from, join, where, like, groupby, having, orderby, set
+**Note:** The following statements can be cached: <samp>select, from, join, where, like, groupby, having, orderby, set</samp>
+
+## PDO Statement <a name="pdo-statement"></a>
+
+### Query Bindings
+
+------
+
+Obullo offers PDO <b>bindValue</b> and <b>bindParam</b> functionalities, using to bind operations will help you for the some <b>performance</b> and <b>security</b>:
+
+### Bind Types
+
+------
+
+<table><thead><tr>
+<th>Obullo Friendly Constant</th><th>PDO CONSTANT</th><th>Description</th></tr></thead><tbody>
+<tr><td>PARAM_BOOL</td><td>PDO::PARAM_BOOL</td><td>Boolean</td></tr>
+<tr><td>PARAM_NULL</td><td>PDO::PARAM_NULL</td><td>NULL</td></tr>
+<tr><td>PARAM_INT</td><td>PDO::PARAM_INT</td><td>Integer</td></tr>
+<tr><td>PARAM_STR</td><td>PDO::PARAM_STR</td><td>String</td></tr>
+<tr><td>PARAM_LOB</td><td>PDO::PARAM_LOB</td><td>Large Object Data (LOB)</td></tr></tbody></table>
+
+### Bind Value Example
+
+------
+
+#### $this->db->bindValue($paramater, $value, $data_type)
+
+```php
+$this->db->prep();   // tell to db class use pdo prepare 
+$this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
+
+$this->db->bindValue(':id', 1, param_int);  // Integer 
+$this->db->bindValue(':code', 'i see dead people', param_str); // String      
+
+$this->db->exec();  // execute query
+$a = $this->db->rowArray();
+
+print_r($a);
+```
+
+The <b>double dots</b> in the query are automatically replaced with the values of <b>bindValue</b> functions.
+
+### Bind Param Example
+
+------
+
+#### $this->db->bindParam($paramater, $variable, $data_type, $data_length, $driver_options = array())
+
+```php
+$this->db->prep();   // tell to db class use pdo prepare 
+$this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
+
+$this->db->bindParam(':id', 1, param_int, 11);   // Integer 
+$this->db->bindParam(':code', 'i see dead people', param_str, 20); // String (int Length)      
+
+$this->db->exec();  // execute query
+$a = $this->db->rowArray();
+
+print_r($a);
+```
+
+The <b>double dots</b> in the query are automatically replaced with the values of <b>bindParam</b> functions.
+
+<b>The secondary benefit of using binds is that the values are automatically escaped, producing safer queries. You don't have to remember to manually escape data; the engine does it automatically for you.</b>
+
+#### A Short Way ..
+
+```php
+$query = $this->db->prep()
+ ->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
+
+$query->bindValue(':id', 1, PARAM_INT);  
+$query->bindValue(':code', 'i-see-dead-people', PARAM_STR); 
+
+$query->exec();
+$a = $query->rowArray(); 
+print_r($a);
+```
+
+### Automatically Bind Query
+
+------
+
+```php
+$values[':id']   = '1';
+$values[':code'] = 'i see dead people';
+
+$res= $this->db->prep()
+->query("SELECT * FROM articles WHERE article_id=:id OR link=:code")
+->exec($values)
+->rowArray();
+
+print_r($res);
+```
+
+**Important:** Obullo does not support Question Mark binding at this time.
+
+### Query Binding with Active Record Class
+
+------
+
+Obullo allows to use query bind functionality with active record class like this ..
+
+#### Using Auto Bind
+
+```php
+$title = 'some-title';
+
+$query = $this->db->prep()   // tell to db class use pdo prepare
+->select("*")
+->where('title', ':title')
+->get('articles')
+->exec(array(':title' => $title));  // when you use prepare() at the top,
+                                    // get() Function will switched to passive
+                                    // so exec() is your active function .. 
+                                    
+$a = $query->resultArray();
+
+print_r($a)
+```
+
+#### Using BindParam
+
+```php
+$this->db->prep();   // tell to db class use pdo prepare
+$this->db
+->select("*")
+->where('title', ':title')
+->where('active', ':active')
+->get('articles');   
+
+$this->db->bindParam(':title', 'some title', PARAM_STR, 20); // String (int Length)
+$this->db->bindParam(':active', 1, PARAM_BOOL);          // Int (int Length)
+
+$query = $this->db->exec();
+$a = $query->resultArray();
+
+print_r($a);
+```
+As you can see above the example <b>bindParam</b> is a very secure function, for example "some title" is a string and it must be in <b>20 characters</b> length
+
+#### Using Secure Like Conditions
+
+When using query bind functionality you must use <b>$this->db->escapeLike()</b> for secure queries because of pdo query bind does not allow to use escape like function automatically.
+
+<b>both</b>
+
+```php
+$this->db->prep();
+$this->db->select("*");
+$this->db->like('article',":like");
+$this->db->get('articles');
+
+$bad_value = '%';
+
+$this->db->exec(array(':like' => $this->db->escapeLike($bad_value)));
+
+ // Produces: SELECT * FROM (`articles`) WHERE `article` LIKE '%\\%%' 
+```
+
+<b>before</b>
+
+```php
+$this->db->prep();
+$this->db->select("*");
+$this->db->like('article',":like");
+$this->db->get('articles');
+
+$value = 'some';
+
+$this->db->exec(array(':like' => $this->db->escapeLike($value, 'before')));
+
+ // Produces: SELECT * FROM (`articles`) WHERE `article` LIKE '%some' 
+```
+
+<b>after</b>
+
+```php
+$this->db->prep();
+$this->db->select("*");
+$this->db->like('article',":like");
+$this->db->get('articles');
+
+$value = 'some';
+
+$this->db->exec(array(':like' => $this->db->escapeLike($value, 'after')));
+
+ // Produces: SELECT * FROM (`articles`) WHERE `article` LIKE 'some%' 
+```
+
+## Database Transactions <a name="database-transactions"></a>
+
+### Transactions
+
+------
+
+Obullo's database abstraction allows you to use transactions with databases that support transaction-safe table types. In MySQL, you'll need to be running <b>InnoDB</b> or <b>BDB</b> table types rather than the more common MyISAM. Most other database platforms support transactions natively.
+
+If you are not familiar with transactions we recommend you find a good online resource to learn about them for your particular database. The information below assumes you have a basic understanding of transactions.
+
+### Running Transactions
+
+------
+
+To run your queries using transactions you will use the <dfn>$this->db->transaction(), $this->db->commit()</dfn> and <dfn>$this->db->rollback()</dfn> functions as follows:
+
+```php
+try {
+    
+    $this->db->transaction(); // begin the transaction
+    
+    // INSERT statements
+    
+    $this->db->execQuery("INSERT INTO persons (person_type, person_name) 
+    VALUES ('lazy', 'ersin')");
+    
+    $this->db->execQuery("INSERT INTO persons (person_type, person_name) 
+    VALUES ('clever', 'john')");
+    
+    $this->db->execQuery("INSERT INTO persons (person_type, person_name) 
+    VALUES ('funny', 'bob')");
+
+
+    $this->db->commit();    // commit the transaction
+
+    echo 'Data entered successfully<br />'; // echo a message to say the database was created
+
+} catch(Exception $e)
+{    
+    $this->db->rollback();       // roll back the transaction if we fail
+       
+    echo $e->getMessage();  // echo exceptional error message
+}
+```
+
+You can run as many queries as you want between the transaction/commit functions and they will all be committed or rolled back based on success or failure of any given query.
+
+### Running Transactions with Active Record Class
+
+------
+
+Also you use active record class like this
+
+```php
+try {
+    
+    $this->db->transaction(); // begin the transaction
+    
+    // INSERT statements
+        
+    $this->db->insert('persons', 
+    array('person_type' => 'lazy',
+          'person_name' => 'ersin'));
+          
+    $this->db->insert('persons', 
+    array('person_type' => 'clever',
+          'person_name' => 'john'));
+          
+    $this->db->insert('persons', 
+    array('person_type' => 'funny',
+          'person_name' => 'bob'));
+
+    $this->db->commit();    // commit the transaction
+
+    echo 'Data entered successfully<br />'; // echo a message to say the database was created
+
+} catch(Exception $e)
+{    
+    $this->db->rollback();       // roll back the transaction if we fail
+       
+    echo $e->getMessage();  // echo exceptional error message
+}
+```
