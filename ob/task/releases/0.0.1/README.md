@@ -18,9 +18,9 @@ This helper is loaded using the following code:
 
 ```php
 new task\run();
-``,
+```
 
-Running Tasks
+#### Running Tasks
 
 The first segment call the <samp>module</samp> and others calls <samp>Controller/method/arguments</samp>
 
