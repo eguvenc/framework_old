@@ -681,12 +681,12 @@ Obullo offers PDO bindValue and bindParam functionality, using bind operations w
     </thead>
     <tbody>
         <tr>
-            <td>param_bool</td>
+            <td>PARAM_BOOLl</td>
             <td>PDO::PARAM_BOOL</td>
             <td>Boolean</td>
         </tr>
         <tr>
-            <td>param_null</td>
+            <td>PARAM_NULL</td>
             <td>PDO::PARAM_NULL</td>
             <td>NULL</td>
         </tr>
@@ -696,12 +696,12 @@ Obullo offers PDO bindValue and bindParam functionality, using bind operations w
             <td>String</td>
         </tr>
         <tr>
-            <td>param_str</td>
+            <td>PARAM_STR</td>
             <td>PDO::PARAM_STR</td>
             <td>Integer</td>
         </tr>
         <tr>
-            <td>param_lob</td>
+            <td>PARAM_LOB</td>
             <td>PDO::PARAM_LOB</td>
             <td>Large Object Data (LOB)</td>
         </tr>
@@ -717,7 +717,7 @@ $this->db->prep();   // tell to db class use pdo prepare
 $this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
 
 $this->db->bindValue(':id', 1, PARAM_INT);  // Integer 
-$this->db->bindValue(':code', 'i see dead people', param_str); // String      
+$this->db->bindValue(':code', 'i see dead people', PARAM_STR); // String      
 
 $this->db->exec();  // execute query
 $a = $this->db->fetch(assoc);
@@ -1459,22 +1459,14 @@ $query = $this->db->get();
 Multiple function calls can be made if you need several joins in one query.
 
 If you need something other than a natural JOIN you can specify it via the third parameter of the function. Options are: left, right, outer, inner, left outer, and right outer.
-
-```php
 $this->db->join('comments', 'comments.id = blogs.id', 'left');
 
 // Produces: LEFT JOIN comments ON comments.id = blogs.id
-```
+$this->db->where();
 
-#### $this->db->where();
+This function enables you to set WHERE clauses using one of four methods:
 
-This function enables you to set <b>WHERE</b> clauses using one of four methods:
-
-<<<<<<< HEAD
 Note: All values passed to this function are escaped automatically, producing safer queries except the LIKE statement, for like statements you should use $this->escapeLike() function for more details look at this page running and escaping queries.
-=======
-**Note:** All values passed to this function are escaped automatically, producing safer queries except the <b>LIKE</b> statement, for like statements you should use $this->escape_like() function for more details look at this page [running and escaping queries](/docs/database/#running-and-escaping-queries).
->>>>>>> 1524192d1e9d1a4e5bac8d0921b8403d3a6cbee1
 
     Simple key/value method: $this->db->where('name', $name);
 
