@@ -46,7 +46,10 @@ l[33]='f';l[34]='e';l[35]='r';l[36]='h';l[37]=' ';l[38]='a';l[39]='<';
 
 Automatically turns URLs and email addresses contained in a string into links. Example:
 
+```php
 $string = link\autoLink($string);
+```
+
 The second parameter determines whether URLs and emails are converted or just one or the other. Default behavior is both if the parameter is not specified. Email links are encoded as link\safeMailTo() as shown above.
 
 Converts only URLs:
