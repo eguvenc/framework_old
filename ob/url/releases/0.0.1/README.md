@@ -190,5 +190,6 @@ If you set before url suffix (like .html) in config.php using fourth parameter $
 **Note:** For very fine grained control over headers, you should use the [Output Class](/ob/output/releases/0.0.1)'s set_header() function.
 If you set refresh parameter you can set refresh time.
 
+```php
 url\redirect('/payments/response_status', 'refresh[4]');  // output  header("Refresh:4;url=/payments/response_status");
- 
+```
