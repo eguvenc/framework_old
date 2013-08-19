@@ -16,8 +16,6 @@ The following functions are available:
 
 #### formOpen()
 
-------
-
 Creates an opening form tag with a base URL <b>built from your config preferences</b>. It will optionally let you add form attributes and hidden input fields.
 
 The main benefit of using this tag rather than hard coding your own HTML is that it permits your site to be more portable in the event your URLs ever change.
@@ -70,13 +68,9 @@ The above example would create a form similar to this:
 
 #### formOpenMultipart()
 
-------
-
 This function is absolutely identical to the form_open() tag above except that it adds a multipart attribute, which is necessary if you would like to use the form to upload files with.
 
-####formHidden('name', 'value' , $attributes = '')
-
-------
+#### formHidden('name', 'value' , $attributes = '')
 
 Lets you generate hidden input fields. You can either submit a name/value string to create one field:
 
@@ -106,8 +100,6 @@ echo formHidden($data);
 ```
 
 #### formInput('name', 'value',$attributes = '')
-
-------
 
 Lets you generate a standard text input field. You can minimally pass the field name and value in the first and second parameter:
 
@@ -144,25 +136,17 @@ echo formInput('username', 'johndoe', $js);
 
 #### formPassword()
 
-------
-
 This function is identical in all respects to the <dfn>formInput()</dfn> function above except that is sets it as a "password" type.
 
 #### formUpload()
-
-------
 
 This function is identical in all respects to the <dfn>formInput()</dfn> function above except that is sets it as a "file" type, allowing it to be used to upload files.
 
 #### formTextarea()
 
-------
-
 This function is identical in all respects to the <dfn>formInput()</dfn> function above except that it generates a "textarea" type. Note: Instead of the "maxlength" and "size" attributes in the above example, you will instead specify "rows" and "cols".
 
 #### formDropdown()
-
-------
 
 Lets you create a standard drop-down field. The first parameter will contain the name of the field, the second parameter will contain an associative array of options, and the third parameter will contain the value you wish to be selected. You can also pass an array of multiple items through the third parameter, and Obullo will create a multiple select for you. Example:
 
@@ -211,13 +195,9 @@ If the array passed as $options is a multidimensional array, form_dropdown() wil
 
 #### formMultiselect()
 
-------
-
 Lets you create a standard multiselect field. The first parameter will contain the name of the field, the second parameter will contain an associative array of options, and the third parameter will contain the value or values you wish to be selected. The parameter usage is identical to using <kbd>formDropdown()</kbd> above, except of course that the name of the field will need to use POST array syntax, e.g. <kbd>foo[]</kbd>.
 
 #### formFieldset()
-
-------
 
 Lets you generate fieldset/legend fields.
 
@@ -234,8 +214,6 @@ echo formFieldset_close();
 ```
 
 #### formFieldsetClose()
-
-------
 
 Produces a closing <b>fieldset</b> tag. The only advantage to using this function is it permits you to pass data to it which will be added below the tag. For example:
 
@@ -259,13 +237,9 @@ $js = 'onClick="some_function()"';
 
 #### formRadio()
 
-------
-
 This function is identical in all respects to the <dfn>formCheckbox()</dfn> function above except that is sets it as a "radio" type.
 
 #### formSubmit()
-
-------
 
 Lets you generate a standard submit button. Simple example:
 
@@ -278,8 +252,6 @@ echo formSubmit('mysubmit', 'Submit Post!');
 ```
 
 #### formReset()
-
-------
 
 Lets you generate a standard reset button. Use is identical to <dfn>formSubmit()</dfn>.
 
@@ -320,8 +292,6 @@ echo formButton('mybutton', 'Click Me', $js);
 
 #### formClose()
 
-------
-
 Produces a closing tag. The only advantage to using this function is it permits you to pass data to it which will be added below the tag. For example:
 
 ```php
@@ -335,9 +305,7 @@ echo formClose($string);
 </div></div>
 ```
 
-### validation_errors($prefix = '', $suffix = '')
-
-------
+#### validation_errors($prefix = '', $suffix = '')
 
 Return to all validation errors of Validator Class. Using prefix and suffix parameters you can use custom html tags.
 
@@ -346,8 +314,6 @@ echo validation_errors($prefix = '<div class="notification">' , $suffix = '</div
 ```
 
 #### formMsg($model, $form_msg = '')
-
-------
 
 Return a heading message at top of the current form using the <b>Validation Model object</b>.
 
@@ -359,9 +325,7 @@ echo formMsg($model, $form_msg = '')
 
 Using optional second parameter you can provide custom errors or success messages otherwise it returns to validation errors of Validator Class.
 
-#### form_prep()
-
-------
+#### formPrep()
 
 Allows you to safely use HTML and characters such as quotes within form elements without breaking out of the form. Consider this example:
 
@@ -380,8 +344,6 @@ Since the above string contains a set of quotes it will cause the form to break.
 
 #### setValue()
 
-------
-
 Permits you to set the value of an input form or textarea. You must supply the field name via the first parameter of the function. The second (optional) parameter allows you to set a default value for the form. Example:
 
 ```php
@@ -391,8 +353,6 @@ Permits you to set the value of an input form or textarea. You must supply the f
 The above form will show "0" when loaded for the first time.
 
 #### setSelect()
-
-------
 
 If you use a select menu, this function permits you to display the menu item that was selected. The first parameter must contain the name of the select menu, the second parameter must contain the value of each item, and the third (optional) parameter lets you set an item as the default (use boolean TRUE/FALSE).
 
@@ -406,7 +366,7 @@ Example:
 </select>
 ```
 
-setCheckbox()
+#### setCheckbox()
 
 Permits you to display a checkbox in the state it was submitted. The first parameter must contain the name of the checkbox, the second parameter must contain its value, and the third (optional) parameter lets you set an item as the default (use boolean TRUE/FALSE). Example:
 
@@ -416,8 +376,6 @@ Permits you to display a checkbox in the state it was submitted. The first param
 ```
 
 #### setRadio()
-
-------
 
 Permits you to display radio buttons in the state they were submitted. This function is identical to the <b>set_checkbox()</b> function above.
 
