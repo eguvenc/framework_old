@@ -1,0 +1,296 @@
+## Date Helper
+
+------
+
+The Date Helper file contains functions that help you work with dates.
+
+### Loading this Helper
+
+------
+
+This helper is loaded using the following code:
+
+```php
+new date\start();
+```
+
+The following functions are available:
+
+### now()
+
+------
+
+Returns the current time as a Unix timestamp, referenced either to your server's local time or GMT, based on the "time reference" setting in your config file. If you do not intend to set your master time reference to GMT (which you'll typically do if you run a site that lets each user set their own timezone settings) there is no benefit to using this function over PHP's time() function.
+
+### mdate()
+
+------
+
+This function is identical to PHPs [date()]("http://php.net/manual/en/function.date.php") function, except that it lets you use MySQL style date codes, where each code letter is preceded with a percent sign: %Y %m %d etc.
+
+The benefit of doing dates this way is that you don't have to worry about escaping any characters that are not date codes, as you would normally have to do with the date() function. Example:
+
+```php
+$datestring = "Year: %Y Month: %m Day: %d - %h:%i %a";
+$time = time();
+
+echo mdate($datestring, $time);
+```
+
+If a timestamp is not included in the second parameter the current time will be used.
+
+### standard_date()
+
+------
+
+Lets you generate a date string in one of several standardized formats. Example:
+
+```php
+$format = 'DATE_RFC822';
+$time = time();
+
+echo standard_date($format, $time);
+```
+
+The first parameter must contain the format, the second parameter must contain the date as a Unix timestamp.
+
+Supported formats:
+
+<table><thead><tr>
+<th>Constant</th><th>Description</th><th>Example</th></tr></thead><tbody>
+<tr><td>DATE_ATOM</td><td>Atom</td><td>2005-08-15T16:13:03+0000</td></tr>
+<tr><td>DATE_COOKIE</td><td>HTTP Cookies</td><td>Sun, 14 Aug 2005 16:13:03 UTC</td></tr>
+<tr><td>DATE_ISO8601</td><td>ISO-8601</td><td>2005-08-14T16:13:03+0000</td></tr>
+<tr><td>DATE_RFC822</td><td>RFC 822</td><td>Sun, 14 Aug 2005 16:13:03 UTC</td></tr>
+<tr><td>DATE_RFC850</td><td>RFC 850</td><td>Sunday, 14-Aug-05 16:13:03 UTC</td></tr>
+<tr><td>DATE_RFC1036</td><td>RFC 1036</td><td>Sunday, 14-Aug-05 16:13:03 UTC</td></tr>
+<tr><td>DATE_RFC1123</td><td>RFC 1123</td><td>Sun, 14 Aug 2005 16:13:03 UTC</td></tr>
+<tr><td>DATE_RFC2822</td><td>RFC 2822</td><td>Sun, 14 Aug 2005 16:13:03 +0000</td></tr>
+<tr><td>DATE_RSS</td><td>RSS</td><td>Sun, 14 Aug 2005 16:13:03 UTC</td></tr>
+<tr><td>DATE_W3C</td><td>World Wide Web Consortium</td><td>2005-08-14T16:13:03+0000</td></tr></tbody></table>
+
+### localToGmt()
+
+------
+
+Takes a Unix timestamp as input and returns it as GMT. Example:
+
+```php
+$now = time();
+
+$gmt = localToGmt($now);
+```
+
+### gmtToLocal()
+
+------
+
+Takes a Unix timestamp (referenced to GMT) as input, and converts it to a localized timestamp based on the timezone and Daylight Saving time submitted. Example:
+
+```php
+$timestamp = '1140153693';
+$timezone = 'UM8';
+$daylight_saving = TRUE;
+
+echo gmtToLocal($timestamp, $timezone, $daylight_saving);
+```
+
+**Note:** For a list of timezones see the reference at the bottom of this page.
+
+### mysqlToUnix()
+
+------
+
+Takes a MySQL Timestamp as input and returns it as Unix. Example:
+
+```php
+$mysql = '20061124092345';
+
+$unix = mysqlToUnix($mysql);
+```
+
+### unixToHuman()
+
+------
+
+Takes a Unix timestamp as input and returns it in a human readable format with this prototype:
+
+```php
+YYYY-MM-DD HH:MM:SS AM/PM
+```
+
+This can be useful if you need to display a date in a form field for submission.
+
+The time can be formatted with or without seconds, and it can be set to European or US format. If only the timestamp is submitted it will return the time without seconds formatted for the U.S. Examples:
+
+```php
+$now = time();
+
+echo unixToHuman($now); // U.S. time, no seconds 
+
+echo unixToHuman($now, TRUE, 'us'); // U.S. time with seconds
+
+echo unixToHuman($now, TRUE, 'eu'); // Euro time with seconds
+```
+
+### humanToUnix()
+
+------
+
+The opposite of the above function. Takes a "human" time as input and returns it as Unix. This function is useful if you accept "human" formatted dates submitted via a form. Returns FALSE (boolean) if the date string passed to it is not formatted as indicated above. Example:
+
+```php
+$now = time();
+
+$human = unixToHuman($now);
+
+$unix = humanToUnix($human);
+```
+
+### timespan()
+
+------
+
+Formats a unix timestamp so that is appears similar to this:
+
+```php
+1 Year, 10 Months, 2 Weeks, 5 Days, 10 Hours, 16 Minutes
+```
+
+The first parameter must contain a Unix timestamp. The second parameter must contain a timestamp that is greater that the first timestamp. If the second parameter empty, the current time will be used. The most common purpose for this function is to show how much time has elapsed from some point in time in the past to now. Example:
+
+```php
+$post_date = '1079621429';
+$now = time();
+
+echo timespan($post_date, $now);
+```
+
+**Note:** The text generated by this function is found in the following language file: *lang//date.php*
+
+### daysInMonth()
+
+------
+
+Returns the number of days in a given month/year. Takes leap years into account. Example:
+
+```php
+echo daysInMonth(06, 2005);
+```
+
+If the second parameter is empty, the current year will be used.
+
+### timezones()
+
+------
+
+Takes a timezone reference (for a list of valid timezones, see the "Timezone Reference" below) and returns the number of hours offset from UTC.
+
+```php
+echo timezones('UM5');
+```
+
+This function is useful when used with timezone_menu().
+
+### timezone_menu()
+
+------
+
+Generates a pull-down menu of timezones, like this one:
+
+<select name="timezones"> 
+<option value="UM12">(UTC -12:00) Baker/Howland Island</option> 
+<option value="UM11">(UTC -11:00) Samoa Time Zone, Niue</option> 
+<option value="UM10">(UTC -10:00) Hawaii-Aleutian Standard Time, Cook Islands, Tahiti</option> 
+<option value="UM95">(UTC -9:30) Marquesas Islands</option> 
+<option value="UM9">(UTC -9:00) Alaska Standard Time, Gambier Islands</option> 
+<option value="UM8">(UTC -8:00) Pacific Standard Time, Clipperton Island</option> 
+<option value="UM7">(UTC -7:00) Mountain Standard Time</option> 
+<option value="UM6">(UTC -6:00) Central Standard Time</option> 
+<option value="UM5">(UTC -5:00) Eastern Standard Time, Western Caribbean Standard Time</option> 
+<option value="UM45">(UTC -4:30) Venezuelan Standard Time</option> 
+<option value="UM4">(UTC -4:00) Atlantic Standard Time, Eastern Caribbean Standard Time</option> 
+<option value="UM35">(UTC -3:30) Newfoundland Standard Time</option> 
+<option value="UM3">(UTC -3:00) Argentina, Brazil, French Guiana, Uruguay</option> 
+<option value="UM2">(UTC -2:00) South Georgia/South Sandwich Islands</option> 
+<option value="UM1">(UTC -1:00) Azores, Cape Verde Islands</option> 
+<option value="UTC" selected="selected">(UTC) Greenwich Mean Time, Western European Time</option> 
+<option value="UP1">(UTC +1:00) Central European Time, West Africa Time</option> 
+<option value="UP2">(UTC +2:00) Central Africa Time, Eastern European Time, Kaliningrad Time</option> 
+<option value="UP3">(UTC +3:00) Moscow Time, East Africa Time</option> 
+<option value="UP35">(UTC +3:30) Iran Standard Time</option> 
+<option value="UP4">(UTC +4:00) Azerbaijan Standard Time, Samara Time</option> 
+<option value="UP45">(UTC +4:30) Afghanistan</option> 
+<option value="UP5">(UTC +5:00) Pakistan Standard Time, Yekaterinburg Time</option> 
+<option value="UP55">(UTC +5:30) Indian Standard Time, Sri Lanka Time</option> 
+<option value="UP575">(UTC +5:45) Nepal Time</option> 
+<option value="UP6">(UTC +6:00) Bangladesh Standard Time, Bhutan Time, Omsk Time</option> 
+<option value="UP65">(UTC +6:30) Cocos Islands, Myanmar</option> 
+<option value="UP7">(UTC +7:00) Krasnoyarsk Time, Cambodia, Laos, Thailand, Vietnam</option> 
+<option value="UP8">(UTC +8:00) Australian Western Standard Time, Beijing Time, Irkutsk Time</option> 
+<option value="UP875">(UTC +8:45) Australian Central Western Standard Time</option> 
+<option value="UP9">(UTC +9:00) Japan Standard Time, Korea Standard Time, Yakutsk Time</option> 
+<option value="UP95">(UTC +9:30) Australian Central Standard Time</option> 
+<option value="UP10">(UTC +10:00) Australian Eastern Standard Time, Vladivostok Time</option> 
+<option value="UP105">(UTC +10:30) Lord Howe Island</option> 
+<option value="UP11">(UTC +11:00) Magadan Time, Solomon Islands, Vanuatu</option> 
+<option value="UP115">(UTC +11:30) Norfolk Island</option> 
+<option value="UP12">(UTC +12:00) Fiji, Gilbert Islands, Kamchatka Time, New Zealand Standard Time</option> 
+<option value="UP1275">(UTC +12:45) Chatham Islands Standard Time</option> 
+<option value="UP13">(UTC +13:00) Phoenix Islands Time, Tonga</option> 
+<option value="UP14">(UTC +14:00) Line Islands</option> 
+</select>
+
+This menu is useful if you run a membership site in which your users are allowed to set their local timezone value.
+
+The first parameter lets you set the "selected" state of the menu. For example, to set Pacific time as the default you will do this:
+
+```php
+echo timezone_menu('UM8');
+```
+
+Please see the timezone reference below to see the values of this menu.
+
+The second parameter lets you set a CSS class name for the menu.
+
+**Note:** The text contained in the menu is found in the following language file: *lang//date.php*
+
+### Timezone Reference
+
+------
+
+The following table indicates each timezone and its location. More details at http://en.wikipedia.org/wiki/Time_zone#UTC
+
+<table><thead><tr>
+<th>Time Zone</th><th>Location</th></tr><tbody>
+<tr><td>UM12</td><td>(UTC - 12:00) Enitwetok, Kwajalien</td></tr>
+<tr><td>UM11</td><td>(UTC - 11:00) Nome, Midway Island, Samoa</td></tr>
+<tr><td>UM10</td><td>(UTC - 10:00) Hawaii</td></tr>
+<tr><td>UM9</td><td>(UTC - 9:00) Alaska</td></tr>
+<tr><td>UM8</td><td>(UTC - 8:00) Pacific Time</td></tr>
+<tr><td>UM7</td><td>(UTC - 7:00) Mountain Time</td></tr>
+<tr><td>UM6</td><td>(UTC - 6:00) Central Time, Mexico City</td></tr>
+<tr><td>UM5</td><td>(UTC - 5:00) Eastern Time, Bogota, Lima, Quito</td></tr>
+<tr><td>UM4</td><td>(UTC - 4:00) Atlantic Time, Caracas, La Paz</td></tr>
+<tr><td>UM25</td><td>(UTC - 3:30) Newfoundland</td></tr>
+<tr><td>UM3</td><td>(UTC - 3:00) Brazil, Buenos Aires, Georgetown, Falkland Is.</td></tr>
+<tr><td>UM2</td><td>(UTC - 2:00) Mid-Atlantic, Ascention Is., St Helena</td></tr>
+<tr><td>UM1</td><td>(UTC - 1:00) Azores, Cape Verde Islands</td></tr>
+<tr><td>UTC</td><td>(UTC) Casablanca, Dublin, Edinburgh, London, Lisbon, Monrovia</td></tr>
+<tr><td>UP1</td><td>(UTC + 1:00) Berlin, Brussels, Copenhagen, Madrid, Paris, Rome</td></tr>
+<tr><td>UP2</td><td>(UTC + 2:00) Istanbul, Kaliningrad, South Africa, Warsaw</td></tr>
+<tr><td>UP3</td><td>(UTC + 3:00) Baghdad, Riyadh, Moscow, Nairobi</td></tr>
+<tr><td>UP25</td><td>(UTC + 3:30) Tehran</td></tr>
+<tr><td>UP4</td><td>(UTC + 4:00) Adu Dhabi, Baku, Muscat, Tbilisi</td></tr>
+<tr><td>UP35</td><td>(UTC + 4:30) Kabul</td></tr>
+<tr><td>UP5</td><td>(UTC + 5:00) Islamabad, Karachi, Tashkent</td></tr>
+<tr><td>UP45</td><td>(UTC + 5:30) Bombay, Calcutta, Madras, New Delhi</td></tr>
+<tr><td>UP6</td><td>(UTC + 6:00) Almaty, Colomba, Dhaka</td></tr>
+<tr><td>UP7</td><td>(UTC + 7:00) Bangkok, Hanoi, Jakarta</td></tr>
+<tr><td>UP8</td><td>(UTC + 8:00) Beijing, Hong Kong, Perth, Singapore, Taipei</td></tr>
+<tr><td>UP9</td><td>(UTC + 9:00) Osaka, Sapporo, Seoul, Tokyo, Yakutsk</td></tr>
+<tr><td>UP85</td><td>(UTC + 9:30) Adelaide, Darwin</td></tr>
+<tr><td>UP10</td><td>(UTC + 10:00) Melbourne, Papua New Guinea, Sydney, Vladivostok</td></tr>
+<tr><td>UP11</td><td>(UTC + 11:00) Magadan, New Caledonia, Solomon Islands</td></tr>
+<tr><td>UP12</td><td>(UTC + 12:00) Auckland, Wellington, Fiji, Marshall Island</td></tr></tbody></table>
+
