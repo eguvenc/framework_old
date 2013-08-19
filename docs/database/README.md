@@ -35,7 +35,7 @@ foreach ($query->result() as $row)   // CODEIGNITER  DB FUNCTIONS ARE AVAILABLE
 }
 
 echo 'Total Results: ' . $query->numRows();  // Pdo does not supported some database using 
-row_count func via SELECT statement .(Mysql is ok.) 
+rowCount func via SELECT statement .(Mysql is ok.) 
 ```
 
 The above <dfn>result()</dfn> function returns an array of <strong>objects</strong>. Example: $row->title
@@ -91,7 +91,7 @@ if($query->row())
 }
 ```
 
-If your database support using row_count function via the SELECT statement you can do it like this .. (not recommended for portable applications..)
+If your database support using rowCount function via the SELECT statement you can do it like this .. (not recommended for portable applications..)
 
 ```php
 $this->db->where('ip_address', '127.0.0.1')
@@ -885,7 +885,7 @@ $result = $query->both();
 
 Returns the number of rows affected by the execution of the last INSERT, DELETE, or UPDATE statement.
 
-The most popular PDO database drivers like **MySQL** support to **rowCount();** function for SELECT statement but some database drivers does not support row_count() function like **SQLite**.If you develop a portable applications **do not use** row_count(); function via **SELECT** statements.
+The most popular PDO database drivers like **MySQL** support to **rowCount();** function for SELECT statement but some database drivers does not support rowCount() function like **SQLite**.If you develop a portable applications **do not use** rowCount(); function via **SELECT** statements.
 
 ```php
 $query = $this->db->query("INSERT UPDATE DELETE QUERY");
@@ -961,7 +961,7 @@ If **rowCount()** function available in your db driver you can use it ..
 $query = $this->db->where('ip_address', '127.0.0.1')
 ->get('ob_sessions');
 
-if($query->row_count() > 0)
+if($query->rowCount() > 0)
 {
     $b = $query->fetchAll(assoc);
 
@@ -1740,7 +1740,7 @@ $this->db->set($object);
 $affected_rows = $this->db->insert('mytable'); 
 echo $affected_rows;  // 1
 
-Note: INSERT , UPDATE and DELETE operations returns to affected rows automatically. You don't need to row_count() function for these methods.
+Note: INSERT , UPDATE and DELETE operations returns to affected rows automatically. You don't need to rowCount() function for these methods.
 Updating Data
 $this->db->update();
 
