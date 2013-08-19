@@ -36,7 +36,7 @@ namespace link {
 
         if ($title == "")
         {
-                $title = $email;
+            $title = $email;
         }
 
         $attributes = _parseAttributes($attributes);
@@ -61,77 +61,75 @@ namespace link {
     {
         $title = (string) $title;
 
-        if ($title == "")
+        if($title == "")
         {
-                $title = $email;
+            $title = $email;
         }
 
-        for ($i = 0; $i < 16; $i++)
+        for($i = 0; $i < 16; $i++)
         {
-                $x[] = substr('<a href="mailto:', $i, 1);
+            $x[] = substr('<a href="mailto:', $i, 1);
         }
 
-        for ($i = 0; $i < strlen($email); $i++)
+        for($i = 0; $i < strlen($email); $i++)
         {
-                $x[] = "|" . ord(substr($email, $i, 1));
+            $x[] = "|" . ord(substr($email, $i, 1));
         }
 
         $x[] = '"';
 
-        if ($attributes != '')
+        if($attributes != '')
         {
-                if (is_array($attributes))
+            if (is_array($attributes))
+            {
+                foreach ($attributes as $key => $val)
                 {
-                        foreach ($attributes as $key => $val)
-                        {
-                                $x[] =  ' '.$key.'="';
-                                for ($i = 0; $i < strlen($val); $i++)
-                                {
-                                        $x[] = "|" . ord(substr($val, $i, 1));
-                                }
-                                $x[] = '"';
-                        }
+                    $x[] =  ' '.$key.'="';
+                    for ($i = 0; $i < strlen($val); $i++)
+                    {
+                        $x[] = "|" . ord(substr($val, $i, 1));
+                    }
+                    $x[] = '"';
                 }
-                else
+            }
+            else
+            {
+                for ($i = 0; $i < strlen($attributes); $i++)
                 {
-                        for ($i = 0; $i < strlen($attributes); $i++)
-                        {
-                                $x[] = substr($attributes, $i, 1);
-                        }
+                    $x[] = substr($attributes, $i, 1);
                 }
+            }
         }
 
         $x[] = '>';
 
         $temp = array();
-        for ($i = 0; $i < strlen($title); $i++)
+        for($i = 0; $i < strlen($title); $i++)
         {
-                $ordinal = ord($title[$i]);
-
-                if ($ordinal < 128)
+            $ordinal = ord($title[$i]);
+            if($ordinal < 128)
+            {
+                $x[] = "|".$ordinal;
+            }
+            else
+            {
+                if (count($temp) == 0)
                 {
-                        $x[] = "|".$ordinal;
+                    $count = ($ordinal < 224) ? 2 : 3;
                 }
-                else
-                {
-                        if (count($temp) == 0)
-                        {
-                                $count = ($ordinal < 224) ? 2 : 3;
-                        }
 
-                        $temp[] = $ordinal;
-                        if (count($temp) == $count)
-                        {
-                                $number = ($count == 3) ? (($temp['0'] % 16) * 4096) + (($temp['1'] % 64) * 64) + ($temp['2'] % 64) : (($temp['0'] % 32) * 64) + ($temp['1'] % 64);
-                                $x[] = "|".$number;
-                                $count = 1;
-                                $temp = array();
-                        }
+                $temp[] = $ordinal;
+                if (count($temp) == $count)
+                {
+                    $number = ($count == 3) ? (($temp['0'] % 16) * 4096) + (($temp['1'] % 64) * 64) + ($temp['2'] % 64) : (($temp['0'] % 32) * 64) + ($temp['1'] % 64);
+                    $x[] = "|".$number;
+                    $count = 1;
+                    $temp = array();
                 }
+            }
         }
 
         $x[] = '<'; $x[] = '/'; $x[] = 'a'; $x[] = '>';
-
         $x_data = array_reverse($x);
         
         ob_start();

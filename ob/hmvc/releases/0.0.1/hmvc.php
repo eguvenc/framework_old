@@ -71,7 +71,7 @@ Class Hmvc
         // Don't clone getInstance(), we just do backup.
         #######################################
         
-        $this->_this  = getInstance();      // We need create backup $this object of main controller
+        $this->_this = getInstance();      // We need create backup $this object of main controller
                                                 // becuse of it will change when HMVC process is done.
         
         #######################################
@@ -148,11 +148,10 @@ Class Hmvc
         $this->no_loop      = false;
 
         // Clone objects
-         $this->uri          = '';
-         $this->router       = '';
-         $this->config       = '';
+        $this->uri          = '';
+        $this->router       = '';
+        $this->config       = '';
        
-
         $this->_this            = '';
         $this->request_method   = 'GET';
 

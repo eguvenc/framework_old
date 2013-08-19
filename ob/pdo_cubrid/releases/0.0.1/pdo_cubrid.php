@@ -10,7 +10,7 @@
  * @link
  */
 
-Class Pdo_Cubrid extends Pdo_Database_Adapter
+Class Pdo_Cubrid extends Database_Pdo\Src\Database_Adapter
 {
     /**
     * The character used for escaping
@@ -147,7 +147,9 @@ Class Pdo_Cubrid extends Pdo_Database_Adapter
 
             // not need to quote for who use prepare and :like bind.
             if($this->prepare == true AND $this->is_like_bind)
-            return $str;
+            {
+                return $str; 
+            }
         }
 
         // make sure is it bind value, if not ...

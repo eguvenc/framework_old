@@ -15,13 +15,13 @@
 | Prototype
 | -------------------------------------------------------------------
 | 
-| $autorun['function']['function_name'] = array('arg1', 'arg2');
+| $autorun['function']['sess\start'] = array('arg1', 'arg2');
 | 
 | e.g.  $autorun['function'] = array('sess\start');
 |
 */
 
-$autorun['function']   = array();
+$autorun['function'] = array();
 
 
 /* End of file autorun.php */

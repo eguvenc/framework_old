@@ -13,7 +13,7 @@ The following page contains example code showing how the database class is used.
 The following code loads and initializes the database class based on your [configuration](#database-configuration-and-connect) settings:
 
 ```php
-new Db\Db();
+new Db();
 ```
 
 Once loaded the class is ready to be used as described below.
@@ -35,7 +35,7 @@ foreach ($query->result() as $row)   // CODEIGNITER  DB FUNCTIONS ARE AVAILABLE
 }
 
 echo 'Total Results: ' . $query->numRows();  // Pdo does not supported some database using 
-row_count func via SELECT statement .(Mysql is ok.) 
+rowCount func via SELECT statement .(Mysql is ok.) 
 ```
 
 The above <dfn>result()</dfn> function returns an array of <strong>objects</strong>. Example: $row->title
@@ -45,7 +45,7 @@ The above <dfn>result()</dfn> function returns an array of <strong>objects</stro
 ------
 
 ```php
-$database = new Db\Db(false);
+$database = new Db(false);
 $db = $database->connect();
 
 print_r($db->get('users')->resultArray());
@@ -91,7 +91,7 @@ if($query->row())
 }
 ```
 
-If your database support using row_count function via the SELECT statement you can do it like this .. (not recommended for portable applications..)
+If your database support using rowCount function via the SELECT statement you can do it like this .. (not recommended for portable applications..)
 
 ```php
 $this->db->where('ip_address', '127.0.0.1')
@@ -430,7 +430,7 @@ Class Start extends Controller
 {
     function __construct()
     {    
-        new Db\Db();
+        new Db();
         parent::__construct();
     }
     
@@ -447,7 +447,7 @@ A <strong>helper</strong> file.
 ```php
 function blog_dropdown()
 {
-    new Db\Db();   // If loader:database declared before in the controller
+    new Db();   // If new Db() declared before in the controller
                           or model you don't need to write it again. 
     $ob = this();
     
@@ -463,7 +463,7 @@ Class User extends Model
 {
     function __construct()
     {
-        new Db\Db();
+        new Db();
         parent::__construct();
     }
     
@@ -494,12 +494,12 @@ $database['db2']['options']  = array();
 Then you can connect to <samp>db2</samp> database just providing the db variable like this ..
 
 ```php
-new Db\Db('db2');
+new Db('db2');
   
 $this->db2->query(" .... ");
 ```
 
-Also you can manually pass database connectivity settings via the first parameter of your loader::database function like this.. :
+Also you can manually pass database connectivity settings via the first parameter of your <dfn>new Db($config)</dfn> function like this.. :
 
 ```php
 $config = array(
@@ -514,7 +514,7 @@ $config = array(
      'options'  => array( PDO::ATTR_PERSISTENT => true )
  );                                
 
- new Db\Db($config);
+ new Db($config);
 
 $this->db3->query(  ....  );
 ```
@@ -530,7 +530,7 @@ $config = array(
      'dsn'      => 'mysql:host=localhost;port=3307;dbname=test_db;username=root;password=1234;'
  );
 
- new Db\Db($config);
+ new Db($config);
 
 $this->db2->query(  ....  );
 ```
@@ -548,11 +548,11 @@ This will give you password parameter of second database connection setting whic
 If you want to grab the database object turn return object switch to true.
 
 ```php
-$db = new Db\Db('db', true);  // provide your database variable
+$db = new Db('db', true);  // provide your database variable
                               // and turn db return object switch to true.                        
 $db->query(" ... "); 
 
-$db2 = new Db\Db('db2', TRUE);  // second db
+$db2 = new Db('db2', TRUE);  // second db
                                       
 $db2->query(" ... ");
 ```
@@ -562,7 +562,7 @@ $db2->query(" ... ");
 You can close the database instantiate using first parameter to false. And if you extend to Database class you can instantiate it to manually. ( Look at [extending to core classes](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#extending-to-core-classes) for more details. )
 
 ```php
-new Db\Db(false);
+new Db(false);
 
 $db = new MY_Database();
 $db = $db->connect('db');
@@ -885,7 +885,7 @@ $result = $query->both();
 
 Returns the number of rows affected by the execution of the last INSERT, DELETE, or UPDATE statement.
 
-The most popular PDO database drivers like **MySQL** support to **rowCount();** function for SELECT statement but some database drivers does not support row_count() function like **SQLite**.If you develop a portable applications **do not use** row_count(); function via **SELECT** statements.
+The most popular PDO database drivers like **MySQL** support to **rowCount();** function for SELECT statement but some database drivers does not support rowCount() function like **SQLite**.If you develop a portable applications **do not use** rowCount(); function via **SELECT** statements.
 
 ```php
 $query = $this->db->query("INSERT UPDATE DELETE QUERY");
@@ -961,7 +961,7 @@ If **rowCount()** function available in your db driver you can use it ..
 $query = $this->db->where('ip_address', '127.0.0.1')
 ->get('ob_sessions');
 
-if($query->row_count() > 0)
+if($query->rowCount() > 0)
 {
     $b = $query->fetchAll(assoc);
 
@@ -1744,7 +1744,7 @@ $this->db->set($object);
 $affected_rows = $this->db->insert('mytable'); 
 echo $affected_rows;  // 1
 
-Note: INSERT , UPDATE and DELETE operations returns to affected rows automatically. You don't need to row_count() function for these methods.
+Note: INSERT , UPDATE and DELETE operations returns to affected rows automatically. You don't need to rowCount() function for these methods.
 Updating Data
 $this->db->update();
 

@@ -10,7 +10,7 @@
  * @link                              
  */
 
-Class Pdo_Pgsql extends Pdo_Database_Adapter
+Class Pdo_Pgsql extends Database_Pdo\Src\Database_Adapter
 {
     /**
     * The character used for escaping
@@ -49,7 +49,9 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
         $this->_pdo  = $this->pdoConnect($dsn, $this->username, $this->password, $this->options);
         
         if( ! empty($this->char_set) )
-        $this->_conn->exec("SET NAMES '" . $this->char_set . "'");     
+        {
+            $this->_conn->exec("SET NAMES '" . $this->char_set . "'");    
+        }    
     
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
         $this->_conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -140,9 +142,10 @@ Class Pdo_Pgsql extends Pdo_Database_Adapter
                  $str = "%{$str}%";
             }
             
-            // not need to quote for who use prepare and :like bind.
-            if($this->prepare == true AND $this->is_like_bind)   
-            return $str;
+            if($this->prepare == true AND $this->is_like_bind) // not need to quote for who use prepare and :like bind.
+            {
+                return $str;   
+            }
         } 
         
         // make sure is it bind value, if not ...

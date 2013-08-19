@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Mongo DB Class.
+ * Mongo Db Class.
  *
- * A library to interface for NoSQL database MongoDB. For more information see http://www.mongodb.org
+ * A library to interface for NoSQL database Mongo. For more information see http://www.mongodb.org
  *
  * @package		Obullo
  * @author		Alex Bilbie | www.alexbilbie.com | alex@alexbilbie.com ( Original Library )
@@ -14,7 +14,7 @@
  *
  */
 
-Class Mongo {
+Class Mongo_Db {
 
     private $db;
     public  $connection;    // ! do not remove we close the connection in the bootstrap.
@@ -47,7 +47,7 @@ Class Mongo {
     * 
     * @throws Exception 
     */
-    public function __construct()
+    public function __construct($no_instance = true)
     {
         if ( ! class_exists('Mongo'))
         {
@@ -55,6 +55,11 @@ Class Mongo {
         }
         
         $this->connectionString();
+        
+        if($no_instance)
+        {
+            getInstance()->mongo = $this; // Available it in the contoller $this->mongo->method();
+        }
     }
     
     // ------------------------------------------------------------------------
@@ -1205,7 +1210,7 @@ Class Mongo {
     }
     
 }
-// END Mongo Class
+// END Mongodb Class
 
-/* End of file mongo.php */
-/* Location: ./ob/mongo/releases/0.0.1/mongo.php */
+/* End of file mongodb.php */
+/* Location: ./ob/mongodb/releases/0.0.1/mongodb.php */

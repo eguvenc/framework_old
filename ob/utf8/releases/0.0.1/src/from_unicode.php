@@ -1,30 +1,15 @@
 <?php
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo       
- * @author          obullo.com
- * @license         public
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+    // ------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------
-
-/**
- * UTF8 from_unicode
- *
- * @access  private
- * @param  array $arr
- * @return string 
- */
-if( ! function_exists('utf8_from_unicode')) 
-{
-    function utf8_from_unicode($arr)
+    /**
+    * UTF8 from_unicode
+    *
+    * @access  private
+    * @param  array $arr
+    * @return string 
+    */
+    function fromUnicode($arr)
     {
         ob_start();
 
@@ -76,8 +61,6 @@ if( ! function_exists('utf8_from_unicode'))
 
         return $result;
     }
-    
-}
 
 /* End of file from_unicode.php */
 /* Location: ./obullo/helpers/drivers/utf8/from_unicode.php */

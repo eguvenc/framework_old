@@ -28,17 +28,17 @@ Obullo-2.0 WILL HAVE THESE FEATURES:
         $model->save();
 
         // Initializing a model for modules\models directory
-        $model = new Model\Models\User(false);
+        $model = new Models\User(false);
         $model->save();
 
         // Email component ( library )
-        new Email\Email();
+        new Email();
         $this->email->to();
         $this->email->send();
 
         or
         // Email component ( library )
-        $email = new Email\Email(false);
+        $email = new Email(false);
         $email->init();
 
         // Session component ( helper )
@@ -51,15 +51,13 @@ Obullo-2.0 WILL HAVE THESE FEATURES:
         cookie\set('key', 'value');
         cookie\get('key');
 
-        // Task component ( helper )
-        
-        // Loading view files
         // Vi component ( helper )
-        echo vi\get('welcome');  // ( loaded by framework autoloader as default no need to vi\start(); function. )
+        echo vi\view('welcome'); 
         
-        // Initializing a view for modules\views directory
+        // Getting a view from modules\views directory
         echo vi\views('footer');
 
-        // loading database package
-        new Db\Connect();
-        $results = $this->db->select()->get('table');
+        // Loading database
+        new Db();
+        $this->db->get('table');
+        $results = $this->db->resultArray();

@@ -11,7 +11,7 @@
  * @link                              
  */
 
-Class Pdo_Odbc extends Pdo_Database_Adapter
+Class Pdo_Odbc extends Database_Pdo\Src\Database_Adapter
 {
     /**
     * The character used for escaping
@@ -41,11 +41,12 @@ Class Pdo_Odbc extends Pdo_Database_Adapter
     */
     public function _connect()
     {
-        // If connection is ok .. not need to again connect..
-        if ($this->_conn) { return; }
+        if ($this->_conn) { return; } // If connection is ok .. not need to again connect..
         
         if( empty($this->dsn) )
-        throw new \Exception('Please provide a dsn for ODBC connection.');
+        {
+            throw new Exception('Please provide a dsn for ODBC connection.');   
+        }
     
         $dsn = &$this->dsn;
         
@@ -80,10 +81,8 @@ Class Pdo_Odbc extends Pdo_Database_Adapter
            
            return $str;
         }
-            
-        loader::helper('ob/security');
-            
-        $str = _removeInvisibleCharacters($str);
+
+        $str = removeInvisibleCharacters($str);
         
         // escape LIKE condition wildcards
         if ($like === true)
@@ -309,8 +308,10 @@ Class Pdo_Odbc extends Pdo_Database_Adapter
      */
     public function _limit($sql, $limit, $offset)
     {
-        // Does ODBC doesn't use the LIMIT clause?
-        return $sql;
+        $limit  = NULL;
+        $offset = NULL;
+        
+        return $sql; // Does ODBC doesn't use the LIMIT clause?
     }
 
 

@@ -45,7 +45,7 @@ namespace form {
         
         if (config('csrf_protection') === true) // CSRF Support
         {
-            $security = Security::getInstance();
+            $security = \Security::getInstance();
             
             $hidden[$security->getCsrfTokenName()] = $security->getCsrfHash();
         }
@@ -1037,12 +1037,12 @@ namespace form {
     */
     function _getValidationObject()
     {
-        if ( ! class_exists('Validator'))  // Obullo Changes ..
+        if ( ! class_exists('\Validator'))  // Obullo Changes ..
         {
             return false;
         }
         
-        return Validator::getInstance();
+        return \Validator::getInstance();
     }
 
 }

@@ -58,7 +58,7 @@ Class Pager_Sliding extends Pager_Common
     * @deprecated
     * @access public
     */
-    public function get_page_by_offset($index) {}
+    public function getPageByOffset($index) {}
 
     // ------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ Class Pager_Sliding extends Pager_Common
     * @return array  First and last offsets
     * @access public
     */
-    public function get_page_range_by_page($page_id = null)
+    public function getPageRangeByPage($page_id = null)
     {
         $page_id = isset($page_id) ? (int)$page_id : $this->_current_page;
         
@@ -118,7 +118,7 @@ Class Pager_Sliding extends Pager_Common
     * @return array back/pages/next/first/last/all links
     * @access public
     */
-    public function get_links($page_id = null, $dummy = '')
+    public function getLinks($page_id = null, $dummy = '')
     {
         if ( ! is_null($page_id)) 
         {

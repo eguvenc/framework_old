@@ -711,18 +711,18 @@ Since your controller classes will extend the main application controller you mu
 
 ##### File Constants
 
-* FILE_READ_MODE
-* FILE_WRITE_MODE
-* DIR_READ_MODE
-* DIR_WRITE_MODE
-* FOPEN_READ
-* FOPEN_READ_WRITE
-* FOPEN_WRITE_CREATE_DESTRUCTIVE
-* FOPEN_READ_WRITE_CREATE_DESTRUCTIVE
-* FOPEN_WRITE_CREATE
-* FOPEN_READ_WRITE_CREATE
-* FOPEN_WRITE_CREATE_STRICT
-* FOPEN_READ_WRITE_CREATE_STRICT
+* 0644
+* 0666
+* 0755
+* 0777
+* 'rb'
+* 'r+b'
+* 'wb'
+* w+b
+* ab
+* 'a+b'
+* 'xb'
+* 'x+b'
 
 ##### Database Constants
 

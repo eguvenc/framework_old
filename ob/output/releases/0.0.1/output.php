@@ -312,7 +312,7 @@ Class Output {
 
         $cache_path .= md5($uri);
 
-        if ( ! $fp = @fopen($cache_path, FOPEN_WRITE_CREATE_DESTRUCTIVE))
+        if ( ! $fp = @fopen($cache_path, 'wb'))
         {
             log\me('error', 'Unable to write cache file: '.$cache_path);
             return;
@@ -333,7 +333,7 @@ Class Output {
         }
         
         fclose($fp);
-        @chmod($cache_path, DIR_WRITE_MODE);
+        @chmod($cache_path, 0777);
 
         log\me('debug', "Cache file written: ".$cache_path);
     }
@@ -360,7 +360,7 @@ Class Output {
             return false;
         }
 
-        if ( ! $fp = @fopen($filepath, FOPEN_READ))
+        if ( ! $fp = @fopen($filepath, 'rb'))
         {
             return false;
         }
@@ -388,9 +388,9 @@ Class Output {
             if (isReallyWritable($cache_path))
             {
                 @unlink($filepath);
-                
+
                 log\me('debug', 'Cache file has expired. File deleted');
-                
+
                 return false;
             }
         }

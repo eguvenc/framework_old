@@ -132,7 +132,7 @@ Class Input {
         
         $_COOKIE = $this->_cleanInputData($_COOKIE);
 
-        \log\me('debug', "Global POST and COOKIE data sanitized");
+        log\me('debug', "Global POST and COOKIE data sanitized");
     }
     
     // ------------------------------------------------------------------------

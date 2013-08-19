@@ -10,7 +10,7 @@
  * @link                              
  */
 
-Class Pdo_Sqlite extends Pdo_Database_Adapter
+Class Pdo_Sqlite extends Database_Pdo\Src\Database_Adapter
 {
     /**
     * The character used for escaping
@@ -73,15 +73,14 @@ Class Pdo_Sqlite extends Pdo_Database_Adapter
             
             $error = $this->_conn->errorInfo();
 
-            throw new \Exception($error[2]);
+            throw new Exception($error[2]);
         }
 
         $retval = $this->_conn->exec('PRAGMA short_column_names=1');
-        if ($retval === false) {
-            
+        if ($retval === false)
+        {
             $error = $this->_conn->errorInfo();
-
-            throw new \Exception($error[2]);
+            throw new Exception($error[2]);
         }
         
     } 

@@ -36,7 +36,7 @@ Class Ftp {
             $this->init($config);
         }
 
-        \log\me('debug', "FTP Class Initialized");
+        log\me('debug', "FTP Class Initialized");
     }
     
     // --------------------------------------------------------------------

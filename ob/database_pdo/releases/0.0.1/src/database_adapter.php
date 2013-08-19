@@ -50,7 +50,7 @@ Abstract Class Database_Adapter extends Database_Layer {
             // Dsn Connection..
             if( isset($param['dsn']) ) 
             {
-                $this->driver = strtolower($param['driver']);  // required
+                $this->driver   = strtolower($param['driver']);  // required
                 $this->username = isset($param['username']) ? $param['username'] : '';    // optional
                 $this->password = isset($param['password']) ? $param['password'] : '';    // optional
                 $this->char_set = isset($param['char_set']) ? $param['char_set'] : '';    // optional
@@ -59,13 +59,13 @@ Abstract Class Database_Adapter extends Database_Layer {
                 
             } else 
             {
-            // Standart Connection..
+                // Standart Connection..
                 $this->hostname = $param['hostname'];             // required
                 $this->username = $param['username'];             // required
                 $this->password = $param['password'];             // required
                 $this->database = $param['database'];             // required
-                $this->driver = strtolower($param['driver']); // required
-                $this->prefix = strtolower($param['prefix']); // optional
+                $this->driver   = strtolower($param['driver']); // required
+                $this->prefix   = strtolower($param['prefix']); // optional
                 $this->swap_pre = strtolower($param['swap_pre']); // optional
                 $this->char_set = isset($param['char_set']) ? $param['char_set'] : '';    // optional
                 $this->dbh_port = isset($param['dbh_port']) ? $param['dbh_port'] : '';    // optional
@@ -79,8 +79,8 @@ Abstract Class Database_Adapter extends Database_Layer {
             $this->username = db('username',$db_var); 
             $this->password = db('password',$db_var); 
             $this->database = db('database',$db_var);
-            $this->driver = strtolower(db('driver',$db_var));
-            $this->prefix = strtolower(db('prefix',$db_var));
+            $this->driver   = strtolower(db('driver',$db_var));
+            $this->prefix   = strtolower(db('prefix',$db_var));
             $this->swap_pre = strtolower(db('swap_pre',$db_var));
             $this->char_set = db('char_set',$db_var);
             $this->dbh_port = db('dbh_port',$db_var);

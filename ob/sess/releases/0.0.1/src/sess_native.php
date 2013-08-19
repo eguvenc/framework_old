@@ -53,7 +53,7 @@ Class Sess_Native {
             $this->$key = (isset($params[$key])) ? $params[$key] : config($key, 'sess');
         }
         
-        // @todo _unserialize func. use strip_slashes() func. We can add it later if we need it in Native Library. ?
+        // @todo _unserialize func. use strip_Slashes() func. We can add it later if we need it in Native Library. ?
                 
         if($this->expire_on_close)
         {

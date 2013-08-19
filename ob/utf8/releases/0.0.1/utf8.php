@@ -37,7 +37,7 @@ Class Utf8 {
     {
         if( ! extension_loaded('mbstring'))
         {
-            throw new \Exception('Mbstring extension not loaded.');
+            throw new Exception('Mbstring extension not loaded.');
         }
     }
     

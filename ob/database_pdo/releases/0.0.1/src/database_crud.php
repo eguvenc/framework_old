@@ -234,7 +234,9 @@ Class Database_Crud {
     private function _where($key, $value = null, $type = 'AND ', $escape = null)
     {
         if ( ! is_array($key))
-        $key = array($key => $value);
+        {
+            $key = array($key => $value);
+        }
         
         // If the escape value was not set will base it on the global setting
         if ( ! is_bool($escape))
@@ -247,7 +249,9 @@ Class Database_Crud {
             $prefix = (count($this->ar_where) == 0 AND count($this->ar_cache_where) == 0) ? '' : $type;
             
             if (is_null($v) && ! self::_hasOperator($k))
-            $k .= ' IS null';  // value appears not to have been set, assign the test to IS null  
+            {
+                $k .= ' IS null';  // value appears not to have been set, assign the test to IS null 
+            } 
         
             if ( ! is_null($v))
             {
@@ -427,7 +431,7 @@ Class Database_Crud {
             // if not bind value ... 
             if( strpos($v, ':') === false || strpos($v, ':') > 0) // Obullo rc1 Changes...
             {
-               $like_statement = $prefix." $k $not LIKE ".$this->escapeLike($v, $side);
+                $like_statement = $prefix." $k $not LIKE ".$this->escapeLike($v, $side);
             } 
             else 
             {
@@ -627,7 +631,9 @@ Class Database_Crud {
         $this->ar_limit = $value;
 
         if ($offset != '')
-        $this->ar_offset = $offset;
+        {
+            $this->ar_offset = $offset;   
+        }
         
         return $this;
     }
@@ -673,7 +679,6 @@ Class Database_Crud {
                      {
                          $v = "'{$v}'";  // obullo changes..
                      }
-
                 }
             
                 // obullo changes..
@@ -1334,7 +1339,9 @@ Class Database_Crud {
     private function _mergeCache()
     {
         if (count($this->ar_cache_exists) == 0)
-        return;
+        {
+            return;   
+        }
 
         foreach ($this->ar_cache_exists as $val)
         {
@@ -1342,7 +1349,9 @@ Class Database_Crud {
             $ar_cache_var   = 'ar_cache_'.$val;
 
             if (count($this->$ar_cache_var) == 0)
-            continue;
+            {
+                continue;   
+            }
     
             $this->$ar_variable = array_unique(array_merge($this->$ar_cache_var, $this->$ar_variable));
         }

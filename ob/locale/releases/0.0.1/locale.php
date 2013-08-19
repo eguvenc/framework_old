@@ -20,7 +20,6 @@ Class Locale {
     {
         // Set Default language from $_COOKIE['__langlocale']
         // $this->set_language();
-        
         log\me('debug', "Locale Class Initialized");    
     }
 
@@ -31,7 +30,7 @@ Class Locale {
        if( ! self::$instance instanceof self)
        {
            self::$instance = new self();
-       } 
+       }
        
        return self::$instance;
     }

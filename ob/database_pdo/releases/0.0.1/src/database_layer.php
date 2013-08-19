@@ -316,16 +316,17 @@ Class Database_Layer extends Database_Crud {
     */
     public function lastQuery($prepared = false)
     {
-        // let's make sure, is it prepared query ?
-        if($prepared == true AND $this->isAssocArray($this->last_values))
+        if($prepared == true AND $this->isAssocArray($this->last_values)) // let's make sure, is it prepared query ?
         {
             $bind_keys = array();
             foreach(array_keys($this->last_values[$this->exec_count]) as $k)
             {
                 $bind_chr = ':';
-                if(strpos($k, ':') === 0)   // If user use ':' characters
-                $bind_chr = '';             // Some users forgot this character
-
+                if(strpos($k, ':') === 0) // If user use ':' characters ?
+                {   
+                    $bind_chr = '';
+                }
+                
                 $bind_keys[]  = "/\\$bind_chr".$k.'\b/';  // escape bind ':' character
             }
 

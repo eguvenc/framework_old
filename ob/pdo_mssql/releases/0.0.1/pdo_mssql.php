@@ -1,5 +1,4 @@
 <?php
-namespace Pdo_Mssql;
 
 /**
  * MSSQL Database Adapter Class
@@ -11,7 +10,7 @@ namespace Pdo_Mssql;
  * @link                              
  */
 
-Class Pdo_Mssql extends Pdo_Database_Adapter
+Class Pdo_Mssql extends Database_Pdo\Src\Database_Adapter
 {
     /**
     * The character used for escaping
@@ -25,7 +24,7 @@ Class Pdo_Mssql extends Pdo_Database_Adapter
     var $_like_escape_chr = '!';    
      
     public function __construct($param)
-    {   
+    {
         parent::__construct($param);
     }
     
@@ -111,7 +110,7 @@ Class Pdo_Mssql extends Pdo_Database_Adapter
         $str = removeInvisibleCharacters($str);
         
         // If pdo::quote() not work Escape single quotes
-        // $str = str_replace("'", "''", _removeInvisibleCharacters($str));
+        // $str = str_replace("'", "''", removeInvisibleCharacters($str));
         
         // escape LIKE condition wildcards
         if ($like === true)
@@ -319,7 +318,6 @@ Class Pdo_Mssql extends Pdo_Database_Adapter
         return "DELETE FROM ".$table.$conditions.$limit;
     }
 
-
     // --------------------------------------------------------------------
 
     /**
@@ -340,6 +338,8 @@ Class Pdo_Mssql extends Pdo_Database_Adapter
         return preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);        
     }
     
+    // --------------------------------------------------------------------
+    
     /**
     * Get Platform Specific Database 
     * Version number. From Zend.
@@ -353,7 +353,7 @@ Class Pdo_Mssql extends Pdo_Database_Adapter
         {
             $stmt = $this->_conn->query("SELECT SERVERPROPERTY('productversion')");
             
-            $result = $stmt->fetchAll(\PDO::FETCH_NUM);
+            $result = $stmt->fetchAll(PDO::FETCH_NUM);
             
             if (count($result))
             {
@@ -362,12 +362,11 @@ Class Pdo_Mssql extends Pdo_Database_Adapter
             
             return null;
         
-        } catch (\PDOException $e)
+        } catch (PDOException $e)
         {
             return null;
         }
     }
-
 
 
 } // end class.

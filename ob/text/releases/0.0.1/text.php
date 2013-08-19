@@ -1,30 +1,29 @@
 <?php
+namespace text {
+    
+    /**
+     * Text Helper
+     *
+     * @package     Obullo
+     * @subpackage  Helpers
+     * @category    Helpers
+     * @author      Obullo Team
+     */
 
-/**
- * Text Helper
- *
- * @package     Obullo
- * @subpackage  Helpers
- * @category    Helpers
- * @author      Obullo Team
- */
+    // ------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------
-
-/**
-* Word Limiter
-*
-* Limits a string to X number of words.
-*
-* @access	public
-* @param	string
-* @param	integer
-* @param	string	the end character. Usually an ellipsis
-* @return	string
-*/
-if( ! function_exists('word_limiter') ) 
-{    
-    function word_limiter($str, $limit = 100, $end_char = '&#8230;')
+    /**
+    * Word Limiter
+    *
+    * Limits a string to X number of words.
+    *
+    * @access	public
+    * @param	string
+    * @param	integer
+    * @param	string	the end character. Usually an ellipsis
+    * @return	string
+    */ 
+    function wordLimiter($str, $limit = 100, $end_char = '&#8230;')
     {
         if (trim($str) == '')
         {
@@ -40,24 +39,22 @@ if( ! function_exists('word_limiter') )
 
         return rtrim($matches[0]).$end_char;
     }
-}
-// ------------------------------------------------------------------------
+    
+    // ------------------------------------------------------------------------
 
-/**
-* Character Limiter
-*
-* Limits the string based on the character count.  Preserves complete words
-* so the character count may not be exactly as specified.
-*
-* @access	public
-* @param	string
-* @param	integer
-* @param	string	the end character. Usually an ellipsis
-* @return	string
-*/
-if( ! function_exists('character_limiter') ) 
-{    
-    function character_limiter($str, $n = 500, $end_char = '&#8230;')
+    /**
+    * Character Limiter
+    *
+    * Limits the string based on the character count.  Preserves complete words
+    * so the character count may not be exactly as specified.
+    *
+    * @access	public
+    * @param	string
+    * @param	integer
+    * @param	string	the end character. Usually an ellipsis
+    * @return	string
+    */ 
+    function characterLimiter($str, $n = 500, $end_char = '&#8230;')
     {
         if (strlen($str) < $n)
         {
@@ -83,21 +80,19 @@ if( ! function_exists('character_limiter') )
             }		
         }
     }
-}
-// ------------------------------------------------------------------------
+    
+    // ------------------------------------------------------------------------
 
-/**
-* High ASCII to Entities
-*
-* Converts High ascii text and MS Word special characters to character entities
-*
-* @access	public
-* @param	string
-* @return	string
-*/
-if( ! function_exists('ascii_to_entities') ) 
-{   
-    function ascii_to_entities($str)
+    /**
+    * High ASCII to Entities
+    *
+    * Converts High ascii text and MS Word special characters to character entities
+    *
+    * @access	public
+    * @param	string
+    * @return	string
+    */
+    function ascii2entities($str)
     {
         $count	= 1;
         $out	= '';
@@ -143,22 +138,20 @@ if( ! function_exists('ascii_to_entities') )
 
         return $out;
     }
-}
-// ------------------------------------------------------------------------
+    
+    // ------------------------------------------------------------------------
 
-/**
-* Entities to ASCII
-*
-* Converts character entities back to ASCII
-*
-* @access	public
-* @param	string
-* @param	bool
-* @return	string
-*/
-if( ! function_exists('entities_to_ascii') ) 
-{
-    function entities_to_ascii($str, $all = true)
+    /**
+    * Entities to ASCII
+    *
+    * Converts character entities back to ASCII
+    *
+    * @access	public
+    * @param	string
+    * @param	bool
+    * @return	string
+    */
+    function entities2ascii($str, $all = true)
     {
        if (preg_match_all('/\&#(\d+)\;/', $str, $matches))
        {
@@ -197,25 +190,23 @@ if( ! function_exists('entities_to_ascii') )
 
        return $str;
     }
-}
-// ------------------------------------------------------------------------
 
-/**
-* Word Censoring Function
-*
-* Supply a string and an array of disallowed words and any
-* matched words will be converted to #### or to the replacement
-* word you've submitted.
-*
-* @access	public
-* @param	string	the text string
-* @param	string	the array of censoered words
-* @param	string	the optional replacement value
-* @return	string
-*/
-if( ! function_exists('word_censor') ) 
-{
-    function word_censor($str, $censored, $replacement = '')
+    // ------------------------------------------------------------------------
+
+    /**
+    * Word Censoring Function
+    *
+    * Supply a string and an array of disallowed words and any
+    * matched words will be converted to #### or to the replacement
+    * word you've submitted.
+    *
+    * @access	public
+    * @param	string	the text string
+    * @param	string	the array of censoered words
+    * @param	string	the optional replacement value
+    * @return	string
+    */
+    function wordCensor($str, $censored, $replacement = '')
     {
         if ( ! is_array($censored))
 	{
@@ -244,21 +235,19 @@ if( ! function_exists('word_censor') )
 
         return trim($str);
     }
-}
-// ------------------------------------------------------------------------
 
-/**
-* Code Highlighter
-*
-* Colorizes code strings
-*
-* @access	public
-* @param	string	the text string
-* @return	string
-*/
-if( ! function_exists('highlight_code') ) 
-{
-    function highlight_code($str)
+    // ------------------------------------------------------------------------
+
+    /**
+    * Code Highlighter
+    *
+    * Colorizes code strings
+    *
+    * @access	public
+    * @param	string	the text string
+    * @return	string
+    */
+    function highlightCode($str)
     {
         // The highlight string function encodes and highlights
         // brackets so we need them to start raw
@@ -291,59 +280,57 @@ if( ! function_exists('highlight_code') )
 
         return $str;
     }
-}
-// ------------------------------------------------------------------------
 
-/**
-* Phrase Highlighter
-*
-* Highlights a phrase within a text string
-*
-* @access	public
-* @param	string	the text string
-* @param	string	the phrase you'd like to highlight
-* @param	string	the openging tag to precede the phrase with
-* @param	string	the closing tag to end the phrase with
-* @return	string
-*/
-if( ! function_exists('highlight_phrase') ) 
-{
-    function highlight_phrase($str, $phrase, $tag_open = '<strong>', $tag_close = '</strong>')
+    // ------------------------------------------------------------------------
+
+    /**
+    * Phrase Highlighter
+    *
+    * Highlights a phrase within a text string
+    *
+    * @access	public
+    * @param	string	the text string
+    * @param	string	the phrase you'd like to highlight
+    * @param	string	the openging tag to precede the phrase with
+    * @param	string	the closing tag to end the phrase with
+    * @return	string
+    */
+    function highlightPhrase($str, $phrase, $tag_open = '<strong>', $tag_close = '</strong>')
     {
         if ($str == '')
         {
-                return '';
+            return '';
         }
 
         if ($phrase != '')
         {
-                return preg_replace('/('.preg_quote($phrase, '/').')/i', $tag_open."\\1".$tag_close, $str);
+            return preg_replace('/('.preg_quote($phrase, '/').')/i', $tag_open."\\1".$tag_close, $str);
         }
 
         return $str;
     }
-}
-// ------------------------------------------------------------------------
+    
+    // ------------------------------------------------------------------------
 
-/**
-* Word Wrap
-*
-* Wraps text at the specified character.  Maintains the integrity of words.
-* Anything placed between {unwrap}{/unwrap} will not be word wrapped, nor
-* will URLs.
-*
-* @access	public
-* @param	string	the text string
-* @param	integer	the number of characters to wrap at
-* @return	string
-*/
-if( ! function_exists('word_wrap') ) 
-{
+    /**
+    * Word Wrap
+    *
+    * Wraps text at the specified character.  Maintains the integrity of words.
+    * Anything placed between {unwrap}{/unwrap} will not be word wrapped, nor
+    * will URLs.
+    *
+    * @access	public
+    * @param	string	the text string
+    * @param	integer	the number of characters to wrap at
+    * @return	string
+    */
     function wordWrap($str, $charlim = '76')
     {
         // Se the character limit
         if ( ! is_numeric($charlim))
-                $charlim = 76;
+        {
+            $charlim = 76;   
+        }
 
         // Reduce multiple spaces
         $str = preg_replace("| +|", " ", $str);
@@ -351,7 +338,7 @@ if( ! function_exists('word_wrap') )
         // Standardize newlines
         if (strpos($str, "\r") !== false)
         {
-                $str = str_replace(array("\r\n", "\r"), "\n", $str);			
+            $str = str_replace(array("\r\n", "\r"), "\n", $str);			
         }
 
         // If the current word is surrounded by {unwrap} tags we'll 
@@ -359,11 +346,11 @@ if( ! function_exists('word_wrap') )
         $unwrap = array();
         if (preg_match_all("|(\{unwrap\}.+?\{/unwrap\})|s", $str, $matches))
         {
-                for ($i = 0; $i < count($matches['0']); $i++)
-                {
-                        $unwrap[] = $matches['1'][$i];				
-                        $str = str_replace($matches['1'][$i], "{{unwrapped".$i."}}", $str);
-                }
+            for ($i = 0; $i < count($matches['0']); $i++)
+            {
+                $unwrap[] = $matches['1'][$i];				
+                $str = str_replace($matches['1'][$i], "{{unwrapped".$i."}}", $str);
+            }
         }
 
         // Use PHP's native function to do the initial wordwrap.  
@@ -375,49 +362,49 @@ if( ! function_exists('word_wrap') )
         $output = "";
         foreach (explode("\n", $str) as $line) 
         {
-                // Is the line within the allowed character count?
-                // If so we'll join it to the output and continue
-                if (strlen($line) <= $charlim)
+            // Is the line within the allowed character count?
+            // If so we'll join it to the output and continue
+            if (strlen($line) <= $charlim)
+            {
+                $output .= $line."\n";			
+                continue;
+            }
+
+            $temp = '';
+            while((strlen($line)) > $charlim) 
+            {
+                // If the over-length word is a URL we won't wrap it
+                if (preg_match("!\[url.+\]|://|wwww.!", $line))
                 {
-                        $output .= $line."\n";			
-                        continue;
+                    break;
                 }
 
-                $temp = '';
-                while((strlen($line)) > $charlim) 
-                {
-                        // If the over-length word is a URL we won't wrap it
-                        if (preg_match("!\[url.+\]|://|wwww.!", $line))
-                        {
-                                break;
-                        }
+                // Trim the word down
+                $temp .= substr($line, 0, $charlim-1);
+                $line = substr($line, $charlim-1);
+            }
 
-                        // Trim the word down
-                        $temp .= substr($line, 0, $charlim-1);
-                        $line = substr($line, $charlim-1);
-                }
+            // If $temp contains data it means we had to split up an over-length 
+            // word into smaller chunks so we'll add it back to our current line
+            if ($temp != '')
+            {
+                $output .= $temp . "\n" . $line; 
+            }
+            else
+            {
+                $output .= $line;
+            }
 
-                // If $temp contains data it means we had to split up an over-length 
-                // word into smaller chunks so we'll add it back to our current line
-                if ($temp != '')
-                {
-                        $output .= $temp . "\n" . $line; 
-                }
-                else
-                {
-                        $output .= $line;
-                }
-
-                $output .= "\n";
+            $output .= "\n";
         }
 
         // Put our markers back
         if (count($unwrap) > 0)
         {	
-                foreach ($unwrap as $key => $val)
-                {
-                        $output = str_replace("{{unwrapped".$key."}}", $val, $output);
-                }
+            foreach ($unwrap as $key => $val)
+            {
+                $output = str_replace("{{unwrapped".$key."}}", $val, $output);
+            }
         }
 
         // Remove the unwrap tags
@@ -425,6 +412,7 @@ if( ! function_exists('word_wrap') )
 
         return $output;	
     }
+
 }
 
 /* End of file text.php */

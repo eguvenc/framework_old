@@ -95,7 +95,7 @@ Class Obullo
         ############## Close the Db connection.
 
         $driver = db('driver');
-        if($driver == 'mongodb' AND isset(getInstance()->db->connection) AND is_object(getInstance()->db->connection))
+        if($driver == 'mongo' AND isset(getInstance()->db->connection) AND is_object(getInstance()->db->connection))
         {
             getInstance()->db->connection->close();
         } 
