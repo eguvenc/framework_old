@@ -94,7 +94,7 @@ Would produce: <a href="news/local/123" title="My News">My News</a>
 echo url\anchor('news/local/123', 'My News', array('title' => 'The best news!'));
 ```
 
-Would produce: a href="news/local/123" title="The best news!">My News</a>
+Would produce: <a href="news/local/123" title="The best news!">My News</a>
 
 Obullo anchor function support **'#'** characters. You can use it like this ..
 
