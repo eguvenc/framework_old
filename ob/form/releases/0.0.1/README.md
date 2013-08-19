@@ -10,7 +10,9 @@ The Form Helper file contains functions that assist in working with forms.
 
 This helper is loaded using the following code:
 
+```php
 new form\start();
+```
 
 The following functions are available:
 
