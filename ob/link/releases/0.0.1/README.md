@@ -15,7 +15,10 @@ The following functions are available:
 
 Creates a standard HTML email link. Usage example:
 
+```php
 echo link\mailTo('me@my-site.com', 'Click Here to Contact Me');
+
+```
 As with the [anchor()](/ob/url/releases/0.0.1/) tab , you can set attributes using the third parameter.
 
 #### safeMailTo()
@@ -48,10 +51,18 @@ The second parameter determines whether URLs and emails are converted or just on
 
 Converts only URLs:
 
+```php
 $string = link\autoLink($string, 'url');
+```
+
 Converts only Email addresses:
 
+```php
 $string = link\auto\Link($string, 'email');
+```
+
 The third parameter determines whether links are shown in a new window. The value can be TRUE or FALSE (boolean):
 
+```php
 $string = link\autoLink($string, 'both', TRUE);
+```
