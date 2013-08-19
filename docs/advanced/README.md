@@ -182,7 +182,7 @@ $users[] = array('usr_username' => 'test2', 'usr_email' => 'example@example.com'
 $errors = array();
 foreach($users as $key => $val)
 {
-     $user = new Model_User();
+     $user = new Model\User();
      $user->usr_username = $val['usr_username'];
      $user->usr_email = $val['usr_email'];
 
@@ -200,7 +200,7 @@ print_r($errors);
 Function will delete the all variables to database which are the fields matches in your model class $settings => fields section.
 
 ```php
-$user->where('usr_id', 5);   // you can use post/get variable .. e.g. i_post('usr_id')
+$user->where('usr_id', 5);   // you can use post/get variable .. e.g. i\post('usr_id')
 $user->where('usr_username', 'username');
 $user->delete();
 ```
@@ -277,8 +277,8 @@ Some times we don't want to save some fields or that the fields which we haven't
 ```php
 $member = new Model\Member(false);
 
-$model->usr_first_lastname   = i_get_post('usr_first_lastname');
-$model->usr_password         = i_get_post('usr_password');
+$model->usr_first_lastname   = i\getPost('usr_first_lastname');
+$model->usr_password         = i\getPost('usr_password');
 
 $member->noSave('usr_agreement'); // we don't have these fields in the db table.
 $member->noSave('usr_password_confirm');
@@ -528,7 +528,7 @@ if($user->save())
 } 
 else
 {
-    echo form_Json\error($this->db->last_query());
+    echo form_Json\error($this->db->lastQuery());
     return;
 }
 ```
@@ -596,7 +596,7 @@ Obullo has a <b>autorun.php</b> functionality that is located in your <dfn>app/c
 When your application start to work, if would you like to run automatically some autoloaded <b>helper</b> functions for whole framework , you should define function names and arguments to $autorun variable.
 
 ```php
-$autorun['function']['sess\start'] = array();  This configuration run the Obullo sess_start(); function.
+$autorun['function']['sess\start'] = array();  This configuration run the Obullo sess\start(); function.
 ```
 
 You can use arguments
