@@ -1459,14 +1459,22 @@ $query = $this->db->get();
 Multiple function calls can be made if you need several joins in one query.
 
 If you need something other than a natural JOIN you can specify it via the third parameter of the function. Options are: left, right, outer, inner, left outer, and right outer.
+
+```php
 $this->db->join('comments', 'comments.id = blogs.id', 'left');
 
 // Produces: LEFT JOIN comments ON comments.id = blogs.id
-$this->db->where();
+```
 
-This function enables you to set WHERE clauses using one of four methods:
+#### $this->db->where();
 
+This function enables you to set <b>WHERE</b> clauses using one of four methods:
+
+<<<<<<< HEAD
 Note: All values passed to this function are escaped automatically, producing safer queries except the LIKE statement, for like statements you should use $this->escapeLike() function for more details look at this page running and escaping queries.
+=======
+**Note:** All values passed to this function are escaped automatically, producing safer queries except the <b>LIKE</b> statement, for like statements you should use $this->escape_like() function for more details look at this page [running and escaping queries](/docs/database/#running-and-escaping-queries).
+>>>>>>> 1524192d1e9d1a4e5bac8d0921b8403d3a6cbee1
 
     Simple key/value method: $this->db->where('name', $name);
 
