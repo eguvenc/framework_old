@@ -13,7 +13,7 @@ The following page contains example code showing how the database class is used.
 The following code loads and initializes the database class based on your [configuration](#database-configuration-and-connect) settings:
 
 ```php
-new Db\Db();
+new Db();
 ```
 
 Once loaded the class is ready to be used as described below.
@@ -45,7 +45,7 @@ The above <dfn>result()</dfn> function returns an array of <strong>objects</stro
 ------
 
 ```php
-$database = new Db\Db(false);
+$database = new Db(false);
 $db = $database->connect();
 
 print_r($db->get('users')->resultArray());
@@ -430,7 +430,7 @@ Class Start extends Controller
 {
     function __construct()
     {    
-        new Db\Db();
+        new Db();
         parent::__construct();
     }
     
@@ -447,7 +447,7 @@ A <strong>helper</strong> file.
 ```php
 function blog_dropdown()
 {
-    new Db\Db();   // If loader:database declared before in the controller
+    new Db();   // If new Db() declared before in the controller
                           or model you don't need to write it again. 
     $ob = this();
     
@@ -463,7 +463,7 @@ Class User extends Model
 {
     function __construct()
     {
-        new Db\Db();
+        new Db();
         parent::__construct();
     }
     
@@ -494,12 +494,12 @@ $database['db2']['options']  = array();
 Then you can connect to <samp>db2</samp> database just providing the db variable like this ..
 
 ```php
-new Db\Db('db2');
+new Db('db2');
   
 $this->db2->query(" .... ");
 ```
 
-Also you can manually pass database connectivity settings via the first parameter of your loader::database function like this.. :
+Also you can manually pass database connectivity settings via the first parameter of your <dfn>new Db($config)</dfn> function like this.. :
 
 ```php
 $config = array(
@@ -514,7 +514,7 @@ $config = array(
      'options'  => array( PDO::ATTR_PERSISTENT => true )
  );                                
 
- new Db\Db($config);
+ new Db($config);
 
 $this->db3->query(  ....  );
 ```
@@ -530,7 +530,7 @@ $config = array(
      'dsn'      => 'mysql:host=localhost;port=3307;dbname=test_db;username=root;password=1234;'
  );
 
- new Db\Db($config);
+ new Db($config);
 
 $this->db2->query(  ....  );
 ```
@@ -548,11 +548,11 @@ This will give you password parameter of second database connection setting whic
 If you want to grab the database object turn return object switch to true.
 
 ```php
-$db = new Db\Db('db', true);  // provide your database variable
+$db = new Db('db', true);  // provide your database variable
                               // and turn db return object switch to true.                        
 $db->query(" ... "); 
 
-$db2 = new Db\Db('db2', TRUE);  // second db
+$db2 = new Db('db2', TRUE);  // second db
                                       
 $db2->query(" ... ");
 ```
@@ -562,7 +562,7 @@ $db2->query(" ... ");
 You can close the database instantiate using first parameter to false. And if you extend to Database class you can instantiate it to manually. ( Look at [extending to core classes](https://github.com/obullo/obullo-2.0/tree/master/docs/advanced#extending-to-core-classes) for more details. )
 
 ```php
-new Db\Db(false);
+new Db(false);
 
 $db = new MY_Database();
 $db = $db->connect('db');
