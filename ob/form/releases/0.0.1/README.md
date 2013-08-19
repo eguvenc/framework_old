@@ -14,7 +14,7 @@ new form\start();
 
 The following functions are available:
 
-#### formOpen()
+#### form\open()
 
 Creates an opening form tag with a base URL <b>built from your config preferences</b>. It will optionally let you add form attributes and hidden input fields.
 
@@ -23,7 +23,7 @@ The main benefit of using this tag rather than hard coding your own HTML is that
 Here's a simple example:
 
 ```php
-echo formOpen('email/send');
+echo form\open('email/send');
 ```
 
 The above example would create a form that points to your base URL plus the "email/send" URI segments, like this:
@@ -39,7 +39,7 @@ Attributes can be added by passing an associative array to the second parameter,
 ```php
 $attributes = array('class' => 'email', 'id' => 'myform');
 
-echo formOpen('email/send', $attributes);
+echo form\open('email/send', $attributes);
 ```
 
 The above example would create a form similar to this:
@@ -55,7 +55,7 @@ Hidden fields can be added by passing an associative array to the third paramete
 ```php
 $hidden = array('username' => 'Joe', 'member_id' => '234');
 
-echo formOpen('email/send', '', $hidden);
+echo form\open('email/send', '', $hidden);
 ```
 
 The above example would create a form similar to this:
@@ -66,16 +66,16 @@ The above example would create a form similar to this:
 <input type="hidden" name="member_id" value="234" />
 ```
 
-#### formOpenMultipart()
+#### form\openMultipart()
 
-This function is absolutely identical to the form_open() tag above except that it adds a multipart attribute, which is necessary if you would like to use the form to upload files with.
+This function is absolutely identical to the form\open() tag above except that it adds a multipart attribute, which is necessary if you would like to use the form to upload files with.
 
-#### formHidden('name', 'value' , $attributes = '')
+#### form\hidden('name', 'value' , $attributes = '')
 
 Lets you generate hidden input fields. You can either submit a name/value string to create one field:
 
 ```php
-formHidden('username', 'johndoe',  $attr = " id='username' " );
+form\hidden('username', 'johndoe',  $attr = " id='username' " );
 
 // Would produce:
 <input type="hidden" name="username" value="johndoe" id='username'  />
@@ -90,7 +90,7 @@ $data = array(
               'url'   => 'http://example.com'
             );
 
-echo formHidden($data);
+echo form\hidden($data);
 
 // Would produce:
 
@@ -99,12 +99,12 @@ echo formHidden($data);
 <input type="hidden" name="url" value="http://example.com" />
 ```
 
-#### formInput('name', 'value',$attributes = '')
+#### form\input('name', 'value',$attributes = '')
 
 Lets you generate a standard text input field. You can minimally pass the field name and value in the first and second parameter:
 
 ```php
-echo form_input('username', 'johndoe', $attributes = '');
+echo form\input('username', 'johndoe', $attributes = '');
 ```
 
 Or you can pass an associative array containing any data you wish your form to contain:
@@ -119,7 +119,7 @@ $data = array(
               'style'       => 'width:50%',
             );
 
-echo formInput($data);
+echo form\input($data);
 
 // Would produce:
 
@@ -129,24 +129,24 @@ echo formInput($data);
 If you would like your form to contain some additional data, like Javascript, you can pass it as a string in the third parameter:
 
 ```php
-$js = 'onClick="some_function()"';
+$js = 'onclick="some_function()"';
 
-echo formInput('username', 'johndoe', $js);
+echo form\input('username', 'johndoe', $js);
 ```
 
-#### formPassword()
+#### form\password()
 
-This function is identical in all respects to the <dfn>formInput()</dfn> function above except that is sets it as a "password" type.
+This function is identical in all respects to the <dfn>form\input()</dfn> function above except that is sets it as a "password" type.
 
-#### formUpload()
+#### form\upload()
 
-This function is identical in all respects to the <dfn>formInput()</dfn> function above except that is sets it as a "file" type, allowing it to be used to upload files.
+This function is identical in all respects to the <dfn>form\input()</dfn> function above except that is sets it as a "file" type, allowing it to be used to upload files.
 
-#### formTextarea()
+#### form\textarea()
 
-This function is identical in all respects to the <dfn>formInput()</dfn> function above except that it generates a "textarea" type. Note: Instead of the "maxlength" and "size" attributes in the above example, you will instead specify "rows" and "cols".
+This function is identical in all respects to the <dfn>form\input()</dfn> function above except that it generates a "textarea" type. Note: Instead of the "maxlength" and "size" attributes in the above example, you will instead specify "rows" and "cols".
 
-#### formDropdown()
+#### form\dropdown()
 
 Lets you create a standard drop-down field. The first parameter will contain the name of the field, the second parameter will contain an associative array of options, and the third parameter will contain the value you wish to be selected. You can also pass an array of multiple items through the third parameter, and Obullo will create a multiple select for you. Example:
 
@@ -160,7 +160,7 @@ $options = array(
 
 $shirts_on_sale = array('small', 'large');
 
-echo formDropdown('shirts', $options, 'large');
+echo form\dropdown('shirts', $options, 'large');
 
 // Would produce:
 
@@ -171,7 +171,7 @@ echo formDropdown('shirts', $options, 'large');
 <option value="xlarge">Extra Large Shirt</option>
 </select>
 
-echo formDropdown('shirts', $options, $shirts_on_sale);
+echo form\dropdown('shirts', $options, $shirts_on_sale);
 
 // Would produce:
 
@@ -188,23 +188,23 @@ If you would like the opening <b>select</b> to contain additional data, like an 
 ```php
 $js = 'id="shirts" onChange="some_function();"';
 
-echo formDropdown('shirts', $options, 'large', $js);
+echo form\dropdown('shirts', $options, 'large', $js);
 ```
 
-If the array passed as $options is a multidimensional array, form_dropdown() will produce an with the array key as the label.
+If the array passed as $options is a multidimensional array, form\dropdown() will produce an with the array key as the label.
 
-#### formMultiselect()
+#### form\multiselect()
 
-Lets you create a standard multiselect field. The first parameter will contain the name of the field, the second parameter will contain an associative array of options, and the third parameter will contain the value or values you wish to be selected. The parameter usage is identical to using <kbd>formDropdown()</kbd> above, except of course that the name of the field will need to use POST array syntax, e.g. <kbd>foo[]</kbd>.
+Lets you create a standard multiselect field. The first parameter will contain the name of the field, the second parameter will contain an associative array of options, and the third parameter will contain the value or values you wish to be selected. The parameter usage is identical to using <kbd>form\dropdown()</kbd> above, except of course that the name of the field will need to use POST array syntax, e.g. <kbd>foo[]</kbd>.
 
-#### formFieldset()
+#### form\fieldset()
 
 Lets you generate fieldset/legend fields.
 
 ```php
-echo formFieldset('Address Information');
+echo form\fieldset('Address Information');
 echo "<p>fieldset content here</p>\n";
-echo formFieldset_close();
+echo form\fieldsetClose();
 
 // Produces
 <fieldset>
@@ -213,14 +213,14 @@ echo formFieldset_close();
 </fieldset>
 ```
 
-#### formFieldsetClose()
+#### form\fieldsetClose()
 
 Produces a closing <b>fieldset</b> tag. The only advantage to using this function is it permits you to pass data to it which will be added below the tag. For example:
 
 ```php
 $string = "</div></div>";
 
-echo fieldsetClose($string);
+echo form\fieldsetClose($string);
 
 // Would produce:
 </fieldset>
@@ -232,35 +232,35 @@ As with other functions, if you would like the tag to contain additional data, l
 ```php
 $js = 'onClick="some_function()"';
 
- echo formCheckbox('newsletter', 'accept', TRUE, $js)
+ echo form\checkbox('newsletter', 'accept', TRUE, $js)
 ```
 
-#### formRadio()
+#### form\radio()
 
-This function is identical in all respects to the <dfn>formCheckbox()</dfn> function above except that is sets it as a "radio" type.
+This function is identical in all respects to the <dfn>form\checkbox()</dfn> function above except that is sets it as a "radio" type.
 
-#### formSubmit()
+#### form\submit()
 
 Lets you generate a standard submit button. Simple example:
 
 ```php
-echo formSubmit('mysubmit', 'Submit Post!');
+echo form\submit('mysubmit', 'Submit Post!');
 
 // Would produce:
 
 <input type="submit" name="mysubmit" value="Submit Post!" />
 ```
 
-#### formReset()
+#### form\reset()
 
-Lets you generate a standard reset button. Use is identical to <dfn>formSubmit()</dfn>.
+Lets you generate a standard reset button. Use is identical to <dfn>form\submit()</dfn>.
 
-#### formButton()
+#### form\button()
 
 Lets you generate a standard button element. You can minimally pass the button name and content in the first and second parameter:
 
 ```php
-echo formButton('name','content');
+echo form\button('name','content');
 
 // Would produce
 <button name="name" type="button">Content</button> 
@@ -277,7 +277,7 @@ $data = array(
     'content' => 'Reset'
 );
 
-echo formButton($data);
+echo form\button($data);
 
 // Would produce:
 <button name="button" id="button" value="TRUE" type="reset">Reset</button>  
@@ -287,17 +287,17 @@ If you would like your form to contain some additional data, like JavaScript, yo
 
 ```php
 $js = 'onClick="someFunction()"';
-echo formButton('mybutton', 'Click Me', $js);
+echo form\button('mybutton', 'Click Me', $js);
 ```
 
-#### formClose()
+#### form\close()
 
 Produces a closing tag. The only advantage to using this function is it permits you to pass data to it which will be added below the tag. For example:
 
 ```php
 $string = "</div></div>";
 
-echo formClose($string);
+echo form\close($string);
 
 // Would produce:
 
@@ -305,27 +305,27 @@ echo formClose($string);
 </div></div>
 ```
 
-#### validation_errors($prefix = '', $suffix = '')
+#### validationErrors($prefix = '', $suffix = '')
 
 Return to all validation errors of Validator Class. Using prefix and suffix parameters you can use custom html tags.
 
 ```php
-echo validation_errors($prefix = '<div class="notification">' , $suffix = '</div>');
+echo form\validationErrors($prefix = '<div class="notification">' , $suffix = '</div>');
 ```
 
-#### formMsg($model, $form_msg = '')
+#### form\msg($model, $form_msg = '')
 
 Return a heading message at top of the current form using the <b>Validation Model object</b>.
 
 ```php
-echo formMsg($model, $form_msg = '')
+echo form\msg($model, $form_msg = '')
 
 // Output <div class="notification error">There are some errors in the form fields !</div>
 ```
 
 Using optional second parameter you can provide custom errors or success messages otherwise it returns to validation errors of Validator Class.
 
-#### formPrep()
+#### form\prep()
 
 Allows you to safely use HTML and characters such as quotes within form elements without breaking out of the form. Consider this example:
 
@@ -347,7 +347,7 @@ Since the above string contains a set of quotes it will cause the form to break.
 Permits you to set the value of an input form or textarea. You must supply the field name via the first parameter of the function. The second (optional) parameter allows you to set a default value for the form. Example:
 
 ```php
-<input type="text" name="quantity" value="<?php echo set_value('quantity', '0'); ?>" size="50" />
+<input type="text" name="quantity" value="<?php echo form\setValue('quantity', '0'); ?>" size="50" />
 ```
 
 The above form will show "0" when loaded for the first time.
@@ -360,9 +360,9 @@ Example:
 
 ```php
 <select name="myselect">
-<option value="one" <?php echo  set_select('myselect', 'one', TRUE); ?> >One</option>
-<option value="two" <?php echo  set_select('myselect', 'two'); ?> >Two</option>
-<option value="three" <?php echo  set_select('myselect', 'three'); ?> >Three</option>
+<option value="one" <?php echo  form\setSelect('myselect', 'one', TRUE); ?> >One</option>
+<option value="two" <?php echo  form\setSelect('myselect', 'two'); ?> >Two</option>
+<option value="three" <?php echo  form\setSelect('myselect', 'three'); ?> >Three</option>
 </select>
 ```
 
@@ -371,8 +371,8 @@ Example:
 Permits you to display a checkbox in the state it was submitted. The first parameter must contain the name of the checkbox, the second parameter must contain its value, and the third (optional) parameter lets you set an item as the default (use boolean TRUE/FALSE). Example:
 
 ```php
-<input type="checkbox" name="mycheck" value="1" <?php echo set_checkbox('mycheck', '1'); ?> /><br />
-<input type="checkbox" name="mycheck" value="2" <?php echo set_checkbox('mycheck', '2'); ?> />
+<input type="checkbox" name="mycheck" value="1" <?php echo form\setCheckbox('mycheck', '1'); ?> /><br />
+<input type="checkbox" name="mycheck" value="2" <?php echo form\setCheckbox('mycheck', '2'); ?> />
 ```
 
 #### setRadio()
@@ -380,6 +380,6 @@ Permits you to display a checkbox in the state it was submitted. The first param
 Permits you to display radio buttons in the state they were submitted. This function is identical to the <b>set_checkbox()</b> function above.
 
 ```php
-<input type="radio" name="myradio" value="1" <?php echo  set_radio('myradio', '1', TRUE); ?> />
-<input type="radio" name="myradio" value="2" <?php echo  set_radio('myradio', '2'); ?> />
+<input type="radio" name="myradio" value="1" <?php echo  form\setRadio('myradio', '1', TRUE); ?> />
+<input type="radio" name="myradio" value="2" <?php echo  form\setRadio('myradio', '2'); ?> />
 ```
