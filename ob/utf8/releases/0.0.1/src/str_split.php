@@ -1,36 +1,25 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Str_Split {
 
-// ------------------------------------------------------------------------
-
-/**
- * UTF8 str_split
- *
- * @access  private
- * @param string $str
- * @param int $split_length
- * @return string
- */
-if( ! function_exists('utf8_str_split'))
-{
-    function utf8_str_split($str, $split_length = 1)
+    // ------------------------------------------------------------------------
+    
+    /**
+     * UTF8 str_split
+     *
+     * @access  private
+     * @param string $str
+     * @param int $split_length
+     * @return string
+     */
+    function start($str, $split_length = 1)
     {
-        $utf8 = lib('ob/utf8');
+        $utf8 = new \Utf8(false);
         
         $split_length = (int) $split_length;
 
-        if($utf8->is_ascii($str))
+        if($utf8->isAscii($str))
         {
             return str_split($str, $split_length);
         }
@@ -49,7 +38,8 @@ if( ! function_exists('utf8_str_split'))
 
         return $matches[0];
     }
+
 }
 
 /* End of file str_split.php */
-/* Location: ./obullo/helpers/drivers/utf8/str_split.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/str_split.php */

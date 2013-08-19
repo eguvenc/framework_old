@@ -1,33 +1,22 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Ucfirst {
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* UTF8 ucfirst
-*
-* @access  private
-* @param   string $str
-* @return  string
-*/
-if( ! function_exists('utf8_ucfirst'))
-{
-    function utf8_ucfirst($str)
+    /**
+    * UTF8 ucfirst
+    *
+    * @access  private
+    * @param   string $str
+    * @return  string
+    */
+    public function start($str)
     {
-        $utf8 = lib('ob/utf8');
+        $utf8 = new \Utf8(false);
 
-        if($utf8->is_ascii($str))
+        if($utf8->isAscii($str))
         {
             return ucfirst($str);
         }
@@ -36,7 +25,8 @@ if( ! function_exists('utf8_ucfirst'))
         
 	return $utf8->strtoupper($matches[1]).$matches[2];
     }
+
 }
 
 /* End of file ucfirst.php */
-/* Location: ./obullo/helpers/drivers/utf8/ucfirst.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/ucfirst.php */

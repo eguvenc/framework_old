@@ -1,41 +1,30 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Strspn {
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* UTF8 strspn
-*
-* @access  private
-* @param   string $str
-* @param   string $mask
-* @param   int $offset
-* @param   int $length
-* @return  string
-*/
-if( ! function_exists('utf8_strspn'))
-{
-    function utf8_strspn($str, $mask, $offset = null, $length = null)
+    /**
+    * UTF8 strspn
+    *
+    * @access  private
+    * @param   string $str
+    * @param   string $mask
+    * @param   int $offset
+    * @param   int $length
+    * @return  string
+    */
+    function start($str, $mask, $offset = null, $length = null)
     {
-        $utf8 = lib('ob/utf8');
+        $utf8 = new \Utf8(false);
         
         if($str == '' OR $mask == '')
         {
             return 0;
         } 
 
-        if($utf8->is_ascii($str) AND $utf8->is_ascii($mask))
+        if($utf8->isAscii($str) AND $utf8->isAscii($mask))
         {
             return ($offset === null) ? strspn($str, $mask) : (($length === null) 
                     ? strspn($str, $mask, $offset) : strspn($str, $mask, $offset, $length));
@@ -54,7 +43,8 @@ if( ! function_exists('utf8_strspn'))
 
         return isset($matches[0]) ? $utf8->strlen($matches[0]) : 0;
     }
+    
 }
 
 /* End of file strspn.php */
-/* Location: ./obullo/helpers/drivers/utf8/strspn.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/strspn.php */

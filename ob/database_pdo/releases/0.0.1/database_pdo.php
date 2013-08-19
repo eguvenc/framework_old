@@ -88,7 +88,7 @@ Class Database_Pdo {
         
         $classname = 'Pdo_'.ucfirst($driver_name);
         $DB = new $classname($options);
-        $DB->__wakeup();
+        $DB->_connect();
         
         return $DB->getConnection();
     }

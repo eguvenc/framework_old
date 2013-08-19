@@ -27,7 +27,7 @@ if( ! function_exists('utf8_strrev'))
     {
         $utf8 = lib('ob/utf8');
         
-        if($utf8->is_ascii($str))
+        if($utf8->isAscii($str))
         {
             return strrev($str);
         }

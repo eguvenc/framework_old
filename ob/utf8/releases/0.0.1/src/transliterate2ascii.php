@@ -1,30 +1,19 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Transliterate2ascii {
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* UTF8 transliterate_to_ascii
-*
-* @access  private
-* @param   string $str
-* @param   int $case
-* @return  string
-*/
-if( ! function_exists('utf8_transliterate_to_ascii'))
-{
-    function utf8_transliterate_to_ascii($str, $case = 0)
+    /**
+    * UTF8 transliterate_to_ascii
+    *
+    * @access  private
+    * @param   string $str
+    * @param   int $case
+    * @return  string
+    */
+    public function start($str, $case = 0)
     {
         static $utf8_lower_accents = null;
         static $utf8_upper_accents = null;
@@ -91,7 +80,8 @@ if( ! function_exists('utf8_transliterate_to_ascii'))
 
         return $str;
     }
+    
 }
 
-/* End of file transliterate_to_ascii.php */
-/* Location: ./obullo/helpers/drivers/utf8/transliterate_to_ascii.php */
+/* End of file transliterate2ascii.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/transliterate2ascii.php */

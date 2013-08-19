@@ -1,41 +1,30 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Strcspn {
+    
+    // ------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------
-
-/**
- * UTF8 strcspn
- *
- * @access  private
- * @param string $str
- * @param string $mask
- * @param int $offset
- * @param int $length 
- * @return  string
- */
-if( ! function_exists('utf8_strcspn'))
-{
-    function utf8_strcspn($str, $mask, $offset = null, $length = null)
+    /**
+     * UTF8 strcspn
+     *
+     * @access  private
+     * @param string $str
+     * @param string $mask
+     * @param int $offset
+     * @param int $length 
+     * @return  string
+     */
+    function strcspn($str, $mask, $offset = null, $length = null)
     {
-        $utf8 = lib('ob/utf8');
-        
+        $utf8 = new \Utf8(false);
+
         if ($str == '' OR $mask == '')
         {
            return 0; 
         }
 
-        if ($utf8->is_ascii($str) AND $utf8->is_ascii($mask))
+        if ($utf8->isAscii($str) AND $utf8->isAscii($mask))
         {
             return ($offset === null) ? strcspn($str, $mask) : (($length === null) ? strcspn($str, $mask, $offset) : strcspn($str, $mask, $offset, $length));
         }
@@ -48,11 +37,12 @@ if( ! function_exists('utf8_strcspn'))
         // Escape these characters:  - [ ] . : \ ^ /
         // The . and : are escaped to prevent possible warnings about POSIX regex elements
         $mask = preg_replace('#[-[\].:\\\\^/]#', '\\\\$0', $mask);
-        
+
         preg_match('/^[^'.$mask.']+/u', $str, $matches);
 
         return isset($matches[0]) ? $utf8->strlen($matches[0]) : 0;
     }
+
 }
 
 /* End of file strcspn.php */

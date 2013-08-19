@@ -1,36 +1,25 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Str_Pad {
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
- * UTF8 str_pad
- *
- * @access  private
- * @param string $str
- * @param int $final_str_length
- * @param string $pad_str
- * @param int $pad_type
- * @return string
- */
-if( ! function_exists('utf8_str_pad'))
-{
-    function utf8_str_pad($str, $final_str_length, $pad_str = ' ', $pad_type = STR_PAD_RIGHT)
+    /**
+     * UTF8 str_pad
+     *
+     * @access  private
+     * @param string $str
+     * @param int $final_str_length
+     * @param string $pad_str
+     * @param int $pad_type
+     * @return string
+     */
+    function start($str, $final_str_length, $pad_str = ' ', $pad_type = STR_PAD_RIGHT)
     {
-        $utf8 = lib('ob/utf8');
+        $utf8 = new \Utf8();
         
-        if($utf8->is_ascii($str) AND $utf8->is_ascii($pad_str))
+        if($utf8->isAscii($str) AND $utf8->isAscii($pad_str))
         {
             return str_pad($str, $final_str_length, $pad_str, $pad_type);
         }
@@ -73,10 +62,9 @@ if( ! function_exists('utf8_str_pad'))
             return $pad_left.$str.$pad_right;
         }
 
-        log\me('UTF8 str_pad: Unknown padding type ('.$pad_type.') in this string: '.$str);
+        \log\me('debug', 'UTF8 str_pad: Unknown padding type ('.$pad_type.') in this string: '.$str);
     }
-
 }
-
+    
 /* End of file str_pad.php */
-/* Location: ./obullo/helpers/drivers/utf8/str_pad.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/str_pad.php */

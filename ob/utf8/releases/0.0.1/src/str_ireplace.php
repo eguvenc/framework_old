@@ -1,45 +1,33 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Str_Ireplace {
 
-// ------------------------------------------------------------------------
-
-/**
- * UTF8 str_ireplace
- *
- * @access  private
- * @param string $search
- * @param string $replace
- * @param string $str
- * @param int $count
- */
-
-if( ! function_exists('utf8_str_ireplace'))
-{
-    function utf8_str_ireplace($search, $replace, $str, & $count = null)
+    // ------------------------------------------------------------------------
+    
+    /**
+     * UTF8 str_ireplace
+     *
+     * @access  private
+     * @param string $search
+     * @param string $replace
+     * @param string $str
+     * @param int $count
+     */
+    public function start($search, $replace, $str, & $count = null)
     {
-        $utf8 = lib('ob/utf8');
+        $utf8 = new \Utf8(false);
 
-        if($utf8->is_ascii($search) AND $utf8->is_ascii($replace) AND $utf8->is_ascii($str))
+        if($utf8->isAscii($search) AND $utf8->isAscii($replace) AND $utf8->isAscii($str))
         {
-            return str_ireplace($search, $replace, $str, $count);
+            return strIreplace($search, $replace, $str, $count);
         }
 
         if (is_array($str))
         {
             foreach ($str as $key => $val)
             {
-                $str[$key] = $utf8->str_ireplace($search, $replace, $val, $count);
+                $str[$key] = $utf8->strIreplace($search, $replace, $val, $count);
             }
 
             return $str;
@@ -55,16 +43,16 @@ if( ! function_exists('utf8_str_ireplace'))
                 {
                     if (array_key_exists($k, $replace))
                     {
-                        $str = $utf8->str_ireplace($search[$k], $replace[$k], $str, $count);
+                        $str = $utf8->strIreplace($search[$k], $replace[$k], $str, $count);
                     }
                     else
                     {
-                        $str = $utf8->str_ireplace($search[$k], '', $str, $count);
+                        $str = $utf8->strIreplace($search[$k], '', $str, $count);
                     }
                 }
                 else
                 {
-                    $str = $utf8->str_ireplace($search[$k], $replace, $str, $count);
+                    $str = $utf8->strIreplace($search[$k], $replace, $str, $count);
                 }
             }
 
@@ -97,4 +85,4 @@ if( ! function_exists('utf8_str_ireplace'))
 }
 
 /* End of file str_ireplace.php */
-/* Location: ./obullo/helpers/drivers/utf8/str_ireplace.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/str_ireplace.php */

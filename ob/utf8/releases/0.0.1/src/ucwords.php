@@ -1,33 +1,22 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Ucwords {
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* UTF8 ucwords
-*
-* @access  private
-* @param   string $str
-* @return  string
-*/
-if( ! function_exists('utf8_ucwords'))
-{
-    function utf8_ucwords($str)
+    /**
+    * UTF8 ucwords
+    *
+    * @access  private
+    * @param   string $str
+    * @return  string
+    */
+    public function start($str)
     {
-        $utf8 = lib('ob/utf8');
-
-        if($utf8->is_ascii($str))
+        $utf8 = new \Utf8(false);
+        
+        if($utf8->isAscii($str))
         {
             return ucwords($str);
         }
@@ -43,4 +32,4 @@ if( ! function_exists('utf8_ucwords'))
 }
 
 /* End of file ucwords.php */
-/* Location: ./obullo/helpers/drivers/utf8/ucwords.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/ucwords.php */

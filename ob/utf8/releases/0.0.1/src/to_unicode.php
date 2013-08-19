@@ -1,17 +1,5 @@
 <?php
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
-
 // ------------------------------------------------------------------------
 
 /**

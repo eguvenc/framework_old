@@ -16,13 +16,13 @@ Abstract Class Database_Adapter extends Database_Layer {
     public $username = '';
     public $password = '';
     public $database = '';
-    public $driver = '';
+    public $driver   = '';
     public $char_set = '';
     public $dbh_port = '';
     public $dsn      = '';
     public $options  = array();
     
-    public $prefix = '';
+    public $prefix   = '';
     public $swap_pre = '';
     
     /**

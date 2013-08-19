@@ -41,7 +41,7 @@ Makes a UTF-8 string uppercase. This is a UTF8-aware version of (http://php.net/
 
 Returns part of a UTF-8 string. This is a UTF8-aware version of (http://php.net/substr).
 
-#### $this->utf8->substr_replace($str, $replacement, $offset, $length = NULL);
+#### $this->utf8->substrReplace($str, $replacement, $offset, $length = NULL);
 
 Replaces text within a portion of a UTF-8 string. This is a UTF8-aware version of (http://php.net/substr_replace).
 
@@ -68,7 +68,7 @@ Strips whitespace (or other UTF-8 characters) from the end of a string. This is 
 
 Returns the unicode ordinal for a character. This is a UTF8-aware version of (http://php.net/ord).
 
-#### $this->utf8->str_ireplace($search = '', $replace = '', $str = '');
+#### $this->utf8->strIreplace($search = '', $replace = '', $str = '');
 
 Returns a string or an array with all occurrences of search in subject (ignoring case) and replaced with the given replace value. This is a UTF8-aware version of (http://php.net/str_ireplace).
 

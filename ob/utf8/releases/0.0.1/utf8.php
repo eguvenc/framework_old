@@ -17,15 +17,14 @@
  * [!!] This file is licensed differently from the rest of Obullo. As a port of
  * [phputf8](http://phputf8.sourceforge.net/), this file is released under the LGPL.
  *
- * Some codes borrowed from Kohana Framework, Harry Fuecks and Andreas Gohr.
+ * Originally borrowed from Kohana Framework, Harry Fuecks and Andreas Gohr.
  * 
  * @package    Obullo
+ * @author     Obullo Team
  * @license    Utf8 library licenced under the http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
  */
 
 Class Utf8 {
-
-    public static $called      = array();   // List of called methods that have had their required file included.
     
     /**
     * Constructor - Set server utf8 extension.
@@ -33,12 +32,31 @@ Class Utf8 {
     *
     * @return void
     */
-    public function __construct()
+    public function __construct($no_instance = true)
     {
         if( ! extension_loaded('mbstring'))
         {
             throw new Exception('Mbstring extension not loaded.');
         }
+        
+        if($no_instance)
+        {
+            getInstance()->utf8 = $this; // Available it in the contoller $this->utf8->method();
+        }
+        
+        log\me('debug', "Utf8 Class Initialized");
+    }
+    
+    // ------------------------------------------------------------------------
+    
+    /**
+     * Initialize to Class.
+     * 
+     * @return object
+     */
+    public function init()
+    {
+        return ($this);
     }
     
     // ------------------------------------------------------------------------
@@ -48,15 +66,15 @@ Class Utf8 {
     * codes and converts to the requested charset while silently discarding
     * incompatible characters.
     *
-    *     OB_Utf8->clean($_GET); // Clean GET data
+    *     Utf8->clean($_GET); // Clean GET data
     *
     * [!!] This method requires [Iconv](http://php.net/iconv)
     *
     * @param   mixed   variable to clean
-    * @param   string  character set, defaults to Kohana::$charset
+    * @param   string  character set, defaults to config('charset')
     * @return  mixed
-    * @uses    OB_Utf8->strip_ascii_ctrl
-    * @uses    OB_Utf8->is_ascii
+    * @uses    Utf8->stripAsciiCtrl
+    * @uses    Utf8->is_ascii
     */
     public function clean($var, $charset = null)
     {
@@ -74,9 +92,9 @@ Class Utf8 {
         }
         elseif (is_string($var) AND $var !== '')
         {
-            $var = $this->strip_ascii_ctrl($var);  // Remove control characters
+            $var = $this->stripAsciiCtrl($var);  // Remove control characters
 
-            if ( ! $this->is_ascii($var))
+            if ( ! $this->isAscii($var))
             {
                 $error_reporting = error_reporting(~E_NOTICE); // Disable notices
                 
@@ -95,12 +113,12 @@ Class Utf8 {
     * Tests whether a string contains only 7-bit ASCII bytes. This is used to
     * determine when to use native functions or UTF-8 functions.
     *
-    *     $ascii = OB_Utf8->is_ascii($str);
+    *     $ascii = Utf8->isAscii($str);
     *
     * @param   mixed    string or array of strings to check
     * @return  boolean
     */
-    public function is_ascii($str)
+    public function isAscii($str)
     {
         if (is_array($str))
         {
@@ -115,12 +133,12 @@ Class Utf8 {
     /**
     * Strips out device control codes in the ASCII range.
     *
-    *     $str = OB_Utf8->strip_ascii_ctrl($str);
+    *     $str = Utf8->stripAsciiCtrl($str);
     *
     * @param   string  string to clean
     * @return  string
     */
-    public function strip_ascii_ctrl($str)
+    public function stripAsciiCtrl($str)
     {
         return preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S', '', $str);
     }
@@ -130,12 +148,12 @@ Class Utf8 {
     /**
     * Strips out all non-7bit ASCII bytes.
     *
-    *     $str = OB_Utf8->strip_non_ascii($str);
+    *     $str = Utf8->stripNonAscii($str);
     *
     * @param   string  string to clean
     * @return  string
     */
-    public function strip_non_ascii($str)
+    public function stripNonAscii($str)
     {
         return preg_replace('/[^\x00-\x7F]+/S', '', $str);
     }
@@ -145,23 +163,16 @@ Class Utf8 {
     /**
      * Replaces special/accented UTF-8 characters by ASCII-7 "equivalents".
      *
-     *     $ascii = OB_Utf8->transliterate_to_ascii($utf8);
+     *     $ascii = Utf8->transliterate_to_ascii($utf8);
      *
-     * @author  Andreas Gohr <andi@splitbrain.org>
      * @param   string   string to transliterate
      * @param   integer  -1 lowercase only, +1 uppercase only, 0 both cases
      * @return  string
      */
-    public function transliterate_to_ascii($str, $case = 0)
+    public function transliterate2ascii($str, $case = 0)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT;
-
-            self::$called[__FUNCTION__] = true;  // Function has been called
-        }
-
-        return utf8_transliterate_to_ascii($str, $case);
+        $object = new Utf8\Src\Transliterate2ascii();
+        return $object->start($str, $case);
     }
 
     // ------------------------------------------------------------------------
@@ -170,7 +181,7 @@ Class Utf8 {
     * Returns the length of the given string. This is a UTF8-aware version
     * of [strlen](http://php.net/strlen).
     *
-    *     $length = OB_Utf8->strlen($str);
+    *     $length = Utf8->strlen($str);
     *
     * @param   string   string being measured for length
     * @return  integer
@@ -186,9 +197,8 @@ Class Utf8 {
     * Finds position of first occurrence of a UTF-8 string. This is a
     * UTF8-aware version of [strpos](http://php.net/strpos).
     *
-    *     $position = OB_Utf8->strpos($str, $search);
+    *     $position = Utf8->strpos($str, $search);
     *
-    * @author  Harry Fuecks <hfuecks@gmail.com>
     * @param   string   haystack
     * @param   string   needle
     * @param   integer  offset from which character in haystack to start searching
@@ -206,9 +216,8 @@ Class Utf8 {
     * Finds position of last occurrence of a char in a UTF-8 string. This is
     * a UTF8-aware version of [strrpos](http://php.net/strrpos).
     *
-    *     $position = OB_Utf8->strrpos($str, $search);
+    *     $position = Utf8->strrpos($str, $search);
     *
-    * @author  Harry Fuecks <hfuecks@gmail.com>
     * @param   string   haystack
     * @param   string   needle
     * @param   integer  offset from which character in haystack to start searching
@@ -226,14 +235,12 @@ Class Utf8 {
     * Returns part of a UTF-8 string. This is a UTF8-aware version
     * of [substr](http://php.net/substr).
     *
-    *     $sub = OB_Utf8->substr($str, $offset);
+    *     $sub = Utf8->substr($str, $offset);
     *
-    * @author  Chris Smith <chris@jalakai.co.uk>
     * @param   string   input string
     * @param   integer  offset
     * @param   integer  length limit
     * @return  string
-    * @uses    UTF8::$server_utf8
     * @uses    config('charset');
     */
     public function substr($str, $offset, $length = null)
@@ -250,24 +257,17 @@ Class Utf8 {
     * Replaces text within a portion of a UTF-8 string. This is a UTF8-aware
     * version of [substr_replace](http://php.net/substr_replace).
     *
-    *     $str = OB_Utf8->substr_replace($str, $replacement, $offset);
+    *     $str = Utf8->substrReplace($str, $replacement, $offset);
     *
-    * @author  Harry Fuecks <hfuecks@gmail.com>
     * @param   string   input string
     * @param   string   replacement string
     * @param   integer  offset
     * @return  string
     */
-    public function substr_replace($str, $replacement, $offset, $length = null)
+    public function substrReplace($str, $replacement, $offset, $length = null)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true; // Function has been called
-        }
-
-        return utf8_substr_replace($str, $replacement, $offset, $length);
+        $object = new Utf8\Src\Substr_Replace();
+        return $object->start($str, $replacement, $offset, $length);
     }
 
     // ------------------------------------------------------------------------
@@ -276,13 +276,10 @@ Class Utf8 {
     * Makes a UTF-8 string lowercase. This is a UTF8-aware version
     * of [strtolower](http://php.net/strtolower).
     *
-    *     $str = OB_Utf8->strtolower($str);
+    *     $str = Utf8->strtolower($str);
     *
-    * @author  Andreas Gohr <andi@splitbrain.org>
-    * @author  Ersin Güvenç
     * @param   string   mixed case string
     * @return  string
-    * @uses    UTF8::$server_utf8
     */
     public function strtolower($str)
     {
@@ -303,8 +300,6 @@ Class Utf8 {
     * @author  Andreas Gohr <andi@splitbrain.org>
     * @param   string   mixed case string
     * @return  string
-    * @uses    UTF8::$server_utf8
-    * @uses    Kohana::$charset
     */
     public function strtoupper($str)
     {
@@ -317,7 +312,7 @@ Class Utf8 {
     * Makes a UTF-8 string's first character uppercase. This is a UTF8-aware
     * version of [ucfirst](http://php.net/ucfirst).
     *
-    *     $str = OB_Utf8->ucfirst($str);
+    *     $str = Utf8->ucfirst($str);
     *
     * @author  Harry Fuecks <hfuecks@gmail.com>
     * @param   string   mixed case string
@@ -325,14 +320,13 @@ Class Utf8 {
     */
     public function ucfirst($str)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
+        if(strpos($str, 'i') === 0)  // i - I problem in Turkish Characters .
         {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-            
-            self::$called[__FUNCTION__] = true; // Function has been called
+            $str = 'İ'. $this->substr($str, 1);
         }
-
-        return utf8_ucfirst($str);
+        
+        $object = new Utf8\Src\Ucfirst();
+        return $object->start($str);
     }
 
     // ------------------------------------------------------------------------
@@ -341,27 +335,20 @@ Class Utf8 {
     * Makes the first character of every word in a UTF-8 string uppercase.
     * This is a UTF8-aware version of [ucwords](http://php.net/ucwords).
     *
-    *     $str = OB_Utf8->ucwords($str);
+    *     $str = Utf8->ucwords($str);
     *
     * @param   string   mixed case string
     * @return  string
-    * @uses    UTF8::$server_utf8
     */
     public function ucwords($str)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true; // Function has been called
-        }
-
         if(strpos($str, 'i') === 0)  // i - I problem in Turkish Characters .
         {
             $str = 'İ'. $this->substr($str, 1);
         }
         
-        return utf8_ucwords($str);
+        $object = new Utf8\Src\Ucwords();
+        return $object->start($str);
     }
     
     // ------------------------------------------------------------------------
@@ -370,7 +357,7 @@ Class Utf8 {
     * Case-insensitive UTF-8 string comparison. This is a UTF8-aware version
     * of [strcasecmp](http://php.net/strcasecmp).
     *
-    *     $compare = OB_Utf8->strcasecmp($str1, $str2);
+    *     $compare = Utf8->strcasecmp($str1, $str2);
     *
     * @param   string   string to compare
     * @param   string   string to compare
@@ -380,14 +367,8 @@ Class Utf8 {
     */
     public function strcasecmp($str1, $str2)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true;  // Function has been called
-        }
-
-        return utf8_strcasecmp($str1, $str2);
+        $object = new Utf8\Src\Strcasecmp();
+        return $object->start($str1, $str2);
     }
 
     // ------------------------------------------------------------------------
@@ -407,16 +388,10 @@ Class Utf8 {
     * @return  string        if the input was a string
     * @return  array         if the input was an array
     */
-    public function str_ireplace($search, $replace, $str, & $count = null)
+    public function strIreplace($search, $replace, $str, & $count = null)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true;  // Function has been called
-        }
-
-        return utf8_str_ireplace($search, $replace, $str, $count);
+        $object = new Utf8\Src\Str_Ireplace();
+        return $object->start($search, $replace, $str, $count);
     }
 
     // ------------------------------------------------------------------------
@@ -426,7 +401,7 @@ Class Utf8 {
     * from the first occurrence of needle to the end. This is a UTF8-aware
     * version of [stristr](http://php.net/stristr).
     *
-    *     $found = OB_Utf8->stristr($str, $search);
+    *     $found = Utf8->stristr($str, $search);
     *
     * @param   string  input string
     * @param   string  needle
@@ -435,14 +410,8 @@ Class Utf8 {
     */
     public function stristr($str, $search)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true;  // Function has been called
-        }
-
-        return utf8_stristr($str, $search);
+        $object = new Utf8\Src\Stristr();
+        return $object->start($str, $search);
     }
 
     // ------------------------------------------------------------------------
@@ -451,7 +420,7 @@ Class Utf8 {
     * Finds the length of the initial segment matching mask. This is a
     * UTF8-aware version of [strspn](http://php.net/strspn).
     *
-    *     $found = OB_Utf8->strspn($str, $mask);
+    *     $found = Utf8->strspn($str, $mask);
     *
     * @param   string   input string
     * @param   string   mask for search
@@ -461,14 +430,8 @@ Class Utf8 {
     */
     public function strspn($str, $mask, $offset = null, $length = null)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true; // Function has been called
-        }
-
-        return utf8_strspn($str, $mask, $offset, $length);
+        $object = new Utf8\Src\Strspn();
+        return $object->start($str, $mask, $offset, $length);
     }
 
     // ------------------------------------------------------------------------
@@ -477,7 +440,7 @@ Class Utf8 {
     * Finds the length of the initial segment not matching mask. This is a
     * UTF8-aware version of [strcspn](http://php.net/strcspn).
     *
-    *     $found = OB_Utf8->strcspn($str, $mask);
+    *     $found = Utf8->strcspn($str, $mask);
     *
     * @param   string   input string
     * @param   string   mask for search
@@ -487,14 +450,8 @@ Class Utf8 {
     */
     public function strcspn($str, $mask, $offset = null, $length = null)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true;  // Function has been called
-        }
-
-        return utf8_strcspn($str, $mask, $offset, $length);
+        $object = new Utf8\Src\Strcspn();
+        return $object->start($str, $mask, $offset, $length);
     }
     
     // ------------------------------------------------------------------------
@@ -503,7 +460,7 @@ Class Utf8 {
     * Pads a UTF-8 string to a certain length with another string. This is a
     * UTF8-aware version of [str_pad](http://php.net/str_pad).
     *
-    *     $str = OB_Utf8->str_pad($str, $length);
+    *     $str = Utf8->str_pad($str, $length);
     *
     * @param   string   input string
     * @param   integer  desired string length after padding
@@ -511,16 +468,10 @@ Class Utf8 {
     * @param   string   padding type: STR_PAD_RIGHT, STR_PAD_LEFT, or STR_PAD_BOTH
     * @return  string
     */
-    public function str_pad($str, $final_str_length, $pad_str = ' ', $pad_type = STR_PAD_RIGHT)
+    public function strPad($str, $final_str_length, $pad_str = ' ', $pad_type = STR_PAD_RIGHT)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true;  // Function has been called
-        }
-
-        return utf8_str_pad($str, $final_str_length, $pad_str, $pad_type);
+        $object = new Utf8\Src\Str_Pad();
+        return $object->start($str, $final_str_length, $pad_str, $pad_type);
     }
 
     // ------------------------------------------------------------------------
@@ -529,22 +480,16 @@ Class Utf8 {
     * Converts a UTF-8 string to an array. This is a UTF8-aware version of
     * [str_split](http://php.net/str_split).
     *
-    *     $array = OB_Utf8->str_split($str);
+    *     $array = Utf8->str_split($str);
     *
     * @param   string   input string
     * @param   integer  maximum length of each chunk
     * @return  array
     */
-    public function str_split($str, $split_length = 1)
+    public function strSplit($str, $split_length = 1)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-            
-            self::$called[__FUNCTION__] = true; // Function has been called
-        }
-
-        return utf8_str_split($str, $split_length);
+        $object = new Utf8\Src\Str_Split();
+        return $object->start($str, $split_length);
     }
 
     // ------------------------------------------------------------------------
@@ -559,14 +504,8 @@ Class Utf8 {
     */
     public function strrev($str)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true;  // Function has been called
-        }
-
-        return utf8_strrev($str);
+        $object = new Utf8\Src\Str_Strrev();
+        return $object->start($str);
     }
 
     // ------------------------------------------------------------------------
@@ -683,7 +622,7 @@ Class Utf8 {
     * @return  array   unicode code points
     * @return  false   if the string is invalid
     */
-    public function to_unicode($str)
+    public function toUnicode($str)
     {
         if ( ! isset(self::$called[__FUNCTION__]))
         {
@@ -714,7 +653,7 @@ Class Utf8 {
     * @return  string   utf8 string of characters
     * @return  boolean  false if a code point cannot be found
     */
-    public function from_unicode($arr)
+    public function fromUnicode($arr)
     {
         if ( ! isset(self::$called[__FUNCTION__]))
         {

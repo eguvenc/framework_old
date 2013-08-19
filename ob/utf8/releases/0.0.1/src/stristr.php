@@ -1,34 +1,23 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Stristr {
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
-* UTF8 stristr
-*
-* @access  private
-* @param   string $str
-* @param   string $search
-* @return  string
-*/
-if( ! function_exists('utf8_stristr'))
-{
-    function utf8_stristr($str, $search)
+    /**
+    * UTF8 stristr
+    *
+    * @access  private
+    * @param   string $str
+    * @param   string $search
+    * @return  string
+    */
+    function start($str, $search)
     {
-        $utf8 = lib('ob/utf8');
+        $utf8 = new \Utf8(false);
         
-        if($utf8->is_ascii($str) AND $utf8->is_ascii($search))
+        if($utf8->isAscii($str) AND $utf8->isAscii($search))
         {
             return stristr($str, $search);
         }
@@ -49,9 +38,8 @@ if( ! function_exists('utf8_stristr'))
         } 
 
         return false;
-    }
+    }   
 }
 
-
 /* End of file stristr.php */
-/* Location: ./obullo/helpers/drivers/utf8/stristr.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/stristr.php */

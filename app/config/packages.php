@@ -53,6 +53,7 @@ $packages = array(
         'validator' => array('version' => '0.0.1', 'component' => 'library'),
         'uri' => array('version' => '0.0.1', 'component' => 'library'),
         'url' => array('version' => '0.0.1', 'component' => 'helper'),
+        'utf8' => array('version' => '0.0.1', 'component' => 'library'),
         'vi' => array('version' => '0.0.1', 'component' => 'helper'),
         'view' => array('version' => '0.0.1', 'component' => 'library'),
     )
