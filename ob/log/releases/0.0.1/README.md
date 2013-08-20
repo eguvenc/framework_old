@@ -1,7 +1,5 @@
 ## Log Helper
 
-------
-
 The Log Helper assist you write messages to your log files.
 
 ### log\me('level', 'message')
