@@ -49,7 +49,7 @@ Permits you to manually set a server status header. Example:
 $this->output->setStatusHeader('401');  // Sets the header as:  Unauthorized
 ```
 
-[See here]("http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html") for a full list of headers.
+[See here](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) for a full list of headers.
 
 #### $this->output->cache();
 
