@@ -147,7 +147,7 @@ Class Start extends Controller {
 }
 
 /* End of file start.php 
-Location: .application/welcome/controllers/start.php */
+Location: .app/welcome/controllers/start.php */
 ```
 
 and <samp>blog/blog/controllers/blog.php</php> file should be like this.
