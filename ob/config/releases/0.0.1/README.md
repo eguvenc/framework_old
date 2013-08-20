@@ -51,13 +51,13 @@ Please see the section entitled <dfn>Fetching Config Items</dfn> below to learn 
 
 The third parameter allows you to suppress errors in the event that a config file does not exist:
 
-<div class="highlight"> 
+
 <pre>
 <code>
-<span class="nv">$this</span><span class="o">-></span><span class="na">config</span><span class="o">-></span><span class="na">load</span><span class="p">(</span><span class="s1">'blog_settings'</span>, <span class="k">FALSE</span>, <span class="k">TRUE</span><span class="p">);</span>
+$this->config->load('blog_settings', FALSE, TRUE);
 </code>
 </pre>
-</div>
+
 <li>Auto-loading</li>
 
 If you find that you need a particular config file globally, you can have it loaded automatically by the system. To do this, look at this section auto-load.
