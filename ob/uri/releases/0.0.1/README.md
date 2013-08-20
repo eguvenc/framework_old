@@ -42,7 +42,7 @@ else
 }
 ```
 
-#### $this->uri->rsegment(n)
+#### $this->uri->rSegment(n)
 
 This function is identical to the previous one, except that it lets you retrieve a specific segment from your re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/#uri-routing) feature.
 
@@ -91,7 +91,6 @@ The first parameter of the function lets you set an offset. By default it is set
 
 ```php
 $array = $this->uri->uri2Assoc(3);
-
 echo $array['name']; 
 ```
 
@@ -137,7 +136,7 @@ The function would return this:
 /news/local/345
 ```
 
-#### $this->uri->ruriString(n)
+#### $this->uri->routedUriString(n)
 
 This function is identical to the previous one, except that it returns the re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/#uri-routing) feature.
 

@@ -1,7 +1,5 @@
 ## Output Class
 
-------
-
 The Output class is a small class with one main function: To send the finalized web page to the requesting browser. It is also responsible for [caching](/docs/advanced/#caching-and-compression) your web pages, if you use that feature.
 
 **Note:** This class is initialized automatically by the system so there is no need to do it manually.
