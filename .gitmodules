@@ -1,0 +1,3 @@
+[submodule "ob/acl"]
+	path = ob/acl
+	url = git@github.com:obullo/acl.git
