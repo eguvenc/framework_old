@@ -497,14 +497,14 @@ Class Utf8 {
     /**
     * Reverses a UTF-8 string. This is a UTF8-aware version of [strrev](http://php.net/strrev).
     *
-    *     $str = OB_Utf8->strrev($str);
+    *     $str = Utf8->strrev($str);
     *
     * @param   string   string to be reversed
     * @return  string
     */
     public function strrev($str)
     {
-        $object = new Utf8\Src\Str_Strrev();
+        $object = new Utf8\Src\Strrev();
         return $object->start($str);
     }
 
@@ -514,7 +514,7 @@ Class Utf8 {
     * Strips whitespace (or other UTF-8 characters) from the beginning and
     * end of a string. This is a UTF8-aware version of [trim](http://php.net/trim).
     *
-    *     $str = OB_Utf8->trim($str);
+    *     $str = Utf8->trim($str);
     *
     * @param   string   input string
     * @param   string   string of characters to remove
@@ -522,14 +522,8 @@ Class Utf8 {
     */
     public function trim($str, $charlist = null)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true; // Function has been called
-        }
-
-        return utf8_trim($str, $charlist);
+        $object = new Utf8\Src\Strrev();
+        return $object->start($str, $charlist);
     }
     
     // ------------------------------------------------------------------------
@@ -538,7 +532,7 @@ Class Utf8 {
     * Strips whitespace (or other UTF-8 characters) from the beginning of
     * a string. This is a UTF8-aware version of [ltrim](http://php.net/ltrim).
     *
-    *     $str = OB_Utf8->ltrim($str);
+    *     $str = Utf8->ltrim($str);
     *
     * @param   string   input string
     * @param   string   string of characters to remove
