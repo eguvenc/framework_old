@@ -1,7 +1,5 @@
 ## Cookie Helper
 
-------
-
 The Cookie Helper file contains functions that assist in working with cookies.
 
 ### Loading this Helper
