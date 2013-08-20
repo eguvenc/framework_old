@@ -1,14 +1,14 @@
-## Language Helper
+## Locale Class
 
 ------
 
-The Language Helper provides functions to retrieve language files and lines of text for purposes of internationalization.
+The Locale Class provides functions to retrieve language files and lines of text for purposes of internationalization.
 
-In your Obullo folder you'll find one called lang containing sets of language files. You can create your own language files as needed in order to display error and other messages in other languages.
+In your app folder you'll find one called locale containing sets of language files. You can create your own language files as needed in order to display error and other messages in other languages.
 
-Language files are typically stored in your obullo/lang directory. Alternately you can create a folder called <kbd>lang</kbd> inside your <kbd>app</kbd< folder and store them there.
+Language files are typically stored in your app/locale directory. Alternately you can create a folder called <kbd>locale</kbd> inside your <kbd>app</kbd> folder and store them there.
 
-**Note:** Each language should be stored in its own folder. For example, the English files are located at: <dfn>obullo/lang/english</dfn>
+**Note:** Each language should be stored in its own folder. For example, the English files are located at: <dfn>app/locale/english</dfn>
 
 ### Creating Language Files
 
@@ -28,33 +28,8 @@ $lang['error_url_missing']      = "You must submit a URL";
 $lang['error_username_missing'] = "You must submit a username";
 ```
 
-### Loading a Module Language File
-
-------
-
-If you want load language files from your <b>controllers</b> folder, you must create a folder called <b>lang</b>.
-
 ```php
-- modules
-        + welcome
-        - blog
-            + controllers
-            + helpers
-            - lang
-               - english
-                    menu.php
-               - french
-                    menu.php
-               - korean
-                    menu.php
-            + models
-            + views
-```
-
-This function load a <b>module</b> language file from your <dfn>modules/blog/lang/english</dfn> folder.
-
-```php
-new lang\start();('language', $folder= '');  // load module language file .. loader::lang('menu', 'english');
+$this->locale->load('language', $folder= '');  // load module language file .. 
 ```
 
 Where <samp>filename</samp> is the name of the file you wish to load (without the file extension), and language is the language set containing it (ie, english). If the second parameter is missing, the default language set in your <kbd>app/config/config.php</kbd> file will be used.
@@ -70,7 +45,7 @@ If you want load language files from your <b>app</b> folder create your language
     + cache
     + config
     + errors
-    + locale
+    - locale
         - english
             blog.php
             welcome.php
@@ -80,50 +55,50 @@ If you want load language files from your <b>app</b> folder create your language
 This function load a <b>app</b> language file from your <dfn>app/locale</dfn> folder.
 
 ```php
-new locale\start('app/filename', 'language');  // Load global language file.. 
+$this->locale->load('filename', 'language');  // Load global language file.. 
 ```
 
+For Example :
+
 ```php
-new locale\start('app/blog','spanish');
+$this->locale->load('calender','spanish');
 ```
 
 ### Loading a Obullo Language File
 
 ------
 
-If you want load language files from your <b>obullo</b> folder create your language files for base libraries.
+If you want load language files from your <b>app</b> folder create your language files for base libraries.
 
 ```php
-+  application
--  obullo
-    + constants
-    + database
-    + helpers
-    - locale
-        - english
-            calendar.php
-            date.php
-            .
-            .
-        - korean
-            calendar.php
-            date.php
-            .
-            .
+-  app
+    +cache
+    +config
+    +errors
+    -locale
+        -english
+            obullo.php
+            welcome.php
+            ...
+        -turkish
+            obullo.php
+            welcome.php
+            ...
+    +logs
 ```
 
 This function load a <b>obullo</b> language file from your <dfn>base/locale</dfn> folder.
 
 ```php
-new locale\start('ob/filename', 'language');  // Load base language file .. 
+$this->locale->load('filename', 'language');  // Load base language file .. 
 ```
 
 ```php
-loader::lang('ob/calendar'); // default english if you not provide second parameter 
+$this->locale->load('calender'); // default english if you not provide second parameter 
 ```
 
 ```php
-new locale\start('ob/calendar','spanish'); // load spanish file. 
+$this->locale->load('calendar','spanish'); // load spanish file. 
 ```
 
 ### Fetching a Line of Text
@@ -139,7 +114,7 @@ locale('language_key');
 You can use shotcut if its available ..
 
 ```php
-lang('language_key');
+locale('language_key');
 ```
 Where <samp>language_key</samp> is the array key corresponding to the line you wish to show.
 
@@ -152,7 +127,5 @@ Where <samp>language_key</samp> is the array key corresponding to the line you w
 If you find that you need a particular language globally throughout your application, you can tell Obullo [autoloader functions](/docs/advanced/#auto-loading-and-auto-running) it during system initialization. Like this ..
 
 ```php
-$autoload['locale'] = array('locale1' => array('english'), 'locale2' => array('german', FALSE));
+$autoload['locale'] = array('locale1','locale2' );
 ```
-
-Also you can <b>partially</b> load a language file see the [globally auto-loading resources](#) section.
