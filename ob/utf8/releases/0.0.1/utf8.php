@@ -163,15 +163,15 @@ Class Utf8 {
     /**
      * Replaces special/accented UTF-8 characters by ASCII-7 "equivalents".
      *
-     *     $ascii = Utf8->transliterate_to_ascii($utf8);
+     *     $ascii = Utf8->toAscii($utf8);
      *
      * @param   string   string to transliterate
      * @param   integer  -1 lowercase only, +1 uppercase only, 0 both cases
      * @return  string
      */
-    public function transliterate2ascii($str, $case = 0)
+    public function toAscii($str, $case = 0)
     {
-        $object = new Utf8\Src\Transliterate2ascii();
+        $object = new Utf8\Src\ToAscii();
         return $object->start($str, $case);
     }
 
