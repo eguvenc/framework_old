@@ -40,7 +40,7 @@ The XSS filter looks for commonly used techniques to trigger Javascript or other
 
 To filter data through the XSS filter use this function:
 
-xss\clean()
+#### clean()
 
 Here is a usage example:
 
