@@ -108,14 +108,15 @@ $this->locale->load('calendar','spanish'); // load spanish file.
 Once your desired language file is loaded you can access any line of text using this function:
 
 ```php
-locale('language_key');
+lang('language_key');
 ```
 
 You can use shotcut if its available ..
 
 ```php
-locale('language_key');
+lang('language_key');
 ```
+
 Where <samp>language_key</samp> is the array key corresponding to the line you wish to show.
 
 **Note:** This function simply returns the line. It does not echo it for you.
@@ -127,5 +128,5 @@ Where <samp>language_key</samp> is the array key corresponding to the line you w
 If you find that you need a particular language globally throughout your application, you can tell Obullo [autoloader functions](/docs/advanced/#auto-loading-and-auto-running) it during system initialization. Like this ..
 
 ```php
-$autoload['locale'] = array('locale1','locale2' );
+$autoload['locale'] = array('locale1', 'locale2');
 ```
