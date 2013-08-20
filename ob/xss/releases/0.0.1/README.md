@@ -87,4 +87,4 @@ You can enable csrf protection by opening your <samp>app/config/config.php</samp
 ```php
 $config['csrf_protection'] = TRUE;
 ```
-If you use the [form helper](/docs/packages/#form-helper) the <var>form\open()</var> function will automatically insert a hidden csrf field in your forms.
+If you use the [form helper](/ob/form/releases/0.0.1/) the <var>form\open()</var> function will automatically insert a hidden csrf field in your forms.
