@@ -1,7 +1,5 @@
 ## Input Helper
 
-------
-
 The Input Helper serves two purposes:
 
 <ol>
@@ -37,11 +35,11 @@ $something = i\post('something');
 The five functions are:
 
 <ul>
-    <li>i_post() ($_POST)</li>
-    <li>i_get() ($_GET)</li>
-    <li>i_request() ($_REQUEST)</li>
-    <li>i_cookie ($_COOKIE)</li>
-    <li>i_server() ($_SERVER)</li>
+    <li>i\post() ($_POST)</li>
+    <li>i\get() ($_GET)</li>
+    <li>i\getPost() </li>
+    <li>i\request() ($_REQUEST)</li>
+    <li>i\cookie ($_COOKIE)</li>
 </ol>
 
 #### i\post()
@@ -117,20 +115,13 @@ This function is identical to the post function, only it fetches cookie data:
 i\cookie('some_data', TRUE);
 ```
 
-#### i\server()
 
-This function is identical to the above functions, only it fetches server data:
-
-```php
-i\server('some_data');
-```
-
-#### i\ipAddress()
+#### i\ip()
 
 Returns the IP address for the current user. If the IP address is not valid, the function will return an IP of: 0.0.0.0
 
 ```php
-echo i\ipAddress();
+echo i\ip();
 ```
 
 #### i\validIp($ip)
