@@ -1,4 +1,4 @@
-## User Classes
+# User Classes
 
 ```php
 namespace Test {
@@ -7,7 +7,7 @@ namespace Test {
 
         function __construct()
         {
-            log\me('Test Helper Initialized !');
+            \log\me('Test Helper Initialized !');
         }       
     }
     
@@ -37,7 +37,7 @@ $test->me(); // outpput Hello !;
 
 ```
 
-## Include User Classes
+# Include User Classes
 
 ```php
 namespace Test {
@@ -48,11 +48,9 @@ namespace Test {
     {
         function __construct()
         {
-            log\me('Test Class Initialized !');
+            \log\me('Test Class Initialized !');
         }
     }
-
-    // ...
 };
 
 ```

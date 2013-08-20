@@ -7,11 +7,8 @@ Class Welcome extends Controller {
         parent::__construct();
 
         // new Email();
-        new form_Json\start();
+        // new form_Json\start();
         // function hasUpperCaseLetter($string)
-        
-        new Utf8(); /* These two examples replace all of $var with 'bob'. */
-        var_dump($this->utf8->fromUnicode(array('34', 'ds')));
         
         // new Acl();
         // new Db();

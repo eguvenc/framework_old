@@ -39,7 +39,7 @@ Class Zip {
      * @param    mixed    the directory name. Can be string or array
      * @return    void
      */
-    public function add_dir($directory)
+    public function addDir($directory)
     {
         foreach ((array)$directory as $dir)
         {
@@ -48,23 +48,22 @@ Class Zip {
                 $dir .= '/';
             }
 
-            $dir_time = $this->_get_mod_time($dir);
+            $dir_time = $this->_getModTime($dir);
 
-            $this->_add_dir($dir, $dir_time['file_mtime'], $dir_time['file_mdate']);
+            $this->_addDir($dir, $dir_time['file_mtime'], $dir_time['file_mdate']);
         }
     }
 
     // --------------------------------------------------------------------    
 
     /**
-     *    Get file/directory modification time
-     *    
-     *    If this is a newly created file/dir, we will set the time to 'now'
+     * Get file/directory modification time
+     * If this is a newly created file/dir, we will set the time to 'now'
      *
-     *    @param string    path to file
-     *    @return array     filemtime/filemdate
+     * @param string    path to file
+     * @return array     filemtime/filemdate
      */
-    public function _get_mod_time($dir)
+    public function _getModTime($dir)
     {
         // filemtime() will return false, but it does raise an error.
         $date = (@filemtime($dir)) ? filemtime($dir) : getdate($this->now); 
@@ -84,7 +83,7 @@ Class Zip {
      * @param    string    the directory name
      * @return    void
      */
-    public function _add_dir($dir, $file_mtime, $file_mdate)
+    public function _addDir($dir, $file_mtime, $file_mdate)
     {        
         $dir = str_replace("\\", "/", $dir);
 
@@ -137,22 +136,20 @@ Class Zip {
      * @param    string
      * @return    void
      */    
-    public function add_data($filepath, $data = null)
+    public function addData($filepath, $data = null)
     {    
         if (is_array($filepath))
         {
             foreach ($filepath as $path => $data)
             {
-                $file_data = $this->_get_mod_time($path);    
-
-                $this->_add_data($path, $data, $file_data['file_mtime'], $file_data['file_mdate']);
+                $file_data = $this->_getModTime($path);    
+                $this->_addData($path, $data, $file_data['file_mtime'], $file_data['file_mdate']);
             }
         }
         else
         {
-            $file_data = $this->_get_mod_time($filepath);
-            
-            $this->_add_data($filepath, $data, $file_data['file_mtime'], $file_data['file_mdate']);
+            $file_data = $this->_getModTime($filepath);
+            $this->_addData($filepath, $data, $file_data['file_mtime'], $file_data['file_mdate']);
         }
     }
 
@@ -166,7 +163,7 @@ Class Zip {
      * @param    string    the data to be encoded
      * @return   void
      */    
-    private function _add_data($filepath, $data, $file_mtime, $file_mdate)
+    private function _addData($filepath, $data, $file_mtime, $file_mdate)
     {
         $filepath = str_replace("\\", "/", $filepath);
 
@@ -218,7 +215,7 @@ Class Zip {
      * @access    public
      * @return    bool
      */    
-    public function read_file($path, $preserve_filepath = false)
+    public function readFile($path, $preserve_filepath = false)
     {
         if ( ! file_exists($path))
         {
@@ -234,7 +231,7 @@ Class Zip {
                 $name = preg_replace("|.*/(.+)|", "\\1", $name);
             }
 
-            $this->add_data($name, $data);
+            $this->addData($name, $data);
             return true;
         }
         return false;
@@ -253,7 +250,7 @@ Class Zip {
      * @param    string    path to source
      * @return    bool
      */
-    public function read_dir($path, $preserve_filepath = true, $root_path = null)
+    public function readDir($path, $preserve_filepath = true, $root_path = null)
     {
         if ( ! $fp = @opendir($path))
         {
@@ -275,7 +272,7 @@ Class Zip {
 
             if (@is_dir($path.$file))
             {
-                $this->read_dir($path.$file."/", $preserve_filepath, $root_path);
+                $this->readDir($path.$file."/", $preserve_filepath, $root_path);
             }
             else
             {
@@ -288,7 +285,7 @@ Class Zip {
                         $name = str_replace($root_path, '', $name);
                     }
 
-                    $this->add_data($name.$file, $data);
+                    $this->addData($name.$file, $data);
                 }
             }
         }
@@ -304,7 +301,7 @@ Class Zip {
      * @access    public
      * @return    binary string
      */    
-    public function get_zip()
+    public function getZip()
     {
         // Is there any data to return?
         if ($this->entries == 0)
@@ -342,7 +339,7 @@ Class Zip {
         }
 
         flock($fp, LOCK_EX);    
-        fwrite($fp, $this->get_zip());
+        fwrite($fp, $this->getZip());
         flock($fp, LOCK_UN);
         fclose($fp);
 
@@ -366,7 +363,7 @@ Class Zip {
             $filename .= '.zip';
         }
         
-        $get_zip = $this->get_zip();
+        $get_zip = $this->getZip();
         $data    =& $get_zip;
 
            // Try to determine if the filename includes a file extension.
@@ -428,7 +425,7 @@ Class Zip {
      * @access    public
      * @return    void
      */        
-    public function clear_data()
+    public function clearData()
     {
         $this->zipdata      = '';
         $this->directory    = '';
@@ -438,5 +435,5 @@ Class Zip {
     }
     
 }
-/* End of file Zip.php */
-/* Location: ./obullo/libraries/Zip.php */
+/* End of file zip.php */
+/* Location: ./ob/zip/releases/0.0.1/zip.php */
