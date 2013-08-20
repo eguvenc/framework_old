@@ -26,6 +26,7 @@ There are two ways to load a config file:
 
 
 1. Manual Loading
+
 To load one of your custom config files you will use the following function within the [controller](/docs/general/#controllers) that needs it:
 
 ```php
@@ -52,6 +53,7 @@ $this->config->load('blog_settings', FALSE, TRUE);
 ```
 
 2. Auto-loading
+
 If you find that you need a particular config file globally, you can have it loaded automatically by the system. To do this, look at this section auto-load.
 
 
