@@ -51,6 +51,7 @@ Please see the section entitled <dfn>Fetching Config Items</dfn> below to learn 
 
 The third parameter allows you to suppress errors in the event that a config file does not exist:
 
+
 <pre>
 <code>
 $this->config->load('blog_settings', FALSE, TRUE);
