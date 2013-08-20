@@ -1,7 +1,5 @@
 ## Html Helper
 
-------
-
 The Head Tag Helper file contains functions that assist in working with HTML tags.
 
 <ul>
@@ -18,7 +16,8 @@ The Head Tag Helper file contains functions that assist in working with HTML tag
     <li><a href="#img">img()</a></li>
     <li><a href="#doctype">link_tag()</a></li>
     <li><a href="#nbs">nbs()</a></li>
-     <li><a href="#ul-and-ol">ol() and ul()</a></li></ul>
+     <li><a href="#ul-and-ol">ol() and ul()</a></li>
+</ul>
 
 ### Loading this Helper
 
