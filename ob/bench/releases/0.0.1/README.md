@@ -11,10 +11,10 @@ In addition, the benchmark is always started the moment the framework is invoked
 #### Table of Contents
 
 <ul>
-    <li><a href="using-the-benchmark-helper">Using the Benchmark Helper</a></li>
-    <li><a href="profiling-your-benchmark">Profiling Your Benchmark Points</a></li>
-    <li><a href="displaying-total-execution-time">Displaying Total Execution Time</a></li>
-    <li><a href="displaying-memory-consumption">Displaying Memory Consumption</a></li>
+    <li><a href="#using-the-benchmark-helper">Using the Benchmark Helper</a></li>
+    <li><a href="#profiling-your-benchmark">Profiling Your Benchmark Points</a></li>
+    <li><a href="#displaying-total-execution-time">Displaying Total Execution Time</a></li>
+    <li><a href="#displaying-memory-consumption">Displaying Memory Consumption</a></li>
 </ul>
 
 ### Using the Benchmark Helper <a name="using-the-benchmark-helper"></a>
@@ -57,6 +57,7 @@ bench\mark('bird');
 echo bench\elapsedTime('dog', 'cat');
 echo bench\elapsedTime('cat', 'bird');
 echo bench\elapsedTime('dog', 'bird');
+```
 
 ### Profiling Your Benchmark Points <a name="profiling-your-benchmark-points"></a>
 
