@@ -12,7 +12,7 @@ In addition, the benchmark is always started the moment the framework is invoked
 
 <ul>
     <li><a href="#using-the-benchmark-helper">Using the Benchmark Helper</a></li>
-    <li><a href="#profiling-your-benchmark">Profiling Your Benchmark Points</a></li>
+    <li><a href="#profiling-your-benchmark-points">Profiling Your Benchmark Points</a></li>
     <li><a href="#displaying-total-execution-time">Displaying Total Execution Time</a></li>
     <li><a href="#displaying-memory-consumption">Displaying Memory Consumption</a></li>
 </ul>
