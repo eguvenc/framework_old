@@ -39,20 +39,23 @@ Where <var>filename</var> is the name of your config file, without the .php file
 
 If you need to load multiple config files normally they will be merged into one master config array. Name collisions can occur, however, if you have identically named array indexes in different config files. To avoid collisions you can set the second parameter to <kbd>TRUE</kbd> and each config file will be stored in an array index corresponding to the name of the config file. Example:
 
-```php
+<pre>
+<code>
 // Stored in an array with this prototype:
 $this->config['blog_settings'] = $config 
 
 $this->config->load('blog_settings', TRUE);
-```
-
+</code>
+</pre>
 Please see the section entitled <dfn>Fetching Config Items</dfn> below to learn how to retrieve config items set this way.
 
 The third parameter allows you to suppress errors in the event that a config file does not exist:
 
-```php
+<pre>
+<code>
 $this->config->load('blog_settings', FALSE, TRUE);
-```
+</code>
+</pre>
 
 <li>Auto-loading</li>
 
