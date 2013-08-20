@@ -6,7 +6,7 @@ The URI Class provides functions that help you retrieve information from your UR
 
 **Note:** This class is initialized automatically by the system so there is no need to do it manually.
 
-### $this->uri->segment(n)
+#### $this->uri->segment(n)
 
 Permits you to retrieve a specific segment. Where n is the segment number you wish to retrieve. Segments are numbered from left to right. For example, if your full URL is this:
 
@@ -62,7 +62,7 @@ Returns:
     <li>segment/</li>
     <li>/segment</li>
     <li>/segment/</li>
-<ol>
+</ol>
 
 #### $this->uri->slashRsegment(n)
 
