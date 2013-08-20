@@ -8,7 +8,6 @@ Class Welcome extends Controller {
 
         // new Email();
         // new form_Json\start();
-        // function hasUpperCaseLetter($string)
         
         // new Acl();
         // new Db();

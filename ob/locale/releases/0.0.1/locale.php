@@ -50,7 +50,7 @@ Class Locale {
     {
         if ($idiom == '')
         {
-            $default = config('language');
+            $default = config('locale');
             $idiom   = ($default == '') ? 'english' : $default;
         }
         

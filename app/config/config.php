@@ -186,7 +186,7 @@ $config['url_suffix']            = '';
 | than english.
 |
 */
-$config['language']              = 'english';
+$config['locale']                = 'english';
 
 /*
 |--------------------------------------------------------------------------
