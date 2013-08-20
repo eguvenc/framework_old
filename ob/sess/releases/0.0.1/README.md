@@ -33,7 +33,7 @@ Sessions will typically run globally with each page load, so the session helper 
 For the most part the session helper will run unattended in the background, so simply initializing the helper file will cause it to read, create, and update sessions.
 
 ```php
-sess_start();
+new sess\start();
 ```
 
 You can pass the paramaters by manually like this.
@@ -55,7 +55,7 @@ When a page is loaded, the session helper will check to see if valid session dat
 
 It's important for you to understand that once initialized, the Session helper runs automatically. There is nothing you need to do to cause the above behavior to happen. You can, as you'll see below, work with session data or even add your own data to a user's session, but the process of reading, writing, and updating a session is automatic.
 
-*Critical* If you intend to use session helper file in the all application you can load and declare **sess_start** function using **autoload** and **autorun** files look at below the example.
+*Critical* If you intend to use session helper file in the all application you can load and declare **sess\start** function using **autoload** and **autorun** files look at below the example.
 Autoloading sessions
 
 ```php
@@ -70,7 +70,7 @@ $autorun['function']['sess\start']   = array();
 
 Look at this section for more details about [auto-loading and auto-running](/docs/advanced/#auto-loading).
 
-If you don't want declare sess_func by globally you can use manually where do you need it. Sometimes if you are **not carefull** you may declare **sess\start(); **function more than one time in the application. So don't worry about it when you declare this function multiple times it will simply return to **FALSE**.
+If you don't want declare sess_func by globally you can use manually where do you need it. Sometimes if you are **not carefull** you may declare **sess\start();** function more than one time in the application. So don't worry about it when you declare this function multiple times it will simply return to **FALSE**.
 
 ```php
 sess\start();  // TRUE driver loaded and session started.
