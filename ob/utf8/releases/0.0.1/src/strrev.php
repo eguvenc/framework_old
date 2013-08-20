@@ -14,7 +14,7 @@ Class Strrev {
     */
     function start($str)
     {
-        $utf8 = new \Utf8();
+        $utf8 = new \Utf8(false);
         
         if($utf8->isAscii($str))
         {

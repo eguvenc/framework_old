@@ -28,5 +28,5 @@ Class Strcasecmp {
     }
 
 }
-/* End of file str_casecmp.php */
-/* Location: ./obullo/helpers/drivers/utf8/str_casecmp.php */
+/* End of file strcasecmp.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/strcasecmp.php */

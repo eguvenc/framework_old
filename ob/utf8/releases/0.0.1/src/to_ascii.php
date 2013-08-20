@@ -1,7 +1,7 @@
 <?php
 namespace Utf8\Src;
 
-Class ToAscii {
+Class To_Ascii {
 
     // ------------------------------------------------------------------------
 
@@ -83,5 +83,5 @@ Class ToAscii {
     
 }
 
-/* End of file toAscii.php */
-/* Location: ./ob/utf8/releases/0.0.1/src/toascii.php */
+/* End of file to_ascii.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/to_ascii.php */

@@ -1,38 +1,29 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Ltrim {
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
- * UTF8 ltrim
- * Trim left space with utf8 support
- *
- * @access  public
- * @param string $str
- * @param string $charlist
- * @return string
- */
-if( ! function_exists('utf8_ltrim'))
-{
-    function utf8_ltrim($str, $charlist = null)
+    /**
+     * UTF8 ltrim
+     * Trim left space with utf8 support
+     *
+     * @access  public
+     * @param string $str
+     * @param string $charlist
+     * @return string
+     */
+    function start($str, $charlist = null)
     {
         if ($charlist === null)
         {
             return ltrim($str);
         }
 
-        if (lib('ob/utf8')->isAscii($charlist))
+        $utf8 = new \Utf8(false);
+        
+        if ($utf8->isAscii($charlist))
         {
             return ltrim($str, $charlist);
         }
@@ -44,4 +35,4 @@ if( ! function_exists('utf8_ltrim'))
 }
 
 /* End of file ltrim.php */
-/* Location: ./obullo/helpers/drivers/utf8/ltrim.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/ltrim.php */

@@ -1,28 +1,17 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Ord {
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
- * UTF8 ord
- *
- * @access  private
- * @param string $str
- */
-if( ! function_exists('utf8_ord'))
-{
-    function utf8_ord($chr)
+    /**
+     * UTF8 ord
+     *
+     * @access  private
+     * @param string $str
+     */
+    function start($chr)
     {
         $ord0 = ord($chr);
 
@@ -33,7 +22,7 @@ if( ! function_exists('utf8_ord'))
 
         if ( ! isset($chr[1]))
         {
-            log\me('debug', 'Short sequence - at least 2 bytes expected, only 1 seen in this char: '. $chr);
+            \log\me('debug', 'Short sequence - at least 2 bytes expected, only 1 seen in this char: '. $chr);
             return false;
         }
 
@@ -46,7 +35,7 @@ if( ! function_exists('utf8_ord'))
 
         if ( ! isset($chr[2]))
         {
-            log\me('debug', 'Short sequence - at least 3 bytes expected, only 2 seen in this char: '. $chr);
+            \log\me('debug', 'Short sequence - at least 3 bytes expected, only 2 seen in this char: '. $chr);
             return false;
         }
 
@@ -59,7 +48,7 @@ if( ! function_exists('utf8_ord'))
 
         if ( ! isset($chr[3]))
         {
-            log\me('debug', 'Short sequence - at least 4 bytes expected, only 3 seen in this char: '. $chr);
+            \log\me('debug', 'Short sequence - at least 4 bytes expected, only 3 seen in this char: '. $chr);
             return false;
         }
 
@@ -72,7 +61,7 @@ if( ! function_exists('utf8_ord'))
 
         if ( ! isset($chr[4]))
         {
-            log\me('debug', 'Short sequence - at least 5 bytes expected, only 4 seen in this char: '. $chr);
+            \log\me('debug', 'Short sequence - at least 5 bytes expected, only 4 seen in this char: '. $chr);
             return false;
         }
 
@@ -85,7 +74,7 @@ if( ! function_exists('utf8_ord'))
 
         if ( ! isset($chr[5]))
         {
-            log\me('debug', 'Short sequence - at least 6 bytes expected, only 5 seen in this char: '. $chr);
+            \log\me('debug', 'Short sequence - at least 6 bytes expected, only 5 seen in this char: '. $chr);
             return false;
         }
 
@@ -96,12 +85,11 @@ if( ! function_exists('utf8_ord'))
 
         if ($ord0 >= 254 AND $ord0 <= 255)
         {
-            log\me('debug', 'Invalid UTF-8 with surrogate ordinal '.$ord0 . 'in this char: '. $chr);
+            \log\me('debug', 'Invalid UTF-8 with surrogate ordinal '.$ord0 . 'in this char: '. $chr);
             return false;
         }
     }
-    
 }
-
+    
 /* End of file ord.php */
-/* Location: ./obullo/helpers/drivers/utf8/ord.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/ord.php */

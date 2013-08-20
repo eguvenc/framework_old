@@ -485,7 +485,7 @@ By default, the Validator Class adds a paragraph tag (
 
     To globally change the error delimiters, in your controller function, just after loading the Form Validation class, add this:
     ```php
-    $form->set_error_delimiters('<div class="error">', '</div>');
+    $form->setErrorDelimiters('<div class="error">', '</div>');
     ```
 
     In this example, we've switched to using div tags.

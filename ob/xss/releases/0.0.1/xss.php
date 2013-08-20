@@ -1,4 +1,5 @@
 <?php
+namespace xml {
 
 /**
  * XSS Helper
@@ -25,34 +26,29 @@ if ( ! function_exists('xss_clean'))
     }
 }
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
- * Sanitize Filename
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('sanitize_filename'))
-{
+    /**
+     * Sanitize Filename
+     *
+     * @access	public
+     * @param	string
+     * @return	string
+     */
     function sanitizeFilename($filename)
     {
         return Security::getInstance()->sanitizeFilename($filename);
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
- * Strip Image Tags
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('strip_image_tags'))
-{
+    /**
+     * Strip Image Tags
+     *
+     * @access	public
+     * @param	string
+     * @return	string
+     */
     function stripImageTags($str)
     {
         $str = preg_replace("#<img\s+.*?src\s*=\s*[\"'](.+?)[\"'].*?\>#", "\\1", $str);
@@ -60,24 +56,22 @@ if ( ! function_exists('strip_image_tags'))
 
         return $str;
     }
-}
 
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-/**
- * Convert PHP tags to entities
- *
- * @access	public
- * @param	string
- * @return	string
- */
-if ( ! function_exists('encode_php_tags'))
-{
+    /**
+     * Convert PHP tags to entities
+     *
+     * @access	public
+     * @param	string
+     * @return	string
+     */
     function encodePhpTags($str)
     {
         return str_replace(array('<?php', '<?PHP', '<?', '?>'),  array('&lt;?php', '&lt;?PHP', '&lt;?', '?&gt;'), $str);
     }
-}
 
-/* End of file xss_filter.php */
-/* Location: ./ob/xss_filter/releases/0.0.1/xss_filter.php */
+ 
+    
+/* End of file xss.php */
+/* Location: ./ob/xss/releases/0.0.1/xss.php */

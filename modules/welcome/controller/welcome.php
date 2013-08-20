@@ -11,7 +11,7 @@ Class Welcome extends Controller {
         // function hasUpperCaseLetter($string)
         
         new Utf8(); /* These two examples replace all of $var with 'bob'. */
-        echo $this->utf8->strrev('isdd.iç ıasdasd');
+        var_dump($this->utf8->fromUnicode(array('34', 'ds')));
         
         // new Acl();
         // new Db();

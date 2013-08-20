@@ -150,5 +150,5 @@ namespace vi {
     
 }
 
-/* End of file view.php */
-/* Location: ./ob/view/releases/0.0.1/view.php */
+/* End of file vi.php */
+/* Location: ./ob/vi/releases/0.0.1/vi.php */

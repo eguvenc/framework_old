@@ -1,15 +1,18 @@
 <?php
+namespace Utf8\Src;
+
+Class From_Unicode {
 
     // ------------------------------------------------------------------------
 
     /**
-    * UTF8 from_unicode
+    * UTF8 fromUnicode
     *
     * @access  private
     * @param  array $arr
     * @return string 
     */
-    function fromUnicode($arr)
+    function start($arr)
     {
         ob_start();
 
@@ -33,7 +36,7 @@
             elseif ($arr[$k] >= 0xD800 AND $arr[$k] <= 0xDFFF)              // Test for illegal surrogates
             {
                 // Found a surrogate
-                log\me('debug', 'UTF8 from_unicode: Illegal surrogate at index: '.$k.', value: '.$arr[$k]);
+                \log\me('debug', 'UTF8 from_unicode: Illegal surrogate at index: '.$k.', value: '.$arr[$k]);
                 return false;
             }
             elseif ($arr[$k] <= 0xffff)              // 3 byte sequence
@@ -51,7 +54,7 @@
             }
             else                // Out of range
             {
-                log\me('debug', 'UTF8 from_unicode: Codepoint out of Unicode range at index: '.$k.', value: '.$arr[$k]);
+                \log\me('debug', 'UTF8 from_unicode: Codepoint out of Unicode range at index: '.$k.', value: '.$arr[$k]);
                 return false;
             }
         }
@@ -61,6 +64,8 @@
 
         return $result;
     }
+    
+}
 
 /* End of file from_unicode.php */
-/* Location: ./obullo/helpers/drivers/utf8/from_unicode.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/from_unicode.php */

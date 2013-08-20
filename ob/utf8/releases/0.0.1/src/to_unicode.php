@@ -1,17 +1,18 @@
 <?php
+namespace Utf8\Src;
 
-// ------------------------------------------------------------------------
+Class To_Unicode {
 
-/**
-* UTF8 utf8_to_unicode
-*
-* @access  private
-* @param   string $str
-* @return  string
-*/
-if( ! function_exists('utf8_to_unicode'))
-{
-    function utf8_to_unicode($str)
+    // ------------------------------------------------------------------------
+
+    /**
+    * UTF8 toUnicode
+    *
+    * @access  private
+    * @param   string $str
+    * @return  string
+    */
+    function start($str)
     {
         // Cached expected number of octets after the current octet until the beginning of the next UTF8 character sequence
         $m_state = 0;
@@ -85,7 +86,7 @@ if( ! function_exists('utf8_to_unicode'))
                 else
                 {
                     // Current octet is neither in the US-ASCII range nor a legal first octet of a multi-octet sequence.
-                    log\me('UTF8 to_unicode: Illegal sequence identifier in UTF-8 at byte '.$i. 'in this string: '.$str);
+                    \log\me('debug', 'UTF8 to_unicode: Illegal sequence identifier in UTF-8 at byte '.$i. 'in this string: '.$str);
                     return false;
                 }
             }
@@ -115,14 +116,13 @@ if( ! function_exists('utf8_to_unicode'))
                                 // Codepoints outside the Unicode range are illegal
                                 ($m_ucs4 > 0x10FFFF))
                         {
-                            log\me('UTF8 to_unicode: Illegal sequence or codepoint in UTF-8 at byte '.$i.' in this string: '.$str);
+                            \log\me('debug', 'UTF8 to_unicode: Illegal sequence or codepoint in UTF-8 at byte '.$i.' in this string: '.$str);
                             return false;
                         }
 
                         if (0xFEFF != $m_ucs4)
                         {
-                            // BOM is legal but we don't want to output it
-                            $out[] = $m_ucs4;
+                            $out[] = $m_ucs4;  // BOM is legal but we don't want to output it
                         }
 
                         // Initialize UTF-8 cache
@@ -135,7 +135,7 @@ if( ! function_exists('utf8_to_unicode'))
                 {
                     // ((0xC0 & (*in) != 0x80) AND (m_state != 0))
                     // Incomplete multi-octet sequence
-                    log\me('UTF8 to_unicode: Incomplete multi-octet sequence in UTF-8 at byte '.$i. 'in this string: '.$str);
+                    \log\me('debug', 'UTF8 to_unicode: Incomplete multi-octet sequence in UTF-8 at byte '.$i. 'in this string: '.$str);
                     return false;
                 }
             }
@@ -146,4 +146,4 @@ if( ! function_exists('utf8_to_unicode'))
 }
 
 /* End of file to_unicode.php */
-/* Location: ./obullo/helpers/drivers/utf8/to_unicode.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/to_unicode.php */

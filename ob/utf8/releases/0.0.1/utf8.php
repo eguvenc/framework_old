@@ -1,8 +1,7 @@
 <?php
 
 /**
- * A port of [phputf8](http://phputf8.sourceforge.net/) to a unified set
- * of files. Provides multi-byte aware replacement string functions.
+ * A port of [phputf8](http://phputf8.sourceforge.net/) to a unified set of files. Provides multi-byte aware replacement string functions.
  *
  * For UTF-8 support to work correctly, the following requirements must be met:
  *
@@ -66,15 +65,15 @@ Class Utf8 {
     * codes and converts to the requested charset while silently discarding
     * incompatible characters.
     *
-    *     Utf8->clean($_GET); // Clean GET data
+    *     $this->utf8->clean($_GET); // Clean GET data
     *
     * [!!] This method requires [Iconv](http://php.net/iconv)
     *
     * @param   mixed   variable to clean
     * @param   string  character set, defaults to config('charset')
     * @return  mixed
-    * @uses    Utf8->stripAsciiCtrl
-    * @uses    Utf8->is_ascii
+    * @uses    $this->utf8->stripAsciiCtrl
+    * @uses    $this->utf8->is_ascii
     */
     public function clean($var, $charset = null)
     {
@@ -113,7 +112,7 @@ Class Utf8 {
     * Tests whether a string contains only 7-bit ASCII bytes. This is used to
     * determine when to use native functions or UTF-8 functions.
     *
-    *     $ascii = Utf8->isAscii($str);
+    *     $ascii = $this->utf8->isAscii($str);
     *
     * @param   mixed    string or array of strings to check
     * @return  boolean
@@ -133,7 +132,7 @@ Class Utf8 {
     /**
     * Strips out device control codes in the ASCII range.
     *
-    *     $str = Utf8->stripAsciiCtrl($str);
+    *     $str = $this->utf8->stripAsciiCtrl($str);
     *
     * @param   string  string to clean
     * @return  string
@@ -148,7 +147,7 @@ Class Utf8 {
     /**
     * Strips out all non-7bit ASCII bytes.
     *
-    *     $str = Utf8->stripNonAscii($str);
+    *     $str = $this->utf8->stripNonAscii($str);
     *
     * @param   string  string to clean
     * @return  string
@@ -163,7 +162,7 @@ Class Utf8 {
     /**
      * Replaces special/accented UTF-8 characters by ASCII-7 "equivalents".
      *
-     *     $ascii = Utf8->toAscii($utf8);
+     *     $ascii = $this->utf8->toAscii($utf8);
      *
      * @param   string   string to transliterate
      * @param   integer  -1 lowercase only, +1 uppercase only, 0 both cases
@@ -171,7 +170,7 @@ Class Utf8 {
      */
     public function toAscii($str, $case = 0)
     {
-        $object = new Utf8\Src\ToAscii();
+        $object = new Utf8\Src\To_Ascii();
         return $object->start($str, $case);
     }
 
@@ -181,7 +180,7 @@ Class Utf8 {
     * Returns the length of the given string. This is a UTF8-aware version
     * of [strlen](http://php.net/strlen).
     *
-    *     $length = Utf8->strlen($str);
+    *     $length = $this->utf8->strlen($str);
     *
     * @param   string   string being measured for length
     * @return  integer
@@ -197,7 +196,7 @@ Class Utf8 {
     * Finds position of first occurrence of a UTF-8 string. This is a
     * UTF8-aware version of [strpos](http://php.net/strpos).
     *
-    *     $position = Utf8->strpos($str, $search);
+    *     $position = $this->utf8->strpos($str, $search);
     *
     * @param   string   haystack
     * @param   string   needle
@@ -216,7 +215,7 @@ Class Utf8 {
     * Finds position of last occurrence of a char in a UTF-8 string. This is
     * a UTF8-aware version of [strrpos](http://php.net/strrpos).
     *
-    *     $position = Utf8->strrpos($str, $search);
+    *     $position = $this->utf8->strrpos($str, $search);
     *
     * @param   string   haystack
     * @param   string   needle
@@ -235,7 +234,7 @@ Class Utf8 {
     * Returns part of a UTF-8 string. This is a UTF8-aware version
     * of [substr](http://php.net/substr).
     *
-    *     $sub = Utf8->substr($str, $offset);
+    *     $sub = $this->utf8->substr($str, $offset);
     *
     * @param   string   input string
     * @param   integer  offset
@@ -257,7 +256,7 @@ Class Utf8 {
     * Replaces text within a portion of a UTF-8 string. This is a UTF8-aware
     * version of [substr_replace](http://php.net/substr_replace).
     *
-    *     $str = Utf8->substrReplace($str, $replacement, $offset);
+    *     $str = $this->utf8->substrReplace($str, $replacement, $offset);
     *
     * @param   string   input string
     * @param   string   replacement string
@@ -276,7 +275,7 @@ Class Utf8 {
     * Makes a UTF-8 string lowercase. This is a UTF8-aware version
     * of [strtolower](http://php.net/strtolower).
     *
-    *     $str = Utf8->strtolower($str);
+    *     $str = $this->utf8->strtolower($str);
     *
     * @param   string   mixed case string
     * @return  string
@@ -312,7 +311,7 @@ Class Utf8 {
     * Makes a UTF-8 string's first character uppercase. This is a UTF8-aware
     * version of [ucfirst](http://php.net/ucfirst).
     *
-    *     $str = Utf8->ucfirst($str);
+    *     $str = $this->utf8->ucfirst($str);
     *
     * @author  Harry Fuecks <hfuecks@gmail.com>
     * @param   string   mixed case string
@@ -335,7 +334,7 @@ Class Utf8 {
     * Makes the first character of every word in a UTF-8 string uppercase.
     * This is a UTF8-aware version of [ucwords](http://php.net/ucwords).
     *
-    *     $str = Utf8->ucwords($str);
+    *     $str = $this->utf8->ucwords($str);
     *
     * @param   string   mixed case string
     * @return  string
@@ -357,7 +356,7 @@ Class Utf8 {
     * Case-insensitive UTF-8 string comparison. This is a UTF8-aware version
     * of [strcasecmp](http://php.net/strcasecmp).
     *
-    *     $compare = Utf8->strcasecmp($str1, $str2);
+    *     $compare = $this->utf8->strcasecmp($str1, $str2);
     *
     * @param   string   string to compare
     * @param   string   string to compare
@@ -401,7 +400,7 @@ Class Utf8 {
     * from the first occurrence of needle to the end. This is a UTF8-aware
     * version of [stristr](http://php.net/stristr).
     *
-    *     $found = Utf8->stristr($str, $search);
+    *     $found = $this->utf8->stristr($str, $search);
     *
     * @param   string  input string
     * @param   string  needle
@@ -420,7 +419,7 @@ Class Utf8 {
     * Finds the length of the initial segment matching mask. This is a
     * UTF8-aware version of [strspn](http://php.net/strspn).
     *
-    *     $found = Utf8->strspn($str, $mask);
+    *     $found = $this->utf8->strspn($str, $mask);
     *
     * @param   string   input string
     * @param   string   mask for search
@@ -440,7 +439,7 @@ Class Utf8 {
     * Finds the length of the initial segment not matching mask. This is a
     * UTF8-aware version of [strcspn](http://php.net/strcspn).
     *
-    *     $found = Utf8->strcspn($str, $mask);
+    *     $found = $this->utf8->strcspn($str, $mask);
     *
     * @param   string   input string
     * @param   string   mask for search
@@ -460,7 +459,7 @@ Class Utf8 {
     * Pads a UTF-8 string to a certain length with another string. This is a
     * UTF8-aware version of [str_pad](http://php.net/str_pad).
     *
-    *     $str = Utf8->str_pad($str, $length);
+    *     $str = $this->utf8->str_pad($str, $length);
     *
     * @param   string   input string
     * @param   integer  desired string length after padding
@@ -480,7 +479,7 @@ Class Utf8 {
     * Converts a UTF-8 string to an array. This is a UTF8-aware version of
     * [str_split](http://php.net/str_split).
     *
-    *     $array = Utf8->str_split($str);
+    *     $array = $this->utf8->str_split($str);
     *
     * @param   string   input string
     * @param   integer  maximum length of each chunk
@@ -497,7 +496,7 @@ Class Utf8 {
     /**
     * Reverses a UTF-8 string. This is a UTF8-aware version of [strrev](http://php.net/strrev).
     *
-    *     $str = Utf8->strrev($str);
+    *     $str = $this->utf8->strrev($str);
     *
     * @param   string   string to be reversed
     * @return  string
@@ -514,7 +513,7 @@ Class Utf8 {
     * Strips whitespace (or other UTF-8 characters) from the beginning and
     * end of a string. This is a UTF8-aware version of [trim](http://php.net/trim).
     *
-    *     $str = Utf8->trim($str);
+    *     $str = $this->utf8->trim($str);
     *
     * @param   string   input string
     * @param   string   string of characters to remove
@@ -522,7 +521,7 @@ Class Utf8 {
     */
     public function trim($str, $charlist = null)
     {
-        $object = new Utf8\Src\Strrev();
+        $object = new Utf8\Src\Trim();
         return $object->start($str, $charlist);
     }
     
@@ -532,7 +531,7 @@ Class Utf8 {
     * Strips whitespace (or other UTF-8 characters) from the beginning of
     * a string. This is a UTF8-aware version of [ltrim](http://php.net/ltrim).
     *
-    *     $str = Utf8->ltrim($str);
+    *     $str = $this->utf8->ltrim($str);
     *
     * @param   string   input string
     * @param   string   string of characters to remove
@@ -540,14 +539,8 @@ Class Utf8 {
     */
     public function ltrim($str, $charlist = null)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true; // Function has been called
-        }
-
-        return utf8_ltrim($str, $charlist);
+        $object = new Utf8\Src\Ltrim();
+        return $object->start($str, $charlist);
     }
     
     // ------------------------------------------------------------------------
@@ -556,7 +549,7 @@ Class Utf8 {
     * Strips whitespace (or other UTF-8 characters) from the end of a string.
     * This is a UTF8-aware version of [rtrim](http://php.net/rtrim).
     *
-    *     $str = OB_Utf8->rtrim($str);
+    *     $str = $this->utf8->rtrim($str);
     *
     * @param   string   input string
     * @param   string   string of characters to remove
@@ -564,14 +557,8 @@ Class Utf8 {
     */
     public function rtrim($str, $charlist = null)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true; // Function has been called
-        }
-
-        return utf8_rtrim($str, $charlist);
+        $object = new Utf8\Src\Rtrim();
+        return $object->start($str, $charlist);
     }
 
     // ------------------------------------------------------------------------
@@ -580,21 +567,15 @@ Class Utf8 {
     * Returns the unicode ordinal for a character. This is a UTF8-aware
     * version of [ord](http://php.net/ord).
     *
-    *     $digit = OB_Utf8->ord($character);
+    *     $digit = $this->utf8->ord($character);
     *
     * @param   string   UTF-8 encoded character
     * @return  integer
     */
     public function ord($chr)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-
-            self::$called[__FUNCTION__] = true;  // Function has been called
-        }
-
-        return utf8_ord($chr);
+        $object = new Utf8\Src\Ord();
+        return $object->start($chr);
     }
 
     // ------------------------------------------------------------------------
@@ -604,7 +585,7 @@ Class Utf8 {
     * Astral planes are supported i.e. the ints in the output can be > 0xFFFF.
     * Occurrences of the BOM are ignored. Surrogates are not allowed.
     *
-    *     $array = OB_Utf8->to_unicode($str);
+    *     $array = $this->utf8->toUnicode($str);
     *
     * The Original Code is Mozilla Communicator client code.
     * The Initial Developer of the Original Code is Netscape Communications Corporation.
@@ -618,14 +599,8 @@ Class Utf8 {
     */
     public function toUnicode($str)
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-            
-            self::$called[__FUNCTION__] = true; // Function has been called
-        }
-
-        return utf8_to_unicode($str);
+        $object = new Utf8\Src\To_Unicode();
+        return $object->start($str);
     }
 
     // ------------------------------------------------------------------------
@@ -635,7 +610,7 @@ Class Utf8 {
     * Astral planes are supported i.e. the ints in the input can be > 0xFFFF.
     * Occurrances of the BOM are ignored. Surrogates are not allowed.
     *
-    *     $str = OB_Utf8->to_unicode($array);
+    *     $str = $this->utf8->fromUnicode($array);
     *
     * The Original Code is Mozilla Communicator client code.
     * The Initial Developer of the Original Code is Netscape Communications Corporation.
@@ -647,19 +622,13 @@ Class Utf8 {
     * @return  string   utf8 string of characters
     * @return  boolean  false if a code point cannot be found
     */
-    public function fromUnicode($arr)
+    public function fromUnicode($arr = array())
     {
-        if ( ! isset(self::$called[__FUNCTION__]))
-        {
-            require BASE .'helpers'. DS .'drivers'. DS .'utf8'. DS . __FUNCTION__ .EXT; 
-            
-            self::$called[__FUNCTION__] = true; // Function has been called
-        }
-
-        return utf8_from_unicode($arr);
+        $object = new Utf8\Src\From_Unicode();
+        return $object->start($arr);
     }
 
 }
 
-/* End of file Utf8.php */
-/* Location: ./obullo/libraries/Utf8.php */
+/* End of file utf8.php */
+/* Location: ./ob/utf8/releases/0.0.1/utf8.php */

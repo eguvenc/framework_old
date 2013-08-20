@@ -1,5 +1,4 @@
 <?php
-namespace Validator;
 
 /**
  * Validator Class
@@ -186,7 +185,7 @@ Class Validator {
      * @param    string
      * @return    string
      */
-    public function set_message($lang, $val = '')
+    public function setMessage($lang, $val = '')
     {
         if ( ! is_array($lang))
         {
@@ -208,7 +207,7 @@ Class Validator {
      * @param    string
      * @return    void
      */    
-    public function set_error_delimiters($prefix = '<p>', $suffix = '</p>')
+    public function setErrorDelimiters($prefix = '<p>', $suffix = '</p>')
     {
         $this->_error_prefix = $prefix;
         $this->_error_suffix = $suffix;
@@ -354,7 +353,7 @@ Class Validator {
             
             if ($row['is_array'] == true)
             {
-                $this->_field_data[$field]['postdata'] = $this->_reduce_array($this->_globals, $row['keys']);
+                $this->_field_data[$field]['postdata'] = $this->_reduceArray($this->_globals, $row['keys']);
             }
             else
             {
@@ -376,7 +375,7 @@ Class Validator {
         }
 
         // Now we need to re-set the POST data with the new, processed data
-        $this->_reset_post_array();
+        $this->_resetPostArray();
         
         // No errors, validation passes!
         if ($total_errors == 0)
@@ -399,7 +398,7 @@ Class Validator {
      * @param    integer
      * @return   mixed
      */        
-    private function _reduce_array($array, $keys, $i = 0)
+    private function _reduceArray($array, $keys, $i = 0)
     {
         if (is_array($array))
         {
@@ -407,7 +406,7 @@ Class Validator {
             {
                 if (isset($array[$keys[$i]]))
                 {
-                    $array = $this->_reduce_array($array[$keys[$i]], $keys, ($i+1));
+                    $array = $this->_reduceArray($array[$keys[$i]], $keys, ($i+1));
                 }
                 else
                 {
@@ -431,7 +430,7 @@ Class Validator {
      * @access    private
      * @return    null
      */        
-    private function _reset_post_array()
+    private function _resetPostArray()
     {
         foreach ($this->_field_data as $field => $row)
         {
@@ -441,7 +440,7 @@ Class Validator {
                 {
                     if (isset($this->_globals[$row['field']]))
                     {
-                        $this->_globals[$row['field']] = $this->prep_for_form($row['postdata']);
+                        $this->_globals[$row['field']] = $this->prepForForm($row['postdata']);
                     }
                 }
                 else
@@ -467,14 +466,14 @@ Class Validator {
                         $array = array();
                         foreach ($row['postdata'] as $k => $v)
                         {
-                            $array[$k] = $this->prep_for_form($v);
+                            $array[$k] = $this->prepForForm($v);
                         }
 
                         $post_ref = $array;
                     }
                     else
                     {
-                        $post_ref = $this->prep_for_form($row['postdata']);
+                        $post_ref = $this->prepForForm($row['postdata']);
                     }
                 }
             }
@@ -548,7 +547,7 @@ Class Validator {
                 }
                 
                 // Build the error message
-                $message = sprintf($line, $this->_translate_fieldname($row['label']));
+                $message = sprintf($line, $this->_translateFieldname($row['label']));
 
                 // Save the error message
                 $this->_field_data[$row['field']]['error'] = $message;
@@ -739,11 +738,11 @@ Class Validator {
                 // of another field?  If so we need to grab its "field label"
                 if (isset($this->_field_data[$param]) AND isset($this->_field_data[$param]['label']))
                 {
-                    $param = $this->_translate_fieldname($this->_field_data[$param]['label']);
+                    $param = $this->_translateFieldname($this->_field_data[$param]['label']);
                 }
                 
                 // Build the error message
-                $message = sprintf($line, $this->_translate_fieldname($row['label']), $param);
+                $message = sprintf($line, $this->_translateFieldname($row['label']), $param);
 
                 // Save the error message
                 $this->_field_data[$row['field']]['error'] = $message;
@@ -768,7 +767,7 @@ Class Validator {
      * @param    string    the field name
      * @return   string
      */    
-    private function _translate_fieldname($fieldname)
+    private function _translateFieldname($fieldname)
     {
         // Do we need to translate the field name?
         // We look for the prefix lang: to determine this
@@ -1004,7 +1003,7 @@ Class Validator {
      * @param    value
      * @return    bool
      */    
-    public function min_len($str, $val)
+    public function minLen($str, $val)
     {
         if (preg_match("/[^0-9]/", $val))
         {
@@ -1024,7 +1023,7 @@ Class Validator {
      * @param    value
      * @return    bool
      */    
-    public function max_len($str, $val)
+    public function maxLen($str, $val)
     {
         if (preg_match("/[^0-9]/", $val))
         {
@@ -1044,7 +1043,7 @@ Class Validator {
      * @param    value
      * @return   bool
      */    
-    public function exact_len($str, $val)
+    public function exactLen($str, $val)
     {
         if (preg_match("/[^0-9]/", $val))
         {
@@ -1077,7 +1076,7 @@ Class Validator {
      * @param    string
      * @return   bool
      */
-    public function valid_email_dns($str)
+    public function validEmailDns($str)
     {
         if($this->validEmail($str) === true)
         {
@@ -1103,24 +1102,24 @@ Class Validator {
      * @param    string
      * @return   bool
      */    
-    public function valid_emails($str, $dns_check = '')
+    public function validEmails($str, $dns_check = '')
     {
         $dns_check = strtoupper($dns_check);
         
         $dns = '';
         if($dns_check == 'true' OR $dns_check == 1)
         {
-            $dns = '_dns';
+            $dns = 'Dns';
         }
         
         if (strpos($str, ',') === false)
         {
-            return $this->{'valid_email'.$dns}(trim($str));
+            return $this->{'validEmail'.$dns}(trim($str));
         }
         
         foreach(explode(',', $str) as $email)
         {
-            if (trim($email) != '' && $this->{'valid_email'.$dns}(trim($email)) === false)
+            if (trim($email) != '' && $this->{'validEmail'.$dns}(trim($email)) === false)
             {
                 return false;
             }
@@ -1139,7 +1138,7 @@ Class Validator {
      * @param    string date_format
      * @return   string
      */
-    public function valid_date($date, $format = 'mm-dd-yyyy')
+    public function validDate($date, $format = 'mm-dd-yyyy')
     {        
         $format = strtoupper(trim($format));
         
@@ -1195,7 +1194,7 @@ Class Validator {
      */
     public function validIp($ip)
     {
-        return i_valid_ip($ip);
+        return i\validIp($ip);
     }
 
     // --------------------------------------------------------------------
@@ -1221,7 +1220,7 @@ Class Validator {
      * @param    string
      * @return   bool
      */    
-    public function alpha_numeric($str)
+    public function alphaNumeric($str)
     {
         return ( ! preg_match("/^([a-z0-9])+$/i", $str)) ? false : true;
     }
@@ -1235,7 +1234,7 @@ Class Validator {
      * @param    string
      * @return   bool
      */    
-    public function alpha_dash($str)
+    public function alphaDash($str)
     {
         return ( ! preg_match("/^([-a-z0-9_-])+$/i", $str)) ? false : true;
     }
@@ -1263,7 +1262,7 @@ Class Validator {
      * @param    string
      * @return    bool
      */
-    public function is_numeric($str)
+    public function isNumeric($str)
     {
         return ( ! is_numeric($str)) ? false : true;
     } 
@@ -1291,7 +1290,7 @@ Class Validator {
      * @param    string
      * @return    bool
      */
-    public function is_natural($str)
+    public function isNatural($str)
     {   
            return (bool)preg_match( '/^[0-9]+$/', $str);
     }
@@ -1305,7 +1304,7 @@ Class Validator {
      * @param    string
      * @return    bool
      */
-    public function is_natural_no_zero($str)
+    public function isNaturalNoZero($str)
     {
         if ( ! preg_match( '/^[0-9]+$/', $str))
         {
@@ -1317,7 +1316,7 @@ Class Validator {
             return false;
         }
     
-           return true;
+        return true;
     }
     
     // --------------------------------------------------------------------
@@ -1332,7 +1331,7 @@ Class Validator {
      * @param    string
      * @return    bool
      */
-    public function valid_base64($str)
+    public function validBase64($str)
     {
         return (bool) ! preg_match('/[^a-zA-Z0-9\/\+=]/', $str);
     }
@@ -1346,7 +1345,7 @@ Class Validator {
      * @param string $str
      * @return bool
      */
-    public function no_space($str)
+    public function noSpace($str)
     {
        return (preg_match("#\s#", $str)) ? false : true;
     } 
@@ -1363,13 +1362,13 @@ Class Validator {
      * @param    string
      * @return    string
      */
-    public function prep_for_form($data = '')
+    public function prepForForm($data = '')
     {
         if (is_array($data))
         {
             foreach ($data as $key => $val)
             {
-                $data[$key] = $this->prep_for_form($val);
+                $data[$key] = $this->prepForForm($val);
             }
             
             return $data;
@@ -1392,7 +1391,7 @@ Class Validator {
      * @param    string
      * @return    string
      */    
-    public function prep_url($str = '')
+    public function prepUrl($str = '')
     {
         if ($str == 'http://' OR $str == '')
         {

@@ -1,36 +1,27 @@
 <?php
+namespace Utf8\Src;
 
-/**
- * Obullo Framework (c) 2009.
- *
- * PHP5 HMVC Based Scalable Software.
- * 
- * @package         obullo    
- * @author          obullo.com
- * @since           Version 1.0.1
- * @filesource
- * @license
- */
+Class Rtrim {
+    
+    // ------------------------------------------------------------------------
 
-// ------------------------------------------------------------------------
-
-/**
- * UTF8 rtrim
- *
- * @access  private
- * @param type $str
- * @param type $charlist
- */
-if(function_exists('utf8_rtrim'))
-{
-    function utf8_rtrim($str, $charlist = null)
+    /**
+     * UTF8 rtrim
+     *
+     * @access  private
+     * @param type $str
+     * @param type $charlist
+     */
+    function start($str, $charlist = null)
     {
         if ($charlist === null)
         {
             return rtrim($str);
         }	
 
-        if (lib('ob/utf8')->isAscii($charlist))
+        $utf8 = new \Utf8(false);
+                
+        if ($utf8->isAscii($charlist))
         {
             return rtrim($str, $charlist);   
         }
@@ -42,4 +33,4 @@ if(function_exists('utf8_rtrim'))
 }
 
 /* End of file rtrim.php */
-/* Location: ./obullo/helpers/drivers/utf8/rtrim.php */
+/* Location: ./ob/utf8/releases/0.0.1/src/rtrim.php */
