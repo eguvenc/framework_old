@@ -1,6 +1,0 @@
-[submodule "ob/agent"]
-	path = ob/agent
-	url = git@github.com:obullo/agent.git
-[submodule "ob/acl"]
-	path = ob/acl
-	url = git@github.com:obullo/acl.git
