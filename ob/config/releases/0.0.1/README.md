@@ -24,13 +24,16 @@ You can add your own config items to this file, or if you prefer to keep your co
 
 There are two ways to load a config file:
 
-<ol>
-<li>Manual Loading</li>
+
+<ol><li> Manual Loading</li>
+
 To load one of your custom config files you will use the following function within the [controller](/docs/general/#controllers) that needs it:
 
-```php
+<pre>
+<code>
 $this->config->load('filename');
-```
+</code>
+</pre>
 
 Where <var>filename</var> is the name of your config file, without the .php file extension.
 
@@ -52,6 +55,7 @@ $this->config->load('blog_settings', FALSE, TRUE);
 ```
 
 <li>Auto-loading</li>
+
 If you find that you need a particular config file globally, you can have it loaded automatically by the system. To do this, look at this section auto-load.
 </ol>
 
