@@ -29,9 +29,11 @@ There are two ways to load a config file:
 
 To load one of your custom config files you will use the following function within the [controller](/docs/general/#controllers) that needs it:
 
-```php
+<pre>
+<code>
 $this->config->load('filename');
-```
+</code>
+</pre>
 
 Where <var>filename</var> is the name of your config file, without the .php file extension.
 
