@@ -19,7 +19,7 @@
  */
 if ( ! function_exists('xss_clean'))
 {
-    function xssClean($str, $is_image = false)
+    function clean($str, $is_image = false)
     {
         return Security::getInstance()->xssClean($str, $is_image);
     }
