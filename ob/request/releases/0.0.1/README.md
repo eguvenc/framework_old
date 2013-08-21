@@ -1,8 +1,6 @@
 ## About HMVC
 
-------
-
-About HMVC structure you can find more information in [Advanced Topics / HMVC](/docs/advanced/#hmvc) section. Obullo's HMVC library support just <b>internal</b> requests at this time.
+About HMVC structure you can find more information in [Advanced Topics / HMVC](/docs/advanced/hmvc) section. Obullo's HMVC library support just <b>internal</b> requests at this time.
 
 ### Calling HMVC Requests
 

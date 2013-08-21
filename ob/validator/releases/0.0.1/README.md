@@ -1,7 +1,5 @@
 ## Form Validation
 
-------
-
 Obullo provides a comprehensive form validation and data prepping class that helps minimize the amount of code you'll write.
 
 <ul>
@@ -59,9 +57,9 @@ What follows is a "hands on" tutorial for implementing Obullos Form Validation.
 
 In order to implement form validation you'll need three things:
 
-1. A [View](/docs/general/#views) file containing a form.
+1. A [View](/docs/general/views) file containing a form.
 2. A View file containing a "success" message to be displayed upon successful submission.
-3. A [controller](/docs/general/#controllers) function to receive and process the submitted data.
+3. A [controller](/docs/general/controllers) function to receive and process the submitted data.
 
 Let's create those three things, using a member sign-up form as the example.
 

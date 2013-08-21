@@ -1,8 +1,6 @@
-### Vi Helper
+## Vi Helper
 
-------
-
-Obullo has a Vi helper that is always active and it declared in your [Autoload](/docs/advanced/#auto-loading) file.
+Obullo has a Vi helper that is always active and it declared in your [Autoload](/docs/advanced/auto-loading) file.
 
 ### Function Reference
 
@@ -28,7 +26,7 @@ Set array type variables to your layouts
 
 Get array variables from your layouts
 
-**Tip:**About loading and creating view files, you can find more examples in [views](/docs/general/#views) section.
+**Tip:**About loading and creating view files, you can find more examples in [views](/docs/general/views) section.
 
 ### Loading Views from common views folder
 

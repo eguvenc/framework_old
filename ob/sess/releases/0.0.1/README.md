@@ -28,7 +28,7 @@ $config['sess_driver']           = 'native';  // cookie | database | mongodb
 
 ------
 
-Sessions will typically run globally with each page load, so the session helper must either be initialized in your [controller](/docs/general/#controllers) constructors, or it can be [auto-load](/docs/advanced/#auto-loading) by the system.
+Sessions will typically run globally with each page load, so the session helper must either be initialized in your [controller](/docs/general/controllers) constructors, or it can be [auto-load](/docs/advanced/auto-loading) by the system.
 
 For the most part the session helper will run unattended in the background, so simply initializing the helper file will cause it to read, create, and update sessions.
 
@@ -68,7 +68,7 @@ Auto running sessions
 $autorun['function']['sess\start']   = array();
 ```
 
-Look at this section for more details about [auto-loading and auto-running](/docs/advanced/#auto-loading).
+Look at this section for more details about [auto-loading and auto-running](/docs/advanced/auto-loading).
 
 If you don't want declare sess_func by globally you can use manually where do you need it. Sometimes if you are **not carefull** you may declare **sess\start();** function more than one time in the application. So don't worry about it when you declare this function multiple times it will simply return to **FALSE**.
 
