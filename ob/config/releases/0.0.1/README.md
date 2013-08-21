@@ -1,7 +1,5 @@
 ## Config Class
 
-------
-
 The Config class provides a means to retrieve configuration preferences. These preferences can come from the default config file (<samp>app/config/config.php</samp>) or from your own custom config files.
 
 **Note:** This class is initialized automatically by the system so there is no need to do it manually.

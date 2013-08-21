@@ -96,9 +96,9 @@ $this->cart->insert($data);
 
 ------
 
-To display the cart you will create a [view file](http://obullo.com/user_guide/en/1.0.1/views.html) with code similar to the one shown below.
+To display the cart you will create a [view file](/docs/general/views) with code similar to the one shown below.
 
-Please note that this example uses the [form helper](http://obullo.com/user_guide/en/1.0.1/form-helper.html).
+Please note that this example uses the [form helper](/ob/form_json/releases/0.0.1).
 
 Your controller should be looks like this ..
 
@@ -257,48 +257,32 @@ In nearly all cases, updating the cart will be something the user does via the "
 
 #### $this->cart->insert();
 
-------
-
 Permits you to add items to the shopping cart, as outlined above.
 
 #### $this->cart->update();
-
-------
 
 Permits you to update items in the shopping cart, as outlined above.
 
 #### $this->cart->total();
 
-------
-
 Displays the total amount in the cart.
 
 #### $this->cart->total_items();
-
-------
 
 Displays the total number of items in the cart.
 
 #### $this->cart->contents();
 
-------
-
 Returns an array containing everything in the cart.
 
 #### $this->cart->has_options(rowid);
-
-------
 
 Returns TRUE (boolean) if a particular row in the cart contains options. This function is designed to be used in a loop with <dfn>$this->cart->contents()</dfn>, since you must pass the <kbd<rowid</kbd> to this function, as shown in the <kbd>Displaying the Cart</kbd> example above.
 
 #### $this->cart->options(rowid);
 
-------
-
 Returns an array of options for a particular product. This function is designed to be used in a loop with <dfn>$this->cart->contents()</dfn>, since you must pass the <kbd>rowid</kbd> to this function, as shown in the <dfn>Displaying the Cart</dfn> example above.
 
 #### $this->cart->destroy();
-
-------
 
 Permits you to destroy the cart. This function will likely be called when you are finished processing the customer's order.
