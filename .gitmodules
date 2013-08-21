@@ -6,4 +6,4 @@
 	url = git://github.com/obullo/agent.git
 [submodule "ob/auth"]
 	path = ob/auth
-	url = https://github.com/obullo/auth.git
+	url = git://github.com/obullo/auth.git
