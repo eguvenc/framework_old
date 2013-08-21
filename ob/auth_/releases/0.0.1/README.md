@@ -193,72 +193,48 @@ $this->auth->logout();
 
 #### $auth->select('field1, field3, field3 ..')
 
------- 
-
 Creates database select string according to your table fields. This function store all selected fields to session container.
 
 #### $auth->get($username = '', $password = '')
-
-------
 
 Creates sql query using username and password combination, if you not provide any username info it will look at $_REQUEST data.
 
 #### $auth->set($fake_auth = false)
 
-------
-
 Authenticate the selected user and store user data to session container. If you provide $fake_auth = true, you can set authentication to user without database selection. For example we use this feature for who want to login with facebook connect button.
 
 #### $auth->redirect($rediret_url = ' ', $urlencode = FALSE)
-
-------
 
 Check auth is fail and redirect it to provided url.
 
 #### $auth->check()
 
-------
-
 Check user is authenticated if its ok it returns to TRUE otherwise FALSE.
 
 #### $auth->data('key')
-
-------
 
 Retrieve authenticated user session data.
 
 #### $auth->setData($key, $val)
 
-------
-
 Set extra data to authenticated user container.
 
 #### $auth->unsetData($key)
-
-------
 
 Unset data from authenticated user container.
 
 #### $auth->item($key)
 
-------
-
 Get auth config item.
 
 #### $auth->setItem($key, $val)
-
-------
 
 Set auth config item.
 
 #### $auth->setAuth($data = array())
 
-------
-
 Store auth data to session container.
 
 #### $auth->logout()
-
-------
 
 Logout user, remove all auth data using destroy the sessions.

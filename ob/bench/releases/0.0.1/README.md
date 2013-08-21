@@ -63,7 +63,7 @@ echo bench\elapsedTime('dog', 'bird');
 
 ------
 
-If you want your benchmark data to be available to the [Profiler](/docs/advanced/#profiling-your-application) all of your marked points must be set up in pairs, and each mark point name must end with<kbd>_start</kbd> and <kbd>_end</kbd>. Each pair of points must otherwise be named identically. Example:
+If you want your benchmark data to be available to the [Profiler](/docs/advanced/profiling-your-application) all of your marked points must be set up in pairs, and each mark point name must end with<kbd>_start</kbd> and <kbd>_end</kbd>. Each pair of points must otherwise be named identically. Example:
 
 ```php
 bench\mark('my_mark_start');
@@ -79,7 +79,7 @@ bench\mark('another_mark_start');
 bench\mark('another_mark_end'); 
 ```
 
-Please read the [Profiler page](/docs/advanced/#profiling-your-application) for more information.
+Please read the [Profiler page](/docs/advanced/profiling-your-application) for more information.
 
 ### Displaying Total Execution Time <a name="displaying-total-execution-time"></a>
 
