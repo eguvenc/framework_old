@@ -93,7 +93,7 @@ Class Obullo
         }
         
         ############## Close the Db connection.
-
+/*
         $driver = db('driver');
         if($driver == 'mongo' AND isset(getInstance()->db->connection) AND is_object(getInstance()->db->connection))
         {
@@ -106,6 +106,7 @@ Class Obullo
                 getInstance()->db = null;
             }
         }
+ */
     }
     
 }

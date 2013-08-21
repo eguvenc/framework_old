@@ -3,26 +3,12 @@
 
 Mongo Class provides a lightweight and simple database management for popular NOSQL database type which is called <b>Mongodb</b>.
 
-### Database Configuration
-
-------
-
-Go to your <dfn>app/config/database.php</dfn> file and set the database.
-
-```php
-$database['db']['hostname']  = "localhost";
-$database['db']['username']  = "root";
-$database['db']['password']  = "12345";
-$database['db']['database']  = "yourdbname";
-$database['db']['driver']  = "mongodb";
-```
-
 ### Initializing the Class
 
 ------
 
 ```php
-new Db();
+new Mongo_Db();
 ```
 
 
@@ -36,43 +22,107 @@ You can set advanced mongodb options using app/config/mongodb.php file.
 
 ```php
 <?php
-$mongodb['host']         = 'localhost';
-$mongodb['port']         = '27017';
-$mongodb['database']     = '';
-$mongodb['username']     = '';
-$mongodb['password']     = '';
+
+/*
 |--------------------------------------------------------------------------
-| Persistent connections
+| Mongo Db Config 
 |--------------------------------------------------------------------------
+| Mongodb database api configuration file.
+| 
+| Prototype: 
 |
+|   $mongo['key'] = value;
+| 
 */
-$mongodb['persist']      = FALSE;
-$mongodb['persist_key']  = 'ob_mongo_persist';
+
+$mongo['host']         = 'localhost';
+$mongo['port']         = '27017';
+$mongo['database']     = '$yourdatabase';
+$mongo['username']     = '$username';
+$mongo['password']     = '$password';
+$mongo['dsn']          = ''; // mongodb://connection_string
+
+/*
 |--------------------------------------------------------------------------
 | Safe Queries
 |--------------------------------------------------------------------------
 | Writing speed and safety options.
 | 
 | Options:
+|   
+|   fysnc = Boolean, defaults to false. Forces the insert to be synced to disk before returning success.
+|   wtimewout = How long to wait for WriteConcern acknowledgement.The default value for MongoClient is 10000 milliseconds.
+|   timeout = If acknowledged writes are used, this sets how long (in milliseconds) for the client to wait for a database response.
+|  
+|   @link http://www.php.net/manual/en/mongocollection.save.php
+| 
+|  Write Concerns:
+|   w=0         Unacknowledged	A write will not be followed up with a GLE call, and therefore not checked ("fire and forget")
+|   w=1         Acknowledged	The write will be acknowledged by the server (the primary on replica set configuration)
+|   w=N         Replica Set Acknowledged	The write will be acknowledged by the primary server, and replicated to N-1 secondaries.
+|   w=majority	Majority Acknowledged	The write will be acknowledged by the majority of the replica set (including the primary). This is a special reserved string.
+|   w=<tag set>	Replica Set Tag Set Acknowledged	The write will be acknowledged by members of the entire tag set
+|   j=true	Journaled	The write will be acknowledged by primary and the journal flushed to disk
 |
-|   none  = Default, high speed.
-|   safe  = The database has receieved and executed the query
-|   fysnc = as above + the change has been committed to harddisk. 
-|   ( NOTE: Will introduce a performance penalty ).
-|
+|   @link http://www.php.net/manual/en/mongo.writeconcerns.php
 */
-$mongodb['query_safety'] = 'safe';
+$mongo['query_safety'] = array('w' => 0, 'j' => 1);
+
+/*
 |--------------------------------------------------------------------------
 | Connection Flag
 |--------------------------------------------------------------------------
-| If you are having connection problems try change set to TRUE.
+| If you are having connection problems try change set to true.
+|
+| if set true db will available end of the the connection string.
+| mongodb://[username:password@]/host/{dbname} 
 |
 */
-$mongodb['timeout']      = 100;
-$mongodb['host_db_flag'] = FALSE;
+$mongo['dbname_flag'] = false;
 
-//* End of file mongodb.php */
-/* Location: .app/config/mongodb.php */
+/* End of file mongo.php */
+/* Location: .app/config/mongo.php */
+```
+
+```php
+new Mongo_Db();
+$docs = $this->mongo->get('users');
+
+if($docs->hasNext())
+{
+    foreach($docs as $row)
+    {
+        echo $row['username'].'<br />';
+    }
+}
+```
+
+### All Popular Crud Functions Available
+
+```php
+$this->mongo->select();
+$this->mongo->where('username', 'bob');
+$docs = $this->mongo->get('users');
+
+if($docs ->hasNext())
+{
+   $row = (object)$docs->getNext();
+   echo $row->username;
+}
+```
+
+### Using Mongo_Db Class for General CRUD Operations.
+
+------
+
+Go to your <dfn>app/config/database.php</dfn> file and set the database driver as mongo.
+
+```php
+$database['db']['hostname']  = "localhost";
+$database['db']['username']  = "root";
+$database['db']['password']  = "12345";
+$database['db']['database']  = "yourdbname";
+$database['db']['driver']    = "mongo";
 ```
 
 ### CRUD ( Create, read, update and delete ) Functions
@@ -169,7 +219,6 @@ foreach($docs as  $row)
 
 ```php
 $this->db->where('username', 'bob');
-
 $docs = $this->db->get('users');
 
 if($docs ->hasNext())
@@ -336,12 +385,12 @@ foreach($docs as  $row)
 }
 ```
 
-#### $this->db->insert_id()
+#### $this->db->insertId()
 
 ```php
 $this->db->insert(''users', array('username' => 'john28', 'ts' => new MongoDate()));
 
-echo $this->db->insert_id();   // last inserted Mongo ID.
+echo $this->db->insertId();   // last inserted Mongo ID.
 ```
 
 #### $this->db->inc()
@@ -410,22 +459,22 @@ $this->db->where(array('blog_id'=>123))->pop('comments')->update('blog_posts');
 $this->db->where(array('blog_id'=>123))->pop(array('comments', 'viewed_by'))->update('blog_posts');
 ```
 
-#### $this->db->batch_insert()
+#### $this->db->batchInsert()
 
 Insert a multiple new document into the passed collection. Forexample you need to insert one billion record to database at once.
 
 ```php
-$this->db->batch_insert('foo',  $data = array();
+$this->db->batchInsert('foo',  $data = array();
 ```
 
-#### $this->db->mongo_instance()
+#### $this->db->getInstance()
 
 Returns to Mongodb instance of object.
 
 Store a gridfs file using mongo instance.
 
 ```php
-$gridFS = $this->db->mongo_instance()->getGridFS();  // get a MongoGridFS instance
+$gridFS = $this->db->getInstance()->getGridFS();  // get a MongoGridFS instance
 $id     = $gridFS->storeFile($filepath, array(
                                                   'filename' => uniqid(time()), 
                                                   'filetype' => $_FILES['field]['type'],
@@ -437,6 +486,6 @@ $id     = $gridFS->storeFile($filepath, array(
 Remove a gridfs file using mongo instance.
 
 ```php
-$gridFS = $this->db->mongo_instance()->getGridFS();
+$gridFS = $this->db->getInstance()->getGridFS();
 $gridFS->remove(array('user_id' => new MongoId($this->auth->data('_id')), 'filegroup' => 'profile-picture'));
 ```

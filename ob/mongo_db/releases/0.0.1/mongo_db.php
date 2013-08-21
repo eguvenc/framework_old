@@ -17,7 +17,7 @@
 Class Mongo_Db {
 
     private $db;
-    public  $connection;    // ! do not remove we close the connection in the bootstrap.
+    public  $connection = null;    // ! do not remove we close the connection in the bootstrap.
     private $connection_string;
 
     private $host;
@@ -54,7 +54,8 @@ Class Mongo_Db {
             throw new Exception("The MongoDB PECL extension has not been installed or enabled.");
         }
         
-        $this->connectionString();
+        $this->setConnectionString(); // Build the connection string from the config file
+        $this->connect();
         
         if($no_instance)
         {
@@ -1016,7 +1017,7 @@ Class Mongo_Db {
     
     /**
      * Establish a connection to MongoDB using the connection string generated in
-     * the connectionString() method.  If 'mongo_persist_key' was set to true in the
+     * the setConnectionString() method.  If 'mongo_persist_key' was set to true in the
      * config file, establish a persistent connection.
      * 
      * We allow for only the 'persist'
@@ -1027,16 +1028,19 @@ Class Mongo_Db {
      */
     public function connect()
     {
-        try
+        if($this->db == null)
         {
-            $this->connection = new Mongo($this->connection_string);
-            $this->db = $this->connection->{$this->dbname};
-            
-            return ($this);	
-        } 
-        catch (MongoConnectionException $e)
-        {
-            throw new Exception("Unable to connect to MongoDB: ".$e->getMessage());
+            try
+            {
+                $this->connection = new Mongo($this->connection_string);
+                $this->db         = $this->connection->{$this->dbname};
+
+                return ($this);	
+            } 
+            catch (MongoConnectionException $e)
+            {
+                throw new Exception("Unable to connect to MongoDB: ".$e->getMessage());
+            }
         }
     }
 
@@ -1059,7 +1063,7 @@ Class Mongo_Db {
      * 
      * @throws Exception 
      */
-    private function connectionString() 
+    private function setConnectionString() 
     {
         $config = getConfig('mongo');
         
@@ -1207,6 +1211,19 @@ Class Mongo_Db {
     public function lastQuery() {
         // @todo: mongodb query output.
         // any idea ? how can we do it ?
+    }
+    
+    // --------------------------------------------------------------------
+    
+    /**
+     * Close the connection.
+     */
+    function __destruct()
+    {
+        if(is_object($this->connection))
+        {
+            $this->connection->close();
+        } 
     }
     
 }

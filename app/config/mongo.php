@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Mongo Db Config 
+| Mongo Db Package Configuration
 |--------------------------------------------------------------------------
 | Mongodb database api configuration file.
 | 
@@ -14,10 +14,10 @@
 
 $mongo['host']         = 'localhost';
 $mongo['port']         = '27017';
-$mongo['database']     = 'obullo';
+$mongo['database']     = '';
 $mongo['username']     = '';
 $mongo['password']     = '';
-$mongo['dsn']          = ''; // mongodb://connection_string
+$mongo['dsn']          = ''; // or dsn mongodb://connectionString
 
 /*
 |--------------------------------------------------------------------------
