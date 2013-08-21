@@ -82,17 +82,16 @@ The function returns FALSE (boolean) if the item you are trying to fetch does no
 If you are using the second parameter of the <kbd>$this->config->load();</kbd> function in order to assign your config items to a specific index you can retrieve it by specifying the index name in the second parameter of the <kbd>$this->config->item()</kbd> function. Example:
 
 ```php
-// Loads a config file named blog_settings.php and assigns
- it to an index named "blog_settings"
-$this->config->load('blog_settings', TRUE);
+// Loads a config file named blog_settings.php and assigns it to an index named "blog_settings"
+$this->config->load('blog_settings');
 
 // Retrieve a config item named site_name contained within the blog_settings array
 $site_name = $this->config->item('site_name', 'blog_settings');
 
 // An alternate way to specify the same item:
-$blog_config = $this->config->item('blog_settings');
+$config = $this->config->item('blog_settings');
 
-$site_name = $blog_config['site_name'];
+$site_name = $config['site_name'];
 ```
 
 ### Setting a Config Item
@@ -113,11 +112,11 @@ Where <var>item_name</var> is the $config array index you want to change, and <v
 
 The config class has the following helper functions:
 
-#### $this->config->base();
+#### $this->config->baseUrl();
 
 This function retrieves the URL to your site without "index" value you've specified in the config file.
 
-#### $this->config->public();
+#### $this->config->assetUrl();
 
 This function retrieves the Public URL to your you've specified in the config file.
 
