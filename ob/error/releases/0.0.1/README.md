@@ -1,7 +1,5 @@
 ## Error Handling
 
-------
-
 Error Codes and Error Constants
 
 ```php

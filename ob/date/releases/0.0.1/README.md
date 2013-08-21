@@ -20,7 +20,7 @@ Returns the current time as a Unix timestamp, referenced either to your server's
 
 #### mdate()
 
-This function is identical to PHPs [date]("http://php.net/manual/en/function.date.php") function, except that it lets you use MySQL style date codes, where each code letter is preceded with a percent sign: %Y %m %d etc.
+This function is identical to PHPs [date](http://php.net/manual/en/function.date.php) function, except that it lets you use MySQL style date codes, where each code letter is preceded with a percent sign: %Y %m %d etc.
 
 The benefit of doing dates this way is that you don't have to worry about escaping any characters that are not date codes, as you would normally have to do with the date() function. Example:
 
@@ -166,12 +166,13 @@ Takes a timezone reference (for a list of valid timezones, see the "Timezone Ref
 echo timezones('UM5');
 ```
 
-This function is useful when used with timezone_menu().
+This function is useful when used with timezoneMenu().
 
-#### timezone_menu()
+#### timezoneMenu()
 
 Generates a pull-down menu of timezones, like this one:
 
+```php
 <select name="timezones"> 
 <option value="UM12">(UTC -12:00) Baker/Howland Island</option> 
 <option value="UM11">(UTC -11:00) Samoa Time Zone, Niue</option> 
@@ -214,13 +215,14 @@ Generates a pull-down menu of timezones, like this one:
 <option value="UP13">(UTC +13:00) Phoenix Islands Time, Tonga</option> 
 <option value="UP14">(UTC +14:00) Line Islands</option> 
 </select>
+```
 
 This menu is useful if you run a membership site in which your users are allowed to set their local timezone value.
 
 The first parameter lets you set the "selected" state of the menu. For example, to set Pacific time as the default you will do this:
 
 ```php
-echo timezone_menu('UM8');
+echo timezoneMenu('UM8');
 ```
 
 Please see the timezone reference below to see the values of this menu.
@@ -229,7 +231,9 @@ The second parameter lets you set a CSS class name for the menu.
 
 **Note:** The text contained in the menu is found in the following language file: *lang//date.php*
 
-#### Timezone Reference
+### Timezone Reference
+
+------
 
 The following table indicates each timezone and its location. More details at http://en.wikipedia.org/wiki/Time_zone#UTC
 
