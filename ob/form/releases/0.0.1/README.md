@@ -1,7 +1,5 @@
 ## Form Helper
 
------
-
 The Form Helper file contains functions that assist in working with forms.
 
 ### Loading this Helper

@@ -83,8 +83,6 @@ $this->ftp->close();
 
 #### $this->ftp->connect()
 
-------
-
 Connects and logs into to the FTP server. Connection preferences are set by passing an array to the function, or you can store them in a config file.
 
 Here is an example showing how you set preferences manually:
@@ -104,9 +102,13 @@ $this->ftp->close();
 
 ### Setting FTP Preferences in a Config File
 
+------
+
 If you prefer you can store your FTP preferences in a config file. Simply create a new file called the <var>ftp.php</var>, add the <var>$config</var> array in that file. Then save the file at <var>config/ftp.php</var> and it will be used automatically.
 
 ### Available connection options:
+
+------
 
     <ul><li><strong>hostname</strong> - the FTP hostname. Usually something like:  <dfn>ftp.example.com</dfn></li>    <li><strong>username</strong> - the FTP username.</li>
     <li><strong>password</strong> - the FTP password.</li>
@@ -115,8 +117,6 @@ If you prefer you can store your FTP preferences in a config file. Simply create
     <li><strong>passive</strong> - <kbd>TRUE/FALSE</kbd> (boolean). Whether to use passive mode. Passive is set automatically by default.</li></ul>
 
 #### $this->ftp->upload()
-
-------
 
 Uploads a file to your server. You must supply the local path and the remote path, and you can optionally set the mode and permissions. Example:
 
@@ -130,8 +130,6 @@ Permissions are available if you are running PHP 5 and can be passed as an <kbd>
 
 #### $this->ftp->rename()
 
-------
-
 Permits you to rename a file. Supply the source file name/path and the new file name/path.
 
 ```php
@@ -140,8 +138,6 @@ $ftp->rename('/public_html/foo/green.html', '/public_html/foo/blue.html');
 ```
 
 #### $this->ftp->move()
-
-------
 
 Lets you move a file. Supply the source and destination paths:
 
@@ -154,8 +150,6 @@ Note: if the destination file name is different the file will be renamed.
 
 #### $this->ftp->deleteFile()
 
-------
-
 Lets you delete a file. Supply the source path with the file name.
 
 ```php
@@ -163,8 +157,6 @@ $this->ftp->deleteFile('/public_html/joe/blog.html');
 ```
 
 #### $this->ftp->deleteDir()
-
-------
 
 Lets you delete a directory and everything it contains. Supply the source path to the directory with a trailing slash.
 
@@ -176,8 +168,6 @@ $this->ftp->deleteDir('/public_html/path/to/folder/');
 
 #### $this->ftp->listFiles()
 
-------
-
 Permits you to retrieve a list of files on your server returned as an <dfn>array</dfn>. You must supply the path to the desired directory.
 
 ```php
@@ -187,8 +177,6 @@ print_r($list);
 
 #### $this->ftp->mirror()
 
-------
-
 Recursively reads a local folder and everything it contains (including sub-folders) and creates a mirror via FTP based on it. Whatever the directory structure of the original file path will be recreated on the server. You must supply a source path and a destination path:
 
 ```php
@@ -196,8 +184,6 @@ $this->ftp->mirror('/path/to/myfolder/', '/public_html/myfolder/');
 ```
 
 #### $this->ftp->mkdir()
-
-------
 
 Lets you create a directory on your server. Supply the path ending in the folder name you wish to create, with a trailing slash. Permissions can be set by passed an <kbd>octal</kbd> value in the second parameter.
 
@@ -208,8 +194,6 @@ $this->ftp->mkdir('/public_html/foo/bar/', 0777);
 
 #### $this->ftp->chmod()
 
-------
-
 Permits you to set file permissions. Supply the path to the file or folder you wish to alter permissions on:
 
 ```php
@@ -218,7 +202,5 @@ $this->ftp->chmod('/public_html/foo/bar/', 0777);
 ```
 
 #### $this->ftp->close();
-
-------
 
 Closes the connection to your server. It's recommended that you use this when you are finished uploading.

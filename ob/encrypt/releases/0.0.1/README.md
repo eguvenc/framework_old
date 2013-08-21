@@ -1,7 +1,5 @@
 ## Encryption Class
 
-------
-
 The Encryption Class provides two-way data encryption. It uses a scheme that pre-compiles the message using a randomly hashed bitwise XOR encoding scheme, which is then encrypted using the Mcrypt library. If Mcrypt is not available on your server the encoded message will still provide a reasonable degree of security for encrypted sessions or other such "light" purposes. If Mcrypt is available, you'll effectively end up with a double-encrypted message string, which should provide a very high degree of security.
 
 ### Setting your Key
@@ -52,8 +50,6 @@ $encrypt->method();
 
 #### $this->encrypt->encode()
 
-------
-
 Performs the data encryption and returns it as a string. Example:
 
 ```php
@@ -73,8 +69,6 @@ $encrypted_string = $this->encrypt->encode($msg, $key);
 
 #### $this->encrypt->decode()
 
-------
-
 Decrypts an encoded string. Example:
 
 ```php
@@ -84,8 +78,6 @@ $plaintext_string = $this->encrypt->decode($encrypted_string);
 
 
 #### $this->encrypt->setCipher();
-
-------
 
 Permits you to set an Mcrypt cipher. By default it uses <samp>MCRYPT_RIJNDAEL_256</samp>. Example:
 
@@ -103,8 +95,6 @@ echo ( ! function_exists('mcrypt_encrypt')) ? 'Nope' : 'Yup';
 
 #### $this->encrypt->setMode();
 
-------
-
 Permits you to set an Mcrypt mode. By default it uses <samp>MCRYPT_MODE_ECB</samp>. Example:
 
 ```php
@@ -114,8 +104,6 @@ $this->encrypt->setMode(MCRYPT_MODE_CFB);
 Please visit php.net for a list of [available modes](http://php.net/mcrypt).
 
 #### $this->encrypt->sha1();
-
-------
 
 SHA1 encoding function. Provide a string and it will return a 160 bit one way hash. Note: SHA1, just like MD5 is non-decodable. Example:
 

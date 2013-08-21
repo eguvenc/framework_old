@@ -1,7 +1,5 @@
 ## Form Send Helper
 
------
-
 The Form Send Helper file contains functions that assist in working with AJAX forms.
 
 ### Loading this Helper
@@ -18,7 +16,7 @@ The following functions are available:
 
 #### error($model object or string $error)
 
-Creates for [Validation in Model](/docs/advanced/#validation-in-model) response in <b>JSON</b> format.
+Creates for [Validation in Model](/docs/advanced/validation-in-model) response in <b>JSON</b> format.
 
 ```php
 {"success":FALSE,
@@ -29,7 +27,7 @@ Creates for [Validation in Model](/docs/advanced/#validation-in-model) response 
 "captcha_answer":"The Security Image field is required."}}
 ```
 
-Obullo JQuery Form Plugin which is located framework <dfn>/public/js/form/</dfn> folder, parse above the response and show validation errors or success messages to users. Using <b>Firefox</b> [Firebug]("https://getfirebug.com/downloads") extension you can see all Validation Model JSON requests to easily find the application bugs.
+Obullo JQuery Form Plugin which is located framework <dfn>/public/js/form/</dfn> folder, parse above the response and show validation errors or success messages to users. Using <b>Firefox</b> [Firebug](https://getfirebug.com/downloads) extension you can see all Validation Model JSON requests to easily find the application bugs.
 
 If you provide a <b>Message type of string</b> instead of <b>Model Object</b> function will send a general system error instead of validation errors.
 

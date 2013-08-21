@@ -1,9 +1,7 @@
 
 ## Hmvc Class
 
-------
-
-Using Obullo's simple hmvc library you can execute hmvc requests between your modules, the HMVC technology offers more flexibility. About HMVC structure you can find more information in [Advanced Topics / HMVC section](/docs/advanced/#hmvc).
+Using Obullo's simple hmvc library you can execute hmvc requests between your modules, the HMVC technology offers more flexibility. About HMVC structure you can find more information in [Advanced Topics / HMVC section](/docs/advanced/hmvc).
 
 ### Initializing the Class
 
@@ -51,6 +49,7 @@ echo $row->key; // output value
 ### HMVC Requests in Sub Modules
 
 ------
+
 If you want to call a HMVC request in the sub.module, you need to provide sub.modulename otherwise Obullo will call a request outside of your sub.module folder.
 
 ```php
@@ -61,9 +60,7 @@ echo request('sub.module/module/controller/method')->exec();
 
 ------
 
-####$request->setMethod($method = 'get', $params = 'mixed');
-
-------
+#### $request->setMethod($method = 'get', $params = 'mixed');
 
 Set the hmvc request method.
 
@@ -78,30 +75,20 @@ Set the hmvc request method.
 
 #### $request->cache($time = 0 int);
 
-------
-
-You can do cache for your static hmvc requests. When a hmvc request called the first time, the cache file will be written to your application/core/cache folder. You can learn more details about ouput [caching](/docs/advanced/#caching-and-compression).
+You can do cache for your static hmvc requests. When a hmvc request called the first time, the cache file will be written to your application/core/cache folder. You can learn more details about ouput [caching](/docs/advanced/caching-and-compression).
 
 #### $request->setServer($key = '', $val = '');
-
-------
 
 Set the $_SERVER headers for current hmvc scope.
 
 $request->noLoop($turn_on = true boolean);
 
-------
-
-Some users some times use the HMVC requests in the [parent controllers](/docs/advanced/#working-with-parent-controllers) in this case normally a HMVC library do a unlimited loop and this may cause server crashes, beware if you use hmvc requests in parent controllers you have to use no_loop(); method for each requests.
+Some users some times use the HMVC requests in the [parent controllers](/docs/advanced/working-with-parent-controllers) in this case normally a HMVC library do a unlimited loop and this may cause server crashes, beware if you use hmvc requests in parent controllers you have to use no_loop(); method for each requests.
 
 #### $request->exec();
-
-------
 
 Execute hmvc call and return to response.
 
 #### $request->decode($format = 'json')->exec();
-
-------
 
 Before the execute of the results you can decode response in JSON format.
