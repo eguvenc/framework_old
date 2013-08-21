@@ -411,30 +411,6 @@ Class Database_Layer extends Database_Crud {
     // --------------------------------------------------------------------
 
     /**
-    * Get results as associative array
-    *
-    * @return  array
-    */
-    public function assoc()
-    {
-        return current($this->Stmt->fetchAll(\PDO::FETCH_ASSOC));
-    }
-
-    // --------------------------------------------------------------------
-
-    /**
-    * Get results as object
-    *
-    * @return  object
-    */
-    public function obj()
-    {
-        return $this->row();
-    }
-
-    // --------------------------------------------------------------------
-
-    /**
     * Alias of $this-db->obj()
     *
     * @return  object
@@ -442,18 +418,6 @@ Class Database_Layer extends Database_Crud {
     public function row()
     {
         return $this->Stmt->fetch(\PDO::FETCH_OBJ);
-    }
-
-    // --------------------------------------------------------------------
-
-    /**
-    * Get number of rows, Does not support all db drivers.
-    *
-    * @return  integer
-    */
-    public function rowCount()
-    {
-        return $this->Stmt->rowCount();
     }
     
     // --------------------------------------------------------------------
@@ -734,7 +698,7 @@ Class Database_Layer extends Database_Crud {
     // --------------------------------------------------------------------
 
     /**
-    * CodeIgniter backward compatibility (result_array)
+    * All Results as array
     *
     * @return  array
     */
@@ -746,7 +710,7 @@ Class Database_Layer extends Database_Crud {
     // --------------------------------------------------------------------
     
     /**
-    * CodeIgniter backward compatibility (row_array)
+    * Result row as array
     *
     * @author CJ Lazell
     * @return  array

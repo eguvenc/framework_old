@@ -1,32 +1,25 @@
-<?php namespace Ob ?>
 <?php new html\start() ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <title>Welcome to HMVC !</title>
-
 <?php echo html\css('welcome.css') ?>
-
 </head>
 <body>
-    
-<!-- body content -->
 <h1>Welcome to Obullo HMVC !</h1>
 
 <table>
-    
     <tr>
         <td width="35%"><b>Example Code</b></td>
         <td>
-<pre>#### Welcome Controller ####</pre>   
-        
+<pre>#### Welcome Controller ####</pre>  
 <br />
-
 <pre>
-loader::helper('ob/request');
-
-$data['response_a'] = request('welcome/start/1/2/3')->exec();
-$data['response_b'] = request('welcome/start/1/5/6')->exec();
+new request\start();
+$data['response_a'] = request\get('welcome/start/1/2/3');
+$data['response_b'] = request\get('welcome/start/1/5/6');
+</pre>
+        </td>
     </tr>
 
     <tr>
@@ -35,7 +28,7 @@ $data['response_b'] = request('welcome/start/1/5/6')->exec();
     </tr>
     
     <tr>
-                <td></td>
+        <td></td>
         <td>
             <pre>#### View hmvc file ####</pre>
             
@@ -49,7 +42,6 @@ $data['response_b'] = request('welcome/start/1/5/6')->exec();
             <?php echo $response_b ?>            
         </td>
     </tr>
-
 </table>
 
 </body>

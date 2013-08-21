@@ -136,7 +136,7 @@ Class Router {
     * that means we say to Router class when Clone word used in HMVC library
     * use cloned URI object instead of orginal ( ersin ).
     */
-    protected function __clone()
+    public function __clone()
     {
         $this->uri = clone $this->uri;
     }
@@ -149,12 +149,12 @@ Class Router {
     * This function determines what should be served based on the URI request,
     * as well as any "routes" that have been set in the routing config file.
     *
-    * @access    protected
+    * @access    public for hmvc
     * @author    Ersin Guvenc
     * @version   0.1
     * @return    void
     */
-    protected function _setRouting()
+    public function _setRouting()
     {
         if($this->hmvc == false)    // GET request valid for standart router requests not HMVC.
         {
@@ -245,7 +245,7 @@ Class Router {
     * This function takes an array of URI segments as
     * input, and sets the current class/method
     *
-    * @access   protected
+    * @access   public for hmvc
     * @author   Ersin Guvenc
     * @param    array
     * @param    bool
@@ -254,7 +254,7 @@ Class Router {
     *           $segments[1] as $segments[2]
     * @return   void
     */
-    protected function _setRequest($segments = array())
+    public function _setRequest($segments = array())
     {
         $segments = $this->_validateRequest($segments);
         
@@ -294,13 +294,13 @@ Class Router {
     *
     * @author   Ersin Guvenc
     * @author   CJ Lazell
-    * @access   protected
+    * @access   public for hmvc
     * @param    array
     * @version  Changed segments[0] as segments[1]
     *           added directory set to segments[0]
     * @return   array
     */
-    protected function _validateRequest($segments)
+    public function _validateRequest($segments)
     {   
         if( ! isset($segments[0]) )
         { 
@@ -376,10 +376,10 @@ Class Router {
     * the config/routes.php file against the URI to
     * determine if the class/method need to be remapped.
     *
-    * @access    protected
+    * @access    public for hmvc
     * @return    void
     */
-    protected function _parseRoutes()
+    public function _parseRoutes()
     { 
         // Do we even have any custom routing to deal with?
         // There is a default scaffolding trigger, so we'll look just for 1
