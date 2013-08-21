@@ -1,7 +1,5 @@
 ## URI Class
 
-------
-
 The URI Class provides functions that help you retrieve information from your URI strings. If you use URI routing, you can also retrieve information about the re-routed segments.
 
 **Note:** This class is initialized automatically by the system so there is no need to do it manually.
@@ -44,7 +42,7 @@ else
 
 #### $this->uri->rSegment(n)
 
-This function is identical to the previous one, except that it lets you retrieve a specific segment from your re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/#uri-routing) feature.
+This function is identical to the previous one, except that it lets you retrieve a specific segment from your re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/uri-routing) feature.
 
 #### $this->uri->slashSegment(n)
 
@@ -66,7 +64,7 @@ Returns:
 
 #### $this->uri->slashRsegment(n)
 
-This function is identical to the previous one, except that it lets you add slashes a specific segment from your re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/#uri-routing) feature.
+This function is identical to the previous one, except that it lets you add slashes a specific segment from your re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/uri-routing) feature.
 
 #### $this->uri->uri2Assoc(n)
 
@@ -108,7 +106,7 @@ Lastly, if a corresponding value is not found for a given key (if there is an od
 
 #### $this->uri->ruri2Assoc(n)
 
-This function is identical to the previous one, except that it creates an associative array using the re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/#uri-routing) feature.
+This function is identical to the previous one, except that it creates an associative array using the re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/uri-routing) feature.
 
 #### $this->uri->assoc2Uri()
 
@@ -138,7 +136,7 @@ The function would return this:
 
 #### $this->uri->routedUriString(n)
 
-This function is identical to the previous one, except that it returns the re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/#uri-routing) feature.
+This function is identical to the previous one, except that it returns the re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/uri-routing) feature.
 
 #### $this->uri->totalSegments()
 
@@ -146,7 +144,7 @@ Returns the total number of segments.
 
 #### $this->uri->totalRsegments()
 
-This function is identical to the previous one, except that it returns the total number of segments in your re-routed URI in the event you are using [URI Routing](/docs/advanced/#uri-routing) feature.
+This function is identical to the previous one, except that it returns the total number of segments in your re-routed URI in the event you are using [URI Routing](/docs/advanced/uri-routing) feature.
 
 #### $this->uri->segmentArray()
 
@@ -164,7 +162,7 @@ foreach ($segs as $segment)
 
 #### $this->uri->rsegmentArray()
 
-This function is identical to the previous one, except that it returns the array of segments in your re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/#uri-routing) feature.
+This function is identical to the previous one, except that it returns the array of segments in your re-routed URI in the event you are using Obullo's [URI Routing](/docs/advanced/uri-routing) feature.
 
 #### $this->uri->extension()
 

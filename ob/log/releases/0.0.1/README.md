@@ -2,9 +2,7 @@
 
 The Log Helper assist you write messages to your log files.
 
-### log\me('level', 'message')
-
-------
+#### log\me('level', 'message')
 
 This function lets you write messages to your log files. You must supply one of three "levels" in the first parameter, indicating what type of message it is (debug, error, info), with the message itself in the second parameter. Example:
 
@@ -30,9 +28,7 @@ There are three message types:
 
 **Note:** In order for the log file to actually be written, the "logs" folder must be writable which is located at <dfn>app/core/logs<dfn>. In addition, you must set the "threshold" for logging. You might, for example, only want error messages to be logged, and not the other two types. If you set it to zero logging will be disabled. (Look at <dfn>app/config/config.php</dfn>)
 
-### log\me('level', '[ module ]: message')
-
-------
+#### log\me('level', '[ module ]: message')
 
 If you want to keep releated module log files in your current module or extension, create a module/core/logs folder and give the write access it, then you need to use <b>'[ module ] : '</b> string before the start of the log message. Forexample if you have a <b>welcome</b> module you need to use log function like this.
 

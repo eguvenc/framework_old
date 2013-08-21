@@ -1,7 +1,5 @@
 ## Locale Class
 
-------
-
 The Locale Class provides functions to retrieve language files and lines of text for purposes of internationalization.
 
 In your app folder you'll find one called locale containing sets of language files. You can create your own language files as needed in order to display error and other messages in other languages.

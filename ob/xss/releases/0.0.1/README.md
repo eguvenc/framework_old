@@ -1,7 +1,5 @@
 ## Xss Helper
 
-------
-
 The Security Helper file contains security related functions.
 
 ### Loading this Helper
@@ -18,7 +16,7 @@ new xss\start();
 
 ------
 
-The security filtering function is called automatically when a new [controller](/docs/general/#controllers) is invoked. It does the following:
+The security filtering function is called automatically when a new [controller](/docs/general/controllers) is invoked. It does the following:
 
 <ul>
    <li>Destroys the global GET array. Since Obullo does not utilize GET strings, there is no reason to allow it.</li>

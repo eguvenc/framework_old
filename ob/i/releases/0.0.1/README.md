@@ -44,8 +44,6 @@ The five functions are:
 
 #### i\post()
 
-------
-
 The first parameter will contain the name of the POST item you are looking for:
 
 ```php

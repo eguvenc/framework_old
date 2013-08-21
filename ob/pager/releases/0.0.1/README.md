@@ -1,7 +1,5 @@
 ## Pager Class
 
-------
-
 Obullo's Pager class <b>derived</b> from <b>PEAR Pager Class</b>, Pager is a class to page an array of data. It is taken as input and it is paged according to various parameters.it has more options, and it is customizable, either dynamically or via stored preferences.
 
 ### Initializing the Class
@@ -9,7 +7,7 @@ Obullo's Pager class <b>derived</b> from <b>PEAR Pager Class</b>, Pager is a cla
 ------
 
 ```php
-new Pager();
+new Pager(false);
 ```
 
 Once the library is loaded it will be ready for use. The image library object you will use to call all functions is: <dfn>$this->pager->method()</dfn>
@@ -22,7 +20,7 @@ Once the library is loaded it will be ready for use. The image library object yo
 Also using lib(); function you can grab the instance of Obullo libraries.
 
 ```php
-$pager = lib('ob/pager');
+$pager = new Pager(false);
 
 $pager->init();
 ```
@@ -55,7 +53,7 @@ $params = array(
 $params['item_data']  = range(1, 1000);
 
 $data  = $pager->getPageData();
-$pager = lib('ob/pager')->init($params);
+$pager = new Pager(false)->init($params);
 $links = $pager->getLinks();
 
 // $links is an ordered + associative array with 'back'/'pages'/'next'/'first'/'last'/'all' links.
@@ -113,9 +111,7 @@ Change mode parameter as <samp>Jumping</samp> and increase <samp>Delta</samp> pa
 [1]  << Back 1  2  3  4  5  Next >>  [33]
 ```
 
-### $pager->getLinks();
-
-------
+#### $pager->getLinks();
 
 getLinks() function also will give you <b>link rel</b> = "" tags, You can get link rel style tags using <b>$links['link_tags'] or $link['link_tags_raw']</b>
 
@@ -204,15 +200,15 @@ $params = array(
     'total_items'  => $num_rows,
 );
 
-$pager = lib('ob/pager')->init($params);
+$pager = new Pager(false)->init($params);
  
-list($from, $to) = $pager->get_offset_by_page();
+list($from, $to) = $pager->getOffsetByPage();
  
 echo 'from:'.$from.'<br />';
 echo 'to:'.$to.'<br />';
  
 $this->db->get('articles', $params['per_page'], $from - 1);
-$data = $this->db->result_array();
+$data = $this->db->resultArray();
  
 echo $pager->links;
 
@@ -301,8 +297,6 @@ You have two HTML widgets called <samp>Per Page Select Box</samp> and <samp>Page
 
 #### getPerPageSelectBox($start = integer, $end = integer, $step = integer, $show_all_data = FALSE, $extra_params = array() );
 
-------
-
 This function will produce html select menu to set_per_page parameter like this
 
 ```php
@@ -320,18 +314,18 @@ Class Start extends Controller {
     {   
         parent::__construct();
         
-        loader::database();
-        loader::helper('ob/form');
+        new Db();
+        new form\start();
     }           
     
     public function index()
     {                  
-        view_var('title', 'Pager Test !');
+        vi\setVar('title', 'Pager Test !');
         
         $query = $this->db->query('SELECT * FROM articles');
-        $num_rows = $query->num_rows();
+        $num_rows = $query->count();
         
-        $per_page = (i_get_post('set_per_page')) ? i_get_post('set_per_page') : '5';
+        $per_page = (i\getPost('set_per_page')) ? i\getPost('set_per_page') : '5';
         
         $params = array(
             'mode'         => 'sliding',  // jumping
@@ -345,9 +339,10 @@ Class Start extends Controller {
             'extra_vars'   => array('d'=>'welcome','c'=>'start', 'm' => 'index', 'set_per_page' => $per_page),
         );
         
-        $pager = lib('ob/pager')->init($params);
+        $pager = new Pager(false);
+        $pager->init($params);
          
-        list($from, $to) = $pager->get_offset_by_page();
+        list($from, $to) = $pager->getOffsetByPage();
          
         $this->db->get('articles', $params['per_page'], $from - 1);
         $data['rows'] = $this->db->result();
@@ -356,17 +351,17 @@ Class Start extends Controller {
         $data['links']  = $pager->getLinks();
         $data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, FALSE);
 
-        view('view_pager_test', $data, FALSE);
+        vi\view('pager_test', $data, FALSE);
     }
        
 }
 /* End of file start.php */
 ```
 
-and <samp>view_pager_test.php</samp> file should be like this 
+and <samp>pager_test.php</samp> file should be like this 
 
 ```php
-<h1><? echo view_var('title'); ?></h1> 
+<h1><? echo vi\getVar('title'); ?></h1> 
 
 <p><? print 'PAGED DATA: <br />'; var_dump($rows); ?></p>
 
@@ -378,12 +373,12 @@ $hiddens = array(
 'm' => 'index',
 );
 
-echo form_open('', array('method' => $params['http_method']), $hiddens);
+echo form\open('', array('method' => $params['http_method']), $hiddens);
 
 echo '<br />'.$links['all'].'    Per Page '.$per_page_select_box.' ';
 
-echo form_submit('_send', 'Send', "");
-echo form_close();
+echo form\submit('_send', 'Send', "");
+echo form\close();
 
 ?>
 ```
@@ -420,18 +415,18 @@ Class Start extends Controller {
     {   
         parent::__construct();
         
-        loader::database();
-        loader::helper('ob/form');
+        new Db();
+        new form\start();
     }           
     
     public function index()
     {                  
-        view_var('title', 'Pager Test !');
+        vi\setVar('title', 'Pager Test !');
         
         $query = $this->db->query('SELECT * FROM articles');
-        $num_rows = $query->num_rows();
+        $num_rows = $query->count();
         
-        $per_page = (i_get_post('set_per_page') != '') ? i_get_post('set_per_page') : '5';
+        $per_page = (i\getPost('set_per_page') != '') ? i\getPost('set_per_page') : '5';
         
         $params = array(
             'mode'         => 'sliding',  // jumping
@@ -444,9 +439,9 @@ Class Start extends Controller {
             'extra_vars'   => array('set_per_page' => $per_page),
         );
         
-        $pager = lib('ob/pager')->init($params);
+        $pager = new Pager(false)->init($params);
          
-        list($from, $to) = $pager->get_offset_by_page();
+        list($from, $to) = $pager->getOffsetByPage();
          
         $this->db->get('articles', $params['per_page'], $from - 1);
         $data['rows'] = $this->db->result();
@@ -577,4 +572,4 @@ After that custom parameters output will look like this
 [« First Page] ‹ Prev Page 1 2 › Next Page [» Last Page]
 ```
 
-Special thanks to [Lorenzo Alberton](http://www.alberton.info/) who originally developed by PEAR pager library.
+Special thanks to [Lorenzo Alberton](http://www.alberton.info/) who originally developed The PEAR pager library.

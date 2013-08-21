@@ -1,7 +1,5 @@
 ## Security
 
-------
-
 This page describes some "best practices" regarding web security, and details Obullo's internal security features.
 
 ### URI Security

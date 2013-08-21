@@ -1,7 +1,5 @@
 ## Navbar Class
 
-------
-
 Navbar Class provides a simple navigation bar management for <b>ul</b> based menus.
 
 ### Configuration
@@ -124,19 +122,13 @@ echo '</div>';
 
 #### $this->navbar->top_level()
 
-------
-
 Get top level navigation items using the first module segment(0).
 
 #### $this->navbar->sub_level()
-
-------
 
 Get sub level navigation items using the first uri segment(0) and second uri segment(1).
 
 
 #### $this->navbar->count($key = 'top_level')
-
-------
 
 Returns the number of items by provided navigation level.

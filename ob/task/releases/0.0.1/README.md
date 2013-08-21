@@ -28,4 +28,4 @@ The first segment call the <samp>module</samp> and others calls <samp>Controller
 task\run('welcome hello/index/arg1/arg2');
 ```
 
-Look at the [Tasks and CLI Requests](/docs/advanced/#tasks-and-cli-requests) section for more details.
+Look at the [Tasks and CLI Requests](/docs/advanced/tasks-and-cli-requests) section for more details.
