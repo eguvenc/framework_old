@@ -137,11 +137,15 @@ if(defined('STDIN'))
     ini_set('memory_limit', '100000M');
 }
 
-// --------------------------------------------------------------------
 
 /**
-* Loads the (static) config files.
-*
+|--------------------------------------------------------------------------
+| Loads the (static) config files.
+|--------------------------------------------------------------------------
+| This function help to load your static configuration files.
+ */
+
+/**
 * @access    private
 * @author    Obullo Team
 * @param     string $filename file name
@@ -155,20 +159,15 @@ function getStatic($filename = 'config', $var = '', $folder = '')
     static $variables = array();
     
     $key = trim($folder. DS .$filename. EXT);
-    
     if ( ! isset($loaded[$key]))
     {
         require($folder. DS .$filename. EXT);
      
-        if($var == '') 
-        {
-            $var = &$filename;
-        }
+        if($var == '') { $var = &$filename; }
 
         if ( ! isset($$var) OR ! is_array($$var))
         {
             $error_msg = 'The static file '. $folder. DS .$filename. EXT .' file does not appear to be formatted correctly.';
-
             log\me('error', $error_msg);
         }
 
@@ -179,11 +178,15 @@ function getStatic($filename = 'config', $var = '', $folder = '')
     return $variables[$key];
 }
 
-// --------------------------------------------------------------------
+/**
+|--------------------------------------------------------------------------
+| Loads the app config files.
+|--------------------------------------------------------------------------
+| This function load your configuration files from "app/config" folder.
+| 
+ */
 
 /**
-* Get config file.
-*
 * @access   public
 * @param    string $filename
 * @param    string $var
@@ -192,17 +195,34 @@ function getStatic($filename = 'config', $var = '', $folder = '')
 function getConfig($filename = 'config', $var = '', $folder = '')
 {
     $folder = ($folder == '') ? APP .'config' : $folder;
-    
     if($filename == 'database')
     {
         $database = getStatic('database', $var, APP .'config');
-
         return $database;
     }
     
     return getStatic($filename, $var, $folder);
 }
 
+/**
+|--------------------------------------------------------------------------
+| Upgrading to new version.
+|--------------------------------------------------------------------------
+| If a new version available, package manager upgrage it using your package.json.
+| If you need a stable a version remove "*", and set version to specific
+| number. ( e.g. version: "2.0" )
+|
+| {
+|  "name": "Obullo",
+|  "version": "*",   
+|  "db_layer": "Database_Pdo",
+|  "dependencies": {
+|    "task" : "*",
+|     "auth" : "*"
+|  }
+| }
+|
+ */
 $packages = getConfig('packages');
 
 // --------------------------------------------------------------------

@@ -17,27 +17,24 @@ Class Obullo
      */
     public function run()
     {   
-        $packages = getConfig('packages');
+        $packages = getConfig('packages'); // get package configuration file.
         
-        require (APP  .'config'. DS .'constants'. EXT);  // app constants.
         require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'ob'. EXT);
         
-        if(packageExists('log')) // check log package is installed.
-        {
-            new log\start();
-        }
-               
-        if(packageExists('error')) // check error package is installed.
-        {
-            new error\start();
-        }
+        ####  Core Packages ( log, error, bench, uri, router, config, input, output ) ####
         
-        $uri    = Uri::getInstance(); 
+        new log\start();   
+        new error\start();
+        
+        $uri    = Uri::getInstance();    
         $router = Router::getInstance();
 
         new bench\start();
         
-        Locale::getInstance();
+        if(packageExists('locale'))
+        {
+            Locale::getInstance();
+        }
         
         bench\mark('total_execution_time_start');
         bench\mark('loading_time_base_classes_start');
@@ -55,7 +52,7 @@ Class Obullo
 
         bench\mark('loading_time_base_classes_end');  // Set a mark point for benchmarking  
         bench\mark('execution_time_( '.$page_uri.' )_start');  // Mark a start point so we can benchmark the controller 
-        
+       
         require ($controller);  // call the controller.
 
         if ( ! class_exists($router->fetchClass()) OR $router->fetchMethod() == 'controller' 
