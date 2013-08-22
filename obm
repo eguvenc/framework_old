@@ -2,12 +2,12 @@
 <?php
 /**
 |--------------------------------------------------------------------------
-| OBM ( Ob Package Manager ). ( People ask to meaning of Obullo, Obullo is African origin and he loves to dance. )
+| OBM ( Ob Package Manager )
 |--------------------------------------------------------------------------
 | Package Manager Functions
 |
-| Update / Install Functions
-| - Install the Obm                 :  cd /var/www/ && wget http://obullo.com/installer
+| Get Installer
+| - Install the Obm          :  cd /var/www/ && wget http://obullo.com/obm
 |
 */ 
 
@@ -17,7 +17,7 @@
 |--------------------------------------------------------------------------
 
 | $ cd /var/www/
-| $ wget http://obullo.com/installer
+| $ wget http://obullo.com/obm
 | 
 | CREATE NEW PROJECT
 | $ php obm install $yourprojectname
@@ -33,7 +33,7 @@ ini_set('zend.ze1_compatibility_mode', 0);
 ini_set('memory_limit', '100000M');
 set_time_limit(0);
 
-if(getOSname() == 'Windows'){
+if(getOSName() == 'Windows'){
     error("Obullo is African origin and he loves to dance.");
     die;
 }
@@ -121,7 +121,7 @@ if(isset($_SERVER['argv'][0])){
         foreach($response as $key => $package_json){
             $pack = json_decode(trim($package_json));
             if($pack == null){
-                error("The package $key could not parsed, probably there is a syntax error in package.json file.");
+                error("The package $key could not parsed, probably there is a syntax error in the package.json.");
             } 
             if($pack != null){
                 // wget -O framework.zip https://github.com/obullo/framework/zipball/dev
@@ -211,7 +211,7 @@ function cli($key, $color = ''){
     }    
     return $start.$key.' '.$end;
 }
-function getOSname() { 
+function getOsName() { 
     $userOS = php_uname('v');
     $os_platform    =   "Unknown OS Platform";
     $os_array       =   array(

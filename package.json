@@ -3,14 +3,6 @@
   "version": "2.0",
   "db_layer": "Database_Pdo",
   "dependencies": {
-    "auth" : "*",
-    "router": "*",
-    "uri": "*",
-    "input": "*",
-    "security": "*", 
-    "db_pdo": "*",
-    "view": "*",
-    "config": "*",
     "task" : "*",
     "auth" : "*"
   },
