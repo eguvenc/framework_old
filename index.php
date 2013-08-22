@@ -78,7 +78,10 @@ date_default_timezone_set('America/Chicago');
 | This file specifies which APP constants should be loaded by default.
 |
  */
-require ('constants');
+if( ! defined('ROOT'))
+{
+    require ('constants');
+}
 
 /**
 |--------------------------------------------------------------------------
