@@ -6,7 +6,7 @@ new url\start();
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <title>Welcome to Obullo !</title>
-<meta charset="utf-8"></meta>
+<meta charset="utf-8" />
 <?php echo html\css('welcome.css') ?>
 </head>
 <body>
