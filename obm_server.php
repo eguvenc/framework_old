@@ -2,7 +2,7 @@
 
 Class Obm_Server {
     public $package_list = array();
-    public $errors = array();
+    public $errors       = array();
     
     function __construct(){
         // Get the json file from package database 
@@ -37,7 +37,7 @@ Class Obm_Server {
                     $this->errors[] = "The package.json file seems empty or not formatted correctly.";
                 }
                 if(count($package_json['dependencies']) == 0){
-                    $this->errors[] = "The package.json dependencies can't be empty.";
+                    $this->errors[] = "The package.json dependencies can't be empty. You need to add packages.";
                 }
                 
             } else {
@@ -64,7 +64,6 @@ Class Obm_Server {
                         }
                     }
                 }
-                
                 echo json_encode($package_update_list);
                 
                 // echo json_encode($this->package_list);
@@ -84,13 +83,16 @@ Class Obm_Server {
     }
     
     function getPackageJson($name){
+        ###
+        ### connect to database and get TASK package.json file
+        // mysql_fetch_row();
         
         if($name == 'auth')
         {
             return '{
                     "name": "auth",
                     "description": "User Authentication Class",
-                    "version": "0.0.1",
+                    "version": "0.0.2",
                     "author": {
                       "name": "Ersin Güvenç",
                       "email": "eguvenc@gmail.com",
@@ -98,7 +100,7 @@ Class Obm_Server {
                     },
                     "component" : "library",
                     "dependencies": {
-                      "session": "*"
+                      "sess": "*"
                     },
                     "keywords": [
                       "auth",
@@ -129,11 +131,7 @@ Class Obm_Server {
         }
         
         if($name == 'task')
-        {
-            ###
-            ### connect to database and get TASK package.json file
-            // mysql_fetch_row();
-            
+        {   
             return '{
                     "name": "task",
                     "description": "Task Helper, run cli tasks and follow debugs from command line.",
