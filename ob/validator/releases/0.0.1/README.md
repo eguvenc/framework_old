@@ -639,11 +639,11 @@ In order to call a specific group you will pass its name to the run() function. 
 ```php
 if ($form->run('signup') == FALSE)
 {
-    vi/get('view_myform', '', FALSE);
+    vi/get('view_myform', FALSE);
 }
 else
 {
-     vi/get('view_success', '', FALSE);
+     vi/get('view_success', FALSE);
 }
 ```
 
@@ -660,11 +660,11 @@ Class Member extends Controller {
             
       if ($form->run() == FALSE)
       {
-          vi/get('view_myform', '', FALSE);
+          vi/get('view_myform', FALSE);
       }
       else
       {
-          vi/get('view_success', '', FALSE);
+          vi/get('view_success', FALSE);
       }
    }
 

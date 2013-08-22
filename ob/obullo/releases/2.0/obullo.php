@@ -91,24 +91,7 @@ Class Obullo
         {
             ob_end_flush();
         }
-        
-        ############## Close the Db connection.
-/*
-        $driver = db('driver');
-        if($driver == 'mongo' AND isset(getInstance()->db->connection) AND is_object(getInstance()->db->connection))
-        {
-            getInstance()->db->connection->close();
-        } 
-        else
-        {
-            if(isset(getInstance()->db))
-            {
-                getInstance()->db = null;
-            }
-        }
- */
     }
-    
 }
 
 // END obullo.php File

@@ -40,7 +40,7 @@ Class Welcome extends Controller {
         
         // sess\set('test', 1234);
         // echo sess\get('test');
-        vi\view('welcome', '', false); // current module view
+        vi\view('welcome', false); // current module view
         //
         // vi\views('welcome', '', false); // modules/views
     }
