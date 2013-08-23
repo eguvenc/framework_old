@@ -72,39 +72,16 @@ if (defined('ENV'))
 date_default_timezone_set('America/Chicago');
 
 /**
-|---------------------------------------------------------------
-| UNDERSTANDING ESSENTIAL CONSTANTS
-|---------------------------------------------------------------
-| DS          - The DIRECTORY SEPERATOR
-| EXT         - The file extension.  Typically ".php"
-| SELF        - The name of THIS file (typically "index.php")
-| FCPATH      - The full server path to THIS file
-| PHP_PATH    - The php path of your server
-| FPATH       - The full server path without file
-*/
-define('DS',   DIRECTORY_SEPARATOR);
-define('EXT',  '.php');
-define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
-define('FCPATH', __FILE__);
-define('PHP_PATH', '/usr/bin/php'); 
-define('FPATH', dirname(__FILE__));
-
-/**
-|---------------------------------------------------------------
-| UNDERSTANDING APP CONSTANTS
-|---------------------------------------------------------------
-| ROOT        - The root path of your server
-| APP         - The full server path to the "app" folder
-| MODULES     - The full server path to the "modules" folder
-| OB_MODULES  - The full server path to the "ob" folder
-| TASK_FILE   - Set your task (CLI) file name that we use it in task helper.
-*/
-define('ROOT',  realpath(dirname(__FILE__)) . DS);
-define('APP',  ROOT .'app'. DS);
-define('MODULES',  ROOT .'modules'. DS);
-define('CLASSES',  ROOT .'classes'. DS);
-define('OB_MODULES',  ROOT .'ob'. DS);
-define('TASK_FILE', 'task');
+|--------------------------------------------------------------------------
+| Application Constants.
+|--------------------------------------------------------------------------
+| This file specifies which APP constants should be loaded by default.
+|
+ */
+if( ! defined('ROOT'))
+{
+    require ('constants');
+}
 
 /**
 |--------------------------------------------------------------------------
@@ -163,11 +140,15 @@ if(defined('STDIN'))
     ini_set('memory_limit', '100000M');
 }
 
-// --------------------------------------------------------------------
 
 /**
-* Loads the (static) config files.
-*
+|--------------------------------------------------------------------------
+| Loads the (static) config files.
+|--------------------------------------------------------------------------
+| This function help to load your static configuration files.
+ */
+
+/**
 * @access    private
 * @author    Obullo Team
 * @param     string $filename file name
@@ -181,20 +162,15 @@ function getStatic($filename = 'config', $var = '', $folder = '')
     static $variables = array();
     
     $key = trim($folder. DS .$filename. EXT);
-    
     if ( ! isset($loaded[$key]))
     {
         require($folder. DS .$filename. EXT);
      
-        if($var == '') 
-        {
-            $var = &$filename;
-        }
+        if($var == '') { $var = &$filename; }
 
         if ( ! isset($$var) OR ! is_array($$var))
         {
             $error_msg = 'The static file '. $folder. DS .$filename. EXT .' file does not appear to be formatted correctly.';
-
             log\me('error', $error_msg);
         }
 
@@ -205,11 +181,15 @@ function getStatic($filename = 'config', $var = '', $folder = '')
     return $variables[$key];
 }
 
-// --------------------------------------------------------------------
+/**
+|--------------------------------------------------------------------------
+| Loads the app config files.
+|--------------------------------------------------------------------------
+| This function load your configuration files from "app/config" folder.
+| 
+ */
 
 /**
-* Get config file.
-*
 * @access   public
 * @param    string $filename
 * @param    string $var
@@ -218,17 +198,34 @@ function getStatic($filename = 'config', $var = '', $folder = '')
 function getConfig($filename = 'config', $var = '', $folder = '')
 {
     $folder = ($folder == '') ? APP .'config' : $folder;
-    
     if($filename == 'database')
     {
         $database = getStatic('database', $var, APP .'config');
-
         return $database;
     }
     
     return getStatic($filename, $var, $folder);
 }
 
+/**
+|--------------------------------------------------------------------------
+| Upgrading to new version.
+|--------------------------------------------------------------------------
+| If a new version available, package manager upgrage it using your package.json.
+| If you need a stable a version remove "*", and set version to specific
+| number. ( e.g. version: "2.0" )
+|
+| {
+|  "name": "Obullo",
+|  "version": "*",   
+|  "db_layer": "Database_Pdo",
+|  "dependencies": {
+|    "task" : "*",
+|     "auth" : "*"
+|  }
+| }
+|
+ */
 $packages = getConfig('packages');
 
 // --------------------------------------------------------------------
@@ -236,7 +233,6 @@ $packages = getConfig('packages');
 require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'obullo'. EXT);
 
 // --------------------------------------------------------------------
-
 
 $obullo = new Obullo();
 $obullo->run();

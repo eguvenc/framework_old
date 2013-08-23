@@ -2,18 +2,16 @@
 new html\start();
 new url\start();
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <title>Welcome to Obullo !</title>
-<meta charset="utf-8"></meta>
+<meta charset="utf-8" />
 <?php echo html\css('welcome.css') ?>
 </head>
 <body>
     
 <h1>Welcome to Obullo !</h1> 
-
 <div id="main">
     <div class="fieldset"> 
           <div class="fieldbox"> 
@@ -25,9 +23,9 @@ new url\start();
                     
                     <code><b>modules / </b><samp>views</samp> / footer.php <kbd>( Footer )</kbd></code> 
                     
-                    <code><b>modules / welcome / </b><samp>views</samp> / welcome.php <kbd>( View )</kbd></code>
+                    <code><b>modules / welcome / </b><samp>view</samp> / welcome.php <kbd>( View )</kbd></code>
                     
-                    <code><b>modules / welcome / </b><samp>controllers</samp> / welcome.php <kbd>( Controller )</kbd></code>
+                    <code><b>modules / welcome / </b><samp>controller</samp> / welcome.php <kbd>( Controller )</kbd></code>
                    
                     <br />
                     <div class="test"><?php echo url\anchor('/welcome/hmvc', 'Try to New HMVC Feature'); ?></div>
@@ -35,18 +33,14 @@ new url\start();
                     <div class="test"><?php echo url\anchor('/welcome/task', 'Try to New Task Feature'); ?></div>
                     <br />
                     
-                    <p><b>Note:</b> If you are new to Obullo, you should start by 
-                reading the <a href="http://obullo.com/user_guide/en/1.0.1/index.html">User Guide</a>.</p>
+                    <p><b>Note:</b> If you are new to Obullo, you should start by reading the <a href="http://obullo.com/docs/2.0/">Api Docs</a>.</p>
            
               </div>
           </div> 
-    </div> 
-
+    </div>
 <?php echo vi\views('footer') ?>
 
 </div> 
-
 <br />
-
 </body>
 </html>

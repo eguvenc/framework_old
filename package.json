@@ -1,21 +1,9 @@
 {
   "name": "Obullo",
-  "version": "2.0",
+  "version": "*",
   "db_layer": "Database_Pdo",
   "dependencies": {
-    "auth" : "*",
-    "router": "*",
-    "uri": "*",
-    "input": "*",
-    "security": "*", 
-    "db_pdo": "*",
-    "view": "*",
-    "config": "*",
     "task" : "*",
     "auth" : "*"
-  },
-  
-  "###notes" : "If you want to replace a default core module you need specify the your repo.",
-  "###example" : "git://github.com/username/yourlibrary.git",
-  "###setting": " 'config' : { 'repo' : 'https://github.com/username/yourlibrary.git', 'version' : '*'}"
+  }
 }

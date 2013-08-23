@@ -40,7 +40,7 @@ Class Welcome extends Controller {
         
         // sess\set('test', 1234);
         // echo sess\get('test');
-        vi\view('welcome', '', false); // current module view
+        vi\view('welcome', false); // current module view
         //
         // vi\views('welcome', '', false); // modules/views
     }
@@ -53,7 +53,7 @@ Class Welcome extends Controller {
         $data['response_a'] = request\get('welcome/test/1/2/3');
         $data['response_b'] = request\get('welcome/test/4/5/6');
         
-        vi\view('hmvc', $data, false);
+        vi\view('hmvc', false, $data);
     }
     
     function test($arg1 = '', $arg2 = '', $arg3 = '')

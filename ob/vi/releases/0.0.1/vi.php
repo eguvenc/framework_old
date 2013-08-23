@@ -23,13 +23,13 @@ namespace vi {
     * Load module view file
     *
     * @param string  $filename
-    * @param array   $data
     * @param boolean $string default true
+    * @param array   $data
     * @return void
     */
-    function view($filename, $data = '', $string = true)
+    function view($filename, $string = true, $data = '')
     {
-        return \View::getInstance()->load($filename, $data, $string);
+        return \View::getInstance()->load($filename, $string, $data);
     }
 
     // ------------------------------------------------------------------------
@@ -38,16 +38,16 @@ namespace vi {
     * Load view file from MODULES\views folder.
     *
     * @param string  $filename
-    * @param array   $data
     * @param boolean $string default true
+    * @param array   $data
     * @return void
     */
-    function views($filename, $data = '', $string = true)
+    function views($filename, $string = true, $data = '')
     {
         $view = \View::getInstance();
         $view->setPath('views');
         
-        return $view->load($filename, $data, $string);
+        return $view->load($filename, $string, $data);
     }
     
     // ------------------------------------------------------------------------

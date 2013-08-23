@@ -2,26 +2,26 @@
 
 Class Obm_Server {
     public $package_list = array();
-    public $errors = array();
+    public $errors       = array();
     
     function __construct(){
         // Get the json file from package database 
         // and send it to user.
         // this area will come form MYSQL database.
     }
-    function global_client_version(){
+    function globalClientVersion(){
         return '0.1';
     }
     function run(){
         // Check the $USER Obm version if OBM version Out of Date
         // Send error and begin the upgrade process to new version.
-        if($_REQUEST['_version'] != $this->global_client_version()){
+        if($_REQUEST['_version'] != $this->globalClientVersion()){
             header('Access-Control-Max-Age: 3628800');
             header('Access-Control-Allow-Methods: GET, POST');
             header('Content-type: application/json');
             header('Cache-Control: no-cache, must-revalidate'); // NO CACHE
             header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-            echo json_encode(array('version_update' => $this->global_client_version()));
+            echo json_encode(array('version_update' => $this->globalClientVersion()));
             return;
         }
         
@@ -37,7 +37,7 @@ Class Obm_Server {
                     $this->errors[] = "The package.json file seems empty or not formatted correctly.";
                 }
                 if(count($package_json['dependencies']) == 0){
-                    $this->errors[] = "The package.json dependencies can't be empty.";
+                    $this->errors[] = "The package.json dependencies can't be empty. You need to add packages.";
                 }
                 
             } else {
@@ -60,11 +60,10 @@ Class Obm_Server {
                 foreach($package_json['dependencies'] as $key => $row) {
                     if($this->packageExists($key)){
                         if( ! is_object($row[$key])){
-                            $package_update_list[$key] = $this->get_package_json($key);
+                            $package_update_list[$key] = $this->getPackageJson($key);
                         }
                     }
                 }
-                
                 echo json_encode($package_update_list);
                 
                 // echo json_encode($this->package_list);
@@ -83,8 +82,111 @@ Class Obm_Server {
         return false;
     }
     
-    function get_package_json($name){
-        return file_get_contents('obullo_modules/'.$name.'/package.json');
+    function getPackageJson($name){
+        ###
+        ### connect to database and get TASK package.json file
+        // mysql_fetch_row();
+        
+        if($name == 'auth')
+        {
+            return '{
+                    "name": "auth",
+                    "description": "User Authentication Class",
+                    "version": "0.0.2",
+                    "author": {
+                      "name": "Ersin Güvenç",
+                      "email": "eguvenc@gmail.com",
+                      "url": "https://github.com/eguvenc"
+                    },
+                    "component" : "library",
+                    "dependencies": {
+                      "sess": "*"
+                    },
+                    "keywords": [
+                      "auth",
+                      "authentication"
+                    ],
+                    "homepage": "https://github.com/obullo/auth",
+                    "repo": {
+                      "type": "git",
+                      "url": "git://github.com/obullo/auth.git",
+                      "archive" : "zip",
+                      "archive_url": "https://github.com/obullo/auth/archive/master.zip"
+                    },
+                    "requires": {
+                      "php": ">= 5.1.2",
+                      "extensions": ["none"]
+                    },
+                    "bugs": {
+                      "url": "https://github.com/obullo/auth/issues",
+                      "email": "eguvenc@gmail.com"
+                    },
+                    "licenses": [
+                      {
+                        "type": "GPL",
+                        "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+                      }
+                    ]
+                  }';
+        }
+        
+        if($name == 'task')
+        {   
+            return '{
+                    "name": "task",
+                    "description": "Task Helper, run cli tasks and follow debugs from command line.",
+                    "version": "0.0.1",
+                    "author": {
+                      "name": "Ersin Güvenç",
+                      "email": "eguvenc@gmail.com",
+                      "url": "https://github.com/eguvenc"
+                    },
+                    "component" : "helper",
+                    "shell" : [
+                      {
+                          "copy" : { 
+                              "source" : "ob/$name/releases/$version/src/task", 
+                              "target" : "/" 
+                          },
+                          "copy" : {
+                              "source" : "ob/$name/releases/$version/example/*",
+                              "target" : "modules/tasks/controllers"
+                          }
+                      }
+                    ],
+                    "keywords": [
+                      "task",
+                      "debug",
+                      "debugging",
+                      "cli",
+                      "cli log debug",
+                      "log debug",
+                      "follow debugs"
+                    ],
+                    "homepage": "https://github.com/obullo/task",
+                    "repo": {
+                      "type": "git",
+                      "url": "https://github.com/obullo/task.git",
+                      "archive" : "zip",
+                      "archive_url": "https://github.com/obullo/task/archive/master.zip"
+                    },
+                    "requires": {
+                      "php": ">= 5.2.4",
+                      "extensions": ["none"]
+                    },
+                    "bugs": {
+                      "url": "https://github.com/obullo/task/issues",
+                      "email": "eguvenc@gmail.com"
+                    },
+                    "licenses": [
+                      {
+                        "type": "GPL",
+                        "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+                      }
+                    ]
+                  }';
+        }
+       
     }
     
 }

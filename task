@@ -3,8 +3,7 @@
 |--------------------------------------------------------------------------
 | Obullo CLI (TASKS)
 |--------------------------------------------------------------------------
-| @see User Guide: Chapters / General Topics / Tasks
-|
+| @see Docs:  General Topics / Tasks
 | @author CJ Lazell
 |
 */ 
@@ -42,6 +41,15 @@ $_SERVER['REQUEST_URI']    = $_SERVER['PATH_INFO'];
 $_SERVER['QUERY_STRING']   = $_SERVER['PATH_INFO'];
 $_SERVER['ORIG_PATH_INFO'] = $_SERVER['PATH_INFO'];
 
+/**
+|--------------------------------------------------------------------------
+| Application Constants.
+|--------------------------------------------------------------------------
+| This file specifies which APP constants should be loaded by default.
+|
+ */
+require ('constants');
+
 
 /**
 |--------------------------------------------------------------------------
@@ -51,4 +59,4 @@ $_SERVER['ORIG_PATH_INFO'] = $_SERVER['PATH_INFO'];
 | to change it from here.
 |
 */ 
-require('index.php');
+require('index'. EXT);

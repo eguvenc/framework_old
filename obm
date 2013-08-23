@@ -2,12 +2,12 @@
 <?php
 /**
 |--------------------------------------------------------------------------
-| OBM ( Ob Package Manager ). ( People ask to meaning of Obullo, Obullo is African origin and he loves to dance. )
+| OBM ( Ob Package Manager )
 |--------------------------------------------------------------------------
 | Package Manager Functions
 |
-| Update / Install Functions
-| - Install the Obm                 :  cd /var/www/ && wget http://obullo.com/installer
+| Get Installer
+| - Install the Obm          :  cd /var/www/ && wget http://obullo.com/obm
 |
 */ 
 
@@ -17,7 +17,7 @@
 |--------------------------------------------------------------------------
 
 | $ cd /var/www/
-| $ wget http://obullo.com/installer
+| $ wget http://obullo.com/obm
 | 
 | CREATE NEW PROJECT
 | $ php obm install $yourprojectname
@@ -33,7 +33,7 @@ ini_set('zend.ze1_compatibility_mode', 0);
 ini_set('memory_limit', '100000M');
 set_time_limit(0);
 
-if(getOSname() == 'Windows'){
+if(getOSName() == 'Windows'){
     error("Obullo is African origin and he loves to dance.");
     die;
 }
@@ -56,9 +56,13 @@ if(isset($_SERVER['argv'][0])){
     }
     $server_url   = 'http://obullo-2.0/obm_server.php';
     if(file_exists('package.json')){
-        $package_json = file_get_contents('package.json');
-        $_SERVER['argv']['_json'] = $package_json; // " { *40-23* : ";
+        $user_package_json = file_get_contents('package.json');
+        $_SERVER['argv']['_json'] = $user_package_json; // " { *40-23* : ";
+    } else {
+        error('Package.json file does not exists in your project root.');
+        die;
     }
+    
     $_SERVER['argv']['_version'] = $OBM_VERSION;
     // use key 'http' even if you send the request to https://...
     $options = array(
@@ -110,18 +114,33 @@ if(isset($_SERVER['argv'][0])){
         // give chmod 777 permission to installed folder
         // cd ..
         // chmod -R 777 modulename
-
     } else {
         error("Could not connect to the OBM Server, please try again.");
         die;
     }
     
     try {
+        // Include the user packages.php to version compare foreach packages.
+        require ('constants');
+        require (APP .'config'. DS .'packages'. EXT);   // Loaded local packages
+        
+        // print_r($packages['dependencies']);
+       
+        $json = json_decode($user_package_json, true);
+        if( ! isset($json['dependencies'])){
+            error('No package found in your package.json file.');
+            die;
+        }
+        /*
+        foreach($json->dependencies as $depname => $depversion){
+            echo $depname;
+        }*/
+        
         // print_r($response);
-        foreach($response as $key => $package_json){
-            $pack = json_decode(trim($package_json));
+        foreach($response as $key => $remote_package_json){
+            $pack = json_decode(trim($remote_package_json));
             if($pack == null){
-                error("The package $key could not parsed, probably there is a syntax error in package.json file.");
+                error("The package $key could not parsed, probably there is a syntax error in the package.json.");
             } 
             if($pack != null){
                 // wget -O framework.zip https://github.com/obullo/framework/zipball/dev
@@ -143,9 +162,28 @@ if(isset($_SERVER['argv'][0])){
                         } else {
                             $code = explode(" ", $output);
                             if(isset($code[1])) {
-                                if($code[1] == '302' || $code[1] == '200'){
-                                    line('obm http 200 '.trim($pack->repo->archive_url));
-                                    line('obm http GET ');
+                                if($code[1] == '302' || $code[1] == '200'){  // Resolve package url
+                                    // get local version of package ..
+                                    $local_version = trim($json['dependencies'][$pack->name]);
+                                    if($local_version == '*' || empty($local_version)){   // go to the packages file and learn current version.
+                                        if($packages['dependencies'][$pack->name]['version'] < $pack->version){
+                                            getHttpPackage($pack->name, $pack->repo->archive_url);
+                                        }
+                                        elseif($packages['dependencies'][$pack->name]['version'] == $pack->version){
+                                            line('obm http 200 '.trim($pack->name).'@'.trim($pack->version).' OK already latest version.'); // trim($pack->repo->archive_url));
+                                        }
+
+                                    } else {
+                                        // check current version exists ? if not install it !!
+                                        if(is_dir(OB_MODULES .$pack->name)){
+                                           if($packages['dependencies'][$pack->name]['version'] == $pack->version){
+                                                line('obm http 200 '.trim($pack->name).'@'.trim($pack->version).' OK already latest version.'); // trim($pack->repo->archive_url));
+                                           }
+                                        } else {
+                                           getHttpPackage($pack->name, $pack->repo->archive_url);
+                                        }
+                                    }
+                                   
                                 } else {
                                     line('obm http '.$code[1].' '.trim($pack->repo->archive_url).' - url could not be resolved. Header: '.getHeader($code[1]));
                                 }
@@ -163,6 +201,11 @@ if(isset($_SERVER['argv'][0])){
 
 //------------------ Obm functions ---------------------
 
+function getHttpPackage($pack_name, $pack_archive_url){
+    
+    
+    line('obm http GET '.$pack_name.' curl exec to ..'.$pack_archive_url.' ...');
+}
 function error($error){
     echo "\33[0;33m".$error."\033[0m\n";
 }
@@ -174,7 +217,7 @@ function line($line){
     unset($words[1]);
     unset($words[2]);
     foreach($words as $word){
-        $text.= cli($word, 'brown');
+        $text.= cli($word, 'cyan');
     }
     echo $text."\n";
 }
@@ -187,7 +230,7 @@ function cli($key, $color = ''){
                 $color_str = '';
                 break;
             case 'cyan':
-                $color_str = "\33[0;35m";
+                $color_str = "\33[0;36m";
                 break;
             case 'brown':
                 $color_str = "\33[0;33m";
@@ -202,6 +245,9 @@ function cli($key, $color = ''){
         case "http":
             $start.= "\33[0;32m";
             break;
+        case "200":
+            $start.= "\33[0;32m";
+            break;
         case "WARN":
             $start.= "\33[0;31m";
             break;
@@ -211,7 +257,7 @@ function cli($key, $color = ''){
     }    
     return $start.$key.' '.$end;
 }
-function getOSname() { 
+function getOsName() { 
     $userOS = php_uname('v');
     $os_platform    =   "Unknown OS Platform";
     $os_array       =   array(
@@ -290,3 +336,7 @@ function getHeader($code){
         return $headers[$code];
     }
 }
+
+/**
+ * @author Obullo Team @2013
+ */

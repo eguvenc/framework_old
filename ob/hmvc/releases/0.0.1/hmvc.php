@@ -361,7 +361,7 @@ Class Hmvc
         // @todo do ob_start(); HMVC CACHE if(ob_get_level() > 0) ob_end_clean();
         
         $hmvc_uri   = "{$router->fetchDirectory()} / {$router->fetchClass()} / {$router->fetchMethod()}";
-        $controller = MODULES .$router->fetchDirectory(). DS .'controllers'. DS .$router->fetchClass(). EXT;
+        $controller = MODULES .$router->fetchDirectory(). DS .'controller'. DS .$router->fetchClass(). EXT;
 
         // Check the controller exists or not
         if ( ! file_exists($controller))

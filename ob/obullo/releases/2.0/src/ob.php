@@ -104,11 +104,6 @@
 
         $ob_parts   = explode('\\', $realname);
         $ob_library = strtolower($ob_parts[0]);
-        
-        if($realname == 'Email\Mail')
-        {
-            // print_r($ob_parts); exit();
-        }
 
         $src = '';
         if(isset($ob_parts[1]) AND $ob_parts[1] == 'Src')

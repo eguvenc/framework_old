@@ -148,7 +148,7 @@ Class Start extends Controller {
 Location: .app/welcome/controllers/start.php */
 ```
 
-and <samp>blog/blog/controllers/blog.php</php> file should be like this.
+and <samp>blog/controllers/blog.php</php> file should be like this.
 
 ```php
 <?php
@@ -170,6 +170,6 @@ Class Blog extends Controller {
 
 }
 
-/* End of file start.php */
-Location: .application/blog/blog/controllers/blog.php */
+/* End of file blog.php */
+Location: .modules/blog/controller/blog.php */
 ```

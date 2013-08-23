@@ -82,7 +82,7 @@ Class View {
     * @param booelan $string fetch the file as string or include file
     * @return void | string
     */
-    public function load($filename, $data = '', $string = false)
+    public function load($filename, $string = false, $data = '')
     {
         if(function_exists('getInstance') AND  is_object(getInstance()))
         {
@@ -114,7 +114,7 @@ Class View {
 
         include($this->path . $filename . EXT);
         
-        log\me('debug', 'View file loaded: '.\error\securePath($this->path). $filename . EXT);
+        log\me('debug', 'View file loaded: '.error\securePath($this->path). $filename . EXT);
 
         if($string === true)
         {

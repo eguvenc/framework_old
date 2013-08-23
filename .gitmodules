@@ -7,3 +7,6 @@
 [submodule "ob/config"]
 	path = ob/config
 	url = git://github.com/obullo/config.git
+[submodule "ob/auth"]
+	path = ob/auth
+	url = git://github.com/obullo/auth.git

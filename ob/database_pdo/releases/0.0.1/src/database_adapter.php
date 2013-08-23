@@ -47,8 +47,7 @@ Abstract Class Database_Adapter extends Database_Layer {
         
         if(isset($param['driver']))
         {    
-            // Dsn Connection..
-            if( isset($param['dsn']) ) 
+            if( isset($param['dsn']) )  // Dsn Connection..
             {
                 $this->driver   = strtolower($param['driver']);  // required
                 $this->username = isset($param['username']) ? $param['username'] : '';    // optional
@@ -97,7 +96,6 @@ Abstract Class Database_Adapter extends Database_Layer {
     /**
     * Connect to PDO (default Mysql)
     * 
-    * @author   Ersin Guvenc 
     * @param    string $dsn  Dsn
     * @param    string $user Db username
     * @param    mixed  $pass Db password
@@ -116,7 +114,9 @@ Abstract Class Database_Adapter extends Database_Layer {
         $this->_pdo = $this->pdoConnect($dsn, $this->username, $this->password, $this->options);
              
         if( ! empty($this->char_set) )
-        $this->_conn->exec("SET NAMES '" . $this->char_set . "'");
+        {
+            $this->_conn->exec("SET NAMES '" . $this->char_set . "'");
+        }
         
         // We set exception attribute for always showing the pdo exceptions errors. (ersin)
         $this->_conn->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
@@ -179,16 +179,16 @@ Abstract Class Database_Adapter extends Database_Layer {
             
         } catch (\PDOException $e)  // don't show excepiton
         {
-            // If the driver doesn't support getting attributes
-            return null;
+            return null; // If the driver doesn't support getting attributes
         }
         
         $matches = null;
         if (preg_match('/((?:[0-9]{1,2}\.){1,3}[0-9]{1,2})/', $version, $matches))
         {
             return $matches[1];
-        
-        } else {
+        } 
+        else 
+        {
             return null;
         }
     }
@@ -271,14 +271,23 @@ Abstract Class Database_Adapter extends Database_Layer {
     // --------------------------------------------------------------------
     
     /**
-    * Return error info
-    * in PDO::PDO::ERRMODE_SILENT mode
+    * Return error info in PDO::PDO::ERRMODE_SILENT mode
     * 
     * @return type 
     */
     public function errors()
     {
         return $this->_conn->errorInfo();
+    }
+    
+    // --------------------------------------------------------------------
+    
+    /**
+     * Close the database connetion. 
+     */
+    function __destruct()
+    {
+        $this->_conn = null;
     }
     
 }

@@ -6,9 +6,9 @@ Obullo has a Vi helper that is always active and it declared in your [Autoload](
 
 ------
 
-#### vi\view('filename', $data = array(), $string = TRUE);
+#### vi\view('filename', $string = TRUE, $data = array());
 
-Load view file from local directory e.g. /blog
+Load view file from local directory e.g. /welcome
 
 #### vi\setVar('key', $val = '');
 
@@ -16,15 +16,15 @@ Set variables to your layouts
 
 #### vi\getVar('key');
 
-Get view variable from your layouts
+Get view variable for all views
 
 #### vi\setArray('key', $val = '');
 
-Set array type variables to your layouts
+Set array type variables to your view files
 
 #### vi\getArray('key');
 
-Get array variables from your layouts
+Get array variables
 
 **Tip:**About loading and creating view files, you can find more examples in [views](/docs/general/views) section.
 
@@ -32,7 +32,7 @@ Get array variables from your layouts
 
 ------
 
-Obullo has a general /views folder which is located in <dfn>/modules</dfn> directory.Sometimes you may want to put common views to this folder which is like application layouts, <b>header</b> and <b>footer</b> parts etc ..
+Obullo has a general /views folder which is located in <dfn>/modules</dfn> directory.Sometimes you may want to put common views to this folder which is like <b>header</b> and <b>footer</b> parts etc ..
 
 ```php
 <?php 
@@ -47,18 +47,18 @@ Class Home extends Controller {
     {
         vi\setVar('title', 'Welcome to Mysite !');
         
-        vi\views('view_home', '', FALSE);
+        vi\views('home', false);
     }
 }
 
 //  End of file home.php
-// Location: .modules/home/controllers/home.php // 
+// Location: .modules/home/controller/home.php // 
 ```
 
 ```php
-Location: .modules/home/views/view_home.php
+Location: .modules/home/view/home.php
 
-<?php echo vi\views('../header'); ?>
+<?php echo vi\views('header'); ?>
 
 <div class="row" id="wrapper">
 <div class="radius" id="content"> 
@@ -72,7 +72,7 @@ Location: .modules/home/views/view_home.php
 
         <div class="row">
             <div class="twelve columns">
-                <p><?php echo anchor('/signup', 'Join', ' class="regular button radius" ') ?></p>
+                <p><?php echo anchor('/signup', 'Join', ' class="button" ') ?></p>
             </div>
         </div>
     </div>
@@ -80,11 +80,11 @@ Location: .modules/home/views/view_home.php
 </div>
 </div>
 
-<?php echo vi\views('../footer'); ?>
+<?php echo vi\views('footer'); ?>
 ```
 
 ```php
-// Location: .modules/views/view_header.php
+// Location: .modules/views/header.php
 
 <div class="row">
     <div class="twelve columns">
@@ -113,5 +113,5 @@ Location: .modules/home/views/view_home.php
 You can create unlimited subfolders.
 
 ```php
-echo vi\views('subfolder/sub/view_filename');
+echo vi\views('subfolder/sub/filename');
 ```

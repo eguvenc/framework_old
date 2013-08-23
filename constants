@@ -1,0 +1,49 @@
+<?php
+
+/*
+| -------------------------------------------------------------------
+| APPLICATION CONSTANTS
+| -------------------------------------------------------------------
+| This file specifies which APP constants should be loaded 
+| by default.
+|
+*/
+
+/**
+|---------------------------------------------------------------
+| UNDERSTANDING ESSENTIAL CONSTANTS
+|---------------------------------------------------------------
+| DS          - The DIRECTORY SEPERATOR
+| EXT         - The file extension.  Typically ".php"
+| SELF        - The name of THIS file (typically "index.php")
+| FCPATH      - The full server path to THIS file
+| PHP_PATH    - The php path of your server
+| FPATH       - The full server path without file
+*/
+define('DS',   DIRECTORY_SEPARATOR);
+define('EXT',  '.php');
+define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+define('FCPATH', __FILE__);
+define('PHP_PATH', '/usr/bin/php'); 
+define('FPATH', dirname(__FILE__));
+
+/**
+|---------------------------------------------------------------
+| UNDERSTANDING APP CONSTANTS
+|---------------------------------------------------------------
+| ROOT        - The root path of your server
+| APP         - The full server path to the "app" folder
+| MODULES     - The full server path to the "modules" folder
+| OB_MODULES  - The full server path to the "ob" folder
+| TASK_FILE   - Set your task (CLI) file name that we use it in task helper.
+*/
+define('ROOT',  realpath(dirname(__FILE__)) . DS);
+define('APP',  ROOT .'app'. DS);
+define('MODULES',  ROOT .'modules'. DS);
+define('CLASSES',  ROOT .'classes'. DS);
+define('OB_MODULES',  ROOT .'ob'. DS);
+define('TASK_FILE', 'task');
+
+
+/* End of file constants */
+/* Location: .constants */
