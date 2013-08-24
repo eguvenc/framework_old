@@ -8,8 +8,7 @@ Class Welcome extends Controller {
 
         // new Email();
         // new form_Json\start();
-        
-        
+      
         // new Acl();
         // new Db();
         // print_r($this->db->get('users')->resultArray());

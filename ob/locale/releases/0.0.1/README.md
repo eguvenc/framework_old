@@ -27,12 +27,12 @@ $lang['error_username_missing'] = "You must submit a username";
 ```
 
 ```php
-$this->locale->load('language', $folder= '');  // load module language file .. 
+$this->locale->load('language', $folder= '');  // load locale file
 ```
 
 Where <samp>filename</samp> is the name of the file you wish to load (without the file extension), and language is the language set containing it (ie, english). If the second parameter is missing, the default language set in your <kbd>app/config/config.php</kbd> file will be used.
 
-### Loading a Application Language File
+### Loading a Language File
 
 ------
 
@@ -50,10 +50,11 @@ If you want load language files from your <b>app</b> folder create your language
             contact.php 
 ```
 
-This function load a <b>app</b> language file from your <dfn>app/locale</dfn> folder.
+This function load a language file from your <dfn>app/locale</dfn> folder.
 
 ```php
-$this->locale->load('filename', 'language');  // Load global language file.. 
+$this->locale->load('welcome', cookie\get('locale'));
+lang('Welcome to the our site !');
 ```
 
 For Example :
@@ -92,7 +93,7 @@ $this->locale->load('filename', 'language');  // Load base language file ..
 ```
 
 ```php
-$this->locale->load('calender'); // default english if you not provide second parameter 
+$this->locale->load('calendar'); // default english if you not provide second parameter 
 ```
 
 ```php
