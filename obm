@@ -121,9 +121,11 @@ if(isset($_SERVER['argv'][0])){
     
     try {
         // Include the user packages.php to version compare foreach packages.
+        // 
+        ######################
         require ('constants');
+        ######################
         require (APP .'config'. DS .'packages'. EXT);   // Loaded local packages
-        
         // print_r($packages['dependencies']);
        
         $json = json_decode($user_package_json, true);
@@ -135,7 +137,6 @@ if(isset($_SERVER['argv'][0])){
         foreach($json->dependencies as $depname => $depversion){
             echo $depname;
         }*/
-        
         // print_r($response);
         foreach($response as $key => $remote_package_json){
             $pack = json_decode(trim($remote_package_json));
@@ -143,17 +144,14 @@ if(isset($_SERVER['argv'][0])){
                 error("The package $key could not parsed, probably there is a syntax error in the package.json.");
             } 
             if($pack != null){
-                // wget -O framework.zip https://github.com/obullo/framework/zipball/dev
-                // unzip framework.zip
-                // mv obullo-framework* obullo_modules/framework
                 if( ! isset($pack->name)){
                     line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No name field.');
                 }
                 if( ! isset($pack->version)){
                     line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No version field.');
                 }                
-                if( ! isset($pack->repo->archive_url)){
-                    line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No repo -> archive_url field.');
+                if( ! isset($pack->repo->archive) || ! isset($pack->repo->archive_url)){
+                    line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No repo -> archive_url or repo -> archive fields, they seems empty.');
                 } else {
                         $shell 	= "curl -s --head ".trim($pack->repo->archive_url)." | head -n 1 | grep \"HTTP/1.[01] [23]..\"";
                         $output = shell_exec($shell);
@@ -167,7 +165,7 @@ if(isset($_SERVER['argv'][0])){
                                     $local_version = trim($json['dependencies'][$pack->name]);
                                     if($local_version == '*' || empty($local_version)){   // go to the packages file and learn current version.
                                         if($packages['dependencies'][$pack->name]['version'] < $pack->version){
-                                            getHttpPackage($pack->name, $pack->repo->archive_url);
+                                            getHttpPackage($pack->name, $pack->repo->archive, $pack->repo->archive_url);
                                         }
                                         elseif($packages['dependencies'][$pack->name]['version'] == $pack->version){
                                             line('obm http 200 '.trim($pack->name).'@'.trim($pack->version).' OK already latest version.'); // trim($pack->repo->archive_url));
@@ -180,7 +178,7 @@ if(isset($_SERVER['argv'][0])){
                                                 line('obm http 200 '.trim($pack->name).'@'.trim($pack->version).' OK already latest version.'); // trim($pack->repo->archive_url));
                                            }
                                         } else {
-                                           getHttpPackage($pack->name, $pack->repo->archive_url);
+                                           getHttpPackage($pack->name, $pack->repo->archive, $pack->repo->archive_url);
                                         }
                                     }
                                    
@@ -201,10 +199,107 @@ if(isset($_SERVER['argv'][0])){
 
 //------------------ Obm functions ---------------------
 
-function getHttpPackage($pack_name, $pack_archive_url){
+/**
+    ###################
+ 
+    getpackage.sh
+
+    ###################
+
+    ARCHIVE_TYPE='zip';
+    PROJECT_DIR=${PWD};
+    PACKAGE='auth';
+    UNIQID='1233'; ## create uniquid in PHP like auth-m983n345.zip
+    TEMP_FOLDER='/tmp/obullo-temp'
+
+    # get zip package as auth-123.zip
+    sudo wget -O $TEMP_FOLDER/$PACKAGE-$UNIQID.zip https://github.com/obullo/$PACKAGE/archive/master.zip
+    sudo mkdir -p $TEMP_FOLDER/$PACKAGE-$UNIQID;
+
+    # unzip folder as auth
+    if [ $ARCHIVE_TYPE == 'zip' ]; then
+            sudo unzip -d $TEMP_FOLDER/$PACKAGE-$UNIQID $TEMP_FOLDER/$PACKAGE-$UNIQID.zip
+    fi;
+
+    if [ $ARCHIVE_TYPE == 'tar' ]; then
+            # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar
+            sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar
+    fi;
+
+    if [ $ARCHIVE_TYPE == 'tar.gz' ]; then
+            # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar.gz
+            sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar.gz
+    fi;
+
+    if [ $ARCHIVE_TYPE == 'tar.bz2' ]; then
+            # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar.bz2
+            sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar.bz2
+    fi;
+
+    # if $PACKAGE folder does not exists create it
+    if [ ! -d $PROJECT_DIR/ob/$PACKAGE ]; then
+        sudo mkdir -p $PROJECT_DIR/ob/$PACKAGE;
+        sudo chmod -R 777 $PROJECT_DIR/ob;
+    fi
+
+    # find the package.json and copy it to ob/$PACKAGE
+    find $TEMP_FOLDER/$PACKAGE-$UNIQID -name package.json -exec cp {} $PROJECT_DIR/ob/$PACKAGE \;
+    find $TEMP_FOLDER/$PACKAGE-$UNIQID -type d -name releases -exec cp {} -ar $PROJECT_DIR/ob/$PACKAGE \;
+
+# http://www.cyberciti.biz/faq/copy-folder-linux-command-line/
+*/
+
+function getHttpPackage($pack_name, $archive, $archive_url){
+    $archive = trim($archive);
+    if(in_array($archive, array('zip', 'tar', 'tar.gz', 'tar.bz2'))){
+        line('obm WARN package.json '.trim($pack_name).' has unsupported archive type : ('.$archive.').');
+        line('obm WARN We support only (zip,tar,tar.gz and tar.bz2) types archives.');
+        return;
+    }
+    $getPackageSh = '
+        ARCHIVE_TYPE=\''.$archive.'\';
+        PROJECT_DIR=${PWD};
+        PACKAGE=\''.$pack_name.'\';
+        UNIQID=\''.uniqid().'\'; ## create package uniqId in PHP to store package to /tmp.
+        TEMP_FOLDER=\'/tmp/obullo-temp\'
+
+        # get zip package as auth-123.zip
+        sudo wget -O $TEMP_FOLDER/$PACKAGE-$UNIQID.zip '.$archive_url.'
+        sudo mkdir -p $TEMP_FOLDER/$PACKAGE-$UNIQID;
+
+        # unzip folder as auth
+        if [ $ARCHIVE_TYPE == \'zip\' ]; then
+                sudo unzip -d $TEMP_FOLDER/$PACKAGE-$UNIQID $TEMP_FOLDER/$PACKAGE-$UNIQID.zip
+        fi;
+
+        if [ $ARCHIVE_TYPE == \'tar\' ]; then
+                # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar
+                sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar
+        fi;
+
+        if [ $ARCHIVE_TYPE == \'tar.gz\' ]; then
+                # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar.gz
+                sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar.gz
+        fi;
+
+        if [ $ARCHIVE_TYPE == \'tar.bz2\' ]; then
+                # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar.bz2
+                sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar.bz2
+        fi;
+
+        # if $PACKAGE folder does not exists create it
+        if [ ! -d $PROJECT_DIR/ob/$PACKAGE ]; then
+            sudo mkdir -p $PROJECT_DIR/ob/$PACKAGE;
+            sudo chmod -R 777 $PROJECT_DIR/ob;
+        fi
+
+        # find the package.json and copy it to ob/$PACKAGE
+        find $TEMP_FOLDER/$PACKAGE-$UNIQID -name package.json -exec cp {} $PROJECT_DIR/ob/$PACKAGE \;
+        find $TEMP_FOLDER/$PACKAGE-$UNIQID -type d -name releases -exec cp {} -ar $PROJECT_DIR/ob/$PACKAGE \;      
+    ';
     
-    
-    line('obm http GET '.$pack_name.' curl exec to ..'.$pack_archive_url.' ...');
+    shell_exec($getPackageSh.' > /dev/null &');
+    line('obm http GET '.$pack_name.' package extracting from '.archive_url.' ...');
 }
 function error($error){
     echo "\33[0;33m".$error."\033[0m\n";
@@ -336,7 +431,6 @@ function getHeader($code){
         return $headers[$code];
     }
 }
-
 /**
  * @author Obullo Team @2013
  */
