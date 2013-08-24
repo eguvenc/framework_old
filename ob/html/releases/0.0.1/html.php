@@ -40,6 +40,7 @@ namespace html {
     {
         if(strpos($href, '/*') !== false)   // WE UNDERSTAND THIS IS A FOLDER 
         {
+            // @todo if($href, '/*^(filename2.js|filename2.js')) except the files.
             $href   = substr($href, 0, -2);
             $files  = '';
             $folder = getFilenames(ROOT .'assets'. DS .'css'. DS . str_replace('/', DS, $href));

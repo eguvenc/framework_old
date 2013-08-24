@@ -47,7 +47,6 @@ $packages = array(
         'request' => array('version' => '0.0.1', 'component' => 'helper'),
         'security' => array('version' => '0.0.1', 'component' => 'library'), 
         'sess' => array('version' => '0.0.1', 'component' => 'helper'), 
-        'sess_cookie' => array('version' => '0.0.1', 'component' => 'library'), 
         'string' => array('version' => '0.0.1', 'component' => 'helper'), 
         'task'  => array('version' => '0.0.1', 'component' => 'helper'),
         'validator' => array('version' => '0.0.1', 'component' => 'library'),
