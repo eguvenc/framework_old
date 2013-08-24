@@ -58,7 +58,7 @@ Class Model_blog extends Model
 ?>
 ```
 
-<strong>Note:</strong> The functions in the above example use the [Active Record Class](/docs/database/active_record_class) database functions.
+<strong>Note:</strong> The functions in the above example use the [Active Record Class](/ob/obullo/releases/2.0/docs/database/active_record_class) database functions.
 
 <strong>Note:</strong> Please don't use $_POST variables as directly. Use <samp>i\post();</samp> function instead of php native $_POST variables.We have a Input Helper for the secure inputs.
 
@@ -110,7 +110,7 @@ app/models/model_user.php
 
 ------
 
-Your models will typically be loaded and called from within your [controller](/docs/general/controllers) functions. To load a application model you will use the following function:
+Your models will typically be loaded and called from within your [controller](/ob/obullo/releases/2.0/docs/general/controllers) functions. To load a application model you will use the following function:
 
 ```php
 -  application
@@ -226,7 +226,7 @@ $autoload['model']      = array('model1', 'model2', 'app/model', '../module/mode
 
 When a model is loaded it does  <strong>NOT</strong> connect automatically to your database. The following options for connecting are available to you:
 
-You can connect using the database methods [described here](/docs/database/database-configuration-and-connect), either from within your Controller class or your Model class. You must declare <samp>new Db/Db()</samp> function in your model or controller class.
+You can connect using the database methods [described here](/ob/obullo/releases/2.0/docs/database/database-configuration-and-connect), either from within your Controller class or your Model class. You must declare <samp>new Db/Db()</samp> function in your model or controller class.
 
 Putting this code into your Controller or Model __construct() function enough for the current database connection which is defined in the <dfn>app/config/database.php</dfn>
 
@@ -306,7 +306,7 @@ $config = array(
 $this->db2->query(  ....  );
 ```
 
-<strong>Tip:</strong> You can reach your database connectivity settings by a [common function](/docs/advanced/common-functions) called <samp>db();</samp> .Look at below the code.
+<strong>Tip:</strong> You can reach your database connectivity settings by a [common function](/ob/obullo/releases/2.0/docs/advanced/common-functions) called <samp>db();</samp> .Look at below the code.
 
 ```php
 echo db('hostname', 'db2');   // output localhost 

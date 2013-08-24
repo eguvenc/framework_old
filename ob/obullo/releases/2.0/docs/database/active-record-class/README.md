@@ -55,7 +55,7 @@ foreach($query->fetchAll() as $row)
 }
 ```
 
-Please visit the [result functions](/docs/database/generating-query-results) page for a full discussion regarding result generation.
+Please visit the [result functions](/ob/obullo/releases/2.0/docs/database/generating-query-results) page for a full discussion regarding result generation.
 
 #### $this->db->getWhere();
 
@@ -153,7 +153,7 @@ $this->db->join('comments', 'comments.id = blogs.id', 'left');
 
 This function enables you to set <b>WHERE</b> clauses using one of four methods:
 
-**Note:** All values passed to this function are escaped automatically, producing safer queries except the LIKE statement, for like statements you should use $this->escapeLike() function for more details look at this page [running and escaping queries](/docs/database/running-and-escaping-queries).
+**Note:** All values passed to this function are escaped automatically, producing safer queries except the LIKE statement, for like statements you should use $this->escapeLike() function for more details look at this page [running and escaping queries](/ob/obullo/releases/2.0/docs/database/running-and-escaping-queries).
 
     <ol><li><h4>Simple key/value method:</h4></li> 
 

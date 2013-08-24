@@ -16,7 +16,7 @@ The Profiler Class will display benchmark results, queries you have run, and $_P
 
 ------
 
-To enable the profiler place the following function anywhere within your [Controller](/docs/general/controllers/) functions:
+To enable the profiler place the following function anywhere within your [Controller](/ob/obullo/releases/2.0/docs/general/controllers/) functions:
 
 ```php
 $this->output->profiler();
