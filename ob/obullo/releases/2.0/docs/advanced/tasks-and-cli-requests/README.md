@@ -129,7 +129,7 @@ Obullo has <b>three</b> tasks folder called APPLICATON, MODULES and YOUR MODULE 
 
 All command line request goes to Obullo <b>task.php</b> which is located in your root directory. Obullo has a <b>/tasks</b> folder in the application directory if you want to create application tasks just create your controllers, models, helpers .. files in this folder.
 
-Using [Task Helper](/ob/task/releases/0.0.1/) you can run your tasks as a command in the background. Function run like CLI but don't use the task.php.
+Using Task Helper you can run your tasks as a command in the background. Function run like CLI but don't use the task.php.
 
 ```php
 new task\start();

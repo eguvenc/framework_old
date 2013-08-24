@@ -10,13 +10,13 @@ The Profiler Class will display benchmark results, queries you have run, and $_P
 
 ------
 
-**Important:**  This class does <kbd>NOT</kbd> need to be initialized. It is loaded automatically by the [Output Class](/ob/output/releases/0.0.1/) if profiling is enabled as shown below.
+**Important:**  This class does <kbd>NOT</kbd> need to be initialized. It is loaded automatically by the Output Class if profiling is enabled as shown below.
 
 ### Enabling the Profiler
 
 ------
 
-To enable the profiler place the following function anywhere within your [Controller](/ob/obullo/releases/2.0/docs/general/controllers/) functions:
+To enable the profiler place the following function anywhere within your Controller functions:
 
 ```php
 $this->output->profiler();
@@ -81,4 +81,4 @@ Application Views       APP\views\view_base_layout.php
 
 In order for the Profiler to compile and display your benchmark data you must name your mark points using specific syntax.
 
-Please read the information on setting Benchmark points in [Benchmark Helper](/ob/bench/releases/0.0.1/) page.
+Please read the information on setting Benchmark points in Benchmark Helper page.

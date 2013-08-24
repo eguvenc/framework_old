@@ -2,7 +2,7 @@
 
 ### What is the ODM
 
-Obullo has a Odm class who want to do validation in model instead of controller. Odm class use [Validator Class](/ob/validator/releases/0.0.1) to form validations. Using Validation Model you can create Native or <b>Ajax</b> forms easily.
+Obullo has a Odm class who want to do validation in model instead of controller. Odm class use Validator Class to form validations. Using Validation Model you can create Native or <b>Ajax</b> forms easily.
 
 If you want to use Odm Class simply extend your model to it.
 
@@ -417,7 +417,7 @@ The following is a list of all the prepping functions that are available to use:
 
 <table><thead>
 <th>Name</th><th>Parameter</th><th>Description</th></thead><tbody>
-<tr><td>xss_clean</td><td>No</td><td>Runs the data through the XSS filtering function, described in the [Security Helper](/ob/security/releases/0.0.1/) page.</td></tr>
+<tr><td>xss_clean</td><td>No</td><td>Runs the data through the XSS filtering function, described in the Security Helper page.</td></tr>
 <tr><td>prep_for_form</td><td>No</td><td>Converts special characters so that HTML data can be shown in a form field without breaking it.</td></tr>
 <tr><td>prep_url</td><td>No</td><td>Adds "http://" to URLs if missing.</td></tr>
 <tr><td>strip_image_tags</td><td>No</td><td>Strips the HTML from image tags leaving the raw URL.</td></tr>
@@ -437,7 +437,7 @@ echo $model->debug();
 
 ------
 
-If you use ajax requests you need to [Form Json Helper](/ob/form_json/releases/0.0.1/) to encode Validaton Model Response in Json format. If you use Obullo Jquery Form Plugin the following is a list of all the Form plugin functions that are available to use
+If you use ajax requests you need to Form Json Helper to encode Validaton Model Response in Json format. If you use Obullo Jquery Form Plugin the following is a list of all the Form plugin functions that are available to use
 
 you can control the form plugin functions using the class <b>attribute</b>
 
@@ -537,4 +537,4 @@ else
 
 ------
 
-Vmodel Library automatically support the transactions if your table engine setted correctly as INNODB. If you want to learn more details about transactions look at [database transactions](/ob/obullo/releases/2.0/docs/database/database-transactions/README.md) section.
+Vmodel Library automatically support the transactions if your table engine setted correctly as INNODB. If you want to learn more details about transactions look at database transactions section.

@@ -10,7 +10,7 @@ To submit a query, use the following function:
 $this->db->query('YOUR QUERY HERE');
 ```
 
-The <dfn>query()</dfn> function returns a database result **object** when "read" type queries are run, which you can use to [show your results](/ob/obullo/releases/2.0/docs/database/generating-query-results). When retrieving data you will typically assign the query to your own variable, like this:
+The <dfn>query()</dfn> function returns a database result **object** when "read" type queries are run, which you can use to show your results. When retrieving data you will typically assign the query to your own variable, like this:
 
 ```php
 $query = $this->db->query('YOUR QUERY HERE');
@@ -60,7 +60,7 @@ $search = '20% raise';<br />
 $sql = "SELECT id FROM table WHERE column LIKE '%".$this->db->escapeLike($search)."%'";
 ```
 
-**Note:** You don't need to **$this->escapeLike** function when you use active record class because of [active record class](/ob/obullo/releases/2.0/docs/database/active-record-class) use auto escape foreach like condition.
+**Note:** You don't need to **$this->escapeLike** function when you use active record class because of active record(CRUD) class use auto escape foreach like condition.
 
 ```php
 $query = $this->db->select("*")
