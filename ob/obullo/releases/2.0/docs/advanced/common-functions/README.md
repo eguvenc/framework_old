@@ -58,7 +58,7 @@ First parameter is filename and the second is <b>$variable</b> name you want to 
 
 #### configItem('item_key', $filename = '')
 
-The [Config library](/ob/config/releases/0.0.1) is the preferred way of accessing configuration information, however configItem() can be used to retrieve single keys. See Config library documentation for more information.
+The Config library is the preferred way of accessing configuration information, however configItem() can be used to retrieve single keys. See Config library documentation for more information.
 
 ```php
 echo configItem('base_url'); //output http://example.com  

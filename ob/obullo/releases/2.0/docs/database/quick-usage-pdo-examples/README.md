@@ -8,7 +8,7 @@ The following page contains example code showing how the database class is used.
 
 ------
 
-The following code loads and initializes the database class based on your [configuration](/ob/obullo/releases/2.0/docs/database/database-configuration-and-connect) settings:
+The following code loads and initializes the database class based on your configuration settings:
 
 ```php
 new Db();
@@ -184,7 +184,7 @@ foreach ($query->result() as $row)
 }
 ```
 
-The above <dfn>get()</dfn> function retrieves all the results from the supplied table. The [Active Record](/ob/obullo/releases/2.0/docs/database/active-record-class) class contains a full compliment of functions for working with data.
+The above <dfn>get()</dfn> function retrieves all the results from the supplied table. The Active Record(CRUD) class contains a full compliment of functions for working with data.
 
 ### CRUD ( Active Record ) Insert
 

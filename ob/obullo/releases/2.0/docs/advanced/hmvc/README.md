@@ -45,7 +45,7 @@ HMVC (Layered MVC)
                                 ------        -------    
 ```
 
-HMVC pattern offers more flexibility in your application. You can call multiple requests using Obullo's [Request helper](/ob/request/releases/0.0.1).
+HMVC pattern offers more flexibility in your application. You can call multiple requests using Obullo's Request helper.
 
 ```php
 ------------------------------------------------------------------------------------
@@ -74,4 +74,4 @@ HMVC pattern offers more flexibility in your application. You can call multiple 
 -------------------------------------------------------------------------------------
 ```
 
-Another example, we created a <b>captcha</b> module using hmvc methods download the latest version of Obullo and look at the captcha module. And just an idea you can create a login service creating a <b>login</b> folder then you can do request from your controllers using HMVC. Learn more details about Obullo's HMVC library click [Request helper](/ob/request/releases/0.0.1/) link.
+Another example, we created a <b>captcha</b> module using hmvc methods download the latest version of Obullo and look at the captcha module. And just an idea you can create a login service creating a <b>login</b> folder then you can do request from your controllers using HMVC.
