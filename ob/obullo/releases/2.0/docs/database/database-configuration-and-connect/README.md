@@ -187,7 +187,7 @@ $database['db']['options']  = array( PDO::ATTR_PERSISTENT => false ,
 
 -------
 
-The [Active Record Class](/docs/database/active-record-class) is globally enabled or disabled by setting the 'active_record' variable in the database configuration file to true/false (boolean). If you are not using the active record class, setting it to false will utilize fewer resources when the database classes are initialized.
+The [Active Record Class](/ob/obullo/releases/2.0/docs/database/active-record-class) is globally enabled or disabled by setting the 'active_record' variable in the database configuration file to true/false (boolean). If you are not using the active record class, setting it to false will utilize fewer resources when the database classes are initialized.
 
 ```php
 $database['system']['active_record'] = true;
@@ -329,7 +329,7 @@ $config = array(
 $this->db2->query(  ....  );
 ```
 
-<strong>Tip:</strong> You can reach your database connectivity settings by a  [common function](/docs/advanced/common-functions) called <samp>db()</samp>. Look at below the code.
+<strong>Tip:</strong> You can reach your database connectivity settings by a  [common function](/ob/obullo/releases/2.0/docs/advanced/common-functions) called <samp>db()</samp>. Look at below the code.
 
 ```php
 echo db('password', 'db2');   // output localhost 

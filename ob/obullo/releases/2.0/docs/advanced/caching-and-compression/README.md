@@ -30,7 +30,7 @@ Where <var>n</var> is the number of <b>minutes</b> you wish the page to remain c
 
 The above tag can go anywhere within a function. It is not affected by the order that it appears, so place it wherever it seems most logical to you. Once the tag is in place, your pages will begin being cached.
 
-**Warning:** Because of the way Obullo stores content for output, caching will only work if you are generating display for your controller with a [view](/docs/general/views).
+**Warning:** Because of the way Obullo stores content for output, caching will only work if you are generating display for your controller with a [view](/ob/obullo/releases/2.0/docs/general/views).
 
 **Note:** Before the cache files can be written you must set the file permissions on your <dfn>app/cache</dfn> folder such that it is writable.
 

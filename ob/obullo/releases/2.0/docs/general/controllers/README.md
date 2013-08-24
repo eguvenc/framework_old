@@ -172,7 +172,7 @@ Class Products extends Controller
 ?>
 ```
 
-**Important:** If you are using the [URI Routing](/docs/advanced/uri-routing) feature, the segments passed to your function will be the re-routed ones.
+**Important:** If you are using the [URI Routing](/ob/obullo/releases/2.0/docs/advanced/uri-routing) feature, the segments passed to your function will be the re-routed ones.
 
 ### Defining a Default Controller <a name="defining-a-default-controller"></a>
 
@@ -221,7 +221,7 @@ public function _remap($method)
 
 ------
 
-Obullo has an output class that takes care of sending your final rendered data to the web browser automatically. More information on this can be found in the [Views](/docs/general/views) and [Output](/ob/output/releases/0.0.1) class pages. In some cases, however, you might want to post-process the finalized data in some way and send it to the browser yourself. Obullo permits you to add a function named <dfn>_output()</dfn> to your controller that will receive the finalized output data.
+Obullo has an output class that takes care of sending your final rendered data to the web browser automatically. More information on this can be found in the [Views](/ob/obullo/releases/2.0/docs/general/views) and [Output](/ob/output/releases/0.0.1) class pages. In some cases, however, you might want to post-process the finalized data in some way and send it to the browser yourself. Obullo permits you to add a function named <dfn>_output()</dfn> to your controller that will receive the finalized output data.
 
 **Important:** If your controller contains a function named <samp>_output()</samp>, it will always be called by the output class instead of echoing the finalized data directly. The first parameter of the function will contain the finalized output.
 
@@ -285,7 +285,7 @@ Constructors are useful if you need to set some default values, or run a default
 
 ------
 
-Since your controller classes will extend the main application controller you must be careful not to name your functions identically to the ones used by that class, otherwise your local functions will override them. See [Reserved Names](/docs/general/reserved-names) for a full list.
+Since your controller classes will extend the main application controller you must be careful not to name your functions identically to the ones used by that class, otherwise your local functions will override them. See [Reserved Names](/ob/obullo/releases/2.0/docs/general/reserved-names) for a full list.
 
 ### That's it!
 
