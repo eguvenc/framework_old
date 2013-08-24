@@ -537,4 +537,4 @@ else
 
 ------
 
-Vmodel Library automatically support the transactions if your table engine setted correctly as INNODB. If you want to learn more details about transactions look at [database transactions](/docs/database/database-transactions) section.
+Vmodel Library automatically support the transactions if your table engine setted correctly as INNODB. If you want to learn more details about transactions look at [database transactions](/ob/obullo/releases/2.0/docs/database/database-transactions) section.
