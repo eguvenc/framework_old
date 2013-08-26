@@ -156,21 +156,23 @@ if(defined('STDIN'))
 * @param     string $folder folder of the file
 * @return    array
 */
-function getStatic($filename = 'config', $var = '', $folder = '')
+function getStatic($filename = 'config', $var = '', $folder = '', $extension = '')
 {
     static $loaded    = array();
     static $variables = array();
     
-    $key = trim($folder. DS .$filename. EXT);
+    $ext = ($extension == '') ? EXT : $extension;
+    $key = trim($folder. DS .$filename. $ext);
+
     if ( ! isset($loaded[$key]))
     {
-        require($folder. DS .$filename. EXT);
+        require($folder. DS .$filename. $ext);
      
         if($var == '') { $var = &$filename; }
 
         if ( ! isset($$var) OR ! is_array($$var))
         {
-            $error_msg = 'The static file '. $folder. DS .$filename. EXT .' file does not appear to be formatted correctly.';
+            $error_msg = 'The static file '. $folder. DS .$filename. $ext.' file does not appear to be formatted correctly.';
             log\me('error', $error_msg);
         }
 
@@ -195,16 +197,16 @@ function getStatic($filename = 'config', $var = '', $folder = '')
 * @param    string $var
 * @return   array
 */
-function getConfig($filename = 'config', $var = '', $folder = '')
+function getConfig($filename = 'config', $var = '', $folder = '', $extension = '')
 {
     $folder = ($folder == '') ? APP .'config' : $folder;
-    if($filename == 'database')
+    if($filename == 'packages')
     {
-        $database = getStatic('database', $var, APP .'config');
+        $database = getStatic('packages', '', APP .'config', '.cache');
         return $database;
     }
     
-    return getStatic($filename, $var, $folder);
+    return getStatic($filename, $var, $folder, $extension);
 }
 
 /**
@@ -217,7 +219,7 @@ function getConfig($filename = 'config', $var = '', $folder = '')
 |
 | {
 |  "name": "Obullo",
-|  "version": "*",   
+|  "version": "*",   // * = new version, 3.0 = stable version
 |  "db_layer": "Database_Pdo",
 |  "dependencies": {
 |    "task" : "*",
