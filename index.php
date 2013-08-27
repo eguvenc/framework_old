@@ -154,26 +154,24 @@ if(defined('STDIN'))
 * @param     string $filename file name
 * @param     string $var variable of the file
 * @param     string $folder folder of the file
+* @param     string $ext extension of the file
 * @return    array
 */
-function getStatic($filename = 'config', $var = '', $folder = '', $extension = '')
+function getStatic($filename = 'config', $var = '', $folder = '', $ext = '')
 {
     static $loaded    = array();
     static $variables = array();
-    
-    $ext = ($extension == '') ? EXT : $extension;
-    $key = trim($folder. DS .$filename. $ext);
 
+    $key = trim($folder. DS .$filename. $ext);
     if ( ! isset($loaded[$key]))
     {
         require($folder. DS .$filename. $ext);
-     
+    
         if($var == '') { $var = &$filename; }
 
         if ( ! isset($$var) OR ! is_array($$var))
         {
-            $error_msg = 'The static file '. $folder. DS .$filename. $ext.' file does not appear to be formatted correctly.';
-            log\me('error', $error_msg);
+            die('The static file '. $folder. DS .$filename. $ext.' file does not appear to be formatted correctly.');
         }
 
         $variables[$key] =& $$var;
@@ -199,14 +197,16 @@ function getStatic($filename = 'config', $var = '', $folder = '', $extension = '
 */
 function getConfig($filename = 'config', $var = '', $folder = '', $extension = '')
 {
+    $ext    = ($extension == '') ? EXT : $extension;
     $folder = ($folder == '') ? APP .'config' : $folder;
-    if($filename == 'packages')
-    {
-        $database = getStatic('packages', '', APP .'config', '.cache');
-        return $database;
+    
+    if(strpos($filename, '.') > 0)  // removes the extension for "." config files.
+    {   
+        $ext = ''; 
+        $var = 'packages';
     }
     
-    return getStatic($filename, $var, $folder, $extension);
+    return getStatic($filename, $var, $folder, $ext);
 }
 
 /**
@@ -218,23 +218,27 @@ function getConfig($filename = 'config', $var = '', $folder = '', $extension = '
 | number. ( e.g. version: "2.0" )
 |
 | {
-|  "name": "Obullo",
-|  "version": "*",   // * = new version, 3.0 = stable version
-|  "db_layer": "Database_Pdo",
 |  "dependencies": {
-|    "task" : "*",
+|     "obullo": "*",   // (*) = new version, (2.1,2.2 .. ) = stable version
 |     "auth" : "*"
 |  }
 | }
 |
  */
-$packages = getConfig('packages');
+$packages = getConfig('packages.cache');
+
+/**
+|--------------------------------------------------------------------------
+| Framework Cartdrige
+|--------------------------------------------------------------------------
+*/
+$core = $packages['core'];  // Custom core, you can use another core instead of obullo.
+
+require (OB_MODULES .$core. DS .'releases'. DS .$packages['dependencies'][$core]['version']. DS .$core. EXT);
+
+$framework = ucfirst($core);
 
 // --------------------------------------------------------------------
 
-require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'obullo'. EXT);
-
-// --------------------------------------------------------------------
-
-$obullo = new Obullo();
+$obullo = new $framework;
 $obullo->run();

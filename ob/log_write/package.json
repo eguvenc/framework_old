@@ -1,0 +1,37 @@
+{
+  "name": "log_write",
+  "description": "Write application logs, a component of the log helper.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ersin Güvenç",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
+  "component" : "library",
+  "keywords": [
+    "log_write",
+    "logging",
+    "log"
+  ],
+  "homepage": "https://github.com/obullo/log_write",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/log_write.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/log_write/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.1.2",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/log_write/issues",
+    "email": "eguvenc@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

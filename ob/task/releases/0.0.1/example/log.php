@@ -138,7 +138,7 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
             
             if( ! isset($logged[$date]))
             {
-                $this->_compile_loaded_files();
+                $this->_compileFiles();
             }
             
             $logged[$date] = 1;
@@ -148,51 +148,49 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
     /**
      *  BENCHMARK INFO 
      */
-    private function _compile_loaded_files()
+    private function _compileFiles()
     {
-        $config_files = array();
-        foreach(Config::getInstance()->is_loaded as $config_file)
+        $configs = array();
+        $config  = '\\'.getComponentOf('config');
+        foreach($config::getInstance()->is_loaded as $cfg)
         {
-            $config_files[] = error_secure_path($config_file);
+            $configs[] = error\securePath($cfg);
         }
         
-        $lang_files   = array();
-        foreach(Locale::getInstance()->is_loaded as $lang_file)
+        $locales = array();
+        $locale  = '\\'.getComponentOf('locale');
+        foreach($locale::getInstance() as $lcl)
         { 
-            $lang_files[]   = error_secure_path($lang_file); 
+            $locales[] = error\securePath($lcl); 
         }
 
+        $autoload = getConfig('autoload');
         $helpers = array();
-        foreach(loader::$_helpers as $helper)
+        foreach($autoload['helper'] as $helper)
         { 
-            $helpers[]      = error_secure_path($helper);
+            $helpers[] = error\securePath(ROOT .'ob'. DS .$helper. DS .$helper. EXT);
         }
         
-        $models  = array();
-        foreach(loader::$_models as $mod)
-        {
-            $models[]       = error_secure_path($mod);
-        }
-              
-        $databases = array();
-        foreach(loader::$_databases as $db_var)
+        $libraries = array();
+        foreach($autoload['library'] as $library)
         { 
-            $databases[]    = $db_var;
+            $libraries[] = error\securePath(ROOT .'ob'. DS .$library. DS .$library. EXT);
         }
         
-        $output = "\33[0;36m________LOADED FILES______________________________________________________";
-        $output.= "\n";
-        if(count($config_files) > 0)
-        $output .= "\nConfigs  --> ".implode(', ',$config_files);
-        if(count($lang_files) > 0)
-        $output .= "\nLocales  --> ".implode(', ', $lang_files);
-        if(count($models) > 0)
-        $output .= "\nModels   --> ".implode(', ',$models);
-        if(count($databases) > 0)
-        $output .= "\nDbs      --> ".implode(', ',$databases);
+        $output  = "\33[0;36m________LOADED FILES______________________________________________________";
+        $output .= "\n";
+        
+        if(count($configs) > 0)
+        $output .= "\nConfigs   --> ".implode(', ',$configs);
+        if(count($locales) > 0)
+        $output .= "\nLocales   --> ".implode(', ',$locales);
         if(count($helpers) > 0)
-        $output .= "\nHelpers  --> ".implode(', ',$helpers);
-        $output.= "\n";
+        $output .= "\nHelpers   --> ".implode(', ',$helpers);
+        if(count($libraries) > 0)
+        $output .= "\nLibraries --> ".implode(', ',$libraries);
+        
+        $output .= "\n";
+        $output .= "__________________________________________________________________________";
         $output .= "\n\n";
         $output .= "\033[0m";
         

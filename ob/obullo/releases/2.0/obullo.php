@@ -17,13 +17,14 @@ Class Obullo
      */
     public function run()
     {   
-        $packages = getConfig('packages'); // get package configuration file.
+        $packages = getConfig('packages.cache'); // get package configuration file.
+        $core     = $packages['core']; 
         
-        require (OB_MODULES .'obullo'. DS .'releases'. DS .$packages['version']. DS .'src'. DS .'ob'. EXT);
+        require (OB_MODULES .$core. DS .'releases'. DS .$packages['dependencies'][$core]['version']. DS .'src'. DS .'common'. EXT);
         
-        ####  Core Packages ( log, error, bench, uri, router, config, input, output ) ####
+        ####  Core packages ( log, error, bench, uri, router, config, input, output ) ####
         
-        new log\start();   
+        new log\start();
         new error\start();
         
         $uri    = Uri::getInstance();    
@@ -31,10 +32,8 @@ Class Obullo
 
         new bench\start();
         
-        if(packageExists('locale'))
-        {
-            Locale::getInstance();
-        }
+        $class = '\\'.getComponentOf('locale');
+        $class::getInstance();
         
         bench\mark('total_execution_time_start');
         bench\mark('loading_time_base_classes_start');

@@ -23,20 +23,20 @@ Class Controller {
         // Default Loaded Core Libraries
         // ------------------------------------
         
-        $this->config = Config::getInstance();
+        $locale = '\\'.getComponentOf('locale');
+        $config = '\\'.getComponentOf('config');
+        
+        $this->config = $config::getInstance();
         $this->router = Router::getInstance();
         $this->uri    = Uri::getInstance();
         $this->output = Output::getInstance();
+        $this->locale = $locale::getInstance();
         
-        if(packageExists('locale'))
-        {
-            $this->locale = Locale::getInstance();
-        }
         
         // Initialize to Autoloaders
         // ------------------------------------
         
-        $autoload = getStatic('autoload', '', APP .'config');
+        $autoload = getConfig('autoload');
         
         log\me('debug', 'Application Autoload Initialized');
 
@@ -78,7 +78,7 @@ Class Controller {
         // Initialize to Autorun
         // ------------------------------------
         
-        $autorun = getStatic('autorun', '', APP .'config');
+        $autorun = getConfig('autorun');
         
         log\me('debug', 'Application Autorun Initialized');
 

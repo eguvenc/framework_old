@@ -29,7 +29,8 @@ namespace vi {
     */
     function view($filename, $string = true, $data = '')
     {
-        return \View::getInstance()->load($filename, $string, $data);
+        $class = '\\'.getComponentOf('vi');
+        return $class::getInstance()->load($filename, $string, $data);
     }
 
     // ------------------------------------------------------------------------
@@ -44,7 +45,8 @@ namespace vi {
     */
     function views($filename, $string = true, $data = '')
     {
-        $view = \View::getInstance();
+        $class = '\\'.getComponentOf('vi');
+        $view  = $class::getInstance();
         $view->setPath('views');
         
         return $view->load($filename, $string, $data);
@@ -61,7 +63,8 @@ namespace vi {
     */
     function setVar($key, $val = '')
     {
-        $view = \View::getInstance();
+        $class = '\\'.getComponentOf('vi');
+        $view  = $class::getInstance();
    
         if($val == array())
         {
@@ -83,7 +86,8 @@ namespace vi {
     */
     function getVar($key)
     {
-        $view = \View::getInstance();
+        $class = '\\'.getComponentOf('vi');
+        $view  = $class::getInstance();
         
         if(isset($view->var[$key]))
         {
@@ -110,9 +114,10 @@ namespace vi {
     */
     function setArray($key, $val = array())
     {
-        $view = \View::getInstance();
-        $val  = (array)$val;
+        $class = '\\'.getComponentOf('vi');
+        $view  = $class::getInstance();
         
+        $val  = (array)$val;
         foreach($val as $value)
         {
             $view->array[$key][] = $value;
@@ -134,7 +139,8 @@ namespace vi {
     */
     function getArray($key)
     {
-        $view = \View::getInstance();
+        $class = '\\'.getComponentOf('vi');
+        $view  = $class::getInstance();
     
         if(isset($view->array[$key]))
         {

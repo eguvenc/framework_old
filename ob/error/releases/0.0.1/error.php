@@ -62,7 +62,7 @@ namespace error {
                     switch ($level) 
                     {              
                         case  0: return; break; 
-                        case  1: include(APP .'errors'. DS .'ob_exception'. EXT); return; break;
+                        case  1: include(APP .'errors'. DS .'exception'. EXT); return; break;
                     }   
                 }       
 
@@ -77,25 +77,26 @@ namespace error {
 
                 if(isset($allowedErrors[$code]))
                 {
-                    include(APP .'errors'. DS .'ob_exception'. EXT);
+                    include(APP .'errors'. DS .'exception'. EXT);
                 }
 
             }
             else  // If error_reporting = 0, we show a blank page template.
             {
-                include(APP .'errors'. DS .'ob_disabled_error'. EXT);
+                include(APP .'errors'. DS .'disabled_error'. EXT);
             }
 
             \log\me('error', $type.': '.$e->getMessage(). ' '.securePath($e->getFile()).' '.$e->getLine(), true); 
 
         } 
-        else  // Is It Exception ?
+        else  // Is It Exception ? Initialize to Exceptions Component.
         {             
-            $exception = new \Exception\Core();
+            $class = '\\'.getComponentOf('error');
+            $exceptions = new $class();
 
-            if(is_object($exception)) 
+            if(is_object($exceptions)) 
             {           
-                $exception->write($e, $type);
+                $exceptions->write($e, $type);
             }
         }
 

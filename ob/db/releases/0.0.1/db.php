@@ -44,7 +44,7 @@ Class Db {
            return;   // Lazy Loading.  
         }
         
-        $driver = is_array($params) ? $params['driver'] : db('driver', $db_var); 
+        $driver   = is_array($params) ? $params['driver'] : db('driver', $db_var); 
         $hostname = db('hostname', $db_var);
         
         if(is_array($params))
@@ -68,20 +68,20 @@ Class Db {
             $mongo = new Mongo_Db(false);
             return $mongo->connect();
         }
-        
-        //----------- MONGO PACKAGE SUPPORT END ------------//
 
-        $packages = getConfig('packages');
-        
-        if($packages['db_layer'] == 'Database_Pdo')
-        {
-            $database = new Database_Pdo();
-            return $database->connect($driver, $options);
-        } 
-        else // Native database support.
-        {
-            $database = new Database();
-            return $database->connect($driver, $options);
+        switch (getComponentOf('db')) {
+            case 'Database_Pdo':
+                $database = new Database_Pdo();
+                return $database->connect($driver, $options);
+                break;
+            case 'Mongo':    // Globally mongo db support.
+                $mongo = new Mongo_Db(false);
+                return $mongo->connect();
+                break;
+            case 'Database': // @todo Native database support. ( Somebody may want add native db packages. )
+                $database = new Database();
+                return $database->connect($driver, $options); 
+                break;
         }
         
         return false;        

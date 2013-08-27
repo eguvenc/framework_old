@@ -47,7 +47,7 @@ Class Model {
             {
                 if(method_exists($this, '__get') OR method_exists($this, '__set'))
                 {
-                    $this->{$db_var} = getInstance()->{$db_var}; // to prevent some reference errors
+                    $this->{$db_var} = getInstance()->{$db_var}; 
                 }
                 else
                 {

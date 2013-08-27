@@ -89,7 +89,7 @@ The following functions let you generate errors:
 
 This function will display the error message supplied to it using the following error template:
 
-You can <b>customize</b> this template which is located at <dfn>app/errors/</dfn><kbd>ob_general.php</kbd>
+You can <b>customize</b> this template which is located at <dfn>app/errors/</dfn><kbd>general.php</kbd>
 
 The optional parameter <dfn>$status_code</dfn> determines what HTTP status code should be sent with the error.
 
@@ -97,7 +97,7 @@ show404('page')
 
 This function will display the 404 error message supplied to it using the following error template:
 
-You can <b>customize</b> this template which is located at <dfn>app/errors/</dfn><kbd>ob_404.php</kbd>
+You can <b>customize</b> this template which is located at <dfn>app/errors/</dfn><kbd>404.php</kbd>
 
 The function expects the string passed to it to be the file path to the page that isn't found. Note that Obullo automatically shows 404 messages if controllers are not found.
 
@@ -136,7 +136,7 @@ log\me('debug', '[ welcome ]: Example message !');
 
 ------
 
-We catch all exceptions with php <samp>set_exception_handler()</samp> function.You can customize exception error template which is located <dfn>app/errors/ob_exception.php</dfn>.
+We catch all exceptions with php <samp>set_exception_handler()</samp> function.You can customize exception error template which is located <dfn>app/errors/exception.php</dfn>.
 
 ```php
 <style type="text/css">

@@ -1,5 +1,4 @@
 <?php
-namespace Exception;
 
 /**
  * Exceptions Class
@@ -9,11 +8,11 @@ namespace Exception;
  * @category      Exceptions
  * @link
  */
-Class Core {
+Class Exceptions {
 
     function __construct()
     {
-        \log\me('debug', "Exception\Core Class Initialized");
+        \log\me('debug', "Exceptions Class Initialized");
     }
  
     /**
@@ -78,7 +77,7 @@ Class Core {
 
         ob_start();
         
-        include (APP .'errors'. DS .'ob_exception'.EXT);
+        include (APP .'errors'. DS .'exception'.EXT);
         
         $error_msg = ob_get_clean();
         

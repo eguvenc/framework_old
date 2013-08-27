@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Obullo Email Class
+ * Email Class
  *
  *
  * @package       Obullo
@@ -1984,6 +1984,7 @@ Class Email {
     }
 
 }
+
 // END email class
 
 /* End of file Email.php */

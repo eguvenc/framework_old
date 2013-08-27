@@ -1,8 +1,6 @@
 {
-  "name": "Obullo",
-  "version": "*",
-  "db_layer": "Database_Pdo",
   "dependencies": {
+    "obullo": "",
     "task" : "*",
     "auth" : "*"
   }

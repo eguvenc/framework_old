@@ -17,6 +17,7 @@
 |   $database['db']['options']   = array( PDO::ATTR_PERSISTENT => false ); 
 | 
 */
+
 $database['db']['hostname']  = 'localhost';
 $database['db']['username']  = 'root';
 $database['db']['password']  = '123456';

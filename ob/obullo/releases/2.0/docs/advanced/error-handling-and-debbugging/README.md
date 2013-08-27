@@ -114,7 +114,7 @@ log\me('debug', '[ welcome ]: Example message !');
 
 ------
 
-We catch all exceptions with php <samp>set_exception_handler()</samp> function.You can customize exception error template which is located <dfn>app/core/errors/ob_exception.php</dfn>.
+We catch all exceptions with php <samp>set_exception_handler()</samp> function.You can customize exception error template which is located <dfn>app/core/errors/exception.php</dfn>.
 
 ```php
 <div id="exception_content">

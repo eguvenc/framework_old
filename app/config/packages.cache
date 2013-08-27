@@ -10,10 +10,9 @@
 // Package Manager ( The Obm ) writes the package.json contents here.
 
 $packages = array(
-    'name' => 'Obullo',
-    'version' => '2.0',
-    'db_layer' => 'Database_Pdo',
+    'core' => 'obullo',
     'dependencies' => array(
+        'obullo' => array('version' => '2.0', 'component' => 'library'),
         'acl'  => array('version' => '0.0.1', 'component' => 'library'),
         'auth'  => array('version' => '0.0.1', 'component' => 'library'),
         'agent'  => array('version' => '0.0.1', 'component' => 'library'),
@@ -27,7 +26,7 @@ $packages = array(
         'error' => array('version' => '0.0.1', 'component' => 'helper'),
         'email' => array('version' => '0.0.1', 'component' => 'library'),
         'encrypt' => array('version' => '0.0.1', 'component' => 'library'),
-        'exception' => array('version' => '0.0.1', 'component' => 'library'),
+        'exceptions' => array('version' => '0.0.1', 'component' => 'library'),
         'form' => array('version' => '0.0.1', 'component' => 'helper'),
         'form_json' => array('version' => '0.0.1', 'component' => 'helper'),
         'ftp' => array('version' => '0.0.1', 'component' => 'library'),
@@ -36,6 +35,7 @@ $packages = array(
         'i' => array('version' => '0.0.1', 'component' => 'helper'),
         'input' => array('version' => '0.0.1', 'component' => 'library'),
         'log' => array('version' => '0.0.1', 'component' => 'helper'),
+        'log_write' => array('version' => '0.0.1', 'component' => 'library'),
         'locale' => array('version' => '0.0.1', 'component' => 'library'),
         'model' => array('version' => '0.0.1', 'component' => 'library'),
         'mongo_db' => array('version' => '0.0.1', 'component' => 'library'),

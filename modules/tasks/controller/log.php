@@ -138,7 +138,7 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
             
             if( ! isset($logged[$date]))
             {
-                self::_compile_files();
+                $this->_compileFiles();
             }
             
             $logged[$date] = 1;
@@ -148,22 +148,23 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
     /**
      *  BENCHMARK INFO 
      */
-    private static function _compile_files()
+    private function _compileFiles()
     {
         $configs = array();
-        foreach(Config::getInstance()->is_loaded as $config)
+        $config  = '\\'.getComponentOf('config');
+        foreach($config::getInstance()->is_loaded as $cfg)
         {
-            $configs[] = error\securePath($config);
+            $configs[] = error\securePath($cfg);
         }
         
-        $locales   = array();
-        foreach(Locale::getInstance()->is_loaded as $locale)
+        $locales = array();
+        $locale  = '\\'.getComponentOf('locale');
+        foreach($locale::getInstance() as $lcl)
         { 
-            $locales[] = error\securePath($locale); 
+            $locales[] = error\securePath($lcl); 
         }
 
         $autoload = getConfig('autoload');
-
         $helpers = array();
         foreach($autoload['helper'] as $helper)
         { 

@@ -3,7 +3,25 @@
     /**
     * Common Functions
     */
-    
+
+    /**
+     * If custom component available get it 
+     * otherwise return to given value.
+     * 
+     * @param type $component
+     * @return type
+     */
+    function getComponentOf($component)
+    {
+        $components = getConfig('components');
+        if(isset($components[$component]))
+        {
+            return $components[$component];
+        }
+        
+        return $component;   
+    }
+
     /**
      * Fetch language item
      * 
@@ -12,7 +30,8 @@
      */
     function lang($item = '')
     {
-        $locale = Locale::getInstance();
+        $class  = '\\'.getComponentOf('locale');
+        $locale = $class::getInstance();
         $item = ($item == '' OR ! isset($locale->language[$item])) ? false : $locale->language[$item];
 
         return $item;
@@ -62,7 +81,7 @@
         }
         */
 
-        $packages = getConfig('packages');
+        $packages = getConfig('packages.cache');
 
         //--------------- MODEL LOADER ---------------//
         
@@ -221,7 +240,7 @@
     */
     function packageExists($package)
     {
-        $packages = getConfig('packages');
+        $packages = getConfig('packages.cache');
 
         if(isset($packages['dependencies'][$package]['component']))
         {
@@ -329,7 +348,7 @@
     {    
         log\me('error', '404 Page Not Found --> '.$page, false, true);
 
-        echo showHttpError('404 Page Not Found', $page, 'ob_404', 404);
+        echo showHttpError('404 Page Not Found', $page, '404', 404);
 
         exit();
     }
@@ -353,7 +372,7 @@
         // Some times we use utf8 chars in errors.
         header('Content-type: text/html; charset='.config('charset')); 
 
-        echo showHttpError($heading, $message, 'ob_general', $status_code);
+        echo showHttpError($heading, $message, 'general', $status_code);
 
         exit();
     }
@@ -371,7 +390,7 @@
     * @param    int       header status code
     * @return   string
     */
-    function showHttpError($heading, $message, $template = 'ob_general', $status_code = 500)
+    function showHttpError($heading, $message, $template = 'general', $status_code = 500)
     {
         setStatusHeader($status_code);
 
