@@ -1,7 +1,7 @@
 <?php
  
  /**
- * Obullo Core
+ * Framework Component
  * Version 2.0
  * 
  * @package         Obullo 
@@ -32,8 +32,8 @@ Class Obullo
 
         new bench\start();
         
-        $class = '\\'.getComponentOf('locale');
-        $class::getInstance();
+        $locale = '\\'.getComponentOf('locale');
+        $locale::getInstance();
         
         bench\mark('total_execution_time_start');
         bench\mark('loading_time_base_classes_start');
@@ -42,7 +42,9 @@ Class Obullo
         $input->_sanitizeGlobals();  // Initalize to input filter. ( Sanitize must be above the GLOBALS !! )             
 
         $output = Output::getInstance();
-        $config = Config::getInstance(); 
+        
+        $config = '\\'.getComponentOf('config');
+        $config::getInstance(); 
 
         if ($output->_displayCache($config, $uri) == true) { exit; }  // Check REQUEST uri if there is a Cached file exist 
 

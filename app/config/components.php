@@ -23,3 +23,4 @@ $components['log']    = 'Log_Write';     // Log_Write Package is a component of 
 $components['error']  = 'Exceptions';    // Exceptions Package is a component of Error package
 $components['lang']   = 'Locale';        // Locale Package is a component of Obullo package ( lang() function use it. )
 $components['config'] = 'Config';        // Config Package is a component of Config package
+$components['obullo'] = 'Obullo';        // Config Package is a component of Config package

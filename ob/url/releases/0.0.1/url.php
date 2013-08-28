@@ -29,7 +29,8 @@ namespace url {
     */
     function base($uri = '')
     {
-        return \Config::getInstance()->baseUrl($uri);
+        $config = '\\'.getComponentOf('config');
+        return $config::getInstance()->baseUrl($uri);
     }
 
     // ------------------------------------------------------------------------
@@ -46,7 +47,8 @@ namespace url {
     */
     function assets($uri = '', $no_ext_uri_slash = false, $no_folder = false)
     {
-        return \Config::getInstance()->assetUrl($uri, $no_folder, $no_ext_uri_slash);
+        $config = '\\'.getComponentOf('config');
+        return $config::getInstance()->assetUrl($uri, $no_folder, $no_ext_uri_slash);
     }
     
     // ------------------------------------------------------------------------
@@ -64,7 +66,8 @@ namespace url {
     */
     function site($uri = '', $suffix = true)
     {
-        return \Config::getInstance()->siteUrl($uri, $suffix);
+        $config = '\\'.getComponentOf('config');
+        return $config::getInstance()->siteUrl($uri, $suffix);
     }
     
     // ------------------------------------------------------------------------
@@ -77,7 +80,8 @@ namespace url {
     */
     function current()
     {
-        return \Config::getInstance()->siteUrl(\Uri::getInstance()->uriString());
+        $config = '\\'.getComponentOf('config');
+        return $config::getInstance()->siteUrl(\Uri::getInstance()->uriString());
     }
 
     // ------------------------------------------------------------------------
