@@ -229,10 +229,10 @@ $packages = getConfig('packages.cache');
 
 /**
 |--------------------------------------------------------------------------
-| Framework Cartdrige
+| Framework Component
 |--------------------------------------------------------------------------
 */
-$core = $packages['core'];  // Custom core, you can use another core instead of obullo.
+$core = strtolower($packages['components']['core']);  // Custom core, you can use another core instead of obullo.
 
 require (OB_MODULES .$core. DS .'releases'. DS .$packages['dependencies'][$core]['version']. DS .$core. EXT);
 

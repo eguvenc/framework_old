@@ -128,7 +128,8 @@ Class View {
         $output = ob_get_contents();
         
         // Set Layout views inside to Output Class for caching functionality.
-        Output::getInstance()->appendOutput($output);
+        $outputClass = getComponent('output');
+        $outputClass::getInstance()->appendOutput($output);
 
         @ob_end_clean();
 

@@ -117,7 +117,8 @@ Class Input {
         // CSRF Protection check
         if ($this->enable_csrf == true)
         {
-            Security::getInstance()->csrfVerify();
+            $securityClass = getComponent('security');
+            $securityClass::getInstance()->csrfVerify();
         }
         
         // Clean $_COOKIE Data
@@ -272,7 +273,8 @@ Class Input {
         // Should we filter the input data?
         if ($this->enable_xss === true)
         {
-            $str = Security::getInstance()->xssClean($str);
+            $securityClass = getComponent('security');
+            $str = $securityClass::getInstance()->xssClean($str);
         }
 
         // Standardize newlines if needed
@@ -332,7 +334,9 @@ Class Input {
 
         if ($xss_clean === true)
         {
-            return Security::getInstance()->xssClean($array[$index]);
+            $securityClass = getComponent('security');
+            
+            return $securityClass::getInstance()->xssClean($array[$index]);
         }
 
         return $array[$index];

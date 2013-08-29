@@ -22,7 +22,7 @@ namespace sess {
             {
                 $driver = (isset($params['driver'])) ? $params['driver'] : config('driver', 'sess');
 
-                $Class = 'Sess\Src\Sess_'.ucfirst(strtolower($driver));
+                $Class = 'Sess_'.ucfirst(strtolower($driver));
                 self::$driver = $Class::getInstance();
                 self::$driver->init($params); // Start the sessions
 

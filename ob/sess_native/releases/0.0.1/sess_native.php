@@ -1,5 +1,4 @@
 <?php
-namespace Sess\Src;
 
 /**
 * Session Native Driver.
@@ -44,7 +43,7 @@ Class Sess_Native {
 
     function init($params = array())
     {
-        \log\me('debug', "Session Native Driver Initialized"); 
+        log\me('debug', "Session Native Driver Initialized"); 
         
         foreach (array('encrypt_cookie','expiration', 'expire_on_close', 'match_ip', 
         'match_useragent', 'cookie_name', 'cookie_path', 'cookie_domain', 
@@ -106,7 +105,7 @@ Class Sess_Native {
         // mark all new flashdata as old (data will be deleted before next request)
         $this->_flashdataMark();
 
-        \log\me('debug', "Session routines successfully run"); 
+        log\me('debug', "Session routines successfully run"); 
 
         return true;
     }
@@ -375,7 +374,6 @@ Class Sess_Native {
             {
                 $new_name = $this->flashdata_key.':old:'.$parts[1];
                 $this->set($new_name, $value);
-                
                 $this->remove($name);
             }
         }
@@ -429,4 +427,4 @@ Class Sess_Native {
 }
 
 /* End of file sess_native.php */
-/* Location: ./ob/sess/releases/0.0.1/src/sess_native.php */
+/* Location: ./ob/sess_native/releases/0.0.1/sess_native.php */

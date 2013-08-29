@@ -69,7 +69,7 @@ Class Db {
             return $mongo->connect();
         }
 
-        switch (getComponentOf('db')) {
+        switch (getComponent('db')) {
             case 'Database_Pdo':
                 $database = new Database_Pdo();
                 return $database->connect($driver, $options);

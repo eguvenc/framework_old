@@ -79,8 +79,11 @@ Class Navbar {
      */
     public function topLevel()
     {
+        $uriClass = getComponent('uri');
+        $uri      = $uriClass::getInstance();
+        
         $top_level  = array();
-        $module     = Uri::getInstance()->rSegment(0); // * Get routed segments
+        $module     = $uri->rSegment(0); // * Get routed segments
         
         foreach($this->top_level as $key => $val)
         {
@@ -107,9 +110,12 @@ Class Navbar {
      */
     public function subLevel()
     {
+        $uriClass = getComponent('uri');
+        $uri      = $uriClass::getInstance();
+        
         $sub_level  = array();
-        $module     = Uri::getInstance()->rSegment(0); // * Get routed segments
-        $controller = Uri::getInstance()->rSegment(1);
+        $module     = $uri->rSegment(0); // * Get routed segments
+        $controller = $uri->rSegment(1);
 
         if(isset($this->sub_level[$module]))
         {

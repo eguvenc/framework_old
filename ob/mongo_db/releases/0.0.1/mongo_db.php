@@ -51,7 +51,7 @@ Class Mongo_Db {
     {
         if ( ! class_exists('Mongo'))
         {
-            throw new Exception("The MongoDB PECL extension has not been installed or enabled.");
+            throw new Exception('The MongoDB PECL extension has not been installed or enabled.');
         }
         
         $this->setConnectionString(); // Build the connection string from the config file
@@ -341,10 +341,12 @@ Class Mongo_Db {
         {
             $value = "^" . $value;
         }
+        
         if ($enable_end_wildcard !== true)
         {
             $value .= "$";
         }
+        
         $regex = "/$value/$flags";
         $this->wheres[$field] = new MongoRegex($regex);
         
@@ -467,7 +469,7 @@ Class Mongo_Db {
     {
         if($this->collection == '')
         {
-            throw new Exception('You need to set a collection name using $this->db->from("collection") function.');
+            throw new Exception('You need to set a collection name using $this->db->from(\'table\') method.');
         }
         
         $re_criteria = array();
@@ -498,7 +500,7 @@ Class Mongo_Db {
     {
         if($this->collection == '')
         {
-            throw new Exception('You need to set a collection name using $this->db->from("collection") function.');
+            throw new Exception('You need to set a collection name using $this->db->from(\'table\') method.');
         }
 
         $re_criteria = array();
@@ -531,7 +533,7 @@ Class Mongo_Db {
         
         if (empty($collection))
         {
-            throw new Exception('You need to set a collection name using $this->db->from("collection") function.');
+            throw new Exception('You need to set a collection name using $this->db->from(\'table\') method.');
         }
         
         $docs = $this->db->{$collection}->find($this->wheres, $this->selects)
@@ -570,7 +572,7 @@ Class Mongo_Db {
         
         if (empty($collection))
         {
-            throw new Exception('You need to set a collection name using <b>$this->db->from("collection")</b> function.');
+            throw new Exception('You need to set a collection name using $this->db->from(\'table\') method.');
         }
         
         if(is_array($options))
@@ -603,17 +605,17 @@ Class Mongo_Db {
     {
         if (empty($collection))
         {
-            throw new Exception("No Mongo collection selected to insert into.");
+            throw new Exception('No Mongo collection selected to insert into.');
         }
 
         if (count($insert) == 0 || ! is_array($insert))
         {
-            throw new Exception("Nothing to insert into Mongo collection or insert is not an array.");
+            throw new Exception('Nothing to insert into Mongo collection or insert is not an array.');
         }
 
         try
         {
-            $this->db->{$collection}->insert($insert, array_merge($options, $this->query_safety));
+            $this->db->{$collection}->insert($insert, array_merge($this->query_safety, $options));
             
             if (isset($insert['_id']))
             {
@@ -628,7 +630,7 @@ Class Mongo_Db {
         }
         catch (MongoCursorException $e)
         {
-            throw new Exception("Insert of data into MongoDB failed: ".$e->getMessage());
+            throw new Exception('Insert of data into MongoDB failed: '.$e->getMessage());
         }
     }
 
@@ -646,21 +648,21 @@ Class Mongo_Db {
      * @return type
      * @throws Exception 
      */
-    public function batchInsert($collection = "", $insert = array())
+    public function batchInsert($collection = "", $insert = array(), $options = array())
     {
         if (empty($collection))
         {
-            throw new Exception("No Mongo collection selected to insert operation.");
+            throw new Exception('No Mongo collection selected to insert operation.');
         }
 
         if (count($insert) == 0 || ! is_array($insert))
         {
-            throw new Exception("Nothing to insert into Mongo collection or insert is not an array.");
+            throw new Exception('Nothing to insert into Mongo collection or insert is not an array.');
         }
 
         try
         {
-            $this->db->{$collection}->batchInsert($insert, $this->query_safety);
+            $this->db->{$collection}->batchInsert($insert, array_merge($this->query_safety, $options));
             
             if (isset($insert['_id']))
             {
@@ -673,7 +675,7 @@ Class Mongo_Db {
         }
         catch (MongoCursorException $e)
         {
-            throw new Exception("Insert of data into MongoDB failed: ".$e->getMessage());
+            throw new Exception('Insert of data into MongoDB failed: '.$e->getMessage());
         }
     }
 
@@ -694,7 +696,7 @@ Class Mongo_Db {
     {
         if (empty($collection))
         {
-            throw new Exception("No Mongo collection selected to update.");
+            throw new Exception('No Mongo collection selected to update.');
         }
 
         if (is_array($data) AND count($data) > 0)
@@ -704,7 +706,7 @@ Class Mongo_Db {
 
         if (count($this->updates) == 0)
         {
-            throw new Exception("Nothing to update in Mongo collection or update is not an array.");
+            throw new Exception('Nothing to update in Mongo collection or update is not an array.');
         }
 
         // Update Modifiers  http://www.mongodb.org/display/DOCS/Updating
@@ -728,17 +730,15 @@ Class Mongo_Db {
             $updates = array('$set' => $this->updates); // default mod = $set
         }
         
-        $options = array_merge($default_options, $options);
-        
         try
         {
-            $this->db->{$collection}->update($this->wheres, $updates, $options);
+            $this->db->{$collection}->update($this->wheres, $updates, array_merge($default_options, $options));
             $this->_resetSelect();
             return $this->db->{$collection}->find($updates)->count();
         }
         catch (MongoCursorException $e)
         {
-            throw new Exception("Update of data into MongoDB failed: ".$e->getMessage());
+            throw new Exception('Update of data into MongoDB failed: '.$e->getMessage());
         }
     }
     
@@ -985,14 +985,16 @@ Class Mongo_Db {
      * @return int affected rows.
      * @throws Exception 
      */
-    public function delete($collection = "")
+    public function delete($collection = '', $options = array())
     {
+        $default_options = array_merge(array('justOne' => false), $this->query_safety);
+
         if (empty($collection))
         {
-            throw new Exception("No Mongo collection selected to delete.");
+            throw new Exception('No Mongo collection selected to delete.');
         }
 
-        if (isset($this->wheres['_id']) AND ! ($this->wheres['_id'] instanceof \MongoId))
+        if (isset($this->wheres['_id']) AND ! ($this->wheres['_id'] instanceof MongoId))
         {
             $this->wheres['_id'] = new MongoId($this->wheres['_id']);
         }
@@ -1001,7 +1003,7 @@ Class Mongo_Db {
         {
             $affected_rows = $this->db->{$collection}->find($this->wheres)->count();
             
-            $this->db->{$collection}->remove($this->wheres, array_merge($this->query_safety, array('justOne' => false)));
+            $this->db->{$collection}->remove($this->wheres, array_merge($default_options, $options));
             
             $this->_resetSelect();
             
@@ -1009,7 +1011,7 @@ Class Mongo_Db {
         }
         catch (MongoCursorException $e)
         {
-            throw new Exception("MongoDB data delete operation failed: ".$e->getMessage());
+            throw new Exception('MongoDB data delete operation failed: '.$e->getMessage());
         }
     }
 
@@ -1039,7 +1041,7 @@ Class Mongo_Db {
             } 
             catch (MongoConnectionException $e)
             {
-                throw new Exception("Unable to connect to MongoDB: ".$e->getMessage());
+                throw new Exception('Unable to connect to MongoDB: '.$e->getMessage());
             }
         }
     }
@@ -1078,7 +1080,6 @@ Class Mongo_Db {
         $this->user         = $config['username'];
         $this->pass         = $config['password'];
         $this->dbname       = $config['database'];
-        
         $this->query_safety = $config['query_safety'];
         
         if($this->dbname == '')
@@ -1091,12 +1092,12 @@ Class Mongo_Db {
 
         if (empty($this->host))
         {
-            throw new Exception("You need to specify a hostname connect to MongoDB.");
+            throw new Exception('You need to specify a hostname connect to MongoDB.');
         }
 
         if (empty($this->dbname))
         {
-            throw new Exception("You need to specify a database name connect to MongoDB.");
+            throw new Exception('You need to specify a database name connect to MongoDB.');
         }
 
         if ( ! empty($this->user) AND ! empty($this->pass))
@@ -1227,7 +1228,7 @@ Class Mongo_Db {
     }
     
 }
-// END Mongodb Class
+// END Mongo_Db Class
 
-/* End of file mongodb.php */
-/* Location: ./ob/mongodb/releases/0.0.1/mongodb.php */
+/* End of file mongo_db.php */
+/* Location: ./ob/mongo_db/releases/0.0.1/mongo_db.php */

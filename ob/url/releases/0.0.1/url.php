@@ -29,7 +29,7 @@ namespace url {
     */
     function base($uri = '')
     {
-        $config = '\\'.getComponentOf('config');
+        $config = '\\'.getComponent('config');
         return $config::getInstance()->baseUrl($uri);
     }
 
@@ -47,7 +47,7 @@ namespace url {
     */
     function assets($uri = '', $no_ext_uri_slash = false, $no_folder = false)
     {
-        $config = '\\'.getComponentOf('config');
+        $config = '\\'.getComponent('config');
         return $config::getInstance()->assetUrl($uri, $no_folder, $no_ext_uri_slash);
     }
     
@@ -66,7 +66,7 @@ namespace url {
     */
     function site($uri = '', $suffix = true)
     {
-        $config = '\\'.getComponentOf('config');
+        $config = '\\'.getComponent('config');
         return $config::getInstance()->siteUrl($uri, $suffix);
     }
     
@@ -80,8 +80,9 @@ namespace url {
     */
     function current()
     {
-        $config = '\\'.getComponentOf('config');
-        return $config::getInstance()->siteUrl(\Uri::getInstance()->uriString());
+        $config = '\\'.getComponent('config');
+        $uri    = '\\'.getComponent('uri');
+        return $config::getInstance()->siteUrl($uri::getInstance()->uriString());
     }
 
     // ------------------------------------------------------------------------

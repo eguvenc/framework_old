@@ -299,7 +299,6 @@ Class Output {
     */    
     public function _writeCache($output)
     {
-        $OB = getInstance();
         $cache_path = APP .'cache'. DS;
 
         if ( ! is_dir(rtrim($cache_path, DS)) OR ! isReallyWritable(rtrim($cache_path, DS)))
@@ -307,8 +306,8 @@ Class Output {
             return;
         }
 
-        $uri_string = $OB->uri->uriString();  // Standart Uri
-        $uri        = $OB->config->baseUrl() . $OB->config->item('index_page'). $uri_string;
+        $uri_string = getInstance()->uri->uriString();  // Standart Uri
+        $uri        = getInstance()->config->baseUrl() . getInstance()->config->item('index_page'). $uri_string;
 
         $cache_path .= md5($uri);
 

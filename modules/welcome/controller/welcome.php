@@ -14,7 +14,6 @@ Class Welcome extends Controller {
         // print_r($this->db->get('users')->resultArray());
         
         // var_dump($this->ftp);
-        // new sess\start();
     }
     
     public function index()

@@ -37,7 +37,7 @@ namespace log {
             return;
         }
        
-        $class = '\\'.getComponentOf('log');
+        $class = '\\'.getComponent('log');
         $logc = new $class();
         $logc->write($level, $message);
     }

@@ -41,11 +41,12 @@ Class Router {
         // the Router Class at Bootstrap loading level. When you try load any library
         // you will get a Fatal Error.
         
-        $this->uri = Uri::getInstance();
+        $uriClass = getComponent('uri');
+        $this->uri = $uriClass::getInstance();
 
         ############## Clone URI Object ############## 
         
-        $uri = clone Uri::getInstance();
+        $uri = clone $uriClass::getInstance();
         
         ############## Clone URI Object ############## 
         
@@ -115,7 +116,9 @@ Class Router {
     */
     public function clear()
     {
-        $this->uri                 = Uri::getInstance();   // reset cloned URI object.
+        $uriClass = getComponent('uri');
+        
+        $this->uri                 = $uriClass::getInstance();   // reset cloned URI object.
         $this->config              = '';
         $this->hmvc                = false;
         $this->hmvc_response       = '';
@@ -259,7 +262,9 @@ Class Router {
         $segments = $this->_validateRequest($segments);
         
         if (count($segments) == 0)
-        return;
+        {
+            return;
+        }
 
         $this->setClass($segments[1]);
 

@@ -23,13 +23,16 @@ Class Controller {
         // Default Loaded Core Libraries
         // ------------------------------------
         
-        $locale = getComponentOf('locale');
-        $config = getComponentOf('config');
+        $config = getComponent('config');
+        $router = getComponent('router');
+        $uri    = getComponent('uri');
+        $output = getComponent('output');
+        $locale = getComponent('locale');
         
         $this->config = $config::getInstance();
-        $this->router = Router::getInstance();
-        $this->uri    = Uri::getInstance();
-        $this->output = Output::getInstance();
+        $this->router = $router::getInstance();
+        $this->uri    = $uri::getInstance();
+        $this->output = $output::getInstance();
         $this->locale = $locale::getInstance();
         
         

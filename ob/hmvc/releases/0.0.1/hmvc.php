@@ -20,8 +20,8 @@ function requestTimer($mark = '')
  */
 Class Hmvc
 {
-    // Cloned objects
-    public $_this            = null;     // Clone original getInstance(); ( Controller instance)
+    // Controller Object
+    public $_this            = null;  // Clone original getInstance(); ( Controller instance )
 
     // Request, Response, Reset
     public $uri_string       = '';
@@ -33,6 +33,11 @@ Class Hmvc
     public $cache_time       = '';
     public $is_reset         = false;
 
+    // Clone objects
+    public $uri          = '';
+    public $router       = '';
+    public $config       = '';
+        
     // Global variables
     public $_GET_BACKUP      = '';
     public $_POST_BACKUP     = '';
@@ -45,7 +50,6 @@ Class Hmvc
     protected static $_conn_id   = array();  // Static HMVC Connection ids.
 
     // Profiler and Benchmark
-    // public static $request_times = array();   // request time for profiler
     public static $start_time    = '';        // benchmark start time for profiler
     public static $request_count = 0;         // request count for profiler
     
@@ -390,10 +394,10 @@ Class Hmvc
         $Class = $router->fetchClass();
         
         // If Everyting ok Declare Called Controller !
-        $OB = new $Class();
+        $ControllerClass = new $Class();
 
         // Check method exist or not
-        if ( ! in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods($OB))))
+        if ( ! in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods($ControllerClass))))
         {
             $this->setResponse('404 - Hmvc request not found: '.$hmvc_uri);
             $this->_resetRouter();
@@ -406,7 +410,7 @@ Class Hmvc
         // Call the requested method.                1       2       3
         // Any URI segments present (besides the directory/class/method)
         // will be passed to the method for convenience
-        call_user_func_array(array($OB, $router->fetchMethod()), array_slice($URI->rsegments, 3));
+        call_user_func_array(array($ControllerClass, $router->fetchMethod()), array_slice($URI->rsegments, 3));
 
         $content = ob_get_contents();       
 
@@ -448,9 +452,13 @@ Class Hmvc
         
         $URI = getInstance()->uri;
         
-        $this->_this->uri     = Uri::setInstance($this->uri);
-        $this->_this->router  = Router::setInstance($this->router);
-        $this->_this->config  = Config::setInstance($this->config);
+        $uri    = getComponent('uri');
+        $router = getComponent('router');
+        $config = getComponent('config');
+        
+        $this->_this->uri     = $uri::setInstance($this->uri);
+        $this->_this->router  = $router::setInstance($this->router);
+        $this->_this->config  = $config::setInstance($this->config);
         
         getInstance($this->_this);         // Set original $this to controller instance that we backup before.
     

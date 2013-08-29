@@ -22,7 +22,9 @@ namespace xss {
      */
     function clean($str, $is_image = false)
     {
-        return Security::getInstance()->xssClean($str, $is_image);
+        $securityClass = '\\'.getComponent('security');
+        
+        return $securityClass::getInstance()->xssClean($str, $is_image);
     }
 
     // ------------------------------------------------------------------------
@@ -36,7 +38,9 @@ namespace xss {
      */
     function sanitizeFilename($filename)
     {
-        return Security::getInstance()->sanitizeFilename($filename);
+        $securityClass = '\\'.getComponent('security');
+        
+        return $securityClass::getInstance()->sanitizeFilename($filename);
     }
 
     // ------------------------------------------------------------------------

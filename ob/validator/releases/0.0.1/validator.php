@@ -320,8 +320,10 @@ Class Validator {
                 return false;
             }
             
+            $uriClass = getComponent('uri');
+            
             // Is there a validation rule for the particular URI being accessed?
-            $uri = ($group == '') ? trim(Uri::getInstance()->routedUriString(), '/') : $group;
+            $uri = ($group == '') ? trim($uriClass::getInstance()->routedUriString(), '/') : $group;
             
             if ($uri != '' AND isset($this->_config_rules[$uri]))
             {
@@ -1291,8 +1293,8 @@ Class Validator {
      * @return    bool
      */
     public function isNatural($str)
-    {   
-           return (bool)preg_match( '/^[0-9]+$/', $str);
+    {
+        return (bool)preg_match( '/^[0-9]+$/', $str);
     }
 
     // --------------------------------------------------------------------
@@ -1417,7 +1419,8 @@ Class Validator {
      */    
     public function stripImageTags($str)
     {
-        return Security::getInstance()->stripImageTags($str);
+        $securityClass = getComponent('security');
+        return $securityClass::getInstance()->stripImageTags($str);
     }
     
     // --------------------------------------------------------------------
@@ -1430,8 +1433,9 @@ Class Validator {
      * @return    string
      */    
     public function xssClean($str)
-    {
-        return Security::getInstance()->xssClean($str);
+    {   
+        $securityClass = getComponent('security');
+        return $securityClass::getInstance()->xssClean($str);
     }
     
     // --------------------------------------------------------------------

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * OBJECT DATA MODEL
+ * ODM - ( Object Data Model )
  *
  * @package         Obullo 
  * @subpackage      odm
@@ -64,7 +64,9 @@ Class Odm extends Model {
         
         ##### Reset validation data for multiple operations #######
         
-        Validator::getInstance()->clear();
+        $validatorClass = getComponent('validator');
+        $validator = $validatorClass::getInstance();
+        $validator->clear();
         
         ##### Reset validation data for multiple operations #######
         
@@ -86,7 +88,8 @@ Class Odm extends Model {
     */
     private function validator($_GLOBALS = array(), $fields = array())
     {
-        $validator = Validator::getInstance();
+        $validatorClass = getComponent('validator');
+        $validator = $validatorClass::getInstance();
         $validator->clear();
 
         if(count($_GLOBALS) == 0)
@@ -311,10 +314,11 @@ Class Odm extends Model {
         $table = $this->schema->config['table'];
         
         $this->errors[$table][$key] = $error;
-       
         if(isset($this->schema_fields[$key])) // set a validation error.
         {
-            Validator::getInstance()->_field_data[$key]['error'] = $error;
+            $validatorClass = getComponent('validator');
+            $validator = $validatorClass::getInstance();
+            $validator->_field_data[$key]['error'] = $error;
         }
     }
 
@@ -536,10 +540,22 @@ Class Odm extends Model {
     * Do update if ID exists otherwise
     * do insert.
     * 
-    * @return  false | Integer
+    * @param mixed $transaction_or_options disable transaction or provide array options
+    * @return  false | Integer ( number of affected rows )
     */
-    public function save()
-    {
+    public function save($transaction_or_options = true)
+    {           
+        $transaction = false;
+        $options     = array();
+        if(is_bool($transaction_or_options) && $transaction_or_options)
+        {
+            $transaction = true;
+        } 
+        else 
+        {
+            $options = (array)$transaction_or_options;
+        }
+        
         getInstance()->locale->load('obullo');
                    
         $v_data = array();   // validation fields data
@@ -556,7 +572,6 @@ Class Odm extends Model {
         }
 
         $has_rules = false;
-        
         foreach($this->schema_fields as $k => $v)
         {
             if(strpos($k, '[]') > 0)  // remove multiple key names from save key ..
@@ -653,17 +668,23 @@ Class Odm extends Model {
                 }
                 
                 try {
-
-                    $this->db->transaction(); // begin the transaction
-
+                    
+                    if($transaction)
+                    {
+                        $this->db->transaction(); // begin the transaction
+                    }
+                    
                     $this->_beforeSave();
                                     
                     $this->_compileSelect();                
-                    $this->errors[$table]['affected_rows'] = $this->db->update($table, $s_data);
+                    $this->errors[$table]['affected_rows'] = $this->db->update($table, $s_data, $options);
                     
                     $this->_afterSave();
                     
-                    $this->db->commit();    // commit the transaction
+                    if($transaction)
+                    {
+                        $this->db->commit();    // commit the transaction
+                    }
                     
                     $this->errors[$table]['success'] = 1;
                     $this->errors[$table]['msg']     = lang('Data updated succesfully.');
@@ -674,7 +695,10 @@ Class Odm extends Model {
 
                 } catch(Exception $e)
                 {
-                    $this->db->rollback();       // roll back the transaction if we fail
+                    if($transaction)
+                    {
+                        $this->db->rollback();       // roll back the transaction if we fail
+                    }
 
                     $this->errors[$table]['success'] = 0;
                     $this->errors[$table]['msg']     = lang('Data not saved, please do some changes.');
@@ -690,17 +714,23 @@ Class Odm extends Model {
             {
                 try {
 
-                    $this->db->transaction(); // begin the transaction
+                    if($transaction)
+                    {
+                        $this->db->transaction(); // begin the transaction
+                    }
                     
                     $this->_beforeSave();
                      
                     $this->_compileSelect();    
-                    $this->errors[$table]['affected_rows'] = $this->db->insert($table, $s_data);
+                    $this->errors[$table]['affected_rows'] = $this->db->insert($table, $s_data, $options);
                     $this->values[$table][$id] = $this->db->insertId();  // add last inserted id.
 
                     $this->_afterSave();
                     
-                    $this->db->commit();    // commit the transaction
+                    if($transaction)
+                    {
+                        $this->db->commit();    // commit the transaction
+                    }
                     
                     $this->errors[$table]['success'] = 1;
                     $this->errors[$table]['msg']     = lang('Data inserted succesfully.');
@@ -711,7 +741,10 @@ Class Odm extends Model {
 
                 } catch(Exception $e)
                 {
-                    $this->db->rollback();       // roll back the transaction if we fail
+                    if($transaction)
+                    {
+                        $this->db->rollback();       // roll back the transaction if we fail
+                    }
 
                     $this->errors[$table]['success'] = 0;
                     $this->errors[$table]['msg']     = lang('Data insert error.');
@@ -807,8 +840,11 @@ Class Odm extends Model {
             return $default;  // No type, return default value.
         }
         
+        $validatorClass = getComponent('validator');
+        $validator = $validatorClass::getInstance();
+        
         $type  = strtolower($this->schema_fields[$field]['type']);
-        $value = Validator::getInstance()->setValue($field, $default);
+        $value = $validator->setValue($field, $default);
             
         if($type == 'string')
         {
@@ -860,10 +896,22 @@ Class Odm extends Model {
     * Delete a record from current table 
     * using ID
     * 
+    * @param mixed $transaction_or_options disable transaction or provide options
     * @return boolean
     */
-    public function delete()
+    public function delete($transaction_or_options = true)
     {
+        $transaction = false;
+        $options     = array();
+        if(is_bool($transaction_or_options) && $transaction_or_options)
+        {
+            $transaction = true;
+        } 
+        else 
+        {
+            $options = (array)$transaction_or_options;
+        }
+        
         getInstance()->locale->load('obullo');  // Load the language file
         
         $v_data = array();
@@ -910,16 +958,22 @@ Class Odm extends Model {
         {
             try {
 
-                $this->db->transaction(); // begin the transaction
+                if($transaction)
+                {
+                    $this->db->transaction(); // begin the transaction
+                }
 
                 $this->_beforeDelete();
                 
                 $this->_compileSelect();
-                $this->errors[$table]['affected_rows'] = $this->db->delete($table);
+                $this->errors[$table]['affected_rows'] = $this->db->delete($table, '', $options);
 
                 $this->_afterDelete();
                 
-                $this->db->commit();    // commit the transaction
+                if($transaction)
+                {
+                    $this->db->commit();    // commit the transaction
+                }
                 
                 $this->errors[$table]['success'] = 1;
                 $this->errors[$table]['msg']     = lang('Data deleted succesfully.');
@@ -930,7 +984,10 @@ Class Odm extends Model {
 
             } catch(Exception $e)
             {
-                $this->db->rollback();       // roll back the transaction if we fail
+                if($transaction)
+                {
+                    $this->db->rollback();       // roll back the transaction if we fail
+                }
 
                 $this->errors[$table]['success'] = 0;
                 $this->errors[$table]['msg']     = lang('Delete error or record already deleted.');
@@ -976,7 +1033,8 @@ Class Odm extends Model {
             $this->db->_resetSelect();  // Reset CRUD variables.
         }
         
-        Validator::getInstance()->clear(); // Clear validation settings.
+        $validator = getComponent('validator');
+        $validator::getInstance()->clear(); // Clear validation settings.
         
         $this->where           = array();   // Reset Select
         $this->or_where        = array();

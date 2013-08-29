@@ -749,10 +749,13 @@ Class Database_Crud {
     * @access   public
     * @param    string   the table to retrieve the results from
     * @param    array    an associative array of insert values
+    * @param    array    insert options
     * @return   PDO exec number of affected rows.
     */
-    public function insert($table = '', $set = null)
+    public function insert($table = '', $set = null, $options = array())
     {    
+        $options = array();
+        
         if ( ! is_null($set))
         {
             $this->set($set);
@@ -863,11 +866,13 @@ Class Database_Crud {
     * @access   public
     * @param    string   the table to retrieve the results from
     * @param    array    an associative array of update values
-    * @param    mixed    the where clause
+    * @param    array    update options
     * @return   PDO exec number of affected rows
     */
-    public function update($table = '', $set = null, $where = null, $limit = null)
+    public function update($table = '', $set = null, $options = array())
     {
+        $options = array(); // Update options.
+        
         // Combine any cached components with the current statements
         $this->_mergeCache();
         
@@ -893,17 +898,7 @@ Class Database_Crud {
             }
             
             $table = $this->ar_from[0];
-        }
-        
-        if ($where != null)
-        {
-            $this->where($where);
-        }
-        
-        if ($limit != null)
-        {
-            $this->limit($limit);   
-        }       
+        } 
         
         $sql = $this->_update($this->_protectIdentifiers($table, true, null, false), $this->ar_set, $this->ar_where, $this->ar_orderby, $this->ar_limit);
                  
@@ -984,8 +979,10 @@ Class Database_Crud {
     * @param    boolean
     * @return   object
     */
-    public function delete($table = '', $where = '', $limit = null, $reset_data = true)
+    public function delete($table = '', $where = '', $options = array(), $reset_data = true)
     {
+        $options = array(); // delete options
+
         // Combine any cached components with the current statements
         $this->_mergeCache();
 
@@ -1004,7 +1001,7 @@ Class Database_Crud {
         {
             foreach($table as $single_table)
             {
-                $this->delete($single_table, $where, $limit, false);   
+                $this->delete($single_table, $where, array(), false);   
             }
         
             $this->_resetWrite();
@@ -1012,16 +1009,6 @@ Class Database_Crud {
         } else 
         {
             $table = $this->_protectIdentifiers($table, true, null, false);
-        }
-
-        if ($where != '')
-        {
-            $this->where($where);
-        }
-
-        if ($limit != null)
-        {
-            $this->limit($limit);
         }
         
         if (count($this->ar_where) == 0 && count($this->ar_wherein) == 0 && count($this->ar_like) == 0)

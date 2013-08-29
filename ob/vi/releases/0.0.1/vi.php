@@ -29,7 +29,7 @@ namespace vi {
     */
     function view($filename, $string = true, $data = '')
     {
-        $class = '\\'.getComponentOf('vi');
+        $class = '\\'.getComponent('view');
         return $class::getInstance()->load($filename, $string, $data);
     }
 
@@ -45,7 +45,7 @@ namespace vi {
     */
     function views($filename, $string = true, $data = '')
     {
-        $class = '\\'.getComponentOf('vi');
+        $class = '\\'.getComponent('view');
         $view  = $class::getInstance();
         $view->setPath('views');
         
@@ -63,7 +63,7 @@ namespace vi {
     */
     function setVar($key, $val = '')
     {
-        $class = '\\'.getComponentOf('vi');
+        $class = '\\'.getComponent('view');
         $view  = $class::getInstance();
    
         if($val == array())
@@ -86,7 +86,7 @@ namespace vi {
     */
     function getVar($key)
     {
-        $class = '\\'.getComponentOf('vi');
+        $class = '\\'.getComponent('view');
         $view  = $class::getInstance();
         
         if(isset($view->var[$key]))
@@ -114,7 +114,7 @@ namespace vi {
     */
     function setArray($key, $val = array())
     {
-        $class = '\\'.getComponentOf('vi');
+        $class = '\\'.getComponent('view');
         $view  = $class::getInstance();
         
         $val  = (array)$val;
@@ -139,7 +139,7 @@ namespace vi {
     */
     function getArray($key)
     {
-        $class = '\\'.getComponentOf('vi');
+        $class = '\\'.getComponent('view');
         $view  = $class::getInstance();
     
         if(isset($view->array[$key]))

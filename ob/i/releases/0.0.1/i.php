@@ -34,7 +34,9 @@ namespace i {
     {
         $GET = ($use_global_var) ? $GLOBALS['_GET_BACKUP']: $_GET; // _GET_BACKUP = Hmvc local get values
         
-        return \Input::getInstance()->_fetchFromArray($GET, $index, $xss_clean);
+        $input = '\\'.getComponent('input');
+        
+        return $input::getInstance()->_fetchFromArray($GET, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -52,7 +54,9 @@ namespace i {
     {
         $POST = ($use_global_var) ? $GLOBALS['_POST_BACKUP']: $_POST; // _POST_BACKUP = Hmvc local post values
 
-        return \Input::getInstance()->_fetchFromArray($POST, $index, $xss_clean);
+        $input = '\\'.getComponent('input');
+        
+        return $input::getInstance()->_fetchFromArray($POST, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -70,7 +74,9 @@ namespace i {
     {
         $REQUEST = ($use_global_var) ? $GLOBALS['_REQUEST_BACKUP']: $_REQUEST; // _REQUEST_BACKUP = Hmvc local request values
 
-        return \Input::getInstance()->_fetchFromArray($REQUEST, $index, $xss_clean);
+        $input = '\\'.getComponent('input');
+        
+        return $input::getInstance()->_fetchFromArray($REQUEST, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -110,7 +116,9 @@ namespace i {
     */
     function cookie($index = '', $xss_clean = false)
     {
-        return \Input::getInstance()->_fetchFromArray($_COOKIE, $index, $xss_clean);
+        $input = '\\'.getComponent('input');
+        
+        return $input::getInstance()->_fetchFromArray($_COOKIE, $index, $xss_clean);
     }
 
     // --------------------------------------------------------------------
@@ -123,7 +131,9 @@ namespace i {
     */
     function ip()
     {
-        return \Input::getInstance()->ip();
+        $input = '\\'.getComponent('input');
+        
+        return $input::getInstance()->ip();
     }
 
     // --------------------------------------------------------------------
@@ -139,7 +149,9 @@ namespace i {
     */
     function validIp($ip)
     {        
-        return \Input::getInstance()->validIp($ip);
+        $input = '\\'.getComponent('input');
+        
+        return $input::getInstance()->validIp($ip);
     }
     
     // --------------------------------------------------------------------
@@ -152,7 +164,8 @@ namespace i {
     */
     function userAgent()
     {
-        $input = \Input::getInstance();
+        $inputClass = '\\'.getComponent('input');
+        $input = $inputClass::getInstance();
 
         if ($input->user_agent !== false)
         {
@@ -278,8 +291,10 @@ namespace i {
     * @return boolean
     */
     function hmvc()
-    {    
-        if(\Router::getInstance()->isHmvc())
+    {   
+        $router = '\\'.getComponent('router');
+        
+        if($router::getInstance()->isHmvc())
         {
             return true;
         }

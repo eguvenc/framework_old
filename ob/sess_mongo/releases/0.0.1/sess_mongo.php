@@ -1,13 +1,12 @@
 <?php
-namespace Sess\Src;
 
 /**
-* Session Database Driver.
+* Session Mongodb Driver.
 * 
 * @author      Obullo Team.
 * @version     0.1
 */
-Class Sess_Database {
+Class Sess_Mongo {
     
     public $db;
     public $encrypt_cookie       = false;
@@ -19,7 +18,7 @@ Class Sess_Database {
     public $cookie_prefix        = '';
     public $cookie_path          = '';
     public $cookie_domain        = '';
-    public $time_to_update  = 300;
+    public $time_to_update       = 300;
     public $encryption_key       = '';
     public $flashdata_key        = 'flash';
     public $time_reference       = 'time';
@@ -45,7 +44,7 @@ Class Sess_Database {
 
     function init($params = array())
     {
-        \log\me('debug', "Session Database Driver Initialized"); 
+        log\me('debug', "Session Database Driver Initialized"); 
         
         foreach (array('db_var', 'table_name', 'encrypt_cookie','expiration', 'expire_on_close', 'match_ip', 
         'match_useragent', 'cookie_name', 'cookie_path', 'cookie_domain', 
@@ -55,7 +54,7 @@ Class Sess_Database {
         }
 
         // _unserialize func. use strip_Slashes() func.
-        new \string\start();
+        new string\start();
 
         $this->now = $this->_getTime();
 
@@ -68,30 +67,13 @@ Class Sess_Database {
         // Set the cookie name
         $this->cookie_name = $this->cookie_prefix . $this->cookie_name;
         
-        // Database settings
+        // Mongo Database Connection
         // --------------------------------------------------------------------
         
-        $db_params = array();
-        $db_params['variable'] = $this->db_var;
-        $db_params['hostname'] = db('hostname', $this->db_var);
-        $db_params['username'] = db('username', $this->db_var);
-        $db_params['password'] = db('password', $this->db_var);
-        $db_params['database'] = db('database', $this->db_var);
-        $db_params['driver'] = db('driver', $this->db_var);
-        $db_params['prefix'] = db('prefix', $this->db_var);
-        $db_params['swap_pre'] = db('swap_pre', $this->db_var);
-        $db_params['dbh_port'] = db('dbh_port', $this->db_var);
-        $db_params['charset']  = db('charset', $this->db_var);
+        $database = new Db(false);
+        $this->db = $database->connect('db', array('driver' => 'mongo'));
         
-        if(db('dsn', $this->db_var) != '')
-        {
-            $db_params['dsn']  = db('dsn', $this->db_var);
-        }
-        
-        $db_params['options']  = db('options', $this->db_var);
-        
-        $database = new \Db(false);
-        $this->db = $database->connect($this->db_var, $db_params);
+        // --------------------------------------------------------------------
 
         // Run the Session routine. If a session doesn't exist we'll 
         // create a new one.  If it does, we'll update it.
@@ -113,7 +95,7 @@ Class Sess_Database {
         // Delete expired sessions if necessary
         $this->_gC();
 
-        \log\me('debug', "Session routines successfully run"); 
+        log\me('debug', "Session routines successfully run"); 
 
         return true;
     }
@@ -129,12 +111,12 @@ Class Sess_Database {
     function _read()
     {
         // Fetch the cookie
-        $session = \i\cookie($this->cookie_name);
+        $session = i\cookie($this->cookie_name);
 
         // No cookie?  Goodbye cruel world!...
         if ($session === false)
         {               
-            \log\me('debug', 'A session cookie was not found.');
+            log\me('debug', 'A session cookie was not found.');
             return false;
         }
         
@@ -153,7 +135,7 @@ Class Sess_Database {
             // Does the md5 hash match?  This is to prevent manipulation of session data in userspace
             if ($hash !==  md5($session . $this->encryption_key))
             {
-                \log\me('error', 'The session cookie data did not match what was expected. This could be a possible hacking attempt.');
+                log\me('error', 'The session cookie data did not match what was expected. This could be a possible hacking attempt.');
                 $this->destroy();
                 return false;
             }
@@ -179,14 +161,14 @@ Class Sess_Database {
         }
 
         // Does the IP Match?
-        if ($this->match_ip == true AND $session['ip_address'] != \i\ip())
+        if ($this->match_ip == true AND $session['ip_address'] != i\ip())
         {
             $this->destroy();
             return false;
         }
         
         // Does the User Agent Match?
-        if ($this->match_useragent == true AND trim($session['user_agent']) != trim(substr(\i\userAgent(), 0, 50)))
+        if ($this->match_useragent == true AND trim($session['user_agent']) != trim(substr(i\userAgent(), 0, 50)))
         {
             $this->destroy();
             return false;
@@ -209,8 +191,13 @@ Class Sess_Database {
         
         $query = $this->db->get($this->table_name);
 
+        // Mongo db changes
+        // -------------------------------------------------------------------- 
+        
         // Is there custom data?  If so, add it to the main session array
-        $row = $query->row();
+        $row = $query->hasNext();
+        
+        // -------------------------------------------------------------------- 
         
         // No result?  Kill it!
         if ($row == false)      // Obullo changes ..
@@ -218,6 +205,13 @@ Class Sess_Database {
             $this->destroy();
             return false;
         }  
+        
+        // Mongo db changes
+        // -------------------------------------------------------------------- 
+        
+        $row = (object)$query->getNext();
+        
+        // -------------------------------------------------------------------- 
            
         if (isset($row->user_data) AND $row->user_data != '')
         {
@@ -301,12 +295,12 @@ Class Sess_Database {
         }
         
         // To make the session ID even more secure we'll combine it with the user's IP
-        $sessid .= \i\ip();
+        $sessid .= i\ip();
 
         $this->userdata = array(
                             'session_id'     => md5(uniqid($sessid, true)),
-                            'ip_address'     => \i\ip(),
-                            'user_agent'     => substr(\i\userAgent(), 0, 50),
+                            'ip_address'     => i\ip(),
+                            'user_agent'     => substr(i\userAgent(), 0, 50),
                             'last_activity'  => $this->now
                             );
         
@@ -345,7 +339,7 @@ Class Sess_Database {
         }
         
         // To make the session ID even more secure we'll combine it with the user's IP
-        $new_sessid .= \i\ip();
+        $new_sessid .= i\ip();
         
         // Turn it into a hash
         $new_sessid = md5(uniqid($new_sessid, true));
@@ -389,9 +383,8 @@ Class Sess_Database {
     {
         // Db driver changes..
         // -------------------------------------------------------------------
-        if(isset($this->userdata['session_id']))
+        if(isset($this->userdata['session_id'])) // Kill the session DB row
         {
-            // Kill the session DB row
             $this->db->where('session_id', $this->userdata['session_id']);
             $this->db->delete($this->table_name);
         }
@@ -568,17 +561,7 @@ Class Sess_Database {
         
         return $prefix.$value.$suffix;
     }
-
-    // ------------------------------------------------------------------------
-
-    /**
-    *  Alias of sess_get_flash. 
-    */
-    function flash($key, $prefix = '', $suffix = '')
-    {
-        return getFlash($key, $prefix, $suffix);
-    }
-
+    
     // ------------------------------------------------------------------------
 
     /**
@@ -742,7 +725,7 @@ Class Sess_Database {
     */
     function _unserialize($data)
     {
-        $string = \string\strip_Slashes($data);
+        $string = string\strip_Slashes($data);
         $data = @unserialize($string);
         
         if (is_array($data))
@@ -783,11 +766,11 @@ Class Sess_Database {
             $this->db->where("last_activity < {$expire}");
             $this->db->delete($this->table_name);
 
-            \log\me('debug', 'Session garbage collection performed.');
+            log\me('debug', 'Session garbage collection performed.');
         }
     }
     
 }
 
-/* End of file sess_database.php */
-/* Location: ./ob/sess/releases/0.0.1/src/sess_database.php */
+/* End of file sess_mongo.php */
+/* Location: ./ob/sess_mongo/releases/0.0.1/sess_mongo.php */

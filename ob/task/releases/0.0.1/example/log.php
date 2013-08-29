@@ -151,14 +151,14 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
     private function _compileFiles()
     {
         $configs = array();
-        $config  = '\\'.getComponentOf('config');
+        $config  = '\\'.getComponent('config');
         foreach($config::getInstance()->is_loaded as $cfg)
         {
             $configs[] = error\securePath($cfg);
         }
         
         $locales = array();
-        $locale  = '\\'.getComponentOf('locale');
+        $locale  = '\\'.getComponent('locale');
         foreach($locale::getInstance() as $lcl)
         { 
             $locales[] = error\securePath($lcl); 

@@ -11,12 +11,12 @@
      * @param type $component
      * @return type
      */
-    function getComponentOf($component)
+    function getComponent($component)
     {
-        $components = getConfig('components');
-        if(isset($components[$component]))
+        $packages = getConfig('packages.cache');
+        if(isset($packages['components'][$component]))
         {
-            return $components[$component];
+            return $packages['components'][$component];
         }
         
         return $component;   
@@ -30,7 +30,7 @@
      */
     function lang($item = '')
     {
-        $class  = '\\'.getComponentOf('locale');
+        $class  = '\\'.getComponent('locale');
         $locale = $class::getInstance();
         $item = ($item == '' OR ! isset($locale->language[$item])) ? false : $locale->language[$item];
 
@@ -102,7 +102,8 @@
             } 
             else // 'Model\\'
             {
-                $router = Router::getInstance();
+                $routerClass = getComponent('router');
+                $router = $routerClass::getInstance();
                 
                 if($model_parts[1] == 'Schema')
                 { 

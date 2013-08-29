@@ -91,12 +91,12 @@ namespace error {
         } 
         else  // Is It Exception ? Initialize to Exceptions Component.
         {             
-            $class = '\\'.getComponentOf('error');
-            $exceptions = new $class();
+            $class = '\\'.getComponent('exception');
+            $exception = new $class();
 
-            if(is_object($exceptions)) 
+            if(is_object($exception)) 
             {           
-                $exceptions->write($e, $type);
+                $exception->write($e, $type);
             }
         }
 
