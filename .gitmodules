@@ -10,3 +10,6 @@
 [submodule "ob/auth"]
 	path = ob/auth
 	url = git://github.com/obullo/auth.git
+[submodule "ob/bench"]
+	path = ob/bench
+	url = git://github.com/obullo/bench.git
