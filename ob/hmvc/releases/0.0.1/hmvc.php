@@ -11,11 +11,9 @@ function requestTimer($mark = '')
  * HMVC Class
  * Hierarcial Model View Controller Library
  *
- * @package     Obullo
- * @subpackage  Libraries
- * @category    HMVC Request Class
- * @author      Obullo Team
- * @version     0.1
+ * @package     Ob
+ * @subpackage  hmvc
+ * @category    hmvc
  * 
  */
 Class Hmvc

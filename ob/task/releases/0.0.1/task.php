@@ -1,14 +1,22 @@
 <?php
 namespace task {
-
+    
     /**
-     * Task Helper
-     *
-     * @package     Task
-     * @subpackage  0.0.1
-     * @version     0.0.1
-     * @link
-     */
+    * Task ( Cli ) Helper
+    *
+    * @package     Ob
+    * @subpackage  task
+    * @category    cli
+    * @link
+    */
+
+    Class start
+    {
+        function __construct()
+        {
+            \log\me('debug', 'Task Helper Initialized');
+        }
+    }
 
     /**
     * Run Command Line Tasks

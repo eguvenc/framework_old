@@ -2,11 +2,14 @@
   "dependencies": {
     "config" : "*",
     "bench" : "*",
+    "error" : "*",
+    "exception" : "*",
     "form" : "*",
     "form_json" : "*",
     "i" : "*",
     "input" : "*",
     "locale" : "*",
+    "log" : "*",
     "router" : "*",
     "security": "*",
     "sess": "*",
@@ -17,21 +20,21 @@
     "url" : "*",
     "vi" : "*",
     "view" : "*",
-    "log" : "*",
-    "error" : "*",
-    "exception" : "*"
+    "validator" : "*"
   },
   "components": {
     "core": "Obullo",
     "config": "Config",
-    "router": "Router",
-    "uri": "Uri",
-    "output": "Output",
-    "locale": "Locale",
-    "view": "View",
-    "log": "Log_Write",
-    "exception": "Exceptions",
     "db": "Database_Pdo",
+    "exception": "Exceptions",
+    "input": "Input",
+    "locale": "Locale",
+    "log": "Log_Write",
+    "output": "Output",
+    "router": "Router",
+    "security": "Security",
+    "uri": "Uri",
+    "view": "View",
     "validator": "Validator"
   }
 }

@@ -1,15 +1,12 @@
 <?php
 namespace bench {
 
-    // --------------------------------------------------------------------
-
     /**
     * Benchmark Helper
     *
-    * @package     Obullo
+    * @package     Ob
     * @subpackage  benchmark
     * @category    benchmarks
-    * @author      Obullo Team
     * @link        
     */
     

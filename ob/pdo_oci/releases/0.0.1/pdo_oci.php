@@ -3,10 +3,9 @@
 /**
  * OCI (Oracle) Database Adapter Class
  *
- * @package       Obullo
- * @subpackage    Drivers
- * @category      Database
- * @author        Obullo Team 
+ * @package       Ob
+ * @subpackage    pdo_oci
+ * @category      database
  * @link                              
  */
 

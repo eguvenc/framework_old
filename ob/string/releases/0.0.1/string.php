@@ -4,11 +4,12 @@ namespace string {
     /**
     * String Helper
     *
-    * @package     Obullo
-    * @subpackage  Helpers
-    * @category    String
+    * @package     Ob
+    * @subpackage  string
+    * @category    string
     * @link
     */
+    
     Class start
     {
         function __construct()

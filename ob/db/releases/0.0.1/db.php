@@ -3,10 +3,10 @@
 /**
  * Database Connection Class.
  *
- * @package         Obullo 
- * @subpackage      Obullo.database     
- * @category        Database
- * @version         0.1
+ * @package         Ob 
+ * @subpackage      db 
+ * @category        database connection
+ * @link            
  * 
  */
 

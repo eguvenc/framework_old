@@ -3,12 +3,12 @@
 /**
  * Shopping Cart Class
  *
- * @package       Obullo
+ * @package       Ob
  * @subpackage    cart
  * @category      Shopping Cart
- * @author        Obullo Team
  * @link
  */
+
 Class Cart {
 
     // These are the regular expression rules that we use to validate the product ID and product name

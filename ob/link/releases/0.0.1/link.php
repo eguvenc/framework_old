@@ -6,10 +6,9 @@ namespace link {
     /**
     * Link Helper
     *
-    * @package     Obullo
+    * @package     Ob
     * @subpackage  link
     * @category    url
-    * @author      Obullo Team
     */
     Class start
     { 

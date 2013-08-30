@@ -1,11 +1,14 @@
 <?php
 
-/**
-* Session Cookie Driver.
-* 
-* @author      Obullo Team.
-* @version     0.1
-*/
+ /**
+ * Session Cookie Driver
+ *
+ * @package     Ob
+ * @subpackage  sess_cookie
+ * @category    sessions
+ * @link
+ */
+
 Class Sess_Cookie {
     
     public $db;

@@ -3,11 +3,9 @@
 /**
  * Log Write Class
  *
- *
- * @package       Obullo
+ * @package       Ob
  * @subpackage    log_write
  * @category      logging
- * @author        Obullo Team
  * @link          
  */
 

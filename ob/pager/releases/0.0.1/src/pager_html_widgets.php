@@ -5,10 +5,9 @@ namespace Pager\Src;
  * Pager Html Widgets
  *
  *
- * @package       Obullo
- * @subpackage    src.pager_html_widgets
+ * @package       Ob
+ * @subpackage    src
  * @category      pagination
- * @author        Obullo Team
  * @author        Derived from PEAR Pager package.
  * @see           Original package http://pear.php.net/package/Pager
  * @link          

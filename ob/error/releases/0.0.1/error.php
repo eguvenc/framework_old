@@ -1,20 +1,17 @@
 <?php
 namespace error {
-
-    // ------------------------------------------------------------------------
-
+    
     /**
     * Error Helper
     *
-    * @package     Obullo
+    * @package     Ob
     * @subpackage  error
-    * @category    Helpers
-    * @author      Obullo Team
+    * @category    errors & Exceptions
     * @link        
     */
+    
     Class start
     {
-        // Constructor
         function __construct()
         {
             \log\me('debug', 'Error Helper Initialized.');

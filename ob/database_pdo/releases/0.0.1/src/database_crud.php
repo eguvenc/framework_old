@@ -4,10 +4,10 @@ namespace Database_Pdo\Src;
 /**
  * CRUD ( CREATE - READ - UPDATE - DELETE ) Class for ** PDO.
  *
- * @package         Obullo 
- * @subpackage      Obullo.database     
- * @category        Database
- * @version         0.1
+ * @package         Ob
+ * @subpackage      src     
+ * @category        database active record
+ * @link            
  */
  
 Class Database_Crud {

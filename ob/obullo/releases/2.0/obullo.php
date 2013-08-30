@@ -2,19 +2,15 @@
  
  /**
  * Framework Component
- * Version 2.0
  * 
- * @package         Obullo 
- * @subpackage      Obullo.core
- * @category        Core
- * @version         2.0
+ * @package         Ob 
+ * @subpackage      obullo
+ * @category        core
+ * 
  */
 
 Class Obullo
 {
-    /**
-     * Run the application
-     */
     public function run()
     {   
         $packages = getConfig('packages.cache'); // get cached package.json configuration file.

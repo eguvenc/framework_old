@@ -5,10 +5,9 @@
  *
  * A simple navigation link control class.
  *
- * @package       Obullo
+ * @package       Ob
  * @subpackage    navbar
- * @category      Navigation
- * @author        Obullo
+ * @category      navigation
  * @link
  */
 

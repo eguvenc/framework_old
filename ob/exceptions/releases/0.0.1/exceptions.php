@@ -3,16 +3,17 @@
 /**
  * Exceptions Class
  *
- * @package       Obullo
+ * @package       Ob
  * @subpackage    exceptions
- * @category      Exceptions
+ * @category      exceptions
  * @link
  */
+
 Class Exceptions {
 
     function __construct()
     {
-        \log\me('debug', "Exceptions Class Initialized");
+        log\me('debug', "Exceptions Class Initialized");
     }
  
     /**
@@ -32,7 +33,7 @@ Class Exceptions {
         
         if(config('error_reporting') == '0')
         {
-            \log\me('debug', 'Error reporting seems Off, check the config.php file $config[\'error_reporting\'].');
+            log\me('debug', 'Error reporting seems Off, check the config.php file $config[\'error_reporting\'].');
             
             return;
         }
@@ -60,11 +61,11 @@ Class Exceptions {
         
         if(defined('STDIN'))  // If Command Line Request. 
         {
-            echo $type .': '. $e->getMessage(). ' File: ' .\error\securePath($e->getFile()). ' Line: '. $e->getLine(). "\n";
+            echo $type .': '. $e->getMessage(). ' File: ' .error\securePath($e->getFile()). ' Line: '. $e->getLine(). "\n";
             
             $cmd_type = (defined('TASK')) ? 'Task' : 'Cmd';
             
-            \log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.\error\securePath($e->getFile()).' '.$e->getLine(), true); 
+            log\me('error', '('.$cmd_type.') '.$type.': '.$e->getMessage(). ' '.error\securePath($e->getFile()).' '.$e->getLine(), true); 
             
             return;
         }
@@ -84,7 +85,7 @@ Class Exceptions {
         // Log Php Errors
         //-----------------------------------------------------------------------
         
-        \log\me('error', $type.': '.$e->getMessage(). ' '.\error\securePath($e->getFile()).' '.$e->getLine(), true); 
+        log\me('error', $type.': '.$e->getMessage(). ' '.error\securePath($e->getFile()).' '.$e->getLine(), true); 
              
         // Displaying Errors
         //-----------------------------------------------------------------------            
@@ -100,14 +101,14 @@ Class Exceptions {
             }   
         }       
     
-        $rules = \error\parseRegex($level);
+        $rules = error\parseRegex($level);
         
         if($rules == false) 
         {
             return;
         }
         
-        $allowed_errors = \error\getAllowedErrors($rules);  // Check displaying error enabled for current error.
+        $allowed_errors = error\getAllowedErrors($rules);  // Check displaying error enabled for current error.
     
         if(isset($allowed_errors[$code]))
         {

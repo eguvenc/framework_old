@@ -3,12 +3,12 @@
 /**
  * Locale Class ( Language )
  *
- * @package       Obullo
+ * @package       Ob
  * @subpackage    locale
  * @category      language
- * @author        Obullo Team
  * @link
  */
+
 Class Locale {
     
     public $language  = array();
@@ -18,8 +18,6 @@ Class Locale {
 
     function __construct()
     {
-        // Set Default language from $_COOKIE['__langlocale']
-        // $this->set_language();
         log\me('debug', "Locale Class Initialized");    
     }
 

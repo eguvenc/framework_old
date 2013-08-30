@@ -3,10 +3,9 @@
 /**
  * Firebird Database Adapter Class
  *
- * @package       Obullo
- * @subpackage    Drivers
- * @category      Database
- * @author        Obullo Team
+ * @package       Ob
+ * @subpackage    pdo_firebird
+ * @category      database
  * @link                              
  */
 

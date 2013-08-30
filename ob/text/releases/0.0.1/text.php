@@ -4,10 +4,11 @@ namespace text {
     /**
      * Text Helper
      *
-     * @package     Obullo
-     * @subpackage  Helpers
-     * @category    Helpers
-     * @author      Obullo Team
+     * @package     Ob
+     * @subpackage  text
+     * @category    text
+     * @link        
+     * 
      */
 
     // ------------------------------------------------------------------------

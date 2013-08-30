@@ -3,10 +3,9 @@
 /**
  * Security Class
  *
- * @package     Obullo
+ * @package     Ob
  * @subpackage	security
- * @category	Securities
- * @author	Obullo Team
+ * @category	Security
  * @link
  */
 

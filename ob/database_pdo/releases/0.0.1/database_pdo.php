@@ -3,10 +3,10 @@
 /**
  * Pdo Connection Class.
  *
- * @package         Obullo 
- * @subpackage      Obullo.database     
- * @category        Database
- * @version         0.1
+ * @package         Ob
+ * @subpackage      database     
+ * @category        databases
+ * @link            
  * 
  */
 Class Database_Pdo {

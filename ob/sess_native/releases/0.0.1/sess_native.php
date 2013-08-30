@@ -1,11 +1,14 @@
 <?php
 
-/**
-* Session Native Driver.
-* 
-* @author      Obullo Team.
-* @version     0.1
-*/
+ /**
+ * Session Native Driver
+ *
+ * @package     Ob
+ * @subpackage  sess_native
+ * @category    sessions
+ * @link
+ */
+
 Class Sess_Native {
     
     public $db;

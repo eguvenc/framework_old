@@ -5,11 +5,10 @@
  *
  * Responsible for sending final output to browser  
  *
- * @package       Obullo
+ * @package       Ob
  * @subpackage    output
  * @category      output
- * @author        Obullo Team
- * @version       0.1
+ * @link          
  */
 
 Class Output {

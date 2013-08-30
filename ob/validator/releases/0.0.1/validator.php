@@ -3,12 +3,12 @@
 /**
  * Validator Class
  *
- * @package       Obullo
- * @subpackage    Base
- * @category      Validation
- * @author        Obullo Team
+ * @package       Ob
+ * @subpackage    validator
+ * @category      validation
  * @link        
  */
+
 Class Validator {
     
     public $_field_data         = array();    
@@ -26,8 +26,7 @@ Class Validator {
     
     public function __construct($rules = array())
     {    
-        // Validation rules can be stored in a config file.
-        $this->_config_rules = $rules;
+        $this->_config_rules = $rules;  // Validation rules can be stored in a config file.
         
         // load the form helper
         new form\start();

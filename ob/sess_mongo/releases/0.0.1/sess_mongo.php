@@ -1,11 +1,14 @@
 <?php
 
-/**
-* Session Mongodb Driver.
-* 
-* @author      Obullo Team.
-* @version     0.1
-*/
+ /**
+ * Session Mongo Driver
+ *
+ * @package     Ob
+ * @subpackage  sess_mongo
+ * @category    sessions
+ * @link
+ */
+
 Class Sess_Mongo {
     
     public $db;

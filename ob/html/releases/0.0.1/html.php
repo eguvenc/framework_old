@@ -4,12 +4,11 @@ namespace html {
     // --------------------------------------------------------------------
     
     /**
-    * Obullo Html Helper
+    * Html Helper
     *
-    * @package     Obullo
-    * @subpackage  Helpers
-    * @category    Html
-    * @author      Obullo Team
+    * @package     Ob
+    * @subpackage  html
+    * @category    html
     * @link
     */
     // --------------------------------------------------------------------

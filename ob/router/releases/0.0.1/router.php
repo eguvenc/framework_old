@@ -4,10 +4,9 @@
  * Router Class
  * Parses URIs and determines routing
  *
- * @package     Obullo
+ * @package     Ob
  * @subpackage  router
- * @category    URI
- * @author      Obullo Team.
+ * @category    uri
  * @link
  */
 

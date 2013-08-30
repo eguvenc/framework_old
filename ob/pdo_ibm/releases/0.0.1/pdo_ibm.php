@@ -3,10 +3,9 @@
 /**
  * IBM DB2 Database Adapter Class
  *
- * @package       Obullo
- * @subpackage    Drivers
- * @category      Database
- * @author        Obullo Team
+ * @package       Ob
+ * @subpackage    pdo_ibm
+ * @category      database
  * @author        Drew Harvey
  * @link                              
  */

@@ -2,14 +2,14 @@
 namespace date {
 
     /**
-     * Obullo Date Helper
+     * Date Helper
      *
-     * @package     Obullo
-     * @subpackage  Helpers
-     * @category    Helpers
-     * @author      Obullo Team
+     * @package     Ob
+     * @subpackage  date
+     * @category    date & time
      * @link        
      */
+    
      Class start
      {
         function __construct()

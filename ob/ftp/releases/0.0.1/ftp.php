@@ -3,12 +3,12 @@
 /**
  * Ftp Class
  *
- * @package       Obullo
- * @subpackage    Base
- * @category      Libraries
- * @author        Obullo Team
+ * @package       Ob
+ * @subpackage    ftp
+ * @category      ftp
  * @link        
  */
+
 Class Ftp {
 
     public $hostname    = '';

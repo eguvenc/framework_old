@@ -1,13 +1,11 @@
 <?php
 
 /**                 
- * Obullo Pager Class
+ * Pager Class
  *
- *
- * @package       Obullo
+ * @package       Ob
  * @subpackage    pager
  * @category      pagination
- * @author        Obullo Team
  * @author        Derived from PEAR pager package.
  * @see           Original package http://pear.php.net/package/Pager         
  */
@@ -15,12 +13,10 @@
 Class Pager
 {     
     /**
-    * Return a pager based on $mode and $options
+    * Returns to pager object
     *
-    * @param array $options Optional parameters for the storage class
-    *
-    * @return object Storage object
-    * @static
+    * @param array $options optional parameters for the pager class
+    * @return object driver object
     * @access public
     */
     public function init($options = array())

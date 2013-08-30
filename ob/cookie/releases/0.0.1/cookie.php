@@ -4,11 +4,12 @@ namespace cookie {
     /**
     * Cookie Helper
     *
-    * @package     Obullo
-    * @subpackage  Helpers
-    * @category    Cookies
+    * @package     Ob
+    * @subpackage  cookie
+    * @category    cookies
     * @link
     */
+    
     Class start
     {
         function __construct()

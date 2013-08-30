@@ -4,10 +4,11 @@ namespace sess {
     /**
     * Session Helper
     *
-    * @package     Obullo
-    * @subpackage  Helpers
+    * @package     Ob
+    * @subpackage  sess
     * @category    Sessions
     */
+    
     Class start
     {
         public static $driver;

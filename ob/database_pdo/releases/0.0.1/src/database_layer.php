@@ -12,10 +12,10 @@ function queryTimer($mark = '')
 /**
  * PDO Layer.
  *
- * @package         Obullo 
- * @subpackage      Obullo.database     
- * @category        Database
- * @version         0.1
+ * @package         Ob
+ * @subpackage      src
+ * @category        database
+ * @link            
  * 
  */
 

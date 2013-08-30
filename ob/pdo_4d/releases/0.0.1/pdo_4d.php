@@ -3,10 +3,9 @@
 /**
  * 4D Database Adapter Class
  *
- * @package       Obullo
- * @subpackage    Drivers
- * @category      Database
- * @author        Obullo Team
+ * @package       Ob
+ * @subpackage    pdo_4d
+ * @category      database
  * @link          ftp://ftp.4d.com/ACI_PRODUCT_REFERENCE_LIBRARY/
  *                4D_PRODUCT_DOCUMENTATION/PDF_Docs_by_4D_Product_A-Z/
  *                4D/4D_v11_SQL/4D_v11_SQL_Reference_r4.pdf                           

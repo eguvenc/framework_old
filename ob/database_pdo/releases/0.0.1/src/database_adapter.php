@@ -4,10 +4,9 @@ namespace Database_Pdo\Src;
 /**
  * Database Adapter Class
  *
- * @package       Obullo
- * @subpackage    Libraries
- * @category      Libraries
- * @author        Obullo Team
+ * @package       database_pdo
+ * @subpackage    src
+ * @category      database adapter
  * @link
  */
 Abstract Class Database_Adapter extends Database_Layer {

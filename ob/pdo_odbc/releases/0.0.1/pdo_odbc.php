@@ -4,10 +4,9 @@
  * ODBC Database Adapter Class
  * ODBC v3 (IBM DB2, unixODBC and win32 ODBC) 
  * 
- * @package       Obullo
- * @subpackage    Drivers
- * @category      Database
- * @author        Obullo Team
+ * @package       Ob
+ * @subpackage    pdo_odbc
+ * @category      database
  * @link                              
  */
 

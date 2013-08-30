@@ -5,13 +5,12 @@
  *
  * A library to interface for NoSQL database Mongo. For more information see http://www.mongodb.org
  *
- * @package		Obullo
+ * @package		Ob
  * @author		Alex Bilbie | www.alexbilbie.com | alex@alexbilbie.com ( Original Library )
  * @author		Ersin Güvenç. ( Porting to Obullo 2.0 )
  * @license		http://www.opensource.org/licenses/mit-license.php
  * @link		http://alexbilbie.com
- * @version		Version 0.0.1
- *
+ * 
  */
 
 Class Mongo_Db {

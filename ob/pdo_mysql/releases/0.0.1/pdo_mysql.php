@@ -3,10 +3,9 @@
 /**
  * PDO MySQL Db Adapter Class
  *
- * @package       Obullo
- * @subpackage    Drivers
- * @category      Database PDO
- * @author        Obullo Team
+ * @package       Ob
+ * @subpackage    pdo_mysql
+ * @category      database
  * @link
  */
 

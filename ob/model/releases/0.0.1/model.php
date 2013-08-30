@@ -5,10 +5,10 @@
  *
  * Main model class.
  *
- * @package         Obullo 
- * @subpackage      Obullo.core     
- * @category        Core Model
- * @version         0.1
+ * @package         Ob 
+ * @subpackage      model
+ * @category        models
+ * @link            
  */                    
 
 Class Model {

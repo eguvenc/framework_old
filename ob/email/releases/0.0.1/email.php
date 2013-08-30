@@ -4,10 +4,9 @@
  * Email Class
  *
  *
- * @package       Obullo
+ * @package       Ob
  * @subpackage    email
- * @category      Email
- * @author        Obullo Team
+ * @category      emails
  * @link          
  */
 Class Email {

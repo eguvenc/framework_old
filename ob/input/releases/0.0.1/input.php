@@ -3,10 +3,9 @@
 /**
  * Input Class
  *
- * @package     Obullo
- * @subpackage  Libraries
- * @category    Language
- * @author      Obullo Team
+ * @package     Ob
+ * @subpackage  input
+ * @category    input
  * @link        
  */
 

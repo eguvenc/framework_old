@@ -5,8 +5,8 @@ namespace request {
     * Hmvc Request Helper
     * Do Request to another controller using HMVC Class.
     *
-    * @package     Obullo
-    * @subpackage  Helpers
+    * @package     Ob
+    * @subpackage  request
     * @category    Hmvc
     * @link
     */

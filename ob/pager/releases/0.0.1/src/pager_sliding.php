@@ -5,10 +5,9 @@ namespace Pager\Src;
  * Pager Sliding Driver
  *
  *
- * @package       Obullo
- * @subpackage    src.pager_sliding
+ * @package       Ob
+ * @subpackage    src
  * @category      pagination
- * @author        Obullo Team
  * @author        Derived from PEAR Pager package.
  * @see           Original package http://pear.php.net/package/Pager
  * @link          

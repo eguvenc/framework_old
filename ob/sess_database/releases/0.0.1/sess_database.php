@@ -1,11 +1,14 @@
 <?php
 
-/**
-* Session Database Driver.
-* 
-* @author      Obullo Team.
-* @version     0.0.1
-*/
+ /**
+ * Session Database Driver
+ *
+ * @package     Ob
+ * @subpackage  sess_database
+ * @category    sessions
+ * @link
+ */
+
 Class Sess_Database {
     
     public $db;

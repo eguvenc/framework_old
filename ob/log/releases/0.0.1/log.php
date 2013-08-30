@@ -1,16 +1,15 @@
 <?php
 namespace log {
     
-    // ------------------------------------------------------------------------
-
     /**
     * Log Helper
     *
-    * @package     Obullo
+    * @package     Ob
     * @subpackage  log
     * @category    log
-    * @author      Obullo Team
+    * @link        
     */
+    
     Class start
     { 
         function __construct()

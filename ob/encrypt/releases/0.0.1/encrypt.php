@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Obullo Encryption Class
+ * Encryption Class
  * 
  * Provides two-way keyed encoding using XOR Hashing and Mcrypt
  *
- * @package     Obullo
+ * @package     Ob
  * @subpackage  encrypt
  * @category    encryption
- * @author      Obullo Team
  * @link        
  */
+
 Class Encrypt {
 
     public $encryption_key    = '';

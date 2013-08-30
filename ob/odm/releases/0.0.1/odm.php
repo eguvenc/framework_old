@@ -3,10 +3,10 @@
 /**
  * ODM - ( Object Data Model )
  *
- * @package         Obullo 
+ * @package         Ob
  * @subpackage      odm
- * @category        Model
- * @version         0.0.1
+ * @category        model
+ * @link            
  */                    
 
 Class Odm extends Model {

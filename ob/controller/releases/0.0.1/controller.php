@@ -5,10 +5,10 @@
  *
  * Main Controller class.
  *
- * @package         Obullo 
- * @subpackage      Obullo.core     
- * @category        Core
- * @version         0.2
+ * @package         Ob
+ * @subpackage      controller     
+ * @category        controllers
+ * @link
  */
 
 Class Controller {

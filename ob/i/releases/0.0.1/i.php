@@ -1,17 +1,15 @@
 <?php
 namespace i {
-    
-    // ------------------------------------------------------------------------
 
     /**
     * "i" ( input ) Helper for Input class
     *
-    * @package     Obullo
+    * @package     Ob
     * @subpackage  i
     * @category    input
-    * @author      Obullo Team
     * @link        
     */
+    
     Class start
     {
         function __construct()
@@ -19,7 +17,6 @@ namespace i {
             \log\me('debug', 'I Helper Initialized.');
         }
     }
-    
     
     /**
     * Fetch an item from the GET array

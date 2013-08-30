@@ -3,10 +3,9 @@
 /**
  * Cubrid Database Adapter Class
  *
- * @package       Obullo
- * @subpackage    Drivers
- * @category      Database
- * @author        Obullo Team
+ * @package       Ob
+ * @subpackage    pdo_cubrid
+ * @category      database
  * @link
  */
 
