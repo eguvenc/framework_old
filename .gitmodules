@@ -13,3 +13,6 @@
 [submodule "ob/bench"]
 	path = ob/bench
 	url = git://github.com/obullo/bench.git
+[submodule "ob/cart"]
+	path = ob/cart
+	url = git://github.com/obullo/cart.git
