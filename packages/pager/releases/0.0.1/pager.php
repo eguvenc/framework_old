@@ -3,7 +3,7 @@
 /**                 
  * Pager Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    pager
  * @category      pagination
  * @author        Derived from PEAR pager package.
@@ -40,4 +40,4 @@ Class Pager
 // END Pager Class
 
 /* End of file Pager.php */
-/* Location: ./ob/pager/releases/0.0.1/pager.php */
+/* Location: ./packages/pager/releases/0.0.1/pager.php */

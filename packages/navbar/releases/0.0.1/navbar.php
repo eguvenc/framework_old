@@ -5,7 +5,7 @@
  *
  * A simple navigation link control class.
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    navbar
  * @category      navigation
  * @link
@@ -147,4 +147,4 @@ Class Navbar {
 // END Navbar Class
 
 /* End of file Navbar.php */
-/* Location: ./ob/navbar/releases/0.0.1/navbar.php */
+/* Location: ./packages/navbar/releases/0.0.1/navbar.php */

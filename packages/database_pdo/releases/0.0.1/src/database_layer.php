@@ -12,9 +12,9 @@ function queryTimer($mark = '')
 /**
  * PDO Layer.
  *
- * @package         Ob
- * @subpackage      src
- * @category        database
+ * @package       packages
+ * @subpackage    database_pdo\src
+ * @category      database
  * @link            
  * 
  */
@@ -774,4 +774,4 @@ define('ORI_REL', 5);
 define('INTO', 9);
 
 /* End of file database_layer.php */
-/* Location: ./ob/database_pdo/releases/0.0.1/src/database_layer.php */
+/* Location: ./packages/database_pdo/releases/0.0.1/src/database_layer.php */

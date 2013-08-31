@@ -3,9 +3,9 @@
 /**
  * Database Connection Class.
  *
- * @package         Ob 
- * @subpackage      db 
- * @category        database connection
+ * @package       packages 
+ * @subpackage    db 
+ * @category      database connection
  * @link            
  * 
  */
@@ -89,4 +89,4 @@ Class Db {
 }
 
 /* End of file db.php */
-/* Location: ./ob/db/releases/0.0.1/db.php */
+/* Location: ./packages/db/releases/0.0.1/db.php */

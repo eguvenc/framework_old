@@ -6,9 +6,9 @@ namespace link {
     /**
     * Link Helper
     *
-    * @package     Ob
-    * @subpackage  link
-    * @category    url
+    * @package       packages
+    * @subpackage    link
+    * @category      url
     */
     Class start
     { 
@@ -219,4 +219,4 @@ namespace link {
 }
 
 /* End of file link.php */
-/* Location: ./ob/link/releases/0.0.1/link.php */
+/* Location: ./packages/link/releases/0.0.1/link.php */

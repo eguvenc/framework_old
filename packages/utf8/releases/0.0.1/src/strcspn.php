@@ -46,4 +46,4 @@ Class Strcspn {
 }
 
 /* End of file strcspn.php */
-/* Location: ./ob/utf8/releases/0.0.1/src/strcspn.php */
+/* Location: ./packages/utf8/releases/0.0.1/src/strcspn.php */

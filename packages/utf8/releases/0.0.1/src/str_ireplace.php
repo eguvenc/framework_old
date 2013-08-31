@@ -85,4 +85,4 @@ Class Str_Ireplace {
 }
 
 /* End of file str_ireplace.php */
-/* Location: ./ob/utf8/releases/0.0.1/src/str_ireplace.php */
+/* Location: ./packages/utf8/releases/0.0.1/src/str_ireplace.php */

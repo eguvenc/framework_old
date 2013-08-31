@@ -3,9 +3,9 @@
  /**
  * Session Mongo Driver
  *
- * @package     Ob
- * @subpackage  sess_mongo
- * @category    sessions
+ * @package       packages
+ * @subpackage    sess_mongo
+ * @category      sessions
  * @link
  */
 
@@ -776,4 +776,4 @@ Class Sess_Mongo {
 }
 
 /* End of file sess_mongo.php */
-/* Location: ./ob/sess_mongo/releases/0.0.1/sess_mongo.php */
+/* Location: ./packages/sess_mongo/releases/0.0.1/sess_mongo.php */

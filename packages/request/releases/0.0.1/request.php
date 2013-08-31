@@ -5,9 +5,9 @@ namespace request {
     * Hmvc Request Helper
     * Do Request to another controller using HMVC Class.
     *
-    * @package     Ob
-    * @subpackage  request
-    * @category    Hmvc
+    * @package       packages
+    * @subpackage    request
+    * @category      hmvc
     * @link
     */
 
@@ -133,4 +133,4 @@ namespace request {
 }
 
 /* End of file request.php */
-/* Location: ./ob/request/releases/0.0.1/request.php */
+/* Location: ./packages/request/releases/0.0.1/request.php */

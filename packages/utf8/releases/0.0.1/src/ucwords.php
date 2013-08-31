@@ -32,4 +32,4 @@ Class Ucwords {
 }
 
 /* End of file ucwords.php */
-/* Location: ./ob/utf8/releases/0.0.1/src/ucwords.php */
+/* Location: ./packages/utf8/releases/0.0.1/src/ucwords.php */

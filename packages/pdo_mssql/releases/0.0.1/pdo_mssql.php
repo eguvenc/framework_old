@@ -3,7 +3,7 @@
 /**
  * MSSQL Database Adapter Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    pdo_mssql
  * @category      database
  * @link                              
@@ -372,4 +372,4 @@ Class Pdo_Mssql extends Database_Pdo\Src\Database_Adapter
 
 
 /* End of file Pdo_Mssql.php */
-/* Location: ./ob/pdo_mssql/releases/0.0.1/pdo_mssql.php */
+/* Location: ./packages/pdo_mssql/releases/0.0.1/pdo_mssql.php */

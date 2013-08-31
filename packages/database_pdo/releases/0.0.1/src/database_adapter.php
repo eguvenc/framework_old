@@ -4,8 +4,8 @@ namespace Database_Pdo\Src;
 /**
  * Database Adapter Class
  *
- * @package       database_pdo
- * @subpackage    src
+ * @package       packages
+ * @subpackage    database_pdo/src
  * @category      database adapter
  * @link
  */
@@ -292,4 +292,4 @@ Abstract Class Database_Adapter extends Database_Layer {
 }
 
 /* End of file database_adapter.php */
-/* Location: ./ob/database_pdo/releases/0.0.1/src/database_adapter.php */
+/* Location: ./packages/database_pdo/releases/0.0.1/src/database_adapter.php */

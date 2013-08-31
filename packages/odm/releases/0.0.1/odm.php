@@ -1,11 +1,11 @@
 <?php
 
 /**
- * ODM - ( Object Data Model )
+ * Odm - ( Object Data Model )
  *
- * @package         Ob
- * @subpackage      odm
- * @category        model
+ * @package       packages
+ * @subpackage    odm
+ * @category      model
  * @link            
  */                    
 
@@ -1120,4 +1120,4 @@ Class Odm extends Model {
 // END Odm Class
 
 /* End of file odm.php */
-/* Location: ./ob/odm/releases/0.0.1/odm.php */
+/* Location: ./packages/odm/releases/0.0.1/odm.php */

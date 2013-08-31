@@ -4,9 +4,9 @@ namespace Database_Pdo\Src;
 /**
  * CRUD ( CREATE - READ - UPDATE - DELETE ) Class for ** PDO.
  *
- * @package         Ob
- * @subpackage      src     
- * @category        database active record
+ * @package       packages
+ * @subpackage    database_pdo\src   
+ * @category      database active record
  * @link            
  */
  
@@ -1634,4 +1634,4 @@ Class Database_Crud {
 }
 
 /* End of file database_crud.php */
-/* Location: ./ob/database_pdo/releases/0.0.1/src/database_crud.php */
+/* Location: ./packages/database_pdo/releases/0.0.1/src/database_crud.php */

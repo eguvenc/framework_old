@@ -4,9 +4,9 @@ namespace sess {
     /**
     * Session Helper
     *
-    * @package     Ob
-    * @subpackage  sess
-    * @category    Sessions
+    * @package       packages
+    * @subpackage    sess
+    * @category      sessions
     */
     
     Class start
@@ -155,4 +155,4 @@ namespace sess {
 }
 
 /* End of file sess.php */
-/* Location: ./ob/sess/releases/0.0.1/sess.php */
+/* Location: ./packages/sess/releases/0.0.1/sess.php */

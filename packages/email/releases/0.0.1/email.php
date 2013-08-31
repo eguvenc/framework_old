@@ -4,7 +4,7 @@
  * Email Class
  *
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    email
  * @category      emails
  * @link          
@@ -1987,4 +1987,4 @@ Class Email {
 // END email class
 
 /* End of file Email.php */
-/* Location: ./ob/email/releases/0.0.1/email.php */
+/* Location: ./packages/email/releases/0.0.1/email.php */

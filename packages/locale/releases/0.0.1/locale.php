@@ -3,7 +3,7 @@
 /**
  * Locale Class ( Language )
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    locale
  * @category      language
  * @link
@@ -88,4 +88,4 @@ Class Locale {
 }
 
 /* End of file locale.php */
-/* Location: ./ob/locale/releases/0.0.1/locale.php */
+/* Location: ./packages/locale/releases/0.0.1/locale.php */

@@ -5,7 +5,7 @@ namespace Pager\Src;
  * Pager Jumping Driver
  *
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    src
  * @category      pagination
  * @author        Derived from PEAR Pager package.
@@ -241,4 +241,4 @@ Class Pager_Jumping extends Pager_Common
 // END Pager_Jumping Class
 
 /* End of file Pager_Jumping.php */
-/* Location: ./ob/pager/releases/0.0.1/src/pager_jumping.php */
+/* Location: ./packages/pager/releases/0.0.1/src/pager_jumping.php */

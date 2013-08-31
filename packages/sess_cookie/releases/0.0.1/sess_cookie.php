@@ -3,9 +3,9 @@
  /**
  * Session Cookie Driver
  *
- * @package     Ob
- * @subpackage  sess_cookie
- * @category    sessions
+ * @package       packages
+ * @subpackage    sess_cookie
+ * @category      sessions
  * @link
  */
 
@@ -659,4 +659,4 @@ Class Sess_Cookie {
 }
 
 /* End of file sess_cookie.php */
-/* Location: ./ob/sess_cookie/releases/0.0.1/sess_cookie.php */
+/* Location: ./packages/sess_cookie/releases/0.0.1/sess_cookie.php */

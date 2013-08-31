@@ -5,7 +5,7 @@ namespace Pager\Src;
  * Pager Common
  *
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    src
  * @category      pagination
  * @author        Derived from PEAR Pager package.
@@ -1226,4 +1226,4 @@ Class Pager_Common
 // END Pager_Common Class
 
 /* End of file Pager_Common.php */
-/* Location: ./ob/pager/releases/0.0.1/src/pager_common.php */
+/* Location: ./packages/pager/releases/0.0.1/src/pager_common.php */

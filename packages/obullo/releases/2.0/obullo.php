@@ -1,11 +1,11 @@
 <?php
  
  /**
- * Framework Component
+ * Core Component
  * 
- * @package         Ob 
- * @subpackage      obullo
- * @category        core
+ * @package       packages 
+ * @subpackage    obullo
+ * @category      core
  * 
  */
 
@@ -94,4 +94,4 @@ Class Obullo
 // END obullo.php File
 
 /* End of file obullo.php
-/* Location: ./ob/obullo/releases/2.0/obullo.php */
+/* Location: ./packages/obullo/releases/2.0/obullo.php */

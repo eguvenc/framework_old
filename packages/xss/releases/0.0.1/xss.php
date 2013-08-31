@@ -2,11 +2,11 @@
 namespace xss {
 
     /**
-     * XSS Helper
+     * Xss Helper
      *
-     * @package     Xss filter
-     * @subpackage  0.0.1
-     * @version     0.0.1
+     * @package     packages
+     * @subpackage  xss
+     * @category    security
      * @link
      */
     
@@ -77,4 +77,4 @@ namespace xss {
 }
     
 /* End of file xss.php */
-/* Location: ./ob/xss/releases/0.0.1/xss.php */
+/* Location: ./packages/xss/releases/0.0.1/xss.php */

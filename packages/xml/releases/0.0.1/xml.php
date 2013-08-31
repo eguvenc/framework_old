@@ -4,8 +4,8 @@ namespace xml {
     /**
     * Xml Helper
     *
-    * @package     Obullo
-    * @subpackage  Helpers
+    * @package     packages
+    * @subpackage  xml 
     * @category    xml
     * @link
     */
@@ -122,4 +122,4 @@ namespace xml {
 }
 
 /* End of file xml.php */
-/* Location: ./ob/xml/releases/0.0.1/xml.php */
+/* Location: ./packages/xml/releases/0.0.1/xml.php */

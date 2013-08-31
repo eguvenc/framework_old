@@ -3,7 +3,7 @@
 /**
  * SQLITE Database Adapter Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    pdo_sqlite
  * @category      database
  * @link                              
@@ -346,4 +346,4 @@ Class Pdo_Sqlite extends Database_Pdo\Src\Database_Adapter
 
 
 /* End of file Pdo_Sqlite.php */
-/* Location: ./ob/pdo_mysql/releases/0.0.1/pdo_sqlite.php */
+/* Location: ./packages/pdo_mysql/releases/0.0.1/pdo_sqlite.php */

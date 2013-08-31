@@ -3,9 +3,9 @@
 /**
  * Security Class
  *
- * @package     Ob
- * @subpackage	security
- * @category	Security
+ * @package       packages
+ * @subpackage    security
+ * @category      security
  * @link
  */
 
@@ -865,4 +865,4 @@ Class Security {
 // END Security Class
 
 /* End of file Security.php */
-/* Location: ./ob/security/releases/0.0.1/src/security.php */
+/* Location: ./packages/security/releases/0.0.1/src/security.php */

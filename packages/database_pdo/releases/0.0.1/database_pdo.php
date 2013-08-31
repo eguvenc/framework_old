@@ -3,9 +3,9 @@
 /**
  * Pdo Connection Class.
  *
- * @package         Ob
- * @subpackage      database     
- * @category        databases
+ * @package       packages
+ * @subpackage    database_pdo    
+ * @category      databases
  * @link            
  * 
  */
@@ -96,4 +96,4 @@ Class Database_Pdo {
 }
 
 /* End of file database_pdo.php */
-/* Location: ./ob/database_pdo/releases/0.0.1/database_pdo.php */
+/* Location: ./packages/database_pdo/releases/0.0.1/database_pdo.php */

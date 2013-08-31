@@ -5,9 +5,9 @@
  *
  * Main model class.
  *
- * @package         Ob 
- * @subpackage      model
- * @category        models
+ * @package       packages 
+ * @subpackage    model
+ * @category      models
  * @link            
  */                    
 
@@ -61,4 +61,4 @@ Class Model {
 // END Model Class
 
 /* End of file model.php */
-/* Location: ./ob/model/releases/0.0.1/model.php */
+/* Location: ./packages/model/releases/0.0.1/model.php */

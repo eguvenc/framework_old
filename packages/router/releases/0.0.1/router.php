@@ -4,9 +4,9 @@
  * Router Class
  * Parses URIs and determines routing
  *
- * @package     Ob
- * @subpackage  router
- * @category    uri
+ * @package       packages
+ * @subpackage    router
+ * @category      uri
  * @link
  */
 
@@ -529,4 +529,4 @@ Class Router {
 // END Router Class
 
 /* End of file Router.php */
-/* Location: ./ob/router/releases/0.0.1/router.php */
+/* Location: ./packages/router/releases/0.0.1/router.php */

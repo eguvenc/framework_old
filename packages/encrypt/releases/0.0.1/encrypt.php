@@ -5,9 +5,9 @@
  * 
  * Provides two-way keyed encoding using XOR Hashing and Mcrypt
  *
- * @package     Ob
- * @subpackage  encrypt
- * @category    encryption
+ * @package       packages
+ * @subpackage    encrypt
+ * @category      encryption
  * @link        
  */
 
@@ -452,4 +452,4 @@ Class Encrypt {
 // END Encrypt class
 
 /* End of file Encrypt.php */
-/* Location: ./ob/encrypt/releases/0.0.1/encrypt.php */
+/* Location: ./packages/encrypt/releases/0.0.1/encrypt.php */

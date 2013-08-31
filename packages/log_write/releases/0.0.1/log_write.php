@@ -3,7 +3,7 @@
 /**
  * Log Write Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    log_write
  * @category      logging
  * @link          
@@ -107,4 +107,4 @@ Class Log_Write {
 // END log_write class
 
 /* End of file Log_Write.php */
-/* Location: ./ob/email/releases/0.0.1/log_write.php */
+/* Location: ./packages/email/releases/0.0.1/log_write.php */

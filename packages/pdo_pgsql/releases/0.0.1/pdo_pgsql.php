@@ -3,7 +3,7 @@
 /**
  * PGSQL (PostgreSQL) Database Adapter Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    pdo_pgsql
  * @category      database 
  * @link                              
@@ -318,4 +318,4 @@ Class Pdo_Pgsql extends Database_Pdo\Src\Database_Adapter
 
 
 /* End of file Pdo_Pgsql.php */
-/* Location: ./ob/pdo_pgsql/releases/0.0.1/pdo_pgsql.php */
+/* Location: ./packages/pdo_pgsql/releases/0.0.1/pdo_pgsql.php */

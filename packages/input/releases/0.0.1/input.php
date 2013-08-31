@@ -3,9 +3,9 @@
 /**
  * Input Class
  *
- * @package     Ob
- * @subpackage  input
- * @category    input
+ * @package       packages
+ * @subpackage    input
+ * @category      input
  * @link        
  */
 
@@ -347,4 +347,4 @@ Class Input {
 // -------------------------------------------------------------------- 
 
 /* End of file input.php */
-/* Location: ./ob/input/releases/0.0.1/input.php */
+/* Location: ./packages/input/releases/0.0.1/input.php */

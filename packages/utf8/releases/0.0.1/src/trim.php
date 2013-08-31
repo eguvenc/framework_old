@@ -26,4 +26,4 @@ Class Trim {
 }
 
 /* End of file trim.php */
-/* Location: ./ob/utf8/releases/0.0.1/src/trim.php */
+/* Location: ./packages/utf8/releases/0.0.1/src/trim.php */

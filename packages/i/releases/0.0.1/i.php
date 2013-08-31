@@ -4,9 +4,9 @@ namespace i {
     /**
     * "i" ( input ) Helper for Input class
     *
-    * @package     Ob
-    * @subpackage  i
-    * @category    input
+    * @package       packages
+    * @subpackage    i
+    * @category      input
     * @link        
     */
     
@@ -302,4 +302,4 @@ namespace i {
 }
 
 /* End of file i.php */
-/* Location: ./ob/i/releases/0.0.1/i.php */
+/* Location: ./packages/i/releases/0.0.1/i.php */

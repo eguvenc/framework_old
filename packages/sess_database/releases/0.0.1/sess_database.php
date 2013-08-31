@@ -3,9 +3,9 @@
  /**
  * Session Database Driver
  *
- * @package     Ob
- * @subpackage  sess_database
- * @category    sessions
+ * @package       packages
+ * @subpackage    sess_database
+ * @category      sessions
  * @link
  */
 
@@ -791,4 +791,4 @@ Class Sess_Database {
 }
 
 /* End of file sess_database.php */
-/* Location: ./ob/sess_database/releases/0.0.1/sess_database.php */
+/* Location: ./packages/sess_database/releases/0.0.1/sess_database.php */

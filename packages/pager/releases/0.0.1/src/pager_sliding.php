@@ -5,7 +5,7 @@ namespace Pager\Src;
  * Pager Sliding Driver
  *
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    src
  * @category      pagination
  * @author        Derived from PEAR Pager package.
@@ -299,4 +299,4 @@ Class Pager_Sliding extends Pager_Common
 // END Pager_sliding Class
 
 /* End of file Pager_sliding.php */
-/* Location: ./ob/pager/releases/0.0.1/src/pager_sliding.php */
+/* Location: ./packages/pager/releases/0.0.1/src/pager_sliding.php */

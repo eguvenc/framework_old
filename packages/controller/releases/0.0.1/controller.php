@@ -5,9 +5,9 @@
  *
  * Main Controller class.
  *
- * @package         Ob
- * @subpackage      controller     
- * @category        controllers
+ * @package       packages
+ * @subpackage    controller     
+ * @category      controllers
  * @link
  */
 
@@ -127,4 +127,4 @@ Class Controller {
 // END Controller Class
 
 /* End of file controller.php */
-/* Location: ./ob/controller/releases/0.1/controller.php */
+/* Location: ./packages/controller/releases/0.1/controller.php */

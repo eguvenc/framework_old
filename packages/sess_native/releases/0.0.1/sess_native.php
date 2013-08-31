@@ -3,9 +3,9 @@
  /**
  * Session Native Driver
  *
- * @package     Ob
- * @subpackage  sess_native
- * @category    sessions
+ * @package       packages
+ * @subpackage    sess_native
+ * @category      sessions
  * @link
  */
 
@@ -430,4 +430,4 @@ Class Sess_Native {
 }
 
 /* End of file sess_native.php */
-/* Location: ./ob/sess_native/releases/0.0.1/sess_native.php */
+/* Location: ./packages/sess_native/releases/0.0.1/sess_native.php */

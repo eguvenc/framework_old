@@ -4,8 +4,8 @@ namespace vi {
     /**
     * View Helper
     *
-    * @package     Obullo
-    * @subpackage  Helpers
+    * @package     Packages
+    * @subpackage  vi
     * @category    View
     * @link
     */
@@ -160,4 +160,4 @@ namespace vi {
 }
 
 /* End of file vi.php */
-/* Location: ./ob/vi/releases/0.0.1/vi.php */
+/* Location: ./packages/vi/releases/0.0.1/vi.php */

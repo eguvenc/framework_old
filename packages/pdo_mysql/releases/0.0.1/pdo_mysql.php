@@ -3,7 +3,7 @@
 /**
  * PDO MySQL Db Adapter Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    pdo_mysql
  * @category      database
  * @link
@@ -344,4 +344,4 @@ Class Pdo_Mysql extends Database_Pdo\Src\Database_Adapter
 
 
 /* End of file Pdo_Mysql.php */
-/* Location: ./ob/pdo_mysql/releases/0.0.1/pdo_mysql.php */
+/* Location: ./packages/pdo_mysql/releases/0.0.1/pdo_mysql.php */

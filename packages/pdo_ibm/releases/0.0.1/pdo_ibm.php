@@ -3,7 +3,7 @@
 /**
  * IBM DB2 Database Adapter Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    pdo_ibm
  * @category      database
  * @author        Drew Harvey
@@ -346,4 +346,4 @@ Class Pdo_Ibm extends Database_Pdo\Src\Database_Adapter
 
 
 /* End of file Pdo_Ibm.php */
-/* Location: ./ob/pdo_ibm/releases/0.0.1/pdo_ibm.php */
+/* Location: ./packages/pdo_ibm/releases/0.0.1/pdo_ibm.php */

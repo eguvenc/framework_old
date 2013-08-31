@@ -4,7 +4,7 @@ namespace date {
     /**
      * Date Helper
      *
-     * @package     Ob
+     * @package     packages
      * @subpackage  date
      * @category    date & time
      * @link        
@@ -578,4 +578,4 @@ namespace date {
 }
 
 /* End of file date.php */
-/* Location: ./ob/date/releases/0.0.1/date.php */
+/* Location: ./packages/date/releases/0.0.1/date.php */

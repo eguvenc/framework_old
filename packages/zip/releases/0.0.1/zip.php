@@ -8,12 +8,12 @@
  *
  * Codes borrowed from Codeigniter Framework
  *
- * @package       Obullo
- * @subpackage    Libraries
- * @category      Libraries
- * @author        Obullo Team
- * @link          
+ * @package       packages
+ * @subpackage    zip
+ * @category      zip
+ * @link           
  */
+
 Class Zip {
 
     public $zipdata     = '';
@@ -436,4 +436,4 @@ Class Zip {
     
 }
 /* End of file zip.php */
-/* Location: ./ob/zip/releases/0.0.1/zip.php */
+/* Location: ./packages/zip/releases/0.0.1/zip.php */

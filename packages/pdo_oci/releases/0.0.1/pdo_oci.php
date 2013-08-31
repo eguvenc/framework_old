@@ -3,7 +3,7 @@
 /**
  * OCI (Oracle) Database Adapter Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    pdo_oci
  * @category      database
  * @link                              
@@ -321,4 +321,4 @@ Class Pdo_Oci extends Database_Pdo\Src\Database_Adapter
 
 
 /* End of file Pdo_Oci.php */
-/* Location: ./ob/pdo_oci/releases/0.0.1/pdo_oci.php */
+/* Location: ./packages/pdo_oci/releases/0.0.1/pdo_oci.php */

@@ -3,7 +3,7 @@
 /**
  * Exceptions Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    exceptions
  * @category      exceptions
  * @link
@@ -118,4 +118,4 @@ Class Exceptions {
     
 }
 /* End of file Exceptions.php */
-/* Location: ./ob/releases/0.0.1/exceptions.php */
+/* Location: ./packages/releases/0.0.1/exceptions.php */

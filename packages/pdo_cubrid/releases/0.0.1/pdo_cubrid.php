@@ -3,7 +3,7 @@
 /**
  * Cubrid Database Adapter Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    pdo_cubrid
  * @category      database
  * @link
@@ -344,4 +344,4 @@ Class Pdo_Cubrid extends Database_Pdo\Src\Database_Adapter
 
 
 /* End of file Pdo_Cubrid.php */
-/* Location: ./ob/pdo_cubrid/releases/0.0.1/pdo_cubrid.php */
+/* Location: ./packages/pdo_cubrid/releases/0.0.1/pdo_cubrid.php */

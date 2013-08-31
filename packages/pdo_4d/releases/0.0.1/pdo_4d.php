@@ -3,7 +3,7 @@
 /**
  * 4D Database Adapter Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    pdo_4d
  * @category      database
  * @link          ftp://ftp.4d.com/ACI_PRODUCT_REFERENCE_LIBRARY/
@@ -318,4 +318,4 @@ Class Pdo_4d extends Database_Pdo\Src\Database_Adapter
 
 
 /* End of file Pdo_4d.php */
-/* Location: ./ob/pdo_4d/releases/0.0.1/pdo_4d.php */
+/* Location: ./packages/pdo_4d/releases/0.0.1/pdo_4d.php */

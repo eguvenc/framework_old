@@ -6,9 +6,9 @@ namespace html {
     /**
     * Html Helper
     *
-    * @package     Ob
-    * @subpackage  html
-    * @category    html
+    * @package       packages
+    * @subpackage    html
+    * @category      html
     * @link
     */
     // --------------------------------------------------------------------
@@ -301,4 +301,4 @@ namespace html {
 }
 
 /* End of file html.php */
-/* Location: ./ob/html/releases/0.0.1/html.php */
+/* Location: ./packages/html/releases/0.0.1/html.php */

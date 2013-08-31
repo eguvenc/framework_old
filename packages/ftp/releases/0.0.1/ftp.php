@@ -3,7 +3,7 @@
 /**
  * Ftp Class
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    ftp
  * @category      ftp
  * @link        
@@ -598,4 +598,4 @@ Class Ftp {
 // END Ftp Class
 
 /* End of file Ftp.php */
-/* Location: ./ob/ftp/releases/0.0.1/ftp.php */
+/* Location: ./packages/ftp/releases/0.0.1/ftp.php */

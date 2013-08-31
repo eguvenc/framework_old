@@ -4,9 +4,9 @@ namespace error {
     /**
     * Error Helper
     *
-    * @package     Ob
-    * @subpackage  error
-    * @category    errors & Exceptions
+    * @package       packages
+    * @subpackage    error
+    * @category      errors & Exceptions
     * @link        
     */
     
@@ -674,4 +674,4 @@ namespace error {
 // END error.php File
 
 /* End of file error.php */
-/* Location: ./ob/error/releases/0.0.1/error.php */
+/* Location: ./packages/error/releases/0.0.1/error.php */

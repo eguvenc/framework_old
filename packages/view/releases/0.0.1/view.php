@@ -5,10 +5,10 @@
  *
  * Display html files.
  *
- * @package       Obullo
- * @subpackage    View
- * @category      Templates
- * @author        Obullo Team
+ * @package       packages
+ * @subpackage    view
+ * @category      views
+ * @link
  */
 
 Class View {
@@ -175,4 +175,4 @@ Class View {
 // END View Class
 
 /* End of file View.php */
-/* Location: ./ob/view/releases/0.0.1/view.php */
+/* Location: ./packages/view/releases/0.0.1/view.php */

@@ -4,9 +4,9 @@ namespace cookie {
     /**
     * Cookie Helper
     *
-    * @package     Ob
-    * @subpackage  cookie
-    * @category    cookies
+    * @package       packages
+    * @subpackage    cookie
+    * @category      cookies
     * @link
     */
     
@@ -128,4 +128,4 @@ namespace cookie {
 }
 
 /* End of file cookie.php */
-/* Location: ./ob/cookie/releases/0.0.1/cookie.php */
+/* Location: ./packages/cookie/releases/0.0.1/cookie.php */

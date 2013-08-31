@@ -11,9 +11,9 @@ function requestTimer($mark = '')
  * HMVC Class
  * Hierarcial Model View Controller Library
  *
- * @package     Ob
- * @subpackage  hmvc
- * @category    hmvc
+ * @package       packages
+ * @subpackage    hmvc
+ * @category      hmvc
  * 
  */
 Class Hmvc
@@ -593,4 +593,4 @@ Class Hmvc
 // END Hmvc Class
 
 /* End of file hmvc.php */
-/* Location: ./ob/hmvc/releases/0.0.1/hmvc.php */
+/* Location: ./packages/hmvc/releases/0.0.1/hmvc.php */

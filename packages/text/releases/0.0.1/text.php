@@ -4,9 +4,9 @@ namespace text {
     /**
      * Text Helper
      *
-     * @package     Ob
-     * @subpackage  text
-     * @category    text
+     * @package       packages
+     * @subpackage    text
+     * @category      text
      * @link        
      * 
      */
@@ -417,4 +417,4 @@ namespace text {
 }
 
 /* End of file text.php */
-/* Location: ./ob/text/releases/0.0.1/text.php */
+/* Location: ./packages/text/releases/0.0.1/text.php */

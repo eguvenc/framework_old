@@ -1,13 +1,12 @@
 <?php
 
  /**
- * URI Class
+ * Uri Class
  * Parses URIs and determines routing
  *
- * @package     Obullo
- * @subpackage  uri
- * @category    URI
- * @author      Obullo Team
+ * @package       packages
+ * @subpackage    uri
+ * @category      url
  * @link
  */
 
@@ -718,4 +717,4 @@ Class Uri
 // END URI Class
 
 /* End of file Uri.php */
-/* Location: ./ob/uri/releases/0.0.1/uri.php */
+/* Location: ./packages/uri/releases/0.0.1/uri.php */

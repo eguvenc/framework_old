@@ -4,9 +4,9 @@ namespace string {
     /**
     * String Helper
     *
-    * @package     Ob
-    * @subpackage  string
-    * @category    string
+    * @package       packages
+    * @subpackage    string
+    * @category      string
     * @link
     */
     
@@ -234,4 +234,4 @@ namespace string {
 }
 
 /* End of file string.php */
-/* Location: ./ob/string/releases/0.0.1/string.php */
+/* Location: ./packages/string/releases/0.0.1/string.php */

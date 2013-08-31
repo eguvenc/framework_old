@@ -1,7 +1,7 @@
 <?php
 
 /**
- * A port of [phputf8](http://phputf8.sourceforge.net/) to a unified set of files. Provides multi-byte aware replacement string functions.
+ * A port of [phputf8]( to a unified set of files. Provides multi-byte aware replacement string functions.
  *
  * For UTF-8 support to work correctly, the following requirements must be met:
  *
@@ -18,8 +18,8 @@
  *
  * Originally borrowed from Kohana Framework, Harry Fuecks and Andreas Gohr.
  * 
- * @package    Obullo
- * @author     Obullo Team
+ * @package    packages
+ * @link       http://phputf8.sourceforge.net/)
  * @license    Utf8 library licenced under the http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
  */
 
@@ -631,4 +631,4 @@ Class Utf8 {
 }
 
 /* End of file utf8.php */
-/* Location: ./ob/utf8/releases/0.0.1/utf8.php */
+/* Location: ./packages/utf8/releases/0.0.1/utf8.php */

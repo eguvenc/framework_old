@@ -42,4 +42,4 @@ Class Str_Split {
 }
 
 /* End of file str_split.php */
-/* Location: ./ob/utf8/releases/0.0.1/src/str_split.php */
+/* Location: ./packages/utf8/releases/0.0.1/src/str_split.php */

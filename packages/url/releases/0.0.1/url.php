@@ -6,11 +6,13 @@ namespace url {
     /**
     * Url Helper
     *
-    * @package     Obullo
-    * @subpackage  url
-    * @category    url
-    * @author      Obullo Team
+    * @package       packages
+    * @subpackage    url
+    * @category      url
+    * @link
+    * 
     */
+    
     Class start
     { 
         function __construct()
@@ -452,4 +454,4 @@ namespace url {
 }
 
 /* End of file url.php */
-/* Location: ./ob/url/releases/0.0.1/url.php */
+/* Location: ./packages/url/releases/0.0.1/url.php */

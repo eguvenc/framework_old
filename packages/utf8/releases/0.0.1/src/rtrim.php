@@ -33,4 +33,4 @@ Class Rtrim {
 }
 
 /* End of file rtrim.php */
-/* Location: ./ob/utf8/releases/0.0.1/src/rtrim.php */
+/* Location: ./packages/utf8/releases/0.0.1/src/rtrim.php */

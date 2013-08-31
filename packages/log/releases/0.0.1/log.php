@@ -4,9 +4,10 @@ namespace log {
     /**
     * Log Helper
     *
-    * @package     Ob
-    * @subpackage  log
-    * @category    log
+    * @package       packages
+    * @subpackage    log
+    * @category      log
+    * @uses          component => log_write
     * @link        
     */
     
@@ -43,4 +44,4 @@ namespace log {
 }
 
 /* End of file log.php */
-/* Location: ./ob/log/releases/0.0.1/log.php */
+/* Location: ./packages/log/releases/0.0.1/log.php */

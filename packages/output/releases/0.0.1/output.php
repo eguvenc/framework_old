@@ -5,7 +5,7 @@
  *
  * Responsible for sending final output to browser  
  *
- * @package       Ob
+ * @package       packages
  * @subpackage    output
  * @category      output
  * @link          
@@ -406,4 +406,4 @@ Class Output {
 // END Output Class
 
 /* End of file Output.php */
-/* Location: ./ob/output/releases/0.0.1/output.php */
+/* Location: ./packages/output/releases/0.0.1/output.php */

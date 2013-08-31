@@ -4,7 +4,7 @@
  * ODBC Database Adapter Class
  * ODBC v3 (IBM DB2, unixODBC and win32 ODBC) 
  * 
- * @package       Ob
+ * @package       packages
  * @subpackage    pdo_odbc
  * @category      database
  * @link                              
@@ -318,4 +318,4 @@ Class Pdo_Odbc extends Database_Pdo\Src\Database_Adapter
 
 
 /* End of file Pdo_Odbc.php */
-/* Location: ./ob/pdo_odbc/releases/0.0.1/pdo_odbc.php */
+/* Location: ./packages/pdo_odbc/releases/0.0.1/pdo_odbc.php */

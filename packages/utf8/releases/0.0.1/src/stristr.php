@@ -42,4 +42,4 @@ Class Stristr {
 }
 
 /* End of file stristr.php */
-/* Location: ./ob/utf8/releases/0.0.1/src/stristr.php */
+/* Location: ./packages/utf8/releases/0.0.1/src/stristr.php */
