@@ -234,7 +234,7 @@ $packages = getConfig('packages.cache');
 */
 $core = strtolower($packages['components']['core']);  // Custom core, you can use another core instead of obullo.
 
-require (OB_MODULES .$core. DS .'releases'. DS .$packages['dependencies'][$core]['version']. DS .$core. EXT);
+require (PACKAGES .$core. DS .'releases'. DS .$packages['dependencies'][$core]['version']. DS .$core. EXT);
 
 $framework = ucfirst($core);
 

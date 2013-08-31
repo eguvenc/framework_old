@@ -1,5 +1,7 @@
 #!/usr/bin/php
 <?php
+$SECRET_KEY  = '5218b17bdf213';
+$OBM_VERSION = '0.1';
 /**
 |--------------------------------------------------------------------------
 | OBM ( Ob Package Manager )
@@ -26,176 +28,294 @@
 | $ php obm update
 |
 */
-$_SERVER['HTTP_USER_AGENT']     = 'OBM ( Obullo Package Manager ) / OS : '.php_uname();
-$_SERVER['HTTP_ACCEPT_CHARSET'] = 'utf-8';
-
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
 ini_set('zend.ze1_compatibility_mode', 0);
 ini_set('memory_limit', '100000M');
 set_time_limit(0);
 
 if(getOSName() == 'Windows'){
-    error("Obullo is African origin and he loves to dance.");
+    error("Obullo love to dance.");
     die;
 }
-$OBM_VERSION = '0.1';
+if( ! file_exists('constants')){
+    error('The "constants" file not found in the root, reinstall your project.');
+    die;
+}
+######################
+require ('constants');
+######################
+
 if(isset($_SERVER['argv'][0])){
     array_shift($_SERVER['argv']);
     if(ini_get('allow_url_fopen') !== "1"){
         error("You need to set allow_url_fopen to \"On\" in your php.ini file.");
         die;
     }
-    if(isset($_SERVER['argv'][1]) AND strtolower($_SERVER['argv'][1]) == 'install'){
-        if(is_dir($_SERVER['argv'][2])){
-            error("You have already a project named as ".$_SERVER['argv'][2].", please try different name.");
+    
+    //------------------- INSTALL -------------------//
+    if(isset($_SERVER['argv'][0]) AND strtolower($_SERVER['argv'][0]) == 'install'){
+        if(is_dir($_SERVER['argv'][1])){
+            error("You have already a project named as ".$_SERVER['argv'][1].", please try different name.");
             die;
         }
+        ###
+        // ... Installation codes here.
+        #### 
     }
-    elseif(isset($_SERVER['argv'][1]) AND strtolower($_SERVER['argv'][1]) == 'update'){
-        // parse package json and send files to OBM SERVER
+    elseif(isset($_SERVER['argv'][0]) AND strtolower($_SERVER['argv'][0]) == 'update'){
         
-    }
-    $server_url   = 'http://obullo-2.0/obm_server.php';
-    if(file_exists('package.json')){
-        $user_package_json = file_get_contents('package.json');
-        $_SERVER['argv']['_json'] = $user_package_json; // " { *40-23* : ";
-    } else {
-        error('Package.json file does not exists in your project root.');
-        die;
-    }
-    
-    $_SERVER['argv']['_version'] = $OBM_VERSION;
-    // use key 'http' even if you send the request to https://...
-    $options = array(
-        'http' => array(
-            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-            'method'  => 'POST',
-            'content' => http_build_query($_SERVER['argv']),
-        ),
-    );
-    $context  = stream_context_create($options);
-    $json_res = file_get_contents($server_url, false, $context);
-    //print_r(json_decode($json_res, true));
-    $response = json_decode($json_res, true);
-    
-    if(isset($response['version_update'])){ // If need to OBM version update. Run the update.sh.
-        echo "\33[0;36mNew OBM version available !\n";
-        echo "upgrading to version ".$response['version_update']." ..\n";
-        sleep(1);
-        echo "please wait ..\n";
-        sleep(1);
-        echo "..\n";
-        sleep(1);
-        echo "...\n";
+        //------------------- UPDATE -------------------//
+        
+        $server_url   = 'http://obm-test/obm_server.php';
+        if(file_exists('package.json')){
+            $user_package_json = file_get_contents('package.json');
+            $_SERVER['argv']['_json'] = $user_package_json; // " { *40-23* : ";
+        } else {
+            error('Package.json file does not exists in your project root.');
+            die;
+        }
 
-        $wget_sh = "
-        sudo rm -rf obm
-        sudo rm -rf /usr/bin/obm
-        sudo wget https://raw.github.com/obullo/obm/master/obm;
-        sudo chmod 777 obm
-        sudo cp obm /usr/bin/obm
-        echo \"\033[0m\";
-        exit; > /dev/null &";
-        shell_exec($wget_sh);
-        
-        echo "\033[0m";
-        exit; //terminate the current script.
-    }
-    
-    if(isset($response['errors'])){
-        foreach($response['errors'] as $error){
-            error($error);
+        $_SERVER['argv']['_agent']      = 'OBM ( Obullo Package Manager ) / OS : '.php_uname();
+        $_SERVER['argv']['_version']    = $OBM_VERSION;
+        $_SERVER['argv']['_secret_key'] = $SECRET_KEY;
+
+        $options = array(         // use key 'http' even if you send the request to https://...
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($_SERVER['argv']),
+            ),
+        );
+        $context  = stream_context_create($options);
+        $json_res = file_get_contents($server_url, false, $context);
+        //print_r(json_decode($json_res, true));
+        $response = json_decode($json_res, true);
+
+        if(isset($response['version_update'])){ // If need to OBM version update. Run the update.sh.
+            echo "\33[0;36mNew OBM version available !\n";
+            echo "upgrading to version ".$response['version_update']." ..\n";
+            sleep(1);
+            echo "please wait ..\n";
+            sleep(1);
+            echo "..\n";
+            sleep(1);
+            echo "...\n";
+
+            $wget_sh = "
+            sudo rm -rf obm
+            sudo rm -rf /usr/bin/obm
+            sudo wget https://raw.github.com/obullo/obm/master/obm;
+            sudo chmod 777 obm
+            sudo cp obm /usr/bin/obm
+            echo \"\033[0m\";
+            exit; > /dev/null &";
+            exec($wget_sh);
+
+            echo "\033[0m";
+            exit; //terminate the current script.
         }
-        die;
-    }
-    
-    // print_r($response);
-    // PARSE JSON DATA
-    if(count($response) > 0){
-        // give chmod 777 permission to installed folder
-        // cd ..
-        // chmod -R 777 modulename
-    } else {
-        error("Could not connect to the OBM Server, please try again.");
-        die;
-    }
-    
-    try {
-        // Include the user packages.php to version compare foreach packages.
-        // 
-        ######################
-        require ('constants');
-        ######################
-        require (APP .'config'. DS .'packages'. EXT);   // Loaded local packages
-        // print_r($packages['dependencies']);
-       
-        $json = json_decode($user_package_json, true);
-        if( ! isset($json['dependencies'])){
-            error('No package found in your package.json file.');
+
+        if(isset($response['errors'])){
+            foreach($response['errors'] as $error){
+                error($error);
+            }
             die;
         }
-        /*
-        foreach($json->dependencies as $depname => $depversion){
-            echo $depname;
-        }*/
+
         // print_r($response);
-        foreach($response as $key => $remote_package_json){
-            $pack = json_decode(trim($remote_package_json));
-            if($pack == null){
-                error("The package $key could not parsed, probably there is a syntax error in the package.json.");
-            } 
-            if($pack != null){
-                if( ! isset($pack->name)){
-                    line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No name field.');
-                }
-                if( ! isset($pack->version)){
-                    line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No version field.');
-                }                
-                if( ! isset($pack->repo->archive) || ! isset($pack->repo->archive_url)){
-                    line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No repo -> archive_url or repo -> archive fields, they seems empty.');
-                } else {
-                        $shell 	= "curl -s --head ".trim($pack->repo->archive_url)." | head -n 1 | grep \"HTTP/1.[01] [23]..\"";
-                        $output = shell_exec($shell);
-                        if($output == null){
-                           line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' '.trim($pack->repo->archive_url).' - url could not be resolved.');
-                        } else {
-                            $code = explode(" ", $output);
-                            if(isset($code[1])) {
-                                if($code[1] == '302' || $code[1] == '200'){  // Resolve package url
-                                    // get local version of package ..
-                                    $local_version = trim($json['dependencies'][$pack->name]);
-                                    if($local_version == '*' || empty($local_version)){   // go to the packages file and learn current version.
-                                        if($packages['dependencies'][$pack->name]['version'] < $pack->version){
-                                            getHttpPackage($pack->name, $pack->repo->archive, $pack->repo->archive_url);
-                                        }
-                                        elseif($packages['dependencies'][$pack->name]['version'] == $pack->version){
-                                            line('obm http 200 '.trim($pack->name).'@'.trim($pack->version).' OK already latest version.'); // trim($pack->repo->archive_url));
-                                        }
+        // PARSE JSON DATA
+        if(count($response) > 0){
+            // give chmod 777 permission to installed folder
+            // cd ..
+            // chmod -R 777 modulename
+        } else {
+            error("Could not connect to the OBM Server, please try again.");
+            die;
+        }
 
-                                    } else {
-                                        // check current version exists ? if not install it !!
-                                        if(is_dir(OB_MODULES .$pack->name)){
-                                           if($packages['dependencies'][$pack->name]['version'] == $pack->version){
-                                                line('obm http 200 '.trim($pack->name).'@'.trim($pack->version).' OK already latest version.'); // trim($pack->repo->archive_url));
-                                           }
+        try {            
+            if( file_exists(APP .'config'. DS .'packages.cache')){
+                ######################
+                require (APP .'config'. DS .'packages.cache');   // Loaded local packages
+                ######################
+            }
+            
+            // print_r($packages['dependencies']);
+            $json = json_decode($user_package_json, true);
+            if( ! isset($json['dependencies']) || ! is_array($json['dependencies'])){
+                error('No package found in your package.json file.');
+                die;
+            }
+            /*
+            foreach($json->dependencies as $depname => $depversion){
+                echo $depname;
+            }*/
+            // print_r($response);
+            foreach($response as $key => $remote_package_json){
+                if($key == 'error'){
+                    error($remote_package_json);
+                    die;
+                }
+                $pack = json_decode(trim($remote_package_json));
+                if($pack == null){
+                    error("The package $key could not parsed, probably there is a syntax error in the package.json.");
+                } 
+                if($pack != null){
+                    if( ! isset($pack->name)){
+                        line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No name field.');
+                    }
+                    if( ! isset($pack->version)){
+                        line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No version field.');
+                    }                
+                    if( ! isset($pack->repo->archive) || ! isset($pack->repo->archive_url)){
+                        line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' No repo -> archive_url or repo -> archive fields, they seems empty.');
+                    } else {
+                            $shell  = "curl -s --head ".trim($pack->repo->archive_url)." | head -n 1 | grep \"HTTP/1.[01] [23]..\"";
+                            $output = exec($shell);
+                            if($output == null){
+                               line('obm WARN package.json '.trim($pack->name).'@'.trim($pack->version).' '.trim($pack->repo->archive_url).' - url could not be resolved.');
+                            } else {
+                                $code = explode(" ", $output);
+                                if(isset($code[1])) {
+                                    if($code[1] == '302' || $code[1] == '200'){  // Resolve package url
+                                        
+                                        $local_version = trim($json['dependencies'][$pack->name]); // get local version of package ..
+                                        
+                                        ################
+                                        $current_package_version = getLocalPackageVersion($pack->name);
+                                        ################
+                                        
+                                        if($local_version == '*' || empty($local_version)){   // go to the packages file and learn current version.
+                                            if($current_package_version < $pack->version){
+                                                getHttpPackage($pack->name, $pack->repo->archive, $pack->repo->archive_url, $pack->version);
+                                            }
+                                            if($current_package_version >= $pack->version){
+                                                line('obm http 200 '.trim($pack->name).'@'.trim($pack->version).' already latest version.'); // trim($pack->repo->archive_url));
+                                            }
                                         } else {
-                                           getHttpPackage($pack->name, $pack->repo->archive, $pack->repo->archive_url);
+                                            if(is_dir(PACKAGES .$pack->name)){    // check current version exists ? if not install it !!
+                                               if($current_package_version == $pack->version){
+                                                   line('obm http 200 '.trim($pack->name).'@'.trim($pack->version).' already latest version.'); // trim($pack->repo->archive_url));
+                                               }
+                                               elseif($current_package_version != '0.0.0'){
+                                                   line('obm http 200 '.trim($pack->name).'@'.trim($pack->version).' stable version, to upgrade latest version use asterisk (*) instead of version number.'); // trim($pack->repo->archive_url));
+                                               }
+                                               elseif($current_package_version == '0.0.0'){ //  Install missing package
+                                                   getHttpPackage($pack->name, $pack->repo->archive, $pack->repo->archive_url, $pack->version);
+                                               }
+                                            } else {
+                                               getHttpPackage($pack->name, $pack->repo->archive, $pack->repo->archive_url, $pack->version);
+                                            }
                                         }
+                                    } else {
+                                        line('obm http '.$code[1].' '.trim($pack->repo->archive_url).' - url could not be resolved. Header: '.getHeader($code[1]));
                                     }
-                                   
-                                } else {
-                                    line('obm http '.$code[1].' '.trim($pack->repo->archive_url).' - url could not be resolved. Header: '.getHeader($code[1]));
                                 }
                             }
-                        }
+                    }
+
                 }
-             
             }
+            
+            //--------------------- CACHE DATA ----------------------------//
+            
+            $cacheStart = "<?php\n\n/*
+| -------------------------------------------------------------------
+| WARNING : DO NOT EDIT THIS FILE
+| -------------------------------------------------------------------
+| This file specifies cached outputs of the package.json which is 
+| located in your project root.
+|
+| In order to keep the framework as light-weight as possible this file 
+| defines the cached package.json variables in array format.
+|
+| We get the packages.cache variables using getConfig('packages.cache');
+|
+| -------------------------------------------------------------------
+| Prototype
+| -------------------------------------------------------------------
+|
+| \$packages = getConfig('packages.cache');
+|
+*/";
+            $cachePackages = "";
+            
+            ##############
+            
+            $OB_PACKAGES = scandir(PACKAGES);  ###  Scan loaded obullo modules .. !!
+            
+            ##############
+            
+            // print_r($OB_PACKAGES);
+            foreach ($OB_PACKAGES as $lp) {
+                $local_package = preg_replace('/[^a-z]/', '', strtolower($lp)); // Allow just lowercase letters
+                if( ! empty($local_package) && is_dir(PACKAGES .$local_package. DS)) {
+                    if(file_exists(PACKAGES .$local_package. DS .'package.json')){
+                        $ob_json_file = file_get_contents(PACKAGES .$local_package. DS .'package.json');
+                        $pjson = json_decode($ob_json_file, true);
+                        if(isset($pjson['name']) AND ! empty($pjson['name'])){
+                            if($pjson['version'] == ''){
+                                error("@".$pjson['name']." package.json file [version] field seems empty.");
+                            }
+                            if($pjson['component'] == ''){
+                                error("@".$pjson['name']." package.json file [component] field seems empty.");
+                            }
+                            $cachePackages.= "\n\$packages['dependencies']['".trim($pjson['name'])."'] = array('version' => '".trim($pjson['version'])."', 'component' => '".trim($pjson['component'])."');";
+                        }
+                    } else {
+                        error(PACKAGES .$local_package. DS .'package.json'. " hasn't got a package.json file. Reinstall the ".$local_package." package.");
+                    }
+                }
+            }
+           
+            $cacheComponents = "\n\n/*
+| -------------------------------------------------------------------
+| COMPONENTS
+| -------------------------------------------------------------------
+| This configuration specifies components of Obullo that you may replace
+| them with third party packages.
+|
+| We get the components using getComponent('component');
+|
+| -------------------------------------------------------------------
+| Prototype
+| -------------------------------------------------------------------
+|
+| \$component = getComponent('db');
+|
+*/";
+            $OB_COMPONENTS = $json['components'];
+            foreach ($OB_COMPONENTS as $comp => $compClass) {
+                $cacheComponents.=  "\n\$packages['components']['".trim($comp)."'] = '".ucfirst(trim($compClass))."';";
+            }
+            $cacheEnd = "\n\n
+/* End of file packages.cache */
+/* Cache Date: ".date('Y-m-d H:i:s')."*/
+/* Location: .app/config/packages.cache */\n";
+            
+            if(file_exists(APP .'config'. DS .'packages.cache')){ // delete file.
+                unlink(APP .'config'. DS .'packages.cache');
+            }
+            if ( ! $fp = @fopen(APP .'config'. DS .'packages.cache', 'ab')){
+                error("Unable open the packages.cache file to write cache.");
+                die;
+            }
+            flock($fp, LOCK_EX);    
+            fwrite($fp, $cacheStart.$cachePackages.$cacheComponents.$cacheEnd);
+            flock($fp, LOCK_UN);
+            fclose($fp);
+
+            chmod(APP .'config'. DS .'packages.cache', '0775');
+            
+        } catch (Exception $e){
+            error($e->getMessage());
+            die;
         }
-    } catch (Exception $e){
-        error($e->getMessage());
-        die;
-    }
-}
+        
+    }    // Update end.
+    
+} // Command line argument isset test end.
 
 //------------------ Obm functions ---------------------
 
@@ -205,84 +325,45 @@ if(isset($_SERVER['argv'][0])){
     getpackage.sh
 
     ###################
-
-    ARCHIVE_TYPE='zip';
-    PROJECT_DIR=${PWD};
-    PACKAGE='auth';
-    UNIQID='1233'; ## create uniquid in PHP like auth-m983n345.zip
-    TEMP_FOLDER='/tmp/obullo-temp'
-
-    # get zip package as auth-123.zip
-    sudo wget -O $TEMP_FOLDER/$PACKAGE-$UNIQID.zip https://github.com/obullo/$PACKAGE/archive/master.zip
-    sudo mkdir -p $TEMP_FOLDER/$PACKAGE-$UNIQID;
-
-    # unzip folder as auth
-    if [ $ARCHIVE_TYPE == 'zip' ]; then
-            sudo unzip -d $TEMP_FOLDER/$PACKAGE-$UNIQID $TEMP_FOLDER/$PACKAGE-$UNIQID.zip
-    fi;
-
-    if [ $ARCHIVE_TYPE == 'tar' ]; then
-            # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar
-            sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar
-    fi;
-
-    if [ $ARCHIVE_TYPE == 'tar.gz' ]; then
-            # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar.gz
-            sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar.gz
-    fi;
-
-    if [ $ARCHIVE_TYPE == 'tar.bz2' ]; then
-            # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar.bz2
-            sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar.bz2
-    fi;
-
-    # if $PACKAGE folder does not exists create it
-    if [ ! -d $PROJECT_DIR/ob/$PACKAGE ]; then
-        sudo mkdir -p $PROJECT_DIR/ob/$PACKAGE;
-        sudo chmod -R 777 $PROJECT_DIR/ob;
-    fi
-
-    # find the package.json and copy it to ob/$PACKAGE
-    find $TEMP_FOLDER/$PACKAGE-$UNIQID -name package.json -exec cp {} $PROJECT_DIR/ob/$PACKAGE \;
-    find $TEMP_FOLDER/$PACKAGE-$UNIQID -type d -name releases -exec cp {} -ar $PROJECT_DIR/ob/$PACKAGE \;
-
-# http://www.cyberciti.biz/faq/copy-folder-linux-command-line/
 */
-
-function getHttpPackage($pack_name, $archive, $archive_url){
+function getHttpPackage($pack_name, $archive, $archive_url, $version){
+    line('obm http GET '.$pack_name.'@'.$version.' new version available installing.');
+    // return;
     $archive = trim($archive);
-    if(in_array($archive, array('zip', 'tar', 'tar.gz', 'tar.bz2'))){
+    if( ! in_array($archive, array('zip', 'tar', 'tar.gz', 'tar.bz2'))){
         line('obm WARN package.json '.trim($pack_name).' has unsupported archive type : ('.$archive.').');
-        line('obm WARN We support only (zip,tar,tar.gz and tar.bz2) types archives.');
+        line('obm WARN Obullo support only (zip,tar,tar.gz and tar.bz2) types archives.');
         return;
     }
+    echo "\33[0;35m\n";
     $getPackageSh = '
         ARCHIVE_TYPE=\''.$archive.'\';
         PROJECT_DIR=${PWD};
         PACKAGE=\''.$pack_name.'\';
-        UNIQID=\''.uniqid().'\'; ## create package uniqId in PHP to store package to /tmp.
-        TEMP_FOLDER=\'/tmp/obullo-temp\'
+        UNIQID=\''.uniqid().'\'; #### create uniqId to store package to /tmp folder.
+        TEMP_FOLDER=\'/tmp/obullo-temp\';
 
         # get zip package as auth-123.zip
-        sudo wget -O $TEMP_FOLDER/$PACKAGE-$UNIQID.zip '.$archive_url.'
+        sudo wget -O $TEMP_FOLDER/$PACKAGE-$UNIQID.zip '.$archive_url.';
         sudo mkdir -p $TEMP_FOLDER/$PACKAGE-$UNIQID;
 
         # unzip folder as auth
-        if [ $ARCHIVE_TYPE == \'zip\' ]; then
-                sudo unzip -d $TEMP_FOLDER/$PACKAGE-$UNIQID $TEMP_FOLDER/$PACKAGE-$UNIQID.zip
+        if [ $ARCHIVE_TYPE = "zip" ]; then
+                # sudo unzip -d $TEMP_FOLDER/$PACKAGE-$UNIQID $TEMP_FOLDER/$PACKAGE-$UNIQID.zip
+                sudo unzip -d /tmp/obullo-temp/$PACKAGE-$UNIQID /tmp/obullo-temp/$PACKAGE-$UNIQID.zip
         fi;
 
-        if [ $ARCHIVE_TYPE == \'tar\' ]; then
+        if [ $ARCHIVE_TYPE = "tar" ]; then
                 # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar
                 sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar
         fi;
 
-        if [ $ARCHIVE_TYPE == \'tar.gz\' ]; then
+        if [ $ARCHIVE_TYPE = "tar.gz" ]; then
                 # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar.gz
                 sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar.gz
         fi;
 
-        if [ $ARCHIVE_TYPE == \'tar.bz2\' ]; then
+        if [ $ARCHIVE_TYPE = "tar.bz2" ]; then
                 # tar -C /tmp/obullo-temp/auth-123 -tvf auth-123.tar.bz2
                 sudo tar -C $TEMP_FOLDER/$PACKAGE-$UNIQID -xvjf $TEMP_FOLDER/$PACKAGE-$UNIQID.tar.bz2
         fi;
@@ -295,11 +376,23 @@ function getHttpPackage($pack_name, $archive, $archive_url){
 
         # find the package.json and copy it to ob/$PACKAGE
         find $TEMP_FOLDER/$PACKAGE-$UNIQID -name package.json -exec cp {} $PROJECT_DIR/ob/$PACKAGE \;
-        find $TEMP_FOLDER/$PACKAGE-$UNIQID -type d -name releases -exec cp {} -ar $PROJECT_DIR/ob/$PACKAGE \;      
+        find $TEMP_FOLDER/$PACKAGE-$UNIQID -type d -name releases -exec cp {} -ar $PROJECT_DIR/ob/$PACKAGE \;
     ';
-    
-    shell_exec($getPackageSh.' > /dev/null &');
-    line('obm http GET '.$pack_name.' package extracting from '.archive_url.' ...');
+    // shell_exec($getPackageSh);
+    exec($getPackageSh.' > /dev/null');
+    echo "\033[0m";
+    line('obm http GET '.$pack_name.'@'.$version.' has been extracted ...'); // exec($getPackageSh);
+}
+function getLocalPackageVersion($package){
+    if(is_dir(PACKAGES .$package) AND file_exists(PACKAGES .$package. DS .'package.json')){
+        $json_file    = file_get_contents(PACKAGES .$package. DS .'package.json');
+        $package_json = json_decode($json_file, true);
+        if(isset($package_json['version'])){
+            return trim($package_json['version']);
+        }
+        return '0.0.0';
+    }
+    return '0.0.0';
 }
 function error($error){
     echo "\33[0;33m".$error."\033[0m\n";

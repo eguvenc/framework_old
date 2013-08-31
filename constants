@@ -33,15 +33,15 @@ define('FPATH', dirname(__FILE__));
 |---------------------------------------------------------------
 | ROOT        - The root path of your server
 | APP         - The full server path to the "app" folder
-| MODULES     - The full server path to the "modules" folder
-| OB_MODULES  - The full server path to the "ob" folder
+| MODS        - The full server path to the "mods" folder
+| PACKAGES    - The full server path to the "libs" folder
 | TASK_FILE   - Set your task (CLI) file name that we use it in task helper.
 */
 define('ROOT',  realpath(dirname(__FILE__)) . DS);
 define('APP',  ROOT .'app'. DS);
-define('MODULES',  ROOT .'modules'. DS);
-define('CLASSES',  ROOT .'classes'. DS);
-define('OB_MODULES',  ROOT .'ob'. DS);
+define('MODS',  ROOT .'mods'. DS);
+define('CLASSES',  MODS .'classes'. DS);
+define('PACKAGES',  ROOT .'packages'. DS);
 define('TASK_FILE', 'task');
 
 
