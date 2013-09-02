@@ -63,18 +63,23 @@ namespace vi {
     */
     function setVar($key, $val = '')
     {
-        if(is_array($val) OR is_object($val))
+        if(is_string($val))
+        {
+            $class = '\\'.getComponent('view');
+            $view  = $class::getInstance();
+            $view->var[$key] = (string)$val;
+            return;
+        }
+        
+        if(is_array($val))
         {
             setArray($key, $val);
             return;
         }
         
-        if(is_string($val))
+        if(is_object($val))
         {
-            $class = '\\'.getComponent('view');
-            $view  = $class::getInstance();
-
-            $view->var[$key][] = $val;
+            setObject($key, $val);
             return;
         }
     }
@@ -94,17 +99,17 @@ namespace vi {
         
         if(isset($view->var[$key]))
         {
-            $var = '';
-            foreach($view->var[$key] as $value)
-            {
-                $var .= $value;
-            }
-
-            return $var;
+            return $view->var[$key];
         }
-        elseif(isset($view->array[$key]))
+        
+        if(isset($view->array[$key]))
         {
             return getArray($key);
+        }
+        
+        if(isset($view->object[$key]))
+        {
+            return getObject($key);
         }
     }
     
@@ -154,6 +159,42 @@ namespace vi {
             }
 
             return $var;
+        }
+    }
+    
+    // ------------------------------------------------------------------------
+    
+    /**
+     * Create object variable
+     * 
+     * @param string $key
+     * @param object $val
+     * @return void
+     */
+    function setObject($key, $val = object)
+    {
+        $class = '\\'.getComponent('view');
+        $view  = $class::getInstance();
+
+        $view->object[$key] = $val;
+    }
+    
+    // ------------------------------------------------------------------------
+    
+    /**
+     * Get object variable
+     * 
+     * @param string $key
+     * @return object
+     */
+    function getObject($key)
+    {
+        $class = '\\'.getComponent('view');
+        $view  = $class::getInstance();
+        
+        if(isset($view->object[$key]))
+        {
+            return $view->object[$key];
         }
     }
     

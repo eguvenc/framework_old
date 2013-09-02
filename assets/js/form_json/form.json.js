@@ -1,12 +1,10 @@
-/**
- * Obullo Form Json Plugin  (c) 2011 - 2013.
 
- * @package         obullo       
- * @author          obullo.com
- * @license         public
- * @since           Version 1.1
- * @filesource
- * @license
+/**
+ * Form Json Plugin.
+ *
+ * @package         obullo
+ * @category        json
+ * @link
  */
 (function() {
   (function($, window) {
@@ -157,5 +155,5 @@
 }).call(this);
 
 
-/* End of file form_json.js. */
+/* End of file form.json.js. */
 /* Location: .assets/js/form_json/form.json.js */

@@ -1,6 +1,6 @@
 
 /**
- * Obullo Form Json Plugin  (c) 2011 - 2013.
+ * Form Json Plugin.
  * 
  * Set your ajax settings and custom error 
  * messages in your language.

@@ -1,5 +1,5 @@
 <?php
-defined('STDIN') or exit('Access Denied');
+defined('STDIN') or die('Access Denied');
 
 Class Clear extends Controller {
     
@@ -12,10 +12,7 @@ Class Clear extends Controller {
     {
         $this->_clear(); // Start the Clear Task
     }
-
-    /**
-     * Start the Clear Task Shell.
-     */
+    
     function _clear()
     {
         $clear_sh = "
@@ -25,7 +22,7 @@ Class Clear extends Controller {
 
         PROJECT_DIR=\${PWD}
 
-        if [ ! -d ob ]; then
+        if [ ! -d ".PACKAGES." ]; then
             # Check the obullo directory exists, so we know you are in the project folder.
             echo \"You must be in the project folder root ! Try cd /your/www/path/projectname\".
             return
@@ -37,7 +34,7 @@ Class Clear extends Controller {
         # delete app directory log files.
         # help https://help.ubuntu.com/community/find
         find \$APP_LOG_DIR -name 'log-*.php' -exec rm -rf {} \;
-        echo \"\33[0m\33[0;32mClear log files task succesfully done.\33[0m\";";
+        echo \"\33[0m\33[0;32mLog files deleted.\33[0m\";";
         
         echo shell_exec($clear_sh);
     }
@@ -45,4 +42,4 @@ Class Clear extends Controller {
 }
 
 /* End of file clear.php */
-/* Location: .modules/tasks/clear.php */
+/* Location: .mods/tasks/controller/clear.php */

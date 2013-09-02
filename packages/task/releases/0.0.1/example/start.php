@@ -18,7 +18,7 @@ Class Start extends Controller {
        |______||____||_____||_||_||____|
 
         Welcome to Task Manager (c) 2013
-Please run [$php task start help] You are in [ mods/ tasks ] folder.'."\n\033[0m";
+Please run [$php task start help] You are in [ mods / tasks ] folder.'."\n\033[0m";
     }
     
     public function help()

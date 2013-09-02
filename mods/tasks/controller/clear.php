@@ -12,10 +12,7 @@ Class Clear extends Controller {
     {
         $this->_clear(); // Start the Clear Task
     }
-
-    /**
-     * Start the Clear Task Shell.
-     */
+    
     function _clear()
     {
         $clear_sh = "
@@ -45,4 +42,4 @@ Class Clear extends Controller {
 }
 
 /* End of file clear.php */
-/* Location: .modules/tasks/clear.php */
+/* Location: .mods/tasks/controller/clear.php */

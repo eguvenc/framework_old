@@ -7,9 +7,9 @@
     </head>
     <body>
         <header>
-            <a href="http://www.obullo.com/"><?php echo html\img('logo.png', ' alt="Obullo" ') ?></a>
+            <?php echo url\anchor('/', html\img('logo.png', ' alt="Obullo" ')) ?>
         </header>
-        <h1>Welcome to Obullo!</h1>
+        <h1>Welcome to Obullo !</h1>
         <p>
             Congratulations! Your Obullo is running. If this is your first time using Obullo, start with this <?php echo url\anchor('#tutorials', '"Hello World" Tutorial') ?>.
         </p>
@@ -17,8 +17,8 @@
         <section>
             <h2>Get Started</h2>
             <ol>
-                <li>The app code is in <code>index.php</code></li>
-                <li>Add / Update your packages using package.json file</li>
+                <li>The app start codes is in <code>index.php</code></li>
+                <li>Update your packages using <strong>package.json</strong> file</li>
                 <li>Run <code>obm update</code> from your console</li>
             </ol>
         </section>
@@ -26,13 +26,13 @@
         <section>
             <h2>Update your package.json</h2>
             <p>
-                If a new packages available, the package manager ( Obm ) will upgrage it using your package.json. If you need a stable a version remove asterisk ( * ) and set the package version to a specific number. ( e.g. auth: "2.0" )
+                If a new packages available, the package manager <strong>( Obm )</strong> will upgrage it using your package.json. If you need a stable a version remove asterisk ( * ) and set the package version to a specific number. ( e.g. auth: "2.0" )
 <pre>
 {
-"dependencies": {
-"obullo": "*",
-"auth" : "*"
-}
+    "dependencies": {
+        "obullo": "*",
+        "auth" : "*"
+    }
 }</pre>                
             </p>
 
@@ -46,18 +46,17 @@
         <section>
             <h2>Tutorials</h2>
             <ol>
-                <li><?php echo url\anchor('/welcome/task', 'Hello World Tutorial') ?></li>
+                <li><?php echo url\anchor('/tutorials/hello_world', 'Hello World') ?></li>
                 <li><?php echo url\anchor('/tutorials/form', 'Odm Tutorial') ?></li>
-                <li><?php echo url\anchor('/welcome/task', 'Task Tutorial') ?></li>
-                <li><?php echo url\anchor('/welcome/hmvc', 'Hmvc Tutorial') ?></li>
+                <li><?php echo url\anchor('/tutorials/task', 'Task Tutorial') ?></li>
+                <li><?php echo url\anchor('/tutorials/hmvc_welcome', 'Hmvc Tutorial') ?></li>
             </ol>
         </section>
 
         <?php echo vi\views('footer', false) ?>
         
         <section>
-                <input type="submit" name="button1" value="test1"/>
-                <input type="submit" name="button2" value="test2"/>
+            <p>&nbsp;</p>
         </section>
         
     </body>

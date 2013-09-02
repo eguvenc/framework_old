@@ -1,10 +1,20 @@
 <style type="text/css">
 #exception_content {
-font-family : Verdana, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, Geneva, Arial, Sans-serif;
+font-family:Arial,Verdana,Sans-serif;
 font-size:12px;
 width:99%;
 padding:5px;
 background-color: #F0F0F0;
+}
+#exception_content  h1 {
+font-size:          23px;
+color:              #333;
+margin:             0 0 8px 0;
+}
+#exception_content  h2 {
+font-size:          15px;
+color:              #333;
+margin:             0 0 4px 0;
 }
 #exception_content .errorfile { 
 display:block;
@@ -29,7 +39,7 @@ background: #fff;
 #exception_content div.arguments table td { text-align: left; padding: 5px; border: 1px solid #ccc; }
 #exception_content div.arguments table td .object_name { color: blue; }
 #exception_content pre.source span.line { display: block; }
-#exception_content pre.source span.highlight { background: #E0E0E0; }
+#exception_content pre.source span.highlight { background: #D3D3D3; }
 #exception_content pre.source span.line span.number { color: none; }
 #exception_content pre.source span.line span.number { color: none; }
 </style>
@@ -57,7 +67,8 @@ function Obullo_Error_Toggle(obj){
 </script>
 
 <div id="exception_content">
-<b>(<?php echo $type ?>):  <?php echo error\securePath($e->getMessage(), true) ?></b><br />
+    <h1><?php echo $type ?></h1>
+    <h2><?php echo error\securePath($e->getMessage(), true) ?></h2>
 <?php 
 if(isset($sql)) 
 {

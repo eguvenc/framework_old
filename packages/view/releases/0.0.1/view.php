@@ -15,6 +15,7 @@ Class View {
 
     public $var          = array(); // String type view variables
     public $array        = array(); // Array type view variables
+    public $object       = array(); // Object type view variables
     public $data         = array(); // Mixed type view variables
     public $path         = null;
     

@@ -26,7 +26,7 @@ table{border-collapse:collapse;border-spacing:0;}
 hr{display:block;height:1px;border:0;border-top:1px solid #cccccc;margin:1em 0;padding:0;}
 input,select{vertical-align:middle;}
 html{ background: #EDEDED; height: 100%; }
-body{background:#FFF;margin:0 auto;min-height:100%;padding:0 30px;width:440px;color:#666;font:14px/23px Arial,Verdana,sans-serif;}
+body{background:#FFF;margin:0 auto;min-height:100%;padding:0 30px;width:520px;color:#666;font:14px/23px Arial,Verdana,sans-serif;}
 h1,h2,h3,p,ul,ol,form,section{margin:0 0 20px 0;}
 h1{color:#333;font-size:20px;}
 h2,h3{color:#333;font-size:14px;}
@@ -46,6 +46,6 @@ input[name="button2"]:hover{ color: #777; background-color: #fff; background: -w
 .input-error { color: #069586; }
 .notification {max-width: 800px;border:1px solid;margin-left:0px;margin-bottom:10px;padding:15px;text-align:center;font-weight:bold;font-size: 16px;}
 .notification h1 { margin-bottom: 5px; }
-.notification.success {border-color: #E6DB55;background-color: #FFFFE0;line-height: 24px;color: #000;background-position:0px 1px}
-.notification.error {border-color: #DF4545;background-color: #FFEBE8;color: #000;background-position:0 -7055px;}
-.loading { font-size: 10px; color:blue; padding: 5px;}
+.notification.success {border-color: #069586;line-height: 24px;color: #000;background-position:0px 1px}
+.notification.error {border-color: #069586;color: #069586;background-position:0 -7055px;}
+.loading { font-size: 10px; color:#069586; padding: 5px;}

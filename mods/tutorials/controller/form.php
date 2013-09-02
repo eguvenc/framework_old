@@ -31,3 +31,6 @@ Class Form extends Controller {
         vi\view('form');
     }
 }
+
+/* End of file form.php */
+/* Location: .mods/tutorials/controller/form.php */

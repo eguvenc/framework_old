@@ -23,9 +23,6 @@ Export your project [$php task export]'."\nexporting your project ...\n\033[0m";
         $this->_export(); // Start the Export Task
     }
 
-    /**
-     * Start the Export Task Shell Script.
-     */
     function _export()
     {
         $export_sh = "
@@ -67,4 +64,4 @@ Export your project [$php task export]'."\nexporting your project ...\n\033[0m";
 }
 
 /* End of file export.php */
-/* Location: .modules/tasks/export.php */
+/* Location: .modules/tasks/controller/export.php */

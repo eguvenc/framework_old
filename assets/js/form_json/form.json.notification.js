@@ -1,21 +1,19 @@
 
 /**
- * Obullo Form Json Plugin.
+ * form notification.
  *
- * Notification Message Settings.
+ * notification message settings.
  * 
- * ***** Customize your notification messages.
+ * * Customize it.
  */
 (function() {
   (function($, window) {
     return $.fn.notification = function(type, message, view) {
       var $notification, notification_content, self;
-      
       self = this;
       self.find('.notification').remove();
       
       notification_content = '<div class="notification ' + type + '">' + message + '</div>';
-
       if(view){
           notification_content += '<div style="margin-top:10px;padding:10px;">' + view + '</div>';
       }
@@ -30,9 +28,7 @@
             */
         }
       }).hide();
-
       if (type === 'success') {  // Fade out success messages if you want.
-
         /*
             setTimeout(function() {
               return $notification.fadeOut('slow', function() {
@@ -41,11 +37,8 @@
             }, 3000);
         */
       }
-      
       self.parent().prepend($notification.fadeIn('fast'));
-      
       return self;
-      
     };
   })(jQuery, this);
 }).call(this);

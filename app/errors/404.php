@@ -11,8 +11,9 @@
 body {
 background-color:    #fff;
 margin:              0px;
-font-size:           12px;
-font-family :        Verdana, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, Geneva, Arial, Sans-serif;
+font-size:           14px;
+font-family :        Arial,Verdana, Sans-serif;
+color:               #666;
 }
 
 #content  {
@@ -23,8 +24,8 @@ padding:            20px 20px 12px 20px;
 
 h1 {
 font-weight:        bold;
-font-size:          14px;
-color:              #000;
+font-size:          20px;
+color:              #333;
 margin:             0 0 8px 0;
 }
 </style>
@@ -32,7 +33,7 @@ margin:             0 0 8px 0;
 </head>
 <body>
 <div id="content">
-<h1> [<?php echo $heading;?>]: </h1> The url <?php echo $message; ?> you requested was not found. <br />
+    <h1><?php echo $heading ?></h1> The url <?php echo $message ?> you requested was not found.
 </div>
 </body>
 </html>

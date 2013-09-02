@@ -15,5 +15,5 @@ $user->schema->user_id['rules'] = 'trim|integer';
 $user->save();
 */
 
-/* End of file User.php */
-/* Location: .mods/model/user.php */
+/* End of file user.php */
+/* Location: .mods/tutorials/model/user.php */

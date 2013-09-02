@@ -14,7 +14,7 @@ background-color: #F0F0F0;
 <body>
 
 <div id="error_general">
-<b>[<?php echo $heading; ?>]:</b> <?php echo $message; ?>        
+   <h1><?php echo $heading ?></h1> <?php echo $message ?>
 </div>
 
 </body>

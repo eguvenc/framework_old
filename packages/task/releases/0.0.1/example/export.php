@@ -23,9 +23,6 @@ Export your project [$php task export]'."\nexporting your project ...\n\033[0m";
         $this->_export(); // Start the Export Task
     }
 
-    /**
-     * Start the Export Task Shell Script.
-     */
     function _export()
     {
         $export_sh = "
@@ -37,7 +34,7 @@ Export your project [$php task export]'."\nexporting your project ...\n\033[0m";
         PROJECT_NAME=\${PWD##*/}
         PROJECT_DIR=\${PWD}
 
-        if [ ! -d ob ]; then
+        if [ ! -d ".PACKAGES." ]; then
             # Check the obullo directory exists, so we know you are in the project folder.
             echo \"You must be in the project folder root ! Try cd /your/www/path/projectname\".
             return
@@ -67,4 +64,4 @@ Export your project [$php task export]'."\nexporting your project ...\n\033[0m";
 }
 
 /* End of file export.php */
-/* Location: .modules/tasks/export.php */
+/* Location: .modules/tasks/controller/export.php */

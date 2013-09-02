@@ -12,6 +12,17 @@ Class Log extends Controller {
     {
         if($level == '')
         {
+            $this->_displayLogo();
+            $this->_follow(APP .'logs'. DS .'log-'.date('Y-m-d').'.php'); // Start the debugging task.
+        } 
+        else 
+        {
+            $this->_follow(APP .'logs'. DS .'log-'.date('Y-m-d').'.php', $level);
+        }
+    }
+    
+    function _displayLogo()
+    {
         echo "\33[0;36m".'
         ______  _            _  _
        |  __  || |__  _   _ | || | ____
@@ -20,15 +31,7 @@ Class Log extends Controller {
        |______||____||_____||_||_||____|
 
         Welcome to Log Manager (c) 2013
-Display logs [$php task log] or to filter logs [$php task log level error]'."\n\033[0m";
-            
-            // Start the Debugging Task
-            $this->_follow(APP .'logs'. DS .'log-'.date('Y-m-d').'.php');
-        } 
-        else 
-        {
-            $this->_follow(APP .'logs'. DS .'log-'.date('Y-m-d').'.php', $level);
-        }
+Display logs [$obm log], to filter logs [$obm log $level]'."\n\033[0m";
     }
     
     /**
@@ -206,6 +209,8 @@ Display logs [$php task log] or to filter logs [$php task log level error]'."\n\
         $output .= "\033[0m";
         
         echo $output;
+        
+        $this->_displayLogo();
     }
 }
 
@@ -231,4 +236,4 @@ $WHITE="33[1;37m";
 */
 
 /* End of file log.php */
-/* Location: .modules/tasks/log.php */
+/* Location: .mods/tasks/controller/log.php */

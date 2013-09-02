@@ -1,12 +1,21 @@
-<?php
-    $user = vi\getVar('user');
-?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
             <?php echo html\css('welcome.css') ?>
-        <title>Odm Tutorial</title>
+        <title>Odm Ajax Tutorial</title>
+        
+        <?php echo html\js('jquery/*') ?> 
+        <?php echo html\js('form_json/*') ?> 
+        <?php echo html\js('underscore/*') ?>
+        
+        <?php
+        // form Json Class Attributes  
+        // 
+        // no-top-msg:    Hide the top error message.
+        // no-ajax:       Use this attribute for native posts.
+        // hide-form:     Hide the form area if form submit success.
+        ?>
     </head>
 
     <body>
@@ -14,27 +23,15 @@
             <?php echo url\anchor('/', html\img('logo.png', ' alt="Obullo" ')) ?>
         </header>
         
-        <h1>Odm Tutorial</h1>
-        <h2><?php echo url\anchor('/tutorials/form_ajax', 'Ajax Tutorial') ?></h2>
-        <section><?php echo form\message($user, '', '<div class="notification error">', '</div>') ?></section>
-
+        <h1>Odm Ajax Tutorial</h1>
         <section>
-            <?php
-            if(sess\getFlash('notice') != '')
-            {
-                echo sess\getFlash('notice', '<div class="notification success">', '</div>');   
-            }
-            ?>
-        </section>
-        
-        <section>
-            <?php echo form\open('tutorials/form/post', array('method' => 'POST')) ?>
+            <?php echo form\open('tutorials/form_ajax/post.json', array('method' => 'POST', 'class' => 'hide-form')) ?>
                 <table width="100%">
                     <tr>
                         <td style="width:20%;"><?php echo form\label('Email') ?></td>
                         <td>
                         <?php echo form\error('user_email', '<div class="input-error">', '</div>'); ?>
-                        <?php echo form\input('user_email', form\setValue('user_email'), " id='email' ");?>
+                        <?php echo form\input('user_email', '', " id='email' ");?>
                         </td>
                     </tr>
                     <tr>
@@ -60,36 +57,15 @@
                     </tr>
                     </table>
                     
-                    <h2>Test Results</h2>
-                    <?php if($user) { ?>
+                    <h2>form_Json Helper</h2>
+                    <p>* form_Json helper simply use php <b>json_encode($user->errors());</b> function and it send ajax response in json format.</p>
+                    <p>* It send <strong>.json</strong> header when we get the request with .json extension in our form post url.</p>
 
-                        <section>
-                            <h3>form\error('user_email')</h3>
-                            <pre><?php echo form\error('user_email') ?></pre>
-
-                            <h3>validationErrors()</h3>
-                            <pre><?php echo form\validationErrors(' | ', ' | '); ?></pre>
-
-                            <h3>print_r($user->errors())</h3>
-                            <pre><?php print_r($user->errors()) ?></pre>
-
-                            <h3>$user->errors('user_email')</h3>
-                            <pre><?php echo $user->errors('user_email'); ?></pre>
-
-                            <h3>print_r($user->values())</h3>
-                            <pre><?php print_r($user->values()) ?></pre>
-
-                            <h3>$user->values('user_email')</h3>
-                            <pre><?php echo $user->values('user_email') ?></pre>
-                        </section>
-
-                    <?php } ?>
             <?php echo form\close(); ?>
-        </section> 
-        
+        </section>
         <section>
             <p>&nbsp;</p>
         </section>
+        
     </body>
-    
 </html>
