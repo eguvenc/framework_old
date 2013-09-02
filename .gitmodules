@@ -16,3 +16,6 @@
 [submodule "packages/cart"]
 	path = packages/cart
 	url = git://github.com/obullo/cart.git
+[submodule "ob/cookie"]
+	path = ob/cookie
+	url = git://github.com/obullo/cookie.git
