@@ -45,7 +45,7 @@ $str = $this->db->lastQuery();
 Returns the <b>prepared</b> last query that was run (the query string, not the result). Example:
 
 ```php
-$str = $this->db->lastQuery(TRUE);
+$str = $this->db->lastQuery(true);
 ```
 
 #### $this->db->setAttribute($key, $val);

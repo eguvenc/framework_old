@@ -21,7 +21,7 @@ new html\start();
 The following functions are available:
 
 
-#### css($filename, $title_or_embed = '', $media = '', $rel = 'stylesheet', $index_page = FALSE)<a name="css"></a>
+#### css($filename, $title_or_embed = '', $media = '', $rel = 'stylesheet', $index_page = false)<a name="css"></a>
 
 Load.css files from <dfn>assets/css</dfn> folder. Example:
 
@@ -102,10 +102,10 @@ echo html\img('images/picture.jpg');
 // gives <img src="http://site.com/assets/images/picture.jpg" />
 ```
 
-There is an optional second parameter that is a TRUE/FALSE value that specifics if the src should have the page specified by $config['index_page'] added to the address it creates. Presumably, this would be if you were using a media controller.
+There is an optional second parameter that is a true/false value that specifics if the src should have the page specified by $config['index_page'] added to the address it creates. Presumably, this would be if you were using a media controller.
 
 ```php
-echo html\img('images/picture.jpg', TRUE);
+echo html\img('images/picture.jpg', true);
 
 // gives <img src="http://site.com/index.php/images/picture.jpg" />
 ```

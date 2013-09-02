@@ -6,7 +6,7 @@ Obullo has a Vi helper that is always active and it declared in your [Autoload](
 
 ------
 
-#### vi\view('filename', $string = TRUE, $data = array());
+#### vi\view('filename', $string = true, $data = array());
 
 Load view file from local directory e.g. /welcome
 

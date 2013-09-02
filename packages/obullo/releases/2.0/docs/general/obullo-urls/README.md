@@ -192,7 +192,7 @@ $config['function_trigger'] = 'm';
 ```
 
 
-If you change "enable_query_strings" to TRUE this feature will become active. Your controllers and functions will then be accessible using the "trigger" words you've set to invoke your directory, controllers and methods:
+If you change "enable_query_strings" to true this feature will become active. Your controllers and functions will then be accessible using the "trigger" words you've set to invoke your directory, controllers and methods:
 
 ```php
 index.php?d=directory&c=controller&m=method

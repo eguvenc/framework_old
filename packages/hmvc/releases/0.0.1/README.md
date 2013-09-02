@@ -10,7 +10,7 @@ Using Obullo's simple hmvc library you can execute hmvc requests between your mo
 Unlike other classes we can call the HMVC library inside from request() function using [request helper](/docs/helpers/request-helper).
 
 ```php
- $request = request('module/controller/method', FALSE);
+ $request = request('module/controller/method', false);
 ```
 
 Once loaded, the Calendar object will be available using: <dfn>$request->method();</dfn>
@@ -22,7 +22,7 @@ Once loaded, the Calendar object will be available using: <dfn>$request->method(
 Here is a very simple example showing how you can call a hmvc request using HMVC object methods.
 
 ```php
-$request = request('/module/controller/method/arguments', FALSE);
+$request = request('/module/controller/method/arguments', false);
 
 $request->setMethod('get', $params = array());
 echo $request->exec();

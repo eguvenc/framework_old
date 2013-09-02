@@ -232,7 +232,7 @@ As with other functions, if you would like the tag to contain additional data, l
 ```php
 $js = 'onClick="some_function()"';
 
- echo form\checkbox('newsletter', 'accept', TRUE, $js)
+ echo form\checkbox('newsletter', 'accept', true, $js)
 ```
 
 #### form\radio()
@@ -272,7 +272,7 @@ Or you can pass an associative array containing any data you wish your form to c
 $data = array(
     'name' => 'button',
     'id' => 'button',
-    'value' => 'TRUE',
+    'value' => 'true',
     'type' => 'reset',
     'content' => 'Reset'
 );
@@ -280,7 +280,7 @@ $data = array(
 echo form\button($data);
 
 // Would produce:
-<button name="button" id="button" value="TRUE" type="reset">Reset</button>  
+<button name="button" id="button" value="true" type="reset">Reset</button>  
 ```
 
 If you would like your form to contain some additional data, like JavaScript, you can pass it as a string in the third parameter: 
@@ -354,13 +354,13 @@ The above form will show "0" when loaded for the first time.
 
 #### setSelect()
 
-If you use a select menu, this function permits you to display the menu item that was selected. The first parameter must contain the name of the select menu, the second parameter must contain the value of each item, and the third (optional) parameter lets you set an item as the default (use boolean TRUE/FALSE).
+If you use a select menu, this function permits you to display the menu item that was selected. The first parameter must contain the name of the select menu, the second parameter must contain the value of each item, and the third (optional) parameter lets you set an item as the default (use boolean true/false).
 
 Example:
 
 ```php
 <select name="myselect">
-<option value="one" <?php echo  form\setSelect('myselect', 'one', TRUE); ?> >One</option>
+<option value="one" <?php echo  form\setSelect('myselect', 'one', true); ?> >One</option>
 <option value="two" <?php echo  form\setSelect('myselect', 'two'); ?> >Two</option>
 <option value="three" <?php echo  form\setSelect('myselect', 'three'); ?> >Three</option>
 </select>
@@ -368,7 +368,7 @@ Example:
 
 #### setCheckbox()
 
-Permits you to display a checkbox in the state it was submitted. The first parameter must contain the name of the checkbox, the second parameter must contain its value, and the third (optional) parameter lets you set an item as the default (use boolean TRUE/FALSE). Example:
+Permits you to display a checkbox in the state it was submitted. The first parameter must contain the name of the checkbox, the second parameter must contain its value, and the third (optional) parameter lets you set an item as the default (use boolean true/false). Example:
 
 ```php
 <input type="checkbox" name="mycheck" value="1" <?php echo form\setCheckbox('mycheck', '1'); ?> /><br />
@@ -380,6 +380,6 @@ Permits you to display a checkbox in the state it was submitted. The first param
 Permits you to display radio buttons in the state they were submitted. This function is identical to the <b>set_checkbox()</b> function above.
 
 ```php
-<input type="radio" name="myradio" value="1" <?php echo  form\setRadio('myradio', '1', TRUE); ?> />
+<input type="radio" name="myradio" value="1" <?php echo  form\setRadio('myradio', '1', true); ?> />
 <input type="radio" name="myradio" value="2" <?php echo  form\setRadio('myradio', '2'); ?> />
 ```

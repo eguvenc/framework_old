@@ -8,7 +8,7 @@ Obullo has a task helper file to using CLI operations (cron jobs, running shell 
 
 Using task\run() function you can run your tasks as a command in the background. Function run like CLI but don't use the task.php.
 
-#### task\run('uri', $debug = FALSE);
+#### task\run('uri', $debug = false);
 
 ### Loading task helper
 

@@ -36,7 +36,7 @@ In this example a connection is opened to the FTP server, and a local file is re
 $config['hostname'] = 'ftp.example.com';
 $config['username'] = 'your-username';
 $config['password'] = 'your-password';
-$config['debug']    = TRUE;
+$config['debug']    = true;
 
 $this->ftp->connect($config);
 
@@ -51,7 +51,7 @@ In this example a list of files is retrieved from the server.
 $config['hostname'] = 'ftp.example.com';
 $config['username'] = 'your-username';
 $config['password'] = 'your-password';
-$config['debug'] = TRUE;
+$config['debug'] = true;
 
 $this->ftp->connect($config);
 
@@ -68,7 +68,7 @@ In this example a local directory is mirrored on the server.
 $config['hostname'] = 'ftp.example.com';
 $config['username'] = 'your-username';
 $config['password'] = 'your-password';
-$config['debug'] = TRUE;
+$config['debug'] = true;
 
 $this->ftp->connect($config);
 
@@ -92,8 +92,8 @@ $config['hostname'] = 'ftp.example.com';
 $config['username'] = 'your-username';
 $config['password'] = 'your-password';
 $config['port']     = 21;
-$config['passive']  = FALSE;
-$config['debug']    = TRUE;
+$config['passive']  = false;
+$config['debug']    = true;
 
 $this->ftp->connect($config);
 
@@ -113,8 +113,8 @@ If you prefer you can store your FTP preferences in a config file. Simply create
     <ul><li><strong>hostname</strong> - the FTP hostname. Usually something like:  <dfn>ftp.example.com</dfn></li>    <li><strong>username</strong> - the FTP username.</li>
     <li><strong>password</strong> - the FTP password.</li>
     <li><strong>port</strong> - The port number. Set to 21 by default.</li>
-    <li><strong>debug</strong> - <kbd>TRUE/FALSE</kbd> (boolean). Whether to enable debugging to display error messages.</li>
-    <li><strong>passive</strong> - <kbd>TRUE/FALSE</kbd> (boolean). Whether to use passive mode. Passive is set automatically by default.</li></ul>
+    <li><strong>debug</strong> - <kbd>true/false</kbd> (boolean). Whether to enable debugging to display error messages.</li>
+    <li><strong>passive</strong> - <kbd>true/false</kbd> (boolean). Whether to use passive mode. Passive is set automatically by default.</li></ul>
 
 #### $this->ftp->upload()
 

@@ -18,7 +18,7 @@ Obullo comes with three helper functions that let you fetch POST, COOKIE or SERV
 ```php
 if ( ! isset($_POST['something']))
 {
-    $something = FALSE;
+    $something = false;
 }
 else
 {
@@ -50,18 +50,18 @@ The first parameter will contain the name of the POST item you are looking for:
 i\post('some_data');
 ```
 
-The function returns FALSE (boolean) if the item you are attempting to retrieve does not exist.
+The function returns false (boolean) if the item you are attempting to retrieve does not exist.
 
-The second optional parameter lets you run the data through the XSS filter. It's enabled by setting the second parameter to boolean TRUE;
+The second optional parameter lets you run the data through the XSS filter. It's enabled by setting the second parameter to boolean true;
 
 ```php
-i\post('some_data', TRUE);
+i\post('some_data', true);
 ```
 
 The third optional parameter if true, function grab the original global $_POST variable instead of HMVC's $_POST variable if hmvc used.
 
 ```php
-i\post('some_data', TRUE, $use_global_var = FALSE);
+i\post('some_data', true, $use_global_var = false);
 ```
 
 #### i\get()
@@ -69,13 +69,13 @@ i\post('some_data', TRUE, $use_global_var = FALSE);
 This function is identical to the post function, only it fetches get data:
 
 ```php
-i\get('some_data', TRUE);
+i\get('some_data', true);
 ```
 
 The third optional parameter if true, function grab the original global $_GET variable instead of HMVC's $_GET variable if hmvc used.
 
 ```php
-i\get('some_data', TRUE, $use_global_var = FALSE);
+i\get('some_data', true, $use_global_var = false);
 ```
 
 #### i\getPost()
@@ -83,12 +83,12 @@ i\get('some_data', TRUE, $use_global_var = FALSE);
 This function will search through both the post and get streams for data, looking first in post, and then in get:
 
 ```php
-i\getPost('some_data', TRUE);
+i\getPost('some_data', true);
 ```
 The third optional parameter if true, function grab the original global $_GET/$_POST variable instead of HMVC's $_GET/$_POST variable if hmvc used.
 
 ```php
-i\getPost('some_data', TRUE, $use_global_var = FALSE);
+i\getPost('some_data', true, $use_global_var = false);
 ```
 
 #### i\request()
@@ -96,13 +96,13 @@ i\getPost('some_data', TRUE, $use_global_var = FALSE);
 This function will search through the request stream for data.
 
 ```php
-i\request('some_data', TRUE);
+i\request('some_data', true);
 ```
 
 The third optional parameter if true, function grab the original global $_REQUEST variable instead of HMVC's $_REQUEST variable if hmvc used.
 
 ```php
-i\request('some_data', TRUE, $use_global_var = FALSE);
+i\request('some_data', true, $use_global_var = false);
 ```
 
 #### i\cookie()
@@ -110,7 +110,7 @@ i\request('some_data', TRUE, $use_global_var = FALSE);
 This function is identical to the post function, only it fetches cookie data:
 
 ```php
-i\cookie('some_data', TRUE);
+i\cookie('some_data', true);
 ```
 
 
@@ -124,7 +124,7 @@ echo i\ip();
 
 #### i\validIp($ip)
 
-Takes an IP address as input and returns TRUE or FALSE (boolean) if it is valid or not. Note: The i_ip_address() function above validates the IP automatically.
+Takes an IP address as input and returns true or false (boolean) if it is valid or not. Note: The i_ip_address() function above validates the IP automatically.
 
 ```php
 if ( ! i\validIp($ip))
@@ -139,7 +139,7 @@ else
 
 #### i\userAgent()
 
-Returns the user agent (web browser) being used by the current user. Returns FALSE if it's not available.
+Returns the user agent (web browser) being used by the current user. Returns false if it's not available.
 
 ```php
 echo i\userAgent();
@@ -147,16 +147,16 @@ echo i\userAgent();
 
 #### i\ajax()
 
-This function check is request ajax or not, If its ajax it returns TRUE otherwise FALSE.
+This function check is request ajax or not, If its ajax it returns true otherwise false.
 
 #### i\cli()
 
-This function check is request CLI or not, If its CLI it returns TRUE otherwise FALSE.
+This function check is request CLI or not, If its CLI it returns true otherwise false.
 
 #### i\task()
 
-This function check is request TASK or not, If its TASK it returns TRUE otherwise FALSE.
+This function check is request TASK or not, If its TASK it returns true otherwise false.
 
 #### i\hmvc()
 
-This function check is request HMVC or not, If its HMVC it returns TRUE otherwise FALSE.
+This function check is request HMVC or not, If its HMVC it returns true otherwise false.

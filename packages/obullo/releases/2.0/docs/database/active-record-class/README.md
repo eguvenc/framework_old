@@ -79,11 +79,11 @@ $query = $this->db->get('mytable');
 
 **Note:** If you are selecting all (*) from a table you do not need to use this function. When omitted, Obullo assumes you wish to SELECT *
 
-$this->db->select() accepts an optional second parameter. If you set it to FALSE, Obullo will not try to protect your field or table names with backticks. This is useful if you need a compound select statement.
+$this->db->select() accepts an optional second parameter. If you set it to false, Obullo will not try to protect your field or table names with backticks. This is useful if you need a compound select statement.
 
 ```php
 $this->db->select("SELECT SUM(payments.amount), 
-                   FROM_UNIXTIME( `field_date` , '%d.%m.%Y %H:%i' ) as date", FALSE);
+                   FROM_UNIXTIME( `field_date` , '%d.%m.%Y %H:%i' ) as date", false);
                    
 $query = $this->db->get('mytable');
 
@@ -98,7 +98,7 @@ You can put " select commands " into $this->db->select() function like this ..
 ```php
 $this->db->select("SELECT MAX(age) as max_age, active,
                    AVG(age) as avg_age,
-                   DATE_FORMAT(field, '%d-%m-%Y') as date", FALSE);
+                   DATE_FORMAT(field, '%d-%m-%Y') as date", false);
                    
 $this->db->where('active', 1);
 $this->db->get('mytable');
@@ -214,10 +214,10 @@ $where = "name='Joe' AND status='boss' OR status='active'";
 $this->db->where($where);
 ```
 
-$this->db->where() accepts an optional third parameter. If you set it to FALSE, Obullo will not try to protect your field or table names with backticks.
+$this->db->where() accepts an optional third parameter. If you set it to false, Obullo will not try to protect your field or table names with backticks.
 
 ```php
-$this->db->where('MATCH (field) AGAINST ("value")', NULL, FALSE);
+$this->db->where('MATCH (field) AGAINST ("value")', NULL, false);
 
 ```</ol>
 
@@ -415,13 +415,13 @@ $this->db->having(array('title =' => 'My Title', 'id <' => $id));
 // Produces: HAVING title = 'My Title', id < 45
 ```
 
-If you are using a database that Obullo escapes queries for, you can prevent escaping content by passing an optional third argument, and setting it to FALSE.
+If you are using a database that Obullo escapes queries for, you can prevent escaping content by passing an optional third argument, and setting it to false.
 
 ```php
 $this->db->having('user_id', 45);
 // Produces: HAVING `user_id` = 45 in some databases such as MySQL
 
-$this->db->having('user_id', 45, FALSE);
+$this->db->having('user_id', 45, false);
 // Produces: HAVING user_id = 45
 
 ```
@@ -544,10 +544,10 @@ $this->db->set('status', $status);
 $this->db->insert('mytable');
 ```
 
-<b>set()</b> will also accept an optional third parameter ($escape), that will prevent data from being escaped if set to FALSE. To illustrate the difference, here is set() used both with and without the escape parameter.
+<b>set()</b> will also accept an optional third parameter ($escape), that will prevent data from being escaped if set to false. To illustrate the difference, here is set() used both with and without the escape parameter.
 
 ```php
-$this->db->set('field', 'field+1', FALSE);
+$this->db->set('field', 'field+1', false);
 $this->db->insert('mytable');
 // gives INSERT INTO mytable (field) VALUES (field+1)
 
@@ -683,7 +683,7 @@ You can also use query binding ..
 
 ```php
 $query = $this->db->prep()  // tell to db class use pdo prepare
-->select("DATE_FORMAT(creation_date, '%d-%m-%Y') as date, title",FALSE)
+->select("DATE_FORMAT(creation_date, '%d-%m-%Y') as date, title",false)
 ->where('title', ':title')
 ->where('title', ':title2')
 ->get('articles')           // get Function will be passive when u use prep()
@@ -695,7 +695,7 @@ $a = $query->fetchAll(assoc);
 
 print_r($a); // Array ( [0] => Array ( [date] => 00-00-0000 [title] => my title ) ) 
 
-echo $this->db->lastQuery(TRUE);
+echo $this->db->lastQuery(true);
 
 // Query output:
 ```

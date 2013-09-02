@@ -43,7 +43,7 @@ $params = array(
     'per_page'     => 8,
     'delta'        => 2,
     'http_method'  => 'GET',
-    'query_string' => FALSE,
+    'query_string' => false,
     'current_page' => $this->uri->segment(3),
     'base_url'     => '/obullo/index.php/welcome/start/index/',
 );
@@ -80,7 +80,7 @@ echo 'isLastPageEnd()...: '; var_dump($pager->isLastPageEnd());
 echo '$pager->range........: '; var_dump($pager->range);
 ```
 
-If want to use simple pager you can use Obullo Style urls you should set <samp>query_string = FALSE</samp> and you must set <samp>'current_page'</samp> parameter to your page segment ( $this->uri->segment(3) ) like this.
+If want to use simple pager you can use Obullo Style urls you should set <samp>query_string = false</samp> and you must set <samp>'current_page'</samp> parameter to your page segment ( $this->uri->segment(3) ) like this.
 
 ```php
 $params = array(
@@ -88,7 +88,7 @@ $params = array(
     'per_page'     => 8,
     'delta'        => 2,
     'http_method'  => 'GET',
-    'query_string' => FALSE,
+    'query_string' => false,
     'current_page' => $this->uri->segment(3),
     'base_url'     => '/obullo/index.php/welcome/start/index/',
 );
@@ -194,7 +194,7 @@ $params = array(
     'delta'        => 2,
     'http_method'  => 'GET',    
     'url_var'      => 'page',
-    'query_string' => FALSE,      // If FALSE use Obullo style URLs
+    'query_string' => false,      // If false use Obullo style URLs
     'current_page' => $this->uri->segment(3),
     'base_url'     => '/obullo/index.php/welcome/start/index/',
     'total_items'  => $num_rows,
@@ -221,7 +221,7 @@ print_r($data);
 
 ------
 
-If you prefer to Http GET methods, you must set these parameters <samp>http_method = GET , query_string = TRUE</samp> and add your extra variables to <samp>extra_vars</samp>.
+If you prefer to Http GET methods, you must set these parameters <samp>http_method = GET , query_string = true</samp> and add your extra variables to <samp>extra_vars</samp>.
 
 ```php
 $params = array(
@@ -230,7 +230,7 @@ $params = array(
     'delta'        => 2,
     'http_method'  => 'GET',     // set http_method to GET
     'url_var'      => 'page',    // provide your PAGE query string
-    'query_string' => TRUE,      // set query string to TRUE
+    'query_string' => true,      // set query string to true
     'base_url'     => '/obullo/index.php',  // Change your base url
     'total_items'  => $num_rows,
     'extra_vars'   => array('d'=>'welcome','c'=>'start', 'm' => 'index'),
@@ -243,13 +243,13 @@ Above the settings produce this url.
 http://localhost/obullo/index.php?d=welcome&c=start&m=index&page=3
 ```
 
-**Note** If you get some errors be sure your *$config['enable_query_strings'] = TRUE;* parameter setted to TRUE in <dfn>app/config/config.php</dfn> file.
+**Note** If you get some errors be sure your *$config['enable_query_strings'] = true;* parameter setted to true in <dfn>app/config/config.php</dfn> file.
 
 ### Http POST Examples
 
 ------
 
-If you prefer to Http POST methods, just change http_method and set query_string to FALSE.
+If you prefer to Http POST methods, just change http_method and set query_string to false.
 
 ```php
 $params = array(
@@ -257,7 +257,7 @@ $params = array(
     'per_page'     => 8,
     'delta'        => 2,
     'http_method'  => 'POST',     // set http_method to POST
-    'query_string' => FALSE,      // set query string to FALSE
+    'query_string' => false,      // set query string to false
     'base_url'     => '/obullo/index.php/welcome/start/index',  // Change your base url
     'total_items'  => $num_rows,
 );
@@ -286,7 +286,7 @@ form.appendChild(input);
 document.getElementsByTagName("body")[0].appendChild(form);
 
 form.submit(); 
-return FALSE;">Page Number</a>
+return false;">Page Number</a>
 ```
 
 ### Html Widgets
@@ -295,7 +295,7 @@ return FALSE;">Page Number</a>
 
 You have two HTML widgets called <samp>Per Page Select Box</samp> and <samp>Page Select Box</samp>
 
-#### getPerPageSelectBox($start = integer, $end = integer, $step = integer, $show_all_data = FALSE, $extra_params = array() );
+#### getPerPageSelectBox($start = integer, $end = integer, $step = integer, $show_all_data = false, $extra_params = array() );
 
 This function will produce html select menu to set_per_page parameter like this
 
@@ -333,7 +333,7 @@ Class Start extends Controller {
             'delta'        => 2,
             'http_method'  => 'GET',    
             'url_var'      => 'page',
-            'query_string' => TRUE,      // If FALSE use Obullo style URLs
+            'query_string' => true,      // If false use Obullo style URLs
             'base_url'     => '/obullo/index.php',
             'total_items'  => $num_rows,
             'extra_vars'   => array('d'=>'welcome','c'=>'start', 'm' => 'index', 'set_per_page' => $per_page),
@@ -349,9 +349,9 @@ Class Start extends Controller {
         
         $data['params'] = $params;
         $data['links']  = $pager->getLinks();
-        $data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, FALSE);
+        $data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, false);
 
-        vi\view('pager_test', $data, FALSE);
+        vi\view('pager_test', $data, false);
     }
        
 }
@@ -392,7 +392,7 @@ http://localhost/obullo/index.php?d=welcome&c=start&m=index
  If you want to use <samp>onchange = ""</samp> for selectbox instead SEND button you must provide <samp>auto_submit</samp> as extra parameter. Remove <b>form_helper</b> functions from the view_test_pager and add extra parameter to get_per_page_select_box in start controller. 
 
 ```php
-$pager->getPerPageSelectBox(5, 50, 5, FALSE, array('auto_submit' => TRUE));
+$pager->getPerPageSelectBox(5, 50, 5, false, array('auto_submit' => true));
 ```
 
 #### getPageSelectBox($extra_params = array() );
@@ -433,7 +433,7 @@ Class Start extends Controller {
             'per_page'     => $per_page,
             'delta'        => 2,
             'http_method'  => 'POST',    
-            'query_string' => FALSE,
+            'query_string' => false,
             'base_url'     => '/obullo/index.php/welcome/start/index',
             'total_items'  => $num_rows,
             'extra_vars'   => array('set_per_page' => $per_page),
@@ -449,10 +449,10 @@ Class Start extends Controller {
         $data['params'] = $params;
         $data['links']  = $pager->getLinks();
         
-        $data['page_select_box']      = $pager->getPageSelectBox(array('auto_submit' => TRUE));  // auto submit
-        $data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, FALSE, array('auto_submit' => TRUE));
+        $data['page_select_box']      = $pager->getPageSelectBox(array('auto_submit' => true));  // auto submit
+        $data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, false, array('auto_submit' => true));
         
-        view('view_pager_test', $data, FALSE); 
+        view('view_pager_test', $data, false); 
     }
     
 }
@@ -482,11 +482,11 @@ echo '   Per Page    '.$per_page_select_box.'   ';
 Additionaly you can set <samp>option_text</samp> parameter to customize select menu texts. Change your codes like this
 
 ```php
-$page_options     = array('auto_submit' => TRUE, 'option_text' => 'Go to page %d');
-$per_page_options = array('auto_submit' => TRUE, 'option_text' => 'Show %d data');
+$page_options     = array('auto_submit' => true, 'option_text' => 'Go to page %d');
+$per_page_options = array('auto_submit' => true, 'option_text' => 'Show %d data');
 
 $data['page_select_box']      = $pager->getPageSelectBox($page_options);
-$data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, FALSE, $per_page_options); 
+$data['per_page_select_box']  = $pager->getPerPageSelectBox(5, 50, 5, false, $per_page_options); 
 ```
 
 The last changes will give you below the output.
@@ -525,7 +525,7 @@ $params = array(
     'per_page'     => $per_page,
     'delta'        => 2,
     'http_method'  => 'POST',    
-    'query_string' => FALSE,
+    'query_string' => false,
     'base_url'     => '/obullo/index.php/tests/start/index',
     'total_items'  => $num_rows,
     'extra_vars'   => array('set_per_page' => $per_page),

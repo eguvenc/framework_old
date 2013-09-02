@@ -134,7 +134,7 @@ Using Task Helper you can run your tasks as a command in the background. Functio
 ```php
 new task\start();
 
-task\run('hello help', $debug = TRUE);
+task\run('hello help', $debug = true);
 ```
 
 Running MODULE Tasks
@@ -144,7 +144,7 @@ Running MODULE Tasks
 ```php
 new task\start();
 
-task\run('start help', $debug = TRUE);
+task\run('start help', $debug = true);
 ```
 
 ### Running YOUR MODULE Tasks
@@ -154,13 +154,13 @@ task\run('start help', $debug = TRUE);
 ```php
 new task\start();
 
-task\run('welcome start/index/arg1/arg2', $debug = TRUE);
+task\run('welcome start/index/arg1/arg2', $debug = true);
 ```
 
 <b>An Important thing</b> we use the second argument <b>$debug = true</b> just for test don't use this argument except the testing or use it as false.
 
 ```php
-task\run('welcome hello/index/arg1/arg2', FALSE);
+task\run('welcome hello/index/arg1/arg2', false);
 ```
 
-**Note:** When you use the task function, debug mode should be <samp>FALSE</samp>, or don't use a second argument except the test otherwise shell command will print output the screen.
+**Note:** When you use the task function, debug mode should be <samp>false</samp>, or don't use a second argument except the test otherwise shell command will print output the screen.

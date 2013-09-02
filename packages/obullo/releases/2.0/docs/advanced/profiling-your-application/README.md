@@ -27,7 +27,7 @@ When enabled a report will be generated in a <b>popup window</b>.
 To disable the profiler you will use:
 
 ```php
-$this->output->profiler(FALSE);
+$this->output->profiler(false);
 ```
 
 Profiler popup window content looks like this

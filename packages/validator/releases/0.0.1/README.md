@@ -122,15 +122,15 @@ Class Form extends Controller {
         new Form();
         new Url();
    
-        $form = new Validator(FALSE);
+        $form = new Validator(false);
                 
-        if ($form->run() == FALSE)
+        if ($form->run() == false)
         {
-            vi/get('view_myform', '', FALSE);
+            vi/get('view_myform', '', false);
         }
         else
         {
-            vi/get('view_success', '', FALSE);
+            vi/get('view_success', '', false);
         }
     }
     
@@ -148,7 +148,7 @@ example.com/index.php/forms/form
 
 If you submit the form you should simply see the form reload. That's because you haven't set up any validation rules yet.
 
-**Since you haven't told the Form Validation class to validate anything yet, it returns <samp>FALSE</samp> (boolean false) by default. The <samp>run()</samp> function only returns <samp>TRUE</samp> if it has successfully applied your rules without any of them failing.**
+**Since you haven't told the Form Validation class to validate anything yet, it returns <samp>false</samp> (boolean false) by default. The <samp>run()</samp> function only returns <samp>true</samp> if it has successfully applied your rules without any of them failing.**
 
 ### Explanation <a name="explanation"></a>
 
@@ -374,35 +374,35 @@ Class Form extends Controller {
         new Form();
         new Url();
         
-        $form = new Validator(FALSE);
+        $form = new Validator(false);
         
         $form->setRules('username', 'Username', 'required|callback_username_check');
         $form->setRules('password', 'Password', 'required');
         $form->setRules('passconf', 'Password Confirmation', 'required');
         $form->setRules('email', 'Email', 'required');
                 
-        if ($form->run() == FALSE)
+        if ($form->run() == false)
         {
-            vi/get('view_myform', '', FALSE);
+            vi/get('view_myform', '', false);
         }
         else
         {
-             vi/get('view_success', '', FALSE);
+             vi/get('view_success', '', false);
         }
     }
 
     public function username_check($str)
     {     
-        $form = new Validator(FALSE);
+        $form = new Validator(false);
         
         if ($str == 'test')
         {
             $form->setMessage('username_check', 'The %s field can not be the word "test"');
-            return FALSE;
+            return false;
         }
         else
         {
-            return TRUE;
+            return true;
         }
     }
     
@@ -414,7 +414,7 @@ Class Form extends Controller {
 
 **To invoke a callback just put the function name in a rule, with "callback_" as the rule prefix.**
 
-You can also process the form data that is passed to your callback and return it. If your callback returns anything other than a boolean TRUE/FALSE it is assumed that the data is your newly processed form data.
+You can also process the form data that is passed to your callback and return it. If your callback returns anything other than a boolean true/false it is assumed that the data is your newly processed form data.
 
 ### Setting Error Messages <a name="setting-error-messages"></a>
 
@@ -636,13 +636,13 @@ $config = array(
 In order to call a specific group you will pass its name to the run() function. For example, to call the <samp>signup</samp> rule you will do this:
 
 ```php
-if ($form->run('signup') == FALSE)
+if ($form->run('signup') == false)
 {
-    vi/get('view_myform', FALSE);
+    vi/get('view_myform', false);
 }
 else
 {
-     vi/get('view_success', FALSE);
+     vi/get('view_success', false);
 }
 ```
 
@@ -655,15 +655,15 @@ Class Member extends Controller {
 
    public function signup()
    {      
-      $form = new Validator(FALSE);
+      $form = new Validator(false);
             
-      if ($form->run() == FALSE)
+      if ($form->run() == false)
       {
-          vi/get('view_myform', FALSE);
+          vi/get('view_myform', false);
       }
       else
       {
-          vi/get('view_success', FALSE);
+          vi/get('view_success', false);
       }
    }
 
@@ -791,109 +791,109 @@ The following is a list of all the native rules that are available to use:
 <tr>
 <td>required</td>
 <td>No</td>
-<td>Returns FALSE if the form element is empty.</td>
+<td>Returns false if the form element is empty.</td>
 <td></td>
 </tr>
 <tr>
 <td>matches</td>
 <td>Yes</td>
-<td>Returns FALSE if the form element does not match the one in the parameter.</td>
+<td>Returns false if the form element does not match the one in the parameter.</td>
 <td>matches[form_item]</td>
 </tr>
 <tr>
 <td>minLen</td>
 <td>Yes</td>
-<td>Returns FALSE if the form element is shorter then the parameter value.</td>
+<td>Returns false if the form element is shorter then the parameter value.</td>
 <td>min_len[6]</td>
 </tr>
 <tr>
 <td>maxLen</td>
 <td>Yes</td>
-<td>Returns FALSE if the form element is longer then the parameter value.</td>
+<td>Returns false if the form element is longer then the parameter value.</td>
 <td>max_len[12]</td>
 </tr>
 <tr>
 <td>exactLen</td>
 <td>Yes</td>
-<td>Returns FALSE if the form element is not exactly the parameter value.</td>
+<td>Returns false if the form element is not exactly the parameter value.</td>
 <td>exact_len[8]</td>
 </tr>
 <tr>
 <td>alpha</td>
 <td>No</td>
-<td>Returns FALSE if the form element contains anything other than alphabetical characters.</td>
+<td>Returns false if the form element contains anything other than alphabetical characters.</td>
 <td></td>
 </tr>
 <tr>
 <td>alphaNumeric</td>
 <td>No</td>
-<td>Returns FALSE if the form element contains anything other than alpha-numeric characters.</td>
+<td>Returns false if the form element contains anything other than alpha-numeric characters.</td>
 <td></td>
 </tr>
 <tr>
 <td>alphaDash</td>
 <td>No</td>
-<td>Returns FALSE if the form element contains anything other than alpha-numeric characters, underscores or dashes.</td>
+<td>Returns false if the form element contains anything other than alpha-numeric characters, underscores or dashes.</td>
 <td></td>
 </tr>
 <tr>
 <td>numeric</td>
 <td>No</td>
-<td>Returns FALSE if the form element contains anything other than numeric characters.</td>
+<td>Returns false if the form element contains anything other than numeric characters.</td>
 <td></td>
 </tr>
 <tr>
 <td>integer</td>
 <td>No</td>
-<td>Returns FALSE if the form element contains anything other than an integer.</td>
+<td>Returns false if the form element contains anything other than an integer.</td>
 <td></td>
 </tr>
 <tr>
 <td>isNatural</td>
 <td>No</td>
-<td>Returns FALSE if the form element contains anything other than a natural number: 0, 1, 2, 3, etc.</td>
+<td>Returns false if the form element contains anything other than a natural number: 0, 1, 2, 3, etc.</td>
 <td></td>
 </tr>
 <tr>
 <td>isNatural_No_Zero</td>
 <td>No</td>
-<td>Returns FALSE if the form element contains anything other than a natural number, but not zero: 1, 2, 3, etc.</td>
+<td>Returns false if the form element contains anything other than a natural number, but not zero: 1, 2, 3, etc.</td>
 <td></td>
 </tr>
 <tr>
 <td>validEmail</td>
 <td>No</td>
-<td>Returns FALSE if the form element does not contain a valid email address.</td>
+<td>Returns false if the form element does not contain a valid email address.</td>
 <td></td>
 </tr>
 <tr>
 <td>validEmailDns</td>
 <td>No</td>
-<td>Returns FALSE if the form element does not contain a valid email AND dns query return to FALSE.</td>
+<td>Returns false if the form element does not contain a valid email AND dns query return to false.</td>
 <td></td>
 </tr>
 <tr>
 <td>validEmails</td>
 <td>Yes</td>
-<td>Returns FALSE if any value provided in a comma separated list is not a valid email. (If parameter TRUE or 1 function also will do a dns query foreach emails)</td>
+<td>Returns false if any value provided in a comma separated list is not a valid email. (If parameter true or 1 function also will do a dns query foreach emails)</td>
 <td>valid_emails[true]</td>
 </tr>
 <tr>
 <td>validIp</td>
 <td>No</td>
-<td>Returns FALSE if the supplied IP is not valid.</td>
+<td>Returns false if the supplied IP is not valid.</td>
 <td></td>
 </tr>
 <tr>
 <td>validBase64</td>
 <td>No</td>
-<td>Returns FALSE if the supplied string contains anything other than valid Base64 characters.</td>
+<td>Returns false if the supplied string contains anything other than valid Base64 characters.</td>
 <td></td>
 </tr>
 <tr>
 <td>noSpace</td>
 <td>No</td>
-<td>Returns FALSE if the supplied string contains space characters.</td>
+<td>Returns false if the supplied string contains space characters.</td>
 <td></td>
 </tr>
 <tr>
@@ -905,13 +905,13 @@ The following is a list of all the native rules that are available to use:
 <tr>
 <td>callback_request[method][request_uri]</td>
 <td>Yes</td>
-<td>Returns TRUE if the supplied hmvc request response == 1 or response == 'TRUE' otherwise returns FALSE .</td>
+<td>Returns true if the supplied hmvc request response == 1 or response == 'true' otherwise returns false .</td>
 <td>calback_request[post][/captcha/check/]</td>
 </tr>
 <tr>
 <td>validDate</td>
 <td>Yes</td>
-<td>Returns FALSE if the supplied date is not valid in current format.</td>
+<td>Returns false if the supplied date is not valid in current format.</td>
 <td>Enter your date format default is mm-dd-yyyy.</td>
 </tr>
 
@@ -986,7 +986,7 @@ Permits you to set validation rules, as described in the tutorial sections above
 
 #### $form->run();
 
-Runs the validation routines. Returns boolean TRUE on success and FALSE on failure. You can optionally pass the name of the validation group via the function, as described in: [Saving Groups of Validation Rules to a Config File](#saving-sets-of-validation).
+Runs the validation routines. Returns boolean true on success and false on failure. You can optionally pass the name of the validation group via the function, as described in: [Saving Groups of Validation Rules to a Config File](#saving-sets-of-validation).
 
 #### $form->setMessage();
 
@@ -1040,13 +1040,13 @@ The above form will show "0" when loaded for the first time.
 
 #### setSelect()
 
-If you use a <dfn>(select)</dfn> menu, this function permits you to display the menu item that was selected. The first parameter must contain the name of the select menu, the second parameter must contain the value of each item, and the third (optional) parameter lets you set an item as the default (use boolean TRUE/FALSE).
+If you use a <dfn>(select)</dfn> menu, this function permits you to display the menu item that was selected. The first parameter must contain the name of the select menu, the second parameter must contain the value of each item, and the third (optional) parameter lets you set an item as the default (use boolean true/false).
 
 Example:
 
 ```php
 <select name="myselect">
-<option value="one" <?php echo setSelect('myselect', 'one', TRUE); ?> >One</option>
+<option value="one" <?php echo setSelect('myselect', 'one', true); ?> >One</option>
 <option value="two" <?php echo setSelect('myselect', 'two'); ?> >Two</option>
 <option value="three" <?php echo setSelect('myselect', 'three'); ?> >Three</option>
 </select>
@@ -1054,7 +1054,7 @@ Example:
 
 #### setCheckbox()
 
-Permits you to display a checkbox in the state it was submitted. The first parameter must contain the name of the checkbox, the second parameter must contain its value, and the third (optional) parameter lets you set an item as the default (use boolean TRUE/FALSE). Example:
+Permits you to display a checkbox in the state it was submitted. The first parameter must contain the name of the checkbox, the second parameter must contain its value, and the third (optional) parameter lets you set an item as the default (use boolean true/false). Example:
 
 ```php
 <input type="checkbox" name="mycheck[]" value="1" <?php echo setCheckbox('mycheck[]', '1'); ?> />
@@ -1066,6 +1066,6 @@ Permits you to display a checkbox in the state it was submitted. The first param
 Permits you to display radio buttons in the state they were submitted. This function is identical to the set_checkbox() function above.
 
 ```php
-<input type="radio" name="myradio" value="1" <?php echo setRadio('myradio', '1', TRUE); ?> />
+<input type="radio" name="myradio" value="1" <?php echo setRadio('myradio', '1', true); ?> />
 <input type="radio" name="myradio" value="2" <?php echo setRadio('myradio', '2'); ?> />
 ```

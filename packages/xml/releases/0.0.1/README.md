@@ -29,7 +29,7 @@ This function ignores ampersands if they are part of existing character entities
 $string = xmlConvert($string);
 ```
 
-#### xmlWriter('array data', $cdata = FALSE, $encoding = 'UTF-8')
+#### xmlWriter('array data', $cdata = false, $encoding = 'UTF-8')
 
 If PECL libxml extension loaded on your host, xml writer function convert your array data to xml.
 
@@ -53,8 +53,8 @@ new xml\start();
 </root>
 ```
 
-If you need to use **html data** in your xml tags, set second param as TRUE.
+If you need to use **html data** in your xml tags, set second param as true.
 
 ```php
-xmlWriter($array, TRUE);
+xmlWriter($array, true);
 ```

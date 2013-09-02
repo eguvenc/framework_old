@@ -102,12 +102,12 @@ string\reduceMultiples(string: text to search in, string: character to reduce,
 boolean: whether to remove the character from the front and end of the string)
 ```
 
-The first parameter contains the string in which you want to reduce the multiplies. The second parameter contains the character you want to have reduced. The third parameter is FALSE by default; if set to TRUE it will remove occurences of the character at the beginning and the end of the string. Example:
+The first parameter contains the string in which you want to reduce the multiplies. The second parameter contains the character you want to have reduced. The third parameter is false by default; if set to true it will remove occurences of the character at the beginning and the end of the string. Example:
 
 ```php
 $string = ",Fred, Bill,, Joe, Jimmy,";
 
-$string = string\reduceMultiples($string, ", ", TRUE); // results in "Fred, Bill, Joe, Jimmy"
+$string = string\reduceMultiples($string, ", ", true); // results in "Fred, Bill, Joe, Jimmy"
 ```
 
 #### quotes2entities()

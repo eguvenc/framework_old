@@ -62,7 +62,7 @@ Preferences are set by passing an array of preference values to the email <dfn>i
 $config['protocol'] = 'sendmail';
 $config['mailpath'] = '/usr/sbin/sendmail';
 $config['charset'] = 'iso-8859-1';
-$config['wordwrap'] = TRUE;
+$config['wordwrap'] = true;
 
 $this->email->init($config);
 ```
@@ -91,15 +91,15 @@ The following is a list of all the preferences that can be set when sending emai
 <tr><td>smtp_pass</td><td>No Default</td><td>None</td><td>SMTP Password.</td></tr>
 <tr><td>smtp_port</td><td>25</td><td>None</td><td>SMTP Port.</td></tr>
 <tr><td>smtp_timeout</td><td>5</td><td>None</td><td>SMTP Timeout (in seconds).</td></tr>
-<tr><td>wordwrap</td><td>TRUE</td><td>TRUE or FALSE (boolean)</td><td>Enable word-wrap.</td></tr>
+<tr><td>wordwrap</td><td>true</td><td>true or false (boolean)</td><td>Enable word-wrap.</td></tr>
 <tr><td>wrapchars</td><td>76</td><td></td><td>Character count to wrap at.</td></tr>
 <tr><td>mailtype</td><td>text</td><td>text or html</td><td>Type of mail. If you send HTML email you must send it as a complete web page. Make sure you don't have any relative links or relative image paths otherwise they will not work.</td></tr>
 <tr><td>charset</td><td>utf-8</td><td></td><td>Character set (utf-8, iso-8859-1, etc.).</td></tr>
-<tr><td>validate</td><td>FALSE</td><td>TRUE or FALSE (boolean)</td><td>	Whether to validate the email address.</td></tr>
+<tr><td>validate</td><td>false</td><td>true or false (boolean)</td><td>	Whether to validate the email address.</td></tr>
 <tr><td>priority</td><td>3</td><td>1, 2, 3, 4, 5</td><td>Email Priority. 1 = highest. 5 = lowest. 3 = normal.</td></tr>
 <tr><td>crlf</td><td>\n</td><td>"\r\n" or "\n" or "\r"</td><td>	Newline character. (Use "\r\n" to comply with RFC 822).</td></tr>
 <tr><td>newline</td><td>\n</td><td>"\r\n" or "\n" or "\r"</td><td>Newline character. (Use "\r\n" to comply with RFC 822).</td></tr>
-<tr><td>bcc_batch_mode</td><td>FALSE</td><td>TRUE or FALSE (boolean)</td><td>Enable BCC Batch Mode.</td></tr>
+<tr><td>bcc_batch_mode</td><td>false</td><td>true or false (boolean)</td><td>Enable BCC Batch Mode.</td></tr>
 <tr><td>bcc_batch_size</td><td>200</td><td>None</td><td>Number of emails in each BCC batch.</td></tr></tbody></table>
 
 ### Email Function Reference
@@ -192,15 +192,15 @@ foreach ($list as $name => $address)
 }
 ```
 
-If you set the parameter to TRUE any attachments will be cleared as well:
+If you set the parameter to true any attachments will be cleared as well:
 
 ```php
-$this->email->clear(TRUE);
+$this->email->clear(true);
 ```
 
 #### $this->email->send()
 
-The Email sending function. Returns boolean TRUE or FALSE based on success or failure, enabling it to be used conditionally:
+The Email sending function. Returns boolean true or false based on success or failure, enabling it to be used conditionally:
 
 ```php
 if ( ! $this->email->send())

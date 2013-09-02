@@ -165,7 +165,7 @@ $user->usr_password = i\getPost('usr_password');
 $user->save();
 ```
 
-Function will return to <b>TRUE</b> if success, otherwise it will return to <b>FALSE</b>.
+Function will return to <b>true</b> if success, otherwise it will return to <b>false</b>.
 
 ### Multiple Save and Validation
 
@@ -248,11 +248,11 @@ function save()
 }
 ```
 
-Functions will return to <b>TRUE</b> if success, otherwise they will return to <b>FALSE</b>.
+Functions will return to <b>true</b> if success, otherwise they will return to <b>false</b>.
 
 #### $model->validation();
 
-Function will return FALSE if $model validation success.
+Function will return false if $model validation success.
 
 #### $model->validate($fields = array());
 
@@ -387,27 +387,27 @@ The following is a list of all the native rules that are available to use:
 
 <table><thead><tr>
 <th>Rule</th><th>Parameter</th><th>Description</th><th>Example</th></tr>
-<tr><td>required</td><td>No</td><td>Returns FALSE if the form element is empty.</td><td> 	
-<tr><td>matches</td><td>Yes</td><td>Returns FALSE if the form element does not match the one in the parameter.</td><td>matches[form_item]</td></tr>
-<tr><td>min_len</td><td>Yes</td><td>Returns FALSE if the form element is shorter then the parameter value.</td><td>min_len[6]</td></tr>
-<tr><td>max_len</td><td>Yes</td><td>Returns FALSE if the form element is longer then the parameter value.</td><td>max_len[12]</td></tr>
-<tr><td>exact_len</td><td>Yes</td><td>Returns FALSE if the form element is not exactly the parameter value.</td><td>exact_len[8]</td></tr>
-<tr><td>alpha</td><td>No</td><td>Returns FALSE if the form element contains anything other than alphabetical characters.</td><td></td></tr> 	
-<tr><td>alpha_numeric</td><td>No</td><td>Returns FALSE if the form element contains anything other than alpha-numeric characters.</td><td></td></tr> 	
-<tr><td>alpha_dash</td><td>No</td><td>Returns FALSE if the form element contains anything other than alpha-numeric characters, underscores or dashes.</td><td></td></tr> 	
-<tr><td>numeric</td><td>No</td><td>Returns FALSE if the form element contains anything other than numeric characters.</td><td></td></tr>	
-<tr><td>integer</td><td>No</td><td>Returns FALSE if the form element contains anything other than an integer.</td><td></td></tr> 	
-<tr><td>is_natural</td><td>No</td><td>Returns FALSE if the form element contains anything other than a natural number: 0, 1, 2, 3, etc.</td><td></td></tr> 	
-<tr><td>is_natural_no_zero</td><td>No</td><td>Returns FALSE if the form element contains anything other than a natural number, but not zero: 1, 2, 3, etc.</td><td></td></tr> 	
-<tr><td>valid_email</td><td>No</td><td>Returns FALSE if the form element does not contain a valid email address.</td><td></td></tr> 	
-<tr><td><kbd>valid_email_dns</kbd></td><td>No</td><td>Returns FALSE if the form element does not contain a valid email AND dns query return to FALSE.</td><td></td></tr>	
-<tr><td><kbd>valid_emails</kbd></td><td>Yes</td><td>Returns FALSE if any value provided in a comma separated list is not a valid email. (If parameter TRUE or 1 function also will do a dns query foreach emails)</td><td>valid_emails[true]</td></tr>
-<tr><td>valid_ip</td><td>No</td><td>Returns FALSE if the supplied IP is not valid.</td><td>	
-<tr><td>valid_base64</td><td>No</td><td>Returns FALSE if the supplied string contains anything other than valid Base64 characters.</td><td></td></tr>	
-<tr><td><kbd>no_space</kbd></td><td>No</td><td>Returns FALSE if the supplied string contains space characters.</td><td></td></tr> 	
+<tr><td>required</td><td>No</td><td>Returns false if the form element is empty.</td><td> 	
+<tr><td>matches</td><td>Yes</td><td>Returns false if the form element does not match the one in the parameter.</td><td>matches[form_item]</td></tr>
+<tr><td>min_len</td><td>Yes</td><td>Returns false if the form element is shorter then the parameter value.</td><td>min_len[6]</td></tr>
+<tr><td>max_len</td><td>Yes</td><td>Returns false if the form element is longer then the parameter value.</td><td>max_len[12]</td></tr>
+<tr><td>exact_len</td><td>Yes</td><td>Returns false if the form element is not exactly the parameter value.</td><td>exact_len[8]</td></tr>
+<tr><td>alpha</td><td>No</td><td>Returns false if the form element contains anything other than alphabetical characters.</td><td></td></tr> 	
+<tr><td>alpha_numeric</td><td>No</td><td>Returns false if the form element contains anything other than alpha-numeric characters.</td><td></td></tr> 	
+<tr><td>alpha_dash</td><td>No</td><td>Returns false if the form element contains anything other than alpha-numeric characters, underscores or dashes.</td><td></td></tr> 	
+<tr><td>numeric</td><td>No</td><td>Returns false if the form element contains anything other than numeric characters.</td><td></td></tr>	
+<tr><td>integer</td><td>No</td><td>Returns false if the form element contains anything other than an integer.</td><td></td></tr> 	
+<tr><td>is_natural</td><td>No</td><td>Returns false if the form element contains anything other than a natural number: 0, 1, 2, 3, etc.</td><td></td></tr> 	
+<tr><td>is_natural_no_zero</td><td>No</td><td>Returns false if the form element contains anything other than a natural number, but not zero: 1, 2, 3, etc.</td><td></td></tr> 	
+<tr><td>valid_email</td><td>No</td><td>Returns false if the form element does not contain a valid email address.</td><td></td></tr> 	
+<tr><td><kbd>valid_email_dns</kbd></td><td>No</td><td>Returns false if the form element does not contain a valid email AND dns query return to false.</td><td></td></tr>	
+<tr><td><kbd>valid_emails</kbd></td><td>Yes</td><td>Returns false if any value provided in a comma separated list is not a valid email. (If parameter true or 1 function also will do a dns query foreach emails)</td><td>valid_emails[true]</td></tr>
+<tr><td>valid_ip</td><td>No</td><td>Returns false if the supplied IP is not valid.</td><td>	
+<tr><td>valid_base64</td><td>No</td><td>Returns false if the supplied string contains anything other than valid Base64 characters.</td><td></td></tr>	
+<tr><td><kbd>no_space</kbd></td><td>No</td><td>Returns false if the supplied string contains space characters.</td><td></td></tr> 	
 <tr><td>callback_function[param]</td><td>Yes</td><td>You can define a custom callback function which is a class method located in your current model or just a function.</td><td>callback_functionname[param]</td></tr>
-<tr><td><kbd>callback_request[method][request_uri]</kbd></td><td>Yes</td><td>Returns TRUE if the supplied hmvc request response == 1 or response == 'TRUE' otherwise returns FALSE .</td><td>calback_request[post][/captcha/check/]</td></tr>
-<tr><td><kbd>valid_date</kbd></td><td>Yes</td><td>Returns FALSE if the supplied date is not valid in current format.</td><td>Enter your date format default is mm-dd-yyyy.</td></tr></tbody></table>
+<tr><td><kbd>callback_request[method][request_uri]</kbd></td><td>Yes</td><td>Returns true if the supplied hmvc request response == 1 or response == 'true' otherwise returns false .</td><td>calback_request[post][/captcha/check/]</td></tr>
+<tr><td><kbd>valid_date</kbd></td><td>Yes</td><td>Returns false if the supplied date is not valid in current format.</td><td>Enter your date format default is mm-dd-yyyy.</td></tr></tbody></table>
 
 ### Prepping Reference
 

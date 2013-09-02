@@ -49,15 +49,15 @@ $data = xss\clean($data);
 If you want the filter to run automatically every time it encounters POST or COOKIE data you can enable it by opening your <samp>app/config/config.php</samp> file and setting this:
 
 ```php
-$config['global_xss_filtering'] = TRUE;
+$config['global_xss_filtering'] = true;
 ```
 
 **Tip:** If you use the *form validation class*, it gives you the option of XSS filtering as well.
 
-An optional second parameter, <dfn>is_image</dfn>, allows this function to be used to test images for potential XSS attacks, useful for file upload security. When this second parameter is set to TRUE, instead of returning an altered string, the function returns TRUE if the image is safe, and FALSE if it contained potentially malicious information that a browser may attempt to execute.
+An optional second parameter, <dfn>is_image</dfn>, allows this function to be used to test images for potential XSS attacks, useful for file upload security. When this second parameter is set to true, instead of returning an altered string, the function returns true if the image is safe, and false if it contained potentially malicious information that a browser may attempt to execute.
 
 ```php
-if (xss\clean($file, TRUE) === FALSE)
+if (xss\clean($file, true) === false)
 {
     // file failed the XSS test
 }
@@ -83,6 +83,6 @@ $string = xss\encodePhpTags($string);
 You can enable csrf protection by opening your <samp>app/config/config.php</samp> file and setting this:
 
 ```php
-$config['csrf_protection'] = TRUE;
+$config['csrf_protection'] = true;
 ```
 If you use the [form helper](/ob/form/releases/0.0.1/) the <var>form\open()</var> function will automatically insert a hidden csrf field in your forms.

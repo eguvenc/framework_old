@@ -281,7 +281,7 @@ Below the table show available result types.
         </tr>
         <tr>
             <td>BOUND</td>
-            <td>Specifies that the fetch method shall return TRUE and assign the values of the columns in the result set to the PHP variables to which they were bound with the PDO bindParam() or PDO bindColumn() methods.</td>
+            <td>Specifies that the fetch method shall return true and assign the values of the columns in the result set to the PHP variables to which they were bound with the PDO bindParam() or PDO bindColumn() methods.</td>
         </tr>
         <tr>
             <td>COLUMN</td>

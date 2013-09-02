@@ -1,0 +1,36 @@
+{
+  "name": "controller",
+  "description": "Main controller class of the framework",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ersin Güvenç",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
+  "component" : "library",
+  "dependencies": {},
+  "keywords": [
+    "controller"
+  ],
+  "homepage": "https://github.com/obullo/controller",
+  "repo": {
+    "type": "git",
+    "url": "git://github.com/obullo/controller.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/controller/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.1.2",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/controller/issues",
+    "email": "eguvenc@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

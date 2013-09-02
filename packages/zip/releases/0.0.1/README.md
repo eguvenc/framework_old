@@ -118,12 +118,12 @@ $this->zip->readFile($path);
 $this->zip->download('my_backup.zip'); 
 ```
 
-If you would like the Zip archive to maintain the directory structure of the file in it, pass <kbd>TRUE</kbd> (boolean) in the second parameter. Example:
+If you would like the Zip archive to maintain the directory structure of the file in it, pass <kbd>true</kbd> (boolean) in the second parameter. Example:
 
 ```php
 $path = '/path/to/photo.jpg';
 
-$this->zip->readFile($path, TRUE);
+$this->zip->readFile($path, true);
 
 // Download the file to your desktop. Name it "my_backup.zip"
 $this->zip->download('my_backup.zip');

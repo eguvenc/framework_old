@@ -21,7 +21,7 @@ The segment numbers would be this:
     <li>crime_is_up</li>
 </ol>
 
-By default the function returns FALSE (boolean) if the segment does not exist. There is an optional second parameter that permits you to set your own default value if the segment is missing. For example, this would tell the function to return the number zero in the event of failure:
+By default the function returns false (boolean) if the segment does not exist. There is an optional second parameter that permits you to set your own default value if the segment is missing. For example, this would tell the function to return the number zero in the event of failure:
 
 ```php
 $product_id = $this->uri->segment(3, 0);
@@ -30,7 +30,7 @@ $product_id = $this->uri->segment(3, 0);
 It helps avoid having to write code like this:
 
 ```php
-if ($this->uri->segment(3) === FALSE)
+if ($this->uri->segment(3) === false)
 {
     $product_id = 0;
 }
@@ -100,9 +100,9 @@ $default = array('name', 'gender', 'location', 'type', 'sort');
 $array = $this->uri->uri2Assoc(3, $default);
 ```
 
-If the URI does not contain a value in your default, an array index will be set to that name, with a value of FALSE.
+If the URI does not contain a value in your default, an array index will be set to that name, with a value of false.
 
-Lastly, if a corresponding value is not found for a given key (if there is an odd number of URI segments) the value will be set to FALSE (boolean).
+Lastly, if a corresponding value is not found for a given key (if there is an odd number of URI segments) the value will be set to false (boolean).
 
 #### $this->uri->ruri2Assoc(n)
 
@@ -211,12 +211,12 @@ Get the current protocol, function returns any protocol listed below.
     </li>ORIG_PATH_INFO</li>
 </ul>
 
-#### $this->uri->requestUri($urlencode = FALSE)
+#### $this->uri->requestUri($urlencode = false)
 
 Return the request uri like native $_SERVER['REQUEST_URI'] variable.
 
 ```php
 echo $this->uri->requestUri();  //  /search/index?var=val1&query=val2 
 
-echo $this->uri->requestUri(TRUE);  //  %2Fsearch%2Findex%3Fvar%3Dval1%26query%3Dval2 
+echo $this->uri->requestUri(true);  //  %2Fsearch%2Findex%3Fvar%3Dval1%26query%3Dval2 
 ```

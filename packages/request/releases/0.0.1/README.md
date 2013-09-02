@@ -101,10 +101,10 @@ $request = request\get('blog/blog/read', array(), 0);   // cache file will be de
 
 ------
 
-You can use Hmvc Class methods directly using second parameter set to FALSE. 
+You can use Hmvc Class methods directly using second parameter set to false. 
 
 ```php
-$request = request\get('/captcha/create', FALSE);
+$request = request\get('/captcha/create', false);
 
 $request->setMethod('get', $params = array());
 $request->cache(0);

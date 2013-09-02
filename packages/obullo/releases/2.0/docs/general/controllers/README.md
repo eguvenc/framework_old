@@ -25,7 +25,7 @@ Consider this URI:
 example.com/index.php/blog/start
 ```
 
-In the above example, Obullo would attempt to find a MODULE named <dfn>/blog</dfn> in the MODS folder and it attempt the find a controller named <dfn>start.php</dfn> in the /controllers folder and load it.
+In the above example, Obullo would attempt to find a MODULE named <dfn>/blog</dfn> in the MODS folder and it attempt the find a controller named <dfn>start.php</dfn> in the /controller folder and load it.
 
 **When a controller's name matches the second segment of a URI, it will be loaded.**
 
@@ -33,28 +33,26 @@ In the above example, Obullo would attempt to find a MODULE named <dfn>/blog</df
 
 -------
 
-Let's create a simple controller so you can see it in action. Create a directory called <samp>blog</samp> in the modules folder
+Let's create a simple controller so you can see it in action. Create a directory called <samp>blog</samp> in the mods folder
 
-Then create <samp>controllers, helpers, models, views</samp> folders and which folders you need.
+Then create <samp>controller, model, view</samp> folders.
 
 ```php
--  application
+-  app
     + config
--  modules
+-  mods
     + welcome
     - blog
-        - controllers
+       - controller
            start.php
-          helpers
-          models
-          views
+         model
+         view
 ```
 
-Using your text editor, create file called <dfn>start.php</dfn> in the <dfn>blog/controllers</dfn> folder, and put the following code in it:
+Using your text editor, create file called <dfn>start.php</dfn> in the <dfn>blog/controller</dfn> folder, and put the following code in it:
 
 ```php
-<?php namespace Ob;
-
+<?php
 Class Start extends Controller 
 {
     public function index()
@@ -79,7 +77,7 @@ If you did it right, you should see <samp>Hello World!</samp>.
 **Note**: Class names must start with an uppercase letter. In other words, this is valid:
 
 ```php
-<?php namespace Ob;
+<?php
 Class Start extends Controller
 {
 
@@ -91,7 +89,6 @@ This is **not** valid:
 
 ```php
 <?php
-namespace Ob;
 Class start extends Controller
 {
     
@@ -116,7 +113,7 @@ example.com/index.php/blog/start/index/
 Let's try it. Add a new function to your controller:
 
 ```php
-<?php namespace Ob;
+<?php
 Class Start extends Controller
 {
     public function index()
@@ -156,7 +153,7 @@ example.com/index.php/shop/products/cars/classic/123
 Your function will be passed URI segments number 4 and 5 ("classic" and "123"):
 
 ```php
-<?php namespace Ob;
+<?php
 
 Class Products extends Controller
 {
@@ -293,40 +290,10 @@ Since your controller classes will extend the main application controller you mu
 
 That, in a nutshell, is all there is to know about controllers.
 
-## Working with Parent Controllers
-
-### Parent Controllers <a name="parent-controllers"></a>
-
-------
-
-You can define your custom Controllers, The Parent Controllers are the parent of your main controller file, it control the <strong>extra jobs</strong> in the application. There are <strong>two</strong> Libraries folder called <strong>/libraries</strong> and it can be locate in your MODS or APPLICATION directory.
-
-### Application Parent Controllers <a name="application-parent-controllers"></a>
-
-------
-
-All your controllers in the framework simply can extend to My_Controller class which is located in your <dfn>app/libraries</dfn> folder. Obullo autoloaders will load the your parent controller simply when you extend to it.
-
-This is an example parent controller we put it to <dfn>app/libraries</dfn> folder.
+###Extending your controllers
 
 ```php
-<?php namespace Ob;
-Class My_Controller extends Controller
-{                                     
-    public function __construct()
-    {
-        parent::__construct();
-
-        new helpername\start();
-    }
-}
-?>
-```
-
-After that you need extend your custom controller like below the example by the way you can change the My_Contoller name anything you want.
-
-```php
-<?php namespace Ob;
+<?php 
 Class Start extends My_Controller
 {
     function __construct()
@@ -338,52 +305,9 @@ Class Start extends My_Controller
     {
         vi\setVar('title',  'Hello World !');
         
-        vi\get('example',  '', false);
+        vi\view('example');
     }
     
 }
 ?> 
 ```
-
-### Module Parent Controllers <a name="module-parent-controllers"></a>
-
-------
-
-You can define a Module Controller in current module. Obullo autoloaders will load it from your <dfn>modulename/libraries</dfn> folder simply when you extend to it.
-
-```php
-<?php namespace Ob;
-Class Welcome_Controller extends Controller
-{                                     
-    public function __construct()
-    {
-        parent::__construct();
-
-        new helpername\start();
-    }
-}
-?>
-```
-
-After that you need extend your custom controller like below the example
-
-```php
-<?php namespace Ob;
-Class Start extends Welcome_Controller
-{
-    function __construct()
-    {
-        parent::__construct(); 
-    }
-    
-    public function index()
-    {
-        vi\setVar('title',  'Hello World !');
-        
-        vi\get('example', '', false);
-    }
-    
-}
-?> 
-```
-You can find the Welcome Controller example in <dfn>modules/welcome/libraries</dfn> folder.

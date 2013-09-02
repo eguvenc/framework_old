@@ -51,7 +51,7 @@ Gzip enables output compression for faster page loads. When enabled, the output 
 To enable gzip compression go <dfn>app/config/cache.php</dfn> and change compress_ouput value. 
 
 ```php
-$cache['compress_output']       = TRUE;  // Compress switch
+$cache['compress_output']       = true;  // Compress switch
 $cache['compression_level']     = 8;     // Compress level
 ```
 

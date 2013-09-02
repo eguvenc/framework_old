@@ -66,8 +66,8 @@ Converts only Email addresses:
 $string = link\auto\Link($string, 'email');
 ```
 
-The third parameter determines whether links are shown in a new window. The value can be TRUE or FALSE (boolean):
+The third parameter determines whether links are shown in a new window. The value can be true or false (boolean):
 
 ```php
-$string = link\autoLink($string, 'both', TRUE);
+$string = link\autoLink($string, 'both', true);
 ```

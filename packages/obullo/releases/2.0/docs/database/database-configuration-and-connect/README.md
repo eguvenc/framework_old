@@ -346,7 +346,7 @@ $db = new Db('db', true);  // provide your database variable
                               // and turn db return object switch to true.                        
 $db->query(" ... "); 
 
-$db2 = new Db('db2', TRUE);  // second db
+$db2 = new Db('db2', true);  // second db
                                       
 $db2->query(" ... ");
 ```

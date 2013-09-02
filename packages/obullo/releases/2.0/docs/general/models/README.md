@@ -146,7 +146,7 @@ $this->model_name->function();
 
 #### Using No Instantiate <a name="using-no-instantiate"></a>
 
-If you set second param to FALSE, you can instantiate the your model manually.
+If you set second param to false, you can instantiate the your model manually.
 
 ```php
 $user = new Model\User(false);

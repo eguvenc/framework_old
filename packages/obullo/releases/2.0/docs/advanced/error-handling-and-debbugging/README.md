@@ -154,7 +154,7 @@ $config['debug_backtrace']  = array('enabled' => 'E_ALL ^ (E_NOTICE | E_WARNING)
 You can enable or disable debugging functionality or you can disable it using native php error regex strings.
 
 ```php
-$config['debug_backtrace']  = array('enabled' => FALSE, 'padding' => 5)
+$config['debug_backtrace']  = array('enabled' => false, 'padding' => 5)
 ```
 
 If you change the padding option debugging lines will be smaller.

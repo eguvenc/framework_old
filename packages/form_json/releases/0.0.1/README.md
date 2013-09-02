@@ -19,7 +19,7 @@ The following functions are available:
 Creates for [Validation in Model](/docs/advanced/validation-in-model) response in <b>JSON</b> format.
 
 ```php
-{"success":FALSE,
+{"success":false,
 "errors":{"usr_username":"The Username field is required.",
 "usr_password":"The Password field is required.",
 "usr_confirm_password":"The Confirm Password field is required.",
@@ -34,20 +34,20 @@ If you provide a <b>Message type of string</b> instead of <b>Model Object</b> fu
 ```php
 echo form_Json\error('System ERROR !');
 
-{"success":FALSE,"errors":{"system_msg":"System ERROR !"}}
+{"success":false,"errors":{"system_msg":"System ERROR !"}}
 ```
 
-#### form_Json\success($msg string, $js_alert = FALSE)
+#### form_Json\success($msg string, $js_alert = false)
 
 This function encodes a success response in json format.
 
 ```php
-{"success":TRUE,"success_msg":"Form saved successfully !"} 
+{"success":true,"success_msg":"Form saved successfully !"} 
 ```
 
-If you provide a second param as TRUE form plugin will do a <b>javascript alert</b> instead of success message.
+If you provide a second param as true form plugin will do a <b>javascript alert</b> instead of success message.
 ```php
-{"success":TRUE,"alert":"Form saved successfully !"} 
+{"success":true,"alert":"Form saved successfully !"} 
 ```
 
 #### form_Json\redirect($redirect_url);
@@ -55,7 +55,7 @@ If you provide a second param as TRUE form plugin will do a <b>javascript alert<
 This function encodes a redirect response in json format. Form plugin just will parse this reponse and it will do a javascript redirect.
 
 ```php
-{"success":TRUE,"success_msg":"","redirect":"http:\/\/example.com"}
+{"success":true,"success_msg":"","redirect":"http:\/\/example.com"}
 ```
 
 form_Json\forward($forward_url);
@@ -63,7 +63,7 @@ form_Json\forward($forward_url);
 This function encodes a forward get/post response in json format. Form plugin just will parse this reponse and it will do a javascript submit to forward url.
 
 ```php
-{"success":TRUE,"forward_url":"\/payment\/do_pay"} 
+{"success":true,"forward_url":"\/payment\/do_pay"} 
 ```
 
 To well understand this function, forexample Obullo Form Plugin if get the forward command after that <b>changing the form action attribute</b> then do a <b>javascript</b> submit like this.
@@ -77,7 +77,7 @@ document.forms[$form_name].submit();
 You can build a simple javascript alert.
 
 ```php
-{"success":FALSE,"alert":"Alert me !"} 
+{"success":false,"alert":"Alert me !"} 
 ```
 
 ### Ajax Form Plugin Rules

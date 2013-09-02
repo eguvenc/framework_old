@@ -60,12 +60,12 @@ Lets you fetch a cookie. The first parameter will contain the name of the cookie
 cookie\get('some_cookie');
 ```
 
-The function returns FALSE (boolean) if the item you are attempting to retrieve does not exist.
+The function returns false (boolean) if the item you are attempting to retrieve does not exist.
 
-The second optional parameter lets you run the data through the XSS filter. It's enabled by setting the second parameter to boolean TRUE;
+The second optional parameter lets you run the data through the XSS filter. It's enabled by setting the second parameter to boolean true;
 
 ```php
-cookie\get('some_cookie', TRUE);
+cookie\get('some_cookie', true);
 ```
 
 #### cookie\delete()

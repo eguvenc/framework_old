@@ -132,7 +132,7 @@ $database['db']['driver']    = "mongo";
 #### $this->db->insert($collection, $data, $options)
 
 ```php
-$options = array('query_safety' => TRUE); // Optionally
+$options = array('query_safety' => true); // Optionally
 
 $affected_rows = $this->db->insert('users', array('username'  => 'john', 'date' => new MongoDate()), $options);
 
@@ -142,7 +142,7 @@ echo $affected_rows.' row(s) added to database !'; '  // 2 row(s) added to datab
 #### $this->db->update($collection, $data)
 
 ```php
-$options = array('query_safety' => TRUE);  // Optionally
+$options = array('query_safety' => true);  // Optionally
 
 $this->db->where('_id', new MongoId('50a39b5e1657ae3817000000'));
 $this->db->update('users', array('username' => 'bob'), $options) 
@@ -290,7 +290,7 @@ Get the documents where the value of a $field is in all of a given $in array().
 $docs = $this->db->where_in_all('foo', array('bar', 'zoo', 'blah'))->get('users');
 ```
 
-#### $this->db->like($field = "", $value = "", $flags = "i", $enable_start_wildcard = TRUE, $enable_end_wildcard = TRUE)
+#### $this->db->like($field = "", $value = "", $flags = "i", $enable_start_wildcard = true, $enable_end_wildcard = true)
 
 ```php
 $this->db->like('username', 'bob');
@@ -309,12 +309,12 @@ $this->db->like('username', 'bob');
      *   u = match unicode
      *
      *  @param $enable_start_wildcard
-     *  If set to anything other than TRUE, a starting line character "^" will be prepended
+     *  If set to anything other than true, a starting line character "^" will be prepended
      *  to the search value, representing only searching for a value at the start of
      *  a new line.
      *
      *  @param $enable_end_wildcard
-     *  If set to anything other than TRUE, an ending line character "$" will be appended
+     *  If set to anything other than true, an ending line character "$" will be appended
      *  to the search value, representing only searching for a value at the end of
      *  a line.
 ```

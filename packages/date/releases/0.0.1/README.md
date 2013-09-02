@@ -78,7 +78,7 @@ Takes a Unix timestamp (referenced to GMT) as input, and converts it to a locali
 ```php
 $timestamp = '1140153693';
 $timezone = 'UM8';
-$daylight_saving = TRUE;
+$daylight_saving = true;
 
 echo gmtToLocal($timestamp, $timezone, $daylight_saving);
 ```
@@ -112,14 +112,14 @@ $now = time();
 
 echo unixToHuman($now); // U.S. time, no seconds 
 
-echo unixToHuman($now, TRUE, 'us'); // U.S. time with seconds
+echo unixToHuman($now, true, 'us'); // U.S. time with seconds
 
-echo unixToHuman($now, TRUE, 'eu'); // Euro time with seconds
+echo unixToHuman($now, true, 'eu'); // Euro time with seconds
 ```
 
 #### humanToUnix()
 
-The opposite of the above function. Takes a "human" time as input and returns it as Unix. This function is useful if you accept "human" formatted dates submitted via a form. Returns FALSE (boolean) if the date string passed to it is not formatted as indicated above. Example:
+The opposite of the above function. Takes a "human" time as input and returns it as Unix. This function is useful if you accept "human" formatted dates submitted via a form. Returns false (boolean) if the date string passed to it is not formatted as indicated above. Example:
 
 ```php
 $now = time();

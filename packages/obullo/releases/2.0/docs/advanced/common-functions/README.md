@@ -87,7 +87,7 @@ echo dbItem('hostname', 'db2');   //output localhost
 
 #### isReallyWritable('path/to/file')
 
-isWritable() returns TRUE on Windows servers when you really can't write to the file as the OS reports to PHP as FALSE only if the read-only attribute is marked. This function determines if a file is actually writable by attempting to write to it first. Generally only recommended on platforms where this information may be unreliable.
+isWritable() returns true on Windows servers when you really can't write to the file as the OS reports to PHP as false only if the read-only attribute is marked. This function determines if a file is actually writable by attempting to write to it first. Generally only recommended on platforms where this information may be unreliable.
 
 ```php
 if (isReallyWritable('file.txt'))

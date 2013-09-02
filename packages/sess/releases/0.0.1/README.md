@@ -70,13 +70,13 @@ $autorun['function']['sess\start']   = array();
 
 Look at this section for more details about [auto-loading and auto-running](/docs/advanced/auto-loading).
 
-If you don't want declare sess_func by globally you can use manually where do you need it. Sometimes if you are **not carefull** you may declare **sess\start();** function more than one time in the application. So don't worry about it when you declare this function multiple times it will simply return to **FALSE**.
+If you don't want declare sess_func by globally you can use manually where do you need it. Sometimes if you are **not carefull** you may declare **sess\start();** function more than one time in the application. So don't worry about it when you declare this function multiple times it will simply return to **false**.
 
 ```php
-sess\start();  // TRUE driver loaded and session started.
-sess\start();  // FALSE driver already loaded and session started before.
-sess\start();  // FALSE driver already loaded and session started before. 
-sess\start();  // FALSE driver already loaded and session started before. 
+sess\start();  // true driver loaded and session started.
+sess\start();  // false driver already loaded and session started before.
+sess\start();  // false driver already loaded and session started before. 
+sess\start();  // false driver already loaded and session started before. 
 
 /*
 *
@@ -130,7 +130,7 @@ Where <kbd>item</kbd> is the array index corresponding to the item you wish to f
 $session_id = sess\get('session_id');
 ```
 
-**Note:** The function returns FALSE (boolean) if the item you are trying to access does not exist.
+**Note:** The function returns false (boolean) if the item you are trying to access does not exist.
 
 ### Adding Custom Session Data
 
@@ -151,7 +151,7 @@ Where <samp>$array</samp> is an associative array containing your new data. Here
 $newdata = array(
                            'username'  => 'johndoe',
                            'email'     => 'johndoe@some-site.com',
-                           'logged_in' => TRUE
+                           'logged_in' => true
                        );
 
 sess\set($newdata);
@@ -298,14 +298,14 @@ You'll find the following Session related preferences in your <samp>app/config/c
         </tr>
         <tr>
             <td>expire_on_close</td>
-            <td>FALSE</td>
+            <td>false</td>
             <td>None</td>
-            <td>If set TRUE all sessions will be destroy when users close the browser.</td>
+            <td>If set true all sessions will be destroy when users close the browser.</td>
         </tr>
         <tr>
             <td>encrypt_cookie</td>
-            <td>FALSE</td>
-            <td>TRUE/FALSE (boolean)</td>
+            <td>false</td>
+            <td>true/false (boolean)</td>
             <td>Whether to encrypt the session data.</td>
         </tr>
         <tr>
@@ -334,14 +334,14 @@ You'll find the following Session related preferences in your <samp>app/config/c
         </tr>
         <tr>
             <td>match_ip</td>
-            <td>FALSE</td>
-            <td>TRUE/FALSE (boolean)</td>
-            <td>Whether to match the user's IP address when reading the session data. Note that some ISPs dynamically changes the IP, so if you want a non-expiring session you will likely set this to FALSE.</td>
+            <td>false</td>
+            <td>true/false (boolean)</td>
+            <td>Whether to match the user's IP address when reading the session data. Note that some ISPs dynamically changes the IP, so if you want a non-expiring session you will likely set this to false.</td>
         </tr>
         <tr>
             <td>match_useragent</td>
-            <td>TRUE</td>
-            <td>TRUE/FALSE (boolean)</td>
+            <td>true</td>
+            <td>true/false (boolean)</td>
             <td>Whether to match the User Agent when reading the session data.</td>
         </tr>
     </tbody>

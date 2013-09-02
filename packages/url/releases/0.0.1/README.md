@@ -58,7 +58,7 @@ Returns the current MODULE name of the controller currently worked.
 echo url\anchor(url\module('/local/start/123'), 'Example');  // output <a href='/index.php/news/local/start/123'>Example</a>
 ```
 
-#### anchor($uri = '', $title = '', $attributes = '', $suffix = TRUE)
+#### anchor($uri = '', $title = '', $attributes = '', $suffix = true)
 
 Creates a standard HTML anchor link based on your local site URL:
 
@@ -148,12 +148,12 @@ $url_title = url\title($title, 'underscore');
 // Produces: Whats_wrong_with_CSS
 ```
 
-The third parameter determines whether or not lowercase characters are forced. By default they are not. Options are boolean TRUE/FALSE:
+The third parameter determines whether or not lowercase characters are forced. By default they are not. Options are boolean true/false:
 
 ```php
 $title = "What's wrong with CSS?";
 
-$url_title = url\title($title, 'underscore', TRUE);
+$url_title = url\title($title, 'underscore', true);
 
 // Produces: whats_wrong_with_css{/ouput}
 ```
@@ -175,7 +175,7 @@ Does a "header redirect" to the local URI specified. Just like other functions i
 The optional second parameter allows you to choose between the "location" method (default) or the "refresh" method. Location is faster, but on Windows servers it can sometimes be a problem. The optional third parameter allows you to send a specific HTTP Response Code - this could be used for example to create 301 redirects for search engine purposes. The default Response Code is 302. The third parameter is only available with 'location' redirects, and not 'refresh'. Examples:
 
 ```php
-if ($logged_in == FALSE)
+if ($logged_in == false)
 {
      url\redirect('/login/form/', 'refresh[0]);
 }

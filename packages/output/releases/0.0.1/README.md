@@ -59,8 +59,8 @@ The Obullo output library also controls caching. For more information, please se
 
 ------
 
-Obullo will parse the pseudo-variables <var>(elapsed_time)</var> and <var>(memory_usage)</var> in your output by default. To disable this, set the <var>$parse_exec_vars</var> class property to <var>FALSE</var> in your controller. 
+Obullo will parse the pseudo-variables <var>(elapsed_time)</var> and <var>(memory_usage)</var> in your output by default. To disable this, set the <var>$parse_exec_vars</var> class property to <var>false</var> in your controller. 
 
 ```php
-$this->output->parse_exec_vars = FALSE; 
+$this->output->parse_exec_vars = false; 
 ```
