@@ -17,7 +17,7 @@
         <section>
             <h2>Get Started</h2>
             <ol>
-                <li>The app start codes is in <code>index.php</code></li>
+                <li>The app start with <code>index.php</code></li>
                 <li>Update your packages using <strong>package.json</strong> file</li>
                 <li>Run <code>obm update</code> from your console</li>
             </ol>

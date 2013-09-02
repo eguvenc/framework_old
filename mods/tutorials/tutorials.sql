@@ -1,5 +1,5 @@
 --
--- Test Module SQL File for Validation Model
+-- Test SQL File for Tutorials
 --
 
 --
@@ -21,19 +21,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `usr_email` varchar(160) NOT null,
   PRIMARY KEY (`usr_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Table structure for table `captcha`
---
-
-CREATE TABLE IF NOT EXISTS `ob_captcha` (
-captcha_id bigint(13) unsigned NOT null auto_increment,
-captcha_time int(10) unsigned NOT null,
-ip_address varchar(16) default '0' NOT null,
-word varchar(20) NOT null,
-PRIMARY KEY `captcha_id` (`captcha_id`),
-KEY `word` (`word`)
-);
 
 --
 -- Table structure for table `sessions`
