@@ -52,3 +52,6 @@
 [submodule "packages/ftp"]
 	path = packages/ftp
 	url = git://github.com/obullo/ftp.git
+[submodule "packages/hmvc"]
+	path = packages/hmvc
+	url = git://github.com/obullo/hmvc.git
