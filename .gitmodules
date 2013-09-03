@@ -37,3 +37,6 @@
 [submodule "packages/encrypt"]
 	path = packages/encrypt
 	url = git://github.com/obullo/encrypt.git
+[submodule "packages/error"]
+	path = packages/error
+	url = git://github.com/obullo/error.git
