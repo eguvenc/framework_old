@@ -112,7 +112,7 @@ Class Controller {
     * @param type $new_instance
     * @return type 
     */
-    public static function _ob_getInstance_($new_instance = '')
+    public static function _getInstance($new_instance = '')
     {   
         if(is_object($new_instance))
         {

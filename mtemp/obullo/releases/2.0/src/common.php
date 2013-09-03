@@ -46,10 +46,10 @@
     { 
         if(is_object($new_instance))  // fixed HMVC object type of integer bug in php 5.1.6
         {
-            Controller::_ob_getInstance_($new_instance);
+            Controller::_getInstance($new_instance);
         }
 
-        return  Controller::_ob_getInstance_(); 
+        return  Controller::_getInstance(); 
     }
 
     // --------------------------------------------------------------------
