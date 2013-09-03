@@ -369,14 +369,14 @@ function getHttpPackage($pack_name, $archive, $archive_url, $version){
         fi;
 
         # if $PACKAGE folder does not exists create it
-        if [ ! -d $PROJECT_DIR/ob/$PACKAGE ]; then
-            sudo mkdir -p $PROJECT_DIR/ob/$PACKAGE;
-            sudo chmod -R 777 $PROJECT_DIR/ob;
+        if [ ! -d $PROJECT_DIR/packages/$PACKAGE ]; then
+            sudo mkdir -p $PROJECT_DIR/packages/$PACKAGE;
+            sudo chmod -R 777 $PROJECT_DIR/packages;
         fi
 
-        # find the package.json and copy it to ob/$PACKAGE
-        find $TEMP_FOLDER/$PACKAGE-$UNIQID -name package.json -exec cp {} $PROJECT_DIR/ob/$PACKAGE \;
-        find $TEMP_FOLDER/$PACKAGE-$UNIQID -type d -name releases -exec cp {} -ar $PROJECT_DIR/ob/$PACKAGE \;
+        # find the package.json and copy it to packages/$PACKAGE
+        find $TEMP_FOLDER/$PACKAGE-$UNIQID -name package.json -exec cp {} $PROJECT_DIR/packages/$PACKAGE \;
+        find $TEMP_FOLDER/$PACKAGE-$UNIQID -type d -name releases -exec cp {} -ar $PROJECT_DIR/packages/$PACKAGE \;
     ';
     // shell_exec($getPackageSh);
     exec($getPackageSh.' > /dev/null');
