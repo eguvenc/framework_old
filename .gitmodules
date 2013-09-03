@@ -46,3 +46,6 @@
 [submodule "packages/form"]
 	path = packages/form
 	url = git://github.com/obullo/form.git
+[submodule "packages/form_json"]
+	path = packages/form_json
+	url = git://github.com/obullo/form_json.git
