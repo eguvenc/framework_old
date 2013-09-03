@@ -83,7 +83,7 @@ $auth['fields']              = array(       // Session Container db table fields
 ```php
 $auth = new Auth(false);
 $auth->select('user_username, user_password, user_active');
-$auth->query();
+$auth->attemptQuery();
 $row = $auth->getRow();
         
 if($row ! == false)
@@ -207,7 +207,7 @@ $this->auth->logout();
 
 Creates database select string according to your table fields. This function store all selected fields to session container.
 
-#### $this->auth->attempt($username = '', $password = '')
+#### $this->auth->attemptQuery($username = '', $password = '')
 
 Tries authentication attempt and do sql query using username and password combination, if you not provide any username data it will look at $_REQUEST data.
 
