@@ -16,4 +16,4 @@ $user->save();
 */
 
 /* End of file user.php */
-/* Location: .mods/tutorials/model/user.php */
+/* Location: .modules/tutorials/model/user.php */

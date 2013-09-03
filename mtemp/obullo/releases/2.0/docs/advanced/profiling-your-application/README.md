@@ -71,7 +71,7 @@ Libraries               -
 Models                  -
 Databases               -
 Scripts                 welcome
-Local Views             MODS\welcome\views\view_welcome.php
+Local Views             MODULES\welcome\views\view_welcome.php
 Application Views       APP\views\view_base_layout.php
 ```
 

@@ -5,7 +5,7 @@
 | Auth Package Configuration
 |--------------------------------------------------------------------------
 |
-| Configure auth library settings
+| Configure auth library options
 |
 */
 $auth['session_prefix']      = 'auth_';     // Set a auth session prefix to prevent collisions.
@@ -15,6 +15,8 @@ $auth['username_col']        = 'user_email';   // The name of the table field th
 $auth['password_col']        = 'user_password';  // The name of the table field that contains the password.
 $auth['username_length']     = '60';        // The string length of the username.
 $auth['password_length']     = '60';        // The string length of the password.
+$auth['password_salt']       = true;        // Whether to use password salt ?
+$auth['password_salt_str']   = '';          // Password salt string for more strong passwords.You need to use same string in the user registration.
 $auth['md5']                 = true;        // Whether to use md5 hash ?
 $auth['allow_login']         = true;        // Whether to allow logins to be performed on this page.
 

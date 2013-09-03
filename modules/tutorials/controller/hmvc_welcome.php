@@ -28,4 +28,4 @@ Class Hmvc_Welcome extends Controller {
 }
 
 /* End of file hmvc_welcome.php */
-/* Location: .mods/tutorials/controller/hmvc_welcome.php */
+/* Location: .modules/tutorials/controller/hmvc_welcome.php */

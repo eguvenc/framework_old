@@ -48,7 +48,7 @@ Class Obullo
         if ($output->_displayCache($config, $uri) == true) { exit; }  // Check REQUEST uri if there is a Cached file exist 
 
         $page_uri   = "{$router->fetchDirectory()} / {$router->fetchClass()} / {$router->fetchMethod()}";
-        $controller = MODS .$router->fetchDirectory(). DS .'controller'. DS .$router->fetchClass(). EXT;
+        $controller = MODULES .$router->fetchDirectory(). DS .'controller'. DS .$router->fetchClass(). EXT;
 
         bench\mark('loading_time_base_classes_end');  // Set a mark point for benchmarking  
         bench\mark('execution_time_( '.$page_uri.' )_start');  // Mark a start point so we can benchmark the controller 
@@ -57,7 +57,7 @@ Class Obullo
 
         if ( ! class_exists($router->fetchClass()) OR $router->fetchMethod() == 'controller' 
               OR $router->fetchMethod() == '_output'       // security fix.
-              OR $router->fetchMethod() == '_ob_getInstance_'
+              OR $router->fetchMethod() == '_getInstance'
               OR in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods('Controller')))
             )
         {

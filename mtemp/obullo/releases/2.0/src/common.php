@@ -93,12 +93,12 @@
             {
                 if($model_parts[1] == 'Schema')
                 {
-                    $model_path = MODS .'models'. DS .'schema'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
+                    $model_path = MODULES .'models'. DS .'schema'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
                     require($model_path);
                     return;
                 }
                 
-                $model_path = MODS .'models'. DS .mb_strtolower($model_parts[1], config('charset')). EXT;
+                $model_path = MODULES .'models'. DS .mb_strtolower($model_parts[1], config('charset')). EXT;
             } 
             else // 'Model\\'
             {
@@ -107,12 +107,12 @@
                 
                 if($model_parts[1] == 'Schema')
                 { 
-                    $model_path = MODS .$router->fetchDirectory(). DS .'model'. DS .'schema'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
+                    $model_path = MODULES .$router->fetchDirectory(). DS .'model'. DS .'schema'. DS .mb_strtolower($model_parts[2], config('charset')). EXT;
                     require($model_path);
                     return;
                 }
 
-                $model_path = MODS .$router->fetchDirectory(). DS .'model'. DS .mb_strtolower($model_parts[1], config('charset')). EXT;
+                $model_path = MODULES .$router->fetchDirectory(). DS .'model'. DS .mb_strtolower($model_parts[1], config('charset')). EXT;
             }
            
             require($model_path);

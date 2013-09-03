@@ -38,4 +38,4 @@ Class Form_Ajax extends Controller {
 }
 
 /* End of file form_ajax.php */
-/* Location: .mods/tutorials/controller/form_ajax.php */
+/* Location: .modules/tutorials/controller/form_ajax.php */

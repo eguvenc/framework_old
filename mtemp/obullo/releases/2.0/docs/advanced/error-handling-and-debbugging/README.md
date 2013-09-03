@@ -165,7 +165,7 @@ $config['debug_backtrace']  = array('enabled' => 'E_ALL ^ (E_NOTICE | E_WARNING)
 
 ```php
 Notice): Undefined variable: undefined 
-MODS/welcome/controllers/welcome.php Code : 8 ( Line : 14 )
+MODULES/welcome/controllers/welcome.php Code : 8 ( Line : 14 )
 
 12     {   
 13 

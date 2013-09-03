@@ -320,19 +320,19 @@ Class Router {
         
         ### tasks ###
         
-        if (is_dir(MODS .$segments[0]))  // Check module
+        if (is_dir(MODULES .$segments[0]))  // Check module
         {        
             $this->setDirectory($segments[0]);
 
             if( ! empty($segments[1]))
             {              
-                if (file_exists(MODS .$this->fetchDirectory(). DS .'controller'. DS .$segments[1]. EXT))
+                if (file_exists(MODULES .$this->fetchDirectory(). DS .'controller'. DS .$segments[1]. EXT))
                 {  
                     return $segments; 
                 }
             }
             
-            if (file_exists(MODS .$this->fetchDirectory(). DS .'controller'. DS .$this->fetchDirectory(). EXT))  // Merge Segments
+            if (file_exists(MODULES .$this->fetchDirectory(). DS .'controller'. DS .$this->fetchDirectory(). EXT))  // Merge Segments
             {
                 array_unshift($segments, $this->fetchDirectory());
 

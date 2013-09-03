@@ -32,7 +32,7 @@ Class View {
     */
     public function __construct()
     {
-        $this->path = MODS .getInstance()->router->fetchDirectory(). DS .'view'. DS;
+        $this->path = MODULES .getInstance()->router->fetchDirectory(). DS .'view'. DS;
         
         log\me('debug', "View Class Initialized");
     }
@@ -58,7 +58,7 @@ Class View {
      */
     public function setPath($folder = 'view', $path = '')
     {
-        $this->path = ($path == '') ? MODS .$folder. DS : MODS .str_replace('/', DS, trim($path, '/')). DS .$folder. DS;
+        $this->path = ($path == '') ? MODULES .$folder. DS : MODULES .str_replace('/', DS, trim($path, '/')). DS .$folder. DS;
     }
     
     // --------------------------------------------------------------------

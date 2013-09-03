@@ -13,7 +13,7 @@ Class Log extends Controller {
         if($level == '')
         {
             $this->_displayLogo();
-            $this->_follow(APP .'logs'. DS .'log-'.date('Y-m-d').'.php'); // Start the debugging task.
+            $this->_follow(APP .'logs'. DS .'log-'.date('Y-m-d').'.php'); // Display the debugging.
         } 
         else 
         {
@@ -31,7 +31,7 @@ Class Log extends Controller {
        |______||____||_____||_||_||____|
 
         Welcome to Log Manager (c) 2013
-Display logs [$obm log], to filter logs [$obm log $level]'."\n\033[0m";
+Display logs [$php task log], to filter logs [$php task log $level]'."\n\033[0m";
     }
     
     /**
@@ -53,11 +53,13 @@ Display logs [$obm log], to filter logs [$obm log $level]'."\n\033[0m";
         while (true)
         {
             clearstatcache(); // clear the cache
-            if( ! file_exists($file)){  // start process when file exists.
+            if( ! file_exists($file)) // start process when file exists.
+            {  
                 continue;
             }
             $currentSize = filesize($file); // continue the process when file size change.
-            if ($size == $currentSize){
+            if ($size == $currentSize)
+            {
                 usleep(100);
                 continue;
             }
@@ -74,14 +76,13 @@ Display logs [$obm log], to filter logs [$obm log $level]'."\n\033[0m";
                 // remove all newlines
                 $line = trim(preg_replace('/[\r\n]/', ' ', $line), "\n");
                 $line = str_replace('[@]', "\n", $line); // new line
-                $out  = explode(" ",$line);
-                // echo print_r($out, true)."\n\n";
+                $out  = explode(" ",$line);  // echo print_r($out, true)."\n\n";
                 
                 if($level == '' OR $level == 'debug')
                 {
                     if(isset($out[5]))
                     {
-                        if(strpos($out[5], '[') !== false)  // module logs.
+                        if(strpos($out[5], '[') !== false)  // colorful logs.
                         {
                             $line = "\033[0;33m".$line."\033[0m";
                         }               
@@ -236,4 +237,4 @@ $WHITE="33[1;37m";
 */
 
 /* End of file log.php */
-/* Location: .mods/tasks/controller/log.php */
+/* Location: .modules/tasks/controller/log.php */

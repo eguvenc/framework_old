@@ -363,7 +363,7 @@ Class Hmvc
         // @todo do ob_start(); HMVC CACHE if(ob_get_level() > 0) ob_end_clean();
         
         $hmvc_uri   = "{$router->fetchDirectory()} / {$router->fetchClass()} / {$router->fetchMethod()}";
-        $controller = MODS .$router->fetchDirectory(). DS .'controller'. DS .$router->fetchClass(). EXT;
+        $controller = MODULES .$router->fetchDirectory(). DS .'controller'. DS .$router->fetchClass(). EXT;
 
         // Check the controller exists or not
         if ( ! file_exists($controller))
@@ -379,7 +379,7 @@ Class Hmvc
 
         if ( ! class_exists($router->fetchClass()) OR $router->fetchMethod() == 'controller' 
               OR $router->fetchMethod() == '_output'       // security fix.
-              OR $router->fetchMethod() == '_ob_getInstance_'
+              OR $router->fetchMethod() == '_getInstance'
               OR in_array(strtolower($router->fetchMethod()), array_map('strtolower', get_class_methods('Controller')))
             )
         {
