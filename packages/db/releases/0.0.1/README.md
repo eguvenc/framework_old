@@ -142,7 +142,7 @@ $database['db2']['hostname'] = "localhost";
 $database['db2']['username'] = "root";
 $database['db2']['password'] = "";
 $database['db2']['database'] = "example_db2";
-$database['db2']['driver'] = "mysql";
+$database['db2']['driver']   = "mysql";
 $database['db2']['dbh_port'] = "";
 $database['db2']['char_set'] = "utf8";
 $database['db2']['dsn']      = "";
@@ -157,7 +157,7 @@ $database['db3']['hostname'] = "";
 $database['db3']['username'] = "";
 $database['db3']['password'] = "";
 $database['db3']['database'] = "";
-$database['db3']['driver'] = "";
+$database['db3']['driver']   = "";
 $database['db3']['dbh_port'] = "";
 $database['db3']['char_set'] = "utf8";
 $database['db3']['dsn']      = "mysql:host=localhost;port=3307;dbname=test_db;username=root;password=1234;";
@@ -182,18 +182,6 @@ $database['db']['options']  = array( PDO::ATTR_PERSISTENT => false ,
 ```
 
 <strong>Tip:</strong>You can learn more details about PDO Predefined Constants.
-
-### CRUD ( Active Record )
-
--------
-
-The CRUD ( Active Record ) Class is globally enabled or disabled by setting the 'active_record' variable in the database configuration file to true/false (boolean). If you are not using the active record class, setting it to false will utilize fewer resources when the database classes are initialized.
-
-```php
-$database['system']['active_record'] = true;
-```
-
-<strong>Note:</strong> that some Obullo classes such as Sessions require Active Records be enabled to access certain functionality.
 
 #### Explanation of Values:
 
@@ -299,7 +287,7 @@ $config = array(
      'username' => 'root',
      'password' => '',
      'database' => 'test_db',
-     'driver' => 'mysql',
+     'driver'   => 'mysql',
      'dbh_port' => '',
      'char_set' => 'utf8',
      'options'  => array( PDO::ATTR_PERSISTENT => true )

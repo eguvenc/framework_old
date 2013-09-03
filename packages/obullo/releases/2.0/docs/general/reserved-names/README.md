@@ -99,7 +99,7 @@ Since your controller classes will extend the main application controller you mu
 
 * param_null
 * PARAM_INT
-* param_str
+* PARAM_STR
 * param_lob
 * param_stmt
 * param_bool

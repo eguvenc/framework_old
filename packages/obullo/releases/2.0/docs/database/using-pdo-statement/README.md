@@ -28,8 +28,8 @@ Obullo offers PDO <b>bindValue</b> and <b>bindParam</b> functionalities, using t
 $this->db->prep();   // tell to db class use pdo prepare 
 $this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
 
-$this->db->bindValue(':id', 1, param_int);  // Integer 
-$this->db->bindValue(':code', 'i see dead people', param_str); // String      
+$this->db->bindValue(':id', 1, PARAM_INT);  // Integer 
+$this->db->bindValue(':code', 'i see dead people', PARAM_STR); // String      
 
 $this->db->exec();  // execute query
 $a = $this->db->rowArray();
@@ -49,8 +49,8 @@ The <b>double dots</b> in the query are automatically replaced with the values o
 $this->db->prep();   // tell to db class use pdo prepare 
 $this->db->query("SELECT * FROM articles WHERE article_id=:id OR link=:code");
 
-$this->db->bindParam(':id', 1, param_int, 11);   // Integer 
-$this->db->bindParam(':code', 'i see dead people', param_str, 20); // String (int Length)      
+$this->db->bindParam(':id', 1, PARAM_INT, 11);   // Integer 
+$this->db->bindParam(':code', 'i see dead people', PARAM_STR, 20); // String (int Length)      
 
 $this->db->exec();  // execute query
 $a = $this->db->rowArray();
