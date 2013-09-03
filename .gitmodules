@@ -25,6 +25,3 @@
 [submodule "packages/date"]
 	path = packages/date
 	url = git://github.com/obullo/date.git
-[submodule "packages/controller"]
-	path = packages/controller
-	url = git://github.com/obullo/controller.git
