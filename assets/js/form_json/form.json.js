@@ -72,6 +72,10 @@
                       window.location.replace(r.redirect);
                       return;
                   }
+                  if ( typeof r.top_redirect !== 'undefined' && r.top_redirect) { 
+                      window.top.location.replace(r.top_redirect);
+                      return;
+                  }
                   $('.loading').hide();
                   $root.find('input[type=submit]', this).removeAttr('disabled');
                   $root.find('input[type=submit]', this).removeClass('disabled');
@@ -108,13 +112,17 @@
                    }
                   });
                 } else {
-                  if ( typeof r.forward_url !== "undefined" && r.forward_url) {   // if we have a forward url request
-                      $root.attr('action', r.forward_url);
+                  if ( typeof r.forward !== "undefined" && r.forward) {   // if we have a forward url request
+                      $root.attr('action', r.forward);
                       document.forms[$root.attr('name')].submit();
                       return;
                   }
                   if ( typeof r.redirect !== "undefined" && r.redirect) {   // if we have a server redirect request
                       window.location.replace(r.redirect);
+                      return;
+                  }
+                  if ( typeof r.top_redirect !== 'undefined' && r.top_redirect) { 
+                      window.top.location.replace(r.top_redirect);
                       return;
                   }
                   $('.loading').hide();
