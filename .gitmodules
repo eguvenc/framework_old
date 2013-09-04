@@ -25,9 +25,6 @@
 [submodule "packages/db"]
 	path = packages/db
 	url = git://github.com/obullo/db.git
-[submodule "packages/encrypt"]
-	path = packages/encrypt
-	url = git://github.com/obullo/encrypt.git
 [submodule "packages/error"]
 	path = packages/error
 	url = git://github.com/obullo/error.git
