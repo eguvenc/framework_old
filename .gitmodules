@@ -1,6 +1,3 @@
-[submodule "packages/acl"]
-	path = packages/acl
-	url = git://github.com/obullo/acl.git
 [submodule "packages/agent"]
 	path = packages/agent
 	url = git://github.com/obullo/agent.git
