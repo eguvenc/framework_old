@@ -55,3 +55,6 @@
 [submodule "packages/auth"]
 	path = packages/auth
 	url = git://github.com/obullo/auth.git
+[submodule "packages/html"]
+	path = packages/html
+	url = git://github.com/obullo/html.git
