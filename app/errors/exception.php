@@ -7,7 +7,7 @@ padding:5px;
 background-color: #F0F0F0;
 }
 #exception_content  h1 {
-font-size:          23px;
+font-size:          20px;
 color:              #333;
 margin:             0 0 8px 0;
 }
