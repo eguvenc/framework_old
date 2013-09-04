@@ -88,3 +88,6 @@
 [submodule "packages/router"]
 	path = packages/router
 	url = git://github.com/obullo/router.git
+[submodule "packages/security"]
+	path = packages/security
+	url = git://github.com/obullo/security.git
