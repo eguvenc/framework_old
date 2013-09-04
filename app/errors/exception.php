@@ -1,51 +1,51 @@
 <style type="text/css">
-#exception_content {
+#exceptionContent {
 font-family:Arial,Verdana,Sans-serif;
 font-size:12px;
 width:99%;
 padding:5px;
 background-color: #F0F0F0;
 }
-#exception_content  h1 {
-font-size:          20px;
+#exceptionContent  h1 {
+font-size:          18px;
 color:              #333;
-margin:             0 0 8px 0;
+margin:             0 0 3px 0;
 }
-#exception_content  h2 {
-font-size:          15px;
+#exceptionContent  h2 {
+font-size:          14px;
 color:              #333;
-margin:             0 0 4px 0;
+margin:             0;
 }
-#exception_content .errorfile { 
+#exceptionContent .errorFile { 
 display:block;
 line-height: 2.0em; 
 }
-#exception_content pre.source { 
+#exceptionContent pre.source { 
 margin: 5px 0 5px 0; 
 padding: 0; 
 background: none; 
 border: none; 
 line-height: none; 
 }
-#exception_content div.collapsed { display: none; }
-#exception_content div.arguments { }
-#exception_content div.arguments table { 
+#exceptionContent div.collapsed { display: none; }
+#exceptionContent div.arguments { }
+#exceptionContent div.arguments table { 
 font-family : Verdana, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, Geneva, Arial, Sans-serif;
 font-size:12px; 
 border-collapse: collapse; 
 border-spacing: 0; 
 background: #fff;  
 }
-#exception_content div.arguments table td { text-align: left; padding: 5px; border: 1px solid #ccc; }
-#exception_content div.arguments table td .object_name { color: blue; }
-#exception_content pre.source span.line { display: block; }
-#exception_content pre.source span.highlight { background: #D3D3D3; }
-#exception_content pre.source span.line span.number { color: none; }
-#exception_content pre.source span.line span.number { color: none; }
+#exceptionContent div.arguments table td { text-align: left; padding: 5px; border: 1px solid #ccc; }
+#exceptionContent div.arguments table td .object_name { color: blue; }
+#exceptionContent pre.source span.line { display: block; }
+#exceptionContent pre.source span.highlight { background: #D3D3D3; }
+#exceptionContent pre.source span.line span.number { color: none; }
+#exceptionContent pre.source span.line span.number { color: none; }
 </style>
 
 <script type="text/javascript">
-function Obullo_Element() {
+function ExceptionElement() {
     var elements = new Array();
     for (var i = 0; i < arguments.length; i++){
         var element = arguments[i];
@@ -57,8 +57,8 @@ function Obullo_Element() {
     }
     return elements;
 }
-function Obullo_Error_Toggle(obj){
-    var el = Obullo_Element(obj);
+function ExceptionToggle(obj){
+    var el = ExceptionElement(obj);
     if (el == null){
         return false;
     }
@@ -66,17 +66,17 @@ function Obullo_Error_Toggle(obj){
 }
 </script>
 
-<div id="exception_content">
+<div id="exceptionContent">
     <h1><?php echo $type ?></h1>
     <h2><?php echo error\securePath($e->getMessage(), true) ?></h2>
 <?php 
 if(isset($sql)) 
 {
-    echo '<span class="errorfile"><b>SQL :</b> '.$sql.'</span>';
+    echo '<span class="errorFile"><b>SQL :</b> '.$sql.'</span>';
 }
 ?>
 <?php $code = ($e->getCode() != 0) ? ' Code : '. $e->getCode() : ''; ?> 
-<span class="errorfile"><?php echo error\securePath($e->getFile()) ?><?php echo $code; ?><?php echo ' ( Line : '.$e->getLine().' ) '; ?></span>
+<span class="errorFile"><?php echo error\securePath($e->getFile()) ?><?php echo $code; ?><?php echo ' ( Line : '.$e->getLine().' ) '; ?></span>
 <?php 
 $debug  = config('debug_backtrace');
 if($debug['enabled'] === true OR $debug['enabled'] == 1)  // Covert to readable format
@@ -153,7 +153,7 @@ if(is_string($debug['enabled']))
                         if(count($trace['args']) > 0)
                         {                  
                             $class_info.= '(<a href="javascript:void(0);" ';
-                            $class_info.= 'onclick="Obullo_Error_Toggle(\'arg_toggle_'.$prefix.$key.'\');">';
+                            $class_info.= 'onclick="ExceptionToggle(\'arg_toggle_'.$prefix.$key.'\');">';
                             $class_info.= 'arg';
                             $class_info.= '</a>)'; 
                             
@@ -198,8 +198,8 @@ if(is_string($debug['enabled']))
                 if($unset == false) { ++$key; }
                 ?>
                 
-                <span class="errorfile" style="line-height: 1.8em;">
-                <a href="javascript:void(0);" onclick="Obullo_Error_Toggle('error_toggle_' + '<?php echo $prefix.$key?>');"><?php echo error\securePath($trace['file']); echo ' ( '?><?php echo ' Line : '.$trace['line'].' ) '; ?></a>
+                <span class="errorFile" style="line-height: 1.8em;">
+                <a href="javascript:void(0);" onclick="ExceptionToggle('error_toggle_' + '<?php echo $prefix.$key?>');"><?php echo error\securePath($trace['file']); echo ' ( '?><?php echo ' Line : '.$trace['line'].' ) '; ?></a>
                 </span>
         
                 <?php 
