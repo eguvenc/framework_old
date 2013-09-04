@@ -85,3 +85,6 @@
 [submodule "packages/output"]
 	path = packages/output
 	url = git://github.com/obullo/output.git
+[submodule "packages/router"]
+	path = packages/router
+	url = git://github.com/obullo/router.git
