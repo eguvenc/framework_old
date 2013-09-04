@@ -76,3 +76,6 @@
 [submodule "packages/log_write"]
 	path = packages/log_write
 	url = git://github.com/obullo/log_write.git
+[submodule "packages/obullo"]
+	path = packages/obullo
+	url = git://github.com/obullo/obullo.git
