@@ -94,3 +94,6 @@
 [submodule "packages/view"]
 	path = packages/view
 	url = git://github.com/obullo/view.git
+[submodule "packages/log_write"]
+	path = packages/log_write
+	url = git://github.com/obullo/log_write.git
