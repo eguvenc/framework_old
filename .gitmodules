@@ -79,3 +79,6 @@
 [submodule "packages/encrypt"]
 	path = packages/encrypt
 	url = git://github.com/obullo/encrypt.git
+[submodule "packages/model"]
+	path = packages/model
+	url = git://github.com/obullo/model.git
