@@ -76,3 +76,6 @@
 [submodule "packages/obullo"]
 	path = packages/obullo
 	url = git://github.com/obullo/obullo.git
+[submodule "packages/database_pdo"]
+	path = packages/database_pdo
+	url = git://github.com/obullo/database_pdo.git
