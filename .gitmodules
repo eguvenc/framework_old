@@ -97,3 +97,6 @@
 [submodule "packages/log_write"]
 	path = packages/log_write
 	url = git://github.com/obullo/log_write.git
+[submodule "packages/validator"]
+	path = packages/validator
+	url = git://github.com/obullo/validator.git
