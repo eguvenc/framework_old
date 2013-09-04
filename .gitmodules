@@ -7,9 +7,6 @@
 [submodule "packages/config"]
 	path = packages/config
 	url = git://github.com/obullo/config.git
-[submodule "packages/auth"]
-	path = packages/auth
-	url = git://github.com/obullo/auth.git
 [submodule "packages/bench"]
 	path = packages/bench
 	url = git://github.com/obullo/bench.git
