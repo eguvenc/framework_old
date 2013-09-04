@@ -67,3 +67,6 @@
 [submodule "packages/link"]
 	path = packages/link
 	url = git://github.com/obullo/link.git
+[submodule "packages/locale"]
+	path = packages/locale
+	url = git://github.com/obullo/locale.git
