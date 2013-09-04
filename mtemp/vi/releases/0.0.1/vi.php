@@ -36,7 +36,7 @@ namespace vi {
     // ------------------------------------------------------------------------
     
     /**
-    * Load view file from MODS\views folder.
+    * Load view file from MODULES\views folder.
     *
     * @param string  $filename
     * @param boolean $string default false

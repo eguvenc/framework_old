@@ -42,4 +42,4 @@ Class Welcome extends Controller {
 }
 
 /* End of file welcome.php */
-/* Location: .mods/welcome/controller/welcome.php */
+/* Location: .modules/welcome/controller/welcome.php */

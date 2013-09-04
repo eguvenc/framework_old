@@ -25,7 +25,7 @@ Consider this URI:
 example.com/index.php/blog/start
 ```
 
-In the above example, Obullo would attempt to find a MODULE named <dfn>/blog</dfn> in the MODS folder and it attempt the find a controller named <dfn>start.php</dfn> in the /controller folder and load it.
+In the above example, Obullo would attempt to find a MODULE named <dfn>/blog</dfn> in the MODULES folder and it attempt the find a controller named <dfn>start.php</dfn> in the /controller folder and load it.
 
 **When a controller's name matches the second segment of a URI, it will be loaded.**
 

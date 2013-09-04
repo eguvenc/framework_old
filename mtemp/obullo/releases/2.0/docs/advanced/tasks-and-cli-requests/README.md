@@ -51,13 +51,13 @@ define('PHP_PATH', 'your_php_path_that_you_learned_by_which_command');
 
 ------
 
-Running below the code will call the another task controller from <dfn>/MODS/tasks</dfn> directory.
+Running below the code will call the another task controller from <dfn>/MODULES/tasks</dfn> directory.
 
 ```php
 $php task.php start
 ```
 
-Running below the code will call the another task controller from your <dfn>/MODS/welcome/tasks</dfn> directory.
+Running below the code will call the another task controller from your <dfn>/MODULES/welcome/tasks</dfn> directory.
 
 ```php
 $php task.php welcome start index arg1 arg2
@@ -81,7 +81,7 @@ The Start Controller Index function successfully works !
 
 Tasks are same thing like controller model view structure. The <b>main difference from CLI</b> in the <b>task mode</b> framework rules works like browsing a web page <b>sessions</b> and another some things works well in this mode.To working with tasks just we call the controller from the command line and we have special directories for this operation called tasks.
 
-Obullo has <b>three</b> tasks folder called APPLICATON, MODS and YOUR MODULE TASKS folder.
+Obullo has <b>three</b> tasks folder called APPLICATON, MODULES and YOUR MODULE TASKS folder.
 
 #### APPLICATION TASK FOLDER
 
@@ -98,7 +98,7 @@ Obullo has <b>three</b> tasks folder called APPLICATON, MODS and YOUR MODULE TAS
            hello.php
 ```
 
-#### MODS TASK FOLDER
+#### MODULES TASK FOLDER
 
 ```php
 + app

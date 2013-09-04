@@ -18,7 +18,7 @@ Class Start extends Controller {
        |______||____||_____||_||_||____|
 
         Welcome to Task Manager (c) 2013
-Please run [$php task start help] You are in [ mods/ tasks ] folder.'."\n\033[0m";
+Please run [$php task start help] You are in [ modules / tasks ] folder.'."\n\033[0m";
     }
     
     public function help()
@@ -26,7 +26,7 @@ Please run [$php task start help] You are in [ mods/ tasks ] folder.'."\n\033[0m
     echo "\nOBULLO GENERAL HELP FOR TASK OPERATIONS\n";
         
     echo "
-YOU HAVE A '/MODS/TASKS' FOLDER\n
+YOU HAVE A '/MODULES/TASKS' FOLDER\n
     1 . Running a task controller : \n\t > \$php task controller method argument1 argument2 ...\n
     2 . Running php files using task helper: \n\t\n\t[php] \n\t\tnew task\start(); \n\t\ttask\\run('module/controller/method/arg1/arg1 ..'); \n\t[/php] \n\t\n";
     }
@@ -34,4 +34,4 @@ YOU HAVE A '/MODS/TASKS' FOLDER\n
 }
 
 /* End of file start.php */
-/* Location: .mods/tasks/controller/start.php */
+/* Location: .modules/tasks/controller/start.php */

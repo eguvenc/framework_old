@@ -70,7 +70,7 @@ Since your controller classes will extend the main application controller you mu
 - DS
 - EXT
 - ROOT
-- MODS
+- MODULES
 - PHP_PATH
 - FCPATH
 - SELF
