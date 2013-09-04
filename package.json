@@ -1,4 +1,19 @@
 {
+  "components": {
+    "core": "Obullo",
+    "config": "Config",
+    "db": "Database_Pdo",
+    "exception": "Exceptions",
+    "input": "Input",
+    "locale": "Locale",
+    "log": "Log_Write",
+    "output": "Output",
+    "router": "Router",
+    "security": "Security",
+    "uri": "Uri",
+    "view": "View",
+    "validator": "Validator"
+  },
   "dependencies": {
     "config" : "*",
     "bench" : "*",
@@ -21,20 +36,5 @@
     "vi" : "*",
     "view" : "*",
     "validator" : "*"
-  },
-  "components": {
-    "core": "Obullo",
-    "config": "Config",
-    "db": "Database_Pdo",
-    "exception": "Exceptions",
-    "input": "Input",
-    "locale": "Locale",
-    "log": "Log_Write",
-    "output": "Output",
-    "router": "Router",
-    "security": "Security",
-    "uri": "Uri",
-    "view": "View",
-    "validator": "Validator"
   }
 }
