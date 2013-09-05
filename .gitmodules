@@ -109,3 +109,6 @@
 [submodule "packages/acl"]
 	path = packages/acl
 	url = git://github.com/obullo/acl.git
+[submodule "packages/odm"]
+	path = packages/odm
+	url = git://github.com/obullo/odm.git
