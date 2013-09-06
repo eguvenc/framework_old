@@ -1,5 +1,5 @@
 <?php
-namespace Model\Schema;
+namespace Models\Schema;
 
 Class User
 {
@@ -11,4 +11,4 @@ Class User
 }
 
 /* End of file user.php */
-/* Location: .modules/tutorials/model/schema/user.php */
+/* Location: .modules/models/schema/user.php */
