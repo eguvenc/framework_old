@@ -127,3 +127,6 @@
 [submodule "packages/sess_native"]
 	path = packages/sess_native
 	url = git://github.com/obullo/sess_native.git
+[submodule "packages/string"]
+	path = packages/string
+	url = git://github.com/obullo/string.git
