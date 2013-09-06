@@ -118,3 +118,6 @@
 [submodule "packages/sess_cookie"]
 	path = packages/sess_cookie
 	url = git://github.com/obullo/sess_cookie.git
+[submodule "packages/sess_database"]
+	path = packages/sess_database
+	url = git://github.com/obullo/sess_database.git
