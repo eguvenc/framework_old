@@ -8,12 +8,7 @@ Class Task extends Controller {
     }         
 
     function index($mode = '')
-    {   
-        if(PHP_OS != 'Linux')
-        {
-            die('Please run task functionality under the linux platforms.');
-        }
-        
+    {
         new task\start();
 
         echo url\anchor('tutorials/task/index/help', 'Click Here to Help.');

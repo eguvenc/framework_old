@@ -7,12 +7,12 @@ padding:5px;
 background-color: #F0F0F0;
 }
 #exceptionContent  h1 {
-font-size:          18px;
+font-size:          16px;
 color:              #333;
-margin:             0 0 3px 0;
+margin:             0;
 }
 #exceptionContent  h2 {
-font-size:          14px;
+font-size:          12px;
 color:              #333;
 margin:             0;
 }
@@ -21,7 +21,7 @@ display:block;
 line-height: 2.0em; 
 }
 #exceptionContent pre.source { 
-margin: 5px 0 5px 0; 
+margin: 0px 0 0px 0; 
 padding: 0; 
 background: none; 
 border: none; 
@@ -30,7 +30,7 @@ line-height: none;
 #exceptionContent div.collapsed { display: none; }
 #exceptionContent div.arguments { }
 #exceptionContent div.arguments table { 
-font-family : Verdana, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, Geneva, Arial, Sans-serif;
+font-family : Verdana, Arial, Sans-serif;
 font-size:12px; 
 border-collapse: collapse; 
 border-spacing: 0; 
@@ -75,14 +75,15 @@ if(isset($sql))
     echo '<span class="errorFile"><b>SQL :</b> '.$sql.'</span>';
 }
 ?>
-<?php $code = ($e->getCode() != 0) ? ' Code : '. $e->getCode() : ''; ?> 
-<span class="errorFile"><?php echo error\securePath($e->getFile()) ?><?php echo $code; ?><?php echo ' ( Line : '.$e->getLine().' ) '; ?></span>
+<?php $code = ($e->getCode() != 0) ? ' Code : '. $e->getCode() : '' ?> 
+<span class="errorFile"><?php echo error\securePath($e->getFile()) ?><?php echo $code ?><?php echo ' ( Line : '.$e->getLine().' ) ' ?></span>
 <?php 
 $debug  = config('debug_backtrace');
 if($debug['enabled'] === true OR $debug['enabled'] == 1)  // Covert to readable format
 {
     $debug['enabled'] = 'E_ALL';
-} 
+}
+
 $rules  = error\parseRegex($debug['enabled']);
 $e_code = (substr($e->getMessage(),0,3) == 'SQL') ? 'SQL' : $e->getCode();
 $allowed_errors = error\getAllowedErrors($rules);  
@@ -166,7 +167,7 @@ if(is_string($debug['enabled']))
                                 $class_info.= '<tr>';
                                 $class_info.= '<td>'.$arg_key.'</td>';
    
-                                if($trace['function'] == 'pdo_connect' AND ($arg_key == 2 OR $arg_key == 1)) // hide database password for security.
+                                if($trace['function'] == 'pdoConnect' AND ($arg_key == 2 OR $arg_key == 1)) // hide database password for security.
                                 {
                                     $class_info.= '<td>***********</td>';
                                 } 

@@ -50,6 +50,12 @@
                     </tr>
                     <tr>
                         <td></td>
+                        <td>
+                        <?php echo form\error('agreement', '<div class="input-error">', '</div>') ?>    
+                        <?php echo form\checkbox('agreement', 1, i\post('agreement'), " id='agreement' ") ?><label for="agreement">I agree terms and conditions.</label></td>
+                    </tr>
+                    <tr>
+                        <td></td>
                         <td><?php echo form\submit('do_post', 'Do Post') ?></td>
                     </tr>
                     <tr>

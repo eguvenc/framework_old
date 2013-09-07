@@ -7,6 +7,7 @@ Class User extends \Odm {
     {
         parent::__construct(new Schema\User());
     }
+    
 }
 
 /*

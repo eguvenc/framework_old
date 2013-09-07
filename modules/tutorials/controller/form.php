@@ -17,14 +17,14 @@ Class Form extends Controller {
     
     function post()
     {   
-        $user = new Model\User();
+        $user = new Models\User();
         $user->user_password = i\post('user_password');
         $user->user_email    = i\post('user_email');
-  
+        
         if($user->save())
         {
-            sess\setFlash('notice', 'form saved succesfully.');   
-            redirect('/tutorials/form');
+            sess\setFlash('notice', 'Form saved succesfully');
+            url\redirect('tutorials/form');
         }
 
         vi\setVar('user', $user);

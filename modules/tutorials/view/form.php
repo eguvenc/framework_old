@@ -15,7 +15,7 @@
         </header>
         
         <h1>Odm Tutorial</h1>
-        <h2><?php echo url\anchor('/tutorials/form_ajax', 'Ajax Tutorial') ?></h2>
+        <h2><?php echo url\anchor('tutorials/form_ajax', 'Ajax Tutorial') ?></h2>
         <section><?php echo form\message($user, '', '<div class="notification error">', '</div>') ?></section>
 
         <section>
@@ -50,6 +50,12 @@
                         <?php echo form\error('user_confirm_password', '<div class="input-error">', '</div>') ?>
                         <?php echo form\password('user_confirm_password', '', " id='confirm' ") ?>
                         </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                        <?php echo form\error('agreement', '<div class="input-error">', '</div>') ?>    
+                        <?php echo form\checkbox('agreement', 1, i\post('agreement'), " id='agreement' ") ?><label for="agreement">I agree terms and conditions.</label></td>
                     </tr>
                     <tr>
                         <td></td>

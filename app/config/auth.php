@@ -26,10 +26,10 @@ $auth['advanced_security']   = true;        // Whether to enable the advanced se
 $auth['query_binding']       = true;        // Whether to enable the PDO query binding feature for security.
 $auth['regenerate_sess_id']  = false;       // Set to true to regenerate the session id on every page load or leave as false to regenerate only upon new login.
 
-$auth['fail_url']            = '/login';     // Redirect Url for Unsuccessfull logins
-$auth['ok_url']              = '/dashboard'; // Redirect Url Successfull logins
+$auth['login_url']           = '/login';     // Redirect Url for Unsuccessfull logins
+$auth['dashboard_url']       = '/dashboard'; // Redirect Url Successfull logins
                                              
-$auth['fields']              = array(       // Session Container db table fields.
+$auth['fields']              = array(       // Default db table select fields.
                                 'user_id', 
                                 'user_firstname', 
                                 'user_lastname', 

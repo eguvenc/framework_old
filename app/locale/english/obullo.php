@@ -12,7 +12,7 @@ $lang['Data inserted succesfully.']   = 'Data inserted succesfully.';
 $lang['Data insert error.']           = 'Data insert error.';
 $lang['Data deleted succesfully.']    = 'Data deleted succesfully.';
 $lang['Delete error or record already deleted.'] = 'Delete error or record already deleted.';
-$lang['We couldn\'t save data at this time please try again. Error: '] = "'We couldn\'t save data at this time please try again. Error: '";
+$lang['We couldn\'t save data at this time please try again. Error: '] = 'We couldn\'t save data at this time please try again. Error: ';
 $lang['There are some errors in the form fields.'] = 'There are some errors in the form fields.';
 
 // Validator
@@ -92,6 +92,8 @@ $lang['date_minutes'] = "Minutes";
 $lang['date_second']  = "Second";
 $lang['date_seconds'] = "Seconds";
 
+// Timezones
+//-----------------------------------------------------------------
 $lang['UM12']	= '(UTC -12:00) Baker/Howland Island';
 $lang['UM11']	= '(UTC -11:00) Samoa Time Zone, Niue';
 $lang['UM10']	= '(UTC -10:00) Hawaii-Aleutian Standard Time, Cook Islands, Tahiti';
@@ -109,7 +111,7 @@ $lang['UM2']	= '(UTC -2:00) South Georgia/South Sandwich Islands';
 $lang['UM1']	= '(UTC -1:00) Azores, Cape Verde Islands';
 $lang['UTC']	= '(UTC) Greenwich Mean Time, Western European Time';
 $lang['UP1']	= '(UTC +1:00) Central European Time, West Africa Time';
-$lang['UP2']	= '(UTC +2:00) Central Africa Time, Eastern European Time, Kaliningrad Time';
+$lang['UP2']	= '(UTC +2:00) Central Africa Time, Eastern European Time, Istanbul, Kaliningrad Time';
 $lang['UP3']	= '(UTC +3:00) Moscow Time, East Africa Time';
 $lang['UP35']	= '(UTC +3:30) Iran Standard Time';
 $lang['UP4']	= '(UTC +4:00) Azerbaijan Standard Time, Samara Time';

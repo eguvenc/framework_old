@@ -1,4 +1,27 @@
 {
+    "dependencies": {
+    "config" : "*",
+    "bench" : "*",
+    "error" : "*",
+    "exception" : "*",
+    "form" : "*",
+    "form_json" : "*",
+    "i" : "*",
+    "input" : "*",
+    "locale" : "*",
+    "log" : "*",
+    "router" : "*",
+    "security": "*",
+    "sess": "*",
+    "sess_native": "*",
+    "obullo": "*",
+    "output" : "*",
+    "uri" : "*",
+    "url" : "*",
+    "vi" : "*",
+    "view" : "*",
+    "validator" : "*"
+  },
   "components": {
     "core": "Obullo",
     "config": "Config",
@@ -13,28 +36,5 @@
     "uri": "Uri",
     "view": "View",
     "validator": "Validator"
-  },
-  "dependencies": {
-    "config" : "*",
-    "bench" : "*",
-    "error" : "*",
-    "exception" : "*",
-    "form" : "*",
-    "form_json" : "*",
-    "i" : "*",
-    "input" : "*",
-    "locale" : "*",
-    "log" : "*",
-    "router" : "*",
-    "security": "*",
-    "sess": "*",
-    "sess_cookie": "*",
-    "obullo": "*",
-    "output" : "*",
-    "uri" : "*",
-    "url" : "*",
-    "vi" : "*",
-    "view" : "*",
-    "validator" : "*"
   }
 }

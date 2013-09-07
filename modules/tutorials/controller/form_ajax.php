@@ -18,7 +18,7 @@ Class Form_Ajax extends Controller {
     {   
         new form_Json\start();
         
-        $user = new Model\User();
+        $user = new Models\User();
         $user->user_password = i\post('user_password');
         $user->user_email    = i\post('user_email');
   

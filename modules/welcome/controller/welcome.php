@@ -8,20 +8,20 @@ Class Welcome extends Controller {
         
         // new Email();
         // new form_Json\start();
-      
+     
         // new Acl();
         // new Db();
+      
         // print_r($this->db->get('users')->resultArray());
         
         // var_dump($this->ftp);
-
     }
     
     public function index()
     { 
         vi\setVar('name', 'Obullo');
-
         // new request\start();
+       
         
         // echo request\get('welcome/test/1/2/3');
         // echo request\get('welcome/test/4/5/6');
