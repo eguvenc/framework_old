@@ -7,7 +7,7 @@
     "email": "eguvenc@gmail.com",
     "url": "https://github.com/eguvenc"
   },
-  "component" : "helper",
+  "component" : "library",
   "keywords": [
     "zip",
     "compress",
@@ -21,17 +21,17 @@
     "archive_url": "https://github.com/obullo/zip/archive/master.zip"
   },
   "requires": {
-    "php": ">= 5.2.4",
+    "php": ">= 5.3.0",
     "extensions": ["none"]
   },
   "bugs": {
-    "url": "https://github.com/eguvenc/task/issues",
+    "url": "https://github.com/eguvenc/zip/issues",
     "email": "eguvenc@gmail.com"
   },
   "licenses": [
     {
       "type": "GPL",
-      "url": "https://github.com/eguvenc/task/master/README.md"
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
     }
   ]
 }

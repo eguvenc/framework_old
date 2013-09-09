@@ -160,3 +160,6 @@
 [submodule "packages/pdo_odbc"]
 	path = packages/pdo_odbc
 	url = git://github.com/obullo/pdo_odbc.git
+[submodule "packages/pdo_pgsql"]
+	path = packages/pdo_pgsql
+	url = git://github.com/obullo/pdo_pgsql.git

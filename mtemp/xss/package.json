@@ -1,6 +1,6 @@
 {
-  "name": "text",
-  "description": "Text Helper.",
+  "name": "xss",
+  "description": "Xss security helper, filter strings for possible security threats.",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",
@@ -9,29 +9,30 @@
   },
   "component" : "helper",
   "keywords": [
-    "text",
-    "string",
-    "word",
-    "character limiter",
-    "word limiter",
-    "word wrap",
-    "word censor",
-    "highlight",
-    "ascii"
+    "xss",
+    "security",
+    "string filter",
+    "filter",
+    "cross-site scripting",
+    "cross-site scripting hack",
+    "css",
+    "csrf",
+    "hack",
+    "hijack"
   ],
-  "homepage": "https://github.com/obullo/text",
+  "homepage": "https://github.com/obullo/xss",
   "repo": {
     "type": "git",
-    "url": "https://github.com/obullo/text.git",
+    "url": "https://github.com/obullo/xss.git",
     "archive" : "zip",
-    "archive_url": "https://github.com/obullo/text/archive/master.zip"
+    "archive_url": "https://github.com/obullo/xss/archive/master.zip"
   },
   "requires": {
     "php": ">= 5.3.0",
     "extensions": ["none"]
   },
   "bugs": {
-    "url": "https://github.com/obullo/text/issues",
+    "url": "https://github.com/obullo/xss/issues",
     "email": "eguvenc@gmail.com"
   },
   "licenses": [
