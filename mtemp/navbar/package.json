@@ -8,6 +8,14 @@
     "url": "https://github.com/eguvenc"
   },
   "component" : "library",
+  "shell" : [
+    {
+        "copy" : { 
+            "source" : "$packages/$name/releases/$version/src/navbar.php", 
+            "target" : "$app/config" 
+        },
+    }
+  ],
   "keywords": [
     "navbar",
     "navigation",

@@ -13,8 +13,8 @@
 
 Class Navbar {
    
-    public $top_level        = array();
-    public $sub_level        = array();
+    public $toplevel        = array();
+    public $sublevel        = array();
     public $top_active_class    = 'navbar-top-active';
     public $top_inactive_class  = 'navbar-top-inactive';
     public $sub_active_class    = 'navbar-sub-active';
@@ -81,18 +81,18 @@ Class Navbar {
         $uriClass = getComponent('uri');
         $uri      = $uriClass::getInstance();
         
-        $top_level  = array();
-        $module     = $uri->rSegment(0); // * Get routed segments
+        $toplevel = array();
+        $module   = $uri->routedSegment(0); // * Get routed segments
         
-        foreach($this->top_level as $key => $val)
+        foreach($this->toplevel as $key => $val)
         {
-            $val         = array_keys($val);
-            $level       = $val[0];
-            $active      = (isset($this->top_level[$key][$module])) ? ' class="'.$this->top_active_class.'" ' : ' class="'.$this->top_inactive_class.'" ';
-            $top_level[] = anchor($this->top_level[$key][$level]['url'], $this->top_level[$key][$level]['label'], $active);
+            $val        = array_keys($val);
+            $level      = $val[0];
+            $active     = (isset($this->toplevel[$key][$module])) ? ' class="'.$this->top_active_class.'" ' : ' class="'.$this->top_inactive_class.'" ';
+            $toplevel[] = anchor($this->toplevel[$key][$level]['url'], $this->toplevel[$key][$level]['label'], $active);
         }
         
-        return $top_level;
+        return $toplevel;
     }
     
     // ------------------------------------------------------------------------
@@ -112,23 +112,23 @@ Class Navbar {
         $uriClass = getComponent('uri');
         $uri      = $uriClass::getInstance();
         
-        $sub_level  = array();
-        $module     = $uri->rSegment(0); // * Get routed segments
-        $controller = $uri->rSegment(1);
+        $sublevel   = array();
+        $module     = $uri->routedSegment(0); // * Get routed segments
+        $controller = $uri->routedSegment(1);
 
-        if(isset($this->sub_level[$module]))
+        if(isset($this->sublevel[$module]))
         {
-            foreach($this->sub_level[$module] as $key => $val)
+            foreach($this->sublevel[$module] as $key => $val)
             {
-                $active = ($this->sub_level[$module][$key]['key'] == $controller) ? ' class="'.$this->sub_active_class.'" ' : ' class="'.$this->sub_inactive_class.'" ';
-                $sub_level[] = anchor($this->sub_level[$module][$key]['url'], $this->sub_level[$module][$key]['label'], $active);
+                $active = ($this->sublevel[$module][$key]['key'] == $controller) ? ' class="'.$this->sub_active_class.'" ' : ' class="'.$this->sub_inactive_class.'" ';
+                $sublevel[] = anchor($this->sublevel[$module][$key]['url'], $this->sublevel[$module][$key]['label'], $active);
             }
         }
         
-        return $sub_level;
+        return $sublevel;
     }
     
-    // public function sub_sub_level() {} ...
+    // public function sub_sublevel() {} ...
     
     // ------------------------------------------------------------------------
     
@@ -137,7 +137,7 @@ Class Navbar {
      *
      * @return int
      */
-    public function count($key = 'top_level')
+    public function count($key = 'toplevel')
     {
         return count($this->{$key});
     }

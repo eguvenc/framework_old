@@ -1,12 +1,36 @@
 ## Navbar Class
 
+-------
+
 Navbar Class provides a simple navigation bar management for <b>ul</b> based menus.
+
+### Initializing the Class
+
+-------
+
+```php
+new Navbar();
+$this->navbar->method();
+```
+
+Once loaded, the Navbar object will be available using: <kbd>$this->navbar->method();</kbd>
+
+### Grabbing the Instance
+
+------
+
+Also using new Navbar(false); boolean you can grab the instance of Obullo libraries,"$this->navbar->method()" will not available in the controller.
+
+```php
+$acl = new Navbar(false);
+$acl->method();
+```
 
 ### Configuration
 
 ------
 
-Go to your <dfn>app/config/navbar.php</dfn> file and set your navigation ( ul tag ) items.
+Go to your <kbd>app/config/navbar.php</kbd> file and set your navigation ( ul tag ) items.
 
 ```php
 /*
@@ -14,58 +38,26 @@ Go to your <dfn>app/config/navbar.php</dfn> file and set your navigation ( ul ta
 | Top Levels
 |--------------------------------------------------------------------------
 |
-| $navbar['top_level'][]['users']    = array('label' => 'Members', 'url' => 'backend/users/list_all');
-| $navbar['top_level'][]['articles'] = array('label' => 'Articles', 'url' => 'backend/articles/list_all');
+| $navbar['toplevel'][]['users']    = array('label' => 'Members', 'url' => 'users/list_all');
+| $navbar['toplevel'][]['articles'] = array('label' => 'Articles', 'url' => 'articles/list_all');
 |
 */
-$navbar['top_level'][]['users'] = array('label' => 'Members', 'url' => 'backend/users/list_all');
+$navbar['toplevel'][]['users'] = array('label' => 'Members', 'url' => 'users/list_all');
 
 |--------------------------------------------------------------------------
 | Sub Levels
 |--------------------------------------------------------------------------
 |  
-| $navbar['sub_level']['users'][]    = array('key' => 'save', 'label' => 'Add Member', 'url' => 'backend/users/save');
-| $navbar['sub_level']['articles'][] = array('key' => 'save', 'label' => 'Add Article','url' => 'backend/articles/save');
+| $navbar['sublevel']['users'][]    = array('key' => 'save', 'label' => 'Add Member', 'url' => 'users/save');
+| $navbar['sublevel']['articles'][] = array('key' => 'save', 'label' => 'Add Article','url' => 'articles/save');
 */
-$navbar['sub_level']['users'][] = array('key' => 'save', 'label' => 'Add Member', 'url' => 'backend/users/save');
+$navbar['sublevel']['users'][] = array('key' => 'save', 'label' => 'Add Member', 'url' => 'users/save');
 ```
 
-### Initializing the Class
-
-------
-
-Use your autoload file which is located <dfn>app/config/autoload.php</dfn>
+Use your autoload file which is located <kbd>app/config/autoload.php</kbd>
 
 ```php
-$autoload['helper']['ob/view'] = '';
-$autoload['helper']['ob/html'] = '';
-$autoload['helper']['ob/url']  = '';
-$autoload['helper']['ob/form'] = '';
-$autoload['helper']['ob/session'] = '';
-
-$autoload['lib']['ob/auth']   = array();
-$autoload['lib']['ob/navbar'] = array();
-$autoload['config']     = array();
-$autoload['lang']       = array();
-$autoload['model']      = array();
-```
-
-If use navbar class for backend module you need to set backend autoload file which is located <dfn>sub.backend/config/autoload.php</dfn>
-
-Once loaded, the navbar object will be available using: <dfn>$this->navbar->method();</dfn>
-
-```php
-$autoload['helper']['ob/view'] = '';
-$autoload['helper']['ob/html'] = '';
-$autoload['helper']['ob/url']  = '';
-$autoload['helper']['ob/form'] = '';
-$autoload['helper']['ob/session'] = '';
-
-$autoload['lib']['ob/auth']   = array(array('module' => 'sub.backend'));
-$autoload['lib']['ob/navbar'] = array(array('module' => 'sub.backend'));
-$autoload['config']     = array();
-$autoload['lang']       = array();
-$autoload['model']      = array();
+$autoload['library']    = array('navbar');
 ```
 
 ### Customizing Css
@@ -87,14 +79,14 @@ $autoload['model']      = array();
 ```php
 echo '<div id="navigation-top-level">';
 
-$total = $this->navbar->count('top_level');
+$total = $this->navbar->count('toplevel');
 if ($total > 0)
 {
     echo '<ul>';
-    foreach ($this->navbar->top_level() as $i => $top_level)
+    foreach ($this->navbar->getTopLevel() as $i => $toplevel)
     {
-        $last_item = ($i == $total) ? ' class="last" ' : '';    
-        echo '<li '.$last_item.'>'.$top_level.'</li>'; 
+        $lastItem = ($i == $total) ? ' class="last" ' : '';    
+        echo '<li '.$lastItem.'>'.$toplevel.'</li>'; 
     }
     echo '</ul>';
 }
@@ -103,12 +95,12 @@ echo '</div>';
 
 echo '<div id="navigation-sub-level">';
 
-if ($this->navbar->count('sub_level') > 0)
+if ($this->navbar->count('sublevel') > 0)
 {
     echo '<ul>';
-    foreach ($this->navbar->sub_level() as $sub_level)
+    foreach ($this->navbar->getSubLevel() as $sublevel)
     {
-        echo '<li>'.$sub_level.'</li>';
+        echo '<li>'.$sublevel.'</li>';
     }
     echo '</ul>';
 }
@@ -120,15 +112,14 @@ echo '</div>';
 
 ------
 
-#### $this->navbar->top_level()
+#### $this->navbar->getTopLevel()
 
 Get top level navigation items using the first module segment(0).
 
-#### $this->navbar->sub_level()
+#### $this->navbar->getSubLevel()
 
 Get sub level navigation items using the first uri segment(0) and second uri segment(1).
 
-
-#### $this->navbar->count($key = 'top_level')
+#### $this->navbar->count($key = 'toplevel')
 
 Returns the number of items by provided navigation level.

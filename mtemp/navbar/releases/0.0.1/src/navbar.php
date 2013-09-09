@@ -23,18 +23,18 @@ $navbar['sub_inactive_class'] = 'navbar-sub-inactive';
 | Top Levels
 |--------------------------------------------------------------------------
 |
-| $navbar['top_level'][]['users']    = array('label' => 'Members', 'url' => 'backend/users/list_all');
-| $navbar['top_level'][]['articles'] = array('label' => 'Articles', 'url' => 'backend/articles/list_all');
+| $navbar['toplevel'][]['users']    = array('label' => 'Members', 'url' => 'users/list_all');
+| $navbar['toplevel'][]['articles'] = array('label' => 'Articles', 'url' => 'articles/list_all');
 |
 */
-$navbar['top_level'][]['users'] = array('label' => '', 'url' => '');
+$navbar['toplevel'][]['users'] = array('label' => '', 'url' => '');
 
 /*
 |--------------------------------------------------------------------------
 | Sub Levels
 |--------------------------------------------------------------------------
 |  
-| $navbar['sub_level']['users'][]    = array('key' => 'save', 'label' => 'Add Member', 'url' => 'backend/users/save');
-| $navbar['sub_level']['articles'][] = array('key' => 'save', 'label' => 'Add Article','url' => 'backend/articles/save');
+| $navbar['sublevel']['users'][]    = array('key' => 'save', 'label' => 'Add Member', 'url' => 'users/save');
+| $navbar['sublevel']['articles'][] = array('key' => 'save', 'label' => 'Add Article','url' => 'articles/save');
 */
-$navbar['sub_level']['users'][] = array('key' => '', 'label' => '', 'url' => '');
+$navbar['sublevel']['users'][] = array('key' => '', 'label' => '', 'url' => '');
