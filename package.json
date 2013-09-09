@@ -1,0 +1,53 @@
+{
+  "name": "task",
+  "description": "Task Helper, run cli tasks and follow debugs from command line.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ersin Güvenç",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
+  "component" : "helper",
+  "shell" : [
+    {
+        "copy" : { 
+            "source" : "ob/$name/releases/$version/src/task", 
+            "target" : "/" 
+        },
+        "copy" : {
+            "source" : "ob/$name/releases/$version/example/*",
+            "target" : "modules/tasks/controllers"
+        }
+    }
+  ],
+  "keywords": [
+    "task",
+    "debug",
+    "debugging",
+    "cli",
+    "cli log debug",
+    "log debug",
+    "follow debugs"
+  ],
+  "homepage": "https://github.com/obullo/task",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/task.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/task/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.3.0",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/task/issues",
+    "email": "eguvenc@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}
