@@ -1,14 +1,6 @@
 ## Task Helper
 
-Obullo has a task helper file to using CLI operations (cron jobs, running shell scripts etc..) inside the php interface.
-
-### Function Reference
-
-------
-
-Using task\run() function you can run your tasks as a command in the background. Function run like CLI but don't use the task.php.
-
-#### task\run('uri', $debug = false);
+The task helper helps to you use CLI operations (cron jobs, running shell scripts etc..) inside the php interface.
 
 ### Loading task helper
 
@@ -17,15 +9,23 @@ Using task\run() function you can run your tasks as a command in the background.
 This helper is loaded using the following code:
 
 ```php
-task\run();
+task\start();
 ```
 
 #### Running Tasks
 
-The first segment call the <samp>module</samp> and others calls <samp>Controller/method/arguments</samp>
+The first segment call the <kbd>module</kbd> and others calls <kbd>controller/method/arguments</kbd>
 
 ```php
 task\run('welcome hello/index/arg1/arg2');
 ```
 
-Look at the [Tasks and CLI Requests](/docs/advanced/tasks-and-cli-requests) section for more details.
+Look at the Tasks and CLI Requests at <kbd>(/docs/advanced/tasks-and-cli-requests)</kbd> section for more details.
+
+### Function Reference
+
+------
+
+#### task\run('uri', $debug = false);
+
+Using task\run() function you can run your tasks as a command in the background.

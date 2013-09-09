@@ -21,7 +21,7 @@ Truncates a string to the number of **words** specified. Example:
 ```php
 $string = "Here is a nice text string consisting of eleven words.";
 
-$string = text\wordLimiter($string, 4);
+echo text\wordLimiter($string, 4);
 
 // Returns: Here is a nice
 ```
@@ -35,22 +35,22 @@ Truncates a string to the number of **characters** specified. It maintains the i
 ```php
 $string = "Here is a nice text string consisting of eleven words.";
 
-$string = text\characterLimiter($string, 20);
+echo text\characterLimiter($string, 20);
 
 // Returns: Here is a nice text string.. 
 ```
 
 The third parameter is an optional suffix added to the string, if undeclared this helper uses an ellipsis.
 
-#### ascii2entities()
+#### asciiToEntities()
 
 Converts ASCII values to character entities, including high ASCII and MS Word characters that can cause problems when used in a web page, so that they can be shown consistently regardless of browser settings or stored reliably in a database. There is some dependence on your server's supported character sets, so it may not be 100% reliable in all cases, but for the most part it should correctly identify characters outside the normal range (like accented characters). Example:
 
 ```php
-$string = text\ascii2entities($string);
+$string = text\asciiToEntities($string);
 ```
 
-#### entities2ascii()
+#### entitiesToAscii()
 
 This function does the opposite of the previous one; it turns character entities back into ASCII.
 
@@ -61,7 +61,7 @@ Enables you to censor words within a text string. The first parameter will conta
 ```php
 $disallowed = array('darn', 'shucks', 'golly', 'phooey');
 
-$string = text\wordCensor($string, $disallowed, 'Beep!');
+echo text\wordCensor($string, $disallowed, 'Beep!');
 ```
 
 #### highlightCode()
@@ -81,7 +81,7 @@ Will highlight a phrase within a text string. The first parameter will contain t
 ```php
 $string = "Here is a nice text string about nothing in particular.";
 
-$string = text\highlightPhrase($string, "nice text", '<span style="color:#990000">', '</span>'); 
+echo text\highlightPhrase($string, "nice text", '<span style="color:#990000">', '</span>'); 
 ```
 
 The above text returns:
@@ -93,14 +93,16 @@ Here is a <span style="color:#990000">nice text</span> string about nothing in p
 Wraps text at the specified **character** count while maintaining complete words. Example:
 
 ```php
-$string = "Here is a simple string of text that will help us demonstrate this Function.";
+$string = "Here is a simple string of text that will help us demonstrate this function.";
 
 echo text\wordWrap($string, 25);
 
 // Would produce:
 
+/*
 Here is a simple string
 of text that will help
 us demonstrate this
-Function
+function
+*/
 ```

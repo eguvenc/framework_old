@@ -93,7 +93,7 @@ namespace text {
     * @param	string
     * @return	string
     */
-    function ascii2entities($str)
+    function asciiToEntities($str)
     {
         $count	= 1;
         $out	= '';
