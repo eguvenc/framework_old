@@ -1,6 +1,6 @@
 ## About HMVC
 
-About HMVC structure you can find more information in [Advanced Topics / HMVC](/docs/advanced/hmvc) section. Obullo's HMVC library support just <b>internal</b> requests at this time.
+About HMVC structure you can find more information in Advanced Topics (/docs/advanced/hmvc) section. HMVC library support just <b>internal</b> requests.
 
 ### Calling HMVC Requests
 
@@ -12,7 +12,7 @@ To start using HMVC libraries first you should load request helper file.
 new request\start();
 ```
 
-After loading request helper file hmvc functions will be available. You can call hmvc functions in <samp>controller, model, parent controllers and view</samp> files.
+After loading request helper file hmvc functions will be available. You can call hmvc functions in <kbd>controller, model and view</kbd> files.
 
 ```php
 $request = request\get('news/articles/index/412');
@@ -22,7 +22,7 @@ $request = request\get('news/articles/index/412');
 
 ------
 
-Normally first parameter assigned for request method but if you not choose a method , Obullo request helper will do atuomatically $_GET request don't forget Obullo also store get and post data into $_REQUEST global variable.
+Normally first parameter assigned for request method but if you not choose a method , request helper will do atuomatically $_GET request. Don't forget Hmvc also store get and post data into $_REQUEST global variable.
 
 ```php
 echo request\get('blog/blog/read');
@@ -30,9 +30,9 @@ echo request\get('blog/blog/read');
 
 
 ```php
-$row = request\exec('get', 'module/controller/method');
+$response = request\exec('get', 'module/controller/method');
 
-echo $row->key; // output value
+echo $response; // output value
 ```
 
 #### request\exec(Method = 'GET', $uri = ' ', $params (mixed), $cache_time = 0')
@@ -61,13 +61,13 @@ You can set post or get data by manually.
 POST data example
 
 ```php
-request\post('POST', 'blog/blog/write',  array('article' => 'content blabla'));  // data must be array
+request\post('POST', 'blog/write',  array('article' => 'content blabla'));  // data must be array
 ```
 
 GET data example
 
 ```php
-$request = request\get('GET', 'blog/blog/write',  array('article' => 'content blabla'));  // data must be array
+$request = request\get('GET', 'blog/write',  array('article' => 'content blabla'));  // data must be array
 ```
 
 
@@ -75,17 +75,17 @@ $request = request\get('GET', 'blog/blog/write',  array('article' => 'content bl
 
 ------
 
-You enter query strings obullo will parse it simply as get data paramaters.
+You enter query strings hmvc will parse it simply as get data paramaters.
 
 ```php
-echo request\get('/api?query=SELECT * FROM users LIMIT 100');
+echo request\get('myapi?query=SELECT * FROM users LIMIT 100');
 ```
 
-### Output Caching For Hmvc Requests
+### Output Caching For Requests
 
 ------
 
-You can do cache for your static hmvc requests. When a hmvc request called the first time, the cache file will be written to your <samp>app/core/cache</samp> folder. You can learn more details about [ouput caching](#/docs/advanced/caching-and-compression).
+You can do cache for your static hmvc requests. When a hmvc request called the first time, the cache file will be written to your <kbd>app/core/cache</kbd> folder. You can learn more details about ouput caching at <kbd>( /docs/advanced/caching-and-compression )</kbd> section.
 
 ```php
 echo request\post('blog/blog/read', array(), $cache_time = 100);
@@ -104,7 +104,7 @@ $request = request\get('blog/blog/read', array(), 0);   // cache file will be de
 You can use Hmvc Class methods directly using second parameter set to false. 
 
 ```php
-$request = request\get('/captcha/create', false);
+$request = request\get('captcha/create', false);
 
 $request->setMethod('get', $params = array());
 $request->cache(0);
@@ -114,7 +114,7 @@ $request->setServer('key', 'val');  // Send $_SERVER headers
 
 #### $request->noLoop();
 
-Some users some times use the HMVC requests in the [parent controllers](/docs/general/#working-with-parent-controllers) in this case normally a HMVC library do a unlimited loop and this may cause server crashes, beware if you use hmvc requests in parent controllers you have to use noLoop(); method for each requests.
+Some users some times use the HMVC requests in a custom controller, in this case normally a HMVC library do a unlimited loop and this may cause server crashes, be aware if you use hmvc requests in the customized controllers you need to use noLoop(); method for each requests.
 
 ```php
 echo request('blog/blog/read')->noLoop()->exec();
