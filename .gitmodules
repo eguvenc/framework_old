@@ -139,3 +139,6 @@
 [submodule "packages/pager"]
 	path = packages/pager
 	url = git://github.com/obullo/pager.git
+[submodule "packages/pdo_4d"]
+	path = packages/pdo_4d
+	url = git://github.com/obullo/pdo_4d.git
