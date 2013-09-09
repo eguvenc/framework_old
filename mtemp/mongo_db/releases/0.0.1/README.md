@@ -1,7 +1,7 @@
 ## Mongo Database Class
 
 
-Mongo Class provides a lightweight and simple database management for popular NOSQL database type which is called <b>Mongodb</b>.
+Mongo Class provides a lightweight and simple <kbd>( CRUD based )</kbd> database management for popular NOSQL database type which is called <b>Mongodb</b>.
 
 ### Initializing the Class
 
@@ -9,10 +9,23 @@ Mongo Class provides a lightweight and simple database management for popular NO
 
 ```php
 new Mongo_Db();
+$this->mongo->method();
 ```
 
+Once loaded, the Mongo object will be available using: <kbd>$this->mongo->method();</kbd>
 
-Once loaded, the database object will be available using: <dfn>$this->db->method();</dfn>
+### Grabbing the Instance
+
+------
+
+Also using new Mongo_Db(false); boolean you can grab the instance of Obullo libraries,"$this->mongo->method()" will not available in the controller.
+
+```php
+$mongo = new Mongo_Db(false);
+$mongo->method();
+```
+
+Once loaded, the mongo object will be available using: <dfn>$this->mongo->method();</dfn>
 
 ### Configuring Mongodb Options
 
@@ -97,7 +110,7 @@ if($docs->hasNext())
 }
 ```
 
-### All Popular Crud Functions Available
+### Some Crud (Active Record) Functions Are Available
 
 ```php
 $this->mongo->select();
@@ -174,9 +187,11 @@ foreach($docs as $row)
 }
 ```
 
-Fetching one row as a object. $docs = $this->db->get('users');
+#### Fetching one row as a object.
 
 ```php
+$docs = $this->db->get('users');
+
 if($docs->hasNext())
 {
      $row = (object) getNext();
@@ -199,7 +214,6 @@ $this->db->select(array('username', 'user_firstname'));
 $docs = $this->db->get('users');
 $row = $docs->getNext();
 ```
-
 
 #### $this->db->from()
 
@@ -259,35 +273,35 @@ $this->db->where('foo <=', 20)->get('foobar');
 $this->db->where('foo !=', 20)->get('foobar');
 ```
 
-#### $this->db->or_where()
+#### $this->db->orWhere()
 
 ```php
-$this->db->or_where('username', 'bob');
-$this->db->or_where('username', 'john');
+$this->db->orWhere('username', 'bob');
+$this->db->orWhere('username', 'john');
 
 $docs = $this->db->get('users');
 ```
 
-#### $this->db->where_in()
+#### $this->db->whereIn()
 
 ```php
-$this->db->where_in('username', array('bob', 'john', 'jenny'));
+$this->db->whereIn('username', array('bob', 'john', 'jenny'));
 ```
 
-#### $this->db->where_in() ( Not In )
+#### $this->db->whereIn() ( Not In )
 
 ```php
-$this->db->where_in('username !=', array('bob', 'john', 'jenny'));
+$this->db->whereIn('username !=', array('bob', 'john', 'jenny'));
 
 $docs = $this->db->get('users');
 ```
 
-#### $this->db->where_in_all()
+#### $this->db->whereInAll()
 
 Get the documents where the value of a $field is in all of a given $in array().
 
 ```php
-$docs = $this->db->where_in_all('foo', array('bar', 'zoo', 'blah'))->get('users');
+$docs = $this->db->whereInAll('foo', array('bar', 'zoo', 'blah'))->get('users');
 ```
 
 #### $this->db->like($field = "", $value = "", $flags = "i", $enable_start_wildcard = true, $enable_end_wildcard = true)
@@ -319,23 +333,23 @@ $this->db->like('username', 'bob');
      *  a line.
 ```
 
-#### $this->db->or_like()
+#### $this->db->orLike()
 
 ```php
-$this->db->or_like('username', 'bob');
+$this->db->orLike('username', 'bob');
 ```
 
-#### $this->db->not_like()
+#### $this->db->notLike()
 
 ```php
-$this->db->not_like('username', 'bob');
+$this->db->notLike('username', 'bob');
 ```
 
-#### $this->db->order_by()
+#### $this->db->orderBy()
 
 ```php
-$this->db->where_in('username', array('bob', 'john', 'jenny'));
-$this->db->order_by('username', 'ASC');
+$this->db->whereIn('username', array('bob', 'john', 'jenny'));
+$this->db->orderBy('username', 'ASC');
 
 $docs = $this->db->get('users');
 ```
@@ -343,8 +357,8 @@ $docs = $this->db->get('users');
 #### $this->db->limit()
 
 ```php 
-$this->db->where_in('username', array('bob', 'john', 'jenny'));
-$this->db->order_by('username', 'ASC');
+$this->db->whereIn('username', array('bob', 'john', 'jenny'));
+$this->db->orderBy('username', 'ASC');
 $this->db->limit(10);
 
 $docs = $this->db->get('users');
@@ -353,8 +367,8 @@ $docs = $this->db->get('users');
 #### $this->db->offset()
 
 ```php
-$this->db->where_in('username', array('bob', 'john', 'jenny'));
-$this->db->order_by('username', 'ASC');
+$this->db->whereIn('username', array('bob', 'john', 'jenny'));
+$this->db->orderBy('username', 'ASC');
 $this->db->limit(10);
 $this->db->offset(20);
 $docs = $this->db->get('users');
@@ -372,7 +386,7 @@ foreach($docs as  $row)
 }
 ```
 
-#### $this->db->find_one($criteria, $fields)
+#### $this->db->findOne($criteria, $fields)
 
 ```php
 $this->db->select('username);
@@ -417,7 +431,7 @@ Sets a field to a value.
 $this->db->where(array('blog_id'=>123))->set('posted', 1)->update('blog_posts'); $this->db->where(array('blog_id'=>123))->set('posted', 1)->update('blog_posts');
 ```
 
-#### $this->db->unset_field()
+#### $this->db->unsetField()
 
 Unsets a field (or fields).
 
@@ -425,13 +439,13 @@ Unsets a field (or fields).
 $this->db->where(array('blog_id'=>123))->unset('posted')->update('blog_posts'); $this->db->where(array('blog_id'=>123))->set(array('posted','time'))->update('blog_posts');
 ```
 
-#### $this->db->addtoset()
+#### $this->db->addToSet()
 
 Adds value to the array only if its not in the array already.
 
 ```php
-$this->db->where(array('blog_id'=>123))->addtoset('tags', 'php')->update('blog_posts'); 
-$this->db->where(array('blog_id'=>123))->addtoset('tags', array('php', 'obullo', 'mongodb'))->update('blog_posts');
+$this->db->where('blog_id', 123)->addToSet('tags', 'php')->update('blog_posts'); 
+$this->db->where('blog_id', 123)->addToSet('tags', array('php', 'obullo', 'mongodb'))->update('blog_posts');
 ```
 
 #### $this->db->pull()
@@ -439,7 +453,7 @@ $this->db->where(array('blog_id'=>123))->addtoset('tags', array('php', 'obullo',
 Removes by an array by the value of a field.
 
 ```php
-$this->db->pull('comments', array('comment_id'=>123))->update('blog_posts');
+$this->db->pull('comments', array('comment_id', 123))->update('blog_posts');
 ```
 
 #### $this->db->push()
@@ -447,7 +461,8 @@ $this->db->pull('comments', array('comment_id'=>123))->update('blog_posts');
 Pushes values into a field (field must be an array).
 
 ```php
-$this->db->where(array('blog_id'=>123))->push('comments', array('text'=>'Hello world'))->update('blog_posts'); $this->db->where(array('blog_id'=>123))->push(array('comments' => array('text'=>'Hello world')), 'viewed_by' => array('Alex')->update('blog_posts');
+$this->db->where('blog_id', 123)->push('comments', array('text'=>'Hello world'))->update('blog_posts'); 
+$this->db->where('blog_id', 123)->push(array('comments' => array('text'=>'Hello world')), 'viewed_by' => array('Alex')->update('blog_posts');
 ```
 
 #### $this->db->pop()
@@ -455,8 +470,8 @@ $this->db->where(array('blog_id'=>123))->push('comments', array('text'=>'Hello w
 Pops the last value from a field (field must be an array).
 
 ```php
-$this->db->where(array('blog_id'=>123))->pop('comments')->update('blog_posts'); 
-$this->db->where(array('blog_id'=>123))->pop(array('comments', 'viewed_by'))->update('blog_posts');
+$this->db->where('blog_id', 123)->pop('comments')->update('blog_posts'); 
+$this->db->where('blog_id', 123)->pop(array('comments', 'viewed_by'))->update('blog_posts');
 ```
 
 #### $this->db->batchInsert()
@@ -487,5 +502,5 @@ Remove a gridfs file using mongo instance.
 
 ```php
 $gridFS = $this->db->getInstance()->getGridFS();
-$gridFS->remove(array('user_id' => new MongoId($this->auth->data('_id')), 'filegroup' => 'profile-picture'));
+$gridFS->remove(array('user_id' => new MongoId($this->auth->getIdentity('_id')), 'filegroup' => 'profile-picture'));
 ```
