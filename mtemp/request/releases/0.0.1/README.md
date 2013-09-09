@@ -6,7 +6,7 @@ About HMVC structure you can find more information in Advanced Topics (/docs/adv
 
 ------
 
-To start using HMVC libraries first you should load request helper file.
+Loading Request Helper
 
 ```php
 new request\start();
@@ -96,31 +96,6 @@ If you set <b>cache_time = 0</b> hmvc function will delete your old cached file 
 ```php
 $request = request\get('blog/blog/read', array(), 0);   // cache file will be deleted at next page refresh.
 ```
-
-### Using Hmvc Class Functions
-
-------
-
-You can use Hmvc Class methods directly using second parameter set to false. 
-
-```php
-$request = request\get('captcha/create', false);
-
-$request->setMethod('get', $params = array());
-$request->cache(0);
-$request->setServer('key', 'val');  // Send $_SERVER headers
-```
-
-
-#### $request->noLoop();
-
-Some users some times use the HMVC requests in a custom controller, in this case normally a HMVC library do a unlimited loop and this may cause server crashes, be aware if you use hmvc requests in the customized controllers you need to use noLoop(); method for each requests.
-
-```php
-echo request('blog/blog/read')->noLoop()->exec();
-```
-
-**Critical:** Hmvc requests *rarely* in use parent controllers but don't use hmvc requests without *noLoop();* method when you use them in any *parent controllers* otherwise this may cause server crashes.
 
 ### Examples
 
