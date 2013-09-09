@@ -1,6 +1,6 @@
 ## Utf8 Class
 
-Obullo's Utf8 Class contains utf8 functions which are the utf8 version of standart Php functions. The class constructor first the check is your server support the <strong>UTF8 natively</strong> if yes the library use the **ICONV** functions otherwise it use **own utf8 functions**.
+Utf8 Class contains utf8 functions which are the utf8 version of standart Php functions. The class constructor first the check is your server support the <strong>UTF8 natively</strong> if yes the library use the **ICONV** functions.
 
 ### Initializing the Class
 
@@ -8,6 +8,7 @@ Obullo's Utf8 Class contains utf8 functions which are the utf8 version of standa
 
 ```php
 new Utf8();
+$this->utf8->method();
 ```
 
 Once loaded, the Upload object will be available using: $this->utf8->method();
@@ -20,7 +21,6 @@ Also using new Utf8(false); boolean you grab the instance of Obullo libraries,"$
 
 ```php
 $utf8 = new Utf8(false);
-
 $utf8->method();
 ```
 
@@ -72,11 +72,11 @@ Returns the unicode ordinal for a character. This is a UTF8-aware version of (ht
 
 Returns a string or an array with all occurrences of search in subject (ignoring case) and replaced with the given replace value. This is a UTF8-aware version of (http://php.net/str_ireplace).
 
-#### $this->utf8->str_pad($str, $final_str_length, $pad_str = ' ', $pad_type = STR_PAD_RIGHT);
+#### $this->utf8->strPad($str, $final_str_length, $pad_str = ' ', $pad_type = STR_PAD_RIGHT);
 
 Pads a UTF-8 string to a certain length with another string. This is a UTF8-aware version of (http://php.net/str_pad).
 
-#### $this->utf8->str_split($str, $split_length = 1);
+#### $this->utf8->strSplit($str, $split_length = 1);
 
 Converts a UTF-8 string to an array. This is a UTF8-aware version of (http://php.net/str_split).
 
@@ -112,14 +112,14 @@ Finds position of last occurrence of a char in a UTF-8 string. This is a UTF8-aw
 
 Reverses a UTF-8 string. This is a UTF8-aware version of (http://php.net/strrev).
 
-#### $this->utf8->from_unicode($array);
+#### $this->utf8->fromUnicode($array);
 
 Takes an array of ints representing the Unicode characters and returns a UTF-8 string.
 
-#### $this->utf8->to_unicode($array);
+#### $this->utf8->toUnicode($array);
 
 Takes an UTF-8 string and returns an array of ints representing the Unicode characters.
 
-#### $this->utf8->transliterate_to_ascii($str, $case = 0)
+#### $this->utf8->toAscii($str, $case = 0)
 
 Replaces special/accented UTF-8 characters by ASCII-7 "equivalents".
