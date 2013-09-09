@@ -88,14 +88,14 @@ The above text returns:
 
 Here is a <span style="color:#990000">nice text</span> string about nothing in particular.
 
-#### wordWrap()
+#### word_Wrap()
 
 Wraps text at the specified **character** count while maintaining complete words. Example:
 
 ```php
 $string = "Here is a simple string of text that will help us demonstrate this function.";
 
-echo text\wordWrap($string, 25);
+echo text\word_Wrap($string, 25);
 
 // Would produce:
 

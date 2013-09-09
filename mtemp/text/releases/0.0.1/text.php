@@ -152,7 +152,7 @@ namespace text {
     * @param	bool
     * @return	string
     */
-    function entities2ascii($str, $all = true)
+    function entitiesToAscii($str, $all = true)
     {
        if (preg_match_all('/\&#(\d+)\;/', $str, $matches))
        {
@@ -325,7 +325,7 @@ namespace text {
     * @param	integer	the number of characters to wrap at
     * @return	string
     */
-    function wordWrap($str, $charlim = '76')
+    function word_Wrap($str, $charlim = '76')
     {
         // Se the character limit
         if ( ! is_numeric($charlim))
@@ -410,7 +410,7 @@ namespace text {
 
         // Remove the unwrap tags
         $output = str_replace(array('{unwrap}', '{/unwrap}'), '', $output);
-
+        
         return $output;	
     }
 
