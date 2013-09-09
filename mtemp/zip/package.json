@@ -1,6 +1,6 @@
 {
-  "name": "task",
-  "description": "Task Helper, monitor all framework logs and debugs from your console, run cli tasks.",
+  "name": "zip",
+  "description": "Zip Compression Class",
   "version": "0.0.1",
   "author": {
     "name": "Ersin Güvenç",
@@ -9,22 +9,17 @@
   },
   "component" : "helper",
   "keywords": [
-    "task",
-    "debug",
-    "debugging",
-    "cli",
-    "cli log debug",
-    "log debug",
-    "follow debugs"
+    "zip",
+    "compress",
+    "compressing"
   ],
-  "homepage": "https://github.com/obullo/task",
+  "homepage": "https://github.com/obullo/zip",
   "repo": {
     "type": "git",
-    "url": "https://github.com/obullo/task.git",
+    "url": "https://github.com/obullo/zip.git",
     "archive" : "zip",
-    "archive_url": "https://github.com/obullo/task/archive/master.zip"
+    "archive_url": "https://github.com/obullo/zip/archive/master.zip"
   },
-  "main": "./releases/latest/task.php",
   "requires": {
     "php": ">= 5.2.4",
     "extensions": ["none"]
