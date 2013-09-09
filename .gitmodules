@@ -175,3 +175,6 @@
 [submodule "packages/text"]
 	path = packages/text
 	url = git://github.com/obullo/text.git
+[submodule "packages/utf8"]
+	path = packages/utf8
+	url = git://github.com/obullo/utf8.git
