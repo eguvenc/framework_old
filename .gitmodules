@@ -136,3 +136,6 @@
 [submodule "packages/navbar"]
 	path = packages/navbar
 	url = git://github.com/obullo/navbar.git
+[submodule "packages/pager"]
+	path = packages/pager
+	url = git://github.com/obullo/pager.git
