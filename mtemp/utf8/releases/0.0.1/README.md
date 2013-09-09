@@ -1,6 +1,6 @@
 ## Utf8 Class
 
-Obullo's Utf8 Class contains utf8 functions which are the utf8 version of standart Php functions.The class constructor first the check is your server support the <strong>UTF8 natively</strong> if yes the library use the **ICONV** functions otherwise it use **own utf8 functions**.
+Obullo's Utf8 Class contains utf8 functions which are the utf8 version of standart Php functions. The class constructor first the check is your server support the <strong>UTF8 natively</strong> if yes the library use the **ICONV** functions otherwise it use **own utf8 functions**.
 
 ### Initializing the Class
 

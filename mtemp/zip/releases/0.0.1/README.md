@@ -1,6 +1,6 @@
 ## Zip Class
 
-Obullo's Zip Encoding Class classes permit you to create Zip archives. Archives can be downloaded to your desktop or saved to a directory.
+The Zip Encoding Class classes permit you to create Zip archives. Archives can be downloaded to your desktop or saved to a directory.
 
 ### Initializing the Class
 
@@ -10,7 +10,7 @@ Obullo's Zip Encoding Class classes permit you to create Zip archives. Archives 
 new Zip();
 ```
 
-Once loaded, the Zip library object will be available using: <dfn>$this->zip->method();</dfn>
+Once loaded, the Zip library object will be available using: <kbd>$this->zip->method();</kbd>
 
 ### Grabbing the Instance
 
@@ -41,8 +41,8 @@ $this->zip->addData($name, $data);
 
 $this->zip->archive('/path/to/directory/my_backup.zip');
 
-// Download the file to your desktop. Name it "my_backup.zip" 
-$this->zip->download('my_backup.zip'); 
+// Download the file to your desktop. Name it "mybackup.zip" 
+$this->zip->download('mybackup.zip'); 
 ```
 
 ### Function Reference
@@ -55,7 +55,7 @@ Permits you to add data to the Zip archive. The first parameter must contain the
 
 ```php
 $name = 'my_bio.txt';
-$data = 'I was born in Istanbul ...';
+$data = 'I was born in London ...';
 
 $this->zip->addData($name, $data);
 ```
@@ -81,8 +81,7 @@ $data = array(
             );
 
 $this->zip->addData($data);
-
-$this>zip->download('my_backup.zip'); 
+$this>zip->download('mybackup.zip'); 
 ```
 
 If you would like your compressed data organized into sub-folders, include the path as part of the filename:
@@ -91,15 +90,15 @@ If you would like your compressed data organized into sub-folders, include the p
 $name = 'personal/my_bio.txt';
 $data = 'I was born in Paris ...';
 
-$this->zip->add_data($name, $data); 
+$this->zip->addData($name, $data); 
 ```
 
-The above example will place <dfn>my_bio.txt</dfn> inside a folder called <kbd>personal</kbd>.
+The above example will place <kbd>my_bio.txt</kbd> inside a folder called personal.
 
 
 #### $this->zip->addDir()
 
-Permits you to add a directory. Usually this function is unnecessary since you can place your data into folders when using <dfn>$this->zip->add_data()</dfn>, but if you would like to create an empty folder you can do so. Example:
+Permits you to add a directory. Usually this function is unnecessary since you can place your data into folders when using <kbd>$this->zip->addData()</kbd>, but if you would like to create an empty folder you can do so. Example:
 
 ```php
 $this->zip->addDir('myfolder'); // Creates a folder called "myfolder" 
@@ -114,19 +113,18 @@ $path = '/path/to/photo.jpg';
 
 $this->zip->readFile($path);
 
-// Download the file to your desktop. Name it "my_backup.zip"
-$this->zip->download('my_backup.zip'); 
+// Download the file to your desktop. Name it "mybackup.zip"
+$this->zip->download('mybackup.zip'); 
 ```
 
 If you would like the Zip archive to maintain the directory structure of the file in it, pass <kbd>true</kbd> (boolean) in the second parameter. Example:
 
 ```php
 $path = '/path/to/photo.jpg';
-
 $this->zip->readFile($path, true);
 
-// Download the file to your desktop. Name it "my_backup.zip"
-$this->zip->download('my_backup.zip');
+// Download the file to your desktop. Name it "mybackup.zip"
+$this->zip->download('mybackup.zip');
 ```
 
 In the above example, photo.jpg will be placed inside two folders: <kbd>path/to/</kbd>
@@ -140,8 +138,8 @@ $path = '/path/to/your/directory/';
 
 $this->zip->readDir($path);
 
-// Download the file to your desktop. Name it "my_backup.zip"
-$this->zip->download('my_backup.zip'); 
+// Download the file to your desktop. Name it "mybackup.zip"
+$this->zip->download('mybackup.zip'); 
 ```
 
 #### $this->zip->archive()
@@ -156,7 +154,7 @@ $this->zip->archive('/path/to/folder/myarchive.zip'); // Creates a file named my
 Causes the Zip file to be downloaded from your server. The function must be passed the name you would like the zip file called. Example:
 
 ```php
-$this->zip->download('latest_stuff.zip'); // File will be named "latest_stuff.zip"
+$this->zip->download('lateststuff.zip'); // File will be named "lateststuff.zip"
 ```
 
 **Note:**  Do not display any data in the controller in which you call this function since it sends various server headers that cause the download to happen and the file to be treated as binary.
@@ -170,7 +168,6 @@ $name = 'my_bio.txt';
 $data = 'I was born in an elevator...';
 
 $this->zip->addData($name, $data);
-
 $this->zipFile = $this->zip->getZip(); 
 ```
 
@@ -184,11 +181,9 @@ $data = 'I was born in an elevator...';
 
 $this->zip->addData($name, $data);
 $zip_file = $this->zip->getZip();
-
 $this->zip->clearData();
 
 $name = 'photo.jpg';
 $this->zip->readFile("/path/to/photo.jpg"); // Read the file's contents
-
 $this->zip->download('myphotos.zip'); 
 ```

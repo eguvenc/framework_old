@@ -20,7 +20,7 @@
     "archive_url": "https://github.com/obullo/request/archive/master.zip"
   },
   "requires": {
-    "php": ">= 5.1.2",
+    "php": ">= 5.3.0",
     "extensions": ["none"]
   },
   "bugs": {

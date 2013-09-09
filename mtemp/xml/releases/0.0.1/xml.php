@@ -38,7 +38,7 @@ namespace xml {
         $xml->startDocument('1.0', $encoding);
         $xml->startElement('root');
 
-        _write_xml($xml, $data, $cdata);
+        _writeXml($xml, $data, $cdata);
 
         $xml->endElement();
 
@@ -54,7 +54,7 @@ namespace xml {
      * @param array $data
      * @param boolen $cdata 
      */
-    function _write_xml($xml, $data, $cdata)
+    function _writeXml($xml, $data, $cdata)
     {
         foreach($data as $key => $value)
         {
@@ -62,7 +62,7 @@ namespace xml {
             {
                $xml->startElement($key);
                
-                _write_xml($xml, $value, $cdata);
+                _writeXml($xml, $value, $cdata);
                 
                $xml->endElement();
 
@@ -109,7 +109,7 @@ namespace xml {
                             $str);
 
         // Decode the temp markers back to entities        
-        $str = preg_replace("/$temp(\d+);/","&#\\1;",$str);
+        $str = preg_replace("/$temp(\d+);/","&#\\1;", $str);
 
         if ($protect_all === true)
         {

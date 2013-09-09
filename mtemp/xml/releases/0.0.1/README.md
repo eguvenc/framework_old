@@ -14,7 +14,7 @@ new xml\start();
 
 The following functions are available:
 
-#### xmlConvert('string')
+#### convert('string')
 
 Takes a string as input and converts the following reserved XML characters to entities:
 
@@ -26,10 +26,10 @@ Dashes: -
 This function ignores ampersands if they are part of existing character entities. Example:
 
 ```php
-$string = xmlConvert($string);
+$string = xml\convert($string);
 ```
 
-#### xmlWriter('array data', $cdata = false, $encoding = 'UTF-8')
+#### writer('array data', $cdata = false, $encoding = 'UTF-8')
 
 If PECL libxml extension loaded on your host, xml writer function convert your array data to xml.
 
@@ -43,18 +43,20 @@ new xml\start();
                        'item3' => 'thing'
                       );    
 
- echo xmlWriter($array);
+ echo xml\writer($array);
 
- // Output
+// Output
+/*
 <?xml version="1.0" encoding="UTF-8"?>
 <root><item1>thing</item1>
 <item2><door>red</door><window>clear</window></item2>
 <item3>thing</item3>
 </root>
+*/
 ```
 
 If you need to use **html data** in your xml tags, set second param as true.
 
 ```php
-xmlWriter($array, true);
+xml\writer($array, true);
 ```

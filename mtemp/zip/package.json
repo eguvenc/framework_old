@@ -8,18 +8,6 @@
     "url": "https://github.com/eguvenc"
   },
   "component" : "helper",
-  "shell" : [
-    {
-        "copy" : { 
-            "source" : "obullo_modules/$name/releases/$version/src/task", 
-            "target" : "/" 
-        },
-        "copy" : {
-            "source" : "obullo_modules/$name/releases/$version/example/*",
-            "target" : "modules/tasks/controllers"
-        }
-    }
-  ],
   "keywords": [
     "task",
     "debug",

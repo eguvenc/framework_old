@@ -7,7 +7,7 @@
     "email": "eguvenc@gmail.com",
     "url": "https://github.com/eguvenc"
   },
-  "component" : "text",
+  "component" : "helper",
   "keywords": [
     "text",
     "string",
@@ -27,7 +27,7 @@
     "archive_url": "https://github.com/obullo/text/archive/master.zip"
   },
   "requires": {
-    "php": ">= 5.2.4",
+    "php": ">= 5.3.0",
     "extensions": ["none"]
   },
   "bugs": {
