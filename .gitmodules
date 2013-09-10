@@ -184,3 +184,6 @@
 [submodule "packages/zip"]
 	path = packages/zip
 	url = git://github.com/obullo/zip.git
+[submodule "packages/html"]
+	path = packages/html
+	url = git://github.com/obullo/html.git
