@@ -17,9 +17,9 @@
         <section>
             <h2>Get Started</h2>
             <ol>
-                <li>The app start with <code>index.php</code></li>
+                <li>Search and find packages for your Obullo</li>
                 <li>Update your packages using <strong>package.json</strong> file</li>
-                <li>Run <code>obm update</code> from your console</li>
+                <li>Run <code>obm update</code> from your console, now your packages always up to date.</li>
             </ol>
         </section>
 

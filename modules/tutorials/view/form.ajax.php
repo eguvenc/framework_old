@@ -5,10 +5,10 @@
             <?php echo html\css('welcome.css') ?>
         <title>Odm Ajax Tutorial</title>
         
-        <?php echo html\js('jquery/*') ?> 
+        <?php echo html\js('jquery/*)') ?> 
         <?php echo html\js('form_json/*') ?> 
         <?php echo html\js('underscore/*') ?>
-        
+    </head>
         <?php
         // form Json Class Attributes  
         // 
@@ -16,8 +16,6 @@
         // no-ajax:       Use this attribute for native posts.
         // hide-form:     Hide the form area if form submit success.
         ?>
-    </head>
-
     <body>
         <header>
             <?php echo url\anchor('/', html\img('logo.png', ' alt="Obullo" ')) ?>
@@ -64,8 +62,7 @@
                     </table>
                     
                     <h2>form_Json Helper</h2>
-                    <p>* form_Json helper simply use php <b>json_encode($user->errors());</b> function and it send ajax response in json format.</p>
-                    <p>* It send <strong>.json</strong> header when we get the request with .json extension in our form post url.</p>
+                    <p>* form_Json helper send json response using php <strong>json_encode();</strong>.</p>
 
             <?php echo form\close(); ?>
         </section>

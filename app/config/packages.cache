@@ -63,6 +63,7 @@ $packages['dependencies']['validator'] = array('version' => '0.0.1', 'component'
 $packages['dependencies']['uri']  = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['url']  = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['utf8'] = array('version' => '0.0.1', 'component' => 'library');
+$packages['dependencies']['xml']  = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['vi']   = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['view'] = array('version' => '0.0.1', 'component' => 'library');
 

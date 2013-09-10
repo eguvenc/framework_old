@@ -13,7 +13,6 @@ Class Welcome extends Controller {
         // new Db();
       
         // print_r($this->db->get('users')->resultArray());
-        
         // var_dump($this->ftp);
     }
     
