@@ -62,7 +62,7 @@
                     </table>
                     
                     <h2>form_Json Helper</h2>
-                    <p>* form_Json helper send json response using php <strong>json_encode();</strong>.</p>
+                    <p>* The form_Json helper sends json response using php <strong>json_encode();</strong>.</p>
 
             <?php echo form\close(); ?>
         </section>

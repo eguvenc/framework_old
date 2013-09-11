@@ -12,13 +12,13 @@ Class Form extends Controller {
 
     function index()
     {        
-        vi\view('form');
+        view('form');
     }
     
     function post()
-    {   
+    {
         $user = new Models\User();
-        $user->user_password = i\post('user_password');
+        $user->user_password = i\post('user_password'); 
         $user->user_email    = i\post('user_email');
         
         if($user->save())
@@ -27,8 +27,8 @@ Class Form extends Controller {
             url\redirect('tutorials/form');
         }
 
-        vi\setVar('user', $user);
-        vi\view('form');
+        setVar('user', $user);
+        view('form');
     }
 }
 

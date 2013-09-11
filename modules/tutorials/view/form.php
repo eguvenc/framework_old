@@ -1,5 +1,5 @@
 <?php
-    $user = vi\getVar('user');
+    $user = getVar('user');
 ?>
 <!DOCTYPE html>
 <html>

@@ -19,10 +19,10 @@
 | -------------------------------------------------------------------
 | Prototypes:
 |
-|       $autoload['helper'] = array('vi', 'html', 'url');
+|       $autoload['helper'] = array('html', 'url');
 */
 
-$autoload['helper']     = array('vi', 'html', 'url');
+$autoload['helper']     = array('html', 'url');
 
 /*
 | -------------------------------------------------------------------

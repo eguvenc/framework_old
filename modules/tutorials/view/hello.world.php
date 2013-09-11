@@ -14,10 +14,10 @@
         <h1>Hello World</h1>
 
         <section>
-            <p><?php echo vi\getVar('var') ?></p>
+            <p><?php echo getVar('var') ?></p>
         </section> 
         
-        <?php echo vi\views('footer', false) // get the common [views] from /mods/view(s) folder.  ?>
+        <?php echo views('footer', false) // get the common [views] from /modules/view(s) folder.  ?>
         
         <section>
             <p>&nbsp;</p>

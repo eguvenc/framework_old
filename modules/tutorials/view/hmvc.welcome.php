@@ -18,13 +18,13 @@
 $response_a = request\get('tutorials/hmvc_welcome/test/1/2/3');
 $response_b = request\get('tutorials/hmvc_welcome/test/4/5/6');
 
-echo vi\getVar('response_a');
-echo vi\getVar('response_b');</pre>
+echo getVar('response_a');
+echo getVar('response_b');</pre>
 
-        <p><?php echo vi\getVar('response_a') ?></p>
-        <p><?php echo vi\getVar('response_b') ?></p>
+        <p><?php echo getVar('response_a') ?></p>
+        <p><?php echo getVar('response_b') ?></p>
         
-        <?php echo vi\views('footer', false) // get the common [views] from /mods/view(s) folder.  ?>
+        <?php echo views('footer', false) // get the common [views] from /mods/view(s) folder.  ?>
         
         <section>
             <p>&nbsp;</p>

@@ -9,10 +9,10 @@ Class Hello_World extends Controller {
 
     function index()
     {  
-        vi\setVar('var', 'Hello, this is my first Obullo page.');
-        vi\setVar('name', 'Obullo');
+        setVar('var', 'Hello, this is my first Obullo page.');
+        setVar('name', 'Obullo');
         
-        vi\view('hello.world');
+        view('hello.world');
     }
 }
 

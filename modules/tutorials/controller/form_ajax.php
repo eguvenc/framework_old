@@ -11,7 +11,7 @@ Class Form_Ajax extends Controller {
 
     function index()
     {        
-        vi\view('form.ajax');
+        view('form.ajax');
     }
     
     function post()
@@ -33,7 +33,7 @@ Class Form_Ajax extends Controller {
             return;
         }
 
-        vi\view('form.ajax');
+        view('form.ajax');
     }
 }
 

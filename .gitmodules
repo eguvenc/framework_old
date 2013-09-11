@@ -82,9 +82,6 @@
 [submodule "packages/security"]
 	path = packages/security
 	url = git://github.com/obullo/security.git
-[submodule "packages/vi"]
-	path = packages/vi
-	url = git://github.com/obullo/vi.git
 [submodule "packages/view"]
 	path = packages/view
 	url = git://github.com/obullo/view.git

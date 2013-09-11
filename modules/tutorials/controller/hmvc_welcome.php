@@ -14,11 +14,11 @@ Class Hmvc_Welcome extends Controller {
         $response_a = request\get('tutorials/hmvc_welcome/test/1/2/3');
         $response_b = request\get('tutorials/hmvc_welcome/test/4/5/6');
         
-        vi\setVar('response_a', $response_a);
-        vi\setVar('response_b', $response_b);
-        vi\setVar('name', 'Obullo');
+        setVar('response_a', $response_a);
+        setVar('response_b', $response_b);
+        setVar('name', 'Obullo');
         
-        vi\view('hmvc.welcome');
+        view('hmvc.welcome');
     }
     
     function test($arg1 = '', $arg2 = '', $arg3 = '')

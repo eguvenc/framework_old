@@ -219,7 +219,7 @@ function getConfig($filename = 'config', $var = '', $folder = '', $extension = '
 |
 | {
 |  "dependencies": {
-|     "obullo": "*",   // (*) = new version, (2.1,2.2 .. ) = stable version
+|     "obullo": "*",   // (*) = new version, (2.1,2.2 .. ) = previous stable version
 |     "auth" : "*"
 |  }
 | }

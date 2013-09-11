@@ -17,28 +17,29 @@
         <section>
             <h2>Get Started</h2>
             <ol>
-                <li>Search and find packages for your Obullo</li>
-                <li>Update your packages using <strong>package.json</strong> file</li>
-                <li>Run <code>obm update</code> from your console, now your packages always up to date.</li>
+                <li>Go to <?php echo url\anchor('http://obm.obullo.com', 'http://obm.obullo.com') ?> and find packages for your Obullo</li>
+                <li>Update your packages using your <strong>package.json</strong> file</li>
+                <li>Run <code>obm update</code> from your console to make your packages up to date.</li>
             </ol>
         </section>
 
         <section>
             <h2>Update your package.json</h2>
             <p>
-                If a new packages available, the package manager <strong>( Obm )</strong> will upgrage it using your package.json. If you need a stable a version remove asterisk ( * ) and set the package version to a specific number. ( e.g. auth: "2.0" )
+                If new packages available, the package manager <strong>( Obm )</strong> will upgrade packages using your package.json. If you need a previous stable version remove the asterisk ( * ) and set it to a specific number. ( e.g. auth: "0.0.3" )
 <pre>
 {
     "dependencies": {
         "obullo": "*",
-        "auth" : "*"
+        "acl" : "*"
+        "auth" : "0.0.3"
     }
 }</pre>                
             </p>
 
             <h2>Submit your packages</h2>
             <p>
-                To find more obullo packages please go <?php echo url\anchor('http://obm.obullo.com', 'Obm Packages') ?>. if you want to add your package click here <?php echo url\anchor('http://obm.obullo.com/submit-package', 'Submit Package') ?>.
+                If you want to add your package click here <?php echo url\anchor('http://obullo.com/submit-package', 'Submit Package') ?> to submit.
             </p>
         </section>
         
@@ -53,7 +54,7 @@
             </ol>
         </section>
 
-        <?php echo vi\views('footer', false) ?>
+        <?php echo views('footer', false) ?>
         
         <section>
             <p>&nbsp;</p>
