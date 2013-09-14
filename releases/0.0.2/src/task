@@ -1,0 +1,62 @@
+<?php
+/*
+|--------------------------------------------------------------------------
+| Obullo CLI (TASKS)
+|--------------------------------------------------------------------------
+| @see Docs:  General Topics / Tasks
+| @author CJ Lazell
+|
+*/ 
+if (isset($_SERVER['REMOTE_ADDR'])) die('Access denied');
+ 
+/*
+|--------------------------------------------------------------------------
+| Get Command Line Arguments
+|--------------------------------------------------------------------------
+*/ 
+unset($_SERVER['argv'][0]);
+
+
+/*
+|--------------------------------------------------------------------------
+| We need to make sure is it Task or Cmd Request
+| The main difference of a task request, user call it via
+| task helper and run with task_run(); function internally.
+|--------------------------------------------------------------------------
+*/
+if(end($_SERVER['argv']) == 'OB_TASK_REQUEST')
+{
+    define('TASK', 1);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Set Command Line Arguments as Obullo Segments
+|--------------------------------------------------------------------------
+| Manually set the URI path based on command line arguments.
+|
+*/ 
+$_SERVER['PATH_INFO']      = '/'. implode('/', $_SERVER['argv']) .'/';
+$_SERVER['REQUEST_URI']    = $_SERVER['PATH_INFO'];
+$_SERVER['QUERY_STRING']   = $_SERVER['PATH_INFO'];
+$_SERVER['ORIG_PATH_INFO'] = $_SERVER['PATH_INFO'];
+
+/*
+|--------------------------------------------------------------------------
+| Application Constants.
+|--------------------------------------------------------------------------
+| This file specifies which APP constants should be loaded by default.
+|
+ */
+require ('constants');
+
+
+/*
+|--------------------------------------------------------------------------
+| Index.php file.
+|--------------------------------------------------------------------------
+| If you want to rename or move your general index.php also you need to
+| to change it from here.
+|
+*/ 
+require('index'. EXT);
