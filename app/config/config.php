@@ -33,22 +33,19 @@ $config['ssl']                   = (ENV == 'LIVE') ? true : false;
 | URL to your Asset Files, Like Base URL. 
 |
 */
-$config['asset_url']            = '/';
+$config['asset_url']             = '/';
 
 /*
 |--------------------------------------------------------------------------
 | Obullo Error Handler Enable / Disable Displaying Errors
 |--------------------------------------------------------------------------
 |  
-| Obullo use default as error_reporting(0), however Obullo can catch all php errors and show them friendly.
+| Frameork use default as error_reporting(0), however framework can catch all php errors and show them friendly.
 |
 |   0 - Turn off all error reporting (0)
 |   1 - All errors  = E_ALL;
-|   String - Custom Regex Mode Examples:
+|   String - Custom Regex Mode:
 |
-|   Running errors
-|       $config['error_reporting'] = 'E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR';
-|   
 |   Running errors + notices
 |       $config['error_reporting'] = 'E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_NOTICE';
 |   
@@ -273,14 +270,14 @@ $config['cookie_prefix']         = '';
 $config['cookie_domain']         = (ENV == 'LIVE') ? '.your-domain.com' : '';
 $config['cookie_path']           = '/';
 $config['cookie_time']           = (7 * 24 * 60 * 60) + time();
-$config['cookie_secure']	 = false;
+$config['cookie_secure']	 	 = false;
 
 /*
 |--------------------------------------------------------------------------
 | Rewrite PHP Short Tags
 |--------------------------------------------------------------------------
 |
-| If your PHP installation does not have short tag support enabled, Obullo
+| If your PHP installation does not have short tag support enabled, framework
 | can rewrite the tags on-the-fly, enabling you to utilize that syntax
 | in your view files.  Options are true or false (boolean)
 |

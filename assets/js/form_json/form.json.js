@@ -40,7 +40,7 @@
           $root.data('form_plugin_active', true);
 
           return $root.bind('submit', function() {
-            var data, i;
+            var data;
             config.before.call(root, $root);
             data = $root.find(':visible, [type="hidden"], .send_even_if_hidden').serialize();
             

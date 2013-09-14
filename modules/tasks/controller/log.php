@@ -172,13 +172,13 @@ Display logs [$php task log], to filter logs [$php task log $level]'."\n\033[0m"
         $helpers = array();
         foreach($autoload['helper'] as $helper)
         { 
-            $helpers[] = error\securePath(ROOT .'ob'. DS .$helper. DS .$helper. EXT);
+            $helpers[] = error\securePath(PACKAGES .$helper. DS .$helper. EXT);
         }
         
         $libraries = array();
         foreach($autoload['library'] as $library)
         { 
-            $libraries[] = error\securePath(ROOT .'ob'. DS .$library. DS .$library. EXT);
+            $libraries[] = error\securePath(PACKAGES .$library. DS .$library. EXT);
         }
         
         $output  = "\33[0;36m________LOADED FILES______________________________________________________";

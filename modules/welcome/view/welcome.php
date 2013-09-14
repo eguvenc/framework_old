@@ -39,7 +39,7 @@
 
             <h2>Submit your packages</h2>
             <p>
-                If you want to add your package click here <?php echo url\anchor('http://obullo.com/submit-package', 'Submit Package') ?> to submit.
+                If you want to add your package click this <?php echo url\anchor('http://obullo.com/submit-package', 'Submit Package') ?> link.
             </p>
         </section>
         
