@@ -2,27 +2,24 @@
 <?php
 $SECRET_KEY  = '5218b17bdf213';
 $OBM_VERSION = '0.1';
-/**
+/*
 |--------------------------------------------------------------------------
 | OBM ( Obullo Manager )
 |--------------------------------------------------------------------------
-| Package Manager Functions
-|
-| Get Installer
-| - Install the Obm          :  cd /var/www/ && wget http://obullo.com/obm
-|
+| Package Manager File
 */ 
 
-/**
+/*
 |--------------------------------------------------------------------------
 | Command line examples
 |--------------------------------------------------------------------------
 
 | $ cd /var/www/
-| $ wget http://obullo.com/obm
+| $ mkdir yourprojectname
+| $ wget https://obullo.com/installer
 | 
-| CREATE NEW PROJECT
-| $ php obm install $yourprojectname
+| INSTALLING OBM IN TO YOUR PROJECT
+| $ php obm install
 | 
 | UPDATE EXISTING PROJECT
 | $ php obm update
@@ -319,7 +316,7 @@ if(isset($_SERVER['argv'][0])){
 
 //------------------ Obm functions ---------------------
 
-/**
+/*
     ###################
  
     getpackage.sh
