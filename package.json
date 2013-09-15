@@ -8,18 +8,11 @@
     "url": "https://github.com/eguvenc"
   },
   "component" : "helper",
-  "shell" : [
-    {
-        "copy" : { 
-            "source" : "ob/$name/releases/$version/src/task", 
-            "target" : "/" 
-        },
-        "copy" : {
-            "source" : "ob/$name/releases/$version/example/*",
-            "target" : "modules/tasks/controllers"
-        }
-    }
-  ],
+  "shell" : {
+    "mkdir": "-p $MODULES/tasks/controller",
+    "copy": "$PACKAGES/$NAME/$RELEASES/$VERSION/controllers/* $MODULES/tasks",
+    "copy": "$PACKAGES/$NAME/$RELEASES/$VERSION/src/task $ROOT/"
+  },
   "keywords": [
     "task",
     "debug",
