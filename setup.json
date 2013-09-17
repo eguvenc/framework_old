@@ -1,0 +1,8 @@
+{
+	"name": "Obullo",
+	"version": "2.0",
+	"init" : {
+		"ignored_folders": ["modules/tasks"],
+		"ignored_files": ["setup.json"]
+	}
+}
