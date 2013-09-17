@@ -10,8 +10,8 @@
   "component" : "helper",
   "shell" : {
     "mkdir": "-p $MODULES/tasks/controller",
-    "copy": "$PACKAGES/$NAME/$RELEASES/$VERSION/controllers/* $MODULES/tasks",
-    "copy": "$PACKAGES/$NAME/$RELEASES/$VERSION/src/task $ROOT/"
+    "chmod": "-R 777 $MODULES/tasks",
+    "cp": ["$PACKAGES/$NAME/$RELEASES/$VERSION/controllers/* $MODULES/tasks/controller", "$PACKAGES/$NAME/$RELEASES/$VERSION/src/task $ROOT/"]
   },
   "keywords": [
     "task",
