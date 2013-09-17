@@ -4,4 +4,6 @@ nbproject
 *.htaccess
 .htaccess
 download.sh
+addsubmodule.sh
+task
 =======
