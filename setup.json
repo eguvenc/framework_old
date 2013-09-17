@@ -3,6 +3,6 @@
 	"version": "2.0",
 	"init" : {
 		"ignored_folders": ["modules/tasks"],
-		"ignored_files": ["setup.json"]
+		"ignored_files": ["setup.json","config/packages.cache","config/auth.php","config/mongo.php"]
 	}
 }
