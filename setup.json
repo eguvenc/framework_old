@@ -2,6 +2,6 @@
 	"name": "Obullo",
 	"version": "2.0",
 	"init" : {
-	   "ignore": ["modules/tasks","setup.json","config/packages.cache","config/auth.php","config/mongo.php"]
+	   "ignore": ["*modules/tasks*","*setup.json*","*config/packages.cache*","*config/auth.php*","*config/mongo.php*"]
 	}
 }
