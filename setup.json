@@ -2,6 +2,6 @@
 	"name": "Obullo",
 	"version": "2.0",
 	"init" : {
-	   "ignore": ["*.gitignore*","*.gitmodules*","*modules/tasks*","*setup.json*","*app/config/packages.cache*","*app/config/auth.php*","*app/config/mongo.php*"]
+	   "ignore": ["*.gitignore*","*.gitmodules*","*commitall.sh*","*modules/tasks*","*setup.json*","*app/config/packages.cache*","*app/config/auth.php*","*app/config/mongo.php*"]
 	}
 }
