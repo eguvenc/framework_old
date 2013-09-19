@@ -3,11 +3,14 @@
   "description": "Task Helper, run cli tasks and follow debugs from command line.",
   "version": "0.0.2",
   "author": {
-    "name": "Ersin Güvenç",
-    "email": "eguvenc@gmail.com",
-    "url": "https://github.com/eguvenc"
+    "name": "Obullo Team",
+    "email": "obulloframework@gmail.com",
+    "url": "https://github.com/obullo"
   },
   "component" : "helper",
+  "dependencies": {
+    "log":"*"
+  },
   "shell" : {
     "mkdir": "-p $MODULES/tasks/controller",
     "chmod": "-R 777 $MODULES/tasks",
