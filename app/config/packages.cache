@@ -39,6 +39,7 @@ $packages['dependencies']['form_json'] = array('version' => '0.0.1', 'component'
 $packages['dependencies']['ftp'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['html'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['hmvc'] = array('version' => '0.0.1', 'component' => 'library');
+$packages['dependencies']['hooks'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['i'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['input'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['log'] = array('version' => '0.0.1', 'component' => 'helper');
