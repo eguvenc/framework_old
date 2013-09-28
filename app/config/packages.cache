@@ -10,7 +10,7 @@
 | In order to keep the framework as light-weight as possible this file 
 | defines the cached package.json variables in array format.
 |
-| We get the packages.cache variables using getConfig('packages.cache');
+| We get the packages.cache variables using global $packages variable;
 |
 | -------------------------------------------------------------------
 | Prototype

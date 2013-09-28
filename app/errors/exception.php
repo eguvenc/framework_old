@@ -68,7 +68,7 @@ function ExceptionToggle(obj){
 
 <div id="exceptionContent">
     <h1><?php echo $type ?></h1>
-    <h2><?php echo error\securePath($e->getMessage(), true) ?></h2>
+    <h2><?php echo Error::getSecurePath($e->getMessage(), true) ?></h2>
 <?php 
 if(isset($sql)) 
 {
@@ -76,50 +76,51 @@ if(isset($sql))
 }
 ?>
 <?php $code = ($e->getCode() != 0) ? ' Code : '. $e->getCode() : '' ?> 
-<span class="errorFile"><?php echo error\securePath($e->getFile()) ?><?php echo $code ?><?php echo ' ( Line : '.$e->getLine().' ) ' ?></span>
+<span class="errorFile"><?php echo Error::getSecurePath($e->getFile()) ?><?php echo $code ?><?php echo ' ( Line : '.$e->getLine().' ) ' ?></span>
 <?php 
-$debug  = config('debug_backtrace');
+$debug = config('debug_backtrace');
 if($debug['enabled'] === true OR $debug['enabled'] == 1)  // Covert to readable format
 {
     $debug['enabled'] = 'E_ALL';
 }
 
-$rules  = error\parseRegex($debug['enabled']);
-$e_code = (substr($e->getMessage(),0,3) == 'SQL') ? 'SQL' : $e->getCode();
-$allowed_errors = error\getAllowedErrors($rules);  
+$rules = Error::parseRegex($debug['enabled']);
+$allowedErrors = Error::getAllowedErrors($rules);
+
+$eCode  = (substr($e->getMessage(),0,3) == 'SQL') ? 'SQL' : $e->getCode();
 
 if(is_string($debug['enabled'])) 
 {
     // Show source code for first exception trace
     // ------------------------------------------------------------------------
-    $e_trace['file'] = $e->getFile();
-    $e_trace['line'] = $e->getLine();
+    $eTrace['file'] = $e->getFile();
+    $eTrace['line'] = $e->getLine();
 
-    echo error\writeFileSource($e_trace);
+    echo Error::debugFileSource($eTrace);
     
-    if( ! isset($allowed_errors[$e_code]))   // Check debug_backtrace enabled for current error. 
+    if( ! isset($allowedErrors[$eCode]))   // Check debug_backtrace enabled for current error. 
     {
         echo '</div>'; return;
     }
     
     // ------------------------------------------------------------------------
     
-    $full_traces = error\debugBacktrace($e);
+    $fullTraces = $e->getTrace();
 
-    $debug_traces = array();
-    foreach($full_traces as $key => $val)
+    $debugTraces = array();
+    foreach($fullTraces as $key => $val)
     {
         if( isset($val['file']) AND isset($val['line']))
         {   
-            $debug_traces[] = $val;
+            $debugTraces[] = $val;
         }
     }
     
-    if(isset($debug_traces[0]['file']) AND isset($debug_traces[0]['line']))
+    if(isset($debugTraces[0]['file']) AND isset($debugTraces[0]['line']))
     {
-        if($debug_traces[0]['file'] == $e->getFile() AND $debug_traces[0]['line'] == $e->getLine())
+        if($debugTraces[0]['file'] == $e->getFile() AND $debugTraces[0]['line'] == $e->getLine())
         {
-            unset($debug_traces[0]);
+            unset($debugTraces[0]);
             
             $unset = true;
         } 
@@ -128,86 +129,86 @@ if(is_string($debug['enabled']))
             $unset = false;
         }
         
-        if(isset($debug_traces[1]['file']) AND isset($debug_traces[1]['line'])) 
+        if(isset($debugTraces[1]['file']) AND isset($debugTraces[1]['line'])) 
         { 
-            $class_info = '';
-            foreach($debug_traces as $key => $trace) 
+            $classInfo = '';
+            foreach($debugTraces as $key => $trace) 
             {                    
                 $prefix = uniqid().'_';
 
                 if(isset($trace['file'])) 
                 {                        
-                    $class_info = '';
+                    $classInfo = '';
                     
                     if(isset($trace['class']) AND isset($trace['function']))
                     {
-                        $class_info.= $trace['class'] .'->'. $trace['function'];  
+                        $classInfo.= $trace['class'] .'->'. $trace['function'];  
                     }
                     
                     if( ! isset($trace['class']) AND isset($trace['function']))
                     {
-                        $class_info.= $trace['function']; 
+                        $classInfo.= $trace['function']; 
                     }
                     
                     if(isset($trace['args']))  
                     {       
                         if(count($trace['args']) > 0)
                         {                  
-                            $class_info.= '(<a href="javascript:void(0);" ';
-                            $class_info.= 'onclick="ExceptionToggle(\'arg_toggle_'.$prefix.$key.'\');">';
-                            $class_info.= 'arg';
-                            $class_info.= '</a>)'; 
+                            $classInfo.= '(<a href="javascript:void(0);" ';
+                            $classInfo.= 'onclick="ExceptionToggle(\'arg_toggle_'.$prefix.$key.'\');">';
+                            $classInfo.= 'arg';
+                            $classInfo.= '</a>)'; 
                             
-                            $class_info.= '<div id="arg_toggle_'.$prefix.$key.'" class="collapsed">';
-                            $class_info.= '<div class="arguments">';
+                            $classInfo.= '<div id="arg_toggle_'.$prefix.$key.'" class="collapsed">';
+                            $classInfo.= '<div class="arguments">';
 
-                            $class_info.= '<table>';
+                            $classInfo.= '<table>';
                             foreach($trace['args'] as $arg_key => $arg_val)
                             {
-                                $class_info.= '<tr>';
-                                $class_info.= '<td>'.$arg_key.'</td>';
+                                $classInfo.= '<tr>';
+                                $classInfo.= '<td>'.$arg_key.'</td>';
    
                                 if($trace['function'] == 'pdoConnect' AND ($arg_key == 2 OR $arg_key == 1)) // hide database password for security.
                                 {
-                                    $class_info.= '<td>***********</td>';
+                                    $classInfo.= '<td>***********</td>';
                                 } 
                                 else 
                                 {
-                                    $class_info.= '<td>'.error\dumpArgument($arg_val).'</td>';
+                                    $classInfo.= '<td>'.Error::dumpArgument($arg_val).'</td>';
                                 }
                                 
-                                $class_info.= '</tr>'; 
+                                $classInfo.= '</tr>'; 
                             }
-                            $class_info.= '</table>';
+                            $classInfo.= '</table>';
                             
-                            $class_info.= '</div>';
-                            $class_info.= '</div>';
+                            $classInfo.= '</div>';
+                            $classInfo.= '</div>';
                         }
                         else
                         {
-                            $class_info.= (isset($trace['function'])) ? '()' : '';     
+                            $classInfo.= (isset($trace['function'])) ? '()' : '';     
                         }
                     }
                     else
                     {
-                        $class_info.= (isset($trace['function'])) ? '()' : '';    
+                        $classInfo.= (isset($trace['function'])) ? '()' : '';    
                     }
                     
-                    echo '<div class="error_file" style="line-height: 2em;">'.$class_info.'</div>';
+                    echo '<div class="error_file" style="line-height: 2em;">'.$classInfo.'</div>';
                 }
 
                 if($unset == false) { ++$key; }
                 ?>
                 
                 <span class="errorFile" style="line-height: 1.8em;">
-                <a href="javascript:void(0);" onclick="ExceptionToggle('error_toggle_' + '<?php echo $prefix.$key?>');"><?php echo error\securePath($trace['file']); echo ' ( '?><?php echo ' Line : '.$trace['line'].' ) '; ?></a>
+                <a href="javascript:void(0);" onclick="ExceptionToggle('error_toggle_' + '<?php echo $prefix.$key?>');"><?php echo Error::getSecurePath($trace['file']); echo ' ( '?><?php echo ' Line : '.$trace['line'].' ) '; ?></a>
                 </span>
         
                 <?php 
                 // Show source codes foreach traces
                 // ------------------------------------------------------------------------
                 
-                echo error\writeFileSource($trace, $key, $prefix);
+                echo Error::debugFileSource($trace, $key, $prefix);
                 
                 // ------------------------------------------------------------------------
                 ?>

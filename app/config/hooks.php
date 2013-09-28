@@ -15,7 +15,7 @@
 |
 | 	$hooks['pre_controller'] = array(
 |                                'class'    => 'MyClass',
-|                                'function' => 'Myfunction',
+|                                'function' => 'Method',
 |                                'filename' => 'Myclass.php',
 |                                'filepath' => 'hooks',
 |                                'params'   => array('beer', 'wine', 'snacks')

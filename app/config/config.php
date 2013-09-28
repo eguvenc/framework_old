@@ -63,7 +63,7 @@ $config['error_reporting']       = (ENV == 'LIVE') ? 0 : 1;
 |--------------------------------------------------------------------------
 |
 | Enabling advanced debug mode will help you to easy development, if it is
-| enabled Obullo will give you more details about application errors.
+| enabled framework will give you more details about application errors.
 | For Object dump you will need 32M php memory.To dumping large objects
 | increase your memory_limit from your php.ini file.
 |       
@@ -71,7 +71,7 @@ $config['error_reporting']       = (ENV == 'LIVE') ? 0 : 1;
 |   
 |   Custom regexs same as error reporting.
 */
-$config['debug_backtrace']       = array('enabled' => 'E_ALL ^ (E_NOTICE | E_WARNING)', 'padding' => 3);
+$config['debug_backtrace']       = array('enabled' => 'E_ALL ^ (E_NOTICE)', 'padding' => 3);
 
 /*
 |--------------------------------------------------------------------------

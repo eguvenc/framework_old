@@ -11,12 +11,9 @@
 |
 | This can be set to anything, but default usage is:
 |
-|     o DEV   - Development ( Show Obullo Friendly Errors )
-|     o DEBUG - Debug Mode  ( Quick Debugging, Show Hidden Php Native Errors )
-|     o TEST  - Testing     ( Test mode, behaviours like DEV )
-|     o LIVE  - Production  ( Close all errors )
-|
-| NOTE: If you change these, also change the error_reporting() code below
+|     o DEBUG - Debug Mode  ( Quick Debugging, Show All Php Native Errors )
+|     o TEST  - Testing     ( Test mode, behaviours like LIVE )
+|     o LIVE  - Production  ( Production mode, all errors disabled )
 |
 */
 define('ENV', 'DEBUG');
@@ -27,37 +24,26 @@ define('ENV', 'DEBUG');
 |--------------------------------------------------------------------------
 | For security reasons its default off.
 | But default `Obullo Error Handler` is active if you don't want to use Obullo
-| development error handler you can *turn off it easily from 
-| "app/config/config.php" file.
+| development error handler you can *turn off it easily from "app/config/config.php" 
+| file.
 |
-*/              
-if (defined('ENV'))
+*/
+switch(ENV)
 {
-    switch(ENV)
-    {
-        case 'DEV':
-            error_reporting(E_ALL | E_STRICT);
-            ini_set('display_errors', '1');
-            error_reporting(0); // Show errors using Obullo Error Handler
-            break;
-        
-        case 'TEST':
-            error_reporting(E_ALL | E_STRICT);
-            error_reporting(0);
-            break;
-        
-        case 'DEBUG':
-            error_reporting(E_ALL | E_STRICT);
-            ini_set('display_errors', '1');
-            break;
-        
-        case 'LIVE':
-            error_reporting(0);
-            break;
-        
-        default:
-        exit('The application environment is not set correctly.');
-    }   
+    case 'TEST':
+        error_reporting(0);
+        break;
+    
+    case 'DEBUG':
+        error_reporting(0);
+        break;
+    
+    case 'LIVE':
+        error_reporting(0);
+        break;
+    
+    default:
+    exit('The application environment is not set correctly.');
 }
 
 /*
@@ -140,92 +126,23 @@ if(defined('STDIN'))
     ini_set('memory_limit', '100000M');
 }
 
-
-/*
-|--------------------------------------------------------------------------
-| Loads the (static) config files.
-|--------------------------------------------------------------------------
-| This function help to load your static configuration files.
- */
-
-/**
-* @access    private
-* @author    Obullo Team
-* @param     string $filename file name
-* @param     string $var variable of the file
-* @param     string $folder folder of the file
-* @param     string $ext extension of the file
-* @return    array
-*/
-function getStatic($filename = 'config', $var = '', $folder = '', $ext = '')
-{
-    static $loaded    = array();
-    static $variables = array();
-
-    $key = trim($folder. DS .$filename. $ext);
-    if ( ! isset($loaded[$key]))
-    {
-        require($folder. DS .$filename. $ext);
-    
-        if($var == '') { $var = &$filename; }
-
-        if ( ! isset($$var) OR ! is_array($$var))
-        {
-            die('The static file '. $folder. DS .$filename. $ext.' file does not appear to be formatted correctly.');
-        }
-
-        $variables[$key] =& $$var;
-        $loaded[$key] = $key;
-     }
-
-    return $variables[$key];
-}
-
-/*
-|--------------------------------------------------------------------------
-| Loads the app config files.
-|--------------------------------------------------------------------------
-| This function load your configuration files from "app/config" folder.
-| 
- */
-
-/**
-* @access   public
-* @param    string $filename
-* @param    string $var
-* @return   array
-*/
-function getConfig($filename = 'config', $var = '', $folder = '', $extension = '')
-{
-    $ext    = ($extension == '') ? EXT : $extension;
-    $folder = ($folder == '') ? APP .'config' : $folder;
-    
-    if(strpos($filename, '.') > 0)  // removes the extension for "." config files.
-    {   
-        $ext = ''; 
-        $var = 'packages';
-    }
-    
-    return getStatic($filename, $var, $folder, $ext);
-}
-
 /*
 |--------------------------------------------------------------------------
 | Upgrading to new version.
 |--------------------------------------------------------------------------
 | If a new version available, package manager upgrage it using your package.json.
-| If you need a stable a version remove "*", and set version to specific
+| If you need a stable a version remove asteriks ( * ), and set version to specific
 | number. ( e.g. version: "2.0" )
 |
 | {
 |  "dependencies": {
-|     "obullo": "*",   // (*) = new version, (2.1,2.2 .. ) = previous stable version
-|     "auth" : "*"
+|     "obullo": "*",
+|     "auth" : "3.0"
 |  }
 | }
 |
  */
-$packages = getConfig('packages.cache');
+require (APP .'config'. DS .'packages.cache');
 
 /*
 |--------------------------------------------------------------------------
@@ -236,9 +153,4 @@ $core = strtolower($packages['components']['core']);  // Custom core, you can us
 
 require (PACKAGES .$core. DS .'releases'. DS .$packages['dependencies'][$core]['version']. DS .$core. EXT);
 
-$framework = ucfirst($core);
-
-// --------------------------------------------------------------------
-
-$obullo = new $framework;
-$obullo->run();
+runFramework();

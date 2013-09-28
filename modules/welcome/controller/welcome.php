@@ -5,7 +5,6 @@ Class Welcome extends Controller {
     function __construct()
     {
         parent::__construct();
-        
         // new Email();
         // new form_Json\start();
 
@@ -14,11 +13,15 @@ Class Welcome extends Controller {
       
         // print_r($this->db->get('users')->resultArray());
         // var_dump($this->ftp);
+
     }
     
     public function index()
     {
         setVar('name', 'Obullo');
+
+        // echo $this->uri->uriString();
+        // echo $this->uri->requestUri();
         // new request\start();
 
         // echo request\get('welcome/test/1/2/3');
@@ -35,8 +38,7 @@ Class Welcome extends Controller {
         
         // sess\set('test', 1234);
         // echo sess\get('test');
-        view('welcome');
-      
+        view('welcome'); 
     }
 }
 

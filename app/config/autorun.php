@@ -15,14 +15,15 @@
 | Prototype
 | -------------------------------------------------------------------
 | 
-| $autorun['function']['sess\start'] = array('arg1', 'arg2');
-| 
-| e.g.  $autorun['function'] = array('sess\start');
+| $autorun[] = 'MyClass::method("param1", "param2")';
+|
+| $autorun[] = '$this->auth->hasIdentity()';
+|
+|
 |
 */
 
-$autorun['function'] = array();
-
+$autorun = array();
 
 /* End of file autorun.php */
 /* Location: .app/config/autorun.php */

@@ -67,6 +67,5 @@ $routes['404_override']          = '';
 */
 $routes['index_method']          = "index";
 
-
 /* End of file routes.php */
 /* Location: .app/config/routes.php */

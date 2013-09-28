@@ -11,7 +11,7 @@ Class Hello_World extends Controller {
     {  
         setVar('var', 'Hello, this is my first Obullo page.');
         setVar('name', 'Obullo');
-        
+
         view('hello.world');
     }
 }
