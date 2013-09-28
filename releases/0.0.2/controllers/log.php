@@ -155,30 +155,30 @@ Display logs [$php task log], to filter logs [$php task log $level]'."\n\033[0m"
     private function _compileFiles()
     {
         $configs = array();
-        $config  = '\\'.getComponent('config');
-        foreach($config::getInstance()->is_loaded as $cfg)
+        $config  = getComponentInstance('config');
+        foreach($config->is_loaded as $cfg)
         {
-            $configs[] = error\securePath($cfg);
+            $configs[] = Error::getSecurePath($cfg);
         }
         
         $locales = array();
-        $locale  = '\\'.getComponent('locale');
-        foreach($locale::getInstance()->is_loaded as $lcl)
+        $locale  = getComponentInstance('locale');
+        foreach($locale->is_loaded as $lcl)
         { 
-            $locales[] = error\securePath($lcl); 
+            $locales[] = Error::getSecurePath($lcl); 
         }
 
         $autoload = getConfig('autoload');
         $helpers = array();
         foreach($autoload['helper'] as $helper)
         { 
-            $helpers[] = error\securePath(ROOT .'ob'. DS .$helper. DS .$helper. EXT);
+            $helpers[] = Error::getSecurePath(ROOT .'ob'. DS .$helper. DS .$helper. EXT);
         }
         
         $libraries = array();
         foreach($autoload['library'] as $library)
         { 
-            $libraries[] = error\securePath(ROOT .'ob'. DS .$library. DS .$library. EXT);
+            $libraries[] = Error::getSecurePath(ROOT .'ob'. DS .$library. DS .$library. EXT);
         }
         
         $output  = "\33[0;36m________LOADED FILES______________________________________________________";

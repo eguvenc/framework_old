@@ -14,7 +14,7 @@ namespace task {
     {
         function __construct()
         {
-            \log\me('debug', 'Task Helper Initialized');
+            \logMe('debug', 'Task Helper Initialized');
         }
     }
 
@@ -49,7 +49,7 @@ namespace task {
             // $output = trim(preg_replace('/\n/', '#', $output), "\n");
             $output = preg_replace(array('/\033\[36m/','/\033\[31m/','/\033\[0m/'), array('','',''), shell_exec($shell));
 
-            \log\me('debug', 'Task function output -> '. $output);
+            \logMe('debug', 'Task function output -> '. $output);
 
             return $output;
         }
@@ -60,7 +60,7 @@ namespace task {
             shell_exec($shell.' > /dev/null &');
         }
 
-        \log\me('debug', 'Task function command -> '. $shell);
+        \logMe('debug', 'Task function command -> '. $shell);
     }
 
 }
