@@ -33,11 +33,9 @@ switch(ENV)
     case 'TEST':
         error_reporting(0);
         break;
-    
     case 'DEBUG':
         error_reporting(0);
         break;
-    
     case 'LIVE':
         error_reporting(0);
         break;
