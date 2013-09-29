@@ -5,9 +5,6 @@ Class Form extends Controller {
     function __construct()
     {        
         parent::__construct();
-
-        new form\start();
-        new sess\start();
     }         
 
     function index()
@@ -18,13 +15,13 @@ Class Form extends Controller {
     function post()
     {
         $user = new Models\User();
-        $user->user_password = i\post('user_password'); 
-        $user->user_email    = i\post('user_email');
+        $user->user_password = post('user_password'); 
+        $user->user_email    = post('user_email');
         
         if($user->save())
         {
-            sess\setFlash('notice', 'Form saved succesfully');
-            url\redirect('tutorials/form');
+            Sess::setFlash('notice', 'Form saved succesfully');
+            redirect('tutorials/form');
         }
 
         setVar('user', $user);

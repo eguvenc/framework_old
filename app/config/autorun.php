@@ -4,7 +4,8 @@
 | -------------------------------------------------------------------
 | AUTO-RUN
 | -------------------------------------------------------------------
-| This file specifies which functions should be run by default.
+| This file specifies which functions should be run by default in controller
+| .
 |
 | In order to keep the framework as light-weight as possible only the
 | absolute minimal resources are run by default.This file lets
@@ -17,9 +18,9 @@
 | 
 | $autorun[] = 'MyClass::method("param1", "param2")';
 |
+| None Static Class
+|  
 | $autorun[] = '$this->auth->hasIdentity()';
-|
-|
 |
 */
 
