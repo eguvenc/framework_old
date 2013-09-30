@@ -40,7 +40,7 @@ $packages['dependencies']['ftp'] = array('version' => '0.0.1', 'component' => 'l
 $packages['dependencies']['html'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['hmvc'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['hooks'] = array('version' => '0.0.1', 'component' => 'library');
-$packages['dependencies']['i'] = array('version' => '0.0.1', 'component' => 'helper');
+$packages['dependencies']['get'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['input'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['log'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['log_write'] = array('version' => '0.0.1', 'component' => 'library');
@@ -65,7 +65,7 @@ $packages['dependencies']['uri']  = array('version' => '0.0.1', 'component' => '
 $packages['dependencies']['url']  = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['utf8'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['xml']  = array('version' => '0.0.1', 'component' => 'helper');
-$packages['dependencies']['vi']   = array('version' => '0.0.1', 'component' => 'helper');
+$packages['dependencies']['make']   = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['view'] = array('version' => '0.0.1', 'component' => 'library');
 
 /*

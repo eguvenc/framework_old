@@ -9,10 +9,12 @@ Class Hello_World extends Controller {
 
     function index()
     {  
-        setVar('var', 'Hello, this is my first Obullo page.');
-        setVar('name', 'Obullo');
+        // Make::var('var', 'Hello, this is my first Obullo page.');
+        Make::setVar('name', 'Obullo');
         
-        view('hello.world');
+        // echo Request::get('get', 'tutorials/hmvc_welcome/test/1/2/3');
+
+        Make::view('hello.world');
     }
 }
 

@@ -18,7 +18,7 @@ Class Welcome extends Controller {
     
     public function index()
     {
-        setVar('name', 'Obullo');
+        Make::setVar('name', 'Obullo');
 
         // echo $this->uri->uriString();
         // echo $this->uri->requestUri();
@@ -38,7 +38,7 @@ Class Welcome extends Controller {
         
         // sess\set('test', 1234);
         // echo sess\get('test');
-        view('welcome'); 
+        Make::view('welcome'); 
     }
 }
 

@@ -9,7 +9,7 @@
 |    Domain Root   "http://your-domain.com"  Full url of your domain.
 |
 */
-$config['base_url']              = '/';
+$config['base_url']              = 'http://localhost/obullo-2.0/';
 $config['domain_root']           = (ENV == 'LIVE') ? 'http://your-domain.com' : 'http://localhost';
 
 /*

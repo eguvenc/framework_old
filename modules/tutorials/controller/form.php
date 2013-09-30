@@ -9,23 +9,25 @@ Class Form extends Controller {
 
     function index()
     {        
-        view('form');
+        Vi::get('form');
     }
     
     function post()
     {
         $user = new Models\User();
-        $user->user_password = post('user_password'); 
-        $user->user_email    = post('user_email');
+        $user->user_password = Get::post('user_password'); 
+        $user->user_email    = Get::post('user_email');
         
         if($user->save())
         {
             Sess::setFlash('notice', 'Form saved succesfully');
-            redirect('tutorials/form');
+            Url::redirect('tutorials/form');
         }
 
-        setVar('user', $user);
-        view('form');
+        Var::setObject('user', $user);
+
+        Vi::get('form');
+        // Vi::get('form', false, 'views');
     }
 }
 
