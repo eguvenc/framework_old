@@ -10,7 +10,7 @@
 |
 */
 $config['base_url']              = 'http://localhost/obullo-2.0/';
-$config['domain_root']           = (ENV == 'LIVE') ? 'http://your-domain.com' : 'http://localhost';
+$config['domain_url']         	 = (ENV == 'LIVE') ? 'http://your-domain.com' : 'http://localhost';
 
 /*
 |--------------------------------------------------------------------------
@@ -24,16 +24,6 @@ $config['domain_root']           = (ENV == 'LIVE') ? 'http://your-domain.com' : 
 | then $_SERVER['HTTPS'] variable will be available for PHP (fastcgi).
 */
 $config['ssl']                   = (ENV == 'LIVE') ? true : false;
-
-/*
-|--------------------------------------------------------------------------
-| Assets Folder URL
-|--------------------------------------------------------------------------
-|
-| URL to your Asset Files, Like Base URL. 
-|
-*/
-$config['asset_url']             = '/';
 
 /*
 |--------------------------------------------------------------------------

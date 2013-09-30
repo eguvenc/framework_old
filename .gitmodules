@@ -187,3 +187,9 @@
 [submodule "packages/hooks"]
 	path = packages/hooks
 	url = git://github.com/obullo/hooks.git
+[submodule "packages/make"]
+	path = packages/make
+	url = git://github.com/obullo/make.git
+[submodule "packages/get"]
+	path = packages/get
+	url = git://github.com/obullo/get.git
