@@ -4,9 +4,6 @@
 [submodule "packages/config"]
 	path = packages/config
 	url = git://github.com/obullo/config.git
-[submodule "packages/bench"]
-	path = packages/bench
-	url = git://github.com/obullo/bench.git
 [submodule "packages/cart"]
 	path = packages/cart
 	url = git://github.com/obullo/cart.git
@@ -46,21 +43,15 @@
 [submodule "packages/email"]
 	path = packages/email
 	url = git://github.com/obullo/email.git
-[submodule "packages/i"]
-	path = packages/i
-	url = git://github.com/obullo/i.git
 [submodule "packages/input"]
 	path = packages/input
 	url = git://github.com/obullo/input.git
 [submodule "packages/link"]
 	path = packages/link
 	url = git://github.com/obullo/link.git
-[submodule "packages/locale"]
-	path = packages/locale
-	url = git://github.com/obullo/locale.git
-[submodule "packages/log"]
-	path = packages/log
-	url = git://github.com/obullo/log.git
+[submodule "packages/lingo"]
+	path = packages/lingo
+	url = git://github.com/obullo/lingo.git
 [submodule "packages/obullo"]
 	path = packages/obullo
 	url = git://github.com/obullo/obullo.git
@@ -118,9 +109,9 @@
 [submodule "packages/sess_native"]
 	path = packages/sess_native
 	url = git://github.com/obullo/sess_native.git
-[submodule "packages/string"]
-	path = packages/string
-	url = git://github.com/obullo/string.git
+[submodule "packages/stringo"]
+	path = packages/stringo
+	url = git://github.com/obullo/stringo.git
 [submodule "packages/mongo_db"]
 	path = packages/mongo_db
 	url = git://github.com/obullo/mongo_db.git
@@ -187,9 +178,6 @@
 [submodule "packages/hooks"]
 	path = packages/hooks
 	url = git://github.com/obullo/hooks.git
-[submodule "packages/make"]
-	path = packages/make
-	url = git://github.com/obullo/make.git
 [submodule "packages/get"]
 	path = packages/get
 	url = git://github.com/obullo/get.git
