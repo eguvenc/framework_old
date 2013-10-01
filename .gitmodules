@@ -10,18 +10,15 @@
 [submodule "packages/cookie"]
 	path = packages/cookie
 	url = git://github.com/obullo/cookie.git
-[submodule "packages/date"]
-	path = packages/date
-	url = git://github.com/obullo/date.git
+[submodule "packages/date_get"]
+	path = packages/date_get
+	url = git://github.com/obullo/date_get.git
 [submodule "packages/controller"]
 	path = packages/controller
 	url = git://github.com/obullo/controller.git
 [submodule "packages/db"]
 	path = packages/db
 	url = git://github.com/obullo/db.git
-[submodule "packages/error"]
-	path = packages/error
-	url = git://github.com/obullo/error.git
 [submodule "packages/exceptions"]
 	path = packages/exceptions
 	url = git://github.com/obullo/exceptions.git
