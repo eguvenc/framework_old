@@ -58,3 +58,6 @@
 [submodule "packages/html"]
 	path = packages/html
 	url = git://github.com/obullo/html.git
+[submodule "packages/input"]
+	path = packages/input
+	url = git://github.com/obullo/input.git
