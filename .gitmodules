@@ -118,3 +118,6 @@
 [submodule "packages/request"]
 	path = packages/request
 	url = git://github.com/obullo/request.git
+[submodule "packages/router"]
+	path = packages/router
+	url = git://github.com/obullo/router.git
