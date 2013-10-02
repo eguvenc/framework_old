@@ -7,8 +7,6 @@ nbproject/
 nbproject
 *.htaccess
 .htaccess
-download.sh
-addsubmodule.sh
 task
 index.sublime-workspace
 =======
