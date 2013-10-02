@@ -7,3 +7,6 @@
 [submodule "packages/auth"]
 	path = packages/auth
 	url = git://github.com/obullo/auth.git
+[submodule "packages/cart"]
+	path = packages/cart
+	url = git://github.com/obullo/cart.git
