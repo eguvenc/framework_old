@@ -7,7 +7,6 @@ Class Welcome extends Controller {
         parent::__construct();
         // new Email();
         // new form_Json\start();
-
         // new Acl();
         // new Db();
       
@@ -17,7 +16,7 @@ Class Welcome extends Controller {
     
     public function index()
     {
-        Make::setVar('name', 'Obullo');
+        setVar('name', 'Obullo');
 
         // echo $this->uri->uriString();
         // echo $this->uri->requestUri();
@@ -26,7 +25,7 @@ Class Welcome extends Controller {
         // echo request\get('welcome/test/1/2/3');
         // echo request\get('welcome/test/4/5/6');
           
-        // $user  = new \Model\User();
+        // $user  = new Models\User();
         // $user->test();
         // $user  = new Model\User();
         // $email = new Email(false);
@@ -37,7 +36,8 @@ Class Welcome extends Controller {
         
         // sess\set('test', 1234);
         // echo sess\get('test');
-        Make::view('welcome'); 
+        
+        view('welcome'); 
     }
 }
 

@@ -9,7 +9,7 @@ Class Form extends Controller {
 
     function index()
     {        
-        Vi::get('form');
+        view('form');
     }
     
     function post()
@@ -24,10 +24,9 @@ Class Form extends Controller {
             Url::redirect('tutorials/form');
         }
 
-        Var::setObject('user', $user);
+        setVar('user', $user);
 
-        Vi::get('form');
-        // Vi::get('form', false, 'views');
+        view('form');
     }
 }
 

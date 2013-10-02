@@ -162,7 +162,7 @@ Display logs [$php task log], to filter logs [$php task log $level]'."\n\033[0m"
         }
         
         $locales = array();
-        $locale  = getComponentInstance('locale');
+        $locale  = getComponentInstance('lingo');
         foreach($locale->is_loaded as $lcl)
         { 
             $locales[] = Error::getSecurePath($lcl); 
@@ -191,7 +191,7 @@ Display logs [$php task log], to filter logs [$php task log $level]'."\n\033[0m"
         
         if(count($locales) > 0)
         {
-            $output .= "\nLocales   --> ".implode(', ',$locales);    
+            $output .= "\nLingo   --> ".implode(', ',$locales);    
         }
 
         if(count($helpers) > 0)

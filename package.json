@@ -14,7 +14,6 @@
         "config": "Config",
         "db": "Database_Pdo",
         "exceptions": "Exceptions",
-        "input": "Input",
         "lingo": "Lingo",
         "log": "Log_Write",
         "output": "Output",
