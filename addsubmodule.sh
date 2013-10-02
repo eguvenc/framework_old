@@ -1,6 +1,4 @@
 #!/bin/bash
-ssh-agent;
-ssh-add;
 
 	## Learning the Shell
 	## http://linuxcommand.org/wss0090.php
