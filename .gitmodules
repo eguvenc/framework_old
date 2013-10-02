@@ -61,3 +61,6 @@
 [submodule "packages/input"]
 	path = packages/input
 	url = git://github.com/obullo/input.git
+[submodule "packages/lingo"]
+	path = packages/lingo
+	url = git://github.com/obullo/lingo.git
