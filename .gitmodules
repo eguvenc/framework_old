@@ -4,3 +4,6 @@
 [submodule "packages/agent"]
 	path = packages/agent
 	url = git://github.com/obullo/agent.git
+[submodule "packages/auth"]
+	path = packages/auth
+	url = git://github.com/obullo/auth.git
