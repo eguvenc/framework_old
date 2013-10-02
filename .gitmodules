@@ -124,3 +124,6 @@
 [submodule "packages/security"]
 	path = packages/security
 	url = git://github.com/obullo/security.git
+[submodule "packages/sess"]
+	path = packages/sess
+	url = git://github.com/obullo/sess.git
