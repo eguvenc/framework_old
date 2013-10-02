@@ -115,3 +115,6 @@
 [submodule "packages/pdo_sqlite"]
 	path = packages/pdo_sqlite
 	url = git://github.com/obullo/pdo_sqlite.git
+[submodule "packages/request"]
+	path = packages/request
+	url = git://github.com/obullo/request.git
