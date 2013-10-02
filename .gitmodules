@@ -139,30 +139,3 @@
 [submodule "packages/stringo"]
 	path = packages/stringo
 	url = git://github.com/obullo/stringo.git
-[submodule "packages/text"]
-	path = packages/text
-	url = git://github.com/obullo/text.git
-[submodule "packages/uri"]
-	path = packages/uri
-	url = git://github.com/obullo/uri.git
-[submodule "packages/url"]
-	path = packages/url
-	url = git://github.com/obullo/url.git
-[submodule "packages/utf8"]
-	path = packages/utf8
-	url = git://github.com/obullo/utf8.git
-[submodule "packages/validator"]
-	path = packages/validator
-	url = git://github.com/obullo/validator.git
-[submodule "packages/view"]
-	path = packages/view
-	url = git://github.com/obullo/view.git
-[submodule "packages/xml"]
-	path = packages/xml
-	url = git://github.com/obullo/xml.git
-[submodule "packages/xss"]
-	path = packages/xss
-	url = git://github.com/obullo/xss.git
-[submodule "packages/zip"]
-	path = packages/zip
-	url = git://github.com/obullo/zip.git
