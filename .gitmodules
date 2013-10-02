@@ -160,3 +160,6 @@
 [submodule "packages/view"]
 	path = packages/view
 	url = git://github.com/obullo/view.git
+[submodule "packages/xml"]
+	path = packages/xml
+	url = git://github.com/obullo/xml.git
