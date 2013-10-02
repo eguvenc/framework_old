@@ -23,11 +23,11 @@
 $packages['dependencies']['acl'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['auth'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['agent']  = array('version' => '0.0.1', 'component' => 'library');
-$packages['dependencies']['bench'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['cart'] = array('version' =>  '0.0.1', 'component' => 'library');
 $packages['dependencies']['cookie'] = array('version' =>  '0.0.1', 'component' => 'helper');
 $packages['dependencies']['controller'] = array('version' =>  '0.0.1', 'component' => 'library');
 $packages['dependencies']['config'] = array('version' =>  '0.0.1', 'component' => 'library');
+$packages['dependencies']['date_get'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['db'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['database_pdo'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['error'] = array('version' => '0.0.1', 'component' => 'helper');
@@ -44,7 +44,7 @@ $packages['dependencies']['get'] = array('version' => '0.0.1', 'component' => 'h
 $packages['dependencies']['input'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['log'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['log_write'] = array('version' => '0.0.1', 'component' => 'library');
-$packages['dependencies']['locale'] = array('version' => '0.0.1', 'component' => 'library');
+$packages['dependencies']['lingo'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['model'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['mongo_db'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['obullo'] = array('version' => '2.0', 'component' => 'library');
@@ -65,7 +65,6 @@ $packages['dependencies']['uri']  = array('version' => '0.0.1', 'component' => '
 $packages['dependencies']['url']  = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['utf8'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['xml']  = array('version' => '0.0.1', 'component' => 'helper');
-$packages['dependencies']['make']   = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['view'] = array('version' => '0.0.1', 'component' => 'library');
 
 /*
@@ -90,7 +89,7 @@ $packages['components']['router'] = "Router";
 $packages['components']['security'] = "Security";
 $packages['components']['uri'] = "Uri";
 $packages['components']['output'] = "Output";
-$packages['components']['locale'] = "Locale";
+$packages['components']['lingo'] = "Lingo";
 $packages['components']['view'] = "View";
 $packages['components']['log'] = "Log_Write";    
 $packages['components']['exception'] = "Exceptions";
