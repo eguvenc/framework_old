@@ -15,7 +15,7 @@
         "db": "Database_Pdo",
         "exceptions": "Exceptions",
         "input": "Input",
-        "locale": "Locale",
+        "lingo": "Lingo",
         "log": "Log_Write",
         "output": "Output",
         "router": "Router",
