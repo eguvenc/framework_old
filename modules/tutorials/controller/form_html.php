@@ -1,6 +1,6 @@
 <?php
 
-Class Form extends Controller {    
+Class Form_Html extends Controller {    
                                       
     function __construct()
     {        

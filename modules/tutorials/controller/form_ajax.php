@@ -5,8 +5,6 @@ Class Form_Ajax extends Controller {
     function __construct()
     {        
         parent::__construct();
-
-        new form\start();
     }         
 
     function index()
@@ -16,20 +14,18 @@ Class Form_Ajax extends Controller {
     
     function post()
     {   
-        new form_Json\start();
-        
         $user = new Models\User();
-        $user->user_password = i\post('user_password');
-        $user->user_email    = i\post('user_email');
+        $user->user_password = Get::post('user_password');
+        $user->user_email    = Get::post('user_email');
   
         if($user->save())
         {
-            echo form_Json\success($user);
+            echo Form_Json::success($user);
             return;
         } 
         else
         {
-            echo form_Json\error($user);
+            echo Form_Json::error($user);
             return;
         }
 

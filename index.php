@@ -23,26 +23,12 @@ define('ENV', 'DEBUG');
 | Native PHP Error Handler (Default Off) 
 |--------------------------------------------------------------------------
 | For security reasons its default off.
-| But default `Obullo Error Handler` is active if you don't want to use Obullo
+| But default `Error Handler` is active if you don't want to use Framework
 | development error handler you can *turn off it easily from "app/config/config.php" 
 | file.
 |
 */
-switch(ENV)
-{
-    case 'TEST':
-        error_reporting(0);
-        break;
-    case 'DEBUG':
-        error_reporting(0);
-        break;
-    case 'LIVE':
-        error_reporting(0);
-        break;
-    
-    default:
-    exit('The application environment is not set correctly.');
-}
+error_reporting(0);
 
 /*
 |--------------------------------------------------------------------------
@@ -96,7 +82,7 @@ if(defined('STDIN'))
     | Set Command Line Server Headers
     |--------------------------------------------------------------------------
     */ 
-    $_SERVER['HTTP_USER_AGENT']     = 'Obullo CLI';
+    $_SERVER['HTTP_USER_AGENT']     = 'Framework CLI';
     $_SERVER['HTTP_ACCEPT_CHARSET'] = 'utf-8';
 
     /*
@@ -140,14 +126,14 @@ if(defined('STDIN'))
 | }
 |
  */
-require (APP .'config'. DS .'packages.cache');
+require (APP .'cache'. DS .'packages.cache');
 
 /*
 |--------------------------------------------------------------------------
 | Framework Component
 |--------------------------------------------------------------------------
 */
-$core = strtolower($packages['components']['core']);  // Custom core, you can use another core instead of obullo.
+$core = strtolower($packages['components']['core']);  // Custom core, you can use another core instead of Obullo.
 
 require (PACKAGES .$core. DS .'releases'. DS .$packages['dependencies'][$core]['version']. DS .$core. EXT);
 

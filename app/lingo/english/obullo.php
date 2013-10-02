@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Obullo English Locale Items.
+ * Obullo English Language Items.
  */
 
 // Odm

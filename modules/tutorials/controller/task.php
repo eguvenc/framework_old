@@ -11,7 +11,7 @@ Class Task extends Controller {
     {
         new task\start();
 
-        echo url\anchor('tutorials/task/index/help', 'Click Here to Help.');
+        echo Url::anchor('tutorials/task/index/help', 'Click Here to Help.');
 
         if($mode == 'help')
         {

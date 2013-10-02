@@ -6,7 +6,7 @@ Class Welcome extends Controller {
     {
         parent::__construct();
         // new Email();
-        // new form_Json\start();
+        // new Form_Json::start();
         // new Acl();
         // new Db();
       

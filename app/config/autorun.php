@@ -22,11 +22,12 @@
 |
 | None Static Class
 |  
-| $autorun[] = '$this->auth->hasIdentity()';
+| $autorun[] = '$this->auth->identityRedirect()';
 |
 */
 
 $autorun[] = '';
+
 
 /* End of file autorun.php */
 /* Location: .app/config/autorun.php */

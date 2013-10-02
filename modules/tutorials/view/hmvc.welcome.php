@@ -2,21 +2,20 @@
 <html>
     <head>
         <meta charset="utf-8" />
-            <?php echo html\css('welcome.css') ?>
+            <?php echo Html::css('welcome.css') ?>
         <title>Hmvc Tutorial</title>
     </head>
 
     <body>
         <header>
-            <?php echo url\anchor('/', html\img('logo.png', ' alt="Obullo" ')) ?>
+            <?php echo Url::anchor('/', Html::img('logo.png', ' alt="Obullo" ')) ?>
         </header>
         
         <h1>Hmvc Tutorial</h1>
  
-<pre>new request\start();
-
-$response_a = request\get('tutorials/hmvc_welcome/test/1/2/3');
-$response_b = request\get('tutorials/hmvc_welcome/test/4/5/6');
+<pre>
+$response_a = Request::get('tutorials/hmvc_welcome/test/1/2/3');
+$response_b = Request::get('tutorials/hmvc_welcome/test/4/5/6');
 
 echo getVar('response_a');
 echo getVar('response_b');</pre>

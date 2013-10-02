@@ -30,16 +30,13 @@ $autoload['config']     = array();
 
 /*
 | -------------------------------------------------------------------
-|  Auto-load Common Libraries
+|  Auto-load Libraries
 | -------------------------------------------------------------------
 | Prototype:
 |
 |	$autoload['library'] = array('auth');
 |
-|       e.g. use it  $this->auth->check();
-|
-| NOTE: This item is intended for use ONLY if you have created custom
-| library files.  Otherwise, leave it blank.
+|   e.g. use it  $this->auth->identityRedirect(); in autorun.php
 |
 */
 
@@ -51,11 +48,11 @@ $autoload['library']    = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['locale'] = array('langfilename', 'langfilename2');
+|	$autoload['lingo'] = array('langfilename', 'langfilename2');
 |
 */
 
-$autoload['locale']     = array();
+$autoload['lingo']     = array();
 
 
 /* End of file autoload.php */
