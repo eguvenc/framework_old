@@ -9,12 +9,13 @@ Class Form_Ajax extends Controller {
 
     function index()
     {        
-        view('form.ajax');
+        view('form_ajax');
     }
     
-    function post()
+    function doPost()
     {   
         $user = new Models\User();
+        
         $user->user_password = Get::post('user_password');
         $user->user_email    = Get::post('user_email');
   
@@ -29,7 +30,7 @@ Class Form_Ajax extends Controller {
             return;
         }
 
-        view('form.ajax');
+        view('form_ajax');
     }
 }
 

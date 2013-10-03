@@ -32,7 +32,7 @@ Class Welcome extends Controller {
         // $this->db->get('users');
         // new Auth();
         
-        // new sess\start();
+        // Sess::start();
         
         // sess\set('test', 1234);
         // echo sess\get('test');

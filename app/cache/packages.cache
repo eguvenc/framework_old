@@ -42,7 +42,6 @@ $packages['dependencies']['hmvc'] = array('version' => '0.0.1', 'component' => '
 $packages['dependencies']['hooks'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['get'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['input'] = array('version' => '0.0.1', 'component' => 'library');
-$packages['dependencies']['log'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['log_write'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['lingo'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['model'] = array('version' => '0.0.1', 'component' => 'library');

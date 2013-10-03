@@ -5,16 +5,19 @@ Class Form_Html extends Controller {
     function __construct()
     {        
         parent::__construct();
+
+        Sess::start();
     }         
 
     function index()
     {        
-        view('form');
+        view('form_html');
     }
     
-    function post()
+    function doPost()
     {
         $user = new Models\User();
+        
         $user->user_password = Get::post('user_password'); 
         $user->user_email    = Get::post('user_email');
         
@@ -25,8 +28,7 @@ Class Form_Html extends Controller {
         }
 
         setVar('user', $user);
-
-        view('form');
+        view('form_html');
     }
 }
 

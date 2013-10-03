@@ -1,35 +1,40 @@
+<?php
+    $user = getVar('user');
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
             <?php echo Html::css('welcome.css') ?>
-        <title>Odm Ajax Tutorial</title>
-        
-        <?php echo Html::js('jquery/*)') ?> 
-        <?php echo Html::js('form_json/*') ?> 
-        <?php echo Html::js('underscore/*') ?>
+        <title>Odm Tutorial</title>
     </head>
-        <?php
-        // form Json Class Attributes  
-        // 
-        // no-top-msg:    Hide the top error message.
-        // no-ajax:       Use this attribute for native posts.
-        // hide-form:     Hide the form area if form submit success.
-        ?>
+
     <body>
         <header>
             <?php echo Url::anchor('/', Html::img('logo.png', ' alt="Obullo" ')) ?>
         </header>
         
-        <h1>Odm Ajax Tutorial</h1>
+        <h1>Odm Tutorial</h1>
+        <h2><?php echo Url::anchor('tutorials/form_ajax', 'Ajax Tutorial') ?></h2>
+        <section><?php echo Form::message($user, '', '<div class="notification error">', '</div>') ?></section>
+
         <section>
-            <?php echo Form::open('tutorials/form_ajax/post.json', array('method' => 'POST', 'class' => 'hide-form')) ?>
+            <?php
+            if(Sess::getFlash('notice') != '')
+            {
+                echo Sess::getFlash('notice', '<div class="notification success">', '</div>');   
+            }
+            ?>
+        </section>
+        
+        <section>
+            <?php echo Form::open('tutorials/form_html/dopost', array('method' => 'POST')) ?>
                 <table width="100%">
                     <tr>
                         <td style="width:20%;"><?php echo Form::label('Email') ?></td>
                         <td>
                         <?php echo Form::error('user_email', '<div class="input-error">', '</div>'); ?>
-                        <?php echo Form::input('user_email', '', " id='email' ");?>
+                        <?php echo Form::input('user_email', Form::setValue('user_email'), " id='email' ");?>
                         </td>
                     </tr>
                     <tr>
@@ -61,14 +66,36 @@
                     </tr>
                     </table>
                     
-                    <h2>form_Json Helper</h2>
-                    <p>* The form_Json helper sends json response using php <strong>json_encode();</strong>.</p>
+                    <h2>Test Results</h2>
+                    <?php if($user) { ?>
 
+                        <section>
+                            <h3>Form::error('user_email')</h3>
+                            <pre><?php echo Form::error('user_email') ?></pre>
+
+                            <h3>validationErrors()</h3>
+                            <pre><?php echo Form::validationErrors(' | ', ' | '); ?></pre>
+
+                            <h3>print_r($user->errors())</h3>
+                            <pre><?php print_r($user->errors()) ?></pre>
+
+                            <h3>$user->errors('user_email')</h3>
+                            <pre><?php echo $user->errors('user_email'); ?></pre>
+
+                            <h3>print_r($user->values())</h3>
+                            <pre><?php print_r($user->values()) ?></pre>
+
+                            <h3>$user->values('user_email')</h3>
+                            <pre><?php echo $user->values('user_email') ?></pre>
+                        </section>
+
+                    <?php } ?>
             <?php echo Form::close(); ?>
-        </section>
-        <section>
-            <p>&nbsp;</p>
-        </section>
+        </section> 
         
+        <section>
+            <p>Total memory usage {memory_usage}.</p>
+        </section>
     </body>
+    
 </html>
