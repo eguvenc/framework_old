@@ -57,9 +57,9 @@ $config['error_reporting']       = 1;
 |       
 |   To Disable Debugging: array('enabled' => false, 'padding' => 5);
 |   
-|   Custom regexs same as error reporting.
+|   Custom regexs same as error_reporting().
 */
-$config['debug_backtrace']       = array('enabled' => 'E_ALL ^ (E_NOTICE)', 'padding' => 3);
+$config['debug_backtrace']       = array('enabled' => 'E_ALL', 'padding' => 3);
 
 /*
 |--------------------------------------------------------------------------

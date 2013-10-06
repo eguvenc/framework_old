@@ -73,7 +73,7 @@
                             <h3>Form::error('user_email')</h3>
                             <pre><?php echo Form::error('user_email') ?></pre>
 
-                            <h3>validationErrors()</h3>
+                            <h3>Form::validationErrors()</h3>
                             <pre><?php echo Form::validationErrors(' | ', ' | '); ?></pre>
 
                             <h3>print_r($user->errors())</h3>

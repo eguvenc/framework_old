@@ -15,9 +15,9 @@ margin:             0;
 font-size:          12px;
 color:              #333;
 margin:             0;
+margin-top:         5px;
 }
 #exceptionContent .errorFile { 
-display:block;
 line-height: 2.0em; 
 }
 #exceptionContent pre.source { 
@@ -67,16 +67,26 @@ function ExceptionToggle(obj){
 </script>
 
 <div id="exceptionContent">
-    <h1><?php echo $type ?></h1>
-    <h2><?php echo Error::getSecurePath($e->getMessage(), true) ?></h2>
+<h1><?php echo $type; ?></h1>
+<?php 
+if(isset($shutdownError))  // Is it compile or fatal error ?
+{                   // if yes we need to exit.
+?>
+<h2><?php echo str_replace(array(APP, MODULES, CLASSES, ROOT, PACKAGES), array('APP'. DS, 'MODULES'. DS, 'CLASSES'. DS, 'ROOT'. DS, 'PACKAGES'. DS), $e->getMessage()) ?></h2>
+<div class="errorFile"><?php echo str_replace(array(APP, MODULES, CLASSES, ROOT, PACKAGES), array('APP'. DS, 'MODULES'. DS, 'CLASSES'. DS, 'ROOT'. DS, 'PACKAGES'. DS), $e->getFile()).' Code : '.$e->getCode().' ( Line : '.$e->getLine().' ) ' ?></div>
+</div>
+<?php
+exit; // Shutdown error exit.
+}
+?>
+<h2><?php echo Error::getSecurePath($e->getMessage(), true) ?></h2>
 <?php 
 if(isset($sql)) 
 {
-    echo '<span class="errorFile"><b>SQL :</b> '.$sql.'</span>';
+    echo '<div class="errorFile"><b>SQL :</b> '.$sql.'</div>';
 }
 ?>
-<?php $code = ($e->getCode() != 0) ? ' Code : '. $e->getCode() : '' ?> 
-<span class="errorFile"><?php echo Error::getSecurePath($e->getFile()) ?><?php echo $code ?><?php echo ' ( Line : '.$e->getLine().' ) ' ?></span>
+<div class="errorFile"><?php echo Error::getSecurePath($e->getFile()).' Code : '.$e->getCode().' ( Line : '.$e->getLine().' ) ' ?></div>
 <?php 
 $debug = config('debug_backtrace');
 if($debug['enabled'] === true OR $debug['enabled'] == 1)  // Covert to readable format
@@ -86,8 +96,7 @@ if($debug['enabled'] === true OR $debug['enabled'] == 1)  // Covert to readable 
 
 $rules = Error::parseRegex($debug['enabled']);
 $allowedErrors = Error::getAllowedErrors($rules);
-
-$eCode  = (substr($e->getMessage(),0,3) == 'SQL') ? 'SQL' : $e->getCode();
+$eCode = (isset($sql)) ? 'SQL' : $e->getCode();
 
 if(is_string($debug['enabled'])) 
 {
@@ -97,16 +106,16 @@ if(is_string($debug['enabled']))
     $eTrace['line'] = $e->getLine();
 
     echo Error::debugFileSource($eTrace);
-    
+
     if( ! isset($allowedErrors[$eCode]))   // Check debug_backtrace enabled for current error. 
     {
-        echo '</div>'; return;
+        echo '</div>';
+        exit;
     }
     
     // ------------------------------------------------------------------------
     
     $fullTraces = $e->getTrace();
-
     $debugTraces = array();
     foreach($fullTraces as $key => $val)
     {
@@ -121,7 +130,6 @@ if(is_string($debug['enabled']))
         if($debugTraces[0]['file'] == $e->getFile() AND $debugTraces[0]['line'] == $e->getLine())
         {
             unset($debugTraces[0]);
-            
             $unset = true;
         } 
         else 
@@ -194,15 +202,15 @@ if(is_string($debug['enabled']))
                         $classInfo.= (isset($trace['function'])) ? '()' : '';    
                     }
                     
-                    echo '<div class="error_file" style="line-height: 2em;">'.$classInfo.'</div>';
+                    echo '<div class="errorFile" style="line-height: 2em;">'.$classInfo.'</div>';
                 }
 
                 if($unset == false) { ++$key; }
                 ?>
                 
-                <span class="errorFile" style="line-height: 1.8em;">
-                <a href="javascript:void(0);" onclick="ExceptionToggle('error_toggle_' + '<?php echo $prefix.$key?>');"><?php echo Error::getSecurePath($trace['file']); echo ' ( '?><?php echo ' Line : '.$trace['line'].' ) '; ?></a>
-                </span>
+                <div class="errorFile" style="line-height: 1.8em;">
+                    <a href="javascript:void(0);" onclick="ExceptionToggle('error_toggle_' + '<?php echo $prefix.$key?>');"><?php echo Error::getSecurePath($trace['file']); echo ' ( '?><?php echo ' Line : '.$trace['line'].' ) '; ?></a>
+                </div>
         
                 <?php 
                 // Show source codes foreach traces

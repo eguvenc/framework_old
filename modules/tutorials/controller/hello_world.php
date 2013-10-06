@@ -3,17 +3,26 @@
 Class Hello_World extends Controller {    
                                       
     function __construct()
-    {        
-        parent::__construct();
-    }         
+    {
+    	parent::__construct();
+    }
 
     function index()
     {
         setVar('name', 'Obullo');
 
-        // echo Request::get('get', 'tutorials/hmvc_welcome/test/1/2/3');
+        // $this->config->load('test');
+        // $this->config->item('base_url');
 
-        view('hello.world');
+        // $this->security->xssClean('sd');
+/*
+        new Db();
+
+        $this->db->select('user_email');
+        $this->db->from('users');
+        $this->db->get();
+*/
+        view('hello_world');
     }
 }
 

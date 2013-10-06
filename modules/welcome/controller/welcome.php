@@ -18,6 +18,7 @@ Class Welcome extends Controller {
     {
         setVar('name', 'Obullo');
 
+
         // echo $this->uri->uriString();
         // echo $this->uri->requestUri();
         // new request\start();

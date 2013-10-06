@@ -9,16 +9,14 @@ Class Hmvc_Welcome extends Controller {
 
     function index()
     {        
-        new request\start();
-
-        $response_a = request\get('tutorials/hmvc_welcome/test/1/2/3');
-        $response_b = request\get('tutorials/hmvc_welcome/test/4/5/6');
+        $response_a = Request::get('tutorials/hmvc_welcome/test/1/2/3');
+        $response_b = Request::get('tutorials/hmvc_welcome/test/4/5/6');
         
         setVar('response_a', $response_a);
         setVar('response_b', $response_b);
         setVar('name', 'Obullo');
         
-        view('hmvc.welcome');
+        view('hmvc_welcome');
     }
     
     function test($arg1 = '', $arg2 = '', $arg3 = '')

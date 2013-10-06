@@ -58,6 +58,7 @@ $packages['dependencies']['sess'] = array('version' => '0.0.1', 'component' => '
 $packages['dependencies']['sess_native'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['sess_database'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['string'] = array('version' => '0.0.1', 'component' => 'helper');
+$packages['dependencies']['text'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['task']  = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['validator'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['uri']  = array('version' => '0.0.1', 'component' => 'library');
