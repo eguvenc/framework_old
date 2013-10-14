@@ -5,6 +5,8 @@ Class Form_Ajax extends Controller {
     function __construct()
     {        
         parent::__construct();
+
+        new Model('user');
     }         
 
     function index()
@@ -14,23 +16,16 @@ Class Form_Ajax extends Controller {
     
     function doPost()
     {   
-        $user = new Models\User();
-        
-        $user->user_password = Get::post('user_password');
-        $user->user_email    = Get::post('user_email');
-  
-        if($user->save())
-        {
-            echo Form_Json::success($user);
-            return;
-        } 
-        else
-        {
-            echo Form_Json::error($user);
-            return;
-        }
+        $this->user->email = Get::post('email');
+        $this->user->password = Get::post('password');
 
-        view('form_ajax');
+        $this->user->func('save',function() {    // transaction ları Trait içerisine koy.
+            return $this->validate();
+        });
+
+        $this->user->save();
+
+        echo Response::json($this->user->output());
     }
 }
 

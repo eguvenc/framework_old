@@ -6,8 +6,8 @@ Class Form_Html extends Controller {
     {        
         parent::__construct();
 
-        Sess::start();
-    }         
+        new Model('user');
+    }
 
     function index()
     {        
@@ -16,18 +16,33 @@ Class Form_Html extends Controller {
     
     function doPost()
     {
-        $user = new Models\User();
-        
-        $user->user_password = Get::post('user_password'); 
-        $user->user_email    = Get::post('user_email');
-        
-        if($user->save())
+        $this->user->email = Get::post('email');
+        $this->user->password = Get::post('password');
+
+        $this->user->func('save',function() {    // transaction ları Trait içerisine koy.
+            // $this->setTransaction(false);
+
+            if ($this->validate())
+            {
+                $this->password = md5($this->values('password'));
+                
+                return $this->db->insert('users', $this);
+            }
+
+            return false;
+        });
+
+        if($this->user->save())
         {
-            Sess::setFlash('notice', 'Form saved succesfully');
-            Url::redirect('tutorials/form');
+            Sess::setFlash('notice', 'User saved successfully.');
+            Url::redirect('tutorials/form_html');
         }
 
-        setVar('user', $user);
+        // print_r($this->user->errors());
+        // var_dump($this->user);
+
+        // $this->user->messages(); Transaction error varsa yada genel bir hata buradan gelsin.
+
         view('form_html');
     }
 }

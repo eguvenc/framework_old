@@ -52,14 +52,17 @@ $packages['dependencies']['output'] = array('version' => '0.0.1', 'component' =>
 $packages['dependencies']['pager']  = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['pdo_mysql'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['router']   = array('version' => '0.0.1', 'component' => 'library');
+$packages['dependencies']['response']  = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['request']  = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['security'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['sess'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['sess_native'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['sess_database'] = array('version' => '0.0.1', 'component' => 'library');
+$packages['dependencies']['view'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['string'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['text'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['task']  = array('version' => '0.0.1', 'component' => 'helper');
+$packages['dependencies']['variables'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['validator'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['uri']  = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['url']  = array('version' => '0.0.1', 'component' => 'helper');
@@ -75,6 +78,7 @@ $packages['dependencies']['view'] = array('version' => '0.0.1', 'component' => '
 | them with third party packages.
 |
 | We get the components using getComponent('component');
+| We get the components instance using getComponentInstance('component');
 |
 | -------------------------------------------------------------------
 | Prototype

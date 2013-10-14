@@ -16,7 +16,7 @@ Class Hmvc_Welcome extends Controller {
         setVar('response_b', $response_b);
         setVar('name', 'Obullo');
         
-        view('hmvc_welcome');
+        View::get('hmvc_welcome');
     }
     
     function test($arg1 = '', $arg2 = '', $arg3 = '')

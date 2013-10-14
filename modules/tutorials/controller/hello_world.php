@@ -9,20 +9,10 @@ Class Hello_World extends Controller {
 
     function index()
     {
-        setVar('name', 'Obullo');
-
-        // $this->config->load('test');
-        // $this->config->item('base_url');
-
-        // $this->security->xssClean('sd');
-/*
-        new Db();
-
-        $this->db->select('user_email');
-        $this->db->from('users');
-        $this->db->get();
-*/
-        view('hello_world');
+        view('hello_world',function() {
+                $this->set('name', 'Obullo');
+                $this->set('footer', $this->tpl('footer'));
+            });
     }
 }
 

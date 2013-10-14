@@ -3,8 +3,8 @@
 <title>404 Page Not Found</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <?php 
-// Important: Don't change the 404 page css names (body, content, h1) 
-// Some browsers does not support different css names.        
+// Important: Don't edit the css tags (body, content, h1) 
+// Some browsers doesn't support different css namings.        
 ?>
 
 <style type="text/css">

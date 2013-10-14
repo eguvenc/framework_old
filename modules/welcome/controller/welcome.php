@@ -1,15 +1,15 @@
 <?php
 
 Class Welcome extends Controller {
-    
+
     function __construct()
     {
         parent::__construct();
         // new Email();
         // new Form_Json::start();
         // new Acl();
-        // new Db();
       
+        // new Db();
         // print_r($this->db->get('users')->resultArray());
         // var_dump($this->ftp);
     }
@@ -17,28 +17,29 @@ Class Welcome extends Controller {
     public function index()
     {
         setVar('name', 'Obullo');
+/*
+        $modelName  = 'User';
+        $schemaName = $modelName.'\Schema';
+            
+        foreach(array_keys(get_object_vars(new $schemaName())) as $key)
+        {
+            echo $key;
+        }
+*/
 
+        // $fields = $this->db->showColumns('users')->result();
+        // print_r($fields);
+
+        // print_r($res->getColumnMeta(1));
 
         // echo $this->uri->uriString();
         // echo $this->uri->requestUri();
         // new request\start();
-
-        // echo request\get('welcome/test/1/2/3');
-        // echo request\get('welcome/test/4/5/6');
-          
-        // $user  = new Models\User();
-        // $user->test();
-        // $user  = new Model\User();
-        // $email = new Email(false);
-        // $this->db->get('users');
-        // new Auth();
-        
-        // Sess::start();
         
         // sess\set('test', 1234);
         // echo sess\get('test');
         
-        view('welcome'); 
+        View::get('welcome'); 
     }
 }
 

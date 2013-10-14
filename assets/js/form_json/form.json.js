@@ -63,37 +63,33 @@
               cache: form_json_config.ajax_cache,
               timeout: form_json_config.ajax_timeout,
               data: data,
-              complete: function(){ },
-              success: function(r) { 
+              complete: function(){ 
+                  $root.find('input[type=submit]', this).removeClass('disabled');
+              },
+              success: function(r)
+              { 
                 $root.parent().find('.notification').remove();
                 $root.find('.input-error').remove();
-                if ( ! r.success) {
-                  if ( typeof r.redirect !== 'undefined' && r.redirect) {  // if we have server redirect request 
-                      window.location.replace(r.redirect);
-                      return;
-                  }
-                  if ( typeof r.top_redirect !== 'undefined' && r.top_redirect) { 
-                      window.top.location.replace(r.top_redirect);
-                      return;
-                  }
+
+                if ( ! r.messages.success) {
+
                   $('.loading').hide();
+
                   $root.find('input[type=submit]', this).removeAttr('disabled');
                   $root.find('input[type=submit]', this).removeClass('disabled');
 
-                  if (r.errors.sys_error) {
-                    $root.notification('error', r.errors.sys_error);
-                    $('.notification.notification-error').attr("tabindex", '0').focus();
-                    return;
-                  }
                   config.error.call(root, r, $root);
+
                   if ($root.data('form.error')) {
                     $root.data('form.error').call(root, r, $root);
                   }
                   if(_.strpos($root.attr('class'), 'no-top-msg') === false){
                       $root.notification('error', config.error_msg);
                   }
+
                   return _.each(r.errors, function(value, key) {
                     var $input, ar_key, name;
+
                     ar_key = _.explode('__', key);
                     name = ar_key[0];
                     ar_key = _.rest(ar_key, 1);
@@ -106,26 +102,21 @@
                    var i = 0;
                    i = i + 1;
                    
-                   if ( ! $input.prev('[class=input-error]').length) {
+                   if ( ! $input.prev('[class=input-error]').length){
                         $input.before("<div class='input-error' tabindex='"+ i +"'>" + value + "</div>");
                         $root.find("[class=input-error]:visible:eq(0)").attr("tabindex", i).focus();
                    }
+
+                  if (r.messages.errorString) {
+                    $('.notification.notification-error').attr("tabindex", '0').focus();
+                  } 
+
                   });
+
                 } else {
-                  if ( typeof r.forward !== "undefined" && r.forward) {   // if we have a forward url request
-                      $root.attr('action', r.forward);
-                      document.forms[$root.attr('name')].submit();
-                      return;
-                  }
-                  if ( typeof r.redirect !== "undefined" && r.redirect) {   // if we have a server redirect request
-                      window.location.replace(r.redirect);
-                      return;
-                  }
-                  if ( typeof r.top_redirect !== 'undefined' && r.top_redirect) { 
-                      window.top.location.replace(r.top_redirect);
-                      return;
-                  }
+
                   $('.loading').hide();
+
                   $root.find('input[type=submit]', this).removeAttr('disabled');
                   $root.find('input[type=submit]', this).removeClass('disabled');
 
@@ -134,10 +125,11 @@
                   if ($root.data('form.success')) {
                     $root.data('form.success').call(root, r, $root);
                   }
-                  if (r.msg){
-                    $root.notification('success', r.msg);
+                  if (r.messages.errorString){
+                    $root.notification('success', r.messages.errorString);
                     $('.notification.notification-success').attr("tabindex", '0').focus();
-                  } else if(config.success_msg) {
+                  } 
+                  else if(config.success_msg) {
                      $root.notification('success', config.success_msg);
                      $('.notification.notification-success').attr("tabindex", '0').focus();
                   }

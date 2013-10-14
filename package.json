@@ -2,12 +2,12 @@
     "dependencies": {
         "database_pdo": "*",
         "form" : "*",
-        "form_json" : "*",
         "sess_native": "*",
         "obullo": "*",
         "url" : "*",
         "view" : "*",
-        "validator" : "*"
+        "validator" : "*",
+        "response" : "*"
   },
   "components": {
         "core": "Obullo",

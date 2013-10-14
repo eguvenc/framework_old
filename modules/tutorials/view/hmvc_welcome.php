@@ -13,8 +13,7 @@
         
         <h1>Hmvc Tutorial</h1>
  
-<pre>
-$response_a = Request::get('tutorials/hmvc_welcome/test/1/2/3');
+<pre>$response_a = Request::get('tutorials/hmvc_welcome/test/1/2/3');
 $response_b = Request::get('tutorials/hmvc_welcome/test/4/5/6');
 
 echo getVar('response_a');
@@ -23,7 +22,9 @@ echo getVar('response_b');</pre>
         <p><?php echo getVar('response_a') ?></p>
         <p><?php echo getVar('response_b') ?></p>
         
-        <?php echo views('footer', false) // get the common [views] from /mods/view(s) folder.  ?>
+        <?php 
+            echo View::template('footer', false) 
+        ?>
         
         <section>
             <p>&nbsp;</p>

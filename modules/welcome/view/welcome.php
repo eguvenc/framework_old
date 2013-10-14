@@ -54,7 +54,9 @@
             </ol>
         </section>
 
-        <?php echo views('footer', false) ?>
+        <?php 
+            echo View::template('footer', false) 
+        ?>
         
         <section>
             <p>&nbsp;</p>

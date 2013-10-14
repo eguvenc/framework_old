@@ -7,11 +7,11 @@
 
     <body>
         <h1>Hello World</h1>
-
+        
         <section>
-            <p><?php echo getVar('var') ?></p>
+            <p><?php echo $name ?></p>
         </section> 
-            <?php echo views('footer', false) // get the common [views] from /modules/view(s) folder.  ?>
+            <?php echo $footer ?>
         <section>
             <p>&nbsp;</p>
         </section>

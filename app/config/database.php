@@ -24,7 +24,6 @@ $database['db']['password']  = '123456';
 $database['db']['database']  = 'obullo';
 $database['db']['driver']    = 'mysql';
 $database['db']['prefix']    = '';
-$database['db']['swap_pre']  = '';
 $database['db']['dbh_port']  = '';
 $database['db']['char_set']  = 'utf8';
 $database['db']['dsn']       = '';

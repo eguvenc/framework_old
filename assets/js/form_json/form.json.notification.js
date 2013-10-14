@@ -8,26 +8,21 @@
  */
 (function() {
   (function($, window) {
-    return $.fn.notification = function(type, message, view) {
+    return $.fn.notification = function(type, message) {
       var $notification, notification_content, self;
+
       self = this;
       self.find('.notification').remove();
-      
-      notification_content = '<div class="notification ' + type + '">' + message + '</div>';
-      if(view){
-          notification_content += '<div style="margin-top:10px;padding:10px;">' + view + '</div>';
-      }
 
       $notification = $('<div>', {  // Close notification window when user click.
-        html:  notification_content,
+        html:  '<div class="notification ' + type + '">' + message + '</div>',
         click: function() {     
-            /*
               return $notification.fadeOut('fast', function() {
               return $notification.remove();
               });
-            */
         }
       }).hide();
+
       if (type === 'success') {  // Fade out success messages if you want.
         /*
             setTimeout(function() {
