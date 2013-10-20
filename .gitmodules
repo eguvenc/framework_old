@@ -172,3 +172,6 @@
 [submodule "packages/response"]
 	path = packages/response
 	url = git://github.com/obullo/response.git
+[submodule "packages/schema_mysql"]
+	path = packages/schema_mysql
+	url = git://github.com/obullo/schema_mysql.git

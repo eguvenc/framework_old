@@ -33,4 +33,4 @@ $sess['time_to_update']   = 300;
 
 
 /* End of file sess.php */
-/* Location: .app/config/sess.php */
+/* Location: .app/config/test/sess.php */

@@ -4,8 +4,8 @@
 | -------------------------------------------------------------------------
 | Hooks
 | -------------------------------------------------------------------------
-| This file lets you define "hooks" to extend Framework without hacking the core
-| files.  Please see the user guide for info:
+| This file lets you define "hooks" to extend framework without hacking
+| the core files. Please see the docs for info:
 |
 |	@see docs/advanced/hooks
 |
@@ -13,17 +13,15 @@
 | Prototype
 | -------------------------------------------------------------------
 |
-| 	$hooks['pre_controller'] = array(
-|                                'class'    => 'MyClass',
-|                                'function' => 'Method',
-|                                'filename' => 'Myclass.php',
-|                                'filepath' => 'hooks',
-|                                'params'   => array('beer', 'wine', 'snacks')
-|                                );
+|	$hooks['pre_controller'] = function() {
+|		...
+| 	};
 |
 */
 
-$hooks = array();
+$hooks['pre_controller'] = function(){
+
+};
 
 /* End of file hooks.php */
 /* Location: ./app/config/hooks.php */

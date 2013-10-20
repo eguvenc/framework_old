@@ -5,14 +5,22 @@ Class Hello_World extends Controller {
     function __construct()
     {
     	parent::__construct();
+
+        // $schema = new Schema_Mysql('users');
+        // echo nl2br($schema->create());
+        // 
+        // new Db();
+        // $this->db->get('users');
     }
 
     function index()
     {
         view('hello_world',function() {
-                $this->set('name', 'Obullo');
-                $this->set('footer', $this->tpl('footer'));
-            });
+
+            $this->set('name', 'Obullo');
+            $this->set('footer', tpl('footer', false));
+
+        });
     }
 }
 

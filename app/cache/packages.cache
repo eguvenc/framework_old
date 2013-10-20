@@ -58,6 +58,7 @@ $packages['dependencies']['security'] = array('version' => '0.0.1', 'component' 
 $packages['dependencies']['sess'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['sess_native'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['sess_database'] = array('version' => '0.0.1', 'component' => 'library');
+$packages['dependencies']['schema_mysql'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['view'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['string'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['text'] = array('version' => '0.0.1', 'component' => 'helper');
@@ -96,6 +97,7 @@ $packages['components']['output'] = "Output";
 $packages['components']['lingo'] = "Lingo";
 $packages['components']['view'] = "View";
 $packages['components']['log'] = "Log_Write";    
+$packages['components']['hooks'] = "Hooks";
 $packages['components']['exception'] = "Exceptions";
 $packages['components']['db'] = "Database_Pdo"; // Database_Pdo package is a component of Db package. More components ? ( Mongo , Database .. etc. )
 $packages['components']['validator'] = "Validator";

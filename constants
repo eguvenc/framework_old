@@ -33,7 +33,7 @@ define('FPATH', dirname(__FILE__));
 |---------------------------------------------------------------
 | ROOT        - The root path of your server
 | APP         - The full server path to the "app" folder
-| MODULES        - The full server path to the "mods" folder
+| MODULES     - The full server path to the "mods" folder
 | PACKAGES    - The full server path to the "libs" folder
 | TASK_FILE   - Set your task (CLI) file name that we use it in task helper.
 */

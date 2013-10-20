@@ -155,63 +155,40 @@ Display logs [$php task log], to filter logs [$php task log $level]'."\n\033[0m"
     private function _compileFiles()
     {
         $configs = array();
-        $config  = getComponentInstance('config');
-        foreach($config->is_loaded as $cfg)
+        foreach(getComponentInstance('config')->is_loaded as $cfg)
         {
             $configs[] = Error::getSecurePath($cfg);
         }
         
         $locales = array();
-        $locale  = getComponentInstance('lingo');
-        foreach($locale->is_loaded as $lcl)
+        foreach(getComponentInstance('lingo')->is_loaded as $lcl)
         { 
             $locales[] = Error::getSecurePath($lcl); 
         }
+        
+        if(count($configs) > 0 || count($locales) > 0)
+        {
+            $output  = "\33[0;36m________LOADED FILES______________________________________________________";
+            $output .= "\n";
+            
+            if(count($configs) > 0)
+            {
+                $output .= "\nConfigs   --> ".implode(', ',$configs);
+            }
+            
+            if(count($locales) > 0)
+            {
+                $output .= "\nLingo   --> ".implode(', ',$locales);    
+            }
 
-        $autoload = getConfig('autoload');
-        $helpers = array();
-        foreach($autoload['helper'] as $helper)
-        { 
-            $helpers[] = Error::getSecurePath(PACKAGES .$helper. DS .$helper. EXT);
-        }
-        
-        $libraries = array();
-        foreach($autoload['library'] as $library)
-        { 
-            $libraries[] = Error::getSecurePath(PACKAGES .$library. DS .$library. EXT);
-        }
-        
-        $output  = "\33[0;36m________LOADED FILES______________________________________________________";
-        $output .= "\n";
-        
-        if(count($configs) > 0)
-        {
-            $output .= "\nConfigs   --> ".implode(', ',$configs);
-        }
-        
-        if(count($locales) > 0)
-        {
-            $output .= "\nLingo   --> ".implode(', ',$locales);    
-        }
+            $output .= "\n";
+            $output .= "__________________________________________________________________________";
+            $output .= "\n\n";
+            $output .= "\033[0m";
+            
+            echo $output;
 
-        if(count($helpers) > 0)
-        {
-            $output .= "\nHelpers   --> ".implode(', ',$helpers);
         }
-        
-        if(count($libraries) > 0)
-        {
-            $output .= "\nLibraries --> ".implode(', ',$libraries);   
-        }
-
-        $output .= "\n";
-        $output .= "__________________________________________________________________________";
-        $output .= "\n\n";
-        $output .= "\033[0m";
-        
-        echo $output;
-        
-        $this->_displayLogo();
     }
 }
 

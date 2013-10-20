@@ -48,8 +48,8 @@ server {
                 rewrite ^/(.+)/$ /$1 permanent;
         }
 
-        # removes access to "obullo" folder
-        if ($request_uri ~* ^/obullo)
+        # removes access to "packages" folder
+        if ($request_uri ~* ^/packages)
         {
                 rewrite ^/(.*)$ /index.php?/$1 last;
                 break;

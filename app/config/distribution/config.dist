@@ -344,5 +344,5 @@ $config['proxy_ips']             = '';
 $config['compress_output']       = false;
 
 
-/* End of file config.php */
-/* Location: .app/config/debug/config.php */
+/* End of file config-dist */
+/* Location: .app/config/distribution/config-dist */

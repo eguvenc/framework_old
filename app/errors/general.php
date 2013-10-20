@@ -4,7 +4,7 @@
 <style type="text/css">
 #errorGeneral  {
 font-family : Verdana, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, Geneva, Arial, Sans-serif;
-font-size:12;
+font-size:14px;
 width:99%;
 padding:5px;
 background-color: #F0F0F0;

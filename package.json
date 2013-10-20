@@ -2,12 +2,14 @@
     "dependencies": {
         "database_pdo": "*",
         "form" : "*",
-        "sess_native": "*",
         "obullo": "*",
         "url" : "*",
+        "request" : "*",
+        "response" : "*",
+        "schema_mysql" : "*",
+        "sess_native": "*",
         "view" : "*",
-        "validator" : "*",
-        "response" : "*"
+        "validator" : "*"
   },
   "components": {
         "core": "Obullo",
@@ -16,6 +18,7 @@
         "exceptions": "Exceptions",
         "lingo": "Lingo",
         "log": "Log_Write",
+        "hooks": "Hooks",
         "output": "Output",
         "router": "Router",
         "security": "Security",

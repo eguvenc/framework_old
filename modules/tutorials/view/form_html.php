@@ -14,13 +14,13 @@
         <h1>Odm Tutorial</h1>
         <h2><?php echo Url::anchor('tutorials/form_ajax', 'Ajax Tutorial') ?></h2>
 
-        <section><?php // $this->user->messages('notice'); echo Form::message($this->user, '', ) ?>
+        <section>
             <?php
                 if(Get::post('dopost'))
                 {
                     ?>
                         <div class="notification error">
-                            <?php echo $this->user->messages('errorString') ?>
+                            <?php echo $this->user->messages('errorMessage') ?>
                         </div>
                     <?php
                 }
@@ -62,6 +62,7 @@
                         <td>
                             <?php echo Form::error('agreement', '<div class="input-error">', '</div>') ?>    
                             <?php echo Form::checkbox('agreement', 1, Form::setValue('agreement'), " id='agreement' ") ?>
+                            
                             <label for="agreement">I agree terms and conditions.</label>
                         </td>
                     </tr>

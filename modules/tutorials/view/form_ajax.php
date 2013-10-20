@@ -52,6 +52,7 @@
                         <td>
                             <?php echo Form::error('agreement', '<div class="input-error">', '</div>') ?>    
                             <?php echo Form::checkbox('agreement', 1, Form::setValue('agreement'), " id='agreement' ") ?>
+                            
                             <label for="agreement">I agree terms and conditions.</label>
                         </td>
                     </tr>
@@ -66,11 +67,8 @@
                     </tr>
                 </table>
 
-                
-                <h2>form_Json Helper</h2>
-                <p>* The form_Json helper sends json response using php <strong>json_encode();</strong>.</p>
-
             <?php echo Form::close(); ?>
+            
         </section>
         <section>
             <p>&nbsp;</p>

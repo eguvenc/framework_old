@@ -19,13 +19,17 @@ Class Form_Ajax extends Controller {
         $this->user->email = Get::post('email');
         $this->user->password = Get::post('password');
 
-        $this->user->func('save',function() {    // transaction ları Trait içerisine koy.
-            return $this->validate();
+        $this->user->func('save',function() { 
+            return $this->isValid();
         });
 
         $this->user->save();
 
-        echo Response::json($this->user->output());
+        header('Cache-Control: no-cache, must-revalidate');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Content-type: application/json;charset=UTF-8');
+
+        echo json_encode($this->user->output());
     }
 }
 

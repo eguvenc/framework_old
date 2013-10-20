@@ -16,16 +16,15 @@
 <pre>$response_a = Request::get('tutorials/hmvc_welcome/test/1/2/3');
 $response_b = Request::get('tutorials/hmvc_welcome/test/4/5/6');
 
-echo getVar('response_a');
-echo getVar('response_b');</pre>
+echo echo $response_a;
+echo echo $response_b;</pre>
 
-        <p><?php echo getVar('response_a') ?></p>
-        <p><?php echo getVar('response_b') ?></p>
+        <p><?php echo $response_a ?></p>
+        <p><?php echo $response_b ?></p>
         
         <?php 
-            echo View::template('footer', false) 
+            echo tpl('footer', false) 
         ?>
-        
         <section>
             <p>&nbsp;</p>
         </section>

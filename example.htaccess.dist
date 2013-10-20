@@ -10,7 +10,7 @@ php_value memory_limit 32M
 
     # this is to remove the index.php in url
 
-    # Removes access to the System folders by users.
+    # Removes access to the Core folders by users.
     # previously this would not have been possible.
     # 'packages' can be replaced if you have renamed your packages folder.
     RewriteCond %{REQUEST_URI} ^(app|packages|modules)\b.*
@@ -24,7 +24,7 @@ php_value memory_limit 32M
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} !=/favicon.ico
 
-    # This last condition enables access to the images and css folders, and the robots.txt file
+    # This last condition enables access assets folder, and the robots.txt file
     RewriteCond $1 !^(index\.php|assets|robots\.txt)
     RewriteRule ^(.*)$ index.php/$1 [L,QSA]
     AddType text/x-component .htc

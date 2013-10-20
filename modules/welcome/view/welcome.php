@@ -39,7 +39,7 @@
 
             <h2>Submit your packages</h2>
             <p>
-                If you want to add your package click this <?php echo Url::anchor('http://obullo.com/submit-package', 'Submit Package') ?> link.
+                If you want to add your package please click here <?php echo Url::anchor('http://obullo.com/submit-package', 'Submit Package') ?>.
             </p>
         </section>
         
@@ -55,7 +55,7 @@
         </section>
 
         <?php 
-            echo View::template('footer', false) 
+            echo tpl('footer', false) 
         ?>
         
         <section>
