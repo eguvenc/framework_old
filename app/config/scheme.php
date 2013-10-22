@@ -22,10 +22,12 @@
 |
 */
 
-$scheme['general'] = function(){
+$scheme['general'] = function($filename){
 
+	$this->set('header', tpl('header',false));
+	$this->set('content', view($filename, false));
 	$this->set('footer', tpl('footer',false));
-
+	
 };
 
 /* End of file scheme.php */

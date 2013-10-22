@@ -6,7 +6,7 @@ Class Form_Ajax extends Controller {
     {        
         parent::__construct();
 
-        new Model('user');
+        new Model('user', 'users');
     }         
 
     function index()

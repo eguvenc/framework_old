@@ -48,6 +48,7 @@ $agents['platforms'] = array (
 
 // The order of this array should NOT be changed. Many browsers return
 // multiple browser types so we want to identify the sub-type first.
+// 
 $agents['browsers'] = array(
                             'Flock'             => 'Flock',
                             'Chrome'            => 'Chrome',
