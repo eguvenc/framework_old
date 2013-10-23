@@ -48,16 +48,14 @@
             <h2>Tutorials</h2>
             <ol>
                 <li><?php echo Url::anchor('/tutorials/hello_world', 'Hello World') ?></li>
-                <li><?php echo Url::anchor('/tutorials/hello_scheme', 'Hello Scheme World') ?></li>
-                <li><?php echo Url::anchor('/tutorials/form_html', 'Odm Tutorial') ?></li>
-                <li><?php echo Url::anchor('/tutorials/task_welcome', 'Task Tutorial') ?></li>
-                <li><?php echo Url::anchor('/tutorials/hmvc_welcome', 'Hmvc Tutorial') ?></li>
+                <li><?php echo Url::anchor('/tutorials/hello_scheme', 'Hello Scheme') ?></li>
+                <li><?php echo Url::anchor('/tutorials/hello_odm', 'Hello Odm') ?></li>
+                <li><?php echo Url::anchor('/tutorials/hello_task', 'Hello Task') ?></li>
+                <li><?php echo Url::anchor('/tutorials/hello_hmvc', 'Hello Hmvc') ?></li>
             </ol>
         </section>
 
-        <?php 
-            echo tpl('footer', false) 
-        ?>
+        <?php echo tpl('footer', false) ?>
         
         <section>
             <p>&nbsp;</p>

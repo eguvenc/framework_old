@@ -1,6 +1,6 @@
 <?php
 
-Class Hmvc_Welcome extends Controller {
+Class Hello_hmvc extends Controller {
                                       
     function __construct()
     {        
@@ -9,10 +9,10 @@ Class Hmvc_Welcome extends Controller {
 
     function index()
     {  
-        view('hmvc_welcome', function(){
+        view('hello_hmvc', function(){
 
-            $response_a = Request::get('tutorials/hmvc_welcome/test/1/2/3');
-            $response_b = Request::get('tutorials/hmvc_welcome/test/4/5/6');
+            $response_a = Request::get('tutorials/hello_hmvc/test/1/2/3');
+            $response_b = Request::get('tutorials/hello_hmvc/test/4/5/6');
 
             $this->set('response_a', $response_a);
             $this->set('response_b', $response_b);
@@ -26,5 +26,5 @@ Class Hmvc_Welcome extends Controller {
     }
 }
 
-/* End of file hmvc_welcome.php */
-/* Location: .modules/tutorials/controller/hmvc_welcome.php */
+/* End of file hello_hmvc.php */
+/* Location: .modules/tutorials/controller/hello_hmvc.php */

@@ -3,27 +3,37 @@
     <head>
         <meta charset="utf-8" />
             <?php echo Html::css('welcome.css') ?>
-        <title>Odm Ajax Tutorial</title>
-        
-        <?php echo Html::js('jquery/*)', true) ?> 
-        <?php echo Html::js('form_json/*') ?> 
-        <?php echo Html::js('underscore/*', true) ?>
+        <title>Odm Tutorial</title>
     </head>
-        <?php
-        // form Json Class Attributes  
-        // 
-        // no-top-msg:    Hide the top error message.
-        // no-ajax:       Use this attribute for native posts.
-        // hide-form:     Hide the form area if form submit success.
-        ?>
+
     <body>
         <header>
             <?php echo Url::anchor('/', Html::img('logo.png', ' alt="Obullo" ')) ?>
         </header>
         
-        <h1>Odm Ajax Tutorial</h1>
+        <h1>Odm Tutorial</h1>
+        <h2><?php echo Url::anchor('tutorials/hello_ajax', 'Ajax Tutorial') ?></h2>
+
         <section>
-            <?php echo Form::open('tutorials/form_ajax/dopost.json', array('method' => 'POST', 'class' => 'hide-form')) ?>
+            <?php
+                if(Get::post('dopost'))
+                {
+                    ?>
+                        <div class="notification error">
+                            <?php echo $this->user->messages('errorMessage') ?>
+                        </div>
+                    <?php
+                }
+            ?>
+        </section>
+
+        <section>
+            <?php echo Sess::getFlash('notice', '<div class="notification success">', '</div>') ?>
+        </section>
+        
+        <section>
+
+            <?php echo Form::open('tutorials/hello_odm/dopost', array('method' => 'POST')) ?>
 
                 <table width="100%">
                     <tr>
@@ -65,14 +75,43 @@
                     <tr>
                         <td colspan="2">&nbsp;</td>
                     </tr>
-                </table>
+                    </table>
+                    
+                    <h2>Test Results</h2>
+                    <?php if(isset($this->user) && is_object($this->user)) { ?>
 
-            <?php echo Form::close(); ?>
+                        <section>
+                            <h3>Form::error('email')</h3>
+                            <pre><?php echo Form::error('email') ?></pre>
+
+                            <h3>print_r($this->user->output())</h3>
+                            <pre><?php print_r($this->user->output()) ?></pre>
+
+                            <h3>print_r($this->user->messages())</h3>
+                            <pre><?php print_r($this->user->messages()) ?></pre>
+
+                            <h3>print_r($this->user->errors())</h3>
+                            <pre><?php print_r($this->user->errors()) ?></pre>
+
+                            <h3>$this->user->errors('email')</h3>
+                            <pre><?php echo $this->user->errors('email'); ?></pre>
+
+                            <h3>print_r($this->user->values())</h3>
+                            <pre><?php print_r($this->user->values()) ?></pre>
+
+                            <h3>$this->user->values('email')</h3>
+                            <pre><?php echo $this->user->values('email') ?></pre>
+                        </section>
+
+                    <?php } ?>
             
-        </section>
-        <section>
-            <p>&nbsp;</p>
-        </section>
+            <?php echo Form::close(); ?>
+
+        </section> 
         
+        <section>
+            <p>Total memory usage <?php echo round(memory_get_usage()/1024/1024, 2).' MB' ?></p>
+        </section>
     </body>
+    
 </html>

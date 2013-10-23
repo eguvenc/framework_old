@@ -1,6 +1,6 @@
 <?php
 
-Class Form_Ajax extends Controller {    
+Class Hello_Ajax extends Controller {    
                                       
     function __construct()
     {        
@@ -11,7 +11,7 @@ Class Form_Ajax extends Controller {
 
     function index()
     {        
-        view('form_ajax');
+        view('hello_ajax');
     }
     
     function doPost()
@@ -33,5 +33,5 @@ Class Form_Ajax extends Controller {
     }
 }
 
-/* End of file form_ajax.php */
-/* Location: .modules/tutorials/controller/form_ajax.php */
+/* End of file hello_ajax.php */
+/* Location: .modules/tutorials/controller/hello_ajax.php */

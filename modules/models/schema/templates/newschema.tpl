@@ -1,6 +1,6 @@
-namespace {className};
+namespace Schema;
 
-Class Schema
+Class {className}
 {
 	public $_colprefix = '';
 

@@ -1,7 +1,7 @@
 <?php 
-namespace Users;
+namespace Schema;
 
-Class Schema
+Class Users
 {
 	public $_colprefix = 'user_';
 

@@ -1,6 +1,6 @@
 <?php
 
-Class Task_Welcome extends Controller {    
+Class Hello_Task extends Controller {    
                                       
     function __construct()
     {        
@@ -9,7 +9,7 @@ Class Task_Welcome extends Controller {
 
     function index($mode = '')
     {
-        echo Url::anchor('tutorials/task_welcome/index/help', 'Click Here to Help.');
+        echo Url::anchor('tutorials/hello_task/index/help', 'Click Here to Help.');
 
         if($mode == 'help')
         {
@@ -24,5 +24,5 @@ Class Task_Welcome extends Controller {
     }
 }
 
-/* End of file task_welcome.php */
-/* Location: .modules/tutorials/controller/task_welcome.php */
+/* End of file hello_task.php */
+/* Location: .modules/tutorials/controller/hello_task.php */

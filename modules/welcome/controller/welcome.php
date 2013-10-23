@@ -12,20 +12,11 @@ Class Welcome extends Controller {
         // 
         // print_r($this->db->get('users')->resultArray());
         // var_dump($this->ftp);
+        // 
     }
     
     public function index()
-    {
-/*
-        $modelName  = 'User';
-        $schemaName = $modelName.'\Schema';
-            
-        foreach(array_keys(get_object_vars(new $schemaName())) as $key)
-        {
-            echo $key;
-        }
-*/
-        
+    {   
         view('welcome', function(){
             $this->set('name', 'Obullo');
         }); 
