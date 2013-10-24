@@ -138,3 +138,4 @@ $core = strtolower($packages['components']['core']);  //  you can use another co
 require (PACKAGES .$core. DS .'releases'. DS .$packages['dependencies'][$core]['version']. DS .$core. EXT);
 
 runFramework();
+echo round(memory_get_usage()/1024/1024, 2).' MB';
