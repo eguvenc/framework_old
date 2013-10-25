@@ -35,9 +35,6 @@ var ajax = {
             }
         }
         xmlhttp.open("POST",url);
-        // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        // xmlhttp.setRequestHeader("Content-length", params.length);
-        // xmlhttp.setRequestHeader("Connection", "close");
         xmlhttp.send(params);
    },
    get : function() {
@@ -46,54 +43,42 @@ var ajax = {
 }
 
 window.onload = function(){
-    var myform = document.getElementById('odm_tutorial');
+    var myform = document.getElementById('odm_tutorial');  // Form ID
     myform.onsubmit = function(){
         var elements = myform.getElementsByTagName('input');
         var elementsClass = document.getElementsByClassName('input-error');
         
         ajax.post(myform.getAttribute('action'), function(json){
-            obj = JSON.parse(json);
-            
+            var obj = JSON.parse(json);
                 for(var i=0; i < elements.length; i++){
                     e = document.createElement('div');
                     e.className = 'input-error';
-                    var text = elements[i].name;
                     if(elements[i].type == 'checkbox'){
-                            if(typeof obj.errors !== 'undefined'){
-                                if(typeof elements[i].parentNode.childNodes[5] !== 'undefined'){
-                                    elements[i].parentNode.childNodes[5].innerHTML = obj.errors[text];
-                                } else {
-                                    e.innerHTML = obj.errors[text];
-                                    elements[i].parentNode.appendChild(e);
-                                }
-                            } else {
-                                if(typeof elements[i].parentNode.childNodes[5] !== 'undefined'){
-                                    elements[i].parentNode.childNodes[5].remove(); 
-                                }
-                            }
-                    } else {
-                        if (elements[i].type != 'submit') { 
-                            if(typeof obj.errors !== 'undefined'){
-                                if(typeof elements[i].parentNode.childNodes[3] !== 'undefined'){
-                                    elements[i].parentNode.childNodes[3].innerHTML = obj.errors[text];
-                                } else {
-                                    e.innerHTML = obj.errors[text];
-                                    elements[i].parentNode.appendChild(e);
-                                }
-                            } else {
-                                if(typeof elements[i].parentNode.childNodes[3] !== 'undefined'){
-                                    elements[i].parentNode.childNodes[3].remove(); 
-                                }
-                            }
-                        }
+                        parseNode(obj, elements[i], 5);
+                    } else if(elements[i].type != 'submit') {
+                        parseNode(obj, elements[i], 3);
                     }
                 }
-
-            console.log(obj.errors);
-        }, 
-        new FormData(myform)); 
-        
+            },
+            new FormData(myform)
+            );
         return false;  // Do not do form submit;
+    }
+}
+
+function parseNode(obj, element, child){
+    var name = element.name;
+    if(typeof obj.errors[name] !== 'undefined'){
+        if(typeof element.parentNode.childNodes[child] !== 'undefined'){
+            element.parentNode.childNodes[child].innerHTML = obj.errors[name];
+        } else {
+            e.innerHTML = obj.errors[name];
+            element.parentNode.appendChild(e);
+        }
+    } else {
+        if(typeof element.parentNode.childNodes[child] !== 'undefined'){
+            element.parentNode.childNodes[child].remove(); 
+        }
     }
 }
 </script>
@@ -151,6 +136,5 @@ window.onload = function(){
         <section>
             <p>&nbsp;</p>
         </section>
-        
     </body>
 </html>
