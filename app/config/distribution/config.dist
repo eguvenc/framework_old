@@ -10,7 +10,7 @@
 |
 */
 $config['base_url']              = '/';
-$config['domain_url']         	 = 'http://localhost';
+$config['domain_url']         	 = 'http://';
 
 /*
 |--------------------------------------------------------------------------

@@ -49,7 +49,7 @@ header{padding: 30px 0;text-align:center;}
 
     <body>
         <header>
-            <a href="/"><img src="/assets/images/logo.png" alt="logo" border="0" /></a>
+            <a href="/"><img src="/public/assets/images/logo.png" alt="logo" border="0" /></a>
         </header>
 
         <h1>Hello World</h1>
