@@ -19,15 +19,20 @@ Class Hello_Odm extends Controller {
         $this->user->email    = Get::post('email');
         $this->user->password = Get::post('password');
 
+        $this->user->setRule('confirm_password', array('label' => 'Confirm Password', 'rules' => 'required|matches[password]'));
+        $this->user->setRule('agreement', array('label' => 'User Agreement', 'rules' => 'integer|required'));
+
+        /*
         $this->user->func('checkuser', function($username){
-            if(strlen($username) > 10)
+            if(strlen($username) < 10)
             {
                 $this->setMessage('checkuser', 'Username must be less than 10 characters.');
                 return false;
             }
             return true;
         });
-        
+        */
+       
         $this->user->func('save',function() {
             if ($this->isValid())
             {

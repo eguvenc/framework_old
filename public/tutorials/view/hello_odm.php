@@ -77,6 +77,8 @@
                     </tr>
                     </table>
                     
+                    <?php echo Form::close(); ?>
+
                     <h2>Test Results</h2>
                     <?php if(isset($this->user) && is_object($this->user)) { ?>
 
@@ -103,9 +105,7 @@
                             <pre><?php echo $this->user->values('email') ?></pre>
                         </section>
 
-                    <?php } ?>
-            
-            <?php echo Form::close(); ?>
+                    <?php } ?>        
 
         </section> 
         
