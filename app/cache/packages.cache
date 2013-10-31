@@ -23,6 +23,7 @@
 $packages['dependencies']['acl'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['auth'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['agent']  = array('version' => '0.0.1', 'component' => 'library');
+$packages['dependencies']['bcrypt'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['cart'] = array('version' =>  '0.0.1', 'component' => 'library');
 $packages['dependencies']['cookie'] = array('version' =>  '0.0.1', 'component' => 'helper');
 $packages['dependencies']['controller'] = array('version' =>  '0.0.1', 'component' => 'library');

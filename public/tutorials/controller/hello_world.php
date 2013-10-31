@@ -8,7 +8,7 @@ Class Hello_World extends Controller {
     }
 
     function index()
-    {   
+    {
         view('hello_world',function() {
             $this->set('name', 'Obullo');
             $this->set('footer', tpl('footer', false));

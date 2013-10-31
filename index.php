@@ -133,7 +133,7 @@ require (APP .'cache'. DS .'packages.cache');
 | Framework Component
 |--------------------------------------------------------------------------
 */
-$core = strtolower($packages['components']['core']);  //  you can use another core instead of Obullo.
+$core = strtolower($packages['components']['core']);  // ( All Components are Replaceable )
 
 require (PACKAGES .$core. DS .'releases'. DS .$packages['dependencies'][$core]['version']. DS .$core. EXT);
 
