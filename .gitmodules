@@ -304,3 +304,6 @@
 [submodule "modules/packages/schema_mysql"]
 	path = modules/packages/schema_mysql
 	url = git://github.com/obullo/schema_mysql.git
+[submodule "modules/packages/security"]
+	path = modules/packages/security
+	url = git://github.com/obullo/security.git
