@@ -283,3 +283,6 @@
 [submodule "modules/packages/pdo_mysql"]
 	path = modules/packages/pdo_mysql
 	url = git://github.com/obullo/pdo_mysql.git
+[submodule "modules/packages/pdo_oci"]
+	path = modules/packages/pdo_oci
+	url = git://github.com/obullo/pdo_oci.git
