@@ -343,3 +343,6 @@
 [submodule "modules/packages/view"]
 	path = modules/packages/view
 	url = git://github.com/obullo/view.git
+[submodule "modules/packages/xml"]
+	path = modules/packages/xml
+	url = git://github.com/obullo/xml.git
