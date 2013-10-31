@@ -301,3 +301,6 @@
 [submodule "modules/packages/router"]
 	path = modules/packages/router
 	url = git://github.com/obullo/router.git
+[submodule "modules/packages/schema_mysql"]
+	path = modules/packages/schema_mysql
+	url = git://github.com/obullo/schema_mysql.git
