@@ -277,3 +277,6 @@
 [submodule "modules/packages/pdo_ibm"]
 	path = modules/packages/pdo_ibm
 	url = git://github.com/obullo/pdo_ibm.git
+[submodule "modules/packages/pdo_mssql"]
+	path = modules/packages/pdo_mssql
+	url = git://github.com/obullo/pdo_mssql.git
