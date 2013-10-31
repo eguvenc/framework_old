@@ -235,3 +235,6 @@
 [submodule "modules/packages/hooks"]
 	path = modules/packages/hooks
 	url = git://github.com/obullo/hooks.git
+[submodule "modules/packages/html"]
+	path = modules/packages/html
+	url = git://github.com/obullo/html.git
