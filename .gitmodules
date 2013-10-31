@@ -211,3 +211,6 @@
 [submodule "modules/packages/email"]
 	path = modules/packages/email
 	url = git://github.com/obullo/email.git
+[submodule "modules/packages/encrypt"]
+	path = modules/packages/encrypt
+	url = git://github.com/obullo/encrypt.git
