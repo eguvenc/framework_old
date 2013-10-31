@@ -43,7 +43,7 @@ define('ROOT',  realpath(dirname(__FILE__)) . DS);
 define('APP',  ROOT .'app'. DS);
 define('MODULES',  ROOT .'modules'. DS);
 define('CLASSES',  MODULES .'classes'. DS);
-define('PACKAGES',  ROOT .'packages'. DS);
+define('PACKAGES',  MODULES .'packages'. DS);
 define('PUBLIC_DIR', (defined('STDIN')) ? MODULES : ROOT .'public'. DS);
 define('TASK_FILE', 'task');
 
