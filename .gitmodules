@@ -268,3 +268,6 @@
 [submodule "modules/packages/pdo_4d"]
 	path = modules/packages/pdo_4d
 	url = git://github.com/obullo/pdo_4d.git
+[submodule "modules/packages/pdo_cubrid"]
+	path = modules/packages/pdo_cubrid
+	url = git://github.com/obullo/pdo_cubrid.git
