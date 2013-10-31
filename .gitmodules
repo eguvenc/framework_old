@@ -262,3 +262,6 @@
 [submodule "modules/packages/output"]
 	path = modules/packages/output
 	url = git://github.com/obullo/output.git
+[submodule "modules/packages/pager"]
+	path = modules/packages/pager
+	url = git://github.com/obullo/pager.git
