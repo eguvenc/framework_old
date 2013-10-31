@@ -322,3 +322,6 @@
 [submodule "modules/packages/stringo"]
 	path = modules/packages/stringo
 	url = git://github.com/obullo/stringo.git
+[submodule "modules/packages/task"]
+	path = modules/packages/task
+	url = git://github.com/obullo/task.git
