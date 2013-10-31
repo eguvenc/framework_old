@@ -256,3 +256,6 @@
 [submodule "modules/packages/obullo"]
 	path = modules/packages/obullo
 	url = git://github.com/obullo/obullo.git
+[submodule "modules/packages/odm"]
+	path = modules/packages/odm
+	url = git://github.com/obullo/odm.git
