@@ -193,3 +193,6 @@
 [submodule "modules/packages/config"]
 	path = modules/packages/config
 	url = git://github.com/obullo/config.git
+[submodule "modules/packages/controller"]
+	path = modules/packages/controller
+	url = git://github.com/obullo/controller.git
