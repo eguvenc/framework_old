@@ -1,177 +1,177 @@
-[submodule "modules/packages/acl"]
-	path = modules/packages/acl
+[submodule "packages/acl"]
+	path = packages/acl
 	url = git://github.com/obullo/acl.git
-[submodule "modules/packages/agent"]
-	path = modules/packages/agent
+[submodule "packages/agent"]
+	path = packages/agent
 	url = git://github.com/obullo/agent.git
-[submodule "modules/packages/auth"]
-	path = modules/packages/auth
+[submodule "packages/auth"]
+	path = packages/auth
 	url = git://github.com/obullo/auth.git
-[submodule "modules/packages/cart"]
-	path = modules/packages/cart
+[submodule "packages/cart"]
+	path = packages/cart
 	url = git://github.com/obullo/cart.git
-[submodule "modules/packages/config"]
-	path = modules/packages/config
+[submodule "packages/config"]
+	path = packages/config
 	url = git://github.com/obullo/config.git
-[submodule "modules/packages/controller"]
-	path = modules/packages/controller
+[submodule "packages/controller"]
+	path = packages/controller
 	url = git://github.com/obullo/controller.git
-[submodule "modules/packages/cookie"]
-	path = modules/packages/cookie
+[submodule "packages/cookie"]
+	path = packages/cookie
 	url = git://github.com/obullo/cookie.git
-[submodule "modules/packages/database_pdo"]
-	path = modules/packages/database_pdo
+[submodule "packages/database_pdo"]
+	path = packages/database_pdo
 	url = git://github.com/obullo/database_pdo.git
-[submodule "modules/packages/db"]
-	path = modules/packages/db
+[submodule "packages/db"]
+	path = packages/db
 	url = git://github.com/obullo/db.git
-[submodule "modules/packages/email"]
-	path = modules/packages/email
+[submodule "packages/email"]
+	path = packages/email
 	url = git://github.com/obullo/email.git
-[submodule "modules/packages/encrypt"]
-	path = modules/packages/encrypt
+[submodule "packages/encrypt"]
+	path = packages/encrypt
 	url = git://github.com/obullo/encrypt.git
-[submodule "modules/packages/error"]
-	path = modules/packages/error
+[submodule "packages/error"]
+	path = packages/error
 	url = git://github.com/obullo/error.git
-[submodule "modules/packages/exceptions"]
-	path = modules/packages/exceptions
+[submodule "packages/exceptions"]
+	path = packages/exceptions
 	url = git://github.com/obullo/exceptions.git
-[submodule "modules/packages/form"]
-	path = modules/packages/form
+[submodule "packages/form"]
+	path = packages/form
 	url = git://github.com/obullo/form.git
-[submodule "modules/packages/ftp"]
-	path = modules/packages/ftp
+[submodule "packages/ftp"]
+	path = packages/ftp
 	url = git://github.com/obullo/ftp.git
-[submodule "modules/packages/get"]
-	path = modules/packages/get
+[submodule "packages/get"]
+	path = packages/get
 	url = git://github.com/obullo/get.git
-[submodule "modules/packages/hmvc"]
-	path = modules/packages/hmvc
+[submodule "packages/hmvc"]
+	path = packages/hmvc
 	url = git://github.com/obullo/hmvc.git
-[submodule "modules/packages/hooks"]
-	path = modules/packages/hooks
+[submodule "packages/hooks"]
+	path = packages/hooks
 	url = git://github.com/obullo/hooks.git
-[submodule "modules/packages/html"]
-	path = modules/packages/html
+[submodule "packages/html"]
+	path = packages/html
 	url = git://github.com/obullo/html.git
-[submodule "modules/packages/lingo"]
-	path = modules/packages/lingo
+[submodule "packages/lingo"]
+	path = packages/lingo
 	url = git://github.com/obullo/lingo.git
-[submodule "modules/packages/link"]
-	path = modules/packages/link
+[submodule "packages/link"]
+	path = packages/link
 	url = git://github.com/obullo/link.git
-[submodule "modules/packages/log_write"]
-	path = modules/packages/log_write
+[submodule "packages/log_write"]
+	path = packages/log_write
 	url = git://github.com/obullo/log_write.git
-[submodule "modules/packages/model"]
-	path = modules/packages/model
+[submodule "packages/model"]
+	path = packages/model
 	url = git://github.com/obullo/model.git
-[submodule "modules/packages/mongo_db"]
-	path = modules/packages/mongo_db
+[submodule "packages/mongo_db"]
+	path = packages/mongo_db
 	url = git://github.com/obullo/mongo_db.git
-[submodule "modules/packages/obullo"]
-	path = modules/packages/obullo
+[submodule "packages/obullo"]
+	path = packages/obullo
 	url = git://github.com/obullo/obullo.git
-[submodule "modules/packages/odm"]
-	path = modules/packages/odm
+[submodule "packages/odm"]
+	path = packages/odm
 	url = git://github.com/obullo/odm.git
-[submodule "modules/packages/output"]
-	path = modules/packages/output
+[submodule "packages/output"]
+	path = packages/output
 	url = git://github.com/obullo/output.git
-[submodule "modules/packages/pager"]
-	path = modules/packages/pager
+[submodule "packages/pager"]
+	path = packages/pager
 	url = git://github.com/obullo/pager.git
-[submodule "modules/packages/pdo_4d"]
-	path = modules/packages/pdo_4d
+[submodule "packages/pdo_4d"]
+	path = packages/pdo_4d
 	url = git://github.com/obullo/pdo_4d.git
-[submodule "modules/packages/pdo_cubrid"]
-	path = modules/packages/pdo_cubrid
+[submodule "packages/pdo_cubrid"]
+	path = packages/pdo_cubrid
 	url = git://github.com/obullo/pdo_cubrid.git
-[submodule "modules/packages/pdo_firebird"]
-	path = modules/packages/pdo_firebird
+[submodule "packages/pdo_firebird"]
+	path = packages/pdo_firebird
 	url = git://github.com/obullo/pdo_firebird.git
-[submodule "modules/packages/pdo_ibm"]
-	path = modules/packages/pdo_ibm
+[submodule "packages/pdo_ibm"]
+	path = packages/pdo_ibm
 	url = git://github.com/obullo/pdo_ibm.git
-[submodule "modules/packages/pdo_mssql"]
-	path = modules/packages/pdo_mssql
+[submodule "packages/pdo_mssql"]
+	path = packages/pdo_mssql
 	url = git://github.com/obullo/pdo_mssql.git
-[submodule "modules/packages/pdo_mysql"]
-	path = modules/packages/pdo_mysql
+[submodule "packages/pdo_mysql"]
+	path = packages/pdo_mysql
 	url = git://github.com/obullo/pdo_mysql.git
-[submodule "modules/packages/pdo_oci"]
-	path = modules/packages/pdo_oci
+[submodule "packages/pdo_oci"]
+	path = packages/pdo_oci
 	url = git://github.com/obullo/pdo_oci.git
-[submodule "modules/packages/pdo_odbc"]
-	path = modules/packages/pdo_odbc
+[submodule "packages/pdo_odbc"]
+	path = packages/pdo_odbc
 	url = git://github.com/obullo/pdo_odbc.git
-[submodule "modules/packages/pdo_sqlite"]
-	path = modules/packages/pdo_sqlite
+[submodule "packages/pdo_sqlite"]
+	path = packages/pdo_sqlite
 	url = git://github.com/obullo/pdo_sqlite.git
-[submodule "modules/packages/request"]
-	path = modules/packages/request
+[submodule "packages/request"]
+	path = packages/request
 	url = git://github.com/obullo/request.git
-[submodule "modules/packages/router"]
-	path = modules/packages/router
+[submodule "packages/router"]
+	path = packages/router
 	url = git://github.com/obullo/router.git
-[submodule "modules/packages/security"]
-	path = modules/packages/security
+[submodule "packages/security"]
+	path = packages/security
 	url = git://github.com/obullo/security.git
-[submodule "modules/packages/sess"]
-	path = modules/packages/sess
+[submodule "packages/sess"]
+	path = packages/sess
 	url = git://github.com/obullo/sess.git
-[submodule "modules/packages/sess_database"]
-	path = modules/packages/sess_database
+[submodule "packages/sess_database"]
+	path = packages/sess_database
 	url = git://github.com/obullo/sess_database.git
-[submodule "modules/packages/sess_mongo"]
-	path = modules/packages/sess_mongo
+[submodule "packages/sess_mongo"]
+	path = packages/sess_mongo
 	url = git://github.com/obullo/sess_mongo.git
-[submodule "modules/packages/sess_native"]
-	path = modules/packages/sess_native
+[submodule "packages/sess_native"]
+	path = packages/sess_native
 	url = git://github.com/obullo/sess_native.git
-[submodule "modules/packages/stringo"]
-	path = modules/packages/stringo
+[submodule "packages/stringo"]
+	path = packages/stringo
 	url = git://github.com/obullo/stringo.git
-[submodule "modules/packages/task"]
-	path = modules/packages/task
+[submodule "packages/task"]
+	path = packages/task
 	url = git://github.com/obullo/task.git
-[submodule "modules/packages/text"]
-	path = modules/packages/text
+[submodule "packages/text"]
+	path = packages/text
 	url = git://github.com/obullo/text.git
-[submodule "modules/packages/uri"]
-	path = modules/packages/uri
+[submodule "packages/uri"]
+	path = packages/uri
 	url = git://github.com/obullo/uri.git
-[submodule "modules/packages/url"]
-	path = modules/packages/url
+[submodule "packages/url"]
+	path = packages/url
 	url = git://github.com/obullo/url.git
-[submodule "modules/packages/utf8"]
-	path = modules/packages/utf8
+[submodule "packages/utf8"]
+	path = packages/utf8
 	url = git://github.com/obullo/utf8.git
-[submodule "modules/packages/validator"]
-	path = modules/packages/validator
+[submodule "packages/validator"]
+	path = packages/validator
 	url = git://github.com/obullo/validator.git
-[submodule "modules/packages/view"]
-	path = modules/packages/view
+[submodule "packages/view"]
+	path = packages/view
 	url = git://github.com/obullo/view.git
-[submodule "modules/packages/xml"]
-	path = modules/packages/xml
+[submodule "packages/xml"]
+	path = packages/xml
 	url = git://github.com/obullo/xml.git
-[submodule "modules/packages/xss"]
-	path = modules/packages/xss
+[submodule "packages/xss"]
+	path = packages/xss
 	url = git://github.com/obullo/xss.git
-[submodule "modules/packages/zip"]
-	path = modules/packages/zip
+[submodule "packages/zip"]
+	path = packages/zip
 	url = git://github.com/obullo/zip.git
-[submodule "modules/packages/date_get"]
-	path = modules/packages/date_get
+[submodule "packages/date_get"]
+	path = packages/date_get
 	url = git://github.com/obullo/date_get.git
-[submodule "modules/packages/response"]
-	path = modules/packages/response
+[submodule "packages/response"]
+	path = packages/response
 	url = git://github.com/obullo/response.git
-[submodule "modules/packages/schema_mysql"]
-	path = modules/packages/schema_mysql
+[submodule "packages/schema_mysql"]
+	path = packages/schema_mysql
 	url = git://github.com/obullo/schema_mysql.git
-[submodule "modules/packages/bcrypt"]
-	path = modules/packages/bcrypt
+[submodule "packages/bcrypt"]
+	path = packages/bcrypt
 	url = git://github.com/obullo/bcrypt.git
