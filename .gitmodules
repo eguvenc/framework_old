@@ -232,3 +232,6 @@
 [submodule "modules/packages/hmvc"]
 	path = modules/packages/hmvc
 	url = git://github.com/obullo/hmvc.git
+[submodule "modules/packages/hooks"]
+	path = modules/packages/hooks
+	url = git://github.com/obullo/hooks.git
