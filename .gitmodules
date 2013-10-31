@@ -229,3 +229,6 @@
 [submodule "modules/packages/get"]
 	path = modules/packages/get
 	url = git://github.com/obullo/get.git
+[submodule "modules/packages/hmvc"]
+	path = modules/packages/hmvc
+	url = git://github.com/obullo/hmvc.git
