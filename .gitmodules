@@ -226,3 +226,6 @@
 [submodule "modules/packages/ftp"]
 	path = modules/packages/ftp
 	url = git://github.com/obullo/ftp.git
+[submodule "modules/packages/get"]
+	path = modules/packages/get
+	url = git://github.com/obullo/get.git
