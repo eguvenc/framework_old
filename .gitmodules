@@ -346,3 +346,6 @@
 [submodule "modules/packages/xml"]
 	path = modules/packages/xml
 	url = git://github.com/obullo/xml.git
+[submodule "modules/packages/xss"]
+	path = modules/packages/xss
+	url = git://github.com/obullo/xss.git
