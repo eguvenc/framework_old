@@ -178,3 +178,6 @@
 [submodule "modules/packages/acl"]
 	path = modules/packages/acl
 	url = git://github.com/obullo/acl.git
+[submodule "modules/packages/agent"]
+	path = modules/packages/agent
+	url = git://github.com/obullo/agent.git
