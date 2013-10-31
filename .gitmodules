@@ -244,3 +244,6 @@
 [submodule "modules/packages/link"]
 	path = modules/packages/link
 	url = git://github.com/obullo/link.git
+[submodule "modules/packages/log_write"]
+	path = modules/packages/log_write
+	url = git://github.com/obullo/log_write.git
