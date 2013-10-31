@@ -253,3 +253,6 @@
 [submodule "modules/packages/mongo_db"]
 	path = modules/packages/mongo_db
 	url = git://github.com/obullo/mongo_db.git
+[submodule "modules/packages/obullo"]
+	path = modules/packages/obullo
+	url = git://github.com/obullo/obullo.git
