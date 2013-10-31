@@ -334,3 +334,6 @@
 [submodule "modules/packages/url"]
 	path = modules/packages/url
 	url = git://github.com/obullo/url.git
+[submodule "modules/packages/utf8"]
+	path = modules/packages/utf8
+	url = git://github.com/obullo/utf8.git
