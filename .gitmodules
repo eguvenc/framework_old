@@ -307,3 +307,6 @@
 [submodule "modules/packages/security"]
 	path = modules/packages/security
 	url = git://github.com/obullo/security.git
+[submodule "modules/packages/sess"]
+	path = modules/packages/sess
+	url = git://github.com/obullo/sess.git
