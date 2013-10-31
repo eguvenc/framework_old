@@ -181,3 +181,6 @@
 [submodule "modules/packages/agent"]
 	path = modules/packages/agent
 	url = git://github.com/obullo/agent.git
+[submodule "modules/packages/auth"]
+	path = modules/packages/auth
+	url = git://github.com/obullo/auth.git
