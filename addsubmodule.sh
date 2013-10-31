@@ -16,6 +16,7 @@ git push origin master
 cd /var/www/framework/modules/packages/$1
 git checkout master
 git remote set-url origin git@github.com:obullo/$1.git
+chmod -R 777 /var/www/framework
 cd /var/www/framework
 
 echo 'Added new submodule '$1;
