@@ -184,3 +184,6 @@
 [submodule "modules/packages/auth"]
 	path = modules/packages/auth
 	url = git://github.com/obullo/auth.git
+[submodule "modules/packages/bcrypt"]
+	path = modules/packages/bcrypt
+	url = git://github.com/obullo/bcrypt.git
