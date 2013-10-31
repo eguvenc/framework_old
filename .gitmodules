@@ -319,3 +319,6 @@
 [submodule "modules/packages/sess_native"]
 	path = modules/packages/sess_native
 	url = git://github.com/obullo/sess_native.git
+[submodule "modules/packages/stringo"]
+	path = modules/packages/stringo
+	url = git://github.com/obullo/stringo.git
