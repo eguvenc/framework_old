@@ -286,3 +286,6 @@
 [submodule "modules/packages/pdo_oci"]
 	path = modules/packages/pdo_oci
 	url = git://github.com/obullo/pdo_oci.git
+[submodule "modules/packages/pdo_odbc"]
+	path = modules/packages/pdo_odbc
+	url = git://github.com/obullo/pdo_odbc.git
