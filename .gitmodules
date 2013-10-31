@@ -331,3 +331,6 @@
 [submodule "modules/packages/uri"]
 	path = modules/packages/uri
 	url = git://github.com/obullo/uri.git
+[submodule "modules/packages/url"]
+	path = modules/packages/url
+	url = git://github.com/obullo/url.git
