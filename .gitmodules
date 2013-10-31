@@ -271,3 +271,6 @@
 [submodule "modules/packages/pdo_cubrid"]
 	path = modules/packages/pdo_cubrid
 	url = git://github.com/obullo/pdo_cubrid.git
+[submodule "modules/packages/pdo_firebird"]
+	path = modules/packages/pdo_firebird
+	url = git://github.com/obullo/pdo_firebird.git
