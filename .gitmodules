@@ -196,3 +196,6 @@
 [submodule "modules/packages/controller"]
 	path = modules/packages/controller
 	url = git://github.com/obullo/controller.git
+[submodule "modules/packages/cookie"]
+	path = modules/packages/cookie
+	url = git://github.com/obullo/cookie.git
