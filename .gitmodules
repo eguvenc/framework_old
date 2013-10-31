@@ -295,3 +295,6 @@
 [submodule "modules/packages/request"]
 	path = modules/packages/request
 	url = git://github.com/obullo/request.git
+[submodule "modules/packages/response"]
+	path = modules/packages/response
+	url = git://github.com/obullo/response.git
