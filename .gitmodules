@@ -223,3 +223,6 @@
 [submodule "modules/packages/form"]
 	path = modules/packages/form
 	url = git://github.com/obullo/form.git
+[submodule "modules/packages/ftp"]
+	path = modules/packages/ftp
+	url = git://github.com/obullo/ftp.git
