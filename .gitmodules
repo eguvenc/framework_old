@@ -187,3 +187,6 @@
 [submodule "modules/packages/bcrypt"]
 	path = modules/packages/bcrypt
 	url = git://github.com/obullo/bcrypt.git
+[submodule "modules/packages/cart"]
+	path = modules/packages/cart
+	url = git://github.com/obullo/cart.git
