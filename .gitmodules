@@ -289,3 +289,6 @@
 [submodule "modules/packages/pdo_odbc"]
 	path = modules/packages/pdo_odbc
 	url = git://github.com/obullo/pdo_odbc.git
+[submodule "modules/packages/pdo_sqlite"]
+	path = modules/packages/pdo_sqlite
+	url = git://github.com/obullo/pdo_sqlite.git
