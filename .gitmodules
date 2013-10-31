@@ -190,3 +190,6 @@
 [submodule "modules/packages/cart"]
 	path = modules/packages/cart
 	url = git://github.com/obullo/cart.git
+[submodule "modules/packages/config"]
+	path = modules/packages/config
+	url = git://github.com/obullo/config.git
