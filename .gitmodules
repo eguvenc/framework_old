@@ -250,3 +250,6 @@
 [submodule "modules/packages/model"]
 	path = modules/packages/model
 	url = git://github.com/obullo/model.git
+[submodule "modules/packages/mongo_db"]
+	path = modules/packages/mongo_db
+	url = git://github.com/obullo/mongo_db.git
