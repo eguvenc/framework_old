@@ -208,3 +208,6 @@
 [submodule "modules/packages/db"]
 	path = modules/packages/db
 	url = git://github.com/obullo/db.git
+[submodule "modules/packages/email"]
+	path = modules/packages/email
+	url = git://github.com/obullo/email.git
