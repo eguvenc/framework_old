@@ -310,3 +310,6 @@
 [submodule "modules/packages/sess"]
 	path = modules/packages/sess
 	url = git://github.com/obullo/sess.git
+[submodule "modules/packages/sess_database"]
+	path = modules/packages/sess_database
+	url = git://github.com/obullo/sess_database.git
