@@ -220,3 +220,6 @@
 [submodule "modules/packages/exceptions"]
 	path = modules/packages/exceptions
 	url = git://github.com/obullo/exceptions.git
+[submodule "modules/packages/form"]
+	path = modules/packages/form
+	url = git://github.com/obullo/form.git
