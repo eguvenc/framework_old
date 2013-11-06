@@ -91,16 +91,19 @@ $packages['dependencies']['view'] = array('version' => '0.0.1', 'component' => '
 */
 $packages['components']['core'] = "Obullo";
 $packages['components']['config'] = "Config";
+$packages['components']['db'] = "Database_Pdo";
+$packages['components']['exception'] = "Exceptions";
 $packages['components']['router'] = "Router";
 $packages['components']['security'] = "Security";
+$packages['components']['sess_native'] = "Sess_Native";
+$packages['components']['sess_database'] = "Sess_Database";
+$packages['components']['sess_mongo'] = "Sess_Mongo";
 $packages['components']['uri'] = "Uri";
 $packages['components']['output'] = "Output";
 $packages['components']['lingo'] = "Lingo";
 $packages['components']['view'] = "View";
 $packages['components']['log'] = "Log_Write";    
 $packages['components']['hooks'] = "Hooks";
-$packages['components']['exception'] = "Exceptions";
-$packages['components']['db'] = "Database_Pdo"; // Database_Pdo package is a component of Db package. More components ? ( Mongo , Database .. etc. )
 $packages['components']['validator'] = "Validator";
 
 /* End of file packages.cache */

@@ -11,11 +11,8 @@
 
 $auth['session_prefix']      = 'auth_';     // Set a auth session prefix to prevent collisions.
 $auth['db_var']              = 'db';        // Database connection variable
-$auth['tablename']           = 'users';     // The name of the database tablename
 $auth['username_col']        = 'user_email';   // The name of the table field that contains the username.
 $auth['password_col']        = 'user_password';  // The name of the table field that contains the password.
-$auth['username_length']     = '60';        // The string length of the username.
-$auth['password_length']     = '60';        // The string length of the password.
 $auth['password_salt_str']   = '';          // Password salt string for more strong passwords. * Leave it blank if you don't want to use it.
 $auth['algorithm']   		 = 'bcrypt';    // Whether to use "bcrypt" or "md5" or "sha256" or "sha512" hash.
 $auth['allow_login']         = true;        // Whether to allow logins to be performed on this page.
@@ -38,23 +35,13 @@ $auth['fields']              = array(        // Default db table select fields.
 
 $auth['query'] = array(function()
 {
-    if($this->query_binding)         // Use bind ( Secure Pdo Query ).
-    {
-        $this->db->prep();
-        $this->db->select(implode(',', $this->select_data));
-        $this->db->where($this->username_col, ':username');
-        $this->db->limit(1);
-        $this->db->get($this->tablename);
-        $this->db->bindParam(':username', $this->username, PARAM_STR, $this->username_length); // String (int Length)
-        $this->row = $this->db->exec()->row();
-    } 
-    else 
-    {
-        $this->db->select(implode(',', $this->select_data));
-        $this->db->where($this->username_col, $username);
-        $this->db->limit(1);
-        $this->row = $this->db->get($this->tablename)->row();
-    } 
+    $this->db->prep();
+    $this->db->select(implode(',', $this->select_data));
+    $this->db->where($this->username_col, ':username');
+    $this->db->get('users');
+    $this->db->bindParam(':username', $this->username, PARAM_STR, 60); // String (int Length),
+    $this->db->exec();
+    $this->row = $this->db->row();
 });
 
 
