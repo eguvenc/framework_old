@@ -91,7 +91,7 @@ $packages['dependencies']['view'] = array('version' => '0.0.1', 'component' => '
 */
 $packages['components']['core'] = "Obullo";
 $packages['components']['config'] = "Config";
-$packages['components']['db'] = "Database_Pdo";
+$packages['components']['db'] = "MONGO";
 $packages['components']['exception'] = "Exceptions";
 $packages['components']['router'] = "Router";
 $packages['components']['security'] = "Security";
