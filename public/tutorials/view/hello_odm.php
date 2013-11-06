@@ -18,7 +18,7 @@
             <?php
                 if(Get::post('dopost'))
                 {
-                    echo $this->user->messages('errorMessage', '<div class="notification error">', '</div>') ?>
+                    echo $this->user->messages('errorMessage', '<div class="notification error">', '</div>');
                 }
             ?>
         </section>
@@ -72,7 +72,7 @@
                     </tr>
                     </table>
                     
-                    <?php echo Form::close(); ?>
+                    <?php echo Form::close() ?>
 
                     <h2>Test Results</h2>
                     <?php if(isset($this->user) && is_object($this->user)) { ?>

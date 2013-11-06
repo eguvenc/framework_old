@@ -14,7 +14,7 @@
 
 $mongo['host']         = 'localhost';
 $mongo['port']         = '27017';
-$mongo['database']     = '';
+$mongo['database']     = 'test';
 $mongo['username']     = '';
 $mongo['password']     = '';
 $mongo['dsn']          = ''; // or dsn mongodb://connectionString

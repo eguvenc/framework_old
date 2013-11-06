@@ -9,11 +9,12 @@ Class Hello_World extends Controller {
 
     function index()
     {
-        view('hello_world',function() {
+        view('hello_world', function() {
             $this->set('name', 'Obullo');
             $this->set('footer', tpl('footer', false));
         });
 
+        /*
         view('hello_world',function() {
             $this->set('odm_form', function(){
 
@@ -28,12 +29,14 @@ Class Hello_World extends Controller {
                     echo Form::label('Password'); 
                     echo Form::error('confirm_password');
                     echo Form::password('confirm_password', '', " id='confirm' ");
-                    
+
                 echo Form::close();
 
             });
 
         });
+     */
+    }
 }
 
 /* End of file hello_world.php */

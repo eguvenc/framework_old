@@ -7,7 +7,7 @@ Class Hello_Form extends Controller {
         parent::__construct();
 
         new Model('user', 'users');
-        new uForm();
+        new Uform();
 
         $this->uform->func(function(){
 
