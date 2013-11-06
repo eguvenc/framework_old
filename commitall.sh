@@ -8,9 +8,9 @@ for file in modules/packages/*; do
 	arr=$(echo $file | tr "/" "\n")
 	for x in $arr
 	do
-		if [ $x != 'modules' -o $x != 'packages' ]; then
+		if [ $x != 'modules' ] && [ $x != 'packages' ] && [ $x != 'index.html' ]; then
 			cd /var/www/framework/modules/packages/$x
-			git commit -am 'updated package.json'
+			git commit -am 'updated package.'
 			git push origin master
 		fi;
 	done
