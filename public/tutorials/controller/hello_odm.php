@@ -34,7 +34,8 @@ Class Hello_Odm extends Controller {
 
         if($this->user->save())
         {
-            Sess::setFlash('notice', 'User saved successfully.');
+            $this->user->setNotice('User saved successfully.');
+
             Url::redirect('tutorials/hello_odm');
         }
 

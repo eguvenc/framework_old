@@ -18,13 +18,13 @@
             <?php
                 if(Get::post('dopost'))
                 {
-                    echo $this->user->messages('errorMessage', '<div class="notification error">', '</div>') ?>
+                    echo $this->user->messages('errorMessage')
                 }
             ?>
         </section>
 
         <section>
-            <?php echo Sess::getFlash('notice', '<div class="notification success">', '</div>') ?>
+            <?php echo $this->user->getNotice() ?>
         </section>
         
         <section>
@@ -32,7 +32,7 @@
             <?php echo $form_html ?>
 
                     <h2>Test Results</h2>
-                    <?php if(isset($this->user) && is_object($this->user)) { ?>
+                    <?php if(isset($this->user) AND is_object($this->user)) { ?>
 
                         <section>
                             <h3>Form::error('email')</h3>

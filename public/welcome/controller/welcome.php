@@ -12,6 +12,9 @@ Class Welcome extends Controller {
         // 
         // print_r($this->db->get('users')->resultArray());
         // var_dump($this->ftp);
+
+        echo Form::open('asdas/sadasd', " class='asd ' "); 
+
     }
     
     public function index()

@@ -18,13 +18,13 @@
             <?php
                 if(Get::post('dopost'))
                 {
-                    echo $this->user->messages('errorMessage', '<div class="notification error">', '</div>');
+                    echo $this->user->messages('errorMessage');
                 }
             ?>
         </section>
 
         <section>
-            <?php echo Sess::getFlash('notice', '<div class="notification success">', '</div>') ?>
+            <?php echo $this->user->getNotice() ?>
         </section>
         
         <section>

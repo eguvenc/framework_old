@@ -6,11 +6,9 @@
 |--------------------------------------------------------------------------
 |
 |    Base Url      "/"    URL to your framework root, generally a '/' trailing slash.
-|    Domain Root   "http://your-domain.com"  Full url of your domain.
 |
 */
 $config['base_url']              = '/';
-$config['domain_url']         	 = 'http://';
 
 /*
 |--------------------------------------------------------------------------

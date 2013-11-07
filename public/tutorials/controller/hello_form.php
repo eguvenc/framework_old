@@ -26,32 +26,12 @@ Class Hello_Form extends Controller {
             $this->close();
 
         }, 'default');
-
-        /*
-                $this->formVar = function(){
-            echo Form::open('/tutorials/hello_form', array('method' => 'post'), 'default');
-
-                    echo Form::label('Password'); 
-                    echo Form::error('password');
-                    echo Form::password('password', '', " id='password' ");
-                    
-                    echo Form::break();
-
-                    echo Form::label('Password'); 
-                    echo Form::error('confirm_password');
-                    echo Form::password('confirm_password', '', " id='confirm' ");
-                    
-            echo Form::close();
-        };         
-
-         */
-        
     }
 
     function index()
     {        
         view('hello_form',function() {
-            $this->set('form_html', $this->formVar);
+            $this->set('form_html', null);
         });
     }
     
@@ -75,12 +55,13 @@ Class Hello_Form extends Controller {
 
         if($this->user->save())
         {
-            Sess::setFlash('notice', 'User saved successfully.');
+            $this->user->setNotice('User saved successfully.');
+
             Url::redirect('tutorials/hello_form');
         }
 
         view('hello_form', function() {
-            $this->set('form_html', $this->formVar);
+            $this->set('form_html', null);
         });
     }
 

@@ -2,27 +2,26 @@
 
 /*
 | -------------------------------------------------------------------
-| uFORM
+| FORM
 | -------------------------------------------------------------------
-| This file specifies form templates that used by package uform.
+| This file specifies form templates that used by packages form && Uform.
 |
 | -------------------------------------------------------------------
 | Prototype
 | -------------------------------------------------------------------
 | 
-| $uform['template_name'] = array(
-|	 	'open' => '<form action="%s" method="%s" name="%s" class="" />',
-|		'close' => '</form>',
+| $form['template_name'] = array(
+|	 	'formClass' => '_formElement>',
+|		'error' => '<div class="_inputError">%s</div>',
+		'errorMessage' => '<div class="notification error">%s</div>',
 | );
 |
 */
 
-$uform['default'] = array(
-'open' => '<form action="%s" method="%s" name="%s" class="%s _formElement" />',
-'close' => '</form>',
-'error' => '<div class="inputError">%s</div>',
+$form['default'] = array(
+'formClass' => '_formElement',
+'error' => '<div class="_inputError">%s</div>',
 'errorMessage' => '<div class="notification error">%s</div>',
-'errorString' => '<div class="notification error">%s</div>',
 'success' => '<div class="notification success">%s</div>',
 'button' => '<div class="_buttonElement">%s</div>',
 'checkbox' => '<div class="_checkboxElement">%s</div>',
@@ -36,8 +35,9 @@ $uform['default'] = array(
 'submit' => '<div class="_submitElement">%s</div>',
 'text' => '<div class="_textElement">%s</div>',
 'textarea' => '<div class="_textareaElement">%s</div>',
+'break' => '<div style="padding:10px;">&nbsp;</div>'
 );
 
 
-/* End of file uform.php */
-/* Location: .app/config/uform.php */
+/* End of file form.php */
+/* Location: .app/config/form.php */
