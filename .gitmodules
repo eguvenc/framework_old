@@ -178,3 +178,6 @@
 [submodule "modules/packages/simple_captcha"]
 	path = modules/packages/simple_captcha
 	url = git://github.com/obullo/simple_captcha.git
+[submodule "modules/packages/cool_captcha"]
+	path = modules/packages/cool_captcha
+	url = git://github.com/obullo/cool_captcha.git
