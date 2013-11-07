@@ -28,6 +28,7 @@ $packages['dependencies']['cart'] = array('version' =>  '0.0.1', 'component' => 
 $packages['dependencies']['cookie'] = array('version' =>  '0.0.1', 'component' => 'helper');
 $packages['dependencies']['controller'] = array('version' =>  '0.0.1', 'component' => 'library');
 $packages['dependencies']['config'] = array('version' =>  '0.0.1', 'component' => 'library');
+$packages['dependencies']['cool_captcha'] = array('version' =>  '0.0.1', 'component' => 'library');
 $packages['dependencies']['date_get'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['db'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['database_pdo'] = array('version' => '0.0.1', 'component' => 'library');
@@ -59,6 +60,7 @@ $packages['dependencies']['security'] = array('version' => '0.0.1', 'component' 
 $packages['dependencies']['sess'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['sess_native'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['sess_database'] = array('version' => '0.0.1', 'component' => 'library');
+$packages['dependencies']['simple_captcha'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['schema_mysql'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['view'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['string'] = array('version' => '0.0.1', 'component' => 'helper');
