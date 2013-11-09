@@ -35,30 +35,30 @@
                     <tr>
                         <td style="width:20%;"><?php echo Form::label('Email') ?></td>
                         <td>
-                            <?php echo Form::error('email', '<div class="input-error">', '</div>'); ?>
-                            <?php echo Form::input('email', Form::setValue('email'), " id='email' ");?>
+                            <?php echo Form::error('email') ?>
+                            <?php echo Form::input('email', Form::setValue('email'), " id='email' ") ?>
                         </td>
                     </tr>
                     <tr>
                         <td><?php echo Form::label('Password') ?></td>
                         <td>
-                            <?php echo Form::error('password', '<div class="input-error">', '</div>'); ?>
+                            <?php echo Form::error('password') ?>
                             <?php echo Form::password('password', '', " id='password' ") ?>
                         </td>
                     </tr>
                     <tr>
                         <td><?php echo Form::label('Confirm') ?></td>
                         <td>
-                            <?php echo Form::error('confirm_password', '<div class="input-error">', '</div>') ?>
+                            <?php echo Form::error('confirm_password') ?>
                             <?php echo Form::password('confirm_password', '', " id='confirm' ") ?>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <?php echo Form::error('agreement', '<div class="input-error">', '</div>') ?>    
+                            <?php echo Form::error('agreement') ?>    
                             <?php echo Form::checkbox('agreement', 1, Form::setValue('agreement'), " id='agreement' ") ?>
-                            <?php echo Form::label('I agree terms and conditions', 'agreement') ?>
+                            <?php echo Form::label('I agree terms and conditions', 'agreement') ?>                        
                         </td>
                     </tr>
                     <tr>
@@ -91,7 +91,7 @@
                             <pre><?php print_r($this->user->errors()) ?></pre>
 
                             <h3>$this->user->errors('email')</h3>
-                            <pre><?php echo $this->user->errors('email'); ?></pre>
+                            <pre><?php echo $this->user->errors('email') ?></pre>
 
                             <h3>print_r($this->user->values())</h3>
                             <pre><?php print_r($this->user->values()) ?></pre>

@@ -9,22 +9,26 @@ Class Hello_Form extends Controller {
         new Model('user', 'users');
         new Uform();
 
-        $this->uform->func(function(){
+        echo $this->uform->create('table', function(){
 
-            $this->open('/tutorials/hello_form', array('method' => 'post'));
+            $this->openForm('/tutorials/hello_form', array('method' => 'post', 'class' => ''));
+            $this->addColumn(); // if table add td tag else div
+            $this->addRow();    // if table add tr tag else div
 
-                $this->label('Password');
-                $this->error('password');
-                $this->password('password', '', " id='password' ");
+            $this->addColumn(array(
+                'label' => 'Email',
+                'error' => true,
+                'input' => $this->input('email', $this->setValue('email'), " id='password' "),
+                ));
 
-                $this->break();
+            $this->addColumn(array(
+                'label' => 'Password',
+                'error' => true,
+                'input' => $this->password('email', '', " id='password' "),
+                ));
 
-                $this->label('Password'); 
-                $this->error('confirm_password');
-                $this->password('confirm_password', '', " id='confirm' ");
-
-            $this->close();
-
+            $this->closeForm();
+            
         }, 'default');
     }
 

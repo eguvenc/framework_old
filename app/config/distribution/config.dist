@@ -12,19 +12,6 @@ $config['base_url']              = '/';
 
 /*
 |--------------------------------------------------------------------------
-| SSL Config
-|--------------------------------------------------------------------------
-| Note : 
-| if your HTTP server NGINX add below the line to your fastcgi_params file.
-|  
-|   # fastcgi_param  HTTPS		  $ssl_protocol;
-|
-| then $_SERVER['HTTPS'] variable will be available for PHP (fastcgi).
-*/
-$config['ssl']                   = false;
-
-/*
-|--------------------------------------------------------------------------
 | Error Handler Enable / Disable Displaying Errors
 |--------------------------------------------------------------------------
 |  

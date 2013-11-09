@@ -4,7 +4,8 @@
 | -------------------------------------------------------------------
 | FORM
 | -------------------------------------------------------------------
-| This file specifies form templates that used by packages form && Uform.
+| This file specifies form templates that used by form && Uform
+| packages.
 |
 | -------------------------------------------------------------------
 | Prototype
@@ -13,7 +14,7 @@
 | $form['template_name'] = array(
 |	 	'formClass' => '_formElement>',
 |		'error' => '<div class="_inputError">%s</div>',
-		'errorMessage' => '<div class="notification error">%s</div>',
+|		'errorMessage' => '<div class="notification error">%s</div>',
 | );
 |
 */
@@ -23,19 +24,20 @@ $form['default'] = array(
 'error' => '<div class="_inputError">%s</div>',
 'errorMessage' => '<div class="notification error">%s</div>',
 'success' => '<div class="notification success">%s</div>',
-'button' => '<div class="_buttonElement">%s</div>',
-'checkbox' => '<div class="_checkboxElement">%s</div>',
-'dropdown' => '<div class="_dropdownElement">%s</div>',
-'fieldset' => '<div class="_fieldsetElement">%s</div>',
-'hidden' => '<div class="_hiddenElement">%s</div>',
-'label' => '<div class="_labelElement">%s</div>',
-'password' => '<div class="_passwordElement">%s</div>',
-'radio' => '<div class="_radioElement">%s</div>',
-'reset' => '<div class="_resetElement">%s</div>',
-'submit' => '<div class="_submitElement">%s</div>',
-'text' => '<div class="_textElement">%s</div>',
-'textarea' => '<div class="_textareaElement">%s</div>',
-'break' => '<div style="padding:10px;">&nbsp;</div>'
+'button' => '<div class="_buttonElement">%s</span>',
+'checkbox' => '<span class="_checkboxElement">%s</span>',
+'dropdown' => '<span class="_dropdownElement">%s</span>',
+'fieldsetOpen' => '<span class="_fieldsetElement">',
+'fieldsetClose' => '</span>',
+'hidden' => '<span class="_hiddenElement">%s</span>',
+'label' => '<span class="_labelElement">%s</span>',
+'password' => '<span class="_passwordElement">%s</span>',
+'radio' => '<span class="_radioElement">%s</span>',
+'reset' => '<span class="_resetElement">%s</span>',
+'submit' => '<span class="_submitElement">%s</span>',
+'input' => '<span class="_textElement">%s</span>',
+'textarea' => '<span class="_textareaElement">%s</span>',
+'addbr' => '<div style="height:%dpx;margin:0;padding:0;">%s</div>'
 );
 
 

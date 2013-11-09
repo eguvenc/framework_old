@@ -181,3 +181,6 @@
 [submodule "modules/packages/cool_captcha"]
 	path = modules/packages/cool_captcha
 	url = git://github.com/obullo/cool_captcha.git
+[submodule "modules/packages/uform"]
+	path = modules/packages/uform
+	url = git://github.com/obullo/uform.git

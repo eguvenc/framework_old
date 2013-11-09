@@ -10,7 +10,7 @@ Class Hello_Odm extends Controller {
     }
 
     function index()
-    {        
+    { 
         view('hello_odm');
     }   
     
