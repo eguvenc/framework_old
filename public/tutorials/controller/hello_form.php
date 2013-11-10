@@ -11,7 +11,7 @@ Class Hello_Form extends Controller {
 
         echo $this->uform->create('table', function(){
 
-            $this->openForm('/tutorials/hello_form', array('method' => 'post', 'class' => ''));
+            $this->formOpen('/tutorials/hello_form', array('method' => 'post', 'class' => ''));
             $this->addColumn(); // if table add td tag else div
             $this->addRow();    // if table add tr tag else div
 

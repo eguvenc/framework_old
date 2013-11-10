@@ -45,7 +45,7 @@ $auth['regenerate_sess_id']  = false;       // Set to true to regenerate the ses
 | Customize your auth query
 |--------------------------------------------------------------------------
 | 
-| Build your sql query or nosql query using crud oject.
+| Build your sql or nosql query using crud oject.
 |
 */
 $auth['query'] = array(function($username) use($auth)
