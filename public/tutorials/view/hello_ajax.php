@@ -8,7 +8,6 @@
         <title>Odm Ajax Tutorial</title>
 
 <script type="text/javascript">
-
 var ajax = {
    post : function(url, closure, params) {
         var xmlhttp,response;
@@ -46,13 +45,13 @@ window.onload = function(){
     var myform = document.getElementById('odm_tutorial');  // Form ID
     myform.onsubmit = function(){
         var elements = myform.getElementsByTagName('input');
-        var elementsClass = document.getElementsByClassName('input-error');
+        var elementsClass = document.getElementsByClassName('_inputError');
         
         ajax.post(myform.getAttribute('action'), function(json){
             var obj = JSON.parse(json);
                 for(var i=0; i < elements.length; i++){
                     e = document.createElement('div');
-                    e.className = 'input-error';
+                    e.className = '_inputError';
                     if(elements[i].type == 'checkbox'){
                         parseNode(obj, elements[i], 5);
                     } else if(elements[i].type != 'submit') {

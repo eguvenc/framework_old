@@ -1,6 +1,3 @@
-php_value upload_max_filesize 30M
-php_value post_max_size 30M
-php_value memory_limit 32M
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
@@ -12,8 +9,8 @@ php_value memory_limit 32M
 
     # Removes access to the Core folders by users.
     # previously this would not have been possible.
-    # 'packages' can be replaced if you have renamed your packages folder.
-    RewriteCond %{REQUEST_URI} ^(app|packages|modules)\b.*
+    
+    RewriteCond %{REQUEST_URI} ^(app|modules)\b.*
     RewriteRule ^(.*)$ index.php/$1 [L]
 
     # Checks to see if the user is attempting to access a valid file,

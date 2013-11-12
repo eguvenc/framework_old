@@ -29,50 +29,51 @@
         
         <section>
 
-            <?php echo Form::open('tutorials/hello_odm/dopost', array('method' => 'POST')) ?>
+            <?php 
+
+            // Form::useTemplate(false);
+            echo Form::open('tutorials/hello_odm/dopost', array('method' => 'POST')) ?>
 
                 <table width="100%">
                     <tr>
                         <td style="width:20%;"><?php echo Form::label('Email') ?></td>
-                        <td>
-                            <?php echo Form::error('email') ?>
-                            <?php echo Form::input('email', Form::setValue('email'), " id='email' ") ?>
-                        </td>
+                        <td><?php 
+                            echo Form::error('email');
+                            echo Form::input('email', Form::setValue('email'), " id='email' ");
+                            ?></td>
                     </tr>
                     <tr>
                         <td><?php echo Form::label('Password') ?></td>
-                        <td>
-                            <?php echo Form::error('password') ?>
-                            <?php echo Form::password('password', '', " id='password' ") ?>
-                        </td>
+                        <td><?php 
+                            echo Form::error('password');
+                            echo Form::password('password', '', " id='password' ");
+                            ?></td>
                     </tr>
                     <tr>
                         <td><?php echo Form::label('Confirm') ?></td>
-                        <td>
-                            <?php echo Form::error('confirm_password') ?>
-                            <?php echo Form::password('confirm_password', '', " id='confirm' ") ?>
-                        </td>
+                        <td><?php 
+                            echo Form::error('confirm_password');
+                            echo Form::password('confirm_password', '', " id='confirm' ");
+                            ?></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>
-                            <?php echo Form::error('agreement') ?>    
-                            <?php echo Form::checkbox('agreement', 1, Form::setValue('agreement'), " id='agreement' ") ?>
-                            <?php echo Form::label('I agree terms and conditions', 'agreement') ?>                        
-                        </td>
+                        <td><?php
+                            echo Form::error('agreement');
+                            echo Form::checkbox('agreement', 1, Form::setValue('agreement'), " id='agreement' ");
+                            echo Form::label('I agree terms and conditions', 'agreement');
+                            ?></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>
-                            <?php echo Form::submit('dopost', 'Do Post') ?>
-                        </td>
+                        <td><?php echo Form::submit('dopost', 'Do Post') ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">&nbsp;</td>
                     </tr>
                     </table>
-                    
-                    <?php echo Form::close() ?>
+                
+                <?php echo Form::close() ?>
 
                     <h2>Test Results</h2>
                     <?php if(isset($this->user) && is_object($this->user)) { ?>

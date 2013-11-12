@@ -1,20 +1,18 @@
 <?php
 
-Class Hello_Form extends Controller {    
+Class Hello_Uform extends Controller {    
                                       
     function __construct()
     {        
         parent::__construct();
 
-        
         new Uform();
-
-
     }
 
     function index()
     {      
         $this->uform->create('table', function(){
+
             $this->addForm('/tutorials/hello_form', array('method' => 'post'));
 
             $this->addRow(); 
@@ -36,7 +34,6 @@ Class Hello_Form extends Controller {
                 'label' => 'Select', 'input' => $this->dropdown("selectbox",array(1=> "Yes" , 2 => "No" , 3 => "I don't know"))
             ));
 
-
             $this->addRow(); 
             $this->addCol(array(
                 'input' => $this->submit('submit', ' Login ', '', " id='password' ")
@@ -49,7 +46,6 @@ Class Hello_Form extends Controller {
         $uform = $this->uform->printForm();
 
         view('hello_uform', function() use($uform) {
-
 
             $this->set('name', 'Obullo Uform');
             $this->set("uform", $uform);

@@ -8,4 +8,4 @@ Class {className}
 }
 
 /* End of file {filename} */
-/* Location: .modules/models/schema/{filename} */
+/* Location: .modules/schemas/{filename} */

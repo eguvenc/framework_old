@@ -19,6 +19,9 @@ Class Hello_Ajax extends Controller {
         $this->user->email = Get::post('email');
         $this->user->password = Get::post('password');
 
+        $this->user->setRule('confirm_password', array('rules' => 'required|matches(password)'));
+        $this->user->setRule('agreement', array('label' => 'User Agreement', 'rules' => '_int(1)|required'));
+
         $this->user->func('save',function() { 
             return $this->isValid();
         });
