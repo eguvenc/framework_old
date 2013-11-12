@@ -11,7 +11,7 @@ Class Hello_Uform extends Controller {
 
     function index()
     {      
-        $this->uform->create('table', function(){
+        $this->uform->create('div', function(){
 
             $this->addForm('/tutorials/hello_form', array('method' => 'post'));
 
@@ -22,6 +22,9 @@ Class Hello_Uform extends Controller {
                 'rules' => 'required|xssClean'
                 )
             );
+            
+
+
             $this->addRow(); 
             $this->addCol(array(
                 'label' => 'Password',
@@ -29,10 +32,11 @@ Class Hello_Uform extends Controller {
                 'rules' => 'required|xssClean'
                 )
             );
-
             $this->addCol(array(
                 'label' => 'Select', 'input' => $this->dropdown("selectbox",array(1=> "Yes" , 2 => "No" , 3 => "I don't know"))
             ));
+
+
 
             $this->addRow(); 
             $this->addCol(array(
@@ -44,6 +48,10 @@ Class Hello_Uform extends Controller {
         $this->uform->isValid();
         
         $uform = $this->uform->printForm();
+
+        // $form = getConfig('form');
+
+        // $form['errors']['error']
 
         view('hello_uform', function() use($uform) {
 
