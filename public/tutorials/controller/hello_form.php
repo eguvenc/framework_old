@@ -6,36 +6,54 @@ Class Hello_Form extends Controller {
     {        
         parent::__construct();
 
-        new Model('user', 'users');
+        
         new Uform();
 
-        echo $this->uform->create('table', function(){
 
-            $this->openForm('/tutorials/hello_form', array('method' => 'post', 'class' => ''));
-            $this->addColumn(); // if table add td tag else div
-            $this->addRow();    // if table add tr tag else div
-
-            $this->addColumn(array(
-                'label' => 'Email',
-                'error' => true,
-                'input' => $this->input('email', $this->setValue('email'), " id='password' "),
-                ));
-
-            $this->addColumn(array(
-                'label' => 'Password',
-                'error' => true,
-                'input' => $this->password('email', '', " id='password' "),
-                ));
-
-            $this->closeForm();
-            
-        }, 'default');
     }
 
     function index()
-    {        
-        view('hello_form',function() {
-            $this->set('form_html', null);
+    {      
+        $this->uform->create('table', function(){
+            $this->addForm('/tutorials/hello_form', array('method' => 'post'));
+
+            $this->addRow(); 
+            $this->addCol(array(
+                'label' => 'Email',
+                'input' => $this->input('email', $this->setValue('email'), " id='email' "),
+                'rules' => 'required|xssClean'
+                )
+            );
+            $this->addRow(); 
+            $this->addCol(array(
+                'label' => 'Password',
+                'input' => $this->input('pass', $this->setValue('pass'), '', " id='password' "),
+                'rules' => 'required|xssClean'
+                )
+            );
+
+            $this->addCol(array(
+                'label' => 'Select', 'input' => $this->dropdown("selectbox",array(1=> "Yes" , 2 => "No" , 3 => "I don't know"))
+            ));
+
+
+            $this->addRow(); 
+            $this->addCol(array(
+                'input' => $this->submit('submit', ' Login ', '', " id='password' ")
+                )
+            );
+        });
+        
+        $this->uform->isValid();
+        
+        $uform = $this->uform->printForm();
+
+        view('hello_uform', function() use($uform) {
+
+
+            $this->set('name', 'Obullo Uform');
+            $this->set("uform", $uform);
+            $this->set('footer', tpl('footer', false));
         });
     }
     
