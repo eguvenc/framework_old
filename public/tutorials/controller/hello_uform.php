@@ -63,6 +63,8 @@ Class Hello_Uform extends Controller {
     
     function doPost()
     {
+        // $this->user->uform->create('table', function(){});
+
         $this->user->email    = Get::post('email');
         $this->user->password = Get::post('password');
 
