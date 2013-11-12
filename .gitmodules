@@ -184,3 +184,6 @@
 [submodule "modules/packages/uform"]
 	path = modules/packages/uform
 	url = git://github.com/obullo/uform.git
+[submodule "modules/packages/pdo_pgsql"]
+	path = modules/packages/pdo_pgsql
+	url = git://github.com/obullo/pdo_pgsql.git
