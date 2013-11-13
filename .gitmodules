@@ -148,3 +148,6 @@
 [submodule "packages/task"]
 	path = packages/task
 	url = git://github.com/obullo/task.git
+[submodule "packages/text"]
+	path = packages/text
+	url = git://github.com/obullo/text.git
