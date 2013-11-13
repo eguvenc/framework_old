@@ -25,3 +25,6 @@
 [submodule "packages/database_pdo"]
 	path = packages/database_pdo
 	url = git://github.com/obullo/database_pdo.git
+[submodule "packages/date_get"]
+	path = packages/date_get
+	url = git://github.com/obullo/date_get.git
