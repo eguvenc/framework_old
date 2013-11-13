@@ -33,7 +33,7 @@ define('FPATH', dirname(__FILE__));
 |---------------------------------------------------------------
 | ROOT        - The root path of your server
 | ASSETS      - The full server path to the "assets" folder
-| APP     - The full server path to the "app" folder
+| APP     	  - The full server path to the "app" folder
 | DATA        - The full server path to the "data" folder
 | CLASSES     - The full server path to the user "classes" folder
 | PACKAGES    - The full server path to the "packages" folder

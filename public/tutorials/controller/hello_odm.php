@@ -44,4 +44,4 @@ Class Hello_Odm extends Controller {
 }
 
 /* End of file hello_odm.php */
-/* Location: .modules/tutorials/controller/hello_odm.php */
+/* Location: .public/tutorials/controller/hello_odm.php */

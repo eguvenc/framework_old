@@ -97,4 +97,4 @@ Class Hello_Uform extends Controller {
 
 
 /* End of file hello_world.php */
-/* Location: .modules/tutorials/controller/hello_world.php */
+/* Location: .public/tutorials/controller/hello_world.php */

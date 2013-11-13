@@ -19,4 +19,4 @@ Class Hello_Scheme extends Controller {
 }
 
 /* End of file hello_scheme.php */
-/* Location: .modules/tutorials/controller/hello_scheme.php */
+/* Location: .public/tutorials/controller/hello_scheme.php */

@@ -37,4 +37,4 @@ Class Hello_Ajax extends Controller {
 }
 
 /* End of file hello_ajax.php */
-/* Location: .modules/tutorials/controller/hello_ajax.php */
+/* Location: .public/tutorials/controller/hello_ajax.php */

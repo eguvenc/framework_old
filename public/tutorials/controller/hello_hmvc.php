@@ -27,4 +27,4 @@ Class Hello_hmvc extends Controller {
 }
 
 /* End of file hello_hmvc.php */
-/* Location: .modules/tutorials/controller/hello_hmvc.php */
+/* Location: .public/tutorials/controller/hello_hmvc.php */

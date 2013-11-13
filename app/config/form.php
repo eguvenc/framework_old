@@ -48,7 +48,7 @@ $form['templates']['default']  = array(
 
 /*
 |--------------------------------------------------------------------------
-| Notification Errors
+| Form Package Notification Errors
 |--------------------------------------------------------------------------
 |
 | Customizable form input and notification errors.

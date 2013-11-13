@@ -25,4 +25,4 @@ Class Hello_Task extends Controller {
 }
 
 /* End of file hello_task.php */
-/* Location: .modules/tutorials/controller/hello_task.php */
+/* Location: .public/tutorials/controller/hello_task.php */

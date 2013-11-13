@@ -42,4 +42,4 @@ Class Clear extends Controller {
 }
 
 /* End of file clear.php */
-/* Location: .modules/tasks/controller/clear.php */
+/* Location: .app/tasks/controller/clear.php */
