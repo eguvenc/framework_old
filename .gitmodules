@@ -172,3 +172,6 @@
 [submodule "packages/xss"]
 	path = packages/xss
 	url = git://github.com/obullo/xss.git
+[submodule "packages/zip"]
+	path = packages/zip
+	url = git://github.com/obullo/zip.git
