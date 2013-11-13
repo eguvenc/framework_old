@@ -121,3 +121,6 @@
 [submodule "packages/response"]
 	path = packages/response
 	url = git://github.com/obullo/response.git
+[submodule "packages/router"]
+	path = packages/router
+	url = git://github.com/obullo/router.git
