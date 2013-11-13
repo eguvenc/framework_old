@@ -7,7 +7,7 @@ Class Users
 
 	public $id;
 	public $email = array('label' => 'User Email', 'rules' => 'required|_string(255)|minLen(6)|validEmail');
-	public $password = array('label' => 'User Password', 'rules' => 'required|_string|maxLen(255)|minLen(6)');
+	public $password = array('label' => 'User Password', 'rules' => 'required|_string(255)|minLen(6)');
 }
 
 /* End of file users.php */

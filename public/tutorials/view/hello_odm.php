@@ -29,9 +29,7 @@
         
         <section>
 
-            <?php 
-
-            // Form::useTemplate(false);
+            <?php
             echo Form::open('tutorials/hello_odm/dopost', array('method' => 'POST')) ?>
 
                 <table width="100%">

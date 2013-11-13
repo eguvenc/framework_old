@@ -10,6 +10,7 @@ for file in modules/packages/*; do
 	do
 		if [ $x != 'modules' ] && [ $x != 'packages' ] && [ $x != 'index.html' ]; then
 			cd /var/www/framework/modules/packages/$x
+			echo $x 'updated';
 			git commit -am 'updated package.'
 			git push origin master
 		fi;

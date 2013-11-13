@@ -16,12 +16,12 @@
 | DS          - The DIRECTORY SEPERATOR
 | EXT         - The file extension.  Typically ".php"
 | SELF        - The name of THIS file (typically "index.php")
-| FCPATH      - The full server path to THIS file
+| FCPATH      - The full server path to this file
 | PHP_PATH    - The php path of your server
 | FPATH       - The full server path without file
 */
-define('DS',   DIRECTORY_SEPARATOR);
-define('EXT',  '.php');
+define('DS', DIRECTORY_SEPARATOR);
+define('EXT', '.php');
 define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 define('FCPATH', __FILE__);
 define('PHP_PATH', '/usr/bin/php'); 
@@ -32,16 +32,19 @@ define('FPATH', dirname(__FILE__));
 | UNDERSTANDING APP CONSTANTS
 |---------------------------------------------------------------
 | ROOT        - The root path of your server
-| APP         - The full server path to the "app" folder
-| MODULES     - The full server path to the "moduless" folder
+| ASSETS      - The full server path to the "assets" folder
+| MODULES     - The full server path to the "modules" folder
+| DATA        - The full server path to the "data" folder
 | CLASSES     - The full server path to the user "classes" folder
 | PACKAGES    - The full server path to the "packages" folder
 | PUBLIC_DIR  - The full server path to the "public" folder
 | TASK_FILE   - Set your task (CLI) file name you will use it in command line $php task command.
 */
 define('ROOT',  realpath(dirname(__FILE__)) . DS);
-define('APP',  ROOT .'app'. DS);
+define('ASSETS',  ROOT .'assets'. DS);
+define('APP',  ROOT .'modules'. DS);
 define('MODULES',  ROOT .'modules'. DS);
+define('DATA',  MODULES .'data'. DS);
 define('CLASSES',  MODULES .'classes'. DS);
 define('PACKAGES',  MODULES .'packages'. DS);
 define('PUBLIC_DIR', (defined('STDIN')) ? MODULES : ROOT .'public'. DS);

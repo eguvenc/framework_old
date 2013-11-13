@@ -39,7 +39,7 @@ error_reporting(0);
 | @see  http://www.php.net/manual/en/timezones.php
 | 
 */
-date_default_timezone_set('America/Chicago');
+date_default_timezone_set('Europe/London');
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +70,7 @@ ini_set('zend.ze1_compatibility_mode', 0);
              
 /*
 |--------------------------------------------------------------------------
-| Obullo Command Line ( Tasks )
+| Framework Command Line ( Tasks )
 |--------------------------------------------------------------------------
 |  @see User Guide: Chapters / General Topics / Tasks
 |
@@ -126,14 +126,14 @@ if(defined('STDIN'))
 | }
 |
  */
-require (APP .'cache'. DS .'packages.cache');
+require (DATA .'cache'. DS .'packages.cache');
 
 /*
 |--------------------------------------------------------------------------
 | Framework Component
 |--------------------------------------------------------------------------
 */
-$core = strtolower($packages['components']['core']);  // ( All Components are Replaceable )
+$core = strtolower($packages['components']['core']);  // * ( All Components are Replaceable )
 
 require (PACKAGES .$core. DS .'releases'. DS .$packages['dependencies'][$core]['version']. DS .$core. EXT);
 
