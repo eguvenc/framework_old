@@ -139,3 +139,6 @@
 [submodule "packages/sess_mongo"]
 	path = packages/sess_mongo
 	url = git://github.com/obullo/sess_mongo.git
+[submodule "packages/sess_native"]
+	path = packages/sess_native
+	url = git://github.com/obullo/sess_native.git
