@@ -33,21 +33,20 @@ define('FPATH', dirname(__FILE__));
 |---------------------------------------------------------------
 | ROOT        - The root path of your server
 | ASSETS      - The full server path to the "assets" folder
-| MODULES     - The full server path to the "modules" folder
+| APP     - The full server path to the "app" folder
 | DATA        - The full server path to the "data" folder
 | CLASSES     - The full server path to the user "classes" folder
 | PACKAGES    - The full server path to the "packages" folder
 | PUBLIC_DIR  - The full server path to the "public" folder
-| TASK_FILE   - Set your task (CLI) file name you will use it in command line $php task command.
+| TASK_FILE   - Set your task (CLI) file name you will use it in command line $php task.
 */
 define('ROOT',  realpath(dirname(__FILE__)) . DS);
 define('ASSETS',  ROOT .'assets'. DS);
-define('APP',  ROOT .'modules'. DS);
-define('MODULES',  ROOT .'modules'. DS);
-define('DATA',  MODULES .'data'. DS);
-define('CLASSES',  MODULES .'classes'. DS);
-define('PACKAGES',  MODULES .'packages'. DS);
-define('PUBLIC_DIR', (defined('STDIN')) ? MODULES : ROOT .'public'. DS);
+define('APP',  ROOT .'app'. DS);
+define('DATA',  APP .'data'. DS);
+define('CLASSES',  ROOT .'classes'. DS);
+define('PACKAGES',  ROOT .'packages'. DS);
+define('PUBLIC_DIR', (defined('STDIN')) ? APP : ROOT .'public'. DS);
 define('TASK_FILE', 'task');
 
 
