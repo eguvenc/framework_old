@@ -133,3 +133,6 @@
 [submodule "packages/sess"]
 	path = packages/sess
 	url = git://github.com/obullo/sess.git
+[submodule "packages/sess_database"]
+	path = packages/sess_database
+	url = git://github.com/obullo/sess_database.git
