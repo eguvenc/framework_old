@@ -19,3 +19,6 @@
 [submodule "packages/controller"]
 	path = packages/controller
 	url = git://github.com/obullo/controller.git
+[submodule "packages/cookie"]
+	path = packages/cookie
+	url = git://github.com/obullo/cookie.git
