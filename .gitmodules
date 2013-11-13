@@ -175,3 +175,6 @@
 [submodule "packages/zip"]
 	path = packages/zip
 	url = git://github.com/obullo/zip.git
+[submodule "packages/simple_captcha"]
+	path = packages/simple_captcha
+	url = git://github.com/obullo/simple_captcha.git
