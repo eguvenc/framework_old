@@ -160,3 +160,6 @@
 [submodule "packages/utf8"]
 	path = packages/utf8
 	url = git://github.com/obullo/utf8.git
+[submodule "packages/validator"]
+	path = packages/validator
+	url = git://github.com/obullo/validator.git
