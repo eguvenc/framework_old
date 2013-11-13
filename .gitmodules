@@ -28,3 +28,6 @@
 [submodule "packages/date_get"]
 	path = packages/date_get
 	url = git://github.com/obullo/date_get.git
+[submodule "packages/db"]
+	path = packages/db
+	url = git://github.com/obullo/db.git
