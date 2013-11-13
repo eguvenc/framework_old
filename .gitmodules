@@ -163,3 +163,6 @@
 [submodule "packages/validator"]
 	path = packages/validator
 	url = git://github.com/obullo/validator.git
+[submodule "packages/view"]
+	path = packages/view
+	url = git://github.com/obullo/view.git
