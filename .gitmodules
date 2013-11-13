@@ -22,3 +22,6 @@
 [submodule "packages/cookie"]
 	path = packages/cookie
 	url = git://github.com/obullo/cookie.git
+[submodule "packages/database_pdo"]
+	path = packages/database_pdo
+	url = git://github.com/obullo/database_pdo.git
