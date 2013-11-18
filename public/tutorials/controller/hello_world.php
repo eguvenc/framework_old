@@ -5,6 +5,12 @@ Class Hello_World extends Controller {
     function __construct()
     {
     	parent::__construct();
+
+        new Captcha();
+
+        $this->captcha->create();
+
+        echo $this->captcha->getImageUrl();
     }
 
     function index()

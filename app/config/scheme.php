@@ -21,7 +21,6 @@
 |	};
 |
 */
-
 $scheme['general'] = function($filename){
 
 	$this->set('header', tpl('header',false));

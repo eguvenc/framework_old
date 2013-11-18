@@ -18,7 +18,6 @@
 | 	};
 |
 */
-
 $hooks['pre_controller'] = function(){
 
 };

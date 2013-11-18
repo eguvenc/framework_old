@@ -13,7 +13,7 @@ Class Hello_Scheme extends Controller {
             $this->set('title', 'Hello Scheme');
             $this->set('name', 'Obullo');
 
-            $this->scheme('general', 'hello_scheme');
+            $this->scheme('general')->view('hello_scheme');
         });
     }
 }

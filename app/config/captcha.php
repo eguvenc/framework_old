@@ -2,49 +2,44 @@
 
 /*
 | -------------------------------------------------------------------
-| CAPTCHA
+| Captcha Package Configuration
 | -------------------------------------------------------------------
 | This file specifies captcha package default settings: colors,
-| driver, expiration, image height, image font, image wave.
-|
-| -------------------------------------------------------------------
-| Prototype
-| -------------------------------------------------------------------
-| 
-|	$captcha['driver'] = 'cool';	
+| driver, expiration, image height, image font, image wave and so on.
 |
 */
-    
-$captcha['driver']        		= 'cool';						// Set default driver ( "secure" or "cool" ).
-$captcha['set_pool']      		= "random";						// Pools: numbers - alpha - random
-$captcha['char']          		= '15';							// Character length of captcha code
-$captcha['font_size']     		= '25';							// Font size
-$captcha['height']        		= '50';							// Height of captcha image, width = auto.
-$captcha['wave_image']    		= true;							// Image wave for more strong captchas.
-$captcha['img_path']       		= '/data/temp/captcha';			// Set captcha image path
-$captcha['user_font_path'] 		= '/assets/fonts';				// Set captcha font path
-$captcha['image_type'] 	  		= 'gif';						// Set image extension
-$captcha['expiration'] 	  		= '2';							// Expiration time of captcha
-
-$captcha['colors'] 				= array(
-									'red'    => '255,0,0',
-									'blue'   => '0,0,255',
-									'green'  => '0,102,0',
-									'black'  => '0,0,0',
-									'yellow' => '255,255,0',
-									'cyan'   => '0,146,134',
-								);
-
-$captcha['default_text_color']  = array('cyan'); 	// If its more than one produce random colors
-$captcha['default_noise_color'] = array('cyan');	// If its more than one produce random noise colors
-
-$captcha['char_pool']           = array(
+$captcha = array(
+	
+	'driver' => 'cool',		 // Set default driver ( "secure" or "cool" ).
+	'set_pool' => 'random',	 // Pools: numbers - alpha - random
+	'char' => '5',			 // Character length of captcha code
+	'font_size' => '20',	 // Font size
+	'height' => '40',		 // Height of captcha image, "width = auto" no need to set it.
+	'wave_image' => true,    // Image wave for more strong captchas.
+	'img_path' => '/data/temp/captcha',   // Set captcha image path
+	'user_font_path' => '/assets/fonts',  // Set captcha font path
+	'image_type' =>	'gif',				  // Set image extension
+	'expiration' => '10',				  // Expiration time of captcha ( second )
+	'colors' => array(					  // Color Schema
+						'red'    => '255,0,0',
+						'blue'   => '0,0,255',
+						'green'  => '0,102,0',
+						'black'  => '0,0,0',
+						'yellow' => '255,255,0',
+						'cyan'   => '0,146,134',
+					),
+	// Captcha text color
+	'default_text_color' => array('cyan'), 	// If its more than one produce random colors
+	// Background noise color
+	'default_noise_color'=> array('cyan'),	// If its more than one produce random noise colors
+	// Characters
+	'char_pool'          => array(
 								'numbers' => '23456789',
 								'alpha'   => 'ABCDEFGHJKLMNPRSTUVWXYZ',
 								'random'  => '23456789ABCDEFGHJKLMNPRSTUVWXYZ'
-								);
-
-$captcha['fonts']              = array(
+								),
+	// Defined Fonts
+	'fonts'              => array(
 								'AlphaSmoke'             => 'AlphaSmoke.ttf',
 								'Anglican'               => 'Anglican.ttf',
 								'Bknuckss'               => 'Bknuckss.ttf',
@@ -93,7 +88,8 @@ $captcha['fonts']              = array(
 								'Xtrusion'               => 'Xtrusion.ttf',
 								'AutumnGifts'            => 'AutumnGifts.ttf',
 								'Mcklst'                 => 'Mcklst.ttf'
-								);
+								),
+);
 
 /* End of file captcha.php */
 /* Location: .app/config/captcha.php */

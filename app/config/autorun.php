@@ -2,7 +2,7 @@
 
 /*
 | -------------------------------------------------------------------
-| AUTO-RUN
+| Auto-Run File ( Run in Controller )
 | -------------------------------------------------------------------
 | This file specifies which functions should be run by default 
 | in __construct() level of the controller.
@@ -24,7 +24,6 @@
 | });
 |
 */
-
 $autorun = array(function(){
 
 });
