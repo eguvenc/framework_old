@@ -2,8 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-
-        <?php echo Html::css('welcome.css') ?>
+        <?php echo $this->html->css('welcome.css') ?>
 
         <title>Odm Ajax Tutorial</title>
 
@@ -84,36 +83,39 @@ function parseNode(obj, element, child){
     </head>
     <body>
         <header>
-            <?php echo Url::anchor('/', Html::img('logo.png', ' alt="Obullo" ')) ?>
+            <?php echo $this->url->anchor('/', $this->html->img('logo.png', ' alt="Obullo" ')) ?>
         </header>
         
-        <h1>Odm Ajax Tutorial</h1>
+        <h1>Hello Ajax</h1>
         <section>
-            <?php echo Form::open('tutorials/hello_ajax/dopost.json', array('method' => 'POST', 'id' => 'odm_tutorial')) ?>
+            <?php
+            $form = new Form;
+
+            echo $form->open('tutorials/hello_ajax/dopost.json', array('method' => 'POST', 'id' => 'odm_tutorial')) ?>
 
                 <table width="100%">
                     <tr>
-                        <td style="width:20%;"><?php echo Form::label('Email') ?></td>
+                        <td style="width:20%;"><?php echo $form->label('Email') ?></td>
                         <td>
-                            <?php echo Form::input('email', Form::setValue('email'), " id='email' ");?>
+                            <?php echo $form->input('email', $form->setValue('email'), " id='email' ");?>
                         </td>
                     </tr>
                     <tr>
-                        <td><?php echo Form::label('Password') ?></td>
+                        <td><?php echo $form->label('Password') ?></td>
                         <td>
-                            <?php echo Form::password('password', '', " id='password' ") ?>
+                            <?php echo $form->password('password', '', " id='password' ") ?>
                         </td>
                     </tr>
                     <tr>
-                        <td><?php echo Form::label('Confirm') ?></td>
+                        <td><?php echo $form->label('Confirm') ?></td>
                         <td>
-                            <?php echo Form::password('confirm_password', '', " id='confirm' ") ?>
+                            <?php echo $form->password('confirm_password', '', " id='confirm' ") ?>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <?php echo Form::checkbox('agreement', 1, Form::setValue('agreement'), " id='agreement' ") ?>
+                            <?php echo $form->checkbox('agreement', 1, $form->setValue('agreement'), " id='agreement' ") ?>
 
                             <label for="agreement">I agree terms and conditions.</label>
                         </td>
@@ -121,7 +123,7 @@ function parseNode(obj, element, child){
                     <tr>
                         <td></td>
                         <td>
-                            <?php echo Form::submit('dopost', 'Do Post', ' ') ?>
+                            <?php echo $form->submit('dopost', 'Do Post', ' ') ?>
                         </td>
                     </tr>
                     <tr>
@@ -129,7 +131,7 @@ function parseNode(obj, element, child){
                     </tr>
                 </table>
 
-            <?php echo Form::close(); ?>
+            <?php echo $form->close(); ?>
             
         </section>
         <section>

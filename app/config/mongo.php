@@ -18,8 +18,6 @@ $mongo = array(
 	'username' => 'root',
 	'password' => '123456',
 	'dsn' 	   => '', // or dsn mongodb://connectionString
-
-	// Safe Queries  ( Writing speed and safety options )
 	/* 
 	| 
 	| Options:
@@ -40,11 +38,9 @@ $mongo = array(
 	|
 	|   @link http://www.php.net/manual/en/mongo.writeconcerns.php
 	*/ 
+	'options' => array('w' => 0, 'j' => 1),
 
-	'query_safety' => array('w' => 0, 'j' => 1),
-
-	 // Connection Flag
-	'dbname_flag' => false,  // If you are having connection problems try change set to true. mongodb://[username:password@]/host/{dbname} 
+	 // Removed the "persist" option, as all connections are now persistent. 
 );
 
 /* End of file mongo.php */

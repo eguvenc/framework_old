@@ -1,22 +1,29 @@
 <?php
 
-Class Hello_Scheme extends Controller {    
-                                      
-    function __construct()
-    {
-    	parent::__construct();
-    }
+/**
+ * $c hello_scheme
+ * @var Controller
+ */
+$c = new Controller(function(){
+    // __construct
+});
 
-    function index()
-    { 
-        tpl('default', function(){
-            $this->set('title', 'Hello Scheme');
-            $this->set('name', 'Obullo');
+$c->func('index',function() use($c){
+    
+    new Html;
+    new Url;
+    
+    $c->tpl('default', function() use($c) {
 
-            $this->scheme('general')->view('hello_scheme');
-        });
-    }
-}
+        $this->set('name', 'Obullo');
+        $this->set('title', 'Hello Scheme World !');
+        $this->set('head', $this->html->css('welcome.css'));
+
+        $this->getScheme($c->view('hello_scheme', false));
+
+    });
+});
+
 
 /* End of file hello_scheme.php */
 /* Location: .public/tutorials/controller/hello_scheme.php */

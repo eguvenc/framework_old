@@ -10,14 +10,12 @@
 */
 $sess = array(
 	'cookie_name' => 'ob_session',  // The name you want for the cookie
-	'expiration' => 7200,			// The number of SECONDS you want the session to last. By default sessions last 7200 seconds (two hours).
-									// Set to zero for no expiration.
+	'expiration' => 7200,			// The number of SECONDS you want the session to last. By default sessions last 7200 seconds (two hours). Set to zero for no expiration.
 	'expire_on_close' => false, 	// Whether to cause the session to expire automatically when the browser window is closed
 	'encrypt_cookie' => false,		// Whether to encrypt the cookie
-	'driver' => 'native', 			// native | database | mongo 
-	'db_var' => 'db',				// The database variable default is db
-
-	// 'db' => new Db()  // If driver database set db.
+	'driver' => 'database', 		// native | database | mongo 
+	'get' => new Get,				// Set input object
+	'database' => new Mongo_Db,  			// new Mongo_Db; // Set database object
 	'table_name' => 'ob_sessions',	// The name of the session database table
 	'match_ip' => false,			// Whether to match the user's IP address when reading the session data
 	'match_useragent' => true,		// Whether to match the User Agent when reading the session data

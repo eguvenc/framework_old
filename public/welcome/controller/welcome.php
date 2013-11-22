@@ -1,29 +1,23 @@
 <?php
 
-Class Welcome extends Controller {
+/**
+ * $c welcome
+ * @var Controller
+ */
+$c = new Controller(function(){
+    // __construct
+	new Url;
+	new Html;
+});
 
-    function __construct()
-    {
-        parent::__construct();
+$c->func('index', function() use($c){
 
-        // new Acl();
-        // 
-        // new Db('db');        
-        // 
-        // print_r($this->db->get('users')->resultArray());
-        // var_dump($this->ftp);
-
-        // echo Form::open('asdas/sadasd', " class='asd ' "); 
-
-    }
+    $c->view('welcome', function() use($c) {
+        $this->set('name', 'Obullo');
+        $this->set('footer', $c->tpl('footer', false));
+    });
     
-    public function index()
-    {   
-        view('welcome', function(){
-            $this->set('name', 'Obullo');
-        }); 
-    }
-}
+});
 
 /* End of file welcome.php */
 /* Location: .public/welcome/controller/welcome.php */

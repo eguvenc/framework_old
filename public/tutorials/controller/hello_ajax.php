@@ -1,40 +1,47 @@
 <?php
 
-Class Hello_Ajax extends Controller {    
-                                      
-    function __construct()
-    {        
-        parent::__construct();
+/**
+ * $c hello_ajax
+ * @var Controller
+ */
+$c = new Controller(function(){});
 
-        new Model('user', 'users');
-    }         
+$c->func('index', function() use($c){
 
-    function index()
-    {        
-        view('hello_ajax');
-    }
-    
-    function doPost()
-    {   
-        $this->user->email = Get::post('email');
-        $this->user->password = Get::post('password');
+    new Html;
+    new Url;
 
-        $this->user->setRule('confirm_password', array('rules' => 'required|matches(password)'));
-        $this->user->setRule('agreement', array('label' => 'User Agreement', 'rules' => '_int(1)|required'));
+    $c->view('hello_ajax');
+});
 
-        $this->user->func('save',function() { 
-            return $this->isValid();
-        });
+$c->func('dopost', function(){
 
-        $this->user->save();
+    new Model('user', 'users');
 
-        header('Cache-Control: no-cache, must-revalidate');
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-        header('Content-type: application/json;charset=UTF-8');
+    $get = new Get;
+    $this->user->email = $get->post('email');
+    $this->user->password = $get->post('password');
 
-        echo json_encode($this->user->output());
-    }
-}
+    $this->user->setRule('confirm_password', array('rules' => 'required|matches(password)'));
+    $this->user->setRule('agreement', array('label' => 'User Agreement', 'rules' => '_int(1)|required'));
+
+    $this->user->func('save',function() { 
+        if($this->isValid())
+        {
+            $this->password = md5($this->values('password'));
+            return $this->db->insert('users', $this);
+        }
+        return false;
+    });
+
+    $this->user->save();
+
+    header('Cache-Control: no-cache, must-revalidate');
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+    header('Content-type: application/json;charset=UTF-8');
+
+    echo json_encode($this->user->output());
+});
 
 /* End of file hello_ajax.php */
 /* Location: .public/tutorials/controller/hello_ajax.php */

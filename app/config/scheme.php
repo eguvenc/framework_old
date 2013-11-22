@@ -13,21 +13,26 @@
 | Prototype
 | -------------------------------------------------------------------
 |
-|	$scheme['general'] = function(){
+| $scheme = array(
 |
-|		$this->set('header', tpl('header',false));
-|		$this->set('footer', tpl('footer',false));
-|
-|	};
+|	 'default' => function($file)
+|	 {
+		 $this->set('header', getInstance()->tpl('header',false))
+|	     $this->set('content', $file);
+|	     $this->set('footer', getInstance()->tpl('footer',false));
+|	 },
+| );
 |
 */
-$scheme['general'] = function($filename){
 
-	$this->set('header', tpl('header',false));
-	$this->set('content', view($filename, false));
-	$this->set('footer', tpl('footer',false));
-	
-};
+$scheme = array(
+
+	'default' => function($file)
+	{
+	    $this->set('content', $file);
+	    $this->set('footer', getInstance()->tpl('footer',false));
+	},
+);
 
 /* End of file scheme.php */
 /* Location: ./app/config/scheme.php */

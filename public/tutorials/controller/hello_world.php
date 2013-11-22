@@ -1,26 +1,30 @@
 <?php
 
-Class Hello_World extends Controller {    
-                                      
-    function __construct()
-    {
-    	parent::__construct();
+/**
+ * $c hello_world
+ * @var Controller
+ */
+$c = new Controller(function(){
+    // __construct
+});
 
-        new Captcha();
+$c->func('index', function() use($c){
 
-        $this->captcha->create();
+	new Sess;
+	// $this->sess->set('tess','aslkdjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+	// var_dump($this->db->resultArray());
 
-        echo $this->captcha->getImageUrl();
-    }
+	echo $this->sess->get('tess');
 
-    function index()
-    {
-        view('hello_world', function() {
-            $this->set('name', 'Obullo');
-            $this->set('footer', tpl('footer', false));
-        });
-    }
-}
+	// new Mongo_Db;
+	// $this->mongo->get('users');
+
+    $c->view('hello_world', function() use($c) {
+        $this->set('name', 'Obullo');
+        $this->set('footer', $c->tpl('footer', false));
+    });
+    
+});
 
 /* End of file hello_world.php */
 /* Location: .public/tutorials/controller/hello_world.php */

@@ -2,21 +2,23 @@
 <html>
     <head>
         <meta charset="utf-8" />
-            <?php echo Html::css('welcome.css') ?>
+            <?php echo $this->html->css('welcome.css') ?>
         <title>Odm Tutorial</title>
     </head>
 
     <body>
         <header>
-            <?php echo Url::anchor('/', Html::img('logo.png', ' alt="Obullo" ')) ?>
+            <?php echo $this->url->anchor('/', $this->html->img('logo.png', ' alt="Obullo" ')) ?>
         </header>
         
-        <h1>Odm Tutorial</h1>
-        <h2><?php echo Url::anchor('tutorials/hello_ajax', 'Ajax Tutorial') ?></h2>
+        <h1>Hello Odm</h1>
+        <h2><?php echo $this->url->anchor('tutorials/hello_ajax', 'Ajax Tutorial') ?></h2>
 
         <section>
             <?php
-                if(Get::post('dopost'))
+                $get = new Get;
+
+                if($get->post('dopost'))
                 {
                     echo $this->user->messages('errorMessage');
                 }
@@ -30,55 +32,57 @@
         <section>
 
             <?php
-            echo Form::open('tutorials/hello_odm/dopost', array('method' => 'POST')) ?>
+            $form = new Form();
+
+            echo $form->open('tutorials/hello_odm/dopost', array('method' => 'POST')) ?>
 
                 <table width="100%">
                     <tr>
-                        <td style="width:20%;"><?php echo Form::label('Email') ?></td>
+                        <td style="width:20%;"><?php echo $form->label('Email') ?></td>
                         <td><?php 
-                            echo Form::error('email');
-                            echo Form::input('email', Form::setValue('email'), " id='email' ");
+                            echo $form->error('email');
+                            echo $form->input('email', $form->setValue('email'), " id='email' ");
                             ?></td>
                     </tr>
                     <tr>
-                        <td><?php echo Form::label('Password') ?></td>
+                        <td><?php echo $form->label('Password') ?></td>
                         <td><?php 
-                            echo Form::error('password');
-                            echo Form::password('password', '', " id='password' ");
+                            echo $form->error('password');
+                            echo $form->password('password', '', " id='password' ");
                             ?></td>
                     </tr>
                     <tr>
-                        <td><?php echo Form::label('Confirm') ?></td>
+                        <td><?php echo $form->label('Confirm') ?></td>
                         <td><?php 
-                            echo Form::error('confirm_password');
-                            echo Form::password('confirm_password', '', " id='confirm' ");
+                            echo $form->error('confirm_password');
+                            echo $form->password('confirm_password', '', " id='confirm' ");
                             ?></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td><?php
-                            echo Form::error('agreement');
-                            echo Form::checkbox('agreement', 1, Form::setValue('agreement'), " id='agreement' ");
-                            echo Form::label('I agree terms and conditions', 'agreement');
+                            echo $form->error('agreement');
+                            echo $form->checkbox('agreement', 1, $form->setValue('agreement'), " id='agreement' ");
+                            echo $form->label('I agree terms and conditions', 'agreement');
                             ?></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><?php echo Form::submit('dopost', 'Do Post') ?></td>
+                        <td><?php echo $form->submit('dopost', 'Do Post') ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">&nbsp;</td>
                     </tr>
                     </table>
                 
-                <?php echo Form::close() ?>
+                <?php echo $form->close() ?>
 
                     <h2>Test Results</h2>
                     <?php if(isset($this->user) && is_object($this->user)) { ?>
 
                         <section>
-                            <h3>Form::error('email')</h3>
-                            <pre><?php echo Form::error('email') ?></pre>
+                            <h3>$form->error('email')</h3>
+                            <pre><?php echo $form->error('email') ?></pre>
 
                             <h3>print_r($this->user->output())</h3>
                             <pre><?php print_r($this->user->output()) ?></pre>

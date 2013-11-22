@@ -1,30 +1,29 @@
 <?php
 
-Class Hello_hmvc extends Controller {
-                                      
-    function __construct()
-    {        
-        parent::__construct();
-    }         
+/**
+ * $c hello_hmvc
+ * @var Controller
+ */
+$c = new Controller(function(){
+    // __construct
+});
 
-    function index()
-    {  
-        view('hello_hmvc', function(){
-
-            $response_a = Request::get('tutorials/hello_hmvc/test/1/2/3');
-            $response_b = Request::get('tutorials/hello_hmvc/test/4/5/6');
-
-            $this->set('response_a', $response_a);
-            $this->set('response_b', $response_b);
-            $this->set('name', 'Obullo');
-        });
-    }
+$c->func('index',function() use($c){
     
-    function test($arg1 = '', $arg2 = '', $arg3 = '')
-    {
-        echo '<pre>Response: '.$arg1 .' - '.$arg2. ' - '.$arg3.'</pre>';   
-    }
-}
+    new Url;
+    new Html;
+	new Request;
+
+    $c->view('hello_hmvc', function() use($c){
+
+        $this->set('response_a', $this->request->get('tutorials/hello_dummy/test/1/2/3'));
+        $this->set('response_b', $this->request->get('tutorials/hello_dummy/test/4/5/6'));
+
+        $this->set('name', 'Obullo');
+        $this->set('footer', $c->tpl('footer', false));
+
+    });
+});
 
 /* End of file hello_hmvc.php */
 /* Location: .public/tutorials/controller/hello_hmvc.php */

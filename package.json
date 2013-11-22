@@ -8,6 +8,7 @@
         "response" : "*",
         "schema_mysql" : "*",
         "sess_native": "*",
+        "sess_database": "*",
         "view" : "*",
         "validator" : "*"
   },
@@ -22,8 +23,6 @@
         "output": "Output",
         "router": "Router",
         "security": "Security",
-        "sess_native": "Sess_Native",
-        "sess_database": "Sess_Database",
         "sess_mongo": "Sess_Mongo",
         "uri": "Uri",
         "view": "View",
