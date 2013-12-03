@@ -10,21 +10,18 @@ $c = new Controller(function(){
 
 $c->func('index', function() use($c){
 
-	new Sess;
-	// $this->sess->set('tess','aslkdjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
-	// var_dump($this->db->resultArray());
+	// new Model('users');
 
-	echo $this->sess->get('tess');
+	// $this->users->syncTable();
 
-	// new Mongo_Db;
-	// $this->mongo->get('users');
+	// $this->users2->createTable();
 
     $c->view('hello_world', function() use($c) {
         $this->set('name', 'Obullo');
         $this->set('footer', $c->tpl('footer', false));
     });
     
-});
+});   
 
 /* End of file hello_world.php */
 /* Location: .public/tutorials/controller/hello_world.php */

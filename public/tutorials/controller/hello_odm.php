@@ -8,6 +8,7 @@ $c = new Controller(function(){
     // __construct
     new Model('user', 'users');
 
+    new Get;
     new Url;
     new Html;
 });
@@ -23,13 +24,15 @@ $c->func('index', function() use($c){
 
 $c->func('doPost', function() use($c){
 
-    $get = new Get;
-    $this->user->email    = $get->post('email');
-    $this->user->password = $get->post('password');
+    $this->user->email    = $this->get->post('email');
+    $this->user->password = $this->get->post('password');
 
-    // set non schema rules
+    //--------------------- set non schema rules
+    
     $this->user->setRule('confirm_password', array('rules' => 'required|matches(password)'));
     $this->user->setRule('agreement', array('label' => 'User Agreement', 'rules' => '_int(1)|required'));
+    
+    //--------------------- set non schema rules
 
     $this->user->func('save', function() {
         if ($this->isValid())

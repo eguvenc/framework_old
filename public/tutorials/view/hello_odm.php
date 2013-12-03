@@ -32,7 +32,7 @@
         <section>
 
             <?php
-            $form = new Form();
+            $form = new Form;
 
             echo $form->open('tutorials/hello_odm/dopost', array('method' => 'POST')) ?>
 

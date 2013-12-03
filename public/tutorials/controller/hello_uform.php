@@ -22,8 +22,6 @@ Class Hello_Uform extends Controller {
                 'rules' => 'required|xssClean'
                 )
             );
-            
-
 
             $this->addRow(); 
             $this->addCol(array(

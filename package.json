@@ -15,15 +15,14 @@
   "components": {
         "core": "Obullo",
         "config": "Config",
-        "db": "Database_Pdo",
         "exception": "Exceptions",
         "lingo": "Lingo",
         "log": "Log_Write",
         "hooks": "Hooks",
         "output": "Output",
         "router": "Router",
+        "sess": "Sess",
         "security": "Security",
-        "sess_mongo": "Sess_Mongo",
         "uri": "Uri",
         "view": "View",
         "validator": "Validator"

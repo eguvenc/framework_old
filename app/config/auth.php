@@ -9,7 +9,10 @@
 */
 $auth = array(
     
-    'db' => new Db(),      // Set Database,
+    'db' => new Db,      // Set Database,
+    'sess' => new Sess,  // Session Object
+    'get' => new Get,    // Input Object
+    'bcrypt' => new Bcrypt;  // Bcrypt password hash / verify object
     'session_prefix' => 'auth_',      // Set a prefix to prevent collisions with original session object.
     'username_col' => 'user_email',   // The name of the table field that contains the username.
     'password_col' => 'user_password', // The name of the table field that contains the password.

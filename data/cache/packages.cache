@@ -90,15 +90,15 @@ $packages['dependencies']['view'] = array('version' => '0.0.1', 'component' => '
 | Prototype
 | -------------------------------------------------------------------
 |
-| $component = getComponent('db');
+| $component = getComponent('validator');
 |
 */
 $packages['components']['core'] = "Obullo";
 $packages['components']['config'] = "Config";
-$packages['components']['db'] = "Database_Pdo";
 $packages['components']['exception'] = "Exceptions";
 $packages['components']['router'] = "Router";
 $packages['components']['security'] = "Security";
+$packages['components']['sess'] = "Sess";
 $packages['components']['uri'] = "Uri";
 $packages['components']['output'] = "Output";
 $packages['components']['lingo'] = "Lingo";
