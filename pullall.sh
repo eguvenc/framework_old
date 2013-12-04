@@ -11,6 +11,8 @@ for file in packages/*; do
 		if [ $x != 'packages' ] && [ $x != 'index.html' ]; then
 			cd /var/www/framework/packages/$x
 			echo $x 'pulled';
+			git remote set-url origin git@github.com:obullo/$x.git
+			git checkout master
 			git pull origin master
 		fi;
 	done

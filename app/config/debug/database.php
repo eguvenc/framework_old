@@ -10,13 +10,13 @@
 */
 $database = array(
 
-	'db' => new Pdo_Mysql(array(
+	'db' => new Pdo_Mysql(array(    // or new Mongo_Db;
 		'variable' => 'db',
 		'hostname' => 'localhost',
 		'username' => 'root',
 		'password' => '123456',
 		'database' => 'test',
-		'driver'   => '',
+		'driver'   => 'mysql',
 		'prefix'   => '',
 		'dbh_port' => '',
 		'char_set' => 'utf8',
