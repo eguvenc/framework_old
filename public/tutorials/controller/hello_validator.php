@@ -27,7 +27,8 @@ $c->func('index', function() use($c){
             if($this->form->run())
             {        
                 $this->form->setNotice('Validation Success !');  // Set flash notice using Session Class.
-                $this->url->redirect('tutorials/hello_validator');
+
+                $this->url->redirect('tutorials/hello_validator'); // Redirect to user same page.
             }
         }
 

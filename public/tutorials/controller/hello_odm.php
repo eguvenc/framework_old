@@ -33,7 +33,7 @@ $c->func('index', function() use($c){
             $this->user->func('save', function() {
                 if ($this->isValid())
                 {
-                    $this->password = md5($this->values('password'));
+                    $this->password = md5($this->getValue('password'));
                     return $this->db->insert('users', $this);
                 }
                 return false;

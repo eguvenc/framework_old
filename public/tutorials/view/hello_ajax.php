@@ -89,33 +89,31 @@ function parseNode(obj, element, child){
         <h1>Hello Ajax</h1>
         <section>
             <?php
-            $form = new Form;
-
-            echo $form->open('tutorials/hello_ajax/dopost.json', array('method' => 'POST', 'id' => 'odm_tutorial')) ?>
+            echo $this->form->open('tutorials/hello_ajax/dopost.json', array('method' => 'POST', 'id' => 'odm_tutorial')) ?>
 
                 <table width="100%">
                     <tr>
-                        <td style="width:20%;"><?php echo $form->label('Email') ?></td>
+                        <td style="width:20%;"><?php echo $this->form->label('Email') ?></td>
                         <td>
-                            <?php echo $form->input('email', $form->setValue('email'), " id='email' ");?>
+                            <?php echo $this->form->input('email', $this->form->setValue('email'), " id='email' ");?>
                         </td>
                     </tr>
                     <tr>
-                        <td><?php echo $form->label('Password') ?></td>
+                        <td><?php echo $this->form->label('Password') ?></td>
                         <td>
-                            <?php echo $form->password('password', '', " id='password' ") ?>
+                            <?php echo $this->form->password('password', '', " id='password' ") ?>
                         </td>
                     </tr>
                     <tr>
-                        <td><?php echo $form->label('Confirm') ?></td>
+                        <td><?php echo $this->form->label('Confirm') ?></td>
                         <td>
-                            <?php echo $form->password('confirm_password', '', " id='confirm' ") ?>
+                            <?php echo $this->form->password('confirm_password', '', " id='confirm' ") ?>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <?php echo $form->checkbox('agreement', 1, $form->setValue('agreement'), " id='agreement' ") ?>
+                            <?php echo $this->form->checkbox('agreement', 1, $this->form->setValue('agreement'), " id='agreement' ") ?>
 
                             <label for="agreement">I agree terms and conditions.</label>
                         </td>
@@ -123,7 +121,7 @@ function parseNode(obj, element, child){
                     <tr>
                         <td></td>
                         <td>
-                            <?php echo $form->submit('dopost', 'Do Post', ' ') ?>
+                            <?php echo $this->form->submit('dopost', 'Do Post', ' ') ?>
                         </td>
                     </tr>
                     <tr>
@@ -131,7 +129,7 @@ function parseNode(obj, element, child){
                     </tr>
                 </table>
 
-            <?php echo $form->close(); ?>
+            <?php echo $this->form->close(); ?>
             
         </section>
         <section>

@@ -181,3 +181,6 @@
 [submodule "packages/captcha"]
 	path = packages/captcha
 	url = git://github.com/obullo/captcha.git
+[submodule "packages/cache"]
+	path = packages/cache
+	url = git://github.com/obullo/cache.git
