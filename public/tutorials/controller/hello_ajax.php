@@ -4,7 +4,9 @@
  * $c hello_ajax
  * @var Controller
  */
-$c = new Controller(function(){});
+$c = new Controller(function(){
+    // _construct
+});
 
 $c->func('index', function() use($c){
 
@@ -16,16 +18,20 @@ $c->func('index', function() use($c){
 
 $c->func('dopost', function(){
 
+    new Get;
     new Model('user', 'users');
 
-    $get = new Get;
-    $this->user->email = $get->post('email');
-    $this->user->password = $get->post('password');
+    $this->user->email    = $this->get->post('email');
+    $this->user->password = $this->get->post('password');
 
-    $this->user->setRule('confirm_password', array('rules' => 'required|matches(password)'));
-    $this->user->setRule('agreement', array('label' => 'User Agreement', 'rules' => '_int(1)|required'));
+    //--------------------- set non schema rules
+    
+    $this->user->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
+    $this->user->setRules('agreement', 'User Agreement', '_int|required|exactLen(1)');
+    
+    //---------------------
 
-    $this->user->func('save',function() { 
+    $this->user->func('save', function() { 
         if($this->isValid())
         {
             $this->password = md5($this->values('password'));

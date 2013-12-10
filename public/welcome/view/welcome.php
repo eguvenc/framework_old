@@ -53,6 +53,7 @@
                 <li><?php echo $this->url->anchor('/tutorials/hello_world', 'Hello World') ?></li>
                 <li><?php echo $this->url->anchor('/tutorials/hello_scheme', 'Hello Scheme') ?></li>
                 <li><?php echo $this->url->anchor('/tutorials/hello_odm', 'Hello Odm') ?></li>
+                <li><?php echo $this->url->anchor('/tutorials/hello_validator', 'Hello Validator') ?></li>
                 <li><?php echo $this->url->anchor('/tutorials/hello_ajax', 'Hello Ajax') ?></li>
                 <li><?php echo $this->url->anchor('/tutorials/hello_task', 'Hello Task') ?></li>
                 <li><?php echo $this->url->anchor('/tutorials/hello_hmvc', 'Hello Hmvc') ?></li>

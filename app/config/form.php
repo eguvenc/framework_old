@@ -11,16 +11,19 @@
 | Prototype
 | -------------------------------------------------------------------
 | 
-| $form['templates']['name'] = array(
-|	 	'formClass' => '_formElement>',
-|		'button' => '<div class="_buttonElement">%s</span>',
-| );
+| $form = array(
+|	'templates' => array(
+|		'default' => array(
+|			'formClass' => '_formElement', .. );
 |
 */
+
 $form = array(
 
-	// Global template switch.
+	// Settings
 	'use_template' => false,
+	'get' => new Get,    // Input Object
+	'validator' => new Validator, // Validator Object
 
 	// Form Templates
 	'templates' => array(
@@ -44,14 +47,13 @@ $form = array(
 		),
 	),
 
-	// Notification Errors ( Customize form input and notification errors. )
+	// Notifications
 	'errors' => array(
 		'error' => '<div class="_inputError">%s</div>',
 		'errorMessage' => '<div class="notification error">%s</div>',
 		'success' => '<div class="notification success">%s</div>'
 	)
 );
-
 
 /* End of file form.php */
 /* Location: .app/config/form.php */

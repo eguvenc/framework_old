@@ -6,50 +6,50 @@
  */
 $c = new Controller(function(){
     // __construct
+    
     new Model('user', 'users');
-
-    new Get;
+    new Get;            
     new Url;
     new Html;
+
 });
 
 $c->func('index', function() use($c){  
 
     $c->view('hello_odm', function() use($c) {
+
+        if($this->get->post('dopost'))
+        {
+            $this->user->email    = $this->get->post('email');
+            $this->user->password = $this->get->post('password');
+
+            //--------------------- set non schema rules
+            
+            $this->user->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
+            $this->user->setRules('agreement', 'User Agreement', '_int|required|exactLen(1)');
+            
+            //---------------------
+            
+            $this->user->func('save', function() {
+                if ($this->isValid())
+                {
+                    $this->password = md5($this->values('password'));
+                    return $this->db->insert('users', $this);
+                }
+                return false;
+            });
+
+            if($this->user->save())
+            {        
+                $this->user->setNotice('User saved successfully.');
+                $this->url->redirect('tutorials/hello_odm');
+            }
+        }
+
         $this->set('name', 'Obullo');
         $this->set('footer', $c->tpl('footer', false));
     });
 
-});
-
-$c->func('doPost', function() use($c){
-
-    $this->user->email    = $this->get->post('email');
-    $this->user->password = $this->get->post('password');
-
-    //--------------------- set non schema rules
-    
-    $this->user->setRule('confirm_password', array('rules' => 'required|matches(password)'));
-    $this->user->setRule('agreement', array('label' => 'User Agreement', 'rules' => '_int(1)|required'));
-    
-    //--------------------- set non schema rules
-
-    $this->user->func('save', function() {
-        if ($this->isValid())
-        {
-            $this->password = md5($this->values('password'));
-            return $this->db->insert('users', $this);
-        }
-        return false;
-    });
-
-    if($this->user->save())
-    {        
-        $this->user->setNotice('User saved successfully.');
-        $this->url->redirect('tutorials/hello_odm');
-    }
-
-    $c->view('hello_odm');
 });
 
 /* End of file hello_odm.php */

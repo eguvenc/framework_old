@@ -1,6 +1,6 @@
 
 {schemaName} = array(
-	'*' => array(),
+	'*' => array({colprefix}),
 	{content}
 );
  
