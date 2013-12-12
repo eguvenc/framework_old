@@ -11,7 +11,6 @@ $c = new Controller(function(){
     new Get;            
     new Url;
     new Html;
-
 });
 
 $c->func('index', function() use($c){  
@@ -42,6 +41,7 @@ $c->func('index', function() use($c){
             if($this->user->save())
             {        
                 $this->user->setNotice('User saved successfully.');
+                
                 $this->url->redirect('tutorials/hello_odm');
             }
         }

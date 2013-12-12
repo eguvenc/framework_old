@@ -18,16 +18,18 @@
 | -------------------------------------------------------------------
 | Prototype
 | -------------------------------------------------------------------
-| 
-| $autorun = array(function() { 
+| $autorun = array(
+|	'controller' => function(){
 |		$this->lingo->load('spanish');
-| });
+|	}
+| );
 |
 */
-$autorun = array(function(){
-
-});
-
+$autorun = array(
+	'controller' => function(){
+		
+	}
+);
 
 /* End of file autorun.php */
 /* Location: .app/config/autorun.php */

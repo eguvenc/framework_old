@@ -20,9 +20,9 @@ $c->func('index', function() use($c){
         if($this->get->post('dopost'))
         {
             $this->form->setRules('email', 'Email', 'required|validEmail');
-            $this->form->setRules('password', 'Password', 'required');
+            $this->form->setRules('password', 'Password', 'required|minLen(6)');
             $this->form->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
-            $this->form->setRules('agreement', 'User Agreement', '_int(1)|required');
+            $this->form->setRules('agreement', 'User Agreement', '_int|required');
 
             if($this->form->run())
             {        
