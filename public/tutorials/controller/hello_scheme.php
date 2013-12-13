@@ -20,7 +20,6 @@ $c->func('index',function() use($c){
         $this->set('head', $this->html->css('welcome.css'));
 
         $this->getScheme($c->view('hello_scheme', false));
-
     });
 });
 

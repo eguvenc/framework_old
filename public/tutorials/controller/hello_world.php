@@ -12,8 +12,6 @@ $c = new Controller(function(){
 $c->func('index', function() use($c){
 
 	// new Model('users');
-	$this->sess->set('test', 'etettete');
-	echo $this->sess->get('test');
 	
 	// $this->users->syncTable();
 	// $this->users2->createTable();

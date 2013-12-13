@@ -11,7 +11,7 @@
 $sess = array(
 	
 	'cookie_name' => 'ob_session',  // The name you want for the cookie
-	'expiration' => 10,			// The number of SECONDS you want the session to last. By default sessions last 7200 seconds (two hours). Set to zero for no expiration.
+	'expiration' => 7200,			// The number of SECONDS you want the session to last. By default sessions last 7200 seconds (two hours). Set to zero for no expiration.
 	'expire_on_close' => false, 	// Whether to cause the session to expire automatically when the browser window is closed
 	'encrypt_cookie' => false,		// Whether to encrypt the cookie
 	'driver' => new Sess_Native, 	// Sess_Database
