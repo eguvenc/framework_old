@@ -6,12 +6,15 @@
  */
 $c = new Controller(function(){
     // __construct
+    
 });
 
 $c->func('index', function() use($c){
 
 	// new Model('users');
-
+	$this->sess->set('test', 'etettete');
+	echo $this->sess->get('test');
+	
 	// $this->users->syncTable();
 	// $this->users2->createTable();
 	// 

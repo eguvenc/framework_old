@@ -27,7 +27,7 @@
 */
 $autorun = array(
 	'controller' => function(){
-		
+		new Sess;
 	}
 );
 

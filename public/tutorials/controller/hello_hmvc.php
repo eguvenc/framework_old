@@ -14,6 +14,10 @@ $c->func('index',function() use($c){
     new Html;
 	new Request;
 
+    print_r($_SESSION);
+
+    echo $this->sess->get('test');
+
     $c->view('hello_hmvc', function() use($c){
 
         $this->set('response_a', $this->request->get('tutorials/hello_dummy/test/1/2/3'));

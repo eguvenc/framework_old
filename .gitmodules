@@ -184,3 +184,6 @@
 [submodule "packages/cache"]
 	path = packages/cache
 	url = git://github.com/obullo/cache.git
+[submodule "packages/sess_cache"]
+	path = packages/sess_cache
+	url = git://github.com/obullo/sess_cache.git
