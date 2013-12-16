@@ -11,9 +11,9 @@ $c = new Controller(function(){
 
 $c->func('index', function() use($c){
 
-	// new Model('users');
+	new Model('users');
 	
-	// $this->users->syncTable();
+	$this->users->syncTable();
 	// $this->users2->createTable();
 	// 
 
