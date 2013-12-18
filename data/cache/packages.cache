@@ -65,11 +65,11 @@ $packages['dependencies']['sess_native'] = array('version' => '0.0.1', 'componen
 $packages['dependencies']['sess_database'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['simple_captcha'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['schema_mysql'] = array('version' => '0.0.1', 'component' => 'library');
+$packages['dependencies']['tag_cloud'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['view'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['string'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['text'] = array('version' => '0.0.1', 'component' => 'helper');
 $packages['dependencies']['task']  = array('version' => '0.0.1', 'component' => 'helper');
-$packages['dependencies']['variables'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['validator'] = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['uri']  = array('version' => '0.0.1', 'component' => 'library');
 $packages['dependencies']['url']  = array('version' => '0.0.1', 'component' => 'helper');
