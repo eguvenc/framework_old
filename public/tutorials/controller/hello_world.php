@@ -13,10 +13,6 @@ $c->func('index', function() use($c){
 
 	new Model('users');
 	
-	$this->users->syncTable();
-	// $this->users2->createTable();
-	// 
-
     $c->view('hello_world', function() use($c) {
         $this->set('name', 'Obullo');
         $this->set('footer', $c->tpl('footer', false));
