@@ -6,12 +6,10 @@
  */
 $c = new Controller(function(){
     // __construct
-    
+
 });
 
 $c->func('index', function() use($c){
-
-	new Model('users');
 	
     $c->view('hello_world', function() use($c) {
         $this->set('name', 'Obullo');
