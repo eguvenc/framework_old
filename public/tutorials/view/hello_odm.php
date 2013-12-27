@@ -74,7 +74,7 @@
                 <?php echo $this->form->close() ?>
 
                     <h2>Test Results</h2>
-                    <?php if(isset($this->user) && is_object($this->user)) { ?>
+                    <?php if(isset($this->user) AND is_object($this->user)) { ?>
 
                         <section>
                             <h3>print_r($this->user->output())</h3>

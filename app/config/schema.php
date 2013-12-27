@@ -13,14 +13,15 @@
 |
 | $schema = array(
 |
-|	'table_suffix' => ' ENGINE=InnoDB DEFAULT CHARSET=utf8;',
+|	'use_column_prefix' => true,
+|	'mysql_table_suffix' => ' ENGINE=InnoDB DEFAULT CHARSET=utf8;',
 |
 | );
 |
 */
 
 $schema = array(
-
+	'use_column_prefix' => true,  // use column prefix in schemas as default
 	'mysql_table_suffix' => ' ENGINE=InnoDB DEFAULT CHARSET=utf8;',  // Sql creator table suffix
 );
 

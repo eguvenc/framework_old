@@ -13,13 +13,12 @@ $c->func('index',function() use($c){
     new Html;
     new Url;
     
-    $c->tpl('default', function() use($c) {
+    $c->view('hello_scheme', function() use($c) {
 
         $this->set('name', 'Obullo');
         $this->set('title', 'Hello Scheme World !');
-        $this->set('head', $this->html->css('welcome.css'));
 
-        $this->getScheme($c->view('hello_scheme', false));
+        $this->getScheme('default');
     });
 });
 

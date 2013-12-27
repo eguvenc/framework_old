@@ -15,10 +15,9 @@
 |
 | $scheme = array(
 |
-|	 'default' => function($file)
+|	 'default' => function()
 |	 {
 		 $this->set('header', getInstance()->tpl('header',false))
-|	     $this->set('content', $file);
 |	     $this->set('footer', getInstance()->tpl('footer',false));
 |	 },
 | );
@@ -27,9 +26,8 @@
 
 $scheme = array(
 
-	'default' => function($file)
+	'default' => function()
 	{
-	    $this->set('content', $file);
 	    $this->set('footer', getInstance()->tpl('footer',false));
 	},
 );
