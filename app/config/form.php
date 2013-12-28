@@ -47,11 +47,12 @@ $form = array(
 		),
 	),
 
-	// Notifications
-	'errors' => array(
+	// Form Notifications
+	'notifications' => array(
 		'error' => '<div class="_inputError">%s</div>',
 		'errorMessage' => '<div class="notification error">%s</div>',
-		'success' => '<div class="notification success">%s</div>'
+		'successMessage' => '<div class="notification success">%s</div>',
+		'infoMessage' => '<div class="notification info">%s</div>',
 	)
 );
 
