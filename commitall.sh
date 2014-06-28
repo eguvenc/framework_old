@@ -2,14 +2,14 @@
 ssh-agent;
 ssh-add;
 
-echo 'Commiting all packages !!';
+echo 'Commiting all versions !!';
 
-for file in packages/*; do
+for file in obullo/*; do
 	arr=$(echo $file | tr "/" "\n")
 	for x in $arr
 	do
-		if [ $x != 'packages' ] && [ $x != 'index.html' ]; then
-			cd /var/www/framework/packages/$x
+		if [ $x != 'obullo' ] && [ $x != 'index.html' ]; then
+			cd /var/www/framework/obullo/$x
 			echo $x 'updated';
 			git commit -am 'updated package.'
 			git push origin master
@@ -17,6 +17,6 @@ for file in packages/*; do
 	done
 done
 
-# cd /var/www/obullo-2.0/packages/$1
+# cd /var/www/framework/obullo/$1
 # git commit -am 'updated package.json'
 # git push origin master

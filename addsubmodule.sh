@@ -7,16 +7,16 @@
 		exit 1;
 	fi;
 
-git submodule add git://github.com/obullo/$1.git packages/$1
+git submodule add git://github.com/obullo/$1.git obullo/$1
 git submodule init
 git submodule update
-git commit -am 'added new submodule package/ '$1
+git commit -am 'added new submodule to this folder obullo/ '$1
 git push origin master
 
-cd /var/www/framework/packages/$1
+cd /var/www/framework/obullo/$1
 git checkout master
 git remote set-url origin git@github.com:obullo/$1.git
 chmod -R 777 /var/www/framework
 cd /var/www/framework
 
-echo 'Added new submodule '$1;
+echo 'Added new submodule called '$1;
