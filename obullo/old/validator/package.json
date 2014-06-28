@@ -1,0 +1,48 @@
+{
+  "name": "validator",
+  "description": "Form Validator class, validate forms, inputs, schemas.",
+  "version": "0.0.1",
+  "releases": ["0.0.1"],
+  "author": {
+    "name": "Obullo Team",
+    "email": "obulloframework@gmail.com",
+    "url": "https://github.com/obullo"
+  },
+  "component" : "library",
+  "dependencies": {
+    "log":"*",
+    "form": "*",
+    "uri": "*",
+    "locale":"*"
+  },
+  "keywords": [
+    "validator",
+    "validation",
+    "form validation",
+    "form",
+    "forms",
+    "input validation",
+    "filter"
+  ],
+  "homepage": "https://github.com/obullo/validator",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/validator.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/validator/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.4.0",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/eguvenc/validator/issues",
+    "email": "obulloframework@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

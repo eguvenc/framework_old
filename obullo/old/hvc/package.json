@@ -1,0 +1,45 @@
+{
+  "name": "hvc",
+  "description": "Hierarcial view controller class.",
+  "version": "0.0.1",
+  "releases": ["0.0.1"],
+  "author": {
+    "name": "Ersin Güvenç",
+    "email": "eguvenc@gmail.com",
+    "url": "https://github.com/eguvenc"
+  },
+  "component" : "library",
+  "dependencies": {
+    "log":"*",
+    "uri": "*",
+    "router": "*",
+    "config": "*",
+    "controller": "*"
+  },
+  "keywords": [
+    "hmvc",
+    "request",
+    "curl"
+  ],
+  "homepage": "https://github.com/obullo/hvc",
+  "repo": {
+    "type": "git",
+    "url": "git://github.com/obullo/hvc.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/hvc/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.4.0",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/hvc/issues",
+    "email": "obulloframework@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

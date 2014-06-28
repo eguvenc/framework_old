@@ -1,0 +1,121 @@
+<?php
+/*
+|-------------------------------------------------------------------
+| APPLICATION CONSTANTS
+|-------------------------------------------------------------------
+| This file specifies which APP constants should be loaded 
+| by default.
+*/
+define('OBULLO_VERSION', '2.0');
+/*
+|--------------------------------------------------------------------------
+| Choose Your Environment
+|--------------------------------------------------------------------------
+| This can be set to anything, but default usage is:
+|
+|     o local - Development Mode  ( Quick Debugging, show all php errors )
+|     o test  - Testing     ( Test mode, behaviours like Live )
+|     o prod  - Production  ( Production mode all errors  should be disabled from config.php )
+|
+*/
+define('ENV', 'local');
+/*
+|---------------------------------------------------------------
+| UNDERSTANDING ESSENTIAL CONSTANTS
+|---------------------------------------------------------------
+| DS          - The DIRECTORY SEPERATOR
+| EXT         - The file extension.  Typically ".php"
+| SELF        - The name of THIS file (typically "index.php")
+| FCPATH      - The full server path to this file
+| PHP_PATH    - The php path of your server
+| FPATH       - The full server path without file
+*/
+define('DS', DIRECTORY_SEPARATOR);
+define('EXT', '.php');
+define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+define('FCPATH', __FILE__);
+define('PHP_PATH', '/usr/bin/php'); 
+define('FPATH', dirname(__FILE__));
+/*
+|---------------------------------------------------------------
+| UNDERSTANDING APP CONSTANTS
+|---------------------------------------------------------------
+| ROOT        		- The root path of your server
+| ASSETS      		- The full server path to the "assets" folder
+| APP     	  		- The full server path to the "app" folder
+| DATA        		- The full server path to the "data" folder
+| CLASSES     		- The full server path to the user "classes" folder
+| TEMPLATES    		- The full server path to the user "templates" folder
+| PACKAGES    		- The full server path to the "packages" folder
+| PUBLIC_FOLDER		- The full "static" server path to the "public" folder
+| PRIVATE_FOLDER 	- The full "static" server path to the "private" folder
+| PUBLIC_DIR  		- The full "dynamic" server path to the "public" folder
+| PRIVATE_DIR 		- The full "static" server path to the "private" folder
+| TASK_FILE   		- The file name for $php task operations.
+| TASK   			- The full "static" path of the native cli task folder.
+| INDEX_PHP			- The path of your index.php file.
+*/
+define('ROOT',  realpath(dirname(__FILE__)) . DS);
+define('ASSETS',  ROOT .'assets'. DS);
+define('APP',  ROOT .'app'. DS);
+define('DATA',  ROOT .'data'. DS);
+define('CLASSES',  APP .'classes'. DS);
+define('TEMPLATES',  APP . 'templates'. DS);
+define('PUBLIC_FOLDER', ROOT .'public'. DS);
+define('PRIVATE_FOLDER', ROOT .'private'. DS);
+define('PUBLIC_DIR', (defined('STDIN')) ? APP : PUBLIC_FOLDER);
+define('PRIVATE_DIR', PRIVATE_FOLDER);
+define('TASK_FILE', 'task');
+define('TASK', PHP_PATH .' '. APP .'tasks'. DS .'cli'. DS);
+define('INDEX_PHP', 'index.php');
+/*
+|--------------------------------------------------------------------------
+| OBULLO CONSTANTS
+|--------------------------------------------------------------------------
+*/
+define('OBULLO',  ROOT .'obullo'. DS . OBULLO_VERSION . DS);
+define('OBULLO_PHP',  OBULLO .'Obullo'. DS .'Obullo.php');
+define('OBULLO_CONFIG',  OBULLO .'Config'. DS .'Config.php');
+define('OBULLO_CORE',  OBULLO .'Obullo'. DS .'Core.php');
+define('OBULLO_CONTAINER',  OBULLO .'Container'. DS .'Container.php');
+define('OBULLO_AUTOLOADER', OBULLO .'Obullo'. DS .'Autoloader.php');
+define('OBULLO_COMPONENTS', ROOT .'components.php');
+define('OBULLO_ROUTES', ROOT .'routes.php');
+define('OBULLO_PROVIDERS', ROOT .'providers.php');
+define('OBULLO_SERVICES', ROOT .'services.php');
+define('OBULLO_FILTERS', ROOT .'filters.php');
+define('OBULLO_CONTROLLER', OBULLO .'Controller'. DS .'Controller.php');
+/*
+|--------------------------------------------------------------------------
+| PDO CONSTANTS
+|--------------------------------------------------------------------------
+*/
+define('PARAM_NULL', 0); // null
+define('PARAM_INT', 1);  // integer
+define('PARAM_STR', 2);  // string
+define('PARAM_LOB', 3);  // integer  Large Object Data (lob)
+define('PARAM_STMT', 4);  // integer  Represents a recordset type ( Not currently supported by any drivers).
+define('PARAM_BOOL', 5);  // boolean                                
+define('PARAM_INOUT', -2147483648); // PDO::PARAM_INPUT_OUTPUT integer
+/*
+|--------------------------------------------------------------------------
+| LOG CONSTANTS
+|--------------------------------------------------------------------------
+*/
+define('LOGGER_FILE', 'file');
+define('LOGGER_SYSLOG', 'syslog');
+define('LOGGER_MONGO', 'mongo');
+define('LOGGER_QUEUE', 'queue');
+/*
+|---------------------------------------------------------------
+| NOTIFICATION CONSTANTS
+|---------------------------------------------------------------
+*/
+define('NOTICE_MESSAGE', 'message');
+define('NOTICE_ERROR', 0);
+define('NOTICE_SUCCESS', 1);
+define('NOTICE_WARNING', 2);
+define('NOTICE_INFO', 3);
+
+/* End of file constants */
+/* Location: .constants */

@@ -1,0 +1,38 @@
+{
+  "name": "logger",
+  "description": "Logger application log package.",
+  "version": "0.0.1",
+  "releases": ["0.0.1"],
+  "author": {
+    "name": "Obullo Team",
+    "email": "obulloframework@gmail.com",
+    "url": "https://github.com/obullo"
+  },
+  "dependencies": {},
+  "keywords": [
+    "logger",
+    "logging",
+    "log"
+  ],
+  "homepage": "https://github.com/obullo/logger",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/logger.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/logger/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.4.0",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/logger/issues",
+    "email": "obulloframework@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

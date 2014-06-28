@@ -1,0 +1,23 @@
+body
+{
+	background:#fff;
+	font-size:13px;
+	font-family:arial;
+}
+.page-header
+{
+	border-bottom-color:transparent;
+	margin-bottom:-10px;
+}
+table thead th
+{
+	text-align:left;
+}
+.control-label
+{
+	text-align:left !important;
+}
+a:focus
+{
+	outline:none;
+}

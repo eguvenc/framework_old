@@ -1,0 +1,43 @@
+{
+  "name": "pdo_cubrid",
+  "description": "Pdo cubrid database driver class.",
+  "version": "0.0.1",
+  "releases": ["0.0.1"],
+  "author": {
+    "name": "Obullo Team",
+    "email": "obulloframework@gmail.com",
+    "url": "https://github.com/obullo"
+  },
+  "component" : "library",
+  "dependencies": {
+    "db": "*",
+    "database_pdo": "*"
+  },
+  "keywords": [
+    "cubrid",
+    "pdo cubrid",
+    "pdo_cubrid",
+    "pdo driver"
+  ],
+  "homepage": "https://github.com/obullo/pdo_cubrid",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/pdo_cubrid.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/pdo_cubrid/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.4.0",
+    "extensions": ["pdo","pdo_cubrid"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/pdo_cubrid/issues",
+    "email": "obulloframework@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

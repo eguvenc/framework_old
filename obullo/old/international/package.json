@@ -1,0 +1,43 @@
+{
+  "name": "international",
+  "description": "This class sets the accepted language code ( en-US ), charsets ,language name, region and other things.",
+  "version": "0.0.1",
+  "releases": ["0.0.1"],
+  "author": {
+    "name": "Obullo Team",
+    "email": "obulloframework@gmail.com",
+    "url": "https://github.com/obullo"
+  },
+  "component" : "library",
+  "dependencies": {
+    "log":"*"
+  },
+  "keywords": [
+    "i18n",
+    "international",
+    "translation",
+    "localization",
+    "locale",
+  ],
+  "homepage": "https://github.com/obullo/translator",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/translator.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/translator/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.4.0",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/translator/issues",
+    "email": "obulloframework@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "task",
+  "description": "Task Helper, run cli tasks and follow debugs from command line.",
+  "version": "0.0.2",
+  "releases": ["0.0.1","0.0.2"],
+  "author": {
+    "name": "Obullo Team",
+    "email": "obulloframework@gmail.com",
+    "url": "https://github.com/obullo"
+  },
+  "component" : "helper",
+  "dependencies": {
+    "log":"*"
+  },
+  "shell" : {
+    "mkdir": "-p $APP/tasks/controller",
+    "chmod": "-R 777 $APP/tasks",
+    "cp": ["$PACKAGES/$NAME/$RELEASES/$VERSION/controllers/* $APP/tasks/controller", "$PACKAGES/$NAME/$RELEASES/$VERSION/src/task $ROOT/"]
+  },
+  "keywords": [
+    "task",
+    "debug",
+    "debugging",
+    "cli",
+    "cli log debug",
+    "log debug",
+    "follow debugs"
+  ],
+  "homepage": "https://github.com/obullo/task",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/task.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/task/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.4.0",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/task/issues",
+    "email": "obulloframework@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

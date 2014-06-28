@@ -1,0 +1,38 @@
+{
+  "name": "captcha",
+  "description": "Captcha class, create security image.",
+  "version": "0.0.1",
+  "releases": ["0.0.1"],
+  "author": {
+    "name": "Obullo Team",
+    "email": "obulloframework@gmail.com",
+    "url": "https://github.com/obullo"
+  },
+  "dependencies": {"log":"*","sess": "*"},
+  "shell" : {
+    "mkdir": "-p $DATA/temp/captcha",
+    "chmod": "-R 777 $DATA/temp/captcha",
+  },
+  "keywords": ["captcha","security","secure","cool","image"],
+  "homepage": "https://github.com/obullo/captcha",
+  "repo": {
+    "type": "git",
+    "url": "git://github.com/obullo/captcha.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/captcha/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.4.0",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/captcha/issues",
+    "email": "obulloframework@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

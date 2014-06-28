@@ -1,0 +1,47 @@
+{
+  "name": "utf8",
+  "description": "Provides utf8 multi-byte aware replacement string functions.",
+  "version": "0.0.1",
+  "releases": ["0.0.1"],
+  "author": {
+    "name": "Obullo Team",
+    "email": "obulloframework@gmail.com",
+    "url": "https://github.com/obullo"
+  },
+  "component" : "library",
+  "dependencies": {
+    "log":"*"
+  },
+  "keywords": [
+    "utf8",
+    "utf-8",
+    "iconv",
+    "encoding",
+    "multibyte",
+    "mbstring",
+    "localization",
+    "locale",
+    "i18n"
+  ],
+  "homepage": "https://github.com/obullo/utf8",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/utf8.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/utf8/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.4.0",
+    "extensions": ["iconv", "mbstring"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/utf8/issues",
+    "email": "obulloframework@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "name": "translator",
+  "description": "Translator package translate the application texts using your translation files.",
+  "version": "0.0.1",
+  "releases": ["0.0.1"],
+  "author": {
+    "name": "Obullo Team",
+    "email": "obulloframework@gmail.com",
+    "url": "https://github.com/obullo"
+  },
+  "component" : "library",
+  "dependencies": {
+    "log":"*"
+  },
+  "keywords": [
+    "translation",
+    "language",
+    "locale",
+    "translator",
+    "translations",
+    "i18n",
+    "international",
+  ],
+  "homepage": "https://github.com/obullo/translator",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/translator.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/translator/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.4.0",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/translator/issues",
+    "email": "obulloframework@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

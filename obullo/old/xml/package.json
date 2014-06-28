@@ -1,0 +1,44 @@
+{
+  "name": "xml",
+  "description": "Xml Helper.",
+  "version": "0.0.1",
+  "releases": ["0.0.1"],
+  "author": {
+    "name": "Obullo Team",
+    "email": "obulloframework@gmail.com",
+    "url": "https://github.com/obullo"
+  },
+  "component" : "helper",
+  "dependencies": {
+    "log":"*"
+  },
+  "keywords": [
+    "xml",
+    "helper",
+    "convert",
+    "xml writer",
+    "writer",
+    "cdata"
+  ],
+  "homepage": "https://github.com/obullo/xml",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/xml.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/xml/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.4.0",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/xml/issues",
+    "email": "obulloframework@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}

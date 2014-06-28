@@ -1,0 +1,33 @@
+function refreshCaptcha()
+{
+    refreshCaptchaUrl = '/tutorials/hello_captcha_create/'+Math.random();		    
+    document.getElementById("captchaImg").src = refreshCaptchaUrl;     		    
+    return false; // Do not do form submit;
+}
+
+$(document).ready(function(){
+	
+	    var formTemplate = $.get( "/assets/js/form.tpl", function(data) {
+			$( "#creteFormId" ).append( data );
+		})
+
+		formTemplate.always(function() {
+			createFormTemplate(jsonData);
+		});
+});
+
+
+
+function createFormTemplate(formData)
+{	
+	//console.log(formData);
+	var template = $(".template").html();
+    $("#creteFormId").html(_.template(template,{formData:formData}));
+}
+
+
+function formpost(){
+	$.post( $('#templateForm').attr( "action" ), $( "#templateForm" ).serialize(), function(data){
+    	
+    });
+}

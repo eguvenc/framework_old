@@ -1,0 +1,44 @@
+{
+  "name": "response",
+  "description": "Creates http status, application headers and errors.",
+  "version": "0.0.1",
+  "releases": ["0.0.1"],
+  "author": {
+    "name": "Obullo Team",
+    "email": "obulloframework@gmail.com",
+    "url": "https://github.com/obullo"
+  },
+  "dependencies": {
+    "log":"*"
+  },
+  "keywords": [
+    "response",
+    "headers",
+    "header status",
+    "errors",
+    "show404",
+    "showError",
+    "json"
+  ],
+  "homepage": "https://github.com/obullo/response",
+  "repo": {
+    "type": "git",
+    "url": "https://github.com/obullo/response.git",
+    "archive" : "zip",
+    "archive_url": "https://github.com/obullo/response/archive/master.zip"
+  },
+  "requires": {
+    "php": ">= 5.4.0",
+    "extensions": ["none"]
+  },
+  "bugs": {
+    "url": "https://github.com/obullo/response/issues",
+    "email": "obulloframework@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ]
+}
