@@ -3,11 +3,9 @@
 
 ------
 
-* Task class environment.
 * Queue and workers not completed keep failed jobs data in database.
 * Logger needs AMQP (Queue) handler.
 * Analytics.
-* View headers. $this->load->view('hello')->header('content-type', '');
 * Hash class required and bcrypt "rehash" function will be added for security purposes.
 * Auth class needs rethink.
 * Session class meta sort problem.

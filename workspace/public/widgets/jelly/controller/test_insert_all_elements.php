@@ -13,7 +13,6 @@ $app = new Controller(
         $c->load('form/element');
         $c->load('post');
         $c->load('request');
-        service/crud
         $c->load('validator');
         $c->load('service/jelly/form as jellyForm');
     }

@@ -12,7 +12,7 @@ $app = new Controller;
 $app->func(
     'index',
     function () {
-
+      
         echo "\33[1;36m".'
         ______  _            _  _
        |  __  || |__  _   _ | || | ____

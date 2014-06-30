@@ -38,15 +38,15 @@ $c['router']->override('defaultController', 'welcome');
 // $c['router']->override('pageNotFoundController', 'errors/page_not_found');
 
 
-// Example
+// Example Api
 
-$c['router']->group(
-    array('domain' => 'api.demo_blog'), 
-    function ($group) use ($c) {
-        $c['router']->route('get', 'user/create', 'api/user/create', null, $group);
-        $c['router']->route('get', 'user/delete/([0-9])', 'api/user/delete/$1', null, $group);
-    }
-);
+// $c['router']->group(
+//     array('domain' => 'api.demo_blog'), 
+//     function ($group) use ($c) {
+//         $c['router']->route('get', 'user/create', 'api/user/create', null, $group);
+//         $c['router']->route('get', 'user/delete/([0-9])', 'api/user/delete/$1', null, $group);
+//     }
+// );
 
 // $c['router']->match(array('get', 'post'), 'welcome', 'welcome/test');
 

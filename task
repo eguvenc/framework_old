@@ -1,9 +1,8 @@
 <?php
-
 if (isset($_SERVER['REMOTE_ADDR'])) die('Access denied');
 /*
 |--------------------------------------------------------------------------
-| Get Command Line Arguments
+| Remove first argument "task"
 |--------------------------------------------------------------------------
 */
 unset($_SERVER['argv'][0]);
@@ -12,9 +11,10 @@ unset($_SERVER['argv'][0]);
 | Define Cli Headers
 |--------------------------------------------------------------------------
 */
-$_SERVER['HTTP_USER_AGENT']     = 'Cli';
+$_SERVER['HTTP_USER_AGENT'] = 'Cli';
 $_SERVER['HTTP_ACCEPT_CHARSET'] = 'utf-8';
 $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+$_SERVER['HTTP_HOST'] = end($_SERVER['argv']);
 /*
 |--------------------------------------------------------------------------
 | Set Default Command "Help" if command not provided

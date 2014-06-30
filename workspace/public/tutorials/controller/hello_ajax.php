@@ -9,6 +9,7 @@ $app = new Controller(
     function ($c) {
         $c->load('form');
         $c->load('request');
+        $c->load('response');
     }
 );
 
@@ -17,9 +18,8 @@ $app->func(
     function () use ($c) {
 
         if ($this->request->isXmlHttp()) { // Is Ajax ?
-            
-            $c->load('validator');
 
+            $c->load('validator');
             $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
@@ -29,17 +29,10 @@ $app->func(
                 $this->validator->setError('email', 'Custom Error Example: There is an error in email field !');
                 $this->form->setMessage('There are some errors in form fields.');
             }
-
-            header('Cache-Control: no-cache, must-revalidate');
-            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-            header('Content-type: application/json;charset=UTF-8');
-
             $this->form->setErrors($this->validator);
-
-            echo json_encode($this->form->getOutput());
+            echo $this->response->json($this->form->getOutput());
             return;
         }
-
         $c->load('url');
         $c->load('html');
         $c->load('view');

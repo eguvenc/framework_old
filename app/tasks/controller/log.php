@@ -238,9 +238,6 @@ $BROWN="33[0;33m";
 $YELLOW="33[1;33m";
 $LIGHTGRAY="33[0;37m";
 $WHITE="33[1;37m";
-
-More Colors :
-http://www.if-not-true-then-false.com/2010/php-class-for-coloring-php-command-line-cli-scripts-output-php-output-colorizing-using-bash-shell-colors/
 */
 
 /* End of file log.php */

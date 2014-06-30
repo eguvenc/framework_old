@@ -12,7 +12,8 @@ $app = new Controller(
         $c->load('view');
         $c->load('post');
         $c->load('form');
-        $c->load('sess');
+        $c->load('session as sess');
+        $c->load('session/flash as flash');
     }
 );
 
@@ -24,7 +25,6 @@ $app->func(
         $errorString = null;
 
         if ($this->post['dopost']) {
-
             $c->load('validator');
             $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');

@@ -1,0 +1,81 @@
+[2014-06-30 08:35:31] system.debug: --> $_REQUEST_URI: /help/index/framework/  
+[2014-06-30 08:35:31] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-06-30 08:35:31] system.debug: --> $_COOKIE:   
+[2014-06-30 08:35:31] system.debug: --> Uri Class Initialized  
+[2014-06-30 08:35:31] system.debug: --> $_POST:   
+[2014-06-30 08:35:31] system.debug: --> $_GET:   
+[2014-06-30 08:35:31] system.debug: --> Router Class Initialized array (  'host' => 'Cli',) 
+[2014-06-30 08:35:31] system.debug: --> Response Class Initialized  
+[2014-06-30 08:35:31] system.debug: --> Final output sent to browser array (  'time' => '0.0014',  'memory' => '0.99 MB',) 
+[2014-06-30 08:35:38] system.debug: --> $_REQUEST_URI: /help/index/framework/  
+[2014-06-30 08:35:38] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-06-30 08:35:38] system.debug: --> $_COOKIE:   
+[2014-06-30 08:35:38] system.debug: --> Uri Class Initialized  
+[2014-06-30 08:35:38] system.debug: --> $_POST:   
+[2014-06-30 08:35:38] system.debug: --> $_GET:   
+[2014-06-30 08:35:38] system.debug: --> Router Class Initialized array (  'host' => 'Cli',) 
+[2014-06-30 08:35:38] system.debug: --> Response Class Initialized  
+[2014-06-30 08:35:38] system.debug: --> Final output sent to browser array (  'time' => '0.0015',  'memory' => '0.99 MB',) 
+[2014-06-30 08:36:10] system.debug: --> $_REQUEST_URI: /help/framework/  
+[2014-06-30 08:36:10] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-06-30 08:36:10] system.debug: --> $_COOKIE:   
+[2014-06-30 08:36:10] system.debug: --> Uri Class Initialized  
+[2014-06-30 08:36:10] system.debug: --> $_POST:   
+[2014-06-30 08:36:10] system.debug: --> $_GET:   
+[2014-06-30 08:36:10] system.debug: --> Router Class Initialized array (  'host' => 'Cli',) 
+[2014-06-30 08:36:10] system.debug: --> Response Class Initialized  
+[2014-06-30 08:36:10] system.debug: --> Final output sent to browser array (  'time' => '0.0015',  'memory' => '0.99 MB',) 
+[2014-06-30 08:36:11] system.debug: --> $_REQUEST_URI: /help/framework/  
+[2014-06-30 08:36:11] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-06-30 08:36:11] system.debug: --> $_COOKIE:   
+[2014-06-30 08:36:11] system.debug: --> Uri Class Initialized  
+[2014-06-30 08:36:11] system.debug: --> $_POST:   
+[2014-06-30 08:36:11] system.debug: --> $_GET:   
+[2014-06-30 08:36:11] system.debug: --> Router Class Initialized array (  'host' => 'Cli',) 
+[2014-06-30 08:36:11] system.debug: --> Response Class Initialized  
+[2014-06-30 08:36:11] system.debug: --> Final output sent to browser array (  'time' => '0.0014',  'memory' => '0.99 MB',) 
+[2014-06-30 08:36:11] system.debug: --> $_REQUEST_URI: /help/framework/  
+[2014-06-30 08:36:11] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-06-30 08:36:11] system.debug: --> $_COOKIE:   
+[2014-06-30 08:36:11] system.debug: --> Uri Class Initialized  
+[2014-06-30 08:36:11] system.debug: --> $_POST:   
+[2014-06-30 08:36:11] system.debug: --> $_GET:   
+[2014-06-30 08:36:11] system.debug: --> Router Class Initialized array (  'host' => 'Cli',) 
+[2014-06-30 08:36:11] system.debug: --> Response Class Initialized  
+[2014-06-30 08:36:11] system.debug: --> Final output sent to browser array (  'time' => '0.0013',  'memory' => '0.99 MB',) 
+[2014-06-30 08:36:40] system.debug: --> $_REQUEST_URI: /help/framework/  
+[2014-06-30 08:36:40] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-06-30 08:36:40] system.debug: --> $_COOKIE:   
+[2014-06-30 08:36:40] system.debug: --> Uri Class Initialized  
+[2014-06-30 08:36:40] system.debug: --> $_POST:   
+[2014-06-30 08:36:40] system.debug: --> $_GET:   
+[2014-06-30 08:36:40] system.debug: --> Router Class Initialized array (  'host' => 'Cli',) 
+[2014-06-30 08:36:40] system.debug: --> Response Class Initialized  
+[2014-06-30 08:36:40] system.debug: --> Final output sent to browser array (  'time' => '0.0015',  'memory' => '0.99 MB',) 
+[2014-06-30 08:36:41] system.debug: --> $_REQUEST_URI: /help/framework/  
+[2014-06-30 08:36:41] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-06-30 08:36:41] system.debug: --> $_COOKIE:   
+[2014-06-30 08:36:41] system.debug: --> Uri Class Initialized  
+[2014-06-30 08:36:41] system.debug: --> $_POST:   
+[2014-06-30 08:36:41] system.debug: --> $_GET:   
+[2014-06-30 08:36:41] system.debug: --> Router Class Initialized array (  'host' => 'Cli',) 
+[2014-06-30 08:36:41] system.debug: --> Response Class Initialized  
+[2014-06-30 08:36:41] system.debug: --> Final output sent to browser array (  'time' => '0.0014',  'memory' => '0.99 MB',) 
+[2014-06-30 08:36:42] system.debug: --> $_REQUEST_URI: /help/framework/  
+[2014-06-30 08:36:42] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-06-30 08:36:42] system.debug: --> $_COOKIE:   
+[2014-06-30 08:36:42] system.debug: --> Uri Class Initialized  
+[2014-06-30 08:36:42] system.debug: --> $_POST:   
+[2014-06-30 08:36:42] system.debug: --> $_GET:   
+[2014-06-30 08:36:42] system.debug: --> Router Class Initialized array (  'host' => 'Cli',) 
+[2014-06-30 08:36:42] system.debug: --> Response Class Initialized  
+[2014-06-30 08:36:42] system.debug: --> Final output sent to browser array (  'time' => '0.0013',  'memory' => '0.99 MB',) 
+[2014-06-30 09:04:39] system.debug: --> $_REQUEST_URI: /help/index/framework/  
+[2014-06-30 09:04:39] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-06-30 09:04:39] system.debug: --> $_COOKIE:   
+[2014-06-30 09:04:39] system.debug: --> Uri Class Initialized  
+[2014-06-30 09:04:39] system.debug: --> $_POST:   
+[2014-06-30 09:04:39] system.debug: --> $_GET:   
+[2014-06-30 09:04:39] system.debug: --> Router Class Initialized array (  'host' => 'Cli',) 
+[2014-06-30 09:04:39] system.debug: --> Response Class Initialized  
+[2014-06-30 09:04:39] system.debug: --> Final output sent to browser array (  'time' => '0.0013',  'memory' => '0.99 MB',) 

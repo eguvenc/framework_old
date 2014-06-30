@@ -13,7 +13,7 @@
         
         <h1>Hello Form</h1>
 
-        <section><?php echo $this->sess->getFlash('notice') ?></section>
+        <section><?php echo $this->flash->get('notice') ?></section>
         <section><?php echo $this->form->getMessage() ?></section>
         <section><?php echo $errorString ?></section>
 

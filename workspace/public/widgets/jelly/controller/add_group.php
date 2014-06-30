@@ -20,6 +20,7 @@ $app = new Controller(
 $app->func(
     'index',
     function ($formId = '') {
+        
         if ($this->post['submit']) {
             $this->validator->setRules('form_id', 'Form', 'required|isNumeric');
             $this->validator->setRules('name', 'Group Name', 'required|callback_name');
