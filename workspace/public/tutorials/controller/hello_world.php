@@ -9,6 +9,10 @@ $app = new Controller(
     function ($c) {
         $c->load('view');
 
+        $this->translator->load('validator');
+        $this->translator->sprintf('OBULLO:VALIDATOR:REQUIRED');
+
+
         // var_dump($this->mongo);
 
         // $id = uniqid();

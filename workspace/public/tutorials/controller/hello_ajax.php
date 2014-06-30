@@ -18,13 +18,12 @@ $app->func(
     function () use ($c) {
 
         if ($this->request->isXmlHttp()) { // Is Ajax ?
-
             $c->load('validator');
             $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
             $this->validator->setRules('agreement', 'User Agreement', 'required|exact(1)');
-
+            
             if ($this->validator->isValid()) {
                 $this->validator->setError('email', 'Custom Error Example: There is an error in email field !');
                 $this->form->setMessage('There are some errors in form fields.');

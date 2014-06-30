@@ -8,6 +8,15 @@
 |
 */
 return array(
+
+    'notice' => false,     // Puts 'translate:' texts everywhere it is help you for multilingual development.
+
+    // Locale Settings
+    'locale' => array(
+        'default'  => 'en',   // This determines which set of language files should be used.
+        'fallback' => 'en',   // If language not determined fallback locale will be set.
+        'setCookie' => true,  // Writes locale name ( en ) to cookie 
+    ),
             
     // Uri Settings
     'uri' => array(
@@ -23,11 +32,6 @@ return array(
         'path'   => '/',      // Typically will be a forward slash
         'expire' => (365 * 24 * 60 * 60),  // 365 day; //  @see  Cookie expire time.   http://us.php.net/strtotime
         'secure' => false,    // Cookies will only be set if a secure HTTPS connection exists.
-    ),
-
-    // Locale Settings
-    'locale' => array(
-        'setCookie' => true,  // Writes locale name ( en ) to cookie 
     ),
 
     // Available Languages

@@ -20,7 +20,7 @@ $c['router']->route('*', 'jelly/(.+)', 'widgets/jelly/$1');  // Rewrite "jform" 
 // );
 
 $c['router']->route('get', '(en|tr)/(.+)', '$2');
-$c['router']->route('get', '(en|tr)', 'welcome/index');
+$c['router']->route('get', '(en|tr)', 'welcome/index');  // default controller
 $c['router']->route('get', 'tag/(.+)', 'tag/$1');
 $c['router']->route('get', 'post/detail/([0-9])', 'post/detail/$1');
 $c['router']->route('get', 'post/preview/([0-9])', 'post/preview/$1');

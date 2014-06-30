@@ -35,15 +35,15 @@ Class Logger implements ServiceInterface
             $logger = new ObulloLogger($c, $c->load('config')['log']);
             $logger->addWriter(
                 LOGGER_FILE,
-                function () use ($logger) { 
-                    return new File($logger);  // primary
+                function () use ($c, $logger) { 
+                    return new File($c, $logger);  // primary
                 },                                                // must be available working on local server.
                 3  // priority
             );
             /*
             |--------------------------------------------------------------------------
             | Removes file handler and use second defined handler as primary 
-            | in "production" ( live ) environment.
+            | in "production" ( live ) mode.
             |--------------------------------------------------------------------------
             */
             if (ENV == 'prod') {
