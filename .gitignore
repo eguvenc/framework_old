@@ -5,6 +5,7 @@
 /nbproject/
 nbproject/
 nbproject
+app/data/logs
 *.htaccess
 .htaccess
 index.sublime-workspace
