@@ -1,0 +1,81 @@
+[2014-07-02 17:01:26] system.debug: --> $_REQUEST_URI: /  
+[2014-07-02 17:01:26] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-07-02 17:01:26] system.debug: --> Uri Class Initialized  
+[2014-07-02 17:01:26] system.debug: --> $_COOKIE:   
+[2014-07-02 17:01:26] system.debug: --> $_POST:   
+[2014-07-02 17:01:26] system.debug: --> $_GET:   
+[2014-07-02 17:01:26] system.debug: --> Html Class Initialized  
+[2014-07-02 17:01:26] system.debug: --> Url Class Initialized  
+[2014-07-02 17:01:26] system.debug: --> View file loaded: /var/www/framework/app/templates/footer.php  
+[2014-07-02 17:01:26] system.debug: --> View Class Initialized  
+[2014-07-02 17:01:26] system.debug: --> No URI present. Default controller set.  
+[2014-07-02 17:01:26] system.debug: --> View file loaded: /var/www/framework/public/welcome/view/welcome.php  
+[2014-07-02 17:01:26] system.debug: --> Router Class Initialized array (  'host' => 'framework',) 
+[2014-07-02 17:01:26] system.debug: --> Response Class Initialized  
+[2014-07-02 17:01:26] system.debug: --> Final output sent to browser array (  'time' => '0.0034',  'memory' => '1.16 MB',) 
+[2014-07-02 17:01:29] system.debug: --> $_REQUEST_URI: /  
+[2014-07-02 17:01:29] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-07-02 17:01:29] system.debug: --> Uri Class Initialized  
+[2014-07-02 17:01:29] system.debug: --> $_COOKIE:   
+[2014-07-02 17:01:29] system.debug: --> $_POST:   
+[2014-07-02 17:01:29] system.debug: --> $_GET:   
+[2014-07-02 17:01:29] system.debug: --> Html Class Initialized  
+[2014-07-02 17:01:29] system.debug: --> Url Class Initialized  
+[2014-07-02 17:01:29] system.debug: --> View file loaded: /var/www/framework/app/templates/footer.php  
+[2014-07-02 17:01:29] system.debug: --> View Class Initialized  
+[2014-07-02 17:01:29] system.debug: --> No URI present. Default controller set.  
+[2014-07-02 17:01:29] system.debug: --> View file loaded: /var/www/framework/public/welcome/view/welcome.php  
+[2014-07-02 17:01:29] system.debug: --> Router Class Initialized array (  'host' => 'framework',) 
+[2014-07-02 17:01:29] system.debug: --> Response Class Initialized  
+[2014-07-02 17:01:29] system.debug: --> Final output sent to browser array (  'time' => '0.0034',  'memory' => '1.16 MB',) 
+[2014-07-02 17:01:35] system.debug: --> $_REQUEST_URI: /tutorials/hello_layers  
+[2014-07-02 17:01:35] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-07-02 17:01:35] system.debug: --> $_COOKIE:   
+[2014-07-02 17:01:35] system.debug: --> $_POST:   
+[2014-07-02 17:01:35] system.debug: --> $_GET:   
+[2014-07-02 17:01:35] system.debug: --> Uri Class Initialized  
+[2014-07-02 17:01:35] system.debug: --> View file loaded: /var/www/framework/public/welcome/view/dummy.php  
+[2014-07-02 17:01:35] system.debug: --> View file loaded: /var/www/framework/public/welcome/view/dummy.php  
+[2014-07-02 17:01:35] system.debug: --> $_LAYER: /tutorials/hello_dummy array (  'time' => '0.0034',  'key' => 'Layer:3802807452',  'output' => '<br /><div style="float:left;"><pre>Request: <span class="string">tutorials/hello_dummy/1/2/3/Layer:3802807452</span></pre><pre>Response: <span class="string">1 - 2 - 3</span></pre><pre>Global Request Object: <span class="string">tutorials/hello_layers</span></pre><p></p></div><div style="clear:both;"></div>',) 
+[2014-07-02 17:01:35] system.debug: --> Layer Class Initialized  
+[2014-07-02 17:01:35] system.debug: --> View file loaded: /var/www/framework/app/templates/footer.php  
+[2014-07-02 17:01:35] system.debug: --> Url Class Initialized  
+[2014-07-02 17:01:35] system.debug: --> View Class Initialized  
+[2014-07-02 17:01:35] system.debug: --> Response Class Initialized  
+[2014-07-02 17:01:35] system.debug: --> Router Class Initialized array (  'host' => 'framework',) 
+[2014-07-02 17:01:35] system.debug: --> $_LAYER: /tutorials/hello_dummy array (  'time' => '0.0010',  'key' => 'Layer:3328021713',  'output' => '<br /><div style="float:left;"><pre>Request: <span class="string">tutorials/hello_dummy/7/8/9/Layer:3328021713</span></pre><pre>Response: <span class="string">7 - 8 - 9</span></pre><pre>Global Request Object: <span class="string">tutorials/hello_layers</span></pre><p></p></div><div style="clear:both;"></div>',) 
+[2014-07-02 17:01:35] system.debug: --> Request Class Initialized  
+[2014-07-02 17:01:35] system.debug: --> View file loaded: /var/www/framework/public/tutorials/view/hello_layers.php  
+[2014-07-02 17:01:35] system.debug: --> Html Class Initialized  
+[2014-07-02 17:01:35] system.debug: --> $_LAYER: /welcome/welcome_dummy array (  'time' => '0.0030',  'key' => 'Layer:3839798353',  'output' => '<br /><div style="float:left;"><pre>Request: <span class="string">welcome/welcome_dummy/4/5/6/Layer:3839798353</span></pre><pre>Response: <span class="string">4 - 5 - 6</span></pre><pre>Global Request Object: <span class="string">tutorials/hello_layers</span></pre><p></p><pre>test</pre><pre>test</pre></div><div style="clear:both;"></div>',) 
+[2014-07-02 17:01:35] system.debug: --> Final output sent to browser array (  'time' => '0.0148',  'memory' => '1.5 MB',) 
+[2014-07-02 17:02:08] system.debug: --> $_REQUEST_URI: /  
+[2014-07-02 17:02:08] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-07-02 17:02:08] system.debug: --> Uri Class Initialized  
+[2014-07-02 17:02:08] system.debug: --> $_COOKIE:   
+[2014-07-02 17:02:08] system.debug: --> $_POST:   
+[2014-07-02 17:02:08] system.debug: --> $_GET:   
+[2014-07-02 17:02:08] system.debug: --> Html Class Initialized  
+[2014-07-02 17:02:08] system.debug: --> Url Class Initialized  
+[2014-07-02 17:02:08] system.debug: --> View file loaded: /var/www/framework/app/templates/footer.php  
+[2014-07-02 17:02:08] system.debug: --> View Class Initialized  
+[2014-07-02 17:02:08] system.debug: --> No URI present. Default controller set.  
+[2014-07-02 17:02:08] system.debug: --> View file loaded: /var/www/framework/public/welcome/view/welcome.php  
+[2014-07-02 17:02:08] system.debug: --> Router Class Initialized array (  'host' => 'framework',) 
+[2014-07-02 17:02:08] system.debug: --> Response Class Initialized  
+[2014-07-02 17:02:08] system.debug: --> Final output sent to browser array (  'time' => '0.0040',  'memory' => '1.16 MB',) 
+[2014-07-02 17:02:09] system.debug: --> $_REQUEST_URI: /tutorials/hello_world  
+[2014-07-02 17:02:09] system.debug: --> Global POST and COOKIE data sanitized  
+[2014-07-02 17:02:09] system.debug: --> $_COOKIE:   
+[2014-07-02 17:02:09] system.debug: --> $_POST:   
+[2014-07-02 17:02:09] system.debug: --> $_GET:   
+[2014-07-02 17:02:09] system.debug: --> Uri Class Initialized  
+[2014-07-02 17:02:09] system.debug: --> View file loaded: /var/www/framework/public/tutorials/view/hello_world.php  
+[2014-07-02 17:02:09] system.debug: --> View Class Initialized  
+[2014-07-02 17:02:09] system.debug: --> Router Class Initialized array (  'host' => 'framework',) 
+[2014-07-02 17:02:09] system.debug: --> View file loaded: /var/www/framework/app/templates/footer.php  
+[2014-07-02 17:02:09] system.error: --> Undefined variable: a array (  'level' => 8,  'file' => '/var/www/framework/public/tutorials/controller/hello_world.php',  'line' => 16,) 
+[2014-07-02 17:02:09] system.error: --> Undefined variable: a array (  'level' => 32767,  'file' => 'ROOT/public/tutorials/controller/hello_world.php',  'line' => 16,  'extra' => NULL,) 
+[2014-07-02 17:02:09] system.debug: --> Response Class Initialized  
+[2014-07-02 17:02:09] system.debug: --> Request Class Initialized  
+[2014-07-02 17:02:09] system.debug: --> Final output sent to browser array (  'time' => '0.0447',  'memory' => '1.28 MB',) 

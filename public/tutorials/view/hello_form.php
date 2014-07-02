@@ -14,7 +14,7 @@
         <h1>Hello Form</h1>
 
         <section><?php echo $this->flash->get('notice') ?></section>
-        <section><?php echo $this->form->getMessage() ?></section>
+        <section><?php echo $this->form->message() ?></section>
         <section><?php echo $errorString ?></section>
 
         <section>
@@ -60,8 +60,8 @@
                     <pre><?php print_r($errors); ?>
                     </pre>
 
-                    <h3>$this->form->getOutput()</h3>
-                    <pre><?php print_r($this->form->getOutput()); ?>
+                    <h3>$this->form->output()</h3>
+                    <pre><?php print_r($this->form->output()); ?>
                     </pre>
 
                     <h3>$this->form->error('email')</h3>

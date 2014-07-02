@@ -46,6 +46,8 @@ $app->func(
                 // $this->validator->setError('email', 'Example Error !');                
                 $this->form->setMessage('Example form success message in current page !', NOTICE_SUCCESS);
                 
+                var_dump($this->form->status());
+
                 // $this->sess->setFlash('notice', 'Example flash notice please refresh this page !');   // Set flash notice using Session Class.
                 // $this->url->redirect('tutorials/hello_form/index'); // Redirect to user same page using header refresh.
 

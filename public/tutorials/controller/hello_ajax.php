@@ -29,7 +29,7 @@ $app->func(
                 $this->form->setMessage('There are some errors in form fields.');
             }
             $this->form->setErrors($this->validator);
-            echo $this->response->json($this->form->getOutput());
+            echo $this->response->json($this->form->output());
             return;
         }
         $c->load('url');

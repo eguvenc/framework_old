@@ -1,7 +1,7 @@
 <?php
 
 /**
- * $c hello_lvc
+ * $app hello_test layers
  * 
  * @var Controller
  */
@@ -11,7 +11,7 @@ $app = new Controller(
         $c->load('html');
         $c->load('url');
         $c->load('request');
-        $c->load('public');
+        $c->load('layer');
     }
 );
 
@@ -19,8 +19,8 @@ $app->func(
     'index',
     function () {
 
-        $a = $this->public->get('welcome/welcome_dummy/4/5/6');
-        $b = $this->public->get('welcome/welcome_dummy/10/11/12');
+        $a = $this->layer->get('welcome/welcome_dummy/4/5/6');
+        $b = $this->layer->get('welcome/welcome_dummy/10/11/12');
 
         echo $a;
         echo $b;

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * $c hello_scheme
+ * $app hello_scheme
  * 
  * @var Controller
  */

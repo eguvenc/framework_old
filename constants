@@ -61,10 +61,8 @@ define('APP',  ROOT .'app'. DS);
 define('DATA',  APP .'data'. DS);
 define('CLASSES',  APP .'classes'. DS);
 define('TEMPLATES',  APP . 'templates'. DS);
-define('PUBLIC_FOLDER', ROOT .'workspace'. DS .'public'. DS);
-define('PRIVATE_FOLDER', ROOT .'workspace'. DS .'private'. DS);
+define('PUBLIC_FOLDER', ROOT .'public'. DS);
 define('PUBLIC_DIR', (defined('STDIN')) ? APP : PUBLIC_FOLDER);
-define('PRIVATE_DIR', PRIVATE_FOLDER);
 define('TASK_FILE', 'task');
 define('TASK', PHP_PATH .' '. APP .'tasks'. DS .'cli'. DS);
 define('INDEX_PHP', 'index.php');
@@ -81,10 +79,9 @@ define('OBULLO_CONTAINER',  OBULLO .'Container'. DS .'Container.php');
 define('OBULLO_AUTOLOADER', OBULLO .'Obullo'. DS .'Autoloader.php');
 define('OBULLO_COMPONENTS', ROOT .'components.php');
 define('OBULLO_ROUTES', ROOT .'routes.php');
-define('OBULLO_PROVIDERS', ROOT .'providers.php');
-define('OBULLO_SERVICES', ROOT .'services.php');
 define('OBULLO_FILTERS', ROOT .'filters.php');
 define('OBULLO_CONTROLLER', OBULLO .'Controller'. DS .'Controller.php');
+
 /*
 |--------------------------------------------------------------------------
 | PDO CONSTANTS

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * $c hello_lvc
+ * $app hello_layers
  * 
  * @var Controller
  */
@@ -11,7 +11,7 @@ $app = new Controller(
         $c->load('view');
         $c->load('url');
         $c->load('request');
-        $c->load('public');
+        $c->load('layer');
     }
 );
 
@@ -19,9 +19,9 @@ $app->func(
     'index',
     function () {
 
-        $a = $this->public->get('tutorials/hello_dummy/1/2/3');
-        $b = $this->public->get('welcome/welcome_dummy/4/5/6');
-        $c = $this->public->get('tutorials/hello_dummy/7/8/9');
+        $a = $this->layer->get('tutorials/hello_dummy/1/2/3');
+        $b = $this->layer->get('welcome/welcome_dummy/4/5/6');
+        $c = $this->layer->get('tutorials/hello_dummy/7/8/9');
     
         $this->view->load(
             'hello_layers', 
@@ -36,5 +36,5 @@ $app->func(
     }
 );
 
-/* End of file hello_lvc.php */
-/* Location: .public/tutorials/controller/hello_lvc.php */
+/* End of file hello_layers.php */
+/* Location: .public/tutorials/controller/hello_layers.php */

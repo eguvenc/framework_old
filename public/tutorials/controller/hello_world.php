@@ -8,10 +8,16 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
+        // $c->load('translator');
+        // $c->load('session/flash as flash');
+        
+        $c->load('service/provider/mongo as mongo');
 
-        $this->translator->load('validator');
-        $this->translator->sprintf('OBULLO:VALIDATOR:REQUIRED');
+        echo $a;
 
+        // // $this->flash->success('testss');
+
+        // echo $this->flash->get('notice:success');
 
         // var_dump($this->mongo);
 

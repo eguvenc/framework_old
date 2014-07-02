@@ -1,7 +1,7 @@
 <?php
 
 /**
- * $c hello_dummy
+ * $app hello_dummy
  * 
  * Dummy test class for Lvc
  * 

@@ -26,19 +26,26 @@ Class Mongo implements ProviderInterface
      */
     public function register($c)
     {
-        $c['provider:mongo'] = function ($db = 'db', $collection = 'test') use ($c) {
-            
-            $host     = $c->load('config')['nosql']['mongo'][$db]['host'];
-            $username = $c->load('config')['nosql']['mongo'][$db]['username'];
-            $password = $c->load('config')['nosql']['mongo'][$db]['password'];
-            $port     = $c->load('config')['nosql']['mongo'][$db]['port'];
-            
-            $dsn = "mongodb://$username:$password@$host:$port/$db";
+        $c['provider:mongo'] = function ($params = array('db' => 'db', 'collection' => 'test')) use ($c) {
 
-            $mongoClient = new MongoClient($dsn);
-            return new MongoCollection($mongoClient->{$db}, $collection);
+            static $connection = array();
+            $host     = $c->load('config')['nosql']['mongo'][$params['db']]['host'];
+            $username = $c->load('config')['nosql']['mongo'][$params['db']]['username'];
+            $password = $c->load('config')['nosql']['mongo'][$params['db']]['password'];
+            $port     = $c->load('config')['nosql']['mongo'][$params['db']]['port'];
+            
+            $dsn = "mongodb://$username:$password@$host:$port/$params[db]";
+
+            if ( ! isset($connection[$params['db']])) {
+                $mongoClient = new MongoClient($dsn);
+                $connection[$params['db']] = $mongoClient;
+            } else {
+                $mongoClient = $connection[$params['db']];
+            }
+            return new MongoCollection($mongoClient->{$params['db']}, $params['collection']);
         };
     }
+
 }
 
 // END Mongo class

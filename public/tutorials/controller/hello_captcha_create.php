@@ -1,7 +1,7 @@
 <?php
 
 /**
- * $o test
+ * $app hello_captcha_create
  * 
  * @var Controller
  */

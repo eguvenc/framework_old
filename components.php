@@ -100,8 +100,8 @@ $c['post'] = function () use ($c) {
 $c['view'] = function () use ($c) {
     $config['schemes'] = array(
         'default' => function () {
-            $this->assign('header', '@public.views/header');
-            $this->assign('sidebar', '@public.views/sidebar');
+            $this->assign('header', '@layer.views/header');
+            $this->assign('sidebar', '@layer.views/sidebar');
             $this->assign('footer', $this->template('footer'));
         },
         'welcome' => function () {
@@ -115,16 +115,8 @@ $c['view'] = function () use ($c) {
 | Layered Vc Public Request
 |--------------------------------------------------------------------------
 */
-$c['public'] = function () use ($c) { 
-    return new Obullo\Layers\PublicRequest($c, $c->load('config')['layers']);
-};
-/*
-|--------------------------------------------------------------------------
-| Layered Vc Private Request
-|--------------------------------------------------------------------------
-*/
-$c['private'] = function () use ($c) {
-    return new Obullo\Layers\PrivateRequest($c, $c->load('config')['layers']);
+$c['layer'] = function () use ($c) { 
+    return new Obullo\Layer\Request($c, $c->load('config')['layers']);
 };
 /*
 |--------------------------------------------------------------------------

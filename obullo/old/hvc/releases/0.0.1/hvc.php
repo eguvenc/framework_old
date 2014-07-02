@@ -447,23 +447,20 @@ echo $this->view->get(
     {
         global $uri, $router, $logger;
         static $storage = array();      // store "$c " variables ( called controllers )
-        // ------------------------------------------------------------------------
 
         $KEY = $this->getKey();   // Get Hvc Key
         $start = microtime(true); // Start the Query Timer 
 
         // ----------------- Static Php Cache -------------------//
 
-        if (isset(self::$cid[$KEY])) {      // Cache the multiple HVC requests in the same controller. 
+        if (isset(self::$cid[$KEY])) {      // Cache the multiple Layer requests in the same controller. 
                                             // This cache type not related with Cache package.
             $response = $this->getResponse();
             $logger->debug('$_HVC: '.$this->getKey(), array('time' => number_format(microtime(true) - $start, 4), 'key' => $KEY, 'output' => '<br /><div style="float:left;">'.preg_replace('/[\r\n\t]+/', '', $response).'</div><div style="clear:both;"></div>'));
             $this->_clear();
             return $response;    // This is native system cache !
         }
-
-
-        self::$cid[$KEY] = $KEY;    // store connection id.
+        self::$cid[$KEY] = $KEY; // store connection id.
 
         // ----------------- Memory Cache Control -------------------//
 
@@ -477,7 +474,6 @@ echo $this->view->get(
                 return base64_decode($response);    // encoding for specialchars
             }
         }
-
         // ----------------- Route is Valid -------------------//
 
         $response = $router->getResponse();
@@ -498,26 +494,21 @@ echo $this->view->get(
         $uri->setUriString(rtrim($uri->getUriString(), '/') . '/' .$KEY); // Create an uniq HVC Uri with md5 hash
         //  --------------------------------------------------------------------------
 
-        $folder = PUBLIC_DIR;
-        if ($this->getVisibility() == 'private') { // Send "private" requests to private folder
-            $folder = PRIVATE_DIR;
-        }
-
         $this->hvc_uri = "{$router->fetchDirectory()} / {$router->fetchClass()} / {$router->fetchMethod()}";
-        $controller = $folder . $router->fetchDirectory() . DS . 'controller' . DS . $router->fetchClass() . EXT;
+        $controller = PUBLIC_DIR . $router->fetchDirectory() . DS . 'controller' . DS . $router->fetchClass() . EXT;
 
         // --------- Check class is exists in the storage ----------- //
 
         if (isset($storage[$this->hvc_uri])) {    // Check is multiple call to same class.
             $c = $storage[$this->hvc_uri];       // Get stored class.
         } else {
-            require($controller);        // Call the controller.
+            include $controller;        // Call the controller.
         }
 
         // --------- End storage exists ----------- //
         // $c variable available here !
 
-        if (!isset($c->request->global)) { // ** Let's create new request object for globals
+        if ( ! isset($c->request->global)) { // ** Let's create new request object for globals
             $c->request = new Request;       // create new request object;
 
             // create a global variable
@@ -542,32 +533,23 @@ echo $this->view->get(
         }
 
         // Get application methods
-        //----------------------------
 
         $storedMethods = array_keys($c->_controllerAppMethods);
 
-        //----------------------------
         // Check method exist or not
-        //----------------------------
 
         if ( ! in_array(strtolower($router->fetchMethod()), $storedMethods)) {
             $this->_clear();
             $this->setResponse('404 - Hvc request not found: ' . $this->hvc_uri);
             return $this->getResponse();
         }
-
-        // Slice Arguments
-        //----------------------------
-
         $arguments = array_slice($uri->rsegments, 2);
-
-        //----------------------------
 
         ob_start(); // Start the output buffer.
 
         // Call the requested method. Any URI segments present (besides the directory / class / index / arguments ) 
         // will be passed to the method for convenience
-            // directory = 0, class = 1,  ( arguments = 2) ( @deprecated  method = 2 method always = index )
+        // directory = 0, class = 1,  ( arguments = 2) ( @deprecated  method = 2 method always = index )
         call_user_func_array(array($c, $router->fetchMethod()), $arguments);
 
         //----------------------------

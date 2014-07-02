@@ -44,9 +44,9 @@ if ($c['config']['uri']['queryStrings'] == false) {  // Is $_GET data allowed ? 
 | Cross Site Request Forgery Filter
 */
 $c['router']->filter(
-    'csrf', function () {
-        $c['securityCsrf']->init();  
-        $c['securityCsrf']->verify(); // Csrf protection check
+    'csrf', function () use ($c) {
+        $c->load('security/csrf')->init();  
+        $c->load('security/csrf')->verify(); // Csrf protection check
     }
 );
 

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * $c hello_test
+ * $app hello_test
  * 
- * Dummy test class for Lvc
+ * Dummy test class for Layerd Vc
  * 
  * @var Controller
  */
@@ -11,7 +11,7 @@ $app = new Controller(
     function ($c) {
         $c->load('uri');
         $c->load('view');
-        $c->load('public');
+        $c->load('layer');
     }
 );
 
@@ -19,9 +19,9 @@ $app->func(
     'index', 
     function () use ($c) {
 
-        echo $this->public->get('welcome/welcome_dummy/1/2/3');
-        echo $this->public->get('views/header');
-        echo $this->public->get('tutorials/hello_dummy/1/2/6');
+        echo $this->layer->get('welcome/welcome_dummy/1/2/3');
+        echo $this->layer->get('views/header');
+        echo $this->layer->get('tutorials/hello_dummy/1/2/6');
 
         // var_dump($this->router);
         // var_dump($this->uri);
