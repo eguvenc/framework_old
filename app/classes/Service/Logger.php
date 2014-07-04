@@ -10,12 +10,12 @@ use Obullo\Log\Disabled,
 /**
  * Log Provider
  *
- * @category  Provider
- * @package   Mongo
+ * @category  Service
+ * @package   Logger
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
- * @link      http://obullo.com/docs/providers
+ * @link      http://obullo.com/docs/services
  */
 Class Logger implements ServiceInterface
 {
