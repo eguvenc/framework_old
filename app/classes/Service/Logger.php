@@ -3,7 +3,8 @@
 namespace Service;
 
 use Obullo\Log\Disabled, 
-    Obullo\Log\Handler\File, 
+    Obullo\Log\Handler\File,
+    Obullo\Log\Handler\Mongo,
     Obullo\Log\Logger as ObulloLogger;
 
 /**
@@ -32,7 +33,8 @@ Class Logger implements ServiceInterface
             if ($c->load('config')['log']['enabled'] == false) {  // Use disabled handler if config disabled.
                 return new Disabled;
             }
-            $logger = new ObulloLogger($c, $c->load('config')['log']);
+            $logger = new ObulloLogger($c, $c->load('config')['log'], $c->load('service/queue'));
+
             $logger->addWriter(
                 LOGGER_FILE,
                 function () use ($c, $logger) { 
@@ -40,6 +42,22 @@ Class Logger implements ServiceInterface
                 },                                                // must be available working on local server.
                 3  // priority
             );
+
+            $logger->addHandler(
+                LOGGER_MONGO, 
+                function () use ($c, $logger) { 
+                    return new Mongo(
+                        $c,
+                        $logger, 
+                        array(
+                        'dsn' => 'mongodb://root:12345@localhost:27017/test', 
+                        'collection' => 'test_logs'
+                        )
+                    );
+                },
+                1  // priority
+            );
+
             /*
             |--------------------------------------------------------------------------
             | Removes file handler and use second defined handler as primary 

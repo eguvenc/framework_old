@@ -23,7 +23,7 @@ $app->func(
         echo $this->layer->get('views/header');
         echo $this->layer->get('tutorials/hello_dummy/1/2/6');
 
-        // var_dump($this->router);
+        // var_dump($this->router->fetchDirectory());
         // var_dump($this->uri);
     }
 );

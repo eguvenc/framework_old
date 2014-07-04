@@ -13,6 +13,7 @@ $app->func(
     'index',
     function () use ($c) {
         $c->load('cli/parser');
+        $c->load('service/queue');
 
         $this->cliParser->parse(func_get_args());
         switch ($this->cliParser->segment(0)) {
@@ -61,27 +62,43 @@ $app->func(
 
 $app->func(
     '_list',
-    function () use ($c) {
+    function () {
 
         echo $this->_displayLogo();
-        echo "\33[0;36mFollowing queue data ...\33[0m\n";
-
-        $c->load('queue');
-
-        $argument = $this->cliParser->argument('channel');
-        $channel = $this->queue->exchange($argument);           // Sets queue channel
-        $route   = $this->cliParser->argument('route', null);  // Sets queue route key ( queue name )
-        $deleteJob = $this->cliParser->argument('delete');
-
-        echo $route;
         $break = "------------------------------------------------------------------------------------------";
-        echo "\033[1;36m".$break."\n\033[0m";
 
+        $channel = $this->cliParser->argument('channel');
+        $route   = $this->cliParser->argument('route', null);  // Sets queue route key ( queue name )
+        $remove  = $this->cliParser->argument('clear');
+
+        echo "\33[0;36mFollowing queue data ...\33[0m\n\n";
+        echo "\33[1;36mChannel : ".$channel."\33[0m\n";
+        echo "\33[1;36mRoute   : ".$route."\33[0m\n";
+
+        $this->queue->channel($channel);  // Sets queue exchange
+        echo "\033[1;36m".$break."\33[0m\n";
+        echo "\033[1;36m".' Job ID | Job Name             | Data '."\33[0m\n";
+        echo "\033[1;36m".$break."\33[0m\n";
+
+        $lines = '';
         while (true) {
-            $job = $this->queue->pop($route);  // Get the last message from queue but don't mark it as delivered
+            $job = $this->queue->pop($route);  // !!! Get the last message from queue but don't mark it as delivered
             if ( ! is_null($job)) {
-                echo "\033[1;33m".$job->getJobId().' - '.$job->getRawBody()."\033[0m\n";
-                if ($deleteJob == 'delete') {  // Delete all jobs in the queue
+                $raw = json_decode($job->getRawBody(), true);
+                $jobIdRepeat = 6 - strlen($job->getJobId());  // 999999
+                if (strlen($job->getJobId()) > 6) {
+                    $jobIdRepeat = 6;
+                }
+                $jobNameRepeat = 20 - strlen($raw['job']);
+                if (strlen($raw['job']) > 20) {
+                    $jobNameRepeat = 20;
+                }
+                $lines = "\033[1;36m ".$job->getJobId().str_repeat(' ', $jobIdRepeat).' | ';
+                $lines.= $raw['job'].str_repeat(' ', $jobNameRepeat).' | ';;
+                $lines.= json_encode($raw['data']);
+                $lines.= "\33[0m\n";
+                echo $lines;
+                if ($remove == 'clear') {  // Delete all jobs in the queue
                      $job->delete();
                 }
             }

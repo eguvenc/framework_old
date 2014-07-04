@@ -139,6 +139,12 @@ $c['router'] = function () use ($c) {
 | Routes
 |--------------------------------------------------------------------------
 */
+// var_dump(error_reporting());
+
+// $c['router']->domain('framework');
+// echo $a;
+// var_dump(error_reporting());
+
 require OBULLO_ROUTES;
 /*
 |--------------------------------------------------------------------------

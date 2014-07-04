@@ -8,12 +8,16 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
+
+        // echo $a;
         // $c->load('translator');
         // $c->load('session/flash as flash');
         
-        $c->load('service/provider/mongo as mongo');
+        // $c->load('service/provider/mongo as mongo');
 
-        echo $a;
+        // $this->logger->load(LOGGER_MONGO);
+
+        // echo $a;
 
         // // $this->flash->success('testss');
 
@@ -23,9 +27,10 @@ $app = new Controller(
 
         // $id = uniqid();
         // $c->load('service/queue');
-        // $this->queue->exchange('ObulloLog');
-        // $this->queue->push('SendLog', array('id' => $id, 'log' => array('debug' => 'test')), $routingKey = 'Server1.logger');
-        // $this->queue->push('SendLog', array('id' => $id, 'message' => 'this is my message'), $routingKey = 'Logger');
+        // $this->queue->channel('ObulloLog');
+        // $this->queue->push('Server1.logger', 'SendLog', array('log' => array('debug' => 'test')));
+        // $this->queue->push('Logger', 'SendLog', array('id' => $id, 'message' => 'this is my message'));
+
     }
 );
 
