@@ -25,6 +25,15 @@ $app->func(
 
         // var_dump($this->router->fetchDirectory());
         // var_dump($this->uri);
+        // 
+        $this->view->load(
+            'hello_world',
+            function () {
+                $this->assign('name', 'Obullo');
+                $this->assign('footer', $this->template('footer'));
+            }
+        );
+
     }
 );
 

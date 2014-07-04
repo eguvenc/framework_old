@@ -33,7 +33,7 @@ Class Logger implements ServiceInterface
             if ($c->load('config')['log']['enabled'] == false) {  // Use disabled handler if config disabled.
                 return new Disabled;
             }
-            $logger = new ObulloLogger($c, $c->load('config')['log'], $c->load('service/queue'));
+            $logger = new ObulloLogger($c, $c->load('config')['log']);
 
             $logger->addWriter(
                 LOGGER_FILE,

@@ -15,7 +15,7 @@ return array(
     */                             
     'error' => array(
         'debug' => true,      // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
-        'reporting' => false,  // Php "Native Error" reporting should be "Enabled" in "TEST" environment should be "Disabled"" in "PRODUCTION".
+        'reporting' => true,  // Php "Native Error" reporting should be "Enabled" in "TEST" environment should be "Disabled"" in "PRODUCTION".
     ),
     /*
     |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ return array(
     | @see Syslog Protocol http://tools.ietf.org/html/rfc5424
     */
     'log' =>   array(
-        'enabled' => false,      // On / Off logging.
+        'enabled' => true,      // On / Off logging.
         'output'  => false,      // On / Off debug html output. When it is enabled all handlers will be disabled.
         'threshold' => array(    // Set allowed log levels.  ( @see http://www.php.net/manual/en/function.syslog.php )
             LOG_EMERG,              
