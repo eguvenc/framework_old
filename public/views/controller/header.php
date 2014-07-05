@@ -3,7 +3,7 @@
 /**
  * $c Header Controller
  *
- * @var Private View Controller
+ * @var View Controller
  */
 $app = new Controller(
     function ($c) {
@@ -15,22 +15,24 @@ $app = new Controller(
 $app->func(
     'index',
     function () {
-        $firstSegment   = $this->request->globals()->uri->segment(0);     // Get first segnment
-        $currentSegment = (empty($firstSegment)) ? 'home' : $firstSegment;  // Set current segment as "home" if its empty
 
-        $li = '';
-        $navbar = array(
-            'home'    => 'Home',
-            'about'   => 'About', 
-            'contact' => 'Contact',
-            'membership/login'   => 'Login',
-            'membership/signup'  => 'Signup',
-        );
-        foreach ($navbar as $key => $value) {
-            $active = ($currentSegment == $key) ? ' id="active" ' : '';
-            $li.= '<li>'.$this->url->anchor($key, $value, " $active ").'</li>';
-        }
+        // $firstSegment   = $this->request->globals()->uri->segment(0);     // Get first segnment
+        // $currentSegment = (empty($firstSegment)) ? 'home' : $firstSegment;  // Set current segment as "home" if its empty
 
+        // $li = '';
+        // $navbar = array(
+        //     'home'    => 'Home',
+        //     'about'   => 'About', 
+        //     'contact' => 'Contact',
+        //     'membership/login'   => 'Login',
+        //     'membership/signup'  => 'Signup',
+        // );
+        // foreach ($navbar as $key => $value) {
+        //     $active = ($currentSegment == $key) ? ' id="active" ' : '';
+        //     $li.= '<li>'.$this->url->anchor($key, $value, " $active ").'</li>';
+        // }
+
+        $li = null;
         // Output must be string;
 
         echo $this->view->load(
