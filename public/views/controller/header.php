@@ -16,6 +16,13 @@ $app->func(
     'index',
     function () {
 
+
+        echo '<pre>Request: <span class="string">'.$this->uri->getUriString().'</span></pre>';
+        echo '<pre>Global Request Object: <span class="string">'.$this->request->globals('uri')->getUriString().'</span></pre>';
+        echo '<p>-----------------------------------------</p>';
+
+        var_dump($this->router->fetchDirectory());
+
         // $firstSegment   = $this->request->globals()->uri->segment(0);     // Get first segnment
         // $currentSegment = (empty($firstSegment)) ? 'home' : $firstSegment;  // Set current segment as "home" if its empty
 
@@ -35,6 +42,8 @@ $app->func(
         $li = null;
         // Output must be string;
 
+
+        /*
         echo $this->view->load(
             'header',
             function () use ($li) {
@@ -42,6 +51,7 @@ $app->func(
             },
             false
         );
+        */
     }
 );
 

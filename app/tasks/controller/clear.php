@@ -20,8 +20,6 @@ $app->func(
     '_clear',
     function () use ($c) {
         
-        echo $a;
-        
         $files = array(
             trim($c->load('config')['log']['path']['app'], '/'),
             trim($c->load('config')['log']['path']['ajax'], '/'),
