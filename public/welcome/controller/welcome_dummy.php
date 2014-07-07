@@ -3,13 +3,14 @@
 /**
  * $app hello_dummy
  * 
- * Dummy test class for Lvc
+ * Dummy test class for testing "Layers"
  * 
  * @var Controller
  */
 $app = new Controller(
     function ($c) {
         $c->load('uri');
+
     }
 );
 
@@ -23,15 +24,17 @@ $app->func(
         echo '<p>-----------------------------------------</p>';
 
         echo $this->layer->get('views/header');
-        echo $this->layer->get('views/header');
-        echo $this->layer->get('views/header');
-        
+
         var_dump($this->router->fetchDirectory());
-        // echo $this->view->load('dummy', false)->layer('welcome');
-        // exit;
-        
+
+        echo $this->layer->get('views/test');
+
+        var_dump($this->router->fetchDirectory());
+
+        $this->view->layer($this->router);
+        // echo $this->view->load('dummy', false);        
     }
 );
 
-/* End of file hello_dummy.php */
-/* Location: .public/tutorials/controller/hello_dummy.php */
+/* End of file welcome_dummy.php */
+/* Location: .public/tutorials/controller/welcome_dummy.php */

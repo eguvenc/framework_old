@@ -16,7 +16,6 @@ $app->func(
     'index',
     function () {
 
-
         echo '<pre>Request: <span class="string">'.$this->uri->getUriString().'</span></pre>';
         echo '<pre>Global Request Object: <span class="string">'.$this->request->globals('uri')->getUriString().'</span></pre>';
         echo '<p>-----------------------------------------</p>';

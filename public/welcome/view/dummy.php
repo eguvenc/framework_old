@@ -1,5 +1,5 @@
 
 
 <pre>
-test
+<b>Dummy View</b>
 </pre>
