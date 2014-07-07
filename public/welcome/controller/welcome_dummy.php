@@ -22,8 +22,11 @@ $app->func(
         echo '<pre>Global Request Object: <span class="string">'.$this->request->globals('uri')->getUriString().'</span></pre>';
         echo '<p>-----------------------------------------</p>';
 
-        // echo $this->layer->get('views/header');
-        // var_dump($this->router->fetchDirectory());
+        echo $this->layer->get('views/header');
+        echo $this->layer->get('views/header');
+        echo $this->layer->get('views/header');
+        
+        var_dump($this->router->fetchDirectory());
         // echo $this->view->load('dummy', false)->layer('welcome');
         // exit;
         

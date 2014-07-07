@@ -21,7 +21,7 @@ $app->func(
         echo '<pre>Global Request Object: <span class="string">'.$this->request->globals('uri')->getUriString().'</span></pre>';
         echo '<p>-----------------------------------------</p>';
 
-        var_dump($this->router->fetchDirectory());
+        // var_dump($this->router->fetchDirectory());
 
         // $firstSegment   = $this->request->globals()->uri->segment(0);     // Get first segnment
         // $currentSegment = (empty($firstSegment)) ? 'home' : $firstSegment;  // Set current segment as "home" if its empty

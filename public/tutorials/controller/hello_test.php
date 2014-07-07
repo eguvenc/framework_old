@@ -20,11 +20,11 @@ $app->func(
     'index', 
     function () use ($c) {
 
-        $this->layer->get('views/header');
-        $this->layer->get('welcome/welcome_dummy/1/2/3');
-        $this->layer->get('views/header');
+        // $this->layer->get('views/header');
+        echo $this->layer->get('welcome/welcome_dummy/1/2/3');
+        // $this->layer->get('views/header');
 
-        var_dump($this->router->fetchDirectory());
+        // echo 'GLOBAL: ' .$this->router->fetchDirectory();
 
         // echo $this->layer->get('views/header');
         // echo $this->layer->get('welcome/welcome_dummy/5/54/30');
@@ -32,41 +32,15 @@ $app->func(
         // echo $this->layer->get('tutorials/hello_dummy/1/2/6');
         // echo $this->layer->get('views/header');
 
-        exit('sd');
+        // exit('sd');
 
-/*
-        if ( ! isset($_SERVER['LAYER_REQUEST'])) {
-            echo '-------------------------';
-        }
-
-        var_dump($this->request->globals('router')->fetchDirectory());
-
-        var_dump($this->router->fetchDirectory());
-*/
-
-        // echo $this->layer->get('welcome/welcome_dummy/1/2/3');
-
-        // echo $this->layer->get('tutorials/hello_dummy/1/2/6');
-
-        // // var_dump($this->uri);
-        
-        // $r = $this->layer->post('ajax/user/get_departments');
-        // $this->layer->post('ajax/user/get_departments');
-
-        // echo $this->layer->get('welcome/welcome_dummy/4/2/3');
-        // $this->layer->get('welcome/welcome_dummy/1/2/3');
-
-        // var_dump($this->uri->getUriString());
-        // var_dump($this->request->globals()->uri->getUriString());
-        
-
-        $this->view->load(
-            'hello_world',
-            function () {
-                $this->assign('name', 'Obullo');
-                $this->assign('footer', $this->template('footer'));
-            }
-        );
+        // $this->view->load(
+        //     'hello_world',
+        //     function () {
+        //         $this->assign('name', 'Obullo');
+        //         $this->assign('footer', $this->template('footer'));
+        //     }
+        // );
 
     }
 );
