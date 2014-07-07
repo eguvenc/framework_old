@@ -20,13 +20,12 @@ $app->func(
     'index', 
     function () use ($c) {
 
-        echo $this->layer->get('views/header');
-        echo $this->layer->get('welcome/welcome_dummy/1/2/3');
-        echo $this->layer->get('views/header');
-        echo $this->layer->get('welcome/welcome_dummy/5/54/30');
-
-        // echo $this->layer->get('tutorials/hello_dummy/1/2/6');
         // echo $this->layer->get('views/header');
+        // echo $this->layer->get('welcome/welcome_dummy/1/2/3');
+        // echo $this->layer->get('views/header');
+        echo $this->layer->get('welcome/welcome_dummy/5/54/30');
+        echo $this->layer->get('tutorials/hello_dummy/1/2/6');
+        echo $this->layer->get('views/header');
 
         // exit('sd');
 

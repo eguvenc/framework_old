@@ -9,30 +9,26 @@
  */
 $app = new Controller(
     function ($c) {
-        $c->load('uri');
-
+        $c->load('view');
+        $c->load('layer');
     }
 );
 
 $app->func(
     'index', 
     function ($arg1 = '', $arg2 = '', $arg3 = '') {
-
+        
         echo '<pre>Request: <span class="string">'.$this->uri->getUriString().'</span></pre>';
         echo '<pre>Response: <span class="string">'.$arg1 .' - '.$arg2. ' - '.$arg3.'</span></pre>';
         echo '<pre>Global Request Object: <span class="string">'.$this->request->globals('uri')->getUriString().'</span></pre>';
         echo '<p>-----------------------------------------</p>';
 
+        // var_dump($this->router->fetchDirectory());
+        
         echo $this->layer->get('views/header');
-
-        var_dump($this->router->fetchDirectory());
-
-        echo $this->layer->get('views/test');
-
-        var_dump($this->router->fetchDirectory());
-
-        $this->view->layer($this->router);
-        // echo $this->view->load('dummy', false);        
+        
+        echo $this->view->layer($this)->load('dummy', false);
+     
     }
 );
 
