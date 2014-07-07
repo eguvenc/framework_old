@@ -1,7 +1,7 @@
 <?php
 
 /**
- * $app hello_dummy
+ * $app welcome_dummy
  * 
  * Dummy test class for testing "Layers"
  * 
@@ -23,11 +23,9 @@ $app->func(
         echo '<pre>Global Request Object: <span class="string">'.$this->request->globals('uri')->getUriString().'</span></pre>';
         echo '<p>-----------------------------------------</p>';
 
-        // var_dump($this->router->fetchDirectory());
-        
         echo $this->layer->get('views/header');
         
-        echo $this->view->layer($this)->load('dummy', false);
+        echo $this->view->nested($this)->load('dummy', false);
      
     }
 );

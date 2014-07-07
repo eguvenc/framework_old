@@ -54,6 +54,5 @@ $app->func(
     }
 );
 
-
 /* End of file hello_world.php */
 /* Location: .public/tutorials/controller/hello_world.php */
