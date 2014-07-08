@@ -98,17 +98,15 @@ return array(
             'httpOnly' => false,           // When true the cookie will be made accessible only through the HTTP protocol
             'prefix'   => '',              // Set a prefix to your cookie
         ),
-        'storageKey' => 'o2_sessions:',   // Don't remove ":" colons. Your cache handler keeps keys in folders using colons.
+        'storageKey' => 'o2_sessions:',    // Don't remove ":" colons. Your cache handler keeps keys in folders using colons.
         'lifetime'       => 7200,          // The number of SECONDS you want the session to last. By default " 2 hours ". "0" is no expiration.
         'expireOnClose'  => true,          // Whether to cause the session to expire automatically when the browser window is closed
-        'matchIp'        => false,         // Whether to match the user's IP address when reading the session data
-        'matchUseragent' => true,          // Whether to match the User Agent when reading the session data
         'timeToUpdate'   => 1,             // How many seconds between framework refreshing "Session" meta data Information"
         'rememberMeSeconds' => 604800,     // Remember me ttl for session reminder class. By default " 1 Week ".
         'metaData' => array(
-            'storageKey' => 'o2_sessions:MetaData:', // Don't remove ":" colons. Your cache handler keeps keys in folders using colons.
-            'matchIp' => true,
-            'matchUseragent' => true
+            'enabled' => false,
+            'matchIp' => false,         // Whether to match the user's IP address when reading the session data
+            'matchUserAgent' => true    // Whether to match the User Agent when reading the session data
         )
         // 'php.ini' => array(
         //     // 'session.gc_divisor'      => 100,   // Configure garbage collection
@@ -140,8 +138,8 @@ return array(
                                                     // used to determine which server to read/write keys from.
                         ),
         ),
-        'auth'       =>  'aZX0bjL',            // connection password
-        'cachePath'  =>  '/data/temp/cache/',  // cache file storage path just for file cache
+        'auth' =>  'aZX0bjL',            // connection password
+        'path' =>  '/data/cache/',  // file storage path just for file cache
         'serializer' =>  'SERIALIZER_PHP',     // SERIALIZER_NONE, SERIALIZER_PHP, SERIALIZER_IGBINARY
     ),
     /*

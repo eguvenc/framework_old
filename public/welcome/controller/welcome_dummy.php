@@ -10,7 +10,6 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-        $c->load('layer');
     }
 );
 
@@ -23,6 +22,7 @@ $app->func(
         echo '<pre>Global Request Object: <span class="string">'.$this->request->globals('uri')->getUriString().'</span></pre>';
         echo '<p>-----------------------------------------</p>';
 
+        echo $this->layer->get('views/header');
         echo $this->layer->get('views/header');
         
         echo $this->view->nested($this)->load('dummy', false);
