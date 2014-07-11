@@ -19,11 +19,7 @@ $c['db'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['session'] = function () use ($c) {
-    return new Obullo\Session\Session(
-        $c, 
-        $c->load('config')['session'],
-        new Obullo\Session\Handler\Cache($c, $c->load('config')['session'])
-    );
+    return new Obullo\Session\Session($c, $c->load('config')['session']);
 };
 /*
 |--------------------------------------------------------------------------
@@ -31,16 +27,7 @@ $c['session'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['form'] = function () use ($c) {
-    return new Obullo\Form\Form(
-        $c,
-        array(
-            NOTICE_MESSAGE => '<div class="{class}">{icon}{message}</div>',
-            NOTICE_ERROR   => array('class' => 'alert alert-danger', 'icon' => '<span class="glyphicon glyphicon-remove-sign"></span>'),
-            NOTICE_SUCCESS => array('class' => 'alert alert-success', 'icon' => '<span class="glyphicon glyphicon-ok-sign"></span> '),
-            NOTICE_WARNING => array('class' => 'alert alert-warning', 'icon' => '<span class="glyphicon glyphicon-exclamation-sign"></span>'),
-            NOTICE_INFO    => array('class' => 'alert alert-info', 'icon' => '<span class="glyphicon glyphicon-info-sign"></span> '),
-        )
-    );
+    return new Obullo\Form\Form($c, $c->load('config')->load('form'));
 };
 /*
 |--------------------------------------------------------------------------
@@ -94,21 +81,9 @@ $c['post'] = function () use ($c) {
 |--------------------------------------------------------------------------
 | View
 |--------------------------------------------------------------------------
-| Lets you define "schemes" to extend views without hacking
-| the view function.
 */
 $c['view'] = function () use ($c) {
-    $config['schemes'] = array(
-        'default' => function () {
-            $this->assign('header', '@layer.views/header');
-            $this->assign('sidebar', '@layer.views/sidebar');
-            $this->assign('footer', $this->template('footer'));
-        },
-        'welcome' => function () {
-            $this->assign('footer', $this->template('footer'));
-        },
-    );
-    return new Obullo\View\View($c, $config);
+    return new Obullo\View\View($c, $c->load('config')['schemes']);
 };
 /*
 |--------------------------------------------------------------------------

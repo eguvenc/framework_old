@@ -1,0 +1,15 @@
+#!/bin/sh
+
+####################
+#  R E P A I R. S H  ( REPAIR MONGODB )
+####################
+
+sudo /etc/init.d/mongodb start
+sudo rm /var/lib/mongodb/mongod.lock
+sudo -u mongodb mongod -f /etc/mongodb.conf --repair
+sudo chown -R mongodb:mongodb /var/lib/mongodb
+sudo mongod --repair --dbpath /var/lib/mongodb
+sudo /etc/init.d/mongodb start
+mongo
+
+echo "Repair process successfully completed !"

@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Obullo\Queue\Handler\AMQP;
+use Obullo\Queue\Queue as OQueue;
 
 /**
  * Queue Service
@@ -26,7 +26,8 @@ Class Queue implements ServiceInterface
     public function register($c)
     {
         $c['queue'] = function () use ($c) {
-            return new AMQP($c);
+            $queue = new OQueue($c, $c->load('config')['queue']);
+            return $queue->getHandler();
         };
     }
 }

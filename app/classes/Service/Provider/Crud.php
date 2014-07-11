@@ -2,7 +2,7 @@
 
 namespace Service\Provider;
 
-use Obullo\Database\Crud\Crud as ObulloCrud;
+use Obullo\Database\Crud\Crud as OCrud;
 
 /**
  * Crud Database Provider
@@ -26,7 +26,7 @@ Class Crud implements ProviderInterface
     public function register($c)
     {
         $c['provider:crud'] = function ($key = 'db') use ($c) {
-            return new ObulloCrud($c->load('return service/provider/database', $key));  // Replace database object with crud.
+            return new OCrud($c->load('return service/provider/database', $key));  // Replace database object with crud.
         };
     }
 }

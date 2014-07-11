@@ -5,10 +5,10 @@ namespace Service;
 use Obullo\Log\Disabled, 
     Obullo\Log\Handler\File,
     Obullo\Log\Handler\Mongo,
-    Obullo\Log\Logger as ObulloLogger;
+    Obullo\Log\Logger as OLogger;
 
 /**
- * Log Provider
+ * Log Service
  *
  * @category  Service
  * @package   Logger
@@ -33,7 +33,7 @@ Class Logger implements ServiceInterface
             if ($c->load('config')['log']['enabled'] == false) {  // Use disabled handler if config disabled.
                 return new Disabled;
             }
-            $logger = new ObulloLogger($c, $c->load('config')['log']);
+            $logger = new OLogger($c, $c->load('config')['log']);
 
             $logger->addWriter(
                 LOGGER_FILE,
@@ -42,16 +42,16 @@ Class Logger implements ServiceInterface
                 },                                                // must be available working on local server.
                 3  // priority
             );
-
             $logger->addHandler(
                 LOGGER_MONGO, 
                 function () use ($c, $logger) { 
                     return new Mongo(
                         $c,
-                        $logger, 
+                        $logger,
                         array(
-                        'dsn' => 'mongodb://root:12345@localhost:27017/test', 
-                        'collection' => 'test_logs'
+                            'database' => 'db',
+                            'collection' => 'logs',
+                            'mongo' => $c->load('service/provider/mongo', 'db')
                         )
                     );
                 },
@@ -76,4 +76,4 @@ Class Logger implements ServiceInterface
 // END Logger class
 
 /* End of file Logger.php */
-/* Location: .classes/Service/Provider/Logger.php */
+/* Location: .classes/Service/Logger.php */

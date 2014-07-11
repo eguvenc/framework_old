@@ -15,7 +15,7 @@ return array(
     */                             
     'error' => array(
         'debug' => true,      // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
-        'reporting' => true,  // Php "Native Error" reporting should be "Enabled" in "TEST" environment should be "Disabled"" in "PRODUCTION".
+        'reporting' => false,  // Php "Native Error" reporting should be "Enabled" in "TEST" environment should be "Disabled"" in "PRODUCTION".
     ),
     /*
     |--------------------------------------------------------------------------
@@ -89,31 +89,7 @@ return array(
     | Sessions
     |--------------------------------------------------------------------------
     */
-    'session' => array(
-        'cookie' => array(
-            'name'     => 'session',       // The name you want for the cookie
-            'domain'   => '',              // Set to .your-domain.com for site-wide cookies
-            'path'     => '/',             // Typically will be a forward slash
-            'secure'   => false,           // When set to true, the cookie will only be set if a secure connection exists.
-            'httpOnly' => false,           // When true the cookie will be made accessible only through the HTTP protocol
-            'prefix'   => '',              // Set a prefix to your cookie
-        ),
-        'storageKey' => 'o2_sessions:',    // Don't remove ":" colons. Your cache handler keeps keys in folders using colons.
-        'lifetime'       => 7200,          // The number of SECONDS you want the session to last. By default " 2 hours ". "0" is no expiration.
-        'expireOnClose'  => true,          // Whether to cause the session to expire automatically when the browser window is closed
-        'timeToUpdate'   => 1,             // How many seconds between framework refreshing "Session" meta data Information"
-        'rememberMeSeconds' => 604800,     // Remember me ttl for session reminder class. By default " 1 Week ".
-        'metaData' => array(
-            'enabled' => false,
-            'matchIp' => false,         // Whether to match the user's IP address when reading the session data
-            'matchUserAgent' => true    // Whether to match the User Agent when reading the session data
-        )
-        // 'php.ini' => array(
-        //     // 'session.gc_divisor'      => 100,   // Configure garbage collection
-        //     // 'session.gc_maxlifetime'  => 7200,
-        //     // 'session.cookie_lifetime' => 0,
-        // ),
-    ),
+    'session' => '@include.session.php',
     /*
     |--------------------------------------------------------------------------
     | Localization
@@ -152,11 +128,27 @@ return array(
     ),
     /*
     |--------------------------------------------------------------------------
+    | View Schemes
+    |--------------------------------------------------------------------------
+    */
+    'schemes' => array(
+        'default' => function () {
+            $this->assign('header', '@layer.views/header');
+            $this->assign('sidebar', '@layer.views/sidebar');
+            $this->assign('footer', $this->template('footer'));
+        },
+        'welcome' => function () {
+            $this->assign('footer', $this->template('footer'));
+        },
+    ),
+    /*
+    |--------------------------------------------------------------------------
     | Queue
     |--------------------------------------------------------------------------
     */
     'queue' => array(
-        'AMQP' => array(
+        'handler' => 'AMQP',
+        'server' => array(
             'host'  => '10.0.0.157',
             'port'  => 5672,
             'user'  => 'root',
@@ -171,7 +163,7 @@ return array(
             'storage' => 'db',              // Storage Handler "mongo" or "db" which are defined in your "providers.php".
             'database' => 'queue_jobs ',    // Database name
             'table' => 'failures',          // Table or mongo collection name
-            'emergency' => array('enabled' => true, 'handler' => 'email')  // When the job fails logger will push data according to your emergency handler.
+            'emergency' => array('enabled' => true, 'handler' => 'email')  // When the job fails logger will push data to your emergency handler.
         ),
     ),
     /*

@@ -8,33 +8,28 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-        $c->load('session as sess');
 
-        // $this->sess->set('test', 'hfsassssssssssdf');
-        echo $this->sess->get('test');
 
-        // echo $a;
-        // $c->load('translator');
-        // $c->load('session/flash as flash');
-        
-        // $c->load('service/provider/mongo as mongo');
+        // new Obullo\Log\Filters\Level;
+
+        // $this->logger->addFilter(
+        //     LOGGER_MONGO, 
+        //     'Obullo\Log\Filters\Level', 
+        //     array(LOG_NOTICE, LOG_ALERT)
+        // );
+        // // $this->logger->getFilteredRecords(LOGGER_MONGO, array());
 
         // $this->logger->load(LOGGER_MONGO);
+        // $this->logger->info('HELLO INFO !!!!!');
+        // $this->logger->notice('HELLO NOTICE !!!!!');
+        // $this->logger->alert('HELLO ALERT !!!!!');
+        // $this->logger->push(LOGGER_MONGO);
 
-        // echo $a;
-
-        // // $this->flash->success('testss');
-
-        // echo $this->flash->get('notice:success');
-
-        // var_dump($this->mongo);
-
-        // $id = uniqid();
         // $c->load('service/queue');
-        // $this->queue->channel('ObulloLog');
-        // $this->queue->push('Server1.logger', 'SendLog', array('log' => array('debug' => 'test')));
-        // $this->queue->push('Logger', 'SendLog', array('id' => $id, 'message' => 'this is my message'));
-
+        // $this->queue->channel('Log');
+        // $this->queue->push($route = 'Server1.logger', 'SendLog', array('log' => array('debug' => 'Test')));
+        // $this->queue->push($route = 'Server1.logger', 'SendLog', array('message' => 'This is my message'));
+        // $this->queue->push($route = 'Server1.logger', 'SendLog', array('log' => array('debug' => 'Test')));
     }
 );
 
