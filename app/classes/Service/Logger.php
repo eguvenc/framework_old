@@ -5,7 +5,8 @@ namespace Service;
 use Obullo\Log\Disabled, 
     Obullo\Log\Handler\File,
     Obullo\Log\Handler\Mongo,
-    Obullo\Log\Logger as OLogger;
+    Obullo\Log\Logger as OLogger,
+    Obullo\Log\Writer\FileWriter;
 
 /**
  * Log Service
@@ -34,14 +35,25 @@ Class Logger implements ServiceInterface
                 return new Disabled;
             }
             $logger = new OLogger($c, $c->load('config')['log']);
-
+            /*
+            |--------------------------------------------------------------------------
+            | Writers
+            |--------------------------------------------------------------------------
+            | Primary file writer must be available on local server.
+            */
             $logger->addWriter(
                 LOGGER_FILE,
                 function () use ($c, $logger) { 
-                    return new File($c, $logger);  // primary
-                },                                                // must be available working on local server.
-                3  // priority
+                    return new File($c, $logger, new FileWriter($logger, $c->load('config')['log']));
+                },
+                2  // priority
             );
+            /*
+            |--------------------------------------------------------------------------
+            | Handlers
+            |--------------------------------------------------------------------------
+            | Add your available log handlers
+            */
             $logger->addHandler(
                 LOGGER_MONGO, 
                 function () use ($c, $logger) { 
@@ -57,11 +69,10 @@ Class Logger implements ServiceInterface
                 },
                 1  // priority
             );
-
             /*
             |--------------------------------------------------------------------------
-            | Removes file handler and use second defined handler as primary 
-            | in "production" ( live ) mode.
+            | Removes file handler and uses second handler as primary 
+            | in "production" env.
             |--------------------------------------------------------------------------
             */
             if (ENV == 'prod') {

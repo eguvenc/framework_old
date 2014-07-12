@@ -12,18 +12,18 @@ $app = new Controller(
 
         // new Obullo\Log\Filters\Level;
 
-        // $this->logger->addFilter(
-        //     LOGGER_MONGO, 
-        //     'Obullo\Log\Filters\Level', 
-        //     array(LOG_NOTICE, LOG_ALERT)
-        // );
-        // // $this->logger->getFilteredRecords(LOGGER_MONGO, array());
+        $this->logger->addFilter(
+            LOGGER_MONGO, 
+            'Obullo\Log\Filter\Level', 
+            array(LOG_NOTICE, LOG_ALERT)
+        );
+    
 
-        // $this->logger->load(LOGGER_MONGO);
-        // $this->logger->info('HELLO INFO !!!!!');
-        // $this->logger->notice('HELLO NOTICE !!!!!');
-        // $this->logger->alert('HELLO ALERT !!!!!');
-        // $this->logger->push(LOGGER_MONGO);
+        $this->logger->load(LOGGER_MONGO);
+        $this->logger->info('HELLO INFO !!!!!');
+        $this->logger->notice('HELLO NOTICE !!!!!');
+        $this->logger->alert('HELLO ALERT !!!!!');
+        $this->logger->push(LOGGER_MONGO);
 
         // $c->load('service/queue');
         // $this->queue->channel('Log');
