@@ -6,7 +6,8 @@ use Obullo\Log\Disabled,
     Obullo\Log\Handler\File,
     Obullo\Log\Handler\Mongo,
     Obullo\Log\Logger as OLogger,
-    Obullo\Log\Writer\FileWriter;
+    Obullo\Log\Writer\FileWriter,
+    Obullo\Log\Writer\MongoWriter;
 
 /**
  * Log Service
@@ -44,7 +45,14 @@ Class Logger implements ServiceInterface
             $logger->addWriter(
                 LOGGER_FILE,
                 function () use ($c, $logger) { 
-                    return new File($c, $logger, new FileWriter($logger, $c->load('config')['log']));
+                    return new File(
+                        $c,
+                        $logger,
+                        new FileWriter(
+                            $logger, 
+                            $c->load('config')['log']
+                        )
+                    );
                 },
                 2  // priority
             );
@@ -60,10 +68,14 @@ Class Logger implements ServiceInterface
                     return new Mongo(
                         $c,
                         $logger,
-                        array(
+                        new MongoWriter(
+                            $logger,
+                            array(
+                            'mongo' => $c->load('service/provider/mongo', 'db'),
                             'database' => 'db',
                             'collection' => 'logs',
-                            'mongo' => $c->load('service/provider/mongo', 'db')
+                            'save_options' => null
+                            )
                         )
                     );
                 },

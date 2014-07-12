@@ -17,8 +17,6 @@ $app = new Controller(
             'Obullo\Log\Filter\Level', 
             array(LOG_NOTICE, LOG_ALERT)
         );
-    
-
         $this->logger->load(LOGGER_MONGO);
         $this->logger->info('HELLO INFO !!!!!');
         $this->logger->notice('HELLO NOTICE !!!!!');
