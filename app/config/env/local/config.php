@@ -24,18 +24,8 @@ return array(
     | @see Syslog Protocol http://tools.ietf.org/html/rfc5424
     */
     'log' =>   array(
-        'enabled' => true,      // On / Off logging.
+        'enabled' => true,       // On / Off logging.
         'output'  => false,      // On / Off debug html output. When it is enabled all handlers will be disabled.
-        'threshold' => array(    // Set allowed log levels.  ( @see http://www.php.net/manual/en/function.syslog.php )
-            LOG_EMERG,              
-            LOG_ALERT,          
-            LOG_CRIT,
-            LOG_ERR,
-            LOG_WARNING,
-            LOG_NOTICE,
-            LOG_INFO,
-            LOG_DEBUG
-        ),
         'channel'   => 'system',       // Default channel name it should be general.
         'line'      => '[%datetime%] %channel%.%level%: --> %message% %context% %extra%\n',  // This format just for line based log drivers.
         'path'      => array(
@@ -147,12 +137,11 @@ return array(
     |--------------------------------------------------------------------------
     */
     'queue' => array(
-        'handler' => 'AMQP',
         'server' => array(
             'host'  => '10.0.0.157',
             'port'  => 5672,
             'user'  => 'root',
-            'pass'  => '123456', 
+            'pass'  => '123456',
             'vhost' => '/',
             'debug' => true,
             'defaultQueueName' => 'defaultQueue',
