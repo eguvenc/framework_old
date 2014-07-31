@@ -94,8 +94,8 @@ $app->func(
                     $jobNameRepeat = 20;
                 }
                 $lines = "\033[1;36m ".$job->getJobId().str_repeat(' ', $jobIdRepeat).' | ';
-                $lines.= $raw['job'].str_repeat(' ', $jobNameRepeat).' | ';;
-                $lines.= json_encode($raw['data']);
+                $lines.= $raw['job'].str_repeat(' ', $jobNameRepeat).' | ';
+                $lines.= "\033[0;36m ".json_encode($raw['data'])."\33[0m\n";
                 $lines.= "\33[0m\n";
                 echo $lines;
                 if ($remove == 'clear') {  // Delete all jobs in the queue

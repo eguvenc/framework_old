@@ -36,22 +36,12 @@ info       : Interesting events. Examples: User logs in, SQL logs, Application B
 debug      : Detailed debug information.\33[0m\n";
             exit;
         }
-        global $c;
-
-        if ($level == 'tasks') {
-            $path = str_replace('/', DS, trim($c['config']['log']['path']['task'], '/'));
-        } else {
-            $path = str_replace('/', DS, trim($c['config']['log']['path']['app'], '/'));
-        }
-        if (strpos($path, 'data') === 0) {  // replace "data" word to application data path
-            $file = str_replace('data', DS . trim(DATA, DS), $path);
-        }
         if ($level == '' || $level == 'tasks') {
             $this->_displayLogo();
-            $this->_follow($file); // Display the debugging.
+            $this->_follow(); // Display the debugging.
         } else {
             $this->_displayLogo();
-            $this->_follow($file, $level);
+            $this->_follow($level);
         }
     }
 );
@@ -67,154 +57,158 @@ $app->func(
        |______||____||_____||_||_||____|
 
         Welcome to Log Manager v2.0 (c) 2014
-You are displaying the log file. To filter log data run "$php task log $level"'."\n\033[0m";
+You are displaying the logs. To filter logs "$php task log $level"'."\n\033[0m";
 
     }
 );
 
 /**
- * Console log 
  * Print colorful log messages to your console.
- * @param  $file
+ * 
+ * @param $level
  */ 
 $app->func(
     '_follow',
-    function ($file, $level = '') {
-        
-        echo "\33[0;36mFollowing log data ...\33[0m\n";
+    function ($level = '') {
 
-        $break = "\n------------------------------------------------------------------------------------------";
+        // new Obullo\Log\Follower\File($level);
 
-        static $lines = array();
-        $size = 0;
-        while (true) {
+        $followerName = 'Obullo\Log\Follower\\'.ucfirst($this->logger->getWriter());
+        $follower = new $followerName($level);
+        $follower->follow($level);
 
-            clearstatcache(); // clear the cache
-            if ( ! file_exists($file)) { // start process when file exists.
-                continue;
-            }
-            $currentSize = filesize($file); // continue the process when file size change.
-            if ($size == $currentSize) {
-                usleep(50);
-                continue;
-            }
-            if ( ! $fh = fopen($file, 'rb')) {
-                echo("\n\n\033[1;31mPermission Error: You need to have root access or log folder has not got write permission.\033[0m\n");
-                die;
-            }
-            fseek($fh, $size);
-            $i = 0;
-            while ($line = fgets($fh)) {
-                if ($i == 0) {
-                    $line = str_replace("\n", '', $line);
-                }
-                $line = trim(preg_replace('/[\r\n]/', "\n", $line), "\n"); // remove all newlines   
-                $out  = explode('.', $line);
+        // echo "\33[0;36mFollowing $writer log data ...\33[0m\n";
+        // $break = "\n------------------------------------------------------------------------------------------";
+        // static $lines = array();
+        // $size = 0;
+        // while (true) {
 
-                if (isset($out[1])) {
-                    $messageBody = $out[1];
-                }
-                if (isset($messageBody)) {
+        //     clearstatcache(); // clear the cache
+        //     if ( ! file_exists($file)) { // start process when file exists.
+        //         continue;
+        //     }
+        //     $currentSize = filesize($file); // continue the process when file size change.
+        //     if ($size == $currentSize) {
+        //         usleep(50);
+        //         continue;
+        //     }
+        //     if ( ! $fh = fopen($file, 'rb')) {
+        //         echo("\n\n\033[1;31mPermission Error: You need to have root access or log folder has not got write permission.\033[0m\n");
+        //         die;
+        //     }
+        //     fseek($fh, $size);
+        //     $i = 0;
+        //     while ($line = fgets($fh)) {
+        //         if ($i == 0) {
+        //             $line = str_replace("\n", '', $line);
+        //         }
+        //         $line = trim(preg_replace('/[\r\n]/', "\n", $line), "\n"); // remove all newlines   
+        //         $out  = explode('.', $line);
 
-                    if (strpos($messageBody, '$_SQL') !== false) {   // remove unnecessary spaces from sql output
-                        $line = "\033[1;32m".preg_replace('/[\s]+/', ' ', $line)."\033[0m";
-                        $line = preg_replace('/[\r\n]/', "\n", $line);
-                    }
-                    if (strpos($messageBody, '$_') !== false) {
-                        $line = preg_replace('/\s+/', ' ', $line);
-                        $line = preg_replace('/\[/', "[", $line);  // do some cleaning
+        //         if (isset($out[1])) {
+        //             $messageBody = $out[1];
+        //         }
+        //         if (isset($messageBody)) {
 
-                        if (strpos($messageBody, '$_REQUEST_URI') !== false) {
-                            $line  = "\033[1;36m".$break."\n".$line.$break."\n\033[0m";
-                        } elseif (strpos($messageBody, '$_LAYER') !== false) {
-                            $line = "\033[1;34m".strip_tags($line)."\033[0m";
-                        } else {
-                            $line = "\033[1;35m".$line."\033[0m";
-                        }
-                    }
-                    if (strpos($messageBody, '$_TASK') !== false) {
-                        $line = "\033[1;34m".$line."\033[0m";
-                    }
-                    if (strpos($messageBody, 'loaded:') !== false) {
-                        $line = "\033[0;35m".$line."\033[0m";
-                    }
-                    if (strpos($messageBody, 'debug') !== false) {   // Do not write two times
-                        if ($level == '' OR $level == 'debug') {
-                            if (strpos($messageBody, 'Final output sent to browser') !== false) {
-                                $line = "\033[1;36m".$line."\033[0m";
-                            }
-                            $line = "\033[0;35m".$line."\033[0m";
-                            if ( ! isset($lines[$i])) {
-                                echo $line."\n";
-                            }
-                        }
-                    }
-                    if (strpos($messageBody, 'info') !== false) {
-                        if ($level == '' OR $level == 'info') {
-                            $line = "\033[1;33m".$line."\033[0m";
-                            if ( ! isset($lines[$line])) {
-                                echo $line."\n";
-                            }
-                        }
-                    }
-                    if (strpos($messageBody, 'error') !== false) {
-                        if ($level == '' OR $level == 'error') {
-                            $line = "\033[1;31m".$line."\033[0m";
-                            if ( ! isset($lines[$line])) {
-                                echo $line."\n";
-                            }
-                        }
-                    }
-                    if (strpos($messageBody, 'alert') !== false) {
-                        if ($level == '' OR $level == 'alert') {
-                            $line = "\033[1;31m".$line."\033[0m";
-                            if ( ! isset($lines[$line])) {
-                                echo $line."\n";
-                            }
-                        }
-                    }
-                    if (strpos($messageBody, 'emergency') !== false) {
-                        if ($level == '' OR $level == 'emergency') {
-                            $line = "\033[1;31m".$line."\033[0m";
-                            if ( ! isset($lines[$line])) {
-                                echo $line."\n";
-                            }
-                        }
-                    }
-                    if (strpos($messageBody, 'critical') !== false) {
-                        if ($level == '' OR $level == 'critical') {
-                            $line = "\033[1;31m".$line."\033[0m";
-                            if ( ! isset($lines[$line])) {
-                                echo $line."\n";
-                            }
-                        }
-                    }
-                    if (strpos($messageBody, 'warning') !== false) {
-                        if ($level == '' OR $level == 'warning') {
-                            $line = "\033[1;31m".$line."\033[0m";
-                            if ( ! isset($lines[$line])) {
-                                echo $line."\n";
-                            }
-                        }
-                    }
-                    if (strpos($messageBody, 'notice') !== false) {
-                        if ($level == '' OR $level == 'notice') {
-                            $line = "\033[1;35m".$line."\033[0m";   // 1;44
-                            if ( ! isset($lines[$line])) {
-                                echo $line."\n";
-                            }
-                        }
-                    }
+        //             if (strpos($messageBody, '$_SQL') !== false) {   // remove unnecessary spaces from sql output
+        //                 $line = "\033[1;32m".preg_replace('/[\s]+/', ' ', $line)."\033[0m";
+        //                 $line = preg_replace('/[\r\n]/', "\n", $line);
+        //             }
+        //             if (strpos($messageBody, '$_') !== false) {
+        //                 $line = preg_replace('/\s+/', ' ', $line);
+        //                 $line = preg_replace('/\[/', "[", $line);  // do some cleaning
 
-                } // end isset
+        //                 if (strpos($messageBody, '$_REQUEST_URI') !== false) {
+        //                     $line  = "\033[1;36m".$break."\n".$line.$break."\n\033[0m";
+        //                 } elseif (strpos($messageBody, '$_LAYER') !== false) {
+        //                     $line = "\033[1;34m".strip_tags($line)."\033[0m";
+        //                 } else {
+        //                     $line = "\033[1;35m".$line."\033[0m";
+        //                 }
+        //             }
+        //             if (strpos($messageBody, '$_TASK') !== false) {
+        //                 $line = "\033[1;34m".$line."\033[0m";
+        //             }
+        //             if (strpos($messageBody, 'loaded:') !== false) {
+        //                 $line = "\033[0;35m".$line."\033[0m";
+        //             }
+        //             if (strpos($messageBody, 'debug') !== false) {   // Do not write two times
+        //                 if ($level == '' OR $level == 'debug') {
+        //                     if (strpos($messageBody, 'Final output sent to browser') !== false) {
+        //                         $line = "\033[1;36m".$line."\033[0m";
+        //                     }
+        //                     $line = "\033[0;35m".$line."\033[0m";
+        //                     if ( ! isset($lines[$i])) {
+        //                         echo $line."\n";
+        //                     }
+        //                 }
+        //             }
+        //             if (strpos($messageBody, 'info') !== false) {
+        //                 if ($level == '' OR $level == 'info') {
+        //                     $line = "\033[1;33m".$line."\033[0m";
+        //                     if ( ! isset($lines[$line])) {
+        //                         echo $line."\n";
+        //                     }
+        //                 }
+        //             }
+        //             if (strpos($messageBody, 'error') !== false) {
+        //                 if ($level == '' OR $level == 'error') {
+        //                     $line = "\033[1;31m".$line."\033[0m";
+        //                     if ( ! isset($lines[$line])) {
+        //                         echo $line."\n";
+        //                     }
+        //                 }
+        //             }
+        //             if (strpos($messageBody, 'alert') !== false) {
+        //                 if ($level == '' OR $level == 'alert') {
+        //                     $line = "\033[1;31m".$line."\033[0m";
+        //                     if ( ! isset($lines[$line])) {
+        //                         echo $line."\n";
+        //                     }
+        //                 }
+        //             }
+        //             if (strpos($messageBody, 'emergency') !== false) {
+        //                 if ($level == '' OR $level == 'emergency') {
+        //                     $line = "\033[1;31m".$line."\033[0m";
+        //                     if ( ! isset($lines[$line])) {
+        //                         echo $line."\n";
+        //                     }
+        //                 }
+        //             }
+        //             if (strpos($messageBody, 'critical') !== false) {
+        //                 if ($level == '' OR $level == 'critical') {
+        //                     $line = "\033[1;31m".$line."\033[0m";
+        //                     if ( ! isset($lines[$line])) {
+        //                         echo $line."\n";
+        //                     }
+        //                 }
+        //             }
+        //             if (strpos($messageBody, 'warning') !== false) {
+        //                 if ($level == '' OR $level == 'warning') {
+        //                     $line = "\033[1;31m".$line."\033[0m";
+        //                     if ( ! isset($lines[$line])) {
+        //                         echo $line."\n";
+        //                     }
+        //                 }
+        //             }
+        //             if (strpos($messageBody, 'notice') !== false) {
+        //                 if ($level == '' OR $level == 'notice') {
+        //                     $line = "\033[1;35m".$line."\033[0m";   // 1;44
+        //                     if ( ! isset($lines[$line])) {
+        //                         echo $line."\n";
+        //                     }
+        //                 }
+        //             }
 
-                $i++;
-                $lines[$line] = $i;
-            }
-            fclose($fh);
-            clearstatcache();
-            $size = $currentSize;
-        }
+        //         } // end isset
+
+        //         $i++;
+        //         $lines[$line] = $i;
+        //     }
+        //     fclose($fh);
+        //     clearstatcache();
+        //     $size = $currentSize;
+        // }
     }
 );
 

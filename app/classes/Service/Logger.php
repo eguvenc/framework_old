@@ -2,6 +2,10 @@
 
 namespace Service;
 
+define('LOGGER_QUEUE_CHANNEL', 'Logs');
+define('LOGGER_QUEUE_JOB', 'Log');
+define('LOGGER_QUEUE_ROUTE', 'Server1.Logger.File');
+
 use Obullo\Log\Disabled,
     Obullo\Log\Handler\File,
     Obullo\Log\Handler\Mongo,
@@ -57,9 +61,9 @@ Class Logger implements ServiceInterface
                             $logger,
                             $c->load('service/queue'),
                             array(
-                                'channel' => 'Logs',
-                                'route' => 'Server1.Logger.File',
-                                'job' => 'Log',
+                                'channel' =>  LOGGER_QUEUE_CHANNEL,
+                                'route' => LOGGER_QUEUE_ROUTE,
+                                'job' => LOGGER_QUEUE_JOB,
                                 'delay' => 0,
                             )
                         )

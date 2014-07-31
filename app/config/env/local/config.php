@@ -14,7 +14,7 @@ return array(
     | If debug enabled framework converts all php errors to exceptions.
     */                             
     'error' => array(
-        'debug' => true,      // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
+        'debug' => true,       // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
         'reporting' => false,  // Php "Native Error" reporting should be "Enabled" in "TEST" environment should be "Disabled"" in "PRODUCTION".
     ),
     /*
