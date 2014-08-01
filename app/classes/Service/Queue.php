@@ -2,8 +2,7 @@
 
 namespace Service;
 
-use Obullo\Queue\Queue as OQueue,
-    Obullo\Queue\Handler\AMQP;
+use Obullo\Queue\Handler\AMQP;
 
 /**
  * Queue Service

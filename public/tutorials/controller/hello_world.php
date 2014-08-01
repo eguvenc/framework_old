@@ -9,10 +9,6 @@ $app = new Controller(
     function ($c) {
         $c->load('view');
 
-        $w = $this->logger->getWriter();
-
-        print_r($w);
-
         // new Obullo\Log\Filters\Level;
         
         // $this->logger->load(LOGGER_MONGO);

@@ -19,7 +19,6 @@ $app->func(
 $app->func(
     '_clear',
     function () use ($c) {
-        
         $files = array(
             trim($c->load('config')['log']['path']['app'], '/'),
             trim($c->load('config')['log']['path']['ajax'], '/'),
@@ -37,7 +36,11 @@ $app->func(
                 unlink($path.$filename);
             }
         }
-        echo "\33[1;36mApplication log files deleted.\33[0m\n";
+        if ($this->logger->getWriterName() == 'QueueWriter') { // Also clear queue data
+            $queue = $c->load('service/queue');
+            $queue->purgeQueue(LOGGER_QUEUE_CHANNEL, LOGGER_QUEUE_NAME);
+        }
+        echo "\33[1;36mApplication logs deleted.\33[0m\n";
     }
 );
 

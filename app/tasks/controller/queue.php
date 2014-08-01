@@ -53,10 +53,14 @@ $app->func(
             echo "\33[1;36mUsage:\33[0m\33[0;36m
     php task [command] [arguments]\n\33[0m\n";
 
-            echo "\33[1;36mAvailable commands:\33[0m\33[0;36m
-    list       : List queued jobs.
-    listen     : Wait and send jobs to job handler.\33[0m\n";
+    echo "\33[1;36mAvailable commands:\33[0m\33[0;36m
 
+    \33[1;36mlist       : List queued jobs.\33[0m\33[0;36m
+    \33[1;36mlisten     : Wait and send jobs to job handler.\33[0m\33[0;36m
+    
+    \33[1;36mExamples :\33[0m\33[0;36m
+    \$php task queue list --channel=Logger --route=server1.log
+    \$php task queue listen --channel=Logger --route=server1.log --memory=128 --delay=0 --timeout=3\33[0m\n";
     }
 );
 
