@@ -24,4 +24,6 @@ return array(
     'OBULLO:VALIDATOR:ISNATURALNOZERO' => "The %s field must contain a number greater than zero.",
     'OBULLO:VALIDATOR:NOSPACE'         => "The %s field can not contain space characters.",
     'OBULLO:VALIDATOR:DATE'            => "The %s field must contain a valid date.",
+    'OBULLO:VALIDATOR:ISDECIMAL'       => "The %s field must contain only decimal characters.",
+    'OBULLO:VALIDATOR:ISJSON'          => "The %s field must contain a valid json data.",
 );

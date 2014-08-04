@@ -8,6 +8,15 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
+        $c->load('service/mailer');
+
+        // $this->mailer->from('paradoks@paradoks.com.tr');
+        // $this->mailer->to('333gmail.com');
+        // $this->mailer->subject('test Mail()');
+        // $this->mailer->message('Hello world ! <b>test</b>');
+        // $this->mailer->send();
+
+        // echo $this->mailer->printDebugger();
 
         // new Obullo\Log\Filters\Level;
         

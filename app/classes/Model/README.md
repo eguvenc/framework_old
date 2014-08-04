@@ -64,6 +64,11 @@ namespace Model;
  */
 Class User
 {
+	/**
+	 * Container
+	 * 
+	 * @var object
+	 */
 	public $c;
 
 	/**
