@@ -4,7 +4,7 @@ namespace Service;
 
 define('LOGGER_QUEUE_CHANNEL', 'Logs');
 define('LOGGER_QUEUE_NAME', 'Server1.Logger.File');
-define('LOGGER_QUEUE_JOB', 'Log');
+define('LOGGER_QUEUE_JOB', 'QueueLogger');
 
 use Obullo\Log\Disabled,
     Obullo\Log\Handler\File,
@@ -57,20 +57,20 @@ Class Logger implements ServiceInterface
                     return new File(
                         $c,
                         $logger,
-                        // new QueueWriter(
-                        //     $logger,
-                        //     $c->load('service/queue'),
-                        //     array(
-                        //         'channel' =>  LOGGER_QUEUE_CHANNEL,
-                        //         'route' => LOGGER_QUEUE_NAME,
-                        //         'job' => LOGGER_QUEUE_JOB,
-                        //         'delay' => 0,
-                        //     )
-                        // )
-                        new FileWriter(
-                            $logger, 
-                            $c->load('config')['log']
+                        new QueueWriter(
+                            $logger,
+                            $c->load('service/queue'),
+                            array(
+                                'channel' =>  LOGGER_QUEUE_CHANNEL,
+                                'route' => LOGGER_QUEUE_NAME,
+                                'job' => LOGGER_QUEUE_JOB,
+                                'delay' => 0,
+                            )
                         )
+                        // new FileWriter(
+                        //     $logger, 
+                        //     $c->load('config')['log']
+                        // )
                     );
             };
             /*

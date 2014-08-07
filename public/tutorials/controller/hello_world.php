@@ -8,15 +8,12 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-        $c->load('service/mailer');
-
-        // $this->mailer->from('paradoks@paradoks.com.tr');
-        // $this->mailer->to('333gmail.com');
-        // $this->mailer->subject('test Mail()');
-        // $this->mailer->message('Hello world ! <b>test</b>');
-        // $this->mailer->send();
-
-        // echo $this->mailer->printDebugger();
+        // $process = new Obullo\Process\Process('php task worker', '/var/wwww/framework/', null, null, 0);
+        // $process->run();
+        // echo $process->getOutput();
+        // 
+        // var_dump($process->isSuccessful());
+        // $process->stop();
 
         // new Obullo\Log\Filters\Level;
         

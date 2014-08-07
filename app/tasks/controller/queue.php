@@ -57,7 +57,7 @@ $app->func(
 
     \33[1;36mlist       : List queued jobs.\33[0m\33[0;36m
     \33[1;36mlisten     : Wait and send jobs to job handler.\33[0m\33[0;36m
-    
+
     \33[1;36mExamples :\33[0m\33[0;36m
     \$php task queue list --channel=Logger --route=server1.log
     \$php task queue listen --channel=Logger --route=server1.log --memory=128 --delay=0 --timeout=3\33[0m\n";
@@ -72,8 +72,8 @@ $app->func(
         $break = "------------------------------------------------------------------------------------------";
 
         $channel = $this->cliParser->argument('channel');
-        $route   = $this->cliParser->argument('route', null);  // Sets queue route key ( queue name )
-        $remove  = $this->cliParser->argument('clear');
+        $route = $this->cliParser->argument('route', null);  // Sets queue route key ( queue name )
+        $clear = $this->cliParser->argument('clear');
 
         echo "\33[0;36mFollowing queue data ...\33[0m\n\n";
         echo "\33[1;36mChannel : ".$channel."\33[0m\n";
@@ -102,7 +102,7 @@ $app->func(
                 $lines.= "\033[0;36m ".json_encode($raw['data'])."\33[0m\n";
                 $lines.= "\33[0m\n";
                 echo $lines;
-                if ($remove == 'clear') {  // Delete all jobs in the queue
+                if ($clear == 'clear') {  // Delete all jobs in the queue
                      $job->delete();
                 }
             }
@@ -112,19 +112,28 @@ $app->func(
 );
 
 /**
- * php task queue listen --channel=Logger --route=server1.log --memory=128 --delay=0 --timeout=3
+ * php task queue listen --channel=Logger --route=Server1.Logger.File --memory=128 --delay=0 --timeout=3 --sleep=1 --maxTries=0 --env=prod
  */
 $app->func(
     '_listen',
     function () use ($c) {
 
-        $c->load('queue/worker');
-        $this->queueWorker->init();
+        $channel = $this->cliParser->argument('channel', null); // Sets queue exchange
+        $route = $this->cliParser->argument('route', null);     // Sets queue route key ( queue name )
+        $memory = $this->cliParser->argument('memory', 128);    // Sets maximum allowed memory for current job.
+        $delay = $this->cliParser->argument('delay', 0);        // Sets job delay interval
+        $timeout = $this->cliParser->argument('timeout', 0);    // Sets time limit execution of the current job.
+        $sleep = $this->cliParser->argument('sleep', 1);        // If we have not job on the queue sleep the script for a given number of seconds.
+        $maxTries = $this->cliParser->argument('maxTries', 0);  // If job attempt failed we push and increase attempt number.
+        $env = $this->cliParser->argument('env', 'prod');       // Sets environment for current worker.
+        
+        $process = new Obullo\Process\Process("php task worker $channel $route $memory $delay $timeout $sleep $maxTries $env", ROOT, null, null, $timeout);
 
-        // while (true) {
-        //     $this->queueWorker->pop();
-        // }
-        // do job.
+        while (true) {
+            $process->run();
+            echo $process->getOutput(); // dogru calisiyor yaptigi işi silmesi gerekli sadece kuyruktan.
+        }
+
     }
 );
 

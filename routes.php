@@ -28,12 +28,13 @@ $c['router']->route('get', 'post/update/([0-9])', 'post/update/$1');
 $c['router']->route('post', 'comment/delete/([0-9])', 'comment/delete/$1');
 $c['router']->route('post', 'comment/update/([0-9])/(.+)', 'comment/update/$1');
 
-// $c['router']->group(
-//     array('domain' => 'test.demo_blog'), 
-//     function ($group) use ($c) {
-//         $c['router']->route('get', 'welcome/(.+)', 'tutorials/hello_scheme', null, $group);
-//     }
-// );
+$c['router']->group(
+    array('domain' => 'test.demo_blog'), 
+    function ($group) use ($c) {
+        $c['router']->route('get', 'welcome/(.+)', 'tutorials/hello_scheme', null, $group);
+    }
+);
+
 $c['router']->override('defaultController', 'welcome');
 // $c['router']->override('pageNotFoundController', 'errors/page_not_found');
 

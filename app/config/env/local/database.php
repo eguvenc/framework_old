@@ -8,7 +8,7 @@
 */
 return array(
     'db' => array(
-        'host' => 'demo_blog',
+        'host' => 'localhost',
         'username' => 'root',
         'password' => '123456',
         'database' => 'demo_blog',
@@ -17,11 +17,11 @@ return array(
         'dsn'      => '',
         'options'  => array()
     ),
-    'yourSecondDatabaseName' => array(
-        'host' => '',
+    'queue_jobs' => array(
+        'host' => 'localhost',
         'username' => 'root',
         'password' => '123456',
-        'database' => '',
+        'database' => 'queue_jobs',
         'port'     => '',
         'charset'  => 'utf8',
         'dsn'      => '',

@@ -155,9 +155,9 @@ return array(
             'exchangeFlags' => 'AMQP_DURABLE', // AMQP_PASSIVE
         ),
         'failed' => array(
-            'storage' => 'db',              // Storage Handler "mongo" or "db" which are defined in your "providers.php".
-            'database' => 'queue_jobs ',    // Database name
-            'table' => 'failures',          // Table or mongo collection name
+            'provider' => 'Database',   // Storage Provider name "Database" which is defined in your "Provider" folder.
+            'key' => 'queue_jobs',      // Provider storage config key defined in your app/config/local/database.php
+            'table' => 'failures',      // Table or mongo collection name.
             'emergency' => array('enabled' => true, 'handler' => 'email')  // When the job fails logger will push data to your emergency handler.
         ),
     ),
