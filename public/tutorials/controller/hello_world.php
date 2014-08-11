@@ -8,15 +8,7 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-        // $process = new Obullo\Process\Process('php task worker', '/var/wwww/framework/', null, null, 0);
-        // $process->run();
-        // echo $process->getOutput();
-        // 
-        // var_dump($process->isSuccessful());
-        // $process->stop();
 
-        // new Obullo\Log\Filters\Level;
-        
         // $this->logger->load(LOGGER_MONGO);
         // $this->logger->info('HELLO INFO !!!!!');
         // $this->logger->notice('HELLO NOTICE !!!!!');

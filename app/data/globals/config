@@ -1,0 +1,15 @@
+<?php 
+
+return array(
+	'version' => '1.0',
+	'name' => 'MyApplication',
+	'maintenance' => array(
+		'app' => 'up',
+		'queue' => 'up',
+	),	
+);
+
+// END config File
+/* End of file config */
+
+/* Location: .data/globals/config */

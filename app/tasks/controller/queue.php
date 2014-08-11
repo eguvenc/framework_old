@@ -57,6 +57,8 @@ $app->func(
 
     \33[1;36mlist       : List queued jobs.\33[0m\33[0;36m
     \33[1;36mlisten     : Wait and send jobs to job handler.\33[0m\33[0;36m
+    \33[1;36mdown       : Pause the queue in maintenance mode.\33[0m\33[0;36m
+    \33[1;36mup         : Release the paused queue.\33[0m\33[0;36m
 
     \33[1;36mExamples :\33[0m\33[0;36m
     \$php task queue list --channel=Logger --route=server1.log
@@ -112,7 +114,7 @@ $app->func(
 );
 
 /**
- * php task queue listen --channel=Logger --route=Server1.Logger.File --memory=128 --delay=0 --timeout=3 --sleep=1 --maxTries=0 --env=prod
+ * php task queue listen --channel=Logger --route=Server1.Logger.File --memory=128 --delay=0 --timeout=3 --sleep=0 --maxTries=0 --env=prod
  */
 $app->func(
     '_listen',
@@ -123,7 +125,7 @@ $app->func(
         $memory = $this->cliParser->argument('memory', 128);    // Sets maximum allowed memory for current job.
         $delay = $this->cliParser->argument('delay', 0);        // Sets job delay interval
         $timeout = $this->cliParser->argument('timeout', 0);    // Sets time limit execution of the current job.
-        $sleep = $this->cliParser->argument('sleep', 1);        // If we have not job on the queue sleep the script for a given number of seconds.
+        $sleep = $this->cliParser->argument('sleep', 0);        // If we have not job on the queue sleep the script for a given number of seconds.
         $maxTries = $this->cliParser->argument('maxTries', 0);  // If job attempt failed we push and increase attempt number.
         $env = $this->cliParser->argument('env', 'prod');       // Sets environment for current worker.
         
@@ -131,7 +133,7 @@ $app->func(
 
         while (true) {
             $process->run();
-            echo $process->getOutput(); // dogru calisiyor yaptigi işi silmesi gerekli sadece kuyruktan.
+            echo $process->getOutput();
         }
 
     }

@@ -16,3 +16,6 @@ return  array(
     NOTICE_WARNING => array('class' => 'alert alert-warning', 'icon' => '<span class="glyphicon glyphicon-exclamation-sign"></span>'),
     NOTICE_INFO    => array('class' => 'alert alert-info', 'icon' => '<span class="glyphicon glyphicon-info-sign"></span> '),
 );
+
+/* End of file form.php */
+/* Location: .app/config/form.php */
