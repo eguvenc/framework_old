@@ -38,7 +38,10 @@ $app->func(
         }
         if ($this->logger->getWriterName() == 'QueueWriter') { // Also clear queue data
             $queue = $c->load('service/queue');
-            $queue->purgeQueue(LOGGER_QUEUE_CHANNEL, LOGGER_QUEUE_NAME);
+            $queue->deleteQueue(LOGGER_CHANNEL, LOGGER_SERVER .'File');
+            $queue->deleteQueue(LOGGER_CHANNEL, LOGGER_SERVER .'Mongo');
+            $queue->deleteQueue(LOGGER_CHANNEL, LOGGER_SERVER .'Email');
+            $queue->deleteQueue(LOGGER_CHANNEL, LOGGER_SERVER .'Syslog');
         }
         echo "\33[1;36mApplication logs deleted.\33[0m\n";
     }

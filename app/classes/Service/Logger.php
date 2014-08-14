@@ -2,16 +2,18 @@
 
 namespace Service;
 
-define('LOGGER_QUEUE_CHANNEL', 'Logs');
-define('LOGGER_QUEUE_NAME', 'Server1.Logger.File');
-define('LOGGER_QUEUE_JOB', 'QueueLogger');
+define('LOGGER_SERVER', 'Server1.Logger.');
+define('LOGGER_CHANNEL', 'Logs');
+define('LOGGER_JOB', 'QueueLogger');
 
 use Obullo\Log\Disabled,
-    Obullo\Log\Handler\File,
-    Obullo\Log\Handler\Mongo,
+    Obullo\Log\Handler\FileHandler,
+    Obullo\Log\Handler\MongoHandler,
+    Obullo\Log\Handler\EmailHandler,
     Obullo\Log\Logger as OLogger,
     Obullo\Log\Writer\FileWriter,
     Obullo\Log\Writer\MongoWriter,
+    Obullo\Log\Writer\EmailWriter,
     Obullo\Log\Writer\QueueWriter;
 
 /**
@@ -53,22 +55,19 @@ Class Logger implements ServiceInterface
             | File Handler
             |--------------------------------------------------------------------------
             */
-            $fileHandler = function () use ($c, $logger) { 
-                    return new File(
+            $FILE_HANDLER = function () use ($c) { 
+                    return new FileHandler(
                         $c,
-                        $logger,
                         new QueueWriter(
-                            $logger,
                             $c->load('service/queue'),
                             array(
-                                'channel' =>  LOGGER_QUEUE_CHANNEL,
-                                'route' => LOGGER_QUEUE_NAME,
-                                'job' => LOGGER_QUEUE_JOB,
+                                'channel' =>  LOGGER_CHANNEL,
+                                'route' => LOGGER_SERVER .'File',
+                                'job' => LOGGER_JOB,
                                 'delay' => 0,
                             )
                         )
                         // new FileWriter(
-                        //     $logger, 
                         //     $c->load('config')['log']
                         // )
                     );
@@ -78,12 +77,10 @@ Class Logger implements ServiceInterface
             | Mongo Handler
             |--------------------------------------------------------------------------
             */
-            $mongoHandler = function () use ($c, $logger) { 
-                return new Mongo(
+            $MONGO_HANDLER = function () use ($c) { 
+                return new MongoHandler(
                     $c,
-                    $logger,
                     new MongoWriter(
-                        $logger,
                         $c->load('service/provider/mongo', 'db'),  // Mongo client instance
                         array(
                         'database' => 'db',
@@ -95,18 +92,38 @@ Class Logger implements ServiceInterface
             };
             /*
             |--------------------------------------------------------------------------
+            | Email Handler
+            |--------------------------------------------------------------------------
+            */
+            $EMAIL_HANDLER = function () use ($c) { 
+                return new EmailHandler(
+                    $c,
+                    new QueueWriter(
+                        $c->load('service/queue'),
+                        array(
+                            'channel' =>  LOGGER_CHANNEL,
+                            'route' => LOGGER_SERVER .'Email',
+                            'job' => LOGGER_JOB,
+                            'delay' => 0,
+                        )
+                    )
+                );
+            };
+            /*
+            |--------------------------------------------------------------------------
             | Writers
             |--------------------------------------------------------------------------
             | Primary file writer must be available on local server.
             */
-            $logger->addWriter(LOGGER_FILE, $fileHandler)->priority(2);
+            $logger->addWriter(LOGGER_FILE, $FILE_HANDLER)->priority(2);
             /*
             |--------------------------------------------------------------------------
             | Handlers
             |--------------------------------------------------------------------------
             | Add your available log handlers
             */
-            $logger->addHandler(LOGGER_MONGO, $mongoHandler)->priority(1)->filter('priority', array(LOG_NOTICE, LOG_ALERT));
+            $logger->addHandler(LOGGER_MONGO, $MONGO_HANDLER)->priority(1)->filter('priority', array(LOG_NOTICE, LOG_ALERT));
+            $logger->addHandler(LOGGER_EMAIL, $EMAIL_HANDLER)->priority(2)->filter('priority', array(LOG_NOTICE, LOG_ALERT));
             /*
             |--------------------------------------------------------------------------
             | Removes file handler and uses second handler as primary 
@@ -116,7 +133,7 @@ Class Logger implements ServiceInterface
             if (ENV == 'prod') {
                 $logger->removeWriter(LOGGER_FILE);
                 $logger->removeHandler(LOGGER_MONGO);
-                $logger->addWriter(LOGGER_MONGO, $mongoHandler);  //  your production log writer
+                $logger->addWriter(LOGGER_MONGO, $MONGO_HANDLER);  //  your production log writer
             }
             return $logger;
         };

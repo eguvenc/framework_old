@@ -50,13 +50,15 @@ Class QueueLogger
      */
     public function fire(Job $job, $data)
     {
-        // echo $this->env;
         // echo $e;
-        $exp = explode('.', LOGGER_QUEUE_NAME);
-        $Handler = '\\Obullo\Log\Queue\JobHandler\\'.end($exp);
+        $exp = explode('.', $job->getName());
+        $JobHandler = '\\Obullo\Log\Queue\JobHandler\JobHandler'.end($exp);
 
-        $writer = new $Handler($this->c);
+        // var_dump($exp);
+
+        $writer = new $JobHandler($this->c);
         $writer->write($data);
+        $writer->close();
 
         print_r($data);
         $job->delete();

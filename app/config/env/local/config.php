@@ -26,7 +26,7 @@ return array(
     'log' =>   array(
         'enabled' => true,       // On / Off logging.
         'output'  => false,      // On / Off debug html output. When it is enabled all handlers will be disabled.
-        'channel'   => 'system',       // Default channel name it should be general.
+        'channel'   => 'system',       // Default channel name should be general.
         'line'      => '[%datetime%] %channel%.%level%: --> %message% %context% %extra%\n',  // This format just for line based log drivers.
         'path'      => array(
             'app'   => 'data/logs/app.log',   // Application log path  ( Only for File Handler )
@@ -151,8 +151,8 @@ return array(
             'vhost' => '/',
             'debug' => true,
             'defaultQueueName' => 'defaultQueue',
-            'exchangeType' => 'AMQP_EX_TYPE_FANOUT', // AMQP_EX_TYPE_DIRECT, AMQP_EX_TYPE_FANOUT, AMQP_EX_TYPE_HEADER or AMQP_EX_TYPE_TOPIC,
-            'exchangeFlags' => 'AMQP_DURABLE', // AMQP_PASSIVE
+            'exchangeType' => 'AMQP_EX_TYPE_DIRECT', // AMQP_EX_TYPE_DIRECT, AMQP_EX_TYPE_FANOUT, AMQP_EX_TYPE_HEADER or AMQP_EX_TYPE_TOPIC,
+            'exchangeFlag' => 'AMQP_DURABLE', // AMQP_PASSIVE
         ),
         'failed' => array(
             'provider' => 'Database',   // Storage Provider name "Database" which is defined in your "Provider" folder.

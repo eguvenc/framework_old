@@ -9,6 +9,11 @@ $app = new Controller(
     function ($c) {
         $c->load('view');
 
+        $this->logger->load(LOGGER_EMAIL);
+        $this->logger->notice('test email notice ! ');
+        $this->logger->alert('test email alert ', array('test' => 'example data 123'));
+        $this->logger->push(LOGGER_EMAIL);
+
         // $this->logger->load(LOGGER_MONGO);
         // $this->logger->info('HELLO INFO !!!!!');
         // $this->logger->notice('HELLO NOTICE !!!!!');
@@ -16,10 +21,9 @@ $app = new Controller(
         // $this->logger->push(LOGGER_MONGO);
 
         // $c->load('service/queue');
-        // $this->queue->channel('Log');
-        // $this->queue->push($route = 'Server1.logger', 'SendLog', array('log' => array('debug' => 'Test')));
-        // $this->queue->push($route = 'Server1.logger', 'SendLog', array('message' => 'This is my message'));
-        // $this->queue->push($route = 'Server1.logger', 'SendLog', array('log' => array('debug' => 'Test')));
+        // $this->queue->channel('Logs');
+        // $this->queue->push('SendLog', 'Server1.Logger.File', array('log' => array('debug' => 'Test')));
+        // $this->queue->push('SendLog', 'Server1.Logger.Email', array('message' => 'This is my message'));
     }
 );
 

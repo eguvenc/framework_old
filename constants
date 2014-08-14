@@ -104,6 +104,7 @@ define('LOGGER_FILE', 'file');
 define('LOGGER_SYSLOG', 'syslog');
 define('LOGGER_MONGO', 'mongo');
 define('LOGGER_QUEUE', 'queue');
+define('LOGGER_EMAIL', 'email');
 /*
 |---------------------------------------------------------------
 | NOTIFICATION CONSTANTS
