@@ -127,13 +127,15 @@ $app->func(
         $timeout = $this->cliParser->argument('timeout', 0);    // Sets time limit execution of the current job.
         $sleep = $this->cliParser->argument('sleep', 0);        // If we have not job on the queue sleep the script for a given number of seconds.
         $maxTries = $this->cliParser->argument('maxTries', 0);  // If job attempt failed we push and increase attempt number.
+        $debug = $this->cliParser->argument('debug', 0);        // Enable / Disabled console debug.
         $env = $this->cliParser->argument('env', 'local');      // Sets environment for current worker.
         
-        $process = new Obullo\Process\Process("php task worker $channel $route $memory $delay $timeout $sleep $maxTries $env", ROOT, null, null, $timeout);
-
+        $process = new Obullo\Process\Process("php task worker $channel $route $memory $delay $timeout $sleep $maxTries $debug $env", ROOT, null, null, $timeout);
         while (true) {
             $process->run();
-            echo $process->getOutput();
+            if ($debug == 1) {
+                echo $process->getOutput();
+            }
         }
 
     }

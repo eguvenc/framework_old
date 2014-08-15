@@ -51,21 +51,50 @@ Class QueueLogger
     public function fire(Job $job, $data)
     {
         // echo $e;
-        $exp = explode('.', $job->getName());
-        $JobHandler = '\\Obullo\Log\Queue\JobHandler\JobHandler'.end($exp);
+        $exp = explode('.', $job->getName());  // File, Mongo, Email ..
+        $handlerName = ucfirst(end($exp));
+        $JobHandlerClass = '\\Obullo\Log\Queue\JobHandler\JobHandler'.$handlerName;
+        $JobHandlerName = strtolower($handlerName);
 
-        // var_dump($exp);
-
-        $writer = new $JobHandler($this->c);
-        $writer->write($data);
-        $writer->close();
-
-        print_r($data);
-        $job->delete();
-        // if ($data['type'] == 'cli') 
+        switch ($JobHandlerName) {
+        case LOGGER_FILE:
+            $writer = new $JobHandlerClass($this->c);
+            break;
+        case LOGGER_EMAIL:
+            $writer = new $JobHandlerClass(
+                $this->c,
+                array(
+                'from' => '<noreply@example.com> Server Admin',
+                'to' => 'eguvenc@gmail.com',
+                'cc' => '',
+                'bcc' => '',
+                'subject' => 'Server Logs',
+                'message' => 'Detailed logs here --> <br /> %s',
+                )
+            );
+            break;  
+        case LOGGER_MONGO:
+            $writer = new $JobHandlerClass($this->c,
+                array(
+                'database' => 'db',
+                'collection' => 'logs',
+                'save_options' => null
+                )
+            );
+            break;
+        default:
+            $writer = null;
+            break;
+        }
+        if ($writer != null) {
+            $writer->write($data);  // Do job
+            $writer->close();
+            // print_r($data);
+            $job->delete();  // Delete job from queue
+        }
     }
 
 }
 
-/* End of file help.php */
+/* End of file QueueLogger.php */
 /* Location: .app/classes/QueueLogger.php */

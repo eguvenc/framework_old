@@ -15,8 +15,8 @@ $app = new Controller(
 
 $app->func(
     'index',
-    function ($channel = null, $route = null, $memory = 128, $delay = 0, $timeout = 0, $sleep = 0, $maxTries = 0, $env = 'prod') {
-        $this->queueWorker->init($channel, $route, $memory, $delay, $timeout, $sleep, $maxTries, $env = 'prod');
+    function ($channel = null, $route = null, $memory = 128, $delay = 0, $timeout = 0, $sleep = 0, $maxTries = 0, $debug = 0, $env = 'prod') {
+        $this->queueWorker->init($channel, $route, $memory, $delay, $timeout, $sleep, $maxTries, $debug, $env = 'prod');
         $this->queueWorker->pop();
     }
 );

@@ -22,6 +22,17 @@ return array(
     | Log
     |--------------------------------------------------------------------------
     | @see Syslog Protocol http://tools.ietf.org/html/rfc5424
+    |
+    | Constants:
+    |
+    | 0  LOG_EMERG: System is unusable
+    | 1  LOG_ALERT: Action must be taken immediately
+    | 2  LOG_CRIT: Critical conditions
+    | 3  LOG_ERR: Error conditions
+    | 4  LOG_WARNING: Warning conditions
+    | 5  LOG_NOTICE: Normal but significant condition
+    | 6  LOG_INFO: Informational messages
+    | 7  LOG_DEBUG: Debug-level messages
     */
     'log' =>   array(
         'enabled' => true,       // On / Off logging.

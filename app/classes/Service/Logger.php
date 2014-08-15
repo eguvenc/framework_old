@@ -6,7 +6,7 @@ define('LOGGER_SERVER', 'Server1.Logger.');
 define('LOGGER_CHANNEL', 'Logs');
 define('LOGGER_JOB', 'QueueLogger');
 
-use Obullo\Log\Disabled,
+use Obullo\Log\Handler\DisabledHandler,
     Obullo\Log\Handler\FileHandler,
     Obullo\Log\Handler\MongoHandler,
     Obullo\Log\Handler\EmailHandler,
@@ -15,6 +15,23 @@ use Obullo\Log\Disabled,
     Obullo\Log\Writer\MongoWriter,
     Obullo\Log\Writer\EmailWriter,
     Obullo\Log\Writer\QueueWriter;
+/*
+|--------------------------------------------------------------------------
+| Log
+|--------------------------------------------------------------------------
+| @see Syslog Protocol http://tools.ietf.org/html/rfc5424
+|
+| Constants:
+|
+| 0  LOG_EMERG: System is unusable
+| 1  LOG_ALERT: Action must be taken immediately
+| 2  LOG_CRIT: Critical conditions
+| 3  LOG_ERR: Error conditions
+| 4  LOG_WARNING: Warning conditions
+| 5  LOG_NOTICE: Normal but significant condition
+| 6  LOG_INFO: Informational messages
+| 7  LOG_DEBUG: Debug-level messages
+*/
 
 /**
  * Log Service
@@ -49,7 +66,7 @@ Class Logger implements ServiceInterface
             |--------------------------------------------------------------------------
             | Register your filters here
             */
-            $logger->addFilter('priority', 'Obullo\Log\Filter\Priority');
+            $logger->registerFilter('priority', 'Obullo\Log\Filter\Priority');
             /*
             |--------------------------------------------------------------------------
             | File Handler
@@ -113,7 +130,7 @@ Class Logger implements ServiceInterface
             |--------------------------------------------------------------------------
             | Writers
             |--------------------------------------------------------------------------
-            | Primary file writer must be available on local server.
+            | Primary file writer should be available on local server.
             */
             $logger->addWriter(LOGGER_FILE, $FILE_HANDLER)->priority(2);
             /*
@@ -122,8 +139,8 @@ Class Logger implements ServiceInterface
             |--------------------------------------------------------------------------
             | Add your available log handlers
             */
-            $logger->addHandler(LOGGER_MONGO, $MONGO_HANDLER)->priority(1)->filter('priority', array(LOG_NOTICE, LOG_ALERT));
-            $logger->addHandler(LOGGER_EMAIL, $EMAIL_HANDLER)->priority(2)->filter('priority', array(LOG_NOTICE, LOG_ALERT));
+            $logger->addHandler(LOGGER_MONGO, $MONGO_HANDLER)->priority(1);
+            $logger->addHandler(LOGGER_EMAIL, $EMAIL_HANDLER)->priority(2)->filter('priority', array(LOG_ERR, LOG_CRIT, LOG_ALERT, LOG_NOTICE, LOG_WARNING, LOG_EMERG));
             /*
             |--------------------------------------------------------------------------
             | Removes file handler and uses second handler as primary 
