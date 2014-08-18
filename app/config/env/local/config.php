@@ -166,10 +166,13 @@ return array(
             'exchangeFlag' => 'AMQP_DURABLE', // AMQP_PASSIVE
         ),
         'failed' => array(
-            'provider' => 'Database',   // Storage Provider name "Database" which is defined in your "Provider" folder.
-            'key' => 'queue_jobs',      // Provider storage config key defined in your app/config/local/database.php
-            'table' => 'failures',      // Table or mongo collection name.
-            'emergency' => array('enabled' => true, 'handler' => 'email')  // When the job fails logger will push data to your emergency handler.
+            'storage' => 'Obullo\Queue\Failed\Storage\Database',
+            'provider' => array(
+                'name' => 'Database',   // "Database" provider which is defined in your "Provider" folder.
+                'key' => 'q_jobs',
+            ),
+            'table' => 'failures',
+            'emergency' => array('class' => 'Obullo\Emergency\Email')  // Email, Sms ..  // When the job fails logger will push data to your emergency handler.
         ),
     ),
     /*

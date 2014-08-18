@@ -88,8 +88,10 @@ Class QueueLogger
         }
         if ($writer != null) {
             $writer->write($data);  // Do job
+
+            throw new Exception("test");
+
             $writer->close();
-            // print_r($data);
             $job->delete();  // Delete job from queue
         }
     }

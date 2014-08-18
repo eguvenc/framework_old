@@ -17,11 +17,11 @@ return array(
         'dsn'      => '',
         'options'  => array()
     ),
-    'queue_jobs' => array(
+    'q_jobs' => array(
         'host' => 'localhost',
         'username' => 'root',
         'password' => '123456',
-        'database' => 'queue_jobs',
+        'database' => 'q_jobs',
         'port'     => '',
         'charset'  => 'utf8',
         'dsn'      => '',

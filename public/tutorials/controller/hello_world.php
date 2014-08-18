@@ -9,11 +9,11 @@ $app = new Controller(
     function ($c) {
         $c->load('view');
 
-        // $this->logger->load(LOGGER_EMAIL);
-        // $this->logger->notice('test email notice ! ');
-        // $this->logger->alert('test email alert ', array('test' => rand()));
-        // $this->logger->push(LOGGER_EMAIL);
-
+        $this->logger->load(LOGGER_EMAIL);
+        $this->logger->notice('test email notice ! ');
+        $this->logger->alert('test email alert ', array('test' => rand()));
+        $this->logger->push(LOGGER_EMAIL);
+        
         // $this->logger->printDebugger();
 
         // $this->logger->load(LOGGER_MONGO)->filter('priority.notIn', array(LOG_DEBUG));
