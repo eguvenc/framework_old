@@ -103,8 +103,9 @@ return array(
     |--------------------------------------------------------------------------
     */
     'locale' => array(
-        'timezone' => 'gmt',     // This pref tells the system whether to use your server's "local" time as the master now reference, or convert it to "gmt".
-        'charset'  => 'UTF-8',   // This determines which character set is used by default.
+        'timezone' => 'gmt',      // This pref tells the system whether to use your server's "local" time as the master now reference, or convert it to "gmt".
+        'charset'  => 'UTF-8',    //  This determines which character set is used by default.
+        'php_date_default_timezone' => 'Europe/London',  // Sets timezone using php date_default_timezone_set(); function.
      ),
     /*
     |--------------------------------------------------------------------------
@@ -172,7 +173,7 @@ return array(
                 'key' => 'q_jobs',
             ),
             'table' => 'failures',
-            'emergency' => array('class' => 'Obullo\Emergency\Email')  // Email, Sms ..  // When the job fails logger will push data to your emergency handler.
+            'emergency' => 'Obullo\Emergency\Email' // When the job fails failedJob class will push data to your emergency handler.
         ),
     ),
     /*

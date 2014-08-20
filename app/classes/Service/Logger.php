@@ -140,7 +140,7 @@ Class Logger implements ServiceInterface
             | Add your available log handlers
             */
             $logger->addHandler(LOGGER_MONGO, $MONGO_HANDLER)->priority(1);
-            $logger->addHandler(LOGGER_EMAIL, $EMAIL_HANDLER)->priority(2)->filter('priority', array(LOG_ERR, LOG_CRIT, LOG_ALERT, LOG_NOTICE, LOG_WARNING, LOG_EMERG));
+            $logger->addHandler(LOGGER_EMAIL, $EMAIL_HANDLER)->priority(2)->filter('priority.notIn', array(LOG_DEBUG, LOG_INFO));
             /*
             |--------------------------------------------------------------------------
             | Removes file handler and uses second handler as primary 

@@ -17,14 +17,6 @@ if (error_get_last() != null) {
 }
 /*
 |--------------------------------------------------------------------------
-| Set Default Time Zone Identifer. @link http://www.php.net/manual/en/timezones.php
-|--------------------------------------------------------------------------                                        
-| Set the default timezone identifier for date function ( Server Time ).
-|
-*/
-date_default_timezone_set('Europe/London');
-/*
-|--------------------------------------------------------------------------
 | Bootstrap
 |--------------------------------------------------------------------------
 */

@@ -14,6 +14,7 @@ $app->func(
     function () use ($c) {
         $c->load('cli/parser');
         $c->load('service/queue');
+        // $c->load('queue/listener as listener');
 
         $this->cliParser->parse(func_get_args());
         switch ($this->cliParser->segment(0)) {
@@ -42,6 +43,10 @@ $app->func(
 
             Welcome to Task Manager (c) 2014
     You are running $php task queue command which is located in app / tasks folder.'."\n\033[0m\n";
+
+
+        // $listener = new Obullo\Queue\Listener;
+        // $listener->logo();
     }
 );
 
@@ -63,12 +68,20 @@ $app->func(
     \33[1;36mExamples :\33[0m\33[0;36m
     \$php task queue list --channel=Logger --route=server1.log
     \$php task queue listen --channel=Logger --route=server1.log --memory=128 --delay=0 --timeout=3\33[0m\n";
+
+
+        // $listener = new Obullo\Queue\Listener;
+        // $listener->help();
+
     }
 );
 
 $app->func(
     '_list',
     function () {
+
+        // $listener = new Obullo\Queue\Listener;
+        // $listener->list();
 
         echo $this->_displayLogo();
         $break = "------------------------------------------------------------------------------------------";
@@ -130,6 +143,9 @@ $app->func(
         $debug = $this->cliParser->argument('debug', 0);        // Enable / Disabled console debug.
         $env = $this->cliParser->argument('env', 'local');      // Sets environment for current worker.
         
+        // $listener = new Obullo\Queue\Listener;
+        // $listener->listen();
+
         $process = new Obullo\Process\Process("php task worker $channel $route $memory $delay $timeout $sleep $maxTries $debug $env", ROOT, null, null, $timeout);
         while (true) {
             $process->run();

@@ -50,7 +50,7 @@ Class QueueLogger
      */
     public function fire(Job $job, $data)
     {
-        // echo $e;
+        echo $e;
         $exp = explode('.', $job->getName());  // File, Mongo, Email ..
         $handlerName = ucfirst(end($exp));
         $JobHandlerClass = '\\Obullo\Log\Queue\JobHandler\JobHandler'.$handlerName;
@@ -89,7 +89,8 @@ Class QueueLogger
         if ($writer != null) {
             $writer->write($data);  // Do job
 
-            throw new Exception("test");
+
+            // throw new Exception("test");
 
             $writer->close();
             $job->delete();  // Delete job from queue

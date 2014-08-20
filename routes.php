@@ -4,7 +4,7 @@
 | Routes 
 |--------------------------------------------------------------------------
 | Typically there is a one-to-one relationship between a URL string and its 
-| corresponding ( directory/controller ).
+| corresponding ( directory / controller ).
 |
 */
 //$c['router']->route('*', '([0-9]+)/([a-z]+)', 'welcome/$1/$2');

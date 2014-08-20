@@ -8,6 +8,8 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
+        // $c->load('service/provider/database as db', 'q_jobs');
+        // $this->db->insert('failures', array('job_id' => 2, 'error_xdebug' => null));
 
         $this->logger->load(LOGGER_EMAIL);
         $this->logger->notice('test email notice ! ');

@@ -1,7 +1,7 @@
 
 ## Models
 
-Obullo is <b>"no model"</b> it don't offer you a model structure but if you want to use your own model you can create them in <kbd>app/classes/Model</kbd> folder. 
+Obullo is <b>"No Model"</b> framework, but if you want to use your own model you can create them in <kbd>app/classes/Model</kbd> folder. 
 
 ### Initializing the Models
 
