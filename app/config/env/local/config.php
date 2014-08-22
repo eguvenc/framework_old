@@ -106,6 +106,9 @@ return array(
         'timezone' => 'gmt',      // This pref tells the system whether to use your server's "local" time as the master now reference, or convert it to "gmt".
         'charset'  => 'UTF-8',    //  This determines which character set is used by default.
         'php_date_default_timezone' => 'Europe/London',  // Sets timezone using php date_default_timezone_set(); function.
+        'date' => array(
+            'format' => 'H:i:s d:m:Y'
+            )
      ),
     /*
     |--------------------------------------------------------------------------
