@@ -2,6 +2,8 @@
 
 defined('STDIN') or die('Access Denied');
 
+use Obullo\Cli\Commands\Clear;
+
 /**
  * $c clear
  * 
@@ -11,39 +13,9 @@ $app = new Controller;
 
 $app->func(
     'index',
-    function () {
-        $this->_clear();  // Start the Clear Task
-    }
-);
-
-$app->func(
-    '_clear',
     function () use ($c) {
-        $files = array(
-            trim($c->load('config')['log']['path']['app'], '/'),
-            trim($c->load('config')['log']['path']['ajax'], '/'),
-            trim($c->load('config')['log']['path']['cli'], '/'),
-        );
-        foreach ($files as $file) {
-            $file = str_replace('/', DS, $file);
-            if (strpos($file, 'data') === 0) { 
-                $file = str_replace('data', rtrim(DATA, DS), $file);
-            } 
-            $exp      = explode(DS, $file);
-            $filename = array_pop($exp);
-            $path     = implode(DS, $exp). DS;
-            if (is_file($path.$filename)) {
-                unlink($path.$filename);
-            }
-        }
-        if ($this->logger->getWriterName() == 'QueueWriter') { // Also clear queue data
-            $queue = $c->load('service/queue');
-            $queue->deleteQueue(LOGGER_CHANNEL, LOGGER_SERVER .'File');
-            $queue->deleteQueue(LOGGER_CHANNEL, LOGGER_SERVER .'Mongo');
-            $queue->deleteQueue(LOGGER_CHANNEL, LOGGER_SERVER .'Email');
-            $queue->deleteQueue(LOGGER_CHANNEL, LOGGER_SERVER .'Syslog');
-        }
-        echo "\33[1;36mApplication logs deleted.\33[0m\n";
+        $clear = new Clear($c);
+        $clear->run();
     }
 );
 

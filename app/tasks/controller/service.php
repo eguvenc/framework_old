@@ -2,7 +2,7 @@
 
 defined('STDIN') or die('Access Denied');
 
-use Obullo\Cli\Commands\App;
+use Obullo\Cli\Commands\Service;
 
 /**
  * $app maintenance control
@@ -14,10 +14,10 @@ $app = new Controller;
 $app->func(
     'index',
     function () use ($c) {
-        $app = new App($c, func_get_args());
+        $app = new Service($c, func_get_args());
         $app->run();
     }    
 );
 
-/* End of file app.php */
-/* Location: .app/tasks/controller/app.php */
+/* End of file service.php */
+/* Location: .app/tasks/controller/service.php */

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<root>
+<app>
+	<all>
+		<name>All Site</name>
+		<host><regex>.*.example.com</regex></host>
+		<maintenance>up</maintenance>
+	</all>
+	<site>
+		<name>Web Site</name>
+		<host><regex>^example.com$|^www.example.com$</regex></host>
+		<maintenance>down</maintenance>
+	</site>
+	<sports>
+		<name>Sports</name>
+		<host><regex>sports\d+.example.com</regex></host>
+		<maintenance>up</maintenance>
+	</sports>
+	<support>
+		<name>Support</name>
+		<host><regex>support.example.com</regex></host>
+		<maintenance>up</maintenance>
+	</support>
+</app>
+<service>
+	<all>
+		<name>All Services</name>
+		<maintenance>up</maintenance>
+	</all>
+	<queue>
+		<name>Queue Service</name>
+		<maintenance>down</maintenance>
+	</queue>
+</service>
+</root>
+<!--
+END xml config File
+End of file config.xml
+
+Location: .data/globals/config.xml
+-->
