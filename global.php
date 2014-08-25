@@ -8,16 +8,33 @@
 
 /*
 |--------------------------------------------------------------------------
-| Maintenance Mode Handler
+| Application Maintenance Mode Handler
 |--------------------------------------------------------------------------
 |
 | The "php task app down" command gives you the ability to put an application
 | into maintenance mode.
 |
 */
-$c['app']->down(
-    function () use ($c) {
+$c['app']->func(
+    'app.down',
+    function ($domain) use ($c) {
         $c->load('response')->setHttpResponse(503)->sendOutput($c->load('view')->template('maintenance'));
+        die;
+    }
+);
+/*
+|--------------------------------------------------------------------------
+| Service Maintenance Mode Handler
+|--------------------------------------------------------------------------
+|
+| The "php task service down" command gives you the ability to put a service
+| into maintenance mode.
+|
+*/
+$c['app']->func(
+    'service.down',
+    function ($domain) use ($c) {
+        echo 'Service Unavailable !';
         die;
     }
 );

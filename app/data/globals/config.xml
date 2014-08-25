@@ -3,22 +3,27 @@
 <app>
 	<all>
 		<name>All Site</name>
-		<host><regex>.*.example.com</regex></host>
-		<maintenance>up</maintenance>
+		<domain><regex>.*.example.com</regex></domain>
+		<maintenance>down</maintenance>
 	</all>
 	<site>
 		<name>Web Site</name>
-		<host><regex>^example.com$|^www.example.com$</regex></host>
+		<domain><regex>^framework$</regex></domain>
 		<maintenance>down</maintenance>
 	</site>
+	<test>
+		<name>Test</name>
+		<domain><regex>test\d+.framework</regex></domain>
+		<maintenance>up</maintenance>
+	</test>
 	<sports>
 		<name>Sports</name>
-		<host><regex>sports\d+.example.com</regex></host>
+		<domain><regex>sports\d+.example.com</regex></domain>
 		<maintenance>up</maintenance>
 	</sports>
 	<support>
 		<name>Support</name>
-		<host><regex>support.example.com</regex></host>
+		<domain><regex>support.example.com</regex></domain>
 		<maintenance>up</maintenance>
 	</support>
 </app>

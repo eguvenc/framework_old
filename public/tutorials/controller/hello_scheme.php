@@ -8,8 +8,8 @@
 $app = new Controller(
     function ($c) {
         $c->load('html');
-        $c->load('view');
         $c->load('url');
+        $c->load('view');
     }
 );
 

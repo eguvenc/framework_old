@@ -20,24 +20,13 @@
 
 <pre>
 /*
-|------------------
+|--------------------------------------------------------------------------
 | View Component
-|------------------
-$c['view'] = $c->share(
-    function () use ($c) {
-        $config['schemes'] = array(
-            'default' => function () {
-                $this->assign('header',  '@public.views/header');
-                $this->assign('sidebar', '@public.views/sidebar');
-                $this->assign('footer',  $this->template('footer'));
-            },
-            'welcome' => function () {
-                $this->assign('footer', $this->template('footer'));
-            },
-        );
-        return new Obullo\View\View($config);
-    }
-);
+|--------------------------------------------------------------------------
+*/
+$c['view'] = function () use ($c) {
+    return new Obullo\View\View($c, $c->load('config')['schemes']);
+};
 </pre>
 
 <p></p>

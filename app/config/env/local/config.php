@@ -112,20 +112,7 @@ return array(
     | Cache
     |--------------------------------------------------------------------------
     */
-    'cache' =>  array(
-       'servers' => array(
-                        array(
-                          'hostname' => '10.0.0.154',
-                          'port'     => '6379',
-                           // 'timeout'  => '2.5',  // 2.5 sec timeout, just for redis cache
-                          'weight'   => '1'         // The weight parameter effects the consistent hashing 
-                                                    // used to determine which server to read/write keys from.
-                        ),
-        ),
-        'auth' =>  'aZX0bjL',            // connection password
-        'path' =>  '/data/cache/',  // file storage path just for file cache
-        'serializer' =>  'SERIALIZER_PHP',     // SERIALIZER_NONE, SERIALIZER_PHP, SERIALIZER_IGBINARY
-    ),
+    'cache' =>  '@include.cache.php',
     /*
     |--------------------------------------------------------------------------
     | Layers
@@ -154,28 +141,7 @@ return array(
     | Queue
     |--------------------------------------------------------------------------
     */
-    'queue' => array(
-        'server' => array(
-            'host'  => '10.0.0.157',
-            'port'  => 5672,
-            'user'  => 'root',
-            'pass'  => '123456',
-            'vhost' => '/',
-            'debug' => true,
-            'defaultQueueName' => 'defaultQueue',
-            'exchangeType' => 'AMQP_EX_TYPE_DIRECT', // AMQP_EX_TYPE_DIRECT, AMQP_EX_TYPE_FANOUT, AMQP_EX_TYPE_HEADER or AMQP_EX_TYPE_TOPIC,
-            'exchangeFlag' => 'AMQP_DURABLE', // AMQP_PASSIVE
-        ),
-        'failed' => array(
-            'storage' => 'Obullo\Queue\Failed\Storage\Database',
-            'provider' => array(
-                'name' => 'Database',   // "Database" provider which is defined in your "Provider" folder.
-                'key' => 'q_jobs',
-            ),
-            'table' => 'failures',
-            'emergency' => 'Obullo\Emergency\Email' // When the job fails failedJob class will push data to your emergency handler.
-        ),
-    ),
+    'queue' => '@include.queue.php',
     /*
     |--------------------------------------------------------------------------
     | Security

@@ -72,7 +72,7 @@ Class Logger implements ServiceInterface
             | File Handler
             |--------------------------------------------------------------------------
             */
-            $FILE_HANDLER = function () use ($c) { 
+            $FILE_HANDLER = function () use ($c) {
                     return new FileHandler(
                         $c,
                         new QueueWriter(

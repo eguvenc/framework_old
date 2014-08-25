@@ -9,6 +9,9 @@ $app = new Controller(
     function ($c) {
         $c->load('view');
 
+        // preg_match('#test.framework#', 'test.framework', $matches);
+        // print_r($matches);
+
         // $c->load('service/provider/database as db', 'q_jobs');
         // $this->db->insert('failures', array('job_id' => 2, 'error_xdebug' => null));
 

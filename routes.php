@@ -10,7 +10,6 @@
 //$c['router']->route('*', '([0-9]+)/([a-z]+)', 'welcome/$1/$2');
 
 $c['router']->domain($c->load('config')['url']['host']);  // Root domain
-$c['router']->route('*', 'jelly/(.+)', 'widgets/jelly/$1');  // Rewrite "jform" uri to widgets/ folders
 
 // $c['router']->route(
 //     '*', 'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
@@ -19,21 +18,32 @@ $c['router']->route('*', 'jelly/(.+)', 'widgets/jelly/$1');  // Rewrite "jform" 
 //     }
 // );
 
-$c['router']->route('get', '(en|tr)/(.+)', '$2');
-$c['router']->route('get', '(en|tr)', 'welcome/index');  // default controller
-$c['router']->route('get', 'tag/(.+)', 'tag/$1');
-$c['router']->route('get', 'post/detail/([0-9])', 'post/detail/$1');
-$c['router']->route('get', 'post/preview/([0-9])', 'post/preview/$1');
-$c['router']->route('get', 'post/update/([0-9])', 'post/update/$1');
-$c['router']->route('post', 'comment/delete/([0-9])', 'comment/delete/$1');
-$c['router']->route('post', 'comment/update/([0-9])/(.+)', 'comment/update/$1');
+// $c['router']->route('get', 'tutorials/hello_world(.*)', 'tutorials/hello_scheme');
 
 $c['router']->group(
-    array('domain' => 'test.demo_blog'), 
-    function ($group) use ($c) {
-        $c['router']->route('get', 'welcome/(.+)', 'tutorials/hello_scheme', null, $group);
+    array('domain' => 'framework', 'before' => 'maintenance'), 
+    function ($group) {
+        $this->route('*', 'jelly/(.+)', 'widgets/jelly/$1', null, $group);  // Rewrite "jform" uri to widgets/ folders
+        $this->route('get', '(en|tr)/(.+)', '$2');
+        $this->route('get', '(en|tr)', 'welcome/index');  // default controller
+        $this->route('get', 'tag/(.+)', 'tag/$1', null, $group);
+        $this->route('get', 'post/detail/([0-9])', 'post/detail/$1');
+        $this->route('get', 'post/preview/([0-9])', 'post/preview/$1');
+        $this->route('get', 'post/update/([0-9])', 'post/update/$1');
+        $this->route('post', 'comment/delete/([0-9])', 'comment/delete/$1');
+        $this->route('post', 'comment/update/([0-9])/(.+)', 'comment/update/$1');
     }
 );
+
+$c['router']->group(
+    array('domain' => $c['config']->xml->app->test->domain->regex, 'before' => 'maintenance'), 
+    function ($group) {
+        // $this->route('get', 'tutorials/hello_world.*', 'tutorials/hello_scheme', null, $group);
+        $this->attach('welcome.*', $group); // all url
+        // $this->attach('((?!tutorials/hello_world).)*$', $group);  // url not contains "tutorials/hello_world"
+    }
+);
+
 
 $c['router']->override('defaultController', 'welcome');
 // $c['router']->override('pageNotFoundController', 'errors/page_not_found');
@@ -43,9 +53,9 @@ $c['router']->override('defaultController', 'welcome');
 
 // $c['router']->group(
 //     array('domain' => 'api.demo_blog'), 
-//     function ($group) use ($c) {
-//         $c['router']->route('get', 'user/create', 'api/user/create', null, $group);
-//         $c['router']->route('get', 'user/delete/([0-9])', 'api/user/delete/$1', null, $group);
+//     function ($group) {
+//         $this->route('get', 'user/create', 'api/user/create', null, $group);
+//         $this->route('get', 'user/delete/([0-9])', 'api/user/delete/$1', null, $group);
 //     }
 // );
 

@@ -11,11 +11,13 @@ return array(
         'host' => 'localhost',
         'username' => 'root',
         'password' => '123456',
-        'database' => 'demo_blog',
+        'database' => 'q_jobs',
         'port'     => '',
         'charset'  => 'utf8',
         'dsn'      => '',
-        'options'  => array()
+        'pdo'      => array(
+            'options'  => array()
+        ),
     ),
     'q_jobs' => array(
         'host' => 'localhost',
@@ -25,7 +27,9 @@ return array(
         'port'     => '',
         'charset'  => 'utf8',
         'dsn'      => '',
-        'options'  => array()
+        'pdo'      => array(
+            'options'  => array()
+        ),
     ),
 );
 
