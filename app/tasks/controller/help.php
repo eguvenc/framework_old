@@ -13,7 +13,7 @@ $app = new Controller;
 
 $app->func(
     'index',
-    function () {
+    function () use ($c) {
         $help = new Help($c);
         $help->run();
     }

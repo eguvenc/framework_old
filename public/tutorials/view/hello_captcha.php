@@ -36,7 +36,7 @@ var ajax = {
             <?php echo $this->url->anchor('/', $this->html->img('logo.png', ' alt="Obullo" ')) ?>
         </header>
         <h1>Hello Captcha</h1>
-        <section><?php echo $this->form->getMessage() ?></section>
+        <section><?php echo $this->form->message() ?></section>
 
         <section>
                 <form action="/tutorials/hello_captcha" method="post" />

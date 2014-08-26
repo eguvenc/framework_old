@@ -13,7 +13,7 @@ $app = new Controller(
         $c->load('post');
         $c->load('form');
         $c->load('session as sess');
-        $c->load('session/flash as flash');
+        $c->load('flash/session as flash');
     }
 );
 

@@ -17,7 +17,7 @@
 */
 $c['app']->func(
     'app.down',
-    function ($domain) use ($c) {
+    function ($params) use ($c) {
         $c->load('response')->setHttpResponse(503)->sendOutput($c->load('view')->template('maintenance'));
         die;
     }
@@ -33,7 +33,7 @@ $c['app']->func(
 */
 $c['app']->func(
     'service.down',
-    function ($domain) use ($c) {
+    function ($params) use ($c) {
         echo 'Service Unavailable !';
         die;
     }

@@ -14,32 +14,11 @@
 
 <h1>Hello Scheme World</h1>
 
+<p>This my first content using schemes.</p>
+
 <section>
-	<p>This my first content using schemes.</p>
-	<p>This page use <b>view class</b> scheme function that is defined in your <kbd>components.php</kbd> file.</p>
 
-<pre>
-/*
-|--------------------------------------------------------------------------
-| View Component
-|--------------------------------------------------------------------------
-*/
-$c['view'] = function () use ($c) {
-    return new Obullo\View\View($c, $c->load('config')['schemes']);
-};
-</pre>
-
-<p></p>
-<p>The <kbd>$this->getScheme();</kbd> method <b>call</b> the <b>welcome</b> scheme function then it assign templates for <b>hello_scheme</b> file.</p>
-
-<pre>$this->view->load('hello_scheme', function() {
-        $this->assign('name', 'Obullo');
-        $this->assign('title', 'Hello Scheme World !');
-        $this->getScheme('welcome');
-});</pre>
-</section>
-
-<p>In <b>"default"</b> function <b>Layered VC</b> pattern calls view and sidebar controllers then it assign outputs to their variables.</p>
+<p><b>Layers</b> call view and sidebar controllers then assign outputs to their variables.</p>
 
 <pre>
 'default' => function () {
@@ -48,6 +27,21 @@ $c['view'] = function () use ($c) {
     $this->assign('footer',  $this->template('footer'));
 },
 </pre>
+
+<p></p>
+
+<p><b>"Default"</b> config defined in your main config file and <b>view class</b> defined in your <kbd>components.php</kbd> file.</p>
+
+<p></p>
+
+<p><kbd>$this->getScheme();</kbd> method calls <b>welcome</b> scheme function then assign them to <b>hello_scheme</b> file.</p>
+
+<pre>$this->view->load('hello_scheme', function() {
+        $this->assign('name', 'Obullo');
+        $this->assign('title', 'Hello Scheme World !');
+        $this->getScheme('welcome');
+});</pre>
+</section>
 
 
 <?php echo $footer ?>

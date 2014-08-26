@@ -7,12 +7,65 @@
 */
 /*
 |--------------------------------------------------------------------------
+| App Maintenance
+|--------------------------------------------------------------------------
+| Maintenance filter for applications.
+|
+| Domain Key Example - Below the example subdomain we use "test" as domain key
+|
+|   test.examle.com
+|
+| Same key must be define in your config.xml file
+|
+| <app>
+|   <test>
+|       <name>Test</name>
+|       <domain><regex>test.example.com</regex></domain>
+|       <maintenance>up</maintenance>
+|   </test>
+| </app>
+|
+*/
+$c['router']->createFilter(
+    'maintenance',
+    function ($params = array()) use ($c) {
+        $c->load('app')->down('app.down', $params['domain']);
+    }
+);
+/*
+|--------------------------------------------------------------------------
+| Service Maintenance
+|--------------------------------------------------------------------------
+| Maintenance filter for services.
+|
+| Same key must be define in your config.xml file
+| <service>
+|   <all>
+|       <name>All Services</name>
+|       <maintenance>up</maintenance>
+|   </all>
+|   <queue>
+|       <name>Queue Service</name>
+|       <maintenance>down</maintenance>
+|   </queue>
+| </service>
+|
+*/
+$c['router']->createFilter(
+    'service.maintenance',
+    function ($params) use ($c) {
+        $c->load('app')->down('service.down', $params['domain']);
+    }
+);
+/*
+|--------------------------------------------------------------------------
 | Auth
 |--------------------------------------------------------------------------
 | Define your filters.
 */
-$c['router']->filter(
-    'auth', function () {
+$c['router']->createFilter(
+    'auth',
+    function () {
         echo '<pre>auth</pre>';
     }
 );
@@ -22,34 +75,11 @@ $c['router']->filter(
 |--------------------------------------------------------------------------
 | Cross Site Request Forgery Filter
 */
-$c['router']->filter(
-    'csrf', function () use ($c) {
+$c['router']->createFilter(
+    'csrf',
+    function () use ($c) {
         $c->load('security/csrf')->init();  
         $c->load('security/csrf')->verify(); // Csrf protection check
-    }
-);
-/*
-|--------------------------------------------------------------------------
-| Maintenance
-|--------------------------------------------------------------------------
-| Maintenance filter for application "all".
-|
-| Domain Key Example - Below the example subdomain we use "test" as domain key
-|
-|   test.examle.com
-|
-| Same key must be define in your config.xml file
-|
-|   <test>
-|       <name>Test</name>
-|       <domain><regex>test.example.com</regex></domain>
-|       <maintenance>up</maintenance>
-|   </test>
-|
-*/
-$c['router']->filter(
-    'maintenance', function ($domain) use ($c) {
-        $c->load('app')->down('app.down', $domain);
     }
 );
 
@@ -75,8 +105,6 @@ if ($c['config']['uri']['queryStrings'] == false) {  // Is $_GET data allowed ? 
 //         $this->attach('tutorials/hello_world/*', $group);
 //     }
 // );
-
-
 
 
 /* End of file filters.php */

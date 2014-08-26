@@ -54,7 +54,7 @@ return array(
     |--------------------------------------------------------------------------
     */
     'url' => array(
-        'host'   => 'framework', // Your Virtual host name default "localhost" should be ".example.com" in production config.
+        'root'   => 'framework', // Your Virtual host name default "localhost" should be ".example.com" in production config.
         'base'   => '/',         // Base Url "/" URL of your framework root, generally a '/' trailing slash. 
         'assets' => '/',         // Assets Url of your framework generally a '/' trailing slash.
         'rewrite' => array(
@@ -73,6 +73,19 @@ return array(
         'queryStrings' => true,  // Allows based URLs: example.com/directory/controller?who=me&what=something&where=here
         'extensions' => array('.json','.xml'),   // Allows extension based URLs: example.com/api/get/users.json
     ),
+    /*
+    |--------------------------------------------------------------------------
+    | Localization
+    |--------------------------------------------------------------------------
+    */
+    'locale' => array(
+        'timezone' => 'gmt',      // This pref tells the system whether to use your server's "local" time as the master now reference, or convert it to "gmt".
+        'charset'  => 'UTF-8',    //  This determines which character set is used by default.
+        'php_date_default_timezone' => 'Europe/London',  // Sets timezone using php date_default_timezone_set(); function.
+        'date' => array(
+            'format' => 'H:i:s d:m:Y'
+            )
+     ),
     /*
     |--------------------------------------------------------------------------
     | Databases
@@ -99,31 +112,16 @@ return array(
     'mail' => '@include.mail.php',
     /*
     |--------------------------------------------------------------------------
-    | Localization
-    |--------------------------------------------------------------------------
-    */
-    'locale' => array(
-        'timezone' => 'gmt',      // This pref tells the system whether to use your server's "local" time as the master now reference, or convert it to "gmt".
-        'charset'  => 'UTF-8',    //  This determines which character set is used by default.
-        'php_date_default_timezone' => 'Europe/London',  // Sets timezone using php date_default_timezone_set(); function.
-        'date' => array(
-            'format' => 'H:i:s d:m:Y'
-            )
-     ),
-    /*
-    |--------------------------------------------------------------------------
     | Cache
     |--------------------------------------------------------------------------
     */
     'cache' =>  '@include.cache.php',
     /*
     |--------------------------------------------------------------------------
-    | Layers
+    | Queue
     |--------------------------------------------------------------------------
     */
-    'layers' => array(
-        'cache' => false     // if you use expiration ( ttl ) as last parameter, layers will do cache using your cache service.
-    ),
+    'queue' => '@include.queue.php',
     /*
     |--------------------------------------------------------------------------
     | View Schemes
@@ -141,10 +139,12 @@ return array(
     ),
     /*
     |--------------------------------------------------------------------------
-    | Queue
+    | Layers
     |--------------------------------------------------------------------------
     */
-    'queue' => '@include.queue.php',
+    'layers' => array(
+        'cache' => false     // if you use expiration ( ttl ) as last parameter, layers will do cache using your cache service.
+    ),
     /*
     |--------------------------------------------------------------------------
     | Security
