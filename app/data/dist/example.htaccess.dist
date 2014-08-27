@@ -6,11 +6,10 @@
     Options -Indexes
 
     # this is to remove the index.php in url
-
     # Removes access to the Core folders by users.
     # previously this would not have been possible.
     
-    RewriteCond %{REQUEST_URI} ^(app|classes|data|obullo|public|private)\b.*
+    RewriteCond %{REQUEST_URI} ^(app|data|obullo|public|vendor)\b.*
     RewriteRule ^(.*)$ index.php/$1 [L]
 
     # Checks to see if the user is attempting to access a valid file,
