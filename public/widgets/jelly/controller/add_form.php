@@ -11,7 +11,7 @@ $app = new Controller(
         $c->load('db');
         $c->load('post');
         $c->load('form');
-        $c->load('session/flash as flash');
+        $c->load('flash/session as flash');
         $c->load('service/jelly/form as jellyForm');
         $c->load('validator');
     }

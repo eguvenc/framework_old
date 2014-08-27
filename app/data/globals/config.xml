@@ -14,7 +14,7 @@
 	<test>
 		<name>Test</name>
 		<domain><regex>test\d+.framework</regex></domain>
-		<maintenance>up</maintenance>
+		<maintenance>down</maintenance>
 	</test>
 	<sports>
 		<name>Sports</name>

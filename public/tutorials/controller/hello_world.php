@@ -8,6 +8,13 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
+        $c->load('form');
+        $c->load('flash/session as flash');
+
+        $this->flash->success('Successful Success !');
+        $this->flash->warning('Successful Warning !');
+
+        echo $this->flash->output();
 
         // preg_match('#test.framework#', 'test.framework', $matches);
         // print_r($matches);
