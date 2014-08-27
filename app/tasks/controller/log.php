@@ -13,8 +13,8 @@ $app = new Controller;
 
 $app->func(
     'index',
-    function ($route = 'app') use ($c) {
-        $log = new Log($c, array('route' => $route));
+    function () use ($c) {
+        $log = new Log($c, func_get_args());
         $log->run();
     }
 );

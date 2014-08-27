@@ -4,7 +4,7 @@
 	<all>
 		<name>All Site</name>
 		<domain><regex>.*.example.com</regex></domain>
-		<maintenance>up</maintenance>
+		<maintenance>down</maintenance>
 	</all>
 	<site>
 		<name>Web Site</name>

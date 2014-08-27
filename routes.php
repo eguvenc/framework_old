@@ -18,10 +18,10 @@ $c['router']->domain($c->load('config')['url']['root']);  // Root domain
 //     }
 // );
 
-$c['router']->route('get', 'tutorials/hello_world(.*)', 'tutorials/hello_scheme');
+// $c['router']->route('get', 'tutorials/hello_world(.*)', 'tutorials/hello_scheme');
 
 
-$c['router']->attach('welcome.*', array('filters' => array('before.maintenance', 'before.auth'))); 
+$c['router']->attach('(.*)', array('filters' => array('before.maintenance', 'before.auth'))); 
 
 // $c['router']->group(
 //     array('name' => 'default', domain' => 'framework'),
