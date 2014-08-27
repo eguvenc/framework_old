@@ -48,10 +48,8 @@ $c['router']->attach('welcome.*', array('filters' => array('before.maintenance',
 //     }
 // );
 
-
-$c['router']->override('defaultController', 'welcome');
-// $c['router']->override('pageNotFoundController', 'errors/page_not_found');
-
+$c['router']->defaultPage('welcome');
+// $c['router']->error404('errors/page_not_found');
 
 // Example Api
 
