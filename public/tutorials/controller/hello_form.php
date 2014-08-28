@@ -25,6 +25,7 @@ $app->func(
         $errorString = null;
 
         if ($this->post['dopost']) {
+            
             $c->load('validator');
             $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');

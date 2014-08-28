@@ -75,18 +75,18 @@ Class Logger implements ServiceInterface
             $FILE_HANDLER = function () use ($c) {
                     return new FileHandler(
                         $c,
-                        new QueueWriter(
-                            $c->load('service/queue'),
-                            array(
-                                'channel' =>  LOGGER_CHANNEL,
-                                'route' => LOGGER_SERVER .'File',
-                                'job' => LOGGER_JOB,
-                                'delay' => 0,
-                            )
-                        )
-                        // new FileWriter(
-                        //     $c->load('config')['log']
+                        // new QueueWriter(
+                        //     $c->load('service/queue'),
+                        //     array(
+                        //         'channel' =>  LOGGER_CHANNEL,
+                        //         'route' => LOGGER_SERVER .'File',
+                        //         'job' => LOGGER_JOB,
+                        //         'delay' => 0,
+                        //     )
                         // )
+                        new FileWriter(
+                            $c->load('config')['log']
+                        )
                     );
             };
             /*
@@ -133,6 +133,8 @@ Class Logger implements ServiceInterface
             | Primary file writer should be available on local server.
             */
             $logger->addWriter(LOGGER_FILE, $FILE_HANDLER)->priority(2);
+            // $logger->addWriter(LOGGER_MONGO, $MONGO_HANDLER)->priority(2)->filter('priority.notIn', array(LOG_DEBUG)); 
+
             /*
             |--------------------------------------------------------------------------
             | Handlers

@@ -11,7 +11,7 @@ return array(
         'db' => array(
             'host' => 'localhost',
             'username' => 'root',
-            'password' => '12345',
+            'password' => '123456',
             'port' => '27017',
             ),
         'yourSecondDatabaseName' => array(

@@ -50,7 +50,6 @@ Class QueueLogger
      */
     public function fire(Job $job, $data)
     {
-        echo $e;
         $exp = explode('.', $job->getName());  // File, Mongo, Email ..
         $handlerName = ucfirst(end($exp));
         $JobHandlerClass = '\\Obullo\Log\Queue\JobHandler\JobHandler'.$handlerName;
@@ -58,14 +57,14 @@ Class QueueLogger
 
         switch ($JobHandlerName) {
         case LOGGER_FILE:
-            $writer = new $JobHandlerClass($this->c);
+            $writer = new $JobHandlerClass($this->c, $this->c->load('config')['log']);
             break;
         case LOGGER_EMAIL:
             $writer = new $JobHandlerClass(
                 $this->c,
                 array(
                 'from' => '<noreply@example.com> Server Admin',
-                'to' => 'eguvenc@gmail.com',
+                'to' => 'obulloframework@gmail.com',
                 'cc' => '',
                 'bcc' => '',
                 'subject' => 'Server Logs',
@@ -88,9 +87,6 @@ Class QueueLogger
         }
         if ($writer != null) {
             $writer->write($data);  // Do job
-
-            // throw new Exception("test");
-
             $writer->close();
             $job->delete();  // Delete job from queue
         }

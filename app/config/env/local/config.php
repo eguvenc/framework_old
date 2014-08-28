@@ -42,7 +42,8 @@ return array(
         'path'      => array(
             'app'   => 'data/logs/app.log',   // Application log path  ( Only for File Handler )
             'cli'   => 'data/logs/cli.log',   // Cli log path  
-            'ajax'  => 'data/logs/ajax.log',  // Ajax log path  
+            'ajax'  => 'data/logs/ajax.log',  // Ajax log path
+            'worker' => 'data/logs/worker.log',  // Queue worker log path
         ),
         'format'    => 'Y-m-d H:i:s',  // Date format
         'queries'   => true,           // If true "all" SQL Queries gets logged.
