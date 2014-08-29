@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Obullo\Auth\Auth as ObulloAuth;
+use Obullo\Auth\Adapter\DbTable;
 
 /**
  * Auth Service
@@ -26,7 +26,7 @@ Class Auth implements ServiceInterface
     public function register($c)
     {
         $c['auth'] = function () use ($c) {
-            return new ObulloAuth(
+            return new Authentication(
                 $c,
                 array(
                     'sessionPrefix' => 'auth_'

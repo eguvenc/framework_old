@@ -14,6 +14,8 @@ $app = new Controller;
 $app->func(
     'index',
     function () use ($c) {
+
+    	// print_r(func_get_args());
         $log = new Log($c, func_get_args());
         $log->run();
     }
