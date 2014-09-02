@@ -18,6 +18,13 @@ use MongoClient,
 Class Mongo implements ProviderInterface
 {
     /**
+     * Container
+     * 
+     * @var object
+     */
+    public $c;
+
+    /**
      * Registry
      *
      * @param object $c container
@@ -37,7 +44,6 @@ Class Mongo implements ProviderInterface
             return new MongoClient($dsn);
         };
     }
-
 }
 
 // END Mongo class
