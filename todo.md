@@ -3,10 +3,6 @@
 
 ------
 
-* Queue and workers not completed keep failed jobs data in database.
-* Logger needs AMQP (Queue) handler.
-* Analytics.
-* Hash class required and bcrypt "rehash" function will be added for security purposes.
 * Auth class needs rethink.
 * Research: Multi thread in more filexible way http://stackoverflow.com/questions/70855/how-can-one-use-multi-threading-in-php-applications
 * Move Rate limiter class to 2.0 folder and create documentation.
