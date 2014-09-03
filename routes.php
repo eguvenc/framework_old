@@ -23,7 +23,7 @@ $c['router']->domain($c->load('config')['url']['root']);  // Root domain
 
 
 $c['router']->group(
-    array('name' => 'default', 'domain' => '^framework$', 'filters' => array('before.maintenance')),
+    array('name' => 'default', 'domain' => '^framework$', 'filters' => array('before.auth')),
     function ($group) {
         $this->route('*', 'jelly/(.+)', 'widgets/jelly/$1', null, $group);  // Rewrite "jform" uri to widgets/ folders
         $this->route('get', '(en|tr)/(.+)', '$2', null, $group, null, $group);
@@ -41,11 +41,11 @@ $c['router']->group(
 
 
 // $c['router']->group(
-//     array('name' => 'maintenance_test', 'domain' => $c['config']->xml->app->test->domain->regex, 'filters' => array('before.maintenance', 'before.auth')), 
+//     array('name' => 'maintenance_test', 'domain' => '^framework$', 'filters' => array('before.maintenance', 'before.auth')), 
 //     function ($group) {
 //         // $this->route('get', 'tutorials/hello_world.*', 'tutorials/hello_scheme', null, $group);
-//         $this->attach('(.*)', $group); // all url
-//         // $this->attach('((?!tutorials/hello_world).)*$', $group);  // url not contains "tutorials/hello_world"
+//         // $this->attach('(.*)', $group); // all url
+//         $this->attach('((?!tutorials/hello_world).)*$', $group);  // url not contains "tutorials/hello_world"
 //     }
 // );
 
