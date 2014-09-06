@@ -74,10 +74,14 @@ Class QueueLogger
             break;  
         case LOGGER_MONGO:
             $writer = new $JobHandlerClass($this->c,
-                array(
-                'database' => 'db',
-                'collection' => 'logs',
-                'save_options' => null
+               array(
+                    'database' => 'db',
+                    'collection' => 'logs',
+                    'save_options' => null,
+                    'format' => array(
+                        'context' => 'array',  // json
+                        'extra'   => 'array'   // json
+                    ),
                 )
             );
             break;

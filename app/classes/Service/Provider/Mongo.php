@@ -3,7 +3,7 @@
 namespace Service\Provider;
 
 use MongoClient,
-    MongoCollection;
+    Obullo\Mongo\MongoConnection;
 
 /**
  * Mongo Provider
@@ -17,13 +17,6 @@ use MongoClient,
  */
 Class Mongo implements ProviderInterface
 {
-    /**
-     * Container
-     * 
-     * @var object
-     */
-    public $c;
-
     /**
      * Registry
      *
@@ -41,9 +34,11 @@ Class Mongo implements ProviderInterface
             $port     = $c->load('config')['nosql']['mongo'][$db]['port'];
             
             $dsn = "mongodb://$username:$password@$host:$port/$db";
-            return new MongoClient($dsn);
+            $mongo = new MongoConnection($dsn);
+            return $mongo->connect();
         };
     }
+
 }
 
 // END Mongo class
