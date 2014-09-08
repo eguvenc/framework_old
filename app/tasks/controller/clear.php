@@ -2,7 +2,7 @@
 
 defined('STDIN') or die('Access Denied');
 
-use Obullo\Cli\Commands\Clear;
+use Obullo\Console\Commands\Clear;
 
 /**
  * $c clear

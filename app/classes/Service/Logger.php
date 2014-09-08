@@ -15,24 +15,6 @@ use Obullo\Log\Handler\DisabledHandler,
     Obullo\Log\Writer\MongoWriter,
     Obullo\Log\Writer\EmailWriter,
     Obullo\Log\Writer\QueueWriter;
-/*
-|--------------------------------------------------------------------------
-| Log
-|--------------------------------------------------------------------------
-| @see Syslog Protocol http://tools.ietf.org/html/rfc5424
-|
-| Constants:
-|
-| 0  LOG_EMERG: System is unusable
-| 1  LOG_ALERT: Action must be taken immediately
-| 2  LOG_CRIT: Critical conditions
-| 3  LOG_ERR: Error conditions
-| 4  LOG_WARNING: Warning conditions
-| 5  LOG_NOTICE: Normal but significant condition
-| 6  LOG_INFO: Informational messages
-| 7  LOG_DEBUG: Debug-level messages
-*/
-
 /**
  * Log Service
  *
@@ -139,6 +121,10 @@ Class Logger implements ServiceInterface
                             'route' => gethostname(). LOGGER_NAME .'Email',
                             'job' => LOGGER_JOB,
                             'delay' => 0,
+                            'format' => array(
+                                'context' => 'array',  // json
+                                'extra'   => 'array'   // json
+                            ),
                         )
                     )
                 );
@@ -149,8 +135,8 @@ Class Logger implements ServiceInterface
             |--------------------------------------------------------------------------
             | Primary file writer should be available on local server.
             */
-            $logger->addWriter(LOGGER_FILE, $FILE_HANDLER)->priority(2);
-            // $logger->addWriter(LOGGER_MONGO, $MONGO_HANDLER)->priority(5); // ->filter('priority.notIn', array(LOG_DEBUG)); 
+            // $logger->addWriter(LOGGER_FILE, $FILE_HANDLER)->priority(2);
+            $logger->addWriter(LOGGER_MONGO, $MONGO_HANDLER)->priority(5); // ->filter('priority.notIn', array(LOG_DEBUG)); 
             
             /*
             |--------------------------------------------------------------------------

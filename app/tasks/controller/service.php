@@ -2,7 +2,7 @@
 
 defined('STDIN') or die('Access Denied');
 
-use Obullo\Cli\Commands\Service;
+use Obullo\Console\Commands\Service;
 
 /**
  * $app maintenance control

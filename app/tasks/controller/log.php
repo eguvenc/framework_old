@@ -2,7 +2,7 @@
 
 defined('STDIN') or die('Access Denied');
 
-use Obullo\Cli\Commands\Log;
+use Obullo\Console\Commands\Log;
 
 /**
  * $app log

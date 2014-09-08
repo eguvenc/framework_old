@@ -15,7 +15,8 @@ return array(
     */                             
     'error' => array(
         'debug' => true,       // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
-        'reporting' => true,  // Php "Native Error" reporting should be "Enabled" in "TEST" environment should be "Disabled"" in "PRODUCTION".
+        'reporting' => false,  // Php "Native Error" reporting should be "Enabled" in "TEST" environment should be "Disabled"" in "PRODUCTION".
+                               // You can turn on it on "local" if you want see an unexpected error.
     ),
     /*
     |--------------------------------------------------------------------------
