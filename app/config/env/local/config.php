@@ -46,7 +46,7 @@ return array(
             'ajax'  => 'data/logs/ajax.log',  // Ajax log path
             'worker' => 'data/logs/worker.log',  // Queue worker log path
         ),
-        'format'    => 'Y-m-d H:i:s',  // Date format
+        'format'    => 'Y-m-d H:i:s',  // Log Date format
         'queries'   => true,           // If true "all" SQL Queries gets logged.
         'benchmark' => true,           // If true "all" Application Benchmarks gets logged.
     ),
@@ -56,7 +56,7 @@ return array(
     |--------------------------------------------------------------------------
     */
     'url' => array(
-        'root'   => 'framework', // Your Virtual host name default "localhost" should be ".example.com" in production config.
+        'host'   => 'framework', // Your Virtual host name default "localhost" should be ".example.com" in production config.
         'base'   => '/',         // Base Url "/" URL of your framework root, generally a '/' trailing slash. 
         'assets' => '/',         // Assets Url of your framework generally a '/' trailing slash.
         'rewrite' => array(

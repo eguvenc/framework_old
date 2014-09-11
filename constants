@@ -8,18 +8,6 @@
 */
 define('OBULLO_VERSION', '2.0');
 /*
-|--------------------------------------------------------------------------
-| Choose Your Environment
-|--------------------------------------------------------------------------
-| This can be set to anything, but default usage is:
-|
-|     o local - Development Mode  ( Quick Debugging, show all php errors )
-|     o test  - Testing     ( Test mode, behaviours like Live )
-|     o prod  - Production  ( Production mode all errors  should be disabled from config.php )
-|
-*/
-define('ENV', 'local');
-/*
 |---------------------------------------------------------------
 | UNDERSTANDING ESSENTIAL CONSTANTS
 |---------------------------------------------------------------

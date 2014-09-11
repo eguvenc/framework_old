@@ -25,7 +25,7 @@ return array(
             'key' => 'q_jobs',
         ),
         'table' => 'failures',
-        'emergency' => 'Obullo\Emergency\Email' // When the job fails failedJob class will push data to your emergency handler.
+        // 'emergency' => 'Obullo\Emergency\Email' // When the job fails failedJob class will push data to your emergency handler.
     ),
 );
 

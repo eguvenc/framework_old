@@ -9,7 +9,8 @@
 */
 //$c['router']->route('*', '([0-9]+)/([a-z]+)', 'welcome/$1/$2');
 
-$c['router']->domain($c->load('config')['url']['root']);  // Root domain
+$c['router']->domain($c->load('config')['url']['host']);  // Root domain
+$c['router']->defaultPage('welcome');
 
 // $c['router']->route(
 //     '*', 'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
@@ -23,8 +24,10 @@ $c['router']->domain($c->load('config')['url']['root']);  // Root domain
 
 
 $c['router']->group(
-    array('name' => 'default', 'domain' => '^framework$', 'filters' => array('before.maintenance')),
+    array('name' => 'default', 'domain' => $c['config']->xml->app->site, 'filters' => array('before.maintenance')),
     function ($group) {
+
+
         $this->route('*', 'jelly/(.+)', 'widgets/jelly/$1', null, $group);  // Rewrite "jform" uri to widgets/ folders
         $this->route('get', '(?:en|tr|de|nl)/(.*)', '$1', null, $group);
         $this->route('get', '(?:en|tr|de|nl)', 'welcome/index',  null, $group);  // default controller
@@ -49,8 +52,6 @@ $c['router']->group(
 //         $this->attach('((?!tutorials/hello_world).)*$', $group);  // url not contains "tutorials/hello_world"
 //     }
 // );
-
-$c['router']->defaultPage('welcome');
 // $c['router']->error404('errors/page_not_found');
 
 // Example Api

@@ -4,7 +4,7 @@ namespace Service;
 
 define('LOGGER_NAME', '.Logger.');
 define('LOGGER_CHANNEL', 'Logs');
-define('LOGGER_JOB', 'QueueLogger');
+define('LOGGER_JOB', 'Workers\QueueLogger');
 
 use Obullo\Log\Handler\DisabledHandler,
     Obullo\Log\Handler\FileHandler,
