@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<root>
+<app>
+	<all>
+		<label>All Site</label>
+		<domain><regex>.*.example.com</regex></domain>
+		<maintenance>down</maintenance>
+	</all>
+	<site>
+		<label>Web Site</label>
+		<domain><regex>^framework$</regex></domain>
+		<maintenance>up</maintenance>
+	</site>
+	<test>
+		<label>Test</label>
+		<domain><regex>test\d+.framework</regex></domain>
+		<maintenance>down</maintenance>
+	</test>
+	<support>
+		<label>Support</label>
+		<domain><regex>support.example.com</regex></domain>
+		<maintenance>up</maintenance>
+	</support>
+</app>
+<service>
+	<all>
+		<label>All Services</label>
+		<maintenance>up</maintenance>
+	</all>
+	<queue>
+		<label>Queue Service</label>
+		<maintenance>down</maintenance>
+	</queue>
+</service>
+</root>
+<!--
+END xml config File
+End of file config.xml
+
+Location: .app/config/env/test/config.xml
+-->
