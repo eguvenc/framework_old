@@ -3,7 +3,7 @@
 <app>
 	<all>
 		<label>All Site</label>
-		<domain><regex>.*.example.com</regex></domain>
+		<domain><regex>^(www\.)?example\.com$</regex></domain>
 		<maintenance>down</maintenance>
 	</all>
 	<site>

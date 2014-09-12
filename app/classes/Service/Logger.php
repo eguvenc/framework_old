@@ -10,7 +10,7 @@ use Obullo\Log\Handler\DisabledHandler,
     Obullo\Log\Handler\FileHandler,
     Obullo\Log\Handler\MongoHandler,
     Obullo\Log\Handler\EmailHandler,
-    Obullo\Log\Logger as OLogger,
+    Obullo\Log\Logger as LogLogger,
     Obullo\Log\Writer\FileWriter,
     Obullo\Log\Writer\MongoWriter,
     Obullo\Log\Writer\EmailWriter,
@@ -41,7 +41,7 @@ Class Logger implements ServiceInterface
             if ($c->load('config')['log']['enabled'] == false) {  // Use disabled handler if config disabled.
                 return new Disabled;
             }
-            $logger = new OLogger($c, $c->load('config')['log']);
+            $logger = new LogLogger($c, $c->load('config')['log']);
             /*
             |--------------------------------------------------------------------------
             | Filters
@@ -135,8 +135,8 @@ Class Logger implements ServiceInterface
             |--------------------------------------------------------------------------
             | Primary file writer should be available on local server.
             */
-            // $logger->addWriter(LOGGER_FILE, $FILE_HANDLER)->priority(2);
-            $logger->addWriter(LOGGER_MONGO, $MONGO_HANDLER)->priority(5); // ->filter('priority.notIn', array(LOG_DEBUG)); 
+            $logger->addWriter(LOGGER_FILE, $FILE_HANDLER)->priority(2);
+            // $logger->addWriter(LOGGER_MONGO, $MONGO_HANDLER)->priority(5); // ->filter('priority.notIn', array(LOG_DEBUG)); 
             
             /*
             |--------------------------------------------------------------------------
