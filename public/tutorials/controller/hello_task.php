@@ -8,14 +8,14 @@
 $app = new Controller(
     function ($c) {
         $c->load('url');
-        $c->load('cli/task');
+        $c->load('console/task as task');
     }
 );
 
 $app->func(
     'index',
     function () {
-        $output = $this->cliTask->run('help/index', true); 
+        $output = $this->task->run('help/index', true); 
         echo '<pre>'.$output.'</pre>';
     }
 );

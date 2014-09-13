@@ -6,7 +6,7 @@ use Obullo\Auth\LoginService,
     Obullo\Auth\Temporary\Storage\Cache;
 
 /**
- * Auth Class Login Service
+ * User ( Authentication ) Login Service
  *
  * @category  Service
  * @package   Password
@@ -29,7 +29,7 @@ Class Login implements ServiceInterface
         $c['user/login'] = function () use ($c) {
 
             $user = $c->load('return auth/user');
-            $user->addService(new LoginService($c, new DbTable, new Cache));
+            $user->registerService(new LoginService($c, new DbTable, new Cache));
             return $user;
         };
     }

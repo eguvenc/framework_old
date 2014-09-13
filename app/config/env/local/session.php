@@ -20,7 +20,6 @@ return array(
     'lifetime'       => 7200,          // The number of SECONDS you want the session to last. By default " 2 hours ". "0" is no expiration.
     'expireOnClose'  => true,          // Whether to cause the session to expire automatically when the browser window is closed
     'timeToUpdate'   => 1,             // How many seconds between framework refreshing "Session" meta data Information"
-    'rememberMeSeconds' => 604800,     // Remember me ttl for session reminder class. By default " 1 Week ".
     'metaData' => array(
         'enabled' => false,
         'matchIp' => false,         // Whether to match the user's IP address when reading the session data

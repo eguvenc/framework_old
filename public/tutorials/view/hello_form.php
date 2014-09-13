@@ -61,7 +61,7 @@
                     </pre>
 
                     <h3>$this->form->output()</h3>
-                    <pre><?php print_r($this->form->output()); ?>
+                    <pre><?php print_r($this->form->outputArray()); ?>
                     </pre>
 
                     <h3>$this->form->error('email')</h3>

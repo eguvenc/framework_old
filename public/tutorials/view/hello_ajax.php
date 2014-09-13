@@ -136,7 +136,7 @@ function submitAjax(formId){
         <h1>Hello Ajax</h1>
         <section>
 
-            <form action="http://framework/index.php/tutorials/hello_ajax" method="POST" id="ajax_tutorial" />
+            <form action="/tutorials/hello_ajax/index" method="POST" id="ajax_tutorial" />
                 <table width="100%">
                     <tr>
                         <td style="width:20%;">Email</td>
@@ -149,6 +149,11 @@ function submitAjax(formId){
                     <tr>
                         <td>Confirm</td>
                         <td><input type="password" name="confirm_password" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Confirm</td>
+                        <td><input type="radio" name="user_status" value="" /> Active
+                            <input type="radio" name="user_status" value="" /> Passive</td>
                     </tr>
                     <tr>
                         <td></td>

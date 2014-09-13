@@ -29,11 +29,11 @@ $app->func(
                 $this->form->setMessage('There are some errors in form fields.');
             }
             $this->form->setErrors($this->validator);
-            echo $this->response->json($this->form->output());
+            echo $this->response->json($this->form->outputArray());
             return;
         }
         $c->load('url');
-        $c->load('html');
+        $c->load('service/html');
         $c->load('view');
 
         $this->view->load(

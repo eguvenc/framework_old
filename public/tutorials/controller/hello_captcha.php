@@ -9,7 +9,7 @@ $app = new Controller(
     function ($c) {
         $c->load('view');
         $c->load('url');
-        $c->load('html');
+        $c->load('service/html');
         $c->load('form');
         $c->load('post');
     }
