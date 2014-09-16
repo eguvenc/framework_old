@@ -90,40 +90,18 @@ return array(
      ),
     /*
     |--------------------------------------------------------------------------
-    | Databases
+    | Include Files
     |--------------------------------------------------------------------------
+    | This feature allows to us load configuration files without using
+    | $this->config->load() method.
+    |
     */
-   'database' => '@include.database.php',
-    /*
-    |--------------------------------------------------------------------------
-    | Sessions
-    |--------------------------------------------------------------------------
-    */
-    'session' => '@include.session.php',
-    /*
-    |--------------------------------------------------------------------------
-    | NoSQL Databases
-    |--------------------------------------------------------------------------
-    */
-   'nosql' => '@include.nosql.php',
-    /*
-    |--------------------------------------------------------------------------
-    | Mail
-    |--------------------------------------------------------------------------
-    */
-    'mail' => '@include.mail.php',
-    /*
-    |--------------------------------------------------------------------------
-    | Cache
-    |--------------------------------------------------------------------------
-    */
-    'cache' =>  '@include.cache.php',
-    /*
-    |--------------------------------------------------------------------------
-    | Queue
-    |--------------------------------------------------------------------------
-    */
-    'queue' => '@include.queue.php',
+    'database' => '@include.database.php', // Databases
+    'session' => '@include.session.php',   // Sessions
+    'nosql' => '@include.nosql.php',       // NoSQL Databases
+    'mail' => '@include.mail.php',         // Mail
+    'cache' =>  '@include.cache.php',      // Cache
+    'queue' => '@include.queue.php',       // Queue
     /*
     |--------------------------------------------------------------------------
     | View Schemes
@@ -169,11 +147,12 @@ return array(
     |--------------------------------------------------------------------------
     */
     'cookie' => array( 
-        'prefix' => '',                          // Set a prefix if you need to avoid collisions
-        'domain' => '',                          // Set to .your-domain.com for site-wide cookies
-        'path'   => '/',                         // Typically will be a forward slash
-        'expire' => (7 * 24 * 60 * 60),          // 1 week - Cookie expire time.
+        'domain' => '.framework.com',                          // Set to .your-domain.com for site-wide cookies
+        'path'   => '',                         // Typically will be a forward slash
         'secure' => false,                       // Cookies will only be set if a secure HTTPS connection exists.
+        'httpOnly' => false,                     // When true the cookie will be made accessible only through the HTTP protocol
+        'expire' => (7 * 24 * 60 * 60),          // 1 week - Cookie expire time.
+        'prefix' => '',                          // Set a prefix if you need to avoid collisions
     ),
     /*
     |--------------------------------------------------------------------------

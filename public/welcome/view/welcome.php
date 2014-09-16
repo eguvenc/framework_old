@@ -7,7 +7,8 @@
     </head>
     <body>
         <header>
-            <?php echo $this->url->anchor('/', $this->html->img('logo.png', ' alt="Obullo" ')) ?>
+            <?php // echo $this->url->anchor('/', $this->html->img('logo.png', ' alt="Obullo" ')) ?>
+            <img src="/assets/images/logo.png" alt="logo" border="0" />
         </header>
 
         <h1>Welcome to Obullo !</h1>

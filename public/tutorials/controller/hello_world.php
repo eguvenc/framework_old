@@ -8,6 +8,7 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
+        $c->load('service/user/login');
 
         // $this->logger->load(LOGGER_MONGO);
 

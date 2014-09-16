@@ -39,7 +39,7 @@ Class Logger implements ServiceInterface
         $c['logger'] = function () use ($c) {
 
             if ($c->load('config')['log']['enabled'] == false) {  // Use disabled handler if config disabled.
-                return new Disabled;
+                return new DisabledHandler;
             }
             $logger = new LogLogger($c, $c->load('config')['log']);
             /*

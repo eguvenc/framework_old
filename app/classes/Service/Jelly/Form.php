@@ -26,7 +26,7 @@ Class Form implements ServiceInterface
      */
     public function register($c)
     {
-        $c['jelly/form'] = function () use ($c) {
+        $c['jelly.form'] = function () use ($c) {
             return new JellyForm(
                 $c, 
                 array(

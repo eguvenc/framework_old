@@ -2,11 +2,13 @@
 
 namespace Service\User;
 
-use Obullo\Auth\LoginService,
-    Obullo\Auth\Temporary\Storage\Cache;
+use Service\ServiceInterface,
+    Obullo\Auth\LoginService,
+    Obullo\Auth\Adapter\DbTable,
+    Auth\Adapter\DbTable\SQLQuery;
 
 /**
- * User ( Authentication ) Login Service
+ * Login Service
  *
  * @category  Service
  * @package   Password
@@ -27,15 +29,18 @@ Class Login implements ServiceInterface
     public function register($c)
     {
         $c['user/login'] = function () use ($c) {
-
-            $user = $c->load('return auth/user');
-            $user->registerService(new LoginService($c, new DbTable, new Cache));
-            return $user;
+            return $c->load('return auth/user')->registerService(
+                new LoginService(
+                    $c, 
+                    new DbTable(new SQLQuery($c))
+                )
+            );
         };
     }
+
 }
 
-// END User class
+// END Login class
 
-/* End of file User.php */
-/* Location: .classes/Service/User.php */
+/* End of file Login.php */
+/* Location: .app/classes/Service/Login.php */
