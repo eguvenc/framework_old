@@ -11,7 +11,7 @@ return array(
         'host' => 'localhost',
         'username' => 'root',
         'password' => '123456',
-        'database' => 'q_jobs',
+        'database' => 'test',
         'port'     => '',
         'charset'  => 'utf8',
         'dsn'      => '',

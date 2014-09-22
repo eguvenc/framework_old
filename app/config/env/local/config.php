@@ -147,12 +147,12 @@ return array(
     |--------------------------------------------------------------------------
     */
     'cookie' => array( 
-        'domain' => '.framework.com',                          // Set to .your-domain.com for site-wide cookies
-        'path'   => '',                         // Typically will be a forward slash
-        'secure' => false,                       // Cookies will only be set if a secure HTTPS connection exists.
-        'httpOnly' => false,                     // When true the cookie will be made accessible only through the HTTP protocol
-        'expire' => (7 * 24 * 60 * 60),          // 1 week - Cookie expire time.
-        'prefix' => '',                          // Set a prefix if you need to avoid collisions
+        'domain' => '.framework.com',  // Set to .your-domain.com for site-wide cookies
+        'path'   => '',                // Typically will be a forward slash
+        'secure' => false,             // Cookies will only be set if a secure HTTPS connection exists.
+        'httpOnly' => false,           // When true the cookie will be made accessible only through the HTTP protocol
+        'expire' => 604800,            // 1 week - Cookie expire time.
+        'prefix' => '',                // Set a prefix if you need to avoid collisions
     ),
     /*
     |--------------------------------------------------------------------------

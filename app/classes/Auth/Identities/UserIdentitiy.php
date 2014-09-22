@@ -2,7 +2,8 @@
 
 namespace Auth\Identities;
 
-use Obullo\Auth\Identities\IdentityInterface;
+use Obullo\Auth\Identities\IdentityInterface,
+    Auth\Credentials;
 
 /**
  * User Identity
@@ -42,7 +43,7 @@ Class User implements IdentityInterface
      */
     public function getIdentifier()
     {
-        return $this->attributes['id'];
+        return $this->attributes[Credentials::IDENTIFIER];
     }
 
     /**
@@ -52,37 +53,17 @@ Class User implements IdentityInterface
      */
     public function getPassword()
     {
-        return $this->attributes['password'];
+        return $this->attributes[Credentials::PASSWORD];
     }
 
     /**
-     * Get the password for the user.
+     * Get the password needs rehash array.
      *
-     * @return string
+     * @return mixed false|string new password hash
      */
-    public function getIsVerified()
+    public function getPasswordNeedsReHash()
     {
-        return isset($this->attributes['__isVerified']) ? $this->attributes['__isVerified'] : 0;
-    }
-
-    /**
-     * Get the password for the user.
-     *
-     * @return string
-     */
-    public function getIsAuthenticated()
-    {
-        return $this->attributes['__isAuthenticated'];
-    }
-
-    /**
-     * Get the password for the user.
-     *
-     * @return string
-     */
-    public function getIsTempAuth()
-    {
-        return $this->attributes['__isTempAuth'];
+        return isset($this->attributes['__passwordNeedsRehash']['hash']) ? $this->attributes['__passwordNeedsRehash']['hash'] : false;
     }
 
     /**
@@ -108,58 +89,63 @@ Class User implements IdentityInterface
     /**
      * Get roles of user
      * 
-     * @return mixed string|array
+     * @return array
      */
     public function getRoles()
     {
-        return isset($this->attributes['__roles']) ? unserialize($this->attributes['__roles']) : '';
+        return isset($this->attributes['__roles']) ? $this->attributes['__roles'] : array();
     }
 
     /**
-     * Get all attributes
-     * 
-     * @return array
-     */
-    public function getArray()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * Set an attribute on the user.
+     * Dynamically access the user's attributes.
      *
-     * @param string $key   key
-     * @param mixed  $value value
+     * @param string $key ket
      * 
-     * @return void
+     * @return mixed
      */
-    public function set($key, $value)
-    {
-        $this->attributes[$key] = $value;
-    }
-
-    /**
-     * Get an attribute on the user.
-     *
-     * @param string $key key
-     * 
-     * @return void
-     */
-    public function get($key)
+    public function __get($key)
     {
         return $this->attributes[$key];
     }
 
     /**
-     * Unset a value on the user.
+     * Dynamically set the user's attributes.
+     *
+     * @param string $key key
+     * @param string $val value
+     * 
+     * @return mixed
+     */
+    public function __set($key, $val)
+    {
+        return $this->attributes[$key] = $val;
+    }
+
+    /**
+     * Dynamically check if a value is set on the user.
      *
      * @param string $key key
      * 
      * @return bool
      */
-    public function remove($key)
+    public function __isset($key)
+    {
+        return isset($this->attributes[$key]);
+    }
+
+    /**
+     * Dynamically unset a value on the user.
+     *
+     * @param string $key key
+     * 
+     * @return void
+     */
+    public function __unset($key)
     {
         unset($this->attributes[$key]);
     }
 
 }
+
+/* End of file UserIdentity.php */
+/* Location: .app/classes/Auth/Identities/UserIdentity.php */

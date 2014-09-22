@@ -2,7 +2,8 @@
 
 namespace Auth\Identities;
 
-use Obullo\Auth\Identities\IdentityInterface;
+use Obullo\Auth\Identities\IdentityInterface,
+    Auth\Credentials;
 
 /**
  * Genetic Identity
@@ -42,7 +43,7 @@ Class GenericIdentity implements IdentityInterface
      */
     public function getIdentifier()
     {
-        return $this->attributes['id'];
+        return $this->attributes[Credentials::IDENTIFIER];
     }
 
     /**
@@ -52,44 +53,42 @@ Class GenericIdentity implements IdentityInterface
      */
     public function getPassword()
     {
-        return $this->attributes['password'];
+        return $this->attributes[Credentials::PASSWORD];
     }
 
     /**
-     * Set an attribute on the user.
-     *
-     * @param string $key   key
-     * @param mixed  $value value
+     * Returns to "1" user if used remember me
      * 
-     * @return void
+     * @return integer
      */
-    public function set($key, $value)
+    public function getRememberMe() 
     {
-        $this->attributes[$key] = $value;
+        return $this->attributes['__rememberMe'];
     }
-
+    
     /**
-     * Get an attribute on the user.
-     *
-     * @param string $key key
+     * Get all attributes
      * 
-     * @return void
+     * @return array
      */
-    public function get($key)
+    public function getArray()
+    {
+        return $this->attributes;
+    }
+    
+    /**
+     * Dynamically access the user's attributes.
+     *
+     * @param string $key ket
+     * 
+     * @return mixed
+     */
+    public function __get($key)
     {
         return $this->attributes[$key];
     }
 
-    /**
-     * Unset a value on the user.
-     *
-     * @param string $key key
-     * 
-     * @return bool
-     */
-    public function remove($key)
-    {
-        unset($this->attributes[$key]);
-    }
-
 }
+
+/* End of file GenericIdentity.php */
+/* Location: .app/classes/Auth/Identities/GenericIdentity.php */

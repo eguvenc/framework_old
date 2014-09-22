@@ -9,7 +9,7 @@
 */
 return array(
 
-    'notice' => false,     // Puts 'translate:' texts everywhere it is help you for multilingual development.
+    'notice' => false,     // Puts 'translate:' texts everywhere it is help to you for multilingual development.
 
     // Locale Settings
     'locale' => array(
@@ -26,12 +26,10 @@ return array(
 
     // Cookies
     'cookie' => array(
-        'name'   =>'locale',
-        'prefix' => '',
-        'domain' => '',       // Set to .your-domain.com for site-wide cookies
-        'path'   => '/',      // Typically will be a forward slash
+        'name'   =>'locale',               // Translation value cookie name
         'expire' => (365 * 24 * 60 * 60),  // 365 day; //  @see  Cookie expire time.   http://us.php.net/strtotime
-        'secure' => false,    // Cookies will only be set if a secure HTTPS connection exists.
+        'secure' => false,                 // Cookie will only be set if a secure HTTPS connection exists.
+        'httpOnly' => false                // When true the cookie will be made accessible only through the HTTP protocol
     ),
 
     // Available Languages

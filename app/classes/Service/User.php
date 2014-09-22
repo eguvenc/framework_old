@@ -3,10 +3,10 @@
 namespace Service\User;
 
 use Service\ServiceInterface,
-    Obullo\Auth\IdentityService;
+    Obullo\Auth\UserService;
 
 /**
- * Identity Service
+ * User Service
  *
  * @category  Service
  * @package   Password
@@ -15,7 +15,7 @@ use Service\ServiceInterface,
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/docs/services
  */
-Class Identity implements ServiceInterface
+Class User implements ServiceInterface
 {
     /**
      * Registry
@@ -25,14 +25,15 @@ Class Identity implements ServiceInterface
      * @return void
      */
     public function register($c)
-    {
-        $c['user/identity'] = function () use ($c) {
-            return $c->load('return auth/user')->registerService(new IdentityService($c));
+    {            
+        $c['user'] = function () use ($c) {
+            return new UserService($c);
         };
     }
+
 }
 
-// END Identity class
+// END User class
 
-/* End of file Identity.php */
-/* Location: .classes/Service/User/Identity.php */
+/* End of file User.php */
+/* Location: .app/classes/Service/User.php */
