@@ -1,3 +1,3 @@
 [submodule "version/o2"]
 	path = version/o2
-	url = git://github.com/version/o2.git
+	url = git://github.com/obullo/o2.git
