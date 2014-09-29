@@ -9,7 +9,7 @@ if ( ! defined('ROOT')) {  // Cli support
 }
 /*
 |--------------------------------------------------------------------------
-| Php startup errors controller
+| Php startup error handler
 |--------------------------------------------------------------------------
 */
 if (error_get_last() != null) {

@@ -19,20 +19,25 @@ return array(
             )
         )
     ),
-    'security' => array(    
-        'cookie' => array(
-            'enabled' => false,  // If true $auth->isAuthenticated() method check user agent and credentials match with security cookie.
-            'name' => '__os',    // Cookie name, change it for security
-            'hash' => 'sha256',  // sha512
-            'expire' => 315360000000,  // Default " 1 Year ".
+    'security' => array(
+        'token' => array(
+            'name' => '__ot',    // Cookie name, change it for security
+            'refresh' => 10,    // Every 5 minutes
+            'path' => '/',
+            'secure' => false,
+            'httpOnly' => false,
+            'prefix' => '',
+            'expire' => 6 * 30 * 24 * 3600,  // Default " 6 Months ". Should be same with rememberMeSeconds value.
         ),
         'passwordNeedsRehash' => array(
             'cost' => 10
         ),
     ),
-    'rememberMeSeconds' => 315360000000,         // Remember me ttl for session reminder class. By default " 1 Year ".
-    'regenerateSessionId' => true,               // Regenerate session id upon new logins.
-    'deleteOldSessionAfterRegenerate' => false,  // Destroy old session data after regenerate the new session id upon new logins
+    'login' => array(
+        'rememberMeSeconds' => 6 * 30 * 24 * 3600,         // Remember me ttl for session reminder class. Default " 1 Year ".
+        'regenerateSessionId' => true,               // Regenerate session id upon new logins.
+        'deleteOldSessionAfterRegenerate' => false,  // Destroy old session data after regenerate the new session id upon new logins
+    )
 );
 
 /* End of file auth.php */

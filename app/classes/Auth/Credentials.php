@@ -3,7 +3,7 @@
 namespace Auth;
 
 /**
- * Credentials Data
+ * Define Your Credentials Constants
  *
  * @category  Auth
  * @package   Auth
@@ -15,14 +15,29 @@ namespace Auth;
 Class Credentials
 {
     /**
-     * Identifier columnd name
+     * Identifier column name
      */
-    const IDENTIFIER = 'id';
+    const IDENTIFIER = 'username';
 
     /**
      * Identifier password column name
      */
     const PASSWORD = 'password';
+
+     /**
+     * None authorized user
+     */
+    const GUEST = 'Guest';
+
+    /**
+     * Login success but verification is not completed ( if verification enabled ).
+     */
+    const UNVERIFIED = 'Unverified';
+
+    /**
+     * Successfully authorized user
+     */
+    const AUTHORIZED = 'Authorized';
 }
 
 

@@ -2,7 +2,7 @@
 
 namespace Service\Provider;
 
-use Obullo\Cache\Redis;
+use Obullo\Cache\Handler\Redis;
 
 /**
  * Cache Provider

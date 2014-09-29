@@ -10,7 +10,7 @@ return array(
     'handler' => 'Cache',               // Available handlers: Cache, Database, Mongo
     'cookie' => array(
         'name'     => 'session',        // The name you want for the cookie
-        'domain'   => '.framework.com', // Set to .your-domain.com for site-wide cookies
+        'domain'   => '',               // Set to .your-domain.com for site-wide cookies
         'path'     => '/',              // Typically will be a forward slash
         'secure'   => false,            // When set to true, the cookie will only be set if a secure connection exists.
         'httpOnly' => false,            // When true the cookie will be made accessible only through the HTTP protocol

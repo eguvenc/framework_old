@@ -15,7 +15,7 @@ return array(
     'locale' => array(
         'default'  => 'en',   // This determines which set of language files should be used.
         'fallback' => 'en',   // If language not determined fallback locale will be set.
-        'setCookie' => true,  // Writes locale name ( en ) to cookie 
+        'setCookie' => false,  // Writes locale name to cookie 
     ),
             
     // Uri Settings

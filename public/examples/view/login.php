@@ -2,13 +2,13 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <?php echo $this->html->css('welcome.css') ?>
+        <link href="@assets@/css/welcome.css" rel="stylesheet" type="text/css" />
         <title>Hello Form</title>
     </head>
 
     <body>
         <header>
-            <?php echo $this->url->anchor('/', $this->html->img('logo.png', ' alt="Obullo" ')) ?>
+            <?php echo $this->url->anchor('/', '<img src="@assets@/images/logo.png">') ?>
         </header>
         
         <h1>Login Example</h1>
@@ -47,8 +47,8 @@
                 <h2>Test Results</h2>
 
                 <section>
-                    <h3>$this->form->output()</h3>
-                    <pre><?php print_r($this->form->output()); ?>
+                    <h3>$this->form->outputArray()</h3>
+                    <pre><?php print_r($this->form->outputArray()); ?>
                     </pre>
 
                     <h3>$this->form->error('email')</h3>

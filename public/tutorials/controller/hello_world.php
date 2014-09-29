@@ -8,37 +8,43 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-        // $c->load('service/user/login');
+        // $c->load('session');
+        // $c->load('service/cache');
 
-        // $this->logger->load(LOGGER_MONGO);
+        // $start = microtime(true);  // Run Timer
 
-        // $this->logger->info('HELLO INFO !!!!!');
-        // $this->logger->notice('HELLO NOTICE !!!!!');
-        // $this->logger->alert('HELLO ALERT !!!!!');
+        // echo hash('adler32', $_SERVER['HTTP_USER_AGENT']);
 
-        // $this->logger->push(LOGGER_MONGO);
-        
-        $c->load('db');
+        // $end = microtime(true) - $start;  // End Timer
+        // echo '<br>'.number_format($end, 12);
 
-        $start = microtime(true);  // Run Timer     
-        
+        // $c->load('service/provider/cache as cache', array('serializer' => 'SERIALIZER_NONE'));
 
-        // $this->db->prepare('SELECT * FROM users WHERE username = ?');
-        // $this->db->bindValue(1, 'eguvensc', PARAM_STR);
-        // $this->db->execute();
+        // $redis = new Redis();
+        // $redis->connect($this->config['cache']['servers'][0]['hostname'], $this->config['cache']['servers'][0]['port']);
 
-        // var_dump($this->db->rowArray());
+        // $this->cache->set('test', 'testValue0988888888');
+        // echo $this->cache->get('test');
 
-        // $t = 'asdkooooooooooooooooooooooooooooooooooooooooooooo30rj23j9j023j9rj32jr935444444444444444444444444444444444444444444444444444444444qweqweqwğş1*l';
+        // $this->session->set('test_', 'test');
+        // echo $this->session->get('test_').'<br>';  // 811 1500 5000 596 1621 1407 620 878   
 
-        // // echo hash('sha256', 'asdkooooooooooooooooooooooooooooooooooooooooooooo30rj23j9j023j9rj32jr935444444444444444444444444444444444444444444444444444444444qweqweqwğş1*l');
-        
-        // echo hash('md5', $t);
-        
+        // for ($i=0; $i < 1000; $i++) {
 
-        $end = microtime(true) - $start;  // End Timer
+        //     // $redis->set('test_'.$i, 'test_'.$i);
+        //     echo $redis->del('test_'.$i).'<br>'; 
 
-        echo '<br>'.number_format($end, 8);
+        //     // $this->session->set('test_'.$i, 'test_'.$i);
+        //     // echo $this->session->get('test_'.$i).'<br>';  // 811 1500 5000 596 1621 1407 620 878   
+        // }
+
+        // $this->session->set('test', 'testValuezzzzzzzzz');
+        // echo $this->session->get('test');  // 811 1500 5000 596 1621 1407 620 878
+
+
+        // $end = microtime(true) - $start;  // End Timer
+
+        // echo '<br>'.number_format($end, 4);
 
     }
 );

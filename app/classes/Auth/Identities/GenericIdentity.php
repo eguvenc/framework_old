@@ -88,6 +88,43 @@ Class GenericIdentity implements IdentityInterface
         return $this->attributes[$key];
     }
 
+    /**
+     * Dynamically set the user's attributes.
+     *
+     * @param string $key key
+     * @param string $val value
+     * 
+     * @return mixed
+     */
+    public function __set($key, $val)
+    {
+        return $this->attributes[$key] = $val;
+    }
+
+    /**
+     * Dynamically check if a value is set on the user.
+     *
+     * @param string $key key
+     * 
+     * @return bool
+     */
+    public function __isset($key)
+    {
+        return isset($this->attributes[$key]);
+    }
+
+    /**
+     * Dynamically unset a value on the user.
+     *
+     * @param string $key key
+     * 
+     * @return void
+     */
+    public function __unset($key)
+    {
+        unset($this->attributes[$key]);
+    }
+
 }
 
 /* End of file GenericIdentity.php */
