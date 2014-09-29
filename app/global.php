@@ -15,13 +15,13 @@
 | into maintenance mode.
 |
 */
-$c['app']->func(
-    'app.down',
-    function ($params) use ($c) {
-        $c->load('response')->setHttpResponse(503)->sendOutput($c->load('view')->template('maintenance'));
-        die;
-    }
-);
+// $c['app']->func(
+//     'app.down',
+//     function ($params) use ($c) {
+//         $c->load('response')->setHttpResponse(503)->sendOutput($c->load('view')->template('maintenance'));
+//         die;
+//     }
+// );
 /*
 |--------------------------------------------------------------------------
 | Service Maintenance Mode Handler
@@ -31,14 +31,14 @@ $c['app']->func(
 | into maintenance mode.
 |
 */
-$c['app']->func(
-    'service.down',
-    function ($params) use ($c) {
-        $c->load('response')->setHttpResponse(503);
-        echo 'Service Unavailable !';
-        die;
-    }
-);
+// $c['app']->func(
+//     'service.down',
+//     function ($params) use ($c) {
+//         $c->load('response')->setHttpResponse(503);
+//         echo 'Service Unavailable !';
+//         die;
+//     }
+// );
 
 
 /* End of file global.php */

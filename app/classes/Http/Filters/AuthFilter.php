@@ -15,13 +15,6 @@ namespace Http\Filters;
 Class AuthFilter
 {
     /**
-     * Auth user
-     * 
-     * @var object
-     */
-    protected $user;
-
-    /**
      * Constructor
      *
      * @param object $c container
@@ -30,9 +23,9 @@ Class AuthFilter
      */
     public function __construct($c)
     {
-        $this->user = $c->load('return service/auth/user');
+        $user = $c->load('return service/auth/user');
         
-        if ($this->user->identity->isAuthenticated()) {
+        if ($user->identity->isAuthenticated()) {
 
         	// Do something
         }
@@ -42,4 +35,4 @@ Class AuthFilter
 // END AuthFilter class
 
 /* End of file AuthFilter.php */
-/* Location: .Http/Filters/AuthFilter.php */
+/* Location: .Http/Filter/AuthFilter.php */

@@ -15,13 +15,6 @@ namespace Http\Filters;
 Class AuthFilter
 {
     /**
-     * Auth user
-     * 
-     * @var object
-     */
-    protected $user;
-
-    /**
      * Constructor
      *
      * @param object $c container
@@ -30,9 +23,9 @@ Class AuthFilter
      */
     public function __construct($c)
     {
-        $this->user = $c->load('return service/auth/user');
+        $user = $c->load('return service/auth/user');
         
-        if ($this->user->identity->isGuest()) {
+        if ($user->identity->isGuest()) {
 
             $c->load('flash/session')->info('Your session has been expired.');
             $c->load('url')->redirect('/');
@@ -43,4 +36,4 @@ Class AuthFilter
 // END GuestFilter class
 
 /* End of file GuestFilter.php */
-/* Location: .Http/Filters/GuestFilter.php */
+/* Location: .Http/Filter/GuestFilter.php */

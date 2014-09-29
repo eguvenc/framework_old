@@ -23,21 +23,6 @@ Class Credentials
      * Identifier password column name
      */
     const PASSWORD = 'password';
-
-     /**
-     * None authorized user
-     */
-    const GUEST = 'Guest';
-
-    /**
-     * Login success but verification is not completed ( if verification enabled ).
-     */
-    const UNVERIFIED = 'Unverified';
-
-    /**
-     * Successfully authorized user
-     */
-    const AUTHORIZED = 'Authorized';
 }
 
 

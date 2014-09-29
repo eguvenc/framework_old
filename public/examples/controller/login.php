@@ -19,7 +19,7 @@ $app->func(
     'index',
     function () use ($c) {
 
-        var_dump($this->user->identity->isGuest());
+        // var_dump($this->user->identity->logout());
 
         print_r($this->user->identity->getArray());
 

@@ -31,4 +31,4 @@ Class CsrfFilter
 // END CsrfFilter class
 
 /* End of file CsrfFilter.php */
-/* Location: .Http/Filters/CsrfFilter.php */
+/* Location: .Http/Filter/CsrfFilter.php */
