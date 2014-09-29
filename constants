@@ -6,7 +6,7 @@
 | This file specifies which APP constants should be loaded 
 | by default.
 */
-define('OBULLO_VERSION', '2.0');
+define('FRAMEWORK_PACKAGE_VERSION', 'o2');
 /*
 |---------------------------------------------------------------
 | UNDERSTANDING ESSENTIAL CONSTANTS
@@ -59,7 +59,7 @@ define('INDEX_PHP', 'index.php');
 | OBULLO CONSTANTS
 |--------------------------------------------------------------------------
 */
-define('OBULLO',  ROOT .'obullo'. DS . OBULLO_VERSION . DS);
+define('OBULLO',  ROOT .'version'. DS . FRAMEWORK_PACKAGE_VERSION . DS);
 define('OBULLO_PHP',  OBULLO .'Obullo'. DS .'Obullo.php');
 define('OBULLO_CONFIG',  OBULLO .'Config'. DS .'Config.php');
 define('OBULLO_CORE',  OBULLO .'Obullo'. DS .'Core.php');
