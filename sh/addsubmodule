@@ -15,7 +15,7 @@ git submodule update
 git commit -am 'added new submodule to this folder version/ '$1
 git push origin master
 
-cd $PROJECT_DIR/version/$1
+cd $PROJECT_DIR/obullo/$1
 git checkout master
 git remote set-url origin git@github.com:obullo/$1.git
 chmod -R 777 $PROJECT_DIR
