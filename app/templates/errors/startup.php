@@ -78,4 +78,4 @@ if (isset($_COOKIE) AND count($_COOKIE, COUNT_RECURSIVE) > $maxInputVars
 }
 
 /* End of file startup.php */
-/* Location: .app/errors/startup.php */
+/* Location: .app/templates/errors/startup.php */

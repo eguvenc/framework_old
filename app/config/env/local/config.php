@@ -15,7 +15,7 @@ return array(
     */                             
     'error' => array(
         'debug' => true,      // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
-        'reporting' => true,  // Php "Native Error" reporting should be "Enabled" in "TEST" environment should be "Disabled"" in "PRODUCTION".
+        'reporting' => false,  // Php "Native Error" reporting should be "Enabled" in "TEST" environment should be "Disabled"" in "PRODUCTION".
                               // You can turn on it on "local" if you want catch hidden fatal errors.
     ),
     /*
@@ -104,15 +104,15 @@ return array(
     'queue' => '@include.queue.php',       // Queue
     /*
     |--------------------------------------------------------------------------
-    | View Schemes
+    | View
     |--------------------------------------------------------------------------
     */
     'view' => array(
-        'schemes' => array(
+        'layouts' => array(
             'default' => function () {
                 $this->assign('header', '@layer.views/header');
                 $this->assign('sidebar', '@layer.views/sidebar');
-                $this->assign('footer', $this->template('footer'));
+                $this->assign('footer', '@layer.views/footer');
             },
             'welcome' => function () {
                 $this->assign('footer', $this->template('footer'));

@@ -73,7 +73,7 @@ The following functions let you generate errors:
 
 This function will display the error message supplied to it using the following error template:
 
-You can <b>customize</b> this template which is located at <dfn>app/errors/general.php</dfn>
+You can <b>customize</b> this template which is located at <dfn>app/templates/errors/general.php</dfn>
 
 The optional parameter <dfn>$status_code</dfn> determines what HTTP status code should be sent with the error.
 
@@ -87,7 +87,7 @@ This function will display the 404 error message supplied to it using the follow
 $this->response->show404('page')
 ```
 
-You can <b>customize</b> this template which is located at <dfn>app/errors/</dfn><kbd>404.php</kbd>
+You can <b>customize</b> this template which is located at <dfn>app/templates/errors/</dfn><kbd>404.php</kbd>
 
 The function expects the string passed to it to be the file path to the page that isn't found. Note that framework automatically shows 404 messages if controllers are not found.
 

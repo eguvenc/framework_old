@@ -3,7 +3,7 @@
 |--------------------------------------------------------------------------
 | COMPONENTS
 |--------------------------------------------------------------------------
-| This file specifies the your application components.
+| Specifies the your application components which they available by default.
 */
 /*
 |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ $c['post'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['view'] = function () use ($c) {
-    return new Obullo\View\View($c, $c->load('config')['view']['schemes']);
+    return new Obullo\View\View($c, $c->load('config')['view']['layouts']);
 };
 /*
 |--------------------------------------------------------------------------

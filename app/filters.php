@@ -9,49 +9,15 @@
 |--------------------------------------------------------------------------
 | App Maintenance
 |--------------------------------------------------------------------------
-| Maintenance filter for applications.
-|
-| Domain Key Example - Below the example subdomain we use "test" as domain key
-|
-|   test.examle.com
-|
-| Same key must be define in your config.xml file
-|
-| <app>
-|   <test>
-|       <name>Test</name>
-|       <domain><regex>test.example.com</regex></domain>
-|       <maintenance>up</maintenance>
-|   </test>
-| </app>
-|
+| Maintenance view filter
 */
 $c['router']->createFilter('maintenance', 'Http\Filters\MaintenanceFilter');
-/*
-|--------------------------------------------------------------------------
-| Service Maintenance
-|--------------------------------------------------------------------------
-| Maintenance filter for services.
-|
-| Same key must be define in your config.xml file
-| <service>
-|   <all>
-|       <name>All Services</name>
-|       <maintenance>up</maintenance>
-|   </all>
-|   <queue>
-|       <name>Queue Service</name>
-|       <maintenance>down</maintenance>
-|   </queue>
-| </service>
-|
-*/
-$c['router']->createFilter('service.maintenance', 'Http\Filters\ServiceMaintenanceFilter');
+
 /*
 |--------------------------------------------------------------------------
 | Auth
 |--------------------------------------------------------------------------
-| Define your filters.
+| Authentication filter
 */
 $c['router']->createFilter('auth', 'Http\Filters\AuthFilter');
 

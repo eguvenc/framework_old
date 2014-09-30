@@ -2,10 +2,10 @@
 
 defined('STDIN') or die('Access Denied');
 
-use Obullo\Console\Commands\Service;
+use Obullo\Cli\Commands\Service;
 
 /**
- * $app maintenance control
+ * $app service maintenance control
  * 
  * @var Controller
  */

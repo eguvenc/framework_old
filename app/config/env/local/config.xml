@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <root>
-<app>
+<host>
 	<all>
 		<label>All Site</label>
-		<domain><regex>^(www\.)?example\.com$</regex></domain>
-		<maintenance>down</maintenance>
+		<maintenance>up</maintenance>
 	</all>
 	<site>
 		<label>Web Site</label>
@@ -18,14 +17,14 @@
 	</test>
 	<support>
 		<label>Support</label>
-		<domain><regex>support.example.com</regex></domain>
+		<domain><regex>support.framework</regex></domain>
 		<maintenance>up</maintenance>
 	</support>
-</app>
+</host>
 <service>
 	<all>
 		<label>All Services</label>
-		<maintenance>up</maintenance>
+		<maintenance>down</maintenance>
 	</all>
 	<queue>
 		<label>Queue Service</label>

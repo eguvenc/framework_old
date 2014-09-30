@@ -24,7 +24,7 @@ $c['router']->defaultPage('welcome');
 
 
 $c['router']->group(
-    array('name' => 'general', 'domain' => $c['config']->xml->app->site, 'filters' => array('before.maintenance')),
+    array('name' => 'general', 'domain' => $c['config']->xml->host->site, 'filters' => array('before.maintenance')),
     function ($group) {
 
         $this->defaultPage('welcome');

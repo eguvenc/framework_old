@@ -13,7 +13,7 @@ if ( ! defined('ROOT')) {  // Cli support
 |--------------------------------------------------------------------------
 */
 if (error_get_last() != null) {
-    include APP .'errors'. DS .'startup'. EXT;
+    include APP .'templates'. DS .'errors'. DS .'startup'. EXT;
 }
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ require OBULLO_AUTOLOADER;
 require OBULLO_CORE;
 require OBULLO_CONTROLLER;
 require OBULLO_COMPONENTS;
-require OBULLO_GLOBAL;
+// require OBULLO_GLOBAL;
 require OBULLO_ROUTES;
 /*
 |--------------------------------------------------------------------------

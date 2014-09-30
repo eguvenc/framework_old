@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
 <root>
-<app>
+<host>
 	<all>
 		<label>All Site</label>
-		<domain><regex>.*.example.com</regex></domain>
 		<maintenance>down</maintenance>
 	</all>
 	<site>
@@ -21,7 +20,7 @@
 		<domain><regex>support.example.com</regex></domain>
 		<maintenance>up</maintenance>
 	</support>
-</app>
+</host>>
 <service>
 	<all>
 		<label>All Services</label>

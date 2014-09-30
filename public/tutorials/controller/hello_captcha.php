@@ -45,7 +45,7 @@ $app->func(
             function () {
                 $this->assign('name', 'Obullo');
                 $this->assign('title', 'Hello Captcha !');
-                $this->getScheme('welcome');
+                $this->layout('welcome');
             }
         );
 
