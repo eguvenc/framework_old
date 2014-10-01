@@ -35,45 +35,46 @@ Class Logger implements ServiceInterface
             if ( ! $c->load('config')['log']['enabled']) {  // Use disabled handler if config disabled.
                 return new DisabledHandler;
             }
-            $logger = new LogService($c, $c->load('config')['log']);
+            $log = new LogService($c, $c->load('config')['log']);
             /*
             |--------------------------------------------------------------------------
             | Register Filters
             |--------------------------------------------------------------------------
             */
-            $logger->registerFilter('priority', 'Log\Filters\PriorityFilter');
+            $log->registerFilter('priority', 'Log\Filters\PriorityFilter');
+            $log->registerFilter('input', 'Log\Filters\InputFilter');
             /*
             |--------------------------------------------------------------------------
             | Register Handlers
             |--------------------------------------------------------------------------
             */
-            $logger->registerHandler(LOGGER_FILE, 'Log\Handlers\FileHandler\CartridgeFileWriter');
-            $logger->registerHandler(LOGGER_MONGO, 'Log\Handlers\MongoHandler\CartridgeMongoWriter');
-            $logger->registerHandler(LOGGER_EMAIL, 'Log\Handlers\EmailHandler\CartridgeQueueWriter');
+            $log->registerHandler(LOGGER_FILE, 'Log\Handlers\FileHandler\CartridgeQueueWriter');
+            $log->registerHandler(LOGGER_MONGO, 'Log\Handlers\MongoHandler\CartridgeMongoWriter');
+            $log->registerHandler(LOGGER_EMAIL, 'Log\Handlers\EmailHandler\CartridgeQueueWriter');
             /*
             |--------------------------------------------------------------------------
             | Add Writer - Primary file writer should be available on local server.
             |--------------------------------------------------------------------------
             */
-            $logger->addWriter(LOGGER_FILE)->priority(2);
+            $log->addWriter(LOGGER_FILE)->priority(2)->filter('priority.notIn', array(LOG_INFO))->filter('input.filter');
             // $logger->addWriter(LOGGER_MONGO)->priority(5);
             /*
             |--------------------------------------------------------------------------
             | Add Handler - Adds to available log handlers
             |--------------------------------------------------------------------------
             */
-            $logger->addHandler(LOGGER_EMAIL)->priority(2)->filter('priority.notIn', array(LOG_DEBUG, LOG_INFO));
+            $log->addHandler(LOGGER_EMAIL)->priority(2);
             /*
             |--------------------------------------------------------------------------
             | Removes file handler and uses second handler as primary in "production" env.
             |--------------------------------------------------------------------------
             */
             if (ENV == 'prod') {
-                $logger->removeWriter(LOGGER_FILE);
-                $logger->removeHandler(LOGGER_MONGO);
-                $logger->addWriter(LOGGER_MONGO);  //  Your production log writer
+                $log->removeWriter(LOGGER_FILE);
+                $log->removeHandler(LOGGER_MONGO);
+                $log->addWriter(LOGGER_MONGO);  //  Your production log writer
             }
-            return $logger;
+            return $log;
         };
     }
 }

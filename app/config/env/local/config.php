@@ -44,7 +44,6 @@ return array(
             'app'   => 'data/logs/app.log',   // Application log path  ( Only for File Handler )
             'cli'   => 'data/logs/cli.log',   // Cli log path  
             'ajax'  => 'data/logs/ajax.log',  // Ajax log path
-            'worker' => 'data/logs/worker.log',  // Queue worker log path
         ),
         'format'    => 'Y-m-d H:i:s',  // Log Date format
         'queries'   => true,           // If true "all" SQL Queries gets logged.
@@ -102,23 +101,6 @@ return array(
     'mail' => '@include.mail.php',         // Mail
     'cache' =>  '@include.cache.php',      // Cache
     'queue' => '@include.queue.php',       // Queue
-    /*
-    |--------------------------------------------------------------------------
-    | View
-    |--------------------------------------------------------------------------
-    */
-    'view' => array(
-        'layouts' => array(
-            'default' => function () {
-                $this->assign('header', '@layer.views/header');
-                $this->assign('sidebar', '@layer.views/sidebar');
-                $this->assign('footer', '@layer.views/footer');
-            },
-            'welcome' => function () {
-                $this->assign('footer', $this->template('footer'));
-            },
-        )
-    ),
     /*
     |--------------------------------------------------------------------------
     | Layers

@@ -21,7 +21,7 @@ return array(
     ),
     'security' => array(
         'token' => array(
-            'name' => '__ot',    // Cookie name, change it for security
+            'name' => '__ot',   // Cookie name, change it for security
             'refresh' => 10,    // Every 5 minutes
             'path' => '/',
             'secure' => false,
@@ -34,9 +34,21 @@ return array(
         ),
     ),
     'login' => array(
-        'rememberMeSeconds' => 6 * 30 * 24 * 3600,         // Remember me ttl for session reminder class. Default " 1 Year ".
-        'regenerateSessionId' => true,               // Regenerate session id upon new logins.
-        'deleteOldSessionAfterRegenerate' => false,  // Destroy old session data after regenerate the new session id upon new logins
+        'rememberMe'  => array(
+            'cookie' => array(
+                'name' => '__rm',
+                'path' => '/',
+                'secure' => false,
+                'httpOnly' => false,
+                'prefix' => '',
+                'expire' => 6 * 30 * 24 * 3600,  // Default " 6 Months ". Should be same with rememberMeSeconds value.
+            )
+        ),
+        'session' => array(
+            // 'rememberMeSeconds' => 6 * 30 * 24 * 3600,    // Remember me ttl for session reminder class. Default " 1 Year ".
+            'regenerateSessionId' => true,               // Regenerate session id upon new logins.
+            'deleteOldSessionAfterRegenerate' => false,  // Destroy old session data after regenerate the new session id upon new logins
+        )
     )
 );
 

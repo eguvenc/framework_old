@@ -9,14 +9,10 @@ return array(
         'server' => array(
             'hostname' => array(
                 'ersin-desktop',
-                'yceo.rabih',
-                'aly',
-                'zero',
-                'burak-MS-7693',
+                'someone.computer',
+                'anotherone.computer',
             ),
             'ip' => array(
-                '127.0.0.1',
-                '127.0.0.1',
                 '127.0.0.1',
                 '127.0.0.1',
                 '127.0.0.1',
@@ -26,7 +22,7 @@ return array(
     'test' => array (
         'server' => array(
             'hostname' => array(
-                'localhost.localdomain',
+                'localhost.test',
             ),
             'ip' => array(),
         ),

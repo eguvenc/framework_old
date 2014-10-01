@@ -8,6 +8,9 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
+
+        $this->logger->info('testsddssd ');
+
         // $c->load('session');
         // $c->load('service/cache');
 

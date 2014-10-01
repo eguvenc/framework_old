@@ -1,5 +1,7 @@
 <?php
 
+namespace Workers;
+
 use Obullo\Queue\Job,
     Obullo\Queue\JobInterface;
 
