@@ -38,7 +38,8 @@ $app->func(
                     array(
                         Auth\Credentials::IDENTIFIER => $this->validator->value('email'), 
                         Auth\Credentials::PASSWORD => $this->validator->value('password')
-                    )
+                    ),
+                    $this->post['rememberMe']
                 );
 
                 if ($result->isValid()) {

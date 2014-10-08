@@ -21,8 +21,8 @@ return array(
     ),
     'security' => array(
         'token' => array(
-            'name' => '__ot',   // Cookie name, change it for security
-            'refresh' => 10,    // Every 5 minutes
+            'name' => '__ot',   // Cookie name, change it if you want
+            'refresh' => 120,   // Every 2 minutes do the cookie validation
             'path' => '/',
             'secure' => false,
             'httpOnly' => false,
@@ -45,7 +45,6 @@ return array(
             )
         ),
         'session' => array(
-            // 'rememberMeSeconds' => 6 * 30 * 24 * 3600,    // Remember me ttl for session reminder class. Default " 1 Year ".
             'regenerateSessionId' => true,               // Regenerate session id upon new logins.
             'deleteOldSessionAfterRegenerate' => false,  // Destroy old session data after regenerate the new session id upon new logins
         )
