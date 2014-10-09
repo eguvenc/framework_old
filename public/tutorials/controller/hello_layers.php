@@ -7,7 +7,6 @@
  */
 $app = new Controller(
     function ($c) {
-        $c->load('service/html');
         $c->load('view');
         $c->load('url');
         $c->load('request');

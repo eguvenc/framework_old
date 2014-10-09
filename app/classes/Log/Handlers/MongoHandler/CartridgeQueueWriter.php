@@ -2,7 +2,7 @@
 
 namespace Log\Handlers\MongoHandler;
 
-use Obullo\Log\Handler\QueueHandler,
+use Obullo\Log\Handler\MongoHandler,
     Obullo\Log\Writer\QueueWriter;
 
 /**

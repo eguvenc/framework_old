@@ -21,8 +21,25 @@ $app->func(
 
         // var_dump($this->user->identity->logout());
 
+        // var_dump($this->user->identity->isAuthenticated());
+
+        echo '<a href="/examples/logout">logout</a>';
+
+        echo '<pre>';
+
         print_r($this->user->identity->getArray());
 
+        echo '</pre>';
+
+        echo '<pre>';
+
+        print_r($_SESSION);
+
+        echo '</pre>';
+        // unset($_SESSION['__Auth/Storage/Identifier']);
+
+        // print_r($this->user->identity->getArray()); exit;
+ 
         if ($this->post['dopost']) {
 
             $c->load('validator'); // load validator

@@ -20,7 +20,7 @@ return array(
         )
     ),
     'security' => array(
-        'token' => array(
+        'cookie' => array(
             'name' => '__ot',   // Cookie name, change it if you want
             'refresh' => 120,   // Every 2 minutes do the cookie validation
             'path' => '/',

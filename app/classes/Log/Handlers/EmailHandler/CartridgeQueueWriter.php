@@ -2,7 +2,7 @@
 
 namespace Log\Handlers\EmailHandler;
 
-use Obullo\Log\Handler\FileHandler,
+use Obullo\Log\Handler\EmailHandler,
     Obullo\Log\Writer\QueueWriter;
 
 /**

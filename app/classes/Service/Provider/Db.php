@@ -5,16 +5,16 @@ namespace Service\Provider;
 use Obullo\Database\Pdo\Mysql;
 
 /**
- * Database Provider
+ * Db Provider
  *
  * @category  Provider
- * @package   Database
+ * @package   Db
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/docs/providers
  */
-Class Database implements ProviderInterface
+Class Db implements ProviderInterface
 {
     /**
      * Registry
@@ -25,7 +25,9 @@ Class Database implements ProviderInterface
      */
     public function register($c)
     {
-        $c['provider:database'] = function ($key = 'db') use ($c) {
+        $c['provider:db'] = $c->alias(
+            'db', 
+            function ($key = 'db') use ($c) {
                 return new Mysql(
                     $c,
                     array(
@@ -37,11 +39,12 @@ Class Database implements ProviderInterface
                         'charset'  => $c->load('config')['database'][$key]['charset'],
                     )
                 );
-        };
+            }
+        );
     }
 }
 
-// END Database class
+// END Db class
 
-/* End of file Database.php */
-/* Location: .classes/Service/Provider/Database.php */
+/* End of file Db.php */
+/* Location: .classes/Service/Provider/Db.php */

@@ -8,7 +8,7 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-        $c->load('db');
+        $c->load('service/provider/database as db');
         $c->load('post');
         $c->load('form');
         $c->load('session/flash as flash');

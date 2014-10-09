@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8" />
-            <?php echo $this->html->css('welcome.css') ?>
+        <link href="@assets@/css/welcome.css" rel="stylesheet" type="text/css" />
         <title>Scheme Tutorial</title>
     </head>
 
     <body>
 
 <header>
-    <?php echo $this->url->anchor('/', $this->html->img('logo.png', ' alt="Obullo" ')) ?>
+    <?php echo $this->url->anchor('/', '<img src="@assets@/images/logo.png">') ?>
 </header>
 
 <h1>Hello Scheme World</h1>

@@ -8,8 +8,8 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-
-        $this->logger->info('testsddssd ');
+        
+        // $this->db->query('SELECT * FROM users');
 
         // $c->load('session');
         // $c->load('service/cache');

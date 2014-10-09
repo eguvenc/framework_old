@@ -2,15 +2,15 @@
 <html>
     <head>
         <meta charset="utf-8" />
-            <?php echo $this->html->css('welcome.css') ?>
+        <link href="@assets@/css/welcome.css" rel="stylesheet" type="text/css" />
         <title>Layered Vc Tutorial</title>
     </head>
 
     <body>
         <header>
-            <?php echo $this->url->anchor('/', $this->html->img('logo.png', ' alt="Obullo" ')) ?>
+            <?php echo $this->url->anchor('/', '<img src="@assets@/images/logo.png">') ?>
         </header>
-        <h1>Layered Vc Tutorial</h1>
+        <h1>Layer Tutorials</h1>
 <pre>
 $c->load('public');
 $a = $this->public->get('tutorials/hello_dummy/1/2/3');
