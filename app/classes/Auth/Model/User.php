@@ -8,7 +8,7 @@ use Obullo\Auth\Adapter\AssociativeArray,
     Auth\Identities\UserIdentity;
 
 /**
- * O2 Auth User Model 
+ * O2 Auth - User Database Model
  *
  * @category  Auth
  * @package   Auth
@@ -34,7 +34,7 @@ Class User implements ModelUserInterface
     public $db;
 
     /**
-     * Db user tablename
+     * Db users tablename
      */
     const TABLE = 'users';
 
@@ -44,14 +44,19 @@ Class User implements ModelUserInterface
     const IDENTIFIER = 'username';
 
     /**
-     * Remember me token column name
+     * RememberMe token column name
      */
     const REMEMBER_TOKEN = 'remember_token';
 
     /**
      * Sql expression
      */
-    const SQL = 'SELECT * FROM %s WHERE BINARY %s = ?';
+    const SQL_USER = 'SELECT * FROM %s WHERE BINARY %s = ?';
+
+    /**
+     * Sql expression of recalled user
+     */
+    const SQL_RECALLED_USER = 'SELECT * FROM %s WHERE %s = ?';
 
     /**
      * Constructor
@@ -69,13 +74,13 @@ Class User implements ModelUserInterface
     /**
      * Execute sql query
      *
-     * @param array $user GenericIdentity object to get user's identifier
+     * @param object $user GenericIdentity object to get user's identifier
      * 
      * @return mixed boolean|array
      */
-    public function execDbQuery(GenericIdentity $user)
+    public function execQuery(GenericIdentity $user)
     {
-        $this->db->prepare(static::SQL, array(static::TABLE, static::IDENTIFIER));
+        $this->db->prepare(static::SQL_USER, array(static::TABLE, static::IDENTIFIER));
         $this->db->bindValue(1, $user->getIdentifier(), PARAM_STR);
         $this->db->execute();
 
@@ -93,6 +98,22 @@ Class User implements ModelUserInterface
     }
 
     /**
+     * Recalled user sql query using remember cookie
+     * 
+     * @param string $token rememberMe token
+     * 
+     * @return array
+     */
+    public function execRecallerQuery($token)
+    {
+        $this->db->prepare(static::SQL_RECALLED_USER, array(static::TABLE, static::REMEMBER_TOKEN));
+        $this->db->bindValue(1, $token, PARAM_STR);
+        $this->db->execute();
+
+        return $this->db->rowArray();  // returns to false if fail
+    }
+
+    /**
      * Update remember token upon every login & logout
      * 
      * @param string $token name
@@ -100,7 +121,7 @@ Class User implements ModelUserInterface
      * 
      * @return void
      */
-    public function refreshRememberMeToken($token, UserIdentity $user)
+    public function refreshRememberMeToken($token, GenericIdentity $user)
     {
         $this->db->update(
             static::TABLE, 

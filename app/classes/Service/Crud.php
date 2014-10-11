@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Obullo\Database\Crud\Crud as OCrud;
+use Obullo\Database\Crud\Crud as ActiveRecord;
 
 /**
  * Crud Database Service
@@ -26,7 +26,19 @@ Class Crud implements ServiceInterface
     public function register($c)
     {
         $c['crud'] = function () use ($c) {
-            return new OCrud($c->load('return db'));
+            return new ActiveRecord(
+                new Mysql(
+                    $c,
+                    array(
+                        'host'     => $c->load('config')['database'][$key]['host'],
+                        'username' => $c->load('config')['database'][$key]['username'],
+                        'password' => $c->load('config')['database'][$key]['password'],
+                        'database' => $c->load('config')['database'][$key]['database'],
+                        'port'     => $c->load('config')['database'][$key]['port'],
+                        'charset'  => $c->load('config')['database'][$key]['charset'],
+                    )
+                )
+            );
         };
     }
 }

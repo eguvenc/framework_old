@@ -7,18 +7,49 @@
 |
 */
 return array(
-   'servers' => array(
-                    array(
-                      'hostname' => '10.0.0.154',
-                      'port'     => '6379',
-                       // 'timeout'  => '2.5',  // 2.5 sec timeout, just for redis cache
-                      'weight'   => '1'         // The weight parameter effects the consistent hashing 
-                                                // used to determine which server to read/write keys from.
-                    ),
+
+   'redis' => array(
+       'servers' => array(
+                        array(
+                          'hostname' => '10.0.0.154',
+                          'port'     => '6379',
+                           // 'timeout'  => '2.5',  // 2.5 sec timeout, just for redis cache
+                          'weight'   => '1'         // The weight parameter effects the consistent hashing 
+                                                    // used to determine which server to read/write keys from.
+                        ),
+        ),
+        'auth' =>  'aZX0bjL',               // connection password
+        'serializer' =>  'SERIALIZER_PHP',  // SERIALIZER_NONE, SERIALIZER_PHP, SERIALIZER_IGBINARY
+        'persistentConnect' => 0,
+        'reconnectionAttemps' => 100,
     ),
-    'auth' =>  'aZX0bjL',            // connection password
-    'path' =>  '/data/cache/',  // file storage path just for file cache
-    'serializer' =>  'SERIALIZER_PHP',     // SERIALIZER_NONE, SERIALIZER_PHP, SERIALIZER_IGBINARY
+
+    'file' => array(
+        'path' =>  '/data/cache/',          // file data storage path
+    ),
+
+    'memcache' => array(
+        'servers' => array(
+                        array(
+                          'hostname' => '',
+                          'port'     => '11211',
+                           // 'timeout'  => '2.5',  // 2.5 sec timeout
+                        ),
+        ),
+    ),
+
+    'memcached' => array(
+        'servers' => array(
+                        array(
+                          'hostname' => '',
+                          'port'     => '11211',
+                          'weight'   => '1'      // The weight parameter effects the consistent hashing 
+                                                 // used to determine which server to read/write keys from.
+                        ),
+        ),
+        'serializer' =>  'SERIALIZER_PHP',  // SERIALIZER_NONE, SERIALIZER_PHP, SERIALIZER_JSON, SERIALIZER_IGBINARY
+    )
+
 );
 
 /* End of file cache.php */

@@ -48,6 +48,7 @@ Class CartridgeQueueWriter
                         'route' => gethostname(). LOGGER_NAME .'Mongo',
                         'job' => LOGGER_JOB,
                         'delay' => 0,
+                        'type' => null,
                         'format' => array(
                             'context' => 'array',  // json
                             'extra'   => 'array'   // json

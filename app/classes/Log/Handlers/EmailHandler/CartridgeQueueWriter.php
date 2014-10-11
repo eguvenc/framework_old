@@ -49,6 +49,7 @@ Class CartridgeQueueWriter
                         'route' => gethostname(). LOGGER_NAME .'Email',
                         'job' => LOGGER_JOB,
                         'delay' => 0,
+                        'type' => null,   // app, worker
                         'format' => array(
                             'context' => 'array',  // json
                             'extra'   => 'array'   // json

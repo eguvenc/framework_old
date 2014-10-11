@@ -6,7 +6,7 @@ use Obullo\Auth\Identities\IdentityInterface,
     Auth\Credentials;
 
 /**
- * Genetic Identity
+ * Generic Identity
  *
  * @category  Users
  * @package   Identities
@@ -55,7 +55,7 @@ Class GenericIdentity implements IdentityInterface
     {
         return $this->attributes[Credentials::PASSWORD];
     }
-
+    
     /**
      * Returns to "1" user if used remember me
      * 
@@ -63,9 +63,20 @@ Class GenericIdentity implements IdentityInterface
      */
     public function getRememberMe() 
     {
-        return $this->attributes['__rememberMe'];
+        return isset($this->attributes['__rememberMe']) ? $this->attributes['__rememberMe'] : 0;
+    }
+
+    /**
+     * Returns to remember token
+     * 
+     * @return integer
+     */
+    public function getRememberToken() 
+    {
+        return isset($this->attributes['__rememberToken']) ? $this->attributes['__rememberToken'] : false;
     }
     
+
     /**
      * Get all attributes
      * 

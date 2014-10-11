@@ -59,7 +59,7 @@ Class UserIdentity implements IdentityInterface
     /**
      * Dynamically access the user's attributes.
      *
-     * @param string $key ket
+     * @param string $key key
      * 
      * @return mixed
      */

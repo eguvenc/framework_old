@@ -26,7 +26,7 @@ Class Cache implements ServiceInterface
     public function register($c)
     {
         $c['cache'] = function () use ($c) {
-            return new Redis($c, $c->load('config')['cache']);
+            return new Redis($c);
         };
     }
 }

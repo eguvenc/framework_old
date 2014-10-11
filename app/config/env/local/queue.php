@@ -21,8 +21,8 @@ return array(
     'failed' => array(
         'storage' => 'Obullo\Queue\Failed\Storage\Database',
         'provider' => array(
-            'name' => 'Database',   // "Database" provider which is defined in your "Provider" folder.
-            'key' => 'q_jobs',
+            'name' => 'Db',     // "Db" provider which is defined in your "Provider" folder.
+            'key' => 'q_jobs',  // Database name
         ),
         'table' => 'failures',
         // 'emergency' => 'Obullo\Emergency\Email' // When the job fails failedJob class will push data to your emergency handler.

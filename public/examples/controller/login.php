@@ -19,6 +19,10 @@ $app->func(
     'index',
     function () use ($c) {
 
+        $c->load('session');
+        
+        // $this->session->remove('__Auth/Identifier');
+
         // var_dump($this->user->identity->logout());
 
         // var_dump($this->user->identity->isAuthenticated());
@@ -26,6 +30,8 @@ $app->func(
         echo '<a href="/examples/logout">logout</a>';
 
         echo '<pre>';
+
+        var_dump($this->user->identity->isAuthenticated());
 
         print_r($this->user->identity->getArray());
 

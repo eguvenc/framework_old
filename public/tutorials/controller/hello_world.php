@@ -8,7 +8,7 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-        
+
         // $this->db->query('SELECT * FROM users');
 
         // $c->load('session');

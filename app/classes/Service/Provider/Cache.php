@@ -28,10 +28,7 @@ Class Cache implements ProviderInterface
         $c['provider:cache'] = function ($params = array('serializer' => 'SERIALIZER_NONE')) use ($c) {
             return new Redis(
                 $c,
-                array(
-                'servers' => $c->load('config')['cache']['servers'],
-                'serializer' => $params['serializer']
-                )
+                $params['serializer']
             );
         };
     }

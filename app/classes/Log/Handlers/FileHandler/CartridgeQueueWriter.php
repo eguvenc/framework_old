@@ -49,6 +49,7 @@ Class CartridgeQueueWriter
                         'route' => gethostname(). LOGGER_NAME .'File',
                         'job' => LOGGER_JOB,
                         'delay' => 0,
+                        'type' => null,
                     )
                 )
             );
