@@ -48,7 +48,7 @@ Class Logger implements ServiceInterface
             | Register Handlers
             |--------------------------------------------------------------------------
             */
-            $log->registerHandler(LOGGER_FILE, 'Log\Handlers\FileHandler\CartridgeQueueWriter');
+            $log->registerHandler(LOGGER_FILE, 'Log\Handlers\FileHandler\CartridgeFileWriter');
             $log->registerHandler(LOGGER_MONGO, 'Log\Handlers\MongoHandler\CartridgeMongoWriter');
             $log->registerHandler(LOGGER_EMAIL, 'Log\Handlers\EmailHandler\CartridgeQueueWriter');
             /*
@@ -56,8 +56,13 @@ Class Logger implements ServiceInterface
             | Add Writer - Primary file writer should be available on local server.
             |--------------------------------------------------------------------------
             */
-            $log->addWriter(LOGGER_FILE)->priority(2)->filter('priority.notIn', array(LOG_INFO))->filter('input.filter');
-            // $logger->addWriter(LOGGER_MONGO)->priority(5);
+            if (defined('STDIN')) { 
+                $log->addWriter(LOGGER_FILE)->priority(2)->filter('priority.notIn', array(LOG_DEBUG, LOG_INFO)); // Cli
+                // $logger->addWriter(LOGGER_MONGO)->priority(5);
+            } else {
+                $log->addWriter(LOGGER_FILE)->priority(2)->filter('priority.notIn', array(LOG_INFO))->filter('input.filter'); // Http
+                // $logger->addWriter(LOGGER_MONGO)->priority(5);
+            }
             /*
             |--------------------------------------------------------------------------
             | Add Handler - Adds to available log handlers

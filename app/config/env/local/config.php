@@ -36,8 +36,8 @@ return array(
     | 7  LOG_DEBUG: Debug-level messages
     */
     'log' =>   array(
-        'enabled' => true,       // On / Off logging.
-        'output'  => false,      // On / Off debug html output. When it is enabled all handlers will be disabled.
+        'enabled' => true,      // On / Off logging.
+        'output' => false,      // On / Off debug html output. When it is enabled all handlers will be disabled.
         'channel'   => 'system',       // Default channel name should be general.
         'line'      => '[%datetime%] %channel%.%level%: --> %message% %context% %extra%\n',  // This format just for line based log drivers.
         'path'      => array(
@@ -48,6 +48,9 @@ return array(
         'format'    => 'Y-m-d H:i:s',  // Log Date format
         'queries'   => true,           // If true "all" SQL Queries gets logged.
         'benchmark' => true,           // If true "all" Application Benchmarks gets logged.
+        'queue' => array(
+            'workers' => true, // On / Off Queue workers logging functionality.
+        )
     ),
     /*
     |--------------------------------------------------------------------------
