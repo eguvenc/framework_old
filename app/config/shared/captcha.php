@@ -95,4 +95,4 @@ return array(
 );
 
 /* End of file captcha.php */
-/* Location: .app/config/captcha.php */
+/* Location: .app/config/shared/captcha.php */

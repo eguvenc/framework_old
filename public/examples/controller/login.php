@@ -11,7 +11,7 @@ $app = new Controller(
         $c->load('form');
         $c->load('view');
         $c->load('post');
-        $c->load('service/auth/user');
+        $c->load('service/user');
     }
 );
 
@@ -20,12 +20,47 @@ $app->func(
     function () use ($c) {
 
         $c->load('session');
+        $c->load('service/cache');
+
+        var_dump($this->session->get('__Auth/Identifier'));
+
+        $this->user->activity->set('lastActivity', time());
+        $this->user->activity->update();
+
+        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username', 'ersin');
+        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'password', '123456');
+        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:5445', 'username', 'mahmut');
+
+        // // echo $this->cache->hGet('Test:__permanent:Authorized:eguvenc@gmail.com:5445', 'username');
+
+        // $this->cache->hMSet('Test:__permanent:Authorized:eguvenc@gmail.com:5445', array('country' => 'tr', 'city' => 'adana' ));
         
+        // print_r($this->cache->hGetAll('Test:__permanent:Authorized:eguvenc@gmail.com:5445'));
+
+        // exit;
+
+        // $data = $this->cache->getAllKeys('Test:__permanent:Authorized:eguvenc@gmail.com:*');
+
+        // $all = $this->cache->hGetAll('Test:__permanent:Authorized:eguvenc@gmail.com:4454');
+        // print_r($all);
+
+        // print_r($data);
+        // if (1413299033.04 > 1413299033.0571) {
+        //     echo 'YES !!';
+        // }
+
+        
+        // $data = $this->cache->getAllKeys('Auth:__permanent:Authorized:eguvenc@gmail.com:*');
+
+        // var_dump($data); exit;
+
         // $this->session->remove('__Auth/Identifier');
 
         // var_dump($this->user->identity->logout());
 
         // var_dump($this->user->identity->isAuthenticated());
+
+        // echo $this->user->activity->getMemoryBlockKey();
 
         echo '<a href="/examples/logout">logout</a>';
 

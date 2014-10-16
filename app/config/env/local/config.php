@@ -49,7 +49,7 @@ return array(
         'queries'   => true,           // If true "all" SQL Queries gets logged.
         'benchmark' => true,           // If true "all" Application Benchmarks gets logged.
         'queue' => array(
-            'workers' => true, // On / Off Queue workers logging functionality.
+            'workers' => false, // On / Off Queue workers logging functionality.
         )
     ),
     /*
@@ -161,5 +161,6 @@ return array(
                               // Even if it does, however, not all browsers support compression
                               // so enable only if you are reasonably sure your visitors can handle it
 );
+
 /* End of file config.php */
 /* Location: .app/env/local/config.php */

@@ -104,4 +104,4 @@ return array(
 
 
 /* End of file mimes.php */
-/* Location: .app/config/mimes.php */
+/* Location: .app/config/shared/mimes.php */

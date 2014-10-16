@@ -182,4 +182,4 @@ return array(
 );
 
 /* End of file agents.php */
-/* Location: .app/config/agents.php */
+/* Location: .app/config/shared/agents.php */

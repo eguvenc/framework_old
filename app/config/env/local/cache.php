@@ -11,7 +11,7 @@ return array(
    'redis' => array(
        'servers' => array(
                         array(
-                          'hostname' => '10.0.0.154',
+                          'hostname' => '127.0.0.1',
                           'port'     => '6379',
                            // 'timeout'  => '2.5',  // 2.5 sec timeout, just for redis cache
                           'weight'   => '1'         // The weight parameter effects the consistent hashing 

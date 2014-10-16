@@ -18,4 +18,4 @@ return  array(
 );
 
 /* End of file flash.php */
-/* Location: .app/config/flash.php */
+/* Location: .app/config/shared/flash.php */

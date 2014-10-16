@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <link href="@assets@/css/welcome.css" rel="stylesheet" type="text/css" />
-        <title>Hello Form</title>
+        <title>Login</title>
     </head>
 
     <body>

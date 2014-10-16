@@ -1,6 +1,6 @@
 <?php
 
-namespace Service\Auth;
+namespace Service;
 
 use Service\ServiceInterface,
     Obullo\Auth\UserService;
@@ -26,7 +26,7 @@ Class User implements ServiceInterface
      */
     public function register($c)
     {            
-        $c['auth/user'] = function () use ($c) {
+        $c['user'] = function () use ($c) {
             return new UserService($c);
         };
     }

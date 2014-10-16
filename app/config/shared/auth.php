@@ -9,7 +9,7 @@
 return array(
     'adapter' => 'AssociativeArray',
     'memory' => array(          // Keeps user identitiy data in your cache driver.
-        'storage' => 'Cache',   // Storage driver uses cache service.
+        'storage' => 'Redis',   // Storage driver uses cache package
         'block' => array(
             'permanent' => array(
                 'lifetime' => 3600  // 1 hour is default storage life time. if remember choosed we use "rememberMeSeconds" value as lifetime otherwise default.
@@ -21,8 +21,8 @@ return array(
     ),
     'security' => array(
         'cookie' => array(
-            'name' => '__ot',   // Cookie name, change it if you want
-            'refresh' => 120,   // Every 2 minutes do the cookie validation
+            'name' => '__ot',  // Cookie name, change it if you want
+            'refresh' => 60,   // Every 1 minutes do the cookie validation
             'path' => '/',
             'secure' => false,
             'httpOnly' => false,
@@ -48,8 +48,11 @@ return array(
             'regenerateSessionId' => true,               // Regenerate session id upon new logins.
             'deleteOldSessionAfterRegenerate' => false,  // Destroy old session data after regenerate the new session id upon new logins
         )
+    ),
+    'activity' => array(
+        'singleSignOff' => false,  // Single sign-off is the property whereby a single action of signing out terminates access to multiple agents.
     )
 );
 
 /* End of file auth.php */
-/* Location: .app/env/local/auth.php */
+/* Location: .app/config/shared/auth.php */

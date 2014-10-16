@@ -43,7 +43,7 @@ Class GenericIdentity implements IdentityInterface
      */
     public function getIdentifier()
     {
-        return $this->attributes[Credentials::IDENTIFIER];
+        return isset($this->attributes[Credentials::IDENTIFIER]) ? $this->attributes[Credentials::IDENTIFIER] : false;
     }
 
     /**
@@ -53,7 +53,7 @@ Class GenericIdentity implements IdentityInterface
      */
     public function getPassword()
     {
-        return $this->attributes[Credentials::PASSWORD];
+        return isset($this->attributes[Credentials::PASSWORD]) ? $this->attributes[Credentials::PASSWORD] : false;
     }
     
     /**

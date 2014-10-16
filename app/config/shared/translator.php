@@ -51,4 +51,4 @@ return array(
 );
 
 /* End of file translator.php */
-/* Location: ./app/config/translator.php */
+/* Location: ./app/config/shared/translator.php */
