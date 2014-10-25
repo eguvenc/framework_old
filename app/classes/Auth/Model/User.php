@@ -59,6 +59,11 @@ Class User implements ModelUserInterface
     const SQL_RECALLED_USER = 'SELECT * FROM %s WHERE %s = ?';
 
     /**
+     * Sql expression of update remember token
+     */
+    const SQL_UPDATE_REMEMBER_TOKEN = 'UPDATE %s SET %s = ? WHERE BINARY %s = ?';
+
+    /**
      * Constructor
      * 
      * @param object $c       container
@@ -88,16 +93,6 @@ Class User implements ModelUserInterface
     }
 
     /**
-     * Execute storage query
-     *
-     * @return mixed boolean|array
-     */
-    public function execStorageQuery()
-    {
-        return $this->storage->query();
-    }
-
-    /**
      * Recalled user sql query using remember cookie
      * 
      * @param string $token rememberMe token
@@ -123,11 +118,10 @@ Class User implements ModelUserInterface
      */
     public function refreshRememberMeToken($token, GenericIdentity $user)
     {
-        $this->db->update(
-            static::TABLE, 
-            array(static::REMEMBER_TOKEN => $token), 
-            array(static::IDENTIFIER => $user->getIdentifier())
-        );
+        $this->db->prepare(static::SQL_UPDATE_REMEMBER_TOKEN, array(static::TABLE, static::REMEMBER_TOKEN, static::IDENTIFIER));
+        $this->db->bindValue(1, $token, PARAM_STR);
+        $this->db->bindValue(2, $user->getIdentifier(), PARAM_STR);
+        $this->db->execute();
     }
 
 }

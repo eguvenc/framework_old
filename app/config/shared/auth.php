@@ -8,11 +8,12 @@
 */
 return array(
     'adapter' => 'AssociativeArray',
-    'memory' => array(          // Keeps user identitiy data in your cache driver.
+    'memory' => array(          // Keeps user identity data in your cache driver.
+        'key' => 'Auth',        // Auth key should be replace with your projectameAuth
         'storage' => 'Redis',   // Storage driver uses cache package
         'block' => array(
             'permanent' => array(
-                'lifetime' => 3600  // 1 hour is default storage life time. if remember choosed we use "rememberMeSeconds" value as lifetime otherwise default.
+                'lifetime' => 7200,  // 2 hours storage life time.
             ),
             'temporary'  => array(
                 'lifetime' => 300  // 5 minutes is default temporary login lifetime.
@@ -21,7 +22,7 @@ return array(
     ),
     'security' => array(
         'cookie' => array(
-            'name' => '__ot',  // Cookie name, change it if you want
+            'name' => '__token',  // Cookie name, change it if you want
             'refresh' => 60,   // Every 1 minutes do the cookie validation
             'path' => '/',
             'secure' => false,
@@ -41,7 +42,7 @@ return array(
                 'secure' => false,
                 'httpOnly' => false,
                 'prefix' => '',
-                'expire' => 6 * 30 * 24 * 3600,  // Default " 6 Months ". Should be same with rememberMeSeconds value.
+                'expire' => 6 * 30 * 24 * 3600,  // Default " 6 Months ".
             )
         ),
         'session' => array(

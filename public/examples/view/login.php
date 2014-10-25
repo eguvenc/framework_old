@@ -10,6 +10,18 @@
         <header>
             <?php echo $this->url->anchor('/', '<img src="@assets@/images/logo.png">') ?>
         </header>
+
+        <?php echo $this->flash->output(); ?>
+
+        <?php
+        if ($this->user->identity->isAuthenticated()) {
+            echo '<a href="/examples/logout">Logout</a>';
+            echo '<pre>';
+            print_r($this->user->identity->getArray());
+            echo '</pre>';
+        }
+        ?>
+        <p></p>
         
         <h1>Login Example</h1>
 
@@ -44,7 +56,7 @@
                     </table>
                 </form>
 
-                <h2>Test Results</h2>
+                <h2>Debug Results</h2>
 
                 <section>
                     <h3>$this->form->outputArray()</h3>

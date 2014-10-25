@@ -12,6 +12,7 @@ $app = new Controller(
         $c->load('view');
         $c->load('post');
         $c->load('service/user');
+        $c->load('flash/session as flash');
     }
 );
 
@@ -19,71 +20,27 @@ $app->func(
     'index',
     function () use ($c) {
 
-        $c->load('session');
-        $c->load('service/cache');
+        // $c->load('service/cache');
+        // $this->cache->delete('Auth:__permanent:Authorized:user@example.com:ucrmvg2j2t');
 
-        var_dump($this->session->get('__Auth/Identifier'));
-
-        $this->user->activity->set('lastActivity', time());
-        $this->user->activity->update();
-
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username', 'ersin');
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'password', '123456');
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:5445', 'username', 'mahmut');
-
-        // // echo $this->cache->hGet('Test:__permanent:Authorized:eguvenc@gmail.com:5445', 'username');
-
-        // $this->cache->hMSet('Test:__permanent:Authorized:eguvenc@gmail.com:5445', array('country' => 'tr', 'city' => 'adana' ));
+        // $this->user->login->authenticateVerifiedIdentity();
         
-        // print_r($this->cache->hGetAll('Test:__permanent:Authorized:eguvenc@gmail.com:5445'));
-
-        // exit;
-
-        // $data = $this->cache->getAllKeys('Test:__permanent:Authorized:eguvenc@gmail.com:*');
-
-        // $all = $this->cache->hGetAll('Test:__permanent:Authorized:eguvenc@gmail.com:4454');
-        // print_r($all);
-
-        // print_r($data);
-        // if (1413299033.04 > 1413299033.0571) {
-        //     echo 'YES !!';
-        // }
-
-        
-        // $data = $this->cache->getAllKeys('Auth:__permanent:Authorized:eguvenc@gmail.com:*');
-
-        // var_dump($data); exit;
-
-        // $this->session->remove('__Auth/Identifier');
-
-        // var_dump($this->user->identity->logout());
-
-        // var_dump($this->user->identity->isAuthenticated());
-
-        // echo $this->user->activity->getMemoryBlockKey();
-
-        echo '<a href="/examples/logout">logout</a>';
-
-        echo '<pre>';
-
-        var_dump($this->user->identity->isAuthenticated());
-
-        print_r($this->user->identity->getArray());
-
-        echo '</pre>';
-
-        echo '<pre>';
+        var_dump($this->user->identity->isGuest());
 
         print_r($_SESSION);
 
-        echo '</pre>';
-        // unset($_SESSION['__Auth/Storage/Identifier']);
+        // $keys = $this->cache->getAllKeys('Auth:__permanent:Authorized:user@example.com:*');
 
-        // print_r($this->user->identity->getArray()); exit;
- 
+        // $exp = explode(':', $keys[0]);
+        // array_pop($exp);
+        // $key = implode(':', $exp);
+        // print_r($key);
+        
+        // $this->cache->delete('Auth:__permanent:Authorized:user@example.com');
+
         if ($this->post['dopost']) {
 
-            $c->load('validator'); // load validator
+            $c->load('validator');
 
             $this->validator->setRules('email', 'Email', 'required|email|trim');
             $this->validator->setRules('password', 'Password', 'required|min(6)|trim');
@@ -101,21 +58,13 @@ $app->func(
                 );
 
                 if ($result->isValid()) {
-
-                    print_r($result->getArray());
-
+                    $this->flash->success('You have authenticated successfully.');
+                    $this->url->redirect('examples/login');
                 } else {
-
-                    $this->validator->setError($result->getArray());
-
-                    // print_r($result->getCode());
-                    ///print_r($result->getIdentifier());
+                    $this->validator->setErrors($result->getArray());
                 }
-
             }
             $this->form->setErrors($this->validator);
-            // $this->form->setErrors($result->getMessages());
-
         }
 
         $this->view->load(
@@ -128,5 +77,5 @@ $app->func(
     }
 );
 
-/* End of file hello_world.php */
-/* Location: .public/tutorials/controller/hello_world.php */
+/* End of file login.php */
+/* Location: .public/examples/controller/login.php */

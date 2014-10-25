@@ -51,6 +51,8 @@ Class Logger implements ServiceInterface
             $log->registerHandler(LOGGER_FILE, 'Log\Handlers\FileHandler\CartridgeFileWriter');
             $log->registerHandler(LOGGER_MONGO, 'Log\Handlers\MongoHandler\CartridgeMongoWriter');
             $log->registerHandler(LOGGER_EMAIL, 'Log\Handlers\EmailHandler\CartridgeQueueWriter');
+
+            // SADECDE LOGGER_FILE ve LOGGER_QUEUE olmalı
             /*
             |--------------------------------------------------------------------------
             | Add Writer - Primary file writer should be available on local server.
