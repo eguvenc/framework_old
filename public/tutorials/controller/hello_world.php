@@ -9,7 +9,9 @@ $app = new Controller(
     function ($c) {
         $c->load('view');
 
-        $c->load('service/cache');
+        // var_dump($this->config->xml()->route->site);
+        // $this->config->save();
+        // print_r($c->load('app')->getEnvArray());
 
         $start = microtime(true);  // start
 
@@ -20,15 +22,7 @@ $app = new Controller(
         // $this->cache->set('Auth:__permanent:Authorized:eguvenc@gmail.com', $a);
 
         // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username', 'ersin');
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username_1', 'ersin');
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username_2', 'ersin');
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username_3', 'ersin');
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username_4', 'ersin');
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username_5', 'ersin');
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username_6', 'ersin');
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username_7', 'ersin');
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username_8', 'ersin');
-        // $this->cache->hSet('Test:__permanent:Authorized:eguvenc@gmail.com:4454', 'username_9', 'ersin');
+
 
         $end = microtime(true) - $start;  // End Timer
 

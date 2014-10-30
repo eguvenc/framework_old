@@ -2,8 +2,8 @@
 
 namespace Service;
 
-use Service\ServiceInterface,
-    Obullo\Auth\UserService;
+use Obullo\Auth\UserService,
+    Service\ServiceInterface;
 
 /**
  * User Service

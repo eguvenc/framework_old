@@ -5,36 +5,35 @@
 |--------------------------------------------------------------------------
 */
 return array(
-    'local' => array (
-        'server' => array(
-            'hostname' => array(
-                'ersin-desktop',
-                'someone.computer',
-                'anotherone.computer',
+    'env' => array(
+        'local' => array (
+            'server' => array(
+                'hostname' => array(
+                    'ersin-desktop',
+                    'someone.computer',
+                    'anotherone.computer',
+                ),
+                'ip' => array(),
             ),
-            'ip' => array(
-                '127.0.0.1',
-                '127.0.0.1',
-                '127.0.0.1',
+        ),
+        'test' => array (
+            'server' => array(
+                'hostname' => array(
+                    'localhost.test',
+                ),
+                'ip' => array(),
+            ),
+        ),
+        'prod' => array (
+            'server' => array(
+                'hostname' => array(
+                    'localhost.production',
+                ),
+                'ip' => array(),
             ),
         ),
     ),
-    'test' => array (
-        'server' => array(
-            'hostname' => array(
-                'localhost.test',
-            ),
-            'ip' => array(),
-        ),
-    ),
-    'prod' => array (
-        'server' => array(
-            'hostname' => array(
-                'localhost.production',
-            ),
-            'ip' => array(),
-        ),
-    ),
+
 );
 
 // END environments.php File

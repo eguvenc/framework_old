@@ -59,10 +59,12 @@ Class QueueLogger implements JobInterface
         $JobHandlerName = strtolower($handlerName);
 
         switch ($JobHandlerName) {
-        case LOGGER_FILE:
+
+        case 'file':
             $writer = new $JobHandlerClass($this->c, $this->c->load('config')['log']);
             break;
-        case LOGGER_EMAIL:
+
+        case 'email':
             $writer = new $JobHandlerClass(
                 $this->c,
                 array(
@@ -74,8 +76,9 @@ Class QueueLogger implements JobInterface
                 'message' => 'Detailed logs here --> <br /> %s',
                 )
             );
-            break;  
-        case LOGGER_MONGO:
+            break;
+
+        case 'mongo':
             $writer = new $JobHandlerClass($this->c,
                array(
                     'database' => 'db',
@@ -88,10 +91,12 @@ Class QueueLogger implements JobInterface
                 )
             );
             break;
+
         default:
             $writer = null;
             break;
         }
+        
         if ($writer != null) {
             $writer->write($data);  // Do job
             $writer->close();

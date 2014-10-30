@@ -1,12 +1,11 @@
 <?php
 
-namespace Log\Handlers\FileHandler;
+namespace Log\Handlers\Simple;
 
-use Obullo\Log\Handler\FileHandler,
-    Obullo\Log\Writer\FileWriter;
+use Obullo\Log\Handler\EmailHandler;
 
 /**
- * "FileHandler" with "CartridgeFileWriter"
+ * Email Handler
  * 
  * @category  Log
  * @package   Handler
@@ -15,7 +14,7 @@ use Obullo\Log\Handler\FileHandler,
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/package/log
  */
-Class CartridgeFileWriter
+Class Email
 {
     /**
      * Container
@@ -32,21 +31,28 @@ Class CartridgeFileWriter
     protected $closure;
 
     /**
+     * Handler priority
+     * 
+     * @var integer
+     */
+    protected $priority;
+
+    /**
      * Constructor
      * 
-     * @param object $c container
+     * @param object  $c        container
+     * @param integer $priority priority
      */
-    public function __construct($c)
+    public function __construct($c, $priority = 1)
     {
         $this->closure = function () use ($c) {
 
-            return new FileHandler(
+            return new EmailHandler(
                 $c,
-                new FileWriter(
-                    $c->load('config')['log']
-                )
+                $c->load('service/mailer')
             );
         };
+        $this->priority = $priority;
     }
 
     /**
@@ -58,9 +64,20 @@ Class CartridgeFileWriter
     {
         return $this->closure;
     }
+
+    /**
+     * Handler priority
+     * 
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
 }
 
-// END CartridgeFileWriter class
+// END Email class
 
-/* End of file CartridgeFileWriter.php */
-/* Location: .app/Log/Handlers/FileHandler/CartridgeFileWriter.php */
+/* End of file Email.php */
+/* Location: .app/Log/Handlers/Simple/Email.php */

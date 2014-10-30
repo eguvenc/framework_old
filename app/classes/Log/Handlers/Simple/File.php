@@ -1,12 +1,11 @@
 <?php
 
-namespace Log\Handlers\FileHandler;
+namespace Log\Handlers\Simple;
 
-use Obullo\Log\Handler\FileHandler,
-    Obullo\Log\Writer\QueueWriter;
+use Obullo\Log\Handler\Simple\FileHandler;
 
 /**
- * "FileHandler" with "CartridgeQueueWriter"
+ * File Handler
  * 
  * @category  Log
  * @package   Handler
@@ -15,7 +14,7 @@ use Obullo\Log\Handler\FileHandler,
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/package/log
  */
-Class CartridgeQueueWriter
+Class File
 {
     /**
      * Container
@@ -32,27 +31,28 @@ Class CartridgeQueueWriter
     protected $closure;
 
     /**
+     * Handler priority
+     * 
+     * @var integer
+     */
+    protected $priority;
+
+    /**
      * Constructor
      * 
-     * @param object $c container
+     * @param object  $c        container
+     * @param integer $priority priority
      */
-    public function __construct($c)
+    public function __construct($c, $priority = 1)
     {
         $this->closure = function () use ($c) {
 
             return new FileHandler(
                 $c,
-                new QueueWriter(
-                    $c->load('service/queue'),
-                    array(
-                        'channel' =>  LOGGER_CHANNEL,
-                        'route' => gethostname(). LOGGER_NAME .'File',
-                        'job' => LOGGER_JOB,
-                        'delay' => 0,
-                    )
-                )
+                $c->load('config')['log']
             );
         };
+        $this->priority = $priority;
     }
 
     /**
@@ -64,9 +64,19 @@ Class CartridgeQueueWriter
     {
         return $this->closure;
     }
+
+    /**
+     * Handler priority
+     * 
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
 }
 
-// END CartridgeQueueWriter class
+// END File class
 
-/* End of file CartridgeQueueWriter.php */
-/* Location: .app/Log/Handlers/FileHandler/CartridgeQueueWriter.php */
+/* End of file File.php */
+/* Location: .app/Log/Handlers/Simple/File.php */

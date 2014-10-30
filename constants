@@ -83,16 +83,7 @@ define('PARAM_LOB', 3);  // integer  Large Object Data (lob)
 define('PARAM_STMT', 4);  // integer  Represents a recordset type ( Not currently supported by any drivers).
 define('PARAM_BOOL', 5);  // boolean                                
 define('PARAM_INOUT', -2147483648); // PDO::PARAM_INPUT_OUTPUT integer
-/*
-|--------------------------------------------------------------------------
-| LOG CONSTANTS
-|--------------------------------------------------------------------------
-*/
-define('LOGGER_FILE', 'file');
-define('LOGGER_SYSLOG', 'syslog');
-define('LOGGER_MONGO', 'mongo');
-define('LOGGER_QUEUE', 'queue');
-define('LOGGER_EMAIL', 'email');
+
 /*
 |---------------------------------------------------------------
 | NOTIFICATION CONSTANTS

@@ -2,7 +2,7 @@
 
 defined('STDIN') or die('Access Denied');
 
-use Obullo\Cli\Commands\Host;
+use Obullo\Cli\Commands\Route;
 
 /**
  * $app host maintenance control
@@ -14,10 +14,10 @@ $app = new Controller;
 $app->func(
     'index',
     function () use ($c) {
-        $app = new Host($c, func_get_args());
+        $app = new Route($c, func_get_args());
         $app->run();
     }    
 );
 
-/* End of file host.php */
-/* Location: .app/tasks/controller/host.php */
+/* End of file route.php */
+/* Location: .app/tasks/controller/route.php */

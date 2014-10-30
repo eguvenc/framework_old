@@ -61,7 +61,7 @@ Class MaintenanceFilter
         $this->response = $c['response'];
 
         $this->allWebSiteFilter();       // Filter for all hosts
-        $this->subdomainRegexFilter();   // Filter for sub domain regex match
+        $this->subdomainRegexFilter();   // Filter for sub domain regex matches
     }
 
     /**
@@ -71,7 +71,7 @@ Class MaintenanceFilter
      */
     protected function allWebSiteFilter()
     {
-        if ($this->config->xml->host->all->maintenance == 'down') {
+        if ($this->config->xml()->route->all->attributes()->maintenance == 'down') {
             $this->show503();
         }
     }
@@ -87,14 +87,14 @@ Class MaintenanceFilter
             throw new LogicException(
                 sprintf(
                     'Correct your routes.php domain value it must be like this <pre>%s</pre>', 
-                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\']->xml->host->$xmlhostkey, .., function () { .. }),.'
+                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\']->xml()->route->$key->attributes()->$item, .., function () { .. }),.'
                 )
             );
         }
-        $name = $this->domain->getName();  // Get xml host name
+        $name = $this->domain->getName();  // Get xml route name
         
-        if (isset($this->config->xml->host->{$name}->domain->regex) 
-            AND $this->config->xml->host->{$name}->maintenance == 'down'
+        if (isset($this->config->xml()->route->{$name}->attributes()->regex) 
+            AND $this->config->xml()->route->{$name}->attributes()->maintenance == 'down'
         ) {
             $this->show503();
         }

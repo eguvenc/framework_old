@@ -23,7 +23,7 @@ Class AuthFilter
      */
     public function __construct($c)
     {
-        $user = $c->load('return service/auth/user');
+        $user = $c->load('return service/user');
         
         if ($user->identity->isGuest()) {
 
