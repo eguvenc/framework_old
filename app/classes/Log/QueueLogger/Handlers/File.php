@@ -1,11 +1,12 @@
 <?php
 
-namespace Log\Handlers\Simple;
+namespace Log\Handlers\Queue;
 
-use Obullo\Log\Handler\MongoHandler;
+use Log\Constants,
+    Obullo\QueueLogger\Handler\FileHandler;
 
 /**
- * Mongo Handler
+ * FileHandler
  * 
  * @category  Log
  * @package   Handler
@@ -14,7 +15,7 @@ use Obullo\Log\Handler\MongoHandler;
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/package/log
  */
-Class Mongo
+Class File
 {
     /**
      * Container
@@ -46,18 +47,15 @@ Class Mongo
     public function __construct($c, $priority = 1)
     {
         $this->closure = function () use ($c) {
-            
-            return new MongoHandler(
+
+            return new FileHandler(
                 $c,
-                $c->load('service/provider/mongo', 'db'),  // Mongo client instance
+                $c->load('service/queue'),
                 array(
-                    'database' => 'db',
-                    'collection' => 'logs',
-                    'save_options' => null,
-                    'format' => array(
-                        'context' => 'array',  // json
-                        'extra'   => 'array'   // json
-                    ),
+                    'channel' =>  Log\Constants::QUEUE_CHANNEL,
+                    'route' => gethostname(). Log\Constants::QUEUE_SEPARATOR .'File',
+                    'job' => Log\Constants::QUEUE_WORKER,
+                    'delay' => 0,
                 )
             );
         };
@@ -83,10 +81,9 @@ Class Mongo
     {
         return $this->priority;
     }
-
 }
 
-// END Mongo class
+// END File class
 
-/* End of file Mongo.php */
-/* Location: .app/Log/Handlers/Simple/Mongo.php */
+/* End of file File.php */
+/* Location: .app/Log/Handlers/Queue/File.php */

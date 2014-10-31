@@ -61,13 +61,14 @@ Class QueueLogger implements JobInterface
         switch ($JobHandlerName) {
 
         case 'file':
-            $writer = new $JobHandlerClass($this->c, $this->c->load('config')['log']);
+            $handler = new $JobHandlerClass($this->c, $this->c->load('config')['log']);
             break;
 
         case 'email':
-            $writer = new $JobHandlerClass(
+            $handler = new $JobHandlerClass(
                 $this->c,
                 array(
+                'mailer' => $this->c->load('service/mailer'),
                 'from' => '<noreply@example.com> Server Admin',
                 'to' => 'obulloframework@gmail.com',
                 'cc' => '',
@@ -79,7 +80,7 @@ Class QueueLogger implements JobInterface
             break;
 
         case 'mongo':
-            $writer = new $JobHandlerClass($this->c,
+            $handler = new $JobHandlerClass($this->c,
                array(
                     'database' => 'db',
                     'collection' => 'logs',
@@ -93,13 +94,15 @@ Class QueueLogger implements JobInterface
             break;
 
         default:
-            $writer = null;
+            $handler = null;
             break;
         }
-        
-        if ($writer != null) {
-            $writer->write($data);  // Do job
-            $writer->close();
+
+        if ($handler != null) {
+            
+            $handler->write($data);  // Do job
+            $handler->close();
+
             $job->delete();  // Delete job from queue
         }
     }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Log\Handlers\Simple;
+namespace Log\Logger\Handlers;
 
-use Obullo\Log\Handler\Simple\FileHandler;
+use Obullo\Log\Handler\FileHandler;
 
 /**
  * File Handler
@@ -79,4 +79,4 @@ Class File
 // END File class
 
 /* End of file File.php */
-/* Location: .app/Log/Handlers/Simple/File.php */
+/* Location: .app/Log/Logger/Handlers/File.php */

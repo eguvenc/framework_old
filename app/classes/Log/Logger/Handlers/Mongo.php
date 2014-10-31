@@ -1,12 +1,11 @@
 <?php
 
-namespace Log\Handlers\Queue;
+namespace Log\Logger\Handlers;
 
-use Log\Constants,
-    Obullo\Log\Handler\MongoHandler;
+use Obullo\Log\Handler\MongoHandler;
 
 /**
- * Queue Mongo Handler
+ * Mongo Handler
  * 
  * @category  Log
  * @package   Handler
@@ -52,10 +51,6 @@ Class Mongo
                 $c,
                 $c->load('service/provider/mongo', 'db'),  // Mongo client instance
                 array(
-                    'channel' =>  Log\Constants::QUEUE_CHANNEL,
-                    'route' => gethostname(). Log\Constants::QUEUE_SEPARATOR .'Mongo',
-                    'job' => Log\Constants::QUEUE_WORKER,
-                    'delay' => 0,
                     'database' => 'db',
                     'collection' => 'logs',
                     'save_options' => null,
@@ -88,9 +83,10 @@ Class Mongo
     {
         return $this->priority;
     }
+
 }
 
 // END Mongo class
 
 /* End of file Mongo.php */
-/* Location: .app/Log/Handlers/Queue/Mongo.php */
+/* Location: .app/Log/Logger/Handlers/Mongo.php */

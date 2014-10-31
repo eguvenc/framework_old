@@ -1,12 +1,11 @@
 <?php
 
-namespace Log\Handlers\Queue;
+namespace Log\Logger\Handlers;
 
-use Log\Constants,
-    Obullo\Queue\Handler\FileHandler;
+use Obullo\Log\Handler\EmailHandler;
 
 /**
- * FileHandler
+ * Email Handler
  * 
  * @category  Log
  * @package   Handler
@@ -15,7 +14,7 @@ use Log\Constants,
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/package/log
  */
-Class File
+Class Email
 {
     /**
      * Container
@@ -48,15 +47,9 @@ Class File
     {
         $this->closure = function () use ($c) {
 
-            return new FileHandler(
+            return new EmailHandler(
                 $c,
-                $c->load('service/queue'),
-                array(
-                    'channel' =>  Log\Constants::QUEUE_CHANNEL,
-                    'route' => gethostname(). Log\Constants::QUEUE_SEPARATOR .'File',
-                    'job' => Log\Constants::QUEUE_WORKER,
-                    'delay' => 0,
-                )
+                $c->load('service/mailer')
             );
         };
         $this->priority = $priority;
@@ -81,9 +74,10 @@ Class File
     {
         return $this->priority;
     }
+
 }
 
-// END File class
+// END Email class
 
-/* End of file File.php */
-/* Location: .app/Log/Handlers/Queue/File.php */
+/* End of file Email.php */
+/* Location: .app/Log/Logger/Handlers/Email.php */

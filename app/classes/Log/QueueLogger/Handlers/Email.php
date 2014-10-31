@@ -1,11 +1,12 @@
 <?php
 
-namespace Log\Handlers\Simple;
+namespace Log\Handlers\Queue;
 
-use Obullo\Log\Handler\EmailHandler;
+use Log\Constants,
+    Obullo\QueueLogger\Handler\EmailHandler;
 
 /**
- * Email Handler
+ * Queue Email Handler
  * 
  * @category  Log
  * @package   Handler
@@ -49,7 +50,17 @@ Class Email
 
             return new EmailHandler(
                 $c,
-                $c->load('service/mailer')
+                $c->load('service/queue'),
+                array(
+                    'channel' =>  Log\Constants::QUEUE_CHANNEL,
+                    'route' => gethostname(). Log\Constants::QUEUE_SEPARATOR .'Email',
+                    'job' => Log\Constants::QUEUE_WORKER,
+                    'delay' => 0,
+                    'format' => array(
+                        'context' => 'array',  // json
+                        'extra'   => 'array'   // json
+                    ),
+                )
             );
         };
         $this->priority = $priority;
@@ -74,10 +85,9 @@ Class Email
     {
         return $this->priority;
     }
-
 }
 
 // END Email class
 
 /* End of file Email.php */
-/* Location: .app/Log/Handlers/Simple/Email.php */
+/* Location: .app/Log/Handlers/Queue/Email.php */

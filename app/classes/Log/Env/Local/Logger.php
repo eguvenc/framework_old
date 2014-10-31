@@ -45,9 +45,9 @@ Class Logger implements ServiceInterface
             | Register Handlers
             |--------------------------------------------------------------------------
             */
-            $log->registerHandler('file', 'Log\Handlers\Simple\File', 5);
-            $log->registerHandler('mongo', 'Log\Handlers\Simple\Mongo', 4);
-            $log->registerHandler('email', 'Log\Handlers\Simple\Email', 3);
+            $log->registerHandler('file', 'Log\Logger\Handlers\File', 5);
+            $log->registerHandler('mongo', 'Log\Logger\Handlers\Mongo', 4);
+            $log->registerHandler('email', 'Log\Logger\Handlers\Email', 3);
             /*
             |--------------------------------------------------------------------------
             | Add Writer - Primary file writer should be available on local server.
@@ -56,7 +56,7 @@ Class Logger implements ServiceInterface
             if (defined('STDIN')) { 
                 $log->addWriter('file')->filter('priority.notIn', array(LOG_DEBUG, LOG_INFO)); // Cli
             } else {
-                $log->addWriter('file')->filter('priority.notIn', array(LOG_INFO))->filter('input.filter'); // Http
+                $log->addWriter('file')->filter('priority.notIn', array(LOG_INFO)); // Http
             }
             return $log;
         };

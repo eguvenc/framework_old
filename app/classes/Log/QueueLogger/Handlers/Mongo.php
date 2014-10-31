@@ -3,10 +3,10 @@
 namespace Log\Handlers\Queue;
 
 use Log\Constants,
-    Obullo\Queue\Handler\EmailHandler;
+    Obullo\QueueLogger\Handler\MongoHandler;
 
 /**
- * Queue Email Handler
+ * Queue Mongo Handler
  * 
  * @category  Log
  * @package   Handler
@@ -15,7 +15,7 @@ use Log\Constants,
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/package/log
  */
-Class Email
+Class Mongo
 {
     /**
      * Container
@@ -47,15 +47,18 @@ Class Email
     public function __construct($c, $priority = 1)
     {
         $this->closure = function () use ($c) {
-
-            return new EmailHandler(
+            
+            return new MongoHandler(
                 $c,
-                $c->load('service/queue'),
+                $c->load('service/provider/mongo', 'db'),  // Mongo client instance
                 array(
                     'channel' =>  Log\Constants::QUEUE_CHANNEL,
-                    'route' => gethostname(). Log\Constants::QUEUE_SEPARATOR .'Email',
+                    'route' => gethostname(). Log\Constants::QUEUE_SEPARATOR .'Mongo',
                     'job' => Log\Constants::QUEUE_WORKER,
                     'delay' => 0,
+                    'database' => 'db',
+                    'collection' => 'logs',
+                    'save_options' => null,
                     'format' => array(
                         'context' => 'array',  // json
                         'extra'   => 'array'   // json
@@ -87,7 +90,7 @@ Class Email
     }
 }
 
-// END Email class
+// END Mongo class
 
-/* End of file Email.php */
-/* Location: .app/Log/Handlers/Queue/Email.php */
+/* End of file Mongo.php */
+/* Location: .app/Log/Handlers/Queue/Mongo.php */
