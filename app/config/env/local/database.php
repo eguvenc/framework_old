@@ -14,6 +14,7 @@ return array(
         'database' => 'test',
         'port'     => '',
         'charset'  => 'utf8',
+        'autoinit' => array('charset' => true, 'bufferedQuery' => true),
         'dsn'      => '',
         'pdo'      => array(
             'options'  => array()
@@ -26,6 +27,7 @@ return array(
         'database' => 'q_jobs',
         'port'     => '',
         'charset'  => 'utf8',
+        'autoinit' => array('charset' => true, 'bufferedQuery' => true),
         'dsn'      => '',
         'pdo'      => array(
             'options'  => array()

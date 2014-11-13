@@ -10,9 +10,9 @@ return array(
     'useragent' => 'Obullo', //  The "user agent".
     'mailpath'  => '/usr/sbin/sendmail',  //  The server path to Sendmail.
     
-    'smtpHost' =>  'smtp.mandrillapp.com',  // SMTP Server Address.
-    'smtpUser' => 'paradoks.soft@gmail.com',   // SMTP Username.
-    'smtpPass' => 'PEXD2vU_lHYal6KULKK0YA',   // SMTP Password.
+    'smtpHost' =>  'smtp.mandrillapp.com',     // SMTP Server Address.
+    'smtpUser' => 'obulloframework@gmail.com', // SMTP Username.
+    'smtpPass' => 'BIK8O7xt1Kp7aZyyQ55uOQ',    // SMTP Password.
     'smtpPort' => '587', // SMTP Port.
     'smtpTimeout' => '5' , // SMTP Timeout (in seconds).
 

@@ -12,7 +12,7 @@
 	</service>
 	<container>
 		<service>
-			<logger class="Log/Env/Local/Logger"/>
+			<logger class="Log/Env/QueueLogger/Local" cli="Log/Env/QueueLogger/Cli"/>
 		</service>
 		<provider></provider>
 	</container>

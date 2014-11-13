@@ -43,7 +43,6 @@ $c['router']->group(
     }
 );
 
-
 // $c['router']->group(
 //     array('name' => 'maintenance_test', 'domain' => '^framework$', 'filters' => array('before.maintenance', 'before.auth')), 
 //     function ($group) {

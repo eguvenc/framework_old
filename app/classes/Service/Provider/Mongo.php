@@ -2,8 +2,7 @@
 
 namespace Service\Provider;
 
-use MongoClient,
-    Obullo\Mongo\MongoConnection;
+use Obullo\Mongo\MongoConnection;
 
 /**
  * Mongo Provider

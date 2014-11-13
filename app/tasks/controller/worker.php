@@ -15,9 +15,8 @@ $app = new Controller(
 
 $app->func(
     'index',
-    function ($channel = null, $route = null, $memory = 128, $delay = 0, $timeout = 0, $sleep = 0, $maxTries = 0, $debug = 0, $env = 'prod') {
-    	// func_get_args();
-        $this->worker->init($channel, $route, $memory, $delay, $timeout, $sleep, $maxTries, $debug, $env = 'prod');
+    function () {
+        $this->worker->init(func_get_args());
         $this->worker->pop();
     }
 );

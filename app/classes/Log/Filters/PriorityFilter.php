@@ -2,7 +2,7 @@
 
 namespace Log\Filters;
 
-use Obullo\Log\LogService,
+use Obullo\Log\Logger,
     Obullo\Log\Filter\FilterInterface;
 
 /**
@@ -52,7 +52,7 @@ Class PriorityFilter implements FilterInterface
      */
     public function filter(array $record)
     {
-        $priority = LogService::$priorities[$record['level']];
+        $priority = Logger::$priorities[$record['level']];
         if (in_array($priority, $this->priorities)) {
             return $record;
         }
@@ -68,8 +68,7 @@ Class PriorityFilter implements FilterInterface
      */
     public function notIn($record)
     {
-        $priority = LogService::$priorities[$record['level']];
-
+        $priority = Logger::$priorities[$record['level']];
         if ( ! in_array($priority, $this->priorities)) {
             return $record;
         }

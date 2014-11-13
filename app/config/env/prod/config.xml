@@ -1,40 +1,25 @@
 <?xml version="1.0"?>
 <root>
-<host>
-	<all>
-		<label>All Site</label>
-		<maintenance>down</maintenance>
-	</all>
-	<site>
-		<label>Web Site</label>
-		<domain><regex>^framework$</regex></domain>
-		<maintenance>up</maintenance>
-	</site>
-	<test>
-		<label>Test</label>
-		<domain><regex>test\d+.framework</regex></domain>
-		<maintenance>down</maintenance>
-	</test>
-	<support>
-		<label>Support</label>
-		<domain><regex>support.example.com</regex></domain>
-		<maintenance>up</maintenance>
-	</support>
-</host>>
-<service>
-	<all>
-		<label>All Services</label>
-		<maintenance>up</maintenance>
-	</all>
-	<queue>
-		<label>Queue Service</label>
-		<maintenance>down</maintenance>
-	</queue>
-</service>
+	<route>
+		<all maintenance="up" label="All Application"/>
+		<site maintenance="up" label="Web Server" regex="^framework$"/>
+		<test maintenance="up" label="Test Server" regex="test\d+.framework"/>
+		<support maintenance="up" label="Support Domain" regex="support.framework"/>
+	</route>
+	<service>
+		<all maintenance="down" label="All Services"/>
+		<queue maintenance="up" label="Queue Service"/>
+	</service>
+	<container>
+		<service>
+			<logger class="Log/Env/ProdLogger"/>
+		</service>
+		<provider></provider>
+	</container>
 </root>
 <!--
 END xml config File
 End of file config.xml
 
-Location: .app/config/env/prod/config.xml
+Location: .app/config/env/local/config.xml
 -->

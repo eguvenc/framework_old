@@ -11,12 +11,11 @@ return array(
     |--------------------------------------------------------------------------
     | Error
     |--------------------------------------------------------------------------
-    | If debug enabled framework converts all php errors to exceptions.
+    | If debug = true framework converts all php errors to exceptions.
     */                             
     'error' => array(
-        'debug' => true,      // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
-        'reporting' => false,  // Php "Native Error" reporting should be "Enabled" in "TEST" environment should be "Disabled"" in "PRODUCTION".
-                              // You can turn on it on "local" if you want catch hidden fatal errors.
+        'debug' => true,       // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
+        'reporting' => true,  // Turn on it if you want catch "unusual hidden errors", should be "Disabled"" in "PRODUCTION".
     ),
     /*
     |--------------------------------------------------------------------------
@@ -36,20 +35,35 @@ return array(
     | 7  LOG_DEBUG: Debug-level messages
     */
     'log' =>   array(
-        'enabled' => true,      // On / Off logging.
-        'output' => false,      // On / Off debug html output. When it is enabled all handlers will be disabled.
-        'channel'   => 'system',       // Default channel name should be general.
-        'line'      => '[%datetime%] %channel%.%level%: --> %message% %context% %extra%\n',  // This format just for line based log drivers.
-        'path'      => array(
-            'app'   => 'data/logs/app.log',   // Application log path  ( Only for File Handler )
-            'cli'   => 'data/logs/cli.log',   // Cli log path  
-            'ajax'  => 'data/logs/ajax.log',  // Ajax log path
+        'control' => array(
+            'enabled' => true,
+            'output'  => false,
         ),
-        'format'    => 'Y-m-d H:i:s',  // Log Date format
-        'queries'   => true,           // If true "all" SQL Queries gets logged.
-        'benchmark' => true,           // If true "all" Application Benchmarks gets logged.
+        'service' => array(
+            'filters' => 'Log\Filters',  // Class paths
+        ),
+        'default' => array(
+            'channel' => 'system',       // Default channel name should be general.
+        ),
+        'file' => array(
+            'path' => array(
+                'http'  => 'data/logs/http.log',  // Http requests log path  ( Only for File Handler )
+                'cli'   => 'data/logs/cli.log',   // Cli log path  
+                'ajax'  => 'data/logs/ajax.log',  // Ajax log path
+            )
+        ),
+        'format' => array(
+            'line' => '[%datetime%] %channel%.%level%: --> %message% %context% %extra%\n',  // This format just for line based log drivers.
+            'date' =>  'Y-m-d H:i:s',
+        ),
+        'extra' => array(
+            'queries'   => true,       // If true "all" SQL Queries gets logged.
+            'benchmark' => true,       // If true "all" Application Benchmarks gets logged.
+        ),
         'queue' => array(
-            'workers' => false, // On / Off Queue workers logging functionality.
+            'workers' => array(
+                'logging' => false     // On / Off Queue workers logging functionality.
+            ), 
         )
     ),
     /*
@@ -110,7 +124,7 @@ return array(
     |--------------------------------------------------------------------------
     */
     'layer' => array(
-        'cache' => false     // if you use expiration ( ttl ) as last parameter, layers will do cache using your cache service.
+        'cache' => false     // On / off layer global cache feature.
     ),
     /*
     |--------------------------------------------------------------------------

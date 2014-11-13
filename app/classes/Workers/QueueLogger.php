@@ -41,6 +41,7 @@ Class QueueLogger implements JobInterface
     {
         $this->c = $c;
         $this->env = $env;
+        $this->config = $this->c->load('config')['log'];
     }
 
     /**
@@ -55,33 +56,36 @@ Class QueueLogger implements JobInterface
     {
         $exp = explode('.', $job->getName());  // File, Mongo, Email ..
         $handlerName = ucfirst(end($exp));
-        $JobHandlerClass = '\\Obullo\Log\Queue\JobHandler\JobHandler'.$handlerName;
+        $JobHandlerClass = '\\Obullo\QueueLogger\JobHandler\JobHandler'.$handlerName;
         $JobHandlerName = strtolower($handlerName);
 
         switch ($JobHandlerName) {
 
         case 'file':
-            $handler = new $JobHandlerClass($this->c, $this->c->load('config')['log']);
+            $handler = new $JobHandlerClass($this->c, $this->config);
             break;
-
         case 'email':
             $handler = new $JobHandlerClass(
                 $this->c,
+                $this->c->load('service/mailer'),
                 array(
-                'mailer' => $this->c->load('service/mailer'),
-                'from' => '<noreply@example.com> Server Admin',
-                'to' => 'obulloframework@gmail.com',
-                'cc' => '',
-                'bcc' => '',
-                'subject' => 'Server Logs',
-                'message' => 'Detailed logs here --> <br /> %s',
+                    'from' => '<noreply@example.com> Server Admin',
+                    'to' => 'obulloframework@gmail.com',
+                    'cc' => '',
+                    'bcc' => '',
+                    'subject' => 'Server Logs',
+                    'message' => 'Detailed logs here --> <br /> %s',
+                    'format' => array(
+                        'context' => 'array',  // json
+                        'extra'   => 'array'   // json
+                    ),
                 )
             );
             break;
-
         case 'mongo':
             $handler = new $JobHandlerClass($this->c,
-               array(
+                $this->c->load('service/provider/mongo', 'db'),
+                array(
                     'database' => 'db',
                     'collection' => 'logs',
                     'save_options' => null,
@@ -92,15 +96,14 @@ Class QueueLogger implements JobInterface
                 )
             );
             break;
-
         default:
             $handler = null;
             break;
         }
-
         if ($handler != null) {
-            
-            $handler->write($data);  // Do job
+
+            $formatted = $handler->format($this->config['format']['date'], $data);  // Do job
+            $handler->write($formatted);  // Do job
             $handler->close();
 
             $job->delete();  // Delete job from queue
@@ -110,4 +113,4 @@ Class QueueLogger implements JobInterface
 }
 
 /* End of file QueueLogger.php */
-/* Location: .app/classes/QueueLogger.php */
+/* Location: .app/classes/Workers/QueueLogger.php */

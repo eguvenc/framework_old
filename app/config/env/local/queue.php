@@ -14,9 +14,11 @@ return array(
         'pass'  => '123456',
         'vhost' => '/',
         'debug' => true,
-        'defaultQueueName' => 'defaultQueue',
-        'exchangeType' => 'AMQP_EX_TYPE_DIRECT', // AMQP_EX_TYPE_DIRECT, AMQP_EX_TYPE_FANOUT, AMQP_EX_TYPE_HEADER or AMQP_EX_TYPE_TOPIC,
-        'exchangeFlag' => 'AMQP_DURABLE', // AMQP_PASSIVE
+        'default' => array('queue' => 'defaultQueue'),
+        'exchange' => array(
+            'type' => 'AMQP_EX_TYPE_DIRECT', // AMQP_EX_TYPE_DIRECT, AMQP_EX_TYPE_FANOUT, AMQP_EX_TYPE_HEADER or AMQP_EX_TYPE_TOPIC,
+            'flag' => 'AMQP_DURABLE', // AMQP_PASSIVE
+        ),
     ),
     'failed' => array(
         'storage' => 'Obullo\Queue\Failed\Storage\Database',
@@ -25,7 +27,6 @@ return array(
             'key' => 'q_jobs',  // Database name
         ),
         'table' => 'failures',
-        // 'emergency' => 'Obullo\Emergency\Email' // When the job fails failedJob class will push data to your emergency handler.
     ),
 );
 

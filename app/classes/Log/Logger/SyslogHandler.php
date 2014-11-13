@@ -1,11 +1,11 @@
 <?php
 
-namespace Log\Logger\Handlers;
+namespace Log\Logger;
 
-use Obullo\Log\Handler\MongoHandler;
+use Obullo\Log\Handler\SyslogHandler as LogSyslogHandler;
 
 /**
- * Mongo Handler
+ * Syslog Handler
  * 
  * @category  Log
  * @package   Handler
@@ -14,7 +14,7 @@ use Obullo\Log\Handler\MongoHandler;
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/package/log
  */
-Class Mongo
+Class SyslogHandler
 {
     /**
      * Container
@@ -46,18 +46,12 @@ Class Mongo
     public function __construct($c, $priority = 1)
     {
         $this->closure = function () use ($c) {
-            
-            return new MongoHandler(
+
+            return new LogSyslogHandler(
                 $c,
-                $c->load('service/provider/mongo', 'db'),  // Mongo client instance
                 array(
-                    'database' => 'db',
-                    'collection' => 'logs',
-                    'save_options' => null,
-                    'format' => array(
-                        'context' => 'array',  // json
-                        'extra'   => 'array'   // json
-                    ),
+                    'name' => 'Logger.Handler.Syslog',
+                    'facility' => LOG_USER,
                 )
             );
         };
@@ -83,10 +77,9 @@ Class Mongo
     {
         return $this->priority;
     }
-
 }
 
-// END Mongo class
+// END SyslogHandler class
 
-/* End of file Mongo.php */
-/* Location: .app/Log/Logger/Handlers/Mongo.php */
+/* End of file SyslogHandler.php */
+/* Location: .app/Log/Logger/SyslogHandler.php */

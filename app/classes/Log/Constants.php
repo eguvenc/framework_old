@@ -22,7 +22,7 @@ Class Constants
     /**
      * Queue separator
      */
-    const QUEUE_SEPARATOR = '.logger.';
+    const QUEUE_SEPARATOR = '.Logger';
 
     /**
      * Queue worker class namespace
