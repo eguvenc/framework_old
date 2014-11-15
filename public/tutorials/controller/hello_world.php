@@ -8,12 +8,13 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-        $c->load('service/queue');
 
         // var_dump($this->config->xml()->route->site);
         // $this->config->save();
         // print_r($c->load('app')->getEnvArray());
         $start = microtime(true);  // start
+
+        // $c->load('service/queue');
 
         // $this->queue->channel('Log');
         // $this->queue->push('Workers/QueueLogger', 'Server1.logger', array('log' => array('debug' => 'Test')));
@@ -24,10 +25,10 @@ $app = new Controller(
 
         // // $this->logger->load('mongo'); 
         
-        $this->logger->load('mongo');
-        $this->logger->alert('Possible hack attempt !', array('username' => 'test2'));
-        $this->logger->emergency('TEST attempt !', array('username' => 'test2'));
-        $this->logger->push('mongo');
+        // $this->logger->load('mongo');
+        // $this->logger->alert('Possible hack attempt !', array('username' => 'test2'));
+        // $this->logger->emergency('MOGO ATTTEMPT !', array('username' => 'test2'));
+        // $this->logger->push();
 
         // $this->logger->mongo->channel();
         // $this->logger->mongo->alert();

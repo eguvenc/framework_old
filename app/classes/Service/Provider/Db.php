@@ -30,14 +30,7 @@ Class Db implements ProviderInterface
             function ($key = 'db') use ($c) {
                 return new Mysql(
                     $c,
-                    array(
-                        'host'     => $c->load('config')['database'][$key]['host'],
-                        'username' => $c->load('config')['database'][$key]['username'],
-                        'password' => $c->load('config')['database'][$key]['password'],
-                        'database' => $c->load('config')['database'][$key]['database'],
-                        'port'     => $c->load('config')['database'][$key]['port'],
-                        'charset'  => $c->load('config')['database'][$key]['charset'],
-                    )
+                    $c->load('config')['database'][$key]
                 );
             }
         );

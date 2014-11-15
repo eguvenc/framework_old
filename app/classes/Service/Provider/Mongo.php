@@ -27,17 +27,11 @@ Class Mongo implements ProviderInterface
     {
         $c['provider:mongo'] = function ($db = 'db') use ($c) {
 
-            $host     = $c->load('config')['nosql']['mongo'][$db]['host'];
-            $username = $c->load('config')['nosql']['mongo'][$db]['username'];
-            $password = $c->load('config')['nosql']['mongo'][$db]['password'];
-            $port     = $c->load('config')['nosql']['mongo'][$db]['port'];
-            
-            $dsn = "mongodb://$username:$password@$host:$port/$db";
-            $mongo = new MongoConnection($dsn);
+            $config = $c->load('config')['nosql']['mongo'][$db];
+            $mongo = new MongoConnection('mongodb://'.$config['username'].':'.$config['password'].'@'.$config['host'].':'.$config['port'].'/'.$db);
             return $mongo->connect();
         };
     }
-
 }
 
 // END Mongo class

@@ -15,7 +15,7 @@ return array(
     */                             
     'error' => array(
         'debug' => true,       // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
-        'reporting' => true,  // Turn on it if you want catch "unusual hidden errors", should be "Disabled"" in "PRODUCTION".
+        'reporting' => false,  // Turn on it if you want catch "unusual hidden errors", should be "Disabled"" in "PRODUCTION".
     ),
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return array(
             'output'  => false,
         ),
         'service' => array(
-            'filters' => 'Log\Filters',  // Class paths
+            'filters' => 'Log\Filters',  // Filters class path
         ),
         'default' => array(
             'channel' => 'system',       // Default channel name should be general.

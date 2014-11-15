@@ -35,7 +35,7 @@ Class Cli implements ServiceInterface
                 array(
                     'queue' => array(
                         'channel' => Constants::QUEUE_CHANNEL,
-                        'route' => gethostname(). Constants::QUEUE_SEPARATOR .'%s',
+                        'route' => gethostname(). Constants::QUEUE_SEPARATOR,
                         'job' => Constants::QUEUE_WORKER,
                         'delay' => 0,
                     ),

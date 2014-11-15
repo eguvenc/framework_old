@@ -3,7 +3,10 @@
 namespace Workers;
 
 use Obullo\Queue\Job,
-    Obullo\Queue\JobInterface;
+    Obullo\Queue\JobInterface,
+    Obullo\QueueLogger\JobHandler\JobHandlerFile,
+    Obullo\QueueLogger\JobHandler\JobHandlerMongo,
+    Obullo\QueueLogger\JobHandler\JobHandlerEmail;
 
 /**
  * Queue Logger
@@ -56,16 +59,14 @@ Class QueueLogger implements JobInterface
     {
         $exp = explode('.', $job->getName());  // File, Mongo, Email ..
         $handlerName = ucfirst(end($exp));
-        $JobHandlerClass = '\\Obullo\QueueLogger\JobHandler\JobHandler'.$handlerName;
         $JobHandlerName = strtolower($handlerName);
 
         switch ($JobHandlerName) {
-
         case 'file':
-            $handler = new $JobHandlerClass($this->c, $this->config);
+            $handler = new JobHandlerFile($this->c, $this->config);
             break;
         case 'email':
-            $handler = new $JobHandlerClass(
+            $handler = new JobHandlerEmail(
                 $this->c,
                 $this->c->load('service/mailer'),
                 array(
@@ -83,7 +84,8 @@ Class QueueLogger implements JobInterface
             );
             break;
         case 'mongo':
-            $handler = new $JobHandlerClass($this->c,
+            $handler = new JobHandlerMongo(
+                $this->c,
                 $this->c->load('service/provider/mongo', 'db'),
                 array(
                     'database' => 'db',
@@ -103,6 +105,7 @@ Class QueueLogger implements JobInterface
         if ($handler != null) {
 
             $formatted = $handler->format($this->config['format']['date'], $data);  // Do job
+            print_r($formatted);
             $handler->write($formatted);  // Do job
             $handler->close();
 
