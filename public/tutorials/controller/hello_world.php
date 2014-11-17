@@ -25,10 +25,10 @@ $app = new Controller(
 
         // // $this->logger->load('mongo'); 
         
-        // $this->logger->load('mongo');
-        // $this->logger->alert('Possible hack attempt !', array('username' => 'test2'));
-        // $this->logger->emergency('MOGO ATTTEMPT !', array('username' => 'test2'));
-        // $this->logger->push();
+        $this->logger->load('mongo')->filter('priority.notIn', array(LOG_EMERG));
+        $this->logger->alert('Possible hack attempt !', array('username' => 'test2'));
+        $this->logger->emergency('MOGO ATTTEMPT !', array('username' => 'test2'));
+        $this->logger->push();
 
         // $this->logger->mongo->channel();
         // $this->logger->mongo->alert();
