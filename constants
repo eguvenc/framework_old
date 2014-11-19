@@ -59,7 +59,7 @@ define('INDEX_PHP', 'index.php');
 | OBULLO CONSTANTS
 |--------------------------------------------------------------------------
 */
-define('OBULLO',  ROOT .'obullo'. DS . FRAMEWORK_PACKAGE_VERSION . DS);
+define('OBULLO',  ROOT . FRAMEWORK_PACKAGE_VERSION . DS);
 define('OBULLO_PHP',  OBULLO .'Obullo'. DS .'Obullo.php');
 define('OBULLO_CONFIG',  OBULLO .'Config'. DS .'Config.php');
 define('OBULLO_CORE',  OBULLO .'Obullo'. DS .'Core.php');
@@ -67,7 +67,6 @@ define('OBULLO_CONTAINER',  OBULLO .'Container'. DS .'Container.php');
 define('OBULLO_AUTOLOADER', OBULLO .'Obullo'. DS .'Autoloader.php');
 define('OBULLO_COMPONENTS', APP .'components.php');
 define('OBULLO_ROUTES', APP .'routes.php');
-// define('OBULLO_GLOBAL', APP .'global.php');
 define('OBULLO_FILTERS', APP .'filters.php');
 define('OBULLO_CONTROLLER', OBULLO .'Controller'. DS .'Controller.php');
 

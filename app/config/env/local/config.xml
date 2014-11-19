@@ -10,12 +10,13 @@
 		<all maintenance="down" label="All Services"/>
 		<queue maintenance="up" label="Queue Service"/>
 	</service>
-	<container>
+
+	<env include=".env.local.php">
 		<service>
-			<logger class="Log/Env/QueueLogger/Local" cli="Log/Env/QueueLogger/Cli"/>
+			<logger class="Log/Env/QueueLogger/Local" cli="Log/Env/QueueLogger/Cli" />
 		</service>
 		<provider></provider>
-	</container>
+	</env>
 </root>
 <!--
 END xml config File

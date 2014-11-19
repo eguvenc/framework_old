@@ -6,4 +6,7 @@
 nbproject/
 nbproject
 index.sublime-workspace
+.env.local.php
+.env.production.php
+.env.test.php
 =======
