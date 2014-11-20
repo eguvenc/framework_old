@@ -14,6 +14,17 @@ $app = new Controller(
         // print_r($c->load('app')->getEnvArray());
         $start = microtime(true);  // start
 
+        $c->load('service/mailer');
+
+        $this->mailer->from('test@example.com', 'Your Name');
+        $this->mailer->to('eguvenc@gmail.com'); 
+        $this->mailer->cc('obulloframework@gmail.com');
+        $this->mailer->subject('Email Test');
+        $this->mailer->message('Testing the email class.'); 
+        $this->mailer->send();
+
+        echo $this->mailer->printDebugger();
+        
         // $c->load('service/queue');
 
         // $this->queue->channel('Log');
@@ -21,14 +32,14 @@ $app = new Controller(
         // $this->queue->push('Workers/QueueLogger', 'Server1.logger', array('message' => 'This is my message'));
         // $this->queue->push('Workers/QueueLogger', 'Server1.logger', array('log' => array('debug' => 'Test')));
 
-        $this->logger->emergency('TEST attempt !', array('username' => 'test2'));
+        // $this->logger->emergency('TEST attempt !', array('username' => 'test2'));
 
-        // // $this->logger->load('mongo'); 
+        // // // $this->logger->load('mongo'); 
         
-        $this->logger->load('mongo')->filter('priority.notIn', array(LOG_EMERG));
-        $this->logger->alert('Possible hack attempt !', array('username' => 'test2'));
-        $this->logger->emergency('MOGO ATTTEMPT !', array('username' => 'test2'));
-        $this->logger->push();
+        // $this->logger->load('mongo')->filter('priority.notIn', array(LOG_EMERG));
+        // $this->logger->alert('Possible hack attempt !', array('username' => 'test2'));
+        // $this->logger->emergency('MOGO ATTTEMPT !', array('username' => 'test2'));
+        // $this->logger->push();
 
         // $this->logger->mongo->channel();
         // $this->logger->mongo->alert();
