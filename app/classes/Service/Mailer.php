@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Obullo\Mail\Send\Protocol\Smtp;
+use Obullo\Mail\QueueMailer;
 
 /**
  * Mailer Service
@@ -26,7 +26,7 @@ Class Mailer implements ServiceInterface
     public function register($c)
     {
         $c['mailer'] = function () use ($c) {
-            return new Smtp($c, $c->load('config')['mail']);
+            return new QueueMailer($c, $c->load('config')['mail']);
         };
     }
 }

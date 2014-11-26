@@ -61,6 +61,10 @@ return array(
             'benchmark' => true,       // If true "all" Application Benchmarks gets logged.
         ),
         'queue' => array(
+            'channel' => 'Log',
+            'route' => gethostname(). '.Logger',
+            'worker' => 'Workers\Logger',
+            'delay' => 0,
             'workers' => array(
                 'logging' => false     // On / Off Queue workers logging functionality.
             ), 

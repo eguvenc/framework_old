@@ -11,7 +11,7 @@
 		<queue maintenance="up" label="Queue Service"/>
 	</service>
 
-	<env include=".env.production.php">
+	<env>
 		<service>
 			<logger class="Log/Env/QueueLogger/Production" cli="Log/Env/QueueLogger/Cli" />
 		</service>

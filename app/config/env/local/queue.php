@@ -10,11 +10,11 @@ return array(
     'server' => array(
         'host'  => '10.0.0.157',
         'port'  => 5672,
-        'user'  => 'root',
-        'pass'  => '123456',
+        'user'  => $_ENV['AMQP_USERNAME'],
+        'pass'  => $_ENV['AMQP_PASSWORD'],
         'vhost' => '/',
         'debug' => true,
-        'default' => array('queue' => 'defaultQueue'),
+        'default' => array('queue' => 'default'),
         'exchange' => array(
             'type' => 'AMQP_EX_TYPE_DIRECT', // AMQP_EX_TYPE_DIRECT, AMQP_EX_TYPE_FANOUT, AMQP_EX_TYPE_HEADER or AMQP_EX_TYPE_TOPIC,
             'flag' => 'AMQP_DURABLE', // AMQP_PASSIVE

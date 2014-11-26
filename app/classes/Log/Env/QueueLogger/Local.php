@@ -32,18 +32,7 @@ Class Local implements ServiceInterface
     {
         $c['logger'] = function () use ($c) {
 
-            $service = new LogService(
-                $c,
-                array(
-                    'queue' => array(
-                        'channel' => Constants::QUEUE_CHANNEL,
-                        'route' => gethostname(). Constants::QUEUE_SEPARATOR,
-                        'job' => Constants::QUEUE_WORKER,
-                        'delay' => 0,
-                    ),
-                    'log' => $c->load('config')['log']
-                )
-            );
+            $service = new LogService($c, $c->load('config'));
             /*
             |--------------------------------------------------------------------------
             | Register Filters

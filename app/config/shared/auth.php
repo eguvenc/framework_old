@@ -51,7 +51,7 @@ return array(
         )
     ),
     'activity' => array(
-        'singleSignOff' => false,  // Single sign-off is the property whereby a single action of signing out terminates access to multiple agents.
+        'singleSignOff' => false,  // Single sign-off is the property whereby a single action of signing out terminates access to multiple sessions.
     )
 );
 

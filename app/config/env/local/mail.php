@@ -9,7 +9,7 @@
 return array(
     'send' => array(
         'settings' => array(
-            'useragent' => 'Framework',  //  The "user agent".
+            'useragent' => 'Framework Mailer',  //  The "user agent".
             'wordwrap' => true,       // "true" or "false" (boolean) Enable word-wrap.
             'wrapchars' => 76,        // Character count to wrap at.
             'mailtype' => 'html',     // text or html Type of mail. If you send HTML email you must send it as a complete web page. 
@@ -30,22 +30,28 @@ return array(
                 'mailpath'  => '/usr/sbin/sendmail',  //  The server path to Sendmail.
             ),
             'smtp' => array(
-                'host' => 'smtp.mandrillapp.com',     // SMTP Server Address.
-                'user' => 'obulloframework@gmail.com', // SMTP Username.
-                'pass' => 'BIK8O7xt1Kp7aZyyQ55uOQ',    // SMTP Password.
+                'host' => 'smtp.mandrillapp.com',      // SMTP Server Address.
+                'user' => $_ENV['MANDRILL_USERNAME'],  // SMTP Username.
+                'pass' => $_ENV['MANDRILL_API_KEY'],   // SMTP Password.
                 'port' => '587',    // SMTP Port.
                 'timeout' => '5' ,  // SMTP Timeout (in seconds).
             ),
         ),
-        'transactional' => array(
-
+        'transport' => array(
             'mandrill' => array(
-                'key' => 'BIK8O7xt1Kp7aZyyQ55uOQ',  // mandrill api key
+                'key' => $_ENV['MANDRILL_API_KEY'],  // Mandrill api key
+                'ip_pool' => 'Main Pool',           // The name of the dedicated ip pool that should be used to send the message.
             ),
             'mailgun' => array(
 
             )
         ),
+        'queue' => array(
+            'mailer' => 'mandrill',             // Default mailer   // mandrill, mailgun, smtp, sendmail, mail ..
+            'channel' => 'Mail',                // QueueMailer channel name
+            'route' => gethostname().'.Mailer', // QueueMailer route name
+            'worker' => 'Workers\Mailer',
+        )
 
     ),
 );

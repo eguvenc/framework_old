@@ -9,22 +9,13 @@ $app = new Controller(
     function ($c) {
         $c->load('view');
 
+        print_r($_ENV);
+
         // var_dump($this->config->xml()->route->site);
         // $this->config->save();
         // print_r($c->load('app')->getEnvArray());
         $start = microtime(true);  // start
 
-        $c->load('service/mailer');
-
-        $this->mailer->from('test@example.com', 'Your Name');
-        $this->mailer->to('eguvenc@gmail.com'); 
-        $this->mailer->cc('obulloframework@gmail.com');
-        $this->mailer->subject('Email Test');
-        $this->mailer->message('Testing the email class.'); 
-        $this->mailer->send();
-
-        echo $this->mailer->printDebugger();
-        
         // $c->load('service/queue');
 
         // $this->queue->channel('Log');

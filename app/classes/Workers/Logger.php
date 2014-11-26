@@ -11,16 +11,16 @@ use Obullo\Queue\Job,
     Obullo\Log\JobHandler\JobHandlerEmail;
 
 /**
- * Queue Logger
+ * Log Worker
  *
- * @category  Queue
- * @package   QueueLogger
+ * @category  Workers
+ * @package   Logger
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/docs/queue
  */
-Class QueueLogger implements JobInterface
+Class Logger implements JobInterface
 {
     /**
      * Container
@@ -30,22 +30,13 @@ Class QueueLogger implements JobInterface
     public $c;
 
     /**
-     * Environment
-     * 
-     * @var string
-     */
-    public $env;
-
-    /**
      * Constructor
      * 
-     * @param object $c   container
-     * @param string $env environments
+     * @param object $c container
      */
-    public function __construct($c, $env)
+    public function __construct($c)
     {
         $this->c = $c;
-        $this->env = $env;
     }
 
     /**
@@ -100,7 +91,6 @@ Class QueueLogger implements JobInterface
                 $handler = null;
                 break;
             }
-
             if ($handler != null AND $handler->isAllowed($array['request'])) {
 
                 $handler->write($array);  // Do job
@@ -115,5 +105,5 @@ Class QueueLogger implements JobInterface
 
 }
 
-/* End of file QueueLogger.php */
-/* Location: .app/classes/Workers/QueueLogger.php */
+/* End of file Logger.php */
+/* Location: .app/classes/Workers/Logger.php */

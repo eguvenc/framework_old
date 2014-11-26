@@ -18,7 +18,7 @@ return array(
                                                     // used to determine which server to read/write keys from.
                         ),
         ),
-        'auth' =>  'aZX0bjL',               // connection password
+        'auth' =>  $_ENV['REDIS_AUTH'],     // connection password
         'serializer' =>  'SERIALIZER_PHP',  // SERIALIZER_NONE, SERIALIZER_PHP, SERIALIZER_IGBINARY
         'persistentConnect' => 0,
         'reconnectionAttemps' => 100,

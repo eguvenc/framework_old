@@ -9,8 +9,8 @@
 return array(
     'db' => array(
         'host' => 'localhost',
-        'username' => 'root',
-        'password' => '123456',
+        'username' => $_ENV['DATABASE_USERNAME'],
+        'password' => $_ENV['DATABASE_PASSWORD'],
         'database' => 'test',
         'port'     => '',
         'charset'  => 'utf8',
@@ -22,8 +22,8 @@ return array(
     ),
     'q_jobs' => array(
         'host' => 'localhost',
-        'username' => 'root',
-        'password' => '123456',
+        'username' => $_ENV['DATABASE_USERNAME'],
+        'password' => $_ENV['DATABASE_PASSWORD'],
         'database' => 'q_jobs',
         'port'     => '',
         'charset'  => 'utf8',
