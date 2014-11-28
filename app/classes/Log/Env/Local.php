@@ -1,6 +1,6 @@
 <?php
 
-namespace Log\Env\QueueLogger;
+namespace Log\Env;
 
 use Log\Constants,
     Service\ServiceInterface,
@@ -62,4 +62,4 @@ Class Local implements ServiceInterface
 // END Local class
 
 /* End of file Local.php */
-/* Location: .classes/Log/Env/QueueLogger/Local.php */
+/* Location: .classes/Log/Env/Local.php */

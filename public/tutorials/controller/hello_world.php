@@ -8,9 +8,7 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-
-        print_r($_ENV);
-
+        
         // var_dump($this->config->xml()->route->site);
         // $this->config->save();
         // print_r($c->load('app')->getEnvArray());

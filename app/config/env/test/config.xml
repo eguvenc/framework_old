@@ -13,7 +13,7 @@
 
 	<env file=".env.test.php">
 		<service>
-			<logger class="Log/Env/QueueLogger/Test" cli="Log/Env/QueueLogger/Cli" />
+			<logger class="Log/Env/Test" cli="Log/Env/Cli" />
 		</service>
 		<provider></provider>
 	</env>

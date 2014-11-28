@@ -1,6 +1,6 @@
 <?php
 
-namespace Log\Env\QueueLogger;
+namespace Log\Env;
 
 use Service\ServiceInterface,
     Log\Constants,
@@ -60,4 +60,4 @@ Class Cli implements ServiceInterface
 // END Cli class
 
 /* End of file Cli.php */
-/* Location: .classes/Log/Env/QueueLogger/Cli.php */
+/* Location: .classes/Log/Env/Cli.php */

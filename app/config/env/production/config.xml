@@ -13,7 +13,7 @@
 
 	<env>
 		<service>
-			<logger class="Log/Env/QueueLogger/Production" cli="Log/Env/QueueLogger/Cli" />
+			<logger class="Log/Env/Production" cli="Log/Env/Cli" />
 		</service>
 		<provider></provider>
 	</env>
