@@ -66,6 +66,7 @@ define('OBULLO_CORE',  OBULLO .'Obullo'. DS .'Core.php');
 define('OBULLO_CONTAINER',  OBULLO .'Container'. DS .'Container.php');
 define('OBULLO_AUTOLOADER', OBULLO .'Obullo'. DS .'Autoloader.php');
 define('OBULLO_COMPONENTS', APP .'components.php');
+define('OBULLO_GLOBAL', APP .'global.php');
 define('OBULLO_ROUTES', APP .'routes.php');
 define('OBULLO_FILTERS', APP .'filters.php');
 define('OBULLO_CONTROLLER', OBULLO .'Controller'. DS .'Controller.php');

@@ -25,6 +25,7 @@ require OBULLO_AUTOLOADER;
 require OBULLO_CORE;
 require OBULLO_CONTROLLER;
 require OBULLO_COMPONENTS;
+require OBULLO_GLOBAL;
 require OBULLO_ROUTES;
 /*
 |--------------------------------------------------------------------------
