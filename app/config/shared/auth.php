@@ -23,7 +23,7 @@ return array(
     'security' => array(
         'cookie' => array(
             'name' => '__token',  // Cookie name, change it if you want
-            'refresh' => 60,   // Every 1 minutes do the cookie validation
+            'refresh' => 60,      // Every 1 minutes do the cookie validation
             'path' => '/',
             'secure' => false,
             'httpOnly' => false,

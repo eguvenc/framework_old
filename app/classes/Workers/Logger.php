@@ -105,5 +105,37 @@ Class Logger implements JobInterface
 
 }
 
+/* LOG DATA
+{
+  "job": "Workers\\Logger",
+  "data": [
+    {
+      "request": "http",
+      "handler": "file",
+      "priority": 5,
+      "time": 1418043527,
+      "record": [
+        {
+          "channel": "system",
+          "level": "debug",
+          "message": "$_REQUEST_URI: \/tutorials\/hello_world",
+          "context": [
+            
+          ]
+        },
+        {
+          "channel": "system",
+          "level": "debug",
+          "message": "Global POST and COOKIE data sanitized",
+          "context": [
+            
+          ]
+        },
+      ]
+    }
+  ]
+}
+*/
+
 /* End of file Logger.php */
 /* Location: .app/classes/Workers/Logger.php */

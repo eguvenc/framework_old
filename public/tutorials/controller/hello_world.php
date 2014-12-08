@@ -17,9 +17,9 @@ $app = new Controller(
         // $c->load('service/queue');
 
         // $this->queue->channel('Log');
-        // $this->queue->push('Workers/QueueLogger', 'Server1.logger', array('log' => array('debug' => 'Test')));
-        // $this->queue->push('Workers/QueueLogger', 'Server1.logger', array('message' => 'This is my message'));
-        // $this->queue->push('Workers/QueueLogger', 'Server1.logger', array('log' => array('debug' => 'Test')));
+        // $this->queue->push('Workers/Logger', 'Server1.logger', array('log' => array('debug' => 'Test')));
+        // $this->queue->push('Workers/Logger', 'Server1.logger', array('message' => 'This is my message'));
+        // $this->queue->push('Workers/Logger', 'Server1.logger', array('log' => array('debug' => 'Test')));
 
         // $this->logger->emergency('TEST attempt !', array('username' => 'test2'));
 
