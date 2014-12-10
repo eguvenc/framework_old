@@ -70,6 +70,17 @@ Class UserRequestHandler
         $logger->debug('Global POST and COOKIE data sanitized', array(), 10);
     }
 
+
+    public function onBeforeController()
+    {
+        // ..
+    }
+
+    public function onAfterController()
+    {
+        // ..
+    }
+
     /**
      * On After Htttp Response
      * 
@@ -104,6 +115,8 @@ Class UserRequestHandler
     {
         $event->listen('before.request', 'Event\UserRequestHandler.onBeforeRequest');
         $event->listen('after.response', 'Event\UserRequestHandler.onAfterResponse');
+        // $event->listen('before.controller', 'Event\UserRequestHandler.onBeforeController');
+        // $event->listen('after.controller', 'Event\UserRequestHandler.onAfterController');
     }
 
 }

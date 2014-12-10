@@ -48,8 +48,8 @@ Class UserEventHandler
 
             // Rate limiter class
 
-            $authResult->setCode(-9);
-            $authResult->setMessage('Your IP is banned !');
+            // $authResult->setCode(-9);
+            // $authResult->setMessage('Your IP is banned !');
 
         }
         return $authResult;

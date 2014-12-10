@@ -12,6 +12,13 @@
 $c['router']->domain($c->load('config')['url']['host']);  // Root domain
 $c['router']->defaultPage('welcome');
 
+$c['router']->route(
+    'get|post', 'examples/login(.*)', null, 
+    function () use ($c) {
+        $c['event']->subscribe(new Event\UserEventHandler($c));
+    }
+);
+
 // $c['router']->route(
 //     '*', 'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
 //     function () use ($c) {
@@ -19,7 +26,6 @@ $c['router']->defaultPage('welcome');
 //     }
 // );
 
-// $c['router']->route('get', 'tutorials/hello_world(.*)', 'tutorials/hello_scheme');
 // $c['router']->attach('(.*)', array('filters' => array('before.maintenance', 'before.auth'))); 
 
 

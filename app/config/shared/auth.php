@@ -22,8 +22,9 @@ return array(
     ),
     'security' => array(
         'cookie' => array(
-            'name' => '__token',  // Cookie name, change it if you want
-            'refresh' => 60,      // Every 1 minutes do the cookie validation
+            'name' => '__token',        // Cookie name, change it if you want
+            'refresh' => 60,            // Every 1 minutes do the cookie validation
+            'userAgentMatch' => false,  // Whether to match user agent when reading token
             'path' => '/',
             'secure' => false,
             'httpOnly' => false,

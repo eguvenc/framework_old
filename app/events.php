@@ -1,7 +1,7 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Events
+| Global Events
 |--------------------------------------------------------------------------
 | This file specifies the your application global events.
 */
@@ -12,7 +12,6 @@
 */
 
 $c['event']->subscribe(new Event\UserRequestHandler($c));
-$c['event']->subscribe(new Event\UserEventHandler($c));
 
 
 /* End of file events.php */
