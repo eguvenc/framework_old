@@ -9,7 +9,7 @@
 */
 //$c['router']->route('*', '([0-9]+)/([a-z]+)', 'welcome/$1/$2');
 
-$c['router']->domain($c->load('config')['url']['host']);  // Root domain
+$c['router']->domain($c['config']['url']['host']);  // Root domain
 $c['router']->defaultPage('welcome');
 
 $c['router']->route(

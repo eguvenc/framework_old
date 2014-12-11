@@ -2,10 +2,10 @@
 
 namespace Service;
 
-use Obullo\Mail\QueueMailer;
+use Obullo\Permissions\RbacService;
 
 /**
- * Mailer Service
+ * Rbac PermissionService
  *
  * @category  Service
  * @package   Mail
@@ -14,7 +14,7 @@ use Obullo\Mail\QueueMailer;
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/docs/services
  */
-Class Mailer implements ServiceInterface
+Class Rbac implements ServiceInterface
 {
     /**
      * Registry
@@ -25,13 +25,13 @@ Class Mailer implements ServiceInterface
      */
     public function register($c)
     {
-        $c['mailer'] = function () use ($c) {
-            return new QueueMailer($c, $c['config']['mail']);
+        $c['rbac'] = function () use ($c) {
+            return new RbacService($c, $c->load('service/provider/db', 'db'), $c['config']->load('rbac'));
         };
     }
 }
 
-// END Mailer class
+// END Rbac class
 
-/* End of file Mailer.php */
-/* Location: .classes/Service/Mailer.php */
+/* End of file Rbac.php */
+/* Location: .classes/Service/Rbac.php */

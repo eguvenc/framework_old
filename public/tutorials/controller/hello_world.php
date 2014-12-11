@@ -8,43 +8,9 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-        $c->load('rate/limiter as limiter');
+        $c->load('service/rbac');
+        $this->rbac->roles->addRoot('root');
 
-        $this->limiter->load('username');        
-        $this->limiter->username->channel('login');
-        $this->limiter->username->identifier('user@example.com');
-        
-        if ($this->limiter->username->isAllowed()) {
-            
-            echo 'Allowed User !';
-
-            $fail = true; // If some operation failed ?
-
-            if ($fail) {
-                $this->limiter->username->reduce();     // We reduce user request limit if operation fail. ( e.g. login attempt )
-            } else {
-                $this->limiter->username->increase();   // We increase user request limit if operation success.
-            }
-        }
-
-        if ($this->limiter->username->isBanned()) {
-            echo 'Maximum request limit reached user is banned !';
-        }
-
-
-        // $this->limiter->username->increaseLimit();
-        
-
-        // $this->limiter->username->removeBan();
-        
-        echo $this->limiter->username->getError();
-
-        // $this->limiter->username->reduceLimit();
-
-        
-        // var_dump($this->config->xml()->route->site);
-        // $this->config->save();
-        // print_r($c->load('app')->getEnvArray());
         $start = microtime(true);  // start
 
         // $c->load('service/queue');

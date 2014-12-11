@@ -30,12 +30,12 @@ Class Crud implements ServiceInterface
                 new Mysql(
                     $c,
                     array(
-                        'host'     => $c->load('config')['database'][$key]['host'],
-                        'username' => $c->load('config')['database'][$key]['username'],
-                        'password' => $c->load('config')['database'][$key]['password'],
-                        'database' => $c->load('config')['database'][$key]['database'],
-                        'port'     => $c->load('config')['database'][$key]['port'],
-                        'charset'  => $c->load('config')['database'][$key]['charset'],
+                        'host'     => $c['config']['database'][$key]['host'],
+                        'username' => $c['config']['database'][$key]['username'],
+                        'password' => $c['config']['database'][$key]['password'],
+                        'database' => $c['config']['database'][$key]['database'],
+                        'port'     => $c['config']['database'][$key]['port'],
+                        'charset'  => $c['config']['database'][$key]['charset'],
                     )
                 )
             );

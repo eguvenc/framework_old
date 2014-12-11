@@ -26,7 +26,7 @@ Class Captcha implements ServiceInterface
     public function register($c)
     {
         $c['captcha'] = function () use ($c) {
-            return new CaptchaService($c, $c->load('config')->load('captcha'));
+            return new CaptchaService($c, $c['config']->load('captcha'));
         };
     }
 }

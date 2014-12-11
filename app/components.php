@@ -1,7 +1,7 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| COMPONENTS
+| Components
 |--------------------------------------------------------------------------
 | Specifies the your application components which they available by default.
 */
@@ -11,7 +11,7 @@
 |--------------------------------------------------------------------------
 */
 $c['session'] = function () use ($c) {
-    return new Obullo\Session\Session($c, $c->load('config')['session']);
+    return new Obullo\Session\Session($c, $c['config']['session']);
 };
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ $c['session'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['form'] = function () use ($c) {
-    return new Obullo\Form\Form($c, $c->load('config')->load('form'));
+    return new Obullo\Form\Form($c, $c['config']->load('form'));
 };
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +43,7 @@ $c['exception'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['translator'] = function () use ($c) { 
-    return new Obullo\Translation\Translator($c, $c->load('config')->load('translator'));
+    return new Obullo\Translation\Translator($c, $c['config']->load('translator'));
 };
 /*
 |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ $c['post'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['view'] = function () use ($c) {
-    return new Obullo\View\View($c, $c->load('config')['view']['layouts']);
+    return new Obullo\View\View($c, $c['config']['view']['layouts']);
 };
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ $c['view'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['layer'] = function () use ($c) { 
-    return new Obullo\Layer\Request($c, $c->load('config')['layer']);
+    return new Obullo\Layer\Request($c, $c['config']['layer']);
 };
 /*
 |--------------------------------------------------------------------------
@@ -99,7 +99,7 @@ $c['layer'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['uri'] = function () use ($c) {
-    return new Obullo\Uri\Uri($c, $c->load('config')['uri']);
+    return new Obullo\Uri\Uri($c, $c['config']['uri']);
 };
 /*
 |--------------------------------------------------------------------------
@@ -107,7 +107,7 @@ $c['uri'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['router'] = function () use ($c) { 
-    return new Obullo\Router\Router($c, $c->load('config')['router']);
+    return new Obullo\Router\Router($c, $c['config']['router']);
 };
 
 
