@@ -13,6 +13,7 @@ $app = new Controller(
         $c->load('post');
         $c->load('service/user');
         $c->load('flash/session as flash');
+        $c->load('event')->subscribe(new Event\User($c)); 
     }
 );
 
@@ -20,23 +21,9 @@ $app->func(
     'index',
     function () use ($c) {
 
-        // $c->load('service/cache');
-        // $this->cache->delete('Auth:__permanent:Authorized:user@example.com:ucrmvg2j2t');
-
         // $this->user->login->authenticateVerifiedIdentity();
         
         var_dump($this->user->identity->isGuest());
-
-        print_r($_SESSION);
-
-        // $keys = $this->cache->getAllKeys('Auth:__permanent:Authorized:user@example.com:*');
-
-        // $exp = explode(':', $keys[0]);
-        // array_pop($exp);
-        // $key = implode(':', $exp);
-        // print_r($key);
-        
-        // $this->cache->delete('Auth:__permanent:Authorized:user@example.com');
 
         if ($this->post['dopost']) {
 

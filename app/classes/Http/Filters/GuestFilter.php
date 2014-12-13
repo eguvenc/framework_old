@@ -3,7 +3,7 @@
 namespace Http\Filters;
 
 /**
- * Route authority filter
+ * Guest auth authority filter
  *
  * @category  Route
  * @package   Filters
@@ -12,8 +12,15 @@ namespace Http\Filters;
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/docs/router
  */
-Class AuthFilter
+Class GuestFilter
 {
+    /**
+     * User service
+     * 
+     * @var object
+     */
+    protected $user;
+
     /**
      * Constructor
      *
@@ -23,9 +30,9 @@ Class AuthFilter
      */
     public function __construct($c)
     {
-        $user = $c->load('return service/user');
+        $this->user = $c->load('return service/user');
         
-        if ($user->identity->isGuest()) {
+        if ($this->user->identity->isGuest()) {
 
             $c->load('flash/session')->info('Your session has been expired.');
             $c->load('url')->redirect('/');

@@ -6,13 +6,13 @@ namespace Event;
  * User request - response handler
  *
  * @category  Event
- * @package   UserRequestHandler
+ * @package   Request
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/docs/event
  */
-Class UserRequestHandler
+Class Request
 {
     /**
      * Container
@@ -40,11 +40,13 @@ Class UserRequestHandler
      */
     public function onBeforeRequest()
     {
-        $logger = $this->c->load('service/logger');  // Sanitize inputs
+        $logger = $this->c->load('service/logger');
  
         if ($this->c['config']['uri']['queryStrings'] == false) {  // Is $_GET data allowed ? 
             $_GET = array(); // If not we'll set the $_GET to an empty array
         }
+        // Sanitize inputs
+        // 
         $_SERVER['PHP_SELF'] = strip_tags($_SERVER['PHP_SELF']); // Sanitize PHP_SELF
 
         // Clean $_COOKIE Data
@@ -113,15 +115,15 @@ Class UserRequestHandler
      */
     public function subscribe($event)
     {
-        $event->listen('before.request', 'Event\UserRequestHandler.onBeforeRequest');
-        $event->listen('after.response', 'Event\UserRequestHandler.onAfterResponse');
+        $event->listen('before.request', 'Event\Request.onBeforeRequest');
+        $event->listen('after.response', 'Event\Request.onAfterResponse');
         // $event->listen('before.controller', 'Event\UserRequestHandler.onBeforeController');
         // $event->listen('after.controller', 'Event\UserRequestHandler.onAfterController');
     }
 
 }
 
-// END UserRequestHandler class
+// END Request class
 
-/* End of file UserRequestHandler.php */
-/* Location: .Event/UserRequestHandler.php */
+/* End of file Request.php */
+/* Location: .Event/Request.php */

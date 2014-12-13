@@ -2,13 +2,13 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link href="@assets@/css/welcome.css" rel="stylesheet" type="text/css" />
+        <link href="@ASSETS/css/welcome.css" rel="stylesheet" type="text/css" />
         <title>Hello Form</title>
     </head>
 
     <body>
         <header>
-            <?php echo $this->url->anchor('/', '<img src="@assets@/images/logo.png">') ?>
+            <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
         </header>
         
         <h1>Hello Form</h1>

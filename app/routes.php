@@ -12,20 +12,12 @@
 $c['router']->domain($c['config']['url']['host']);  // Root domain
 $c['router']->defaultPage('welcome');
 
-$c['router']->route(
-    'get|post', 'examples/login(.*)', null, 
-    function () use ($c) {
-        $c['event']->subscribe(new Event\UserEventHandler($c));
-    }
-);
-
 // $c['router']->route(
 //     '*', 'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
 //     function () use ($c) {
 //         $c->load('view')->load('dummy');
 //     }
 // );
-
 // $c['router']->attach('(.*)', array('filters' => array('before.maintenance', 'before.auth'))); 
 
 
@@ -45,7 +37,7 @@ $c['router']->group(
         // $this->route('post', 'comment/delete/([0-9])', 'comment/delete/$1', null, $group);
         // $this->route('post', 'comment/update/([0-9])/(.+)', 'comment/update/$1', null, $group);
 
-        $this->attach('(.*)', $group); // all urls
+        $this->attach('(.*)', $group); // all urls of this group
     }
 );
 

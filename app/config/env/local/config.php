@@ -110,18 +110,18 @@ return array(
      ),
     /*
     |--------------------------------------------------------------------------
-    | Include Files
+    | Include Environment Files
     |--------------------------------------------------------------------------
     | This feature allows to us load configuration files without using
     | $this->config->load() method.
     |
     */
-    'database' => '@include.database.php', // Databases
-    'session' => '@include.session.php',   // Sessions
-    'nosql' => '@include.nosql.php',       // NoSQL Databases
-    'mail' => '@include.mail.php',         // Mail
-    'cache' =>  '@include.cache.php',      // Cache
-    'queue' => '@include.queue.php',       // Queue
+    'database' => include ENV_CONFIG .'database.php', // Databases
+    'session' => include ENV_CONFIG .'session.php',   // Sessions
+    'nosql' => include ENV_CONFIG .'nosql.php',       // NoSQL Databases
+    'mail' => include ENV_CONFIG .'mail.php',         // Mail
+    'cache' =>  include ENV_CONFIG .'cache.php',      // Cache
+    'queue' => include ENV_CONFIG .'queue.php',       // Queue
     /*
     |--------------------------------------------------------------------------
     | Layers

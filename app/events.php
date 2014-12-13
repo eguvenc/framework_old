@@ -11,7 +11,7 @@
 |--------------------------------------------------------------------------
 */
 
-$c['event']->subscribe(new Event\UserRequestHandler($c));
+$c['event']->subscribe(new Event\Request($c));
 
 
 /* End of file events.php */

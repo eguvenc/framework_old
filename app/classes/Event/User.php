@@ -8,13 +8,13 @@ use Obullo\Auth\AuthResult;
  * User event handler
  * 
  * @category  Event
- * @package   UserEventHandler
+ * @package   User
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
  * @link      http://obullo.com/docs/event
  */
-Class UserEventHandler
+Class User
 {
     /**
      * Container
@@ -36,7 +36,7 @@ Class UserEventHandler
     }
 
     /**
-     * Handler user login attempts
+     * Handle user login attempts
      *
      * @param object $authResult AuthResult object
      * 
@@ -46,8 +46,8 @@ Class UserEventHandler
     {
         if ( ! $authResult->isValid()) {
 
+            echo 'ok !';
             // Rate limiter class
-
             // $authResult->setCode(-9);
             // $authResult->setMessage('Your IP is banned !');
 
@@ -84,14 +84,14 @@ Class UserEventHandler
      */
     public function subscribe($event)
     {
-        $event->listen('login.attempt', 'Event\UserEventHandler.onLoginAttempt');
-        $event->listen('after.login', 'Event\UserEventHandler.onAfterLogin');
-        $event->listen('after.logout', 'Event\UserEventHandler.onAfterLogout');
+        $event->listen('login.attempt', 'Event\User.onLoginAttempt');
+        $event->listen('after.login', 'Event\User.onAfterLogin');
+        $event->listen('after.logout', 'Event\User.onAfterLogout');
     }
 
 }
 
-// END UserEventHandler class
+// END User class
 
-/* End of file UserEventHandler.php */
-/* Location: .Event/UserEventHandler.php */
+/* End of file User.php */
+/* Location: .Event/User.php */

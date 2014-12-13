@@ -8,8 +8,6 @@
 $app = new Controller(
     function ($c) {
         $c->load('view');
-        $c->load('service/rbac');
-        $this->rbac->roles->addRoot('root');
 
         $start = microtime(true);  // start
 

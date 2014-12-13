@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link href="@assets@/css/welcome.css" rel="stylesheet" type="text/css" />
+        <link href="@ASSETS/css/welcome.css" rel="stylesheet" type="text/css" />
         <title>Hello Captcha</title>
 
 <script type="text/javascript">
@@ -33,7 +33,7 @@ var ajax = {
     </head>
     <body>
         <header>
-            <?php echo $this->url->anchor('/', '<img src="@assets@/images/logo.png">') ?>
+            <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
         </header>
         <h1>Hello Captcha</h1>
         <section><?php echo $this->form->message() ?></section>

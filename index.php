@@ -13,7 +13,7 @@ if ( ! defined('ROOT')) {  // Cli support
 |--------------------------------------------------------------------------
 */
 if (error_get_last() != null) {
-    include APP .'templates'. DS .'errors'. DS .'startup'. EXT;
+    include APP .'templates'. DS .'errors'. DS .'startup.php';
 }
 /*
 |--------------------------------------------------------------------------

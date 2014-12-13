@@ -12,14 +12,12 @@ define('FRAMEWORK_PACKAGE_VERSION', 'o2');
 | UNDERSTANDING ESSENTIAL CONSTANTS
 |---------------------------------------------------------------
 | DS          - The DIRECTORY SEPERATOR
-| EXT         - The file extension.  Typically ".php"
 | SELF        - The name of THIS file (typically "index.php")
 | FCPATH      - The full server path to this file
 | PHP_PATH    - The php path of your server
 | FPATH       - The full server path without file
 */
 define('DS', DIRECTORY_SEPARATOR);
-define('EXT', '.php');
 define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 define('FCPATH', __FILE__);
 define('PHP_PATH', '/usr/bin/php'); 

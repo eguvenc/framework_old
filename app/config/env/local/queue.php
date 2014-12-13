@@ -8,7 +8,7 @@
 */
 return array(
     'server' => array(
-        'host'  => '127.0.0.1',  // 10.0.0.157
+        'host'  => '10.0.0.157',  // 10.0.0.157
         'port'  => 5672,
         'user'  => $_ENV['AMQP_USERNAME'],
         'pass'  => $_ENV['AMQP_PASSWORD'],

@@ -3,7 +3,7 @@
 namespace Http\Filters;
 
 /**
- * Route authority filter
+ * User auth authority filter
  *
  * @category  Route
  * @package   Filters
@@ -15,6 +15,13 @@ namespace Http\Filters;
 Class AuthFilter
 {
     /**
+     * User service
+     * 
+     * @var object
+     */
+    protected $user;
+
+    /**
      * Constructor
      *
      * @param object $c container
@@ -23,9 +30,9 @@ Class AuthFilter
      */
     public function __construct($c)
     {
-        $user = $c->load('return service/auth/user');
+        $this->user = $c->load('return service/user');
         
-        if ($user->identity->isAuthenticated()) {
+        if ($this->user->identity->isAuthenticated()) {
 
         	// Do something
         }
