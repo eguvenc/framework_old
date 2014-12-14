@@ -8,7 +8,7 @@
 */
 return array(
     'server' => array(
-        'host'  => '10.0.0.157',  // 10.0.0.157
+        'host'  => '127.0.0.1',  // 10.0.0.157
         'port'  => 5672,
         'user'  => $_ENV['AMQP_USERNAME'],
         'pass'  => $_ENV['AMQP_PASSWORD'],
@@ -21,10 +21,11 @@ return array(
         ),
     ),
     'failed' => array(
+        'enabled' => false,
         'storage' => 'Obullo\Queue\Failed\Storage\Database',
         'provider' => array(
-            'name' => 'Db',     // "Db" provider which is defined in your "Provider" folder.
-            'key' => 'q_jobs',  // Database name
+            'name' => 'Db',    // "Db" provider which is defined in your "Provider" folder.
+            'db' => 'q_jobs',  // Database config name
         ),
         'table' => 'failures',
     ),

@@ -2,22 +2,24 @@
 
 defined('STDIN') or die('Access Denied');
 
-use Obullo\Cli\Commands\Clear;
+use Obullo\Cli\Controller\ClearController;
 
 /**
- * $c clear
- * 
- * @var Controller
+ * Clear command
  */
-$app = new Controller;
-
-$app->func(
-    'index',
-    function () use ($c) {
-        $clear = new Clear($c);
+Class Clear extends Controller
+{
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
+        $clear = new ClearController($this->c);
         $clear->run();
     }
-);
+}
 
 /* End of file clear.php */
 /* Location: .app/tasks/controller/clear.php */

@@ -1,20 +1,25 @@
 <?php
 
-/**
- * $app welcome
- * 
- * @var Controller
- */
-$app = new Controller(
-    function ($c) {
-        $c->load('url');
-        $c->load('view');
+Class Welcome extends Controller
+{
+    /**
+     * Loader
+     * 
+     * @return void
+     */
+    public function load()
+    {
+        $this->c->load('url');
+        $this->c->load('view');
     }
-);
 
-$app->func(
-    'index',
-    function () {
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
         $this->view->load(
             'welcome',
             function () {
@@ -23,7 +28,8 @@ $app->func(
             }
         );
     }
-);
+}
+
 
 /* End of file welcome.php */
 /* Location: .public/welcome/controller/welcome.php */

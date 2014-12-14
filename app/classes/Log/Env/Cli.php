@@ -4,8 +4,7 @@ namespace Log\Env;
 
 use Service\ServiceInterface,
     Log\Constants,
-    Obullo\Log\LogService,
-    Obullo\QueueLogger\Handler\FileHandler;
+    Obullo\Log\LogService;
 
 /**
  * Log Service
@@ -30,13 +29,14 @@ Class Cli implements ServiceInterface
     {
         $c['logger'] = function () use ($c) {
 
-            $service = new LogService($c, $c->load('config'));
+            $service = new LogService($c, $c['config']);
             /*
             |--------------------------------------------------------------------------
             | Register Filters
             |--------------------------------------------------------------------------
             */
-            $service->logger->registerFilter('priority', 'PriorityFilter')->registerFilter('input', 'InputFilter');
+            $service->logger->registerFilter('priority', 'Log\Filters\PriorityFilter');
+            $service->logger->registerFilter('input', 'Log\Filters\InputFilter');
             /*
             |--------------------------------------------------------------------------
             | Register Handlers

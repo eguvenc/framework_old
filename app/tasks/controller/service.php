@@ -2,22 +2,24 @@
 
 defined('STDIN') or die('Access Denied');
 
-use Obullo\Cli\Commands\Service;
+use Obullo\Cli\Controller\Service as ServiceController;
 
 /**
- * $app service maintenance control
- * 
- * @var Controller
+ * Service controller
  */
-$app = new Controller;
-
-$app->func(
-    'index',
-    function () use ($c) {
-        $app = new Service($c, func_get_args());
-        $app->run();
-    }    
-);
+Class Service extends Controller
+{
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
+        $service = new ServiceController($this->c, func_get_args());
+        $service->run();
+    }
+}
 
 /* End of file service.php */
 /* Location: .app/tasks/controller/service.php */

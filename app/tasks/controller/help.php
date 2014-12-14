@@ -2,22 +2,24 @@
 
 defined('STDIN') or die('Access Denied');
 
-use Obullo\Cli\Commands\Help;
+use Obullo\Cli\Controller\HelpController;
 
 /**
- * $app help
- * 
- * @var Controller
+ * Help controller
  */
-$app = new Controller;
-
-$app->func(
-    'index',
-    function () use ($c) {
-        $help = new Help($c);
+Class Help extends Controller
+{
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
+        $help = new HelpController($this->c);
         $help->run();
     }
-);
+}
 
 /* End of file help.php */
 /* Location: .app/tasks/controller/help.php */

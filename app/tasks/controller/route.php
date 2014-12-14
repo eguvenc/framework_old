@@ -2,22 +2,24 @@
 
 defined('STDIN') or die('Access Denied');
 
-use Obullo\Cli\Commands\Route;
+use Obullo\Cli\Controller\RouteController;
 
 /**
- * $app host maintenance control
- * 
- * @var Controller
+ * Route controller
  */
-$app = new Controller;
-
-$app->func(
-    'index',
-    function () use ($c) {
-        $app = new Route($c, func_get_args());
-        $app->run();
-    }    
-);
+Class Route extends Controller
+{
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
+        $route = new RouteController($this->c, func_get_args());
+        $route->run();
+    }
+}
 
 /* End of file route.php */
 /* Location: .app/tasks/controller/route.php */

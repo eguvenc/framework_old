@@ -36,11 +36,8 @@ return array(
     */
     'log' =>   array(
         'control' => array(
-            'enabled' => true,
+            'enabled' => false,
             'output'  => false,
-        ),
-        'service' => array(
-            'filters' => 'Log\Filters',  // Filters class path
         ),
         'default' => array(
             'channel' => 'system',       // Default channel name should be general.

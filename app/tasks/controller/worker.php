@@ -3,23 +3,31 @@
 defined('STDIN') or die('Access Denied');
 
 /**
- * $app queue worker
- * 
- * @var Controller
+ * Worker controller
  */
-$app = new Controller(
-    function () use ($c) {
-        $c->load('queue/worker as worker');
-    }    
-);
+Class Worker extends Controller
+{
+    /**
+     * Loader
+     * 
+     * @return void
+     */
+    public function load()
+    {
+        $this->c->load('queue/worker as worker');
+    }
 
-$app->func(
-    'index',
-    function () {
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
         $this->worker->init(func_get_args());
         $this->worker->pop();
     }
-);
+}
 
 /* End of file worker.php */
 /* Location: .app/tasks/controller/worker.php */

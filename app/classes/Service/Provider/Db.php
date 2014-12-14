@@ -27,10 +27,10 @@ Class Db implements ProviderInterface
     {
         $c['provider:db'] = $c->alias(
             'db', 
-            function ($key = 'db') use ($c) {
+            function ($db = 'db') use ($c) {
                 return new Mysql(
                     $c,
-                    $c['config']['database'][$key]
+                    $c['config']['database'][$db]
                 );
             }
         );

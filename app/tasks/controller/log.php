@@ -2,22 +2,24 @@
 
 defined('STDIN') or die('Access Denied');
 
-use Obullo\Cli\Commands\Log;
+use Obullo\Cli\Controller\LogController;
 
 /**
- * $app log
- * 
- * @var Controller
+ * Log command
  */
-$app = new Controller;
-
-$app->func(
-    'index',
-    function () use ($c) {
-        $log = new Log($c, func_get_args());
+Class Log extends Controller
+{
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
+        $log = new LogController($this->c, func_get_args());
         $log->run();
     }
-);
+}
 
 /* End of file log.php */
 /* Location: .app/tasks/controller/log.php */

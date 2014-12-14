@@ -3,19 +3,20 @@
 defined('STDIN') or die('Access Denied');
 
 /**
- * $app queue listener
- * 
- * @var Controller
+ * Queue controller
  */
-$app = new Controller;
-
-$app->func(
-    'index',
-    function () use ($c) {
-        $c->load('queue/listener', func_get_args());
+Class Queue extends Controller
+{
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
+        $this->c->load('queue/listener', func_get_args());
     }
-);
+}
 
-
-/* End of file help.php */
+/* End of file queue.php */
 /* Location: .app/tasks/controller/queue.php */
