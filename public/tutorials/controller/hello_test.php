@@ -1,25 +1,27 @@
 <?php
 
-/**
- * $app hello_test
- * 
- * Dummy test class for Layers
- * 
- * @var Controller
- */
-$app = new Controller(
-    function ($c) {
-        $c->load('uri');
-        $c->load('view');
-        $c->load('layer');
-        $c->load('request');
+Class Hello_Test extends Controller
+{
+    /**
+     * Loader
+     * 
+     * @return void
+     */
+    public function load()
+    {
+        $this->c->load('uri');
+        $this->c->load('view');
+        $this->c->load('layer');
+        $this->c->load('request');
     }
-);
 
-$app->func(
-    'index', 
-    function () use ($c) {
-
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
         echo $this->layer->get('views/header');
         echo $this->layer->get('welcome/welcome_dummy/1/2/3');
         echo $this->layer->get('views/header');
@@ -34,9 +36,9 @@ $app->func(
                 $this->assign('footer', $this->template('footer'));
             }
         );
-
     }
-);
+}
 
-/* End of file hello_dummy.php */
-/* Location: .public/tutorials/controller/hello_dummy.php */
+
+/* End of file hello_test.php */
+/* Location: .public/tutorials/controller/hello_test.php */

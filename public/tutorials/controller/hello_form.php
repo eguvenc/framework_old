@@ -1,32 +1,36 @@
 <?php
 
-/**
- * $app hello_form
- * 
- * @var Controller
- */
-$app = new Controller(
-    function ($c) {
-        $c->load('url');
-        $c->load('service/html');
-        $c->load('view');
-        $c->load('post');
-        $c->load('form');
-        $c->load('session as sess');
-        $c->load('flash/session as flash');
+Class Hello_Form extends Controller
+{
+    /**
+     * Loader
+     * 
+     * @return void
+     */
+    public function load()
+    {
+        $this->c->load('url');
+        $this->c->load('view');
+        $this->c->load('post');
+        $this->c->load('form');
+        $this->c->load('session');
+        $this->c->load('flash/session as flash');
     }
-);
 
-$app->func(
-    'index',
-    function () use ($c) {
-
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
         $errors = array();
         $errorString = null;
 
         if ($this->post['dopost']) {
             
-            $c->load('validator');
+            $this->c->load('validator');
+
             $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
@@ -68,9 +72,9 @@ $app->func(
                 $this->assign('footer', $this->template('footer', false));
             }
         );
-
     }
-);
+    
+}
 
 /* End of file hello_form.php */
 /* Location: .public/tutorials/controller/hello_form.php */

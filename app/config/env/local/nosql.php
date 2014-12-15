@@ -10,8 +10,8 @@ return array(
     'mongo' => array(
         'db' => array(
             'host' => 'localhost',
-            'username' => $_ENV['MONGO_USERNAME'],
-            'password' => $_ENV['MONGO_PASSWORD'],
+            'username' => envget('MONGO_USERNAME'),
+            'password' => envget('MONGO_PASSWORD'),
             'port' => '27017',
             ),
         'yourSecondDatabaseName' => array(

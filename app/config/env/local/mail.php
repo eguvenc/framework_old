@@ -31,15 +31,15 @@ return array(
             ),
             'smtp' => array(
                 'host' => 'smtp.mandrillapp.com',      // SMTP Server Address.
-                'user' => $_ENV['MANDRILL_USERNAME'],  // SMTP Username.
-                'pass' => $_ENV['MANDRILL_API_KEY'],   // SMTP Password.
+                'user' => envget('MANDRILL_USERNAME'),  // SMTP Username.
+                'pass' => envget('MANDRILL_API_KEY'),   // SMTP Password.
                 'port' => '587',    // SMTP Port.
                 'timeout' => '5' ,  // SMTP Timeout (in seconds).
             ),
         ),
         'transport' => array(
             'mandrill' => array(
-                'key' => $_ENV['MANDRILL_API_KEY'],  // Mandrill api key
+                'key' => envget('MANDRILL_API_KEY'),  // Mandrill api key
                 'ip_pool' => 'Main Pool',           // The name of the dedicated ip pool that should be used to send the message.
             ),
             'mailgun' => array(

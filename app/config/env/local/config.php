@@ -36,7 +36,7 @@ return array(
     */
     'log' =>   array(
         'control' => array(
-            'enabled' => false,
+            'enabled' => true,
             'output'  => false,
         ),
         'default' => array(
@@ -73,7 +73,7 @@ return array(
     |--------------------------------------------------------------------------
     */
     'url' => array(
-        'host'   => 'framework', // Your Virtual host name default "localhost" should be ".example.com" in production config.
+        'host'   => 'framework', // Your Virtual host name default "localhost" should be "example.com" in production config.
         'base'   => '/',         // Base Url "/" URL of your framework root, generally a '/' trailing slash. 
         'assets' => '/assets/',  // Assets Url of your framework generally a '/assets/' you may want to change it with your "cdn" provider.
         'rewrite' => array(
@@ -113,12 +113,12 @@ return array(
     | $this->config->load() method.
     |
     */
-    'database' => include ENV_CONFIG .'database.php', // Databases
-    'session' => include ENV_CONFIG .'session.php',   // Sessions
-    'nosql' => include ENV_CONFIG .'nosql.php',       // NoSQL Databases
-    'mail' => include ENV_CONFIG .'mail.php',         // Mail
-    'cache' =>  include ENV_CONFIG .'cache.php',      // Cache
-    'queue' => include ENV_CONFIG .'queue.php',       // Queue
+    'database' => envfile('database.php'), // Databases
+    'session' => envfile('session.php'),   // Sessions
+    'nosql' => envfile('nosql.php'),       // NoSQL Databases
+    'mail' => envfile('mail.php'),         // Mail
+    'cache' => envfile('cache.php'),       // Cache
+    'queue' => envfile('queue.php'),       // Queue
     /*
     |--------------------------------------------------------------------------
     | Layers

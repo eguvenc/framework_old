@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <link href="@ASSETS/css/welcome.css" rel="stylesheet" type="text/css" />
-        <title>Layered Vc Tutorial</title>
+        <title>Layers Tutorial</title>
     </head>
 
     <body>
@@ -12,7 +12,7 @@
         </header>
         <h1>Layer Tutorials</h1>
 <pre>
-$c->load('layer');
+$this->c->load('layer');
 $a = $this->layer->get('tutorials/hello_dummy/1/2/3');
 $b = $this->layer->get('welcome/welcome_dummy/4/5/6');
 $c = $this->layer->get('tutorials/hello_dummy/7/8/9');</pre>

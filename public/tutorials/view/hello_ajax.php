@@ -130,7 +130,7 @@ function submitAjax(formId){
     </head>
     <body>
         <header>
-            <?php echo $this->url->anchor('/', '<img src="@assets@/images/logo.png">') ?>
+            <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
         </header>
         
         <h1>Hello Ajax</h1>

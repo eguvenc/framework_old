@@ -6,15 +6,14 @@
         <title>Scheme Tutorial</title>
     </head>
 
-    <body>
-
+<body>
 <header>
     <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
 </header>
 
-<h1>Hello Scheme World</h1>
+<h1>Hello Layout World</h1>
 
-<p>This my first content using schemes.</p>
+<p>This my first content using layouts.</p>
 
 <section>
 
@@ -22,24 +21,23 @@
 
 <pre>
 'default' => function () {
-    $this->assign('header',  '@public.views/header');
-    $this->assign('sidebar', '@public.views/sidebar');
-    $this->assign('footer',  $this->template('footer'));
+    $this->assign('header',  '@layer.views/header');
+    $this->assign('sidebar', '@layer.views/sidebar');
 },
 </pre>
 
 <p></p>
 
-<p><b>"Default"</b> config defined in your main config file and <b>view class</b> defined in your <kbd>components.php</kbd> file.</p>
+<p><b>"Default"</b> config defined in your <kbd>view.php</kbd> config file.</p>
 
 <p></p>
 
-<p><kbd>$this->getScheme();</kbd> method calls <b>welcome</b> scheme function then assign them to <b>hello_scheme</b> file.</p>
+<p><kbd>$this->layout();</kbd> method calls <b>welcome</b> layout config then assign them to <b>hello_layout</b> file.</p>
 
-<pre>$this->view->load('hello_scheme', function() {
+<pre>$this->view->load('hello_layout', function() {
         $this->assign('name', 'Obullo');
         $this->assign('title', 'Hello Scheme World !');
-        $this->getScheme('welcome');
+        $this->layout('welcome');
 });</pre>
 </section>
 

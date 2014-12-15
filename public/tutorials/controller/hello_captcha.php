@@ -1,35 +1,39 @@
 <?php
 
-/**
- * $o hell_captcha
- * 
- * @var Controller
- */
-$app = new Controller(
-    function ($c) {
-        $c->load('view');
-        $c->load('url');
-        $c->load('service/html');
-        $c->load('form');
-        $c->load('post');
+Class Hello_Captcha extends Controller
+{
+    /**
+     * Loader
+     * 
+     * @return void
+     */
+    public function load()
+    {
+        $this->c->load('view');
+        $this->c->load('url');
+        $this->c->load('form');
+        $this->c->load('post');
     }
-);
 
-$app->func(
-    'index',
-    function () use ($c) {
-
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
         if ($this->post['dopost']) {
 
-            $c->load('validator');
+            $this->c->load('validator');
+            
             $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('captcha_answer', 'Captcha', 'required|callback_captcha');
 
             $this->validator->func(
                 'callback_captcha',
-                function () use ($c) {
-                    if ($c->load('captcha')->check($this->post['captcha_answer']) == false) {
+                function () {
+                    if ($this->c->load('service/captcha')->check($this->post['captcha_answer']) == false) {
                         $this->setMessage('callback_captcha', 'Wrong Captcha Code');
                         return false;
                     }
@@ -40,6 +44,7 @@ $app->func(
                 $this->form->setMessage('Form Validation Success ! ');  // Set flash notice using Session Class.
             }
         }
+
         $this->view->load(
             'hello_captcha',
             function () {
@@ -48,10 +53,9 @@ $app->func(
                 $this->layout('welcome');
             }
         );
-
     }
-);
+}
 
 
-/* End of file welcome.php */
-/* Location: .public/welcome/controller/welcome.php */
+/* End of file hello_captcha.php */
+/* Location: .public/tutorials/controller/hello_captcha.php */

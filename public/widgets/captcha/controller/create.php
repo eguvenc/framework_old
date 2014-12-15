@@ -1,20 +1,24 @@
 <?php
 
-/**
- * $app Captcha Create
- * 
- * @var Controller
- */
-$app = new Controller(
-    function ($c) {
-        $c->load('captcha');
+Class Create extends Controller
+{
+    /**
+     * Loader
+     * 
+     * @return void
+     */
+    public function load()
+    {
+        $this->c->load('service/captcha');
     }
-);
 
-$app->func(
-    'index',
-    function () {
-
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 
@@ -29,7 +33,7 @@ $app->func(
         $this->captcha->setFont('NightSkK');
         $this->captcha->create();
     }
-);
+}
 
 /* End of file create.php */
 /* Location: .public/widgets/captcha/controller/create.php */

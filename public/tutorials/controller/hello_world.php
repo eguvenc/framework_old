@@ -10,11 +10,6 @@ Class Hello_World extends Controller
     public function load()
     {
         $this->c->load('view');
-        $this->c->load('service/queue');
-
-        $this->queue->channel('Log');
-        // $this->queue->push('Workers/Logger', 'Logger', array('log' => array('debug' => 'Test')));
-
     }
 
     /**

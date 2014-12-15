@@ -1,25 +1,29 @@
 <?php
 
-/**
- * $app hello_task
- * 
- * @var Controller
- */
-$app = new Controller(
-    function ($c) {
-        $c->load('url');
-        $c->load('console/task as task');
+Class Hello_Task extends Controller
+{
+    /**
+     * Loader
+     * 
+     * @return void
+     */
+    public function load()
+    {
+        $this->c->load('url');
+        $this->c->load('cli/task as task');
     }
-);
 
-$app->func(
-    'index',
-    function () {
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
         $output = $this->task->run('help/index', true); 
         echo '<pre>'.$output.'</pre>';
     }
-);
-
+}
 
 /* End of file hello_task.php */
 /* Location: .public/tutorials/controller/hello_task.php */

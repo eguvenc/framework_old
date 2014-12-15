@@ -10,8 +10,8 @@ return array(
     'server' => array(
         'host'  => '127.0.0.1',  // 10.0.0.157
         'port'  => 5672,
-        'user'  => $_ENV['AMQP_USERNAME'],
-        'pass'  => $_ENV['AMQP_PASSWORD'],
+        'user'  => envget('AMQP_USERNAME'),
+        'pass'  => envget('AMQP_PASSWORD'),
         'vhost' => '/',
         'debug' => true,
         'default' => array('queue' => 'default'),
@@ -25,7 +25,7 @@ return array(
         'storage' => 'Obullo\Queue\Failed\Storage\Database',
         'provider' => array(
             'name' => 'Db',    // "Db" provider which is defined in your "Provider" folder.
-            'db' => 'q_jobs',  // Database config name
+            'db' => 'q_jobs',  // Database name
         ),
         'table' => 'failures',
     ),
