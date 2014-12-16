@@ -9,6 +9,7 @@ return array(
         'local' => array (
             'server' => array(
                 'hostname' => array(
+                    'aly',
                     'ersin-desktop',
                     'someone.computer',
                     'anotherone.computer',
