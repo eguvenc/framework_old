@@ -21,7 +21,7 @@ Class Hello_Ajax extends Controller
      */
     public function index()
     {
-        if ($this->request->isXmlHttp()) { // Is Ajax ?
+        if ($this->request->isAjax()) { // Is Ajax ?
 
             $this->c->load('validator');
 
@@ -47,7 +47,7 @@ Class Hello_Ajax extends Controller
             function () {
                 $this->assign('name', 'Obullo');
                 $this->assign('title', 'Hello Ajax World !');
-                $this->getScheme('welcome');
+                $this->layout('welcome');
             }
         );
     }

@@ -8,7 +8,7 @@
 */
 return array(
     'server' => array(
-        'host'  => '127.0.0.1',  // 10.0.0.157
+        'host'  => envget('AMQP_HOST'),
         'port'  => 5672,
         'user'  => envget('AMQP_USERNAME'),
         'pass'  => envget('AMQP_PASSWORD'),

@@ -11,7 +11,9 @@
 |
 */
 return array(
+
     'platforms' => array( 
+
         'windows nt 6.3'    => 'Windows 8.1',
         'windows nt 6.2'    => 'Windows 8',
         'windows nt 6.1'    => 'Windows 7',
@@ -55,6 +57,7 @@ return array(
     // multiple browser types so we want to identify the sub-type first.
     // 
     'browsers' => array(
+
         'Flock'             => 'Flock',
         'Chrome'            => 'Chrome',
         'Opera'             => 'Opera',
@@ -77,7 +80,9 @@ return array(
         'hotjava'           => 'HotJava',
         'amaya'             => 'Amaya',
         'IBrowse'           => 'IBrowse'
+
     ),
+
     'mobiles' => array(
         // legacy array, old values commented out
         'mobileexplorer'    => 'Mobile Explorer',
@@ -168,8 +173,10 @@ return array(
         'smartphone'            => "Generic Mobile",
         'cellphone'             => "Generic Mobile"
     ),
+
      // There are hundreds of bots but these are the most common.
     'robots' =>  array(
+
         'googlebot'         => 'Googlebot',
         'msnbot'            => 'MSNBot',
         'slurp'             => 'Inktomi Slurp',

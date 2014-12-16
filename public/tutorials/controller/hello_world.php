@@ -10,6 +10,8 @@ Class Hello_World extends Controller
     public function load()
     {
         $this->c->load('view');
+
+        
     }
 
     /**

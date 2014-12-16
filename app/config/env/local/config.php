@@ -15,7 +15,7 @@ return array(
     */                             
     'error' => array(
         'debug' => true,       // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
-        'reporting' => false,  // Turn on it if you want catch "unusual hidden errors", should be "Disabled"" in "PRODUCTION".
+        'reporting' => false,   // Turn on it if you want catch "unusual hidden errors", should be "Disabled"" in "PRODUCTION".
     ),
     /*
     |--------------------------------------------------------------------------
