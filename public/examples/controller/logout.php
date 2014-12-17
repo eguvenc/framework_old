@@ -1,27 +1,34 @@
 <?php
 
-/**
- * $app login
- * 
- * @var Controller
- */ 
-$app = new Controller(
-    function ($c) {
-        $c->load('url');
-        $c->load('service/user');
+Class Logout extends Controller
+{
+    /**
+     * Loader
+     * 
+     * @return void
+     */
+    public function load()
+    {
+        $this->c->load('url');
+        $this->c->load('service/user');
     }
-);
 
-$app->func(
-    'index',
-    function () use ($c) {
-
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
         $this->user->identity->logout();
+
         // $this->user->identity->destroy();
         // $this->user->identity->forgetMe();
+        
         $this->url->redirect('/examples/login');
     }
-);
+}
 
-/* End of file hello_world.php */
-/* Location: .public/tutorials/controller/hello_world.php */
+
+/* End of file logout.php */
+/* Location: .public/tutorials/controller/logout.php */

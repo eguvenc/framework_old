@@ -1,33 +1,37 @@
 <?php
 
-/**
- * $app login
- * 
- * @var Controller
- */ 
-$app = new Controller(
-    function ($c) {
-        $c->load('url');
-        $c->load('form');
-        $c->load('view');
-        $c->load('post');
-        $c->load('service/user');
-        $c->load('flash/session as flash');
-        $c->load('event')->subscribe(new Event\User($c)); 
+Class Login extends Controller
+{
+    /**
+     * Loader
+     * 
+     * @return void
+     */
+    public function load()
+    {
+        $this->c->load('url');
+        $this->c->load('form');
+        $this->c->load('view');
+        $this->c->load('post');
+        $this->c->load('service/user');
+        $this->c->load('flash/session as flash');
+        $this->c->load('event')->subscribe(new Event\User($this->c));   // Listen user events
     }
-);
 
-$app->func(
-    'index',
-    function () use ($c) {
-
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
         // $this->user->login->authenticateVerifiedIdentity();
         
         var_dump($this->user->identity->isGuest());
 
         if ($this->post['dopost']) {
 
-            $c->load('validator');
+            $this->c->load('validator');
 
             $this->validator->setRules('email', 'Email', 'required|email|trim');
             $this->validator->setRules('password', 'Password', 'required|min(6)|trim');
@@ -62,7 +66,7 @@ $app->func(
         );
 
     }
-);
+}
 
 /* End of file login.php */
 /* Location: .public/examples/controller/login.php */

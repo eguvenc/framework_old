@@ -31,6 +31,8 @@ Class Request
     public function __construct($c)
     {
         $this->c = $c;
+        $this->router = $this->c['router'];
+        $this->logger = $this->c->load('service/logger');
     }
 
     /**
@@ -40,8 +42,6 @@ Class Request
      */
     public function onBeforeRequest()
     {
-        $logger = $this->c->load('service/logger');
- 
         if ($this->c['config']['uri']['queryStrings'] == false) {  // Is $_GET data allowed ? 
             $_GET = array(); // If not we'll set the $_GET to an empty array
         }
@@ -65,22 +65,37 @@ Class Request
          *  Log requests
          * ------------------------------------------------------
          */
-        $logger->debug('$_REQUEST_URI: ' . $this->c->load('uri')->getRequestUri(), array(), 10);
-        $logger->debug('$_COOKIE: ', $_COOKIE, 9);
-        $logger->debug('$_POST: ', $_POST, 9);
-        $logger->debug('$_GET: ', $_GET, 9);
-        $logger->debug('Global POST and COOKIE data sanitized', array(), 10);
+        $this->logger->debug('$_REQUEST_URI: ' . $this->c['uri']->getRequestUri(), array(), 10);
+        $this->logger->debug('$_COOKIE: ', $_COOKIE, 9);
+        $this->logger->debug('$_POST: ', $_POST, 9);
+        $this->logger->debug('$_GET: ', $_GET, 9);
+        $this->logger->debug('Global POST and COOKIE data sanitized', array(), 10);
     }
 
-
-    public function onBeforeController()
+    /**
+     * Before the run load and index methods of controller
+     * 
+     * @param object $class Controller
+     * 
+     * @return void
+     */
+    public function onBeforeController($class, $annot)
     {
-        // ..
+        $class = null;
+        $this->router->initFilters('before');  // Initialize ( exec ) registered router ( before ) filters
     }
 
-    public function onAfterController()
+    /**
+     * After the run index method of controller
+     * 
+     * @param object $class Controller
+     * 
+     * @return void
+     */
+    public function onAfterController($class)
     {
-        // ..
+        $class = null;
+        $this->router->initFilters('after');  // Initialize ( exec ) registered router ( after ) filters
     }
 
     /**
@@ -92,8 +107,6 @@ Class Request
      */
     public function onAfterResponse($start)
     {
-        $logger = $this->c->load('service/logger');
-
         $end = microtime(true) - $start;  // End Timer
         $extra = array();
         if ($this->c['config']['log']['extra']['benchmark']) {     // Do we need to generate benchmark data ? If so, enable and run it.
@@ -103,7 +116,7 @@ Class Request
             }
             $extra = array('time' => number_format($end, 4), 'memory' => $usage);
         }
-        $logger->debug('Final output sent to browser', $extra, -99);
+        $this->logger->debug('Final output sent to browser', $extra, -99);
     }
 
     /**
@@ -117,8 +130,9 @@ Class Request
     {
         $event->listen('before.request', 'Event\Request.onBeforeRequest');
         $event->listen('after.response', 'Event\Request.onAfterResponse');
-        // $event->listen('before.controller', 'Event\UserRequestHandler.onBeforeController');
-        // $event->listen('after.controller', 'Event\UserRequestHandler.onAfterController');
+
+        $event->listen('before.controller', 'Event\Request.onBeforeController');
+        $event->listen('after.controller', 'Event\Request.onAfterController');
     }
 
 }

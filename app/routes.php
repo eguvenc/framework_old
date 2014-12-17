@@ -12,12 +12,13 @@
 $c['router']->domain($c['config']['url']['host']);  // Root domain
 $c['router']->defaultPage('welcome');
 
-// $c['router']->route(
-//     '*', 'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
-//     function () use ($c) {
-//         $c->load('view')->load('dummy');
-//     }
-// );
+$c['router']->route(
+    '*', 'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
+    function () use ($c) {
+        $c->load('view')->load('dummy');
+    }
+);
+
 // $c['router']->attach('(.*)', array('filters' => array('before.maintenance', 'before.auth'))); 
 
 
@@ -42,7 +43,7 @@ $c['router']->group(
 );
 
 // $c['router']->group(
-//     array('name' => 'maintenance_test', 'domain' => '^framework$', 'filters' => array('before.maintenance', 'before.auth')), 
+//     array('name' => 'maintenance_test', 'domain' => '^framework$', 'before.filters' => array('maintenance', 'auth')), 
 //     function ($group) {
 //         // $this->route('get', 'tutorials/hello_world.*', 'tutorials/hello_scheme', null, $group);
 //         // $this->attach('(.*)', $group); // all url

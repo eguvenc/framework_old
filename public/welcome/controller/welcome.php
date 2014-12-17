@@ -10,7 +10,7 @@ Class Welcome extends Controller
     public function load()
     {
         $this->c->load('url');
-        $this->c->load('view');
+        // $this->c->load('view');
     }
 
     /**

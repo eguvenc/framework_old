@@ -62,8 +62,6 @@ Class InputFilter implements FilterInterface
             foreach ($notPermitted as $v) {
                 if (isset($record['context'][$v])) {
                     unset($record['context'][$v]);
-                } elseif (isset($record['context']['data']['form'][$v])) {
-                    unset($record['context']['data']['form'][$v]);
                 }
             }
         }

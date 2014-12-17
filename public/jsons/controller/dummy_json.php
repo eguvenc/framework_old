@@ -1,22 +1,24 @@
 <?php
 
-/**
- * $app hello_dummy
- * 
- * Dummy test class
- * 
- * @var Controller
- */
-$app = new Controller(
-    function ($c) {
-        $c->load('validator');
+Class Dummy_Json extends Controller
+{
+    /**
+     * Loader
+     * 
+     * @return void
+     */
+    public function load()
+    {
+        $this->c->load('validator');        
     }
-);
 
-$app->func(
-    'index', 
-    function () use ($c) {
-
+    /**
+     * Index
+     * 
+     * @return void
+     */
+    public function index()
+    {
         try {
 
             // $r = array(
@@ -40,7 +42,7 @@ $app->func(
             echo json_encode($r);
         }
     }
-);
+}
 
-/* End of file hello_dummy.php */
-/* Location: .public/tutorials/controller/hello_dummy.php */
+/* End of file dummy_json.php */
+/* Location: .public/jsons/controller/dummy_json.php */
