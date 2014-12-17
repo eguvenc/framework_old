@@ -39,7 +39,7 @@ var ajax = {
         <section><?php echo $this->form->message() ?></section>
 
         <section>
-                <form action="/tutorials/hello_captcha" method="post" />
+                <form action="/widgets/tutorials/hello_captcha" method="post" />
                 <table width="100%">
                     <tr>
                         <td style="width:20%;">Email</td>

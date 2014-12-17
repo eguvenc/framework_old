@@ -19,7 +19,7 @@
 
         <section>
 
-            <form action="/tutorials/hello_form" method="POST">
+            <form action="/widgets/tutorials/hello_form" method="POST">
                 <table width="100%">
                     <tr>
                         <td style="width:20%;">Email</td>

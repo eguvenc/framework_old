@@ -7,6 +7,7 @@
 |
 */
 return array(
+
     'mongo' => array(
         'db' => array(
             'host' => 'localhost',
@@ -14,6 +15,7 @@ return array(
             'password' => envget('MONGO_PASSWORD'),
             'port' => '27017',
             ),
+
         'yourSecondDatabaseName' => array(
             'host' => '',
             'username' => '',

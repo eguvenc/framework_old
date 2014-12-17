@@ -13,9 +13,9 @@
         <h1>Layer Tutorials</h1>
 <pre>
 $this->c->load('layer');
-$a = $this->layer->get('tutorials/hello_dummy/1/2/3');
-$b = $this->layer->get('welcome/welcome_dummy/4/5/6');
-$c = $this->layer->get('tutorials/hello_dummy/7/8/9');</pre>
+$a = $this->layer->get('widgets/tutorials/hello_dummy/1/2/3');
+$b = $this->layer->get('welcome/dummy/4/5/6');
+$c = $this->layer->get('widgets/tutorials/hello_dummy/7/8/9');</pre>
 
         <section><p>&nbsp;</p></section>
 

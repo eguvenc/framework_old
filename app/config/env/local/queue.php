@@ -7,6 +7,7 @@
 |
 */
 return array(
+
     'server' => array(
         'host'  => envget('AMQP_HOST'),
         'port'  => 5672,
@@ -20,12 +21,13 @@ return array(
             'flag' => 'AMQP_DURABLE', // AMQP_PASSIVE
         ),
     ),
+    
     'failed' => array(
         'enabled' => false,
         'storage' => 'Obullo\Queue\Failed\Storage\Database',
         'provider' => array(
-            'name' => 'Db',    // "Db" provider which is defined in your "Provider" folder.
-            'db' => 'q_jobs',  // Database name
+            'name' => 'Db',         // "Db" provider which is defined in your "Provider" folder.
+            'db' => 'failed_jobs',  // Database name
         ),
         'table' => 'failures',
     ),

@@ -7,6 +7,7 @@
 |
 */
 return array(
+
     'send' => array(
         'settings' => array(
             'useragent' => 'Framework Mailer',  //  The "user agent".
@@ -22,6 +23,7 @@ return array(
             'bccBatchMode' =>  false,   // true or false (boolean) Enable BCC Batch Mode.
             'bccBatchSize' => 200,     // None  Number of emails in each BCC batch.
         ),
+
         'protocol' => array(
             'mail' => array(
 
@@ -37,6 +39,7 @@ return array(
                 'timeout' => '5' ,  // SMTP Timeout (in seconds).
             ),
         ),
+
         'transport' => array(
             'mandrill' => array(
                 'key' => envget('MANDRILL_API_KEY'),  // Mandrill api key
@@ -46,6 +49,7 @@ return array(
 
             )
         ),
+        
         'queue' => array(
             'mailer' => 'mandrill',             // Default mailer   // mandrill, mailgun, smtp, sendmail, mail ..
             'channel' => 'Mail',                // QueueMailer channel name

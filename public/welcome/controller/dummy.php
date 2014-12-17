@@ -1,6 +1,9 @@
 <?php
 
-Class Welcome_Dummy extends Controller
+/**
+ * Dummy controller for layers tutorial
+ */
+Class Dummy extends Controller
 {
     /**
      * Loader

@@ -19,13 +19,13 @@
             <h2>Getting  Started with Tutorials</h2>
 
             <ol>
-                <li><?php echo $this->url->anchor('/tutorials/hello_world', 'Hello World') ?></li>
-                <li><?php echo $this->url->anchor('/tutorials/hello_layout', 'Hello Layout') ?></li>
-                <li><?php echo $this->url->anchor('/tutorials/hello_form', 'Hello Form') ?></li>
-                <li><?php echo $this->url->anchor('/tutorials/hello_ajax', 'Hello Ajax') ?></li>
-                <li><?php echo $this->url->anchor('/tutorials/hello_task', 'Hello Task') ?></li>
-                <li><?php echo $this->url->anchor('/tutorials/hello_layers', 'Hello Layers') ?></li>
-                <li><?php echo $this->url->anchor('/tutorials/hello_captcha', 'Hello Captcha') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_world', 'Hello World') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_layout', 'Hello Layout') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_form', 'Hello Form') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_ajax', 'Hello Ajax') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_task', 'Hello Task') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_layers', 'Hello Layers') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_captcha', 'Hello Captcha') ?></li>
             </ol>
 
         </section>
