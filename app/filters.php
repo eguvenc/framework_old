@@ -29,6 +29,15 @@ $c['router']->createFilter('auth', 'Http\Filters\AuthFilter');
 */
 $c['router']->createFilter('csrf', 'Http\Filters\CsrfFilter');
 
+/*
+|--------------------------------------------------------------------------
+| Activity
+|--------------------------------------------------------------------------
+| User Activity Filter
+*/
+$c['router']->createFilter('activity', 'Http\Filters\ActivityFilter');
+
+
 
 // @todo
 // $c['router']->when('post', 'auth', array('post', 'put', 'delete')); // api için.  only authenticated users would be able to create, edit or delete posts from the application.

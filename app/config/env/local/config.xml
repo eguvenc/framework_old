@@ -13,9 +13,9 @@
 
 	<env file=".env.local.php">
 		<service>
-			<logger class="Log/Env/Local" cli="Log/Env/Cli" />
+			<logger class="Log/Env/Local" cli="Log/Env/Cli"/>
 		</service>
-		<provider></provider>
+		<provider/>
 	</env>
 </root>
 <!--

@@ -25,7 +25,7 @@ $c['router']->route(
 $c['router']->group(
     array('name' => 'general', 'domain' => $c['config']->xml()->route->site, 'before.filters' => array('maintenance')),
     function ($group) {
-
+        
         $this->defaultPage('welcome');
         $this->route('*', 'jelly/(.+)', 'widgets/jelly/$1', null, $group);  // Rewrite "jform" uri to widgets/ folders
         $this->route('get', '(?:en|tr|de|nl)/(.*)', '$1', null, $group);
