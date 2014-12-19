@@ -3,13 +3,13 @@
 namespace Http\Filters;
 
 /**
- * Csrf security filter
+ * Csrf security filter 
  *
  * @category  Route
  * @package   Filters
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT
+ * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/router
  */
 Class CsrfFilter
@@ -23,8 +23,10 @@ Class CsrfFilter
      */
     public function __construct($c)
     {
-        $c->load('security/csrf')->init();  
-        $c->load('security/csrf')->verify(); // Csrf protection check
+        $csrf = $c->load('security/csrf'); 
+
+        $csrf->init();
+        $csrf->verify(); // Csrf protection check
     }
 }
 

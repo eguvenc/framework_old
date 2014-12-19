@@ -11,7 +11,7 @@ use Obullo\Cache\Handler\Redis;
  * @package   Cache
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT
+ * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/providers
  */
 Class Cache implements ProviderInterface

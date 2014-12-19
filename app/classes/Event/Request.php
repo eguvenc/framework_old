@@ -9,7 +9,7 @@ namespace Event;
  * @package   Request
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT
+ * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/event
  */
 Class Request
@@ -32,7 +32,7 @@ Class Request
     {
         $this->c = $c;
         $this->router = $this->c['router'];
-        $this->logger = $this->c->load('service/logger');
+        $this->logger = $this->c->load('return service/logger');
     }
 
     /**
@@ -75,27 +75,31 @@ Class Request
     /**
      * Before the run load and index methods of controller
      * 
-     * @param object $class Controller
+     * @param object $class  Controller
+     * @param object $filter Blocks\Annotations\Filter
      * 
      * @return void
      */
-    public function onBeforeController($class, $annot)
+    public function onBeforeController($class, $filter)
     {
-        $class = null;
+        // $filter->initFilters('before');
         $this->router->initFilters('before');  // Initialize ( exec ) registered router ( before ) filters
+        $class = null;
     }
 
     /**
      * After the run index method of controller
      * 
-     * @param object $class Controller
+     * @param object $class  Controller
+     * @param object $filter Blocks\Annotations\Filter
      * 
      * @return void
      */
-    public function onAfterController($class)
+    public function onAfterController($class, $filter)
     {
-        $class = null;
+        // $filter->initFilters('after');
         $this->router->initFilters('after');  // Initialize ( exec ) registered router ( after ) filters
+        $class = null;
     }
 
     /**
@@ -120,6 +124,23 @@ Class Request
     }
 
     /**
+     * Executed when you use annotation filters, use this block @filter->method(["post","delete"]); on your controller index() method.
+     * 
+     * @param object $object     allowed method parameter(s) ( get, post, put, delete )
+     * @param string $httpMethod valid request method e.g. post
+     * 
+     * @return void
+     */
+    public function onHttpMethod($object, $httpMethod)
+    {
+        $allowedMethods = (array)$object; // $event->fire() method does not allow to send arrays as one parameter thats why we send data as object.
+
+        if ( ! in_array($httpMethod, $allowedMethods)) {
+            $this->c['response']->showError("$httpMethod method not allowed.");
+        }
+    }
+
+    /**
      * Event subscribe
      * 
      * @param object $event object
@@ -130,9 +151,9 @@ Class Request
     {
         $event->listen('before.request', 'Event\Request.onBeforeRequest');
         $event->listen('after.response', 'Event\Request.onAfterResponse');
-
         $event->listen('before.controller', 'Event\Request.onBeforeController');
         $event->listen('after.controller', 'Event\Request.onAfterController');
+        $event->listen('method.filter', 'Event\Request.onHttpMethod');
     }
 
 }

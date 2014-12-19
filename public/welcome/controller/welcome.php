@@ -1,5 +1,6 @@
 <?php
 
+
 Class Welcome extends Controller
 {
     /**
@@ -9,12 +10,21 @@ Class Welcome extends Controller
      */
     public function load()
     {
+        $block = new Obullo\Blocks\Annotations\Filter($this->c);
+        $block->before('csrf');
+        $block->before('activity')->when(array('post','get'));
+        $block->before('auth');
+        $block->initFilters('before');
+        $block->initFilters('after');
+
         $this->c->load('url');
         // $this->c->load('view');
     }
 
     /**
      * Index
+     *
+     * @filter->before(["auth", "sad"]);
      * 
      * @return void
      */
