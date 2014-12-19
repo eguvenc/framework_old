@@ -1,23 +1,23 @@
 <?php
 
-namespace Auth\Model;
+namespace Auth\Provider;
 
 use Obullo\Auth\Adapter\AssociativeArray,
-    Obullo\Auth\ModelUserInterface,
+    Obullo\Auth\DatabaseProviderInterface,
     Auth\Identities\GenericIdentity,
     Auth\Identities\UserIdentity;
 
 /**
- * O2 Auth - User Database Model
+ * O2 Auth - User Database Provider
  *
  * @category  Auth
  * @package   Auth
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL Licence
+ * @license   http://opensource.org/licenses/MIT
  * @link      http://obullo.com/package/auth
  */
-Class User implements ModelUserInterface
+Class User implements DatabaseProviderInterface
 {
     /**
      * Container
@@ -129,4 +129,4 @@ Class User implements ModelUserInterface
 // END User.php File
 /* End of file User.php
 
-/* Location: .app/classes/Auth/Model/User.php */
+/* Location: .app/classes/Auth/Provider/User.php */
