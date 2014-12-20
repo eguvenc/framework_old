@@ -5,6 +5,9 @@ return array(
     'MYSQL_USERNAME' => 'root',
     'MYSQL_PASSWORD' => '',
 
+    'PGSQL_USERNAME' => 'root',
+    'PGSQL_PASSWORD' => '',
+
     'MONGO_USERNAME' => 'root',
     'MONGO_PASSWORD' => '',
 
