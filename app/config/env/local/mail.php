@@ -33,8 +33,8 @@ return array(
             ),
             'smtp' => array(
                 'host' => 'smtp.mandrillapp.com',      // SMTP Server Address.
-                'user' => envget('MANDRILL_USERNAME'),  // SMTP Username.
-                'pass' => envget('MANDRILL_API_KEY'),   // SMTP Password.
+                'user' => env('MANDRILL_USERNAME'),  // SMTP Username.
+                'pass' => env('MANDRILL_API_KEY'),   // SMTP Password.
                 'port' => '587',    // SMTP Port.
                 'timeout' => '5' ,  // SMTP Timeout (in seconds).
             ),
@@ -42,7 +42,7 @@ return array(
 
         'transport' => array(
             'mandrill' => array(
-                'key' => envget('MANDRILL_API_KEY'),  // Mandrill api key
+                'key' => env('MANDRILL_API_KEY'),  // Mandrill api key
                 'ip_pool' => 'Main Pool',           // The name of the dedicated ip pool that should be used to send the message.
             ),
             'mailgun' => array(

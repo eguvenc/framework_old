@@ -31,7 +31,7 @@ Class AuthFilter
     public function __construct($c)
     {
         $this->user = $c->load('return service/user');
-        
+
         if ($this->user->identity->isAuthenticated()) {
 
         	// Do something

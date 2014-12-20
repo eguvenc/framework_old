@@ -11,8 +11,8 @@ return array(
     'mongo' => array(
         'db' => array(
             'host' => 'localhost',
-            'username' => envget('MONGO_USERNAME'),
-            'password' => envget('MONGO_PASSWORD'),
+            'username' => env('MONGO_USERNAME'),
+            'password' => env('MONGO_PASSWORD'),
             'port' => '27017',
             ),
 

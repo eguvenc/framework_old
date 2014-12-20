@@ -10,8 +10,8 @@ return array(
     
     'db' => array(
         'host' => 'localhost',
-        'username' => envget('MYSQL_USERNAME'),
-        'password' => envget('MYSQL_PASSWORD'),
+        'username' => env('MYSQL_USERNAME'),
+        'password' => env('MYSQL_PASSWORD'),
         'database' => 'test',
         'port'     => '',
         'charset'  => 'utf8',
@@ -24,8 +24,8 @@ return array(
 
     'failed_jobs' => array(
         'host' => 'localhost',
-        'username' => envget('MYSQL_USERNAME'),
-        'password' => envget('MYSQL_PASSWORD'),
+        'username' => env('MYSQL_USERNAME'),
+        'password' => env('MYSQL_PASSWORD'),
         'database' => 'failed_jobs',
         'port'     => '',
         'charset'  => 'utf8',

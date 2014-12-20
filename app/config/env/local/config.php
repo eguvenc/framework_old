@@ -99,12 +99,23 @@ return array(
     */
     'locale' => array(
         'timezone' => 'gmt',      // This pref tells the system whether to use your server's "local" time as the master now reference, or convert it to "gmt".
-        'charset'  => 'UTF-8',    //  This determines which character set is used by default.
+        'charset'  => 'UTF-8',    // This determines which character set is used by default.
         'date' => array(
             'php_date_default_timezone' => 'Europe/London',  // Sets timezone using php date_default_timezone_set(); function.
             'format' => 'H:i:s d:m:Y'
         )
      ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Controller
+    |--------------------------------------------------------------------------
+    */
+    'controller' => array(
+        'annotation' => array(
+            'reader' => true,     // Enable or Disable "annotation reader" which is able to parse filters on controller.
+        )
+    ),
     /*
     |--------------------------------------------------------------------------
     | Include Environment Files
@@ -113,12 +124,12 @@ return array(
     | $this->config->load() method.
     |
     */
-    'database' => envfile('database.php'), // Databases
-    'session' => envfile('session.php'),   // Sessions
-    'nosql' => envfile('nosql.php'),       // NoSQL Databases
-    'mail' => envfile('mail.php'),         // Mail
-    'cache' => envfile('cache.php'),       // Cache
-    'queue' => envfile('queue.php'),       // Queue
+    'database' => config('database.php'), // Databases
+    'session' => config('session.php'),   // Sessions
+    'nosql' => config('nosql.php'),       // NoSQL Databases
+    'mail' => config('mail.php'),         // Mail
+    'cache' => config('cache.php'),       // Cache
+    'queue' => config('queue.php'),       // Queue
     /*
     |--------------------------------------------------------------------------
     | Layers

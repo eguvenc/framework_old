@@ -9,10 +9,10 @@
 return array(
 
     'server' => array(
-        'host'  => envget('AMQP_HOST'),
+        'host'  => env('AMQP_HOST'),
         'port'  => 5672,
-        'user'  => envget('AMQP_USERNAME'),
-        'pass'  => envget('AMQP_PASSWORD'),
+        'user'  => env('AMQP_USERNAME'),
+        'pass'  => env('AMQP_PASSWORD'),
         'vhost' => '/',
         'debug' => true,
         'default' => array('queue' => 'default'),

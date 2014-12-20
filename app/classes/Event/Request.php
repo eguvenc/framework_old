@@ -82,7 +82,9 @@ Class Request
      */
     public function onBeforeController($class, $filter)
     {
-        // $filter->initFilters('before');
+        if ($filter) {
+            $filter->initFilters('before');    // Initialize annotations filters
+        }
         $this->router->initFilters('before');  // Initialize ( exec ) registered router ( before ) filters
         $class = null;
     }
@@ -97,7 +99,9 @@ Class Request
      */
     public function onAfterController($class, $filter)
     {
-        // $filter->initFilters('after');
+        if ($filter) {
+            $filter->initFilters('after');  // Initialize annotations filters
+        }
         $this->router->initFilters('after');  // Initialize ( exec ) registered router ( after ) filters
         $class = null;
     }
