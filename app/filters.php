@@ -11,7 +11,7 @@
 |--------------------------------------------------------------------------
 | Maintenance view filter
 */
-$c['router']->createFilter('maintenance', 'Http\Filters\MaintenanceFilter');
+$c['router']->filter('maintenance', 'Http\Filters\MaintenanceFilter');
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ $c['router']->createFilter('maintenance', 'Http\Filters\MaintenanceFilter');
 |--------------------------------------------------------------------------
 | Authentication filter
 */
-$c['router']->createFilter('auth', 'Http\Filters\AuthFilter');
+$c['router']->filter('auth', 'Http\Filters\AuthFilter');
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ $c['router']->createFilter('auth', 'Http\Filters\AuthFilter');
 |--------------------------------------------------------------------------
 | Cross Site Request Forgery Filter
 */
-$c['router']->createFilter('csrf', 'Http\Filters\CsrfFilter');
+$c['router']->filter('csrf', 'Http\Filters\CsrfFilter');
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +35,7 @@ $c['router']->createFilter('csrf', 'Http\Filters\CsrfFilter');
 |--------------------------------------------------------------------------
 | User Activity Filter
 */
-$c['router']->createFilter('activity', 'Http\Filters\ActivityFilter');
-
-
+$c['router']->filter('activity', 'Http\Filters\ActivityFilter');
 
 // @todo
 // $c['router']->when('post', 'auth', array('post', 'put', 'delete')); // api için.  only authenticated users would be able to create, edit or delete posts from the application.

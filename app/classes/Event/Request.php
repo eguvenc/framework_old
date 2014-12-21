@@ -25,8 +25,6 @@ Class Request
      * Constructor
      *
      * @param object $c container
-     * 
-     * @return void
      */
     public function __construct($c)
     {
@@ -82,10 +80,7 @@ Class Request
      */
     public function onBeforeController($class, $filter)
     {
-        if ($filter) {
-            $filter->initFilters('before');    // Initialize annotations filters
-        }
-        $this->router->initFilters('before');  // Initialize ( exec ) registered router ( before ) filters
+        $this->router->initFilters('before', $filter);  // Initialize ( exec ) registered router ( before ) filters
         $class = null;
     }
 
@@ -93,16 +88,27 @@ Class Request
      * After the run index method of controller
      * 
      * @param object $class  Controller
-     * @param object $filter Blocks\Annotations\Filter
+     * @param object $filter \Blocks\Annotations\Filter
      * 
      * @return void
      */
     public function onAfterController($class, $filter)
     {
-        if ($filter) {
-            $filter->initFilters('after');  // Initialize annotations filters
-        }
-        $this->router->initFilters('after');  // Initialize ( exec ) registered router ( after ) filters
+        $this->router->initFilters('after', $filter);  // Initialize ( exec ) registered router ( after ) filters
+        $class = null;
+    }
+
+    /**
+     * After the run load() method of controller
+     * 
+     * @param object $class  Controller
+     * @param object $filter \Blocks\Annotations\Filter
+     * 
+     * @return void
+     */
+    public function onLoad($class, $filter)
+    {
+        $this->router->initFilters('load', $filter);  // Initialize ( exec ) registered router ( after ) filters
         $class = null;
     }
 
@@ -117,7 +123,7 @@ Class Request
     {
         $end = microtime(true) - $start;  // End Timer
         $extra = array();
-        if ($this->c['config']['log']['extra']['benchmark']) {     // Do we need to generate benchmark data ? If so, enable and run it.
+        if ($this->c['config']['log']['extra']['benchmark']) {     // Do we need to generate benchmark data ?
             $usage = 'memory_get_usage() function not found on your php configuration.';
             if (function_exists('memory_get_usage') AND ($usage = memory_get_usage()) != '') {
                 $usage = round($usage/1024/1024, 2). ' MB';
@@ -128,19 +134,20 @@ Class Request
     }
 
     /**
-     * Executed when you use annotation filters, use this block @filter->method(["post","delete"]); on your controller index() method.
+     * Executed when you use annotation method filter
      * 
      * @param object $object     allowed method parameter(s) ( get, post, put, delete )
      * @param string $httpMethod valid request method e.g. post
      * 
      * @return void
      */
-    public function onHttpMethod($object, $httpMethod)
+    public function onMethod($object, $httpMethod)
     {
-        $allowedMethods = (array)$object; // $event->fire() method does not allow to send arrays as one parameter thats why we send data as object.
+        $allowedMethods = (array)$object; // $event->fire() method does not allow to send arrays 
+                                          // as one parameter thats why we send params as object.
 
         if ( ! in_array($httpMethod, $allowedMethods)) {
-            $this->c['response']->showError("$httpMethod method not allowed.");
+            $this->c['response']->setHttpResponse(405)->showError("Http ".ucfirst($httpMethod)." method not allowed.");
         }
     }
 
@@ -157,7 +164,8 @@ Class Request
         $event->listen('after.response', 'Event\Request.onAfterResponse');
         $event->listen('before.controller', 'Event\Request.onBeforeController');
         $event->listen('after.controller', 'Event\Request.onAfterController');
-        $event->listen('method.filter', 'Event\Request.onHttpMethod');
+        $event->listen('on.load', 'Event\Request.onLoad');
+        $event->listen('on.method', 'Event\Request.onMethod');
     }
 
 }

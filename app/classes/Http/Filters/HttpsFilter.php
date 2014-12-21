@@ -3,7 +3,7 @@
 namespace Http\Filters;
 
 /**
- * User auth authority filter
+ * Https filter
  *
  * @category  Route
  * @package   Filters
@@ -12,14 +12,14 @@ namespace Http\Filters;
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/router
  */
-Class AuthFilter
+Class HttpsFilter
 {
     /**
-     * User service
+     * Container
      * 
      * @var object
      */
-    protected $user;
+    protected $c;
 
     /**
      * Constructor
@@ -28,7 +28,10 @@ Class AuthFilter
      */
     public function __construct($c)
     {
-        $this->user = $c->load('return service/user');
+        $this->c = $c;
+        $this->uri = $c['uri'];
+        $this->url = $c->load('url');
+        $this->router = $c['router'];
     }
 
     /**
@@ -38,15 +41,13 @@ Class AuthFilter
      */
     public function before()
     {
-        if ($this->user->identity->isAuthenticated()) {
-
-            // Do something
+        if ($this->c['request']->isSecure() == false) {
+            $this->url->redirect('https://'.$this->router->getDomain() . $this->uri->getRequestUri());
         }
     }
-    
 }
 
-// END AuthFilter class
+// END HttpsFilter class
 
-/* End of file AuthFilter.php */
-/* Location: .Http/Filters/AuthFilter.php */
+/* End of file HttpsFilter.php */
+/* Location: .Http/Filters/HttpsFilter.php */

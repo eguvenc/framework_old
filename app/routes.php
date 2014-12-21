@@ -12,24 +12,22 @@
 $c['router']->domain($c['config']['url']['host']);  // Root domain
 $c['router']->defaultPage('welcome');
 
-$c['router']->route(
-    '*', 'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
+$c['router']->get(
+    'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
     function () use ($c) {
         $c->load('view')->load('dummy');
     }
-);
+)->attach('welcome/(.*)', array('activity'));
 
-// $c['router']->attach('(.*)', array('filters' => array('before.maintenance', 'before.auth'))); 
-
+// $c['router']->attach('welcome/([0-9]+)/([a-z]+)', array('activity'));
 
 $c['router']->group(
-    array('name' => 'general', 'domain' => $c['config']->xml()->route->site, 'before.filters' => array('maintenance')),
+    array('name' => 'general', 'domain' => $c['config']->xml()->route->site, 'filters' => array('activity')),
     function ($group) {
         
         $this->defaultPage('welcome');
-        $this->route('*', 'jelly/(.+)', 'widgets/jelly/$1', null, $group);  // Rewrite "jform" uri to widgets/ folders
-        $this->route('get', '(?:en|tr|de|nl)/(.*)', '$1', null, $group);
-        $this->route('get', '(?:en|tr|de|nl)', 'welcome/index',  null, $group);  // default controller
+        $this->get('(?:en|tr|de|nl)/(.*)', '$1', null, $group);
+        $this->get('(?:en|tr|de|nl)', 'welcome/index',  null, $group);  // default controller
 
         // $this->route('get', 'tag/(.+)', 'tag/$1', null, $group);
         // $this->route('get', 'post/detail/([0-9])', 'post/detail/$1', null, $group);
@@ -43,7 +41,7 @@ $c['router']->group(
 );
 
 // $c['router']->group(
-//     array('name' => 'maintenance_test', 'domain' => '^framework$', 'before.filters' => array('maintenance', 'auth')), 
+//     array('name' => 'maintenance_test', 'domain' => '^framework$', 'filters' => array('maintenance', 'auth')), 
 //     function ($group) {
 //         // $this->route('get', 'tutorials/hello_world.*', 'tutorials/hello_scheme', null, $group);
 //         // $this->attach('(.*)', $group); // all url

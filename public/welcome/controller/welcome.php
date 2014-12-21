@@ -10,14 +10,15 @@ Class Welcome extends Controller
     public function load()
     {
         $this->c->load('url');
+        $this->c->load('view');
     }
 
     /**
      * Index
      *
-     * @filter->before("activity")->when("get", "post");
-     * @filter->after("activity");
-     * @filter->method("get");
+     * @f->before("activity")->when("get", "post");
+     * @f->after("activity");
+     * @filter->method("post");
      * 
      * @return void
      */

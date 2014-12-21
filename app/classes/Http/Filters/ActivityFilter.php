@@ -25,19 +25,27 @@ Class ActivityFilter
      * Constructor
      *
      * @param object $c container
-     * 
-     * @return void
      */
     public function __construct($c)
     {
         $this->user = $c->load('return service/user');
+    }
 
+    /**
+     * Before the controller
+     * 
+     * @return void
+     */
+    public function before()
+    {
         $this->user->activity->set('date', time());
         $this->user->activity->update();
+
+        echo 'activity !!';
     }
 }
 
 // END ActivityFilter class
 
 /* End of file ActivityFilter.php */
-/* Location: .Http/Filter/ActivityFilter.php */
+/* Location: .Http/Filters/ActivityFilter.php */

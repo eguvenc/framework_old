@@ -15,6 +15,13 @@ namespace Http\Filters;
 Class GuestFilter
 {
     /**
+     * Container
+     * 
+     * @var object
+     */
+    protected $c;
+
+    /**
      * User service
      * 
      * @var object
@@ -25,22 +32,30 @@ Class GuestFilter
      * Constructor
      *
      * @param object $c container
-     * 
-     * @return void
      */
     public function __construct($c)
     {
+        $this->c = $c;
         $this->user = $c->load('return service/user');
-        
+    }
+
+    /**
+     * Before the controller
+     * 
+     * @return void
+     */
+    public function before()
+    {
         if ($this->user->identity->isGuest()) {
 
-            $c->load('flash/session')->info('Your session has been expired.');
-            $c->load('url')->redirect('/');
+            $this->c->load('flash/session')->info('Your session has been expired.');
+            $this->c->load('url')->redirect('/');
         }
     }
+
 }
 
 // END GuestFilter class
 
 /* End of file GuestFilter.php */
-/* Location: .Http/Filter/GuestFilter.php */
+/* Location: .Http/Filters/GuestFilter.php */

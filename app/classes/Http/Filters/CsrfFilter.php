@@ -15,22 +15,35 @@ namespace Http\Filters;
 Class CsrfFilter
 {
     /**
+     * Csrf
+     * 
+     * @var object
+     */
+    protected $csrf;
+
+    /**
      * Constructor
      *
      * @param object $c container
-     * 
-     * @return void
      */
     public function __construct($c)
     {
-        $csrf = $c->load('security/csrf'); 
+        $this->csrf = $c->load('security/csrf'); 
+    }
 
-        $csrf->init();
-        $csrf->verify(); // Csrf protection check
+    /**
+     * Before the controller
+     * 
+     * @return void
+     */
+    public function before()
+    {
+        $this->csrf->init();
+        $this->csrf->verify(); // Csrf protection check
     }
 }
 
 // END CsrfFilter class
 
 /* End of file CsrfFilter.php */
-/* Location: .Http/Filter/CsrfFilter.php */
+/* Location: .Http/Filters/CsrfFilter.php */

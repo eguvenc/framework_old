@@ -18,48 +18,38 @@ use LogicException,
 Class MaintenanceFilter
 {
     /**
-     * View class
+     * Container
      * 
      * @var object
      */
-    protected $view;
+    protected $c;
 
     /**
-     * SimpleXmlElement domain element
+     * SimpleXmlElement domain
      * 
      * @var object
      */
     protected $domain;
 
     /**
-     * Config class
-     * 
-     * @var object
-     */
-    protected $config;
-
-    /**
-     * Response class
-     * 
-     * @var object
-     */
-    protected $response;
-
-    /**
      * Constructor
      *
      * @param object $c      container
      * @param array  $params config parameters
-     * 
-     * @return void
      */
     public function __construct($c , $params = array())
     {
-        $this->view = $c['view'];
+        $this->c = $c;
         $this->domain = $params['domain'];
-        $this->config = $c['config'];
-        $this->response = $c['response'];
+    }
 
+    /**
+     * Before the controller
+     * 
+     * @return void
+     */
+    public function before()
+    {
         $this->allWebSiteFilter();       // Filter for all hosts
         $this->subdomainRegexFilter();   // Filter for sub domain regex matches
     }
@@ -71,7 +61,7 @@ Class MaintenanceFilter
      */
     protected function allWebSiteFilter()
     {
-        if ($this->config->xml()->route->all->attributes()->maintenance == 'down') {
+        if ($this->c['config']->xml()->route->all->attributes()->maintenance == 'down') {
             $this->show503();
         }
     }
@@ -93,8 +83,8 @@ Class MaintenanceFilter
         }
         $name = $this->domain->getName();  // Get xml route name
         
-        if (isset($this->config->xml()->route->{$name}->attributes()->regex) 
-            AND $this->config->xml()->route->{$name}->attributes()->maintenance == 'down'
+        if (isset($this->c['config']->xml()->route->{$name}->attributes()->regex) 
+            AND $this->c['config']->xml()->route->{$name}->attributes()->maintenance == 'down'
         ) {
             $this->show503();
         }
@@ -107,7 +97,7 @@ Class MaintenanceFilter
      */
     protected function show503()
     {
-        $this->response->setHttpResponse(503)->sendOutput($this->view->template('errors/maintenance'));
+        $this->c['response']->setHttpResponse(503)->sendOutput($this->c['view']->template('errors/maintenance'));
         die;
     }
 
