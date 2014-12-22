@@ -9,11 +9,10 @@
 return array(
     
     'db' => array(
-        'host'     => '10.0.0.161',
-        'username' => 'root',
-        'password' => '123456',
-        'database' => 'betforyousystem',
-        // 'database' => 'test',
+        'host' => 'localhost',
+        'username' => env('MYSQL_USERNAME'),
+        'password' => env('MYSQL_PASSWORD'),
+        'database' => 'test',
         'port'     => '',
         'charset'  => 'utf8',
         'autoinit' => array('charset' => true, 'bufferedQuery' => true),
