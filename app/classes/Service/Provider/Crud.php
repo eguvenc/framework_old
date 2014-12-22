@@ -2,7 +2,7 @@
 
 namespace Service\Provider;
 
-use Obullo\Database\Crud\Crud as OCrud;
+use Obullo\Database\Crud\Query;
 
 /**
  * Crud Database Provider
@@ -25,13 +25,13 @@ Class Crud implements ProviderInterface
      */
     public function register($c)
     {
-        $c['provider:crud'] = function ($key = 'db') use ($c) {
-            return new OCrud($c->load('return service/provider/database', $key));  // Replace database object with crud.
+        $c['provider:crud'] = function ($params = array('db' => 'db')) use ($c) {
+            return new Query($c->load('return service/provider/database', $params['db']));  // Replace database object with crud.
         };
     }
 }
 
-// END Database class
+// END Crud class
 
-/* End of file Database.php */
-/* Location: .classes/Service/Provider/Database.php */
+/* End of file Crud.php */
+/* Location: .classes/Service/Provider/Crud.php */

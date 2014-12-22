@@ -2,7 +2,7 @@
 
 namespace Service\Provider;
 
-use Obullo\Database\Pdo\Mysql;
+use Obullo\Database\Connection;
 
 /**
  * Db Provider
@@ -25,15 +25,10 @@ Class Db implements ProviderInterface
      */
     public function register($c)
     {
-        $c['provider:db'] = $c->alias(
-            'db', 
-            function ($db = 'db') use ($c) {
-                return new Mysql(
-                    $c,
-                    $c['config']['database'][$db]
-                );
-            }
-        );
+        $c['provider:db'] = function ($params = array('db' => 'db', 'provider' => 'mysql')) use ($c) {
+            $connection = new Connection($c, $params);
+            return $connection->connect();
+        };
     }
 }
 

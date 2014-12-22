@@ -9,6 +9,7 @@
 return array(
 
     'send' => array(
+        
         'settings' => array(
             'useragent' => 'Framework Mailer',  //  The "user agent".
             'wordwrap' => true,       // "true" or "false" (boolean) Enable word-wrap.
@@ -22,6 +23,12 @@ return array(
             'newline' =>  "\n",       // "\r\n" or "\n" or "\r"  Newline character. (Use "\r\n" to comply with RFC 822).
             'bccBatchMode' =>  false,   // true or false (boolean) Enable BCC Batch Mode.
             'bccBatchSize' => 200,     // None  Number of emails in each BCC batch.
+        ),
+
+        'from' => array(
+            'name'  => 'Admin',
+            'email' => 'admin@example.com',   // Update your default sender email
+            'address' => 'Admin <admin@example.com>'
         ),
 
         'protocol' => array(

@@ -15,10 +15,6 @@ Class Welcome extends Controller
 
     /**
      * Index
-     *
-     * @f->before("activity")->when("get", "post");
-     * @f->after("activity");
-     * @filter->method("post");
      * 
      * @return void
      */

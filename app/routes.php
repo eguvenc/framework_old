@@ -12,17 +12,17 @@
 $c['router']->domain($c['config']['url']['host']);  // Root domain
 $c['router']->defaultPage('welcome');
 
-$c['router']->get(
-    'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
-    function () use ($c) {
-        $c->load('view')->load('dummy');
-    }
-)->attach('welcome/(.*)', array('activity'));
+// $c['router']->get(
+//     'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
+//     function () use ($c) {
+//         $c->load('view')->load('dummy');
+//     }
+// )->attach('welcome/(.*)', array('activity'));
 
 // $c['router']->attach('welcome/([0-9]+)/([a-z]+)', array('activity'));
 
 $c['router']->group(
-    array('name' => 'general', 'domain' => $c['config']->xml()->route->site, 'filters' => array('activity')),
+    array('name' => 'general', 'domain' => $c['config']->xml()->route->site, 'filters' => array('maintenance')),
     function ($group) {
         
         $this->defaultPage('welcome');

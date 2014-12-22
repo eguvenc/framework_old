@@ -77,7 +77,7 @@ Class MaintenanceFilter
             throw new LogicException(
                 sprintf(
                     'Correct your routes.php domain value it must be like this <pre>%s</pre>', 
-                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\']->xml()->route->$key->attributes()->$item, .., function () { .. }),.'
+                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\']->xml()->route->$item, .., function () { .. }),.'
                 )
             );
         }

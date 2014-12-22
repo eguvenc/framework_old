@@ -2,10 +2,10 @@
 
 namespace Service;
 
-use Obullo\Mail\Queue;
+use Obullo\Mail\Connection;
 
 /**
- * Mailer Service
+ * Mailer Provider
  *
  * @category  Service
  * @package   Mail
@@ -27,9 +27,9 @@ Class Mailer implements ServiceInterface
      */
     public function register($c)
     {
-        $c['mailer'] = function () use ($c) {
-            $mailer = new Queue($c, $c['config']['mail']);
-            $mailer->from($c['config']['mail']['send']['from']['address']);
+        $c['provider:mailer'] = function ($params = array('provider' => 'Mandrill', 'from' => '')) use ($c) {
+            $mailer = new Connection($c, $params);
+            $mailer->from($params['from']);
             return $mailer;
         };
     }
