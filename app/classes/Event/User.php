@@ -46,7 +46,6 @@ Class User
     {
         if ( ! $authResult->isValid()) {
 
-            echo 'ok !';
             // Rate limiter class
             // $authResult->setCode(-9);
             // $authResult->setMessage('Your IP is banned !');

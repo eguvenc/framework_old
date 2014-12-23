@@ -10,7 +10,7 @@ return array(
 
     'mongo' => array(
         'db' => array(
-            'host' => 'localhost',
+            'host' => env('MONGO_HOST'),
             'username' => env('MONGO_USERNAME'),
             'password' => env('MONGO_PASSWORD'),
             'port' => '27017',

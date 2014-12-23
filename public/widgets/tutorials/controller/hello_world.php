@@ -14,8 +14,6 @@ Class Hello_World extends Controller
 
     /**
      * Index
-     *
-     * @before.filter("auth")
      * 
      * @return void
      */

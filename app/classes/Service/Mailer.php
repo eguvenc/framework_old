@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Obullo\Mail\Queue;
+use Obullo\Mail\Transport\Queue;
 
 /**
  * Mailer Service

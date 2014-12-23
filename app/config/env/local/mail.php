@@ -8,6 +8,20 @@
 */
 return array(
 
+    'default' => array(
+        'provider' => 'mandrill',    // Choose provider ( mandrill, mailgun, smtp, mail, sendmail )
+    ),
+
+    'handlers' => array(
+        'queue' => '\\Obullo\Mail\Transport\Queue',
+        'mail' => '\\Obullo\Mail\Send\Protocol\Mail',
+        'sendmail' => '\\Obullo\Mail\Send\Protocol\Sendmail',
+        'smtp' => '\\Obullo\Mail\Send\Protocol\Smtp',
+        'mandrill' => '\\Obullo\Mail\Transport\Mandrill',
+        'mailgun' => '\\Obullo\Mail\Transport\Mailgun',
+        'yourmailer' => '\\Mail\Transport\YourMailer'     // You can create your own mailer using Mail/Transport/TransportInterface.php
+    ),
+
     'send' => array(
         
         'settings' => array(
@@ -59,9 +73,9 @@ return array(
         
         'queue' => array(
             'mailer' => 'mandrill',             // Default mailer   // mandrill, mailgun, smtp, sendmail, mail ..
-            'channel' => 'Mail',                // QueueMailer channel name
-            'route' => gethostname().'.Mailer', // QueueMailer route name
-            'worker' => 'Workers\Mailer',
+            'channel' => 'Mail',                // Queue Mailer channel name
+            'route' => gethostname().'.Mailer', // Queue Mailer route name
+            'worker' => 'Workers\Mailer',       // Queue Worker Class
         )
 
     ),

@@ -112,15 +112,15 @@ return array(
     */
     'controller' => array(
         'annotation' => array(
-            'reader' => true,     // Enable or Disable "annotation reader" which is able to parse filters on controller.
+            'reader' => false,     // Enable or Disable "annotation reader" which is able to parse filters on controller.
         )
     ),
     /*
     |--------------------------------------------------------------------------
     | Include Environment Files
     |--------------------------------------------------------------------------
-    | This feature allows to us load configuration files without using
-    | $this->config->load() method.
+    | This feature allows to access configuration parts without using $this->config->load() method
+    | and each file is loaded from its environment folder.
     |
     */
     'database' => config('database.php'), // Databases
@@ -159,12 +159,12 @@ return array(
     |--------------------------------------------------------------------------
     */
     'cookie' => array( 
-        'domain' => '',                // Set to .your-domain.com for site-wide cookies
-        'path'   => '',                // Typically will be a forward slash
-        'secure' => false,             // Cookies will only be set if a secure HTTPS connection exists.
-        'httpOnly' => false,           // When true the cookie will be made accessible only through the HTTP protocol
-        'expire' => 604800,            // 1 week - Cookie expire time.
-        'prefix' => '',                // Set a prefix if you need to avoid collisions
+        'domain' => '',         // Set to .your-domain.com for site-wide cookies
+        'path'   => '',         // Typically will be a forward slash
+        'secure' => false,       // Cookies will only be set if a secure HTTPS connection exists.
+        'httpOnly' => false,  // When true the cookie will be made accessible only through the HTTP protocol
+        'expire' => 604800,                     // 1 week - Cookie expire time.
+        'prefix' => '',                         // Set a prefix if you need to avoid collisions
     ),
     /*
     |--------------------------------------------------------------------------

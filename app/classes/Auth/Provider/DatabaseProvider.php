@@ -5,7 +5,8 @@ namespace Auth\Provider;
 use Obullo\Auth\Adapter\AssociativeArray,
     Obullo\Auth\DatabaseProviderInterface,
     Auth\Identities\GenericIdentity,
-    Auth\Identities\UserIdentity;
+    Auth\Identities\UserIdentity,
+    Auth\Credentials;
 
 /**
  * O2 Auth - User Database Provider
@@ -39,22 +40,17 @@ Class DatabaseProvider implements DatabaseProviderInterface
     const TABLE = 'users';
 
     /**
-     * Db identifier column name
-     */
-    const IDENTIFIER = 'username';
-
-    /**
      * RememberMe token column name
      */
     const REMEMBER_TOKEN = 'remember_token';
 
     /**
-     * Sql expression
+     * Sql expression for login attempt
      */
     const SQL_USER = 'SELECT * FROM %s WHERE BINARY %s = ?';
 
     /**
-     * Sql expression of recalled user
+     * Sql expression of recalled user for remember me feature
      */
     const SQL_RECALLED_USER = 'SELECT * FROM %s WHERE %s = ?';
 
@@ -85,7 +81,7 @@ Class DatabaseProvider implements DatabaseProviderInterface
      */
     public function execQuery(GenericIdentity $user)
     {
-        $this->db->prepare(static::SQL_USER, array(static::TABLE, static::IDENTIFIER));
+        $this->db->prepare(static::SQL_USER, array(static::TABLE, Credentials::IDENTIFIER));
         $this->db->bindValue(1, $user->getIdentifier(), PARAM_STR);
         $this->db->execute();
 
@@ -118,7 +114,7 @@ Class DatabaseProvider implements DatabaseProviderInterface
      */
     public function refreshRememberMeToken($token, GenericIdentity $user)
     {
-        $this->db->prepare(static::SQL_UPDATE_REMEMBER_TOKEN, array(static::TABLE, static::REMEMBER_TOKEN, static::IDENTIFIER));
+        $this->db->prepare(static::SQL_UPDATE_REMEMBER_TOKEN, array(static::TABLE, static::REMEMBER_TOKEN, Credentials::IDENTIFIER));
         $this->db->bindValue(1, $token, PARAM_STR);
         $this->db->bindValue(2, $user->getIdentifier(), PARAM_STR);
         $this->db->execute();

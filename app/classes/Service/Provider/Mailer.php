@@ -27,10 +27,9 @@ Class Mailer implements ServiceInterface
      */
     public function register($c)
     {
-        $c['provider:mailer'] = function ($params = array('provider' => 'Mandrill', 'from' => '')) use ($c) {
-            $mailer = new Connection($c, $params);
-            $mailer->from($params['from']);
-            return $mailer;
+        $c['provider:mailer'] = function ($params = array('provider' => 'mandrill', 'from' => '')) use ($c) {
+            $connection = new Connection($c, $params);
+            return $connection->connect();
         };
     }
 }

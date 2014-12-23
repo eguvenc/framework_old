@@ -4,7 +4,6 @@ namespace Workers;
 
 use Obullo\Queue\Job,
     Obullo\Queue\JobInterface,
-    Obullo\Mail\Send\Smtp,
     Obullo\Mail\Transport\Mandrill;
 
  /**

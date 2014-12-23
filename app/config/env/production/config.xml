@@ -15,7 +15,6 @@
 		<service>
 			<logger class="Log/Env/Production" cli="Log/Env/Cli" />
 		</service>
-		<provider></provider>
 	</env>
 </root>
 <!--
