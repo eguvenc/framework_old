@@ -8,7 +8,12 @@
 */
 return array(
 
+    'default' => array(
+        'provider' => 'redis'
+    ),
+
    'redis' => array(
+
        'servers' => array(
                         array(
                           'hostname' => env('REDIS_HOST'),

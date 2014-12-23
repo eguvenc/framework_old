@@ -26,7 +26,7 @@ Class Crud implements ProviderInterface
     public function register($c)
     {
         $c['provider:crud'] = function ($params = array('db' => 'db')) use ($c) {
-            return new Query($c->load('return service/provider/database', $params['db']));  // Replace database object with crud.
+            return new Query($c->load('return new service/provider/db', $params));  // Replace database object with crud.
         };
     }
 }

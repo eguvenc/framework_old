@@ -25,9 +25,8 @@ Class Mongo implements ProviderInterface
      */
     public function register($c)
     {
-        $c['provider:mongo'] = function ($db = 'db') use ($c) {
-            $config = $c['config']['nosql']['mongo'][$db];
-            $mongo  = new Connection('mongodb://'.$config['username'].':'.$config['password'].'@'.$config['host'].':'.$config['port'].'/'.$db);
+        $c['provider:mongo'] = function ($params = array('db' => 'db')) use ($c) {
+            $mongo  = new Connection($c, $params);
             return $mongo->connect();
         };
     }

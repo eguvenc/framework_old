@@ -83,7 +83,7 @@ $c['post'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['view'] = function () use ($c) {
-    return new Obullo\View\View($c, $c['config']['view']['layouts']);
+    return new Obullo\View\View($c, $c['config']->load('view')['layouts']);
 };
 /*
 |--------------------------------------------------------------------------
@@ -107,7 +107,7 @@ $c['uri'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['router'] = function () use ($c) { 
-    return new Obullo\Router\Router($c, $c['config']['router']);
+    return new Obullo\Router\Router($c);
 };
 
 

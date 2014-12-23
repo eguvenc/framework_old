@@ -2,7 +2,7 @@
 
 namespace Service\Provider;
 
-use Obullo\Cache\Handler\Redis;
+use Obullo\Cache\Connection;
 
 /**
  * Cache Provider
@@ -25,11 +25,9 @@ Class Cache implements ProviderInterface
      */
     public function register($c)
     {
-        $c['provider:cache'] = function ($params = array('serializer' => 'SERIALIZER_NONE')) use ($c) {
-            return new Redis(
-                $c,
-                $params['serializer']
-            );
+        $c['provider:cache'] = function ($params = array('serializer' => 'SERIALIZER_NONE', 'provider' => 'redis')) use ($c) {
+            $connection = new Connection($c, $params);
+            return $connection->connect();
         };
     }
 }
