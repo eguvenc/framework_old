@@ -12,6 +12,15 @@ return array(
         'provider' => 'redis'
     ),
 
+    'handlers' => array(
+        'redis' => '\\Obullo\Cache\Handler\Redis',
+        'memcache' => '\\Obullo\Cache\Handler\Memcache',
+        'memcached' => '\\Obullo\Cache\Handler\Memcached',
+        'apc' => '\\Obullo\Cache\Handler\Apc',
+        'file' => '\\Obullo\Cache\Handler\File',
+        'yourhandler' => '\\Obullo\Cache\Handler\YourHandler',  // You can create your own handler using Cache/Handler/HandlerInterface.php
+    ),
+
    'redis' => array(
 
        'servers' => array(

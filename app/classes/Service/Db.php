@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Obullo\Database\Pdo\Mysql;
+use Obullo\Database\Pdo\Handler\Mysql;
 
 /**
  * Db Service

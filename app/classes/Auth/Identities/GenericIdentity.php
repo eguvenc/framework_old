@@ -76,7 +76,6 @@ Class GenericIdentity implements IdentityInterface
         return isset($this->attributes['__rememberToken']) ? $this->attributes['__rememberToken'] : false;
     }
     
-
     /**
      * Get all attributes
      * 

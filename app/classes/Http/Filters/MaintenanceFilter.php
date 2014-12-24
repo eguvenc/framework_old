@@ -61,7 +61,7 @@ Class MaintenanceFilter
      */
     protected function allWebSiteFilter()
     {
-        if ($this->c['config']->xml()->route->all->attributes()->maintenance == 'down') {
+        if ($this->c['config']->env['web']['route']['all']['maintenance'] == 'down') {
             $this->show503();
         }
     }
@@ -73,18 +73,16 @@ Class MaintenanceFilter
      */
     protected function subdomainRegexFilter()
     {
-        if ( ! $this->domain instanceof SimpleXmlElement) {
+        if ( ! is_array($this->domain) AND ! isset($this->domain['regex'])) {
             throw new LogicException(
                 sprintf(
                     'Correct your routes.php domain value it must be like this <pre>%s</pre>', 
-                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\']->xml()->route->$item, .., function () { .. }),.'
+                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\']->env[\'web\'][\'route\'][\'key\'], .., function () { .. }),.'
                 )
             );
         }
-        $name = $this->domain->getName();  // Get xml route name
-        
-        if (isset($this->c['config']->xml()->route->{$name}->attributes()->regex) 
-            AND $this->c['config']->xml()->route->{$name}->attributes()->maintenance == 'down'
+        if (isset($this->domain['maintenance']) 
+            AND $this->domain['maintenance'] == 'down'
         ) {
             $this->show503();
         }

@@ -28,6 +28,7 @@ Class Login extends Controller
         // $this->user->login->authenticateVerifiedIdentity();
         
         var_dump($this->user->identity->isGuest());
+        var_dump($this->user->identity->isAuthenticated());
 
         if ($this->post['dopost']) {
 
@@ -38,7 +39,7 @@ Class Login extends Controller
 
             if ($this->validator->isValid()) {
 
-                $this->user->login->enableVerification();
+                // $this->user->login->enableVerification();
 
                 $result = $this->user->login->attempt(
                     array(

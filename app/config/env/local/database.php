@@ -12,12 +12,18 @@ return array(
         'provider' => 'mysql',
     ),
 
+    'handlers' => array(
+        'mysql' => '\\Obullo\Database\Pdo\Handler\Mysql',
+        'pgsql' => '\\Obullo\Database\Pdo\Handler\Pgsql',
+        'yourhandler' => '\\Obullo\Database\Pdo\Handler\YourHandler',  // You can create your own handler using Cache/Handler/HandlerInterface.php
+    ),
+
     'key' => array(
 
         'db' => array(
             'host' => 'localhost',
             'username' => env('MYSQL_USERNAME'),
-            'password' => env('MYSQL_PASSWORD'),
+            'password' => env('MYSQL_PASSWORD', '', false),
             'database' => 'test',
             'port'     => '',
             'charset'  => 'utf8',
@@ -31,7 +37,7 @@ return array(
         'failed_jobs' => array(
             'host' => 'localhost',
             'username' => env('MYSQL_USERNAME'),
-            'password' => env('MYSQL_PASSWORD'),
+            'password' => env('MYSQL_PASSWORD', '', false),
             'database' => 'failed_jobs',
             'port'     => '',
             'charset'  => 'utf8',

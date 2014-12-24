@@ -26,7 +26,7 @@ Class Queue implements ServiceInterface
     public function register($c)
     {
         $c['queue'] = function () use ($c) {
-            return new AMQP($c, $c['config']['queue']);
+            return new AMQP($c, $c['config']->load('queue'));
         };
     }
 }

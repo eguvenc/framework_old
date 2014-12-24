@@ -11,7 +11,7 @@
 |--------------------------------------------------------------------------
 */
 $c['session'] = function () use ($c) {
-    return new Obullo\Session\Session($c, $c['config']['session']);
+    return new Obullo\Session\Session($c, $c['config']->load('session'));
 };
 /*
 |--------------------------------------------------------------------------

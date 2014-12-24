@@ -11,6 +11,10 @@ Class Welcome extends Controller
     {
         $this->c->load('url');
         $this->c->load('view');
+
+        $this->c->load('service/cache');
+        $this->c->load('return service/provider/cache', array('serializer' => 'SERIALIZER_NONE'));
+
     }
 
     /**
@@ -72,7 +76,7 @@ Class Welcome extends Controller
             )
         );
 
-        print_r(array_merge($array['log'], $array2['log']));
+       //  print_r(array_merge($array['log'], $array2['log']));
 
         $this->view->load(
             'welcome',

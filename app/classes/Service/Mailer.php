@@ -28,7 +28,7 @@ Class Mailer implements ServiceInterface
     public function register($c)
     {
         $c['mailer'] = function () use ($c) {
-            $mailer = new Queue($c, $c['config']['mail']);
+            $mailer = new Queue($c, $c['config']->load('mail'));
             $mailer->from($c['config']['mail']['send']['from']['address']);
             return $mailer;
         };
