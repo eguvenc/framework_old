@@ -13,6 +13,7 @@ Class Dummy extends Controller
     public function load()
     {
         $this->c->load('view');
+        $this->c->load('layer');
     }
 
     /**

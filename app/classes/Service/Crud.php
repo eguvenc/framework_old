@@ -26,22 +26,8 @@ Class Crud implements ServiceInterface
      */
     public function register($c)
     {
-        $c['crud'] = function ($params = array('db' => 'db')) use ($c) {
-
-            return new Query(
-                $c,
-                new Mysql(
-                    $c,
-                    array(
-                        'host'     => $c['config']['database'][$params['db']]['host'],
-                        'username' => $c['config']['database'][$params['db']]['username'],
-                        'password' => $c['config']['database'][$params['db']]['password'],
-                        'database' => $c['config']['database'][$params['db']]['database'],
-                        'port'     => $c['config']['database'][$params['db']]['port'],
-                        'charset'  => $c['config']['database'][$params['db']]['charset'],
-                    )
-                )
-            );
+        $c['crud'] = function ($database) use ($c) {
+            return new Query($c, $database);
         };
     }
 }

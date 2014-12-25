@@ -1,11 +1,10 @@
 <?php
 
-namespace Log\Env;
+namespace Service\Log\Env;
 
-use Log\Constants,
-    Service\ServiceInterface,
+use Service\ServiceInterface,
     Obullo\Log\LogService;
-    
+
 /**
  * Log Service
  *
@@ -16,7 +15,7 @@ use Log\Constants,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Local implements ServiceInterface
+Class Cli implements ServiceInterface
 {
     /**
      * Registry
@@ -47,7 +46,7 @@ Class Local implements ServiceInterface
             $service->logger->registerHandler(3, 'email')->filter('priority.notIn', array(LOG_DEBUG));
             /*
             |--------------------------------------------------------------------------
-            | Add Writers - Primary file writer should be available on local server
+            | Add Writer - Primary file writer should be available on local server
             |--------------------------------------------------------------------------
             */
             $service->logger->addWriter('file')->filter('priority.notIn', array(LOG_INFO));
@@ -57,7 +56,7 @@ Class Local implements ServiceInterface
     }
 }
 
-// END Local class
+// END Cli class
 
-/* End of file Local.php */
-/* Location: .classes/Log/Env/Local.php */
+/* End of file Cli.php */
+/* Location: .classes/Service/Log/Env/Cli.php */

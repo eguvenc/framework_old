@@ -22,7 +22,7 @@ $c['router']->defaultPage('welcome');
 // $c['router']->attach('welcome/([0-9]+)/([a-z]+)', array('activity'));
 
 $c['router']->group(
-    array('name' => 'general', 'domain' => $c['config']->env['web']['route']['site'], 'filters' => array('maintenance')),
+    array('name' => 'general', 'domain' => $c['config']->env['web']['route']['site']),
     function ($group) {
         
         $this->defaultPage('welcome');

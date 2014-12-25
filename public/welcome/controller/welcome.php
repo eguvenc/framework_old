@@ -12,9 +12,7 @@ Class Welcome extends Controller
         $this->c->load('url');
         $this->c->load('view');
 
-        $this->c->load('service/cache');
-        $this->c->load('return service/provider/cache', array('serializer' => 'SERIALIZER_NONE'));
-
+        $this->c->load('service/provider/mongo', array('db' => 'db'));
     }
 
     /**
