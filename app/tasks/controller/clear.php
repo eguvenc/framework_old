@@ -1,13 +1,13 @@
 <?php
 
-defined('STDIN') or die('Access Denied');
+namespace Tasks;
 
 use Obullo\Cli\Controller\ClearController;
 
 /**
  * Clear command
  */
-Class Clear extends Controller
+Class Clear extends \Controller
 {
     /**
      * Index

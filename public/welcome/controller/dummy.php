@@ -1,9 +1,11 @@
 <?php
 
+namespace Welcome;
+
 /**
  * Dummy controller for layers tutorial
  */
-Class Dummy extends Controller
+Class Dummy extends \Controller
 {
     /**
      * Loader

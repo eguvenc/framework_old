@@ -1,6 +1,11 @@
 <?php
 
-Class Hello_Layout extends Controller
+namespace Widgets\Tutorials;
+
+/**
+ * Hello Layout
+ */
+Class Hello_Layout extends \Controller
 {
     /**
      * Loader

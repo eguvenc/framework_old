@@ -1,13 +1,13 @@
 <?php
 
-defined('STDIN') or die('Access Denied');
+namespace Tasks;
 
 use Obullo\Cli\Controller\Service as ServiceController;
 
 /**
  * Service controller
  */
-Class Service extends Controller
+Class Service extends \Controller
 {
     /**
      * Index

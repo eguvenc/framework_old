@@ -1,13 +1,13 @@
 <?php
 
-defined('STDIN') or die('Access Denied');
+namespace Tasks;
 
 use Obullo\Cli\Controller\HelpController;
 
 /**
  * Help controller
  */
-Class Help extends Controller
+Class Help extends \Controller
 {
     /**
      * Index

@@ -1,6 +1,11 @@
 <?php
 
-Class Hello_Test extends Controller
+namespace Widgets\Tutorials;
+
+/**
+ * Hello Test
+ */
+Class Hello_Test extends \Controller
 {
     /**
      * Loader

@@ -1,6 +1,11 @@
 <?php
 
-Class Hello_Layers extends Controller
+namespace Widgets\Tutorials;
+
+/**
+ * Hello Layers
+ */
+Class Hello_Layers extends \Controller
 {
     /**
      * Loader

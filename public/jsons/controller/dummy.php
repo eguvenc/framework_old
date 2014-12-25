@@ -1,6 +1,11 @@
 <?php
 
-Class Dummy_Json extends Controller
+namespace Jsons;
+
+/**
+ * Dummy controller
+ */
+Class Dummy extends Controller
 {
     /**
      * Loader

@@ -1,6 +1,11 @@
 <?php
 
-Class Hello_World extends Controller
+namespace Widgets\Tutorials;
+
+/**
+ * Widgets
+ */
+Class Hello_World extends \Controller
 {
     /**
      * Loader
@@ -30,4 +35,4 @@ Class Hello_World extends Controller
 }
 
 /* End of file hello_world.php */
-/* Location: .public/tutorials/controller/hello_world.php */
+/* Location: .public/widgets/tutorials/controller/hello_world.php */

@@ -1,11 +1,11 @@
 <?php
 
-defined('STDIN') or die('Access Denied');
+namespace Tasks;
 
 /**
  * Queue controller
  */
-Class Queue extends Controller
+Class Queue extends \Controller
 {
     /**
      * Index

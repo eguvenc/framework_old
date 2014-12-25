@@ -1,6 +1,11 @@
 <?php
 
-Class Hello_Captcha extends Controller
+namespace Widgets\Tutorials;
+
+/**
+ * Hello Captcha
+ */
+Class Hello_Captcha extends \Controller
 {
     /**
      * Loader

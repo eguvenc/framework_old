@@ -1,6 +1,11 @@
 <?php
 
-Class Hello_Form extends Controller
+namespace Widgets\Tutorials;
+
+/**
+ * Hello Form
+ */
+Class Hello_Form extends \Controller
 {
     /**
      * Loader

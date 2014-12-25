@@ -1,6 +1,11 @@
 <?php
 
-Class Hello_Task extends Controller
+namespace Widgets\Tutorials;
+
+/**
+ * Hello Task
+ */
+Class Hello_Task extends \Controller
 {
     /**
      * Loader

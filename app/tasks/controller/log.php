@@ -1,13 +1,13 @@
 <?php
 
-defined('STDIN') or die('Access Denied');
+namespace Tasks;
 
 use Obullo\Cli\Controller\LogController;
 
 /**
  * Log command
  */
-Class Log extends Controller
+Class Log extends \Controller
 {
     /**
      * Index

@@ -1,6 +1,11 @@
 <?php
 
-Class Header extends Controller
+namespace Views;
+
+/**
+ * Header
+ */
+Class Header extends \Controller
 {
     /**
      * Loader

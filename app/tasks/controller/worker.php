@@ -1,11 +1,11 @@
 <?php
 
-defined('STDIN') or die('Access Denied');
+namespace Tasks;
 
 /**
  * Worker controller
  */
-Class Worker extends Controller
+Class Worker extends \Controller
 {
     /**
      * Loader

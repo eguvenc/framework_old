@@ -1,6 +1,11 @@
 <?php
 
-Class Logout extends Controller
+namespace Examples;
+
+/**
+ * Logout
+ */
+Class Logout extends \Controller
 {
     /**
      * Loader

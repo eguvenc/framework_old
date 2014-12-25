@@ -1,6 +1,11 @@
 <?php
 
-Class Hello_Ajax extends Controller
+namespace Widgets\Tutorials;
+
+/**
+ * Hello Ajax
+ */
+Class Hello_Ajax extends \Controller
 {
     /**
      * Loader

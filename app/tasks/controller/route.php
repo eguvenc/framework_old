@@ -1,13 +1,13 @@
 <?php
 
-defined('STDIN') or die('Access Denied');
+namespace Tasks;
 
 use Obullo\Cli\Controller\RouteController;
 
 /**
  * Route controller
  */
-Class Route extends Controller
+Class Route extends \Controller
 {
     /**
      * Index

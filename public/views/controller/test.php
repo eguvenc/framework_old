@@ -1,6 +1,11 @@
 <?php
 
-Class Test extends Controller
+namespace Views;
+
+/**
+ * Test
+ */
+Class Test extends \Controller
 {
     /**
      * Loader

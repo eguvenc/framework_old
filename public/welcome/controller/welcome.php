@@ -1,6 +1,11 @@
 <?php
 
-Class Welcome extends Controller
+namespace Welcome;
+
+/**
+ * Welcome\Welcome
+ */
+Class Welcome extends \Controller
 {
     /**
      * Loader
@@ -12,7 +17,10 @@ Class Welcome extends Controller
         $this->c->load('url');
         $this->c->load('view');
 
-        $this->c->load('service/provider/mongo', array('db' => 'db'));
+        $this->config->env['web']['route']['all']['maintenance'] = 'up';
+        $this->config->write();
+
+        var_dump($this->config->env);
     }
 
     /**
