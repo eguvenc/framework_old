@@ -2,7 +2,7 @@
 
 namespace Tasks;
 
-use Obullo\Cli\Controller\Service as ServiceController;
+use Obullo\Cli\Controller\ServiceController;
 
 /**
  * Service controller

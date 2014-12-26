@@ -2,21 +2,13 @@
 
 namespace Tasks;
 
+use Obullo\Cli\Controller\WorkerController;
+
 /**
  * Worker controller
  */
 Class Worker extends \Controller
 {
-    /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c->load('queue/worker as worker');
-    }
-
     /**
      * Index
      * 
@@ -24,8 +16,8 @@ Class Worker extends \Controller
      */
     public function index()
     {
-        $this->worker->init(func_get_args());
-        $this->worker->pop();
+        $worker = new WorkerController($this->c, func_get_args());
+        $worker->run();
     }
 }
 

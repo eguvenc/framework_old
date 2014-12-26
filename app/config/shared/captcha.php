@@ -1,13 +1,5 @@
 <?php
 
-/*
-| -------------------------------------------------------------------
-| Captcha Package Configuration
-| -------------------------------------------------------------------
-| This file specifies captcha package default settings: colors,
-| driver, expiration, image height, image font, image wave and so on.
-|
-*/
 return array(
 
     'charset' => 'UTF-8',

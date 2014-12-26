@@ -2,8 +2,7 @@
 
 namespace Http\Filters;
 
-use LogicException,
-    SimpleXmlElement;
+use LogicException;
 
 /**
  * Maintenance filter
@@ -61,7 +60,7 @@ Class MaintenanceFilter
      */
     protected function allWebSiteFilter()
     {
-        if ($this->c['config']->env['web']['route']['all']['maintenance'] == 'down') {
+        if ($this->c['config']->env['web']['app']['all']['maintenance'] == 'down') {
             $this->show503();
         }
     }
@@ -77,7 +76,7 @@ Class MaintenanceFilter
             throw new LogicException(
                 sprintf(
                     'Correct your routes.php domain value it must be like this <pre>%s</pre>', 
-                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\']->env[\'web\'][\'route\'][\'key\'], .., function () { .. }),.'
+                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\']->env[\'web\'][\'app\'][\'key\'], .., function () { .. }),.'
                 )
             );
         }

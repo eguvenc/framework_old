@@ -2,6 +2,8 @@
 
 namespace Tasks;
 
+use Obullo\Cli\Controller\QueueController;
+
 /**
  * Queue controller
  */
@@ -14,7 +16,8 @@ Class Queue extends \Controller
      */
     public function index()
     {
-        $this->c->load('queue/listener', func_get_args());
+        $queue = new QueueController($this->c, func_get_args());
+        $queue->run();
     }
 }
 

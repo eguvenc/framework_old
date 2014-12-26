@@ -1,12 +1,7 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| Auth
-|--------------------------------------------------------------------------
-| Configuration file
-|
-*/
+
 return array(
+
     'adapter' => 'AssociativeArray',
     'memory' => array(          // Keeps user identity data in your cache driver.
         'key' => 'Auth',        // Auth key should be replace with your projectameAuth

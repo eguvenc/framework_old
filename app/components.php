@@ -19,7 +19,7 @@ $c['session'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['form'] = function () use ($c) {
-    return new Obullo\Form\Form($c, $c['config']->load('form'));
+    return new Obullo\Form\Form($c, $c['config']->load('shared/form'));
 };
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +43,7 @@ $c['exception'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['translator'] = function () use ($c) { 
-    return new Obullo\Translation\Translator($c, $c['config']->load('translator'));
+    return new Obullo\Translation\Translator($c, $c['config']->load('shared/translator'));
 };
 /*
 |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ $c['post'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['view'] = function () use ($c) {
-    return new Obullo\View\View($c, $c['config']->load('view')['layouts']);
+    return new Obullo\View\View($c, $c['config']->load('shared/view')['layouts']);
 };
 /*
 |--------------------------------------------------------------------------

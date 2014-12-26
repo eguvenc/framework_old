@@ -1,12 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Translator Config
-|--------------------------------------------------------------------------
-| Configure set translator package options.
-|
-*/
 return array(
 
     'notice' => false,     // Puts 'translate:' texts everywhere it is help to you for multilingual development.

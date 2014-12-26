@@ -28,7 +28,7 @@ return array(
             ),
         ),
 
-        'failed_jobs' => array(
+        'failed' => array(
             'host' => 'localhost',
             'username' => env('MYSQL_USERNAME'),
             'password' => env('MYSQL_PASSWORD', '', false),

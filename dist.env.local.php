@@ -23,7 +23,7 @@ return array(
     'AMQP_PASSWORD' => '',
 
     'COOKIE_NAME' => '',
-    'COOKIE_DOMAIN' => '',
+    'COOKIE_DOMAIN' => '/',
     'COOKIE_PATH' => '',
     'COOKIE_SECURE' => false,
     'COOKIE_HTTP_ONLY' => false,

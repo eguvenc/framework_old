@@ -75,7 +75,7 @@ Class Logger implements JobInterface
             case 'mongo':
                 $handler = new JobHandlerMongo(
                     $this->c,
-                    $this->c->load('service/provider/mongo', 'db'),
+                    $this->c->load('service/provider/mongo', array('db' => 'db')),
                     array(
                         'database' => 'db',
                         'collection' => 'logs',

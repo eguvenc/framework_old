@@ -30,22 +30,11 @@ return array(
     | Log
     |--------------------------------------------------------------------------
     | @see Syslog Protocol http://tools.ietf.org/html/rfc5424
-    |
-    | Constants:
-    |
-    | 0  LOG_EMERG: System is unusable
-    | 1  LOG_ALERT: Action must be taken immediately
-    | 2  LOG_CRIT: Critical conditions
-    | 3  LOG_ERR: Error conditions
-    | 4  LOG_WARNING: Warning conditions
-    | 5  LOG_NOTICE: Normal but significant condition
-    | 6  LOG_INFO: Informational messages
-    | 7  LOG_DEBUG: Debug-level messages
     */
     'log' =>   array(
         'control' => array(
-            'enabled' => true,
-            'output'  => false,
+            'enabled' => true,   // Enable / Disable logging
+            'output'  => false,  // Debug log data as html output
         ),
         'default' => array(
             'channel' => 'system',       // Default channel name should be general.
@@ -71,7 +60,7 @@ return array(
             'worker' => 'Workers\Logger',
             'delay' => 0,
             'workers' => array(
-                'logging' => false     // On / Off Queue workers logging functionality.
+                'logging' => false     // On / Off Queue workers logging functionality. See the Queue package docs.
             ), 
         )
     ),

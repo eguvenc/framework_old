@@ -1,14 +1,16 @@
 <?php
 
-/*
-|-------------------------------------------------------------------
-| MIME TYPES
-|-------------------------------------------------------------------
-| This file contains an array of mime types.  It is used by the
-| Upload class to help identify allowed file types. 
-|
-*/
-return array( 
+return array(
+
+    /*
+    |-------------------------------------------------------------------
+    | MIME TYPES
+    |-------------------------------------------------------------------
+    | This file contains an array of mime types.  It is used by the
+    | Upload class to help identify allowed file types. 
+    |
+    */
+    
     'hqx'   =>  'application/mac-binhex40',
     'cpt'   =>  'application/mac-compactpro',
     'csv'   =>  array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel'),

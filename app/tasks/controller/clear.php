@@ -16,7 +16,7 @@ Class Clear extends \Controller
      */
     public function index()
     {
-        $clear = new ClearController($this->c);
+        $clear = new ClearController($this->c, func_get_args());
         $clear->run();
     }
 }
