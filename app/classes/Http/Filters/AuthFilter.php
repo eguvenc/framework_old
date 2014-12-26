@@ -38,7 +38,7 @@ Class AuthFilter
      */
     public function before()
     {
-        if ($this->user->identity->isAuthenticated()) {
+        if ($this->user->identity->check()) {
 
             // Do something
         }

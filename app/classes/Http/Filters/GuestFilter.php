@@ -46,7 +46,7 @@ Class GuestFilter
      */
     public function before()
     {
-        if ($this->user->identity->isGuest()) {
+        if ($this->user->identity->guest()) {
 
             $this->c->load('flash/session')->info('Your session has been expired.');
             $this->c->load('url')->redirect('/');
