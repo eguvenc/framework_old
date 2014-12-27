@@ -1,15 +1,15 @@
 <?php
 /*
 |-------------------------------------------------------------------
-| APPLICATION CONSTANTS
+| CONSTANTS
 |-------------------------------------------------------------------
 | This file specifies which APP constants should be loaded 
 | by default.
 */
-define('FRAMEWORK_PACKAGE_VERSION', 'o2');
+define('PACKAGE_VERSION', 'o2');
 /*
 |---------------------------------------------------------------
-| UNDERSTANDING ESSENTIAL CONSTANTS
+| ESSENTIAL CONSTANTS
 |---------------------------------------------------------------
 | DS          - The DIRECTORY SEPERATOR
 | SELF        - The name of THIS file (typically "index.php")
@@ -24,7 +24,7 @@ define('PHP_PATH', '/usr/bin/php');
 define('FPATH', dirname(__FILE__));
 /*
 |---------------------------------------------------------------
-| UNDERSTANDING APP CONSTANTS
+| APP CONSTANTS
 |---------------------------------------------------------------
 | ROOT        		- The root path of your server
 | ASSETS      		- The full server path to the "assets" folder
@@ -32,11 +32,8 @@ define('FPATH', dirname(__FILE__));
 | DATA        		- The full server path to the "data" folder
 | CLASSES     		- The full server path to the user "classes" folder
 | TEMPLATES    		- The full server path to the user "templates" folder
-| PACKAGES    		- The full server path to the "packages" folder
-| PUBLIC_FOLDER		- The full "static" server path to the "public" folder
-| PRIVATE_FOLDER 	- The full "static" server path to the "private" folder
-| PUBLIC_DIR  		- The full "dynamic" server path to the "public" folder
-| PRIVATE_DIR 		- The full "static" server path to the "private" folder
+| CONTROLLER_FOLDER	- The full "static" server path to the "public" folder
+| CONTROLLERS  		- The full "dynamic" server path to the "public" folder
 | TASK_FILE   		- The file name for $php task operations.
 | TASK   			- The full "static" path of the native cli task folder.
 | INDEX_PHP			- The path of your index.php file.
@@ -47,17 +44,17 @@ define('APP',  ROOT .'app'. DS);
 define('DATA',  APP .'data'. DS);
 define('CLASSES',  APP .'classes'. DS);
 define('TEMPLATES',  APP . 'templates'. DS);
-define('PUBLIC_FOLDER', ROOT .'public'. DS);
-define('PUBLIC_DIR', (defined('STDIN')) ? APP : PUBLIC_FOLDER);
+define('CONTROLLER_FOLDER', ROOT .'controllers'. DS);
+define('CONTROLLERS', (defined('STDIN')) ? APP : CONTROLLER_FOLDER);
 define('TASK_FILE', 'task');
 define('TASK', PHP_PATH .' '. APP .'tasks'. DS .'cli'. DS);
 define('INDEX_PHP', 'index.php');
 /*
 |--------------------------------------------------------------------------
-| OBULLO CONSTANTS
+| OBULLO
 |--------------------------------------------------------------------------
 */
-define('OBULLO',  ROOT . FRAMEWORK_PACKAGE_VERSION . DS);
+define('OBULLO',  ROOT . PACKAGE_VERSION . DS);
 define('OBULLO_PHP',  OBULLO .'Obullo'. DS .'Obullo.php');
 define('OBULLO_CONFIG',  OBULLO .'Config'. DS .'Config.php');
 define('OBULLO_CORE',  OBULLO .'Obullo'. DS .'Core.php');
@@ -68,10 +65,9 @@ define('OBULLO_EVENTS', APP .'events.php');
 define('OBULLO_ROUTES', APP .'routes.php');
 define('OBULLO_FILTERS', APP .'filters.php');
 define('OBULLO_CONTROLLER', OBULLO .'Controller'. DS .'Controller.php');
-
 /*
 |--------------------------------------------------------------------------
-| PDO CONSTANTS
+| PDO
 |--------------------------------------------------------------------------
 */
 define('PARAM_NULL', 0); // null
@@ -81,10 +77,9 @@ define('PARAM_LOB', 3);  // integer  Large Object Data (lob)
 define('PARAM_STMT', 4);  // integer  Represents a recordset type ( Not currently supported by any drivers).
 define('PARAM_BOOL', 5);  // boolean                                
 define('PARAM_INOUT', -2147483648); // PDO::PARAM_INPUT_OUTPUT integer
-
 /*
 |---------------------------------------------------------------
-| NOTIFICATION CONSTANTS
+| NOTIFICATIONS
 |---------------------------------------------------------------
 */
 define('NOTICE_MESSAGE', 'message');

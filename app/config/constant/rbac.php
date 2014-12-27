@@ -1,11 +1,4 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| Rbac Configuration Constants
-|--------------------------------------------------------------------------
-| Configuration of base constants,
-|
-*/
 
 /**
  * RBAC "roles" table definitions

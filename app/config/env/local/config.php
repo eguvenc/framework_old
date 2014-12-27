@@ -8,7 +8,7 @@ return array(
     | If debug = true framework converts all php errors to exceptions.
     */                             
     'error' => array(
-        'debug' => true,       // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
+        'debug' => false,       // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
         'reporting' => false,   // Turn on it if you want catch "unusual hidden errors", should be "Disabled"" in "PRODUCTION".
     ),
     /*
