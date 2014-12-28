@@ -20,7 +20,7 @@ Class Login extends \Controller
         $this->c->load('post');
         $this->c->load('service/user');
         $this->c->load('flash/session as flash');
-        // $this->c->load('event')->subscribe(new User($this->c));   // Listen user events
+        $this->c->load('event')->subscribe(new User($this->c));   // Listen user events
     }
 
     /**
