@@ -2,7 +2,8 @@
 
 return array(
 
-    'adapter' => 'AssociativeArray',
+    'adapter' => 'Database',
+    
     'memory' => array(          // Keeps user identity data in your cache driver.
         'key' => 'Auth',        // Auth key should be replace with your projectameAuth
         'storage' => 'Redis',   // Storage driver uses cache package
