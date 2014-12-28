@@ -61,17 +61,14 @@ Class Hello_Form extends \Controller
             } else {
                 $this->form->setMessage('Form validation failed !', NOTICE_ERROR);
             }
-            $errors = $this->validator->getErrors();
-            $errorString = $this->validator->getErrorString();
+            $this->form->setErrors($this->validator->getErrors());
         }
 
         $this->view->load(
             'hello_form', 
-            function () use ($errors, $errorString) {
+            function () {
                 $this->assign('name', 'Obullo');
-                $this->assign('errors', $errors);
-                $this->assign('errorString', $errorString);
-                $this->assign('footer', $this->template('footer', false));
+                $this->assign('footer', $this->template('footer'));
             }
         );
     }

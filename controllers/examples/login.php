@@ -2,6 +2,9 @@
 
 namespace Examples;
 
+use Auth\Credentials,
+    Event\User;
+
 Class Login extends \Controller
 {
     /**
@@ -17,7 +20,7 @@ Class Login extends \Controller
         $this->c->load('post');
         $this->c->load('service/user');
         $this->c->load('flash/session as flash');
-        $this->c->load('event')->subscribe(new \Event\User($this->c));   // Listen user events
+        // $this->c->load('event')->subscribe(new User($this->c));   // Listen user events
     }
 
     /**
@@ -28,38 +31,39 @@ Class Login extends \Controller
     public function index()
     {
         // $this->user->login->authenticateVerifiedIdentity();
-        
-        var_dump($this->user->identity->guest());
-        var_dump($this->user->identity->check());
+
+        // var_dump($this->user->identity->guest());
+        // var_dump($this->user->identity->check());
 
         if ($this->post['dopost']) {
 
-            $this->c->load('validator');
-
-            $this->validator->setRules('email', 'Email', 'required|email|trim');
-            $this->validator->setRules('password', 'Password', 'required|min(6)|trim');
-
-            if ($this->validator->isValid()) {
-
                 // $this->user->login->enableVerification();
-
+                
                 $result = $this->user->login->attempt(
                     array(
-                        Auth\Credentials::IDENTIFIER => $this->validator->value('email'), 
-                        Auth\Credentials::PASSWORD => $this->validator->value('password')
+                        Credentials::IDENTIFIER => $this->post['email'], 
+                        Credentials::PASSWORD => $this->post['password']
                     ),
                     $this->post['rememberMe']
                 );
 
-                if ($result->isValid()) {
 
-                    $this->flash->success('You have authenticated successfully.');
-                    $this->url->redirect('examples/login');
-                } else {
-                    $this->validator->setErrors($result->getArray());
-                }
-            }
-            $this->form->setErrors($this->validator);
+                // $data = $this->c->load('service/cache')->hGetAll('Auth:__permanent:Authorized:user@example.com:9fxpjde6ss');
+
+                // var_dump($data);
+                print_r($result->getArray());
+
+                // if ($result->isValid()) {
+                    
+                //     print_r($result->getArray());
+
+                //     $this->flash->success('You have authenticated successfully.');
+                //     $this->url->redirect('examples/login');
+                //     
+                // } else {
+                // 
+                //     $this->form->setErrors($result->getArray());
+                // }
         }
 
         $this->view->load(
@@ -68,7 +72,6 @@ Class Login extends \Controller
                 $this->assign('footer', $this->template('footer'));
             }
         );
-
     }
 }
 

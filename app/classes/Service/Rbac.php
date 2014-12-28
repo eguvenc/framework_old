@@ -26,7 +26,7 @@ Class Rbac implements ServiceInterface
     public function register($c)
     {
         $c['rbac'] = function ($database) use ($c) {
-            return new RbacService($c, $database, $c['config']->load('rbac'));
+            return new RbacService($c, $database);
         };
     }
 }

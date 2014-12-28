@@ -27,8 +27,6 @@ Class User
      * Constructor
      *
      * @param object $c container
-     * 
-     * @return void
      */
     public function __construct($c)
     {
@@ -46,9 +44,7 @@ Class User
     {
         if ( ! $authResult->isValid()) {
 
-            // Rate limiter class
-            // $authResult->setCode(-9);
-            // $authResult->setMessage('Your IP is banned !');
+            // Store attemtps
 
         }
         return $authResult;

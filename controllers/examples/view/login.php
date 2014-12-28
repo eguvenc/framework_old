@@ -25,7 +25,14 @@
         
         <h1>Login Example</h1>
 
-        <section><?php echo $this->form->message() ?></section>
+        <section><?php 
+        $output = $this->form->outputArray();
+
+        if (isset($output['errors']['auth'])) {
+            foreach ($output['errors']['auth']['messages'] as $message) {
+                echo $this->form->message($message);
+            }
+        }?></section>
 
         <section>
             <form action="/examples/login" method="POST">

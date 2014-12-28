@@ -15,7 +15,7 @@
 
         <section><?php echo $this->flash->get('notice') ?></section>
         <section><?php echo $this->form->message() ?></section>
-        <section><?php echo $errorString ?></section>
+        <section><?php echo (isset($this->validator)) ?  $this->validator->getErrorString() : '' ?></section>
 
         <section>
 
@@ -55,20 +55,16 @@
                 <h2>Test Results</h2>
 
                 <section>
-
-                    <h3>print_r($errors)</h3>
-                    <pre><?php print_r($errors); ?>
-                    </pre>
-
-                    <h3>$this->form->output()</h3>
+                
+                    <h3>$this->form->outputArray()</h3>
                     <pre><?php print_r($this->form->outputArray()); ?>
                     </pre>
 
                     <h3>$this->form->error('email')</h3>
                     <pre><?php echo $this->form->error('email') ?></pre>
 
-                    <h3>echo $errorString</h3>
-                    <pre><?php echo $errorString ?></pre>
+                    <h3>echo $this->validator->getErrorString()</h3>
+                    <pre><?php echo (isset($this->validator)) ?  $this->validator->getErrorString() : '' ?></pre>
                 </section>    
 
         </section> 

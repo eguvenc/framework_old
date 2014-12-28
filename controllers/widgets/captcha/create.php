@@ -2,7 +2,7 @@
 
 namespace Widgets\Captcha;
 
-Class Create extends Controller
+Class Create extends \Controller
 {
     /**
      * Loader

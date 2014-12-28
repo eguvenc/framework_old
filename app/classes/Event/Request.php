@@ -30,7 +30,7 @@ Class Request
     {
         $this->c = $c;
         $this->router = $this->c['router'];
-        $this->logger = $this->c->load('return service/logger');
+        $this->logger = $this->c->load('service/logger');
     }
 
     /**
