@@ -26,7 +26,7 @@ Class User implements ServiceInterface
      * @return void
      */
     public function register($c)
-    {            
+    {
         $c['user'] = function () use ($c) {
             return new UserService($c);
         };

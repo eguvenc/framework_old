@@ -2,7 +2,8 @@
 
 namespace Event;
 
-use Obullo\Auth\AuthResult;
+use Obullo\Auth\AuthResult,
+    Obullo\Auth\User\UserIdentity;
 
 /**
  * User event handler
@@ -51,6 +52,20 @@ Class User
     }
 
     /**
+     * Invalid auth token event listener
+     * 
+     * @param object $identity UserIdentity
+     * @param string $cookie   user token that we read from cookie
+     * 
+     * @return void
+     */
+    public function onInvalidToken(UserIdentity $identity, $cookie)
+    {
+        $this->c->load('flash/session')->error('Invalid auth token : '.$cookie.' identity '.$identity->getIdentifier().' destroyed');
+        $this->c->load('url')->redirect('/login');
+    }
+
+    /**
      * Handler user login events
      * 
      * @return void
@@ -81,6 +96,7 @@ Class User
     {
         $event->listen('login.attempt', 'Event\User.onLoginAttempt');
         $event->listen('after.login', 'Event\User.onAfterLogin');
+        $event->listen('auth.token', 'Event\User.onInvalidToken');
         $event->listen('after.logout', 'Event\User.onAfterLogout');
     }
 

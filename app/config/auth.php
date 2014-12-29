@@ -2,11 +2,11 @@
 
 return array(
 
-    'adapter' => 'Database',
-    
+    'adapter' => '\Obullo\Auth\Adapter\Database',
+
     'memory' => array(          // Keeps user identity data in your cache driver.
         'key' => 'Auth',        // Auth key should be replace with your projectameAuth
-        'storage' => 'Redis',   // Storage driver uses cache package
+        'storage' => '\Obullo\Auth\Storage\Redis',   // Storage driver uses cache package
         'block' => array(
             'permanent' => array(
                 'lifetime' => 7200,  // 2 hours storage life time.
@@ -28,8 +28,8 @@ return array(
             'expire' => 6 * 30 * 24 * 3600,  // Default " 6 Months ". Should be same with rememberMeSeconds value.
         ),
         'passwordNeedsRehash' => array(
-            'cost' => 10
-        ),
+            'cost' => 6               // It depends of your server http://php.net/manual/en/function.password-hash.php
+        ),                            // Set 6 for best performance and less security, set between 8 - 12  for strong security if your hardware strong..
     ),
     'login' => array(
         'rememberMe'  => array(

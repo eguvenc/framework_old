@@ -3,6 +3,7 @@
 namespace Examples;
 
 use Auth\Credentials,
+    Auth\Identities\GenericUser,
     Event\User;
 
 Class Login extends \Controller
@@ -17,7 +18,7 @@ Class Login extends \Controller
         $this->c->load('url');
         $this->c->load('form');
         $this->c->load('view');
-        $this->c->load('post');
+        $this->c->load('request');
         $this->c->load('service/user');
         $this->c->load('flash/session as flash');
         $this->c->load('event')->subscribe(new User($this->c));   // Listen user events
@@ -34,36 +35,29 @@ Class Login extends \Controller
 
         // var_dump($this->user->identity->guest());
         // var_dump($this->user->identity->check());
+        if ($this->request->isPost()) {
 
-        if ($this->post['dopost']) {
+            // $this->user->login->enableVerification();
+            
+            $result = $this->user->login->attempt(
+                array(
+                    Credentials::IDENTIFIER => filter_var($this->request->post('email'), FILTER_VALIDATE_EMAIL),  // No need to use validator
+                    Credentials::PASSWORD => $this->request->post('password')
+                ),
+                $this->request->post('rememberMe')
+            );
 
-                // $this->user->login->enableVerification();
+            if ($result->isValid()) {
                 
-                $result = $this->user->login->attempt(
-                    array(
-                        Credentials::IDENTIFIER => $this->post['email'], 
-                        Credentials::PASSWORD => $this->post['password']
-                    ),
-                    $this->post['rememberMe']
-                );
-
-
-                // $data = $this->c->load('service/cache')->hGetAll('Auth:__permanent:Authorized:user@example.com:9fxpjde6ss');
-
-                // var_dump($data);
                 print_r($result->getArray());
 
-                // if ($result->isValid()) {
-                    
-                //     print_r($result->getArray());
-
-                //     $this->flash->success('You have authenticated successfully.');
-                //     $this->url->redirect('examples/login');
-                //     
-                // } else {
-                // 
-                //     $this->form->setErrors($result->getArray());
-                // }
+                $this->flash->success('You have authenticated successfully.');
+                $this->url->redirect('examples/login');
+                
+            } else {
+            
+                $this->form->setErrors($result->getArray());
+            }
         }
 
         $this->view->load(

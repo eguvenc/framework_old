@@ -18,7 +18,7 @@ return array(
     
     'failed' => array(
         'enabled' => false,
-        'storage' => 'Obullo\Queue\Failed\Storage\Database',
+        'storage' => '\Obullo\Queue\Failed\Storage\Database',
         'provider' => array(
             'name' => 'Db',       // Db provider which is defined in your "Provider" folder.
             'db' => 'failed',     // Database key

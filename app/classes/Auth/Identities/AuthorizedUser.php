@@ -15,7 +15,7 @@ use Obullo\Auth\Identities\IdentityInterface,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/package/auth
  */
-Class UserIdentity implements IdentityInterface
+Class AuthorizedUser implements IdentityInterface
 {
     /**
      * All of the user's attributes.
@@ -107,5 +107,5 @@ Class UserIdentity implements IdentityInterface
 
 }
 
-/* End of file UserIdentity.php */
-/* Location: .app/classes/Auth/Identities/UserIdentity.php */
+/* End of file AuthorizedUser.php */
+/* Location: .app/classes/Auth/Identities/AuthorizedUser.php */

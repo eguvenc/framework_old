@@ -6,7 +6,7 @@ use Obullo\Auth\Identities\IdentityInterface,
     Auth\Credentials;
 
 /**
- * Generic Identity
+ * Generic User Identity
  *
  * @category  Users
  * @package   Identities
@@ -15,7 +15,7 @@ use Obullo\Auth\Identities\IdentityInterface,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/package/auth
  */
-Class GenericIdentity implements IdentityInterface
+Class GenericUser implements IdentityInterface
 {
     /**
      * All of the user's attributes.
@@ -137,5 +137,5 @@ Class GenericIdentity implements IdentityInterface
 
 }
 
-/* End of file GenericIdentity.php */
-/* Location: .app/classes/Auth/Identities/GenericIdentity.php */
+/* End of file GenericUser.php */
+/* Location: .app/classes/Auth/Identities/GenericUser.php */
