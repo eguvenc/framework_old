@@ -3,7 +3,6 @@
 namespace Service;
 
 use Obullo\Auth\UserService,
-    Obullo\Auth\AuthUserProvider,
     Service\ServiceInterface;
     
 /**
@@ -28,10 +27,7 @@ Class User implements ServiceInterface
     public function register($c)
     {
         $c['user'] = function () use ($c) {
-            return new UserService($c);
-        };
-        $c['user.provider'] = function () use ($c) {
-            return new AuthUserProvider($c, $c->load('service/provider/db'));
+            return new UserService($c, $c->load('return service/provider/db'));
         };
     }
 

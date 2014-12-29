@@ -2,10 +2,14 @@
 
 return array(
 
-    'adapter' => '\Obullo\Auth\Adapter\Database',
+    'adapter' => '\Obullo\Auth\Adapter\Database',  // Adapter
 
-    'memory' => array(          // Keeps user identity data in your cache driver.
-        'key' => 'Auth',        // Auth key should be replace with your projectameAuth
+    'user' => array(
+        'provider' => '\Obullo\Auth\AuthUserProvider', // User provider, you can replace it with your own.
+    ),
+
+    'memory' => array(              // Keeps user identity data in your cache driver.
+        'key' => 'Auth',            // Auth key should be replace with your projectameAuth
         'storage' => '\Obullo\Auth\Storage\Redis',   // Storage driver uses cache package
         'block' => array(
             'permanent' => array(
