@@ -15,6 +15,11 @@ namespace Auth;
 Class Credentials
 {
     /**
+     * Id column name ( Primary key )
+     */
+    const ID = 'id';
+
+    /**
      * Identifier column name
      */
     const IDENTIFIER = 'username';
@@ -23,6 +28,11 @@ Class Credentials
      * Identifier password column name
      */
     const PASSWORD = 'password';
+
+    /**
+     * Remember me token column name
+     */
+    const REMEMBER_TOKEN = 'remember_token';
 }
 
 

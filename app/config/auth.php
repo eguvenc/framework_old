@@ -9,7 +9,7 @@ return array(
     ),
 
     'memory' => array(              // Keeps user identity data in your cache driver.
-        'key' => 'Auth',            // Auth key should be replace with your projectameAuth
+        'key' => 'Auth',            // Auth key should be replace with your projectname to prevent collissions
         'storage' => '\Obullo\Auth\Storage\Redis',   // Storage driver uses cache package
         'block' => array(
             'permanent' => array(
@@ -22,8 +22,8 @@ return array(
     ),
     'security' => array(
         'cookie' => array(
-            'name' => '__token',        // Cookie name, change it if you want
-            'refresh' => 60,            // Every 1 minutes do the cookie validation
+            'name' => '__token',        // Cookie name
+            'refresh' => 30,            // Every 1 minutes do the cookie validation
             'userAgentMatch' => false,  // Whether to match user agent when reading token
             'path' => '/',
             'secure' => false,

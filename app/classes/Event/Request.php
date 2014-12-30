@@ -114,23 +114,25 @@ Class Request
 
     /**
      * On After Htttp Response
-     * 
-     * @param integer $start start of the response time
+     *
+     * @param string $message log message
+     * @param string $extra   benchmark data
      * 
      * @return void
      */
-    public function onAfterResponse($start)
+    public function onAfterResponse($message = 'Final output sent to browser', $extra = array())
     {
-        $end = microtime(true) - $start;  // End Timer
-        $extra = array();
+        $end = microtime(true) - $_SERVER['REQUEST_TIME_START'];  // End Timer
+
         if ($this->c['config']['log']['extra']['benchmark']) {     // Do we need to generate benchmark data ?
             $usage = 'memory_get_usage() function not found on your php configuration.';
             if (function_exists('memory_get_usage') AND ($usage = memory_get_usage()) != '') {
                 $usage = round($usage/1024/1024, 2). ' MB';
             }
-            $extra = array('time' => number_format($end, 4), 'memory' => $usage);
+            $extra['time'] = number_format($end, 4);
+            $extra['memory'] = $usage;
         }
-        $this->logger->debug('Final output sent to browser', $extra, -99);
+        $this->logger->debug($message, $extra, -99);
     }
 
     /**
@@ -152,6 +154,20 @@ Class Request
     }
 
     /**
+     * After $this->url->redirect() method
+     *
+     * @param string $uri    redirect uri url
+     * @param string $method redirect method ( header location )
+     * 
+     * @return void
+     */
+    public function beforeRedirect($uri, $method)
+    {
+        $method = null;
+        $this->onAfterResponse('Header redirect', array('uri' => $uri));  // Add final response info
+    }
+
+    /**
      * Event subscribe
      * 
      * @param object $event object
@@ -166,6 +182,7 @@ Class Request
         $event->listen('after.controller', 'Event\Request.onAfterController');
         $event->listen('on.load', 'Event\Request.onLoad');
         $event->listen('on.method', 'Event\Request.onMethod');
+        $event->listen('before.redirect', 'Event\Request.beforeRedirect');
     }
 
 }
