@@ -9,7 +9,7 @@ return array(
     ),
 
     'memory' => array(              // Keeps user identity data in your cache driver.
-        'key' => 'Auth',            // Auth key should be replace with your projectname to prevent collissions
+        'key' => 'Auth',            // Auth key should be replace with your projectname to prevent collisions
         'storage' => '\Obullo\Auth\Storage\Redis',   // Storage driver uses cache package
         'block' => array(
             'permanent' => array(
