@@ -16,14 +16,14 @@ return array(
                 'lifetime' => 7200,  // 2 hours storage life time.
             ),
             'temporary'  => array(
-                'lifetime' => 300  // 5 minutes is default temporary login lifetime.
+                'lifetime' => 300    // 5 minutes is default temporary login lifetime.
             )
         )
     ),
     'security' => array(
         'cookie' => array(
             'name' => '__token',        // Cookie name
-            'refresh' => 30,            // Every 1 minutes do the cookie validation
+            'refresh' => 60,            // Every 1 minutes do the cookie validation
             'userAgentMatch' => false,  // Whether to match user agent when reading token
             'path' => '/',
             'secure' => false,
@@ -52,7 +52,7 @@ return array(
         )
     ),
     'activity' => array(
-        'singleSignOff' => false,  // Single sign-off is the property whereby a single action of signing out terminates access to multiple sessions.
+        'uniqueSession' => false,  // If unique session enabled terminate all other sessions.
     )
 );
 

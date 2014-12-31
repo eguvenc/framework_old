@@ -85,6 +85,27 @@ Class User
         // ..
     }
 
+
+    public function onUniqueSession()
+    {
+        $sessions = $this->storage->getAllSessions();
+
+        if (sizeof($sessions) < 1) {  // If user have more than one auth session continue to destroy them.
+            return;
+        }
+        $sessionKeys = array();  
+        foreach ($sessions as $key => $val) {       // Keep the last session
+            $sessionKeys[$val['__time']] = $key;
+        }
+        $lastSession = max(array_keys($sessionKeys));   // Get the highest integer time
+        $protectedSession = $sessionKeys[$lastSession];
+        unset($sessions[$protectedSession]);            // Don't touch the current session
+
+        foreach (array_keys($sessions) as $aid) {   // Destroy all other sessions
+            $this->storage->killSession($aid);
+        }
+    }
+
     /**
      * Register the listeners for the subscriber.
      * 
@@ -98,6 +119,7 @@ Class User
         $event->listen('after.login', 'Event\User.onAfterLogin');
         $event->listen('auth.token', 'Event\User.onInvalidToken');
         $event->listen('after.logout', 'Event\User.onAfterLogout');
+        $event->listen('aurh.unique', 'Event\User.onUniqueSession');
     }
 
 }

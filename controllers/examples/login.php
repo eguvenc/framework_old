@@ -31,32 +31,42 @@ Class Login extends \Controller
      */
     public function index()
     {
-        // $this->user->login->authenticateVerifiedIdentity();
+        $this->c->load('service/cache');
+        $this->cache->delete('Auth:__permanent:Authorized:user@example.com');
 
-        // var_dump($this->user->identity->guest());
-        // var_dump($this->user->identity->check());
         if ($this->request->isPost()) {
 
-            // $this->user->login->enableVerification();
-            
-            $result = $this->user->login->attempt(
-                array(
-                    Credentials::IDENTIFIER => filter_var($this->request->post('email'), FILTER_VALIDATE_EMAIL),  // No need to use validator
-                    Credentials::PASSWORD => $this->request->post('password')
-                ),
-                $this->request->post('rememberMe')
-            );
+            $this->c->load('validator'); // load validator
 
-            if ($result->isValid()) {
-                
-                print_r($result->getArray());
+            $this->validator->setRules('email', 'Email', 'required|email|trim');
+            $this->validator->setRules('password', 'Password', 'required|min(6)|trim');
 
-                $this->flash->success('You have authenticated successfully.');
-                $this->url->redirect('examples/login');
+            if (  ! $this->validator->isValid()) {
                 
+                $this->form->setErrors($this->validator);
+
             } else {
-            
-                $this->form->setErrors($result->getArray());
+
+                // $this->user->login->enableVerification();
+
+                $result = $this->user->login->attempt(
+                    array(
+                        Credentials::IDENTIFIER => $this->validator->value('email'), 
+                        Credentials::PASSWORD => $this->validator->value('password')
+                    ),
+                    $this->request->post('rememberMe')
+                );
+
+                if ($result->isValid()) {
+
+                    $this->flash->success('You have authenticated successfully.');
+                    $this->url->redirect('examples/login');
+
+                } else {
+
+                    $this->validator->setError($result->getArray());
+                    $this->form->setErrors($this->validator);
+                }
             }
         }
 

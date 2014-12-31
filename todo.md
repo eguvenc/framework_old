@@ -14,6 +14,7 @@
 * Security class csrf documentation and csrf tests.
 
 * Research: Multi thread in more filexible way http://stackoverflow.com/questions/70855/how-can-one-use-multi-threading-in-php-applications
+* X-Frame options: https://github.com/django/django/blob/master/django/middleware/clickjacking.py
 
 
 * ----------- Testing----------------
