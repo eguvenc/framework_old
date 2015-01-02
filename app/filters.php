@@ -29,14 +29,6 @@ $c['router']->filter('auth', 'Http\Filters\AuthFilter');
 */
 $c['router']->filter('csrf', 'Http\Filters\CsrfFilter');
 
-/*
-|--------------------------------------------------------------------------
-| Activity
-|--------------------------------------------------------------------------
-| Authorized user activity check filter
-*/
-$c['router']->filter('activity', 'Http\Filters\ActivityFilter');
-
 
 /* End of file filters.php */
 /* Location: .filters.php */

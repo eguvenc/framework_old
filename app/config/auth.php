@@ -5,7 +5,7 @@ return array(
     'adapter' => '\Obullo\Auth\Adapter\Database',  // Adapter
 
     'user' => array(
-        'provider' => '\Obullo\Auth\AuthUserProvider', // User provider, you can replace it with your own.
+        'provider' => '\Obullo\Auth\UserProvider', // User provider, you can replace it with your own.
     ),
 
     'memory' => array(              // Keeps user identity data in your cache driver.
@@ -13,7 +13,7 @@ return array(
         'storage' => '\Obullo\Auth\Storage\Redis',   // Storage driver uses cache package
         'block' => array(
             'permanent' => array(
-                'lifetime' => 7200,  // 2 hours storage life time.
+                'lifetime' => 86400,  // 24 hours
             ),
             'temporary'  => array(
                 'lifetime' => 300    // 5 minutes is default temporary login lifetime.
@@ -29,7 +29,7 @@ return array(
             'secure' => false,
             'httpOnly' => false,
             'prefix' => '',
-            'expire' => 6 * 30 * 24 * 3600,  // Default " 6 Months ". Should be same with rememberMeSeconds value.
+            'expire' => 86400   // 24 hours
         ),
         'passwordNeedsRehash' => array(
             'cost' => 6               // It depends of your server http://php.net/manual/en/function.password-hash.php
@@ -52,7 +52,7 @@ return array(
         )
     ),
     'activity' => array(
-        'uniqueSession' => false,  // If unique session enabled terminate all other sessions.
+        'uniqueSession' => false,  // If unique session enabled application terminates all other active sessions.
     )
 );
 

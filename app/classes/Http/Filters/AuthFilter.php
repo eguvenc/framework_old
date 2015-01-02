@@ -41,6 +41,9 @@ Class AuthFilter
         if ($this->user->identity->check()) {
 
             // Do something
+            
+            $this->user->activity->set('date', time());
+            $this->user->activity->update();        // Update user activity container
         }
     }
     

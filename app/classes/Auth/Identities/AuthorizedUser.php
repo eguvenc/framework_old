@@ -3,7 +3,7 @@
 namespace Auth\Identities;
 
 use Obullo\Auth\Identities\IdentityInterface,
-    Auth\Credentials;
+    Auth\Constant;
 
 /**
  * User Identity
@@ -43,7 +43,7 @@ Class AuthorizedUser implements IdentityInterface
      */
     public function getIdentifier()
     {
-        return isset($this->attributes[Credentials::IDENTIFIER]) ? $this->attributes[Credentials::IDENTIFIER] : false;
+        return isset($this->attributes[Constant::IDENTIFIER]) ? $this->attributes[Constant::IDENTIFIER] : false;
     }
 
     /**
@@ -53,7 +53,7 @@ Class AuthorizedUser implements IdentityInterface
      */
     public function getPassword()
     {
-        return isset($this->attributes[Credentials::PASSWORD]) ? $this->attributes[Credentials::IDENTIFIER] : false;
+        return isset($this->attributes[Constant::PASSWORD]) ? $this->attributes[Constant::IDENTIFIER] : false;
     }
     
     /**
