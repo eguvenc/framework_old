@@ -22,7 +22,7 @@ Class Header extends \Controller
      */
     public function index()
     {
-        $firstSegment   = $this->request->globals()->uri->segment(0);     // Get first segnment
+        $firstSegment   = $this->request->global->uri->segment(0);     // Get first segnment
         $currentSegment = (empty($firstSegment)) ? 'home' : $firstSegment;  // Set current segment as "home" if its empty
 
         $li = '';
