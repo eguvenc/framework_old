@@ -28,7 +28,7 @@ return array(
         ),
         'auth' =>  env('REDIS_AUTH'),       // connection password
         'serializer' =>  'SERIALIZER_PHP',  // SERIALIZER_NONE, SERIALIZER_PHP, SERIALIZER_IGBINARY
-        'persistentConnect' => 0,
+        'persistentConnect' => 0,           // Enable / Disable persistent connection, "1" on "0" off.
         'reconnectionAttemps' => 100,
     ),
 
