@@ -12,8 +12,13 @@ namespace Auth;
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/package/auth
  */
-Class Credentials
+Class Constant
 {
+    /**
+     * Database tablename
+     */
+    const TABLENAME = 'users';
+
     /**
      * Id column name ( Primary key )
      */

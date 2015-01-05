@@ -2,8 +2,7 @@
 
 namespace Examples;
 
-use Auth\Credentials,
-    Auth\Identities\GenericUser,
+use Auth\Constant,
     Event\User;
 
 Class Login extends \Controller
@@ -31,9 +30,6 @@ Class Login extends \Controller
      */
     public function index()
     {
-        $this->c->load('service/cache');
-        $this->cache->delete('Auth:__permanent:Authorized:user@example.com');
-
         if ($this->request->isPost()) {
 
             $this->c->load('validator'); // load validator
@@ -51,8 +47,8 @@ Class Login extends \Controller
 
                 $result = $this->user->login->attempt(
                     array(
-                        Credentials::IDENTIFIER => $this->validator->value('email'), 
-                        Credentials::PASSWORD => $this->validator->value('password')
+                        Constant::IDENTIFIER => $this->validator->value('email'), 
+                        Constant::PASSWORD => $this->validator->value('password')
                     ),
                     $this->request->post('rememberMe')
                 );

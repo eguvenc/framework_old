@@ -85,7 +85,11 @@ Class User
         // ..
     }
 
-
+    /**
+     * Unique session handler
+     * 
+     * @return void
+     */
     public function onUniqueSession()
     {
         $sessions = $this->storage->getAllSessions();
@@ -117,9 +121,9 @@ Class User
     {
         $event->listen('login.attempt', 'Event\User.onLoginAttempt');
         $event->listen('after.login', 'Event\User.onAfterLogin');
-        $event->listen('auth.token', 'Event\User.onInvalidToken');
+        $event->listen('auth.invalidToken', 'Event\User.onInvalidToken');
         $event->listen('after.logout', 'Event\User.onAfterLogout');
-        $event->listen('aurh.unique', 'Event\User.onUniqueSession');
+        $event->listen('auth.unique', 'Event\User.onUniqueSession');
     }
 
 }

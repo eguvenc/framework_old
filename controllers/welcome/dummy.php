@@ -29,7 +29,7 @@ Class Dummy extends \Controller
     {
         echo '<pre>Request: <span class="string">'.$this->uri->getUriString().'</span></pre>';
         echo '<pre>Response: <span class="string">'.$arg1 .' - '.$arg2. ' - '.$arg3.'</span></pre>';
-        echo '<pre>Global Request Object: <span class="string">'.$this->request->globals('uri')->getUriString().'</span></pre>';
+        echo '<pre>Global Request Object: <span class="string">'.$this->request->global->uri->getUriString().'</span></pre>';
         echo '<p>-----------------------------------------</p>';
 
         echo $this->layer->get('views/test');
