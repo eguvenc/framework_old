@@ -46,6 +46,7 @@ define('CLASSES',  APP .'classes'. DS);
 define('TEMPLATES',  APP . 'templates'. DS);
 define('CONTROLLER_FOLDER', ROOT .'controllers'. DS);
 define('CONTROLLERS', (defined('STDIN')) ? APP : CONTROLLER_FOLDER);
+define('MODELS', ROOT .'models'. DS);
 define('TASK_FILE', 'task');
 define('TASK', PHP_PATH .' '. APP .'tasks'. DS .'cli'. DS);
 define('INDEX_PHP', 'index.php');

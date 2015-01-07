@@ -2,19 +2,19 @@
 
 namespace Service;
 
-use Obullo\Crypt\Password\Bcrypt;
+use Obullo\Database\Pdo\Handler\Mysql;
 
 /**
- * Password Service ( Shared )
+ * Db Service ( Shared )
  *
  * @category  Service
- * @package   Password
+ * @package   Db
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Password implements ServiceInterface
+Class Db implements ServiceInterface
 {
     /**
      * Registry
@@ -25,13 +25,13 @@ Class Password implements ServiceInterface
      */
     public function register($c)
     {
-        $c['password'] = function () use ($c) {
-            return new Bcrypt($c);
+        $c['db'] = function () use ($c) {
+            return new Mysql($c);
         };
     }
 }
 
-// END Password class
+// END Db class
 
-/* End of file Password.php */
-/* Location: .classes/Service/Password.php */
+/* End of file Db.php */
+/* Location: .classes/Service/Db.php */

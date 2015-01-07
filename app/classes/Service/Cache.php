@@ -5,7 +5,7 @@ namespace Service;
 use Obullo\Cache\Handler\Redis;
 
 /**
- * Cache Service
+ * Cache Service ( Shared )
  *
  * @category  Service
  * @package   Cache

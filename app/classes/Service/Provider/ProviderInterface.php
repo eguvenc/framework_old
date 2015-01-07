@@ -17,11 +17,12 @@ interface ProviderInterface
     /**
      * Registry
      *
-     * @param object $c container
+     * @param object $c        container
+     * @param array  $commands loader command parameters ( new, return, as .. )
      * 
      * @return void
      */
-    public function register($c);
+    // public function register($c, $commands = array());
 }
 
 // END ProviderInterface class

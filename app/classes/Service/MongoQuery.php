@@ -2,19 +2,19 @@
 
 namespace Service;
 
-use Obullo\Crypt\Password\Bcrypt;
+use Obullo\Mongo\Query;
 
 /**
- * Password Service ( Shared )
+ * Mongo Crud Service ( Shared )
  *
  * @category  Service
- * @package   Password
+ * @package   Mongo
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Password implements ServiceInterface
+Class MongoQuery implements ServiceInterface
 {
     /**
      * Registry
@@ -25,13 +25,13 @@ Class Password implements ServiceInterface
      */
     public function register($c)
     {
-        $c['password'] = function () use ($c) {
-            return new Bcrypt($c);
+        $c['mongoQuery'] = function ($database) use ($c) {
+            return new Query($c, $database, $database->provider->getName());
         };
     }
 }
 
-// END Password class
+// END MongoQuery class
 
-/* End of file Password.php */
-/* Location: .classes/Service/Password.php */
+/* End of file MongoQuery.php */
+/* Location: .classes/Service/MongoQuery.php */
