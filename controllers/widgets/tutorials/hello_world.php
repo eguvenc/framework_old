@@ -15,7 +15,6 @@ Class Hello_World extends \Controller
         $this->c->bind('model.user', 'Model\User');
         $this->c->bind('model.user');
 
-
         $this->model->user->test();
 
     }
