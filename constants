@@ -82,7 +82,7 @@ define('PARAM_INOUT', -2147483648); // PDO::PARAM_INPUT_OUTPUT integer
 | NOTIFICATIONS
 |---------------------------------------------------------------
 */
-define('NOTICE_MESSAGE', 'message');
+define('NOTICE_MESSAGE', 'message'); // Form class message key
 define('NOTICE_ERROR', 0);
 define('NOTICE_SUCCESS', 1);
 define('NOTICE_WARNING', 2);

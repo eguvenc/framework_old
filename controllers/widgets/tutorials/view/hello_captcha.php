@@ -36,21 +36,21 @@ var ajax = {
             <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
         </header>
         <h1>Hello Captcha</h1>
-        <section><?php echo $this->form->message() ?></section>
+        <section><?php echo $this->form->getMessage() ?></section>
 
         <section>
                 <form action="/widgets/tutorials/hello_captcha" method="post" />
                 <table width="100%">
                     <tr>
                         <td style="width:20%;">Email</td>
-                        <td><?php echo $this->form->error('email') ?>
-                        <input type="text" name="email" value="<?php echo $this->form->value('email') ?>" />
+                        <td><?php echo $this->form->getError('email') ?>
+                        <input type="text" name="email" value="<?php echo $this->form->getValue('email') ?>" />
                         </td>
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><?php echo $this->form->error('password') ?>
-                        <input type="password" name="password" value="<?php echo $this->form->value('password') ?>" />
+                        <td><?php echo $this->form->getError('password') ?>
+                        <input type="password" name="password" value="<?php echo $this->form->getValue('password') ?>" />
                         </td>
                     </tr>
                     <tr>
@@ -62,8 +62,8 @@ var ajax = {
                     </tr>
                     <tr>
                         <td>Captcha Code</td>
-                        <td><?php echo $this->form->error('captcha_answer'); ?>
-                            <input type="text" name="captcha_answer" value="<?php echo $this->form->value('captcha') ?>" />
+                        <td><?php echo $this->form->getError('captcha_answer'); ?>
+                            <input type="text" name="captcha_answer" value="<?php echo $this->form->getValue('captcha') ?>" />
                             </td>
                     </tr>
                     <tr>

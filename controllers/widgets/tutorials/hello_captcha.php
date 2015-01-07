@@ -14,7 +14,7 @@ Class Hello_Captcha extends \Controller
         $this->c->load('view');
         $this->c->load('url');
         $this->c->load('form');
-        $this->c->load('post');
+        $this->c->load('request');
     }
 
     /**
@@ -24,7 +24,7 @@ Class Hello_Captcha extends \Controller
      */
     public function index()
     {
-        if ($this->post['dopost']) {
+        if ($this->request->isPost()) {
 
             $this->c->load('validator');
             
@@ -35,7 +35,7 @@ Class Hello_Captcha extends \Controller
             $this->validator->func(
                 'callback_captcha',
                 function () {
-                    if ($this->c->load('service/captcha')->check($this->post['captcha_answer']) == false) {
+                    if ($this->c->load('captcha')->check($this->request->post('captcha_answer')) == false) {
                         $this->setMessage('callback_captcha', 'Wrong Captcha Code');
                         return false;
                     }
@@ -43,7 +43,7 @@ Class Hello_Captcha extends \Controller
                 }
             );
             if ($this->validator->isValid()) {
-                $this->form->setMessage('Form Validation Success ! ');  // Set flash notice using Session Class.
+                $this->form->success('Form Validation Success ! ');  // Set flash notice using Session Class.
             }
         }
 

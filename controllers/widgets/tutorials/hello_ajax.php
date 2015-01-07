@@ -34,7 +34,7 @@ Class Hello_Ajax extends \Controller
             
             if ($this->validator->isValid()) {
                 $this->validator->setError('email', 'Custom Error Example: There is an error in email field !');
-                $this->form->setMessage('There are some errors in form fields.');
+                $this->form->error('There are some errors in form fields.');
             }
             $this->form->setErrors($this->validator);
             echo $this->response->json($this->form->outputArray());

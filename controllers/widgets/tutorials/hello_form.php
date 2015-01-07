@@ -13,8 +13,8 @@ Class Hello_Form extends \Controller
     {
         $this->c->load('url');
         $this->c->load('view');
-        $this->c->load('post');
         $this->c->load('form');
+        $this->c->load('request');
         $this->c->load('session');
         $this->c->load('flash/session as flash');
     }
@@ -26,10 +26,7 @@ Class Hello_Form extends \Controller
      */
     public function index()
     {
-        $errors = array();
-        $errorString = null;
-
-        if ($this->post['dopost']) {
+        if ($this->request->isPost()) {
             
             $this->c->load('validator');
 
@@ -51,15 +48,16 @@ Class Hello_Form extends \Controller
             if ($this->validator->isValid()) {
 
                 // $this->validator->setError('email', 'Example Error !');                
-                $this->form->setMessage('Example form success message in current page !', NOTICE_SUCCESS);
+                $this->form->success('Example form success message in current page !');
                 
-                var_dump($this->form->status());
+                var_dump($this->form->getStatus());
 
-                // $this->sess->setFlash('notice', 'Example flash notice please refresh this page !');   // Set flash notice using Session Class.
+                // $this->flash->success('Example flash notice please refresh this page !');   // Set flash notice
                 // $this->url->redirect('tutorials/hello_form/index'); // Redirect to user same page using header refresh.
 
             } else {
-                $this->form->setMessage('Form validation failed !', NOTICE_ERROR);
+
+                $this->form->error('Form validation failed !');
             }
             $this->form->setErrors($this->validator->getErrors());
         }

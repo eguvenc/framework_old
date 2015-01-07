@@ -2,7 +2,6 @@
 
 namespace Welcome;
 
-
 Class Dummy extends \Controller
 {
     /**

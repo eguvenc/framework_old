@@ -34,9 +34,9 @@ return array(
                     ),
 
     // Captcha text color
-    'default_text_color' => array('cyan'),  // If its more than one produce random colors
+    'defaultTextColor' => array('cyan'),  // If its more than one produce random colors
     // Background noise color
-    'default_noise_color'=> array('cyan'),  // If its more than one produce random noise colors
+    'defaultNoiseColor'=> array('cyan'),  // If its more than one produce random noise colors
     // Characters
     'char_pool'          => array(
                                 'numbers' => '23456789',
