@@ -19,14 +19,15 @@ Class Mongo implements ProviderInterface
     /**
      * Registry
      *
-     * @param object $c container
+     * @param object $c        container
+     * @param array  $commands loader command parameters ( new, return, as .. )
      * 
      * @return void
      */
-    public function register($c)
+    public function register($c, $commands = array())
     {
-        $c['provider:mongo'] = function ($params = array('db' => 'db')) use ($c) {
-            $mongo  = new Connection($c, $params);
+        $c['provider:mongo'] = function ($params = array('db' => 'db')) use ($c, $commands) {
+            $mongo  = new Connection($c, $params, $commands);
             return $mongo->connect();
         };
     }

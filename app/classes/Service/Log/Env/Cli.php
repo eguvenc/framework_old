@@ -46,7 +46,7 @@ Class Cli implements ServiceInterface
             $service->logger->registerHandler(3, 'email')->filter('priority.notIn', array(LOG_DEBUG));
             /*
             |--------------------------------------------------------------------------
-            | Add Writer - Primary file writer should be available on local server
+            | Add Writers - Primary file writer should be available on local server
             |--------------------------------------------------------------------------
             */
             $service->logger->addWriter('file')->filter('priority.notIn', array(LOG_INFO));

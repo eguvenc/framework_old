@@ -5,7 +5,7 @@ namespace Service;
 use Obullo\Mail\Transport\Queue;
 
 /**
- * Mailer Service
+ * Mailer Service ( Shared )
  *
  * @category  Service
  * @package   Mail

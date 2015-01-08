@@ -17,11 +17,11 @@ interface ServiceInterface
     /**
      * Registry
      *
-     * @param object $c container
+     * @param object $c        container
+     * @param array  $commands loader command parameters ( new, return, as .. )
      * 
      * @return void
      */
-    public function register($c);
 }
 
 // END ServiceInterface class

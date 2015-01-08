@@ -1,11 +1,9 @@
 <?php
 
-namespace Model;
-
 /**
  * User model
  */
-Class User extends \Model
+Class Test extends Model
 {
     /**
      * Loader
@@ -14,12 +12,12 @@ Class User extends \Model
      */
     public function load()
     {
-        $this->c->load('service/provider/db');      
+        $this->c->load('service/db'); 
     }
 
     public function test()
     {
-        echo 'ok !';
+        echo 'ok';
     }
 
 }

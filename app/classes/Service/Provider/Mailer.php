@@ -19,16 +19,17 @@ Class Mailer implements ServiceInterface
     /**
      * Registry
      *
-     * @param object $c container
-     *
+     * @param object $c        container
+     * @param array  $commands loader command parameters ( new, return, as .. )
+     * 
      * Providers : Mandrill, Smtp, Queue ..
      * 
      * @return void
      */
-    public function register($c)
+    public function register($c, $commands = array())
     {
-        $c['provider:mailer'] = function ($params = array('provider' => 'mandrill', 'from' => '')) use ($c) {
-            $connection = new Connection($c, $params);
+        $c['provider:mailer'] = function ($params = array('provider' => 'mandrill', 'from' => '')) use ($c, $commands) {
+            $connection = new Connection($c, $params, $commands);
             return $connection->connect();
         };
     }

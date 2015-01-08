@@ -5,7 +5,7 @@ namespace Service;
 use Obullo\Queue\Handler\AMQP;
 
 /**
- * Queue Service
+ * Queue Service ( Shared )
  *
  * @category  Service
  * @package   Cache

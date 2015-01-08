@@ -6,7 +6,7 @@ use Obullo\Auth\UserService,
     Service\ServiceInterface;
     
 /**
- * User Service
+ * User Service ( Shared )
  *
  * @category  Service
  * @package   Password

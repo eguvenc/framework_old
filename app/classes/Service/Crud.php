@@ -2,11 +2,11 @@
 
 namespace Service;
 
-use Obullo\Database\Crud\Query,
+use Obullo\Database\Pdo\Query,
     Obullo\Database\Pdo\Handler\Mysql;
 
 /**
- * Crud Database Service
+ * Crud Database Service ( Shared )
  *
  * @category  Service
  * @package   Database

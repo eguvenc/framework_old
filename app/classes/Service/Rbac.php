@@ -5,7 +5,7 @@ namespace Service;
 use Obullo\Permissions\RbacService;
 
 /**
- * Rbac PermissionService
+ * Rbac PermissionService ( Shared )
  *
  * @category  Service
  * @package   Mail

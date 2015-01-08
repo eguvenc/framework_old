@@ -4,12 +4,13 @@ return array(
     
     'default' => array(
         'provider' => 'mysql',
+        'database' => 'db',
     ),
 
     'handlers' => array(
         'mysql' => '\\Obullo\Database\Pdo\Handler\Mysql',
         'pgsql' => '\\Obullo\Database\Pdo\Handler\Pgsql',
-        'yourhandler' => '\\Obullo\Database\Pdo\Handler\YourHandler',  // You can create your own handler using Cache/Handler/HandlerInterface.php
+        'yourhandler' => '\\Obullo\Database\Pdo\Handler\YourHandler',  // create your own using Cache/Handler/HandlerInterface.php
     ),
 
     'key' => array(
