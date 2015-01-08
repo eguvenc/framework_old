@@ -22,7 +22,6 @@ interface ServiceInterface
      * 
      * @return void
      */
-    // public function register($c, $commands = array());
 }
 
 // END ServiceInterface class

@@ -22,7 +22,6 @@ interface ProviderInterface
      * 
      * @return void
      */
-    // public function register($c, $commands = array());
 }
 
 // END ProviderInterface class
