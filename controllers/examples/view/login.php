@@ -30,7 +30,7 @@
 
         if (isset($output['errors']['auth'])) {
             foreach ($output['errors']['auth']['messages'] as $message) {
-                echo $this->form->message($message);
+                echo $this->form->getMessage($message);
             }
         }?></section>
 
@@ -39,18 +39,18 @@
                 <table width="100%">
                     <tr>
                         <td style="width:20%;">Email</td>
-                        <td><?php echo $this->form->error('email'); ?>
-                        <input type="text" name="email" value="<?php echo $this->form->value('email') ?>" />
+                        <td><?php echo $this->form->getError('email'); ?>
+                        <input type="text" name="email" value="<?php echo $this->form->getValue('email') ?>" />
                         </td>
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><?php echo $this->form->error('password'); ?>
+                        <td><?php echo $this->form->getError('password'); ?>
                         <input type="password" name="password" value="" /></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><?php echo $this->form->error('rememberMe'); ?>
+                        <td><?php echo $this->form->getError('rememberMe'); ?>
                         <input type="checkbox" name="rememberMe" value="1"  id="rememberMe"><label for="rememberMe"> Remember Me</label></td>
                     </tr>
                     <tr>

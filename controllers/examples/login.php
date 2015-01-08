@@ -47,8 +47,8 @@ Class Login extends \Controller
 
                 $result = $this->user->login->attempt(
                     array(
-                        Constant::IDENTIFIER => $this->validator->value('email'), 
-                        Constant::PASSWORD => $this->validator->value('password')
+                        Constant::IDENTIFIER => $this->validator->getValue('email'), 
+                        Constant::PASSWORD => $this->validator->getValue('password')
                     ),
                     $this->request->post('rememberMe')
                 );
