@@ -16,6 +16,8 @@ Class User extends Model
      */
     public function load()
     {
+        echo 'heello';
+
         $this->c->load('service/db'); 
 
         // echo 'new instance<br>';
