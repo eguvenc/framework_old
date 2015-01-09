@@ -12,9 +12,16 @@ Class Hello_World extends \Controller
     public function load()
     {
         $this->c->load('view');
-        $this->c->bind('user', new Member\User);
+        // $this->c->bind('user', 'Member\User');
+        $this->c->bind('new user', 'Member\User');
 
-        var_dump($this->user);
+
+        // $this->user;
+
+        // $this->c->bind('model.user', 'User');
+
+
+        // var_dump($this->model->user);
 
         // $this->c->bind('new model.user');
         // $this->c->bind('new model.user');
