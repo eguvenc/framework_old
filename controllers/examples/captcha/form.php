@@ -38,21 +38,23 @@ Class Form extends \Controller
 
             } else {
 
-                if ($this->captcha->check($this->validator->getValue('captcha_code'))) {
+                $result = $this->captcha->image->check($this->validator->getValue('captcha_code'));
 
-                    $this->flash->success($this->captcha->result()['message']);
+                if ($result->isValid()) {
+
+                    $this->flash->success($result->getMessage());
                     $this->url->redirect('examples/captcha/form');
 
                 } else {
 
-                    $this->validator->setError($this->captcha->result());
+                    $this->validator->setError($result->getArray());
                     $this->form->setErrors($this->validator);
                 }
             }
         }
 
         $this->view->load(
-            'captcha',
+            'form',
             function () {
                 $this->assign('footer', $this->template('footer'));
             }
