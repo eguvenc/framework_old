@@ -30,7 +30,7 @@ Class Form extends \Controller
 
             $this->c->load('validator'); // load validator
 
-            $this->validator->setRules('captcha_code', 'Captcha', 'required|exact(5)|trim');
+            $this->validator->setRules('captchaCode', 'Captcha', 'required|exact(5)|trim');
 
             if (  ! $this->validator->isValid()) {
                 
@@ -38,7 +38,8 @@ Class Form extends \Controller
 
             } else {
 
-                $result = $this->captcha->image->check($this->validator->getValue('captcha_code'));
+                $code = $this->validator->getValue('captcha_code');
+                $result = $this->captcha->check($code);
 
                 if ($result->isValid()) {
 

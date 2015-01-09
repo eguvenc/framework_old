@@ -14,7 +14,7 @@
         <section>
             <?php echo $this->flash->output(); ?>
         </section>
-        
+
         <h1>Captcha Example</h1>
 
         <section style="color:red;">
@@ -30,14 +30,14 @@
                 <table width="100%">
                     <tr>
                         <td style="width:20%;">Captcha</td>
-                        <td><?php echo $this->form->getError('captcha_code'); ?>
-                        <input type="text" name="captcha_code" value="" />
+                        <td><?php echo $this->form->getError('captchaCode'); ?>
+                        <!-- <input type="text" name="captcha_code" value="" /> -->
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                        <img src="/widgets/captcha/create">
+                        <?php $this->captcha->printCaptcha(); ?>
                         </td>
                     </tr>
                     <tr>
@@ -56,8 +56,8 @@
                     <h3>$this->form->outputArray()</h3>
                     <pre><?php print_r($this->form->outputArray()); ?></pre>
 
-                    <h3>$this->form->getError('captcha_code')</h3>
-                    <pre><?php echo $this->form->getError('captcha_code') ?></pre>
+                    <h3>$this->form->getError('captchaCode')</h3>
+                    <pre><?php echo $this->form->getError('captchaCode') ?></pre>
                 </section>
         </section>
 
