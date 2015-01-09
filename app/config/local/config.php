@@ -34,7 +34,7 @@ return array(
     'log' =>   array(
         'control' => array(
             'enabled' => true,   // Enable / Disable logging
-            'output'  => false,  // Debug log data as html output
+            'firelog' => false,  // Debug log data as html output
         ),
         'default' => array(
             'channel' => 'system',       // Default channel name should be general.

@@ -11,8 +11,10 @@
             <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
         </header>
 
-        <?php echo $this->flash->output(); ?>
-
+        <section>
+            <?php echo $this->flash->output(); ?>
+        </section>
+        
         <h1>Captcha Example</h1>
 
         <section style="color:red;">

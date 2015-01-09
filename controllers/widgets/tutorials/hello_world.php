@@ -20,6 +20,9 @@ Class Hello_World extends \Controller
         // $this->c->bind('user', 'Member\User');
 
         $this->model->user->test();
+
+        echo $this->c['app']->getEnvPath();
+
         // $this->model->userLogin->test();
 
         // $this->c->bind('new model.user');
