@@ -29,7 +29,7 @@ return array(
         'truecolor'  => true,                   // PHP.net recommends imagecreatetruecolor(), but it isn't always available
         'type'       => 'png',                  // Set image extension
         'wave'       => true,                   // Image wave for more strong captchas.
-        'path'       => '/temp',   // Set captcha image path
+        'path'       => '/data/temp',   // Set captcha image path
         'height'     => 80,                     // Height of captcha image, "width = auto" no need to set it.
         'expiration' => 10,                     // Expiration time of captcha ( second )
     ),

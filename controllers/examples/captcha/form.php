@@ -37,8 +37,9 @@ Class Form extends \Controller
                 $this->form->setErrors($this->validator);
 
             } else {
-
-                $result = $this->captcha->image->check($this->validator->getValue('captcha_code'));
+                
+                $code = $this->validator->getValue('captcha_code');
+                $result = $this->captcha->check($code);
 
                 if ($result->isValid()) {
 

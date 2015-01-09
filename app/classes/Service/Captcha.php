@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Obullo\Captcha\CaptchaService;
+use Obullo\Captcha\Adapter\Image;
 
 /**
  * Captcha Service
@@ -26,7 +26,7 @@ Class Captcha implements ServiceInterface
     public function register($c)
     {
         $c['captcha'] = function () use ($c) {
-            return new CaptchaService($c, $c['config']->load('captcha'));
+            return new Image($c);
         };
     }
 }
