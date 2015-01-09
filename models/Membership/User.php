@@ -1,9 +1,11 @@
 <?php
 
+namespace Membership;
+
 /**
  * User model
  */
-Class User extends Model
+Class User extends \Model
 {
     public $email;
     public $username;
@@ -21,9 +23,9 @@ Class User extends Model
         // echo 'new instance<br>';
     }
 
-    public function test($var = 'test')
+    public function test()
     {
-        echo __CLASS__.$var;
+        echo __CLASS__;   
     }
 
     public function save()

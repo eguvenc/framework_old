@@ -13,15 +13,14 @@ Class Hello_World extends \Controller
     {
         $this->c->load('view');
         // $this->c->bind('user', 'Member\User');
-        $this->c->bind('new user', 'Member\User');
-
-
-        // $this->user;
-
+        
+        $this->c->bind('model as user', 'Membership\User');
+        // $this->c->bind('model as UserLogin', 'User');
         // $this->c->bind('model.user', 'User');
+        // $this->c->bind('user', 'Member\User');
 
-
-        // var_dump($this->model->user);
+        $this->model->user->test();
+        // $this->model->userLogin->test();
 
         // $this->c->bind('new model.user');
         // $this->c->bind('new model.user');
