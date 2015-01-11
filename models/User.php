@@ -18,12 +18,12 @@ Class User extends Model
     {
         $this->c->load('service/db'); 
 
-        // echo 'new instance<br>';
+        echo 'new instance<br>';
     }
 
-    public function test($var = 'test')
+    public function test()
     {
-        echo __CLASS__.$var;
+        echo __CLASS__.'<br />';
     }
 
     public function save()

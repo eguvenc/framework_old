@@ -9,14 +9,14 @@
 return array(
                     
     'error' => array(
-        'debug' => false,       // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
+        'debug' => true,       // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
         'reporting' => false,   // Turn on it if you want catch "unusual hidden errors", should be "Disabled"" in "PRODUCTION".
     ),
 
     'log' =>   array(
         'control' => array(
-            'enabled' => true,
-            'output'  => false,
+            'enabled' => false,
+            'firelog'  => false,
         )
     ),
 

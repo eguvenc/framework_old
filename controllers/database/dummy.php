@@ -1,6 +1,6 @@
 <?php
 
-namespace Jsons;
+namespace Database;
 
 Class Dummy extends Controller
 {
@@ -22,6 +22,8 @@ Class Dummy extends Controller
     public function index()
     {
         try {
+
+            // $this->c->bind('model user')->save();
 
             // $r = array(
             //   'success' => 1, 

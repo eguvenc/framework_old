@@ -12,29 +12,16 @@ Class Hello_World extends \Controller
     public function load()
     {
         $this->c->load('view');
-        // $this->c->bind('user', 'Member\User');
-        
-        $this->c->bind('model as user', 'Membership\User');
-        // $this->c->bind('model as UserLogin', 'User');
-        // $this->c->bind('model.user', 'User');
-        // $this->c->bind('user', 'Member\User');
+
+        // $this->user = new Model\Membership\User;
+
+        $this->c->bind('model user', 'Membership\User');
 
         $this->model->user->test();
 
-        echo $this->c['app']->getEnvPath();
+        // echo get_class($this->model->member).'<br>';
 
-        // $this->model->userLogin->test();
-
-        // $this->c->bind('new model.user');
-        // $this->c->bind('new model.user');
-        // $this->c->bind('new model.user');
-        //$this->c->bind('model.user');
-        //$this->c->bind('model.user');
-        // $this->c->bind('model.user');
-        // $this->c->bind('model.user');
-        // $this->c->bind('model.test');
-
-        // var_dump($this->model->user);
+        // $this->model->member->test();
         // var_dump(get_class($this->model));
         // var_dump(get_class($this->model->user));
     }

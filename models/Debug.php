@@ -1,9 +1,9 @@
 <?php
 
 /**
- * User model
+ * Debug model
  */
-Class Test extends Model
+Class Debug extends Model
 {
     /**
      * Loader
@@ -17,7 +17,7 @@ Class Test extends Model
 
     public function test()
     {
-        echo 'ok';
+        echo 'oksssss';
     }
 
 }
