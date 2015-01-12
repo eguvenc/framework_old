@@ -2,7 +2,7 @@
 
 namespace Auth\Identities;
 
-use Obullo\Auth\Identities\IdentityInterface,
+use Obullo\Authentication\Identities\IdentityInterface,
     Auth\Constant;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Obullo\Auth\UserService,
+use Obullo\Authentication\UserService,
     Service\ServiceInterface;
     
 /**

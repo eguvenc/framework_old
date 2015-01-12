@@ -2,8 +2,8 @@
 
 namespace Auth\Provider;
 
-use Obullo\Auth\UserProviderInterface,
-    Obullo\Auth\UserProvider as ObulloUserProvider,
+use Obullo\Authentication\UserProviderInterface,
+    Obullo\Authentication\UserProvider as ObulloUserProvider,
     Auth\Identities\GenericUser,
     Auth\Identities\AuthorizedUser,
     Auth\Constant;
