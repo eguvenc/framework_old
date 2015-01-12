@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <link href="@ASSETS/css/welcome.css" rel="stylesheet" type="text/css" />
+        <?php $this->captcha->printJs(); ?>
+
         <title>Captcha</title>
     </head>
 
@@ -24,7 +26,7 @@
                     echo $output['errors']['message'];
             ?>
         </section>
-        
+
         <section>
             <form action="/examples/captcha/form" method="POST">
                 <table width="100%">
