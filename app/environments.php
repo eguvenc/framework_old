@@ -2,33 +2,19 @@
 
 return array(
 
-    'env' => array(
+    'local' => array (
+        'aly',
+        'someone.computer',
+        'anotherone.computer',
+        'ersin-desktop',
+    ),
 
-        'local' => array (
-            'server' => array(
-                'hostname' => array(
-                    'aly',
-                    'someone.computer',
-                    'anotherone.computer',
-                    'ersin-desktop',
-                ),
-            ),
-        ),
-        'test' => array (
-            'server' => array(
-                'hostname' => array(
-                    'localhost.test',
-                ),
-            ),
-        ),
-        'production' => array (
-            'server' => array(
-                'hostname' => array(
-                    'localhost.production',
-                ),
-            ),
-        ),
+    'test' => array (
+        'localhost.test',
+    ),
 
+    'production' => array (
+        'localhost.production',
     ),
 );
 
