@@ -30,24 +30,23 @@ Class Form extends \Controller
 
             $this->c->load('validator'); // load validator
 
-            $this->validator->setRules('captchaCode', 'Captcha', 'required|exact(5)|trim');
+            if (($code = $this->request->post('g-recaptcha-response')) === false) {
+                $this->validator->setRules('captchaCode', 'Captcha', 'required|exact(5)|trim');
+            }
 
             if (  ! $this->validator->isValid()) {
-                
                 $this->form->setErrors($this->validator);
-
             } else {
 
-                $code = $this->validator->getValue('captcha_code');
+                $code = ($code !== false) ? $code : $this->validator->getValue('captchaCode');
                 $result = $this->captcha->check($code);
 
                 if ($result->isValid()) {
 
-                    $this->flash->success($result->getMessage());
+                    $this->flash->success('Captcha successful.');
                     $this->url->redirect('examples/captcha/form');
 
                 } else {
-
                     $this->validator->setError($result->getArray());
                     $this->form->setErrors($this->validator);
                 }

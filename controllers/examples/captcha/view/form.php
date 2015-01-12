@@ -24,7 +24,7 @@
                     echo $output['errors']['message'];
             ?>
         </section>
-
+        
         <section>
             <form action="/examples/captcha/form" method="POST">
                 <table width="100%">
