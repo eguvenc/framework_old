@@ -21,7 +21,7 @@ Class Form extends \Controller
 
     /**
      * Index
-     * 
+     *
      * @return void
      */
     public function index()
@@ -30,16 +30,10 @@ Class Form extends \Controller
 
             $this->c->load('validator'); // load validator
 
-            if (($code = $this->request->post('g-recaptcha-response')) === false) {
-                $this->validator->setRules('captchaCode', 'Captcha', 'required|exact(5)|trim');
-            }
-
             if (  ! $this->validator->isValid()) {
                 $this->form->setErrors($this->validator);
             } else {
-
-                $code = ($code !== false) ? $code : $this->validator->getValue('captchaCode');
-                $result = $this->captcha->check($code);
+                $result = $this->captcha->check();
 
                 if ($result->isValid()) {
 
