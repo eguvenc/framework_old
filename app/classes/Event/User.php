@@ -2,8 +2,8 @@
 
 namespace Event;
 
-use Obullo\Auth\AuthResult,
-    Obullo\Auth\User\UserIdentity;
+use Obullo\Authentication\AuthResult,
+    Obullo\Authentication\User\UserIdentity;
 
 /**
  * User event handler

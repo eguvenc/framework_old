@@ -13,7 +13,10 @@ Class Hello_World extends \Controller
     {
         $this->c->load('view');
 
-        new \Object;
+        $this->c->load('service/db');
+        
+        $this->db->query("SELECT * FROM %s WHERE id = ?", array('users'), array(1));
+
 
         // $this->c->load('service/crud as db', $this->c->load('return service/db'));
 
