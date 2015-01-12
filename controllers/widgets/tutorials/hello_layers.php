@@ -34,7 +34,6 @@ Class Hello_Layers extends \Controller
                 $this->assign('a', $a);
                 $this->assign('b', $b);
                 $this->assign('c', $c);
-                $this->assign('footer', $this->template('footer'));
             }
         );
     }

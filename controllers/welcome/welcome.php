@@ -25,8 +25,7 @@ Class Welcome extends \Controller
         $this->view->load(
             'welcome',
             function () {
-                $this->assign('name', 'Obullo');
-                $this->assign('footer', $this->template('footer', false));
+                $this->assign('title', 'Welcome to Obullo !');
             }
         );
     }
