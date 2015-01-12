@@ -13,11 +13,18 @@ Class Hello_World extends \Controller
     {
         $this->c->load('view');
 
+        new \Object;
+
+        // $this->c->load('service/crud as db', $this->c->load('return service/db'));
+
+        // $this->db->get('users', 10);
+        // echo $this->db->lastQuery();
+
         // $this->user = new Model\Membership\User;
 
-        $this->c->bind('model user', 'Membership\User');
+        // $this->c->bind('model user', 'Membership\User');
 
-        $this->model->user->test();
+        // $this->model->user->test();
 
         // echo get_class($this->model->member).'<br>';
 

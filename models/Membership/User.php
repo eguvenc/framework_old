@@ -30,7 +30,7 @@ Class User extends Model
         echo __CLASS__.'<br />';   
     }
 
-    public function save()
+    public function insert()
     {
         $this->db->insert(
             'users', 

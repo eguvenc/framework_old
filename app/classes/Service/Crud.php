@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Obullo\Database\Pdo\Query,
+use Obullo\Database\Pdo\QueryBuilder,
     Obullo\Database\Pdo\Handler\Mysql;
 
 /**
@@ -27,7 +27,7 @@ Class Crud implements ServiceInterface
     public function register($c)
     {
         $c['crud'] = function ($database) use ($c) {
-            return new Query($c, $database);
+            return new QueryBuilder($c, $database);
         };
     }
 }
