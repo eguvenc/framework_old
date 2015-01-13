@@ -8,12 +8,23 @@ return array(
         'provider' => '\Obullo\Authentication\UserProvider', // User provider, you can replace it with your own.
     ),
 
-    'memory' => array(              // Keeps user identity data in your cache driver.
+    'database' => array(      // Set your login query database table and column names
+        'table' => array(
+            'users' => array(
+                'tablename' => 'users',
+                'id' => 'id',
+                'identifier' => 'username',
+                'password' => 'password',
+                'rememberToken' => 'remember_token',
+            )
+        ),
+    ),
+    'cache' => array(               // Keeps user identity data in your cache driver.
         'key' => 'Auth',            // Auth key should be replace with your projectname to prevent collisions
         'storage' => '\Obullo\Authentication\Storage\Redis',   // Storage driver uses cache package
         'block' => array(
             'permanent' => array(
-                'lifetime' => 86400,  // 24 hours
+                'lifetime' => 86400,  // 24 hours default, it should be long period ( this is identity cache )
             ),
             'temporary'  => array(
                 'lifetime' => 300    // 5 minutes is default temporary login lifetime.

@@ -60,7 +60,7 @@ Class MaintenanceFilter
      */
     protected function allWebSiteFilter()
     {
-        if ($this->c['config']->env['web']['app']['all']['maintenance'] == 'down') {
+        if ($this->c['config']->env['application']['all']['maintenance'] == 'down') {
             $this->show503();
         }
     }

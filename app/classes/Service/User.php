@@ -26,9 +26,23 @@ Class User implements ServiceInterface
      */
     public function register($c)
     {
-        $c['user'] = function () use ($c) {
-            return new UserService($c, $c->load('return service/provider/db'));
+        $c['user'] = function ($params = array('table' => 'users')) use ($c) {
+            return new UserService($c, $params);
         };
+    }
+
+    /**
+     * Bind parameters
+     * 
+     * @return array
+     */
+    public function bindArray()
+    {
+        return array(
+            'db' => array(
+                'params' => array('db' => 'db', 'provider' => 'mysql')  //  bind database provider parameters
+            )
+        );
     }
 
 }
