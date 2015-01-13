@@ -50,7 +50,6 @@ Class Hello_Captcha extends \Controller
         $this->view->load(
             'hello_captcha',
             function () {
-                $this->assign('name', 'Obullo');
                 $this->assign('title', 'Hello Captcha !');
                 $this->layout('welcome');
             }

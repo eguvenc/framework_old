@@ -62,13 +62,7 @@ Class Hello_Form extends \Controller
             $this->form->setErrors($this->validator->getErrors());
         }
 
-        $this->view->load(
-            'hello_form', 
-            function () {
-                $this->assign('name', 'Obullo');
-                $this->assign('footer', $this->template('footer'));
-            }
-        );
+        $this->view->load('hello_form');
     }
     
 }

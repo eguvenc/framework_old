@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <link href="@ASSETS/css/welcome.css" rel="stylesheet" type="text/css" />
-        <title>Obullo</title>
+        <title><?php echo $title; ?></title>
     </head>
     <body>
         <header>
@@ -30,7 +30,7 @@
 
         </section>
 
-        <?php echo $footer ?>
+        <?php echo $this->view->template('footer'); ?>
         
         <section>
             <p>&nbsp;</p>

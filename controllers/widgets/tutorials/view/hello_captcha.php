@@ -78,7 +78,7 @@ var ajax = {
         </section> 
         
         <section>
-            <p>Total memory usage <?php echo round(memory_get_usage()/1024/1024, 2).' MB' ?></p>
+        <?php echo $this->view->template('footer'); ?>
         </section>
 
     <section>

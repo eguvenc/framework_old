@@ -58,6 +58,6 @@ header{padding: 30px 0;text-align:center;}
             <p>This is my first page.</p>
         </section>
 
-        <?php echo $footer ?>
+        <?php echo $this->view->template('footer'); ?>
     </body>
 </html>

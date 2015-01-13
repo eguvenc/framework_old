@@ -42,7 +42,7 @@
 </section>
 
 
-<?php echo $footer ?>
+<?php echo $this->view->template('footer') ?>
 
 <section>
     <p>&nbsp;</p>

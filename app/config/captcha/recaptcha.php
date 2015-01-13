@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    
     'locale' => array(
         'lang' => 'en'                                                  // Captcha language
     ),

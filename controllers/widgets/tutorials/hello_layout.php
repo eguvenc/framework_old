@@ -25,9 +25,7 @@ Class Hello_Layout extends \Controller
         $this->view->load(
             'hello_layout',
             function () {
-                $this->assign('name', 'Obullo');
                 $this->assign('title', 'Hello Layout World !');
-                $this->assign('footer',  $this->template('footer'));
                 $this->layout('welcome');
             }
         );

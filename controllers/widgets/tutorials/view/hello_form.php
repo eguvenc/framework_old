@@ -69,7 +69,7 @@
 
         </section> 
 
-        <?php echo $footer ?>
+        <?php echo $this->view->template('footer'); ?>
     </body>
     
 </html>
