@@ -13,22 +13,16 @@ Class Welcome extends \Controller
     {
         $this->c->load('url');
         $this->c->load('view');
-        $this->c->load('service/rbac', $this->c->load('service/db'));
+        $this->c->load('service/rbac');
     }
 
     /**
      * Index
-     * 
+     *
      * @return void
      */
     public function index()
     {
-        echo '<pre>';
-        $this->rbac->user->setUserId(1);
-        $this->rbac->user->setResourceId('test');
-        $this->rbac->user->setRoleIds(1);
-        var_dump($this->rbac->user->object->form->getPermissions(array('input1', 'input2'), 'view'));
-
         $this->view->load(
             'welcome',
             function () {
