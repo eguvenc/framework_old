@@ -19,7 +19,7 @@ return array(
             'host' => 'localhost',
             'username' => env('MYSQL_USERNAME'),
             'password' => env('MYSQL_PASSWORD', '', false),
-            'database' => 'test',
+            'database' => 'betforyousystem',
             'port'     => '',
             'charset'  => 'utf8',
             'autoinit' => array('charset' => true, 'bufferedQuery' => true),
