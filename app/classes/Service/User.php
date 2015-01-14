@@ -24,7 +24,7 @@ Class User implements ServiceInterface
      */
     public function __construct($c)
     {
-        $c['user.params']['database'] = array('db' => 'db', 'provider' => 'mysql');  // bind database provider parameters
+        $c['config']['user.params.database'] = array('db' => 'db', 'provider' => 'mysql');  // bind database provider parameters
     }
 
     /**

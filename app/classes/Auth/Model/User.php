@@ -1,15 +1,15 @@
 <?php
 
-namespace Auth\Provider;
+namespace Auth\Model;
 
-use Obullo\Authentication\UserProviderInterface,
-    Obullo\Authentication\UserProvider as ObulloUserProvider,
+use Obullo\Authentication\Model\UserInterface,
+    Obullo\Authentication\Model\User as ModelUser,
     Auth\Identities\GenericUser,
     Auth\Identities\AuthorizedUser,
     Auth\Constant;
 
 /**
- * O2 Auth - User Database Provider
+ * O2 Auth - User Database Model
  *
  * @category  Auth
  * @package   Provider
@@ -18,7 +18,7 @@ use Obullo\Authentication\UserProviderInterface,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/package/auth
  */
-Class UserProvider extends ObulloUserProvider implements UserProviderInterface
+Class User extends ModelUser implements UserInterface
 {
     /**
      * Constructor
@@ -45,7 +45,7 @@ Class UserProvider extends ObulloUserProvider implements UserProviderInterface
 
 }
 
-// END UserProvider.php File
-/* End of file UserProvider.php
+// END User.php File
+/* End of file User.php
 
-/* Location: .app/classes/Auth/Provider/UserProvider.php */
+/* Location: .app/classes/Auth/Model/User.php */
