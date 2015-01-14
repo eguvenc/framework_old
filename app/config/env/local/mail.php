@@ -76,4 +76,4 @@ return array(
 );
 
 /* End of file mail.php */
-/* Location: .app/config/local/mail.php */
+/* Location: .app/config/env/local/mail.php */

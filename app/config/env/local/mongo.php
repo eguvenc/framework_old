@@ -18,4 +18,4 @@ return array(
 );
 
 /* End of file mongo.php */
-/* Location: .app/config/local/mongo.php */
+/* Location: .app/config/env/local/mongo.php */

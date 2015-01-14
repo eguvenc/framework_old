@@ -157,4 +157,4 @@ return array(
 );
 
 /* End of file config.php */
-/* Location: .app/config/local/config.php */
+/* Location: .app/config/env/local/config.php */

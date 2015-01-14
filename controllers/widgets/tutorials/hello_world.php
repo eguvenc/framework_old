@@ -13,7 +13,7 @@ Class Hello_World extends \Controller
     {
         $this->c->load('view');
 
-        $this->c->load('service/db');
+        // print_r($this->db->resultArray());
 
         // $this->c->load('service/crud as db', $this->c->load('return service/db'));
 

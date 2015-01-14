@@ -17,9 +17,9 @@ return array(
 
         'db' => array(
             'host' => 'localhost',
-            'username' => env('MYSQL_USERNAME'),
-            'password' => env('MYSQL_PASSWORD', '', false),
-            'database' => 'betforyousystem',
+            'username' => env('MYSQL_USERNAME'),  // @MYSQL_USERNAME.REQUIRED
+            'password' => env('MYSQL_PASSWORD', '', false), // @MYSQL_PASSWORD.NULL
+            'database' => 'test',
             'port'     => '',
             'charset'  => 'utf8',
             'autoinit' => array('charset' => true, 'bufferedQuery' => true),
@@ -31,9 +31,9 @@ return array(
 
         'failed' => array(
             'host' => 'localhost',
-            'username' => env('MYSQL_USERNAME'),
-            'password' => env('MYSQL_PASSWORD', '', false),
-            'database' => 'failed_jobs',
+            'username' => env('MYSQL_USERNAME'),  // @MYSQL_USERNAME.REQUIRED
+            'password' => env('MYSQL_PASSWORD', '', false), // @MYSQL_PASSWORD.NULL
+            'database' => 'failed',
             'port'     => '',
             'charset'  => 'utf8',
             'autoinit' => array('charset' => true, 'bufferedQuery' => true),
@@ -47,4 +47,4 @@ return array(
 );
 
 /* End of file database.php */
-/* Location: .app/config/local/database.php */
+/* Location: .app/config/env/local/database.php */

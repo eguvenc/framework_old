@@ -34,4 +34,4 @@ return array(
 );
 
 /* End of file config.php */
-/* Location: .app/config/production/config.php */
+/* Location: .app/config/env/production/config.php */

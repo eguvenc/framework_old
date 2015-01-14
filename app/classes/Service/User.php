@@ -18,6 +18,16 @@ use Obullo\Authentication\UserService,
 Class User implements ServiceInterface
 {
     /**
+     * Configure servide parameters
+     * 
+     * @param object $c container
+     */
+    public function __construct($c)
+    {
+        $c['user.params']['database'] = array('db' => 'db', 'provider' => 'mysql');  // bind database provider parameters
+    }
+
+    /**
      * Registry
      *
      * @param object $c container
@@ -30,21 +40,6 @@ Class User implements ServiceInterface
             return new UserService($c, $params);
         };
     }
-
-    /**
-     * Bind parameters
-     * 
-     * @return array
-     */
-    public function bindArray()
-    {
-        return array(
-            'db' => array(
-                'params' => array('db' => 'db', 'provider' => 'mysql')  //  bind database provider parameters
-            )
-        );
-    }
-
 }
 
 // END User class

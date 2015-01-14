@@ -5,7 +5,7 @@ return array(
     'adapter' => '\Obullo\Authentication\Adapter\Database',  // Adapter
 
     'user' => array(
-        'provider' => '\Obullo\Authentication\UserProvider', // User provider, you can replace it with your own.
+        'provider' => '\Obullo\Authentication\Model\User', // User model, you can replace it with your own.
     ),
 
     'database' => array(      // Set your login query database table and column names
