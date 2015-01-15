@@ -13,24 +13,18 @@ Class Hello_World extends \Controller
     {
         $this->c->load('view');
 
-        // print_r($this->db->resultArray());
+        $this->c->load('service/db');
 
-        // $this->c->load('service/crud as db', $this->c->load('return service/db'));
+        $columns = array('username', 'password');
+        $values  = array('ersin', '123456');
 
-        // $this->db->get('users', 10);
-        // echo $this->db->lastQuery();
+        echo $this->db->write("INSERT INTO %s", array('users'), $columns, $values);
+        
+        // $this->db->write("REPLACE INTO %s", array('users'), $data);
+        // $this->db->write("UPDATE %s WHERE user_id = ?", array('users'), $data, array(4));
+        // $this->db->write("DELETE FROM %s WHERE user_id = ?", array('users'), array(4));
+        
 
-        // $this->user = new Model\Membership\User;
-
-        // $this->c->bind('model user', 'Membership\User');
-
-        // $this->model->user->test();
-
-        // echo get_class($this->model->member).'<br>';
-
-        // $this->model->member->test();
-        // var_dump(get_class($this->model));
-        // var_dump(get_class($this->model->user));
     }
 
     /**

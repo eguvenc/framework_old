@@ -2,8 +2,7 @@
 
 namespace Auth\Identities;
 
-use Obullo\Authentication\Identities\IdentityInterface,
-    Auth\Constant;
+use Obullo\Authentication\Identities\GenericUserInterface;
 
 /**
  * Generic User Identity
@@ -15,27 +14,27 @@ use Obullo\Authentication\Identities\IdentityInterface,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/package/auth
  */
-Class GenericUser implements IdentityInterface
+Class GenericUser implements GenericUserInterface
 {
-    /**
-     * All of the user's attributes.
-     *
-     * @var array
-     */
     protected $attributes;
+    protected $identifier;
+    protected $password;
 
     /**
      * Create a new generic User object.
      *
-     * @param array $attributes identity array
+     * @param array $params     auth table parameters
+     * @param array $attributes user identities
      * 
      * @return void
      */
-    public function __construct(array $attributes)
+    public function __construct(array $params, array $attributes)
     {
         $this->attributes = $attributes;
+        $this->identifier = $params['identifier'];
+        $this->password   = $params['password'];
     }
-
+    
     /**
      * Get the unique identifier for the user.
      *
@@ -43,7 +42,7 @@ Class GenericUser implements IdentityInterface
      */
     public function getIdentifier()
     {
-        return isset($this->attributes[Constant::IDENTIFIER]) ? $this->attributes[Constant::IDENTIFIER] : false;
+        return isset($this->attributes[$this->identifier]) ? $this->attributes[$this->identifier] : false;
     }
 
     /**
@@ -53,7 +52,7 @@ Class GenericUser implements IdentityInterface
      */
     public function getPassword()
     {
-        return isset($this->attributes[Constant::PASSWORD]) ? $this->attributes[Constant::PASSWORD] : false;
+        return isset($this->attributes[$this->password]) ? $this->attributes[$this->password] : false;
     }
     
     /**
