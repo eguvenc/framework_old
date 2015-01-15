@@ -2,7 +2,8 @@
 
 namespace Service;
 
-use Obullo\Permissions\RbacService;
+use Service\ServiceInterface,
+    Obullo\Permissions\RbacService;
 
 /**
  * Rbac PermissionService ( Shared )
@@ -17,6 +18,16 @@ use Obullo\Permissions\RbacService;
 Class Rbac implements ServiceInterface
 {
     /**
+     * Configure servide parameters
+     * 
+     * @param object $c container
+     */
+    public function __construct($c)
+    {
+        $c['config']['rbac.params.database'] = array('db' => 'db', 'provider' => 'mysql');  // bind database provider parameters
+    }
+
+    /**
      * Registry
      *
      * @param object $c container
@@ -25,8 +36,8 @@ Class Rbac implements ServiceInterface
      */
     public function register($c)
     {
-        $c['rbac'] = function ($params = array('db' => 'db', 'provider' => 'mysql')) use ($c) {
-            return new RbacService($c, $params);
+        $c['rbac'] = function () use ($c) {
+            return new RbacService($c);
         };
     }
 }

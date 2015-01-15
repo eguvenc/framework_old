@@ -13,7 +13,6 @@ Class Welcome extends \Controller
     {
         $this->c->load('url');
         $this->c->load('view');
-        $this->c->load('service/rbac');
     }
 
     /**
