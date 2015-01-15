@@ -7,19 +7,7 @@ use Obullo\Cli\Controller\WorkerController;
 /**
  * Worker controller
  */
-Class Worker extends \Controller
-{
-    /**
-     * Index
-     * 
-     * @return void
-     */
-    public function index()
-    {
-        $worker = new WorkerController($this->c, func_get_args());
-        $worker->run();
-    }
-}
+Class Worker extends WorkerController{}
 
 /* End of file worker.php */
 /* Location: .app/tasks/controller/worker.php */

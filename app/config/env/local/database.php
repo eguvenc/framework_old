@@ -1,5 +1,7 @@
 <?php
 
+use Obullo\Config\Object;
+
 return array(
     
     'default' => array(
@@ -15,24 +17,26 @@ return array(
 
     'key' => array(
 
-        'db' => array(
-            'host' => 'localhost',
-            'username' => env('MYSQL_USERNAME'),  // @MYSQL_USERNAME.REQUIRED
-            'password' => env('MYSQL_PASSWORD', '', false), // @MYSQL_PASSWORD.NULL
-            'database' => 'test',
-            'port'     => '',
-            'charset'  => 'utf8',
-            'autoinit' => array('charset' => true, 'bufferedQuery' => true),
-            'dsn'      => '',
-            'pdo'      => array(
-                'options'  => array()
-            ),
+        'db' => new Object(
+            array(
+                'host' => 'localhost',
+                'username' => '@MYSQL_USERNAME.ROOT.REQUIRED',
+                'password' => '@MYSQL_PASSWORD.NULL',
+                'database' => 'test',
+                'port'     => '',
+                'charset'  => 'utf8',
+                'autoinit' => array('charset' => true, 'bufferedQuery' => true),
+                'dsn'      => '',
+                'pdo'      => array(
+                    'options'  => array()
+                ),
+            )
         ),
 
         'failed' => array(
             'host' => 'localhost',
-            'username' => env('MYSQL_USERNAME'),  // @MYSQL_USERNAME.REQUIRED
-            'password' => env('MYSQL_PASSWORD', '', false), // @MYSQL_PASSWORD.NULL
+            'username' =>'@MYSQL_USERNAME.REQUIRED',
+            'password' =>'@MYSQL_PASSWORD.NULL',
             'database' => 'failed',
             'port'     => '',
             'charset'  => 'utf8',

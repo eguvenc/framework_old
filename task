@@ -52,4 +52,4 @@ ini_set('memory_limit', '100000M');  // Set maximum amount of memory for Cli ope
 |--------------------------------------------------------------------------
 | Name of index.php file
 */ 
-require(INDEX_PHP);
+require(CLI_PHP);

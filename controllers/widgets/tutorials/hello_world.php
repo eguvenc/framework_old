@@ -12,17 +12,27 @@ Class Hello_World extends \Controller
     public function load()
     {
         $this->c->load('view');
+        // $this->c->load('service/db');
 
-        $this->c->load('service/db');
+        // $this->config->load('database');
 
-        $columns = array('username', 'password');
-        $values  = array('ersin', '123456');
+        // echo $this->config['database']['key']['db']->username;
 
-        echo $this->db->write("INSERT INTO %s", array('users'), $columns, $values);
-        
-        // $this->db->write("REPLACE INTO %s", array('users'), $data);
-        // $this->db->write("UPDATE %s WHERE user_id = ?", array('users'), $data, array(4));
-        // $this->db->write("DELETE FROM %s WHERE user_id = ?", array('users'), array(4));
+        // $this->c['config']->load('cache');
+
+        // echo $this->config['cache']['redis']['servers'][0]['hostname'];
+
+        // $columns = array('username', 'password');
+        // $values  = array('ersin', '123456');
+
+        // $data = array('username' => 'ersin', 'password' => "asd'^sd");
+
+        // $this->db->query("SELECT * FROM %s WHERE user_id = ?", array('users'), array(5));
+        // $this->db->query("INSERT INTO %s", array('users'), $data);
+        // $this->db->query("REPLACE INTO %s", array('users'), $data);
+
+        // $this->db->query("UPDATE %s WHERE user_id = ?", array('users'), $data, array(4));
+        // $this->db->query("DELETE FROM %s WHERE user_id = ?", array('users'), array(4));
         
 
     }

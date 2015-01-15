@@ -49,6 +49,7 @@ define('CONTROLLERS', (defined('STDIN')) ? APP : CONTROLLER_FOLDER);
 define('MODELS', ROOT .'models'. DS);
 define('TASK_FILE', 'task');
 define('TASK', PHP_PATH .' '. APP .'tasks'. DS .'cli'. DS);
+define('CLI_PHP', 'cli.php');
 define('INDEX_PHP', 'index.php');
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +57,8 @@ define('INDEX_PHP', 'index.php');
 |--------------------------------------------------------------------------
 */
 define('OBULLO',  ROOT . PACKAGE_VERSION . DS);
-define('OBULLO_PHP',  OBULLO .'Obullo'. DS .'Obullo.php');
+define('OBULLO_CLI',  OBULLO .'Obullo'. DS .'Cli.php');
+define('OBULLO_HTTP',  OBULLO .'Obullo'. DS .'Http.php');
 define('OBULLO_CONFIG',  OBULLO .'Config'. DS .'Config.php');
 define('OBULLO_CORE',  OBULLO .'Obullo'. DS .'Core.php');
 define('OBULLO_CONTAINER',  OBULLO .'Container'. DS .'Container.php');
