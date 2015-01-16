@@ -34,7 +34,7 @@
 
 <p><kbd>$this->layout();</kbd> method calls <b>welcome</b> layout config then assign them to <b>hello_layout</b> file.</p>
 
-<pre>$this->view->load('hello_layout', function() {
+<pre>$this->c['view']->load('hello_layout', function() {
         $this->assign('name', 'Obullo');
         $this->assign('title', 'Hello Scheme World !');
         $this->layout('welcome');

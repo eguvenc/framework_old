@@ -29,8 +29,8 @@ return array(
             'priority' =>  3,         // 1, 2, 3, 4, 5   Email Priority. 1 = highest. 5 = lowest. 3 = normal.
             'crlf'  => "\n",          //  "\r\n" or "\n" or "\r"  Newline character. (Use "\r\n" to comply with RFC 822).
             'newline' =>  "\n",       // "\r\n" or "\n" or "\r"  Newline character. (Use "\r\n" to comply with RFC 822).
-            'bccBatchMode' =>  false,   // true or false (boolean) Enable BCC Batch Mode.
-            'bccBatchSize' => 200,     // None  Number of emails in each BCC batch.
+            'bccBatchMode' =>  false, // true or false (boolean) Enable BCC Batch Mode.
+            'bccBatchSize' => 200,    // None  Number of emails in each BCC batch.
         ),
 
         'from' => array(
@@ -47,18 +47,18 @@ return array(
                 'mailpath'  => '/usr/sbin/sendmail',  //  The server path to Sendmail.
             ),
             'smtp' => array(
-                'host' => 'smtp.mandrillapp.com',      // SMTP Server Address.
-                'user' => env('MANDRILL_USERNAME'),  // SMTP Username.
-                'pass' => env('MANDRILL_API_KEY'),   // SMTP Password.
-                'port' => '587',    // SMTP Port.
-                'timeout' => '5' ,  // SMTP Timeout (in seconds).
+                'host' => 'smtp.mandrillapp.com',          // SMTP Server Address.
+                'user' => $c['env']['MANDRILL_USERNAME'],  // SMTP Username.
+                'pass' => $c['env']['MANDRILL_API_KEY'],   // SMTP Password.
+                'port' => '587',                           // Port.
+                'timeout' => '5' ,                         // Timeout (in seconds).
             ),
         ),
 
         'transport' => array(
             'mandrill' => array(
-                'key' => env('MANDRILL_API_KEY'),  // Mandrill api key
-                'ip_pool' => 'Main Pool',           // The name of the dedicated ip pool that should be used to send the message.
+                'key' => $c['env']['MANDRILL_API_KEY'],  // Mandrill api key
+                'ip_pool' => 'Main Pool',                // The name of the dedicated ip pool that should be used to send the message.
             ),
             'mailgun' => array(
 

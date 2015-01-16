@@ -13,8 +13,6 @@ Class Form extends \Controller
     {
         $this->c->load('url');
         $this->c->load('form');
-        $this->c->load('view');
-        $this->c->load('request');
         $this->c->load('service/captcha');
         $this->c->load('flash/session as flash');
     }
@@ -26,7 +24,7 @@ Class Form extends \Controller
      */
     public function index()
     {
-        if ($this->request->isPost()) {
+        if ($this->c['request']->isPost()) {
 
             $this->c->load('validator'); // load validator
 
@@ -47,7 +45,7 @@ Class Form extends \Controller
             }
         }
 
-        $this->view->load(
+        $this->c['view']->load(
             'form',
             function () {
                 $this->assign('footer', $this->template('footer'));

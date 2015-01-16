@@ -20,12 +20,12 @@ return array(
     ),
 
     'cookie' => array(
-        'name'     => env('SESSION_COOKIE_NAME', 'session'),       // The name you want for the cookie
-        'domain'   => env('SESSION_COOKIE_DOMAIN', ''),            // Set to .your-domain.com for site-wide cookies
-        'path'     => env('SESSION_COOKIE_PATH', '/'),             // Typically will be a forward slash
-        'secure'   => env('SESSION_COOKIE_SECURE', false),         // When set to true, the cookie will only be set if a https:// connection exists.
-        'httpOnly' => env('SESSION_COOKIE_HTTP_ONLY', false),      // When true the cookie will be made accessible only through the HTTP protocol
-        'prefix'   => '',                                   // Set a prefix to your cookie
+        'name'     => $c['env']['SESSION_COOKIE_NAME.session'],    // The name you want for the cookie
+        'domain'   => $c['env']['SESSION_COOKIE_DOMAIN.NULL'],     // Set to .your-domain.com for site-wide cookies
+        'path'     => $c['env']['SESSION_COOKIE_PATH./'],          // Typically will be a forward slash
+        'secure'   => $c['env']['SESSION_COOKIE_SECURE'],          // When set to true, the cookie will only be set if a https:// connection exists.
+        'httpOnly' => $c['env']['SESSION_COOKIE_HTTP_ONLY'],       // When true the cookie will be made accessible only through the HTTP protocol
+        'prefix'   => '',                                          // Set a prefix to your cookie
     ),
     
     'meta' => array(

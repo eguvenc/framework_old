@@ -62,7 +62,7 @@ Class Hello_Form extends \Controller
             $this->form->setErrors($this->validator->getErrors());
         }
 
-        $this->view->load('hello_form');
+        $this->c['view']->load('hello_form');
     }
     
 }

@@ -31,7 +31,7 @@ Class Hello_Test extends \Controller
         echo $this->layer->get('widgets/tutorials/hello_dummy/index/1/2/6');
         echo $this->layer->get('views/header');
 
-        $this->view->load('hello_world');
+        $this->c['view']->load('hello_world');
     }
 }
 

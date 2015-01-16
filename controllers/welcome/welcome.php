@@ -12,7 +12,6 @@ Class Welcome extends \Controller
     public function load()
     {
         $this->c->load('url');
-        $this->c->load('view');
     }
 
     /**
@@ -22,7 +21,7 @@ Class Welcome extends \Controller
      */
     public function index()
     {
-        $this->view->load(
+        $this->c['view']->load(
             'welcome',
             function () {
                 $this->assign('title', 'Welcome to Obullo !');

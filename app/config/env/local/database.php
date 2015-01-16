@@ -1,7 +1,5 @@
 <?php
 
-use Obullo\Config\Object;
-
 return array(
     
     'default' => array(
@@ -17,11 +15,11 @@ return array(
 
     'key' => array(
 
-        'db' => new Object(
+        'db' => 
             array(
                 'host' => 'localhost',
-                'username' => '@MYSQL_USERNAME.ROOT.REQUIRED',
-                'password' => '@MYSQL_PASSWORD.NULL',
+                'username' => $c['env']['MYSQL_USERNAME.root'],
+                'password' => $c['env']['MYSQL_PASSWORD.NULL'],
                 'database' => 'test',
                 'port'     => '',
                 'charset'  => 'utf8',
@@ -30,13 +28,12 @@ return array(
                 'pdo'      => array(
                     'options'  => array()
                 ),
-            )
         ),
 
         'failed' => array(
             'host' => 'localhost',
-            'username' =>'@MYSQL_USERNAME.REQUIRED',
-            'password' =>'@MYSQL_PASSWORD.NULL',
+            'username' => $c['env']['MYSQL_USERNAME.REQUIRED'],
+            'password' => $c['env']['MYSQL_PASSWORD.NULL'],
             'database' => 'failed',
             'port'     => '',
             'charset'  => 'utf8',

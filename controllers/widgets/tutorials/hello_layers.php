@@ -12,9 +12,6 @@ Class Hello_Layers extends \Controller
     public function load()
     {
         $this->c->load('url');
-        $this->c->load('view');
-        $this->c->load('request');
-        $this->c->load('layer');
     }
 
     /**
@@ -24,11 +21,11 @@ Class Hello_Layers extends \Controller
      */
     public function index()
     {
-        $a = $this->layer->get('widgets/tutorials/hello_dummy/index/1/2/3');
-        $b = $this->layer->get('welcome/dummy/index/4/5/6');
-        $c = $this->layer->get('widgets/tutorials/hello_dummy/index/7/8/9');
+        $a = $this->c['layer']->get('widgets/tutorials/hello_dummy/index/1/2/3');
+        $b = $this->c['layer']->get('welcome/dummy/index/4/5/6');
+        $c = $this->c['layer']->get('widgets/tutorials/hello_dummy/index/7/8/9');
 
-        $this->view->load(
+        $this->c['view']->load(
             'hello_layers', 
             function () use ($a, $b, $c) {
                 $this->assign('a', $a);

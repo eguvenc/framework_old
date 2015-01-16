@@ -9,9 +9,9 @@ return array(
     'key' => array(
         
         'db' => array(
-            'host' => env('MONGO_HOST'),
-            'username' => env('MONGO_USERNAME'),
-            'password' => env('MONGO_PASSWORD'),
+            'host' => $c['env']['MONGO_HOST'],
+            'username' => $c['env']['MONGO_USERNAME'],
+            'password' => $c['env']['MONGO_PASSWORD'],
             'port' => '27017',
             ),
     ),

@@ -38,7 +38,7 @@ Class Header extends \Controller
             $li.= '<li>'.$this->url->anchor($key, $value, " $active ").'</li>';
         }
 
-        echo $this->view->load(
+        echo $this->c['view']->load(
             'header',
             function () use ($li) {
                 $this->assign('li', $li);

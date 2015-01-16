@@ -3,10 +3,10 @@
 return array(
 
     'server' => array(
-        'host'  => env('AMQP_HOST'),
+        'host'  => $c['env']['AMQP_HOST'],
+        'user'  => $c['env']['AMQP_USERNAME'],
+        'pass'  => $c['env']['AMQP_PASSWORD'],
         'port'  => 5672,
-        'user'  => env('AMQP_USERNAME'),
-        'pass'  => env('AMQP_PASSWORD'),
         'vhost' => '/',
         'debug' => true,
         'default' => array('queue' => 'default'),

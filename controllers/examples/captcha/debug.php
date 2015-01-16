@@ -12,7 +12,6 @@ Class Debug extends \Controller
     public function load()
     {
         $this->c->load('url');
-        $this->c->load('view');
         $this->c->load('captcha/debug');
     }
 
@@ -25,7 +24,7 @@ Class Debug extends \Controller
     {
         $fonts = $this->captchaDebug->font();
 
-        $this->view->load(
+        $this->c['view']->load(
             'debug',
             function () use ($fonts) {
                 $this->assign('fonts', $fonts);

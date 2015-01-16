@@ -22,7 +22,7 @@ Class Hello_Layout extends \Controller
      */
     public function index()
     {
-        $this->view->load(
+        $this->c['view']->load(
             'hello_layout',
             function () {
                 $this->assign('title', 'Hello Layout World !');

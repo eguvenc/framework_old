@@ -12,8 +12,6 @@ Class Hello_Ajax extends \Controller
     public function load()
     {
         $this->c->load('form');
-        $this->c->load('request');
-        $this->c->load('response');
     }
 
     /**
@@ -23,7 +21,7 @@ Class Hello_Ajax extends \Controller
      */
     public function index()
     {
-        if ($this->request->isAjax()) { // Is Ajax ?
+        if ($this->c['request']->isAjax()) { // Is Ajax ?
 
             $this->c->load('validator');
 
@@ -37,14 +35,12 @@ Class Hello_Ajax extends \Controller
                 $this->form->error('There are some errors in form fields.');
             }
             $this->form->setErrors($this->validator);
-            echo $this->response->json($this->form->outputArray());
+            echo $this->c['response']->json($this->form->outputArray());
             return;
         }
-
         $this->c->load('url');
-        $this->c->load('view');
 
-        $this->view->load(
+        $this->c['view']->load(
             'hello_ajax',
             function () {
                 $this->assign('name', 'Obullo');

@@ -12,10 +12,9 @@
         </header>
         <h1>Layer Tutorials</h1>
 <pre>
-$this->c->load('layer');
-$a = $this->layer->get('widgets/tutorials/hello_dummy/1/2/3');
-$b = $this->layer->get('welcome/dummy/4/5/6');
-$c = $this->layer->get('widgets/tutorials/hello_dummy/7/8/9');</pre>
+$a = $this->c['layer']->get('widgets/tutorials/hello_dummy/1/2/3');
+$b = $this->c['layer']->get('welcome/dummy/4/5/6');
+$c = $this->c['layer']->get('widgets/tutorials/hello_dummy/7/8/9');</pre>
 
         <section><p>&nbsp;</p></section>
 
@@ -25,7 +24,7 @@ $c = $this->layer->get('widgets/tutorials/hello_dummy/7/8/9');</pre>
             <?php echo $c ?>
         </section>
 
-        <?php echo $this->view->template('footer'); ?>
+        <?php echo $this->c['view']->template('footer'); ?>
 
         <section>
             <p>&nbsp;</p>
