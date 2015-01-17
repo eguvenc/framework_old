@@ -43,7 +43,7 @@ Class AuthFilter
             // Do something
             
             $this->user->activity->set('date', time());
-            $this->user->activity->update();        // Update user activity container
+            $this->user->activity->update();        // Update user activity data
         }
     }
     

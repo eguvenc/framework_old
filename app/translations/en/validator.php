@@ -1,8 +1,5 @@
 <?php
 
-// Validator English
-//-----------------------------------------------------------------
-
 return array(
     'OBULLO:VALIDATOR:REQUIRED'        => 'The %s field is required.',
     'OBULLO:VALIDATOR:CONTAINS'        => 'The %s field contains unaccepted value.',

@@ -12,6 +12,7 @@ Class Welcome extends \Controller
     public function load()
     {
         $this->c->load('url');
+        $this->c->load('view');
     }
 
     /**
@@ -21,11 +22,11 @@ Class Welcome extends \Controller
      */
     public function index()
     {
-        $this->c['view']->load(
+        $this->view->load(
             'welcome',
-            function () {
-                $this->assign('title', 'Welcome to Obullo !');
-            }
+            [
+                'title' => 'Welcome to Obullo !'
+            ]
         );
     }
 }

@@ -1,8 +1,5 @@
 <?php
 
-// Date Format English
-//-----------------------------------------------------------------
-
 return array(
     'date' => array(
         'OBULLO:DATE:YEAR'    => 'Year',

@@ -17,8 +17,8 @@ return array(
     |--------------------------------------------------------------------------
     */
     'url' => array(
-        'webhost'   => 'framework', // Your web host name default "localhost" should be "example.com" in production config.
-        'base'   => '/',         // Base Url "/" URL of your framework root, generally a '/' trailing slash. 
+        'webhost' => 'framework', // Your web host name default "localhost" should be "example.com" in production config.
+        'baseurl' => '/',         // Base Url "/" URL of your framework root, generally a '/' trailing slash. 
         'assets' => '/assets/',  // Assets Url of your framework generally a '/assets/' you may want to change it with your "cdn" provider.
         'rewrite' => array(
             'indexPage' => '',   // Typically this will be your index.php file, If mod_rewrite enabled is should be blank.

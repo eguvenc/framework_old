@@ -1,8 +1,5 @@
 <?php
 
-// Email English
-//-----------------------------------------------------------------
-
 return array(
     'OBULLO:MAIL:MUST_BE_ARRAY' => 'The email validation method must be passed an array.',
     'OBULLO:MAIL:INVALID_ADDRESS' => 'Invalid email address: %s',

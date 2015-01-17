@@ -2,24 +2,12 @@
 
 namespace Tasks;
 
-use Obullo\Cli\Controller\ServiceController;
+use Obullo\Cli\Tasks\ServiceController;
 
 /**
  * Service controller
  */
-Class Service extends \Controller
-{
-    /**
-     * Index
-     * 
-     * @return void
-     */
-    public function index()
-    {
-        $service = new ServiceController($this->c, func_get_args());
-        $service->run();
-    }
-}
+Class Service extends ServiceController {}
 
 /* End of file service.php */
 /* Location: .app/tasks/controller/service.php */

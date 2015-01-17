@@ -30,7 +30,7 @@
 
         </section>
 
-        <?php echo $this->c['view']->template('footer'); ?>
+        <?php echo $this->view->template('footer'); ?>
         
         <section>
             <p>&nbsp;</p>

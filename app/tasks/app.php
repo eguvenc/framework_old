@@ -2,24 +2,12 @@
 
 namespace Tasks;
 
-use Obullo\Cli\Controller\AppController;
+use Obullo\Cli\Tasks\AppController;
 
 /**
  * App controller
  */
-Class App extends \Controller
-{
-    /**
-     * Index
-     * 
-     * @return void
-     */
-    public function index()
-    {
-        $route = new AppController($this->c, func_get_args());
-        $route->run();
-    }
-}
+Class App extends AppController {}
 
 /* End of file app.php */
 /* Location: .app/tasks/controller/app.php */

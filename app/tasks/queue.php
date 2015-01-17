@@ -2,7 +2,7 @@
 
 namespace Tasks;
 
-use Obullo\Cli\Controller\QueueController;
+use Obullo\Cli\Tasks\QueueController;
 
 /**
  * Queue controller
