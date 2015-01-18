@@ -5,7 +5,7 @@ namespace Service;
 use Obullo\Mongo\Query;
 
 /**
- * Mongo Crud Service ( Shared )
+ * Mongo Query Service ( Shared )
  *
  * @category  Service
  * @package   Mongo
@@ -14,7 +14,7 @@ use Obullo\Mongo\Query;
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class MongoQuery implements ServiceInterface
+Class MongoQ implements ServiceInterface
 {
     /**
      * Registry
@@ -25,7 +25,7 @@ Class MongoQuery implements ServiceInterface
      */
     public function register($c)
     {
-        $c['mongoQuery'] = function ($database) use ($c) {
+        $c['mongoQ'] = function ($database) use ($c) {
             return new Query($c, $database, $database->provider->getName());
         };
     }

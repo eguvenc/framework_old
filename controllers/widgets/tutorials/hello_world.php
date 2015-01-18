@@ -11,37 +11,23 @@ Class Hello_World extends \Controller
      */
     public function load()
     {
-        $this->c->load('service/db');
+        $this->c->load('service/query as db');
         $this->c->load('view');
-
+        
         // $columns = array('username', 'password');
         // $values  = array('ersin', '123456');
 
         // $data = array('username' => 'ersin', 'password' => "asd'^sd");
 
-        $sql = "SELECT * FROM users 
-        WHERE user_id IN (%s) 
-        AND (%s) 
-        OR (%s) 
-        LIMIT %d";
+        // $this->db->query("SELECT * FROM %s WHERE user_id = ?", array('users'), (1));
 
-        $this->db->query(
-            $sql, 
-            [
-                ['@in' => [1,3,4]],
-                ['@and' => ['username' => 'ersin', 'surname' => 'guvenc']],
-                ['@or' => ['a' => '%223%']],
-            ]
-        );
-
-        // print_r(array_values(array('$in' => array(1,3,4))));
-
-        // $this->db->query("INSERT INTO users %s", array('$build' => $data));  // arrat MULTI ise multi
-        // $this->db->query("REPLACE INTO users %s", array('$into' => $data));
-        // $this->db->query("UPDATE users SET %s WHERE id = ?", array('$set' => $data), array(4));
-        // $this->db->query("UPDATE users SET %s WHERE id = ?", array(), array(4));
+        // $this->db->query("INSERT INTO users %s", array(['@insert' => $data]));  
+        // $this->db->query("REPLACE INTO users %s", array('$replace' => $data));
+        // $this->db->query("UPDATE users SET %s WHERE id = ?", array(['@update' => $data]), array(4));
         
-        // $this->db->query("DELETE FROM users WHERE user_id = ?", array(), array(4));
+        // $this->db->query("DELETE FROM users WHERE IN (%s)", array(['@in' => [1,2,3]]), array(4));
+        // $this->db->query("DELETE FROM users WHERE OR (%s)", array(['@and' => ['u' => 's', 'a' => 'B']]), array(4));
+        // $this->db->query("DELETE FROM users WHERE OR (%s)", array(['@or' => ['u' => 's', 'a' => 'B']]), array(4));
     }
 
     /**

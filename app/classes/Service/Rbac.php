@@ -24,7 +24,7 @@ Class Rbac implements ServiceInterface
      */
     public function __construct($c)
     {
-        $c['config']['rbac.params.database'] = array('db' => 'db', 'provider' => 'mysql');  // bind database provider parameters
+        $c['config']['rbac.params.database'] = array('db' => 'db', 'provider' => 'mysql');  // set provider parameters
     }
 
     /**

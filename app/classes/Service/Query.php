@@ -2,11 +2,10 @@
 
 namespace Service;
 
-use Obullo\Database\Pdo\QueryBuilder,
-    Obullo\Database\Pdo\Handler\Mysql;
+use Obullo\Database\Pdo\QueryBuilder;
 
 /**
- * Crud Database Service ( Shared )
+ * Query Builder ( Only select queries )
  *
  * @category  Service
  * @package   Database
@@ -15,8 +14,18 @@ use Obullo\Database\Pdo\QueryBuilder,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Crud implements ServiceInterface
+Class Query implements ServiceInterface
 {
+    /**
+     * Configure servide parameters
+     * 
+     * @param object $c container
+     */
+    public function __construct($c)
+    {
+        $c['config']['crud.params.database'] = array('db' => 'db', 'provider' => 'mysql');  // set provider parameters
+    }
+
     /**
      * Registry
      *
@@ -26,8 +35,8 @@ Class Crud implements ServiceInterface
      */
     public function register($c)
     {
-        $c['crud'] = function ($database) use ($c) {
-            return new QueryBuilder($c, $database);
+        $c['query'] = function () use ($c) {
+            return new QueryBuilder($c);
         };
     }
 }
