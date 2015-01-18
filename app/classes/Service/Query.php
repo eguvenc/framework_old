@@ -5,7 +5,7 @@ namespace Service;
 use Obullo\Database\Pdo\QueryBuilder;
 
 /**
- * Query Builder ( Only select queries )
+ * Query Builder
  *
  * @category  Service
  * @package   Database
@@ -23,7 +23,7 @@ Class Query implements ServiceInterface
      */
     public function __construct($c)
     {
-        $c['config']['crud.params.database'] = array('db' => 'db', 'provider' => 'mysql');  // set provider parameters
+        $c['config']['query.params.database'] = array('db' => 'db', 'provider' => 'mysql');  // set provider parameters
     }
 
     /**
