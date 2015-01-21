@@ -11,7 +11,105 @@ Class Hello_World extends \Controller
      */
     public function load()
     {
-        $this->c->load('service/query as db');
+
+        // $this->c->load('service/provider/mongo', array(1,2,3));
+        // $mongo = $this->c->load('service/provider/mongo', array(4,5,6));
+        
+        
+        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
+        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
+        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
+        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
+        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
+        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
+        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
+        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
+        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
+        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
+
+        foreach ($this->mongo->logs->find() as $val) {
+            echo $val['message'];
+        }
+
+        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('stats');  // factory
+
+        foreach ($this->mongo->users->find() as $val) {
+            echo $val['id'];
+        }
+
+
+        // $mongo = $this->c->load('service/provider/mongo', array('server' => 'default2'));  // factory
+        
+        // $this->mongo = $this->c['mongo.connection.default'];
+
+
+        
+        // FACTORY
+        // $mongo = $this->c->load('service/provider/mongo', array('server' => 'mongodb://localhost:27017', 'options' => array('connect' => true));  // factory
+        
+        // $this->mongo = $mongo->selectDb('db');
+        // $this->mongo->users->find();
+
+
+        // $mongo->factory($server = "mongodb://localhost:27017", $options = array('connect' => true));
+
+
+        // $this->mongo['default'];  // get default connection.
+
+        // $this->c->load('new service/provider/mongo');
+        // $this->
+
+
+        // $this->db = $c->load(
+        //             'return new service/provider/mongo',
+        //             $this->databaseName
+        //         );
+        // $this->collection = $this->db->selectCollection($this->databaseName, $this->collectionName);
+
+        // $this->mongo->database('db');
+    
+        // foreach ($this->mongo->get('logs')->resultArray() as $val) {
+        //     echo $val['message'].'<br>';
+        // }
+
+        // foreach ($this->mongo->users->find() as $val) {
+        //     echo $val['_id'].'<br>';
+        // }
+
+        // $this->c->load('new service/provider/mongo')->selectCollection('db', 'logs');
+
+        // $this->mongo->selectDb('db')->logs;
+
+
+        // // $this->c->extend('provider:mongo', );
+
+        // foreach ($this->mongo->logs->find() as $val) {
+        //     echo $val['message'].'<br>';
+        // }
+
+        
+    // $this->c->load('service/mongo')->database = ;
+        
+        // $this->mongo->get('logs');
+
+        // // $docs = $this->mongo->logs->find();
+        // foreach ($this->mongo->resultArray() as $val) {
+        //     echo $val['message'].'<br>';
+        // }
+
+        // $this->c->load('service/mongo', array('db' => 'stats'));
+
+        // $this->mongo->database('stats');
+        // $this->mongo->get('users');
+
+        // print_r($this->mongo->resultArray());
+
+        // foreach ($this->mongo->resultArray() as $val) {
+        //     echo $val['id'].'<br>';
+        // }
+
+
+        // $this->c->load('service/query as db');
         $this->c->load('view');
         
         // $columns = array('username', 'password');

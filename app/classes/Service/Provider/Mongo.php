@@ -2,7 +2,9 @@
 
 namespace Service\Provider;
 
-use Obullo\Mongo\Connection;
+use Obullo\Container\Container,
+    Obullo\Provider\Mongo,
+    Obullo\Provider\ProviderInterface;
 
 /**
  * Mongo Provider
@@ -14,22 +16,20 @@ use Obullo\Mongo\Connection;
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/providers
  */
-Class Mongo implements ProviderInterface
+Class Mongo extends MongoProvider implements ProviderInterface  // Obullo mongo provider a extend olacak bu komutlar onun içinde olacak.
 {
     /**
      * Registry
      *
-     * @param object $c        container
-     * @param array  $commands loader command parameters ( new, return, as .. )
+     * @param object $c       Container
+     * @param array  $params  parameters
+     * @param array  $matches loader commands
      * 
      * @return void
      */
-    public function register($c, $commands = array())
+    public function register(Container $c, $params = array(), $matches = array())
     {
-        $c['provider:mongo'] = function ($params = array('db' => 'db')) use ($c, $commands) {
-            $mongo  = new Connection($c, $params, $commands);
-            return $mongo->connect();
-        };
+        return parent::register($c, $params, $matches);
     }
 }
 

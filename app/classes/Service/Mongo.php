@@ -2,10 +2,10 @@
 
 namespace Service;
 
-use Obullo\Mongo\Connection;
+use Obullo\Mongo\Query;
 
 /**
- * Mongo Active Record Service ( Shared )
+ * Mongo Query Service
  *
  * @category  Service
  * @package   Mongo
@@ -19,21 +19,19 @@ Class Mongo implements ServiceInterface
     /**
      * Registry
      *
-     * @param object $c        container
-     * @param array  $commands loader command parameters ( new, return, as .. )
+     * @param object $c container
      * 
      * @return void
      */
-    public function register($c, $commands = array())
+    public function register($c)
     {
-        $c['mongo'] = function ($params = array('db' => 'db')) use ($c, $commands) {
-            $mongo  = new Connection($c, $params, $commands);
-            return $mongo->connect();
+        $c['mongo'] = function () use ($c) {
+            return new Query($c);
         };
     }
 }
 
-// END Mongo class
+// END MongoQuery class
 
-/* End of file Mongo.php */
-/* Location: .classes/Service/Mongo.php */
+/* End of file MongoQuery.php */
+/* Location: .classes/Service/MongoQuery.php */

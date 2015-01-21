@@ -3,7 +3,8 @@
 namespace Service\Log\Env;
 
 use Service\ServiceInterface,
-    Obullo\Log\LogService;
+    Obullo\Log\LogService,
+    Obullo\Container\Container;
 
 /**
  * Log Service
@@ -24,7 +25,7 @@ Class Local implements ServiceInterface
      * 
      * @return void
      */
-    public function register($c)
+    public function register(Container $c)
     {
         $c['logger'] = function () use ($c) {
 

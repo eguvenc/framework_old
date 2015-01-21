@@ -19,15 +19,14 @@ Class Db implements ProviderInterface
     /**
      * Registry
      *
-     * @param object $c        container
-     * @param array  $commands loader command parameters ( new, as, return ..)
+     * @param object $c container
      * 
      * @return void
      */
-    public function register($c, $commands = array())
+    public function register($c)
     {
-        $c['provider:db'] = function ($params = array('db' => 'db', 'provider' => 'mysql')) use ($c, $commands) {
-            $connection = new Connection($c, $params, $commands);
+        $c['provider:db'] = function ($params = array('db' => 'db', 'provider' => 'mysql')) use ($c) {
+            $connection = new Connection($c, $params);
             return $connection->connect();
         };
     }

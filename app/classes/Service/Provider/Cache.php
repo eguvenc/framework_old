@@ -19,15 +19,14 @@ Class Cache implements ProviderInterface
     /**
      * Registry
      *
-     * @param object $c        container
-     * @param array  $commands loader command parameters ( new, as, return ..)
+     * @param object $c container
      * 
      * @return void
      */
-    public function register($c, $commands = array())
+    public function register($c)
     {
-        $c['provider:cache'] = function ($params = array('serializer' => 'SERIALIZER_NONE', 'provider' => 'redis')) use ($c, $commands) {
-            $connection = new Connection($c, $params, $commands);
+        $c['provider:cache'] = function ($params = array('serializer' => 'SERIALIZER_PHP', 'provider' => 'redis')) use ($c) {
+            $connection = new Connection($c, $params);
             return $connection->connect();
         };
     }
