@@ -1,10 +1,9 @@
 <?php
 
-namespace Service\Log\Env;
+namespace Service\Logger\Env;
 
 use Service\ServiceInterface,
-    Obullo\Log\LogService,
-    Obullo\Container\Container;
+    Obullo\Log\LogService;
 
 /**
  * Log Service
@@ -16,7 +15,7 @@ use Service\ServiceInterface,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Local implements ServiceInterface
+Class Cli implements ServiceInterface
 {
     /**
      * Registry
@@ -25,7 +24,7 @@ Class Local implements ServiceInterface
      * 
      * @return void
      */
-    public function register(Container $c)
+    public function register($c)
     {
         $c['logger'] = function () use ($c) {
 
@@ -57,7 +56,7 @@ Class Local implements ServiceInterface
     }
 }
 
-// END Local class
+// END Cli class
 
-/* End of file Local.php */
-/* Location: .classes/Service/Log/Env/Local.php */
+/* End of file Cli.php */
+/* Location: .classes/Service/Logger/Env/Cli.php */

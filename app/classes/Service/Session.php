@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Obullo\Queue\Handler\AMQP;
+use Obullo\Session\Session as SessionClass;
 
 /**
  * Queue Service ( Shared )
@@ -14,7 +14,7 @@ use Obullo\Queue\Handler\AMQP;
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/providers
  */
-Class Queue implements ServiceInterface
+Class Session implements ServiceInterface
 {
     /**
      * Registry
@@ -25,8 +25,8 @@ Class Queue implements ServiceInterface
      */
     public function register($c)
     {
-        $c['queue'] = function () use ($c) {
-            return new AMQP($c);
+        $c['session'] = function () use ($c) {
+            return new SessionClass($c);
         };
     }
 }
@@ -34,4 +34,4 @@ Class Queue implements ServiceInterface
 // END Cache class
 
 /* End of file Cache.php */
-/* Location: .classes/queue.php */
+/* Location: .classes/Service/Queue.php */

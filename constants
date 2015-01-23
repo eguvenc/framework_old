@@ -68,18 +68,7 @@ define('OBULLO_EVENTS', APP .'events.php');
 define('OBULLO_ROUTES', APP .'routes.php');
 define('OBULLO_FILTERS', APP .'filters.php');
 define('OBULLO_CONTROLLER', OBULLO .'Controller'. DS .'Controller.php');
-/*
-|--------------------------------------------------------------------------
-| PDO
-|--------------------------------------------------------------------------
-*/
-define('PARAM_NULL', 0); // null
-define('PARAM_INT', 1);  // integer
-define('PARAM_STR', 2);  // string
-define('PARAM_LOB', 3);  // integer  Large Object Data (lob)
-define('PARAM_STMT', 4);  // integer  Represents a recordset type ( Not currently supported by any drivers).
-define('PARAM_BOOL', 5);  // boolean                                
-define('PARAM_INOUT', -2147483648); // PDO::PARAM_INPUT_OUTPUT integer
+
 /*
 |---------------------------------------------------------------
 | NOTIFICATIONS

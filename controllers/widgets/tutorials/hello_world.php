@@ -11,42 +11,36 @@ Class Hello_World extends \Controller
      */
     public function load()
     {
+        $this->c->load('view');
+        $this->c->load('view');
+        $this->c->load('view');
+        // $this->c->load('cache');
 
-        // $this->c->load('service/provider/mongo', array(1,2,3));
-        // $mongo = $this->c->load('service/provider/mongo', array(4,5,6));
+        // var_dump($this->cache);
+
+        $this->mongo = $this->c->load('service provider mongo', ['connection' => 'default'])->selectDb('db');
+
+        // FACTORY
+        // $mongo = $this->c->load('new service provider mongo', ['connection' => 'mongodb://localhost:27017', 'options' => array('connect' => true)];  // factory
         
         
-        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
-        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
-        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
-        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
-        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
-        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
-        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
-        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
-        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
-        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('db');  // factory
+        // $this->mongo = $this->c->load('mongo', ['connection' => 'default'])->selectDb('db');
 
-        foreach ($this->mongo->logs->find() as $val) {
-            echo $val['message'];
-        }
+        // foreach ($this->mongo->logs->find() as $val) {
+        //     echo $val['message'];
+        // }
 
-        $this->mongo = $this->c->load('service/provider/mongo', ['server' => 'default'])->selectDb('stats');  // factory
+        // $this->mongo = $this->c->load('mongo', ['mongo.server' => 'default'])->selectDb('stats');  // factory
 
-        foreach ($this->mongo->users->find() as $val) {
-            echo $val['id'];
-        }
+        // foreach ($this->mongo->users->find() as $val) {
+        //     echo $val['id'];
+        // }
 
 
-        // $mongo = $this->c->load('service/provider/mongo', array('server' => 'default2'));  // factory
+        // $mongo = $this->c->load('service provider mongo', array('server' => 'default2'));  // factory
         
         // $this->mongo = $this->c['mongo.connection.default'];
 
-
-        
-        // FACTORY
-        // $mongo = $this->c->load('service/provider/mongo', array('server' => 'mongodb://localhost:27017', 'options' => array('connect' => true));  // factory
-        
         // $this->mongo = $mongo->selectDb('db');
         // $this->mongo->users->find();
 
@@ -87,9 +81,6 @@ Class Hello_World extends \Controller
         //     echo $val['message'].'<br>';
         // }
 
-        
-    // $this->c->load('service/mongo')->database = ;
-        
         // $this->mongo->get('logs');
 
         // // $docs = $this->mongo->logs->find();
@@ -110,7 +101,6 @@ Class Hello_World extends \Controller
 
 
         // $this->c->load('service/query as db');
-        $this->c->load('view');
         
         // $columns = array('username', 'password');
         // $values  = array('ersin', '123456');

@@ -2,6 +2,8 @@
 
 namespace Http\Filters;
 
+use Obullo\Container\Container;
+
 /**
  * Locale filter
  *
@@ -33,7 +35,7 @@ Class LocaleFilter
      *
      * @param object $c container
      */
-    public function __construct($c)
+    public function __construct(Container $c)
     {
         $this->url = $c->load('url');
         $this->cookie = $c->load('cookie');

@@ -12,7 +12,7 @@ Class Debug extends Model
      */
     public function load()
     {
-        $this->c->load('service/db'); 
+        $this->c->load('db'); 
     }
 
     public function test()

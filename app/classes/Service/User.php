@@ -18,16 +18,6 @@ use Obullo\Authentication\UserService,
 Class User implements ServiceInterface
 {
     /**
-     * Configure servide parameters
-     * 
-     * @param object $c container
-     */
-    public function __construct($c)
-    {
-        $c['config']['user.params.database'] = array('db' => 'db', 'provider' => 'mysql');  // bind database provider parameters
-    }
-
-    /**
      * Registry
      *
      * @param object $c container
@@ -36,6 +26,21 @@ Class User implements ServiceInterface
      */
     public function register($c)
     {
+        $c['user.db'] = function () use ($c) {
+            return $c->load('service provider pdo', array('connection' => 'db', 'driver' => 'mysql'));
+
+            return $c->load(
+                'new service provider pdo', 
+                array(
+                    'pdo.dsn' => 'pdo_mysql:dbname=test;host=127.0.0.1',
+                    'pdo.username' => 'username', // optional
+                    'pdo.password' => 'password', // optional
+                    'pdo.options' => array( // optional
+                        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"
+                    )
+                )
+            );
+        };
         $c['user'] = function ($params = array('table' => 'users')) use ($c) {
             return new UserService($c, $params);
         };

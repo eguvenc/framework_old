@@ -3,8 +3,8 @@
 namespace Service\Provider;
 
 use Obullo\Container\Container,
-    Obullo\Provider\Mongo,
-    Obullo\Provider\ProviderInterface;
+    Obullo\Provider\MongoServiceProvider,
+    Obullo\Provider\ServiceProviderInterface;
 
 /**
  * Mongo Provider
@@ -16,7 +16,7 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/providers
  */
-Class Mongo extends MongoProvider implements ProviderInterface  // Obullo mongo provider a extend olacak bu komutlar onun içinde olacak.
+Class Mongo extends MongoServiceProvider implements ServiceProviderInterface  // Obullo mongo provider a extend olacak bu komutlar onun içinde olacak.
 {
     /**
      * Registry

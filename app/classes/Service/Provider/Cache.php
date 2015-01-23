@@ -14,7 +14,7 @@ use Obullo\Cache\Connection;
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/providers
  */
-Class Cache implements ProviderInterface
+Class Redis implements ProviderInterface
 {
     /**
      * Registry

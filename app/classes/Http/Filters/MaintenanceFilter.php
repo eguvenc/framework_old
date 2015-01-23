@@ -2,7 +2,8 @@
 
 namespace Http\Filters;
 
-use LogicException;
+use LogicException,
+    Obullo\Container\Container;
 
 /**
  * Maintenance filter
@@ -36,7 +37,7 @@ Class MaintenanceFilter
      * @param object $c      container
      * @param array  $params config parameters
      */
-    public function __construct($c , $params = array())
+    public function __construct(Container $c , $params = array())
     {
         $this->c = $c;
         $this->domain = $params['domain'];
@@ -49,34 +50,24 @@ Class MaintenanceFilter
      */
     public function before()
     {
-        $this->allWebSiteFilter();       // Filter for all hosts
-        $this->subdomainRegexFilter();   // Filter for sub domain regex matches
+        $this->domainFilter();   // Filter for sub domain regex matches
     }
 
     /**
-     * Do filter for all web site routes
+     * Do filter for matched sub.domains or domain reges
      * 
      * @return void
      */
-    protected function allWebSiteFilter()
+    protected function domainFilter()
     {
-        if ($this->c['config']->env['application']['all']['maintenance'] == 'down') {
+        if ($this->c['config']->env['domain']['root']['maintenance'] == 'down') {  // Filter for all domains
             $this->show503();
         }
-    }
-
-    /**
-     * Do filter for matched sub.domains
-     * 
-     * @return void
-     */
-    protected function subdomainRegexFilter()
-    {
         if ( ! is_array($this->domain) AND ! isset($this->domain['regex'])) {
             throw new LogicException(
                 sprintf(
                     'Correct your routes.php domain value it must be like this <pre>%s</pre>', 
-                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\']->env[\'web\'][\'app\'][\'key\'], .., function () { .. }),.'
+                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\']->env[\'domain\'][\'key\'], .., function () { .. }),.'
                 )
             );
         }

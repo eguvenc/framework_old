@@ -17,12 +17,13 @@ $c['router']->defaultPage('welcome');
 //     function () use ($c) {
 //         $c->load('view')->load('dummy');
 //     }
-// )->attach('welcome/(.*)', array('activity'));
+// )->attach('welcome/(.*)',  array('activity'));
 
-// $c['router']->attach('welcome/([0-9]+)/([a-z]+)', array('activity'));
+
+// $c['router']->attach('(.)', array('maintenance'));
 
 $c['router']->group(
-    array('name' => 'general', 'domain' => $c['config']->env['application']['site'], 'filters' => array('maintenance')),
+    array('name' => 'general', 'domain' => $c['config']->env['domain']['sub.domain.com'], 'filters' => array('maintenance')),
     function ($group) {
         
         $this->defaultPage('welcome');

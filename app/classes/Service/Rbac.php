@@ -18,16 +18,6 @@ use Service\ServiceInterface,
 Class Rbac implements ServiceInterface
 {
     /**
-     * Configure servide parameters
-     * 
-     * @param object $c container
-     */
-    public function __construct($c)
-    {
-        $c['config']['rbac.params.database'] = array('db' => 'db', 'provider' => 'mysql');  // set provider parameters
-    }
-
-    /**
      * Registry
      *
      * @param object $c container
@@ -36,6 +26,9 @@ Class Rbac implements ServiceInterface
      */
     public function register($c)
     {
+        $c['rbac.db'] = function () use ($c) {
+            return new PdoServiceProvider(array('db' => 'db', 'provider' => 'mysql'));
+        };
         $c['rbac'] = function () use ($c) {
             return new RbacService($c);
         };

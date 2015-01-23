@@ -26,7 +26,20 @@ Class Cache implements ServiceInterface
     public function register($c)
     {
         $c['cache'] = function () use ($c) {
-            return new Redis($c);
+            
+            // https://github.com/CHH/cache-service-provider
+
+            // config dosyasından gelicek bağlantılar.
+
+            return new CacheServiceProvider($c, array(
+                'cache.options' => array(
+                    "default" => array(
+                        "driver" => "redis"
+                    )
+                )
+            );
+
+            // return new Redis($c);
         };
     }
 }

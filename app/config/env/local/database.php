@@ -13,21 +13,22 @@ return array(
         'yourhandler' => '\\Obullo\Database\Pdo\Handler\YourHandler',  // create your own using Cache/Handler/HandlerInterface.php
     ),
 
-    'key' => array(
+    'connections' => array(
 
-        'db' => 
-            array(
-                'host' => 'localhost',
-                'username' => $c['env']['MYSQL_USERNAME.root'],
-                'password' => $c['env']['MYSQL_PASSWORD.NULL'],
-                'database' => 'test',
-                'port'     => '',
-                'charset'  => 'utf8',
-                'autoinit' => array('charset' => true, 'bufferedQuery' => true),
-                'dsn'      => '',
-                'pdo'      => array(
-                    'options'  => array()
-                ),
+        'db' => array(
+            'host' => 'localhost',
+            'username' => $c['env']['MYSQL_USERNAME.root'],
+            'password' => $c['env']['MYSQL_PASSWORD.NULL'],
+            'database' => 'test',
+            'port'     => '',
+            'charset'  => 'utf8',
+            'dsn'      => '',
+            'pdo'      => array(
+                'options'  => [
+                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
+                    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
+                ]
+            ),
         ),
 
         'failed' => array(
@@ -37,10 +38,12 @@ return array(
             'database' => 'failed',
             'port'     => '',
             'charset'  => 'utf8',
-            'autoinit' => array('charset' => true, 'bufferedQuery' => true),
             'dsn'      => '',
             'pdo'      => array(
-                'options'  => array()
+                'options'  => [
+                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
+                    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
+                ]
             ),
         ),
     )
