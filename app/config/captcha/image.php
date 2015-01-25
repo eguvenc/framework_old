@@ -2,7 +2,7 @@
 
 return array(
 
-    'driver' => 'cool',                         // Set default driver ( "secure" or "cool" ).
+    'driver' => 'cool',  // Set default driver ( "secure" or "cool" ).
 
     'locale' => array(
         'charset' => 'UTF-8'

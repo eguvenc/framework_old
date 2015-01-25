@@ -7,7 +7,6 @@ return array(
     'user' => array(
         'model' => '\Obullo\Authentication\Model\User', // User model, you can replace it with your own.
     ),
-
     'database' => array(      // Set your login query database table and column names
         'table' => array(
             'users' => array(

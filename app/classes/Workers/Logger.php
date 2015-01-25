@@ -4,6 +4,7 @@ namespace Workers;
 
 use Obullo\Queue\Job,
     Obullo\Queue\JobInterface,
+    Obullo\Container\Container,
     Obullo\Log\PriorityQueue,
     Obullo\Log\JobHandlerPriority,
     Obullo\Log\JobHandler\JobHandlerFile,
@@ -34,7 +35,7 @@ Class Logger implements JobInterface
      * 
      * @param object $c container
      */
-    public function __construct($c)
+    public function __construct(Container $c)
     {
         $this->c = $c;
     }
@@ -75,7 +76,7 @@ Class Logger implements JobInterface
             case 'mongo':
                 $handler = new JobHandlerMongo(
                     $this->c,
-                    $this->c->load('service/provider/mongo', array('db' => 'db')),
+                    $this->c->load('service provider mongo', array('connection' => 'default'))->selectDb('db'),
                     array(
                         'database' => 'db',
                         'collection' => 'logs',

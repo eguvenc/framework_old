@@ -11,14 +11,14 @@ Class Hello_World extends \Controller
      */
     public function load()
     {
-        $this->c->load('view');
-        $this->c->load('view');
+        // $this->c->load('new db', array('connection' => 'test'));
+
         $this->c->load('view');
         // $this->c->load('cache');
 
         // var_dump($this->cache);
 
-        $this->mongo = $this->c->load('service provider mongo', ['connection' => 'default'])->selectDb('db');
+        // $this->mongo = $this->c->load('service provider mongo', ['connection' => 'default'])->selectDb('db');
 
         // FACTORY
         // $mongo = $this->c->load('new service provider mongo', ['connection' => 'mongodb://localhost:27017', 'options' => array('connect' => true)];  // factory

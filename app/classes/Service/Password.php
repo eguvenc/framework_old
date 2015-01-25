@@ -2,7 +2,8 @@
 
 namespace Service;
 
-use Obullo\Crypt\Password\Bcrypt;
+use Obullo\Container\Container,
+    Obullo\Crypt\Password\Bcrypt;
 
 /**
  * Password Service ( Shared )
@@ -23,7 +24,7 @@ Class Password implements ServiceInterface
      * 
      * @return void
      */
-    public function register($c)
+    public function register(Container $c)
     {
         $c['password'] = function () use ($c) {
             return new Bcrypt($c);

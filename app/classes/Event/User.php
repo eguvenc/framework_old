@@ -2,7 +2,8 @@
 
 namespace Event;
 
-use Obullo\Authentication\AuthResult,
+use Obullo\Container\Container,
+    Obullo\Authentication\AuthResult,
     Obullo\Authentication\User\UserIdentity;
 
 /**
@@ -29,7 +30,7 @@ Class User
      *
      * @param object $c container
      */
-    public function __construct($c)
+    public function __construct(Container $c)
     {
         $this->c = $c;
     }
@@ -61,7 +62,13 @@ Class User
      */
     public function onInvalidToken(UserIdentity $identity, $cookie)
     {
-        $this->c->load('flash/session')->error('Invalid auth token : '.$cookie.' identity '.$identity->getIdentifier().' destroyed');
+        $this->c->load('flash/session')->error(
+            sprintf(
+                'Invalid auth token : %s identity %s destroyed',
+                $cookie,
+                $identity->getIdentifier()
+            )
+        );
         $this->c->load('url')->redirect('/login');
     }
 

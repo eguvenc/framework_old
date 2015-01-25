@@ -2,7 +2,8 @@
 
 namespace Service;
 
-use Obullo\Cache\Handler\Redis;
+use Obullo\Container\Container,
+    Obullo\Cache\Handler\Redis;
 
 /**
  * Cache Service ( Shared )
@@ -23,7 +24,7 @@ Class Cache implements ServiceInterface
      * 
      * @return void
      */
-    public function register($c)
+    public function register(Container $c)
     {
         $c['cache'] = function () use ($c) {
             

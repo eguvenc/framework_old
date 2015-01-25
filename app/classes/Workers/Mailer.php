@@ -4,6 +4,7 @@ namespace Workers;
 
 use Obullo\Queue\Job,
     Obullo\Queue\JobInterface,
+    Obullo\Container\Container,
     Obullo\Mail\Transport\Mandrill;
 
  /**
@@ -37,7 +38,7 @@ Class Mailer implements JobInterface
      * 
      * @param object $c container
      */
-    public function __construct($c)
+    public function __construct(Container $c)
     {
         $this->c = $c;
         $this->config = $c['config']->load('mail');
@@ -56,7 +57,6 @@ Class Mailer implements JobInterface
         $data = $data['message'];
 
         switch ($data['mailer']) {
-
         case 'mandrill':
             $mail = new Mandrill($this->c, $this->config);
 
@@ -88,6 +88,7 @@ Class Mailer implements JobInterface
             break;
 
         case 'smtp':
+            // Send with smtp
 
             break;
         }

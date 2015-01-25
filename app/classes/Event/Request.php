@@ -2,6 +2,8 @@
 
 namespace Event;
 
+use Obullo\Container\Container;
+
 /**
  * User request - response handler
  *
@@ -26,7 +28,7 @@ Class Request
      *
      * @param object $c container
      */
-    public function __construct($c)
+    public function __construct(Container $c)
     {
         $this->c = $c;
         $this->router = $this->c['router'];
@@ -43,8 +45,6 @@ Class Request
         if ($this->c['config']['uri']['queryStrings'] == false) {  // Is $_GET data allowed ? 
             $_GET = array(); // If not we'll set the $_GET to an empty array
         }
-        // Sanitize inputs
-        // 
         $_SERVER['PHP_SELF'] = strip_tags($_SERVER['PHP_SELF']); // Sanitize PHP_SELF
 
         // Clean $_COOKIE Data
@@ -54,20 +54,19 @@ Class Request
         // http://www.ietf.org/rfc/rfc2109.txt
         // note that the key names below are single quoted strings, and are not PHP variables
         unset(
-            $_COOKIE['$Version'], 
-            $_COOKIE['$Path'], 
+            $_COOKIE['$Version'],
+            $_COOKIE['$Path'],
             $_COOKIE['$Domain']
         );
         /*
          * ------------------------------------------------------
-         *  Log requests
+         *  Log headers
          * ------------------------------------------------------
          */
         $this->logger->debug('$_REQUEST_URI: ' . $this->c['uri']->getRequestUri(), array(), 10);
         $this->logger->debug('$_COOKIE: ', $_COOKIE, 9);
         $this->logger->debug('$_POST: ', $_POST, 9);
         $this->logger->debug('$_GET: ', $_GET, 9);
-        $this->logger->debug('Global POST and COOKIE data sanitized', array(), 10);
     }
 
     /**
@@ -149,7 +148,9 @@ Class Request
                                           // as one parameter thats why we send params as object.
 
         if ( ! in_array($httpMethod, $allowedMethods)) {
-            $this->c['response']->setHttpResponse(405)->showError("Http ".ucfirst($httpMethod)." method not allowed.");
+            $this->c['response']->setHttpResponse(405)->showError(
+                sprintf("Http %s method not allowed.", ucfirst($httpMethod))
+            );
         }
     }
 
