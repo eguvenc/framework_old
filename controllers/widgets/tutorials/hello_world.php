@@ -14,7 +14,7 @@ Class Hello_World extends \Controller
         // $this->c->load('new db', array('connection' => 'test'));
 
         $this->c->load('view');
-        $this->c->load('cache');
+        // $this->c->load('cache');
 
         // $this->cache->set('test', array('a', 'hello',  'myworld'));
         // $this->cache->setOption(array('serializer' => 'SERIALIZER_NONE'));
@@ -30,7 +30,6 @@ Class Hello_World extends \Controller
         //     ]
         // );
 
-
         // $this->c->load('cache');
 
         // var_dump($this->cache);
@@ -38,7 +37,7 @@ Class Hello_World extends \Controller
         //$this->mongo = $this->c->load('service provider mongo', ['connection' => 'default'])->selectDb('db');
 
         // FACTORY
-        // $mongo = $this->c->load('new service provider mongo', ['connection' => 'mongodb://localhost:27017', 'options' => array('connect' => true)];  // factory
+        // $mongo = $this->c->load('service provider mongo', ['server' => 'mongodb://localhost:27017', 'options' => array('connect' => true)];  // factory
         
         
         // $this->mongo = $this->c->load('mongo', ['connection' => 'default'])->selectDb('db');
