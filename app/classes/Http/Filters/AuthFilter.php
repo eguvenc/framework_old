@@ -2,6 +2,8 @@
 
 namespace Http\Filters;
 
+use Obullo\Container\Container;
+
 /**
  * User auth authority filter
  *
@@ -26,9 +28,9 @@ Class AuthFilter
      *
      * @param object $c container
      */
-    public function __construct($c)
+    public function __construct(Container $c)
     {
-        $this->user = $c->load('return service/user');
+        $this->user = $c->load('user');
     }
 
     /**

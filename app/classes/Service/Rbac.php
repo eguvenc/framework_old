@@ -27,10 +27,17 @@ Class Rbac implements ServiceInterface
     public function register($c)
     {
         $c['rbac.db'] = function () use ($c) {
-            return new PdoServiceProvider(array('db' => 'db', 'provider' => 'mysql'));
+            return new PdoServiceProvider();
         };
         $c['rbac'] = function () use ($c) {
-            return new RbacService($c);
+            return new RbacService(
+                $c, 
+                array(
+                    'provider' => 'pdo',
+                    'connection' => 'db',
+                    'driver' => 'mysql'
+                )
+            );
         };
     }
 }

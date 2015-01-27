@@ -20,9 +20,9 @@ return array(
         'enabled' => false,
         'storage' => '\Obullo\Queue\Failed\Storage\Database',
         'provider' => array(
-            'name' => 'Db',       // Db provider which is defined in your "Provider" folder.
-            'db' => 'failed',     // Database key
-            'provider' => 'mysql' // Database driver
+            'name' => 'Pdo',       // Db provider which is defined in your "Provider" folder.
+            'connection' => 'failed',     // Database key
+            'driver' => 'mysql' // Database driver
         ),
         'table' => 'failures',
     ),

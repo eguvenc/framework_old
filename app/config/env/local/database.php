@@ -3,8 +3,7 @@
 return array(
     
     'default' => array(
-        'provider' => 'mysql',
-        'database' => 'db',
+        'connection' => 'default',
     ),
 
     'handlers' => array(
@@ -15,8 +14,9 @@ return array(
 
     'connections' => array(
 
-        'db' => array(
-            'host' => 'localhost',
+        'default' => array(
+            'driver'   => 'mysql',
+            'hostname' => 'localhost',
             'username' => $c['env']['MYSQL_USERNAME.root'],
             'password' => $c['env']['MYSQL_PASSWORD.NULL'],
             'database' => 'test',
@@ -32,7 +32,8 @@ return array(
         ),
 
         'failed' => array(
-            'host' => 'localhost',
+            'driver'   => 'mysql',
+            'hostname' => 'localhost',
             'username' => $c['env']['MYSQL_USERNAME.REQUIRED'],
             'password' => $c['env']['MYSQL_PASSWORD.NULL'],
             'database' => 'failed',

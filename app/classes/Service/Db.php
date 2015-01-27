@@ -30,7 +30,7 @@ Class Db implements ServiceInterface
             
             // $c->load('service provider pdo', $params);
             
-            return new Mysql($c);
+            // return new Mysql($c);
         };
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Http\Filters;
 
+use Obullo\Container\Container;
+
 /**
  * Csrf security filter 
  *
@@ -15,6 +17,13 @@ namespace Http\Filters;
 Class CsrfFilter
 {
     /**
+     * Container
+     * 
+     * @var object
+     */
+    protected $c;
+
+    /**
      * Csrf
      * 
      * @var object
@@ -26,9 +35,10 @@ Class CsrfFilter
      *
      * @param object $c container
      */
-    public function __construct($c)
+    public function __construct(Container $c)
     {
-        $this->csrf = $c->load('security/csrf'); 
+        $this->c = $c;
+        $this->csrf = $this->c->load('security/csrf'); 
     }
 
     /**

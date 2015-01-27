@@ -10,7 +10,7 @@ return array(
     'connections' => array(
 
         'default' => array(
-            'host'     => $c['env']['MONGO_HOST'],
+            'hostname' => $c['env']['MONGO_HOST'],
             'username' => $c['env']['MONGO_USERNAME'],
             'password' => $c['env']['MONGO_PASSWORD'],
             'port'     => '27017',
@@ -18,7 +18,7 @@ return array(
         )
         ,
         'second' => array(
-            'host'     => $c['env']['MONGO_HOST'],
+            'hostname' => $c['env']['MONGO_HOST'],
             'username' => $c['env']['MONGO_USERNAME'],
             'password' => $c['env']['MONGO_PASSWORD'],
             'port'     => '27017',

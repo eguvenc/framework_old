@@ -2,6 +2,8 @@
 
 namespace Http\Filters;
 
+use Obullo\Container\Container;
+
 /**
  * Https filter
  *
@@ -26,12 +28,9 @@ Class HttpsFilter
      *
      * @param object $c container
      */
-    public function __construct($c)
+    public function __construct(Container $c)
     {
         $this->c = $c;
-        $this->uri = $c['uri'];
-        $this->url = $c->load('url');
-        $this->router = $c['router'];
     }
 
     /**
@@ -42,7 +41,7 @@ Class HttpsFilter
     public function before()
     {
         if ($this->c['request']->isSecure() == false) {
-            $this->url->redirect('https://'.$this->router->getDomain() . $this->uri->getRequestUri());
+            $this->c->load('url')->redirect('https://'.$this->c['router']->getDomain() . $this->c['uri']->getRequestUri());
         }
     }
 }

@@ -17,18 +17,11 @@ use Obullo\Container\Container;
 Class LocaleFilter
 {
     /**
-     * Url
-     * 
-     * @var string
-     */
-    protected $url;
-        
-    /**
-     * Cookie
+     * Container
      * 
      * @var object
      */
-    protected $cookie;
+    protected $c;
 
     /**
      * Constructor
@@ -37,8 +30,7 @@ Class LocaleFilter
      */
     public function __construct(Container $c)
     {
-        $this->url = $c->load('url');
-        $this->cookie = $c->load('cookie');
+        $this->c = $c['uri'];
     }
 
     /**
@@ -48,13 +40,13 @@ Class LocaleFilter
      */
     public function before()
     {
-        $locale = $this->cookie->get('locale');
+        $locale = $this->c['cookie']->get('locale');
         $languages = $this->c['config']->load('translator')['languages'];
 
-        if ( ! isset($languages[$locale])) {
-            $locale = $this->translator->getLocale();
+        if ( ! isset($languages[$locale]) OR $locale == false) {
+            $locale = $this->c['translator']->getLocale();
         }
-        $this->url->redirect($locale. '/' . $this->uri->getUriString());
+        $this->c->load('url')->redirect($locale. '/' . $this->c['uri']->getUriString());
     }
 }
 

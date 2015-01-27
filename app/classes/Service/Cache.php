@@ -6,7 +6,7 @@ use Obullo\Container\Container,
     Obullo\Cache\Handler\Redis;
 
 /**
- * Cache Service ( Shared )
+ * Cache Service
  *
  * @category  Service
  * @package   Cache
@@ -28,19 +28,22 @@ Class Cache implements ServiceInterface
     {
         $c['cache'] = function () use ($c) {
             
-            // https://github.com/CHH/cache-service-provider
+            // // https://github.com/CHH/cache-service-provider
 
-            // config dosyasından gelicek bağlantılar.
+            // // config dosyasından gelicek bağlantılar.
 
-            return new CacheServiceProvider($c, array(
-                'cache.options' => array(
-                    "default" => array(
-                        "driver" => "redis"
-                    )
-                )
-            );
+            // return new CacheServiceProvider(
+            //     $c, 
+            //     array(
+            //     'cache.options' => array(
+            //         "default" => array(
+            //             "driver" => "redis"
+            //         )
+            //     )
+            // );
 
             // return new Redis($c);
+
         };
     }
 }

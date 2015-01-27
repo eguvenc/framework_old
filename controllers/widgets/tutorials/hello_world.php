@@ -14,11 +14,28 @@ Class Hello_World extends \Controller
         // $this->c->load('new db', array('connection' => 'test'));
 
         $this->c->load('view');
+        $this->c->load('cache');
+
+        // $this->cache->set('test', array('a', 'hello',  'myworld'));
+        // $this->cache->setOption(array('serializer' => 'SERIALIZER_NONE'));
+        // $this->cache->set('test2', array('a', 'hello',  'myworld'));
+
+        // $this->cache = $this->c->load(
+        //     'service provider cache', 
+        //     [
+        //         'driver' => 'redis', 
+        //         'options' => array(
+        //             'serializer' => 'SERIALIZER_PHP'
+        //         )
+        //     ]
+        // );
+
+
         // $this->c->load('cache');
 
         // var_dump($this->cache);
 
-        // $this->mongo = $this->c->load('service provider mongo', ['connection' => 'default'])->selectDb('db');
+        //$this->mongo = $this->c->load('service provider mongo', ['connection' => 'default'])->selectDb('db');
 
         // FACTORY
         // $mongo = $this->c->load('new service provider mongo', ['connection' => 'mongodb://localhost:27017', 'options' => array('connect' => true)];  // factory
@@ -70,7 +87,7 @@ Class Hello_World extends \Controller
         //     echo $val['_id'].'<br>';
         // }
 
-        // $this->c->load('new service/provider/mongo')->selectCollection('db', 'logs');
+        // $this->c->load('new service provider mongo')->selectCollection('db', 'logs');
 
         // $this->mongo->selectDb('db')->logs;
 
@@ -98,24 +115,6 @@ Class Hello_World extends \Controller
         // foreach ($this->mongo->resultArray() as $val) {
         //     echo $val['id'].'<br>';
         // }
-
-
-        // $this->c->load('service/query as db');
-        
-        // $columns = array('username', 'password');
-        // $values  = array('ersin', '123456');
-
-        // $data = array('username' => 'ersin', 'password' => "asd'^sd");
-
-        // $this->db->query("SELECT * FROM %s WHERE user_id = ?", array('users'), (1));
-
-        // $this->db->query("INSERT INTO users %s", array(['@insert' => $data]));  
-        // $this->db->query("REPLACE INTO users %s", array('$replace' => $data));
-        // $this->db->query("UPDATE users SET %s WHERE id = ?", array(['@update' => $data]), array(4));
-        
-        // $this->db->query("DELETE FROM users WHERE IN (%s)", array(['@in' => [1,2,3]]), array(4));
-        // $this->db->query("DELETE FROM users WHERE OR (%s)", array(['@and' => ['u' => 's', 'a' => 'B']]), array(4));
-        // $this->db->query("DELETE FROM users WHERE OR (%s)", array(['@or' => ['u' => 's', 'a' => 'B']]), array(4));
     }
 
     /**
