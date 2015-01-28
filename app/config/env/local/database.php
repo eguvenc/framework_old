@@ -15,37 +15,25 @@ return array(
     'connections' => array(
 
         'default' => array(
-            'driver'   => 'mysql',
             'hostname' => 'localhost',
             'username' => $c['env']['MYSQL_USERNAME.root'],
             'password' => $c['env']['MYSQL_PASSWORD.NULL'],
-            'database' => 'test',
-            'port'     => '',
-            'charset'  => 'utf8',
-            'dsn'      => '',
-            'pdo'      => array(
-                'options'  => [
-                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
-                    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
-                ]
-            ),
+            'dsn'      => 'mysql:host=localhost;port=;dbname=demo_blog',
+            'options'  => [
+                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
+                PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
+            ]
         ),
 
         'failed' => array(
-            'driver'   => 'mysql',
             'hostname' => 'localhost',
-            'username' => $c['env']['MYSQL_USERNAME.REQUIRED'],
+            'username' => $c['env']['MYSQL_USERNAME.root'],
             'password' => $c['env']['MYSQL_PASSWORD.NULL'],
-            'database' => 'failed',
-            'port'     => '',
-            'charset'  => 'utf8',
-            'dsn'      => '',
-            'pdo'      => array(
-                'options'  => [
-                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
-                    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
-                ]
-            ),
+            'dsn'      => 'mysql:host=localhost;port=;dbname=failed',
+            'options'  => [
+                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
+                PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
+            ]
         ),
     )
 
