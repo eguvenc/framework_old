@@ -3,6 +3,7 @@
 namespace Service;
 
 use Obullo\Container\Container,
+    Obullo\ServiceProvider\ServiceInterface,
     Obullo\Cache\Handler\Redis;
 
 /**
@@ -28,22 +29,9 @@ Class Cache implements ServiceInterface
     {
         $c['cache'] = function () use ($c) {
             
-            // // https://github.com/CHH/cache-service-provider
-
-            // // config dosyasından gelicek bağlantılar.
-
-            // return new CacheServiceProvider(
-            //     $c, 
-            //     array(
-            //     'cache.options' => array(
-            //         "default" => array(
-            //             "driver" => "redis"
-            //         )
-            //     )
-            // );
-
-            // return new Redis($c);
-
+            $cache = $this->c->load('service provider cache', ['driver' => 'redis']);
+            $cache->setOption(array('serializer' => 'SERIALIZER_PHP'));
+            return $cache;
         };
     }
 }

@@ -2,7 +2,9 @@
 
 namespace Service;
 
-use Obullo\Session\Session as SessionClass;
+use Obullo\Container\Container,
+    Obullo\ServiceProvider\ServiceInterface,
+    Obullo\Session\Session as SessionClass;
 
 /**
  * Queue Service ( Shared )
@@ -23,7 +25,7 @@ Class Session implements ServiceInterface
      * 
      * @return void
      */
-    public function register($c)
+    public function register(Container $c)
     {
         $c['session'] = function () use ($c) {
             return new SessionClass($c);

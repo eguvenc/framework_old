@@ -23,8 +23,7 @@ return array(
                                         // used to determine which server to read/write keys from.
             )
         ),
-        'auth' =>  $c['env']['REDIS_AUTH'],  // Connection password
-        'serializer' => 'SERIALIZER_PHP',    // SERIALIZER_NONE, SERIALIZER_PHP, SERIALIZER_IGBINARY
+        'auth' =>  $c['env']['REDIS_AUTH'], // Connection password
         'persistentConnect' => 0,           // Enable / Disable persistent connection, "1" on "0" off.
         'reconnectionAttemps' => 100,
     ),
@@ -52,7 +51,6 @@ return array(
                                                  // used to determine which server to read/write keys from.
                         ),
         ),
-        'serializer' =>  'SERIALIZER_PHP',  // SERIALIZER_NONE, SERIALIZER_PHP, SERIALIZER_JSON, SERIALIZER_IGBINARY
     )
 
 );

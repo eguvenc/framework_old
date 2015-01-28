@@ -2,7 +2,9 @@
 
 namespace Service;
 
-use Obullo\View\View as ViewClass;
+use Obullo\Container\Container,
+    Obullo\View\View as ViewClass,
+    Obullo\ServiceProvider\ServiceInterface;
 
 /**
  * View Service
@@ -23,12 +25,11 @@ Class View implements ServiceInterface
      * 
      * @return void
      */
-    public function register($c)
+    public function register(Container $c)
     {
         $c['view'] = function () use ($c) {
 
             $view = new ViewClass($c);
-
             /**
              * Creates your layouts using Layers
              */

@@ -2,7 +2,9 @@
 
 namespace Service;
 
-use Obullo\Mongo\Query;
+use Obullo\Mongo\Query,
+    Obullo\Container\Container,
+    Obullo\ServiceProvider\ServiceInterface;
 
 /**
  * Mongo Query Service
@@ -23,7 +25,7 @@ Class Mongo implements ServiceInterface
      * 
      * @return void
      */
-    public function register($c)
+    public function register(Container $c)
     {
         $c['mongo'] = function () use ($c) {
             return new Query($c);

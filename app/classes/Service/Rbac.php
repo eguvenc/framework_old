@@ -2,8 +2,9 @@
 
 namespace Service;
 
-use Service\ServiceInterface,
-    Obullo\Permissions\RbacService;
+use Obullo\Container\Container,
+    Obullo\Permissions\RbacService,
+    Obullo\ServiceProvider\ServiceInterface;
 
 /**
  * Rbac PermissionService ( Shared )
@@ -24,7 +25,7 @@ Class Rbac implements ServiceInterface
      * 
      * @return void
      */
-    public function register($c)
+    public function register(Container $c)
     {
         $c['rbac.db'] = function () use ($c) {
             return new PdoServiceProvider();
