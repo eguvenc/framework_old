@@ -22,7 +22,7 @@ Class AuthorizedUser extends AbstractAuthorizedUser implements AuthorizedUserInt
      * Create a authorized user object.
      *
      * @param array $c          container
-     * @param array $attributes user identities
+     * @param array $attributes identity data
      * 
      * @return void
      */

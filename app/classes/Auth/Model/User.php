@@ -4,9 +4,9 @@ namespace Auth\Model;
 
 use Obullo\Authentication\Model\UserInterface,
     Obullo\Authentication\Model\User as ModelUser,
+    Obullo\Container\Container,
     Auth\Identities\GenericUser,
-    Auth\Identities\AuthorizedUser,
-    Auth\Constant;
+    Auth\Identities\AuthorizedUser;
 
 /**
  * O2 Auth - User Database Model
@@ -23,12 +23,11 @@ Class User extends ModelUser implements UserInterface
     /**
      * Constructor
      * 
-     * @param object $c  container
-     * @param object $db database
+     * @param object $c container
      */
-    public function __construct($c, $db)
+    public function __construct(Container $c)
     {
-        parent::__construct($c, $db);
+        parent::__construct($c);
     }
     
     /**

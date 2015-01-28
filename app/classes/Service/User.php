@@ -30,7 +30,7 @@ Class User implements ServiceInterface
         $c['user'] = function () use ($c) {
             $user = new AuthServiceProvider(
                 $c,
-                array( // Set your login query database table and column names
+                array(
                     'db.adapter'       => '\Obullo\Authentication\Adapter\Database', // Adapter
                     'db.model'         => '\Obullo\Authentication\Model\User', // User model, you can replace it with your own.
                     'db.provider'      => 'database',
