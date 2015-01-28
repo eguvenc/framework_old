@@ -22,8 +22,6 @@ Class Welcome extends \Controller
      */
     public function index()
     {
-
-        die;
         $this->view->load(
             'welcome',
             [
