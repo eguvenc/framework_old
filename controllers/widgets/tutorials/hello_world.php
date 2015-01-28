@@ -18,7 +18,6 @@ Class Hello_World extends \Controller
         // $this->cache->setOption(array('serializer' => 'SERIALIZER_NONE'));
         // $this->cache->set('test2', array('a', 'hello',  'myworld'));
 
-
         $this->cache = $this->c->load('service provider cache', ['driver' => 'redis']);
 
         $this->cache->setOption(array('serializer' => 'SERIALIZER_PHP'));
