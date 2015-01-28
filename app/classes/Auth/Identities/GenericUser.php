@@ -2,7 +2,9 @@
 
 namespace Auth\Identities;
 
-use Obullo\Authentication\Identities\GenericUserInterface;
+use Obullo\Container\Container,
+    Obullo\Authentication\AbstractGenericUser,
+    Obullo\Authentication\Identities\GenericUserInterface;
 
 /**
  * Generic User Identity
@@ -14,25 +16,19 @@ use Obullo\Authentication\Identities\GenericUserInterface;
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/package/auth
  */
-Class GenericUser implements GenericUserInterface
+Class GenericUser extends AbstractGenericUser implements GenericUserInterface
 {
-    protected $attributes;
-    protected $identifier;
-    protected $password;
-
     /**
      * Create a new generic User object.
      *
-     * @param array $params     auth table parameters
+     * @param array $c          container
      * @param array $attributes user identities
      * 
      * @return void
      */
-    public function __construct(array $params, array $attributes)
+    public function __construct(Container $c, $attributes)
     {
-        $this->attributes = $attributes;
-        $this->identifier = $params['identifier'];
-        $this->password   = $params['password'];
+        parent::__construct($c, $attributes);
     }
     
     /**
@@ -42,7 +38,7 @@ Class GenericUser implements GenericUserInterface
      */
     public function getIdentifier()
     {
-        return isset($this->attributes[$this->identifier]) ? $this->attributes[$this->identifier] : false;
+        return isset($this->attributes[$this->getColumnIdentifier()]) ? $this->attributes[$this->getColumnIdentifier()] : false;
     }
 
     /**
@@ -52,7 +48,7 @@ Class GenericUser implements GenericUserInterface
      */
     public function getPassword()
     {
-        return isset($this->attributes[$this->password]) ? $this->attributes[$this->password] : false;
+        return isset($this->attributes[$this->getColumnPassword()]) ? $this->attributes[$this->getColumnPassword()] : false;
     }
     
     /**
@@ -84,56 +80,6 @@ Class GenericUser implements GenericUserInterface
     {
         return $this->attributes;
     }
-    
-    /**
-     * Dynamically access the user's attributes.
-     *
-     * @param string $key ket
-     * 
-     * @return mixed
-     */
-    public function __get($key)
-    {
-        return $this->attributes[$key];
-    }
-
-    /**
-     * Dynamically set the user's attributes.
-     *
-     * @param string $key key
-     * @param string $val value
-     * 
-     * @return mixed
-     */
-    public function __set($key, $val)
-    {
-        return $this->attributes[$key] = $val;
-    }
-
-    /**
-     * Dynamically check if a value is set on the user.
-     *
-     * @param string $key key
-     * 
-     * @return bool
-     */
-    public function __isset($key)
-    {
-        return isset($this->attributes[$key]);
-    }
-
-    /**
-     * Dynamically unset a value on the user.
-     *
-     * @param string $key key
-     * 
-     * @return void
-     */
-    public function __unset($key)
-    {
-        unset($this->attributes[$key]);
-    }
-
 }
 
 /* End of file GenericUser.php */

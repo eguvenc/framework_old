@@ -16,8 +16,10 @@ Class Login extends \Controller
     {
         $this->c->load('url');
         $this->c->load('form');
-        $this->c->load('service/user');
+        $this->c->load('user');
+        $this->c->load('view');
         $this->c->load('flash/session as flash');
+        $this->c->load('password');
         $this->c->load('event')->subscribe(new User($this->c));   // Listen user events
     }
 
@@ -28,6 +30,7 @@ Class Login extends \Controller
      */
     public function index()
     {
+        // echo $this->password->hash(123456);
         if ($this->c['request']->isPost()) {
 
             $this->c->load('validator'); // load validator
@@ -44,8 +47,8 @@ Class Login extends \Controller
 
                 $result = $this->user->login->attempt(
                     array(
-                        Constant::IDENTIFIER => $this->validator->getValue('email'), 
-                        Constant::PASSWORD => $this->validator->getValue('password')
+                        $this->c['auth.params']['db.identifier'] => $this->validator->getValue('email'), 
+                        $this->c['auth.params']['db.password']   => $this->validator->getValue('password')
                     ),
                     $this->request->post('rememberMe')
                 );
@@ -63,11 +66,11 @@ Class Login extends \Controller
             }
         }
 
-        $this->c['view']->load(
+        $this->view->load(
             'login',
-            function () {
-                $this->assign('footer', $this->template('footer'));
-            }
+            [
+                'footer' => $this->view->template('footer')
+            ]
         );
     }
 }

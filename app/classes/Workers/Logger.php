@@ -62,7 +62,7 @@ Class Logger implements JobInterface
             case 'email':
                 $handler = new JobHandlerEmail(
                     $this->c,
-                    $this->c->load('service/mailer'),
+                    $this->c->load('mailer'),
                     array(
                         'from' => '<noreply@example.com> Server Admin',
                         'to' => 'obulloframework@gmail.com',

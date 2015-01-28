@@ -29,7 +29,7 @@ Class Cache implements ServiceInterface
     {
         $c['cache'] = function () use ($c) {
             
-            $cache = $this->c->load('service provider cache', ['driver' => 'redis']);
+            $cache = $c->load('service provider cache', ['driver' => 'redis']);
             $cache->setOption(array('serializer' => 'SERIALIZER_PHP'));
             return $cache;
         };

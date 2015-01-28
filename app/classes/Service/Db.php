@@ -27,11 +27,8 @@ Class Db implements ServiceInterface
      */
     public function register(Container $c)
     {
-        $c['db'] = function ($params = array('connection' => 'default')) use ($c) {
-            
-            // $c->load('service provider pdo', $params);
-            
-            // return new Mysql($c);
+        $c['db'] = function () use ($c) {
+            return $c->load('service provider database', ['connection' => 'default']);
         };
     }
 }
