@@ -2,8 +2,9 @@
 
 namespace Service\Logger\Env;
 
-use Service\ServiceInterface,
-    Obullo\Log\LogService;
+use Obullo\Container\Container,
+    Obullo\Log\LogServiceProvider,
+    Obullo\ServiceProvider\ServiceInterface;
 
 /**
  * Log Service
@@ -24,34 +25,35 @@ Class Cli implements ServiceInterface
      * 
      * @return void
      */
-    public function register($c)
+    public function register(Container $c)
     {
         $c['logger'] = function () use ($c) {
 
-            $service = new LogService($c, $c['config']);
+            $serviceProvider = new LogServiceProvider($c, $c['config']);
+            $logger = $serviceProvider->getLogger();
             /*
             |--------------------------------------------------------------------------
             | Register Filters
             |--------------------------------------------------------------------------
             */
-            $service->logger->registerFilter('priority', 'Log\Filters\PriorityFilter');
-            $service->logger->registerFilter('input', 'Log\Filters\InputFilter');
+            $logger->registerFilter('priority', 'Log\Filters\PriorityFilter');
+            $logger->registerFilter('input', 'Log\Filters\InputFilter');
             /*
             |--------------------------------------------------------------------------
             | Register Handlers
             |--------------------------------------------------------------------------
             */
-            $service->logger->registerHandler(5, 'file');
-            $service->logger->registerHandler(4, 'mongo')->filter('priority.notIn', array(LOG_DEBUG));
-            $service->logger->registerHandler(3, 'email')->filter('priority.notIn', array(LOG_DEBUG));
+            $logger->registerHandler(5, 'file');
+            $logger->registerHandler(4, 'mongo')->filter('priority.notIn', array(LOG_DEBUG));
+            $logger->registerHandler(3, 'email')->filter('priority.notIn', array(LOG_DEBUG));
             /*
             |--------------------------------------------------------------------------
             | Add Writers - Primary file writer should be available on local server
             |--------------------------------------------------------------------------
             */
-            $service->logger->addWriter('file')->filter('priority.notIn', array(LOG_INFO));
+            $logger->addWriter('file')->filter('priority.notIn', array(LOG_INFO));
             
-            return $service->logger;
+            return $logger;
         };
     }
 }

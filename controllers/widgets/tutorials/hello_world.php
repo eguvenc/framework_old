@@ -11,8 +11,6 @@ Class Hello_World extends \Controller
      */
     public function load()
     {
-        // $this->c->load('new db', array('connection' => 'test'));
-
         $this->c->load('view');
         // $this->c->load('cache');
 
@@ -20,15 +18,21 @@ Class Hello_World extends \Controller
         // $this->cache->setOption(array('serializer' => 'SERIALIZER_NONE'));
         // $this->cache->set('test2', array('a', 'hello',  'myworld'));
 
-        $this->cache = $this->c->load(
-            'service provider cache', 
-            [
-                'driver' => 'redis', 
-                'options' => array(
-                    'serializer' => 'SERIALIZER_PHP'
-                )
-            ]
-        );
+
+        $this->cache = $this->c->load('service provider cache', ['driver' => 'redis']);
+
+        $this->cache->setOption(array('serializer' => 'SERIALIZER_PHP'));
+
+        // $this->cache = $this->c->load(
+        //     'service provider cache', 
+        //     [
+        //         'driver' => 'redis', 
+        //         'options' => array(
+        //             'serializer' => 'SERIALIZER_NONE'
+        //         )
+        //     ]
+        // );
+
 
         // $this->c->load('cache');
 

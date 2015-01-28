@@ -3,6 +3,7 @@
 namespace Service;
 
 use Obullo\Container\Container,
+    Obullo\ServiceProvider\ServiceInterface,
     Obullo\Crypt\Password\Bcrypt;
 
 /**

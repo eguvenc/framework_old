@@ -2,7 +2,9 @@
 
 namespace Service;
 
-use Obullo\Database\Pdo\QueryBuilder;
+use Obullo\Container\Container,
+    Obullo\ServiceProvider\ServiceInterface,
+    Obullo\Database\Pdo\QueryBuilder;
 
 /**
  * Query Builder
@@ -17,23 +19,13 @@ use Obullo\Database\Pdo\QueryBuilder;
 Class Query implements ServiceInterface
 {
     /**
-     * Configure servide parameters
-     * 
-     * @param object $c container
-     */
-    public function __construct($c)
-    {
-        $c['config']['query.params.database'] = array('db' => 'db', 'provider' => 'mysql');  // set provider parameters
-    }
-
-    /**
      * Registry
      *
      * @param object $c container
      * 
      * @return void
      */
-    public function register($c)
+    public function register(Container $c)
     {
         $c['query'] = function () use ($c) {
             return new QueryBuilder($c);

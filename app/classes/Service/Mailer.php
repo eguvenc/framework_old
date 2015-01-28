@@ -2,7 +2,9 @@
 
 namespace Service;
 
-use Obullo\Mail\Transport\Queue;
+use Obullo\Container\Container,
+    Obullo\ServiceProvider\ServiceInterface,
+    Obullo\Mail\Transport\Queue;
 
 /**
  * Mailer Service ( Shared )
@@ -25,7 +27,7 @@ Class Mailer implements ServiceInterface
      * 
      * @return void
      */
-    public function register($c)
+    public function register(Container $c)
     {
         $c['mailer'] = function () use ($c) {
             $mailer = new Queue($c);

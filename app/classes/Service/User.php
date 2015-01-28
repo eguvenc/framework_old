@@ -2,9 +2,9 @@
 
 namespace Service;
 
-use Service\ServiceInterface,
-    Obullo\Container\Container,
-    Obullo\Authentication\UserServiceProvider,
+use Obullo\Container\Container,
+    Obullo\ServiceProvider\ServiceInterface,
+    Obullo\Authentication\UserServiceProvider;
     
 /**
  * User Service
