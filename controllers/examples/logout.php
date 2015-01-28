@@ -12,7 +12,7 @@ Class Logout extends \Controller
     public function load()
     {
         $this->c->load('url');
-        $this->c->load('service/user');
+        $this->c->load('user');
     }
 
     /**

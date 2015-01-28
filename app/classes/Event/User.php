@@ -69,7 +69,7 @@ Class User
                 $identity->getIdentifier()
             )
         );
-        $this->c->load('url')->redirect('/login');
+        $this->c->load('url')->redirect('/examples/login');
     }
 
     /**

@@ -12,6 +12,10 @@ return array(
         'yourhandler' => '\\Session\Handler\YourHandler' // You can create your own handler using Session/Handler/HandlerInterface.php
     ),
 
+    'cache' => array(
+        'storage' =>'redis',
+    ),
+
     'session' => array(
         'key' => 'o2_sessions:',  // Don't remove ":" colons. Your cache handler keeps keys in folders using colons.
         'lifetime' => 7200,       // The number of SECONDS you want the session to last. By default " 2 hours ". "0" is no expiration.

@@ -4,7 +4,7 @@ namespace Service;
 
 use Obullo\Container\Container,
     Obullo\ServiceProvider\ServiceInterface,
-    Obullo\Authentication\UserServiceProvider;
+    Obullo\Authentication\AuthServiceProvider;
     
 /**
  * User Service
@@ -28,12 +28,18 @@ Class User implements ServiceInterface
     public function register(Container $c)
     {
         $c['user'] = function () use ($c) {
-            $user = new UserServiceProvider(
+            $user = new AuthServiceProvider(
                 $c,
-                array(
-                    'db.provider'   => 'pdo',
-                    'db.connection' => 'db',
-                    'db.table'      => 'users'
+                array( // Set your login query database table and column names
+                    'db.adapter'       => '\Obullo\Authentication\Adapter\Database', // Adapter
+                    'db.model'         => '\Obullo\Authentication\Model\User', // User model, you can replace it with your own.
+                    'db.provider'      => 'database',
+                    'db.connection'    => 'default',
+                    'db.tablename'     => 'users', // Database column settings
+                    'db.id'            => 'user_id',
+                    'db.identifier'    => 'email',
+                    'db.password'      => 'password',
+                    'db.rememberToken' => 'remember_token'
                 )
             );
             return $user;

@@ -11,7 +11,7 @@ Class Create extends \Controller
      */
     public function load()
     {
-        $this->c->load('service/captcha');
+        $this->c->load('captcha');
     }
 
     /**

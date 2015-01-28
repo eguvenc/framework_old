@@ -1,25 +1,9 @@
 <?php
 
 return array(
-
-    'adapter' => '\Obullo\Authentication\Adapter\Database',  // Adapter
-
-    'user' => array(
-        'model' => '\Obullo\Authentication\Model\User', // User model, you can replace it with your own.
-    ),
-    'database' => array(      // Set your login query database table and column names
-        'table' => array(
-            'users' => array(
-                'tablename' => 'users',
-                'id' => 'id',
-                'identifier' => 'username',
-                'password' => 'password',
-                'rememberToken' => 'remember_token',
-            )
-        ),
-    ),
-    'cache' => array(               // Keeps user identity data in your cache driver.
-        'key' => 'Auth',            // Auth key should be replace with your projectname to prevent collisions
+    
+    'cache' => array(    // Keeps user identity data in your cache driver.
+        'key' => 'Auth', // Auth key should be replace with your projectname to prevent collisions
         'storage' => '\Obullo\Authentication\Storage\Redis',   // Storage driver uses cache package
         'block' => array(
             'permanent' => array(
@@ -33,7 +17,7 @@ return array(
     'security' => array(
         'cookie' => array(
             'name' => '__token',        // Cookie name
-            'refresh' => 60,            // Every 1 minutes do the cookie validation
+            'refresh' => 5,            // Every 1 minutes do the cookie validation
             'userAgentMatch' => false,  // Whether to match user agent when reading token
             'path' => '/',
             'secure' => false,

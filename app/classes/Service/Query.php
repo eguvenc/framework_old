@@ -28,12 +28,18 @@ Class Query implements ServiceInterface
     public function register(Container $c)
     {
         $c['query'] = function () use ($c) {
-            return new QueryBuilder($c);
+            return new QueryBuilder(
+                $c,
+                [
+                    'db.provider' => 'database',
+                    'db.connection' => 'default'
+                ]
+            );
         };
     }
 }
 
-// END Crud class
+// END Query class
 
-/* End of file Crud.php */
-/* Location: .classes/Service/Crud.php */
+/* End of file Query.php */
+/* Location: .classes/Service/Query.php */
