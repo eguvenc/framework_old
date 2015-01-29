@@ -30,7 +30,7 @@ Class User implements ServiceInterface
         $c['user'] = function () use ($c) {
             $user = new AuthServiceProvider(
                 $c,
-                array(
+                [
                     'db.adapter'       => '\Obullo\Authentication\Adapter\Database', // Adapter
                     'db.model'         => '\Obullo\Authentication\Model\User', // User model, you can replace it with your own.
                     'db.provider'      => 'database',
@@ -40,7 +40,7 @@ Class User implements ServiceInterface
                     'db.identifier'    => 'email',
                     'db.password'      => 'password',
                     'db.rememberToken' => 'remember_token'
-                )
+                ]
             );
             return $user;
         };

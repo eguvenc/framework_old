@@ -18,7 +18,7 @@ return array(
             'hostname' => 'localhost',
             'username' => $c['env']['MYSQL_USERNAME.root'],
             'password' => $c['env']['MYSQL_PASSWORD.NULL'],
-            'dsn'      => 'mysql:host=localhost;port=;dbname=demo_blog',
+            'dsn'      => 'mysql:host=localhost;port=;dbname=test',
             'options'  => [
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
                 PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true

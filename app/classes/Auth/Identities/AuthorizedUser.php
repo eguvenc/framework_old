@@ -7,7 +7,7 @@ use Obullo\Container\Container,
     Obullo\Authentication\Identities\AuthorizedUserInterface;
 
 /**
- * User Identity
+ * Add your "authorized user" methods here
  *
  * @category  Auth
  * @package   Identities
@@ -50,6 +50,27 @@ Class AuthorizedUser extends AbstractAuthorizedUser implements AuthorizedUserInt
     {
         return isset($this->attributes[$this->getColumnPassword()]) ? $this->attributes[$this->getColumnPassword()] : false;
     }
+
+    /**
+     * Returns to "1" user if used remember me feature
+     * 
+     * @return integer
+     */
+    public function getRememberMe() 
+    {
+        return $this->attributes['__rememberMe'];
+    }
+
+    /**
+     * Get all attributes
+     * 
+     * @return array
+     */
+    public function getArray()
+    {
+        return $this->attributes;
+    }
+
 }
 
 /* End of file AuthorizedUser.php */

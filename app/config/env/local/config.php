@@ -90,13 +90,11 @@ return array(
      ),
     /*
     |--------------------------------------------------------------------------
-    | Controller
+    | Annotations
     |--------------------------------------------------------------------------
     */
-    'controller' => array(
-        'annotation' => array(
-            'reader' => false,     // Enable or Disable "annotation reader" which is able to parse filters on controller.
-        )
+    'annotation' => array(
+        'controller' => false, // Enable or Disable "annotation reader" which is able to parse filters on controller.
     ),
     /*
     |--------------------------------------------------------------------------

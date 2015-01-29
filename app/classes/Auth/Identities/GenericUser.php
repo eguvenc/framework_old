@@ -7,7 +7,7 @@ use Obullo\Container\Container,
     Obullo\Authentication\Identities\GenericUserInterface;
 
 /**
- * Generic User Identity
+ * Add your "guest user" methods here
  *
  * @category  Users
  * @package   Identities

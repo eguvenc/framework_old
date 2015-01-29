@@ -3,8 +3,7 @@
 namespace Service;
 
 use Obullo\Container\Container,
-    Obullo\ServiceProvider\ServiceInterface,
-    Obullo\Cache\Handler\Redis;
+    Obullo\ServiceProvider\ServiceInterface;
 
 /**
  * Cache Service
@@ -14,7 +13,7 @@ use Obullo\Container\Container,
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
  * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/container
+ * @link      http://obullo.com/docs/services
  */
 Class Cache implements ServiceInterface
 {
@@ -28,10 +27,7 @@ Class Cache implements ServiceInterface
     public function register(Container $c)
     {
         $c['cache'] = function () use ($c) {
-            
-            $cache = $c->load('service provider cache', ['driver' => 'redis']);
-            $cache->setOption(array('serializer' => 'SERIALIZER_PHP'));
-            return $cache;
+            return $c->load('service provider cache', ['driver' => 'redis', 'serializer' => 'SERIALIZER_PHP']);
         };
     }
 }

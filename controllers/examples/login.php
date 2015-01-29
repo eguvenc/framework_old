@@ -2,8 +2,7 @@
 
 namespace Examples;
 
-use Auth\Constant,
-    Event\User;
+use Event\User;
 
 Class Login extends \Controller
 {
@@ -30,7 +29,6 @@ Class Login extends \Controller
      */
     public function index()
     {
-        // echo $this->password->hash(123456);
         if ($this->c['request']->isPost()) {
 
             $this->c->load('validator'); // load validator

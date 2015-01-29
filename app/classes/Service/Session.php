@@ -7,14 +7,14 @@ use Obullo\Container\Container,
     Obullo\Session\Session as SessionClass;
 
 /**
- * Queue Service ( Shared )
+ * Session Service
  *
  * @category  Service
- * @package   Cache
+ * @package   Session
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
  * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/providers
+ * @link      http://obullo.com/docs/services
  */
 Class Session implements ServiceInterface
 {

@@ -12,7 +12,6 @@ return array(
     | and the array values are used to set the actual name of the item.
     |
     */
-
     'platforms' => array(
 
         'pc' => array(

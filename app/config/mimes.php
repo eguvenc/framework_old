@@ -10,7 +10,6 @@ return array(
     | Upload class to help identify allowed file types. 
     |
     */
-    
     'hqx'   =>  'application/mac-binhex40',
     'cpt'   =>  'application/mac-compactpro',
     'csv'   =>  array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel'),

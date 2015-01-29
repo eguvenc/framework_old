@@ -14,7 +14,7 @@ use Obullo\Container\Container,
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
  * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/providers
+ * @link      http://obullo.com/docs/services
  */
 Class View implements ServiceInterface
 {
@@ -34,7 +34,7 @@ Class View implements ServiceInterface
              * Creates your layouts using Layers
              */
             $view->setLayouts(
-                array(
+                [
                     'default' => function () {
                         $this->assign('header', $this->c['layer']->get('views/header'), false);
                         $this->assign('sidebar', $this->c['layer']->get('views/sidebar'), false);
@@ -43,7 +43,7 @@ Class View implements ServiceInterface
                     'welcome' => function () {
                         $this->assign('footer', $this->template('footer'), false);
                     },
-                )
+                ]
             );
             return $view;
         };
