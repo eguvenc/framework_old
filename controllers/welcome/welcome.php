@@ -13,6 +13,7 @@ Class Welcome extends \Controller
     {
         $this->c->load('url');
         $this->c->load('view');
+        $this->c->load('layer');
     }
 
     /**
@@ -25,7 +26,9 @@ Class Welcome extends \Controller
         $this->view->load(
             'welcome',
             [
-                'title' => 'Welcome to Obullo !'
+                'title' => 'Welcome to Obullo !',
+                'header' => $this->layer->get('views/header'),
+                'footer' => $this->layer->get('views/footer'),
             ]
         );
     }

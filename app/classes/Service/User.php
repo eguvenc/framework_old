@@ -36,8 +36,8 @@ Class User implements ServiceInterface
                     'db.provider'      => 'database',
                     'db.connection'    => 'default',
                     'db.tablename'     => 'users', // Database column settings
-                    'db.id'            => 'user_id',
-                    'db.identifier'    => 'email',
+                    'db.id'            => 'id',
+                    'db.identifier'    => 'username',
                     'db.password'      => 'password',
                     'db.rememberToken' => 'remember_token'
                 ]

@@ -10,18 +10,12 @@ return array(
     'connections' => array(
 
         'default' => array(
-            'hostname' => $c['env']['MONGO_HOST'],
-            'username' => $c['env']['MONGO_USERNAME'],
-            'password' => $c['env']['MONGO_PASSWORD'],
-            'port'     => '27017',
+            'server' => 'mongodb://'.$c['env']['MONGO_USERNAME'].':'.$c['env']['MONGO_PASSWORD'].'@'.$c['env']['MONGO_HOST'].':27017',
             'options'  => array('connect' => true)
         )
         ,
         'second' => array(
-            'hostname' => $c['env']['MONGO_HOST'],
-            'username' => $c['env']['MONGO_USERNAME'],
-            'password' => $c['env']['MONGO_PASSWORD'],
-            'port'     => '27017',
+            'server' => 'mongodb://test:123456@localhost:27017',
             'options'  => array('connect' => true)
         )
 

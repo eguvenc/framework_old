@@ -61,6 +61,7 @@ return array(
             'delay' => 0,
             'workers' => array(
                 'logging' => false     // On / Off Queue workers logging functionality. See the Queue package docs.
+                                       // You can turn on logs if you want to set workers as service.
             ), 
         )
     ),

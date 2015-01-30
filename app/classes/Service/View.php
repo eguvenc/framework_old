@@ -36,12 +36,8 @@ Class View implements ServiceInterface
             $view->setLayouts(
                 [
                     'default' => function () {
-                        $this->assign('header', $this->c['layer']->get('views/header'), false);
-                        $this->assign('sidebar', $this->c['layer']->get('views/sidebar'), false);
-                        $this->assign('footer', $this->c['layer']->get('views/footer'), false);
-                    },
-                    'welcome' => function () {
-                        $this->assign('footer', $this->template('footer'), false);
+                        $this->assign('header', $this->c['layer']->get('views/header'));
+                        $this->assign('footer', $this->c['layer']->get('views/test'));
                     },
                 ]
             );

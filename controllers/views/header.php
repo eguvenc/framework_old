@@ -22,28 +22,11 @@ Class Header extends \Controller
      */
     public function index()
     {
-        $firstSegment   = $this->request->global->uri->segment(0);     // Get first segnment
-        $currentSegment = (empty($firstSegment)) ? 'home' : $firstSegment;  // Set current segment as "home" if its empty
-
-        $li = '';
-        $navbar = array(
-            'home'    => 'Home',
-            'about'   => 'About', 
-            'contact' => 'Contact',
-            'membership/login'   => 'Login',
-            'membership/signup'  => 'Signup',
-        );
-        foreach ($navbar as $key => $value) {
-            $active = ($currentSegment == $key) ? ' id="active" ' : '';
-            $li.= '<li>'.$this->url->anchor($key, $value, " $active ").'</li>';
-        }
-
-        echo $this->c['view']->load(
+        echo $this->view->get(
             'header',
-            function () use ($li) {
-                $this->assign('li', $li);
-            },
-            false
+            [
+                'header' => '--------------- EXAMPLE HEADER LAYER ---------------'
+            ]
         );
     }
 }

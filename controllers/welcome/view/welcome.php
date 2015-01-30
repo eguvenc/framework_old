@@ -8,6 +8,8 @@
     <body>
         <header>
             <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
+
+            <?php echo $header; ?>
         </header>
 
         <h1>Welcome to Obullo !</h1>
@@ -36,6 +38,8 @@
             <p>&nbsp;</p>
             <p>&nbsp;</p>
         </section>
+
+        <?php echo $footer; ?>
 
     </body>
 </html>

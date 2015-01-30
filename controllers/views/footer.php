@@ -1,8 +1,8 @@
 <?php
 
-namespace Widgets\Tutorials;
+namespace Views;
 
-Class Hello_Layout extends \Controller
+Class Footer extends \Controller
 {
     /**
      * Loader
@@ -22,15 +22,15 @@ Class Hello_Layout extends \Controller
      */
     public function index()
     {
-        $this->view->load(
-            'hello_layout',
+        echo $this->view->get(
+            'footer',
             [
-                'title' => 'Hello Layouts !'
-            ],
-            'welcome'
+                'footer' => '--------------- EXAMPLE FOOTER LAYER ---------------'
+            ]
         );
     }
 }
 
-/* End of file hello_layout.php */
-/* Location: .controllers/tutorials/hello_layout.php */
+
+/* End of file header.php */
+/* Location: .controllers/views/header.php */
