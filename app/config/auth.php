@@ -2,9 +2,14 @@
 
 return array(
     
-    'cache' => array(    // Keeps user identity data in your cache driver.
-        'key' => 'Auth', // Auth key should be replace with your projectname to prevent collisions
-        'storage' => '\Obullo\Authentication\Storage\Redis',   // Storage driver uses cache package
+    'cache' => array(
+
+        'storage' => '\Obullo\Authentication\Storage\Memcached',   // Storage driver uses cache package
+        'provider' => array(
+            'name' => 'cache',
+            'driver' => 'memcached',
+            'serializer' => 'SERIALIZER_PHP',  // SERIALIZER_JSON, SERIALIZER_IGBINARY
+        ),
         'block' => array(
             'permanent' => array(
                 'lifetime' => 86400,  // 24 hours default, it should be long period ( this is identity cache )
@@ -17,7 +22,7 @@ return array(
     'security' => array(
         'cookie' => array(
             'name' => '__token',       // Cookie name
-            'refresh' => 5,            // Every 1 minutes do the cookie validation
+            'refresh' => 10,            // Every 1 minutes do the cookie validation
             'userAgentMatch' => false, // Whether to match user agent when reading token
             'path' => '/',
             'secure' => false,
@@ -41,8 +46,8 @@ return array(
             )
         ),
         'session' => array(
-            'regenerateSessionId' => true,               // Regenerate session id upon new logins.
-            'deleteOldSessionAfterRegenerate' => false,  // Destroy old session data after regenerate the new session id upon new logins
+            'regenerateSessionId' => true,              // Regenerate session id upon new logins.
+            'deleteOldSessionAfterRegenerate' => true,  // Removes old session id after regenerate after new logins.
         )
     ),
     'activity' => array(
