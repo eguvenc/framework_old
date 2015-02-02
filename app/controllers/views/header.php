@@ -13,7 +13,7 @@ Class Header extends \Controller
     {
         $this->c->load('view');
     }
-
+    
     /**
      * Index
      * 

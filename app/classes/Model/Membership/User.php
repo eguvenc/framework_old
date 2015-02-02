@@ -2,8 +2,7 @@
 
 namespace Model\Membership;
 
-use Pdo,
-    Model;
+use Model;
 
 /**
  * User model
@@ -27,7 +26,7 @@ Class User extends Model
 
     public function test()
     {
-        $this->model->debug->test();
+        $this->modelDebug->test();
         echo __CLASS__.'<br />';   
     }
 

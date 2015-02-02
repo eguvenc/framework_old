@@ -59,6 +59,9 @@ Class User
         if ( ! $authResult->isValid()) {
 
             // Store attemtps
+            // ...
+        
+            $row = $authResult->getResultRow();  // Get query results
 
         }
         return $authResult;

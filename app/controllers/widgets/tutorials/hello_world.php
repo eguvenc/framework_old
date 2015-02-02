@@ -4,7 +4,7 @@ namespace Widgets\Tutorials;
 
 Class Hello_World extends \Controller
 {
-    use \View\Layout\Welcome;
+    use \View\Layout\Base;
 
     /**
      * Loader
@@ -14,7 +14,7 @@ Class Hello_World extends \Controller
     public function load()
     {
         $this->c->load('view');
-        $this->c->load('service provider cache', ['driver' => 'redis']);
+        // $this->c->load('service provider cache', ['driver' => 'redis']);
     }
 
     /**

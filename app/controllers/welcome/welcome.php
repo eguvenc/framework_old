@@ -4,7 +4,7 @@ namespace Welcome;
 
 Class Welcome extends \Controller
 {
-    use \View\Layout\Welcome;
+    use \View\Layout\Base;
 
     /**
      * Loader
@@ -14,7 +14,9 @@ Class Welcome extends \Controller
     public function load()
     {
         $this->c->load('url');
-        $this->c->load('view');
+
+        $this->c['model.user'] = new \Model\User;
+        $this->c['model.user']->test();
     }
 
     /**

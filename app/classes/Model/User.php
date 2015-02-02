@@ -5,7 +5,7 @@ namespace Model;
 /**
  * User model
  */
-Class User extends Model
+Class User extends \Model
 {
     public $email;
     public $username;
@@ -19,13 +19,13 @@ Class User extends Model
     public function load()
     {
         $this->c->load('db'); 
-
-        echo 'new instance<br>';
+        // $this->c->bind('model debug', 'Debug');
     }
 
     public function test()
     {
-        echo __CLASS__.'<br />';
+        echo 'OK !';
+        // $this->modelDebug->test();
     }
 
     public function save()
