@@ -2,7 +2,7 @@
 
 namespace Views;
 
-Class Footer extends \Controller
+Class Header extends \Controller
 {
     /**
      * Loader
@@ -11,7 +11,6 @@ Class Footer extends \Controller
      */
     public function load()
     {
-        $this->c->load('url');
         $this->c->load('view');
     }
 
@@ -23,9 +22,9 @@ Class Footer extends \Controller
     public function index()
     {
         echo $this->view->get(
-            'footer',
+            'header',
             [
-                'footer' => '--------------- EXAMPLE FOOTER LAYER ---------------'
+                'header' => '--------------- EXAMPLE HEADER LAYER ---------------'
             ]
         );
     }

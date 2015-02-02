@@ -1,5 +1,7 @@
 <?php
 
+namespace Model;
+
 /**
  * User model
  */
@@ -28,13 +30,18 @@ Class User extends Model
 
     public function save()
     {
-        $this->db->insert(
-            'users', 
-            array(
-            'username' => $this->username,
-            'email' => $this->email,
-            'date' => $this->date,
-            )
+        $this->db->query(
+            'INSERT INTO users (%s,%s,%s) VALUES (?,?,?)', 
+            [
+                'username',
+                'email', 
+                $this->db->protect('date')
+            ],
+            [
+                $this->username, 
+                $this->email, 
+                $this->date
+            ]
         );
     }
 

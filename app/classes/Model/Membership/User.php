@@ -1,6 +1,6 @@
 <?php
 
-namespace Membership;
+namespace Model\Membership;
 
 use Pdo,
     Model;
@@ -34,7 +34,12 @@ Class User extends Model
     public function insert()
     {
         $this->db->query(
-            'INSERT INTO users (%s,%s,%s) VALUES (?,?,?)', ['username','email', $this->db->protect('date')],
+            'INSERT INTO users (%s,%s,%s) VALUES (?,?,?)', 
+            [
+                'username',
+                'email', 
+                $this->db->protect('date')
+            ],
             [
                 $this->username, 
                 $this->email, 

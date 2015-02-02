@@ -2,6 +2,7 @@
 
 return array(
 
+    // Provider ı driver olarak değiştir.
     'default' => array(
         'provider' => 'mandrill',    // Choose provider ( mandrill, mailgun, smtp, mail, sendmail )
     ),
@@ -54,6 +55,8 @@ return array(
                 'timeout' => '5' ,                         // Timeout (in seconds).
             ),
         ),
+
+        // BU KISIM SERVIS İÇERİSİNDEN KONFİGURE EDİLECEK.
 
         'transport' => array(
             'mandrill' => array(

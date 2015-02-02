@@ -1,6 +1,6 @@
 <?php
 
-namespace Service\Logger\Env;
+namespace Service\Logger\Cli;
 
 use Obullo\Container\Container,
     Obullo\Log\LogServiceProvider,
@@ -16,7 +16,7 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Local implements ServiceInterface
+Class Cli implements ServiceInterface
 {
     /**
      * Registry
@@ -36,7 +36,7 @@ Class Local implements ServiceInterface
             | Set configuration
             |--------------------------------------------------------------------------
             */
-            $logger->initialize(
+            $logger->setParams(
                 [
                     'default' => array(
                         'channel' => 'system',       // Default channel name should be general.
@@ -53,8 +53,8 @@ Class Local implements ServiceInterface
                         'date' =>  'Y-m-d H:i:s',
                     ),
                     'extra' => array(
-                        'queries'   => true, // If true "all" SQL Queries gets logged.
-                        'benchmark' => true, // If true "all" Application Benchmarks gets logged.
+                        'queries'   => true,       // If true "all" SQL Queries gets logged.
+                        'benchmark' => true,       // If true "all" Application Benchmarks gets logged.
                     ),
                     'queue' => array(
                         'channel' => 'Log',
@@ -95,7 +95,7 @@ Class Local implements ServiceInterface
     }
 }
 
-// END Local class
+// END Cli class
 
-/* End of file Local.php */
-/* Location: .classes/Service/Logger/Env/Local.php */
+/* End of file Cli.php */
+/* Location: .classes/Service/Logger/Cli/Cli.php */

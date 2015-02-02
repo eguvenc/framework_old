@@ -28,20 +28,7 @@ Class View implements ServiceInterface
     public function register(Container $c)
     {
         $c['view'] = function () use ($c) {
-
-            $view = new ViewClass($c);
-            /**
-             * Creates your layouts using Layers
-             */
-            $view->setLayouts(
-                [
-                    'default' => function () {
-                        $this->assign('header', $this->c['layer']->get('views/header'));
-                        $this->assign('footer', $this->c['layer']->get('views/test'));
-                    },
-                ]
-            );
-            return $view;
+            return new ViewClass($c);
         };
     }
 }

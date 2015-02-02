@@ -60,14 +60,14 @@ Class MaintenanceFilter
      */
     protected function domainFilter()
     {
-        if ($this->c['config']->env['domain']['root']['maintenance'] == 'down') {  // Filter for all domains
+        if ($this->c['config']['domain']['root']['maintenance'] == 'down') {  // Filter for all domains
             $this->show503();
         }
         if ( ! is_array($this->domain) AND ! isset($this->domain['regex'])) {
             throw new LogicException(
                 sprintf(
                     'Correct your routes.php domain value it must be like this <pre>%s</pre>', 
-                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\']->env[\'domain\'][\'key\'], .., function () { .. }),.'
+                    '$c[\'router\']->group( array(\'domain\' => $c[\'config\'][\'domain\'][\'key\'], .., function () { .. }),.'
                 )
             );
         }
@@ -85,7 +85,7 @@ Class MaintenanceFilter
      */
     protected function show503()
     {
-        $this->c['response']->setHttpResponse(503)->sendOutput($this->c['view']->template('errors/maintenance'));
+        $this->c['response']->setHttpResponse(503)->sendOutput($this->c->load('view')->template('errors/maintenance'));
         die;
     }
 

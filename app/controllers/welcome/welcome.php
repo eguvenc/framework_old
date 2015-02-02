@@ -4,6 +4,8 @@ namespace Welcome;
 
 Class Welcome extends \Controller
 {
+    use \View\Layout\Welcome;
+
     /**
      * Loader
      * 
@@ -13,7 +15,6 @@ Class Welcome extends \Controller
     {
         $this->c->load('url');
         $this->c->load('view');
-        $this->c->load('layer');
     }
 
     /**
@@ -27,8 +28,6 @@ Class Welcome extends \Controller
             'welcome',
             [
                 'title' => 'Welcome to Obullo !',
-                'header' => $this->layer->get('views/header'),
-                'footer' => $this->layer->get('views/footer'),
             ]
         );
     }
