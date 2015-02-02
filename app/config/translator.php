@@ -32,15 +32,6 @@ return array(
                         'de' => 'deutsch',
                         'tr' => 'turkish',
                         ),
-
-    // Iso Language Codes
-    // http://www.microsoft.com/resources/msdn/goglobal/default.mspx
-    'isoCodes' => array(
-                        'en' => 'en_US',
-                        'es' => 'es_US',
-                        'de' => 'de_DE',
-                        'tr' => 'tr_TR',
-    ),
 );
 
 /* End of file translator.php */
