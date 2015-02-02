@@ -36,13 +36,25 @@ Class User
     }
 
     /**
+     * Before login attempt
+     * 
+     * @param array $credentials user login credentials
+     * 
+     * @return void
+     */
+    public function beforeLoginAttempt($credentials = array())
+    {
+        // ..
+    }
+
+    /**
      * Handle user login attempts
      *
      * @param object $authResult AuthResult object
      * 
      * @return void
      */
-    public function onLoginAttempt(AuthResult $authResult)
+    public function afterLoginAttempt(AuthResult $authResult)
     {
         if ( ! $authResult->isValid()) {
 
@@ -70,16 +82,6 @@ Class User
             )
         );
         $this->c->load('url')->redirect('/examples/login');
-    }
-
-    /**
-     * Handler user login events
-     * 
-     * @return void
-     */
-    public function onAfterLogin()
-    {
-        // ..
     }
 
     /**
@@ -126,8 +128,9 @@ Class User
      */
     public function subscribe($event)
     {
-        $event->listen('login.attempt', 'Event\User.onLoginAttempt');
-        $event->listen('after.login', 'Event\User.onAfterLogin');
+        $event->listen('login.beforeAttempt', 'Event\User.beforeLoginAttempt');
+        $event->listen('login.afterAttempt', 'Event\User.afterLoginAttempt');
+
         $event->listen('auth.invalidToken', 'Event\User.onInvalidToken');
         $event->listen('after.logout', 'Event\User.onAfterLogout');
         $event->listen('auth.unique', 'Event\User.onUniqueSession');

@@ -15,7 +15,6 @@ Class Hello_World extends \Controller
     {
         $this->c->load('view');
         $this->c->load('service provider cache', ['driver' => 'redis']);
-
     }
 
     /**
