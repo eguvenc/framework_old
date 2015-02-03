@@ -99,12 +99,12 @@ return array(
     |--------------------------------------------------------------------------
     */
     'cookie' => array( 
-        'domain' => '',          // Set to .your-domain.com for site-wide cookies
-        'path'   => '/',         // Typically will be a forward slash
-        'secure' => false,       // Cookies will only be set if a secure HTTPS connection exists.
-        'httpOnly' => false,     // When true the cookie will be made accessible only through the HTTP protocol
-        'expire' => 604800,                     // 1 week - Cookie expire time.
-        'prefix' => '',                         // Set a prefix if you need to avoid collisions
+        'domain' => $c['env']['COOKIE_DOMAIN.NULL'],    // Set to .your-domain.com for site-wide cookies
+        'path'   => '/',                                // Typically will be a forward slash
+        'secure' => false,                              // Cookies will only be set if a secure HTTPS connection exists.
+        'httpOnly' => false,                            // When true the cookie will be made accessible only through the HTTP protocol
+        'expire' => 604800,                             // 1 week - Cookie expire time.
+        'prefix' => '',                                 // Set a prefix if you need to avoid collisions
     ),
     /*
     |--------------------------------------------------------------------------

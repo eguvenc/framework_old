@@ -2,19 +2,20 @@
 
 namespace Event;
 
-use Obullo\Container\Container;
+use Obullo\Container\Container,
+    Obullo\Event\EventListenerInterface;
 
 /**
- * User request - response handler
+ * Request - response handler
  *
- * @category  Event
+ * @category  EventListener
  * @package   Request
  * @author    Obullo Framework <obulloframework@gmail.com>
  * @copyright 2009-2014 Obullo
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/event
  */
-Class Request
+Class Request implements EventListenerInterface
 {
     /**
      * Container
@@ -33,6 +34,62 @@ Class Request
         $this->c = $c;
         $this->router = $this->c['router'];
         $this->logger = $this->c->load('logger');
+    }
+
+    /**
+     * Before the run load and index methods of controller
+     * 
+     * @param object $class  Controller
+     * @param object $filter Blocks\Annotations\Filter
+     * 
+     * @return void
+     */
+    // public function onBeforeController($class, $filter)
+    // {
+    //     $this->router->initFilters('before', $filter);  // Initialize ( exec ) registered router ( before ) filters
+    //     $class = null;
+    // }
+
+    /**
+     * After the run index method of controller
+     * 
+     * @param object $class  Controller
+     * @param object $filter \Blocks\Annotations\Filter
+     * 
+     * @return void
+     */
+    // public function onAfterController($class, $filter)
+    // {
+    //     $this->router->initFilters('after', $filter);  // Initialize ( exec ) registered router ( after ) filters
+    //     $class = null;
+    // }
+
+    /**
+     * After the run load() method of controller
+     * 
+     * @param object $class  Controller
+     * @param object $filter \Blocks\Annotations\Filter
+     * 
+     * @return void
+     */
+    // public function onLoad($class, $filter)
+    // {
+    //     $this->router->initFilters('load', $filter);  // Initialize ( exec ) registered router ( after ) filters
+    //     $class = null;
+    // }
+
+    /**
+     * After $this->url->redirect() method
+     *
+     * @param string $uri    redirect uri url
+     * @param string $method redirect method ( header location )
+     * 
+     * @return void
+     */
+    public function beforeRedirect($uri, $method)
+    {
+        $method = null;
+        $this->onAfterResponse('Header redirect', array('uri' => $uri));  // Add final response info
     }
 
     /**
@@ -70,45 +127,23 @@ Class Request
     }
 
     /**
-     * Before the run load and index methods of controller
+     * Executed when you use annotation method filter
      * 
-     * @param object $class  Controller
-     * @param object $filter Blocks\Annotations\Filter
+     * @param object $object     allowed method parameter(s) ( get, post, put, delete )
+     * @param string $httpMethod valid request method e.g. post
      * 
      * @return void
      */
-    public function onBeforeController($class, $filter)
+    public function onMethod($object, $httpMethod)
     {
-        $this->router->initFilters('before', $filter);  // Initialize ( exec ) registered router ( before ) filters
-        $class = null;
-    }
+        $allowedMethods = (array)$object; // $event->fire() method does not allow to send arrays 
+                                          // as one parameter thats why we send params as object.
 
-    /**
-     * After the run index method of controller
-     * 
-     * @param object $class  Controller
-     * @param object $filter \Blocks\Annotations\Filter
-     * 
-     * @return void
-     */
-    public function onAfterController($class, $filter)
-    {
-        $this->router->initFilters('after', $filter);  // Initialize ( exec ) registered router ( after ) filters
-        $class = null;
-    }
-
-    /**
-     * After the run load() method of controller
-     * 
-     * @param object $class  Controller
-     * @param object $filter \Blocks\Annotations\Filter
-     * 
-     * @return void
-     */
-    public function onLoad($class, $filter)
-    {
-        $this->router->initFilters('load', $filter);  // Initialize ( exec ) registered router ( after ) filters
-        $class = null;
+        if ( ! in_array($httpMethod, $allowedMethods)) {
+            $this->c['response']->setHttpResponse(405)->showError(
+                sprintf("Http %s method not allowed.", ucfirst($httpMethod))
+            );
+        }
     }
 
     /**
@@ -134,39 +169,6 @@ Class Request
         $this->logger->debug($message, $extra, -99);
     }
 
-    /**
-     * Executed when you use annotation method filter
-     * 
-     * @param object $object     allowed method parameter(s) ( get, post, put, delete )
-     * @param string $httpMethod valid request method e.g. post
-     * 
-     * @return void
-     */
-    public function onMethod($object, $httpMethod)
-    {
-        $allowedMethods = (array)$object; // $event->fire() method does not allow to send arrays 
-                                          // as one parameter thats why we send params as object.
-
-        if ( ! in_array($httpMethod, $allowedMethods)) {
-            $this->c['response']->setHttpResponse(405)->showError(
-                sprintf("Http %s method not allowed.", ucfirst($httpMethod))
-            );
-        }
-    }
-
-    /**
-     * After $this->url->redirect() method
-     *
-     * @param string $uri    redirect uri url
-     * @param string $method redirect method ( header location )
-     * 
-     * @return void
-     */
-    public function beforeRedirect($uri, $method)
-    {
-        $method = null;
-        $this->onAfterResponse('Header redirect', array('uri' => $uri));  // Add final response info
-    }
 
     /**
      * Event subscribe

@@ -35,6 +35,7 @@ return array(
         ),                            // Set 6 for best performance and less security, set between 8 - 12  for strong security if your hardware strong..
     ),
     'login' => array(
+        'route' => '/examples/login',
         'rememberMe'  => array(
             'cookie' => array(
                 'name' => '__rm',
