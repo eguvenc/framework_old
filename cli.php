@@ -5,7 +5,7 @@
 |--------------------------------------------------------------------------
 */
 if (error_get_last() != null) {
-    include APP .'templates'. DS .'errors'. DS .'startup.php';
+    include TEMPLATES .'errors'. DS .'startup.php';
 }
 /*
 |--------------------------------------------------------------------------

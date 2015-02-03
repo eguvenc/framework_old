@@ -32,20 +32,21 @@ define('FPATH', dirname(__FILE__));
 | DATA        		- The full server path to the "data" folder
 | CLASSES     		- The full server path to the user "classes" folder
 | TEMPLATES    		- The full server path to the user "templates" folder
-| CONTROLLER_FOLDER	- The full "static" server path to the "public" folder
+| RESOURCES    		- The full server path to the user "resources" folder
 | CONTROLLERS  		- The full "dynamic" server path to the "public" folder
 | TASK_FILE   		- The file name for $php task operations.
 | TASK   			- The full "static" path of the native cli task folder.
 | INDEX_PHP			- The path of your index.php file.
 */
 define('ROOT',  realpath(dirname(__FILE__)) . DS);
-define('ASSETS',  ROOT .'assets'. DS);
 define('APP',  ROOT .'app'. DS);
-define('DATA',  APP .'data'. DS);
+define('ASSETS',  ROOT .'assets'. DS);
+define('RESOURCES',  ROOT .'resources'. DS);
+define('DATA',  RESOURCES .'data'. DS);
+define('TRANSLATIONS',  RESOURCES .'translations'. DS);
 define('CLASSES',  APP .'classes'. DS);
 define('TEMPLATES',  APP . 'templates'. DS);
-define('CONTROLLER_FOLDER', APP .'controllers'. DS);
-define('CONTROLLERS', (defined('STDIN')) ? APP : CONTROLLER_FOLDER);
+define('CONTROLLERS', APP .'controllers'. DS);
 define('TASK_FILE', 'task');
 define('TASK', PHP_PATH .' '. APP .'tasks'. DS .'cli'. DS);
 define('CLI_PHP', 'cli.php');
@@ -67,7 +68,6 @@ define('OBULLO_EVENTS', APP .'events.php');
 define('OBULLO_ROUTES', APP .'routes.php');
 define('OBULLO_FILTERS', APP .'filters.php');
 define('OBULLO_CONTROLLER', OBULLO .'Controller'. DS .'Controller.php');
-
 /*
 |---------------------------------------------------------------
 | NOTIFICATIONS
