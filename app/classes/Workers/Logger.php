@@ -62,7 +62,7 @@ Class Logger implements JobInterface
             case 'email':
                 $handler = new JobHandlerEmail(
                     $this->c,
-                    $this->c->load('mailer'),
+                    $this->c['mailer'],
                     array(
                         'from' => '<noreply@example.com> Server Admin',
                         'to' => 'obulloframework@gmail.com',
@@ -76,7 +76,7 @@ Class Logger implements JobInterface
             case 'mongo':
                 $handler = new JobHandlerMongo(
                     $this->c,
-                    $this->c->load('service provider mongo', array('connection' => 'default'))->selectDb('db'),
+                    $this->c['service provider mongo']->get(['connection' => 'default']),
                     array(
                         'database' => 'db',
                         'collection' => 'logs',

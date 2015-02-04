@@ -30,7 +30,7 @@ Class AuthFilter
      */
     public function __construct(Container $c)
     {
-        $this->user = $c->load('user');
+        $this->user = $c['user'];
     }
 
     /**

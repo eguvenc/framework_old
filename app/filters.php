@@ -1,25 +1,24 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Filters
+| Route Filters
 |--------------------------------------------------------------------------
-| This file specifies the your application filters.
 */
 /*
 |--------------------------------------------------------------------------
 | Maintenance
 |--------------------------------------------------------------------------
-| App maintenance control filter
+| Domain under maintenance control
 */
-$c['router']->filter('maintenance', 'Http\Filters\MaintenanceFilter');
+$c['router']->filter('maintenance', 'Http\Filters\MaintenanceFilter', 'before');
 
 /*
 |--------------------------------------------------------------------------
 | Auth
 |--------------------------------------------------------------------------
-| Authentication control filter
+| Authentication filter
 */
-$c['router']->filter('auth', 'Http\Filters\AuthFilter');
+$c['router']->filter('auth', 'Http\Filters\AuthFilter', 'before');
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +26,31 @@ $c['router']->filter('auth', 'Http\Filters\AuthFilter');
 |--------------------------------------------------------------------------
 | Cross site request forgery check filter
 */
-$c['router']->filter('csrf', 'Http\Filters\CsrfFilter');
+$c['router']->filter('csrf', 'Http\Filters\CsrfFilter', 'before');
+
+/*
+|--------------------------------------------------------------------------
+| Method Not Allowed
+|--------------------------------------------------------------------------
+| Checks http request methods
+*/
+$c['router']->filter('methodNotAllowed', 'Http\Filters\RequestNotAllowedFilter', 'before');
+
+/*
+|--------------------------------------------------------------------------
+| Application Before Filter
+|--------------------------------------------------------------------------
+| A before application filter allows you to execute tasks before the controller is executed
+*/
+$c['app']->filter('Http\Filters\RequestFilter', 'before');
+/*
+|--------------------------------------------------------------------------
+| Application Finish Filter
+|--------------------------------------------------------------------------
+| A finish application filter allows you to execute tasks after the Response has been sent to the client
+*/
+$c['app']->filter('Http\Filters\RequestFilter', 'finish');
+
 
 
 /* End of file filters.php */

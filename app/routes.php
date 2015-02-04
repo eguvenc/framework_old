@@ -15,17 +15,19 @@ $c['router']->defaultPage('welcome');
 // $c['router']->get(
 //     'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
 //     function () use ($c) {
-//         $c->load('view')->load('dummy');
+//         $c['view']->load('dummy');
 //     }
 // )->attach('welcome/(.*)',  array('activity'));
 
 
 // $c['router']->attach('(.)', array('maintenance'));
 
+
+
 $c['router']->group(
-    array('name' => 'general', 'domain' => $c['config']['domain']['sub.domain.com'], 'filters' => array('maintenance')),
+    array('name' => 'general', 'domain' => $c['config']['domain']['mydomain.com'], 'filters' => array('maintenance')),
     function ($group) {
-        
+
         $this->defaultPage('welcome');
         $this->get('(?:en|tr|de|nl)/(.*)', '$1', null, $group);
         $this->get('(?:en|tr|de|nl)', 'welcome/index',  null, $group);  // default controller

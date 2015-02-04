@@ -38,7 +38,7 @@ Class GuestFilter
     public function __construct(Container $c)
     {
         $this->c = $c;
-        $this->user = $this->c->load('user');
+        $this->user = $this->c['user'];
     }
 
     /**
@@ -50,8 +50,8 @@ Class GuestFilter
     {
         if ($this->user->identity->guest()) {
 
-            $this->c->load('flash/session')->info('Your session has been expired.');
-            $this->c->load('url')->redirect('/');
+            $this->c['flash/session']->info('Your session has been expired.');
+            $this->c['url']->redirect('/');
         }
     }
 

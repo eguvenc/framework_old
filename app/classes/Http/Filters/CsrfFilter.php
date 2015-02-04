@@ -38,7 +38,7 @@ Class CsrfFilter
     public function __construct(Container $c)
     {
         $this->c = $c;
-        $this->csrf = $this->c->load('security/csrf'); 
+        $this->csrf = $this->c['security/csrf']; 
     }
 
     /**

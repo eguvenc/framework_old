@@ -41,7 +41,7 @@ Class HttpsFilter
     public function before()
     {
         if ($this->c['request']->isSecure() == false) {
-            $this->c->load('url')->redirect('https://'.$this->c['router']->getDomain() . $this->c['uri']->getRequestUri());
+            $this->c['url']->redirect('https://'.$this->c['router']->getDomain() . $this->c['uri']->getRequestUri());
         }
     }
 }

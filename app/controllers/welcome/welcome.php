@@ -13,10 +13,7 @@ Class Welcome extends \Controller
      */
     public function load()
     {
-        $this->c->load('url');
-
-        $this->c['model.user'] = new \Model\User;
-        $this->c['model.user']->test();
+        $this->c['url'];
     }
 
     /**

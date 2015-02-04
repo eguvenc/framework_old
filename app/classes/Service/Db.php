@@ -28,7 +28,7 @@ Class Db implements ServiceInterface
     public function register(Container $c)
     {
         $c['db'] = function () use ($c) {
-            return $c->load('service provider database', ['connection' => 'default']);
+            return $c['service provider database']->get(['connection' => 'default']);
         };
     }
 }

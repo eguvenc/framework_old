@@ -84,8 +84,8 @@ Class User implements EventListenerInterface
         $event->listen('login.beforeAttempt', 'Event\User.beforeLoginAttempt');
         $event->listen('login.afterAttempt', 'Event\User.afterLoginAttempt');
 
-        $event->listen('auth.unique', 'Event\User.onUniqueSession');
-        $event->listen('auth.invalidToken', 'Event\User.onInvalidToken');
+        // $event->listen('auth.unique', 'Event\User.onUniqueSession');     // FILTER OLACAKLAR
+        // $event->listen('auth.invalidToken', 'Event\User.onInvalidToken');
     }
 
 }

@@ -6,9 +6,13 @@ return array(
         'maintenance' => 'up',
         'regex' => null,
     ),
-    'sub.domain.com' => array(
+    'mydomain.com' => array(
         'maintenance' => 'up',
         'regex' => '^framework$',
+    ),
+    'sub.domain.com' => array(
+        'maintenance' => 'up',
+        'regex' => '^sub.domain.com$',
     ),
 );
 

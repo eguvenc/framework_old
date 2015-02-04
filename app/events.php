@@ -6,12 +6,8 @@
 | This file specifies the your application global events.
 */
 
-/*
-|--------------------------------------------------------------------------
-| Request - Response Handler
-|--------------------------------------------------------------------------
-*/
-$c['event']->subscribe(new Event\Request($c));
+
+// $c['event']->subscribe(new Event\MyEvent($c));
 
 
 /* End of file events.php */

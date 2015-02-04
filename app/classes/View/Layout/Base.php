@@ -11,8 +11,8 @@ Trait Base
      */
     public function extend()
     {
-        $this->c->load('view');
-        $this->c->load('layer');
+        $this->c['view'];
+        $this->c['layer'];
 
         $this->view->assign('header', $this->layer->get('views/header'));
         $this->view->assign('footer', $this->layer->get('views/footer'));
