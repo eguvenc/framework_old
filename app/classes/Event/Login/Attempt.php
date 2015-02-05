@@ -1,6 +1,6 @@
 <?php
 
-namespace Event;
+namespace Event\Login;
 
 use Obullo\Container\Container,
     Obullo\Authentication\AuthResult,
@@ -10,7 +10,7 @@ use Obullo\Container\Container,
     Obullo\Authentication\Addons\InvalidTokenTrait;
 
 /**
- * User event handler
+ * Login attempt listener
  * 
  * @category  EventListener
  * @package   User
@@ -19,9 +19,9 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/event
  */
-Class User implements EventListenerInterface
+Class Attempt implements EventListenerInterface
 {
-    use UniqueSessionTrait, InvalidTokenTrait;
+    // use UniqueSessionTrait, InvalidTokenTrait;
 
     /**
      * Container
@@ -47,7 +47,7 @@ Class User implements EventListenerInterface
      * 
      * @return void
      */
-    public function beforeLoginAttempt($credentials = array())
+    public function before($credentials = array())
     {
         // ..
     }
@@ -59,7 +59,7 @@ Class User implements EventListenerInterface
      * 
      * @return void
      */
-    public function afterLoginAttempt(AuthResult $authResult)
+    public function after(AuthResult $authResult)
     {
         if ( ! $authResult->isValid()) {
 
@@ -81,8 +81,8 @@ Class User implements EventListenerInterface
      */
     public function subscribe($event)
     {
-        $event->listen('login.beforeAttempt', 'Event\User.beforeLoginAttempt');
-        $event->listen('login.afterAttempt', 'Event\User.afterLoginAttempt');
+        $event->listen('login.attempt.before', 'Event\Login\Attempt.before');
+        $event->listen('login.attempt.after', 'Event\Login\Attempt.after');
 
         // $event->listen('auth.unique', 'Event\User.onUniqueSession');     // FILTER OLACAKLAR
         // $event->listen('auth.invalidToken', 'Event\User.onInvalidToken');

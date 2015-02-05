@@ -6,8 +6,7 @@
 | This file specifies the your application global events.
 */
 
-
-// $c['event']->subscribe(new Event\MyEvent($c));
+$c['event']->subscribe(new Event\Redirect($c));
 
 
 /* End of file events.php */

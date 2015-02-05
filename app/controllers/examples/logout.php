@@ -11,8 +11,8 @@ Class Logout extends \Controller
      */
     public function load()
     {
-        $this->c->load('url');
-        $this->c->load('user');
+        $this->c['url'];
+        $this->c['user'];
     }
 
     /**

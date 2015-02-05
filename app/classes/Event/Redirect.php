@@ -3,10 +3,11 @@
 namespace Event;
 
 use Obullo\Container\Container,
-    Obullo\Event\EventListenerInterface;
+    Obullo\Event\EventListenerInterface,
+    Obullo\Application\Addons\BenchmarkTrait;
 
 /**
- * Request - response handler
+ * Global event listener
  *
  * @category  EventListener
  * @package   Request
@@ -15,8 +16,10 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/event
  */
-Class Request implements EventListenerInterface
+Class Redirect implements EventListenerInterface
 {
+    use BenchmarkTrait;
+
     /**
      * Container
      * 
@@ -32,22 +35,19 @@ Class Request implements EventListenerInterface
     public function __construct(Container $c)
     {
         $this->c = $c;
-        $this->router = $this->c['router'];
-        $this->logger = $this->c['logger'];
     }
 
     /**
-     * After $this->url->redirect() method
+     * After 
      *
      * @param string $uri    redirect uri url
      * @param string $method redirect method ( header location )
      * 
      * @return void
      */
-    public function beforeRedirect($uri, $method)
+    public function before($uri, $method)
     {
-        $method = null;
-        $this->onAfterResponse('Header redirect', array('uri' => $uri));  // Add final response info
+        $this->benchmarkEnd('Header redirect', array('uri' => $uri, 'method' => $method));  // Add final response info
     }
 
 
@@ -60,12 +60,12 @@ Class Request implements EventListenerInterface
      */
     public function subscribe($event)
     {
-        $event->listen('before.redirect', 'Event\Request.beforeRedirect');
+        $event->listen('before.redirect', 'Event\Redirect.before');
     }
 
 }
 
-// END Request class
+// END Redirect class
 
-/* End of file Request.php */
-/* Location: .Event/Request.php */
+/* End of file Redirect.php */
+/* Location: .Event/Redirect.php */

@@ -11,8 +11,10 @@ Class Hello_Captcha extends \Controller
      */
     public function load()
     {
-        $this->c->load('url');
-        $this->c->load('form');
+        $this->c['url'];
+        $this->c['form'];
+        $this->c['request'];
+        $this->c['view'];
     }
 
     /**
@@ -22,9 +24,9 @@ Class Hello_Captcha extends \Controller
      */
     public function index()
     {
-        if ($this->c['request']->isPost()) {
+        if ($this->request->isPost()) {
 
-            $this->c->load('validator');
+            $this->c['validator'];
             
             $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
@@ -33,7 +35,7 @@ Class Hello_Captcha extends \Controller
             $this->validator->func(
                 'callback_captcha',
                 function () {
-                    if ($this->c->load('captcha')->check($this->c['request']->post('captcha_answer')) == false) {
+                    if ($this->c['captcha']->check($this->request->post('captcha_answer')) == false) {
                         $this->setMessage('callback_captcha', 'Wrong Captcha Code');
                         return false;
                     }
@@ -45,7 +47,7 @@ Class Hello_Captcha extends \Controller
             }
         }
 
-        $this->c['view']->load(
+        $this->view->load(
             'hello_captcha',
             function () {
                 $this->assign('title', 'Hello Captcha !');

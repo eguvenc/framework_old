@@ -11,7 +11,7 @@ Class Dummy extends Controller
      */
     public function load()
     {
-        $this->c->load('validator');        
+        $this->c['validator'];        
     }
 
     /**

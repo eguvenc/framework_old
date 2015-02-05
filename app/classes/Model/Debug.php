@@ -20,7 +20,7 @@ Class Debug extends Model
      */
     protected function load()
     {
-        $this->c->load('db'); 
+        $this->c['db']; 
     }
 
     public function test()

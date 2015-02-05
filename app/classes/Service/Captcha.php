@@ -4,7 +4,7 @@ namespace Service;
 
 use Obullo\Container\Container,
     Obullo\Captcha\Adapter\Image,
-    Obullo\ServiceProvider\ServiceInterface,
+    Obullo\ServiceProvider\ServiceInterface;
 
 /**
  * Captcha Service

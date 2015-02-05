@@ -11,7 +11,7 @@ Class Test extends \Controller
      */
     public function load()
     {
-        $this->c->load('url');
+        $this->c['url'];
     }
 
     /**

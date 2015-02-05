@@ -11,7 +11,7 @@ Class Footer extends \Controller
      */
     public function load()
     {
-        $this->c->load('view');
+        $this->c['view'];
     }
 
     /**

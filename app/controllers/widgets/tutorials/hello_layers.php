@@ -11,9 +11,9 @@ Class Hello_Layers extends \Controller
      */
     public function load()
     {
-        $this->c->load('url');
-        $this->c->load('view');
-        $this->c->load('layer');
+        $this->c['url'];
+        $this->c['view'];
+        $this->c['layer'];
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Examples;
 
-use Event\User;
+use Event\Login\Attempt;
 
 Class Login extends \Controller
 {
@@ -13,13 +13,14 @@ Class Login extends \Controller
      */
     public function load()
     {
-        $this->c->load('url');
-        $this->c->load('form');
-        $this->c->load('user');
-        $this->c->load('view');
-        $this->c->load('flash/session as flash');
-        $this->c->load('password');
-        $this->c->load('event')->subscribe(new User($this->c));   // Listen user events
+        $this->c['url'];
+        $this->c['form'];
+        $this->c['user'];
+        $this->c['view'];
+        $this->c['request'];
+        $this->c['password'];
+        $this->c['flash/session as flash'];
+        $this->c['event']->subscribe(new Attempt($this->c));   // Listen user events
     }
 
     /**
@@ -29,9 +30,9 @@ Class Login extends \Controller
      */
     public function index()
     {
-        if ($this->c['request']->isPost()) {
+        if ($this->request->isPost()) {
 
-            $this->c->load('validator'); // load validator
+            $this->c['validator']; // load validator
 
             $this->validator->setRules('email', 'Email', 'required|email|trim');
             $this->validator->setRules('password', 'Password', 'required|min(6)|trim');

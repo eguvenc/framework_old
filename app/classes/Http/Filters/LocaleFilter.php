@@ -46,7 +46,7 @@ Class LocaleFilter
         if ( ! isset($languages[$locale]) OR $locale == false) {
             $locale = $this->c['translator']->getLocale();
         }
-        $this->c->load('url')->redirect($locale. '/' . $this->c['uri']->getUriString());
+        $this->c['url']->redirect($locale. '/' . $this->c['uri']->getUriString());
     }
 }
 

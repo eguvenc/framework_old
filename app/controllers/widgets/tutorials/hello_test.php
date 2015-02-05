@@ -11,10 +11,10 @@ Class Hello_Test extends \Controller
      */
     public function load()
     {
-        $this->c->load('uri');
-        $this->c->load('view');
-        $this->c->load('layer');
-        $this->c->load('request');
+        $this->c['uri'];
+        $this->c['view'];
+        $this->c['layer'];
+        $this->c['request'];
     }
 
     /**

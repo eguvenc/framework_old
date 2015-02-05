@@ -20,7 +20,7 @@ Class User extends Model
      */
     public function load()
     {
-        $this->c->load('db');
+        $this->c['db'];
         $this->c->bind('model debug');
     }
 

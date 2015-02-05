@@ -11,10 +11,10 @@ Class Form extends \Controller
      */
     public function load()
     {
-        $this->c->load('url');
-        $this->c->load('form');
-        $this->c->load('service/captcha');
-        $this->c->load('flash/session as flash');
+        $this->c['url'];
+        $this->c['form'];
+        $this->c['captcha'];
+        $this->c['flash/session as flash'];
     }
 
     /**
@@ -26,7 +26,7 @@ Class Form extends \Controller
     {
         if ($this->c['request']->isPost()) {
 
-            $this->c->load('validator'); // load validator
+            $this->c['validator']; // load validator
 
             if (  ! $this->validator->isValid()) {
                 $this->form->setErrors($this->validator);

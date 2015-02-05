@@ -11,9 +11,8 @@ Class Memcache extends \Controller
      */
     public function load()
     {
-        $this->c->load('view');
-        $this->cache = $this->c->load(
-            'service provider cache', 
+        $this->c['view'];
+        $this->cache = $this->c['service provider cache']->get(
             [
                 'driver' => 'memcached', 'serializer' => 'SERIALIZER_PHP'
             ]

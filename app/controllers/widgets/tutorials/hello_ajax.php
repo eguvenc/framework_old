@@ -11,7 +11,7 @@ Class Hello_Ajax extends \Controller
      */
     public function load()
     {
-        $this->c->load('form');
+        $this->c['form'];
     }
 
     /**
@@ -23,7 +23,7 @@ Class Hello_Ajax extends \Controller
     {
         if ($this->c['request']->isAjax()) { // Is Ajax ?
 
-            $this->c->load('validator');
+            $this->c['validator'];
 
             $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
@@ -38,7 +38,7 @@ Class Hello_Ajax extends \Controller
             echo $this->c['response']->json($this->form->outputArray());
             return;
         }
-        $this->c->load('url');
+        $this->c['url'];
 
         $this->c['view']->load(
             'hello_ajax',

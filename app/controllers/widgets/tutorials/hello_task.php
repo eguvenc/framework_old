@@ -11,8 +11,8 @@ Class Hello_Task extends \Controller
      */
     public function load()
     {
-        $this->c->load('url');
-        $this->c->load('cli/task as task');
+        $this->c['url'];
+        $this->c['cli/task as task'];
     }
 
     /**

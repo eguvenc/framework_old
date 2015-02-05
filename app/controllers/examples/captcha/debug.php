@@ -11,8 +11,8 @@ Class Debug extends \Controller
      */
     public function load()
     {
-        $this->c->load('url');
-        $this->c->load('captcha/debug');
+        $this->c['url'];
+        $this->c['captcha/debug'];
     }
 
     /**
