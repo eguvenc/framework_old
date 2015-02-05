@@ -5,7 +5,7 @@ namespace Http\Filters;
 use Obullo\Container\Container;
 
 /**
- * Csrf security filter 
+ * Cross Site Request Forgery filter 
  *
  * @category  Route
  * @package   Filters

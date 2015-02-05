@@ -20,6 +20,13 @@ class AuthFilter
     use UniqueLoginTrait;  // You can add / remove addons.
 
     /**
+     * Container
+     * 
+     * @var object
+     */
+    protected $c;
+
+    /**
      * User service
      * 
      * @var object
@@ -45,9 +52,10 @@ class AuthFilter
     {
         if ($this->user->identity->check()) {
 
-            // Do something
-
             $this->uniqueLoginCheck();
+
+            // Do something 
+
             $this->user->activity->set('date', time());  //  example activity data
         }
     }

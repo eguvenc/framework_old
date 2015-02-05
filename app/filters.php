@@ -16,9 +16,10 @@ $c['router']->filter('maintenance', 'Http\Filters\MaintenanceFilter', 'before');
 |--------------------------------------------------------------------------
 | Auth
 |--------------------------------------------------------------------------
-| Authentication filter
+| Authentication filters
 */
 $c['router']->filter('auth', 'Http\Filters\AuthFilter', 'before');
+$c['router']->filter('auth', 'Http\Filters\AuthFilter', 'finish');
 
 /*
 |--------------------------------------------------------------------------

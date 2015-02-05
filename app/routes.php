@@ -23,9 +23,8 @@ $c['router']->defaultPage('welcome');
 // $c['router']->attach('(.)', array('maintenance'));
 
 
-
 $c['router']->group(
-    array('name' => 'general', 'domain' => $c['config']['domain']['mydomain.com'], 'filters' => array('maintenance')),
+    array('name' => 'general', 'domain' => $c['config']['domain']['mydomain.com'], 'filters' => array('maintenance', 'auth')),
     function ($group) {
 
         $this->defaultPage('welcome');
