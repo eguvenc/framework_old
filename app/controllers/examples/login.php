@@ -17,9 +17,8 @@ Class Login extends \Controller
         $this->c['form'];
         $this->c['user'];
         $this->c['view'];
+        $this->c['flash'];
         $this->c['request'];
-        $this->c['password'];
-        $this->c['flash/session as flash'];
         $this->c['event']->subscribe(new Attempt($this->c));   // Listen user events
     }
 
@@ -32,7 +31,7 @@ Class Login extends \Controller
     {
         if ($this->request->isPost()) {
 
-            $this->c['validator']; // load validator
+            $this->c['validator'];
 
             $this->validator->setRules('email', 'Email', 'required|email|trim');
             $this->validator->setRules('password', 'Password', 'required|min(6)|trim');
@@ -43,7 +42,7 @@ Class Login extends \Controller
             } else {
 
                 // $this->user->login->enableVerification();
-
+            
                 $result = $this->user->login->attempt(
                     array(
                         $this->c['auth.params']['db.identifier'] => $this->validator->getValue('email'), 
@@ -59,7 +58,7 @@ Class Login extends \Controller
 
                 } else {
 
-                    $this->validator->setError($result->getArray());
+                    $this->validator->setErrors($result->getArray());
                     $this->form->setErrors($this->validator);
                 }
             }

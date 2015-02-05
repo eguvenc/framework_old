@@ -13,8 +13,10 @@ Class Form extends \Controller
     {
         $this->c['url'];
         $this->c['form'];
+        $this->c['flash'];
         $this->c['captcha'];
-        $this->c['flash/session as flash'];
+        $this->c['request'];
+        $this->c['view'];
     }
 
     /**
@@ -24,7 +26,7 @@ Class Form extends \Controller
      */
     public function index()
     {
-        if ($this->c['request']->isPost()) {
+        if ($this->request->isPost()) {
 
             $this->c['validator']; // load validator
 
@@ -39,17 +41,17 @@ Class Form extends \Controller
                     $this->url->redirect('examples/captcha/form');
 
                 } else {
-                    $this->validator->setError($result->getArray());
+                    $this->validator->setErrors($result->getArray());
                     $this->form->setErrors($this->validator);
                 }
             }
         }
 
-        $this->c['view']->load(
+        $this->view->load(
             'form',
-            function () {
-                $this->assign('footer', $this->template('footer'));
-            }
+            [
+                'footer' =>  $this->template('footer')
+            ]
         );
     }
 }

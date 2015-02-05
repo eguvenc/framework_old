@@ -2,7 +2,8 @@
 
 namespace Http\Filters;
 
-use Obullo\Container\Container;
+use Obullo\Container\Container,
+    Obullo\Authentication\Addons\UniqueLoginTrait;
 
 /**
  * User auth authority filter
@@ -14,8 +15,10 @@ use Obullo\Container\Container;
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/router
  */
-Class AuthFilter
+class AuthFilter
 {
+    use UniqueLoginTrait;  // You can add / remove addons.
+
     /**
      * User service
      * 
@@ -43,12 +46,22 @@ Class AuthFilter
         if ($this->user->identity->check()) {
 
             // Do something
-            
-            $this->user->activity->set('date', time());
-            $this->user->activity->update();        // Update user activity data
+
+            $this->uniqueLoginCheck();
+            $this->user->activity->set('date', time());  //  example activity data
         }
     }
     
+    /**
+     * After the response
+     * 
+     * @return void
+     */
+    public function finish()
+    {
+        $this->user->activity->write();  // Write user activity data
+    }
+
 }
 
 // END AuthFilter class

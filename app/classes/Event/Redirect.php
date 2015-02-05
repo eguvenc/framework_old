@@ -49,8 +49,7 @@ Class Redirect implements EventListenerInterface
     {
         $this->benchmarkEnd('Header redirect', array('uri' => $uri, 'method' => $method));  // Add final response info
     }
-
-
+    
     /**
      * Event subscribe
      * 

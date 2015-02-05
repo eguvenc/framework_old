@@ -16,7 +16,7 @@ Class Hello_Form extends \Controller
         $this->c['form'];
         $this->c['request'];
         $this->c['session'];
-        $this->c['flash/session as flash'];
+        $this->c['flash'];
     }
 
     /**

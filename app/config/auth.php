@@ -52,7 +52,7 @@ return array(
         )
     ),
     'activity' => array(
-        'uniqueSession' => false,  // If unique session enabled application terminates all other active sessions.
+        'uniqueLogin' => false,  // If unique login enabled application terminates all other active login sessions.
     )
 );
 

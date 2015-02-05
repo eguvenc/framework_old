@@ -53,7 +53,7 @@ Class Attempt implements EventListenerInterface
     }
 
     /**
-     * Handle user login attempts
+     * After login attempts
      *
      * @param object $authResult AuthResult object
      * 

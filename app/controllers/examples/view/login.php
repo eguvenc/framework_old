@@ -28,8 +28,8 @@
         <section><?php 
         $output = $this->form->outputArray();
 
-        if (isset($output['errors']['auth'])) {
-            foreach ($output['errors']['auth']['messages'] as $message) {
+        if (isset($output['errors']['messages'])) {
+            foreach ($output['errors']['messages'] as $message) {
                 echo $this->form->getMessage($message);
             }
         }?></section>

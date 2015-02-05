@@ -2,7 +2,8 @@
 
 namespace Http\Filters;
 
-use Obullo\Container\Container;
+use Obullo\Container\Container,
+    Obullo\Application\Addons\LocaleRewriteTrait;
 
 /**
  * Locale filter
@@ -16,6 +17,8 @@ use Obullo\Container\Container;
  */
 Class LocaleFilter
 {
+    use LocaleRewriteTrait;
+
     /**
      * Container
      * 
@@ -30,7 +33,7 @@ Class LocaleFilter
      */
     public function __construct(Container $c)
     {
-        $this->c = $c['uri'];
+        $this->c = $c;
     }
 
     /**
@@ -40,13 +43,7 @@ Class LocaleFilter
      */
     public function before()
     {
-        $locale = $this->c['cookie']->get('locale');
-        $languages = $this->c['config']->load('translator')['languages'];
-
-        if ( ! isset($languages[$locale]) OR $locale == false) {
-            $locale = $this->c['translator']->getLocale();
-        }
-        $this->c['url']->redirect($locale. '/' . $this->c['uri']->getUriString());
+        $this->rewrite();
     }
 }
 

@@ -56,7 +56,6 @@ Class MaintenanceFilter
         $this->rootDomainIsDown();
         $this->subDomainIsDown();
     }
-
 }
 
 // END MaintenanceFilter class

@@ -28,6 +28,7 @@ Class User implements ServiceInterface
     public function register(Container $c)
     {
         $c['user'] = function () use ($c) {
+            
             $user = new AuthServiceProvider(
                 $c,
                 [

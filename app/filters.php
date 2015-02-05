@@ -43,6 +43,7 @@ $c['router']->filter('methodNotAllowed', 'Http\Filters\RequestNotAllowedFilter',
 | A before application filter allows you to execute tasks before the controller is executed
 */
 $c['app']->filter('Http\Filters\RequestFilter', 'before');
+
 /*
 |--------------------------------------------------------------------------
 | Application Finish Filter
@@ -50,7 +51,6 @@ $c['app']->filter('Http\Filters\RequestFilter', 'before');
 | A finish application filter allows you to execute tasks after the Response has been sent to the client
 */
 $c['app']->filter('Http\Filters\RequestFilter', 'finish');
-
 
 
 /* End of file filters.php */

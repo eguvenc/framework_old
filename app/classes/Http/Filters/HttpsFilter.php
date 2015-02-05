@@ -2,7 +2,8 @@
 
 namespace Http\Filters;
 
-use Obullo\Container\Container;
+use Obullo\Container\Container,
+    Obullo\Application\Addons\RewriteHttpsTrait;
 
 /**
  * Https filter
@@ -16,6 +17,8 @@ use Obullo\Container\Container;
  */
 Class HttpsFilter
 {
+    use RewriteHttpsTrait;
+
     /**
      * Container
      * 
@@ -40,9 +43,7 @@ Class HttpsFilter
      */
     public function before()
     {
-        if ($this->c['request']->isSecure() == false) {
-            $this->c['url']->redirect('https://'.$this->c['router']->getDomain() . $this->c['uri']->getRequestUri());
-        }
+        $this->rewrite();
     }
 }
 
