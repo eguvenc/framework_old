@@ -2,27 +2,12 @@
 
 namespace Event\Login;
 
-use Obullo\Container\Container,
-    Obullo\Authentication\AuthResult,
-    Obullo\Event\EventListenerInterface,
-    Obullo\Authentication\User\UserIdentity,
-    Obullo\Authentication\Addons\UniqueSessionTrait,
-    Obullo\Authentication\Addons\InvalidTokenTrait;
+use Obullo\Container\Container;
+use Obullo\Authentication\AuthResult;
+use Obullo\Event\EventListenerInterface;
 
-/**
- * Login attempt listener
- * 
- * @category  EventListener
- * @package   User
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/event
- */
 Class Attempt implements EventListenerInterface
 {
-    // use UniqueSessionTrait, InvalidTokenTrait;
-
     /**
      * Container
      * 
@@ -83,9 +68,6 @@ Class Attempt implements EventListenerInterface
     {
         $event->listen('login.attempt.before', 'Event\Login\Attempt.before');
         $event->listen('login.attempt.after', 'Event\Login\Attempt.after');
-
-        // $event->listen('auth.unique', 'Event\User.onUniqueSession');     // FILTER OLACAKLAR
-        // $event->listen('auth.invalidToken', 'Event\User.onInvalidToken');
     }
 
 }

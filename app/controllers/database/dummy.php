@@ -33,7 +33,7 @@ Class Dummy extends Controller
             // );
             // echo json_encode($r);
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
 
             $r = array(
               'success' => 0,

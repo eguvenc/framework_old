@@ -6,16 +6,6 @@ use Obullo\Container\Container,
     Obullo\Authentication\AbstractAuthorizedUser,
     Obullo\Authentication\Identities\AuthorizedUserInterface;
 
-/**
- * Add your "authorized user" methods here
- *
- * @category  Auth
- * @package   Identities
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/package/auth
- */
 Class AuthorizedUser extends AbstractAuthorizedUser implements AuthorizedUserInterface
 {
     /**

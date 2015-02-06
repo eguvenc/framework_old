@@ -4,7 +4,7 @@ namespace Widgets\Tutorials;
 
 Class Hello_World extends \Controller
 {
-     use \View\Layout\Base;
+     // use \View\Layout\Base;
 
     /**
      * Loader
@@ -13,7 +13,7 @@ Class Hello_World extends \Controller
      */
     public function load()
     {
-        // $this->view->assign('footer', $this->layer->get('views/footer'));
+        $this->c['view'];
 
         // $this->cache = $this->c['service provider cache']->get(['driver' => 'redis']);
 
@@ -22,13 +22,13 @@ Class Hello_World extends \Controller
 
     /**
      * Index
+     *
+     * @filter->method("post","get");
      * 
      * @return void
      */
-    public function index($id = 2)
+    public function index()
     {
-        echo $id;
-
         $this->view->load(
             'hello_world', 
             [

@@ -6,16 +6,6 @@ use Obullo\Container\Container,
     Obullo\Authentication\AbstractGenericUser,
     Obullo\Authentication\Identities\GenericUserInterface;
 
-/**
- * Add your "guest user" methods here
- *
- * @category  Users
- * @package   Identities
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/package/auth
- */
 Class GenericUser extends AbstractGenericUser implements GenericUserInterface
 {
     /**

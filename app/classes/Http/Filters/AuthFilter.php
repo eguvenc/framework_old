@@ -2,19 +2,9 @@
 
 namespace Http\Filters;
 
-use Obullo\Container\Container,
-    Obullo\Authentication\Addons\UniqueLoginTrait;
+use Obullo\Container\Container;
+use Obullo\Authentication\Addons\UniqueLoginTrait;
 
-/**
- * User auth authority filter
- *
- * @category  Route
- * @package   Filters
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/router
- */
 class AuthFilter
 {
     use UniqueLoginTrait;  // You can add / remove addons.
@@ -40,6 +30,7 @@ class AuthFilter
      */
     public function __construct(Container $c)
     {
+        $this->c = $c;
         $this->user = $c['user'];
     }
 

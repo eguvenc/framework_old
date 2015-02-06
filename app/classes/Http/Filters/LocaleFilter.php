@@ -2,20 +2,10 @@
 
 namespace Http\Filters;
 
-use Obullo\Container\Container,
-    Obullo\Application\Addons\LocaleRewriteTrait;
+use Obullo\Container\Container;
+use Obullo\Application\Addons\LocaleRewriteTrait;
 
-/**
- * Locale filter
- *
- * @category  Route
- * @package   Filters
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/router
- */
-Class LocaleFilter
+class LocaleFilter
 {
     use LocaleRewriteTrait;
 

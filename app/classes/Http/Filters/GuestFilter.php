@@ -4,17 +4,7 @@ namespace Http\Filters;
 
 use Obullo\Container\Container;
 
-/**
- * Guest auth authority filter
- *
- * @category  Route
- * @package   Filters
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/router
- */
-Class GuestFilter
+class GuestFilter
 {
     /**
      * Container

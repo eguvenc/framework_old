@@ -2,20 +2,10 @@
 
 namespace Http\Filters;
 
-use Obullo\Container\Container,
-    Obullo\Application\Addons\RequestMethodNotAllowedTrait;
+use Obullo\Container\Container;
+use Obullo\Application\Addons\RequestMethodNotAllowedTrait;
 
-/**
- * Check http request method
- *
- * @category  Request
- * @package   Filters
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/filters
- */
-Class RequestNotAllowedFilter
+class RequestNotAllowedFilter
 {
     use RequestMethodNotAllowedTrait;  // You can add / remove addons.
 

@@ -2,21 +2,11 @@
 
 namespace Http\Filters;
 
-use LogicException,
-    Obullo\Container\Container,
-    Obullo\Application\Addons\UnderMaintenanceTrait;
+use LogicException;
+use Obullo\Container\Container;
+use Obullo\Application\Addons\UnderMaintenanceTrait;
 
-/**
- * Maintenance filter
- *
- * @category  Route
- * @package   Filters
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/router
- */
-Class MaintenanceFilter
+class MaintenanceFilter
 {
     use UnderMaintenanceTrait;
 

@@ -2,21 +2,11 @@
 
 namespace Http\Filters;
 
-use Obullo\Container\Container,
-    Obullo\Application\Addons\BenchmarkTrait,
-    Obullo\Application\Addons\SanitizeSuperGlobalsTrait;
+use Obullo\Container\Container;
+use Obullo\Application\Addons\BenchmarkTrait;
+use Obullo\Application\Addons\SanitizeSuperGlobalsTrait;
 
-/**
- * Global http request filter
- *
- * @category  Request
- * @package   Filters
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/filters
- */
-Class RequestFilter
+class RequestFilter
 {
     use BenchmarkTrait,
         SanitizeSuperGlobalsTrait;   // You can add / remove addons.

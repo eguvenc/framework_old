@@ -8,7 +8,7 @@
 |--------------------------------------------------------------------------
 | Maintenance
 |--------------------------------------------------------------------------
-| Domain under maintenance control
+| Domain under maintenance filter
 */
 $c['router']->filter('maintenance', 'Http\Filters\MaintenanceFilter', 'before');
 
@@ -33,7 +33,7 @@ $c['router']->filter('csrf', 'Http\Filters\CsrfFilter', 'before');
 |--------------------------------------------------------------------------
 | Method Not Allowed
 |--------------------------------------------------------------------------
-| Checks http request methods
+| Http request route methods validate filter
 */
 $c['router']->filter('methodNotAllowed', 'Http\Filters\RequestNotAllowedFilter', 'before');
 
