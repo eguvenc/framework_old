@@ -20,6 +20,7 @@ $c['router']->filter('maintenance', 'Http\Filters\MaintenanceFilter', 'before');
 */
 $c['router']->filter('auth', 'Http\Filters\AuthFilter', 'before');
 $c['router']->filter('auth', 'Http\Filters\AuthFilter', 'finish');
+$c['router']->filter('guest', 'Http\Filters\GuestFilter', 'before');
 
 /*
 |--------------------------------------------------------------------------

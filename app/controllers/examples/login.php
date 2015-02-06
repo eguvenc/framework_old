@@ -54,7 +54,7 @@ Class Login extends \Controller
                 if ($result->isValid()) {
 
                     $this->flash->success('You have authenticated successfully.');
-                    $this->url->redirect('examples/login');
+                    $this->url->redirect('examples/restricted');
 
                 } else {
 

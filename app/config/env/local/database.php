@@ -15,7 +15,7 @@ return array(
     'connections' => array(
 
         'default' => array(
-            'dsn'      => 'mysql:host=localhost;port=;dbname=demo_blog',
+            'dsn'      => 'mysql:host=localhost;port=;dbname=test',
             'username' => $c['env']['MYSQL_USERNAME.root'],
             'password' => $c['env']['MYSQL_PASSWORD.NULL'],
             'options'  => [

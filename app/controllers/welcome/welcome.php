@@ -2,26 +2,26 @@
 
 namespace Welcome;
 
-// before filter run here 
-
 Class Welcome extends \Controller
 {
     use \View\Layout\Base;
 
     /**
      * Loader
+     *
+     * @filter->method("get");
      * 
      * @return void
      */
     public function load()
     {
         $this->c['url'];
-
-        // load filter run here
     }
 
     /**
      * Index
+     *
+     * @filter->method("get");
      * 
      * @return void
      */
@@ -33,8 +33,6 @@ Class Welcome extends \Controller
                 'title' => 'Welcome to Obullo !',
             ]
         );
-
-        // after filter run here
     }
 
 }

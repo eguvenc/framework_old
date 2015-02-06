@@ -41,7 +41,7 @@ class GuestFilter
         if ($this->user->identity->guest()) {
 
             $this->c['flash']->info('Your session has been expired.');
-            $this->c['url']->redirect('/welcome');
+            $this->c['url']->redirect('examples/login');
         }
     }
 

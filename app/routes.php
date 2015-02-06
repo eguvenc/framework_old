@@ -24,7 +24,7 @@ $c['router']->defaultPage('welcome');
 
 
 $c['router']->group(
-    array('name' => 'general', 'domain' => $c['config']['domain']['mydomain.com'], 'filters' => array('maintenance')),
+    array('name' => 'GenericUsers', 'domain' => $c['config']['domain']['mydomain.com'], 'filters' => array('maintenance')),
     function ($group) {
 
         $this->defaultPage('welcome');
@@ -42,14 +42,20 @@ $c['router']->group(
     }
 );
 
-// $c['router']->group(
-//     array('name' => 'maintenance_test', 'domain' => '^framework$', 'filters' => array('maintenance', 'auth')), 
-//     function ($group) {
-//         // $this->route('get', 'tutorials/hello_world.*', 'tutorials/hello_scheme', null, $group);
-//         // $this->attach('(.*)', $group); // all url
-//         $this->attach('((?!tutorials/hello_world).)*$', $group);  // url not contains "tutorials/hello_world"
-//     }
-// );
+$c['router']->group(
+    array('name' => 'AuthorizedUsers', 'domain' => $c['config']['domain']['mydomain.com'], 'filters' => array('guest')), 
+    function ($group) {
+
+        $this->defaultPage('welcome');
+        $this->attach('examples/restricted', $group); // all urls of this group
+
+        // $this->route('get', 'tutorials/hello_world.*', 'tutorials/hello_scheme', null, $group);
+        // $this->attach('(.*)', $group); // all url
+        // $this->attach('((?!tutorials/hello_world).)*$', $group);  // url not contains "tutorials/hello_world"
+    }
+);
+
+
 // $c['router']->error404('errors/page_not_found');
 
 // Example Api

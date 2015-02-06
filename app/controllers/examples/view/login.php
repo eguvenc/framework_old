@@ -13,14 +13,6 @@
 
         <?php echo $this->flash->output(); ?>
 
-        <?php
-        if ($this->user->identity->check()) {
-            echo '<a href="/examples/logout">Logout</a>';
-            echo '<pre>';
-            print_r($this->user->identity->getArray());
-            echo '</pre>';
-        }
-        ?>
         <p></p>
         
         <h1>Login Example</h1>

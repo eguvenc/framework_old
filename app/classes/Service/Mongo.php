@@ -31,15 +31,14 @@ Class Mongo implements ServiceInterface
             return new Query(
                 $c,
                 [
-                    'db.provider' => 'mongo',
-                    'db.database' => 'db'
+                    'connection' => 'default',
                 ]
             );
         };
     }
 }
 
-// END MongoQuery class
+// END Mongo class
 
-/* End of file MongoQuery.php */
-/* Location: .classes/Service/MongoQuery.php */
+/* End of file Mongo.php */
+/* Location: .classes/Service/Mongo.php */
