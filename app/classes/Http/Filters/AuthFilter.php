@@ -41,6 +41,8 @@ class AuthFilter
      */
     public function before()
     {
+        echo '!';
+
         if ($this->user->identity->check()) {
 
             $this->uniqueLoginCheck();

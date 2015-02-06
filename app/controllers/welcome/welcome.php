@@ -2,6 +2,8 @@
 
 namespace Welcome;
 
+// before filter run here 
+
 Class Welcome extends \Controller
 {
     use \View\Layout\Base;
@@ -14,11 +16,13 @@ Class Welcome extends \Controller
     public function load()
     {
         $this->c['url'];
+
+        // load filter run here
     }
 
     /**
      * Index
-     *
+     * 
      * @return void
      */
     public function index()
@@ -29,8 +33,14 @@ Class Welcome extends \Controller
                 'title' => 'Welcome to Obullo !',
             ]
         );
+
+        // after filter run here
     }
+
 }
+
+
+// after finish run here
 
 /* End of file welcome.php */
 /* Location: .controllers/welcome/welcome.php */

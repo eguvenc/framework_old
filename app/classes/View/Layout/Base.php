@@ -13,7 +13,7 @@ Trait Base
     {
         $this->c['view'];
         $this->c['layer'];
-
+    
         $this->view->assign('header', $this->layer->get('views/header'));
         $this->view->assign('footer', $this->layer->get('views/footer'));
     }
