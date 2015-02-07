@@ -2,9 +2,9 @@
 
 namespace Service;
 
-use Obullo\Container\Container,
-    Obullo\ServiceProvider\ServiceInterface,
-    Obullo\Database\Pdo\Handler\Mysql;
+use Obullo\Container\Container;
+use Obullo\ServiceProviders\ServiceInterface;
+use Obullo\Database\Pdo\Handler\Mysql;
 
 /**
  * Db Service ( Shared )
@@ -16,7 +16,7 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Db implements ServiceInterface
+class Db implements ServiceInterface
 {
     /**
      * Registry
@@ -30,9 +30,7 @@ Class Db implements ServiceInterface
         $c['db'] = function () use ($c) {
             
             return $c['service provider database']->get(
-                [
-                    'connection' => 'default'
-                ]
+                ['connection' => 'default']
             );
         };
     }

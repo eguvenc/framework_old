@@ -2,9 +2,9 @@
 
 namespace Service;
 
-use Obullo\Container\Container,
-    Obullo\ServiceProvider\ServiceInterface,
-    Obullo\Database\Pdo\QueryBuilder;
+use Obullo\Container\Container;
+use Obullo\ServiceProviders\ServiceInterface;
+use Obullo\Database\Pdo\QueryBuilder;
 
 /**
  * Query Builder
@@ -16,7 +16,7 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Query implements ServiceInterface
+class Query implements ServiceInterface
 {
     /**
      * Registry
@@ -28,12 +28,10 @@ Class Query implements ServiceInterface
     public function register(Container $c)
     {
         $c['query'] = function () use ($c) {
+            
             return new QueryBuilder(
                 $c,
-                [
-                    'db.provider' => 'database',
-                    'db.connection' => 'default'
-                ]
+                ['connection' => 'default']
             );
         };
     }

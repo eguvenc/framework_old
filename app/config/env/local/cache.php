@@ -3,14 +3,7 @@
 return array(
 
     'default' => array(
-        'driver' => 'redis',
         'serializer' => 'SERIALIZER_PHP',
-    ),
-
-    'handlers' => array(
-        'redis' => '\\Obullo\Cache\Handler\Redis',
-        'memcached' => '\\Obullo\Cache\Handler\Memcached',
-        'yourhandler' => '\\Obullo\Cache\Handler\YourHandler',  // You can create your own handler using Cache/Handler/HandlerInterface.php
     ),
 
    'redis' => array(

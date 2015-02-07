@@ -6,12 +6,6 @@ return array(
         'connection' => 'default',
     ),
 
-    'handlers' => array(
-        'mysql' => '\\Obullo\Database\Pdo\Handler\Mysql',
-        'pgsql' => '\\Obullo\Database\Pdo\Handler\Pgsql',
-        'yourhandler' => '\\Obullo\Database\Pdo\Handler\YourHandler',  // create your own using Cache/Handler/HandlerInterface.php
-    ),
-
     'connections' => array(
 
         'default' => array(

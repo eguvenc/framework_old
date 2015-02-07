@@ -2,12 +2,12 @@
 
 namespace Service;
 
-use Obullo\Queue\Handler\AMQP,
-    Obullo\Container\Container,
-    Obullo\ServiceProvider\ServiceInterface;
+use Obullo\Queue\Handler\AMQP;
+use Obullo\Container\Container;
+use Obullo\ServiceProviders\ServiceInterface;
 
 /**
- * Queue Service ( Shared )
+ * Queue Service
  *
  * @category  Service
  * @package   Cache
@@ -16,7 +16,7 @@ use Obullo\Queue\Handler\AMQP,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/providers
  */
-Class Queue implements ServiceInterface
+class Queue implements ServiceInterface
 {
     /**
      * Registry

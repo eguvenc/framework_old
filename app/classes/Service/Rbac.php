@@ -2,9 +2,9 @@
 
 namespace Service;
 
-use Obullo\Container\Container,
-    Obullo\Permissions\RbacService,
-    Obullo\ServiceProvider\ServiceInterface;
+use Obullo\Container\Container;
+use Obullo\Permissions\RbacService;
+use Obullo\ServiceProviders\ServiceInterface;
 
 /**
  * Rbac PermissionService ( Shared )
@@ -16,7 +16,7 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Rbac implements ServiceInterface
+class Rbac implements ServiceInterface
 {
     /**
      * Registry
@@ -27,10 +27,10 @@ Class Rbac implements ServiceInterface
      */
     public function register(Container $c)
     {
-        $c['rbac.db'] = function () use ($c) {
-            return new PdoServiceProvider();
-        };
-        $c['rbac'] = function () use ($c) {
+        // $c['rbac.db'] = function () use ($c) {
+        //     return new PdoServiceProvider();  
+        // };
+        $c['rbac'] = function () use ($c) {   // $c['service provider rbac']->get('config' => 'default');
             return new RbacService(
                 $c, 
                 array(

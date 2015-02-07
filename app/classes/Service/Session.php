@@ -2,9 +2,9 @@
 
 namespace Service;
 
-use Obullo\Container\Container,
-    Obullo\ServiceProvider\ServiceInterface,
-    Obullo\Session\Session as SessionClass;
+use Obullo\Container\Container;
+use Obullo\ServiceProviders\ServiceInterface;
+use Obullo\Session\Session as SessionClass;
 
 /**
  * Session Service
@@ -16,7 +16,7 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Session implements ServiceInterface
+class Session implements ServiceInterface
 {
     /**
      * Registry

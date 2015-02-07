@@ -2,9 +2,9 @@
 
 namespace Service;
 
-use Obullo\Container\Container,
-    Obullo\ServiceProvider\ServiceInterface,
-    Obullo\Flash\Session;
+use Obullo\Container\Container;
+use Obullo\ServiceProviders\ServiceInterface;
+use Obullo\Flash\Session;
 
 /**
  * Flash Service
@@ -16,7 +16,7 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Flash implements ServiceInterface
+class Flash implements ServiceInterface
 {
     /**
      * Registry

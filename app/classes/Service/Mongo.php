@@ -2,9 +2,9 @@
 
 namespace Service;
 
-use Obullo\Mongo\Query,
-    Obullo\Container\Container,
-    Obullo\ServiceProvider\ServiceInterface;
+use Obullo\Mongo\Query;
+use Obullo\Container\Container;
+use Obullo\ServiceProviders\ServiceInterface;
 
 /**
  * Mongo Query Service
@@ -16,7 +16,7 @@ use Obullo\Mongo\Query,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Mongo implements ServiceInterface
+class Mongo implements ServiceInterface
 {
     /**
      * Registry
@@ -30,9 +30,7 @@ Class Mongo implements ServiceInterface
         $c['mongo'] = function () use ($c) {
             return new Query(
                 $c,
-                [
-                    'connection' => 'default',
-                ]
+                ['connection' => 'default']
             );
         };
     }

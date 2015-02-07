@@ -2,9 +2,9 @@
 
 namespace Service;
 
-use Obullo\Container\Container,
-    Obullo\ServiceProvider\ServiceInterface,
-    Obullo\Authentication\AuthServiceProvider;
+use Obullo\Container\Container;
+use Obullo\ServiceProviders\ServiceInterface;
+use Obullo\Authentication\AuthServiceProvider;
     
 /**
  * User Service
@@ -16,7 +16,7 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class User implements ServiceInterface
+class User implements ServiceInterface
 {
     /**
      * Registry
@@ -29,6 +29,8 @@ Class User implements ServiceInterface
     {
         $c['user'] = function () use ($c) {
             
+            // $c['service provider auth']->get('config => 'default')->getLogger();
+
             $user = new AuthServiceProvider(
                 $c,
                 [

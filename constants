@@ -67,7 +67,7 @@ define('OBULLO_COMPONENTS', APP .'components.php');
 define('OBULLO_EVENTS', APP .'events.php');
 define('OBULLO_ROUTES', APP .'routes.php');
 define('OBULLO_FILTERS', APP .'filters.php');
-define('OBULLO_CONTROLLER', OBULLO .'Controller'. DS .'Controller.php');
+define('OBULLO_CONTROLLER', OBULLO .'Obullo'. DS .'Controller'. DS .'Controller.php');
 /*
 |---------------------------------------------------------------
 | NOTIFICATIONS

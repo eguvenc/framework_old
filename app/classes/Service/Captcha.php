@@ -2,9 +2,9 @@
 
 namespace Service;
 
-use Obullo\Container\Container,
-    Obullo\Captcha\Adapter\Image,
-    Obullo\ServiceProvider\ServiceInterface;
+use Obullo\Container\Container;
+use Obullo\Captcha\Adapter\Image;
+use Obullo\ServiceProviders\ServiceInterface;
 
 /**
  * Captcha Service
@@ -16,7 +16,7 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/container
  */
-Class Captcha implements ServiceInterface
+class Captcha implements ServiceInterface
 {
     /**
      * Registry

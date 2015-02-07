@@ -3,13 +3,7 @@
 return array(
 
     'default' => array(
-        'handler' => 'cache',
-    ),
-
-    'handlers' => array(
-        'cache' => '\\Obullo\Session\Handler\Cache',
-        'mongo' => '\\Obullo\Session\Handler\Mongo',
-        'yourhandler' => '\\Session\Handler\YourHandler' // You can create your own handler using Session/Handler/HandlerInterface.php
+        'handler' => '\\Obullo\Session\Handler\Cache',
     ),
 
     'cache' => array(

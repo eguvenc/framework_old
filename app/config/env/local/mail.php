@@ -5,17 +5,18 @@ return array(
     // Provider ı driver olarak değiştir.
     'default' => array(
         'provider' => 'mandrill',    // Choose provider ( mandrill, mailgun, smtp, mail, sendmail )
+        'handler' => '\\Obullo\Mail\Transport\Queue',
     ),
 
-    'handlers' => array(
-        'queue' => '\\Obullo\Mail\Transport\Queue',
-        'mail' => '\\Obullo\Mail\Send\Protocol\Mail',
-        'sendmail' => '\\Obullo\Mail\Send\Protocol\Sendmail',
-        'smtp' => '\\Obullo\Mail\Send\Protocol\Smtp',
-        'mandrill' => '\\Obullo\Mail\Transport\Mandrill',
-        'mailgun' => '\\Obullo\Mail\Transport\Mailgun',
-        'yourmailer' => '\\Mail\Transport\YourMailer'     // You can create your own mailer using Mail/Transport/TransportInterface.php
-    ),
+    // 'handlers' => array(
+    //     'queue' => '\\Obullo\Mail\Transport\Queue',
+    //     'mail' => '\\Obullo\Mail\Send\Protocol\Mail',
+    //     'sendmail' => '\\Obullo\Mail\Send\Protocol\Sendmail',
+    //     'smtp' => '\\Obullo\Mail\Send\Protocol\Smtp',
+    //     'mandrill' => '\\Obullo\Mail\Transport\Mandrill',
+    //     'mailgun' => '\\Obullo\Mail\Transport\Mailgun',
+    //     'yourmailer' => '\\Mail\Transport\YourMailer'     // You can create your own mailer using Mail/Transport/TransportInterface.php
+    // ),
 
     'send' => array(
         
@@ -55,9 +56,7 @@ return array(
                 'timeout' => '5' ,                         // Timeout (in seconds).
             ),
         ),
-
-        // BU KISIM SERVIS İÇERİSİNDEN KONFİGURE EDİLECEK.
-
+        
         'transport' => array(
             'mandrill' => array(
                 'key' => $c['env']['MANDRILL_API_KEY'],  // Mandrill api key

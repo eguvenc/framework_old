@@ -24,7 +24,7 @@ $c['router']->defaultPage('welcome');
 
 
 $c['router']->group(
-    array('name' => 'GenericUsers', 'domain' => $c['config']['domain']['mydomain.com'], 'filters' => array('maintenance')),
+    ['name' => 'GenericUsers','domain' => $c['config']['domain']['mydomain.com'],'filters' => array('maintenance')],
     function ($group) {
 
         $this->defaultPage('welcome');
@@ -43,7 +43,7 @@ $c['router']->group(
 );
 
 $c['router']->group(
-    array('name' => 'AuthorizedUsers', 'domain' => $c['config']['domain']['mydomain.com'], 'filters' => array('guest')), 
+    ['name' => 'AuthorizedUsers','domain' => $c['config']['domain']['mydomain.com'],'filters' => array('guest')],
     function ($group) {
 
         $this->defaultPage('welcome');

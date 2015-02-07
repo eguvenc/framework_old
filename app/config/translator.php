@@ -2,8 +2,6 @@
 
 return array(
 
-    'notice' => false,     // Puts 'translate:' texts everywhere it is help to you for multilingual development.
-
     'locale' => array(
         'default'  => 'en',   // This determines which set of language files should be used.
         'fallback' => 'en',   // If language not determined fallback locale will be set.
@@ -28,6 +26,8 @@ return array(
                         'de' => 'deutsch',
                         'tr' => 'turkish',
                         ),
+
+    'notice' => false,     // Puts 'translate:' texts everywhere it is help to you for multilingual development.
 );
 
 /* End of file translator.php */

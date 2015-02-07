@@ -2,8 +2,8 @@
 
 namespace Service;
 
-use Obullo\Container\Container,
-    Obullo\ServiceProvider\ServiceInterface;
+use Obullo\Container\Container;
+use Obullo\ServiceProviders\ServiceInterface;
 
 /**
  * Cache Service
@@ -15,7 +15,7 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Cache implements ServiceInterface
+class Cache implements ServiceInterface
 {
     /**
      * Registry

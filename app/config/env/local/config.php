@@ -34,7 +34,7 @@ return array(
     'log' =>   array(
         'control' => array(
             'enabled' => true,   // Enable / Disable logging
-            'firelog' => false,  // Debug log data as html output
+            'firelog' => false,  // Send log data to php firelog extension its good for debugging on firefox.
         ),
     ),
     /*

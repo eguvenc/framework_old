@@ -2,12 +2,12 @@
 
 namespace Service;
 
-use Obullo\Container\Container,
-    Obullo\ServiceProvider\ServiceInterface,
-    Obullo\Mail\Transport\Queue;
+use Obullo\Container\Container;
+use Obullo\ServiceProviders\ServiceInterface;
+use Obullo\Mail\Transport\Queue;
 
 /**
- * Mailer Service ( Shared )
+ * Mailer Service
  *
  * @category  Service
  * @package   Mail
@@ -16,7 +16,7 @@ use Obullo\Container\Container,
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/services
  */
-Class Mailer implements ServiceInterface
+class Mailer implements ServiceInterface
 {
     /**
      * Registry
@@ -30,9 +30,17 @@ Class Mailer implements ServiceInterface
     public function register(Container $c)
     {
         $c['mailer'] = function () use ($c) {
-            $mailer = new Queue($c);
-            $mailer->from($c['config']['mail']['send']['from']['address']);
-            return $mailer;
+
+            return $c['service provider mailer']->get(
+                [
+                    'driver' => 'mandrill', 
+                    'from' => $c['config']['mail']['send']['from']['address']
+                ]
+            );
+
+            // $mailer = new Queue($c);
+            // $mailer->from($c['config']['mail']['send']['from']['address']);
+            // return $mailer;
         };
     }
 }
