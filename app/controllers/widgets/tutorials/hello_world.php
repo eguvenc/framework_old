@@ -22,8 +22,6 @@ Class Hello_World extends \Controller
 
     /**
      * Index
-     *
-     * @filter->method("post","get");
      * 
      * @return void
      */
