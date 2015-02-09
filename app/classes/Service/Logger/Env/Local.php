@@ -29,7 +29,7 @@ class Local implements ServiceInterface
     {
         $c['logger'] = function () use ($c) {
 
-            $serviceProvider = new LoggerServiceProvider($c);  // $c['service provider logger']->get('driver' => 'queue')->getLogger();
+            $serviceProvider = new LoggerServiceProvider($c);  // LoggerQueueServiceProvider
             $logger = $serviceProvider->getLogger();
             /*
             |--------------------------------------------------------------------------

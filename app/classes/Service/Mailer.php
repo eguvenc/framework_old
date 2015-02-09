@@ -30,13 +30,13 @@ class Mailer implements ServiceInterface
     public function register(Container $c)
     {
         $c['mailer'] = function () use ($c) {
-
-            return $c['service provider mailer']->get(
+            $mailer =  $c['service provider mailer']->get(
                 [
-                    'driver' => 'mandrill', 
-                    'from' => $c['config']['mail']['send']['from']['address']
+                    'driver' => 'mandrill',
                 ]
             );
+            $mailer->from($c['config']['mail']['send']['from']['address']);
+            return $mailer;
 
             // $mailer = new Queue($c);
             // $mailer->from($c['config']['mail']['send']['from']['address']);

@@ -15,8 +15,6 @@ Class Hello_World extends \Controller
     {
         $this->c['view'];
 
-        // $this->cache = $this->c['service provider cache']->get(['driver' => 'redis']);
-
         // $this->c['service provider cache']->get(['driver' => 'redis']);
     }
 

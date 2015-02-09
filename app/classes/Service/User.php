@@ -28,8 +28,6 @@ class User implements ServiceInterface
     public function register(Container $c)
     {
         $c['user'] = function () use ($c) {
-            
-            // $c['service provider auth']->get('config => 'default')->getLogger();
 
             $user = new AuthServiceProvider(
                 $c,

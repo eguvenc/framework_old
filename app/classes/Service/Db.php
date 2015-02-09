@@ -4,7 +4,6 @@ namespace Service;
 
 use Obullo\Container\Container;
 use Obullo\ServiceProviders\ServiceInterface;
-use Obullo\Database\Pdo\Handler\Mysql;
 
 /**
  * Db Service ( Shared )
@@ -28,7 +27,6 @@ class Db implements ServiceInterface
     public function register(Container $c)
     {
         $c['db'] = function () use ($c) {
-            
             return $c['service provider database']->get(
                 ['connection' => 'default']
             );

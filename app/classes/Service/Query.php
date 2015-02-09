@@ -28,11 +28,7 @@ class Query implements ServiceInterface
     public function register(Container $c)
     {
         $c['query'] = function () use ($c) {
-            
-            return new QueryBuilder(
-                $c,
-                ['connection' => 'default']
-            );
+            return new QueryBuilder($c, ['connection' => 'default']);
         };
     }
 }

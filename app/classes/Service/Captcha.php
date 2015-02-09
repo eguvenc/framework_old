@@ -28,7 +28,19 @@ class Captcha implements ServiceInterface
     public function register(Container $c)
     {
         $c['captcha'] = function () use ($c) {
-            return new Image($c);
+
+            $captcha = new Image($c);
+            $captcha->setDriver('secure');  // or set to "cool" with no background
+            $captcha->setPool('alpha');
+            $captcha->setChar(5);
+            $captcha->setWave(false);
+            $captcha->setFont(array('NightSkK','Almontew', 'Fordd'));
+            $captcha->setFontSize(39);
+            $captcha->setHeight(98);
+            $captcha->setColor(array('red','black','blue'));
+            $captcha->setNoiseColor(array('red','black','blue'));
+            
+            return $captcha;
         };
     }
 }

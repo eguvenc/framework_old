@@ -28,10 +28,7 @@ class Mongo implements ServiceInterface
     public function register(Container $c)
     {
         $c['mongo'] = function () use ($c) {
-            return new Query(
-                $c,
-                ['connection' => 'default']
-            );
+            return new Query($c, ['connection' => 'default']);
         };
     }
 }
