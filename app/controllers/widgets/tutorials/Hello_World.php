@@ -36,6 +36,3 @@ Class Hello_World extends \Controller
     }
 
 }
-
-/* End of file hello_world.php */
-/* Location: .controllers/widgets/tutorials/hello_world.php */

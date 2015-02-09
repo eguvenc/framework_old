@@ -17,6 +17,8 @@ use Obullo\Log\Logger,
  */
 Class PriorityFilter implements FilterInterface
 {
+    // use LogPriorityFilterTrait;
+
     /**
      * Container
      * 

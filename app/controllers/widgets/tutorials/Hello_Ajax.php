@@ -50,7 +50,3 @@ Class Hello_Ajax extends \Controller
         );
     }
 }
-
-
-/* End of file hello_ajax.php */
-/* Location: .controllers/tutorials/hello_ajax.php */

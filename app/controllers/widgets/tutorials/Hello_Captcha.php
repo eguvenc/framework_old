@@ -56,7 +56,3 @@ Class Hello_Captcha extends \Controller
         );
     }
 }
-
-
-/* End of file hello_captcha.php */
-/* Location: .controllers/tutorials/hello_captcha.php */

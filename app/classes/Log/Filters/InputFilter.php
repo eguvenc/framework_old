@@ -17,6 +17,8 @@ use Obullo\Log\LogService,
  */
 Class InputFilter implements FilterInterface
 {
+    // use LogInputFilterTrait;
+
     /**
      * Container
      * 

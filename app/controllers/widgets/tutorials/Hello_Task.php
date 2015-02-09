@@ -26,6 +26,3 @@ Class Hello_Task extends \Controller
         echo '<pre>'.$output.'</pre>';
     }
 }
-
-/* End of file hello_task.php */
-/* Location: .controllers/tutorials/hello_task.php */

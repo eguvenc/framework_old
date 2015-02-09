@@ -4,6 +4,8 @@ namespace Widgets\Tutorials;
 
 Class Hello_Layout extends \Controller
 {
+    use \View\Layout\Base;
+
     /**
      * Loader
      * 
@@ -12,7 +14,6 @@ Class Hello_Layout extends \Controller
     public function load()
     {
         $this->c['url'];
-        $this->c['view'];
     }
 
     /**
@@ -26,8 +27,7 @@ Class Hello_Layout extends \Controller
             'hello_layout',
             [
                 'title' => 'Hello Layouts !'
-            ],
-            'welcome'
+            ]
         );
     }
 }
