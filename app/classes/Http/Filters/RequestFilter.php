@@ -8,8 +8,8 @@ use Obullo\Application\Addons\SanitizeSuperGlobalsTrait;
 
 class RequestFilter
 {
-    use BenchmarkTrait,
-        SanitizeSuperGlobalsTrait;   // You can add / remove addons.
+    use BenchmarkTrait;
+    use SanitizeSuperGlobalsTrait;   // You can add / remove addons.
 
     /**
      * Container

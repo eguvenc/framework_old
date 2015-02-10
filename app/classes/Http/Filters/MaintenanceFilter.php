@@ -8,7 +8,14 @@ use Obullo\Application\Addons\UnderMaintenanceTrait;
 
 class MaintenanceFilter
 {
-    use UnderMaintenanceTrait;
+    use UnderMaintenanceTrait; // You can add / remove addons.
+
+    /**
+     * Injected parameters ( Route domain config.php )
+     * 
+     * @var object
+     */
+    public $params = array();
 
     /**
      * Container
@@ -18,22 +25,13 @@ class MaintenanceFilter
     protected $c;
 
     /**
-     * Route domain configuration
-     * 
-     * @var object
-     */
-    protected $params;
-
-    /**
      * Constructor
      *
-     * @param object $c      container
-     * @param array  $params route config parameters
+     * @param object $c container
      */
-    public function __construct(Container $c , $params = array())
+    public function __construct(Container $c)
     {
         $this->c = $c;
-        $this->params = $params;
     }
 
     /**

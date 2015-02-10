@@ -10,6 +10,13 @@ class RequestNotAllowedFilter
     use RequestMethodNotAllowedTrait;  // You can add / remove addons.
 
     /**
+     * Injected parameters ( router inject filter allowed methods parameters in here )
+     * 
+     * @var array
+     */
+    public $params = array();
+
+    /**
      * Container
      * 
      * @var object
@@ -17,22 +24,13 @@ class RequestNotAllowedFilter
     protected $c;
 
     /**
-     * Router request allowed methods
-     * 
-     * @var array
-     */
-    protected $allowedMethods = array();
-
-    /**
      * Constructor
      *
-     * @param object $c      container
-     * @param array  $params array router allowed methods
+     * @param object $c container
      */
-    public function __construct(Container $c, $params = array())
+    public function __construct(Container $c)
     {
         $this->c = $c;
-        $this->allowedMethods = $params['allowedMethods'];  // Get current route allowed methods from router
     }
 
     /**

@@ -7,7 +7,7 @@ use Obullo\Application\Addons\RewriteHttpsTrait;
 
 class HttpsFilter
 {
-    use RewriteHttpsTrait;
+    use RewriteHttpsTrait;  // You can add / remove addons.
 
     /**
      * Container

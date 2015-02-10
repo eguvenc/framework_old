@@ -7,7 +7,7 @@ use Obullo\Application\Addons\LocaleRewriteTrait;
 
 class LocaleFilter
 {
-    use LocaleRewriteTrait;
+    use LocaleRewriteTrait;  // You can add / remove addons.
 
     /**
      * Container
