@@ -2,10 +2,11 @@
 
 namespace Workers;
 
-use Obullo\Queue\Job,
-    Obullo\Queue\JobInterface,
-    Obullo\Container\Container,
-    Obullo\Mail\Transport\Mandrill;
+use Obullo\Queue\Job;
+use Obullo\Queue\JobInterface;
+use Obullo\Container\Container;
+use Obullo\Mailer\Protocol\Smtp;
+use Obullo\Mailer\Transport\Mandrill;
 
  /**
  * Mail Worker
@@ -41,7 +42,7 @@ Class Mailer implements JobInterface
     public function __construct(Container $c)
     {
         $this->c = $c;
-        $this->config = $c['config']->load('mail');
+        $this->config = $c['config']->load('mailer');
     }
 
     /**
@@ -58,12 +59,12 @@ Class Mailer implements JobInterface
 
         switch ($data['mailer']) {
         case 'mandrill':
-            $mail = new Mandrill($this->c, $this->config);
+            $mail = new Mandrill($this->c);
 
             $mail->setMailType($data['mailtype']);
             $mail->from($data['from_email'], $data['from_name']);
 
-            foreach ($data['to'] as $to) {
+            foreach ($data['to'] as $to) {  // Parse to, cc and bcc 
                 $method = $to['type'];
                 $mail->$method($to['name'].' <'.$to['email'].'>');
             }
@@ -89,7 +90,27 @@ Class Mailer implements JobInterface
 
         case 'smtp':
             // Send with smtp
+            $mail = new Smtp($this->c);
+            $mail->from($data['from_email']);
 
+            foreach ($data['to'] as $to) { // Parse to, cc and bcc 
+                $method = $to['type'];
+                $mail->$method($to['name'].' <'.$to['email'].'>');
+            }
+            $mail->subject($data['subject']);
+            $mail->message($data[$mail->getMailType()]);
+
+            if (isset($data['attachments'])) {
+                foreach ($data['attachments'] as $attachments) {
+                    $mail->attach($attachments['fileurl'], 'attachment');
+                }
+            }
+            if (isset($data['images'])) {
+                foreach ($data['images'] as $attachments) {
+                    $mail->attach($attachments['fileurl'], 'inline');
+                }
+            }
+            $mail->send();
             break;
         }
         /**
@@ -100,7 +121,7 @@ Class Mailer implements JobInterface
     }
 }
 
-/* PUSH DATA
+/* INCOMING DATA
     {
         "message": {
             "mailer": "mandrill",

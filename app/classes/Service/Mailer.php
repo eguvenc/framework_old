@@ -4,7 +4,6 @@ namespace Service;
 
 use Obullo\Container\Container;
 use Obullo\ServiceProviders\ServiceInterface;
-use Obullo\Mail\Transport\Queue;
 
 /**
  * Mailer Service
@@ -23,24 +22,21 @@ class Mailer implements ServiceInterface
      *
      * @param object $c container
      *
-     * Providers : Mandrill, Smtp, Queue ..
+     * Drivers : mandrill, smtp, queue ..
      * 
      * @return void
      */
     public function register(Container $c)
     {
         $c['mailer'] = function () use ($c) {
-            $mailer =  $c['service provider mailer']->get(
+            $mailer = $c['service provider mailer']->get(
                 [
                     'driver' => 'mandrill',
+                    'options' => array('queue' => true)
                 ]
             );
-            $mailer->from($c['config']['mail']['send']['from']['address']);
+            $mailer->from('Admin <admin@example.com>');
             return $mailer;
-
-            // $mailer = new Queue($c);
-            // $mailer->from($c['config']['mail']['send']['from']['address']);
-            // return $mailer;
         };
     }
 }

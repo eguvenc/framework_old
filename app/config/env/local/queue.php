@@ -4,7 +4,7 @@ return array(
 
     'default' => array(
         'connection' => 'default',
-        'queue' => 'default'  // default queue name
+        'queueName' => 'default'  // default queue name
     ),
     'exchange' => array(
         'type' => 'AMQP_EX_TYPE_DIRECT', // AMQP_EX_TYPE_DIRECT, AMQP_EX_TYPE_FANOUT, AMQP_EX_TYPE_HEADER or AMQP_EX_TYPE_TOPIC,
@@ -15,7 +15,6 @@ return array(
     'AMQP' => array(
 
         'connections' => array(
-
             'default' => array(
                 'host'  => $c['env']['AMQP_HOST'],
                 'port'  => 5672,
