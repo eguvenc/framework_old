@@ -30,14 +30,13 @@ class Cli implements ServiceInterface
         $c['logger'] = function () use ($c) {
 
             $serviceProvider = new LoggerServiceProvider($c);
-            $logger = $serviceProvider->getLogger();
+            $logger = $serviceProvider->getQueueLogger();
             /*
             |--------------------------------------------------------------------------
             | Register Filters
             |--------------------------------------------------------------------------
             */
             $logger->registerFilter('priority', 'Log\Filters\PriorityFilter');
-            $logger->registerFilter('input', 'Log\Filters\InputFilter');
             /*
             |--------------------------------------------------------------------------
             | Register Handlers

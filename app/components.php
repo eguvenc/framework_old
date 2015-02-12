@@ -51,7 +51,7 @@ $c['response'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['layer'] = function () use ($c) { 
-    return new Obullo\Layer\Request($c, $c['config']['layer']);
+    return new Obullo\Layer\Request($c);
 };
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +59,7 @@ $c['layer'] = function () use ($c) {
 |--------------------------------------------------------------------------
 */
 $c['uri'] = function () use ($c) {
-    return new Obullo\Uri\Uri($c, $c['config']['uri']);
+    return new Obullo\Uri\Uri($c);
 };
 /*
 |--------------------------------------------------------------------------

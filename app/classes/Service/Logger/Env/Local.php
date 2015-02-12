@@ -30,20 +30,19 @@ class Local implements ServiceInterface
         $c['logger'] = function () use ($c) {
 
             $serviceProvider = new LoggerServiceProvider($c);  // LoggerQueueServiceProvider
-            $logger = $serviceProvider->getLogger();
+            $logger = $serviceProvider->getQueueLogger();
             /*
             |--------------------------------------------------------------------------
             | Register Filters
             |--------------------------------------------------------------------------
             */
             $logger->registerFilter('priority', 'Log\Filters\PriorityFilter');
-            $logger->registerFilter('input', 'Log\Filters\InputFilter');
             /*
             |--------------------------------------------------------------------------
             | Register Handlers
             |--------------------------------------------------------------------------
             */
-            $logger->registerHandler(5, 'file');  // Second paramter should register the class PATH.
+            $logger->registerHandler(5, 'file');
             $logger->registerHandler(4, 'mongo')->filter('priority.notIn', array(LOG_DEBUG));
             $logger->registerHandler(3, 'email')->filter('priority.notIn', array(LOG_DEBUG));
             /*

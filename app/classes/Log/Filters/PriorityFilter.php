@@ -3,8 +3,9 @@
 namespace Log\Filters;
 
 use Obullo\Log\Logger;
+use Obullo\Container\Container;
+use Obullo\Log\FilterInterface;
 use Obullo\Log\Addons\LogPriorityFilterTrait;
-use Obullo\Log\Filter\FilterInterface;
 
 /**
  * PriorityFilter Class
@@ -28,22 +29,20 @@ Class PriorityFilter implements FilterInterface
     public $c;
 
     /**
-     * Filter Params
+     * Injected Parameters
      * 
      * @var array
      */
-    public $priorities;
+    public $params;
 
     /**
      * Constructor
      * 
-     * @param object $c      container
-     * @param array  $params array
+     * @param object $c container
      */
-    public function __construct($c, array $params = array())
+    public function __construct(Container $c)
     {
         $this->c = $c;
-        $this->priorities = $params;
     }
 }
 

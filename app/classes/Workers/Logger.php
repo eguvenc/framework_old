@@ -2,14 +2,14 @@
 
 namespace Workers;
 
-use Obullo\Queue\Job,
-    Obullo\Queue\JobInterface,
-    Obullo\Container\Container,
-    Obullo\Log\PriorityQueue,
-    Obullo\Log\JobHandlerPriority,
-    Obullo\Log\JobHandler\JobHandlerFile,
-    Obullo\Log\JobHandler\JobHandlerMongo,
-    Obullo\Log\JobHandler\JobHandlerEmail;
+use Obullo\Queue\Job;
+use Obullo\Log\PriorityQueue;
+use Obullo\Queue\JobInterface;
+use Obullo\Container\Container;
+use Obullo\Log\Queue\QueueHandlerPriority;
+use Obullo\Log\Handler\File as FileHandler;
+use Obullo\Log\Handler\Mongo as MongoHandler;
+use Obullo\Log\Handler\Email as EmailHandler;
 
 /**
  * Log Worker
@@ -23,12 +23,9 @@ use Obullo\Queue\Job,
  */
 Class Logger implements JobInterface
 {
-    /**
-     * Container
-     * 
-     * @var object
-     */
-    public $c;
+    public $c;           // Container
+    public $job;         // Job class
+    public $queuedData;  // Log data
 
     /**
      * Constructor
@@ -50,17 +47,36 @@ Class Logger implements JobInterface
      */
     public function fire(Job $job, $data)
     {
-        $priority = new JobHandlerPriority();
-        $priority->insert($data);
+        $this->job = $job;
+        
+        if ($data['logger'] == 'QueueLogger') {  // Queue logger data
 
-        foreach ($priority->getQueue() as $array) {
+            $priority = new QueueHandlerPriority();
+            $priority->insert($data);
+            $this->queuedData = $priority->getQueue();
+        }
+
+        if ($data['logger'] == 'Logger') {      // Standart logger data
+            $this->queuedData = $data;
+        }
+        $this->process();
+    }
+
+    /**
+     * Process log data
+     * 
+     * @return void
+     */
+    protected function process()
+    {
+        foreach ($this->queuedData as $array) {
 
             switch ($array['handler']) {
             case 'file':
-                $handler = new JobHandlerFile($this->c);
+                $handler = new FileHandler($this->c);
                 break;
             case 'email':
-                $handler = new JobHandlerEmail(
+                $handler = new EmailHandler(
                     $this->c,
                     $this->c['mailer'],
                     array(
@@ -74,7 +90,7 @@ Class Logger implements JobInterface
                 );
                 break;
             case 'mongo':
-                $handler = new JobHandlerMongo(
+                $handler = new MongoHandler(
                     $this->c,
                     $this->c['service provider mongo']->get(['connection' => 'default']),
                     array(
@@ -96,46 +112,52 @@ Class Logger implements JobInterface
 
                 $handler->write($array);  // Do job
                 $handler->close();
-
-                $job->delete();  // Delete job from queue
+                
+                $this->job->delete();  // Delete job from queue
             }
         
         } // end foreach
-
-    } // end method
-
-}
-
-/* LOG DATA
-{
-  "job": "Workers\\Logger",
-  "data": [
-    {
-      "request": "http",
-      "handler": "file",
-      "priority": 5,
-      "time": 1418043527,
-      "record": [
-        {
-          "channel": "system",
-          "level": "debug",
-          "message": "$_REQUEST_URI: \/tutorials\/hello_world",
-          "context": [
-            
-          ]
-        },
-        {
-          "channel": "system",
-          "level": "debug",
-          "message": "Global POST and COOKIE data sanitized",
-          "context": [
-            
-          ]
-        },
-      ]
     }
-  ]
 }
+
+/* EXAMPLE LOG DATA
+Array
+(
+    [logger] => QueueLogger
+    [0] => Array
+        (
+            [request] => http
+            [handler] => file
+            [priority] => 5
+            [time] => 1423677515
+            [record] => Array
+                (
+                    [0] => Array
+                        (
+                            [channel] => system
+                            [level] => debug
+                            [message] => $_REQUEST_URI: /widgets/tutorials/hello_world
+                            [context] => Array
+                                (
+                                )
+
+                        )
+
+                    [1] => Array
+                        (
+                            [channel] => system
+                            [level] => debug
+                            [message] => $_COOKIE: 
+                            [context] => Array
+                                (
+                                )
+
+                        )
+
+        )
+
+)
+
 */
 
 /* End of file Logger.php */
