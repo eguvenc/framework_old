@@ -29,8 +29,8 @@ class Local implements ServiceInterface
     {
         $c['logger'] = function () use ($c) {
 
-            $serviceProvider = new LoggerServiceProvider($c);  // LoggerQueueServiceProvider
-            $logger = $serviceProvider->getQueueLogger();
+            $serviceProvider = new LoggerServiceProvider($c);
+            $logger = $serviceProvider->getLogger();
             /*
             |--------------------------------------------------------------------------
             | Register Filters

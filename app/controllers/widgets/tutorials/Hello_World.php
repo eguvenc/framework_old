@@ -17,7 +17,7 @@ Class Hello_World extends \Controller
 
         // $this->c['service provider cache']->get(['driver' => 'redis']);
         
-        // $this->mailer = $this->c['service provider mailer']->get(['driver' => 'smtp', 'options' => array('queue' => true)]);
+        // $this->mailer = $this->c['service provider mailer']->get(['driver' => 'mandrill', 'options' => array('queue' => true)]);
 
         // $this->mailer->from('admin@example.com');
         // $this->mailer->to('eguvenc@gmail.com');

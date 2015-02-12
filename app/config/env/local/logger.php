@@ -25,6 +25,7 @@ return array(
     ),
 
     'queue' => array(
+        'service' => 'queue',     // Queue service name its located in app/Service folder.
         'channel' => 'Log',
         'route' => gethostname(). '.Logger',
         'worker' => 'Workers\Logger',

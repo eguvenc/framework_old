@@ -6,16 +6,6 @@ use Obullo\Container\Container;
 use Obullo\ServiceProviders\ServiceInterface;
 use Obullo\Authentication\AuthServiceProvider;
     
-/**
- * User Service
- *
- * @category  Service
- * @package   Password
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/services
- */
 class User implements ServiceInterface
 {
     /**
@@ -49,7 +39,7 @@ class User implements ServiceInterface
     }
 }
 
-// END User class
+// END Authentication service
 
 /* End of file User.php */
 /* Location: .app/classes/Service/User.php */

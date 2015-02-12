@@ -8,8 +8,6 @@ Class Welcome extends \Controller
 
     /**
      * Loader
-     *
-     * @filter->method("get");
      * 
      * @return void
      */
@@ -20,8 +18,6 @@ Class Welcome extends \Controller
 
     /**
      * Index
-     *
-     * @filter->method("get");
      * 
      * @return void
      */
@@ -36,9 +32,6 @@ Class Welcome extends \Controller
     }
 
 }
-
-
-// after finish run here
 
 /* End of file welcome.php */
 /* Location: .controllers/welcome/welcome.php */

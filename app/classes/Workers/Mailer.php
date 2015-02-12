@@ -28,13 +28,6 @@ Class Mailer implements JobInterface
     protected $c;
 
     /**
-     * Config parameters
-     * 
-     * @var array
-     */
-    protected $config;
-
-    /**
      * Constructor
      * 
      * @param object $c container
@@ -42,7 +35,6 @@ Class Mailer implements JobInterface
     public function __construct(Container $c)
     {
         $this->c = $c;
-        $this->config = $c['config']->load('mailer');
     }
 
     /**
@@ -53,12 +45,11 @@ Class Mailer implements JobInterface
      * 
      * @return void
      */
-    public function fire(Job $job, $data)
+    public function fire($job, $data)
     {
-        $data = $data['message'];
+        switch ($data['mailer']) { 
 
-        switch ($data['mailer']) {
-        case 'mandrill':
+        case 'mandrill': 
             $mail = new Mandrill($this->c);
 
             $mail->setMailType($data['mailtype']);
@@ -84,12 +75,12 @@ Class Mailer implements JobInterface
             $mail->addMessage('send_at', $mail->setDate($data['send_at']));
             $mail->send();
 
-            // print_r($mail->response()->getArray());
-            // echo $mail->printDebugger();
+            // print_r($mail->response->getArray());
+            echo $mail->printDebugger();
             break;
 
-        case 'smtp':
-            // Send with smtp
+        case 'smtp':              // Send with smtp
+
             $mail = new Smtp($this->c);
             $mail->from($data['from_email']);
 
@@ -111,57 +102,57 @@ Class Mailer implements JobInterface
                 }
             }
             $mail->send();
+            echo $mail->printDebugger();
             break;
         }
-        /**
-         * Delete job from queue after successfull operation.
-         */
-        $job->delete(); 
+        
+        if ($job instanceof Job) {
+            $job->delete(); 
+        }
             
     }
 }
 
 /* INCOMING DATA
-    {
-        "message": {
-            "mailer": "mandrill",
-            'mailtype': "html", // text
-            "html": "<p>Example HTML content</p>",
-            "text": "Example text content",
-            "subject": "example subject",
-            "from_email": "message.from_email@example.com",
-            "from_name": "Example Name",
-            "to": [
-                {
-                    "email": "recipient.email@example.com",
-                    "name": "Recipient Name",
-                    "type": "to"
-                }
-            ],
-            "headers": {
-                "Reply-To": "message.reply@example.com"
-            },
-            "important": false,
-            "tags": [
-                "password-resets"
-            ],
-            "attachments": [
-                {
-                    "type": "text/plain",
-                    "name": "myfile.txt",
-                    "fileurl" : "/var/www/images/myfile.txt"
-                }
-            ],
-            "images": [
-                {
-                    "type": "image/png",
-                    "name": "myimages.gif",
-                    "fileurl": "http://example.com/static/myimages.gif"
-                }
-            ]
-        },
-        "send_at": "date"
-    }
+{
+    "mailer": "mandrill",
+    'mailtype': "html", // text
+    "html": "<p>Example HTML content</p>",
+    "text": "Example text content",
+    "subject": "example subject",
+    "from_email": "message.from_email@example.com",
+    "from_name": "Example Name",
+    "to": [
+        {
+            "email": "recipient.email@example.com",
+            "name": "Recipient Name",
+            "type": "to"
+        }
+    ],
+    "headers": {
+        "Reply-To": "message.reply@example.com"
+    },
+    "important": false,
+    "tags": [
+        "password-resets"
+    ],
+    "attachments": [
+        {
+            "type": "text/plain",
+            "name": "myfile.txt",
+            "fileurl" : "/var/www/images/myfile.txt"
+        }
+    ],
+    "images": [
+        {
+            "type": "image/png",
+            "name": "myimages.gif",
+            "fileurl": "http://example.com/static/myimages.gif"
+        }
+    ]
+},
+"send_at": "date"
+}
 */
 
 /* End of file Mailer.php */

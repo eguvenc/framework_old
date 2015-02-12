@@ -6,16 +6,6 @@ use Obullo\Queue\Handler\AMQP;
 use Obullo\Container\Container;
 use Obullo\ServiceProviders\ServiceInterface;
 
-/**
- * Queue Service
- *
- * @category  Service
- * @package   Cache
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/providers
- */
 class Queue implements ServiceInterface
 {
     /**
@@ -33,7 +23,7 @@ class Queue implements ServiceInterface
     }
 }
 
-// END Cache class
+// END Queue service
 
 /* End of file Cache.php */
 /* Location: .classes/queue.php */

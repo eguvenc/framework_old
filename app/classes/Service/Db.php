@@ -5,16 +5,6 @@ namespace Service;
 use Obullo\Container\Container;
 use Obullo\ServiceProviders\ServiceInterface;
 
-/**
- * Db Service ( Shared )
- *
- * @category  Service
- * @package   Db
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/services
- */
 class Db implements ServiceInterface
 {
     /**
@@ -27,14 +17,12 @@ class Db implements ServiceInterface
     public function register(Container $c)
     {
         $c['db'] = function () use ($c) {
-            return $c['service provider database']->get(
-                ['connection' => 'default']
-            );
+            return $c['service provider database']->get(['connection' => 'default']);
         };
     }
 }
 
-// END Db class
+// END Db service
 
 /* End of file Db.php */
 /* Location: .classes/Service/Db.php */

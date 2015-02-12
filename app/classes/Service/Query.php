@@ -6,16 +6,6 @@ use Obullo\Container\Container;
 use Obullo\ServiceProviders\ServiceInterface;
 use Obullo\Database\Pdo\QueryBuilder;
 
-/**
- * Query Builder
- *
- * @category  Service
- * @package   Database
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/services
- */
 class Query implements ServiceInterface
 {
     /**
@@ -33,7 +23,7 @@ class Query implements ServiceInterface
     }
 }
 
-// END Query class
+// END Query service
 
 /* End of file Query.php */
 /* Location: .classes/Service/Query.php */

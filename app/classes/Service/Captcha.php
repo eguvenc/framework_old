@@ -6,16 +6,6 @@ use Obullo\Container\Container;
 use Obullo\Captcha\Adapter\Image;
 use Obullo\ServiceProviders\ServiceInterface;
 
-/**
- * Captcha Service
- *
- * @category  Service
- * @package   Captcha
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/container
- */
 class Captcha implements ServiceInterface
 {
     /**
@@ -45,7 +35,7 @@ class Captcha implements ServiceInterface
     }
 }
 
-// END Captcha class
+// END Captcha service
 
 /* End of file Captcha.php */
 /* Location: .classes/Service/Captcha.php */

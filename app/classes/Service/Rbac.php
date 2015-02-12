@@ -6,16 +6,6 @@ use Obullo\Container\Container;
 use Obullo\Permissions\RbacService;
 use Obullo\ServiceProviders\ServiceInterface;
 
-/**
- * Rbac PermissionService ( Shared )
- *
- * @category  Service
- * @package   Mail
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/services
- */
 class Rbac implements ServiceInterface
 {
     /**
@@ -43,7 +33,7 @@ class Rbac implements ServiceInterface
     }
 }
 
-// END Rbac class
+// END Rbac service
 
 /* End of file Rbac.php */
 /* Location: .classes/Service/Rbac.php */

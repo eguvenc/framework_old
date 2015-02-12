@@ -5,16 +5,6 @@ namespace Service;
 use Obullo\Container\Container;
 use Obullo\ServiceProviders\ServiceInterface;
 
-/**
- * Cache Service
- *
- * @category  Service
- * @package   Cache
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/services
- */
 class Cache implements ServiceInterface
 {
     /**
@@ -27,17 +17,12 @@ class Cache implements ServiceInterface
     public function register(Container $c)
     {
         $c['cache'] = function () use ($c) {
-            return $c['service provider cache']->get(
-                [
-                    'driver' => 'redis', 
-                    'serializer' => 'SERIALIZER_PHP'
-                ]
-            );
+            return $c['service provider cache']->get(['driver' => 'redis', 'serializer' => 'SERIALIZER_PHP']);
         };
     }
 }
 
-// END Cache class
+// END Cache service
 
 /* End of file Cache.php */
 /* Location: .classes/Service/Cache.php */

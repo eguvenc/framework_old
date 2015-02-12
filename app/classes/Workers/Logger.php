@@ -3,10 +3,9 @@
 namespace Workers;
 
 use Obullo\Queue\Job;
-use Obullo\Log\PriorityQueue;
 use Obullo\Queue\JobInterface;
 use Obullo\Container\Container;
-use Obullo\Log\Queue\QueueHandlerPriority;
+use Obullo\Log\LogWriterRaidController;
 use Obullo\Log\Handler\File as FileHandler;
 use Obullo\Log\Handler\Mongo as MongoHandler;
 use Obullo\Log\Handler\Email as EmailHandler;
@@ -23,9 +22,26 @@ use Obullo\Log\Handler\Email as EmailHandler;
  */
 Class Logger implements JobInterface
 {
-    public $c;           // Container
-    public $job;         // Job class
-    public $queuedData;  // Log data
+    /**
+     * Container
+     * 
+     * @var object
+     */
+    public $c;
+
+    /**
+     * Job class for queue operations
+     * 
+     * @var object
+     */
+    public $job;
+
+    /**
+     * Common data for logger
+     * 
+     * @var array
+     */
+    public $writers;
 
     /**
      * Constructor
@@ -45,48 +61,45 @@ Class Logger implements JobInterface
      * 
      * @return void
      */
-    public function fire(Job $job, $data)
+    public function fire($job, $data)
     {
         $this->job = $job;
-        
-        if ($data['logger'] == 'QueueLogger') {  // Queue logger data
-
-            $priority = new QueueHandlerPriority();
-            $priority->insert($data);
-            $this->queuedData = $priority->getQueue();
-        }
-
-        if ($data['logger'] == 'Logger') {      // Standart logger data
-            $this->queuedData = $data;
-        }
+        $this->writers = LogWriterRaidController::handle($data);  // Control multiple writers 
         $this->process();
     }
 
     /**
-     * Process log data
+     * Process log data, standart logger use this method
+     * thats why we declare it as public.
      * 
      * @return void
      */
-    protected function process()
+    public function process()
     {
-        foreach ($this->queuedData as $array) {
+        foreach ($this->writers as $array) {
 
             switch ($array['handler']) {
             case 'file':
                 $handler = new FileHandler($this->c);
                 break;
             case 'email':
-                $handler = new EmailHandler(
-                    $this->c,
-                    $this->c['mailer'],
-                    array(
-                        'from' => '<noreply@example.com> Server Admin',
-                        'to' => 'obulloframework@gmail.com',
-                        'cc' => '',
-                        'bcc' => '',
-                        'subject' => 'Server Logs',
-                        'message' => 'Detailed logs here --> <br /> %s',
-                    )
+                $mailer = $this->c['service provider mailer']->factory(['driver' => 'mandrill']);
+                
+                $mailer->from('<noreply@example.com> Server Admin');
+                $mailer->to('obulloframework@gmail.com');
+                $mailer->subject('Server Logs');
+
+                $handler = new EmailHandler($this->c);
+                $handler->setMessage('Detailed logs here --> <div>%s</div>');
+                $handler->setNewlineChar('<br />');
+                $handler->func(
+                    function ($message) use ($mailer) {
+                        $mailer->message($message);
+                        $mailer->send();
+
+                        // $mailer->response->getArray();
+                        // echo $mailer->printDebugger();  // debug : on / off
+                    }
                 );
                 break;
             case 'mongo':
@@ -108,12 +121,14 @@ Class Logger implements JobInterface
                 $handler = null;
                 break;
             }
-            if ($handler != null AND $handler->isAllowed($array['request'])) {
+            if ($handler != null AND $handler->isAllowed($array)) { // Check write permissions
 
                 $handler->write($array);  // Do job
                 $handler->close();
                 
-                $this->job->delete();  // Delete job from queue
+                if ($this->job instanceof Job) {
+                    $this->job->delete();  // Delete job from queue
+                }
             }
         
         } // end foreach
@@ -124,10 +139,12 @@ Class Logger implements JobInterface
 Array
 (
     [logger] => QueueLogger
-    [0] => Array
+    [primary] => 5
+    [5] => Array
         (
             [request] => http
             [handler] => file
+            [type] => writer
             [priority] => 5
             [time] => 1423677515
             [record] => Array
@@ -155,6 +172,15 @@ Array
                         )
 
         )
+    [2] => Array
+        (
+            [request] => http
+            [handler] => email
+            [type] => handler
+            [priority] => 5
+            [time] => 1423677515
+            [record] => Array
+                (
 
 )
 

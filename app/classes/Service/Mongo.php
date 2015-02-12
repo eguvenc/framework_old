@@ -6,16 +6,6 @@ use Obullo\Mongo\Query;
 use Obullo\Container\Container;
 use Obullo\ServiceProviders\ServiceInterface;
 
-/**
- * Mongo Query Service
- *
- * @category  Service
- * @package   Mongo
- * @author    Obullo Framework <obulloframework@gmail.com>
- * @copyright 2009-2014 Obullo
- * @license   http://opensource.org/licenses/MIT MIT license
- * @link      http://obullo.com/docs/services
- */
 class Mongo implements ServiceInterface
 {
     /**
@@ -33,7 +23,7 @@ class Mongo implements ServiceInterface
     }
 }
 
-// END Mongo class
+// END Mongo service
 
 /* End of file Mongo.php */
 /* Location: .classes/Service/Mongo.php */
