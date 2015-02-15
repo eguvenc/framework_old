@@ -10,6 +10,7 @@
             <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
 
             <?php echo $header; ?>
+            
         </header>
 
         <h1>Welcome to Obullo !</h1>
@@ -31,8 +32,6 @@
             </ol>
 
         </section>
-
-        <?php echo $this->view->template('footer'); ?>
         
         <section>
             <p>&nbsp;</p>

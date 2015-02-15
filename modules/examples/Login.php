@@ -2,8 +2,6 @@
 
 namespace Examples;
 
-use Event\Login\Attempt;
-
 Class Login extends \Controller
 {
     /**
@@ -19,16 +17,19 @@ Class Login extends \Controller
         $this->c['view'];
         $this->c['flash'];
         $this->c['request'];
-        $this->c['event']->subscribe(new Attempt($this->c));   // Listen user events
     }
 
     /**
      * Index
-     * 
+     *
+     * @event->subscribe('Event\Login\Attempt');
+     *  
      * @return void
      */
     public function index()
     {
+        // $this->user->login->authenticateVerifiedIdentity();
+
         if ($this->request->isPost()) {
 
             $this->c['validator'];
@@ -41,7 +42,7 @@ Class Login extends \Controller
 
             } else {
 
-                // $this->user->login->enableVerification();
+                $this->user->login->enableVerification();
             
                 $result = $this->user->login->attempt(
                     array(
@@ -54,7 +55,7 @@ Class Login extends \Controller
                 if ($result->isValid()) {
 
                     $this->flash->success('You have authenticated successfully.');
-                    $this->url->redirect('examples/restricted');
+                    $this->url->redirect('examples/restrictedArea');
 
                 } else {
 
@@ -64,11 +65,6 @@ Class Login extends \Controller
             }
         }
 
-        $this->view->load(
-            'login',
-            [
-                'footer' => $this->view->template('footer')
-            ]
-        );
+        $this->view->load('login');
     }
 }

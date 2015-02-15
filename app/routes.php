@@ -13,7 +13,7 @@ $c['router']->domain($c['config']['url']['webhost']);  // Root domain
 $c['router']->defaultPage('welcome');
 
 // $c['router']->get(
-//     'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2', 
+//     'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2',
 //     function () use ($c) {
 //         $c['view']->load('dummy');
 //     }

@@ -27,7 +27,7 @@ return array(
     ),
     
     'meta' => array(
-        'enabled' => true,
+        'enabled' => false,
         'matchIp' => false,       // Whether to match the user's IP address when reading the session data
         'matchUserAgent' => true  // Whether to match the User Agent when reading the session data
     )

@@ -66,8 +66,8 @@ return array(
     | Annotations
     |--------------------------------------------------------------------------
     */
-    'annotation' => array(
-        'filters' => false,   // Enable or Disable "annotation filters" on controller.
+    'annotations' => array(
+        'enabled' => true,   // Enable or Disable "annotations".
     ),
     /*
     |--------------------------------------------------------------------------

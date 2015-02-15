@@ -57,7 +57,6 @@ header{padding: 30px 0;text-align:center;}
         <section>
             <p>This is my first page.</p>
         </section>
-
-        <?php echo $this->view->template('footer'); ?>
+        
     </body>
 </html>

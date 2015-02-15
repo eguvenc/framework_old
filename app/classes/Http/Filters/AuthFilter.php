@@ -50,16 +50,6 @@ class AuthFilter
             $this->user->activity->set('date', time());  //  example activity data
         }
     }
-    
-    /**
-     * After the response
-     * 
-     * @return void
-     */
-    public function finish()
-    {
-        $this->user->activity->write();  // Write user activity data
-    }
 
 }
 

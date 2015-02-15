@@ -3,10 +3,10 @@
 namespace Auth\Identities;
 
 use Obullo\Container\Container,
-    Obullo\Authentication\AbstractAuthorizedUser,
+    Obullo\Authentication\AbstractUserIdentity,
     Obullo\Authentication\Identities\AuthorizedUserInterface;
 
-Class AuthorizedUser extends AbstractAuthorizedUser implements AuthorizedUserInterface
+Class AuthorizedUser extends AbstractUserIdentity implements AuthorizedUserInterface
 {
     /**
      * Create a authorized user object.
@@ -28,7 +28,9 @@ Class AuthorizedUser extends AbstractAuthorizedUser implements AuthorizedUserInt
      */
     public function getIdentifier()
     {
-        return isset($this->attributes[$this->getColumnIdentifier()]) ? $this->attributes[$this->getColumnIdentifier()] : false;
+        $id = $this->getColumnIdentifier();
+
+        return $this->$id;
     }
 
     /**
@@ -38,27 +40,9 @@ Class AuthorizedUser extends AbstractAuthorizedUser implements AuthorizedUserInt
      */
     public function getPassword()
     {
-        return isset($this->attributes[$this->getColumnPassword()]) ? $this->attributes[$this->getColumnPassword()] : false;
-    }
+        $password = $this->getColumnPassword();
 
-    /**
-     * Returns to "1" user if used remember me feature
-     * 
-     * @return integer
-     */
-    public function getRememberMe() 
-    {
-        return $this->attributes['__rememberMe'];
-    }
-
-    /**
-     * Get all attributes
-     * 
-     * @return array
-     */
-    public function getArray()
-    {
-        return $this->attributes;
+        return $this->$password;
     }
 
 }

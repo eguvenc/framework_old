@@ -22,7 +22,7 @@ return array(
     'security' => array(
         'cookie' => array(
             'name' => '__token',       // Cookie name
-            'refresh' => 10,           // Every 1 minutes do the cookie validation
+            'refresh' => 60,           // Every 1 minutes do the cookie validation
             'userAgentMatch' => false, // Whether to match user agent when reading token
             'path' => '/',
             'secure' => false,
@@ -52,7 +52,7 @@ return array(
         )
     ),
     'activity' => array(
-        'uniqueLogin' => false,  // If unique login enabled application terminates all other active login sessions.
+        'uniqueLogin' => true,  // If unique login enabled application terminates all other active login sessions.
     )
 );
 

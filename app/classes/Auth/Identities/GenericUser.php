@@ -3,10 +3,10 @@
 namespace Auth\Identities;
 
 use Obullo\Container\Container,
-    Obullo\Authentication\AbstractGenericUser,
+    Obullo\Authentication\AbstractUserIdentity,
     Obullo\Authentication\Identities\GenericUserInterface;
 
-Class GenericUser extends AbstractGenericUser implements GenericUserInterface
+Class GenericUser extends AbstractUserIdentity implements GenericUserInterface
 {
     /**
      * Create a new generic User object.
@@ -28,7 +28,9 @@ Class GenericUser extends AbstractGenericUser implements GenericUserInterface
      */
     public function getIdentifier()
     {
-        return isset($this->attributes[$this->getColumnIdentifier()]) ? $this->attributes[$this->getColumnIdentifier()] : false;
+        $id = $this->getColumnIdentifier();
+
+        return $this->$id;
     }
 
     /**
@@ -38,38 +40,11 @@ Class GenericUser extends AbstractGenericUser implements GenericUserInterface
      */
     public function getPassword()
     {
-        return isset($this->attributes[$this->getColumnPassword()]) ? $this->attributes[$this->getColumnPassword()] : false;
-    }
-    
-    /**
-     * Returns to "1" user if used remember me
-     * 
-     * @return integer
-     */
-    public function getRememberMe() 
-    {
-        return isset($this->attributes['__rememberMe']) ? $this->attributes['__rememberMe'] : 0;
+        $password = $this->getColumnPassword();
+
+        return $this->$password;
     }
 
-    /**
-     * Returns to remember token
-     * 
-     * @return integer
-     */
-    public function getRememberToken() 
-    {
-        return isset($this->attributes['__rememberToken']) ? $this->attributes['__rememberToken'] : false;
-    }
-    
-    /**
-     * Get all attributes
-     * 
-     * @return array
-     */
-    public function getArray()
-    {
-        return $this->attributes;
-    }
 }
 
 /* End of file GenericUser.php */

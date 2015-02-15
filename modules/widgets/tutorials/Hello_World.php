@@ -14,6 +14,7 @@ Class Hello_World extends \Controller
     public function load()
     {
         $this->c['view'];
+        $this->c['session'];
 
         // $this->c['service provider cache']->get(['driver' => 'redis']);
         
@@ -24,7 +25,6 @@ Class Hello_World extends \Controller
         // $this->mailer->subject('Test');
         // $this->mailer->message('Hello_World !');
         // $this->mailer->send();
-
     }
 
     /**

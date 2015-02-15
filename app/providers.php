@@ -1,30 +1,19 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors',1);
 /*
 |--------------------------------------------------------------------------
-| Constants.
+| Service Providers
 |--------------------------------------------------------------------------
+| Specifies the your application service providers.
 */
-require 'constants';
 /*
 |--------------------------------------------------------------------------
-| Php startup error handler
+| Pdo Service Provider
 |--------------------------------------------------------------------------
 */
-if (error_get_last() != null) {
-    include TEMPLATES .'errors'. DS .'startup.php';
-}
+$c->register(new Obullo\ServiceProviders\PdoServiceProvider);
 /*
 |--------------------------------------------------------------------------
-| Http Bootstrap
+| Cache Service Provider
 |--------------------------------------------------------------------------
 */
-require OBULLO_CONTAINER;
-require OBULLO_AUTOLOADER;
-require OBULLO_CORE;
-require OBULLO_HTTP;
-
-
-/* End of file index.php */
-/* Location: .index.php */
+$c->register(new Obullo\ServiceProviders\CacheServiceProvider);

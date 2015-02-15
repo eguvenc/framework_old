@@ -66,9 +66,8 @@
                     <pre><?php echo $this->form->error('email') ?></pre>
                 </section>    
 
-        </section> 
+        </section>
 
-        <?php echo $footer ?>
     </body>
     
 </html>
