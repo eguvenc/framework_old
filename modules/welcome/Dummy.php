@@ -23,7 +23,7 @@ Class Dummy extends \Controller
         echo $this->c['layer']->get('views/test');
         echo $this->c['layer']->get('views/test');
         
-        echo $this->c['view']->get('dummy');
+        echo $this->c['view']->nested($this)->get('dummy');
     }
 }
 
