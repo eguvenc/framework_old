@@ -41,9 +41,6 @@
 });</pre>
 </section>
 
-
-<?php echo $this->view->template('footer') ?>
-
 <section>
     <p>&nbsp;</p>
     <p>&nbsp;</p>

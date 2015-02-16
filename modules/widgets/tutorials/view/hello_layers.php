@@ -24,8 +24,6 @@ $c = $this->c['layer']->get('widgets/tutorials/hello_dummy/7/8/9');</pre>
             <?php echo $c ?>
         </section>
 
-        <?php echo $this->c['view']->template('footer'); ?>
-
         <section>
             <p>&nbsp;</p>
             <p>&nbsp;</p>

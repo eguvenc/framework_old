@@ -76,10 +76,6 @@ var ajax = {
                     </table>
                 </form>
         </section> 
-        
-        <section>
-        <?php echo $this->view->template('footer'); ?>
-        </section>
 
     <section>
         <p>&nbsp;</p>
