@@ -42,7 +42,7 @@ Class Login extends \Controller
 
             } else {
 
-                $this->user->login->enableVerification();
+                // $this->user->login->enableVerification();
             
                 $result = $this->user->login->attempt(
                     array(
@@ -55,7 +55,7 @@ Class Login extends \Controller
                 if ($result->isValid()) {
 
                     $this->flash->success('You have authenticated successfully.');
-                    $this->url->redirect('examples/restrictedArea');
+                    $this->url->redirect('examples/restricted');
 
                 } else {
 

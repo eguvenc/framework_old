@@ -29,13 +29,13 @@ Class Memcache extends \Controller
         // $this->cache->set('test:value', array('a' => array('b', 'c', 'd')));
 
         // $this->cache->delete('Auth:__permanent:Authorized:user@example.com');
-        print_r($this->cache->get('Auth:__permanent:Authorized:user@example.com:cnoom8p14x'));
+        // print_r($this->cache->get('Auth:__permanent:Authorized:user@example.com:cnoom8p14x'));
 
-        // $allkeys = $this->cache->getAllKeys();
+        $allkeys = $this->cache->getAllKeys();
 
-        // foreach ($allkeys as $key => $value) {
-        //     echo $key.':'.print_r($value, true).'<br />';
-        // }
+        foreach ($allkeys as $key => $value) {
+            echo $key.':'.$value.'<br />';
+        }
 
         // print_r($allkeys);
 

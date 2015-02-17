@@ -2,7 +2,7 @@
 
 namespace Examples;
 
-Class RestrictedArea extends \Controller
+Class Restricted extends \Controller
 {
     /**
      * Loader
