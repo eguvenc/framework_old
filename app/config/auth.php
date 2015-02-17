@@ -4,10 +4,10 @@ return array(
     
     'cache' => array(
 
-        'storage' => '\Obullo\Authentication\Storage\Redis',   // Storage driver uses cache package
+        'storage' => '\Obullo\Authentication\Storage\Memcached',   // Storage driver uses cache package
         'provider' => array(
             'name' => 'cache',
-            'driver' => 'redis',
+            'driver' => 'memcached',
             'serializer' => 'SERIALIZER_PHP',  // SERIALIZER_JSON, SERIALIZER_IGBINARY
         ),
         'block' => array(
@@ -22,7 +22,7 @@ return array(
     'security' => array(
         'cookie' => array(
             'name' => '__token',       // Cookie name
-            'refresh' => 60,           // Every 1 minutes do the cookie validation
+            'refresh' => 10,           // Every 1 minutes do the cookie validation
             'userAgentMatch' => false, // Whether to match user agent when reading token
             'path' => '/',
             'secure' => false,

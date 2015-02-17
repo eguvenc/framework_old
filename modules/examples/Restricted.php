@@ -14,6 +14,8 @@ Class Restricted extends \Controller
         $this->c['view'];
         $this->c['user'];
         $this->c['flash'];
+
+        var_dump($this->c['auth.storage']->getMemoryBlockKey('__permanent'));
     }
 
     /**

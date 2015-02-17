@@ -2,9 +2,9 @@
 
 namespace Event;
 
-use Obullo\Container\Container,
-    Obullo\Event\EventListenerInterface,
-    Obullo\Application\Addons\BenchmarkTrait;
+use Obullo\Container\Container;
+use Obullo\Event\EventListenerInterface;
+use Obullo\Application\Addons\BenchmarkTrait;
 
 Class Redirect implements EventListenerInterface
 {

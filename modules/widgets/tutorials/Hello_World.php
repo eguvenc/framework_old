@@ -14,7 +14,6 @@ Class Hello_World extends \Controller
     public function load()
     {
         $this->c['view'];
-        $this->c['session'];
 
         // $this->c['service provider cache']->get(['driver' => 'redis']);
         
