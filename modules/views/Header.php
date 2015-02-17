@@ -21,7 +21,7 @@ Class Header extends \Controller
      */
     public function index()
     {
-        echo $this->view->nested($this)->get(
+        echo $this->view->get(
             'header',
             [
                 'header' => '--------------- EXAMPLE HEADER LAYER ---------------'

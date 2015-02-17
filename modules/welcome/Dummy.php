@@ -23,7 +23,9 @@ Class Dummy extends \Controller
         echo $this->c['layer']->get('views/test');
         echo $this->c['layer']->get('views/test');
         
-        echo $this->c['view']->nested($this)->get('dummy');
+        echo 'WELCOME MODULE: '.$this->router->fetchNamespace().'<br>';
+
+        echo $this->c['view']->get('dummy');  // In sub layers we need to use nested method to pass reference of
     }
 }
 

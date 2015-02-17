@@ -21,7 +21,7 @@ Class Footer extends \Controller
      */
     public function index()
     {
-        echo $this->view->nested($this)->get(
+        echo $this->view->get(
             'footer',
             [
                 'footer' => '--------------- EXAMPLE FOOTER LAYER ---------------'
