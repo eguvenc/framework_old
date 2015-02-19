@@ -13,11 +13,6 @@ Class Memcache extends \Controller
     {
         $this->c['view'];
         $this->c['user'];
-        $this->cache = $this->c['service provider cache']->get(
-            [
-                'driver' => 'memcached', 'serializer' => 'SERIALIZER_PHP'
-            ]
-        );
     }
 
     /**

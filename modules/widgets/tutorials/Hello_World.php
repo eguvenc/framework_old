@@ -15,6 +15,8 @@ Class Hello_World extends \Controller
     {
         $this->c['view'];
 
+        // $this->AMQPConnection = $this->c['service provider AMQP']->get(['connection' => 'default']);
+
         // $this->c['service provider cache']->get(['driver' => 'redis']);
         
         // $this->mailer = $this->c['service provider mailer']->get(['driver' => 'mandrill', 'options' => array('queue' => true)]);
