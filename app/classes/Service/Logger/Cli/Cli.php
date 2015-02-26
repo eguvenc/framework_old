@@ -29,8 +29,8 @@ class Cli implements ServiceInterface
     {
         $c['logger'] = function () use ($c) {
 
-            $serviceProvider = new LoggerServiceProvider($c);
-            $logger = $serviceProvider->getLogger();
+            $provider = new LoggerServiceProvider($c);
+            $logger = $provider->get(array('driver' => 'Logger'));  // or QueueLogger
             /*
             |--------------------------------------------------------------------------
             | Register Filters
@@ -51,7 +51,6 @@ class Cli implements ServiceInterface
             |--------------------------------------------------------------------------
             */
             $logger->addWriter('file')->filter('priority.notIn', array(LOG_INFO));
-            
             return $logger;
         };
     }

@@ -3,10 +3,8 @@
 return array(
     
     'cache' => array(
-
         'storage' => '\Obullo\Authentication\Storage\Memcached',   // Storage driver uses cache package
         'provider' => array(
-            'name' => 'cache',
             'driver' => 'memcached',
             'serializer' => 'SERIALIZER_PHP',  // SERIALIZER_JSON, SERIALIZER_IGBINARY
         ),
@@ -52,7 +50,7 @@ return array(
         )
     ),
     'activity' => array(
-        'uniqueLogin' => true,  // If unique login enabled application terminates all other active login sessions.
+        'uniqueLogin' => true,  // If unique login enabled application terminates all other active sessions.
     )
 );
 

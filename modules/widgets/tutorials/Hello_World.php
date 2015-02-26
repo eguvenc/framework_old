@@ -15,6 +15,10 @@ Class Hello_World extends \Controller
     {
         $this->c['view'];
 
+        // echo $_SERVER['REQUEST_URI'];
+
+        // $this->c['translator']->load('validator');
+
         // $this->AMQPConnection = $this->c['service provider AMQP']->get(['connection' => 'default']);
 
         // $this->c['service provider cache']->get(['driver' => 'redis']);

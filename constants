@@ -56,19 +56,15 @@ define('INDEX_PHP', 'index.php');
 | OBULLO
 |--------------------------------------------------------------------------
 */
-define('OBULLO',  ROOT . PACKAGE_VERSION . DS);
-define('OBULLO_CLI',  OBULLO .'Obullo'. DS .'Cli.php');
-define('OBULLO_HTTP',  OBULLO .'Obullo'. DS .'Http.php');
-define('OBULLO_CONFIG',  OBULLO .'Config'. DS .'Config.php');
-define('OBULLO_CORE',  OBULLO .'Obullo'. DS .'Core.php');
-define('OBULLO_CONTAINER',  OBULLO .'Container'. DS .'Container.php');
-define('OBULLO_AUTOLOADER', OBULLO .'Obullo'. DS .'Autoloader.php');
+define('OBULLO', ROOT . PACKAGE_VERSION . DS);
+define('OBULLO_CLI', OBULLO .'Application'. DS .'Cli.php');
+define('OBULLO_HTTP', OBULLO .'Application'. DS .'Http.php');
 define('OBULLO_PROVIDERS', APP .'providers.php');
 define('OBULLO_COMPONENTS', APP .'components.php');
 define('OBULLO_EVENTS', APP .'events.php');
 define('OBULLO_ROUTES', APP .'routes.php');
-define('OBULLO_FILTERS', APP .'filters.php');
-define('OBULLO_CONTROLLER', OBULLO .'Obullo'. DS .'Controller'. DS .'Controller.php');
+define('OBULLO_MIDDLEWARES', APP .'middlewares.php');
+define('OBULLO_CONTROLLER', OBULLO .'Controller'. DS .'Controller.php');
 /*
 |---------------------------------------------------------------
 | NOTIFICATIONS

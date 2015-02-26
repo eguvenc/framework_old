@@ -49,7 +49,7 @@ Class Redirect implements EventListenerInterface
      */
     public function subscribe($event)
     {
-        $event->listen('before.redirect', 'Event\Redirect.before');
+        $event->listen('before.redirect', 'Event\Redirect@before');
     }
 
 }

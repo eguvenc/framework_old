@@ -15,7 +15,6 @@ return array(
         'wordwrap' => true,       // "true" or "false" (boolean) Enable word-wrap.
         'wrapchars' => 76,        // Character count to wrap at.
         'mailtype' => 'html',     // text or html Type of mail. If you send HTML email you must send it as a complete web page. 
-                                  // Make sure you don't have any relative links or relative image paths otherwise they will not work.
         'charset' => 'utf-8',     // Character set (utf-8, iso-8859-1, etc.).
         'validate' => false,      // Whether to validate the email address.
         'priority' =>  3,         // 1, 2, 3, 4, 5   Email Priority. 1 = highest. 5 = lowest. 3 = normal.
@@ -26,10 +25,32 @@ return array(
     ),
 
     'protocol' => array(
+        // 'mail' => array(),
+        // 'sendmail' => array(
+        //     'mailpath'  => '/usr/sbin/sendmail',  //  The server path to Sendmail.
+        // ),
+        // 'smtp' => array(
+        //     'host' => 'smtp.mandrillapp.com',          // SMTP Server Address.
+        //     'user' => $c['env']['MANDRILL_USERNAME'],  // SMTP Username.
+        //     'pass' => $c['env']['MANDRILL_API_KEY'],   // SMTP Password.
+        //     'port' => '587',                           // Port.
+        //     'timeout' => '5' ,                         // Timeout (in seconds).
+        // ),
+    ),
+
+    'transport' => array(
+
+        'mandrill' => array(
+            'key' => $c['env']['MANDRILL_API_KEY'],  // Mandrill api key
+            'ip_pool' => 'Main Pool',                // The name of the dedicated ip pool that should be used to send the message.
+        ),
+
         'mail' => array(),
+
         'sendmail' => array(
             'mailpath'  => '/usr/sbin/sendmail',  //  The server path to Sendmail.
         ),
+
         'smtp' => array(
             'host' => 'smtp.mandrillapp.com',          // SMTP Server Address.
             'user' => $c['env']['MANDRILL_USERNAME'],  // SMTP Username.
@@ -37,13 +58,7 @@ return array(
             'port' => '587',                           // Port.
             'timeout' => '5' ,                         // Timeout (in seconds).
         ),
-    ),
 
-    'transport' => array(
-        'mandrill' => array(
-            'key' => $c['env']['MANDRILL_API_KEY'],  // Mandrill api key
-            'ip_pool' => 'Main Pool',                // The name of the dedicated ip pool that should be used to send the message.
-        ),
     ),
 
     'queue' => array(

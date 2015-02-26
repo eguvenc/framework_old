@@ -84,7 +84,6 @@ Class Logger implements JobInterface
                 break;
             case 'email':
                 $mailer = $this->c['service provider mailer']->factory(['driver' => 'mandrill']);
-                
                 $mailer->from('<noreply@example.com> Server Admin');
                 $mailer->to('obulloframework@gmail.com');
                 $mailer->subject('Server Logs');

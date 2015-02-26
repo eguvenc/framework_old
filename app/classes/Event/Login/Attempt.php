@@ -66,8 +66,8 @@ Class Attempt implements EventListenerInterface
      */
     public function subscribe($event)
     {
-        $event->listen('login.attempt.before', 'Event\Login\Attempt.before');
-        $event->listen('login.attempt.after', 'Event\Login\Attempt.after');
+        $event->listen('login.attempt.before', 'Event\Login\Attempt@before');
+        $event->listen('login.attempt.after', 'Event\Login\Attempt@after');
     }
 
 }
