@@ -9,7 +9,7 @@ if (error_get_last() != null) {
 }
 /*
 |--------------------------------------------------------------------------
-| Obullo.php
+| Obullo Cli Requests
 |--------------------------------------------------------------------------
 */
 require OBULLO_CLI;
@@ -27,5 +27,5 @@ Obullo\Application\Cli::registerAutoloader();
 $c['app']->run();
 
 
-/* End of file index.php */
-/* Location: .index.php */
+/* End of file cli.php */
+/* Location: .cli.php */

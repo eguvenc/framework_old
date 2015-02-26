@@ -37,7 +37,7 @@ $_SERVER['ORIG_PATH_INFO'] = $_SERVER['QUERY_STRING'] = $_SERVER['REQUEST_URI'] 
 |--------------------------------------------------------------------------
 | This file specifies which APP constants should be loaded by default.
 |
- */
+*/
 require 'constants';
 /*
 |--------------------------------------------------------------------------

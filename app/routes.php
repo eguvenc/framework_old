@@ -11,7 +11,7 @@
 
 $c['router']->domain($c['config']['url']['webhost']);  // Root domain
 $c['router']->defaultPage('welcome');
-// $c['router']->error404('errors/page_not_found');
+// $c['router']->error404('errors/custom404');
 
 // $c['router']->get(
 //     'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2',
