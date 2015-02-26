@@ -2,7 +2,7 @@
 
 namespace Tasks;
 
-use Obullo\Cli\Tasks\HelpController;
+use Obullo\Tasks\HelpController;
 
 /**
  * Help controller

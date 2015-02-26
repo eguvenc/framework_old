@@ -2,7 +2,7 @@
 
 namespace Tasks;
 
-use Obullo\Cli\Tasks\WorkerController;
+use Obullo\Queue\Tasks\WorkerController;
 
 /**
  * Worker controller

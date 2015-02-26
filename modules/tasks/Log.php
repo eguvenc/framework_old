@@ -2,7 +2,7 @@
 
 namespace Tasks;
 
-use Obullo\Cli\Tasks\LogController;
+use Obullo\Tasks\LogController;
 
 /**
  * Log command

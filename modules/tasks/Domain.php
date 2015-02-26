@@ -2,7 +2,7 @@
 
 namespace Tasks;
 
-use Obullo\Cli\Tasks\DomainController;
+use Obullo\Tasks\DomainController;
 
 /**
  * Domain controller

@@ -1,7 +1,7 @@
 <?php
 /*
 |-------------------------------------------------------------------
-| CONSTANTS
+| APPLICATION CONSTANTS
 |-------------------------------------------------------------------
 | This file specifies which APP constants should be loaded 
 | by default.
