@@ -8,9 +8,11 @@ You can create your own service providers in here. Please read this documentatio
 
 ### Register Your Service Providers
 
-Look other app/providers.php and add your provider class.
+Open app/providers.php file and add your service provider.
 
-
+```php
+$c->register(new Service\Providers\MyServiceProvider);
+```
 
 ### Loading Service Providers
 
