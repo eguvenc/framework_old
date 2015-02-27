@@ -11,13 +11,6 @@ class MethodNotAllowed extends Middleware
     use MethodNotAllowedTrait;  // You can add / remove addons.
 
     /**
-     * Injected parameters ( router inject filter allowed methods parameters in here )
-     * 
-     * @var array
-     */
-    public $params = array();
-
-    /**
      * Loader
      * 
      * @return void

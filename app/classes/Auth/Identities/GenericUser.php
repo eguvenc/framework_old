@@ -2,25 +2,11 @@
 
 namespace Auth\Identities;
 
-use Obullo\Container\Container,
-    Obullo\Authentication\AbstractUserIdentity,
-    Obullo\Authentication\Identities\GenericUserInterface;
+use Obullo\Authentication\AbstractUserIdentity;
+use Obullo\Authentication\Identities\GenericUserInterface;
 
 Class GenericUser extends AbstractUserIdentity implements GenericUserInterface
 {
-    /**
-     * Create a new generic User object.
-     *
-     * @param array $c          container
-     * @param array $attributes identity data
-     * 
-     * @return void
-     */
-    public function __construct(Container $c, $attributes)
-    {
-        parent::__construct($c, $attributes);
-    }
-    
     /**
      * Get the unique identifier for the user.
      *

@@ -24,14 +24,14 @@ $c['router']->defaultPage('welcome');
 
 $c['router']->group(
     ['name' => 'GenericUsers','domain' => $c['config']['domain']['mydomain.com'], 'middleware' => array('Maintenance')],
-    function ($group) {
+    function () {
 
         $this->defaultPage('welcome');
 
         // $this->post('widgets/tutorials/hello_world', null, null, $group);
 
-        $this->get('(?:en|tr|de|nl)/(.*)', '$1', null, $group);
-        $this->get('(?:en|tr|de|nl)', 'welcome/index',  null, $group);  // default controller
+        $this->get('(?:en|tr|de|nl)/(.*)', '$1', null);
+        $this->get('(?:en|tr|de|nl)', 'welcome/index',  null);  // default controller
 
         // $this->get('tag/(.+)', 'tag/$1', null, $group);
         // $this->get('post/detail/([0-9])', 'post/detail/$1', null, $group);
@@ -40,20 +40,20 @@ $c['router']->group(
         // $this->post('comment/delete/([0-9])', 'comment/delete/$1', null, $group);
         // $this->post('comment/update/([0-9])/(.+)', 'comment/update/$1', null, $group);
 
-        $this->attach('(.*)', $group); // all urls of this group
+        $this->attach('(.*)'); // all urls of this group
     }
 );
 
 $c['router']->group(
     ['name' => 'AuthorizedUsers','domain' => $c['config']['domain']['mydomain.com'], 'middleware' => array('Guest')],
-    function ($group) {
+    function () {
 
         $this->defaultPage('welcome');
-        $this->attach('examples/restricted', $group); // all urls of this group
+        $this->attach('examples/restricted'); // all urls of this group
 
-        // $this->route('get', 'tutorials/hello_world.*', 'tutorials/hello_scheme', null, $group);
-        // $this->attach('(.*)', $group); // all url
-        // $this->attach('((?!tutorials/hello_world).)*$', $group);  // url not contains "tutorials/hello_world"
+        // $this->route('get', 'tutorials/hello_world.*', 'tutorials/hello_scheme', null;
+        // $this->attach('(.*)'); // all url
+        // $this->attach('((?!tutorials/hello_world).)*$');  // url not contains "tutorials/hello_world"
     }
 );
 

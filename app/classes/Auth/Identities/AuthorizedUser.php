@@ -2,25 +2,11 @@
 
 namespace Auth\Identities;
 
-use Obullo\Container\Container,
-    Obullo\Authentication\AbstractUserIdentity,
-    Obullo\Authentication\Identities\AuthorizedUserInterface;
+use Obullo\Authentication\AbstractUserIdentity;
+use Obullo\Authentication\Identities\AuthorizedUserInterface;
 
 Class AuthorizedUser extends AbstractUserIdentity implements AuthorizedUserInterface
 {
-    /**
-     * Create a authorized user object.
-     *
-     * @param array $c          container
-     * @param array $attributes identity data
-     * 
-     * @return void
-     */
-    public function __construct(Container $c, $attributes)
-    {
-        parent::__construct($c, $attributes);
-    }
-
     /**
      * Get the unique identifier for the user.
      *
