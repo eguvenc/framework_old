@@ -3,6 +3,7 @@
 namespace Http\Middlewares;
 
 use Obullo\Application\Middleware;
+use Obullo\Application\Addons\RewriteLocaleTrait;
 use Obullo\Application\Addons\SetDefaultLocaleTrait;
 
 class Translation extends Middleware
@@ -18,7 +19,7 @@ class Translation extends Middleware
     public function load()
     {
         $this->setLocale();   // We need to set locale at the top
-        $this->rewrite();
+        // $this->rewrite();
 
         $this->next->load();
     }

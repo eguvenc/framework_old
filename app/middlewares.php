@@ -9,15 +9,22 @@
 |	- Route middlewares are triggered when their associated route is matched.
 | 
 */
-$c['app']->middleware(new Http\Middlewares\Request);
-
 /*
 |--------------------------------------------------------------------------
 | Translations
 |--------------------------------------------------------------------------
 | Detect locale and set.
 */
-// $c['app']->middleware(new Http\Middlewares\Translation);
+$c['app']->middleware(new Http\Middlewares\Translation);
+
+/*
+|--------------------------------------------------------------------------
+| Request
+|--------------------------------------------------------------------------
+| Sanitize requests
+*/
+$c['app']->middleware(new Http\Middlewares\Request);
+
 
 
 /* End of file middlewares.php */

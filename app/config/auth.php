@@ -3,9 +3,9 @@
 return array(
     
     'cache' => array(
-        'storage' => '\Obullo\Authentication\Storage\Memcached',   // Storage driver uses cache package
+        'storage' => '\Obullo\Authentication\Storage\Redis',   // Storage driver uses cache package
         'provider' => array(
-            'driver' => 'memcached',
+            'driver' => 'redis',
             'serializer' => 'SERIALIZER_PHP',  // SERIALIZER_JSON, SERIALIZER_IGBINARY
         ),
         'block' => array(
