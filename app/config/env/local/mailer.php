@@ -11,6 +11,7 @@ return array(
     ),
     
     'settings' => array(
+        
         'useragent' => 'Framework Mailer',  //  The "user agent".
         'wordwrap' => true,       // "true" or "false" (boolean) Enable word-wrap.
         'wrapchars' => 76,        // Character count to wrap at.
