@@ -6,11 +6,11 @@ return array(
         'storage' => '\Obullo\Authentication\Storage\Redis',   // Storage driver uses cache package
         'provider' => array(
             'driver' => 'redis',
-            'serializer' => 'SERIALIZER_PHP',  // SERIALIZER_JSON, SERIALIZER_IGBINARY
+            'serializer' => 'php',  // json, igbinary
         ),
         'block' => array(
             'permanent' => array(
-                'lifetime' => 86400,  // 24 hours default, it should be long period ( this is identity cache )
+                'lifetime' => 86400, // 24 hours default, it should be long period ( this is identity cache )
             ),
             'temporary'  => array(
                 'lifetime' => 300    // 5 minutes is default temporary login lifetime.
@@ -45,8 +45,7 @@ return array(
             )
         ),
         'session' => array(
-            'regenerateSessionId' => true,              // Regenerate session id upon new logins.
-            'deleteOldSessionAfterRegenerate' => true,  // Removes old session after session regenerate.
+            'regenerateSessionId' => true,  // Regenerate session id upon new logins.
         )
     ),
     'activity' => array(

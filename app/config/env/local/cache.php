@@ -3,7 +3,7 @@
 return array(
 
     'default' => array(
-        'serializer' => 'SERIALIZER_PHP',
+        'serializer' => 'php',
     ),
 
    'redis' => array(
