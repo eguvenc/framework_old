@@ -22,7 +22,7 @@ return array(
     ),
 
     'file' => array(
-        'path' =>  '/data/cache/',          // file data storage path
+        'path' =>  '/resources/data/cache/',          // file data storage path
     ),
 
     'memcache' => array(

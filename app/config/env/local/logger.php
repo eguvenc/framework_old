@@ -8,9 +8,9 @@ return array(
     
     'file' => array(
         'path' => array(
-            'http'  => 'data/logs/http.log',  // Http requests log path  ( Only for File Handler )
-            'cli'   => 'data/logs/cli.log',   // Cli log path  
-            'ajax'  => 'data/logs/ajax.log',  // Ajax log path
+            'http'  => '/resources/data/logs/http.log',  // Http requests log path  ( Only for File Handler )
+            'cli'   => '/resources/data/logs/cli.log',   // Cli log path  
+            'ajax'  => '/resources/data/logs/ajax.log',  // Ajax log path
         )
     ),
 

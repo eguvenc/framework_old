@@ -27,7 +27,7 @@ class Request extends Middleware
      * @return void
      */
     public function call()
-    {      
+    {
         $this->sanitize();
         $this->benchmarkStart();
 

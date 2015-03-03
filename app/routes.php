@@ -23,7 +23,7 @@ $c['router']->defaultPage('welcome');
 // $c['router']->attach('(.)', array('maintenance'));
 
 $c['router']->group(
-    ['name' => 'GenericUsers','domain' => $c['config']['domain']['mydomain.com'], 'middleware' => array('Maintenance', 'Auth')],
+    ['name' => 'GenericUsers','domain' => $c['config']['domain']['mydomain.com'], 'middleware' => array('Auth', 'Maintenance')],
     function () {
 
         $this->defaultPage('welcome');

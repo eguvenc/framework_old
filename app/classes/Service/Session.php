@@ -3,6 +3,7 @@
 namespace Service;
 
 use Obullo\Container\Container;
+use Obullo\Session\Handler\Cache;
 use Obullo\ServiceProviders\ServiceInterface;
 use Obullo\Session\Session as SessionClass;
 

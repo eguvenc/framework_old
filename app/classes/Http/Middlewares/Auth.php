@@ -36,7 +36,7 @@ class Auth extends Middleware
     public function call()
     {
         if ($this->user->identity->check()) {
-
+            
             $this->uniqueLoginCheck();  // Terminate multiple logins
 
             $this->user->activity->set('date', time());  //  Example meta data
