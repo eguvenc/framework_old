@@ -14,7 +14,7 @@ Class Hello_World extends \Controller
     public function load()
     {
         $this->c['view'];
-
+        
         // echo $_SERVER['REQUEST_URI'];
 
         // $this->c['translator']->load('validator');
