@@ -10,6 +10,8 @@
 | 
 | IMPORTANT: Obullo automatically assign route middlewares when their associated route is matched. 
 | There is no need to assign them in here.
+| 
+| Priority of middlewares: Add your middleware to end if you need run at the top.
 */
 /*
 |--------------------------------------------------------------------------

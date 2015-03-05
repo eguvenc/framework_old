@@ -24,7 +24,6 @@ Class Logout extends \Controller
     public function index()
     {
         $this->user->identity->logout();
-
         // $this->user->identity->destroy();
         // $this->user->identity->forgetMe();
         

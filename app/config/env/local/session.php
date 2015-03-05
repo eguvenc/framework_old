@@ -5,11 +5,12 @@ return array(
     'saveHandler' => '\\Obullo\Session\SaveHandler\Cache',
     
     'provider' => array(
-        'driver' =>'file',        // Service provider options
+        'driver' =>'redis',        // Service provider options
+        'options' => array()
     ),
 
     'session' => array(
-        'key' => 'o2_sessions:',  // Don't remove ":" colons. If your cache handler redis, it keeps keys in folders using colons.
+        'key' => PACKAGE_VERSION .'_sessions:',  // Don't remove ":" colons. If your cache handler redis, it keeps keys in folders using colons.
         'lifetime' => 7200,       // The number of SECONDS you want the session to last. By default " 2 hours ". "0" is no expiration.
         'expireOnClose' => true,  // Whether to cause the session to expire automatically when the browser window is closed
         'timeToUpdate'  => 1,     // How many seconds between framework refreshing "Session" meta data Information"

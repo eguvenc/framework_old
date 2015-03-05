@@ -3,10 +3,10 @@
 return array(
     
     'cache' => array(
-        'storage' => '\Obullo\Authentication\Storage\Cache',   // Storage driver uses cache package
+        'storage' => '\Obullo\Authentication\Storage\Cache',  // Storage can be a Cache package or custom database like Redis.
         'provider' => array(
-            'driver' => 'file',
-            'serializer' => 'php',  // json, igbinary
+            'driver' => 'redis',                         // If storage Not Cache provider['driver'] and storage values must be same.
+            'options' => array('serializer' => 'php')   // json, igbinary
         ),
         'block' => array(
             'permanent' => array(

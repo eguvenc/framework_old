@@ -2,10 +2,6 @@
 
 return array(
 
-    'default' => array(
-        'serializer' => 'php',
-    ),
-
    'redis' => array(
        'servers' => array(
             array(

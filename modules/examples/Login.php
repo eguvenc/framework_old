@@ -28,7 +28,11 @@ Class Login extends \Controller
      */
     public function index()
     {
-        // $this->user->login->authenticateVerifiedIdentity();
+        // $this->cache = $this->c['service provider cache']->get(['driver' => 'redis', 'options' => array('serializer' => 'php')]);
+        // $credentials = $this->cache->get('Auth:__temporary:user@example.com');
+        // print_r($credentials); exit;
+
+        // $this->user->login->authenticateTemporaryIdentity();
 
         if ($this->request->isPost()) {
 
