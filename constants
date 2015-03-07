@@ -6,7 +6,7 @@
 | This file specifies which APP constants should be loaded 
 | by default.
 */
-define('PACKAGE_VERSION', 'o2');
+define('FRAMEWORK', 'o2');
 /*
 |---------------------------------------------------------------
 | ESSENTIAL CONSTANTS
@@ -24,7 +24,7 @@ define('FCPATH', __FILE__);
 define('PHP_PATH', '/usr/bin/php'); 
 define('FPATH', dirname(__FILE__));
 define('ROOT',  realpath(dirname(__FILE__)) . DS);
-define('OBULLO', ROOT . PACKAGE_VERSION . DS);
+define('OBULLO', ROOT . FRAMEWORK . DS);
 /*
 |---------------------------------------------------------------
 | OBULLO CONSTANTS

@@ -3,7 +3,7 @@
 return array(
     
     'cache' => array(
-        'storage' => '\Obullo\Authentication\Storage\Cache',  // Storage can be a Cache package or custom database like Redis.
+        'storage' => '\Obullo\Authentication\Storage\Redis',  // Storage can be a Cache package or custom database like Redis.
         'provider' => array(
             'driver' => 'redis',                         // If storage Not Cache provider['driver'] and storage values must be same.
             'options' => array('serializer' => 'php')   // json, igbinary
@@ -19,14 +19,14 @@ return array(
     ),
     'security' => array(
         'cookie' => array(
-            'name' => '__token',       // Cookie name
-            'refresh' => 10,           // Every 1 minutes do the cookie validation
-            'userAgentMatch' => false, // Whether to match user agent when reading token
+            'name' => '__token',    // Cookie name
+            'refresh' => 10,        // Every 1 minutes do the cookie validation
             'path' => '/',
             'secure' => false,
             'httpOnly' => false,
+            'expire' => 0,         // If value == 0 session will be expire automatically when the browser window is closed.
             'prefix' => '',
-            'expire' => 86400   // 24 hours
+
         ),
         'passwordNeedsRehash' => array(
             'cost' => 6               // It depends of your server http://php.net/manual/en/function.password-hash.php
@@ -49,7 +49,7 @@ return array(
         )
     ),
     'activity' => array(
-        'uniqueLogin' => true,  // If unique login enabled application terminates all other active sessions.
+        'uniqueLogin' => false,  // If unique login enabled application terminates all other active sessions.
     )
 );
 
