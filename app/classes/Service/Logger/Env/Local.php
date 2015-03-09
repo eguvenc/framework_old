@@ -50,7 +50,7 @@ class Local implements ServiceInterface
             | Add Writers - Primary file writer should be available on local server
             |--------------------------------------------------------------------------
             */
-            $logger->addWriter('file')->filter('priority.notIn', array(LOG_INFO));
+            $logger->addWriter('file')->filter('priority.notIn', array());
             return $logger;
         };
     }

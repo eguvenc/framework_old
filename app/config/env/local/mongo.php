@@ -2,11 +2,6 @@
 
 return array(
 
-    'default' => array(
-        'connection'   => 'default',
-        'database' => 'db',
-    ),
-
     'connections' => array(
 
         'default' => array(

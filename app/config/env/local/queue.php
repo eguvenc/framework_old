@@ -3,7 +3,6 @@
 return array(
 
     'default' => array(
-        'connection' => 'default',
         'queueName' => 'default'  // default queue name
     ),
     'exchange' => array(

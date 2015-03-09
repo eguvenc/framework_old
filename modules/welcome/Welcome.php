@@ -14,6 +14,7 @@ Class Welcome extends \Controller
     public function load()
     {
         $this->c['url'];
+
         // $this->cache = $this->c['service provider cache']->get(['driver' => 'redis', 'options' => array('serializer' => 'php')]);
 
         // $test = array(
