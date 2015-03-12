@@ -14,7 +14,14 @@ Class Hello_World extends \Controller
     public function load()
     {
         $this->c['view'];
-        
+        $this->c['session'];
+
+        $this->cache = $this->c['service provider cache']->get(['driver' => 'memcached', 'connection' => 'default']);
+
+        // $this->cache->set('test', '1245');
+        // echo $this->cache->get('test');
+
+
         // echo $_SERVER['REQUEST_URI'];
 
         // $this->c['translator']->load('validator');

@@ -1,36 +1,4 @@
 <?php
-if (isset($_SERVER['REMOTE_ADDR'])) die('Access denied');
-/*
-|--------------------------------------------------------------------------
-| Remove first argument "task"
-|--------------------------------------------------------------------------
-*/
-unset($_SERVER['argv'][0]);
-/*
-|--------------------------------------------------------------------------
-| Define Cli Headers
-|--------------------------------------------------------------------------
-*/
-$_SERVER['HTTP_USER_AGENT'] = 'Cli';
-$_SERVER['HTTP_ACCEPT_CHARSET'] = 'utf-8';
-$_SERVER['REMOTE_ADDR'] = '127.0.0.1';
-$_SERVER['HTTP_HOST'] = end($_SERVER['argv']);
-/*
-|--------------------------------------------------------------------------
-| Set Default Command "Help" if command not provided
-|--------------------------------------------------------------------------
-*/
-if ( ! isset($_SERVER['argv'][1]) ) {
-	$_SERVER['argv'][1] = 'help';
-}
-/*
-|--------------------------------------------------------------------------
-| Set Command Line Arguments as Framework Segments
-|--------------------------------------------------------------------------
-| Manually set the URI path based on command line arguments.
-|
-*/ 
-$_SERVER['ORIG_PATH_INFO'] = $_SERVER['QUERY_STRING'] = $_SERVER['REQUEST_URI'] = $_SERVER['PATH_INFO'] = '/'. implode('/', $_SERVER['argv']) .'/';
 /*
 |--------------------------------------------------------------------------
 | Application Constants.
@@ -41,10 +9,15 @@ $_SERVER['ORIG_PATH_INFO'] = $_SERVER['QUERY_STRING'] = $_SERVER['REQUEST_URI'] 
 require 'constants';
 /*
 |--------------------------------------------------------------------------
+| Php execution limit
+|--------------------------------------------------------------------------
+*/
+set_time_limit(0);                   // 0 = Unlimited
+/*
+|--------------------------------------------------------------------------
 | Memory Limit
 |--------------------------------------------------------------------------
 */
-set_time_limit(0);                   // Php execution limit, 0 = Unlimited
 ini_set('memory_limit', '100000M');  // Set maximum amount of memory for Cli operations.
 /*
 |--------------------------------------------------------------------------

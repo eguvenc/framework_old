@@ -10,22 +10,34 @@
 | Pdo Service Provider
 |--------------------------------------------------------------------------
 */
-$c->register(new Obullo\ServiceProviders\PdoServiceProvider);
+$c->register('Obullo\ServiceProviders\PdoServiceProvider');
 /*
 |--------------------------------------------------------------------------
 | Database Service Provider
 |--------------------------------------------------------------------------
 */
-$c->register(new Obullo\ServiceProviders\DatabaseServiceProvider);
+$c->register('Obullo\ServiceProviders\DatabaseServiceProvider');
 /*
 |--------------------------------------------------------------------------
 | Cache Service Provider
 |--------------------------------------------------------------------------
 */
-$c->register(new Obullo\ServiceProviders\CacheServiceProvider);
+$c->register('Obullo\ServiceProviders\CacheServiceProvider');
+/*
+|--------------------------------------------------------------------------
+| Redis Service Provider
+|--------------------------------------------------------------------------
+*/
+$c->register('Obullo\ServiceProviders\RedisServiceProvider');
+/*
+|--------------------------------------------------------------------------
+| Memcached Service Provider
+|--------------------------------------------------------------------------
+*/
+$c->register('Obullo\ServiceProviders\MemcachedServiceProvider');
 /*
 |--------------------------------------------------------------------------
 | AMQP Service Provider
 |--------------------------------------------------------------------------
 */
-$c->register(new Obullo\ServiceProviders\AMQPServiceProvider);
+$c->register('Obullo\ServiceProviders\AMQPServiceProvider');

@@ -24,10 +24,10 @@ return array(
         ),
     ),
 
-    'uri' => array(                    // Auto detects the URI protocol 
-        'protocol' => 'AUTO',          // Default option is 'AUTO', Options: REQUEST_URI, QUERY_STRING, PATH_INFO Example : http://example.com/login?param=1&param2=yes
-        'permittedChars' => 'a-z 0-9~%.:_-',  // Allowed URL Characters ,this lets you specify with a regular expression which characters are permitted within your URLs.
-        'queryStrings' => true,        // Allows based URLs: example.com/directory/controller?who=me&what=something&where=here
+    'uri' => array(
+        'protocol' => 'REQUEST_URI',    // Options: REQUEST_URI, QUERY_STRING, PATH_INFO Example : http://example.com/login?param=1&param2=yes
+        'sanitizer' => true,            // Remove all characters except letters, digits and $-_.+!*'(),{}|\\^~[]`<>#%";/?:@&=.
+        'queryStrings' => true,         // Allows query string based URLs: example.com/directory/controller?who=me&what=something&where=here
         'extensions' => array('.json','.xml','.html'),   // Allows extension based URLs: example.com/api/get/users.json
     ),
 

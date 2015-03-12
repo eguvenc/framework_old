@@ -7,7 +7,7 @@ return array(
     ),
     'exchange' => array(
         'type' => 'AMQP_EX_TYPE_DIRECT', // AMQP_EX_TYPE_DIRECT, AMQP_EX_TYPE_FANOUT, AMQP_EX_TYPE_HEADER or AMQP_EX_TYPE_TOPIC,
-        'flag' => 'AMQP_DURABLE', // AMQP_PASSIVE
+        'flag' => 'AMQP_DURABLE',        // AMQP_PASSIVE
     ),
     'debug' => true,
     
