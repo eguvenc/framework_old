@@ -16,7 +16,7 @@ Class Hello_World extends \Controller
         $this->c['view'];
         $this->c['session'];
 
-        $this->cache = $this->c['service provider cache']->get(['driver' => 'memcached', 'connection' => 'default']);
+        // $this->cache = $this->c['service provider cache']->get(['driver' => 'memcached', 'connection' => 'default']);
 
         // $this->cache->set('test', '1245');
         // echo $this->cache->get('test');

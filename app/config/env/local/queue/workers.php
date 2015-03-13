@@ -14,4 +14,4 @@ return array(
 );
 
 /* End of file workers.php */
-/* Location: .app/config/env/local/workers.php */
+/* Location: .app/config/env/local/queue/workers.php */
