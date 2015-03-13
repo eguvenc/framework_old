@@ -28,7 +28,7 @@ return array(
     
     'meta' => array(
         'enabled' => true,
-        'refresh'  => 300,        // How many seconds between framework refreshing "Session" meta data Information"
+        'refresh'  => 10,        // How many seconds between framework refreshing "Session" meta data Information"
         'matchIp' => false,       // Whether to match the user's IP address when reading the session data
         'matchUserAgent' => true  // Whether to match the User Agent when reading the session data
     )

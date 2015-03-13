@@ -22,6 +22,7 @@ class Session implements ServiceInterface
             $session->registerSaveHandler();   // Handler comes from sesssion config file if we not provide handler object.
             $session->setName();
             $session->start();
+            return $session;
         };
     }
 }

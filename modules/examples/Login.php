@@ -28,13 +28,6 @@ Class Login extends \Controller
      */
     public function index()
     {
-        // $this->c['cookie']->queue('test2', 'test2222222', 300);
-        // var_dump($this->c['cookie']->get('test2'));
-
-        // $this->cache = $this->c['service provider cache']->get(['driver' => 'redis', 'options' => array('serializer' => 'php')]);
-        // $credentials = $this->cache->get('Auth:__temporary:user@example.com');
-        // print_r($credentials); exit;
-
         // $this->user->login->authenticateTemporaryIdentity();
 
         if ($this->request->isPost()) {

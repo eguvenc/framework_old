@@ -6,7 +6,7 @@ return array(
         'storage' => '\Obullo\Authentication\Storage\Redis',  // Storage can be a Cache package or custom database like Redis.
         'provider' => array(
             'driver' => 'redis',                         // If storage Not Cache provider['driver'] and storage values must be same.
-            'options' => array('serializer' => 'php')   // json, igbinary
+            'connection' => 'second'
         ),
         'block' => array(
             'permanent' => array(
