@@ -12,7 +12,7 @@ Class Debug extends Model
     public $email;
     public $username;
     public $date;
-
+    
     /**
      * Loader
      * 

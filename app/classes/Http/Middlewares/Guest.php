@@ -35,7 +35,7 @@ class Guest extends Middleware
         if ($this->user->identity->guest()) {
 
             $this->c['flash']->info('Your session has been expired.');
-            $this->c['url']->redirect($this->c['config']['auth']['login']['route']);
+            $this->c['url']->redirect($this->user->config['login']['route']);
         }
         $this->next->call();
     }

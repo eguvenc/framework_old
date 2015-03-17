@@ -28,7 +28,7 @@ Class Login extends \Controller
      */
     public function index()
     {
-        // $this->user->login->authenticateTemporaryIdentity();
+        // $this->user->identity->makePermanent();
 
         if ($this->request->isPost()) {
 
@@ -42,17 +42,18 @@ Class Login extends \Controller
 
             } else {
 
-                // $this->user->login->enableVerification();
-            
                 $result = $this->user->login->attempt(
                     array(
-                        $this->c['auth.params']['db.identifier'] => $this->validator->getValue('email'), 
-                        $this->c['auth.params']['db.password']   => $this->validator->getValue('password')
+                        $this->user->config['db.identifier'] => $this->validator->getValue('email'), 
+                        $this->user->config['db.password']   => $this->validator->getValue('password')
                     ),
                     $this->request->post('rememberMe')
                 );
 
                 if ($result->isValid()) {
+
+                    // $this->user->identity->makeTemporary();
+                    // $this->user->identity->makePermanent();
 
                     $this->flash->success('You have authenticated successfully.');
                     $this->url->redirect('examples/restricted');

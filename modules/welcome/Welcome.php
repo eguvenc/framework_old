@@ -17,7 +17,7 @@ Class Welcome extends \Controller
         $this->c['session'];
 
 
-        // $this->cache = $this->c['service provider cache']->get(['driver' => 'redis', 'options' => array('serializer' => 'none')]);
+        // $this->cache = $this->c['service provider cache']->get(['driver' => 'redis', 'connection' => 'default');
         // /$this->cache = $this->c['service provider redis']->get();
 
         // $this->cache->set('test', 'asdasdasd');

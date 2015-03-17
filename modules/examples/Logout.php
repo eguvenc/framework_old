@@ -13,7 +13,6 @@ Class Logout extends \Controller
     {
         $this->c['url'];
         $this->c['user'];
-        $this->c['config']->load('auth');
     }
 
     /**
@@ -27,6 +26,6 @@ Class Logout extends \Controller
         // $this->user->identity->destroy();
         // $this->user->identity->forgetMe();
         
-        $this->url->redirect($this->c['config']['auth']['login']['route']);
+        $this->url->redirect($this->user->config['login']['route']);
     }
 }

@@ -21,7 +21,6 @@ Class User extends Model
     public function load()
     {
         $this->c['db'];
-        $this->c->bind('model debug');
     }
 
     public function test()

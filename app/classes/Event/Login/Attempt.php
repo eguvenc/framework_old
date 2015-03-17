@@ -52,7 +52,6 @@ Class Attempt implements EventListenerInterface
             // ...
         
             // $row = $authResult->getResultRow();  // Get query results
-
         }
         return $authResult;
     }
