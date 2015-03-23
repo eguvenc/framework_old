@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-Class Hello_Layout extends \Controller
+class Hello_Layout extends \Controller
 {
     use \View\Layout\Base;
 

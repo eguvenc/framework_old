@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-Class Hello_Test extends \Controller
+class Hello_Test extends \Controller
 {
     /**
      * Loader

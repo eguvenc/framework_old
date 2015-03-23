@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-Class Hello_Dummy extends \Controller
+class Hello_Dummy extends \Controller
 {
     /**
      * Index

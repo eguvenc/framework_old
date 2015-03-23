@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-Class Hello_Layers extends \Controller
+class Hello_Layers extends \Controller
 {
     /**
      * Loader

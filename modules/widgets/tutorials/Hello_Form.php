@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-Class Hello_Form extends \Controller
+class Hello_Form extends \Controller
 {
     /**
      * Loader

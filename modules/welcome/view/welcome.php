@@ -3,14 +3,12 @@
     <head>
         <meta charset="utf-8" />
         <link href="@ASSETS/css/welcome.css" rel="stylesheet" type="text/css" />
-        <title><?php echo $title; ?></title>
+        <title><?php echo $title ?></title>
     </head>
     <body>
         <header>
             <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
-
-            <?php echo $header; ?>
-            
+            <?php echo $header ?>
         </header>
 
         <h1>Welcome to Obullo !</h1>
@@ -38,7 +36,7 @@
             <p>&nbsp;</p>
         </section>
 
-        <?php echo $footer; ?>
+        <?php echo $footer ?>
 
     </body>
 </html>

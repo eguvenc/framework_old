@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-Class Hello_Task extends \Controller
+class Hello_Task extends \Controller
 {
     /**
      * Loader

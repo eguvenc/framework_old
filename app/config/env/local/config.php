@@ -8,7 +8,7 @@
 return array(
                           
     'error' => [
-        'debug' => true,           // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
+        'debug' => false,          // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
         'reporting' => false,      // Turn on it if you want catch "unusual hidden errors", should be "Disabled"" in "PRODUCTION".
     ],
 
@@ -23,8 +23,8 @@ return array(
     ],
 
     'log' => [
-        'enabled' => true,   // Enable / Disable logging
-        'debug' => false,  // Send log data to php firelog extension its good for debugging on firefox.
+        'enabled' => true,          // Enable / Disable logging
+        'debug' => true,            // Enable / Disable html log debugger.
     ],
 
     'uri' => [
@@ -60,7 +60,7 @@ return array(
         'prefix' => '',                                 // Set a prefix if you need to avoid collisions
     ],
 
-    'proxy' => [     // Reverse Proxy IPs , If your server is behind a reverse proxy, you must whitelist the proxy IP
+    'proxy' => [          // Reverse Proxy IPs , If your server is behind a reverse proxy, you must whitelist the proxy IP
         'ips' => '',      // addresses from which the Application should trust the HTTP_X_FORWARDED_FOR
     ],                    // header in order to properly identify the visitor's IP address.
                           // Comma-delimited, e.g. '10.0.1.200,10.0.1.201'

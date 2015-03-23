@@ -2,7 +2,7 @@
 
 namespace Welcome;
 
-Class Welcome extends \Controller
+class Welcome extends \Controller
 {
     use \View\Layout\Base;
 
@@ -15,7 +15,7 @@ Class Welcome extends \Controller
     {
         $this->c['url'];
         $this->c['mailer'];
-        
+
         // var_dump($this->cache);
 
         // $this->cache->set('test', '1223');

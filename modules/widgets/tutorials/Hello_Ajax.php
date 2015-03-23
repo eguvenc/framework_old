@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-Class Hello_Ajax extends \Controller
+class Hello_Ajax extends \Controller
 {
     /**
      * Loader

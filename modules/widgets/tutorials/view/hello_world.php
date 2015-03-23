@@ -34,8 +34,8 @@ input,select{vertical-align:middle;}
 html{ background: #EDEDED; height: 100%; }
 body{background:#FFF;margin:0 auto;min-height:100%;padding:0 30px;width:520px;color:#666;font:14px/23px Arial,Verdana,sans-serif;}
 h1,h2,h3,p,ul,ol,form,section{margin:0 0 20px 0;}
-h1{color:#333;font-size:20px;}
-h2,h3{color:#333;font-size:14px;}
+h1{color:#5B5B5B;font-size:20px;}
+h2,h3{color:#5B5B5B;font-size:14px;}
 h3{margin:0;font-size:12px;font-weight:bold;}
 ul,ol{list-style-position:inside;color:#999;}
 ul{list-style-type:square;}

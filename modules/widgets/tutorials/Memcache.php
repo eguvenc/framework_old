@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-Class Memcache extends \Controller
+class Memcache extends \Controller
 {
     /**
      * Loader
