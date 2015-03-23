@@ -2,46 +2,44 @@
 
 return array(
 
-    'connections' => array(
-
-        'default' => array(         // Default connection always use serializer none
-
+    'connections' => 
+    [
+        'default' => [         // Default connection always use serializer none
             'host' => $c['env']['REDIS_HOST'],
             'port' => 6379,
-            'options' => array(
+            'options' => [
+                'persistent' => false,
                 'auth' => $c['env']['REDIS_AUTH'], // Connection password
                 'timeout' => 30,
-                'persistent' => 0,
-                'reconnection.attemps' => 100,     // For persistent connections
+                'attempt' => 100,  // For persistent connections
                 'serializer' => 'none',
                 'database' => null,
                 'prefix' => null,
-            )
-        ),
-
-        'second' => array(         // Second connection always use serializer php
-
+            ]
+        ],
+        
+        'second' => [         // Second connection always use a "serializer"
             'host' => $c['env']['REDIS_HOST'],
             'port' => 6379,
-            'options' => array(
-                'auth' => $c['env']['REDIS_AUTH'], // Connection password
+            'options' => [
+                'persistent' => false,
+                'auth' => $c['env']['REDIS_AUTH'],
                 'timeout' => 30,
-                'persistent' => 0,
-                'reconnection.attemps' => 100,     // For persistent connections
+                'attempt' => 100,
                 'serializer' => 'php',
                 'database' => null,
                 'prefix' => null,
-            )
-        ),
+            ]
+        ],
 
-    ),
+    ],
 
-    'nodes' => array(
+    'nodes' => [
         [
-            // 'host' => null,
-            // 'port' => 6379,
+            'host' => '',
+            'port' => 6379,
         ]
-    ),
+    ],
 
 );
 

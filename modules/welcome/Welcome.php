@@ -14,8 +14,12 @@ Class Welcome extends \Controller
     public function load()
     {
         $this->c['url'];
-        $this->c['session'];
+        $this->c['mailer'];
+        
+        // var_dump($this->cache);
 
+        // $this->cache->set('test', '1223');
+        // echo $this->cache->get('test');
 
         // $this->cache = $this->c['service provider cache']->get(['driver' => 'redis', 'connection' => 'default');
         // /$this->cache = $this->c['service provider redis']->get();

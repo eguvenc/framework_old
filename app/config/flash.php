@@ -1,6 +1,6 @@
 <?php
 
-return  array(
+return array(
 
     /*
     | -------------------------------------------------------------------
@@ -12,10 +12,10 @@ return  array(
     |
     */
     NOTICE_MESSAGE => '<div class="{class}">{icon}{message}</div>',
-    NOTICE_ERROR   => array('class' => 'alert alert-danger', 'icon' => '<span class="glyphicon glyphicon-remove-sign"></span> '),
-    NOTICE_SUCCESS => array('class' => 'alert alert-success', 'icon' => '<span class="glyphicon glyphicon-ok-sign"></span> '),
-    NOTICE_WARNING => array('class' => 'alert alert-warning', 'icon' => '<span class="glyphicon glyphicon-exclamation-sign"></span> '),
-    NOTICE_INFO    => array('class' => 'alert alert-info', 'icon' => '<span class="glyphicon glyphicon-info-sign"></span> '),
+    NOTICE_ERROR   => ['class' => 'alert alert-danger', 'icon' => '<span class="glyphicon glyphicon-remove-sign"></span> '],
+    NOTICE_SUCCESS => ['class' => 'alert alert-success', 'icon' => '<span class="glyphicon glyphicon-ok-sign"></span> '],
+    NOTICE_WARNING => ['class' => 'alert alert-warning', 'icon' => '<span class="glyphicon glyphicon-exclamation-sign"></span> '],
+    NOTICE_INFO    => ['class' => 'alert alert-info', 'icon' => '<span class="glyphicon glyphicon-info-sign"></span> '],
 );
 
 /* End of file flash.php */

@@ -2,72 +2,72 @@
 
 return array(
 
-    'driver' => 'cool',  // Set default driver ( "secure" or "cool" ).
+    'driver' => 'cool',  // Set default driver ( "secure" or "cool" ].
 
-    'locale' => array(
+    'locale' => [
         'charset' => 'UTF-8'
-    ),
+    ],
 
-    'characters' => array(
-        'default' => array(
+    'characters' => [
+        'default' => [
             'pool' => 'random'                  // Pools: numbers - alpha - random
-        ),
-        'pools' => array(
+        ],
+        'pools' => [
             'numbers' => '23456789',
             'alpha'   => 'ABCDEFGHJKLMNPRSTUVWXYZ',
             'random'  => '23456789ABCDEFGHJKLMNPRSTUVWXYZ'
-        ),
+        ],
         'length' => 5                           // Character length of captcha code
-    ),
+    ],
 
-    'font' => array(
+    'font' => [
         'size' => 30,                           // Font size
         'path' => '/assets/fonts',              // Set captcha font path
-    ),
+    ],
 
-    'image' => array(
-        'truecolor'  => true,                   // PHP.net recommends imagecreatetruecolor(), but it isn't always available
+    'image' => [
+        'truecolor'  => true,                   // PHP.net recommends imagecreatetruecolor(], but it isn't always available
         'type'       => 'png',                  // Set image extension
         'wave'       => true,                   // Image wave for more strong captchas.
         'path'       => '/data/temp',           // Set captcha image path
         'height'     => 80,                     // Height of captcha image, "width = auto" no need to set it.
-        'expiration' => 10,                     // Expiration time of captcha ( second )
-    ),
+        'expiration' => 10,                     // Expiration time of captcha ( second ]
+    ],
 
-    'colors' => array(                          // Color Schema
+    'colors' => [                          // Color Schema
         'red'    => '255,0,0',
         'blue'   => '0,0,255',
         'green'  => '0,102,0',
         'black'  => '0,0,0',
         'yellow' => '255,255,0',
         'cyan'   => '0,146,134',
-    ),
-    'form' => array(
+    ],
+    'form' => [
 
-        'input' => array(
-            'attributes' => array(              // Set input attributes
+        'input' => [
+            'attributes' => [              // Set input attributes
                 'type'  => 'text',
                 'name'  => 'captchaCode',
                 'class' => 'captcha',
                 'id'    => ''         
-            )
-        ),
-        'img' => array(                         // This array <img> data
-            'attributes' => array(              // Set <img attributes
+            ]
+        ],
+        'img' => [                         // This array <img> data
+            'attributes' => [              // Set <img attributes
                 'src' =>  '/widgets/captcha/create',
                 'class' => ''
-            )
-        ),
+            ]
+        ],
 
-    ),
-    'text' => array(
-        'colors' =>  array(
-            'text' => array('cyan'),            // If its more than one produce random colors
-            'noise' => array('cyan')            // If its more than one produce random noise colors
-        )
-    ),
+    ],
+    'text' => [
+        'colors' =>  [
+            'text' => ['cyan'],            // If its more than one produce random colors
+            'noise' => ['cyan']            // If its more than one produce random noise colors
+        ]
+    ],
 
-    'fonts' => array(                           // Defined Fonts
+    'fonts' => [                           // Defined Fonts
         'AlphaSmoke'             => 'AlphaSmoke.ttf',
         'Anglican'               => 'Anglican.ttf',
         'Bknuckss'               => 'Bknuckss.ttf',
@@ -116,7 +116,7 @@ return array(
         'Xtrusion'               => 'Xtrusion.ttf',
         'AutumnGifts'            => 'AutumnGifts.ttf',
         'Mcklst'                 => 'Mcklst.ttf'
-    ),
+    ],
 );
 
 /* End of file image.php */

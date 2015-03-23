@@ -2,53 +2,44 @@
 
 return array(
     
-    'cache' => array(
+    'cache' => [
         'storage' => '\Obullo\Authentication\Storage\Redis',  // Storage can be a Cache package or custom database like Redis.
-        'provider' => array(
+        'provider' => [
             'driver' => 'redis',                         // If storage Not Cache provider['driver'] and storage values must be same.
             'connection' => 'second'
-        ),
-        'block' => array(
-            'permanent' => array(
+        ],
+        'block' => [
+            'permanent' => [
                 'lifetime' => 3600,  // 1 hour is default permanent identity cache time for database queries.
-            ),
-            'temporary'  => array(
+            ],
+            'temporary'  => [
                 'lifetime' => 300    // 5 minutes is default temporary identity lifetime.
-            )
-        )
-    ),
-    'security' => array(
-        'cookie' => array(
-            'name' => '__token',    // Cookie name
-            'refresh' => 10,        // Every 30 seconds do the cookie ( token ) validation
-            'path' => '/',
-            'secure' => false,
-            'httpOnly' => false,
-            'expire' => 0,         // If value == 0 session will be expire automatically when the browser window is closed.
-            'prefix' => '',
-
-        ),
-        'passwordNeedsRehash' => array(
+            ]
+        ]
+    ],
+    'security' => [
+        'passwordNeedsRehash' => [
             'cost' => 6               // It depends of your server http://php.net/manual/en/function.password-hash.php
-        ),                            // Set 6 for best performance and less security, set between 8 - 12 for strong security if your "hardware" strong..
-    ),
-    'login' => array(
-        'route' => '/examples/login',
-        'rememberMe'  => array(
-            'cookie' => array(
+        ],                            // Set 6 for best performance and less security, set between 8 - 12 for strong security if your "hardware" strong.
+    ],
+    'login' => [
+        'route' => '/membership/login',
+        'rememberMe'  => [
+            'cookie' => [
                 'name' => '__rm',
+                'domain' => $c['env']['COOKIE_DOMAIN.NULL'],  // Set to .your-domain.com for site-wide cookies
                 'path' => '/',
                 'secure' => false,
                 'httpOnly' => false,
                 'prefix' => '',
                 'expire' => 6 * 30 * 24 * 3600,  // Default " 6 Months ".
-            )
-        ),
-    ),
-    'session' => array(
+            ]
+        ],
+    ],
+    'session' => [
         'regenerateSessionId' => true,  // Regenerate session id upon new logins.
-        'unique' => true,              // If unique session enabled application terminates all other active sessions.
-    )
+        'unique' => true,               // If unique session enabled application terminates all other active sessions.
+    ]
 );
 
 /* End of file auth.php */

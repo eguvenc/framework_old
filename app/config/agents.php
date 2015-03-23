@@ -12,9 +12,9 @@ return array(
     | and the array values are used to set the actual name of the item.
     |
     */
-    'platforms' => array(
+    'platforms' => [
 
-        'pc' => array(
+        'pc' => [
             'windows nt 6.3' => 'Windows 8.1',
             'windows nt 6.2' => 'Windows 8',
             'windows nt 6.1' => 'Windows 7',
@@ -53,10 +53,10 @@ return array(
             'openbsd'        => 'OpenBSD',
             'gnu'            => 'GNU/Linux',
             'unix'           => 'Unknown Unix OS',
-        ),
+        ],
 
         // Mobile Operating Systems
-        'mobile' => array(
+        'mobile' => [
 
             'android'    => 'Android',
             'iphone'     => 'Iphone',
@@ -70,12 +70,12 @@ return array(
             'palm'       => 'Palm',
             'series60'   => 'Symbian S60',
             'windows ce' => 'Windows CE',
-        )
-    ),
+        ]
+    ],
     // The order of this array should NOT be changed. Many browsers return
     // multiple browser types so we want to identify the sub-type first.
     // 
-    'browsers' => array(
+    'browsers' => [
 
         'Flock'             => 'Flock',
         'Chrome'            => 'Chrome',
@@ -100,9 +100,9 @@ return array(
         'amaya'             => 'Amaya',
         'IBrowse'           => 'IBrowse'
 
-    ),
+    ],
 
-    'mobiles' => array(
+    'mobiles' => [
         // legacy array, old values commented out
         'mobileexplorer' => 'Mobile Explorer',
 //                  'openwave'          => 'Open Wave',
@@ -190,10 +190,10 @@ return array(
         'up.browser'           => "Generic Mobile",
         'smartphone'           => "Generic Mobile",
         'cellphone'            => "Generic Mobile"
-    ),
+    ],
 
      // There are hundreds of bots but these are the most common.
-    'robots' =>  array(
+    'robots' =>  [
 
         'googlebot'         => 'Googlebot',
         'msnbot'            => 'MSNBot',
@@ -203,7 +203,7 @@ return array(
         'fastcrawler'       => 'FastCrawler',
         'infoseek'          => 'InfoSeek Robot 1.0',
         'lycos'             => 'Lycos'
-    )
+    ]
 );
 
 /* End of file agents.php */

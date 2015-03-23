@@ -2,15 +2,16 @@
 
 return array(
 
-    'failed' => array(
+    'failed' => 
+    [
         'enabled' => false,
         'storage' => '\Obullo\Queue\Failed\Storage\Database',
-        'provider' => array(
+        'provider' => [
             'name' => 'database',       // Set database service provider settings
             'connection' => 'failed',   // connection name
-        ),
+        ],
         'table' => 'failures',
-    ),
+    ],
 );
 
 /* End of file workers.php */

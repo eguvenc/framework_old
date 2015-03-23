@@ -2,21 +2,27 @@
 
 return array(
 
-    'connections' => array(
-
-        'default' => array(
-            'server' => '',
-            'options' => array()
-        )
-    ),
-
-    'nodes' => array(
-        [
-            'hostname' => '',
-            'port' => '11211',
-            // 'timeout' => '2.5',   // 2.5 seconds
+    'connections' => 
+    [
+        'default' => [
+            'host' => '127.0.0.1',
+            'port' => 11211,
+            'weight' => 1,
+            'options' => [
+                'persistent' => true,
+                'timeout' => 30,    // seconds
+                'attempt' => 100,
+            ]
         ]
-    )
+    ],
+
+    'nodes' => [
+        [
+            'host' => '',
+            'port' => '11211',
+            'weight' => 1
+        ]
+    ]
 
 );
 

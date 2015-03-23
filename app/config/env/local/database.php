@@ -2,9 +2,9 @@
 
 return array(
     
-    'connections' => array(
-
-        'default' => array(
+    'connections' => 
+    [
+        'default' => [
             'dsn'      => 'mysql:host=localhost;port=;dbname=test',
             'username' => $c['env']['MYSQL_USERNAME.root'],
             'password' => $c['env']['MYSQL_PASSWORD.NULL'],
@@ -12,9 +12,9 @@ return array(
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
                 PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
             ]
-        ),
+        ],
 
-        'failed' => array(
+        'failed' => [
             'dsn'      => 'mysql:host=localhost;port=;dbname=failed',
             'username' => $c['env']['MYSQL_USERNAME.root'],
             'password' => $c['env']['MYSQL_PASSWORD.NULL'],
@@ -22,8 +22,8 @@ return array(
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
                 PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
             ]
-        ),
-    )
+        ],
+    ]
 
 );
 

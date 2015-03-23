@@ -1,8 +1,8 @@
 <?php
 
-namespace Examples;
+namespace Membership;
 
-Class Restricted extends \Controller
+class Restricted extends \Controller
 {
     /**
      * Loader
@@ -66,7 +66,7 @@ Class Restricted extends \Controller
 
         echo '<section>';
 
-        echo '<a href="/examples/logout">Logout</a>';
+        echo '<a href="/membership/logout">Logout</a>';
         echo '<pre>';
         print_r($this->user->identity->getArray());
         echo '</pre>';

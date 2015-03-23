@@ -37,6 +37,12 @@ $c->register('Obullo\ServiceProviders\RedisServiceProvider');
 $c->register('Obullo\ServiceProviders\MemcachedServiceProvider');
 /*
 |--------------------------------------------------------------------------
+| Mailer Service Provider
+|--------------------------------------------------------------------------
+*/
+$c->register('Obullo\ServiceProviders\MailerServiceProvider');
+/*
+|--------------------------------------------------------------------------
 | AMQP Service Provider
 |--------------------------------------------------------------------------
 */

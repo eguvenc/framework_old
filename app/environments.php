@@ -2,20 +2,20 @@
 
 return array(
 
-    'local' => array (
+    'local' => [
         'aly',
         'someone.computer',
         'anotherone.computer',
         'ersin-desktop',
-    ),
+    ],
 
-    'test' => array (
+    'test' => [
         'localhost.test',
-    ),
+    ],
 
-    'production' => array (
+    'production' => [
         'localhost.production',
-    ),
+    ],
 );
 
 /* End of file environments.php */

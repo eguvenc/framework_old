@@ -2,32 +2,31 @@
 
 return array(
 
-    'connections' => array(
-
-        'default' => array(
+    'connections' => 
+    [
+        'default' => [
             'host' => '127.0.0.1',
             'port' => 11211,
-            'weight' => 1,  
-            'options' => array(
-                'persistent' => [
-                    'connection' => false,
-                    'pool' => 'connection_pool'     // http://php.net/manual/en/memcached.construct.php
-                ],
+            'weight' => 1,
+            'options' => [
+                'persistent' => false,
+                'pool' => 'connection_pool',   // http://php.net/manual/en/memcached.construct.php
+                'timeout' => 30,               // seconds
+                'attempt' => 100,
                 'serializer' => 'php',    // php, json, igbinary
                 'prefix' => null
-            )
-        )
-    ),
+            ]
+        ]
+    ],
 
-    'nodes' => array(
+    'nodes' => [
         [
             'host' => '',
             'port' => '11211',
-            'weight' => 1,           // The weight parameter effects the consistent hashing 
-                                     // used to determine which server to read/write keys from.
+            'weight' => 1
         ]
-    )
-
+    ]
+    
 );
 
 /* End of file memcached.php */

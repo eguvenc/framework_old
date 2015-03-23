@@ -20,7 +20,7 @@ use Obullo\Log\Handler\Email as EmailHandler;
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/queue
  */
-Class Logger implements JobInterface
+class Logger implements JobInterface
 {
     /**
      * Container
@@ -83,7 +83,7 @@ Class Logger implements JobInterface
                 $handler = new FileHandler($this->c);
                 break;
             case 'email':
-                $mailer = $this->c['service provider mailer']->factory(['driver' => 'mandrill']);
+                $mailer = $this->c['service provider mailer']->get(['driver' => 'mandrill']);
                 $mailer->from('<noreply@example.com> Server Admin');
                 $mailer->to('obulloframework@gmail.com');
                 $mailer->subject('Server Logs');

@@ -2,19 +2,18 @@
 
 return array(
 
-    'connections' => array(
-
-        'default' => array(
+    'connections' =>
+    [
+        'default' => [
             'server' => 'mongodb://'.$c['env']['MONGO_USERNAME'].':'.$c['env']['MONGO_PASSWORD'].'@'.$c['env']['MONGO_HOST'].':27017',
-            'options'  => array('connect' => true)
-        )
-        ,
-        'second' => array(
+            'options'  => ['connect' => true]
+        ],
+        'second' => [
             'server' => 'mongodb://test:123456@localhost:27017',
-            'options'  => array('connect' => true)
-        )
+            'options'  => ['connect' => true]
+        ]
+    ],
 
-    ),
 );
 
 /* End of file mongo.php */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Examples;
+namespace Membership;
 
 Class Login extends \Controller
 {
@@ -28,8 +28,6 @@ Class Login extends \Controller
      */
     public function index()
     {
-        // $this->user->identity->makePermanent();
-
         if ($this->request->isPost()) {
 
             $this->c['validator'];
@@ -56,7 +54,7 @@ Class Login extends \Controller
                     // $this->user->identity->makePermanent();
 
                     $this->flash->success('You have authenticated successfully.');
-                    $this->url->redirect('examples/restricted');
+                    $this->url->redirect('membership/restricted');
 
                 } else {
 

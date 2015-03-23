@@ -1,6 +1,6 @@
 <?php
 
-namespace Examples;
+namespace Membership;
 
 Class Logout extends \Controller
 {

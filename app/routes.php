@@ -30,8 +30,8 @@ $c['router']->group(
 
         // $this->post('widgets/tutorials/hello_world', null, null, $group);
 
-        $this->get('(?:en|tr|de|nl)/(.*)', '$1', null);
-        $this->get('(?:en|tr|de|nl)', 'welcome/index',  null);  // default controller
+        $this->get('(?:en|tr|de|nl)/(.*)', '$1');
+        $this->get('(?:en|tr|de|nl)', 'welcome/index');  // default controller
 
         // $this->get('tag/(.+)', 'tag/$1', null);
         // $this->get('post/detail/([0-9])', 'post/detail/$1', null);
@@ -49,7 +49,7 @@ $c['router']->group(
     function () {
 
         $this->defaultPage('welcome');
-        $this->attach('examples/restricted'); // all urls of this group
+        $this->attach('membership/restricted'); // all urls of this group
 
         // $this->get('tutorials/hello_world.*', 'tutorials/hello_scheme');
         // $this->attach('(.*)'); // all url
