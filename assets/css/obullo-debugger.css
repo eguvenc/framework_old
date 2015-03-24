@@ -1,8 +1,9 @@
 body
 {
-	/*font: 11px "Arial Black", Gadget, sans-serif;*/
 	font:11px 'Arial';
 	background: #ddd;
+	overflow-y:auto;
+	overflow-x:hidden;
 }
 .clearfix
 {
@@ -12,11 +13,10 @@ body
 {
 	width:100%;
 	background: #fff;
-	position: fixed;
-	bottom:0;
-	/*overflow-y:scroll;*/
 	display: block;
-	/*height:300px;*/
+	height:100%;
+	overflow-y:auto;
+	overflow-x:hidden;
 }
 .obulloDebugger-wrapper > .obulloDebugger-nav
 {
@@ -25,7 +25,9 @@ body
 	border:1px solid #ccc;
 	display: block;
 	position: fixed;
+	top:0;
 	width:100%;
+	z-index:99;
 }
 .obulloDebugger-wrapper > .obulloDebugger-nav > ul
 {
@@ -89,14 +91,18 @@ body
 }
 .obulloDebugger-wrapper > .obulloDebugger-container
 {
-	padding:5px;
-	margin:5px;
-	margin-top:25px;
+	padding:12px;
 	color:#5A5A5F;
-	overflow-y:scroll;
-	display: block;
-	height:250px;
-	/*background: #eff2f1;*/
+	height:calc(100% - 45px);
+	height:-webkit-calc(100% - 45px);
+	height:-moz-calc(100% - 45px);
+	height:-o-calc(100% - 45px);
+	height:-ms-calc(100% - 45px);
+	position:absolute;
+	top:20px;
+	left:0;
+	width:100%;
+	background:#fff;
 }
 .obulloDebugger-wrapper > .obulloDebugger-nav > ul > li.favicon
 {
@@ -109,13 +115,10 @@ body
 }
 .obulloDebugger-wrapper > .obulloDebugger-container >  p
 {
-	/*margin:1px 0;*/
-	padding:4px 0px;
-	background:transparent;
-	/*border:1px dotted rgba(221, 221, 221, 0.75);*/
+	padding:1px 0;
+	background:white;
 	cursor:pointer;
 	position: relative;
-
 }
 .obulloDebugger-wrapper > .obulloDebugger-container > p:hover
 {
