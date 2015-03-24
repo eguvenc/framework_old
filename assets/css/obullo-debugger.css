@@ -1,3 +1,6 @@
+html,body {
+    height:100%;
+}
 body
 {
 	font:11px 'Arial';
@@ -17,6 +20,7 @@ body
 	height:100%;
 	overflow-y:auto;
 	overflow-x:hidden;
+	position:relative;
 }
 .obulloDebugger-wrapper > .obulloDebugger-nav
 {
@@ -28,6 +32,7 @@ body
 	top:0;
 	width:100%;
 	z-index:99;
+	border-width: 0 1px 1px 1px;
 }
 .obulloDebugger-wrapper > .obulloDebugger-nav > ul
 {
@@ -92,17 +97,15 @@ body
 .obulloDebugger-wrapper > .obulloDebugger-container
 {
 	padding:12px;
+	margin:25px 5px 2px 5px;
 	color:#5A5A5F;
-	height:calc(100% - 45px);
-	height:-webkit-calc(100% - 45px);
-	height:-moz-calc(100% - 45px);
-	height:-o-calc(100% - 45px);
-	height:-ms-calc(100% - 45px);
-	position:absolute;
-	top:20px;
-	left:0;
-	width:100%;
-	background:#fff;
+	height:calc(100% - 51px);
+	height:-webkit-calc(100% - 51px);
+	height:-moz-calc(100% - 51px);
+	height:-o-calc(100% - 51px);
+	height:-ms-calc(100% - 51px);
+	overflow-y:auto;
+	overflow-x:hidden;
 }
 .obulloDebugger-wrapper > .obulloDebugger-nav > ul > li.favicon
 {
@@ -113,23 +116,22 @@ body
 	margin-top:3px;
 	display: block;
 }
-.obulloDebugger-wrapper > .obulloDebugger-container >  p
+.obulloDebugger-wrapper > .obulloDebugger-container  p
 {
 	padding:1px 0;
 	background:white;
 	cursor:pointer;
 	position: relative;
 }
-.obulloDebugger-wrapper > .obulloDebugger-container > p:hover
+.obulloDebugger-wrapper > .obulloDebugger-container  p:hover
 {
-	/*background:rgba(51, 51, 51, 0.15);*/
-	background: #e53528;
-	color:#fff;
+	background:rgb(234, 234, 234);
+	color:#000;
 
 }
 .obulloDebugger-wrapper .obulloDebugger-container p:hover  span.date
 {
-	color:#fff;
+	color:#000;
 }
 .obulloDebugger-wrapper .obulloDebugger-container  p  span.date
 {
@@ -149,7 +151,7 @@ body
 {
 	padding-left:3px;
 }
-.obulloDebugger-wrapper > .obulloDebugger-container.hiddenContainer
+.hiddenContainer
 {
 	display: none;
 }

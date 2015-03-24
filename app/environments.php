@@ -7,6 +7,7 @@ return array(
         'someone.computer',
         'anotherone.computer',
         'ersin-desktop',
+        'erkan-CASPER-NIRVANA',
     ],
 
     'test' => [
