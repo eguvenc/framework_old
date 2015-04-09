@@ -2,7 +2,7 @@
 
 namespace Tasks;
 
-use Obullo\Tasks\LogController;
+use Obullo\Task\LogController;
 
 /**
  * Log command
@@ -10,4 +10,4 @@ use Obullo\Tasks\LogController;
 Class Log extends LogController{}
 
 /* End of file log.php */
-/* Location: .app/tasks/controller/log.php */
+/* Location: ..modules/tasks/Log.php */

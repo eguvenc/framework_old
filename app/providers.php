@@ -7,6 +7,12 @@
 */
 /*
 |--------------------------------------------------------------------------
+| Logger Service Provider
+|--------------------------------------------------------------------------
+*/
+$c->register('Obullo\ServiceProviders\LoggerServiceProvider');
+/*
+|--------------------------------------------------------------------------
 | Pdo Service Provider
 |--------------------------------------------------------------------------
 */
@@ -47,3 +53,9 @@ $c->register('Obullo\ServiceProviders\MailerServiceProvider');
 |--------------------------------------------------------------------------
 */
 $c->register('Obullo\ServiceProviders\AMQPServiceProvider');
+/*
+|--------------------------------------------------------------------------
+| Query Builder Service Provider
+|--------------------------------------------------------------------------
+*/
+$c->register('Obullo\ServiceProviders\QueryServiceProvider');

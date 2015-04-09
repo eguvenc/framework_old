@@ -4,10 +4,9 @@ return array(
 
     'failed' => 
     [
-        'enabled' => false,
+        'enabled' => true,
         'storage' => '\Obullo\Queue\Failed\Storage\Database',
         'provider' => [
-            'name' => 'database',       // Set database service provider settings
             'connection' => 'failed',   // connection name
         ],
         'table' => 'failures',

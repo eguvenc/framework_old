@@ -38,15 +38,13 @@ class Hello_Ajax extends \Controller
             echo $this->c['response']->json($this->form->outputArray());
             return;
         }
-        $this->c['url'];
 
+        $this->c['url'];
         $this->c['view']->load(
             'hello_ajax',
-            function () {
-                $this->assign('name', 'Obullo');
-                $this->assign('title', 'Hello Ajax World !');
-                $this->layout('welcome');
-            }
+            [
+                'title' => 'Hello Ajax World !',
+            ]
         );
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Tasks;
 
-use Obullo\Queue\Tasks\WorkerController;
+use Obullo\Queue\Task\WorkerController;
 
 /**
  * Worker controller
@@ -10,4 +10,4 @@ use Obullo\Queue\Tasks\WorkerController;
 class Worker extends WorkerController {}
 
 /* End of file worker.php */
-/* Location: .app/tasks/controller/worker.php */
+/* Location: .modules/tasks/Worker.php */

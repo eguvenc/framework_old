@@ -2,7 +2,7 @@
 
 return array(
 
-    'saveHandler' => '\\Obullo\Session\SaveHandler\Cache',
+    'saveHandler' => '\Obullo\Session\SaveHandler\Cache',
     
     'cache' => [
         'provider' => [

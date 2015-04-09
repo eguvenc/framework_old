@@ -23,7 +23,6 @@ return array(
         ],                            // Set 6 for best performance and less security, set between 8 - 12 for strong security if your "hardware" strong.
     ],
     'login' => [
-        'route' => '/membership/login',
         'rememberMe'  => [
             'cookie' => [
                 'name' => '__rm',

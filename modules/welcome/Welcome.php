@@ -14,9 +14,6 @@ class Welcome extends \Controller
     public function load()
     {
         $this->c['url'];
-        $this->c['mailer'];
-
-        // var_dump($this->cache);
 
         // $this->cache->set('test', '1223');
         // echo $this->cache->get('test');

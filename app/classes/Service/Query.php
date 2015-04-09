@@ -4,7 +4,6 @@ namespace Service;
 
 use Obullo\Container\Container;
 use Obullo\ServiceProviders\ServiceInterface;
-use Obullo\Database\Pdo\QueryBuilder;
 
 class Query implements ServiceInterface
 {
@@ -18,7 +17,7 @@ class Query implements ServiceInterface
     public function register(Container $c)
     {
         $c['query'] = function () use ($c) {
-            return new QueryBuilder($c, ['connection' => 'default']);
+            return $c['service provider query']->get(['connection' => 'default']);
         };
     }
 }

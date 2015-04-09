@@ -2,7 +2,7 @@
 
 namespace Tasks;
 
-use Obullo\Tasks\DomainController;
+use Obullo\Task\DomainController;
 
 /**
  * Domain controller
@@ -10,4 +10,4 @@ use Obullo\Tasks\DomainController;
 Class Domain extends DomainController {}
 
 /* End of file domain.php */
-/* Location: .app/tasks/controller/domain.php */
+/* Location: ..modules/tasks/Domain.php */

@@ -9,8 +9,7 @@
 return array(
                     
     'error' => [
-        'debug' => true,       // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
-        'reporting' => false,   // Turn on it if you want catch "unusual hidden errors", should be "Disabled"" in "PRODUCTION".
+        'debug' => false,       // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
     ],
 
     'log' =>   [

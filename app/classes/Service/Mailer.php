@@ -19,6 +19,7 @@ class Mailer implements ServiceInterface
     public function register(Container $c)
     {
         $c['mailer'] = function () use ($c) {
+
             $mailer = $c['service provider mailer']->get(['driver' => 'smtp', 'options' => array('queue' => false)]);
             $mailer->from('Admin <admin@example.com>');
             return $mailer;

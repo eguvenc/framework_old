@@ -26,6 +26,6 @@ Class Logout extends \Controller
         // $this->user->identity->destroy();
         // $this->user->identity->forgetMe();
         
-        $this->url->redirect($this->user->config['login']['route']);
+        $this->url->redirect($this->user->config['url.login']);
     }
 }

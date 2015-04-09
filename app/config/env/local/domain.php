@@ -2,18 +2,18 @@
 
 return array(
 
-    'root' => [
+    'root' => array(
         'maintenance' => 'up',
         'regex' => null,
-    ],
-    'mydomain.com' => [
+    ),
+    'mydomain.com' => array(
         'maintenance' => 'up',
         'regex' => '^framework$',
-    ],
-    'sub.domain.com' => [
+    ),
+    'sub.domain.com' => array(
         'maintenance' => 'up',
         'regex' => '^sub.domain.com$',
-    ],
+    ),
 );
 
 /* End of file */

@@ -48,8 +48,8 @@ header{padding: 30px 0;text-align:center;}
     </head>
 
     <body>
-        <header>
-            <a href="/"><img src="@ASSETS/images/logo.png" alt="logo" border="0" /></a>
+        <header> 
+            <a href="/"><img src="/assets/images/logo.png" alt="logo" border="0" /></a>
         </header>
 
         <h1>Hello World</h1>
@@ -57,6 +57,11 @@ header{padding: 30px 0;text-align:center;}
         <section>
             <p>This is my first page.</p>
         </section>
+
+        <a href="javascript:void(0);">test</a>
+
+        <li><?php echo $this->c['url']->anchor('/widgets/tutorials/hello_layout', 'Hello Layout') ?></li>
         
+
     </body>
 </html>

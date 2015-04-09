@@ -59,7 +59,7 @@ pre span.string {color: #cc0000;}
 a{color: #E53528;}
 header{padding: 30px 0;text-align:center;}
 
-._inputError { color: #069586; }
+._inputError { color: #E53528; }
 .notification {max-width: 800px;border:1px solid;margin-left:0px;margin-bottom:10px;padding:15px;text-align:center;font-weight:bold;font-size: 16px;}
 .notification h1 { margin-bottom: 5px; }
 .notification.success {border-color: #069586;color: #069586;line-height: 24px;background-position:0px 1px}

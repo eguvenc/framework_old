@@ -12,7 +12,7 @@ class Hello_Task extends \Controller
     public function load()
     {
         $this->c['url'];
-        $this->c['cli/task as task'];
+        $this->c['task'];
     }
 
     /**

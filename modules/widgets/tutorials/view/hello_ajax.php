@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link href="@ASSETS/css/welcome.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $this->url->asset('css/welcome.css') ?>" rel="stylesheet" type="text/css" />
         <title>Hello Ajax</title>
 
 <script type="text/javascript">
@@ -15,16 +15,6 @@ var ajax = {
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); // code for IE6, IE5
         }
         xmlhttp.onreadystatechange=function(){
-        /**
-         * onreadystatechange will fire five times as 
-         * your specified page is requested.
-         * 
-         *  0: uninitialized
-         *  1: loading
-         *  2: loaded
-         *  3: interactive
-         *  4: complete
-         */
             if (xmlhttp.readyState==4 && xmlhttp.status==200){
                 if( typeof closure === 'function'){
                     closure(xmlhttp.responseText);
@@ -130,7 +120,7 @@ function submitAjax(formId){
     </head>
     <body>
         <header>
-            <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
+            <?php echo $this->url->anchor('/', '<img src="'.$this->url->asset('images/logo.png').'">') ?>
         </header>
         
         <h1>Hello Ajax</h1>

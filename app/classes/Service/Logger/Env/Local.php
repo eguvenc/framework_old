@@ -3,7 +3,6 @@
 namespace Service\Logger\Env;
 
 use Obullo\Container\Container;
-use Obullo\Log\LoggerServiceProvider;
 use Obullo\ServiceProviders\ServiceInterface;
 
 /**
@@ -29,8 +28,7 @@ class Local implements ServiceInterface
     {
         $c['logger'] = function () use ($c) {
 
-            $provider = new LoggerServiceProvider($c);
-            $logger = $provider->get(array('driver' => 'Logger'));  // or QueueLogger
+            $logger = $c['service provider logger']->get(['queue' => false]);
             /*
             |--------------------------------------------------------------------------
             | Register Filters
@@ -43,14 +41,14 @@ class Local implements ServiceInterface
             |--------------------------------------------------------------------------
             */
             $logger->registerHandler(5, 'file');
-            $logger->registerHandler(4, 'mongo')->filter('priority.notIn', array(LOG_DEBUG));
-            $logger->registerHandler(3, 'email')->filter('priority.notIn', array(LOG_DEBUG));
+            $logger->registerHandler(4, 'mongo')->filter('priority@notIn', array(LOG_DEBUG));
+            $logger->registerHandler(3, 'email')->filter('priority@notIn', array(LOG_DEBUG));
             /*
             |--------------------------------------------------------------------------
             | Add Writers - Primary file writer should be available on local server
             |--------------------------------------------------------------------------
             */
-            $logger->addWriter('file')->filter('priority.notIn', array());
+            $logger->addWriter('file')->filter('priority@notIn', array());
             return $logger;
         };
     }

@@ -2,7 +2,7 @@
 
 namespace Tasks;
 
-use Obullo\Tasks\HelpController;
+use Obullo\Task\HelpController;
 
 /**
  * Help controller
@@ -10,4 +10,4 @@ use Obullo\Tasks\HelpController;
 Class Help extends HelpController {}
 
 /* End of file help.php */
-/* Location: .app/tasks/controller/help.php */
+/* Location: ..modules/tasks/Help.php */

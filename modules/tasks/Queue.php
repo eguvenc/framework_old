@@ -2,7 +2,7 @@
 
 namespace Tasks;
 
-use Obullo\Queue\Tasks\QueueController;
+use Obullo\Queue\Task\QueueController;
 
 /**
  * Queue controller
@@ -10,4 +10,4 @@ use Obullo\Queue\Tasks\QueueController;
 Class Queue extends QueueController {}
 
 /* End of file queue.php */
-/* Location: .app/tasks/controller/queue.php */
+/* Location: .modules/tasks/Queue.php */

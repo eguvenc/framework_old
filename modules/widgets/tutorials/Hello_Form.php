@@ -56,7 +56,6 @@ class Hello_Form extends \Controller
                 // $this->url->redirect('tutorials/hello_form/index'); // Redirect to user same page using header refresh.
 
             } else {
-
                 $this->form->error('Form validation failed !');
             }
             $this->form->setErrors($this->validator->getErrors());
