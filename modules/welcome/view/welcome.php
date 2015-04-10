@@ -7,6 +7,7 @@
         <title><?php echo $title ?></title>
     </head>
     <body>
+
         <header>
             <?php echo $this->url->anchor('/', '<img src="'.$this->url->asset('images/logo.png').'">') ?>
             <?php echo $header ?>
@@ -38,6 +39,5 @@
         </section>
 
         <?php echo $footer ?>
-
     </body>
 </html>

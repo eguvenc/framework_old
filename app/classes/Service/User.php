@@ -4,7 +4,8 @@ namespace Service;
 
 use Obullo\Container\Container;
 use Obullo\ServiceProviders\ServiceInterface;
-    
+use Obullo\Authentication\AuthServiceProvider;
+
 class User implements ServiceInterface
 {
     /**
@@ -18,21 +19,22 @@ class User implements ServiceInterface
     {
         $c['user'] = function () use ($c) {
 
-            $user = $c['service provider auth']->factory(
+            $user = new AuthServiceProvider(
+                $c,
                 [
-                    'url.login'        => '/membership/login',
-                    'cache.key'        => 'Auth',
+                    'cache.key'        => 'Auth:Site',
                     'db.adapter'       => '\Obullo\Authentication\Adapter\Database', // Adapter
                     'db.model'         => '\Obullo\Authentication\Model\User', // User model, you can replace it with your own.
                     'db.provider'      => 'database',
                     'db.connection'    => 'default',
                     'db.tablename'     => 'users', // Database column settings
-                    'db.id'            => 'id',
-                    'db.identifier'    => 'username',
-                    'db.password'      => 'password',
+                    'db.id'            => 'user_id',
+                    'db.identifier'    => 'user_username',
+                    'db.password'      => 'user_password',
                     'db.rememberToken' => 'remember_token',
                 ]
             );
+
             return $user;
         };
     }

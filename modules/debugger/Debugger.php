@@ -2,6 +2,8 @@
 
 namespace Debugger;
 
+use Obullo\Application\Debugger\DebugOutput;
+
 class Debugger extends \Controller
 {
     /**
@@ -34,6 +36,7 @@ class Debugger extends \Controller
         echo '<!DOCTYPE html>
         <html>
         <head>
+        <meta charset="utf-8" />
         <script type="text/javascript">
 
             var ajax = {
@@ -202,13 +205,24 @@ class Debugger extends \Controller
      * @return void
      */
     public function off()
-    {       
+    {   
         $key = (int)sprintf("%u", crc32('__obulloDebugger'));
         $id = @shmop_open($key, "a", 0644, 0); 
         if ($id) {
             shmop_delete($id);
             shmop_close($id);
         }
+        $redirectUrl = preg_replace('#\/debugger\/off$#', '', $this->c['uri']->getRequestUri());
+        $redirectUrl = '/'.trim($redirectUrl, '/');
+        
+        echo '<html>';
+        echo '<head>';
+        echo '<script type="text/javascript">';
+        echo 'window.top.location.href = "'.$redirectUrl.'";';
+        echo '</script>';
+        echo '</head>';
+        echo '<body></body>';
+        echo '</html>';
     }
 
     /**
@@ -235,7 +249,6 @@ class Debugger extends \Controller
             die('Debugger couldn\'t write the entire length of data to memory.');
         }
         shmop_close($id);
-
     }
 
     /**
@@ -245,8 +258,8 @@ class Debugger extends \Controller
      */
     public function console()
     {
-        $debugger = new \Obullo\Application\Debugger\Output($this->c);
-        echo $debugger->printDebugger();
+        $debugger = new DebugOutput($this->c);
+        echo $debugger->printHtml();
     }
 
     /**
@@ -256,9 +269,9 @@ class Debugger extends \Controller
      */
     public function clear()
     {
-        $debugger = new \Obullo\Application\Debugger\Output($this->c);
+        $debugger = new DebugOutput($this->c);
         $debugger->clear();
-        echo $debugger->printDebugger();
+        echo $debugger->printHtml();
     }
 
 }
