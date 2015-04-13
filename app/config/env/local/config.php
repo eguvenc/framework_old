@@ -29,8 +29,8 @@ return array(
     ],
 
     'debugger' => [
-        'reader' => 'file',
-        'socket' => 'ws://127.0.0.1:9000'
+        'enabled' => true,
+        'socket'  => 'ws://127.0.0.1:9000'
     ],
 
     'uri' => [

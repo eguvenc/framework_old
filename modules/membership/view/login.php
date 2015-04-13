@@ -2,13 +2,13 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link href="@ASSETS/css/welcome.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $this->url->asset('css/welcome.css') ?>" rel="stylesheet" type="text/css" />
         <title>Login</title>
     </head>
 
     <body>
         <header>
-            <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
+            <?php echo $this->url->anchor('/', '<img src="'.$this->url->asset('images/logo.png').'">') ?>
         </header>
 
         <?php echo $this->flash->output(); ?>
@@ -27,7 +27,7 @@
         }?></section>
 
         <section>
-            <form action="/examples/login" method="POST">
+            <form action="/membership/login" method="POST">
                 <table width="100%">
                     <tr>
                         <td style="width:20%;">Email</td>

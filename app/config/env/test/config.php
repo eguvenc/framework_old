@@ -14,7 +14,6 @@ return array(
 
     'log' =>   [
         'enabled' => true,
-        'debug'  => false,
     ],
 
     'url' => [

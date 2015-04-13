@@ -22,15 +22,15 @@ class User implements ServiceInterface
             $user = new AuthServiceProvider(
                 $c,
                 [
-                    'cache.key'        => 'Auth:Site',
+                    'cache.key'        => 'Auth',
                     'db.adapter'       => '\Obullo\Authentication\Adapter\Database', // Adapter
                     'db.model'         => '\Obullo\Authentication\Model\User', // User model, you can replace it with your own.
                     'db.provider'      => 'database',
                     'db.connection'    => 'default',
                     'db.tablename'     => 'users', // Database column settings
-                    'db.id'            => 'user_id',
-                    'db.identifier'    => 'user_username',
-                    'db.password'      => 'user_password',
+                    'db.id'            => 'id',
+                    'db.identifier'    => 'username',
+                    'db.password'      => 'password',
                     'db.rememberToken' => 'remember_token',
                 ]
             );

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link href="@ASSETS/css/welcome.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $this->url->asset('css/welcome.css') ?>" rel="stylesheet" type="text/css" />
         <?php $this->captcha->printJs(); ?>
 
         <title>Captcha</title>
@@ -10,7 +10,7 @@
 
     <body>
         <header>
-            <?php echo $this->url->anchor('/', '<img src="@ASSETS/images/logo.png">') ?>
+            <?php echo $this->url->anchor('/', '<img src="'.$this->url->asset('images/logo.png').'">') ?>
         </header>
 
         <section>

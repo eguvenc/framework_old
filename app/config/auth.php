@@ -37,7 +37,7 @@ return array(
     ],
     'session' => [
         'regenerateSessionId' => true,  // Regenerate session id upon new logins.
-        'unique' => true,               // If unique session enabled application terminates all other active sessions.
+        'unique' => false,               // If unique session enabled application terminates all other active sessions.
     ]
 );
 
