@@ -5,7 +5,7 @@ return array(
     'cache' => [
         'storage' => '\Obullo\Authentication\Storage\Redis',  // Storage can be a Cache package or custom database like Redis.
         'provider' => [
-            'driver' => 'redis',                         // If storage Not Cache provider['driver'] and storage values must be same.
+            'driver' => 'redis',                              // If storage Not Cache provider['driver'] and storage values must be same.
             'connection' => 'second'
         ],
         'block' => [

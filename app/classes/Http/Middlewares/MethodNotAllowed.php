@@ -4,7 +4,7 @@ namespace Http\Middlewares;
 
 use Obullo\Container\Container;
 use Obullo\Application\Middleware;
-use Obullo\Application\Addons\MethodNotAllowedTrait;
+use Obullo\Application\Middlewares\MethodNotAllowedTrait;
 
 class MethodNotAllowed extends Middleware
 {

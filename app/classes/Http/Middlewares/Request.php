@@ -3,8 +3,8 @@
 namespace Http\Middlewares;
 
 use Obullo\Application\Middleware;
-use Obullo\Application\Addons\BenchmarkTrait;
-use Obullo\Application\Addons\SanitizeSuperGlobalsTrait;
+use Obullo\Application\Middlewares\BenchmarkTrait;
+use Obullo\Application\Middlewares\SanitizeSuperGlobalsTrait;
 
 class Request extends Middleware
 {
@@ -35,6 +35,5 @@ class Request extends Middleware
 
         $this->benchmarkEnd();
     }
-
 
 }

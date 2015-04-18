@@ -8,20 +8,12 @@ use Obullo\Application\Middleware;
 class Csrf extends Middleware
 {
     /**
-     * Csrf
-     * 
-     * @var object
-     */
-    protected $csrf;
-
-    /**
      * Loader
      * 
      * @return void
      */
     public function load()
     {
-        $this->csrf = $this->c['security/csrf'];
         $this->next->load();
     }
 
@@ -32,9 +24,16 @@ class Csrf extends Middleware
      */
     public function call()
     {
-        $this->csrf->init();
-        $this->csrf->verify(); // Csrf protection check
-        
+        echo 'CSRF';
+        // if ( ! $this->c['csrf']->verify() AND ! $this->c['request']->isAjax()) {
+
+        //     $this->c['response']->showError(
+        //         'The action you have requested is not allowed.', 
+        //         401, 
+        //         'Access Denied'
+        //     );
+        // }
         $this->next->call();
     }
+    
 }

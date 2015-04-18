@@ -72,4 +72,4 @@ $c['router'] = function () use ($c) {
 
 
 /* End of file components.php */
-/* Location: .components.php */
+/* Location: .app/components.php */

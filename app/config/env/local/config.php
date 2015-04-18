@@ -8,8 +8,8 @@
 return array(
                           
     'error' => [
-        'debug' => true,           // Friendly debugging feature should be "Disabled"" in "PRODUCTION" environment.
-    ],                             // If log enabled all errors go to log data otherwise framework use php native errors.
+        'debug' => true,            // Friendly debugging feature disable it in "production" environment.
+    ],                              // If log enabled all errors go to log data otherwise framework use php native errors.
 
     'url' => [
         'webhost'  => 'framework',  // Your web host name default "localhost" should be "example.com" in production config.
@@ -29,7 +29,7 @@ return array(
     ],
 
     'debugger' => [
-        'enabled' => true,
+        'enabled' => false,
         'socket'  => 'ws://127.0.0.1:9000'
     ],
 

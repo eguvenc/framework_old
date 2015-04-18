@@ -23,6 +23,7 @@ class User implements ServiceInterface
                 $c,
                 [
                     'cache.key'        => 'Auth',
+                    'url.login'        => '/membership/login',
                     'db.adapter'       => '\Obullo\Authentication\Adapter\Database', // Adapter
                     'db.model'         => '\Obullo\Authentication\Model\User', // User model, you can replace it with your own.
                     'db.provider'      => 'database',
@@ -34,7 +35,6 @@ class User implements ServiceInterface
                     'db.rememberToken' => 'remember_token',
                 ]
             );
-
             return $user;
         };
     }

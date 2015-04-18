@@ -54,7 +54,7 @@ return array(
         ],
         'img' => [                         // This array <img> data
             'attributes' => [              // Set <img attributes
-                'src' =>  '/widgets/captcha/create',
+                'src' =>  '/captcha/create',
                 'class' => ''
             ]
         ],

@@ -2,7 +2,7 @@
 
 namespace Membership;
 
-Class Login extends \Controller
+class Login extends \Controller
 {
     /**
      * Loader

@@ -9,7 +9,7 @@ use Obullo\Task\ModuleController;
  *
  * Add / remove new modules to modules folder
  */
-Class Module extends ModuleController{}
+class Module extends ModuleController {}
 
 /* End of file module.php */
 /* Location: .modules/tasks/Module.php */

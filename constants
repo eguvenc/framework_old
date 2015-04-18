@@ -1,12 +1,10 @@
 <?php
 /*
-|-------------------------------------------------------------------
-| APPLICATION CONSTANTS
-|-------------------------------------------------------------------
-| This file specifies which APP constants should be loaded 
-| by default.
+|---------------------------------------------------------------
+| FRAMEWORK VERSION
+|---------------------------------------------------------------
 */
-define('FRAMEWORK', 'o2');
+define('OBULLO_VERSION', 'o2');
 /*
 |---------------------------------------------------------------
 | ESSENTIAL CONSTANTS
@@ -24,23 +22,14 @@ define('FCPATH', __FILE__);
 define('PHP_PATH', '/usr/bin/php'); 
 define('FPATH', dirname(__FILE__));
 define('ROOT',  realpath(dirname(__FILE__)) . DS);
-define('OBULLO', ROOT . FRAMEWORK . DS);
+define('OBULLO', ROOT . OBULLO_VERSION . DS);
 /*
 |---------------------------------------------------------------
 | OBULLO CONSTANTS
 |---------------------------------------------------------------
 */
 require OBULLO .'Application'. DS .'Constants.php';
-/*
-|---------------------------------------------------------------
-| NOTIFICATIONS
-|---------------------------------------------------------------
-*/
-define('NOTICE_MESSAGE', 'message'); // Form class message key
-define('NOTICE_ERROR', 0);
-define('NOTICE_SUCCESS', 1);
-define('NOTICE_WARNING', 2);
-define('NOTICE_INFO', 3);
+
 
 /* End of file constants */
 /* Location: .constants */

@@ -32,10 +32,12 @@ class Hello_Captcha extends \Controller
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('captcha_answer', 'Captcha', 'required|callback_captcha');
 
+            $answer = $this->request->post('captcha_answer');
+
             $this->validator->func(
                 'callback_captcha',
                 function () {
-                    if ($this->c['captcha']->check($this->request->post('captcha_answer')) == false) {
+                    if ($this->c['captcha']->check($answer) == false) {
                         $this->setMessage('callback_captcha', 'Wrong Captcha Code');
                         return false;
                     }
@@ -49,10 +51,9 @@ class Hello_Captcha extends \Controller
 
         $this->view->load(
             'hello_captcha',
-            function () {
-                $this->assign('title', 'Hello Captcha !');
-                $this->layout('welcome');
-            }
+            [
+                'title' => 'Hello Captcha !'
+            ]
         );
     }
 }

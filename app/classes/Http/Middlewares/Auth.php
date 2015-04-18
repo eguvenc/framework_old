@@ -4,7 +4,7 @@ namespace Http\Middlewares;
 
 use Obullo\Container\Container;
 use Obullo\Application\Middleware;
-use Obullo\Authentication\Addons\UniqueLoginTrait;
+use Obullo\Authentication\Middlewares\UniqueLoginTrait;
 
 class Auth extends Middleware
 {
@@ -43,4 +43,5 @@ class Auth extends Middleware
         }
         $this->next->call();
     }
+    
 }

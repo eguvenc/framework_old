@@ -39,4 +39,5 @@ class Guest extends Middleware
         }
         $this->next->call();
     }
+    
 }

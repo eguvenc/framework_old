@@ -12,10 +12,9 @@ Trait Base
     public function extend()
     {
         $this->c['view'];
-        $this->c['layer'];
     
-        $this->view->assign('header', $this->layer->get('views/header'));
-        $this->view->assign('footer', $this->layer->get('views/footer'));
+        $this->view->assign('header', $this->c['layer']->get('views/header'));
+        $this->view->assign('footer', $this->c['layer']->get('views/footer'));
     }
 }
 

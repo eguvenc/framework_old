@@ -22,34 +22,30 @@ $c['router']->defaultPage('welcome');
 
 // $c['router']->attach('(.)', array('maintenance'));
 
+
 $c['router']->group(
-    ['name' => 'GenericUsers','domain' => $c['config']['domain']['mydomain.com'], 'middleware' => array('Maintenance')],
-    function () {
+    [
+        'name' => 'GenericUsers', 
+        'domain' => $c['config']['domain']['mydomain.com'],
+        'middleware' => array('Csrf')
+    ],
+    function () use ($c) {
 
         $this->defaultPage('welcome');
 
-        // $this->post('widgets/tutorials/hello_world', null, null, $group);
-
         $this->get('(?:en|tr|de|nl)/(.*)', '$1');
-        $this->get('(?:en|tr|de|nl)', 'welcome/index');  // default controller
+        $this->get('(?:en|tr|de|nl)', 'welcome');  // default controller
 
-        // $this->get('tag/(.+)', 'tag/$1', null);
-        // $this->get('post/detail/([0-9])', 'post/detail/$1', null);
-        // $this->get('post/preview/([0-9])', 'post/preview/$1', null);
-        // $this->post('post/update/([0-9])', 'post/update/$1', null);
-        // $this->post('comment/delete/([0-9])', 'comment/delete/$1', null);
-        // $this->post('comment/update/([0-9])/(.+)', 'comment/update/$1', null);
-
-        $this->attach('(.*)'); // all urls of this group
+        $this->attach('.*'); // all urls of this group
     }
 );
 
 $c['router']->group(
-    ['name' => 'AuthorizedUsers','domain' => $c['config']['domain']['mydomain.com'], 'middleware' => array('Auth','Guest')],
+    ['name' => 'AuthorizedUsers', 'domain' => $c['config']['domain']['mydomain.com'], 'middleware' => array()],
     function () {
 
         $this->defaultPage('welcome');
-        $this->attach('membership/restricted'); // all urls of this group
+        $this->attach('membership/restricted');
 
         // $this->get('tutorials/hello_world.*', 'tutorials/hello_scheme');
         // $this->attach('(.*)'); // all url
@@ -62,13 +58,6 @@ $c['router']->group(
 
 // Example Api
 
-// $c['router']->group(
-//     array('domain' => 'api.demo_blog'), 
-//     function ($group) {
-//         $this->route('get', 'user/create', 'api/user/create', null, $group);
-//         $this->route('get', 'user/delete/([0-9])', 'api/user/delete/$1', null, $group);
-//     }
-// );
 
 // $c['router']->match(array('get', 'post'), 'welcome', 'welcome/test');
 
@@ -93,4 +82,4 @@ $c['router']->group(
 
 
 /* End of file routes.php */
-/* Location: .routes.php */
+/* Location: .app/routes.php */

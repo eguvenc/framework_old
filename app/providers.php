@@ -59,3 +59,7 @@ $c->register('Obullo\ServiceProviders\AMQPServiceProvider');
 |--------------------------------------------------------------------------
 */
 $c->register('Obullo\ServiceProviders\QueryServiceProvider');
+
+
+/* End of file providers.php */
+/* Location: .app/providers.php */

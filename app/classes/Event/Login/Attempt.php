@@ -6,7 +6,7 @@ use Obullo\Container\Container;
 use Obullo\Authentication\AuthResult;
 use Obullo\Event\EventListenerInterface;
 
-Class Attempt implements EventListenerInterface
+class Attempt implements EventListenerInterface
 {
     /**
      * Container

@@ -2,11 +2,11 @@
 
 namespace Service;
 
-use Obullo\Flash\Session;
 use Obullo\Container\Container;
+use Obullo\Security\Csrf as CsrfClass;
 use Obullo\ServiceProviders\ServiceInterface;
 
-class Flash implements ServiceInterface
+class Csrf implements ServiceInterface
 {
     /**
      * Registry
@@ -17,13 +17,13 @@ class Flash implements ServiceInterface
      */
     public function register(Container $c)
     {
-        $c['flash'] = function () use ($c) {
-            return new Session($c);
+        $c['csrf'] = function () use ($c) {
+            return new CsrfClass($c);
         };
     }
 }
 
-// END Cache service
+// END Csrf service
 
-/* End of file Cache.php */
-/* Location: .classes/Service/Queue.php */
+/* End of file Csrf.php */
+/* Location: .classes/Service/Csrf.php */

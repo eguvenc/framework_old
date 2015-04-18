@@ -2,7 +2,7 @@
 
 namespace Membership;
 
-Class Logout extends \Controller
+class Logout extends \Controller
 {
     /**
      * Loader

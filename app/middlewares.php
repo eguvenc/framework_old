@@ -15,20 +15,10 @@
 */
 /*
 |--------------------------------------------------------------------------
-| Translations
-|--------------------------------------------------------------------------
-| Detect locale and set.
-*/
-$c['app']->middleware(new Http\Middlewares\Translation);
-
-/*
-|--------------------------------------------------------------------------
 | Request
 |--------------------------------------------------------------------------
-| Sanitize requests
 */
 $c['app']->middleware(new Http\Middlewares\Request);
 
-
 /* End of file middlewares.php */
-/* Location: .middlewares.php */
+/* Location: .app/middlewares.php */
