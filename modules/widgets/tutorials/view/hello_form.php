@@ -44,7 +44,10 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" name="dopost" value="DoPost" /></td>
+                        <td>
+                            <input type="hidden" name="<?php echo $this->c['csrf']->getTokenName() ?>" value="<?php echo $this->c['csrf']->getToken(); ?>" />
+                            <input type="submit" name="dopost" value="DoPost" />
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">&nbsp;</td>

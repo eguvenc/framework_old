@@ -18,7 +18,7 @@ $c['router']->defaultPage('welcome');
 //     function () use ($c) {
 //         $c['view']->load('dummy');
 //     }
-// )->attach('welcome/(.*)',  array('activity'));
+// )->attach('welcome/(.*)',  array('activity')); 
 
 // $c['router']->attach('(.)', array('maintenance'));
 
@@ -27,16 +27,18 @@ $c['router']->group(
     [
         'name' => 'GenericUsers', 
         'domain' => $c['config']['domain']['mydomain.com'],
-        'middleware' => array('Csrf')
+        'middleware' => array()
     ],
     function () use ($c) {
 
         $this->defaultPage('welcome');
 
+        // $this->match(['get', 'post'], 'widgets/tutorials/hello_form')->middleware('Csrf');
+
         $this->get('(?:en|tr|de|nl)/(.*)', '$1');
         $this->get('(?:en|tr|de|nl)', 'welcome');  // default controller
 
-        $this->attach('.*'); // all urls of this group
+        $this->attach('.*'); // all urls
     }
 );
 

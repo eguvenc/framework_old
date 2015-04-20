@@ -4,7 +4,7 @@ namespace Http\Middlewares;
 
 use Obullo\Container\Container;
 use Obullo\Application\Middleware;
-use Obullo\Authentication\Middlewares\UniqueLoginTrait;
+use Obullo\Authentication\Addons\UniqueLoginTrait;
 
 class Auth extends Middleware
 {

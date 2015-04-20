@@ -26,7 +26,7 @@ return array(
         'rememberMe'  => [
             'cookie' => [
                 'name' => '__rm',
-                'domain' => $c['env']['COOKIE_DOMAIN.NULL'],  // Set to .your-domain.com for site-wide cookies
+                'domain' => $c['env']['COOKIE_DOMAIN.null'],  // Set to .your-domain.com for site-wide cookies
                 'path' => '/',
                 'secure' => false,
                 'httpOnly' => false,
@@ -37,7 +37,7 @@ return array(
     ],
     'session' => [
         'regenerateSessionId' => true,  // Regenerate session id upon new logins.
-        'unique' => false,               // If unique session enabled application terminates all other active sessions.
+        'unique' => false,              // If unique session enabled application terminates all other active sessions.
     ]
 );
 

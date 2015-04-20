@@ -19,8 +19,6 @@ class Welcome extends \Controller
     /**
      * Index
      *
-     * @middleware->remove("Csrf");
-     * 
      * @return void
      */
     public function index()

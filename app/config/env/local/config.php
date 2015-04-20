@@ -58,7 +58,7 @@ return array(
     ],
 
     'cookie' => [ 
-        'domain' => $c['env']['COOKIE_DOMAIN.NULL'],    // Set to .your-domain.com for site-wide cookies
+        'domain' => $c['env']['COOKIE_DOMAIN.null'],    // Set to .your-domain.com for site-wide cookies
         'path'   => '/',                                // Typically will be a forward slash
         'secure' => false,                              // Cookies will only be set if a secure HTTPS connection exists.
         'httpOnly' => false,                            // When true the cookie will be made accessible only through the HTTP protocol

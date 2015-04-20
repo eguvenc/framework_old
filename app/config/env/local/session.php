@@ -19,7 +19,7 @@ return array(
     'cookie' => [
         'lifetime' => 0,            // If lifetime  == 0  session will expire automatically when the browser window is closed
         'name'     => 'session',    // The name you want for the cookie
-        'domain'   => $c['env']['COOKIE_DOMAIN.NULL'],             // Set to .your-domain.com for site-wide cookies
+        'domain'   => $c['env']['COOKIE_DOMAIN.null'],             // Set to .your-domain.com for site-wide cookies
         'path'     => '/',                                         // Typically will be a forward slash
         'secure'   => false,                                       // When set to true, the cookie will only be set if a https:// connection exists.
         'httpOnly' => false,                                       // When true the cookie will be made accessible only through the HTTP protocol
