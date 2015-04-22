@@ -12,12 +12,11 @@ return array(
     ],
 
     'session' => [
-        'key' => 'sessions:',      // Don't remove ":" colons. If your cache handler redis, it keeps keys in folders using colons.
-        'lifetime' => 7200,        // The number of SECONDS you want the session to last. By default " 2 hours ". "0" is no expiration.
+        'key' => 'sessions:',   // Don't remove ":" colons. If your cache handler redis, it keeps keys in folders using colons.
+        'lifetime' => 0,        // if "0" session will expire automatically when the browser window is closed. Set 86400 for 1 day.
     ],
 
     'cookie' => [
-        'lifetime' => 0,            // If lifetime  == 0  session will expire automatically when the browser window is closed
         'name'     => 'session',    // The name you want for the cookie
         'domain'   => $c['env']['COOKIE_DOMAIN.null'],             // Set to .your-domain.com for site-wide cookies
         'path'     => '/',                                         // Typically will be a forward slash

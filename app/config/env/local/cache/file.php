@@ -2,7 +2,7 @@
 
 return array(
 
-    'path' =>  '/resources/data/cache/',   // file data storage path
+    'path' =>  '/resources/data/cache/',   // change it as "/tmp/" if you want to use unix temp directory
 );
 
 /* End of file file.php */

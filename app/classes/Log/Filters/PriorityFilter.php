@@ -5,7 +5,7 @@ namespace Log\Filters;
 use Obullo\Log\Logger;
 use Obullo\Container\Container;
 use Obullo\Log\FilterInterface;
-use Obullo\Log\Addons\LogPriorityFilterTrait;
+use Obullo\Log\Filters\LogPriorityFilterTrait;
 
 /**
  * PriorityFilter Class

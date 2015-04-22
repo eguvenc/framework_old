@@ -33,8 +33,8 @@ return array(
                         'fr' => 'french',
                     ],
 
-    'debug' => false,     // Puts 'translate:' texts everywhere it is help to you for multilingual development.
+    'debug' => false,     // Puts 'translate:' texts everywhere. it is help to you for multilingual development.
 );
 
 /* End of file translator.php */
-/* Location: ./app/config/translator.php */
+/* Location: .app/config/translator.php */
