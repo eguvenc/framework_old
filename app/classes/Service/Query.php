@@ -17,7 +17,7 @@ class Query implements ServiceInterface
     public function register(Container $c)
     {
         $c['query'] = function () use ($c) {
-            return $c['service provider query']->get(['connection' => 'default']);
+            return $c['app']->provider('query')->get(['connection' => 'default']);
         };
     }
 }

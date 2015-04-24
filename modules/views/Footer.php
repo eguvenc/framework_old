@@ -2,7 +2,7 @@
 
 namespace Views;
 
-Class Footer extends \Controller
+class Footer extends \Controller
 {
     /**
      * Loader
@@ -24,7 +24,7 @@ Class Footer extends \Controller
         echo $this->view->get(
             'footer',
             [
-                'footer' => '--------------- EXAMPLE FOOTER LAYER ---------------'
+                'footer' => '<pre>--------------- EXAMPLE FOOTER LAYER ---------------</pre>'
             ]
         );
     }

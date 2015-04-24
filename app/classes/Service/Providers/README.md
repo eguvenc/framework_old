@@ -11,7 +11,7 @@ You can create your own service providers in here. Please read this documentatio
 Open app/providers.php file and add your service provider.
 
 ```php
-$c->register(new Service\Providers\MyServiceProvider);
+$c->register('Service\Providers\MyServiceProvider');
 ```
 
 ### Loading Service Providers
@@ -19,11 +19,11 @@ $c->register(new Service\Providers\MyServiceProvider);
 Getting from your configuration
 
 ```php
-$this->name = $this->c['service provider name']->get($params);
+$this->name = $this->c['app']->provider('name')->get($params);
 ```
 
 Creating New ( Factory ) without Static Configuration
 
 ```php
-$this->name = $this->c['app service provider name']->factory($params);
+$this->name = $this->c['app']->provider('name')->factory($params);
 ```

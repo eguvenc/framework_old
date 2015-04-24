@@ -11,13 +11,14 @@ return array(
         ]
     ],
 
-    'session' => [
-        'key' => 'sessions:',   // Don't remove ":" colons. If your cache handler redis, it keeps keys in folders using colons.
-        'lifetime' => 0,        // if "0" session will expire automatically when the browser window is closed. Set 86400 for 1 day.
+    'storage' => [
+        'key' => 'sessions:', // Don't remove ":" colons. If your cache handler redis, it keeps keys in folders using colons.
+        'lifetime' => 3600,   // Set storage lifetime 3600 = 1 hours.
     ],
 
-    'cookie' => [
-        'name'     => 'session',    // The name you want for the cookie
+    'cookie' => [             // Session http cookie parameters
+        'expire' => 0,        // if "0" session will expire automatically when the browser window is closed
+        'name'     => 'session',                                   // The name you want for the cookie
         'domain'   => $c['env']['COOKIE_DOMAIN.null'],             // Set to .your-domain.com for site-wide cookies
         'path'     => '/',                                         // Typically will be a forward slash
         'secure'   => false,                                       // When set to true, the cookie will only be set if a https:// connection exists.

@@ -6,7 +6,7 @@
 | This file specifies the global configurations of your application.
 */
 return array(
-                          
+      
     'error' => [
         'debug' => true,            // Friendly debugging feature disable it in "production" environment.
     ],                              // If log enabled all errors go to log data otherwise framework use php native errors.

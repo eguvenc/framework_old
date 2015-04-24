@@ -2,7 +2,7 @@
 
 namespace Views;
 
-Class Test extends \Controller
+class Test extends \Controller
 {
     /**
      * Loader

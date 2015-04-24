@@ -83,7 +83,8 @@ class Logger implements JobInterface
                 $handler = new FileHandler($this->c);
                 break;
             case 'email':
-                $mailer = $this->c['service provider mailer']->get(['driver' => 'mandrill']);
+                $mailer = $this->c['app']->provider('mailer')->get(['driver' => 'mandrill']);
+
                 $mailer->from('<noreply@example.com> Server Admin');
                 $mailer->to('obulloframework@gmail.com');
                 $mailer->subject('Server Logs');
@@ -104,7 +105,7 @@ class Logger implements JobInterface
             case 'mongo':
                 $handler = new MongoHandler(
                     $this->c,
-                    $this->c['service provider mongo']->get(['connection' => 'default']),
+                    $this->c['app']->provider('mongo')->get(['connection' => 'default']),
                     array(
                         'database' => 'db',
                         'collection' => 'logs',

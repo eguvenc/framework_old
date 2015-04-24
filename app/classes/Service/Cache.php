@@ -17,7 +17,7 @@ class Cache implements ServiceInterface
     public function register(Container $c)
     {
         $c['cache'] = function () use ($c) {
-            return $c['service provider cache']->get(['driver' => 'redis', 'connection' => 'default']);
+            return $c['app']->provider('cache')->get(['driver' => 'redis', 'connection' => 'default']);
         };
     }
 }

@@ -17,4 +17,4 @@ return array(
 );
 
 /* End of file */
-/* Location: ./var/www/framework/app/config/env/local/domain.php */
+/* Location: .app/config/env/local/domain.php */

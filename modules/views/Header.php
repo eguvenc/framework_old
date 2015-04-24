@@ -2,7 +2,7 @@
 
 namespace Views;
 
-Class Header extends \Controller
+class Header extends \Controller
 {
     /**
      * Loader
@@ -24,7 +24,7 @@ Class Header extends \Controller
         echo $this->view->get(
             'header',
             [
-                'header' => '--------------- EXAMPLE HEADER LAYER ---------------'
+                'header' => '<pre>--------------- EXAMPLE HEADER LAYER ---------------</pre>'
             ]
         );
     }
