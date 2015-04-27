@@ -6,6 +6,7 @@
 | This file specifies the your application global events.
 */
 
+// $c['event']->subscribe('Event\Classname');
 
 /* End of file events.php */
 /* Location: .app/events.php */

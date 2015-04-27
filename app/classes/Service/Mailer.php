@@ -3,7 +3,7 @@
 namespace Service;
 
 use Obullo\Container\Container;
-use Obullo\ServiceProviders\ServiceInterface;
+use Obullo\Service\ServiceInterface;
 
 class Mailer implements ServiceInterface
 {
@@ -19,7 +19,6 @@ class Mailer implements ServiceInterface
     public function register(Container $c)
     {
         $c['mailer'] = function () use ($c) {
-
             $mailer = $c['app']->provider('mailer')->get(['driver' => 'smtp', 'options' => array('queue' => false)]);
             $mailer->from('Admin <admin@example.com>');
             return $mailer;

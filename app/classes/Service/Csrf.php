@@ -3,8 +3,8 @@
 namespace Service;
 
 use Obullo\Container\Container;
+use Obullo\Service\ServiceInterface;
 use Obullo\Security\Csrf as CsrfClass;
-use Obullo\ServiceProviders\ServiceInterface;
 
 class Csrf implements ServiceInterface
 {

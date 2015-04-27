@@ -3,7 +3,7 @@
 namespace Service;
 
 use Obullo\Container\Container;
-use Obullo\ServiceProviders\ServiceInterface;
+use Obullo\Service\ServiceInterface;
 use Obullo\Authentication\AuthServiceProvider;
 
 class User implements ServiceInterface

@@ -4,7 +4,7 @@ namespace Service;
 
 use Obullo\Flash\Session;
 use Obullo\Container\Container;
-use Obullo\ServiceProviders\ServiceInterface;
+use Obullo\Service\ServiceInterface;
 
 class Flash implements ServiceInterface
 {

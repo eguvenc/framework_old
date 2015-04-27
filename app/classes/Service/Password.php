@@ -3,8 +3,8 @@
 namespace Service;
 
 use Obullo\Container\Container;
-use Obullo\ServiceProviders\ServiceInterface;
 use Obullo\Crypt\Password\Bcrypt;
+use Obullo\Service\ServiceInterface;
 
 class Password implements ServiceInterface
 {

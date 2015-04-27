@@ -4,7 +4,7 @@ namespace Service;
 
 use Obullo\Queue\Handler\AMQP;
 use Obullo\Container\Container;
-use Obullo\ServiceProviders\ServiceInterface;
+use Obullo\Service\ServiceInterface;
 
 class Queue implements ServiceInterface
 {

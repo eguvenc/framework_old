@@ -17,7 +17,7 @@ use Obullo\Log\Filters\LogPriorityFilterTrait;
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/package/log
  */
-Class PriorityFilter implements FilterInterface
+class PriorityFilter implements FilterInterface
 {
     use LogPriorityFilterTrait;
 
