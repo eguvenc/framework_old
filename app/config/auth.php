@@ -29,7 +29,7 @@ return array(
                 'domain' => $c['env']['COOKIE_DOMAIN.null'],  // Set to .your-domain.com for site-wide cookies
                 'path' => '/',
                 'secure' => false,
-                'httpOnly' => false,
+                'httpOnly' => true,
                 'prefix' => '',
                 'expire' => 6 * 30 * 24 * 3600,  // Default " 6 Months ".
             ]
