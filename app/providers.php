@@ -52,7 +52,7 @@ $c['app']->register('Obullo\Service\Providers\MailerServiceProvider');
 | AMQP Service Provider
 |--------------------------------------------------------------------------
 */
-$c['app']->register('Obullo\Service\Providers\AMQPServiceProvider');
+$c['app']->register('Obullo\Service\Providers\AmqpServiceProvider');
 /*
 |--------------------------------------------------------------------------
 | Query Builder Service Provider
