@@ -16,21 +16,17 @@ return array(
     // Message key
 
     'message' => '<div class="{class}">{icon}{message}</div>',
-
-    // Error
-    0  => [
+    
+    'error'  => [
         'class' => 'alert alert-danger', 'icon' => '<span class="glyphicon glyphicon-remove-sign"></span> '
     ],
-    // Success
-    1 => [
+    'success' => [
         'class' => 'alert alert-success', 'icon' => '<span class="glyphicon glyphicon-ok-sign"></span> '
     ],
-    // Warning
-    2 => [
+    'warning' => [
         'class' => 'alert alert-warning', 'icon' => '<span class="glyphicon glyphicon-exclamation-sign"></span> '
     ],
-    // Info
-    3 => [
+    'info' => [
         'class' => 'alert alert-info', 'icon' => '<span class="glyphicon glyphicon-info-sign"></span> '
     ],
 );

@@ -11,8 +11,8 @@ class Logout extends \Controller
      */
     public function load()
     {
-        $this->c['url'];
         $this->c['user'];
+        $this->c['flash'];
     }
 
     /**
@@ -23,9 +23,10 @@ class Logout extends \Controller
     public function index()
     {
         $this->user->identity->logout();
+
         // $this->user->identity->destroy();
         // $this->user->identity->forgetMe();
         
-        $this->url->redirect($this->user->config['url.login']);
+        $this->flash->info('You succesfully logged out')->with('url')->redirect($this->user['url.login']);
     }
 }

@@ -17,14 +17,13 @@
         
         <h1>Login Example</h1>
 
-        <section><?php 
-        $output = $this->form->outputArray();
-
-        if (isset($output['errors']['messages'])) {
-            foreach ($output['errors']['messages'] as $message) {
+        <section><?php
+        if ($results = $this->form->resultsArray()) {
+            foreach ($results['messages'] as $message) {
                 echo $this->form->getMessage($message);
             }
-        }?></section>
+        }
+        ?></section>
 
         <section>
             <form action="/membership/login" method="POST">

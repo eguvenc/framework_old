@@ -18,7 +18,9 @@ class Password implements ServiceInterface
     public function register(Container $c)
     {
         $c['password'] = function () use ($c) {
-            return new Bcrypt($c);
+            $bcrypt = new Bcrypt($c);
+            $bcrypt->setIdentifier('2y');
+            return $bcrypt;
         };
     }
 }
@@ -26,4 +28,4 @@ class Password implements ServiceInterface
 // END Password service
 
 /* End of file Password.php */
-/* Location: .classes/Service/Password.php */
+/* Location: .app/classes/Service/Password.php */

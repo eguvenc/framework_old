@@ -25,4 +25,4 @@ class Query implements ServiceInterface
 // END Query service
 
 /* End of file Query.php */
-/* Location: .classes/Service/Query.php */
+/* Location: .app/classes/Service/Query.php */

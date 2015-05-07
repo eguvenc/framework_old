@@ -42,28 +42,19 @@ class Login extends \Controller
 
                 $result = $this->user->login->attempt(
                     array(
-                        $this->user->config['db.identifier'] => $this->validator->getValue('email'), 
-                        $this->user->config['db.password']   => $this->validator->getValue('password')
+                        $this->user['db.identifier'] => $this->validator->getValue('email'), 
+                        $this->user['db.password']   => $this->validator->getValue('password')
                     ),
                     $this->request->post('rememberMe')
                 );
 
                 if ($result->isValid()) {
-
-                    // $this->user->identity->makeTemporary();
-                    // $this->user->identity->makePermanent();
-
-                    $this->flash->success('You have authenticated successfully.');
-                    $this->url->redirect('membership/restricted');
-
+                    $this->flash->success('You have authenticated successfully.')->with('url')->redirect('membership/restricted');
                 } else {
-
-                    $this->validator->setErrors($result->getArray());
-                    $this->form->setErrors($this->validator);
+                    $this->form->setResults($result->getArray());
                 }
             }
         }
-
         $this->view->load('login');
     }
 }

@@ -19,8 +19,10 @@ return array(
         'date' =>  'Y-m-d H:i:s',
     ],
     
-    'extra' => [
-        'queries'   => true,       // If true "all" SQL Queries gets logged.
+    'app' => [
+        'sql' => [
+            'queries'   => true,   // If true "all" SQL Queries gets logged.
+        ],
         'benchmark' => true,       // If true "all" Application Benchmarks gets logged.
     ],
 
