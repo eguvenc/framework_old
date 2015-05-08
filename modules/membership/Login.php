@@ -49,7 +49,7 @@ class Login extends \Controller
                 );
 
                 if ($result->isValid()) {
-                    $this->flash->success('You have authenticated successfully.')->with('url')->redirect('membership/restricted');
+                    $this->flash->success('You have authenticated successfully.')->url->redirect('membership/restricted');
                 } else {
                     $this->form->setResults($result->getArray());
                 }
