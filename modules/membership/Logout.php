@@ -27,6 +27,6 @@ class Logout extends \Controller
         // $this->user->identity->destroy();
         // $this->user->identity->forgetMe();
         
-        $this->flash->info('You succesfully logged out')->with('url')->redirect($this->user['url.login']);
+        $this->flash->info('You succesfully logged out')->url->redirect($this->user['url.login']);
     }
 }

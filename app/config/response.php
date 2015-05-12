@@ -4,7 +4,7 @@ return array(
 
     /*
     | -------------------------------------------------------------------
-    | Response config
+    | Http Response Configuration
     | -------------------------------------------------------------------
     | Sets default response headers.
     |

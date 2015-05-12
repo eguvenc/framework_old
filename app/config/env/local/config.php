@@ -8,7 +8,7 @@
 return array(
 
     'error' => [
-        'debug' => false,            // Friendly debugging feature disable it in "production" environment.
+        'debug' => true,            // Friendly debugging feature disable it in "production" environment.
     ],                              // If log > enabled = true all errors go to log data otherwise framework use php native errors.
 
     'url' => [

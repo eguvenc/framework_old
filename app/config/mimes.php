@@ -4,7 +4,7 @@ return array(
 
     /*
     |-------------------------------------------------------------------
-    | MIME TYPES
+    | Mime Types
     |-------------------------------------------------------------------
     | This file contains an array of mime types.  It is used by the
     | Upload class to help identify allowed file types. 

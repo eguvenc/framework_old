@@ -14,32 +14,7 @@ class Welcome extends \Controller
     public function load()
     {
         $this->c['url'];
-
-        // $this->entry = new \Model\Entry;
-        // print_r($this->entry->findAll());
-
-        // $this->entry->delete(1);
-
-        // $this->entry->title = 'Insert Test';
-        // $this->entry->content = 'Hello World';
-        // $this->entry->date = time();
-        // $this->entry->insert();
-
-        // $result = $this->db->transaction(
-        //     function () {
-
-        //         return $this->db->exec(
-        //             sprintf(
-        //                 "DELETE FROM userst WHERE id = %d",
-        //                 4
-        //             )
-        //         );
-        //     }
-        // );
-
-        // var_dump($result);
-
-
+        $this->c['request'];
 
         // $this->entry = new \Model\Entry;
 
@@ -55,7 +30,6 @@ class Welcome extends \Controller
         //         $id
         //     )
         // );
-
 
         // print_r($row);
 

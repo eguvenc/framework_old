@@ -2,7 +2,18 @@
 
 return array(
     
+    /*
+    | -------------------------------------------------------------------
+    | Auth - ( User Service )
+    | -------------------------------------------------------------------
+    | This file contains auth configuration. It is used by Authentication/ package to manage
+    | auth service behaviours.
+    |
+    | Note : This configuration will be merged with configuration parameter in Authentication/AuthServiceProvider class.
+    |
+    */
     'cache' => [
+
         'storage' => '\Obullo\Authentication\Storage\Redis',  // Storage can be a Cache package or custom database like Redis.
         'provider' => [
             'driver' => 'redis',                              // If storage Not Cache provider['driver'] and storage values must be same.

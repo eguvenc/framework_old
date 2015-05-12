@@ -1,7 +1,14 @@
 <?php
 
 return array(
-                
+
+    /*
+    | -------------------------------------------------------------------
+    | Security Package Configuration
+    | -------------------------------------------------------------------
+    | Sets your encryption key and protection settings.
+    |
+    */
     'encryption' => [
         'key' => 'write-your-secret-key',  // If you use the Encryption class you MUST set an encryption key.
     ],

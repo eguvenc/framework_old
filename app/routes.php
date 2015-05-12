@@ -31,29 +31,34 @@ $c['router']->group(
     ],
     function () use ($c) {
 
-        $this->defaultPage('welcome');
+            $this->defaultPage('welcome');
 
-        // $this->match(['get', 'post'], 'widgets/tutorials/hello_form')->middleware('Csrf');
+            // $this->match(['get', 'post'], 'widgets/tutorials/hello_form')->middleware('Csrf');
 
-        $this->get('(?:en|tr|de|nl)/(.*)', '$1');
-        $this->get('(?:en|tr|de|nl)', 'welcome');  // default controller
+            $this->get('(?:en|tr|de|nl)/(.*)', '$1');
+            $this->get('(?:en|tr|de|nl)', 'welcome');  // default controller
 
-        $this->attach('.*'); // all urls
+            $this->attach('.*'); // all urls
+
+
+            $this->group(
+                ['name' => 'AuthorizedUsers', 'middleware' => array()],  //  Auth // Guest
+                function () {
+
+                    $this->defaultPage('welcome');
+                    
+
+                    // $this->attach('membership/restricted');
+
+                    // $this->get('tutorials/hello_world.*', 'tutorials/hello_scheme');
+                    // $this->attach('(.*)'); // all url
+                    // $this->attach('((?!tutorials/hello_world).)*$');  // url not contains "tutorials/hello_world"
+                }
+            );
+
     }
 );
 
-$c['router']->group(
-    ['name' => 'AuthorizedUsers', 'domain' => $c['config']['domain']['mydomain.com'], 'middleware' => array()],
-    function () {
-
-        $this->defaultPage('welcome');
-        $this->attach('membership/restricted');
-
-        // $this->get('tutorials/hello_world.*', 'tutorials/hello_scheme');
-        // $this->attach('(.*)'); // all url
-        // $this->attach('((?!tutorials/hello_world).)*$');  // url not contains "tutorials/hello_world"
-    }
-);
 
 
 // $c['router']->error404('errors/page_not_found');

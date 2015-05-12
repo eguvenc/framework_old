@@ -2,6 +2,13 @@
 
 return array(
 
+    /*
+    | -------------------------------------------------------------------
+    | Translator Package Configuration
+    | -------------------------------------------------------------------
+    | Sets your locale settings.
+    |
+    */
     'locale' => [
         'default'  => 'en',  // This determines which set of language files should be used by default selected.
     ],
