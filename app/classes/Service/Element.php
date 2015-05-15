@@ -2,11 +2,11 @@
 
 namespace Service;
 
-use Obullo\Flash\Session;
 use Obullo\Container\Container;
+use Obullo\Form\Element as FormElement;
 use Obullo\Service\ServiceInterface;
 
-class Flash implements ServiceInterface
+class Element implements ServiceInterface
 {
     /**
      * Registry
@@ -17,13 +17,13 @@ class Flash implements ServiceInterface
      */
     public function register(Container $c)
     {
-        $c['flash'] = function () use ($c) {
-            return new Session($c);
+        $c['element'] = function () use ($c) {
+            return new FormElement($c);
         };
     }
 }
 
-// END Flash service
+// END Element service
 
-/* End of file Flash.php */
-/* Location: .app/classes/Service/Flash.php */
+/* End of file Element.php */
+/* Location: .app/classes/Service/Element.php */

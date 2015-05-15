@@ -4,7 +4,7 @@
 | FRAMEWORK VERSION
 |---------------------------------------------------------------
 */
-define('OBULLO_VERSION', 'o2');
+define('OBULLO_RELEASE', 'o2');
 /*
 |---------------------------------------------------------------
 | ESSENTIAL CONSTANTS
@@ -23,7 +23,7 @@ define('FCPATH', __FILE__);
 define('PHP_PATH', '/usr/bin/php'); 
 define('FPATH', dirname(__FILE__));
 define('ROOT',  realpath(dirname(__FILE__)) . DS);
-define('OBULLO', ROOT . OBULLO_VERSION . DS);
+define('OBULLO', ROOT . OBULLO_RELEASE . DS);
 /*
 |---------------------------------------------------------------
 | OBULLO CONSTANTS

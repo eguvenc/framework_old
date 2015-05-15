@@ -11,15 +11,15 @@
             <?php echo $this->url->anchor('/', '<img src="'.$this->url->asset('images/logo.png').'">') ?>
         </header>
 
-        <?php echo $this->flash->output(); ?>
+        <?php echo $this->flash->output() ?>
 
         <p></p>
         
         <h1>Login Example</h1>
 
         <section><?php
-        if ($results = $this->form->resultsArray()) {
-            foreach ($results['messages'] as $message) {
+        if ($results = $this->form->results()) {
+            foreach ($results->messages as $message) {
                 echo $this->form->getMessage($message);
             }
         }
@@ -61,8 +61,8 @@
                     <pre><?php print_r($this->form->outputArray()); ?>
                     </pre>
 
-                    <h3>$this->form->error('email')</h3>
-                    <pre><?php echo $this->form->error('email') ?></pre>
+                    <h3>$this->form->getError('email')</h3>
+                    <pre><?php echo $this->form->getError('email') ?></pre>
                 </section>    
 
         </section>

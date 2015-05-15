@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-class Hello_Form extends \Controller
+class Hello_Element extends \Controller
 {
     /**
      * Loader
@@ -15,6 +15,7 @@ class Hello_Form extends \Controller
         $this->c['view'];
         $this->c['form'];
         $this->c['request'];
+        $this->c['element'];
     }
 
     /**
@@ -33,28 +34,18 @@ class Hello_Form extends \Controller
             $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
             $this->validator->setRules('agreement', 'User Agreement', 'required');
 
-            $this->validator->func(
-                'callback_test',
-                function ($email, $val) {
-                    if (strlen($email) < $val) {
-                        $this->setMessage('callback_test', 'Callback function validation test error !');
-                        return false;
-                    }
-                    return true;
-                }
-            );
-            if ($this->validator->isValid()) {          
+            if ($this->validator->isValid()) {
                 $this->form->success('Form validation success.');
             } else {
                 $this->form->error('Form validation failed.');
             }
-            $this->form->setErrors($this->validator->getErrors());
+            $this->form->setErrors($this->validator);
         }
 
-        $this->c['view']->load('hello_form');
+        $this->c['view']->load('hello_element');
     }
     
 }
 
-/* End of file hello_form.php */
-/* Location: .modules/tutorials/hello_form.php */
+/* End of file hello_element.php */
+/* Location: .modules/tutorials/hello_element.php */

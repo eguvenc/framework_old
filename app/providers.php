@@ -7,59 +7,25 @@
 */
 /*
 |--------------------------------------------------------------------------
-| Logger Service Provider
+| Register application service providers
 |--------------------------------------------------------------------------
+| Priority of providers very important forexample logger provider must be register
+| at the top.
+|
 */
-$c['app']->register('Obullo\Service\Providers\LoggerServiceProvider');
-/*
-|--------------------------------------------------------------------------
-| Pdo Service Provider
-|--------------------------------------------------------------------------
-*/
-$c['app']->register('Obullo\Service\Providers\PdoServiceProvider');
-/*
-|--------------------------------------------------------------------------
-| Database Service Provider
-|--------------------------------------------------------------------------
-*/
-$c['app']->register('Obullo\Service\Providers\DatabaseServiceProvider');
-/*
-|--------------------------------------------------------------------------
-| Cache Service Provider
-|--------------------------------------------------------------------------
-*/
-$c['app']->register('Obullo\Service\Providers\CacheServiceProvider');
-/*
-|--------------------------------------------------------------------------
-| Redis Service Provider
-|--------------------------------------------------------------------------
-*/
-$c['app']->register('Obullo\Service\Providers\RedisServiceProvider');
-/*
-|--------------------------------------------------------------------------
-| Memcached Service Provider
-|--------------------------------------------------------------------------
-*/
-$c['app']->register('Obullo\Service\Providers\MemcachedServiceProvider');
-/*
-|--------------------------------------------------------------------------
-| Mailer Service Provider
-|--------------------------------------------------------------------------
-*/
-$c['app']->register('Obullo\Service\Providers\MailerServiceProvider');
-/*
-|--------------------------------------------------------------------------
-| AMQP Service Provider
-|--------------------------------------------------------------------------
-*/
-$c['app']->register('Obullo\Service\Providers\AmqpServiceProvider');
-/*
-|--------------------------------------------------------------------------
-| Query Builder Service Provider
-|--------------------------------------------------------------------------
-*/
-$c['app']->register('Obullo\Service\Providers\QueryServiceProvider');
-
+$c['app']->register(
+    [
+        'logger' => 'Obullo\Service\Providers\LoggerServiceProvider',
+        'pdo' => 'Obullo\Service\Providers\PdoServiceProvider',
+        'database' => 'Obullo\Service\Providers\DatabaseServiceProvider',
+        'cache' => 'Obullo\Service\Providers\CacheServiceProvider',
+        'redis' => 'Obullo\Service\Providers\RedisServiceProvider',
+        'memcached' => 'Obullo\Service\Providers\MemcachedServiceProvider',
+        'mailer' => 'Obullo\Service\Providers\MailerServiceProvider',
+        'amqp' => 'Obullo\Service\Providers\AmqpServiceProvider',
+        'query' => 'Obullo\Service\Providers\QueryServiceProvider',
+    ]
+);
 
 /* End of file providers.php */
 /* Location: .app/providers.php */

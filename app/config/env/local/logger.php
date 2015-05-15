@@ -20,12 +20,12 @@ return array(
     ],
     
     'app' => [
-        'query'
+        'query' => [
             'log'=> true,   // If true "all" SQL Queries gets logged.
         ],
         'benchmark' => true,       // If true "all" Application Benchmarks gets logged.
     ],
-
+    
     'queue' => [
         'service' => 'queue',     // Queue service name its located in app/Service folder.
         'channel' => 'Log',

@@ -25,6 +25,7 @@
                 <li><?php echo $this->url->anchor('/widgets/tutorials/hello_world', 'Hello World') ?></li>
                 <li><?php echo $this->url->anchor('/widgets/tutorials/hello_layout', 'Hello Layout') ?></li>
                 <li><?php echo $this->url->anchor('/widgets/tutorials/hello_form', 'Hello Form') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_element', 'Hello Element') ?></li>
                 <li><?php echo $this->url->anchor('/widgets/tutorials/hello_ajax', 'Hello Ajax') ?></li>
                 <li><?php echo $this->url->anchor('/widgets/tutorials/hello_task', 'Hello Task') ?></li>
                 <li><?php echo $this->url->anchor('/widgets/tutorials/hello_layers', 'Hello Layers') ?></li>

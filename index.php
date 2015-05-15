@@ -7,7 +7,7 @@
 require 'constants';
 /*
 |--------------------------------------------------------------------------
-| Obullo Http Requests
+| Http Requests
 |--------------------------------------------------------------------------
 */
 require OBULLO_HTTP;
@@ -16,7 +16,9 @@ require OBULLO_HTTP;
 | Autoloader
 |--------------------------------------------------------------------------
 */
-Obullo\Application\Http::registerAutoloader();
+require 'vendor/autoload.php';
+
+// Obullo\Application\Autoloader::register();
 /*
 |--------------------------------------------------------------------------
 | Initialize

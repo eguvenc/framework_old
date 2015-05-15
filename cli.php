@@ -1,7 +1,7 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Obullo Cli Requests
+| Cli Requests
 |--------------------------------------------------------------------------
 */
 require OBULLO_CLI;
@@ -10,7 +10,9 @@ require OBULLO_CLI;
 | Autoloader
 |--------------------------------------------------------------------------
 */
-Obullo\Application\Cli::registerAutoloader();
+require 'vendor/autoload.php';
+
+// Obullo\Application\Cli::registerAutoloader();
 /*
 |--------------------------------------------------------------------------
 | Initialize
