@@ -16,14 +16,13 @@
 $c['app']->register(
     [
         'logger' => 'Obullo\Service\Providers\LoggerServiceProvider',
-        'pdo' => 'Obullo\Service\Providers\PdoServiceProvider',
         'database' => 'Obullo\Service\Providers\DatabaseServiceProvider',
+        // 'database' => 'Obullo\Service\Providers\DoctrineServiceProvider',
         'cache' => 'Obullo\Service\Providers\CacheServiceProvider',
         'redis' => 'Obullo\Service\Providers\RedisServiceProvider',
         'memcached' => 'Obullo\Service\Providers\MemcachedServiceProvider',
         'mailer' => 'Obullo\Service\Providers\MailerServiceProvider',
         'amqp' => 'Obullo\Service\Providers\AmqpServiceProvider',
-        'query' => 'Obullo\Service\Providers\QueryServiceProvider',
     ]
 );
 

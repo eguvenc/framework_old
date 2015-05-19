@@ -5,7 +5,7 @@ return array(
     'connections' => 
     [
         'default' => [
-            'dsn'      => 'mysql:host=localhost;port=;dbname=test',
+            'dsn'      => 'pdo_mysql:host=localhost;port=;dbname=test',
             'username' => $c['env']['MYSQL_USERNAME.root'],
             'password' => $c['env']['MYSQL_PASSWORD.null'],
             'options'  => [
@@ -15,7 +15,7 @@ return array(
         ],
 
         'failed' => [
-            'dsn'      => 'mysql:host=localhost;port=;dbname=failed',
+            'dsn'      => 'pdo_mysql:host=localhost;port=;dbname=failed',
             'username' => $c['env']['MYSQL_USERNAME.root'],
             'password' => $c['env']['MYSQL_PASSWORD.null'],
             'options'  => [

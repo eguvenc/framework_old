@@ -32,7 +32,7 @@
 $c['app']->error(
     function (ErrorException $e) use ($c) {
         $c['logger']->error($e);
-        return ! $continue = false;   // Whether to continue native errors
+        return ! $continue = false;   // Whether to continue show native errors
     }
 );
 /*

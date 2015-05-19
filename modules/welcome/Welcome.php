@@ -2,11 +2,6 @@
 
 namespace Welcome;
 
-// use Doctrine\Common\ClassLoader;
-
-// $classLoader = new ClassLoader('Doctrine', '/vendor/doctrine');
-// $classLoader->register();
-
 class Welcome extends \Controller
 {
     use \View\Layout\Base;
@@ -19,6 +14,31 @@ class Welcome extends \Controller
     public function load()
     {
         $this->c['url'];
+        $this->c['db'];
+
+        $this->db->query("SELECT * FROM users");
+        $this->db->prepare("SELECT * FROM users WHERE id = ?")->bindValue(1, 1, \PDO::PARAM_INT)->execute();
+
+        // // var_dump($db);
+
+        // $this->db = $this->c->get('qb', false, ['connection' => 'default']);
+
+        // var_dump($this->db);
+
+        // $qb = $this->c->get('qb', false, ['db' => $db]);
+        // var_dump($qb);
+
+
+        // $qb2 = $this->c->get('qb', false, ['db' => $db2]);
+        // var_dump($qb2);
+
+
+        // $qb($this->c['db']);
+    
+        // $this->db = $this->c['qb']->withParams(['connection' => 'default']);
+
+        // $url = 'sqlite:dbname=:memory:';
+        // $url = 'sqlite:dbname=/usr/local/var/db.sqlite';
 
         /**
          * http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html
@@ -36,47 +56,48 @@ class Welcome extends \Controller
         // LOGLAR DAKI SQL QUERY I BOYLE YAP
         // 
         // http://php.net/manual/en/pdostatement.debugdumpparams.php
-        //         SQL: [96] SELECT name, colour, calories
-        //     FROM fruit
-        //     WHERE calories < :calories AND colour = :colour
-        // Params:  2
-        // Key: Name: [9] :calories
-        // paramno=-1
-        // name=[9] ":calories"
-        // is_param=1
-        // param_type=1
-        // Key: Name: [7] :colour
-        // paramno=-1
-        // name=[7] ":colour"
-        // is_param=1
-        // param_type=2
 
-        $config = new \Doctrine\DBAL\Configuration();
-        //..
-        $connectionParams = array(
-            'pdo' => $this->c['app']->provider('pdo')->get(['connection' => 'default'])
-        );
-        $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
-
-        $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
-        $stmt->bindValue(1, 1);
-        $stmt->execute();
-        
-        // var_dump($stmt->fetchAll());
-
+        // $result = $this->db->prepare("SELECT * FROM users WHERE id = ?")->bindValue(1, 1, \PDO::PARAM_INT)->execute()->resultArray();
         // var_dump($result);
-        
+
         // http://doctrine-orm.readthedocs.org/en/latest/reference/query-builder.html#executing-a-query
 
-        // $query = $conn->createQueryBuilder();
+        // $query = $this->db->createQueryBuilder();
 
-        // $sql = $query->select('id', 'username')
+
+        // http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html
+
+        // example 1:
+        // $result = $this->db->select('id', 'username')
         //     ->from('users')
-        //     ->where('id = ?')->setParameters([0 => 1]);
+        //     ->where('id = ?')->setParameters([0 => 1])->get()->resultArray();
 
-        // $stmt = $conn->executeQuery($sql, $query->getParameters());
+        // print_r($result);
 
-        // var_dump($stmt);
+        // example 2:
+        // $result = $this->db->select('id', 'username')
+        //     ->where('id = ?')->setParameters([0 => 1])->get('users')->resultArray();
+
+        // echo $result = $this->db
+        //     ->insert('users')
+        //     ->values(
+        //         [
+        //             'username' => '?',
+        //             'password' => '?'
+        //         ]
+        //     )
+        //     ->setParameter(0, 'example@doctrine.com')
+        //     ->setParameter(1, '1232456')
+        //     ->getSQL();
+
+
+        // echo $this->db->lastQuery();
+
+
+        // $result = $this->db->executeQuery($sql, $query->getParameters())->resultArray();
+
+        // var_dump($result);
+
 
         // var_dump($stmt->fetch());
         // $stmt->debugDumpParams();
@@ -92,6 +113,9 @@ class Welcome extends \Controller
 //         ->setParameter(1, $editId)
 //         ->getQuery();
 // $p = $q->execute();
+
+        // $this->qb->update('model/User', 'u')
+        //     ->set('u.username', $this->qb->expr()->literal($username))
 
         // $conn->query($sql);
 
