@@ -14,28 +14,42 @@ class Welcome extends \Controller
     public function load()
     {
         $this->c['url'];
-        $this->c['db'];
+        // $this->db = $this->c->get('qb', ['connection' => 'default']);
 
-        $this->db->query("SELECT * FROM users");
-        $this->db->prepare("SELECT * FROM users WHERE id = ?")->bindValue(1, 1, \PDO::PARAM_INT)->execute();
+        $this->c['db'];
+        // 
+        // 
+
+
+        try {
+
+            $this->db->beginTransaction(); // Operasyonları başlat
+            echo $this->db->delete('uses', ['id' => 17], ['id' => \PDO::PARAM_INT]);
+            $this->db->commit();      // Operasyonu bitti olarak kaydet
+
+            echo 'Veri başarı ile silindi.';
+
+        } catch(\Exception $e)
+        {    
+            $this->db->rollBack();    // İşlem başarısız olursa kaydedilen tüm verileri geri al.
+            echo $e->getMessage();    // Hata mesajını ekrana yazdır.
+        }
+
+        // $this->db->update('users', ['username' => 'user@example.com'], ['id' => 1], ['id' => \PDO::PARAM_STR]);
+
+
+
+        // echo $this->db->insert('users', ['username' => 'last@example.com']);
+
+        // $result = $this->db->query("SELECT * FROM ".$this->db->quoteIdentifier('users'))->resultArray();
+        // $this->db->prepare("SELECT * FROM users WHERE id = ?")->bindValue(1, 1, \PDO::PARAM_INT)->execute();
+
+
+        // var_dump($this->db->getConfiguration());
 
         // // var_dump($db);
 
-        // $this->db = $this->c->get('qb', false, ['connection' => 'default']);
-
         // var_dump($this->db);
-
-        // $qb = $this->c->get('qb', false, ['db' => $db]);
-        // var_dump($qb);
-
-
-        // $qb2 = $this->c->get('qb', false, ['db' => $db2]);
-        // var_dump($qb2);
-
-
-        // $qb($this->c['db']);
-    
-        // $this->db = $this->c['qb']->withParams(['connection' => 'default']);
 
         // $url = 'sqlite:dbname=:memory:';
         // $url = 'sqlite:dbname=/usr/local/var/db.sqlite';
@@ -45,7 +59,7 @@ class Welcome extends \Controller
          *
          * DOCTRINE DBAL CONNECTION class A EXTEND OL SONUCLAR resultArray() olarak alınabilisin.
          * 
-         * db - servisine aşağıdaki bağlantıya bir adapater yazılacak ve o class içerisinden DBAL tanımlanabilecek.
+         * db - servisine aşağıdaki bağlantıya bir adapter yazılacak ve o class içerisinden DBAL tanımlanabilecek.
          * dql - servisine doctrine query kurulacak
          */
 
@@ -70,7 +84,7 @@ class Welcome extends \Controller
         // example 1:
         // $result = $this->db->select('id', 'username')
         //     ->from('users')
-        //     ->where('id = ?')->setParameters([0 => 1])->get()->resultArray();
+        //     ->where('id = ?')->setParameters([0 => 1])->execute()->resultArray();
 
         // print_r($result);
 
@@ -88,7 +102,7 @@ class Welcome extends \Controller
         //     )
         //     ->setParameter(0, 'example@doctrine.com')
         //     ->setParameter(1, '1232456')
-        //     ->getSQL();
+        //     ->execute();
 
 
         // echo $this->db->lastQuery();

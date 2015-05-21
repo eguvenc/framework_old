@@ -18,7 +18,7 @@
 | Request
 |--------------------------------------------------------------------------
 */
-$c['app']->middleware('Http\Middlewares\Request');
+$c['app']->middleware(new Http\Middlewares\Request);
 
 /* End of file middlewares.php */
 /* Location: .app/middlewares.php */
