@@ -14,32 +14,49 @@ class Welcome extends \Controller
     public function load()
     {
         $this->c['url'];
+
+        // $this->db = $this->c['app']->provider('qb')->get();
+
         // $this->db = $this->c->get('qb', ['connection' => 'default']);
+
+        // var_dump($this->db);
+
 
         $this->c['db'];
         // 
         // 
 
+        // try {
 
-        try {
+        //     $this->db->beginTransaction(); // Operasyonları başlat
+        //     echo $this->db->delete('uses', ['id' => 17], ['id' => \PDO::PARAM_INT]);
+        //     $this->db->commit();      // Operasyonu bitti olarak kaydet
 
-            $this->db->beginTransaction(); // Operasyonları başlat
-            echo $this->db->delete('uses', ['id' => 17], ['id' => \PDO::PARAM_INT]);
-            $this->db->commit();      // Operasyonu bitti olarak kaydet
+        //     echo 'Veri başarı ile silindi.';
 
-            echo 'Veri başarı ile silindi.';
+        // } catch(\Exception $e)
+        // {    
+        //     $this->db->rollBack();    // İşlem başarısız olursa kaydedilen tüm verileri geri al.
+        //     echo $e->getMessage();    // Hata mesajını ekrana yazdır.
+        // }
 
-        } catch(\Exception $e)
-        {    
-            $this->db->rollBack();    // İşlem başarısız olursa kaydedilen tüm verileri geri al.
-            echo $e->getMessage();    // Hata mesajını ekrana yazdır.
-        }
+        // $this->db->update(
+        //     'users', 
+        //     ['password' => '123456', 'username' => 'user@example.com'], 
+        //     ['id' => 1], 
+        //     [
+        //         'id' => \PDO::PARAM_INT,
+        //         'username' => \PDO::PARAM_STR,
+        //         'password' => \PDO::PARAM_STR
+        //     ]
+        // );
+        
+        // $this->db->insert(
+        //     'users', 
+        //     ['username' => 'last@example.com', 'password' => 123456], 
+        //     ['username' => \PDO::PARAM_STR, 'password' => \PDO::PARAM_INT]
+        // );
 
-        // $this->db->update('users', ['username' => 'user@example.com'], ['id' => 1], ['id' => \PDO::PARAM_STR]);
-
-
-
-        // echo $this->db->insert('users', ['username' => 'last@example.com']);
 
         // $result = $this->db->query("SELECT * FROM ".$this->db->quoteIdentifier('users'))->resultArray();
         // $this->db->prepare("SELECT * FROM users WHERE id = ?")->bindValue(1, 1, \PDO::PARAM_INT)->execute();
@@ -77,7 +94,6 @@ class Welcome extends \Controller
         // http://doctrine-orm.readthedocs.org/en/latest/reference/query-builder.html#executing-a-query
 
         // $query = $this->db->createQueryBuilder();
-
 
         // http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html
 
