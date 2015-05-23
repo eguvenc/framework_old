@@ -28,8 +28,8 @@ return array(
         'enabled' => true,         // Enable / Disable logging ( If log disabled run php native errors )
     ],
 
-    'debugger' => [
-        'enabled' => false,
+    'http-debugger' => [
+        'enabled' =>  false,
         'socket'  => 'ws://127.0.0.1:9000'
     ],
 

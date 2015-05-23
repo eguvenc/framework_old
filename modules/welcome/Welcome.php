@@ -15,14 +15,30 @@ class Welcome extends \Controller
     {
         $this->c['url'];
 
-        // $this->db = $this->c['app']->provider('qb')->get();
+        $this->db = $this->c['app']->provider('qb')->get();
 
         // $this->db = $this->c->get('qb', ['connection' => 'default']);
 
         // var_dump($this->db);
 
 
-        $this->c['db'];
+        // $this->c['db'];
+
+        // echo $this->db
+        //     ->select('id', 'name')
+        //     ->from('users')
+        //     ->getSQL();
+
+        $or = $this->db->expr()->orx();
+        $or->add($this->db->expr()->eq('u.id', 1));
+        $or->add($this->db->expr()->eq('u.id', 2));
+
+        echo $this->db->update('users', 'u')
+            ->set('u.password', md5('password'))
+            ->where($or);
+
+
+        
         // 
         // 
 
