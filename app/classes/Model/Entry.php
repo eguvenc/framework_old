@@ -2,7 +2,7 @@
 
 namespace Model;
 
-class Entry extends \Obullo\Model\Easy
+class Entry extends \Obullo\Database\Model
 {
     public $title;
     public $content;
@@ -107,6 +107,3 @@ class Entry extends \Obullo\Model\Easy
     }
 
 }
-
-/* End of file entry.php */
-/* Location: .model/Entry.php */

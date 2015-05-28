@@ -5,7 +5,7 @@ return array(
     'connections' =>
     [
         'default' => [
-            'server' => 'mongodb://'.$c['env']['MONGO_USERNAME'].':'.$c['env']['MONGO_PASSWORD'].'@'.$c['env']['MONGO_HOST'].':27017',
+            'server' => 'mongodb://root:'.$c['env']['MONGO_PASSWORD'].'@localhost:27017',
             'options'  => ['connect' => true]
         ],
         'second' => [

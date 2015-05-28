@@ -4,8 +4,8 @@ return array(
 
     'connections' => 
     [
-        'default' => [         // Default connection always use serializer none
-            'host' => $c['env']['REDIS_HOST'],
+        'default' => [              // Default connection always use serializer none
+            'host' => '127.0.0.1',
             'port' => 6379,
             'options' => [
                 'persistent' => false,
@@ -18,8 +18,8 @@ return array(
             ]
         ],
         
-        'second' => [         // Second connection always use a "serializer"
-            'host' => $c['env']['REDIS_HOST'],
+        'second' => [               // Second connection always use a "serializer"
+            'host' => '127.0.0.1',
             'port' => 6379,
             'options' => [
                 'persistent' => false,

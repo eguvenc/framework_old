@@ -45,8 +45,3 @@ class PriorityFilter implements FilterInterface
         $this->c = $c;
     }
 }
-
-// END PriorityFilter class
-
-/* End of file PriorityFilter.php */
-/* Location: .app/Log/Filters/PriorityFilter.php */

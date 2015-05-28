@@ -11,7 +11,7 @@ You can create your own service providers in here. Please read this documentatio
 Open app/providers.php file and add your service provider.
 
 ```php
-$c->register('Service\Providers\MyServiceProvider');
+$c['app']->register('Service\Providers\MyServiceProvider');
 ```
 
 ### Loading Service Providers

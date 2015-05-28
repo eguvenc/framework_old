@@ -22,7 +22,7 @@ class Login extends \Controller
     /**
      * Index
      *
-     * @event->subscribe('Event\Login\Attempt');
+     * @event->when("post")->subscribe('Event\Login\Attempt');
      *  
      * @return void
      */
@@ -40,18 +40,18 @@ class Login extends \Controller
 
             } else {
 
-                $result = $this->user->login->attempt(
-                    array(
+                $authResult = $this->user->login->attempt(
+                    [
                         $this->user['db.identifier'] => $this->validator->getValue('email'), 
                         $this->user['db.password']   => $this->validator->getValue('password')
-                    ),
+                    ],
                     $this->request->post('rememberMe')
                 );
 
-                if ($result->isValid()) {
+                if ($authResult->isValid()) {
                     $this->flash->success('You have authenticated successfully.')->url->redirect('membership/restricted');
                 } else {
-                    $this->form->setResults($result->getArray());
+                    $this->form->setResults($authResult->getArray());
                 }
             }
         }

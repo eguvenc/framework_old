@@ -185,6 +185,3 @@ Array
 )
 
 */
-
-/* End of file Logger.php */
-/* Location: .app/classes/Workers/Logger.php */

@@ -22,7 +22,6 @@ $c['router']->defaultPage('welcome');
 
 // $c['router']->attach('(.)', array('maintenance'));
 
-
 $c['router']->group(
     [
         'name' => 'GenericUsers', 
@@ -39,23 +38,22 @@ $c['router']->group(
             $this->get('(?:en|tr|de|nl)', 'welcome');  // default controller
 
             $this->attach('.*'); // all urls
+    }
+);
 
 
-            $this->group(
-                ['name' => 'AuthorizedUsers', 'middleware' => array()],  //  Auth // Guest
-                function () {
+$c['router']->group(
+    ['name' => 'AuthorizedUsers', 'middleware' => array('Auth', 'Guest')],  //  Auth // Guest
+    function () {
 
-                    $this->defaultPage('welcome');
-                    
+        $this->defaultPage('welcome');
+        
 
-                    // $this->attach('membership/restricted');
+        $this->attach('membership/restricted');
 
-                    // $this->get('tutorials/hello_world.*', 'tutorials/hello_scheme');
-                    // $this->attach('(.*)'); // all url
-                    // $this->attach('((?!tutorials/hello_world).)*$');  // url not contains "tutorials/hello_world"
-                }
-            );
-
+        // $this->get('tutorials/hello_world.*', 'tutorials/hello_scheme');
+        // $this->attach('(.*)'); // all url
+        // $this->attach('((?!tutorials/hello_world).)*$');  // url not contains "tutorials/hello_world"
     }
 );
 

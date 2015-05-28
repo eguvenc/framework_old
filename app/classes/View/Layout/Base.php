@@ -23,8 +23,3 @@ Trait Base
         );
     }
 }
-
-// END Base class
-
-/* End of file Base.php */
-/* Location: .app/classes/View/Layout/Base.php */

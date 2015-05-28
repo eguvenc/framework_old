@@ -175,6 +175,3 @@ class Mailer implements JobInterface
 "send_at": "date"
 }
 */
-
-/* End of file Mailer.php */
-/* Location: .app/classes/Mailer.php */

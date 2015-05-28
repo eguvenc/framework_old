@@ -14,33 +14,47 @@ class Welcome extends \Controller
     public function load()
     {
         $this->c['url'];
+        $this->c['session'];
+
+        // $data = array(
+        //     0 => [
+        //         'id' => 1,
+        //         'username' => 'user@example.com',
+        //     ],
+        //     2 => [
+        //         'id' => 2,
+        //         'username' => 'test@example.com',
+        //     ]
+        // );
+
+        // $this->session->set('key', $data);
+
+        // $a = $this->session->get('key');
+        // print_r($a);
 
         $this->db = $this->c['app']->provider('qb')->get();
 
-        // $this->db = $this->c->get('qb', ['connection' => 'default']);
+    
+        // // $this->db = $this->c->get('qb', ['connection' => 'default']);
 
-        // var_dump($this->db);
-
-
-        // $this->c['db'];
-
-        // echo $this->db
-        //     ->select('id', 'name')
-        //     ->from('users')
-        //     ->getSQL();
-
-        $or = $this->db->expr()->orx();
-        $or->add($this->db->expr()->eq('u.id', 1));
-        $or->add($this->db->expr()->eq('u.id', 2));
-
-        echo $this->db->update('users', 'u')
-            ->set('u.password', md5('password'))
-            ->where($or);
+        // // var_dump($this->db);
 
 
-        
-        // 
-        // 
+        // // $this->c['db'];
+
+        // // echo $this->db
+        // //     ->select('id', 'name')
+        // //     ->from('users')
+        // //     ->getSQL();
+
+        // $or = $this->db->expr()->orx();
+        // $or->add($this->db->expr()->eq('u.id', 1));
+        // $or->add($this->db->expr()->eq('u.id', 2));
+
+        // echo $this->db->update('users', 'u')
+        //     ->set('u.password', md5('password'))
+        //     ->where($or);
+
 
         // try {
 

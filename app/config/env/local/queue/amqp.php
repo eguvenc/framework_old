@@ -10,9 +10,9 @@ return array(
     'connections' => 
     [
         'default' => [
-            'host'  => $c['env']['AMQP_HOST'],
+            'host'  => '127.0.0.1',
             'port'  => 5672,
-            'username'  => $c['env']['AMQP_USERNAME'],
+            'username'  => 'root',
             'password'  => $c['env']['AMQP_PASSWORD'],
             'vhost' => '/',
         ]
