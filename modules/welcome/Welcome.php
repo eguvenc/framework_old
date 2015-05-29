@@ -14,7 +14,6 @@ class Welcome extends \Controller
     public function load()
     {
         $this->c['url'];
-        $this->c['session'];
 
         // $data = array(
         //     0 => [
