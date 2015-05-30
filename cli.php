@@ -4,15 +4,16 @@
 | Cli Requests
 |--------------------------------------------------------------------------
 */
-require OBULLO_CLI;
+require OBULLO. 'Application/Cli.php';
+require OBULLO .'Application/Autoloader.php';
 /*
 |--------------------------------------------------------------------------
 | Autoloader
 |--------------------------------------------------------------------------
 */
-require 'vendor/autoload.php';
+// require 'vendor/autoload.php';
 
-// Obullo\Application\Cli::registerAutoloader();
+Obullo\Application\Autoloader::register();
 /*
 |--------------------------------------------------------------------------
 | Initialize

@@ -10,15 +10,16 @@ require 'constants';
 | Http Requests
 |--------------------------------------------------------------------------
 */
-require OBULLO_HTTP;
+require OBULLO. 'Application/Http.php';
+require OBULLO .'Application/Autoloader.php';
 /*
 |--------------------------------------------------------------------------
 | Autoloader
 |--------------------------------------------------------------------------
 */
-require 'vendor/autoload.php';
+// require 'vendor/autoload.php';
 
-// Obullo\Application\Autoloader::register();
+Obullo\Application\Autoloader::register();
 /*
 |--------------------------------------------------------------------------
 | Initialize

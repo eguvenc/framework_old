@@ -28,11 +28,6 @@ return array(
         'enabled' => true,         // Enable / Disable logging ( If log disabled run php native errors )
     ],
 
-    'http-debugger' => [
-        'enabled' =>  false,
-        'socket'  => 'ws://127.0.0.1:9000'
-    ],
-
     'uri' => [
         'protocol' => 'REQUEST_URI',   // Options: REQUEST_URI, QUERY_STRING, PATH_INFO Example : http://example.com/login?param=1&param2=yes
         'sanitizer' => true,           // Remove all characters except letters, digits and $-_.+!*'(],{}|\\^~[]`<>#%";/?:@&=.

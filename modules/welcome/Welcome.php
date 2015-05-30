@@ -31,7 +31,7 @@ class Welcome extends \Controller
         // $a = $this->session->get('key');
         // print_r($a);
 
-        $this->db = $this->c['app']->provider('qb')->get();
+        // $this->db = $this->c['app']->provider('qb')->get();
 
     
         // // $this->db = $this->c->get('qb', ['connection' => 'default']);
