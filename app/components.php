@@ -7,93 +7,24 @@
 */
 /*
 |--------------------------------------------------------------------------
-| Event
+| Register core components
 |--------------------------------------------------------------------------
 */
-$c['event'] = function () use ($c) {
-    return new Obullo\Event\Event($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Exception
-|--------------------------------------------------------------------------
-*/
-$c['exception'] = function () use ($c) {
-    return new Obullo\Error\Exception($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Translator
-|--------------------------------------------------------------------------
-*/
-$c['translator'] = function () use ($c) {
-    return new Obullo\Translation\Translator($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Http Request
-|--------------------------------------------------------------------------
-*/
-$c['request'] = function () use ($c) { 
-    return new Obullo\Http\Request($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Http Response
-|--------------------------------------------------------------------------
-*/
-$c['response'] = function () use ($c) { 
-    return new Obullo\Http\Response($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Input Validate Filter
-|--------------------------------------------------------------------------
-*/
-$c['is'] = function () use ($c) {
-    return new Obullo\Filters\Is($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Input Clean Filter
-|--------------------------------------------------------------------------
-*/
-$c['clean'] = function () use ($c) {
-    return new Obullo\Filters\Clean($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Http User Agent
-|--------------------------------------------------------------------------
-*/
-$c['agent'] = function () use ($c) {
-    return new Obullo\Http\UserAgent($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Layers
-|--------------------------------------------------------------------------
-*/
-$c['layer'] = function () use ($c) { 
-    return new Obullo\Layer\Request($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Uri
-|--------------------------------------------------------------------------
-*/
-$c['uri'] = function () use ($c) {
-    return new Obullo\Uri\Uri($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Router
-|--------------------------------------------------------------------------
-*/
-$c['router'] = function () use ($c) { 
-    return new Obullo\Router\Router($c);
-};
-
+$c['app']->component(
+    [
+        'event' => 'Obullo\Event\Event',
+        'exception' => 'Obullo\Error\Exception',
+        'translator' => 'Obullo\Translation\Translator',
+        'request' => 'Obullo\Http\Request',
+        'response' => 'Obullo\Http\Response',
+        'is' => 'Obullo\Http\Filters\Is',
+        'clean' => 'Obullo\Http\Filters\Clean',
+        'agent' => 'Obullo\Http\UserAgent',
+        'layer' => 'Obullo\Layer\Request',
+        'uri' => 'Obullo\Uri\Uri',
+        'router' => 'Obullo\Router\Router',
+    ]
+);
 
 /* End of file components.php */
 /* Location: .app/components.php */

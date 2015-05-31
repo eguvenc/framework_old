@@ -6,4 +6,4 @@ return array(
 );
 
 /* End of file sendmail.php */
-/* Location: .app/config/env/local/mailer/sendmail.php */
+/* Location: .app/config/env.local/mailer/sendmail.php */

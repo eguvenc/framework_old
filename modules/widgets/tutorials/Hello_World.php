@@ -4,8 +4,6 @@ namespace Widgets\Tutorials;
 
 class Hello_World extends \Controller
 {
-     // use \View\Layout\Base;
-
     /**
      * Loader
      * 

@@ -28,6 +28,13 @@ return array(
         'enabled' => true,         // Enable / Disable logging ( If log disabled run php native errors )
     ],
 
+    'http' => [
+        'debugger' => [
+            'enabled' => false,
+            'socket' => 'ws://127.0.0.1:9000'
+        ]
+    ],
+    
     'uri' => [
         'protocol' => 'REQUEST_URI',   // Options: REQUEST_URI, QUERY_STRING, PATH_INFO Example : http://example.com/login?param=1&param2=yes
         'sanitizer' => true,           // Remove all characters except letters, digits and $-_.+!*'(],{}|\\^~[]`<>#%";/?:@&=.
@@ -44,8 +51,8 @@ return array(
         ]
      ],
 
-    'annotations' => [
-        'enabled' => true,   // Enable / Disable "annotations".
+    'controller' => [
+        'annotations' => true,   // Enable / Disable "annotations".
     ],
 
     'layer' => [
@@ -74,4 +81,4 @@ return array(
 );
 
 /* End of file config.php */
-/* Location: .app/config/env/local/config.php */
+/* Location: .app/config/env.local/config.php */

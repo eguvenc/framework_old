@@ -40,4 +40,4 @@ return array(
 );
 
 /* End of file logger.php */
-/* Location: .app/config/env/local/logger.php */
+/* Location: .app/config/env.local/logger.php */
