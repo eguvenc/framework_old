@@ -16,8 +16,8 @@ return array(
     
         'storage' => '\Obullo\Authentication\Storage\Null',  // Storage can be a Cache package or custom database like Redis.
         'provider' => [
-            'driver' => 'redis',                              // If storage Not Cache provider['driver'] and storage values must be same.
-            'connection' => 'second'
+            'driver' => 'null',                              // If storage Not Cache provider['driver'] and storage values must be same.
+            'connection' => 'null'
         ],
         'block' => [
             'permanent' => [
@@ -26,6 +26,15 @@ return array(
             'temporary'  => [
                 'lifetime' => 300    // 5 minutes is default temporary identity lifetime.
             ]
+        ]
+    ],
+
+    'tables' => [
+        'users' => [
+            'db.id' => 'id',
+            'db.identifier' => 'username',
+            'db.password' => 'password',
+            'db.rememberToken' => 'remember_token',
         ]
     ],
 

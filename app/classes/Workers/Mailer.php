@@ -4,9 +4,9 @@ namespace Workers;
 
 use Obullo\Queue\Job;
 use Obullo\Queue\JobInterface;
-use Obullo\Container\Container;
 use Obullo\Mailer\Transport\Smtp;
 use Obullo\Mailer\Transport\Mandrill;
+use Obullo\Container\ContainerInterface;
 
  /**
  * Mail Worker
@@ -21,7 +21,7 @@ use Obullo\Mailer\Transport\Mandrill;
 class Mailer implements JobInterface
 {
     /**
-     * Container
+     * Application
      * 
      * @var object
      */
@@ -32,7 +32,7 @@ class Mailer implements JobInterface
      * 
      * @param object $c container
      */
-    public function __construct(Container $c)
+    public function __construct(ContainerInterface $c)
     {
         $this->c = $c;
     }

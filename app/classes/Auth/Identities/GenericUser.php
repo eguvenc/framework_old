@@ -2,13 +2,12 @@
 
 namespace Auth\Identities;
 
-use Obullo\Authentication\AbstractUserIdentity;
-use Obullo\Authentication\Identities\GenericUserInterface;
+use Obullo\Authentication\Identity\AbstractIdentity;
 
-Class GenericUser extends AbstractUserIdentity implements GenericUserInterface
+Class GenericUser extends AbstractIdentity
 {
     /**
-     * Get the unique identifier for the user.
+     * Get the identifier input value
      *
      * @return mixed
      */
@@ -20,9 +19,9 @@ Class GenericUser extends AbstractUserIdentity implements GenericUserInterface
     }
 
     /**
-     * Get the password for the user.
+     * Get the password input value
      *
-     * @return string
+     * @return mixed
      */
     public function getPassword()
     {

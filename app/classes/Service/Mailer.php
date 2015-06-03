@@ -2,8 +2,8 @@
 
 namespace Service;
 
-use Obullo\Container\Container;
 use Obullo\Service\ServiceInterface;
+use Obullo\Container\ContainerInterface;
 
 class Mailer implements ServiceInterface
 {
@@ -16,7 +16,7 @@ class Mailer implements ServiceInterface
      * 
      * @return void
      */
-    public function register(Container $c)
+    public function register(ContainerInterface $c)
     {
         $c['mailer'] = function () use ($c) {
 

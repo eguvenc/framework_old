@@ -3,8 +3,8 @@
 namespace Service;
 
 use Obullo\Queue\Handler\AMQP;
-use Obullo\Container\Container;
 use Obullo\Service\ServiceInterface;
+use Obullo\Container\ContainerInterface;
 
 class Queue implements ServiceInterface
 {
@@ -15,7 +15,7 @@ class Queue implements ServiceInterface
      * 
      * @return void
      */
-    public function register(Container $c)
+    public function register(ContainerInterface $c)
     {
         $c['queue'] = function () use ($c) {
             return new AMQP($c);

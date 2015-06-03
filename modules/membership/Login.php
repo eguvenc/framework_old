@@ -2,6 +2,8 @@
 
 namespace Membership;
 
+use Obullo\Authentication\AuthConfig;
+
 class Login extends \Controller
 {
     /**
@@ -42,8 +44,8 @@ class Login extends \Controller
 
                 $authResult = $this->user->login->attempt(
                     [
-                        $this->user['db.identifier'] => $this->validator->getValue('email'), 
-                        $this->user['db.password']   => $this->validator->getValue('password')
+                        AuthConfig::get('db.identifier') => $this->validator->getValue('email'), 
+                        AuthConfig::get('db.password') => $this->validator->getValue('password'),
                     ],
                     $this->request->post('rememberMe')
                 );

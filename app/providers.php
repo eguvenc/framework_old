@@ -16,8 +16,8 @@
 $c['app']->register(
     [
         'logger' => 'Obullo\Service\Providers\LoggerServiceProvider',
-        // 'database' => 'Obullo\Service\Providers\DatabaseServiceProvider',
-        'database' => 'Obullo\Service\Providers\DoctrineDBALServiceProvider',
+        'database' => 'Obullo\Service\Providers\DatabaseServiceProvider',
+        // 'database' => 'Obullo\Service\Providers\DoctrineDBALServiceProvider',
         'qb' => 'Obullo\Service\Providers\DoctrineQueryBuilderServiceProvider',
         'cache' => 'Obullo\Service\Providers\CacheServiceProvider',
         'redis' => 'Obullo\Service\Providers\RedisServiceProvider',

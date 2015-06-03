@@ -11,6 +11,8 @@
 
 $c['router']->domain($c['config']['url']['webhost']);  // Root domain
 $c['router']->defaultPage('welcome');
+
+
 // $c['router']->error404('errors/custom404');
 
 // $c['router']->get(

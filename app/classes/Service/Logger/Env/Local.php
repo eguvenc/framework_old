@@ -2,8 +2,8 @@
 
 namespace Service\Logger\Env;
 
-use Obullo\Container\Container;
 use Obullo\Service\ServiceInterface;
+use Obullo\Container\ContainerInterface;
 
 /**
  * Log Service
@@ -24,11 +24,12 @@ class Local implements ServiceInterface
      * 
      * @return void
      */
-    public function register(Container $c)
+    public function register(ContainerInterface $c)
     {
         $c['logger'] = function () use ($c) {
-
+            
             $logger = $c['app']->provider('logger')->get(['queue' => false]);
+            // $logger = $c['app']->provider('qlogger')->get();
             /*
             |--------------------------------------------------------------------------
             | Register Filters
@@ -49,6 +50,7 @@ class Local implements ServiceInterface
             |--------------------------------------------------------------------------
             */
             $logger->addWriter('file')->filter('priority@notIn', array());
+
             return $logger;
         };
     }

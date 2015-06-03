@@ -2,6 +2,8 @@
 
 namespace Membership;
 
+use Obullo\Authentication\AuthConfig;
+
 class Logout extends \Controller
 {
     /**
@@ -27,6 +29,6 @@ class Logout extends \Controller
         // $this->user->identity->destroy();
         // $this->user->identity->forgetMe();
         
-        $this->flash->info('You succesfully logged out')->url->redirect($this->user['url.login']);
+        $this->flash->info('You succesfully logged out')->url->redirect(AuthConfig::get('url.login'));
     }
 }

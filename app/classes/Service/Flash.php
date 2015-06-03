@@ -3,8 +3,8 @@
 namespace Service;
 
 use Obullo\Flash\Session;
-use Obullo\Container\Container;
 use Obullo\Service\ServiceInterface;
+use Obullo\Container\ContainerInterface;
 
 class Flash implements ServiceInterface
 {
@@ -15,7 +15,7 @@ class Flash implements ServiceInterface
      * 
      * @return void
      */
-    public function register(Container $c)
+    public function register(ContainerInterface $c)
     {
         $c['flash'] = function () use ($c) {
             return new Session($c);

@@ -2,9 +2,9 @@
 
 namespace Service;
 
-use Obullo\Container\Container;
 use Obullo\Crypt\Password\Bcrypt;
 use Obullo\Service\ServiceInterface;
+use Obullo\Container\ContainerInterface;
 
 class Password implements ServiceInterface
 {
@@ -15,7 +15,7 @@ class Password implements ServiceInterface
      * 
      * @return void
      */
-    public function register(Container $c)
+    public function register(ContainerInterface $c)
     {
         $c['password'] = function () use ($c) {
             $bcrypt = new Bcrypt($c);

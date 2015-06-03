@@ -2,8 +2,8 @@
 
 namespace Service;
 
-use Obullo\Container\Container;
 use Obullo\Service\ServiceInterface;
+use Obullo\Container\ContainerInterface;
 use Obullo\Session\Session as SessionClass;
 
 class Session implements ServiceInterface
@@ -15,7 +15,7 @@ class Session implements ServiceInterface
      * 
      * @return void
      */
-    public function register(Container $c)
+    public function register(ContainerInterface $c)
     {
         $c['session'] = function () use ($c) {
             $session = new SessionClass($c);

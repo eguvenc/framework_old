@@ -4,8 +4,9 @@ namespace Workers;
 
 use Obullo\Queue\Job;
 use Obullo\Queue\JobInterface;
-use Obullo\Container\Container;
 use Obullo\Log\LogWriterRaidController;
+use Obullo\Container\ContainerInterface;
+
 use Obullo\Log\Handler\File as FileHandler;
 use Obullo\Log\Handler\Mongo as MongoHandler;
 use Obullo\Log\Handler\Email as EmailHandler;
@@ -20,10 +21,10 @@ use Obullo\Log\Handler\Email as EmailHandler;
  * @license   http://opensource.org/licenses/MIT MIT license
  * @link      http://obullo.com/docs/queue
  */
-class Logger implements JobInterface
+class Logger
 {
     /**
-     * Container
+     * Application
      * 
      * @var object
      */
@@ -48,7 +49,7 @@ class Logger implements JobInterface
      * 
      * @param object $c container
      */
-    public function __construct(Container $c)
+    public function __construct(ContainerInterface $c)
     {
         $this->c = $c;
     }
@@ -121,7 +122,7 @@ class Logger implements JobInterface
                 $handler = null;
                 break;
             }
-            if ($handler != null AND $handler->isAllowed($array)) { // Check write permissions
+            if ($handler != null && $handler->isAllowed($array)) { // Check write permissions
 
                 $handler->write($array);  // Do job
                 $handler->close();

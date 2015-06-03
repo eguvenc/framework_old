@@ -2,9 +2,9 @@
 
 namespace Service;
 
-use Obullo\Container\Container;
 use Obullo\Service\ServiceInterface;
-use Obullo\Authentication\AuthServiceProvider;
+use Obullo\Authentication\AuthManager;
+use Obullo\Container\ContainerInterface;
 
 class User implements ServiceInterface
 {
@@ -15,27 +15,23 @@ class User implements ServiceInterface
      * 
      * @return void
      */
-    public function register(Container $c)
+    public function register(ContainerInterface $c)
     {
-        $c['user'] = function () use ($c) {
+        $c['user'] = function ($params = ['table' => 'users']) use ($c) {
 
-            $user = new AuthServiceProvider(
-                $c,
-                [
-                    'cache.key'        => 'Auth',
-                    'url.login'        => '/membership/login',
-                    'db.adapter'       => '\Obullo\Authentication\Adapter\Database', // Adapter
-                    'db.model'         => '\Obullo\Authentication\Model\User', // User model, you can replace it with your own.
-                    'db.provider'      => 'database',
-                    'db.connection'    => 'default',
-                    'db.tablename'     => 'users', // Database column settings
-                    'db.id'            => 'id',
-                    'db.identifier'    => 'username',
-                    'db.password'      => 'password',
-                    'db.rememberToken' => 'remember_token',
-                ]
-            );
-            return $user;
+            $parameters = [
+                'cache.key'     => 'Auth',
+                'url.login'     => '/membership/login',
+                'db.adapter'    => '\Obullo\Authentication\Adapter\Database', // Adapter
+                'db.model'      => '\Obullo\Authentication\Model\User',       // User model, you can replace it with your own.
+                'db.provider'   => 'database',
+                'db.connection' => 'default',
+                'db.tablename'  => $params['table'],
+            ];
+            $manager = new AuthManager($c);
+            $manager->setConfiguration($parameters);
+
+            return $manager;
         };
     }
 }

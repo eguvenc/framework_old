@@ -3,8 +3,8 @@
 namespace Log\Filters;
 
 use Obullo\Log\Logger;
-use Obullo\Container\Container;
 use Obullo\Log\FilterInterface;
+use Obullo\Container\ContainerInterface;
 use Obullo\Log\Filters\LogPriorityFilterTrait;
 
 /**
@@ -40,7 +40,7 @@ class PriorityFilter implements FilterInterface
      * 
      * @param object $c container
      */
-    public function __construct(Container $c)
+    public function __construct(ContainerInterface $c)
     {
         $this->c = $c;
     }
