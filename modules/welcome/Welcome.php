@@ -15,6 +15,10 @@ class Welcome extends \Controller
     {
         $this->c['url'];
 
+        $this->c->get('user', ['table' => 'users']);
+        $this->c->get('user', ['table' => 'users']);
+        $this->c->get('user', ['table' => 'users']);
+
         // $data = array(
         //     0 => [
         //         'id' => 1,

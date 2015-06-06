@@ -19,6 +19,8 @@ class User implements ServiceInterface
     {
         $c['user'] = function ($params = ['table' => 'users']) use ($c) {
 
+            print_r($params);
+
             $parameters = [
                 'cache.key'     => 'Auth',
                 'url.login'     => '/membership/login',
