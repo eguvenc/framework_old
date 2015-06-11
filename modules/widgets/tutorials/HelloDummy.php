@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-class Hello_Dummy extends \Controller
+class HelloDummy extends \Controller
 {
     /**
      * Index
@@ -21,6 +21,3 @@ class Hello_Dummy extends \Controller
         echo '<p></p>';
     }
 }
-
-/* End of file hello_dummy.php */
-/* Location: .controllers/tutorials/hello_dummy.php */

@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-class Hello_Captcha extends \Controller
+class HelloCaptcha extends \Controller
 {
     /**
      * Loader

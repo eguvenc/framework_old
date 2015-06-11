@@ -17,7 +17,7 @@
         <section><?php echo $this->form->getValidationErrors() ?></section>
 
         <section>
-            <form action="/widgets/tutorials/hello_form" method="POST">
+            <form action="/widgets/tutorials/helloForm" method="POST">
 
                 <input type="hidden" name="<?php echo $this->c['csrf']->getTokenName() ?>" value="<?php echo $this->c['csrf']->getToken(); ?>" />
 

@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-class Hello_Layers extends \Controller
+class HelloLayers extends \Controller
 {
     /**
      * Loader
@@ -23,9 +23,9 @@ class Hello_Layers extends \Controller
      */
     public function index()
     {
-        $a = $this->layer->get('widgets/tutorials/hello_dummy/index/1/2/3');
+        $a = $this->layer->get('widgets/tutorials/helloDummy/index/1/2/3');
         $b = $this->layer->get('welcome/dummy/index/4/5/6');
-        $c = $this->layer->get('widgets/tutorials/hello_dummy/index/7/8/9');
+        $c = $this->layer->get('widgets/tutorials/helloDummy/index/7/8/9');
 
         $this->view->load(
             'hello_layers', 
@@ -37,6 +37,3 @@ class Hello_Layers extends \Controller
         );
     }
 }
-
-/* End of file hello_layers.php */
-/* Location: .controllers/tutorials/hello_layers.php */

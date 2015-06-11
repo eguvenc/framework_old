@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-class Hello_Form extends \Controller
+class HelloForm extends \Controller
 {
     /**
      * Loader
@@ -55,6 +55,3 @@ class Hello_Form extends \Controller
     }
     
 }
-
-/* End of file hello_form.php */
-/* Location: .modules/tutorials/hello_form.php */

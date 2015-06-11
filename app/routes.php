@@ -34,7 +34,7 @@ $c['router']->group(
 
             $this->defaultPage('welcome');
 
-            // $this->match(['get', 'post'], 'widgets/tutorials/hello_form')->middleware('Csrf');
+            // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
 
             $this->get('(?:en|tr|de|nl)/(.*)', '$1');
             $this->get('(?:en|tr|de|nl)', 'welcome');  // default controller
@@ -53,9 +53,9 @@ $c['router']->group(
 
         $this->attach('membership/restricted');
 
-        // $this->get('tutorials/hello_world.*', 'tutorials/hello_scheme');
+        // $this->get('tutorials/helloWorld.*', 'tutorials/helloLayout');
         // $this->attach('(.*)'); // all url
-        // $this->attach('((?!tutorials/hello_world).)*$');  // url not contains "tutorials/hello_world"
+        // $this->attach('((?!tutorials/helloWorld).)*$');  // url not contains "tutorials/hello_world"
     }
 );
 

@@ -15,6 +15,20 @@ class Welcome extends \Controller
     {
         $this->c['url'];
 
+        // print_r(getallheaders());
+
+        // echo $this->c['response']->json(array('response' => 'ok' , 'error' => false));
+
+        // echo '<pre>';
+        // print_r($_REQUEST);
+        // echo $_SERVER['REQUEST_METHOD'].'<br>';
+        // echo $_SERVER['QUERY_STRING'].'<br>';
+        // echo $_SERVER['REQUEST_URI'].'<br>';
+        // // print_r($_SERVER);
+        // print_r(getallheaders());
+        // echo '</pre>';
+        // die;
+
         // $data = array(
         //     0 => [
         //         'id' => 1,

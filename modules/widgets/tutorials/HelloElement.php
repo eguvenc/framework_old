@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-class Hello_Ajax extends \Controller
+class HelloElement extends \Controller
 {
     /**
      * Loader
@@ -11,7 +11,11 @@ class Hello_Ajax extends \Controller
      */
     public function load()
     {
+        $this->c['url'];
+        $this->c['view'];
         $this->c['form'];
+        $this->c['request'];
+        $this->c['element'];
     }
 
     /**
@@ -21,30 +25,24 @@ class Hello_Ajax extends \Controller
      */
     public function index()
     {
-        if ($this->c['request']->isAjax()) { // Is Ajax ?
-
+        if ($this->request->isPost()) {
+            
             $this->c['validator'];
 
             $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
-            $this->validator->setRules('agreement', 'User Agreement', 'required|exact(1)');
-            
+            $this->validator->setRules('agreement', 'User Agreement', 'required');
+
             if ($this->validator->isValid()) {
-                $this->validator->setError('email', 'Custom Error Example: There is an error in email field !');
-                $this->form->error('There are some errors in form fields.');
+                $this->form->success('Form validation success.');
+            } else {
+                $this->form->error('Form validation failed.');
             }
             $this->form->setErrors($this->validator);
-            echo $this->c['response']->json($this->form->outputArray());
-            return;
         }
 
-        $this->c['url'];
-        $this->c['view']->load(
-            'hello_ajax',
-            [
-                'title' => 'Hello Ajax World !',
-            ]
-        );
+        $this->c['view']->load('hello_element');
     }
+    
 }

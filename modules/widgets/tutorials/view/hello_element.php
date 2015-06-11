@@ -17,7 +17,7 @@
         <section><?php echo $this->form->getValidationErrors() ?></section>
 
         <section>
-            <?php echo $this->element->form('/widgets/tutorials/hello_element') ?>
+            <?php echo $this->element->form('/widgets/tutorials/helloElement') ?>
 
                 <table width="100%">
                     <tr>

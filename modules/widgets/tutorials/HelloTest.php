@@ -34,7 +34,3 @@ class Hello_Test extends \Controller
 
     }
 }
-
-
-/* End of file hello_test.php */
-/* Location: .controllers/tutorials/hello_test.php */

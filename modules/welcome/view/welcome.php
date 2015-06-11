@@ -22,14 +22,14 @@
             <h2>Getting  Started with Tutorials</h2>
 
             <ol>
-                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_world', 'Hello World') ?></li>
-                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_layout', 'Hello Layout') ?></li>
-                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_form', 'Hello Form') ?></li>
-                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_element', 'Hello Element') ?></li>
-                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_ajax', 'Hello Ajax') ?></li>
-                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_task', 'Hello Task') ?></li>
-                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_layers', 'Hello Layers') ?></li>
-                <li><?php echo $this->url->anchor('/widgets/tutorials/hello_captcha', 'Hello Captcha') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/helloWorld', 'Hello World') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/helloLayout', 'Hello Layout') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/helloForm', 'Hello Form') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/helloElement', 'Hello Element') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/helloAjax', 'Hello Ajax') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/helloTask', 'Hello Task') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/helloLayers', 'Hello Layers') ?></li>
+                <li><?php echo $this->url->anchor('/widgets/tutorials/helloCaptcha', 'Hello Captcha') ?></li>
             </ol>
 
         </section>

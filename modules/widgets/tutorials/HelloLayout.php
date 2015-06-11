@@ -2,7 +2,7 @@
 
 namespace Widgets\Tutorials;
 
-class Hello_Layout extends \Controller
+class HelloLayout extends \Controller
 {
     use \View\Layout\Base;
 
@@ -31,6 +31,3 @@ class Hello_Layout extends \Controller
         );
     }
 }
-
-/* End of file hello_layout.php */
-/* Location: .controllers/tutorials/hello_layout.php */

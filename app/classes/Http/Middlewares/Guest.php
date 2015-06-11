@@ -2,7 +2,6 @@
 
 namespace Http\Middlewares;
 
-use Obullo\Container\Container;
 use Obullo\Application\Middleware;
 
 class Guest extends Middleware
@@ -21,7 +20,7 @@ class Guest extends Middleware
      */
     public function load()
     {
-        $this->user = $this->c['user'];
+        $this->user = $this->c->get('user');
         $this->next->load();
     }
 

@@ -2,7 +2,6 @@
 
 namespace Http\Middlewares;
 
-use Obullo\Container\Container;
 use Obullo\Application\Middleware;
 use Obullo\Application\Middlewares\MethodNotAllowedTrait;
 
@@ -18,7 +17,6 @@ class MethodNotAllowed extends Middleware
     public function load()
     {
         $this->methodIsAllowed();
-        
         $this->next->load();
     }
 

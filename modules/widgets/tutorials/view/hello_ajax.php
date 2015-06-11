@@ -126,7 +126,7 @@ function submitAjax(formId){
         <h1>Hello Ajax</h1>
         <section>
 
-            <form action="/widgets/tutorials/hello_ajax/index" method="POST" id="ajax_tutorial" />
+            <form action="/widgets/tutorials/helloAjax/index" method="POST" id="ajax_tutorial" />
                 <table width="100%">
                     <tr>
                         <td style="width:20%;">Email</td>

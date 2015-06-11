@@ -2,7 +2,6 @@
 
 namespace Http\Middlewares;
 
-use Obullo\Container\Container;
 use Obullo\Application\Middleware;
 use Obullo\Authentication\Middleware\UniqueLoginTrait;
 
@@ -24,7 +23,7 @@ class Auth extends Middleware
      */
     public function load()
     {
-        $this->user = $this->c['user'];
+        $this->user = $this->c->get('user');
         $this->next->load();
     }
 
