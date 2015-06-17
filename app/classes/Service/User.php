@@ -18,9 +18,7 @@ class User implements ServiceInterface
     public function register(ContainerInterface $c)
     {
         $c['user'] = function ($params = ['table' => 'users']) use ($c) {
-
-            print_r($params);
-
+            
             $parameters = [
                 'cache.key'     => 'Auth',
                 'url.login'     => '/membership/login',
@@ -37,8 +35,3 @@ class User implements ServiceInterface
         };
     }
 }
-
-// END Authentication service
-
-/* End of file User.php */
-/* Location: .app/classes/Service/User.php */

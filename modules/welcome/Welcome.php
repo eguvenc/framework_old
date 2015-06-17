@@ -14,6 +14,19 @@ class Welcome extends \Controller
     public function load()
     {
         $this->c['url'];
+
+        // $this->c['response']->callback(
+        //     function ($response) {
+
+        //         // $response->headers->set('content-type', 'text/plain');
+
+        //         list($status, $headers, $options, $output) = $response->finalize();
+        //         $response->sendHeaders($status, $headers, $options);
+
+        //         echo $output; // Send output
+        //     }
+        // );
+
     }
 
     /**

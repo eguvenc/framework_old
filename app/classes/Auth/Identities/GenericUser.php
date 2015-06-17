@@ -31,6 +31,3 @@ Class GenericUser extends AbstractIdentity
     }
 
 }
-
-/* End of file GenericUser.php */
-/* Location: .app/classes/Auth/Identities/GenericUser.php */

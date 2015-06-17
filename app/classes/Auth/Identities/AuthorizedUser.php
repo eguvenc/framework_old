@@ -31,6 +31,3 @@ class AuthorizedUser extends AbstractIdentity
     }
 
 }
-
-/* End of file AuthorizedUser.php */
-/* Location: .app/classes/Auth/Identities/AuthorizedUser.php */

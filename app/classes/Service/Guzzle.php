@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use Obullo\Service\ServiceInterface;
 use Obullo\Container\ContainerInterface;
 
-class Http implements ServiceInterface
+class Guzzle implements ServiceInterface
 {
     /**
      * Registry
@@ -17,13 +17,8 @@ class Http implements ServiceInterface
      */
     public function register(ContainerInterface $c)
     {
-        $c['http'] = function () {
+        $c['guzzle'] = function () {
             return new Client;
         };
     }
 }
-
-// END Http service
-
-/* End of file Http.php */
-/* Location: .app/classes/Service/Http.php */

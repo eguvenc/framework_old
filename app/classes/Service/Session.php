@@ -26,8 +26,3 @@ class Session implements ServiceInterface
         };
     }
 }
-
-// END Session service
-
-/* End of file Session.php */
-/* Location: .app/classes/Service/Session.php */

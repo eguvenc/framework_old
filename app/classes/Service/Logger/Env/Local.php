@@ -28,8 +28,21 @@ class Local implements ServiceInterface
     {
         $c['logger'] = function () use ($c) {
             
-            $logger = $c['app']->provider('logger')->get(['queue' => false]);
-            // $logger = $c['app']->provider('qlogger')->get();
+            $logger = $c['app']->provider('logger')->get(
+                [
+                    'queue' => [
+                        'enabled' => false,
+                        'channel' => 'Log',
+                        'route' => gethostname(). '.Logger',
+                        'worker' => 'Workers\Logger',
+                        'delay' => 0,
+                        'workers' => [
+                            'logging' => false     // On / Off Queue workers logging functionality. See the Queue package docs.
+                                                   // You may want to turn on logs if you want to set workers as service in another application.
+                        ],
+                    ]
+                ]
+            );
             /*
             |--------------------------------------------------------------------------
             | Register Filters
@@ -50,13 +63,7 @@ class Local implements ServiceInterface
             |--------------------------------------------------------------------------
             */
             $logger->addWriter('file')->filter('priority@notIn', array());
-
             return $logger;
         };
     }
 }
-
-// END Local class
-
-/* End of file Local.php */
-/* Location: .app/classes/Service/Logger/Env/Local.php */

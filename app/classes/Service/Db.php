@@ -21,8 +21,3 @@ class Db implements ServiceInterface
         };
     }
 }
-
-// END Db service
-
-/* End of file Db.php */
-/* Location: .app/classes/Service/Db.php */

@@ -21,8 +21,3 @@ class Cache implements ServiceInterface
         };
     }
 }
-
-// END Cache service
-
-/* End of file Cache.php */
-/* Location: .app/classes/Service/Cache.php */

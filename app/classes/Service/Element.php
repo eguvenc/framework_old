@@ -22,8 +22,3 @@ class Element implements ServiceInterface
         };
     }
 }
-
-// END Element service
-
-/* End of file Element.php */
-/* Location: .app/classes/Service/Element.php */

@@ -25,18 +25,6 @@ return array(
         ],
         'benchmark' => true,       // If true "all" Application Benchmarks gets logged.
     ],
-    
-    'queue' => [
-        'service' => 'queue',     // Queue service name its located in app/Service folder.
-        'channel' => 'Log',
-        'route' => gethostname(). '.Logger',
-        'worker' => 'Workers\Logger',
-        'delay' => 0,
-        'workers' => [
-            'logging' => false     // On / Off Queue workers logging functionality. See the Queue package docs.
-                                   // You may want to turn on logs if you want to set workers as service.
-        ],
-    ]
 );
 
 /* End of file logger.php */

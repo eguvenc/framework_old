@@ -2,8 +2,6 @@
 
 namespace View\Layout;
 
-use Obullo\View\ViewController;
-
 Trait Base
 {
     /**
@@ -13,12 +11,10 @@ Trait Base
      */
     public function extend()
     {
-        $layer = new ViewController;
-
         $this->c['view']->assign(
             [
-                'header', $layer->get('views/header'),
-                'footer', $layer->get('views/footer')
+                'header' => $this->c['layer']->get('views/header'),
+                'footer' => $this->c['layer']->get('views/footer')
             ]
         );
     }

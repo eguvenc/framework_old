@@ -70,8 +70,3 @@ class Attempt implements EventListenerInterface
     }
 
 }
-
-// END Attempt class
-
-/* End of file Event/Login/Atempt.php */
-/* Location: .Event/Login/Atempt.php */

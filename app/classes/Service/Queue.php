@@ -22,8 +22,3 @@ class Queue implements ServiceInterface
         };
     }
 }
-
-// END Queue service
-
-/* End of file Cache.php */
-/* Location: .classes/queue.php */

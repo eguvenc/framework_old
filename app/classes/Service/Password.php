@@ -24,8 +24,3 @@ class Password implements ServiceInterface
         };
     }
 }
-
-// END Password service
-
-/* End of file Password.php */
-/* Location: .app/classes/Service/Password.php */

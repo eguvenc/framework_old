@@ -30,7 +30,7 @@ return array(
 
     'http' => [
         'debugger' => [
-            'enabled' => false,
+            'enabled' => true,
             'socket' => 'ws://127.0.0.1:9000'
         ]
     ],

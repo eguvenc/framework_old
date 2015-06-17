@@ -22,8 +22,3 @@ class Flash implements ServiceInterface
         };
     }
 }
-
-// END Flash service
-
-/* End of file Flash.php */
-/* Location: .app/classes/Service/Flash.php */
