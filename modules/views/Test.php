@@ -30,4 +30,4 @@ class Test extends \Controller
 }
 
 /* End of file test.php */
-/* Location: .controllers/views/test.php */
+/* Location: .modules/views/test.php */

@@ -32,4 +32,4 @@ class Header extends \Controller
 
 
 /* End of file header.php */
-/* Location: .controllers/views/header.php */
+/* Location: .modules/views/header.php */

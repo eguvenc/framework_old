@@ -21,7 +21,7 @@ return array(
     
     'app' => [
         'query' => [
-            'log'=> true,   // If true "all" SQL Queries gets logged.
+            'log'=> true,          // If true "all" SQL Queries gets logged.
         ],
         'benchmark' => true,       // If true "all" Application Benchmarks gets logged.
     ],
