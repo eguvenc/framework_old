@@ -28,7 +28,7 @@ $c['router']->group(
     [
         'name' => 'GenericUsers', 
         'domain' => $c['config']['domain']['mydomain.com'],
-        'middleware' => array()
+        'middleware' => array('Maintenance')
     ],
     function () use ($c) {
 

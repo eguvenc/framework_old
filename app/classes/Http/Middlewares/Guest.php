@@ -3,29 +3,12 @@
 namespace Http\Middlewares;
 
 use Obullo\Application\Middleware;
+use Obullo\Authentication\AuthConfig;
 
 class Guest extends Middleware
 {
     /**
-     * User service
-     * 
-     * @var object
-     */
-    protected $user;
-    
-    /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->user = $this->c->get('user');
-        $this->next->load();
-    }
-
-    /**
-     *  Call action
+     * Call action
      * 
      * @return void
      */
@@ -33,8 +16,8 @@ class Guest extends Middleware
     {
         if ($this->user->identity->guest()) {
 
-            $this->c['flash']->info('Your session has been expired.');
-            $this->c['url']->redirect($this->user['url.login']);
+            $this->flash->info('Your session has been expired.');
+            $this->url->redirect(AuthConfig::get('url.login'));
         }
         $this->next->call();
     }

@@ -5,20 +5,6 @@ namespace Widgets\Tutorials;
 class HelloElement extends \Controller
 {
     /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c['url'];
-        $this->c['view'];
-        $this->c['form'];
-        $this->c['request'];
-        $this->c['element'];
-    }
-
-    /**
      * Index
      * 
      * @return void
@@ -26,8 +12,6 @@ class HelloElement extends \Controller
     public function index()
     {
         if ($this->request->isPost()) {
-            
-            $this->c['validator'];
 
             $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
@@ -42,7 +26,7 @@ class HelloElement extends \Controller
             $this->form->setErrors($this->validator);
         }
 
-        $this->c['view']->load('hello_element');
+        $this->view->load('hello_element');
     }
     
 }

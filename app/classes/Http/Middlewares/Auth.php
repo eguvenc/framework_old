@@ -10,24 +10,6 @@ class Auth extends Middleware
     use UniqueLoginTrait;
 
     /**
-     * User service
-     * 
-     * @var object
-     */
-    protected $user;
-
-    /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->user = $this->c->get('user');
-        $this->next->load();
-    }
-
-    /**
      *  Call action
      * 
      * @return void

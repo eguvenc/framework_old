@@ -5,25 +5,13 @@ namespace Widgets\Tutorials;
 class HelloAjax extends \Controller
 {
     /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c['form'];
-    }
-
-    /**
      * Index
      * 
      * @return void
      */
     public function index()
     {
-        if ($this->c['request']->isAjax()) { // Is Ajax ?
-
-            $this->c['validator'];
+        if ($this->request->isAjax()) { // Is Ajax ?
 
             $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
@@ -31,16 +19,15 @@ class HelloAjax extends \Controller
             $this->validator->setRules('agreement', 'User Agreement', 'required|exact(1)');
             
             if ($this->validator->isValid()) {
-                $this->validator->setError('email', 'Custom Error Example: There is an error in email field !');
+                $this->validator->setError('email', 'Custom Error: There is an error in email field !');
                 $this->form->error('There are some errors in form fields.');
             }
             $this->form->setErrors($this->validator);
-            echo $this->c['response']->json($this->form->outputArray());
+            echo $this->response->json($this->form->outputArray());
             return;
         }
 
-        $this->c['url'];
-        $this->c['view']->load(
+        $this->view->load(
             'hello_ajax',
             [
                 'title' => 'Hello Ajax World !',

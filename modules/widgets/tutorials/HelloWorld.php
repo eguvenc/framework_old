@@ -5,16 +5,6 @@ namespace Widgets\Tutorials;
 class HelloWorld extends \Controller
 {
     /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c['view'];
-    }
-
-    /**
      * Index
      * 
      * @return void

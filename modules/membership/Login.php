@@ -7,21 +7,6 @@ use Obullo\Authentication\AuthConfig;
 class Login extends \Controller
 {
     /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c['url'];
-        $this->c['form'];
-        $this->c['user'];
-        $this->c['view'];
-        $this->c['flash'];
-        $this->c['request'];
-    }
-
-    /**
      * Index
      *
      * @event->when("post")->subscribe('Event\Login\Attempt');
@@ -32,12 +17,10 @@ class Login extends \Controller
     {
         if ($this->request->isPost()) {
 
-            $this->c['validator'];
-
             $this->validator->setRules('email', 'Email', 'required|email|trim');
             $this->validator->setRules('password', 'Password', 'required|min(6)|trim');
 
-            if (  ! $this->validator->isValid()) {
+            if (! $this->validator->isValid()) {
                 $this->form->setErrors($this->validator);
 
             } else {

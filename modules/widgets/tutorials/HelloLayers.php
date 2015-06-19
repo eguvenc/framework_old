@@ -5,18 +5,6 @@ namespace Widgets\Tutorials;
 class HelloLayers extends \Controller
 {
     /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c['url'];
-        $this->c['view'];
-        $this->c['layer'];
-    }
-
-    /**
      * Index
      * 
      * @return void

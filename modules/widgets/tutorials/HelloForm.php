@@ -5,19 +5,6 @@ namespace Widgets\Tutorials;
 class HelloForm extends \Controller
 {
     /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c['url'];
-        $this->c['view'];
-        $this->c['form'];
-        $this->c['request'];
-    }
-
-    /**
      * Index
      * 
      * @return void
@@ -25,22 +12,17 @@ class HelloForm extends \Controller
     public function index()
     {
         if ($this->request->isPost()) {
-            
-            $this->c['validator'];
 
-            $this->validator->setRules('email', 'Email', 'required|email');
+            $this->validator->setRules('email', 'Email', 'callback_test(7)|required|email|');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
             $this->validator->setRules('agreement', 'User Agreement', 'required');
 
             $this->validator->func(
                 'callback_test',
-                function ($email, $val) {
-                    if (strlen($email) < $val) {
-                        $this->setMessage('callback_test', 'Callback function validation test error !');
-                        return false;
-                    }
-                    return true;
+                function ($field, $val) {
+                    $this->setMessage('Callback function validation test error !');
+                    return false;
                 }
             );
             if ($this->validator->isValid()) {          
@@ -51,7 +33,7 @@ class HelloForm extends \Controller
             $this->form->setErrors($this->validator->getErrors());
         }
 
-        $this->c['view']->load('hello_form');
+        $this->view->load('hello_form');
     }
     
 }

@@ -7,17 +7,18 @@ use Obullo\Application\Middlewares\MethodNotAllowedTrait;
 
 class MethodNotAllowed extends Middleware
 {
-    use MethodNotAllowedTrait;  // You can add / remove addons.
-
+    use MethodNotAllowedTrait;
+    
     /**
      * Loader
+     *
+     * @param array $params allowed methods
      * 
      * @return void
      */
-    public function load()
+    public function __construct(array $params)
     {
-        $this->methodIsAllowed();
-        $this->next->load();
+        $this->methodIsAllowed($params);
     }
 
     /**

@@ -13,32 +13,44 @@
 
 <h1>Hello Layout World</h1>
 
-<p>This my first content using layouts.</p>
-
 <section>
 
-<p><b>Layers</b> call view and sidebar controllers then assign outputs to their variables.</p>
+<p>Put your layout to <kbd>app/classes/Views/Layout</kbd> page.</p>
 
 <pre>
-'default' => function () {
-    $this->assign('header',  '@layer.views/header');
-    $this->assign('sidebar', '@layer.views/sidebar');
-},
+namespace View\Layout;
+
+Trait Base
+{
+    /**
+     * Setup layout & assign view variables
+     * 
+     * @return void
+     */
+    public function extend()
+    {
+        $this->view->assign(
+            [
+                'header' => $this->layer->get('views/header'),
+                'footer' => $this->layer->get('views/footer')
+            ]
+        );
+    }
+}
 </pre>
 
 <p></p>
 
-<p><b>"Default"</b> config defined in your <kbd>view.php</kbd> config file.</p>
+<p>Put header variable to in your views/view/header.php </p>
+
+<pre><?php echo htmlspecialchars('<?php echo $header ?>') ?></pre>
 
 <p></p>
 
-<p><kbd>$this->layout();</kbd> method calls <b>welcome</b> layout config then assign them to <b>hello_layout</b> file.</p>
+<p>Put footer variable to in your views/view/footer.php </p>
 
-<pre>$this->c['view']->load('hello_layout', function() {
-        $this->assign('name', 'Obullo');
-        $this->assign('title', 'Hello Scheme World !');
-        $this->layout('welcome');
-});</pre>
+<pre><?php echo htmlspecialchars('<?php echo $footer ?>') ?></pre>
+
 </section>
 
 <section>

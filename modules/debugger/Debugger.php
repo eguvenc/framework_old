@@ -7,11 +7,18 @@ use Obullo\Debugger\Manager;
 class Debugger extends \Controller
 {
     /**
+     * Manager
+     * 
+     * @var object
+     */
+    protected $debugger;
+
+    /**
      * Loader
      * 
      * @return void
      */
-    public function load()
+    public function __construct()
     {
         $this->debugger = new Manager($this->c);
     }
@@ -34,16 +41,6 @@ class Debugger extends \Controller
     public function body()
     {
         echo $this->debugger->printBody();
-    }
-
-    /**
-     * Close debugger window
-     * 
-     * @return void
-     */
-    public function off()
-    {
-        echo $this->debugger->off();
     }
 
     /**

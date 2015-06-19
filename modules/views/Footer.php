@@ -5,16 +5,6 @@ namespace Views;
 class Footer extends \Controller
 {
     /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c['view'];
-    }
-
-    /**
      * Index
      * 
      * @return void

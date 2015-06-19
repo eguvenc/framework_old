@@ -14,9 +14,7 @@
         </header>
 
         <h1>Welcome</h1>
-        <p>
-            Congratulations! Your Obullo is running. If this is your first time using Obullo, start with Tutorials.
-        </p>
+        <p>Congratulations! Your Obullo is running. If this is your first time using Obullo, start with Tutorials.</p>
 
         <section>
             <h2>Getting  Started with Tutorials</h2>

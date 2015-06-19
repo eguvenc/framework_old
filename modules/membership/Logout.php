@@ -7,17 +7,6 @@ use Obullo\Authentication\AuthConfig;
 class Logout extends \Controller
 {
     /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c['user'];
-        $this->c['flash'];
-    }
-
-    /**
      * Index
      * 
      * @return void

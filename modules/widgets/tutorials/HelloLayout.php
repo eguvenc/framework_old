@@ -7,16 +7,6 @@ class HelloLayout extends \Controller
     use \View\Layout\Base;
 
     /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c['url'];
-    }
-
-    /**
      * Index
      * 
      * @return void

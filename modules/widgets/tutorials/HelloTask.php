@@ -2,19 +2,8 @@
 
 namespace Widgets\Tutorials;
 
-class Hello_Task extends \Controller
+class HelloTask extends \Controller
 {
-    /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c['url'];
-        $this->c['task'];
-    }
-
     /**
      * Index
      * 
