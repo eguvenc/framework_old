@@ -25,7 +25,7 @@ $maxInputErrorStr = 'Too much inputs !';
 |--------------------------------------------------------------------------
 */
 $isAjax = function () {
-    if ( ! empty($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+    if (! empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         return true;
     }
     return false;
@@ -54,7 +54,7 @@ $response = function () use ($isAjax, $responseJson, $responseHtml) {
 | Error Handler for Max $_POST Input Vars
 |--------------------------------------------------------------------------
 */
-if (isset($_SERVER['REQUEST_METHOD']) AND $_SERVER['REQUEST_METHOD'] = 'POST' AND count($_POST, COUNT_RECURSIVE) > $maxInputVars
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] = 'POST' && count($_POST, COUNT_RECURSIVE) > $maxInputVars
 ) {
     $response();
 }
@@ -63,7 +63,7 @@ if (isset($_SERVER['REQUEST_METHOD']) AND $_SERVER['REQUEST_METHOD'] = 'POST' AN
 | Error Handler for Max $_GET Input Vars
 |--------------------------------------------------------------------------
 */
-if (isset($_SERVER['REQUEST_METHOD']) AND $_SERVER['REQUEST_METHOD'] = 'GET' AND count($_GET, COUNT_RECURSIVE) > $maxInputVars
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] = 'GET' && count($_GET, COUNT_RECURSIVE) > $maxInputVars
 ) {
     $response();
 }
@@ -72,7 +72,7 @@ if (isset($_SERVER['REQUEST_METHOD']) AND $_SERVER['REQUEST_METHOD'] = 'GET' AND
 | Error Handler for Max $_COOKIE Input Vars
 |--------------------------------------------------------------------------
 */
-if (isset($_COOKIE) AND count($_COOKIE, COUNT_RECURSIVE) > $maxInputVars
+if (isset($_COOKIE) && count($_COOKIE, COUNT_RECURSIVE) > $maxInputVars
 ) {
     $response();
 }

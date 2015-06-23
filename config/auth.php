@@ -69,4 +69,4 @@ return array(
 );
 
 /* End of file auth.php */
-/* Location: .app/config/auth.php */
+/* Location: .config/auth.php */

@@ -27,4 +27,4 @@ return array(
 );
 
 /* End of file memcache.php */
-/* Location: .app/config/env.local/cache/memcache.php */
+/* Location: .config/env.local/cache/memcache.php */

@@ -6,15 +6,15 @@ return array(
     | -------------------------------------------------------------------
     | Form
     | -------------------------------------------------------------------
-    | This file contains flash messages configurations.
+    | This file contains form messages configurations.
     | It is used by Form Class to set messages HTML template or attributes.
-    | Array keys are predefined in flash/session class file.
+    | Array keys are predefined in form class file.
     |
     | Note : Default CSS classes brought from getbootstrap.com
     |
     */
     'message' => '<div class="{class}">{icon}{message}</div>',
-    
+
     'error'  => [
         'class' => 'alert alert-danger', 
         'icon' => '<span class="glyphicon glyphicon-remove-sign"></span> '
@@ -33,5 +33,5 @@ return array(
     ],
 );
 
-/* End of file flash.php */
-/* Location: .app/config/flash.php */
+/* End of file form.php */
+/* Location: .config/form.php */

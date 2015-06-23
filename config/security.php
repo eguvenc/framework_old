@@ -24,4 +24,4 @@ return array(
 );
 
 /* End of file config.php */
-/* Location: .app/config/security.php */
+/* Location: .config/security.php */

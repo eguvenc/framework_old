@@ -20,12 +20,12 @@ Class Dummy extends \Controller
         echo '<pre>Global Request Object: <span class="string">'.$this->c['app']->uri->getUriString().'</span></pre>';
         echo '<p>-----------------------------------------</p>';
 
-        echo $this->c['layer']->get('views/test');
-        echo $this->c['layer']->get('views/test');
+        echo $this->layer->get('views/test');
+        echo $this->layer->get('views/test');
         
         echo 'WELCOME MODULE: '.$this->router->fetchNamespace().'<br>';
 
-        echo $this->c['view']->get('dummy');  // In sub layers we need to use nested method to pass reference of
+        echo $this->view->get('dummy');  // In sub layers we need to use nested method to pass reference of
     }
 }
 

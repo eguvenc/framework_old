@@ -5,16 +5,6 @@ namespace Views;
 class Test extends \Controller
 {
     /**
-     * Loader
-     * 
-     * @return void
-     */
-    public function load()
-    {
-        $this->c['url'];
-    }
-
-    /**
      * Index
      * 
      * @return void

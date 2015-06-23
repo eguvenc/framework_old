@@ -30,7 +30,7 @@ return array(
 
     'http' => [
         'debugger' => [
-            'enabled' => true,
+            'enabled' => false,
             'socket' => 'ws://127.0.0.1:9000'
         ]
     ],
@@ -72,13 +72,7 @@ return array(
         'ips' => '',      // addresses from which the Application should trust the HTTP_X_FORWARDED_FOR
     ],                    // header in order to properly identify the visitor's IP address.
                           // Comma-delimited, e.g. '10.0.1.200,10.0.1.201'
-
-    'output' => [
-        'compress' => false,  // Enables Gzip output compression for faster page loads.  When enabled,
-    ],                        // the Response class will test whether your server supports Gzip.
-                              // Even if it does, however, not all browsers support compression
-                              // so enable only if you are reasonably sure your visitors can handle it
 );
 
 /* End of file config.php */
-/* Location: .app/config/env.local/config.php */
+/* Location: .config/env.local/config.php */

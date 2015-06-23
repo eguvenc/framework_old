@@ -30,4 +30,4 @@ return array(
 );
 
 /* End of file memcached.php */
-/* Location: .app/config/env.local/cache/memcached.php */
+/* Location: .config/env.local/cache/memcached.php */

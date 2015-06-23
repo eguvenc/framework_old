@@ -8,4 +8,4 @@ return array(
 );
 
 /* End of file smtp.php */
-/* Location: .app/config/env.local/mailer/smtp.php */
+/* Location: .config/env.local/mailer/smtp.php */

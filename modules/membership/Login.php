@@ -22,7 +22,6 @@ class Login extends \Controller
 
             if (! $this->validator->isValid()) {
                 $this->form->setErrors($this->validator);
-
             } else {
 
                 $authResult = $this->user->login->attempt(

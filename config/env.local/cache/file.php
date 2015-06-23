@@ -6,4 +6,4 @@ return array(
 );
 
 /* End of file file.php */
-/* Location: .app/config/env.local/cache/file.php */
+/* Location: .config/env.local/cache/file.php */
