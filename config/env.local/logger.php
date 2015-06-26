@@ -2,28 +2,53 @@
 
 return array(
 
+    /**
+     * Default log channel
+     */
     'default' => [
-        'channel' => 'system',       // Default channel name should be general.
+        'channel' => 'system',
     ],
     
+    /**
+     * File handler log paths
+     *
+     * Path : 
+     *     http : Http requests log data 
+     *     cli  : Console requests log data 
+     *     ajax : Ajax requests log data 
+     */
     'file' => [
         'path' => [
-            'http'  => '/resources/data/logs/http.log',  // Http requests log path  ( Only for File Handler )
-            'cli'   => '/resources/data/logs/cli.log',   // Cli log path  
-            'ajax'  => '/resources/data/logs/ajax.log',  // Ajax log path
+            'http'  => '/resources/data/logs/http.log',
+            'cli'   => '/resources/data/logs/cli.log',
+            'ajax'  => '/resources/data/logs/ajax.log',
         ]
     ],
 
+    /**
+     * Log format for line based log drivers.
+     */
     'format' => [
-        'line' => '[%datetime%] %channel%.%level%: --> %message% %context% %extra%\n',  // This format just for line based log drivers.
+        'line' => '[%datetime%] %channel%.%level%: --> %message% %context% %extra%\n',
         'date' =>  'Y-m-d H:i:s',
     ],
     
+    /**
+     * Application query & benchmark logs
+     *
+     * Query : 
+     *     log : If true "all" SQL Queries gets logged.
+     *     
+     * Benchmark :
+     *     log : If true "all" Application Benchmarks gets logged.
+     */
     'app' => [
         'query' => [
-            'log'=> true,          // If true "all" SQL Queries gets logged.
+            'log'=> true,
         ],
-        'benchmark' => true,       // If true "all" Application Benchmarks gets logged.
+        'benchmark' => [
+            'log' => true,
+        ],
     ],
 );
 

@@ -14,7 +14,7 @@ class Debugger extends \Controller
     protected $debugger;
 
     /**
-     * Loader
+     * Constructor
      * 
      * @return void
      */

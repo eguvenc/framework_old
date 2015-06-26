@@ -18,7 +18,6 @@
 
         <section>
             <h2>Getting  Started with Tutorials</h2>
-
             <ol>
                 <li><?php echo $this->url->anchor('/widgets/tutorials/helloWorld', 'Hello World') ?></li>
                 <li><?php echo $this->url->anchor('/widgets/tutorials/helloLayout', 'Hello Layout') ?></li>
@@ -29,14 +28,12 @@
                 <li><?php echo $this->url->anchor('/widgets/tutorials/helloLayers', 'Hello Layers') ?></li>
                 <li><?php echo $this->url->anchor('/widgets/tutorials/helloCaptcha', 'Hello Captcha') ?></li>
             </ol>
-
         </section>
-        
+
         <section>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
         </section>
-
         <?php echo $footer ?>
     </body>
 </html>

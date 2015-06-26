@@ -9,26 +9,43 @@ return array(
     | This file contains auth configuration. It is used by Authentication/ package to manage
     | auth service behaviours.
     |
-    | Note : This configuration will be merged with configuration parameter in Authentication/AuthServiceProvider class.
+    | Note : This configuration will be merged with parameters that are defined in Authentication/AuthManager class.
     |
     */
+   
+    /**
+     * Cache configuration
+     *
+     * Storage : Auth storage path
+     * provider : 
+     *     driver : Cache provider name
+     *     connection :  Connection name
+     * block :
+     *     permanent : Login query cache block
+     *         lifetime : Fully authorized identity expire time; ( 3600 ) 1 hour is default.
+     *     temporary : Temporary identity cache block
+     *         lifetime : Unverified identity expire time; ( 300 ) 5 minutes is default.
+     */
     'cache' => [
     
-        'storage' => '\Obullo\Authentication\Storage\Null',  // Storage can be a Cache package or custom database like Redis.
+        'storage' => '\Obullo\Authentication\Storage\Null',
         'provider' => [
-            'driver' => 'null',                              // If storage Not Cache provider['driver'] and storage values must be same.
+            'driver' => 'null',
             'connection' => 'null'
         ],
         'block' => [
             'permanent' => [
-                'lifetime' => 3600,  // 1 hour is default permanent identity cache time for database queries.
+                'lifetime' => 3600,
             ],
             'temporary'  => [
-                'lifetime' => 300    // 5 minutes is default temporary identity lifetime.
+                'lifetime' => 300
             ]
         ]
     ],
 
+    /**
+     * Login query table
+     */
     'tables' => [
         'users' => [
             'db.id' => 'id',
@@ -38,32 +55,58 @@ return array(
         ]
     ],
 
+    /**
+     * Security
+     *
+     * PasswordNeedsRehash :
+     *     cost : It depends of your server http://php.net/manual/en/function.password-hash.php 
+     *            Set 6 for best performance but less security, if your "hardware" strong set between 8 - 12 for strong security.
+     */
     'security' => [
         'passwordNeedsRehash' => [
-            'cost' => 6               // It depends of your server http://php.net/manual/en/function.password-hash.php
-        ],                            // Set 6 for best performance and less security, set between 8 - 12 for strong security if your "hardware" strong.
+            'cost' => 6
+        ],
     ],
 
+    /**
+     * Login functionality
+     *
+     * RememberMe : 
+     *     cookie : 
+     *         name   : Recaller cookie name
+     *         domain : Set to .your-domain.com for site-wide cookies
+     *         expire : It should be long period default is " 6 Months ".
+     */
     'login' => [
         'rememberMe'  => [
             'cookie' => [
                 'name' => '__rm',
-                'domain' => $c['env']['COOKIE_DOMAIN.null'],  // Set to .your-domain.com for site-wide cookies
+                'domain' => $c['env']['COOKIE_DOMAIN.null'],
                 'path' => '/',
                 'secure' => false,
                 'httpOnly' => true,
                 'prefix' => '',
-                'expire' => 6 * 30 * 24 * 3600,  // Default " 6 Months ".
+                'expire' => 6 * 30 * 24 * 3600,
             ]
         ],
     ],
 
+    /**
+     * Session
+     *
+     * RegenerateId : Whether to regenerate session id upon new logins.
+     */
     'session' => [
-        'regenerateSessionId' => true, // Regenerate session id upon new logins. 
+        'regenerateSessionId' => true,
     ],
 
+    /**
+     * Auth middlewares
+     *
+     * UniqueLogin : If this is true all other opened session in other devices will be logged out except the current session.
+     */
     'middleware' => [
-        'uniqueLogin' => false         // If unique login enabled application terminates all other active sessions.
+        'uniqueLogin' => false
     ]
 
 );
