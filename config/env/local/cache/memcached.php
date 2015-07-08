@@ -9,9 +9,12 @@ return array(
             'port' => 11211,
             'weight' => 1,
             'options' => [
-                'persistent' => true,
-                'timeout' => 30,    // seconds
+                'persistent' => false,
+                'pool' => 'connection_pool',   // http://php.net/manual/en/memcached.construct.php
+                'timeout' => 30,               // seconds
                 'attempt' => 100,
+                'serializer' => 'php',    // php, json, igbinary
+                'prefix' => null
             ]
         ]
     ],
@@ -23,8 +26,8 @@ return array(
             'weight' => 1
         ]
     ]
-
+    
 );
 
-/* End of file memcache.php */
-/* Location: .config/env.local/cache/memcache.php */
+/* End of file memcached.php */
+/* Location: .config/env/local/cache/memcached.php */

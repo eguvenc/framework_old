@@ -50,7 +50,6 @@ $c['router']->group(
 
         $this->defaultPage('welcome');
         
-
         $this->attach('membership/restricted');
 
         // $this->get('tutorials/helloWorld.*', 'tutorials/helloLayout');

@@ -20,7 +20,7 @@ class Debugger extends \Controller
      */
     public function __construct()
     {
-        $this->debugger = new Manager($this->c);
+        $this->debugger = new Manager;
     }
 
     /**

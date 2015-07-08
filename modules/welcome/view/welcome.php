@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
 
-        <link href="<?php echo $this->url->asset('css/welcome.css') ?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $this->url->asset('css/navigation.css') ?>" rel="stylesheet" type="text/css" />
         <title><?php echo $title ?></title>
     </head>
     <body>

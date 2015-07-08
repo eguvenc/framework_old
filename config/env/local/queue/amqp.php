@@ -20,4 +20,4 @@ return array(
 );
 
 /* End of file queue.php */
-/* Location: .config/env.local/queue/amqp.php */
+/* Location: .config/env/local/queue/amqp.php */

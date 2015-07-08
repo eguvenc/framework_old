@@ -7,6 +7,8 @@ return array(
     'MYSQL_USERNAME' => 'root',
     'MYSQL_PASSWORD' => '123456',
 
+    'AMQP_PASSWORD' => '123456',
+
     'MONGO_USERNAME' => 'root',
     'MONGO_PASSWORD' => '123456',
 
@@ -14,5 +16,5 @@ return array(
     'REDIS_AUTH' => '',
 );
 
-/* End of file .env.local.php */
-/* Location: .env.local.php */
+/* End of file .env/local.php */
+/* Location: .env/local.php */

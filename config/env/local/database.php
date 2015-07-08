@@ -28,4 +28,4 @@ return array(
 );
 
 /* End of file database.php */
-/* Location: .config/env.local/database.php */
+/* Location: .config/env/local/database.php */

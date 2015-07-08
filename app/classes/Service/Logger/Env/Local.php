@@ -2,6 +2,7 @@
 
 namespace Service\Logger\Env;
 
+use Obullo\Log\LogManager;
 use Obullo\Service\ServiceInterface;
 use Obullo\Container\ContainerInterface;
 
@@ -28,27 +29,23 @@ class Local implements ServiceInterface
     {
         $c['logger'] = function () use ($c) {
             
-            $logger = $c['app']->provider('logger')->get(
-                [
-                    'queue' => [
-                        'enabled' => false,
-                        'channel' => 'Log',
-                        'route' => gethostname(). '.Logger',
-                        'worker' => 'Workers\Logger',
-                        'delay' => 0,
-                        'workers' => [
-                            'logging' => false     // On / Off Queue workers logging functionality. See the Queue package docs.
-                                                   // You may want to turn on logs if you want to set workers as service in another application.
-                        ],
-                    ]
+            $parameters = [
+                'queue' => [
+                    'enabled' => false,
+                    'channel' => 'log',
+                    'route' => 'logger.1',
+                    'delay' => 0,
                 ]
-            );
+            ];
+            $manager = new LogManager($c);
+            $manager->setConfiguration($parameters);
+            $logger = $manager->getLogger();
             /*
             |--------------------------------------------------------------------------
             | Register Filters
             |--------------------------------------------------------------------------
             */
-            $logger->registerFilter('priority', 'Log\Filters\PriorityFilter');
+            $logger->registerFilter('priority', 'Obullo\Log\Filters\PriorityFilter');
             /*
             |--------------------------------------------------------------------------
             | Register Handlers
@@ -59,7 +56,7 @@ class Local implements ServiceInterface
             $logger->registerHandler(3, 'email')->filter('priority@notIn', array(LOG_DEBUG));
             /*
             |--------------------------------------------------------------------------
-            | Add Writers - Primary file writer should be available on local server
+            | Add Writers - File writer should be available on local server
             |--------------------------------------------------------------------------
             */
             $logger->addWriter('file')->filter('priority@notIn', array());

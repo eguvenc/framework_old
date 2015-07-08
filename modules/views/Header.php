@@ -11,8 +11,7 @@ class Header extends \Controller
      */
     public function index()
     {
-        $firstSegment = $this->app->uri->segment(0);
-        $segment = (empty($firstSegment)) ? 'welcome' : $firstSegment;
+        $segment = ($this->app->uri->segment(0)) ? $this->app->uri->segment(0) : 'welcome';
 
         $li = '';
         $navbar = array(
@@ -35,3 +34,6 @@ class Header extends \Controller
         );
     }
 }
+
+/* End of file views/header.php */
+/* Location: .modules/views/header.php */

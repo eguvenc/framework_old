@@ -15,7 +15,6 @@
 */
 $c['app']->register(
     [
-        'logger' => 'Obullo\Service\Providers\LoggerServiceProvider',
         'database' => 'Obullo\Service\Providers\DatabaseServiceProvider',
         // 'database' => 'Obullo\Service\Providers\DoctrineDBALServiceProvider',
         'qb' => 'Obullo\Service\Providers\DoctrineQueryBuilderServiceProvider',
@@ -24,6 +23,7 @@ $c['app']->register(
         'memcached' => 'Obullo\Service\Providers\MemcachedServiceProvider',
         'mailer' => 'Obullo\Service\Providers\MailerServiceProvider',
         'amqp' => 'Obullo\Service\Providers\AmqpServiceProvider',
+        'mongo' => 'Obullo\Service\Providers\MongoServiceProvider',
     ]
 );
 
