@@ -10,6 +10,20 @@ return array(
     ],
     
     /**
+     * Keep values null if you need native order. Don't use zero "0".
+     */
+    'priorities' => [
+        'emergency' => 7,
+        'alert'     => 6,
+        'critical'  => 5,
+        'error'     => 4,
+        'warning'   => 3,
+        'notice'    => 2,
+        'info'      => 1,
+        'debug'     => null,
+    ],
+
+    /**
      * File handler log paths
      *
      * Path : 

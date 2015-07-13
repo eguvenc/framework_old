@@ -9,7 +9,7 @@ Trait Base
      * 
      * @return void
      */
-    public function extend()
+    public function __extend()
     {
         $this->view->assign(
             [

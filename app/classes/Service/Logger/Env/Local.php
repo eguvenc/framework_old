@@ -45,7 +45,7 @@ class Local implements ServiceInterface
             | Register Filters
             |--------------------------------------------------------------------------
             */
-            $logger->registerFilter('priority', 'Obullo\Log\Filters\PriorityFilter');
+            $logger->registerFilter('priority', 'Obullo\Log\Filter\PriorityFilter');
             /*
             |--------------------------------------------------------------------------
             | Register Handlers
@@ -56,10 +56,10 @@ class Local implements ServiceInterface
             $logger->registerHandler(3, 'email')->filter('priority@notIn', array(LOG_DEBUG));
             /*
             |--------------------------------------------------------------------------
-            | Add Writers - File writer should be available on local server
+            | Set Primary Writer
             |--------------------------------------------------------------------------
             */
-            $logger->addWriter('file')->filter('priority@notIn', array());
+            $logger->setWriter('file')->filter('priority@notIn', array());
             return $logger;
         };
     }

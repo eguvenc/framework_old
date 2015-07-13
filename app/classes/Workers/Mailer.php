@@ -35,7 +35,7 @@ class Mailer implements JobInterface
      * 
      * @return void
      */
-    public function fire($job, $data)
+    public function fire($job, array $data)
     {
         switch ($data['mailer']) { 
         case 'mandrill': 

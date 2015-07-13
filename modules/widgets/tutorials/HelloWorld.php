@@ -11,8 +11,24 @@ class HelloWorld extends \Controller
      */
     public function index()
     {
-        $this->logger->alert("alert test");
-        $this->logger->info("info test");
+        $this->logger->emergency("emerg test 1");
+        $this->logger->info("info test 1");
+        $this->logger->info("info test 2");
+        $this->logger->info("info test 3");
+        $this->logger->info("info test 4");
+        $this->logger->notice("NOTICE XXXX", array());
+        $this->logger->info("info test 5");
+
+        // $this->logger->info("info test");
+        // $this->logger->info("info test");
+        // $this->logger->info("info test");
+        // $this->logger->info("info test");
+        // $this->logger->info("info test");
+        // $this->logger->info("info test");
+        // $this->logger->info("info test");
+        // $this->logger->info("info test");
+        // $this->logger->info("info test");
+        // $this->logger->info("info test");
 
         // $this->logger->load('mongo');
         // $this->logger->channel('security');               

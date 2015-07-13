@@ -12,7 +12,7 @@ class Welcome extends \Controller
      * @return void
      */
     public function index()
-    {
+    {        
         $this->logger->alert("alert test");
         $this->logger->info("info test");
         

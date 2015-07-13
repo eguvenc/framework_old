@@ -3,13 +3,12 @@
 namespace Workers;
 
 use Obullo\Queue\Job;
-use Obullo\Log\LogRaidManager;
-use Obullo\Queue\JobInterface;
+use Obullo\Log\Filter\LogFilters;
 use Obullo\Container\ContainerInterface;
 
-use Obullo\Log\Handler\File as FileHandler;
-use Obullo\Log\Handler\Mongo as MongoHandler;
-use Obullo\Log\Handler\Email as EmailHandler;
+use Obullo\Log\Handler\File;
+use Obullo\Log\Handler\Mongo;
+use Obullo\Log\Handler\Email;
 
 class Logger
 {
@@ -47,15 +46,15 @@ class Logger
     /**
      * Fire the job
      * 
-     * @param Job   $job  object
-     * @param array $data log data
+     * @param mixed $job   object|null
+     * @param array $event log data
      * 
      * @return void
      */
-    public function fire($job, $data)
+    public function fire($job, array $event)
     {
         $this->job = $job;
-        $this->writers = LogRaidManager::handle($data);  // Control multiple writers 
+        $this->writers = $event['writers'];
         $this->process();
     }
 
@@ -67,11 +66,11 @@ class Logger
      */
     public function process()
     {
-        foreach ($this->writers as $data) {
+        foreach ($this->writers as $event) {
 
-            switch ($data['handler']) {
+            switch ($event['handler']) {
             case 'file':
-                $handler = new FileHandler;
+                $handler = new File;
                 break;
             case 'email':
                 $mailer = $this->c['app']->provider('mailer')->get(['driver' => 'mandrill']);
@@ -80,7 +79,7 @@ class Logger
                 $mailer->to('obulloframework@gmail.com');
                 $mailer->subject('Server Logs');
 
-                $handler = new EmailHandler;
+                $handler = new Email;
                 $handler->setMessage('Detailed logs here --> <div>%s</div>');
                 $handler->setNewlineChar('<br />');
                 $handler->func(
@@ -95,7 +94,7 @@ class Logger
             case 'mongo':
                 $provider = $this->c['app']->provider('mongo')->get(['connection' => 'default']);
 
-                $handler = new MongoHandler(
+                $handler = new Mongo(
                     $provider,
                     array(
                         'database' => 'db',
@@ -112,9 +111,16 @@ class Logger
                 $handler = null;
                 break;
             }
-            if (is_object($handler) && $handler->isAllowed($data)) { // Check write permissions
 
-                $handler->write($data);  // Do job
+            if (is_object($handler) && $handler->isAllowed($event)) { // Check write permissions
+
+                $event = LogFilters::handle($event);
+
+                // echo '<pre>';
+                // print_r($event);
+                // echo '</pre>';
+
+                $handler->write($event);  // Do job
                 $handler->close();
                 
                 if ($this->job instanceof Job) {
@@ -124,12 +130,12 @@ class Logger
         
         } // end foreach
     }
+
 }
 
 /* EXAMPLE LOG DATA
 Array
 (
-    [logger] => Logger
     [primary] => 5
     [5] => Array
         (
@@ -137,6 +143,19 @@ Array
             [handler] => file
             [type] => writer
             [time] => 1436357633
+            [filters] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [class] => Obullo\Log\Filter\PriorityFilter
+                                    [method] => notIn
+                                    [params] => Array
+                                        (
+                                        )
+
+                                )
+
+                        )
             [record] => Array
                 (
                     [0] => Array

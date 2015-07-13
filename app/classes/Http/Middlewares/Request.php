@@ -9,7 +9,7 @@ use Obullo\Application\Middlewares\SanitizeSuperGlobalsTrait;
 class Request extends Middleware
 {
     use BenchmarkTrait;
-    use SanitizeSuperGlobalsTrait;   // You can add / remove addons.
+    use SanitizeSuperGlobalsTrait;   // You can add / remove traits.
 
     /**
      *  Call action
@@ -24,6 +24,7 @@ class Request extends Middleware
         $this->next->call();
 
         $this->benchmarkEnd();
+        $this->c['logger']->shutdown();  // Manually shutdown logger
     }
 
 }
