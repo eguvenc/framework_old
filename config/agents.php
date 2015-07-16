@@ -205,6 +205,3 @@ return array(
         'lycos'             => 'Lycos'
     ]
 );
-
-/* End of file agents.php */
-/* Location: .config/agents.php */

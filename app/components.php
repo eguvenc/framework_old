@@ -25,6 +25,3 @@ $c['app']->component(
         'router' => 'Obullo\Router\Router',
     ]
 );
-
-/* End of file components.php */
-/* Location: .app/components.php */

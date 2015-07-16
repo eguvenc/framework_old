@@ -22,6 +22,3 @@ return array(
      ],                                 
 
 );
-
-/* End of file config.php */
-/* Location: .config/security.php */

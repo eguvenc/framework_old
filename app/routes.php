@@ -85,7 +85,3 @@ $c['router']->group(
 //     'index_method' => 'index'                // This is controller default index method for all controllers.
 //                                              // You should configure it before the first run of your application.
 // ),
-
-
-/* End of file routes.php */
-/* Location: .app/routes.php */

@@ -42,6 +42,3 @@ return array(
     ],
 
 );
-
-/* End of file redis.php */
-/* Location: .config/env/local/cache/redis.php */

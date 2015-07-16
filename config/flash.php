@@ -32,6 +32,3 @@ return array(
         'icon' => '<span class="glyphicon glyphicon-info-sign"></span> '
     ],
 );
-
-/* End of file flash.php */
-/* Location: .config/flash.php */

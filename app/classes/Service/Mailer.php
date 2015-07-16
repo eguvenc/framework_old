@@ -2,6 +2,7 @@
 
 namespace Service;
 
+use Obullo\Mail\MailManager;
 use Obullo\Service\ServiceInterface;
 use Obullo\Container\ContainerInterface;
 
@@ -11,8 +12,6 @@ class Mailer implements ServiceInterface
      * Registry
      *
      * @param object $c container
-     *
-     * Drivers : mandrill, smtp, sendmail, mail ..
      * 
      * @return void
      */
@@ -20,11 +19,28 @@ class Mailer implements ServiceInterface
     {
         $c['mailer'] = function () use ($c) {
 
-            return new MailerClass($c['app']->provider('mailer'));
+            $parameters = [
+                'queue' => [
+                    'channel' => 'mail',
+                    'route' => 'mailer.1',
+                    'delay' => 0,
+                ],
+                'mandrill' => [
+                    'url' => 'https://mandrillapp.com/api/1.0/messages/send.json',
+                    'key' => 'BIK8O7xt1Kp7aZyyQ55uOQ',
+                    'pool' => 'Main Pool',
+                ],
+                // 'sendgrid' => [
+                //     'url' => 'https://api.sendgrid.com/api/mail.send.json',
 
-            // $mailer = $c['app']->provider('mailer')->get(['driver' => 'smtp', 'options' => array('queue' => false)]);
-            // $mailer->from('Admin <admin@example.com>');
-            /// return $mailer;
+                // ]
+            ];
+            $manager = new MailManager($c);
+            $manager->setConfiguration($parameters);
+
+            $mailer = $manager->getMailer('mandrill');
+            $mailer->from('Admin <admin@example.com>');
+            return $mailer;
         };
     }
 }

@@ -28,6 +28,3 @@ return array(
     ]
     
 );
-
-/* End of file memcached.php */
-/* Location: .config/env/local/cache/memcached.php */

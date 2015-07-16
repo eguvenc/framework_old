@@ -116,10 +116,6 @@ class Logger
 
                 $event = LogFilters::handle($event);
 
-                // echo '<pre>';
-                // print_r($event);
-                // echo '</pre>';
-
                 $handler->write($event);  // Do job
                 $handler->close();
                 

@@ -21,11 +21,7 @@ $c['app']->register(
         'cache' => 'Obullo\Service\Providers\CacheServiceProvider',
         'redis' => 'Obullo\Service\Providers\RedisServiceProvider',
         'memcached' => 'Obullo\Service\Providers\MemcachedServiceProvider',
-        'mailer' => 'Obullo\Service\Providers\MailerServiceProvider',
         'amqp' => 'Obullo\Service\Providers\AmqpServiceProvider',
         'mongo' => 'Obullo\Service\Providers\MongoServiceProvider',
     ]
 );
-
-/* End of file providers.php */
-/* Location: .app/providers.php */

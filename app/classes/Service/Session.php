@@ -19,7 +19,7 @@ class Session implements ServiceInterface
     {
         $c['session'] = function () use ($c) {
             $session = new SessionClass($c);
-            $session->registerSaveHandler();   // Handler comes from sesssion config file if we not provide handler object.
+            $session->registerSaveHandler();
             $session->setName();
             $session->start();
             return $session;

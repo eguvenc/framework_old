@@ -19,6 +19,6 @@ return array(
     'OBULLO:MAILER:SMTP_AUTH_PW' => 'Failed to authenticate password. Error: %s',
     'OBULLO:MAILER:SMTP_DATA_FAILURE' => 'Unable to send data: %s',
     'OBULLO:MAILER:EXIT_STATUS' => 'Exit status code: %s',
-    'OBULLO:MAILER:API_CALL_FAILED' => 'Mailer api call failed with following parameters: url=%s, error=%s',
-    'OBULLO:MAILER:QUEUE_MAILER_PUSH_FAILED' => 'QueueMailer class push failed with following parameters: route=%s',
+    'OBULLO:MAILER:API_ERROR' => 'Mailer api failed with following parameters: url=%s, error=%s',
+    'OBULLO:MAILER:QUEUE_FAILED' => 'Mailer class queue failed with following parameters: route=%s',
 );

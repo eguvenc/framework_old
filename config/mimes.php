@@ -103,7 +103,3 @@ return array(
     'json' => ['application/json', 'text/json']
 
 );
-
-
-/* End of file mimes.php */
-/* Location: .config/mimes.php */

@@ -10,7 +10,7 @@ return array(
     ],
     
     /**
-     * Keep values null if you need native order. Don't use zero "0".
+     * Keep values null if you need native order.
      */
     'priorities' => [
         'emergency' => 7,
@@ -65,6 +65,3 @@ return array(
         ],
     ],
 );
-
-/* End of file logger.php */
-/* Location: .config/env/local/logger.php */

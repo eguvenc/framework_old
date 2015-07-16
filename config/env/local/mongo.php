@@ -15,6 +15,3 @@ return array(
     ],
 
 );
-
-/* End of file mongo.php */
-/* Location: .config/env/local/mongo.php */

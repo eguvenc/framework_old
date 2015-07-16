@@ -15,6 +15,3 @@ return array(
         'regex' => '^sub.domain.com$',
     ],
 );
-
-/* End of file */
-/* Location: .config/env/local/domain.php */

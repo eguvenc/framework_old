@@ -19,6 +19,3 @@ return array(
         'localhost.production',
     ],
 );
-
-/* End of file environments.php */
-/* Location: .app/environments.php */

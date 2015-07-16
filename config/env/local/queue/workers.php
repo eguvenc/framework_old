@@ -12,6 +12,3 @@ return array(
         'table' => 'failures',
     ],
 );
-
-/* End of file workers.php */
-/* Location: .config/env/local/queue/workers.php */

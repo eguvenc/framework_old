@@ -147,6 +147,3 @@ return array(
         'ips' => '',
     ],
 );
-
-/* End of file config.php */
-/* Location: .config/env/local/config.php */

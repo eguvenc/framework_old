@@ -34,6 +34,3 @@ return array(
                               // Even if it does, however, not all browsers support compression
                               // so enable only if you are reasonably sure your visitors can handle it
 );
-
-/* End of file response.php */
-/* Location: .config/response.php */

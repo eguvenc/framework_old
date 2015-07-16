@@ -66,6 +66,3 @@ return array(
     ]
 
 );
-
-/* End of file session.php */
-/* Location: .config/env/local/session.php */

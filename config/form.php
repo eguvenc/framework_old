@@ -32,6 +32,3 @@ return array(
         'icon' => '<span class="glyphicon glyphicon-info-sign"></span> '
     ],
 );
-
-/* End of file form.php */
-/* Location: .config/form.php */

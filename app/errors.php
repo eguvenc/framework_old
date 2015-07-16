@@ -65,6 +65,3 @@ $c['app']->fatal(
         $c['logger']->error($e);
     }
 );
-
-/* End of file errors.php */
-/* Location: .app/errors.php */
