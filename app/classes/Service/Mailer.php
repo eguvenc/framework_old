@@ -25,15 +25,17 @@ class Mailer implements ServiceInterface
                     'route' => 'mailer.1',
                     'delay' => 0,
                 ],
-                'mandrill' => [
-                    'url' => 'https://mandrillapp.com/api/1.0/messages/send.json',
-                    'key' => 'BIK8O7xt1Kp7aZyyQ55uOQ',
-                    'pool' => 'Main Pool',
-                ],
-                // 'sendgrid' => [
-                //     'url' => 'https://api.sendgrid.com/api/mail.send.json',
-
-                // ]
+                'provider' => [
+                    'mandrill' => [
+                        'url' => 'https://mandrillapp.com/api/1.0/messages/send.json',
+                        'key' => 'BIK8O7xt1Kp7aZyyQ55uOQ',
+                        'pool' => 'Main Pool',
+                    ],
+                    'mailgun' => [
+                        'url' => 'https://api.mailgun.net/v2/samples.mailgun.org/messages',
+                        'key' => ''
+                    ]
+                ]
             ];
             $manager = new MailManager($c);
             $manager->setConfiguration($parameters);

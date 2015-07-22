@@ -11,15 +11,20 @@ class HelloWorld extends \Controller
      */
     public function index()
     {
-        $result = $this->mailer
-            ->from('obullo')
-            ->to('1')
-            ->subject('test')
-            ->message("test message")
-            ->send();
+
+        // echo $result = $this->mailer
+        //     ->from('Ersin <localhost@localdomain.com>')
+        //     ->to('eguvenc@gmail.com')
+        //     ->subject('test')
+        //     ->message("test message")
+        //     ->getFrom();
+
+        return;
 
         if (! $result->isValid()) {
             print_r($result->getMessages());
+        } else {
+            echo "Success !";
         }
 
         $this->view->load(
