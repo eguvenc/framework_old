@@ -3,6 +3,7 @@
 namespace Workers;
 
 use Obullo\Queue\Job;
+use Obullo\Queue\JobInterface;
 use Obullo\Log\Filter\LogFilters;
 use Obullo\Container\ContainerInterface;
 
@@ -10,7 +11,7 @@ use Obullo\Log\Handler\File;
 use Obullo\Log\Handler\Mongo;
 use Obullo\Log\Handler\Email;
 
-class Logger
+class Logger implements JobInterface
 {
     /**
      * Application
@@ -46,15 +47,15 @@ class Logger
     /**
      * Fire the job
      * 
-     * @param mixed $job   object|null
-     * @param array $event log data
+     * @param mixed $job  object|null
+     * @param array $data log data
      * 
      * @return void
      */
-    public function fire($job, array $event)
+    public function fire($job, array $data)
     {
         $this->job = $job;
-        $this->writers = $event['writers'];
+        $this->writers = $data['writers'];
         $this->process();
     }
 
@@ -73,8 +74,7 @@ class Logger
                 $handler = new File;
                 break;
             case 'email':
-                $mailer = $this->c['app']->provider('mailer')->get(['driver' => 'mandrill']);
-
+                $mailer = $this->c['mailer'];
                 $mailer->from('<noreply@example.com> Server Admin');
                 $mailer->to('obulloframework@gmail.com');
                 $mailer->subject('Server Logs');
@@ -86,8 +86,6 @@ class Logger
                     function ($message) use ($mailer) {
                         $mailer->message($message);
                         $mailer->send();
-
-                        // echo $mailer->printDebugger();
                     }
                 );
                 break;

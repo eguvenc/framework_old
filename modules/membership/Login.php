@@ -7,6 +7,14 @@ use Obullo\Authentication\AuthConfig;
 class Login extends \Controller
 {
     /**
+     * Constrcutor
+     */
+    public function __construct()
+    {
+        $this->user = $this->c->get('user', ['table' => 'users']);
+    }
+
+    /**
      * Index
      *
      * @event->when("post")->subscribe('Event\Login\Attempt');

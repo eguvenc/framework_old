@@ -27,20 +27,19 @@ class Mailer implements ServiceInterface
                 ],
                 'provider' => [
                     'mandrill' => [
-                        'url' => 'https://mandrillapp.com/api/1.0/messages/send.json',
-                        'key' => 'BIK8O7xt1Kp7aZyyQ55uOQ',
                         'pool' => 'Main Pool',
+                        'key' => 'BIK8O7xt1Kp7aZyyQ55uOQ',
+                        'async' => false,
                     ],
                     'mailgun' => [
-                        'url' => 'https://api.mailgun.net/v2/samples.mailgun.org/messages',
-                        'key' => ''
+                        'domain' => 'news.obullo.com',
+                        'key' => '1c520989a3e6c6917ccd14d1f59c5fde'
                     ]
                 ]
             ];
-            $manager = new MailManager($c);
-            $manager->setConfiguration($parameters);
-
-            $mailer = $manager->getMailer('mandrill');
+            $mailer = new MailManager($c);
+            $mailer->setParameters($parameters);
+            $mailer->setMailer('mandrill');
             $mailer->from('Admin <admin@example.com>');
             return $mailer;
         };

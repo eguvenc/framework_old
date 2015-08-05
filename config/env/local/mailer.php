@@ -34,15 +34,5 @@ return array(
         'mailtype' => 'html',
         'crlf'  => "\n",
         'newline' =>  "\n",
-    ],
-    
-    /**
-     * Attachments 
-     * 
-     * Failure : Whether to hide attachment errors. Set to true to display errors.
-     */
-    'attachment' => [
-        'failure' => false,
     ]
-
 );

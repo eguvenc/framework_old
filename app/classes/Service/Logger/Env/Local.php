@@ -38,7 +38,7 @@ class Local implements ServiceInterface
                 ]
             ];
             $manager = new LogManager($c);
-            $manager->setConfiguration($parameters);
+            $manager->setParameters($parameters);
             $logger = $manager->getLogger();
             /*
             |--------------------------------------------------------------------------

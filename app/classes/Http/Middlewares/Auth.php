@@ -10,6 +10,14 @@ class Auth extends Middleware
     use UniqueLoginTrait;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->user = $this->c->get('user', ['table' => 'users']);
+    }
+
+    /**
      *  Call action
      * 
      * @return void

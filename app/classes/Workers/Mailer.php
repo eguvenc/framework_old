@@ -4,8 +4,8 @@ namespace Workers;
 
 use Obullo\Queue\Job;
 use Obullo\Queue\JobInterface;
-use Obullo\Mailer\Transport\Smtp;
-use Obullo\Mailer\Transport\Mandrill;
+use Obullo\Mail\Provider\Mailgun;
+use Obullo\Mail\Provider\Mandrill;
 use Obullo\Container\ContainerInterface;
 
 class Mailer implements JobInterface
@@ -38,12 +38,11 @@ class Mailer implements JobInterface
     public function fire($job, array $data)
     {
         switch ($data['mailer']) { 
+        case 'mailgun':
+            $this->sendWithMailgun($data);
+            break;
         case 'mandrill': 
             $this->sendWithMandrill($data);
-            break;
-
-        case 'smtp':
-            $this->sendWithSmtp($data);
             break;
         }
         if ($job instanceof Job) {
@@ -52,116 +51,82 @@ class Mailer implements JobInterface
     }
 
     /**
-     * Sent mail with Mandrill Api
+     * Sent mail with Mailgun Api
      * 
-     * @param array $data queue data
+     * @param array $msgEvent queue data
      * 
-     * @return void
+     * @return object MailResult
      */
-    protected function sendWithMandrill($data)
+    protected function sendWithMailgun(array $msgEvent)
     {
-        $mail = new Mandrill($this->c);
+        print_r($msgEvent);
 
-        $mail->setMailType($data['mailtype']);
-        $mail->from($data['from_email'], $data['from_name']);
+        $mail = new Mailgun($this->c, $this->c['mailer']->getParameters());
+        $mailtype = (isset($msgEvent['html'])) ? 'html' : 'text';
 
-        foreach ($data['to'] as $to) {  // Parse to, cc and bcc 
-            $method = $to['type'];
-            $mail->$method($to['name'].' <'.$to['email'].'>');
-        }
-        $mail->subject($data['subject']);
-        $mail->message($data[$mail->getMailType()]);
+        $mail->from($msgEvent['from']);
 
-        if (isset($data['attachments'])) {
-            foreach ($data['attachments'] as $attachments) {
-                $mail->attach($attachments['fileurl'], 'attachment');
+        if (! empty($msgEvent['to'])) {
+            foreach ($msgEvent['to'] as $email) {
+                $mail->to($email);
             }
         }
-        if (isset($data['images'])) {
-            foreach ($data['images'] as $attachments) {
-                $mail->attach($attachments['fileurl'], 'inline');
+        if (! empty($msgEvent['cc'])) {
+            foreach ($msgEvent['cc'] as $email) {
+                $mail->cc($email);
             }
         }
-        $mail->addMessage('send_at', $mail->setDate($data['send_at']));
-        $mail->send();
+        if (! empty($msgEvent['bcc'])) {
+            foreach ($msgEvent['bcc'] as $email) {
+                $mail->bcc($email);
+            }
+        }
+        if (! empty($headers['Reply-To'])) {
+            $this->msgEvent['h:Reply-To'] = $headers['Reply-To'];
+        }
+        if (! empty($headers['Message-ID'])) {
+            $this->msgEvent['h:Message-Id'] = $headers['Message-ID'];
+        }
+        $mail->subject($msgEvent['subject']);
+        $mail->message($msgEvent[$mailtype]);
 
-        // echo $mail->printDebugger();  // Run debugger to see details.
+        if (isset($msgEvent['files'])) {
+            foreach ($msgEvent['files'] as $value) {
+                $mail->attach($value['fileurl'], $value['disposition']);
+            }
+        }
+        $mail->addMessage('o:deliverytime', $mail->setDate());
+        return $mail->send();
     }
 
     /**
-     * Sent mail with Smtp
+     * Sent mail with Mandrill Api
      * 
-     * @param array $data queue data
+     * @param array $msgEvent queue data
      * 
      * @return void
      */
-    protected function sendWithSmtp($data)
+    protected function sendWithMandrill(array $msgEvent)
     {
-        $mail = new Smtp($this->c);
-        $mail->from($data['from_email']);
+        $mail = new Mandrill($this->c, $this->c['mailer']->getParameters());
+        $mailtype = (isset($msgEvent['html'])) ? 'html' : 'text';
 
-        foreach ($data['to'] as $to) { // Parse to, cc and bcc 
+        $mail->from($msgEvent['from_email'], $msgEvent['from_name']);
+
+        foreach ($msgEvent['to'] as $to) {  // Parse to, cc and bcc 
             $method = $to['type'];
-            $mail->$method($to['name'].' <'.$to['email'].'>');
+            $mail->$method($to['email']);
         }
-        $mail->subject($data['subject']);
-        $mail->message($data[$mail->getMailType()]);
+        $mail->subject($msgEvent['subject']);
+        $mail->message($msgEvent[$mailtype]);
 
-        if (isset($data['attachments'])) {
-            foreach ($data['attachments'] as $attachments) {
-                $mail->attach($attachments['fileurl'], 'attachment');
+        if (isset($msgEvent['files'])) {
+            foreach ($msgEvent['files'] as $value) {
+                $mail->attach($value['fileurl'], $value['disposition']);
             }
         }
-        if (isset($data['images'])) {
-            foreach ($data['images'] as $attachments) {
-                $mail->attach($attachments['fileurl'], 'inline');
-            }
-        }
-        $mail->send();
-
-        // echo $mail->printDebugger();  // Run debugger to see details.
+        $mail->addMessage('send_at', $mail->setDate());
+        return $mail->send();
     }
 
 }
-
-/* INCOMING DATA
-{
-    "mailer": "mandrill",
-    'mailtype': "html", // text
-    "html": "<p>Example HTML content</p>",
-    "text": "Example text content",
-    "subject": "example subject",
-    "from_email": "message.from_email@example.com",
-    "from_name": "Example Name",
-    "to": [
-        {
-            "email": "recipient.email@example.com",
-            "name": "Recipient Name",
-            "type": "to"
-        }
-    ],
-    "headers": {
-        "Reply-To": "message.reply@example.com"
-    },
-    "important": false,
-    "tags": [
-        "password-resets"
-    ],
-    "attachments": [
-        {
-            "type": "text/plain",
-            "name": "myfile.txt",
-            "fileurl" : "/var/www/images/myfile.txt"
-        }
-    ],
-    "images": [
-        {
-            "type": "image/png",
-            "name": "myimages.gif",
-            "fileurl": "http://example.com/static/myimages.gif"
-        }
-    ]
-},
-"send_at": "date"
-}
-*/

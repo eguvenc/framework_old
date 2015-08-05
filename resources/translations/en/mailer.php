@@ -2,10 +2,11 @@
 
 return array(
     'OBULLO:MAILER:MUST_BE_ARRAY' => 'The email validation method must be passed an array.',
-    'OBULLO:MAILER:INVALID_ADDRESS' => 'Invalid email address: %s',
-    'OBULLO:MAILER:ATTACHMENT_MISSING' => 'Unable to locate the following email attachment: %s',
-    'OBULLO:MAILER:ATTACHMENT_UNREADABLE' => 'Unable to open this attachment: %s',
-    'OBULLO:MAILER:NO_RECIPIENTS' => 'You must include recipients: To, Cc, or Bcc',
+    'OBULLO:MAILER:INVALID_ADDRESS' => 'Invalid email address: %s.',
+    'OBULLO:MAILER:ATTACHMENT_MISSING' => 'Unable to locate the following email attachment: %s.',
+    'OBULLO:MAILER:ATTACHMENT_UNREADABLE' => 'Unable to open this attachment: %s.',
+    'OBULLO:MAILER:NO_SENDER' => 'Sender adress can\'t be empty: from email.',
+    'OBULLO:MAILER:NO_RECIPIENTS' => 'Recipients can\'t be empty: to, cc, or bcc.',
     'OBULLO:MAILER:SEND_FAILURE_PHPMAIL' => 'Unable to send email using PHP mail().  Your server might not be configured to send mail using this method.',
     'OBULLO:MAILER:SEND_FAILURE_SENDMAIL' => 'Unable to send email using PHP Sendmail.  Your server might not be configured to send mail using this method.',
     'OBULLO:MAILER:SEND_FAILURE_SMTP' => 'Unable to send email using PHP SMTP.  Your server might not be configured to send mail using this method.',
