@@ -6,23 +6,19 @@ use Obullo\Authentication\AuthConfig;
 
 class Login extends \Controller
 {
-    /**
-     * Constrcutor
-     */
-    public function __construct()
-    {
-        $this->user = $this->c->get('user', ['table' => 'users']);
-    }
+    const USERS = 'users';
 
     /**
      * Index
-     *
+     * 
      * @event->when("post")->subscribe('Event\Login\Attempt');
-     *  
+     *
      * @return void
      */
     public function index()
     {
+        $this->user = $this->c->get('user', ['table' => static::USERS]);
+
         if ($this->request->isPost()) {
 
             $this->validator->setRules('email', 'Email', 'required|email|trim');

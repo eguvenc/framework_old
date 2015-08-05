@@ -26,7 +26,7 @@
         ?></section>
 
         <section>
-            <form action="/membership/login" method="POST">
+            <form action="/membership/login/index" method="POST">
                 <table width="100%">
                     <tr>
                         <td style="width:20%;">Email</td>

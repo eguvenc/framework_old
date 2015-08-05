@@ -15,9 +15,6 @@ class Restricted extends \Controller
         echo '<head>';
         echo '</head><body>';
 
-        print_r($this->user->getParameters());
-
-
         echo '<h1>Restricted Area</h1>';
 
         echo $this->flash->output();

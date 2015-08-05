@@ -52,6 +52,14 @@ return array(
             'db.identifier' => 'username',
             'db.password' => 'password',
             'db.rememberToken' => 'remember_token',
+            'url.login' => '/membership/login/index'
+        ],
+        'admins' => [
+            'db.id' => 'id',
+            'db.identifier' => 'username',
+            'db.password' => 'password',
+            'db.rememberToken' => 'remember_token',
+            'url.login' => '/membership/login/admin'
         ]
     ],
 

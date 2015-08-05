@@ -9,7 +9,7 @@ use Obullo\Application\Middlewares\SanitizeSuperGlobalsTrait;
 class Request extends Middleware
 {
     use BenchmarkTrait;
-    use SanitizeSuperGlobalsTrait;   // You can add / remove traits.
+    use SanitizeSuperGlobalsTrait;
 
     /**
      *  Call action
