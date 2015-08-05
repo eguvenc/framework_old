@@ -33,7 +33,7 @@ class Mailer implements ServiceInterface
                     ],
                     'mailgun' => [
                         'domain' => 'news.obullo.com',
-                        'key' => '1c520989a3e6c6917ccd14d1f59c5fde'
+                        'key' => 'key-1c520989a3e6c6917ccd14d1f59c5fde'
                     ]
                 ]
             ];
