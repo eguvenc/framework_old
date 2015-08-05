@@ -31,7 +31,7 @@ class Login extends \Controller
                 $authResult = $this->user->login->attempt(
                     [
                         AuthConfig::get('db.identifier') => $this->validator->getValue('email'), 
-                        AuthConfig::get('db.password') => $this->validator->getValue('password'),
+                        AuthConfig::get('db.password')   => $this->validator->getValue('password'),
                     ],
                     $this->request->post('rememberMe')
                 );
