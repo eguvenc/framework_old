@@ -19,7 +19,3 @@ class Footer extends \Controller
         );
     }
 }
-
-
-/* End of file header.php */
-/* Location: .modules/views/header.php */

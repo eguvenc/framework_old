@@ -60,7 +60,7 @@ return array(
      */
     'http' => [
         'debugger' => [
-            'enabled' => false,
+            'enabled' => true,
             'socket' => 'ws://127.0.0.1:9000'
         ]
     ],
@@ -146,4 +146,31 @@ return array(
     'proxy' => [
         'ips' => '',
     ],
+
+    /**
+     * Sets your encryption key and protection settings.
+     *
+     * Encryption 
+     *   key:   If you use the Encryption class you MUST set an encryption key.
+     *   
+     * Csrf
+     *   protection : Enables a CSRF session token to be set. When set to true, token will be checked on a submitted form.
+     *   If you are accepting user data, it is strongly recommended CSRF protection be enabled.
+     *   Token
+     *     name : Csrf token name
+     *     refresh : Refresh the csrf token every x seconds default 30 seconds.
+     */
+    'security' => [
+        'encryption' => [
+            'key' => 'write-your-secret-key',
+        ],
+        'csrf' => [                      
+            'protection' => true,
+            'token' => [
+                'name' => 'csrf_token',
+                'refresh' => 30,
+            ],    
+         ],     
+    ]
+
 );

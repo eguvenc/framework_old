@@ -28,7 +28,3 @@ Class Dummy extends \Controller
         echo $this->view->get('dummy');  // In sub layers we need to use nested method to pass reference of
     }
 }
-
-
-/* End of file dummy.php */
-/* Location: .controllers/tutorials/dummy.php */

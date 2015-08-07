@@ -59,8 +59,6 @@ class Mailer implements JobInterface
      */
     protected function sendWithMailgun(array $msgEvent)
     {
-        print_r($msgEvent);
-
         $mail = new Mailgun($this->c, $this->c['mailer']->getParameters());
         $mailtype = (isset($msgEvent['html'])) ? 'html' : 'text';
 

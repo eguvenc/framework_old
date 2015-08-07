@@ -15,6 +15,3 @@ return array(
     'REDIS_HOST' => '127.0.0.1',
     'REDIS_AUTH' => '',
 );
-
-/* End of file .env/local.php */
-/* Location: .env/local.php */

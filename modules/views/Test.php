@@ -18,6 +18,3 @@ class Test extends \Controller
         echo 'VIEWS MODULE:'.$this->router->fetchNamespace().'<br>';
     }
 }
-
-/* End of file test.php */
-/* Location: .modules/views/test.php */

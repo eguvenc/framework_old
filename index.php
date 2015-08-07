@@ -31,7 +31,3 @@ require OBULLO .'Application/Http.php';
 |--------------------------------------------------------------------------
 */
 $c['app']->run();
-
-
-/* End of file index.php */
-/* Location: .index.php */

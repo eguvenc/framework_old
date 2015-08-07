@@ -30,7 +30,3 @@ define('OBULLO', ROOT . OBULLO_RELEASE . DS);
 |---------------------------------------------------------------
 */
 require OBULLO .'Application'. DS .'Constants.php';
-
-
-/* End of file constants */
-/* Location: .constants */

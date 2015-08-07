@@ -6,8 +6,6 @@ use Obullo\Authentication\AuthConfig;
 
 class Login extends \Controller
 {
-    const USERS = 'users';
-
     /**
      * Index
      * 
@@ -17,8 +15,6 @@ class Login extends \Controller
      */
     public function index()
     {
-        $this->user = $this->c->get('user', ['table' => static::USERS]);
-
         if ($this->request->isPost()) {
 
             $this->validator->setRules('email', 'Email', 'required|email|trim');

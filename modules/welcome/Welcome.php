@@ -13,9 +13,6 @@ class Welcome extends \Controller
      */
     public function index()
     {        
-        $this->logger->alert("alert test");
-        $this->logger->info("info test");
-        
         $this->view->load(
             'welcome',
             [
@@ -24,7 +21,3 @@ class Welcome extends \Controller
         );
     }
 }
-
-
-/* End of file welcome.php */
-/* Location: .modules/welcome/welcome.php */

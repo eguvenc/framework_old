@@ -10,6 +10,3 @@ use Obullo\Task\MiddlewareController;
  * Add / remove middlewares to classes/Http/Middlewares folder
  */
 class Middleware extends MiddlewareController {}
-
-/* End of file middleware.php */
-/* Location: .modules/tasks/Middleware.php */

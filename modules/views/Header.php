@@ -34,6 +34,3 @@ class Header extends \Controller
         );
     }
 }
-
-/* End of file views/header.php */
-/* Location: .modules/views/header.php */

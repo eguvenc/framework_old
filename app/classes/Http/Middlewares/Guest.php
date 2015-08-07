@@ -8,26 +8,6 @@ use Obullo\Authentication\AuthConfig;
 class Guest extends Middleware
 {
     /**
-     * User service
-     * 
-     * @var object
-     */
-    protected $user;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->user = $this->c->get(
-            'user',
-            [
-                'table' => AuthConfig::session('db.tablename')
-            ]
-        );
-    }
-
-    /**
      * Call action
      * 
      * @return void

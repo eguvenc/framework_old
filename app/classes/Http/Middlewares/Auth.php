@@ -9,27 +9,7 @@ use Obullo\Authentication\Middleware\UniqueLoginTrait;
 class Auth extends Middleware
 {
     use UniqueLoginTrait;
-
-    /**
-     * User service
-     * 
-     * @var object
-     */
-    protected $user;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->user = $this->c->get(
-            'user',
-            [
-                'table' => AuthConfig::session('db.tablename')
-            ]
-        );
-    }
-
+    
     /**
      *  Call action
      * 
