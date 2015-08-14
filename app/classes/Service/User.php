@@ -29,7 +29,6 @@ class User implements ServiceInterface
             ];
             $manager = new AuthManager($c);
             $manager->setParameters($parameters);
-
             return $manager;
         };
     }

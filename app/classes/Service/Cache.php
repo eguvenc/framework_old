@@ -2,6 +2,7 @@
 
 namespace Service;
 
+use Obullo\Cache\CacheManager;
 use Obullo\Service\ServiceInterface;
 use Obullo\Container\ContainerInterface;
 
@@ -17,7 +18,19 @@ class Cache implements ServiceInterface
     public function register(ContainerInterface $c)
     {
         $c['cache'] = function () use ($c) {
-            return $c['app']->provider('cache')->get(['driver' => 'redis', 'connection' => 'default']);
+            
+            $parameters = [
+                'provider' => [
+                    'name' => 'cache',
+                    'params' => [
+                        'driver' => 'redis',
+                        'connection' => 'default'
+                    ]
+                ]
+            ];
+            $manager = new CacheManager($c);
+            $manager->setParameters($parameters);
+            return $manager->getProvider();
         };
     }
 }

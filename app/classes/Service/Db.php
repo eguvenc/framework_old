@@ -2,6 +2,7 @@
 
 namespace Service;
 
+use Obullo\Database\DatabaseManager;
 use Obullo\Service\ServiceInterface;
 use Obullo\Container\ContainerInterface;
 
@@ -17,7 +18,18 @@ class Db implements ServiceInterface
     public function register(ContainerInterface $c)
     {
         $c['db'] = function () use ($c) {
-            return $c['app']->provider('database')->get(['connection' => 'default']);
+            
+            $parameters = [
+                'provider' => [
+                    'name' => 'database',
+                    'params' => [
+                        'connection' => 'default'
+                    ]
+                ]
+            ];
+            $manager = new DatabaseManager($c);
+            $manager->setParameters($parameters);
+            return $manager->getProvider();
         };
     }
 }

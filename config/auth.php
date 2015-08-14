@@ -1,37 +1,30 @@
 <?php
 
 return array(
-    
+
     /*
     | -------------------------------------------------------------------
-    | Auth - ( User Service )
+    | Auth
     | -------------------------------------------------------------------
-    | This file contains auth configuration. It is used by Authentication/ package to manage
-    | auth service behaviours.
-    |
-    | Note : This configuration will be merged with parameters that are defined in Authentication/AuthManager class.
+    | Storage : Auth storage path
+    | provider : 
+    |     driver : Cache provider name
+    |     connection :  Connection name
+    | block :
+    |     permanent : Login query cache block
+    |         lifetime : Fully authorized identity expire time; ( 3600 ) 1 hour is default.
+    |     temporary : Temporary identity cache block
+    |         lifetime : Unverified identity expire time; ( 300 ) 5 minutes is default.
     |
     */
-   
-    /**
-     * Cache configuration
-     *
-     * Storage : Auth storage path
-     * provider : 
-     *     driver : Cache provider name
-     *     connection :  Connection name
-     * block :
-     *     permanent : Login query cache block
-     *         lifetime : Fully authorized identity expire time; ( 3600 ) 1 hour is default.
-     *     temporary : Temporary identity cache block
-     *         lifetime : Unverified identity expire time; ( 300 ) 5 minutes is default.
-     */
     'cache' => [
     
         'storage' => '\Obullo\Authentication\Storage\Null',
         'provider' => [
-            'driver' => 'null',
-            'connection' => 'null'
+            'params' => [
+                'driver' => 'null',
+                'connection' => 'null'
+            ]
         ],
         'block' => [
             'permanent' => [

@@ -1,10 +1,5 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| General Config
-|--------------------------------------------------------------------------
-| This file specifies the global configurations of your application.
-*/
+
 return array(
 
     /**
@@ -60,7 +55,7 @@ return array(
      */
     'http' => [
         'debugger' => [
-            'enabled' => true,
+            'enabled' => false,
             'socket' => 'ws://127.0.0.1:9000'
         ]
     ],

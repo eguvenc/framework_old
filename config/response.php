@@ -4,14 +4,17 @@ return array(
 
     /*
     | -------------------------------------------------------------------
-    | Http Response Configuration
+    | Http Response
     | -------------------------------------------------------------------
     | Sets default response headers.
     |
+    | Prototype:
+    |
+    |   $this->response->json(array $data, 'default'];
     */
     'headers' => [
 
-        'json' => [    // $this->response->json(array $data, 'default'];
+        'json' => [
 
             'default' => [
                 'Cache-Control: no-cache, must-revalidate',
@@ -19,18 +22,17 @@ return array(
                 'Content-type: application/json;charset=UTF-8',
             ]
         ],
-
-        'xml' => [    // $this->response->xml(array $data, 'default'];
-
-            'default'=> [
-                "Content-type: text/xml",
-            ]
-        ]
     ],
 
+    /**
+     * Output Compression
+     *
+     * Enables Gzip output compression for faster page loads.  When enabled,
+     * the Response class will test whether your server supports Gzip.
+     * Even if it does, however, not all browsers support compression
+     * so enable only if you are reasonably sure your visitors can handle it
+     */
     'compress' => [
-        'enabled' => false,   // Enables Gzip output compression for faster page loads.  When enabled,
-    ],                        // the Response class will test whether your server supports Gzip.
-                              // Even if it does, however, not all browsers support compression
-                              // so enable only if you are reasonably sure your visitors can handle it
+        'enabled' => false,
+    ],
 );

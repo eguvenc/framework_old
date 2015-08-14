@@ -18,6 +18,13 @@ class Mailer implements JobInterface
     protected $c;
 
     /**
+     * Service parameters
+     * 
+     * @var array
+     */
+    protected $params;
+
+    /**
      * Constructor
      * 
      * @param object $c container
@@ -25,6 +32,7 @@ class Mailer implements JobInterface
     public function __construct(ContainerInterface $c)
     {
         $this->c = $c;
+        $this->params = $this->c['mailer']->getParameters();
     }
 
     /**
@@ -37,6 +45,8 @@ class Mailer implements JobInterface
      */
     public function fire($job, array $data)
     {
+        echo $a;
+
         switch ($data['mailer']) { 
         case 'mailgun':
             $this->sendWithMailgun($data);
@@ -59,7 +69,7 @@ class Mailer implements JobInterface
      */
     protected function sendWithMailgun(array $msgEvent)
     {
-        $mail = new Mailgun($this->c, $this->c['mailer']->getParameters());
+        $mail = new Mailgun($this->params);
         $mailtype = (isset($msgEvent['html'])) ? 'html' : 'text';
 
         $mail->from($msgEvent['from']);
@@ -106,7 +116,7 @@ class Mailer implements JobInterface
      */
     protected function sendWithMandrill(array $msgEvent)
     {
-        $mail = new Mandrill($this->c, $this->c['mailer']->getParameters());
+        $mail = new Mandrill($this->params);
         $mailtype = (isset($msgEvent['html'])) ? 'html' : 'text';
 
         $mail->from($msgEvent['from_email'], $msgEvent['from_name']);

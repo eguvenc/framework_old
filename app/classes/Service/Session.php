@@ -2,9 +2,9 @@
 
 namespace Service;
 
+use Obullo\Session\SessionManager;
 use Obullo\Service\ServiceInterface;
 use Obullo\Container\ContainerInterface;
-use Obullo\Session\Session as SessionClass;
 
 class Session implements ServiceInterface
 {
@@ -18,8 +18,21 @@ class Session implements ServiceInterface
     public function register(ContainerInterface $c)
     {
         $c['session'] = function () use ($c) {
-            $session = new SessionClass($c);
-            $session->registerSaveHandler();
+
+            $parameters = [
+                'provider' => [
+                    'name' => 'cache',
+                    'params' => [
+                        'driver' => 'redis',
+                        'connection' => 'default'
+                    ]
+                ]
+            ];
+            $manager = new SessionManager($c);
+            $manager->setParameters($parameters);
+            $session = $manager->getSession();
+
+            $session->registerSaveHandler('\Obullo\Session\SaveHandler\Cache');
             $session->setName();
             $session->start();
             return $session;

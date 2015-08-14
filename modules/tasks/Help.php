@@ -5,6 +5,6 @@ namespace Tasks;
 use Obullo\Task\HelpController;
 
 /**
- * Help controller
+ * Help command
  */
 class Help extends HelpController {}

@@ -21,7 +21,6 @@ class Mailer implements ServiceInterface
 
             $parameters = [
                 'queue' => [
-                    'channel' => 'mail',
                     'route' => 'mailer.1',
                     'delay' => 0,
                 ],
@@ -39,6 +38,12 @@ class Mailer implements ServiceInterface
             ];
             $mailer = new MailManager($c);
             $mailer->setParameters($parameters);
+            $mailer->registerMailer(
+                [
+                    'mailgun' => 'Obullo\Mail\Provider\Mailgun',
+                    'mandrill' => 'Obullo\Mail\Provider\Mandrill'
+                ]
+            );
             $mailer->setMailer('mandrill');
             $mailer->from('Admin <admin@example.com>');
             return $mailer;

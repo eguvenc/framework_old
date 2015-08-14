@@ -1,32 +1,16 @@
 <?php
 
 return array(
-
-    /**
-     * Session save handler
-     */
-    'saveHandler' => '\Obullo\Session\SaveHandler\Cache',
     
     /**
-     * Cache configuration
+     * Cache storage
      *
-     * Provider : 
-     *     driver : Cache driver name
-     *     connection : Connection name that is defined in your config/cache/$driver.php file, you can find it in 'connections' array.
-     */
-    'cache' => [
-        'provider' => [
-            'driver' => 'redis',
-            'connection' => 'default'
-        ]
-    ],
-
-    /**
-     * Cache storage settings
+     * Key: Cache key name
+     * lifetime : Session lifetime 3600 = 1 hour.
      */
     'storage' => [
-        'key' => 'sessions:', // Don't remove ":" colons. If your cache handler redis, it keeps keys in folders using colons.
-        'lifetime' => 3600,   // Set storage lifetime 3600 = 1 hours.
+        'key' => 'sessions:',
+        'lifetime' => 3600,
     ],
 
     /**

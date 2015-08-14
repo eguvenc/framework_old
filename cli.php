@@ -25,6 +25,3 @@ require OBULLO .'Application/Cli.php';
 |--------------------------------------------------------------------------
 */
 $c['app']->run();
-
-/* End of file cli.php */
-/* Location: .cli.php */

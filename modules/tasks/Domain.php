@@ -5,6 +5,6 @@ namespace Tasks;
 use Obullo\Task\DomainController;
 
 /**
- * Domain controller
+ * Domain command
  */
 class Domain extends DomainController {}
