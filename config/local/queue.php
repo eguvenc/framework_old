@@ -24,7 +24,7 @@ return array(
                 'host'  => '127.0.0.1',
                 'port'  => 5672,
                 'username'  => 'root',
-                'password'  => $c['env']['AMQP_PASSWORD'],
+                'password'  => '123456',   // $c['env']['AMQP_PASSWORD'],
                 'vhost' => '/',
             ]
         ],

@@ -18,21 +18,21 @@ class Logger implements JobInterface
      * 
      * @var object
      */
-    public $c;
+    protected $c;
 
     /**
      * Job class for queue operations
      * 
      * @var object
      */
-    public $job;
+    protected $job;
 
     /**
      * Common data for logger
      * 
      * @var array
      */
-    public $writers;
+    protected $writers;
 
     /**
      * Constructor
@@ -71,7 +71,10 @@ class Logger implements JobInterface
 
             switch ($event['handler']) {
             case 'file':
-                $handler = new File;
+                $handler = new File(
+                    $this->c['app'],
+                    $this->c['config']
+                );
                 break;
             case 'email':
                 $mailer = $this->c['mailer'];
@@ -79,7 +82,10 @@ class Logger implements JobInterface
                 $mailer->to('obulloframework@gmail.com');
                 $mailer->subject('Server Logs');
 
-                $handler = new Email;
+                $handler = new Email(
+                    $this->c['app'],
+                    $this->c['config']
+                );
                 $handler->setMessage('Detailed logs here --> <div>%s</div>');
                 $handler->setNewlineChar('<br />');
                 $handler->func(
@@ -90,10 +96,15 @@ class Logger implements JobInterface
                 );
                 break;
             case 'mongo':
-                $provider = $this->c['app']->provider('mongo')->get(['connection' => 'default']);
-
+                $provider = $this->c['app']->provider('mongo')->get(
+                    [
+                        'connection' => 'default'
+                    ]
+                );
                 $handler = new Mongo(
                     $provider,
+                    $this->c['app'],
+                    $this->c['config'],
                     array(
                         'database' => 'db',
                         'collection' => 'logs',
@@ -111,7 +122,7 @@ class Logger implements JobInterface
             }
 
             if (is_object($handler) && $handler->isAllowed($event)) { // Check write permissions
-
+                
                 $event = LogFilters::handle($event);
 
                 $handler->write($event);  // Do job

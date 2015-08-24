@@ -4,8 +4,6 @@ namespace Workers;
 
 use Obullo\Queue\Job;
 use Obullo\Queue\JobInterface;
-use Obullo\Mail\Provider\Mailgun;
-use Obullo\Mail\Provider\Mandrill;
 use Obullo\Container\ContainerInterface;
 
 class Mailer implements JobInterface
@@ -18,13 +16,6 @@ class Mailer implements JobInterface
     protected $c;
 
     /**
-     * Service parameters
-     * 
-     * @var array
-     */
-    protected $params;
-
-    /**
      * Constructor
      * 
      * @param object $c container
@@ -32,7 +23,6 @@ class Mailer implements JobInterface
     public function __construct(ContainerInterface $c)
     {
         $this->c = $c;
-        $this->params = $this->c['mailer']->getParameters();
     }
 
     /**
@@ -45,8 +35,6 @@ class Mailer implements JobInterface
      */
     public function fire($job, array $data)
     {
-        echo $a;
-
         switch ($data['mailer']) { 
         case 'mailgun':
             $this->sendWithMailgun($data);
@@ -69,7 +57,7 @@ class Mailer implements JobInterface
      */
     protected function sendWithMailgun(array $msgEvent)
     {
-        $mail = new Mailgun($this->params);
+        $mail = $this->c['mailer']->setProvider('mailgun');
         $mailtype = (isset($msgEvent['html'])) ? 'html' : 'text';
 
         $mail->from($msgEvent['from']);
@@ -116,7 +104,7 @@ class Mailer implements JobInterface
      */
     protected function sendWithMandrill(array $msgEvent)
     {
-        $mail = new Mandrill($this->params);
+        $mail = $this->c['mailer']->setProvider('mandrill');
         $mailtype = (isset($msgEvent['html'])) ? 'html' : 'text';
 
         $mail->from($msgEvent['from_email'], $msgEvent['from_name']);

@@ -13,11 +13,11 @@ class Logout extends \Controller
      */
     public function index()
     {
-        $this->user->identity->logout();
+        $this->user->identity->logout();      // Don't remove the user identity from cache just logout user. ( We use cached identity if user come back )
 
-        // $this->user->identity->destroy();
-        // $this->user->identity->forgetMe();
+        // $this->user->identity->destroy();  // Remove the identity from cache and logout. ( So application needs to do sql query )
+        // $this->user->identity->forgetMe(); // Remove rember me cookie from cookie.
         
-        $this->flash->info('You succesfully logged out')->url->redirect(AuthConfig::get('url.login'));
+        $this->flash->info('You succesfully logged out')->url->redirect('/membership/login/index');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Service\Logger\Env;
+namespace Service\Logger;
 
 use Obullo\Log\LogManager;
 use Obullo\Service\ServiceInterface;
@@ -38,7 +38,7 @@ class Local implements ServiceInterface
             ];
             $manager = new LogManager($c);
             $manager->setParameters($parameters);
-            $logger = $manager->getLogger();
+            $logger = $manager->getClass();
             /*
             |--------------------------------------------------------------------------
             | Register Filters

@@ -20,6 +20,7 @@ class Session implements ServiceInterface
         $c['session'] = function () use ($c) {
 
             $parameters = [
+                'class' => '\Obullo\Session\SaveHandler\Cache',
                 'provider' => [
                     'name' => 'cache',
                     'params' => [
@@ -30,9 +31,8 @@ class Session implements ServiceInterface
             ];
             $manager = new SessionManager($c);
             $manager->setParameters($parameters);
-            $session = $manager->getSession();
-
-            $session->registerSaveHandler('\Obullo\Session\SaveHandler\Cache');
+            $session = $manager->getClass();
+            $session->registerSaveHandler();
             $session->setName();
             $session->start();
             return $session;

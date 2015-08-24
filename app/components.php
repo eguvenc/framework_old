@@ -29,6 +29,7 @@ $c['app']->component(
         'task' => 'Obullo\Task\Task',
         'router' => 'Obullo\Router\Router',
         'flash' => 'Obullo\Flash\Session',
+        'form' => 'Obullo\Form\Form',
         'element' => 'Obullo\Form\Element',
         'password' => 'Obullo\Crypt\Password\Bcrypt',
         'csrf' => 'Obullo\Security\Csrf',

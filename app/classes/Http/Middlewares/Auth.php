@@ -3,7 +3,6 @@
 namespace Http\Middlewares;
 
 use Obullo\Application\Middleware;
-use Obullo\Authentication\AuthConfig;
 use Obullo\Authentication\Middleware\UniqueLoginTrait;
 
 class Auth extends Middleware

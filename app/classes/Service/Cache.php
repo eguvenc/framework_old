@@ -30,7 +30,7 @@ class Cache implements ServiceInterface
             ];
             $manager = new CacheManager($c);
             $manager->setParameters($parameters);
-            return $manager->getProvider();
+            return $manager->getClass();
         };
     }
 }

@@ -19,11 +19,11 @@ return array(
     */
     'cache' => [
     
-        'storage' => '\Obullo\Authentication\Storage\Null',
+        'storage' => '\Obullo\Authentication\Storage\Redis',
         'provider' => [
             'params' => [
-                'driver' => 'null',
-                'connection' => 'null'
+                'driver' => 'redis',
+                'connection' => 'default'
             ]
         ],
         'block' => [
@@ -37,41 +37,10 @@ return array(
     ],
 
     /**
-     * Login query table
-     */
-    'tables' => [
-        'users' => [
-            'db.id' => 'id',
-            'db.identifier' => 'username',
-            'db.password' => 'password',
-            'db.rememberToken' => 'remember_token',
-            'url.login' => '/membership/login/index'
-        ],
-        'admins' => [
-            'db.id' => 'id',
-            'db.identifier' => 'username',
-            'db.password' => 'password',
-            'db.rememberToken' => 'remember_token',
-            'url.login' => '/membership/login/admin'
-        ]
-    ],
-
-    /**
-     * Security
-     *
-     * PasswordNeedsRehash :
-     *     cost : It depends of your server http://php.net/manual/en/function.password-hash.php 
-     *            Set 6 for best performance but less security, if your "hardware" strong set between 8 - 12 for strong security.
-     */
-    'security' => [
-        'passwordNeedsRehash' => [
-            'cost' => 6
-        ],
-    ],
-
-    /**
      * Login functionality
      *
+     * Split : Allows multiple login tables to split. Forexample if you have two , default tablename is
+     *                configured in your user service.
      * RememberMe : 
      *     cookie : 
      *         name   : Recaller cookie name
@@ -91,6 +60,19 @@ return array(
             ]
         ],
     ],
+    
+    /**
+     * Security
+     *
+     * PasswordNeedsRehash :
+     *     cost : It depends of your server http://php.net/manual/en/function.password-hash.php 
+     *            Set 6 for best performance but less security, if your "hardware" strong set between 8 - 12 for strong security.
+     */
+    'security' => [
+        'passwordNeedsRehash' => [
+            'cost' => 6
+        ],
+    ],
 
     /**
      * Session
@@ -107,7 +89,7 @@ return array(
      * UniqueLogin : If this is true all other opened session in other devices will be logged out except the current session.
      */
     'middleware' => [
-        'uniqueLogin' => false
+        'unique.login' => false
     ]
 
 );

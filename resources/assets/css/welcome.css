@@ -65,6 +65,6 @@ header{padding: 30px 0;text-align:center;}
 .notification.success {border-color: #069586;color: #069586;line-height: 24px;background-position:0px 1px}
 .notification.error {border-color: #069586;color: #069586;background-position:0 -7055px;}
 
-.alert.alert-success { color: #069586; font-weight: bold; }
+.alert.alert-success { color: blue; font-weight: bold; }
 .alert.alert-danger { color: red; font-weight: bold; }
 .alert.alert-info { color: blue; font-weight: bold; }

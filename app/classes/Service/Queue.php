@@ -30,8 +30,7 @@ class Queue implements ServiceInterface
             ];
             $manager = new QueueManager($c);
             $manager->setParameters($parameters);
-            $handler = $manager->getHandler();
-            return $handler;
+            return $manager->getClass();
         };
     }
 }

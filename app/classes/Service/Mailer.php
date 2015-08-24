@@ -28,23 +28,19 @@ class Mailer implements ServiceInterface
                     'mandrill' => [
                         'pool' => 'Main Pool',
                         'key' => 'BIK8O7xt1Kp7aZyyQ55uOQ',
+                        'class' => '\Obullo\Mail\Provider\Mandrill',
                         'async' => false,
                     ],
                     'mailgun' => [
                         'domain' => 'news.obullo.com',
-                        'key' => 'key-1c520989a3e6c6917ccd14d1f59c5fde'
+                        'key' => 'key-1c520989a3e6c6917ccd14d1f59c5fde',
+                        'class' => 'Obullo\Mail\Provider\Mailgun'
                     ]
                 ]
             ];
             $mailer = new MailManager($c);
             $mailer->setParameters($parameters);
-            $mailer->registerMailer(
-                [
-                    'mailgun' => 'Obullo\Mail\Provider\Mailgun',
-                    'mandrill' => 'Obullo\Mail\Provider\Mandrill'
-                ]
-            );
-            $mailer->setMailer('mandrill');
+            $mailer->setProvider('mandrill');
             $mailer->from('Admin <admin@example.com>');
             return $mailer;
         };

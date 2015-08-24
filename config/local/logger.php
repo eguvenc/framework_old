@@ -30,12 +30,14 @@ return array(
      *     http : Http requests log data 
      *     cli  : Console requests log data 
      *     ajax : Ajax requests log data 
+     *     worker : Queue worker log data
      */
     'file' => [
         'path' => [
             'http'  => '/resources/data/logs/http.log',
             'cli'   => '/resources/data/logs/cli.log',
             'ajax'  => '/resources/data/logs/ajax.log',
+            'worker'  => '/resources/data/logs/cli.log',
         ]
     ],
 
@@ -55,6 +57,9 @@ return array(
      *     
      * Benchmark :
      *     log : If true "all" Application Benchmarks gets logged.
+     *
+     * Worker
+     *     log : If true all "php task queue listen" console process gets logged.
      */
     'app' => [
         'query' => [
@@ -63,5 +68,8 @@ return array(
         'benchmark' => [
             'log' => true,
         ],
+        'worker' => [
+            'log' => false,
+        ]
     ],
 );

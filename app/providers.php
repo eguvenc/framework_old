@@ -17,11 +17,12 @@ $c['app']->register(
     [
         'database' => 'Obullo\Service\Providers\DatabaseServiceProvider',
         // 'database' => 'Obullo\Service\Providers\DoctrineDBALServiceProvider',
-        'qb' => 'Obullo\Service\Providers\DoctrineQueryBuilderServiceProvider',
+        // 'qb' => 'Obullo\Service\Providers\DoctrineQueryBuilderServiceProvider',
         'cache' => 'Obullo\Service\Providers\CacheServiceProvider',
         'redis' => 'Obullo\Service\Providers\RedisServiceProvider',
         'memcached' => 'Obullo\Service\Providers\MemcachedServiceProvider',
         'amqp' => 'Obullo\Service\Providers\AmqpServiceProvider',
+        // 'amqp' => 'Obullo\Service\Providers\AmqpLibServiceProvider',
         'mongo' => 'Obullo\Service\Providers\MongoServiceProvider',
     ]
 );

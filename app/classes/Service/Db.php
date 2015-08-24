@@ -29,7 +29,7 @@ class Db implements ServiceInterface
             ];
             $manager = new DatabaseManager($c);
             $manager->setParameters($parameters);
-            return $manager->getProvider();
+            return $manager->getClass();
         };
     }
 }
