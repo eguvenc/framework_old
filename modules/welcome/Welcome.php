@@ -12,7 +12,7 @@ class Welcome extends \Controller
      * @return void
      */
     public function index()
-    {        
+    {
         $this->view->load(
             'welcome',
             [

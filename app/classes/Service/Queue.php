@@ -20,7 +20,7 @@ class Queue implements ServiceInterface
         $c['queue'] = function () use ($c) {
 
             $parameters = [
-                'class' => '\Obullo\Queue\Handler\AMQP',
+                'class' => '\Obullo\Queue\Handler\Amqp',
                 'provider' => [
                     'name' => 'amqp',
                     'params' => [

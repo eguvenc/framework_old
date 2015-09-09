@@ -27,7 +27,7 @@ return array(
     'cookie' => [
         'expire' => 0,
         'name'     => 'session',
-        'domain'   => $c['env']['COOKIE_DOMAIN.null'],
+        'domain'   => $c['var']['COOKIE_DOMAIN.null'],
         'path'     => '/',
         'secure'   => false,
         'httpOnly' => false, 

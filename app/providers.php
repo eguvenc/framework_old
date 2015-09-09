@@ -15,14 +15,14 @@
 */
 $c['app']->register(
     [
-        'database' => 'Obullo\Service\Providers\DatabaseServiceProvider',
-        // 'database' => 'Obullo\Service\Providers\DoctrineDBALServiceProvider',
-        // 'qb' => 'Obullo\Service\Providers\DoctrineQueryBuilderServiceProvider',
-        'cache' => 'Obullo\Service\Providers\CacheServiceProvider',
-        'redis' => 'Obullo\Service\Providers\RedisServiceProvider',
-        'memcached' => 'Obullo\Service\Providers\MemcachedServiceProvider',
-        'amqp' => 'Obullo\Service\Providers\AmqpServiceProvider',
-        // 'amqp' => 'Obullo\Service\Providers\AmqpLibServiceProvider',
-        'mongo' => 'Obullo\Service\Providers\MongoServiceProvider',
+        'database' => 'Obullo\Service\Providers\Database',
+        // 'database' => 'Obullo\Service\Providers\DoctrineDBAL',
+        // 'qb' => 'Obullo\Service\Providers\DoctrineQueryBuilder',
+        'cache' => 'Obullo\Service\Providers\Cache',
+        'redis' => 'Obullo\Service\Providers\Redis',
+        'memcached' => 'Obullo\Service\Providers\Memcached',
+        'amqp' => 'Obullo\Service\Providers\Amqp',
+        // 'amqp' => 'Obullo\Service\Providers\AmqpLib',
+        'mongo' => 'Obullo\Service\Providers\Mongo',
     ]
 );

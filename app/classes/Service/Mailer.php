@@ -21,7 +21,7 @@ class Mailer implements ServiceInterface
 
             $parameters = [
                 'queue' => [
-                    'route' => 'mailer.1',
+                    'job' => 'mailer.1',
                     'delay' => 0,
                 ],
                 'provider' => [

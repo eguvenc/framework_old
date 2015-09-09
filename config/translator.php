@@ -51,7 +51,7 @@ return array(
      */
     'cookie' => [
         'name'   =>'locale', 
-        'domain' => $c['env']['COOKIE_DOMAIN.null'],
+        'domain' => $c['var']['COOKIE_DOMAIN.null'],
         'expire' => (365 * 24 * 60 * 60),
         'secure' => false,
         'httpOnly' => false,

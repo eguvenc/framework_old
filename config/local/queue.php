@@ -24,15 +24,12 @@ return array(
                 'host'  => '127.0.0.1',
                 'port'  => 5672,
                 'username'  => 'root',
-                'password'  => '123456',   // $c['env']['AMQP_PASSWORD'],
+                'password'  => $c['var']['AMQP_PASSWORD'],
                 'vhost' => '/',
-            ]
+            ],
         ],
     ],
 
-    /**
-     * Failed job configuration
-     */
     'failedJob' => 
     [
         'enabled' => true,

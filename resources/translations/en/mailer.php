@@ -21,5 +21,5 @@ return array(
     'OBULLO:MAILER:SMTP_DATA_FAILURE' => 'Unable to send data: %s',
     'OBULLO:MAILER:EXIT_STATUS' => 'Exit status code: %s',
     'OBULLO:MAILER:API_ERROR' => 'Mailer api failed with following parameters: url=%s, error=%s',
-    'OBULLO:MAILER:QUEUE_FAILED' => 'Mailer class queue failed with following parameters: route=%s',
+    'OBULLO:MAILER:QUEUE_FAILED' => 'Mailer class queue failed with following parameters: %s',
 );

@@ -122,7 +122,7 @@ return array(
      * prefix   : Set a prefix if you need to avoid collisions
      */
     'cookie' => [ 
-        'domain' => $c['env']['COOKIE_DOMAIN.null'],
+        'domain' => $c['var']['COOKIE_DOMAIN.null'],
         'path'   => '/',
         'secure' => false,
         'httpOnly' => false,

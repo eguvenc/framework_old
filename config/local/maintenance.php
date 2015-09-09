@@ -4,14 +4,15 @@ return array(
 
     'root' => [
         'maintenance' => 'up',
-        'regex' => null,
     ],
-    'mydomain.com' => [
+    'mydomain' => [
         'maintenance' => 'up',
+        'namespace' => 'Welcome',
         'regex' => '^framework$',
     ],
-    'sub.domain.com' => [
+    'sub.domain' => [
         'maintenance' => 'up',
+        'namespace' => null,
         'regex' => '^sub.domain.com$',
     ],
 );

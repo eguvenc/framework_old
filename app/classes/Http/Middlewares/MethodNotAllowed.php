@@ -18,7 +18,7 @@ class MethodNotAllowed extends Middleware
      */
     public function __construct(array $params)
     {
-        $this->methodIsAllowed($params);
+        $this->check($params);
     }
 
     /**

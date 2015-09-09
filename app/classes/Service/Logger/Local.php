@@ -32,7 +32,7 @@ class Local implements ServiceInterface
             $parameters = [
                 'queue' => [
                     'enabled' => false,
-                    'route' => 'logger.1',
+                    'job' => 'logger.1',
                     'delay' => 0,
                 ]
             ];
