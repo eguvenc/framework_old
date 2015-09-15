@@ -4,11 +4,9 @@
 | Routes 
 |--------------------------------------------------------------------------
 | Typically there is a one-to-one relationship between a URL string and its 
-| corresponding ( directory / controller ).
+| corresponding ( directory / controller / method ).
 |
 */
-//$c['router']->route('*', '([0-9]+)/([a-z]+)', 'welcome/$1/$2');
-
 $c['router']->configuration(
     [
         'domain' => 'framework',
@@ -17,15 +15,26 @@ $c['router']->configuration(
     ]
 );
 
+$c['router']->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
+
+// $c['router']->get(
+//     '{id}/{name}/{any}', 'welcome/index/$1/$2/$3',
+//     function ($id, $name, $any) use ($c) {
+//         echo $id.'-'.$name.'-'.$any;
+//     }
+// )->where(['id' => '([0-9]+)', 'name' => '([a-z]+)', 'any' => '(.+)']);
+
 // $c['router']->middleware('Maintenance');
 
 $c['router']->group(
     [
-        'name' => 'test',
+        'domain' => 'test.*\d.framework',
         // 'domain' => '^framework$',
         //'middleware' => array('Maintenance')
     ],
     function () {
+        
+        $this->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
 
         // $this->attach('.*'); // all urls
         // $this->attach('welcome');
@@ -46,20 +55,28 @@ $c['router']->group(
 $c['router']->group(
     [
         'name' => 'GenericUsers', 
-        'namespace' => 'Welcome',
-        'domain' => '^framework$',
+        // 'match' => '([0-9]+)/([a-z]+).*',
+        'domain' => 'framework',
         'middleware' => array('Maintenance')
     ],
     function ($sub) use ($c) {
 
-            // echo 'OK !!';
-
             // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
+
+            // echo $this->fetchNamespace();
+
+            // echo 'OK !!';
 
             // $this->get('(?:en|tr|de|nl)/(.*)', '$1');
             // $this->get('(?:en|tr|de|nl)', 'welcome');  // default controller
 
             $this->attach('.*'); // all urls
+
+            // $this->middleware(['Maintenance'], '.*');
+            // ikinci parametre girilmemişse
+            // tek olarak atayacak middleware i girilirse
+            // regex vardır diyecek.
+
     }
 );
 

@@ -4,7 +4,7 @@ namespace Welcome;
 
 class Welcome extends \Controller
 {
-    use \View\Layout\Base;
+    use \View\Base;
 
     /**
      * Index

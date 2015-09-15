@@ -37,7 +37,6 @@ return array(
             'http'  => '/resources/data/logs/http.log',
             'cli'   => '/resources/data/logs/cli.log',
             'ajax'  => '/resources/data/logs/ajax.log',
-            'worker'  => '/resources/data/logs/cli.log',
         ]
     ],
 

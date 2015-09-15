@@ -4,7 +4,7 @@ namespace Widgets\Tutorials;
 
 class HelloLayout extends \Controller
 {
-    use \View\Layout\Base;
+    use \View\Base;
 
     /**
      * Index

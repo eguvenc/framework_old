@@ -63,9 +63,6 @@ return array(
      */
     'languages' => [
                         'en' => 'english',
-                        'de' => 'deutsch',
-                        'es' => 'spanish',
                         'tr' => 'turkish',
-                        'fr' => 'french',
                     ],
 );

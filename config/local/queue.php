@@ -14,10 +14,9 @@ return array(
     'amqp' => [
 
         'exchange' => [
-            'type' => 'AMQP_EX_TYPE_DIRECT',
-            'flag' => 'AMQP_DURABLE',
+            'type' => 'direct',
+            'flag' => 'durable',
         ],
-        
         'connections' => 
         [
             'default' => [

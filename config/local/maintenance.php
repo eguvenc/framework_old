@@ -7,12 +7,10 @@ return array(
     ],
     'mydomain' => [
         'maintenance' => 'up',
-        'namespace' => 'Welcome',
-        'regex' => '^framework$',
+        'regex' => 'framework',
     ],
     'sub.domain' => [
         'maintenance' => 'up',
-        'namespace' => null,
-        'regex' => '^sub.domain.com$',
+        'regex' => 'sub.domain.com',
     ],
 );

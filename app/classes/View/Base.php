@@ -1,6 +1,6 @@
 <?php
 
-namespace View\Layout;
+namespace View;
 
 Trait Base
 {

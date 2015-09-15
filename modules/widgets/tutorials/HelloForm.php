@@ -20,7 +20,7 @@ class HelloForm extends \Controller
 
             $this->validator->func(
                 'callback_test',
-                function ($field, $val) {
+                function ($field, $value) {
                     $this->setMessage('Callback function validation test error !');
                     return false;
                 }
