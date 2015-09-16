@@ -29,11 +29,9 @@ $c['router']->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
 $c['router']->group(
     [
         'domain' => 'test.*\d.framework',
-        // 'domain' => '^framework$',
-        //'middleware' => array('Maintenance')
     ],
     function () {
-        
+
         $this->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
 
         // $this->attach('.*'); // all urls

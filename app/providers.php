@@ -9,20 +9,19 @@
 |--------------------------------------------------------------------------
 | Register application service providers
 |--------------------------------------------------------------------------
-| Priority of providers very important forexample logger provider must be register
-| at the top.
+| Priority of providers very important database should be at the top.
 |
 */
 $c['app']->register(
     [
-        'database' => 'Obullo\Service\Providers\Database',
-        // 'database' => 'Obullo\Service\Providers\DoctrineDBAL',
-        // 'qb' => 'Obullo\Service\Providers\DoctrineQueryBuilder',
-        'cache' => 'Obullo\Service\Providers\Cache',
-        'redis' => 'Obullo\Service\Providers\Redis',
-        'memcached' => 'Obullo\Service\Providers\Memcached',
-        'amqp' => 'Obullo\Service\Providers\Amqp',
-        // 'amqp' => 'Obullo\Service\Providers\AmqpLib',
-        'mongo' => 'Obullo\Service\Providers\Mongo',
+        'database' => 'Obullo\Service\Provider\Database',
+        // 'database' => 'Obullo\Service\Provider\DoctrineDBAL',
+        // 'qb' => 'Obullo\Service\Provider\DoctrineQueryBuilder',
+        'cache' => 'Obullo\Service\Provider\Cache',
+        'redis' => 'Obullo\Service\Provider\Redis',
+        'memcached' => 'Obullo\Service\Provider\Memcached',
+        'amqp' => 'Obullo\Service\Provider\Amqp',
+        // 'amqp' => 'Obullo\Service\Provider\AmqpLib',
+        'mongo' => 'Obullo\Service\Provider\Mongo',
     ]
 );

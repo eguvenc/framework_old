@@ -3,7 +3,7 @@
 namespace Service\Logger;
 
 use Obullo\Log\LogManager;
-use Obullo\Service\ServiceInterface;
+use Obullo\Container\ServiceInterface;
 use Obullo\Container\ContainerInterface;
 
 /**

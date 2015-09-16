@@ -3,7 +3,7 @@
 namespace Service;
 
 use Obullo\Database\DatabaseManager;
-use Obullo\Service\ServiceInterface;
+use Obullo\Container\ServiceInterface;
 use Obullo\Container\ContainerInterface;
 
 class Db implements ServiceInterface

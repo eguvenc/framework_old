@@ -3,7 +3,7 @@
 namespace Service;
 
 use Obullo\Cache\CacheManager;
-use Obullo\Service\ServiceInterface;
+use Obullo\Container\ServiceInterface;
 use Obullo\Container\ContainerInterface;
 
 class Cache implements ServiceInterface

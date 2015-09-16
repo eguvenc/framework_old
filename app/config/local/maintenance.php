@@ -7,9 +7,9 @@ return array(
     ],
     'mydomain' => [
         'maintenance' => 'up',
-        'regex' => 'framework',
+        'regex' => 'test.*\\d.framework',
     ],
-    'sub.domain' => [
+    'subdomain' => [
         'maintenance' => 'up',
         'regex' => 'sub.domain.com',
     ],

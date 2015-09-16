@@ -3,7 +3,7 @@
 namespace Service;
 
 use Obullo\Captcha\CaptchaManager;
-use Obullo\Service\ServiceInterface;
+use Obullo\Container\ServiceInterface;
 use Obullo\Container\ContainerInterface;
 
 class Captcha implements ServiceInterface

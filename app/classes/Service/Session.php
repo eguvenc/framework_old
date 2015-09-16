@@ -3,7 +3,7 @@
 namespace Service;
 
 use Obullo\Session\SessionManager;
-use Obullo\Service\ServiceInterface;
+use Obullo\Container\ServiceInterface;
 use Obullo\Container\ContainerInterface;
 
 class Session implements ServiceInterface
