@@ -6,10 +6,8 @@ return array(
      * AMQP Settings
      * 
      * Exchange
-     *     type : Exchange types : AMQP_EX_TYPE_DIRECT / AMQP_EX_TYPE_FANOUT / AMQP_EX_TYPE_HEADER / AMQP_EX_TYPE_TOPIC,
-     *     flag : Exchange flags : AMQP_DURABLE, AMQP_PASSIVE
-     *
-     * @link http://php.net/manual/pl/amqpexchange.setflags.php
+     *     type : Exchange types : AMQP_EX_TYPE_DIRECT (direct) / AMQP_EX_TYPE_FANOUT (fanout) / AMQP_EX_TYPE_HEADER (header) / AMQP_EX_TYPE_TOPIC (topic),
+     *     flag : Exchange flags : AMQP_DURABLE (durable), AMQP_PASSIVE (passive)
      */
     'amqp' => [
 

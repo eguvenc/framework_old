@@ -167,17 +167,5 @@ return array(
             ],    
          ],     
     ],
-    
-    /**
-     * Output Compression
-     *
-     * Enables Gzip output compression for faster page loads.  When enabled,
-     * the Response class will test whether your server supports Gzip.
-     * Even if it does, however, not all browsers support compression
-     * so enable only if you are reasonably sure your visitors can handle it
-     */
-    'compress' => [
-        'enabled' => false,
-    ],
 
 );
