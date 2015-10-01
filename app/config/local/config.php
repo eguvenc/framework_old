@@ -42,8 +42,7 @@ return array(
             'folder' => '/resources/assets/',
         ],    
         'rewrite' => [
-            'index.php' => '',
-            'suffix'  => '',
+            'index.php' => ''
         ]
     ],
 
@@ -66,13 +65,11 @@ return array(
      * Protocol     : Options: REQUEST_URI, QUERY_STRING, PATH_INFO Example : http://example.com/login?param=1&param2=yes
      * sanitizer    : If true removes all characters except letters, digits and $-_.+!*'(],{}|\\^~[]`<>#%";/?:@&=.
      * queryStrings : Allows query string based URLs: http://example.com/directory/controller?who=me&what=something&where=here
-     * extensions   : Allows extension based URLs: example.com/api/get/users.json
      */
     'uri' => [
         'protocol' => 'REQUEST_URI',
         'sanitizer' => true,
-        'queryStrings' => true,
-        'extensions' => ['.json','.xml','.html'],
+        'queryStrings' => true
     ],
 
     /**
@@ -138,7 +135,7 @@ return array(
      *       header in order to properly identify the visitor's IP address.
      *       Comma-delimited, e.g. '10.0.1.200,10.0.1.201'
      */
-    'proxy' => [
+    'trusted' => [
         'ips' => '',
     ],
 

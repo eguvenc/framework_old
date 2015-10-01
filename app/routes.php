@@ -68,7 +68,7 @@ $c['router']->group(
             // $this->get('(?:en|tr|de|nl)/(.*)', '$1');
             // $this->get('(?:en|tr|de|nl)', 'welcome');  // default controller
 
-            $this->attach('.*'); // all urls
+            // $this->attach('.*'); // all urls
 
             // $this->middleware(['Maintenance'], '.*');
             // ikinci parametre girilmemişse

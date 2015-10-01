@@ -30,6 +30,7 @@ class Session implements ServiceInterface
                 ]
             ];
             $manager = new SessionManager($c);
+            $manager->setLogger($c['logger']);
             $manager->setParameters($parameters);
             $session = $manager->getClass();
             $session->registerSaveHandler();

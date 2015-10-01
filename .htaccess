@@ -12,5 +12,5 @@ RewriteRule ^(.*)$ index.php/$1 [L]
 
 # Enable access for "resources/assets" folder, and the "robots.txt" file
 
-RewriteCond $1 !^(index\.php|resources/assets|robots\.txt)
+RewriteCond $1 !^(index\.php|resources/assets|robots\.txt|favicon.ico)
 RewriteRule ^(.*)$ ./index.php/$1 [L,QSA]

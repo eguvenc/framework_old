@@ -5,11 +5,11 @@ namespace View;
 Trait Base
 {
     /**
-     * Setup layout & assign view variables
+     * Setup layouts & assign view variables
      * 
      * @return void
      */
-    public function __extend()
+    public function __invoke()
     {
         $this->view->assign(
             [

@@ -77,12 +77,6 @@ class Mailer implements JobInterface
                 $mail->bcc($email);
             }
         }
-        if (! empty($headers['Reply-To'])) {
-            $this->msgEvent['h:Reply-To'] = $headers['Reply-To'];
-        }
-        if (! empty($headers['Message-ID'])) {
-            $this->msgEvent['h:Message-Id'] = $headers['Message-ID'];
-        }
         $mail->subject($msgEvent['subject']);
         $mail->message($msgEvent[$mailtype]);
 

@@ -20,6 +20,7 @@ $c['app']->register(
         'cache' => 'Obullo\Service\Provider\Cache',
         'redis' => 'Obullo\Service\Provider\Redis',
         'memcached' => 'Obullo\Service\Provider\Memcached',
+        // 'memcache' => 'Obullo\Service\Provider\Memcache',
         'amqp' => 'Obullo\Service\Provider\Amqp',
         // 'amqp' => 'Obullo\Service\Provider\AmqpLib',
         'mongo' => 'Obullo\Service\Provider\Mongo',
