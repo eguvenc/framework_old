@@ -22,7 +22,7 @@ $c['app']->provider(
 )->service(
     [
         'logger' => 'Obullo\Log\LogManager',
-        'cache' => 'Obullo\Cache\CacheManager'
+        'cache' => 'Obullo\Cache\CacheManager',
     ]
 )->component(
     [
@@ -45,7 +45,7 @@ $c['app']->provider(
         'password' => 'Obullo\Crypt\Password\Bcrypt',
         'csrf' => 'Obullo\Security\Csrf',
         'validator' => 'Obullo\Validator\Validator',
-        'view' => 'Obullo\View\View'
+        'view' => 'Obullo\View\View',
     ]
 )->dependency(
     [

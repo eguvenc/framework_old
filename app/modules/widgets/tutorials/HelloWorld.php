@@ -19,14 +19,17 @@ class HelloWorld extends \Controller
 
         // print_r($this->request->getParsedBody());
 
+        // $this->response = $this->response->withAddedHeader('Content-Type', 'text/plain');
+
 
         // print_r($this->request->getHeaders());
         // var_dump($this->request->getMethod());
 
         // echo $this->uri->getUriString();
 
-        // print_r($this->response->getHeaders());
-        // exit;
+
+        // echo $this->response->json(['dasd']);
+
 
         $this->view->load(
             'hello_world', 
@@ -34,6 +37,9 @@ class HelloWorld extends \Controller
                 'title' => 'Hello World !',
             ]
         );
+
+
+
     }
 
 }

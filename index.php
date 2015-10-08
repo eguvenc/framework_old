@@ -3,16 +3,10 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 register_shutdown_function('fatal_handler');
-
 function fatal_handler() {
-  $errfile = "unknown file";
-  $errstr  = "shutdown";
-  $errno   = E_CORE_ERROR;
-  $errline = 0;
-
   $error = error_get_last();
   if (isset($error['message'])) {
-  	echo $error['message'];
+    echo $error['message'];
   };
 }
 
@@ -36,16 +30,33 @@ require 'constants';
 require 'vendor/autoload.php';
 
 // Obullo\Application\Autoloader::register();
-/*
-|--------------------------------------------------------------------------
-| Http Requests
-|--------------------------------------------------------------------------
-*/
-require OBULLO .'Application/Http/Bootstrap.php';
 
 /*
 |--------------------------------------------------------------------------
-| Initialize
+| Bootstrap
 |--------------------------------------------------------------------------
 */
-$c['app']->run();
+require OBULLO .'Application/Http/Bootstrap.php';
+/*
+|--------------------------------------------------------------------------
+| Create App with Zend Diactoros
+|--------------------------------------------------------------------------
+*/
+$server = Obullo\Http\Server::createServer(
+    function ($c, $request, $response, $done) {
+
+        $c['app']->run();
+    },
+    $c,
+    $_SERVER,
+    $_GET,
+    $_POST,
+    $_COOKIE,
+    $_FILES
+);
+/*
+|--------------------------------------------------------------------------
+| Run
+|--------------------------------------------------------------------------
+*/
+$server->listen();

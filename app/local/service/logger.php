@@ -17,6 +17,7 @@ return array(
         ['filter' => ['priority@notIn', array(LOG_DEBUG)]],
         ['registerHandler' => [3, 'email']],
         ['filter' => ['priority@notIn', array(LOG_DEBUG)]],
-        ['setWriter' => ['file'], 'filter' => ['priority@notIn', array()]],
+        ['setWriter' => ['file']],
+        ['filter' => ['priority@notIn', array()]],
     ]
 );
