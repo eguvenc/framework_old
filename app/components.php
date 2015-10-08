@@ -3,14 +3,28 @@
 |--------------------------------------------------------------------------
 | Components
 |--------------------------------------------------------------------------
-| Specifies the your application components which they available by default.
+| Specifies the your application components, services and service providers 
+| which they available by default.
 */
-/*
-|--------------------------------------------------------------------------
-| Register core components
-|--------------------------------------------------------------------------
-*/
-$c['app']->component(
+
+$c['app']->provider(
+    [
+        'database' => 'Obullo\Service\Provider\Database',
+        // 'database' => 'Obullo\Service\Provider\DoctrineDBAL',
+        // 'qb' => 'Obullo\Service\Provider\DoctrineQueryBuilder',
+        'redis' => 'Obullo\Service\Provider\Redis',
+        'memcached' => 'Obullo\Service\Provider\Memcached',
+        // 'memcache' => 'Obullo\Service\Provider\Memcache',
+        'amqp' => 'Obullo\Service\Provider\Amqp',
+        // 'amqp' => 'Obullo\Service\Provider\AmqpLib',
+        'mongo' => 'Obullo\Service\Provider\Mongo',
+    ]
+)->service(
+    [
+        'logger' => 'Obullo\Log\LogManager',
+        'cache' => 'Obullo\Cache\CacheManager'
+    ]
+)->component(
     [
         'event' => 'Obullo\Event\Event',
         'exception' => 'Obullo\Error\Exception',
@@ -32,5 +46,15 @@ $c['app']->component(
         'csrf' => 'Obullo\Security\Csrf',
         'validator' => 'Obullo\Validator\Validator',
         'view' => 'Obullo\View\View'
+    ]
+)->dependency(
+    [
+        'app',
+        'config',
+        'logger',
+        'uri',
+        'cache',
+        'request',
+        'response',
     ]
 );

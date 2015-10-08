@@ -24,6 +24,7 @@
 |           - UnderflowException
 |           - UnexpectedValueException
 */
+
 /*
 |--------------------------------------------------------------------------
 | Php Native Errors

@@ -1,6 +1,21 @@
 <?php
 ini_set('display_errors', 1);
-error_reporting(1);
+error_reporting(E_ALL);
+
+register_shutdown_function('fatal_handler');
+
+function fatal_handler() {
+  $errfile = "unknown file";
+  $errstr  = "shutdown";
+  $errno   = E_CORE_ERROR;
+  $errline = 0;
+
+  $error = error_get_last();
+  if (isset($error['message'])) {
+  	echo $error['message'];
+  };
+}
+
 /*
 |--------------------------------------------------------------------------
 | Constants.
@@ -26,7 +41,8 @@ require 'vendor/autoload.php';
 | Http Requests
 |--------------------------------------------------------------------------
 */
-require OBULLO .'Application/Http.php';
+require OBULLO .'Application/Http/Bootstrap.php';
+
 /*
 |--------------------------------------------------------------------------
 | Initialize

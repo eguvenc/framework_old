@@ -51,7 +51,7 @@ return array(
         'rememberMe'  => [
             'cookie' => [
                 'name' => '__rm',
-                'domain' => $c['var']['COOKIE_DOMAIN.null'],
+                'domain' => null,
                 'path' => '/',
                 'secure' => false,
                 'httpOnly' => true,

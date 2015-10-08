@@ -58,19 +58,6 @@ return array(
             'socket' => 'ws://127.0.0.1:9000'
         ]
     ],
-    
-    /**
-     * Uri
-     *
-     * Protocol     : Options: REQUEST_URI, QUERY_STRING, PATH_INFO Example : http://example.com/login?param=1&param2=yes
-     * sanitizer    : If true removes all characters except letters, digits and $-_.+!*'(],{}|\\^~[]`<>#%";/?:@&=.
-     * queryStrings : Allows query string based URLs: http://example.com/directory/controller?who=me&what=something&where=here
-     */
-    'uri' => [
-        'protocol' => 'REQUEST_URI',
-        'sanitizer' => true,
-        'queryStrings' => true
-    ],
 
     /**
      * Locale
@@ -119,7 +106,7 @@ return array(
      * prefix   : Set a prefix if you need to avoid collisions
      */
     'cookie' => [ 
-        'domain' => $c['var']['COOKIE_DOMAIN.null'],
+        'domain' => '',
         'path'   => '/',
         'secure' => false,
         'httpOnly' => false,

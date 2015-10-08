@@ -7,7 +7,7 @@ return array(
         'default' => [
             'dsn'      => 'pdo_mysql:host=localhost;port=;dbname=test',
             'username' => 'root',
-            'password' => $c['var']['MYSQL_PASSWORD.null'],
+            'password' => '123456',
             'options'  => [
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
                 PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
@@ -17,7 +17,7 @@ return array(
         'failed' => [
             'dsn'      => 'pdo_mysql:host=localhost;port=;dbname=failed',
             'username' => 'root',
-            'password' => $c['var']['MYSQL_PASSWORD.null'],
+            'password' => '123456',
             'options'  => [
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",
                 PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true

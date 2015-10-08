@@ -1,32 +1,27 @@
 <?php
 /*
 |---------------------------------------------------------------
-| FRAMEWORK VERSION
-|---------------------------------------------------------------
-*/
-define('OBULLO_RELEASE', 'o2');
-/*
-|---------------------------------------------------------------
 | ESSENTIAL CONSTANTS
 |---------------------------------------------------------------
-| DS          - The DIRECTORY SEPERATOR
 | SELF        - The name of THIS file (typically "index.php")
 | FCPATH      - The full server path to this file
 | PHP_PATH    - The php path of your server
 | FPATH       - The full server path without file
 | ROOT        - The root path of your server
 | OBULLO      - The full path of version folder
+| LOADER      - The container service loader class ( php, xml .. )
 */
-define('DS', DIRECTORY_SEPARATOR);
 define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 define('FCPATH', __FILE__);
 define('PHP_PATH', '/usr/bin/php'); 
 define('FPATH', dirname(__FILE__));
-define('ROOT',  realpath(dirname(__FILE__)) . DS);
-define('OBULLO', ROOT . OBULLO_RELEASE . DS);
+define('ROOT',  realpath(dirname(__FILE__)) .DIRECTORY_SEPARATOR);
+define('VENDOR', ROOT .'vendor');
+define('OBULLO', ROOT .'o2'. DIRECTORY_SEPARATOR);
+define('LOADER', 'php');
 /*
 |---------------------------------------------------------------
 | OBULLO CONSTANTS
 |---------------------------------------------------------------
 */
-require OBULLO .'Application'. DS .'Constants.php';
+require OBULLO .'Application/Constants.php';

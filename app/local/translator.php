@@ -51,7 +51,7 @@ return array(
      */
     'cookie' => [
         'name'   =>'locale', 
-        'domain' => $c['var']['COOKIE_DOMAIN.null'],
+        'domain' => null,
         'expire' => (365 * 24 * 60 * 60),
         'secure' => false,
         'httpOnly' => false,
@@ -62,7 +62,7 @@ return array(
      * Available Languages
      */
     'languages' => [
-                        'en' => 'english',
-                        'tr' => 'turkish',
-                    ],
+        'en' => 'english',
+        'tr' => 'turkish',
+    ],
 );

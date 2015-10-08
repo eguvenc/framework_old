@@ -4,9 +4,11 @@ namespace Event\Login;
 
 use Obullo\Authentication\AuthResult;
 use Obullo\Container\ContainerInterface;
+use Obullo\Container\ContainerAwareInterface;
 use Obullo\Event\EventListenerInterface;
+use Obullo\Event\EventInterface;
 
-class Attempt implements EventListenerInterface
+class Attempt implements EventListenerInterface, ContainerAwareInterface
 {
     /**
      * Container
@@ -16,11 +18,13 @@ class Attempt implements EventListenerInterface
     protected $c;
 
     /**
-     * Constructor
+     * Injector container
+     * 
+     * @param ContainerInterface|null $c ContainerInterface
      *
-     * @param object $c container
+     * @return void
      */
-    public function __construct(ContainerInterface $c)
+    public function setContainer(ContainerInterface $c = null)
     {
         $this->c = $c;
     }
@@ -63,7 +67,7 @@ class Attempt implements EventListenerInterface
      * 
      * @return void
      */
-    public function subscribe($event)
+    public function subscribe(EventInterface $event)
     {
         $event->listen('login.before', 'Event\Login\Attempt@before');
         $event->listen('login.after', 'Event\Login\Attempt@after');
