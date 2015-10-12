@@ -9,7 +9,6 @@ function fatal_handler() {
     echo $error['message'];
   };
 }
-
 /*
 |--------------------------------------------------------------------------
 | Constants.
@@ -43,11 +42,9 @@ require OBULLO .'Application/Http/Bootstrap.php';
 |--------------------------------------------------------------------------
 */
 $server = Obullo\Http\Server::createServer(
-    function ($c, $request, $response, $done) {
+    function ($request, $response, $done) {
 
-        $c['app']->run();
     },
-    $c,
     $_SERVER,
     $_GET,
     $_POST,

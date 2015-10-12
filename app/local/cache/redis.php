@@ -28,7 +28,7 @@ return array(
             'port' => 6379,
             'options' => [
                 'persistent' => false,
-                'auth' => $c['var']['REDIS_AUTH'],
+                'auth' => '123456',
                 'timeout' => 30,
                 'attempt' => 100,
                 'serializer' => 'none',
@@ -42,7 +42,7 @@ return array(
             'port' => 6379,
             'options' => [
                 'persistent' => false,
-                'auth' => $c['var']['REDIS_AUTH'],
+                'auth' => '123456',
                 'timeout' => 30,
                 'attempt' => 100,
                 'serializer' => 'php',

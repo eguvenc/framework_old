@@ -3,13 +3,11 @@
 namespace Http\Middlewares;
 
 use Obullo\Application\Middleware;
-use Obullo\Application\Middlewares\BenchmarkTrait;
-use Obullo\Application\Middlewares\SanitizerTrait;
+use Obullo\Http\BenchmarkTrait;
 
 class Request extends Middleware
 {
     use BenchmarkTrait;
-    use SanitizerTrait;
 
     /**
      *  Call action
@@ -18,13 +16,11 @@ class Request extends Middleware
      */
     public function call()
     {
-        $this->sanitize();
-
         $this->benchmarkStart();
-        $this->next->call();
-        $this->benchmarkEnd();
 
-        $this->c['logger']->shutdown();
+        $this->next->call();
+        
+        $this->benchmarkEnd();
     }
 
 }

@@ -15,6 +15,7 @@ $c['app']->provider(
         'redis' => 'Obullo\Service\Provider\Redis',
         'memcached' => 'Obullo\Service\Provider\Memcached',
         // 'memcache' => 'Obullo\Service\Provider\Memcache',
+        'cache' => 'Obullo\Service\Provider\Cache',
         'amqp' => 'Obullo\Service\Provider\Amqp',
         // 'amqp' => 'Obullo\Service\Provider\AmqpLib',
         'mongo' => 'Obullo\Service\Provider\Mongo',
@@ -23,13 +24,12 @@ $c['app']->provider(
     [
         'logger' => 'Obullo\Log\LogManager',
         'cache' => 'Obullo\Cache\CacheManager',
+        'db' => 'Obullo\Database\DatabaseManager'
     ]
 )->component(
     [
         'event' => 'Obullo\Event\Event',
         'exception' => 'Obullo\Error\Exception',
-        'error' => 'Obullo\Http\Error',
-        'output' => 'Obullo\Http\Output',
         'translator' => 'Obullo\Translation\Translator',
         'cookie' => 'Obullo\Cookie\Cookie',
         'is' => 'Obullo\Filters\Is',
