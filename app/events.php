@@ -1,9 +1,13 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Global Events
+| Application Events
 |--------------------------------------------------------------------------
-| This file specifies the your application global events.
+| Specifies the your application global events
 */
-
+/*
+|--------------------------------------------------------------------------
+| Event definitions
+|--------------------------------------------------------------------------
+*/
 // $c['event']->subscribe('Event\Classname');

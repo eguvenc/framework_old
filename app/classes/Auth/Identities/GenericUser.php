@@ -4,7 +4,7 @@ namespace Auth\Identities;
 
 use Obullo\Authentication\Identity\AbstractIdentity;
 
-Class GenericUser extends AbstractIdentity
+class GenericUser extends AbstractIdentity
 {
     /**
      * Get the identifier input value

@@ -1,37 +1,49 @@
 <?php
 
+namespace Http\Middlewares;
+
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * Middleware test
- */
-class MethodNotAllowed
+class NotAllowed
 {
     /**
-     * Method not allowed
+     * Allowed http methods
      * 
-     * @param object   $c    ContainerInterface
-     * @param callable $next callable
-     * 
-     * @return object response
+     * @var array
      */
-    public function __invoke($c, callable $next)
+    protected $allowedMethods = ['GET', 'POST', 'PUT', 'DELETE'];
+
+    /**
+     * Set allowed methods
+     * 
+     * @param array $methods allowed methods
+     *
+     * @return void
+     */
+    public function inject(array $methods)
     {
-        $method = $c['request']->getMethod();
+        $this->allowedMethods = $methods;
+    }
 
-        echo 'Before MethodNotAllowed middleware !<br />';
+    /**
+     * Invoke middleware
+     * 
+     * @param ServerRequestInterface $request  request
+     * @param ResponseInterface      $response respone
+     * @param callable               $next     callable
+     * 
+     * @return object ResponseInterface
+     */
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+    {
+        $method = $request->getMethod();
 
-        if (! in_array($method, ['GET', 'POST', 'PUT', 'DELETE'])) {  // Get injected parameters
+        if (! in_array($method, $this->allowedMethods)) {
             
-            $c['response']->withStatus(405)->showError(
-                sprintf(
-                    "Http Error 405 %s method not allowed.", 
-                    ucfirst($method)
-                ),
-                'Method Not Allowed'
-            );
+            $response->error('Http Error 405 method not allowed.', 405, 'Method Not Allowed');
+            return $response;
         }
-        return $next($c);
+        return $next($request, $response);
     }
 }

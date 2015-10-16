@@ -3,26 +3,26 @@
 namespace Http\Middlewares;
 
 use Obullo\Application\Middleware;
-use Obullo\Application\Middlewares\MethodNotAllowedTrait;
+use Obullo\Application\Middlewares\UnderMaintenanceTrait;
 
-class MethodNotAllowed extends Middleware
+class Maintenance extends Middleware
 {
-    use MethodNotAllowedTrait;
-    
+    use UnderMaintenanceTrait;
+
     /**
-     * Loader
+     * Constructor
      *
-     * @param array $params allowed methods
+     * @param array $params domain parameters
      * 
      * @return void
      */
     public function __construct(array $params)
-    {
+    {   
         $this->check($params);
     }
 
     /**
-     * Call action
+     *  Call action
      * 
      * @return void
      */

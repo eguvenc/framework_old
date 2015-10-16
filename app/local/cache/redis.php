@@ -28,7 +28,7 @@ return array(
             'port' => 6379,
             'options' => [
                 'persistent' => false,
-                'auth' => '123456',
+                'auth' => '',
                 'timeout' => 30,
                 'attempt' => 100,
                 'serializer' => 'none',
@@ -42,7 +42,7 @@ return array(
             'port' => 6379,
             'options' => [
                 'persistent' => false,
-                'auth' => '123456',
+                'auth' => '',
                 'timeout' => 30,
                 'attempt' => 100,
                 'serializer' => 'php',

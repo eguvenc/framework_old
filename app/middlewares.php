@@ -1,21 +1,39 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Application middlewares
+| Http Middlewares
 |--------------------------------------------------------------------------
-| Obullo allows you to run code different stages during the handling of a request through middlewares:
-|	
-| 	- Application middlewares are triggered independently of the current handled request;
-|	- Route middlewares are triggered when their associated route is matched. 
-| 
-| IMPORTANT: Obullo automatically assign route middlewares when their associated route is matched. 
-| There is no need to assign them in here.
-| 
-| Priority of middlewares: Add your middleware to end if you need run it at the top.
+| Specifies the your application http middlewares
+|
+|  Default Middlewares
+|
+|   - Maintenance
+|   - NotAllowed
+|   - Begin
+|   - Finalize
 */
 /*
 |--------------------------------------------------------------------------
-| Request
+| Middleware definitions
 |--------------------------------------------------------------------------
 */
-$c['app']->middleware(new Http\Middlewares\Request);
+$c['middleware']->configure(
+    [
+        // 'Auth' => 'Http\Middlewares\Auth',
+        // 'Guest' => 'Http\Middlewares\Guest',
+        'Maintenance' => 'Http\Middlewares\Maintenance',
+        'NotAllowed' => 'Http\Middlewares\NotAllowed',
+        'Begin' => 'Http\Middlewares\Begin',
+        'Finalize' => 'Http\Middlewares\Finalize',
+    ]
+);
+/*
+|--------------------------------------------------------------------------
+| Add your global middlewares
+|--------------------------------------------------------------------------
+*/
+$c['middleware']->add(
+    [
+        'NotAllowed',
+    ]
+);

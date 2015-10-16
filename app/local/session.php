@@ -33,20 +33,4 @@ return array(
         'httpOnly' => false, 
         'prefix'   => '', 
     ],
-    
-    /**
-     * Session meta data
-     *
-     * Enabled : On / off session meta data feaure.
-     * refresh : How many seconds between framework refreshing "Session" meta data Information"
-     * matchIp : Whether to match the user's IP address when reading the session data
-     * matchUserAgent : Whether to match the User Agent when reading the session data
-     */
-    'meta' => [
-        'enabled' => false,
-        'refresh'  => 200,
-        'matchIp' => false,
-        'matchUserAgent' => false
-    ]
-
 );

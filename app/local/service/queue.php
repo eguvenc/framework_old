@@ -4,10 +4,10 @@ return array(
     
     'params' => [
         'provider' => [
-            'name' => 'database',
+            'name' => 'amqp',
             'params' => [
                 'connection' => 'default'
             ]
-        ] 
+        ]
     ]
 );

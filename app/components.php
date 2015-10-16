@@ -3,10 +3,8 @@
 |--------------------------------------------------------------------------
 | Components
 |--------------------------------------------------------------------------
-| Specifies the your application components, services and service providers 
-| which they available by default.
+| Specifies your application components, services, providers and dependencies.
 */
-
 $c['app']->provider(
     [
         'database' => 'Obullo\Service\Provider\Database',
@@ -18,18 +16,21 @@ $c['app']->provider(
         'cache' => 'Obullo\Service\Provider\Cache',
         'amqp' => 'Obullo\Service\Provider\Amqp',
         // 'amqp' => 'Obullo\Service\Provider\AmqpLib',
-        'mongo' => 'Obullo\Service\Provider\Mongo',
+        'mongo' => 'Obullo\Service\Provider\Mongo'
     ]
 )->service(
     [
         'logger' => 'Obullo\Log\LogManager',
-        'cache' => 'Obullo\Cache\CacheManager',
-        'db' => 'Obullo\Database\DatabaseManager'
+        'db' => 'Obullo\Database\DatabaseManager',
+        'session' => 'Obullo\Session\SessionManager',
+        'queue' => 'Obullo\Queue\QueueManagerAmqp',
+        // 'queue' => 'Obullo\Queue\QueueManagerAmqpLib',
     ]
 )->component(
     [
         'event' => 'Obullo\Event\Event',
         'exception' => 'Obullo\Error\Exception',
+        'middleware' => 'Obullo\Application\Middleware',
         'translator' => 'Obullo\Translation\Translator',
         'cookie' => 'Obullo\Cookie\Cookie',
         'is' => 'Obullo\Filters\Is',
@@ -53,8 +54,8 @@ $c['app']->provider(
         'config',
         'logger',
         'uri',
-        'cache',
         'request',
         'response',
+        'session',
     ]
 );

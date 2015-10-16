@@ -42,8 +42,14 @@ require OBULLO .'Application/Http/Bootstrap.php';
 |--------------------------------------------------------------------------
 */
 $server = Obullo\Http\Server::createServer(
-    function ($request, $response, $done) {
+    function ($request, $response, $done) use ($c) {
 
+        $relay = new Relay\RelayBuilder;
+        $dispatcher = $relay->newInstance(
+            $c['middleware']->getValues()
+        );
+        $response = $dispatcher($request, $response);
+        return $response;
     },
     $_SERVER,
     $_GET,

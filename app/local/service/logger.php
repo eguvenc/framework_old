@@ -10,7 +10,6 @@ return array(
         ]
     ],
     'methods' => [
-
         ['registerFilter' => ['priority', 'Obullo\Log\Filter\PriorityFilter']],
         ['registerHandler' => [5, 'file']],
         ['registerHandler' => [4, 'mongo']],

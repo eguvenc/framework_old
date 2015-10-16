@@ -11,6 +11,8 @@ class HelloWorld extends \Controller
      */      
     public function index()
     {
+        // $this->session->set('trest', 2);
+
         // if ($variable = $this->request->get('variable', 'is')->int()) {
         //     echo 'variable is integer';
         // }
@@ -27,11 +29,12 @@ class HelloWorld extends \Controller
         // $this->response->withStatus(404);
 
         // $this->response->html('sds');
+
+        // $this->response->error404('sds');
         
-        // $this->response->show404('sds');
-        
-        // $this->response->showError('sds');
-        // 
+        // $this->response->error('sds');
+
+        // $this->response->emptyContent();
 
         $this->view->load(
             'hello_world', 
