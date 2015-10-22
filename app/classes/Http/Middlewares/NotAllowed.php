@@ -41,8 +41,10 @@ class NotAllowed
 
         if (! in_array($method, $this->allowedMethods)) {
             
-            $response->error('Http Error 405 method not allowed.', 405, 'Method Not Allowed');
-            return $response;
+            return $response->withStatus(404)
+                ->withHeader('Content-Type', 'text/html')
+                ->withTemplate('404');
+            // return $response->error('405 method not allowed.', 405, 'Method Not Allowed');
         }
         return $next($request, $response);
     }

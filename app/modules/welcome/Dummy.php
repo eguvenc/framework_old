@@ -23,7 +23,7 @@ Class Dummy extends \Controller
         echo $this->layer->get('views/test');
         echo $this->layer->get('views/test');
         
-        echo 'WELCOME MODULE: '.$this->router->fetchNamespace().'<br>';
+        echo 'WELCOME MODULE: '.$this->router->getNamespace().'<br>';
 
         echo $this->view->get('dummy');
     }

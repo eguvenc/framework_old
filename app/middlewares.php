@@ -8,9 +8,10 @@
 |  Default Middlewares
 |
 |   - Maintenance
-|   - NotAllowed
-|   - Begin
-|   - Finalize
+|   - NotAllowed ( required )
+|   - Begin  ( required )
+|   - Finalize ( required )
+|   - View
 */
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +20,14 @@
 */
 $c['middleware']->configure(
     [
+        'NotFound' => 'Http\Middlewares\NotFound',
         // 'Auth' => 'Http\Middlewares\Auth',
+        'Annotation' => 'Http\Middlewares\Annotation',
+        'Begin' => 'Http\Middlewares\Begin',
         // 'Guest' => 'Http\Middlewares\Guest',
         'Maintenance' => 'Http\Middlewares\Maintenance',
         'NotAllowed' => 'Http\Middlewares\NotAllowed',
-        'Begin' => 'Http\Middlewares\Begin',
-        'Finalize' => 'Http\Middlewares\Finalize',
+        'View' => 'Http\Middlewares\View',
     ]
 );
 /*
@@ -34,6 +37,9 @@ $c['middleware']->configure(
 */
 $c['middleware']->add(
     [
-        'NotAllowed',
+        // 'NotAllowed',
+        // 'Annotation',
+        // 'NotFound',
+        'View'
     ]
 );

@@ -9,7 +9,7 @@ use Obullo\Container\ContainerInterface;
 
 use Obullo\Log\Handler\File;
 use Obullo\Log\Handler\Mongo;
-use Obullo\Log\Handler\Email;
+// use Obullo\Log\Handler\Email;
 
 class Logger implements JobInterface
 {
@@ -76,27 +76,27 @@ class Logger implements JobInterface
                     $this->c['config']
                 );
                 break;
-            case 'email':
-                $mailer = $this->c['mailer'];
-                $mailer->from('<noreply@example.com> Server Admin');
-                $mailer->to('obulloframework@gmail.com');
-                $mailer->subject('Server Logs');
+            // case 'email':
+            //     $mailer = $this->c['mailer'];
+            //     $mailer->from('<noreply@example.com> Server Admin');
+            //     $mailer->to('obulloframework@gmail.com');
+            //     $mailer->subject('Server Logs');
 
-                $handler = new Email(
-                    $this->c['app'],
-                    $this->c['config']
-                );
-                $handler->setMessage('Detailed logs here --> <div>%s</div>');
-                $handler->setNewlineChar('<br />');
-                $handler->func(
-                    function ($message) use ($mailer) {
-                        $mailer->message($message);
-                        $mailer->send();
-                    }
-                );
-                break;
+            //     $handler = new Email(
+            //         $this->c['app'],
+            //         $this->c['config']
+            //     );
+            //     $handler->setMessage('Detailed logs here --> <div>%s</div>');
+            //     $handler->setNewlineChar('<br />');
+            //     $handler->func(
+            //         function ($message) use ($mailer) {
+            //             $mailer->message($message);
+            //             $mailer->send();
+            //         }
+            //     );
+            //     break;
             case 'mongo':
-                $provider = $this->c['app']->provider('mongo')->get(
+                $provider = $this->c['mongo']->get(
                     [
                         'connection' => 'default'
                     ]

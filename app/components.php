@@ -18,7 +18,9 @@ $c['app']->provider(
         // 'amqp' => 'Obullo\Service\Provider\AmqpLib',
         'mongo' => 'Obullo\Service\Provider\Mongo'
     ]
-)->service(
+);
+
+$c['app']->service(
     [
         'logger' => 'Obullo\Log\LogManager',
         'db' => 'Obullo\Database\DatabaseManager',
@@ -26,8 +28,11 @@ $c['app']->provider(
         'queue' => 'Obullo\Queue\QueueManagerAmqp',
         // 'queue' => 'Obullo\Queue\QueueManagerAmqpLib',
     ]
-)->component(
+);
+
+$c['app']->component(
     [
+        'response' => 'Obullo\Http\Response',
         'event' => 'Obullo\Event\Event',
         'exception' => 'Obullo\Error\Exception',
         'middleware' => 'Obullo\Application\Middleware',
@@ -35,7 +40,6 @@ $c['app']->provider(
         'cookie' => 'Obullo\Cookie\Cookie',
         'is' => 'Obullo\Filters\Is',
         'clean' => 'Obullo\Filters\Clean',
-        'agent' => 'Obullo\Http\UserAgent',
         'layer' => 'Obullo\Layer\Request',
         'url' => 'Obullo\Url\Url',
         'task' => 'Obullo\Cli\Task\Task',
@@ -47,10 +51,15 @@ $c['app']->provider(
         'csrf' => 'Obullo\Security\Csrf',
         'validator' => 'Obullo\Validator\Validator',
         'view' => 'Obullo\View\View',
+        'template' => 'Obullo\View\Template',
     ]
-)->dependency(
+);
+
+$c['app']->dependency(
     [
+        'dependency',
         'app',
+        'middleware',
         'config',
         'logger',
         'uri',

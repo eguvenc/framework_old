@@ -53,7 +53,7 @@ $c['router']->group(
 $c['router']->group(
     [
         'name' => 'GenericUsers', 
-        // 'match' => '([0-9]+)/([a-z]+).*',
+        // 'match' => '([0-9]+)/([a-z]+).*',   // Match URI
         'domain' => 'framework',
         'middleware' => array('Maintenance')
     ],
@@ -61,7 +61,7 @@ $c['router']->group(
 
             // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
 
-            // echo $this->fetchNamespace();
+            // echo $this->getNamespace();
 
             // echo 'OK !!';
 

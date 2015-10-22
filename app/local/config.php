@@ -76,15 +76,6 @@ return array(
         ]
      ],
 
-     /**
-      * Controller
-      *
-      * Annotations : On / off annotations. If on you can use them for middlewares, events etc.
-      */
-    'controller' => [
-        'annotations' => true,
-    ],
-
     /**
      * Layers
      *

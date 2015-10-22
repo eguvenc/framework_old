@@ -26,6 +26,8 @@ class HelloWorld extends \Controller
 
         // $this->response->json(['dasd']);
         
+
+
         // $this->response->withStatus(404);
 
         // $this->response->html('sds');
@@ -33,6 +35,10 @@ class HelloWorld extends \Controller
         // $this->response->error404('sds');
         
         // $this->response->error('sds');
+        
+        // $this->middleware->add('NotFound');
+
+        // $this->response->redirect('http://framework/welcome');
 
         // $this->response->emptyContent();
 

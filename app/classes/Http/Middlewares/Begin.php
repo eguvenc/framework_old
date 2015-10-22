@@ -5,21 +5,21 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-use Obullo\Http\BenchmarkTrait;
-use Obullo\Config\ConfigInterface;
-use Obullo\Container\ContainerInterface;
 use Obullo\Log\LoggerInterface;
+use Obullo\Config\ConfigInterface;
+use Obullo\Application\ApplicationInterface;
+use Obullo\Application\Middlewares\BenchmarkTrait;
 
 class Begin
 {
     use BenchmarkTrait;
 
     /**
-     * Container
+     * Application
      * 
      * @var object
      */
-    protected $c;
+    protected $app;
 
     /**
      * Config
@@ -38,15 +38,27 @@ class Begin
     /**
      * Constructor
      * 
-     * @param ContainerInterface $c      config
-     * @param ConfigInterface    $config config
-     * @param LoggerInterface    $logger logger
+     * @param ApplicationInterface $app    application
+     * @param ConfigInterface      $config config
+     * @param LoggerInterface      $logger logger
      */
-    public function __construct(ContainerInterface $c, ConfigInterface $config, LoggerInterface $logger)
+    public function __construct(ApplicationInterface $app, ConfigInterface $config, LoggerInterface $logger)
     {
-        $this->c = $c;
+        $this->app = $app;
         $this->config = $config;
         $this->logger = $logger;
+    }
+
+    /**
+     * Inject controller object
+     * 
+     * @param \Obullo\Controller\Controller $controller object
+     * 
+     * @return void
+     */
+    public function inject($controller)
+    {
+        // ...   
     }
 
     /**
@@ -62,6 +74,15 @@ class Begin
     {
         $request = $this->benchmarkStart($request);
 
-        return $next($request, $response);
+        $response = $next($request, $this->app->call($response));
+
+        // if ($response->getStatusCode() == 404) {
+        //     // global $c;
+        //     // $c['middleware']->add('NotFound');
+        // }
+        $request = $this->benchmarkEnd($request);
+
+        $this->logger->shutdown(); // Manually shutdown logger to catch all worker errors.
+        return $response;
     }
 }

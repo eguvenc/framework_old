@@ -38,24 +38,27 @@ require 'vendor/autoload.php';
 require OBULLO .'Application/Http/Bootstrap.php';
 /*
 |--------------------------------------------------------------------------
+| Zend Stratigility
+|--------------------------------------------------------------------------
+*/
+$app = new Zend\Stratigility\MiddlewarePipe;
+/*
+|--------------------------------------------------------------------------
+| Assign App Middlewares
+|--------------------------------------------------------------------------
+*/
+foreach ($c['middleware']->getValues() as $middleware) {
+    $app->pipe($middleware);
+}
+/*
+|--------------------------------------------------------------------------
 | Create App with Zend Diactoros
 |--------------------------------------------------------------------------
 */
-$server = Obullo\Http\Server::createServer(
-    function ($request, $response, $done) use ($c) {
-
-        $relay = new Relay\RelayBuilder;
-        $dispatcher = $relay->newInstance(
-            $c['middleware']->getValues()
-        );
-        $response = $dispatcher($request, $response);
-        return $response;
-    },
-    $_SERVER,
-    $_GET,
-    $_POST,
-    $_COOKIE,
-    $_FILES
+$server = Obullo\Http\Server::createServerFromRequest(
+    $app,
+    $c['request'],
+    $c['response']
 );
 /*
 |--------------------------------------------------------------------------
