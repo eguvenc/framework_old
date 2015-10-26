@@ -2,7 +2,9 @@
 
 namespace Widgets\Tutorials;
 
-class HelloDummy extends \Controller
+use Obullo\Http\Controller;
+
+class HelloDummy extends Controller
 {
     /**
      * Index

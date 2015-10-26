@@ -61,11 +61,14 @@ padding:            20px;
     Ob1eMLCci/9YKkwYAIekBEe9E6RpHp9j9EtXr4/5jnFQodgbnJG9Idb65jjGxAL7JuXz6ion8fHy
     om2hiY9lj0kke3vSWdOJ8iHO3PTx+RZbuzojrv8toB0d2cfr6jSWCskjWi9emI+f1mrf+aqtTUjl
     Ov4DWLTRBbAc7WQAAAAASUVORK5CYII=" /></span>
-    <span style="float:left"><div><?php echo $heading ?></div></span>
+    <span style="float:left">
+        <div>Application Error</div>
+    </span>
 </div>
 
 <div style="clear:both;"></div>
-<h1><?php echo $message ?></h1>
+
+<h1><?php echo $error ?></h1>
 
 </body>
 </html>

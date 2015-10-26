@@ -2,10 +2,13 @@
 
 namespace Http\Middlewares;
 
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 
-class View
+use Obullo\Http\ControllerInterface as Controller;
+use Obullo\Http\Middleware\ControllerAwareInterface;
+
+class View implements ControllerAwareInterface
 {
     /**
      * Inject controller object
@@ -13,8 +16,8 @@ class View
      * @param \Obullo\Controller\Controller $controller object
      * 
      * @return void
-     */
-    public function inject($controller)
+     */ 
+    public function inject(Controller $controller)
     {
         $this->setupLayout($controller);
     }
@@ -28,9 +31,12 @@ class View
      * 
      * @return object ResponseInterface
      */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+    public function __invoke(Request $request, Response $response, callable $next)
     {
-        return $next($request, $response);
+        // echo 'Before View <br>';
+        $response = $next($request, $response);
+        // echo 'After View <br>';
+        return $response;
     }
 
     /**

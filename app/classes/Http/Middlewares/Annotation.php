@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Obullo\Container\ContainerInterface as Container;
 use Obullo\Router\RouterInterface as Router;
 use Obullo\View\TemplateInterface as Template;
+use Obullo\Http\ControllerInterface as Controller;
 
 class Annotation
 {
@@ -38,7 +39,7 @@ class Annotation
      * 
      * @return void
      */
-    public function inject($controller)
+    public function inject(Controller $controller)
     {        
         $this->controller = $controller;
     }
@@ -57,14 +58,14 @@ class Annotation
         $reflector = new ReflectionClass($this->controller);
         $method = $this->router->getMethod();  // default index
 
-        if (! $reflector->hasMethod($method)) {  // Show404 if method doest not exist
+        // if (! $reflector->hasMethod($method)) {  // Show404 if method doest not exist
 
-            $body = $this->template->get('404');
+        //     $body = $this->template->get('404');
 
-            return $response->withStatus(404)
-                ->withHeader('Content-Type', 'text/html')
-                ->withBody($body);
-        }
+        //     return $response->withStatus(404)
+        //         ->withHeader('Content-Type', 'text/html')
+        //         ->withBody($body);
+        // }
         $docs = new \Obullo\Annotations\Controller($this->c, $reflector);
         $docs->setMethod($method);
         $docs->parse();

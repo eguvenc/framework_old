@@ -2,7 +2,9 @@
 
 namespace Welcome;
 
-Class Dummy extends \Controller
+use Obullo\Http\Controller;
+
+Class Dummy extends Controller
 {
     /**
      * Index

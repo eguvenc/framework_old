@@ -2,7 +2,9 @@
 
 namespace Membership;
 
-class Restricted extends \Controller
+use Obullo\Http\Controller;
+
+class Restricted extends Controller
 {
     /**
      * Index

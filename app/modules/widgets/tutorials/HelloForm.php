@@ -2,7 +2,9 @@
 
 namespace Widgets\Tutorials;
 
-class HelloForm extends \Controller
+use Obullo\Http\Controller;
+
+class HelloForm extends Controller
 {
     /**
      * Index

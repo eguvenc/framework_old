@@ -2,7 +2,9 @@
 
 namespace Widgets\Tutorials;
 
-class Hello404 extends \Controller
+use Obullo\Http\Controller;
+
+class Hello404 extends Controller
 {
     /**
      * Index

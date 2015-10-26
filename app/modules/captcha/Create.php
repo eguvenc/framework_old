@@ -2,7 +2,9 @@
 
 namespace Captcha;
 
-class Create extends \Controller
+use Obullo\Http\Controller;
+
+class Create extends Controller
 {
     /**
      * Index

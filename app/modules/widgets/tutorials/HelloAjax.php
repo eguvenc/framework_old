@@ -2,7 +2,9 @@
 
 namespace Widgets\Tutorials;
 
-class HelloAjax extends \Controller
+use Obullo\Http\Controller;
+
+class HelloAjax extends Controller
 {
     /**
      * Index

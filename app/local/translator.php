@@ -13,10 +13,10 @@ return array(
     |
     */
     'default' => [
+
         'debug' => false,
         'locale'  => 'en'
     ],
-
     /**
      * Fallback language
      *
@@ -24,10 +24,10 @@ return array(
      * Locale  : The language will be used as a fallback for text that has no translation in the default language.
      */
     'fallback' => [
+
         'enabled' => false,
         'locale' => 'es',
     ],
-
     /**
      * Uri configuration
      * 
@@ -35,10 +35,10 @@ return array(
      * SegmentNumber : Uri segment number e.g. http://example.com/en/home
      */
     'uri' => [
+
         'segment' => true,
         'segmentNumber' => 0       
     ],
-
     /**
      * Cookie configuration
      * 
@@ -50,6 +50,7 @@ return array(
      * Path : Cookie domain path
      */
     'cookie' => [
+
         'name'   =>'locale', 
         'domain' => null,
         'expire' => (365 * 24 * 60 * 60),
@@ -57,11 +58,11 @@ return array(
         'httpOnly' => false,
         'path' => '/',
     ],
-
     /**
      * Available Languages
      */
     'languages' => [
+    
         'en' => 'english',
         'tr' => 'turkish',
     ],

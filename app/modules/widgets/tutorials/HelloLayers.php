@@ -2,7 +2,9 @@
 
 namespace Widgets\Tutorials;
 
-class HelloLayers extends \Controller
+use Obullo\Http\Controller;
+
+class HelloLayers extends Controller
 {
     /**
      * Index

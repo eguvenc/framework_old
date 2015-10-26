@@ -13,7 +13,6 @@ return array(
                 PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
             ]
         ],
-
         'failed' => [
             'dsn'      => 'pdo_mysql:host=localhost;port=;dbname=failed',
             'username' => 'root',

@@ -2,9 +2,9 @@
 
 namespace Membership;
 
-use Obullo\Authentication\AuthConfig;
+use Obullo\Http\Controller;
 
-class Logout extends \Controller
+class Logout extends Controller
 {
     /**
      * Index

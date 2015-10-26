@@ -3,6 +3,34 @@
 return array(
     
     'params' => [
+        'default' => [
+            'channel' => 'system',
+        ],
+        'priorities' => [
+            'emergency' => 7,
+            'alert'     => 6,
+            'critical'  => 5,
+            'error'     => 4,
+            'warning'   => 3,
+            'notice'    => 2,
+            'info'      => 1,
+            'debug'     => null,
+        ],
+        'format' => [
+            'line' => '[%datetime%] %channel%.%level%: --> %message% %context% %extra%\n',
+            'date' =>  'Y-m-d H:i:s',
+        ],
+        'app' => [
+            'query' => [
+                'log'=> true,
+            ],
+            'benchmark' => [
+                'log' => true,
+            ],
+            'worker' => [
+                'log' => false,
+            ]
+        ],
         'queue' => [
             'enabled' => false,
             'job' => 'logger.1',

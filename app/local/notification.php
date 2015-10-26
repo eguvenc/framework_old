@@ -4,7 +4,7 @@ return array(
 
     /*
     | -------------------------------------------------------------------
-    | Form
+    | Form Messages
     | -------------------------------------------------------------------
     | This file contains form messages configurations.
     | It is used by Form Class to set messages HTML template or attributes.
@@ -33,13 +33,10 @@ return array(
             'icon' => '<span class="glyphicon glyphicon-info-sign"></span> '
         ],
     ],
-
     /*
     | -------------------------------------------------------------------
-    | Flash
+    | Flash Messagess
     | -------------------------------------------------------------------
-    | This file contains flash messages configurations.
-    |
     */
     'flash' => [
     

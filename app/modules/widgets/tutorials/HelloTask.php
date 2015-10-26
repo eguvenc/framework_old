@@ -2,7 +2,9 @@
 
 namespace Widgets\Tutorials;
 
-class HelloTask extends \Controller
+use Obullo\Http\Controller;
+
+class HelloTask extends Controller
 {
     /**
      * Index

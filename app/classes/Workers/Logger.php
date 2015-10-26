@@ -5,7 +5,7 @@ namespace Workers;
 use Obullo\Queue\Job;
 use Obullo\Queue\JobInterface;
 use Obullo\Log\Filter\LogFilters;
-use Obullo\Container\ContainerInterface;
+use Obullo\Container\ContainerInterface as Container;
 
 use Obullo\Log\Handler\File;
 use Obullo\Log\Handler\Mongo;
@@ -37,9 +37,9 @@ class Logger implements JobInterface
     /**
      * Constructor
      * 
-     * @param object $c container
+     * @param ContainerInterface $c container
      */
-    public function __construct(ContainerInterface $c)
+    public function __construct(Container $c)
     {
         $this->c = $c;
     }
@@ -72,8 +72,14 @@ class Logger implements JobInterface
             switch ($event['handler']) {
             case 'file':
                 $handler = new File(
-                    $this->c['app'],
-                    $this->c['config']
+                    $this->c['logger.params'],
+                    [
+                        'path' => [
+                            'http'  => '/resources/data/logs/http.log',
+                            'cli'   => '/resources/data/logs/cli.log',
+                            'ajax'  => '/resources/data/logs/ajax.log',
+                        ],
+                    ]
                 );
                 break;
             // case 'email':
@@ -96,24 +102,25 @@ class Logger implements JobInterface
             //     );
             //     break;
             case 'mongo':
+
                 $provider = $this->c['mongo']->get(
                     [
                         'connection' => 'default'
                     ]
                 );
+
                 $handler = new Mongo(
                     $provider,
-                    $this->c['app'],
-                    $this->c['config'],
-                    array(
+                    $this->c['logger.params'],
+                    [
                         'database' => 'db',
                         'collection' => 'logs',
                         'save_options' => null,
-                        'save_format' => array(
+                        'save_format' => [
                             'context' => 'array',  // json
                             'extra'   => 'array'   // json
-                        ),
-                    )
+                        ],
+                    ]
                 );
                 break;
             default:
@@ -121,11 +128,11 @@ class Logger implements JobInterface
                 break;
             }
 
-            if (is_object($handler) && $handler->isAllowed($event)) { // Check write permissions
+            if (is_object($handler) && $handler->isAllowed($event, $this->c['request'])) { // Check write permissions
                 
-                $event = LogFilters::handle($event);
+                $filteredEvent = LogFilters::handle($event, $this->c['logger']);
 
-                $handler->write($event);  // Do job
+                $handler->write($filteredEvent);  // Do job
                 $handler->close();
                 
                 if ($this->job instanceof Job) {
@@ -141,13 +148,12 @@ class Logger implements JobInterface
 /* EXAMPLE LOG DATA
 Array
 (
-    [primary] => 5
     [5] => Array
         (
-            [request] => http
             [handler] => file
+            [request] => http
             [type] => writer
-            [time] => 1436357633
+            [time] => 1445593189
             [filters] => Array
                         (
                             [0] => Array

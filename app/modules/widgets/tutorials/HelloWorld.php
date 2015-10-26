@@ -2,7 +2,10 @@
 
 namespace Widgets\Tutorials;
 
-class HelloWorld extends \Controller
+use Obullo\Http\Controller;
+use Obullo\Http\Stream;
+
+class HelloWorld extends Controller
 {
     /**
      * Index
@@ -25,8 +28,6 @@ class HelloWorld extends \Controller
         // echo $this->uri->getUriString();
 
         // $this->response->json(['dasd']);
-        
-
 
         // $this->response->withStatus(404);
 
@@ -40,7 +41,7 @@ class HelloWorld extends \Controller
 
         // $this->response->redirect('http://framework/welcome');
 
-        // $this->response->emptyContent();
+        // return $this->response->emptyContent();
 
         $this->view->load(
             'hello_world', 

@@ -2,7 +2,9 @@
 
 namespace Widgets\Tutorials;
 
-class HelloElement extends \Controller
+use Obullo\Http\Controller;
+
+class HelloElement extends Controller
 {
     /**
      * Index

@@ -2,6 +2,10 @@
 
 return array(
     
+    'params' => [
+
+    ],
+
     'methods' => [
         [
             'setParameters' => [

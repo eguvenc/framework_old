@@ -2,7 +2,9 @@
 
 namespace Membership;
 
-class Login extends \Controller
+use Obullo\Http\Controller;
+
+class Login extends Controller
 {
     /**
      * Index

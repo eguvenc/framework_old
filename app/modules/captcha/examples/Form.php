@@ -2,7 +2,9 @@
 
 namespace Captcha\Examples;
 
-class Form extends \Controller
+use Obullo\Http\Controller;
+
+class Form extends Controller
 {
     /**
      * Index

@@ -2,7 +2,9 @@
 
 namespace Captcha\Examples;
 
-class Ajax extends \Controller
+use Obullo\Http\Controller;
+
+class Ajax extends Controller
 {
     /**
      * Index

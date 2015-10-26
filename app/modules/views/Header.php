@@ -2,7 +2,9 @@
 
 namespace Views;
 
-class Header extends \Controller
+use Obullo\Http\Controller;
+
+class Header extends Controller
 {
     /**
      * Index

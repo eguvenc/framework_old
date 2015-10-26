@@ -2,11 +2,15 @@
 
 namespace Http\Middlewares;
 
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 
-class NotAllowed
+use Obullo\View\Template\TemplateInterface as Template;
+
+class NotAllowed implements ParamsAwareInterface
 {
+    protected $template;
+
     /**
      * Allowed http methods
      * 
@@ -15,15 +19,25 @@ class NotAllowed
     protected $allowedMethods = ['GET', 'POST', 'PUT', 'DELETE'];
 
     /**
+     * Constructor
+     * 
+     * @param Template $template object
+     */
+    public function __construct(Template $template)
+    {
+        $this->template = $template;
+    }
+
+    /**
      * Set allowed methods
      * 
-     * @param array $methods allowed methods
+     * @param array $params allowed methods
      *
      * @return void
      */
-    public function inject(array $methods)
+    public function inject(array $params)
     {
-        $this->allowedMethods = $methods;
+        $this->allowedMethods = $params;
     }
 
     /**
@@ -35,16 +49,17 @@ class NotAllowed
      * 
      * @return object ResponseInterface
      */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+    public function __invoke(Request $request, Response $response, callable $next)
     {
         $method = $request->getMethod();
 
         if (! in_array($method, $this->allowedMethods)) {
             
+            $body = $this->template->make('404');
+
             return $response->withStatus(404)
                 ->withHeader('Content-Type', 'text/html')
-                ->withTemplate('404');
-            // return $response->error('405 method not allowed.', 405, 'Method Not Allowed');
+                ->withBody($body);
         }
         return $next($request, $response);
     }

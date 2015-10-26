@@ -7,14 +7,6 @@
 | corresponding ( directory / controller / method ).
 |
 */
-$c['router']->configuration(
-    [
-        'domain' => 'framework',
-        'defaultPage' => 'welcome',
-        'error404' => null
-    ]
-);
-
 $c['router']->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
 
 // $c['router']->get(

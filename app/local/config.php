@@ -10,7 +10,6 @@ return array(
     'error' => [
         'debug' => true,
     ],
-
     /**
      * Log
      *
@@ -21,7 +20,6 @@ return array(
     'log' => [
         'enabled' => true,
     ],
-
     /**
      * Url
      * 
@@ -44,7 +42,6 @@ return array(
             'index.php' => ''
         ]
     ],
-
     /**
      * Debugger
      *
@@ -57,7 +54,6 @@ return array(
             'socket' => 'ws://127.0.0.1:9000'
         ]
     ],
-
     /**
      * Locale
      *
@@ -75,7 +71,6 @@ return array(
             'format' => 'H:i:s d:m:Y'
         ]
      ],
-
     /**
      * Layers
      *
@@ -84,7 +79,6 @@ return array(
     'layer' => [
         'cache' => false
     ],
-
     /**
      * Cookies
      *
@@ -103,7 +97,6 @@ return array(
         'expire' => 604800,
         'prefix' => '',
     ],
-
     /**
      * Proxy
      *
@@ -115,7 +108,6 @@ return array(
     'trusted' => [
         'ips' => '',
     ],
-
     /**
      * Sets your encryption key and protection settings.
      *

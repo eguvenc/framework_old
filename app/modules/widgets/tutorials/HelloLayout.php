@@ -2,7 +2,9 @@
 
 namespace Widgets\Tutorials;
 
-class HelloLayout extends \Controller
+use Obullo\Http\Controller;
+
+class HelloLayout extends Controller
 {
     use \View\Base;
 

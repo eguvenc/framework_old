@@ -2,9 +2,12 @@
 
 namespace Welcome;
 
-class Hello extends \Controller
+use Obullo\Http\Controller;
+use View\Base;
+
+class Hello extends Controller
 {
-    use \View\Base;
+    use Base;
 
     /**
      * Index

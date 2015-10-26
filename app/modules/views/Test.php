@@ -2,7 +2,9 @@
 
 namespace Views;
 
-class Test extends \Controller
+use Obullo\Http\Controller;
+
+class Test extends Controller
 {
     /**
      * Index

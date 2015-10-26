@@ -2,9 +2,10 @@
 
 namespace Debugger;
 
+use Obullo\Http\Controller;
 use Obullo\Debugger\Manager;
 
-class Debugger extends \Controller
+class Debugger extends Controller
 {
     /**
      * Manager

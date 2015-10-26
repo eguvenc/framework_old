@@ -2,7 +2,9 @@
 
 namespace Views;
 
-class Footer extends \Controller
+use Obullo\Http\Controller;
+
+class Footer extends Controller
 {
     /**
      * Index
