@@ -4,6 +4,9 @@ namespace Views;
 
 use Obullo\Http\Controller;
 
+/**
+ * View controller
+ */
 class Footer extends Controller
 {
     /**

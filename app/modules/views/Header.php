@@ -4,6 +4,9 @@ namespace Views;
 
 use Obullo\Http\Controller;
 
+/**
+ * View controller
+ */
 class Header extends Controller
 {
     /**
@@ -13,7 +16,10 @@ class Header extends Controller
      */
     public function index()
     {
-        $segment = ($this->app->uri->segment(0)) ? $this->app->uri->segment(0) : 'welcome';
+        // $segment = ($this->app->uri->segment(0)) ? $this->app->uri->segment(0) : 'welcome';
+        
+        $uri = $this->request->getUri();
+        $segment = ($uri->segment(0)) ? $uri->segment(0) : 'welcome';
 
         $li = '';
         $navbar = array(
