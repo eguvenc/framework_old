@@ -23,6 +23,7 @@ $c['app']->provider(
 $c['app']->service(
     [
         'logger' => 'Obullo\Log\LogManager',
+        'url' => 'Obullo\Url\UrlManager',
         'db' => 'Obullo\Database\DatabaseManager',
         'session' => 'Obullo\Session\SessionManager',
         'queue' => 'Obullo\Queue\QueueManagerAmqp',
@@ -41,7 +42,6 @@ $c['app']->component(
         'is' => 'Obullo\Filters\Is',
         'clean' => 'Obullo\Filters\Clean',
         'layer' => 'Obullo\Layer\Request',
-        'url' => 'Obullo\Url\Url',
         'task' => 'Obullo\Cli\Task\Task',
         'router' => 'Obullo\Router\Router',
         'flash' => 'Obullo\Flash\Session',

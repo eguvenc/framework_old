@@ -3,7 +3,6 @@
 namespace Widgets\Tutorials;
 
 use Obullo\Http\Controller;
-use Obullo\Http\Stream;
 
 class HelloWorld extends Controller
 {
@@ -14,6 +13,10 @@ class HelloWorld extends Controller
      */      
     public function index()
     {
+        // echo $this->uri->getUriString();
+
+        // echo $this->url->baseUrl();
+
         // $this->session->set('trest', 2);
 
         // if ($variable = $this->request->get('variable', 'is')->int()) {

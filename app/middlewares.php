@@ -8,7 +8,6 @@
 |  Default Middlewares
 |
 |   - Router ( required )
-|   - Benchmark
 |   - Maintenance
 |   - NotAllowed ( required )
 |   - View
@@ -20,7 +19,7 @@
 */
 $c['middleware']->configure(
     [
-        'Benchmark' => 'Http\Middlewares\Benchmark',
+        'Error' => 'Http\Middlewares\Error',
         'Router' => 'Http\Middlewares\Router',
         'Maintenance' => 'Http\Middlewares\Maintenance',
         'NotAllowed' => 'Http\Middlewares\NotAllowed',
@@ -35,13 +34,13 @@ $c['middleware']->configure(
 |--------------------------------------------------------------------------
 | Add your global middlewares
 |--------------------------------------------------------------------------
-| Warning ! : Set Benchmark middleware at index "0" of array.
 */
-$c['middleware']->add(
+$c['middleware']->queue(
     [
-        'Router',
-        'Benchmark',
         // 'Annotation',
+        'Maintenance',
+        'Router',
+        // 'Error',
         'View',
     ]
 );

@@ -7,30 +7,26 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 use Obullo\Router\RouterInterface as Route;
 use Obullo\Config\ConfigInterface as Config;
-use Obullo\View\TemplateInterface as Template;
-use Obullo\Application\ApplicationInterface as Application;
+use Obullo\Container\ContainerInterface as Container;
 
 class Router
 {
-    protected $app;
+    protected $c;
     protected $router;
     protected $config;
-    protected $template;
 
     /**
      * Constructor
      * 
-     * @param Application $app      app
-     * @param Route       $router   router
-     * @param Config      $config   config
-     * @param Template    $template template
+     * @param Container $c      container
+     * @param Route     $router router
+     * @param Config    $config config
      */
-    public function __construct(Application $app, Route $router, Config $config, Template $template)
+    public function __construct(Container $c, Route $router, Config $config)
     {
-        $this->app = $app;
+        $this->c = $c;
         $this->router = $router;
         $this->config = $config;
-        $this->template = $template;
     }
 
     /**
@@ -50,22 +46,12 @@ class Router
                 'defaultPage' => 'welcome',
             ]
         );
-        if (strpos($request->getUri()->getHost(), $this->config['url']['webhost']) === false) {
-
-            $error = 'Your webhost configuration is not correct in the main config file.';
-            $body = $this->template->make('error', ['error' => $error]);
-
-            return $response->withStatus(500)
-                ->withHeader('Content-Type', 'text/html')
-                ->withBody($body);
-        }
-
         if ($this->router->getDefaultPage() == '') {
 
             $error = 'Unable to determine what should be displayed.';
             $error.= 'A default route has not been specified in the router middleware.';
 
-            $body = $this->template->make('error', ['error' => $error]);
+            $body = $this->c['template']->make('error', ['error' => $error]);
 
             return $response->withStatus(404)
                 ->withHeader('Content-Type', 'text/html')
@@ -85,10 +71,11 @@ class Router
      */
     protected function run(Response $response)
     {
-        $result = $this->app->call($response);
+        $result = $this->c['app']->call($response);
 
         if (! $result) {
-            $body = $this->template->make('404');
+            $body = $this->c['template']->make('404');
+
             return $response->withStatus(404)
                 ->withHeader('Content-Type', 'text/html')
                 ->withBody($body);

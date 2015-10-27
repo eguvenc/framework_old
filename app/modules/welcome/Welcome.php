@@ -16,6 +16,8 @@ class Welcome extends Controller
      */
     public function index()
     {
+        echo $this->url->siteUrl();
+
         $this->view->load(
             'welcome',
             [

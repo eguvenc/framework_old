@@ -21,34 +21,13 @@ return array(
         'enabled' => true,
     ],
     /**
-     * Url
-     * 
-     * Webhost : Your web host name default "localhost" should be "example.com" in production config
-     * baseurl : Base Url "/" URL of your framework root, generally a '/' trailing slash. 
-     * assets
-     *     url    : Assets url of your framework generally a '/' you may want to change it with your "cdn" provider.
-     *     folder : Full path of assets folder
-     * rewrite : 
-     *     index.php : Typically this will be your index.php file, If mod_rewrite enabled is should be blank. 
-     */
-    'url' => [
-        'webhost'  => 'framework',
-        'baseurl'  => '/',
-        'assets'   => [
-            'url' => '/',
-            'folder' => '/resources/assets/',
-        ],    
-        'rewrite' => [
-            'index.php' => ''
-        ]
-    ],
-    /**
      * Debugger
      *
      * Enabled : On / off http debugger web socket data activity
      * socket  : Websocket connection url and port
      */
     'http' => [
+        'webhost'  => 'framework',
         'debugger' => [
             'enabled' => false,
             'socket' => 'ws://127.0.0.1:9000'

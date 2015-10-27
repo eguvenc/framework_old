@@ -29,7 +29,6 @@ require 'constants';
 require 'vendor/autoload.php';
 
 // Obullo\Application\Autoloader::register();
-
 /*
 |--------------------------------------------------------------------------
 | Bootstrap
@@ -38,24 +37,23 @@ require 'vendor/autoload.php';
 require OBULLO .'Application/Http/Bootstrap.php';
 /*
 |--------------------------------------------------------------------------
-| Create Zend Stratigility
+| Benchmark
 |--------------------------------------------------------------------------
 */
-$app = new Obullo\Zend\Stratigility\MiddlewarePipe($c['app']->env());
+Obullo\Log\Benchmark::start($c);
 /*
 |--------------------------------------------------------------------------
-| Create Attached Middlewares
+| Choose your middleware app
 |--------------------------------------------------------------------------
 */
-foreach ($c['middleware']->getValues() as $middleware) {
-    $app->pipe($middleware);
-}
+$app = new Obullo\Http\Relay($c);
+// $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
 /*
 |--------------------------------------------------------------------------
-| Create Zend Diactoros App
+| Create your http server
 |--------------------------------------------------------------------------
 */
-$server = Obullo\Http\Server::createServerFromRequest(
+$server = Obullo\Http\Zend\Diactoros\Server::createServerFromRequest(
     $app,
     $c['request'],
     $c['response']
@@ -66,3 +64,9 @@ $server = Obullo\Http\Server::createServerFromRequest(
 |--------------------------------------------------------------------------
 */
 $server->listen();
+/*
+|--------------------------------------------------------------------------
+| Benchmark
+|--------------------------------------------------------------------------
+*/
+Obullo\Log\Benchmark::end($c);

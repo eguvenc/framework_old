@@ -31,7 +31,6 @@ $c['router']->group(
         // $this->attach('welcome/test');
     }
 );
-// $c['router']->error404('errors/custom404');
 
 // $c['router']->get(
 //     'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2',

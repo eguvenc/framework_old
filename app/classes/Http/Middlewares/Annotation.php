@@ -15,20 +15,17 @@ class Annotation
 {
     protected $c;
     protected $router;
-    protected $template;
     protected $controller;
 
     /**
      * Constructor
      * 
-     * @param Container $c        container
-     * @param Template  $template template
-     * @param Router    $router   router
+     * @param Container $c      container
+     * @param Router    $router router
      */
-    public function __construct(Container $c, Template $template, Router $router)
+    public function __construct(Container $c, Router $router)
     {
         $this->c = $c;
-        $this->template = $template;
         $this->router = $router;
     }
 
@@ -60,7 +57,7 @@ class Annotation
 
         // if (! $reflector->hasMethod($method)) {  // Show404 if method doest not exist
 
-        //     $body = $this->template->get('404');
+        //     $body = $this->c['template']->get('404');
 
         //     return $response->withStatus(404)
         //         ->withHeader('Content-Type', 'text/html')
