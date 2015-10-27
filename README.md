@@ -1,11 +1,15 @@
 
+### Installation
 
-Obullo Setup
-===
+----
+
+There is no any release yet.
+
+### Setup
 
 When you setup your application you have two options to work with Http middlewares.
 
-### Setup with Relay ( Default )
+#### Setup with Relay ( Default )
 
 It's a simple and lightweight middleware solution.
 
@@ -43,7 +47,7 @@ $server->listen();
 Learn more details about <a href="http://relayphp.com/" target="_blank">relay middleware</a>.
 
 
-### Setup with Zend Stratigility
+#### Setup with Zend Stratigility
 
 It's a advanced middleware solution from zend.
 
