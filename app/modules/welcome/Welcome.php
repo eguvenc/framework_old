@@ -17,6 +17,7 @@ class Welcome extends Controller
     public function index()
     {
         // echo $this->url->siteUrl();
+        // echo $this->request->getServerParams()['REQUEST_URI'];
 
         $this->view->load(
             'welcome',

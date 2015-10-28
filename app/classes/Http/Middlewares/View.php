@@ -17,7 +17,7 @@ class View implements ControllerAwareInterface
      * 
      * @return void
      */ 
-    public function inject(Controller $controller)
+    public function setController(Controller $controller)
     {
         $this->setupLayout($controller);
     }
@@ -42,11 +42,11 @@ class View implements ControllerAwareInterface
     /**
      * Assign layout variables
      * 
-     * @param \Obullo\Controller\Controller $controller object
+     * @param \Obullo\Http\Controller $controller object
      * 
      * @return void
      */
-    protected function setupLayout($controller)
+    protected function setupLayout(Controller $controller)
     {
         if (method_exists($controller, '__invoke')) {
             $controller();

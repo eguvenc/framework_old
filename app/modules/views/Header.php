@@ -16,9 +16,7 @@ class Header extends Controller
      */
     public function index()
     {
-        // $segment = ($this->app->uri->segment(0)) ? $this->app->uri->segment(0) : 'welcome';
-        
-        $uri = $this->request->getUri();
+        $uri = $this->app->request->getUri();
         $segment = ($uri->segment(0)) ? $uri->segment(0) : 'welcome';
 
         $li = '';

@@ -15,7 +15,7 @@ class Footer extends Controller
      * @return void
      */
     public function index()
-    {
+    {        
         echo $this->view->get(
             'footer',
             [

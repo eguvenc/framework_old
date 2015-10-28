@@ -35,7 +35,7 @@ class NotAllowed implements ParamsAwareInterface
      *
      * @return void
      */
-    public function inject(array $params)
+    public function setParams(array $params)
     {
         $this->allowedMethods = $params;
     }

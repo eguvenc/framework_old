@@ -13,6 +13,8 @@ class HelloWorld extends Controller
      */      
     public function index()
     {
+        // print_r($GLOBALS);
+        
         // echo $this->uri->getUriString();
 
         // echo $this->url->baseUrl();
