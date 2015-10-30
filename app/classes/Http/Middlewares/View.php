@@ -5,10 +5,11 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Http\ControllerInterface as Controller;
 use Obullo\Http\Middleware\ControllerAwareInterface;
 
-class View implements ControllerAwareInterface
+class View implements ControllerAwareInterface, MiddlewareInterface
 {
     /**
      * Inject controller object
@@ -31,11 +32,9 @@ class View implements ControllerAwareInterface
      * 
      * @return object ResponseInterface
      */
-    public function __invoke(Request $request, Response $response, callable $next)
+    public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        // echo 'Before View <br>';
         $response = $next($request, $response);
-        // echo 'After View <br>';
         return $response;
     }
 

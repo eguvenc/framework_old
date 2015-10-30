@@ -9,13 +9,13 @@ class HelloWorld extends Controller
     /**
      * Index
      * 
+     * @middleware->method("post");
+     * 
      * @return void
-     */      
+     */ 
     public function index()
     {
-        // print_r($GLOBALS);
-        
-        // echo $this->uri->getUriString();
+        // echo $this->request->getUri()->getUriString();
 
         // echo $this->url->baseUrl();
 

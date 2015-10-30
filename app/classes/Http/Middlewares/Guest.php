@@ -2,7 +2,7 @@
 
 namespace Http\Middlewares;
 
-use Obullo\Application\Middleware;
+use Obullo\Http\Middleware\MiddlewareInterface;
 
 class Guest extends Middleware
 {

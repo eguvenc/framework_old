@@ -5,11 +5,12 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Container\ContainerInterface as Container;
 use Obullo\Application\Middleware\MaintenanceTrait;
 use Obullo\Http\Middleware\ParamsAwareInterface;
 
-class Maintenance implements ParamsAwareInterface
+class Maintenance implements ParamsAwareInterface, MiddlewareInterface
 {
     use MaintenanceTrait;
 
@@ -47,7 +48,7 @@ class Maintenance implements ParamsAwareInterface
      * 
      * @return object ResponseInterface
      */
-    public function __invoke(Request $request, Response $response, callable $next)
+    public function __invoke(Request $request, Response $response, callable $next = null)
     {
         if ($this->check() == false) {
             

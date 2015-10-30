@@ -25,7 +25,7 @@ class HelloAjax extends Controller
                 $this->form->error('There are some errors in form fields.');
             }
             $this->form->setErrors($this->validator);
-            echo $this->response->json($this->form->outputArray());
+            $this->response->json($this->form->outputArray());
             return;
         }
 

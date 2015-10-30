@@ -5,17 +5,13 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-use Obullo\View\Template\TemplateInterface as Template;
+use Obullo\View\TemplateInterface as Template;
+use Obullo\Http\Middleware\MiddlewareInterface;
+use Obullo\Http\Middleware\ParamsAwareInterface;
 
-class NotAllowed implements ParamsAwareInterface
+class NotAllowed implements ParamsAwareInterface, MiddlewareInterface
 {
     protected $template;
-
-    /**
-     * Allowed http methods
-     * 
-     * @var array
-     */
     protected $allowedMethods = ['GET', 'POST', 'PUT', 'DELETE'];
 
     /**
@@ -49,10 +45,12 @@ class NotAllowed implements ParamsAwareInterface
      * 
      * @return object ResponseInterface
      */
-    public function __invoke(Request $request, Response $response, callable $next)
+    public function __invoke(Request $request, Response $response, callable $next = null)
     {
         $method = $request->getMethod();
 
+        // print_r($this->allowedMethods);
+        // die;
         if (! in_array($method, $this->allowedMethods)) {
             
             $body = $this->template->make('404');

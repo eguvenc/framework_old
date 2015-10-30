@@ -48,6 +48,7 @@ Obullo\Log\Benchmark::start($c);
 */
 $app = new Obullo\Http\Relay($c);
 // $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
+// 
 /*
 |--------------------------------------------------------------------------
 | Create your http server

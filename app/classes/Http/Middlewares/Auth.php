@@ -2,10 +2,11 @@
 
 namespace Http\Middlewares;
 
-use Obullo\Application\Middleware;
 use Obullo\Authentication\Middleware\UniqueLoginTrait;
 
-class Auth extends Middleware
+use Obullo\Http\Middleware\MiddlewareInterface;
+
+class Auth extends MiddlewareInterface
 {
     use UniqueLoginTrait;
     

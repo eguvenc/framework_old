@@ -17,4 +17,9 @@ class Tutorials extends Controller
         echo get_class();
     }
 
+    public function test()
+    {
+        echo 'asds';
+    }
+
 }

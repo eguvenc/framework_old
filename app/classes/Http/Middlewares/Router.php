@@ -5,11 +5,12 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Router\RouterInterface as Route;
 use Obullo\Config\ConfigInterface as Config;
 use Obullo\Container\ContainerInterface as Container;
 
-class Router
+class Router implements MiddlewareInterface
 {
     protected $c;
     protected $router;
@@ -38,7 +39,7 @@ class Router
      * 
      * @return object ResponseInterface
      */
-    public function __invoke(Request $request, Response $response, callable $next)
+    public function __invoke(Request $request, Response $response, callable $next = null)
     {
         $this->router->configuration(
             [
@@ -59,28 +60,6 @@ class Router
         }
         $this->router->init();
 
-        return $next($request, $this->run($response));
+        return $next($request, $response);
     }
-
-    /**
-     * Run application
-     * 
-     * @param ResponseInterface $response response
-     * 
-     * @return mixed
-     */
-    protected function run(Response $response)
-    {
-        $result = $this->c['app']->call($response);
-
-        if (! $result) {
-            $body = $this->c['template']->make('404');
-
-            return $response->withStatus(404)
-                ->withHeader('Content-Type', 'text/html')
-                ->withBody($body);
-        }
-        return $result;
-    }
-
 }

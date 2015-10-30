@@ -33,11 +33,7 @@ return array(
             'icon' => '<span class="glyphicon glyphicon-info-sign"></span> '
         ],
     ],
-    /*
-    | -------------------------------------------------------------------
-    | Flash Messagess
-    | -------------------------------------------------------------------
-    */
+
     'flash' => [
     
         'message' => '<div class="{class}">{icon}{message}</div>',

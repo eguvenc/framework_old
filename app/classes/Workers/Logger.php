@@ -5,13 +5,14 @@ namespace Workers;
 use Obullo\Queue\Job;
 use Obullo\Queue\JobInterface;
 use Obullo\Log\Filter\LogFilters;
+use Obullo\Container\ContainerAwareInterface;
 use Obullo\Container\ContainerInterface as Container;
 
 use Obullo\Log\Handler\File;
 use Obullo\Log\Handler\Mongo;
 // use Obullo\Log\Handler\Email;
 
-class Logger implements JobInterface
+class Logger implements JobInterface, ContainerAwareInterface
 {
     /**
      * Application
@@ -35,11 +36,13 @@ class Logger implements JobInterface
     protected $writers;
 
     /**
-     * Constructor
+     * Set container
      * 
-     * @param ContainerInterface $c container
+     * @param Container|null $c container
+     *
+     * @return void
      */
-    public function __construct(Container $c)
+    public function setContainer(Container $c = null)
     {
         $this->c = $c;
     }
@@ -108,7 +111,6 @@ class Logger implements JobInterface
                         'connection' => 'default'
                     ]
                 );
-
                 $handler = new Mongo(
                     $provider,
                     $this->c['logger.params'],

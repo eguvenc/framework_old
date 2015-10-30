@@ -6,12 +6,14 @@ use ReflectionClass;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+use Obullo\Http\Middleware\MiddlewareInterface;
+use Obullo\Http\Middleware\ControllerAwareInterface;
+
 use Obullo\Container\ContainerInterface as Container;
-use Obullo\Router\RouterInterface as Router;
-use Obullo\View\TemplateInterface as Template;
+use Obullo\Router\RouterInterface as Route;
 use Obullo\Http\ControllerInterface as Controller;
 
-class Annotation
+class Annotation implements MiddlewareInterface
 {
     protected $c;
     protected $router;
@@ -23,7 +25,7 @@ class Annotation
      * @param Container $c      container
      * @param Router    $router router
      */
-    public function __construct(Container $c, Router $router)
+    public function __construct(Container $c, Route $router)
     {
         $this->c = $c;
         $this->router = $router;
@@ -50,20 +52,24 @@ class Annotation
      * 
      * @return object ResponseInterface
      */
-    public function __invoke(Request $request, Response $response, callable $next)
+    public function __invoke(Request $request, Response $response, callable $next = null)
     {
+        // return $next($request, $response);
+        
         $reflector = new ReflectionClass($this->controller);
         $method = $this->router->getMethod();  // default index
 
-        // if (! $reflector->hasMethod($method)) {  // Show404 if method doest not exist
+        if (! $reflector->hasMethod($method)) {
 
-        //     $body = $this->c['template']->get('404');
+            $body = $this->c['template']->make('404');
 
-        //     return $response->withStatus(404)
-        //         ->withHeader('Content-Type', 'text/html')
-        //         ->withBody($body);
-        // }
-        $docs = new \Obullo\Annotations\Controller($this->c, $reflector);
+            return $response->withStatus(404)
+                ->withHeader('Content-Type', 'text/html')
+                ->withBody($body);
+        }
+        $docs = new \Obullo\Application\Annotations\Controller;
+        $docs->setContainer($this->c);
+        $docs->setReflectionClass($reflector);
         $docs->setMethod($method);
         $docs->parse();
 

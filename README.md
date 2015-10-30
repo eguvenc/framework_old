@@ -3,7 +3,7 @@
 
 ----
 
-There is no any release yet.
+There is no release yet, we are still working on it.
 
 ### Setup
 
@@ -17,7 +17,7 @@ It's a simple and lightweight middleware solution.
 composer require relay/relay
 ```
 
-Open your index.php and update <kbd>$app</kbd> variable as Http\Relay;
+Open your index.php and update <kbd>$app</kbd> variable to Http\Relay;
 
 ```php
 /*
@@ -49,9 +49,9 @@ Learn more details about <a href="http://relayphp.com/" target="_blank">relay mi
 
 #### Setup with Zend Stratigility
 
-It's a advanced middleware solution from zend.
+It's an advanced middleware solution from zend.
 
-Open your index.php and update <kbd>$app</kbd> variable as Http\Zend\Stratigility\MiddlewarePipe;
+Open your index.php and update <kbd>$app</kbd> variable to Http\Zend\Stratigility\MiddlewarePipe;
 
 ```php
 /*

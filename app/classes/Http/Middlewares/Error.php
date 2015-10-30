@@ -10,7 +10,7 @@ use Obullo\Http\Middleware\ErrorMiddlewareInterface;
 /**
  * Catch middleware errors
  * 
- * Only availabe with Zend\Stratigility middleware.
+ * Only available with Zend\Stratigility middleware.
  */
 class Error implements ErrorMiddlewareInterface
 {
