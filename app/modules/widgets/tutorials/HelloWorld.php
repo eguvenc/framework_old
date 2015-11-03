@@ -15,6 +15,8 @@ class HelloWorld extends Controller
      */ 
     public function index()
     {
+        // throw new \ErrorException("asd");
+
         // echo $this->request->getUri()->getUriString();
 
         // echo $this->url->baseUrl();

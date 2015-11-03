@@ -7,6 +7,8 @@
 |
 |  Default Middlewares
 |
+|   - App ( Default added by system )
+|   - Error ( Default added by system if you use Zend Stratigility )
 |   - Router ( required )
 |   - Maintenance
 |   - NotAllowed ( required )
@@ -19,10 +21,10 @@
 */
 $c['middleware']->configure(
     [
+        'App' => 'Http\Middlewares\App',
         'Error' => 'Http\Middlewares\Error',
         'Debugger' => 'Http\Middlewares\Debugger',
         'Router' => 'Http\Middlewares\Router',
-        'Call' => 'Http\Middlewares\Call',
         'Maintenance' => 'Http\Middlewares\Maintenance',
         'NotAllowed' => 'Http\Middlewares\NotAllowed',
         'Auth' => 'Http\Middlewares\Auth',
@@ -40,10 +42,8 @@ $c['middleware']->configure(
 $c['middleware']->queue(
     [
         'Router',
-        'Call',
+        'View',
         // 'Annotation',
         // 'Maintenance',
-        // 'Error',
-        'View',
     ]
 );

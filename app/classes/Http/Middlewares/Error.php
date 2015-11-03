@@ -5,6 +5,7 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+use Obullo\View\TemplateInterface as Template;
 use Obullo\Http\Middleware\ErrorMiddlewareInterface;
 
 /**
@@ -14,6 +15,18 @@ use Obullo\Http\Middleware\ErrorMiddlewareInterface;
  */
 class Error implements ErrorMiddlewareInterface
 {
+    protected $template;
+
+    /**
+     * Constructor
+     * 
+     * @param Template $template object
+     */
+    public function __construct(Template $template)
+    {
+        $this->template = $template;
+    }
+
     /**
      * Invoke middleware
      * 
@@ -26,12 +39,15 @@ class Error implements ErrorMiddlewareInterface
      */
     public function __invoke($error, Request $request, Response $response, callable $out = null)
     {
-        if (is_object($error)) {
-            echo $error->getMessage();
-        }
         if (is_string($error)) {
+
             echo $error;
         }
+        if (is_object($error)) {
+            
+            echo $error->getMessage();
+        }
+
         return $response;
     }
 }

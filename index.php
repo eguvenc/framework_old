@@ -2,13 +2,13 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-register_shutdown_function('fatal_handler');
-function fatal_handler() {
-  $error = error_get_last();
-  if (isset($error['message'])) {
-    echo $error['message'];
-  };
-}
+// register_shutdown_function('fatal_handler');
+// function fatal_handler() {
+//   $error = error_get_last();
+//   if (isset($error['message'])) {
+//     echo $error['message'];
+//   };
+// }
 /*
 |--------------------------------------------------------------------------
 | Constants.
@@ -37,18 +37,11 @@ require 'vendor/autoload.php';
 require OBULLO .'Application/Http/Bootstrap.php';
 /*
 |--------------------------------------------------------------------------
-| Benchmark
-|--------------------------------------------------------------------------
-*/
-Obullo\Log\Benchmark::start($c);
-/*
-|--------------------------------------------------------------------------
 | Choose your middleware app
 |--------------------------------------------------------------------------
 */
-$app = new Obullo\Http\Relay($c);
-// $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
-// 
+// $app = new Obullo\Http\Relay($c);
+$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
 /*
 |--------------------------------------------------------------------------
 | Create your http server
@@ -56,8 +49,7 @@ $app = new Obullo\Http\Relay($c);
 */
 $server = Obullo\Http\Zend\Diactoros\Server::createServerFromRequest(
     $app,
-    $c['request'],
-    $c['response']
+    $app->getRequest()
 );
 /*
 |--------------------------------------------------------------------------
@@ -65,9 +57,3 @@ $server = Obullo\Http\Zend\Diactoros\Server::createServerFromRequest(
 |--------------------------------------------------------------------------
 */
 $server->listen();
-/*
-|--------------------------------------------------------------------------
-| Benchmark
-|--------------------------------------------------------------------------
-*/
-Obullo\Log\Benchmark::end($c);
