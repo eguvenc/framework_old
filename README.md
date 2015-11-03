@@ -33,8 +33,7 @@ $app = new Obullo\Http\Relay($c);
 */
 $server = Obullo\Http\Server::createServerFromRequest(
     $app,
-    $c['request'],
-    $c['response']
+    $app->getRequest()
 );
 /*
 |--------------------------------------------------------------------------
