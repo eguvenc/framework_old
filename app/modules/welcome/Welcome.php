@@ -16,6 +16,8 @@ class Welcome extends Controller
      */
     public function index()
     {
+        // var_dump($this->request->getUri()->getPath());
+
         // echo $this->url->siteUrl();
         // echo $this->request->getServerParams()['REQUEST_URI'];
 

@@ -49,13 +49,18 @@ class NotAllowed implements ParamsAwareInterface, MiddlewareInterface
     {
         $method = $request->getMethod();
 
-        // print_r($this->allowedMethods);
-        // die;
         if (! in_array($method, $this->allowedMethods)) {
             
-            $body = $this->template->make('404');
-
-            return $response->withStatus(404)
+            $body = $this->template->make(
+                'error',
+                [
+                    'error' => sprintf(
+                        '%s Method Not Allowed',
+                        $method
+                    )
+                ]
+            );
+            return $response->withStatus(405)
                 ->withHeader('Content-Type', 'text/html')
                 ->withBody($body);
         }

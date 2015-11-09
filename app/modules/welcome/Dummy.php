@@ -17,9 +17,9 @@ Class Dummy extends Controller
      */
     public function index($arg1 = '', $arg2 = '', $arg3 = '')
     {
-        echo '<pre>Request: <span class="string">'.$this->request->getUri()->getUriString().'</span></pre>';
+        echo '<pre>Request: <span class="string">'.$this->request->getUri()->getPath().'</span></pre>';
         echo '<pre>Response: <span class="string">'.$arg1 .' - '.$arg2. ' - '.$arg3.'</span></pre>';
-        echo '<pre>Global Request Object: <span class="string">'.$this->app->request->getUri()->getUriString().'</span></pre>';
+        echo '<pre>Global Request Object: <span class="string">'.$this->app->request->getUri()->getPath().'</span></pre>';
         echo '<p>-----------------------------------------</p>';
 
         echo $this->layer->get('views/test');

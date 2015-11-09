@@ -9,15 +9,16 @@ class HelloWorld extends Controller
     /**
      * Index
      * 
-     * @middleware->method("post");
+     * @middleware->method('POST', 'GET');
      * 
      * @return void
      */ 
     public function index()
     {
-        // throw new \ErrorException("asd");
+        // echo $a;
+        // throw new \RuntimeException("test");
 
-        // echo $this->request->getUri()->getUriString();
+        // echo $this->request->getUri()->getPath();
 
         // echo $this->url->baseUrl();
 
@@ -32,7 +33,7 @@ class HelloWorld extends Controller
         // print_r($this->request->getHeaders());
         // var_dump($this->request->getMethod());
 
-        // echo $this->uri->getUriString();
+        // echo $this->uri->getPath();
 
         // $this->response->json(['dasd']);
 
@@ -43,8 +44,6 @@ class HelloWorld extends Controller
         // $this->response->error404('sds');
         
         // $this->response->error('sds');
-        
-        // $this->middleware->add('NotFound');
 
         // $this->response->redirect('http://framework/welcome');
 

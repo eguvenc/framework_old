@@ -7,7 +7,7 @@ use View\Base;
 
 class Hello extends Controller
 {
-    use Base;
+    // use Base;
 
     /**
      * Index

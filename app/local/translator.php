@@ -13,22 +13,18 @@ return array(
     |
     */
     'default' => [
-
         'debug' => false,
         'locale'  => 'en'
     ],
     'fallback' => [
-
         'enabled' => false,
         'locale' => 'es',
     ],
     'uri' => [
-
         'segment' => true,
         'segmentNumber' => 0       
     ],
     'cookie' => [
-    
         'name'   =>'locale', 
         'domain' => null,
         'expire' => (365 * 24 * 60 * 60),
@@ -37,7 +33,6 @@ return array(
         'path' => '/',
     ],
     'languages' => [
-    
         'en' => 'english',
         'tr' => 'turkish',
     ],

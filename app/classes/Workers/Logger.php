@@ -132,11 +132,12 @@ class Logger implements JobInterface, ContainerAwareInterface
 
             if (is_object($handler) && $handler->isAllowed($event, $this->c['request'])) { // Check write permissions
                 
+
                 $filteredEvent = LogFilters::handle($event, $this->c['logger']);
 
                 $handler->write($filteredEvent);  // Do job
                 $handler->close();
-                
+
                 if ($this->job instanceof Job) {
                     $this->job->delete();  // Delete job from queue
                 }

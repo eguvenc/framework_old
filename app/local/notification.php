@@ -13,8 +13,8 @@ return array(
     | Note : Default CSS classes brought from getbootstrap.com
     |
     */
-    'form' => [
-
+    'form' => 
+    [
         'message' => '<div class="{class}">{icon}{message}</div>',
         'error'  => [
             'class' => 'alert alert-danger', 
@@ -33,9 +33,8 @@ return array(
             'icon' => '<span class="glyphicon glyphicon-info-sign"></span> '
         ],
     ],
-
-    'flash' => [
-    
+    'flash' => 
+    [
         'message' => '<div class="{class}">{icon}{message}</div>',
         'error'  => [
             'class' => 'alert alert-danger', 

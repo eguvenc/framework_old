@@ -37,7 +37,7 @@ $c['middleware']->configure(
 |--------------------------------------------------------------------------
 | Add your global middlewares
 |--------------------------------------------------------------------------
-| Warning ! : Router & Annotaion middleware must defined at the top.
+| Warning ! : Router & Annotation middleware must defined at the top.
 */
 $c['middleware']->queue(
     [

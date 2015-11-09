@@ -1,20 +1,22 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Disable php.ini errors to use set_error_handler() func
+|--------------------------------------------------------------------------
+*/
 ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-// register_shutdown_function('fatal_handler');
-// function fatal_handler() {
-//   $error = error_get_last();
-//   if (isset($error['message'])) {
-//     echo $error['message'];
-//   };
-// }
+/*
+|--------------------------------------------------------------------------
+| Disable all php errors to use set_error_handler() func
+|--------------------------------------------------------------------------
+*/
+error_reporting(1);
 /*
 |--------------------------------------------------------------------------
 | Constants.
 |--------------------------------------------------------------------------
 */
-require 'constants';
+require '../constants';
 /*
 |--------------------------------------------------------------------------
 | Autoloader
@@ -26,9 +28,15 @@ require 'constants';
 | Register Autoloader
 |--------------------------------------------------------------------------
 */
-require 'vendor/autoload.php';
- 
+require '../vendor/autoload.php';
+
 // Obullo\Application\Autoloader::register();
+/*
+|--------------------------------------------------------------------------
+| Set timezone identifier
+|--------------------------------------------------------------------------
+*/
+date_default_timezone_set('Europe/London');
 /*
 |--------------------------------------------------------------------------
 | Bootstrap
@@ -40,8 +48,8 @@ require OBULLO .'Application/Http/Bootstrap.php';
 | Choose your middleware app
 |--------------------------------------------------------------------------
 */
-// $app = new Obullo\Http\Relay($c);
-$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
+$app = new Obullo\Http\Relay($c);
+// $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
 /*
 |--------------------------------------------------------------------------
 | Create your http server
@@ -49,7 +57,7 @@ $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
 */
 $server = Obullo\Http\Zend\Diactoros\Server::createServerFromRequest(
     $app,
-    $app->getRequest()
+    Obullo\Log\Benchmark::start($app->getRequest())
 );
 /*
 |--------------------------------------------------------------------------

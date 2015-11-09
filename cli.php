@@ -1,20 +1,16 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-register_shutdown_function('fatal_handler');
-
-function fatal_handler() {
-  $errfile = "unknown file";
-  $errstr  = "shutdown";
-  $errno   = E_CORE_ERROR;
-  $errline = 0;
-
-  $error = error_get_last();
-  if (isset($error['message'])) {
-    echo $error['message'];
-  };
-}
+/*
+|--------------------------------------------------------------------------
+| Disable php.ini errors to use set_error_handler() func
+|--------------------------------------------------------------------------
+*/
+ini_set('display_errors', 0);
+/*
+|--------------------------------------------------------------------------
+| Disable all php errors to use set_error_handler() func
+|--------------------------------------------------------------------------
+*/
+error_reporting(0);
 /*
 |--------------------------------------------------------------------------
 | Autoloader
@@ -29,6 +25,12 @@ function fatal_handler() {
 require 'vendor/autoload.php';
 
 // Obullo\Application\Autoloader::register();
+/*
+|--------------------------------------------------------------------------
+| Set timezone identifier
+|--------------------------------------------------------------------------
+*/
+date_default_timezone_set('Europe/London');
 /*
 |--------------------------------------------------------------------------
 | Cli Requests

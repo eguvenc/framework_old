@@ -41,12 +41,6 @@ class Router implements MiddlewareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        $this->router->configuration(
-            [
-                'domain' => 'framework',
-                'defaultPage' => 'welcome',
-            ]
-        );
         if ($this->router->getDefaultPage() == '') {
 
             $error = 'Unable to determine what should be displayed.';
@@ -58,7 +52,6 @@ class Router implements MiddlewareInterface
                 ->withHeader('Content-Type', 'text/html')
                 ->withBody($body);
         }
-        $this->router->init();
 
         return $next($request, $response);
     }

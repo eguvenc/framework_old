@@ -18,7 +18,7 @@ return array(
             'baseurl'  => '/',
             'assets'   => [
                 'url' => '/',
-                'folder' => '/resources/assets/',
+                'folder' => '/public/assets/',
             ],    
             'rewrite' => [
                 'index.php' => ''

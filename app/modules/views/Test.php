@@ -13,8 +13,8 @@ class Test extends Controller
      */
     public function index()
     {
-        echo '<pre>Request: <span class="string">'.$this->request->getUri()->getUriString().'</span></pre>';
-        echo '<pre>Global Request Object: <span class="string">'.$this->app->request->getUri()->getUriString().'</span></pre>';
+        echo '<pre>Request: <span class="string">'.$this->request->getUri()->getPath().'</span></pre>';
+        echo '<pre>Global Request Object: <span class="string">'.$this->app->request->getUri()->getPath().'</span></pre>';
         echo '<p>-----------------------------------------</p>';
 
         echo 'VIEWS MODULE:'.$this->router->getNamespace().'<br>';

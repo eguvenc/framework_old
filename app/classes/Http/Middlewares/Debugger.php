@@ -18,6 +18,7 @@ class Debugger implements MiddlewareInterface
     protected $app;
     protected $config;
     protected $logger;
+    protected $params;
     protected $websocket;
 
     /**
