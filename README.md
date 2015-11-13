@@ -19,7 +19,7 @@ Create your composer.json file
     },
     "require": {
         "obullo/service": "^1.0",
-        "relay/relay": "^1.0"
+        "ircmaxell/password-compat": "^1.0"
     }
 }
 ```
@@ -48,15 +48,11 @@ Put the latest version to your web root (<kbd>/var/www/project/</kbd>). Create y
 
 When you setup your application you have two options to work with Http middlewares.
 
-#### Setup with Relay ( Default )
+#### Setup with Zend Stratigility ( Default )
 
-It's a simple and lightweight middleware solution.
+It's an advanced middleware solution from zend.
 
-```php
-composer require relay/relay
-```
-
-Open your index.php and update <kbd>$app</kbd> variable to Http\Relay;
+Open your index.php and update <kbd>$app</kbd> variable to Http\Zend\Stratigility\MiddlewarePipe;
 
 ```php
 /*
@@ -64,7 +60,7 @@ Open your index.php and update <kbd>$app</kbd> variable to Http\Relay;
 | Choose your middleware app
 |--------------------------------------------------------------------------
 */
-$app = new Obullo\Http\Relay\MiddlewarePipe($c);
+$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
 /*
 |--------------------------------------------------------------------------
 | Create your http server
@@ -82,14 +78,18 @@ $server = Obullo\Http\Server::createServerFromRequest(
 $server->listen();
 ```
 
-Learn more details about <a href="http://relayphp.com/" target="_blank">relay middleware</a>.
+Learn more details about <a href="https://github.com/zendframework/zend-stratigility" target="_blank">zend middleware</a>.
 
 
-#### Setup with Zend Stratigility
+#### Setup with Relay 
 
-It's an advanced middleware solution from zend.
+It's a simple middleware solution.
 
-Open your index.php and update <kbd>$app</kbd> variable to Http\Zend\Stratigility\MiddlewarePipe;
+```php
+composer require relay/relay
+```
+
+Open your index.php and update <kbd>$app</kbd> variable to Http\Relay;
 
 ```php
 /*
@@ -97,7 +97,7 @@ Open your index.php and update <kbd>$app</kbd> variable to Http\Zend\Stratigilit
 | Choose your middleware app
 |--------------------------------------------------------------------------
 */
-$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
+$app = new Obullo\Http\Relay\MiddlewarePipe($c);
 ```
 
-Learn more details about <a href="https://github.com/zendframework/zend-stratigility" target="_blank">zend middleware</a>.
+Learn more details about <a href="http://relayphp.com/" target="_blank">relay middleware</a>.
