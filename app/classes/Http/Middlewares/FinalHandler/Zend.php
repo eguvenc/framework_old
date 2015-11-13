@@ -2,17 +2,13 @@
 
 namespace Http\Middlewares\FinalHandler;
 
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-
-use Obullo\Http\Zend\Stratigility\Http\Request as DecoratedRequest;
-use Obullo\Http\Zend\Stratigility\Http\Response as DecoratedResponse;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Exception;
-use Obullo\Log\Benchmark;
 use Obullo\Http\Zend\Stratigility\Utils;
-use Obullo\Log\LoggerInterface as Logger;
-use Obullo\Http\Zend\Stratigility\FinalHandlerTrait;
+use Obullo\Http\Middleware\TerminableInterface;
+use Obullo\Container\ContainerInterface as Container;
 
 /**
  * This middleware called in index.php file 
@@ -20,8 +16,6 @@ use Obullo\Http\Zend\Stratigility\FinalHandlerTrait;
  */
 class Zend
 {
-    use FinalHandlerTrait;
-
     /**
      * Container
      * 
@@ -30,11 +24,11 @@ class Zend
     protected $c;
 
     /**
-     * Logger
+     * Request
      * 
      * @var object
      */
-    protected $logger;
+    protected $request;
 
     /**
      * Options
@@ -54,30 +48,28 @@ class Zend
      * Constructor
      * 
      * @param array                  $options  options
-     * @param LoggerInterface        $logger   logger
      * @param null|ResponseInterface $response Original response, if any.
      */
-    public function __construct(array $options, Logger $logger, Response $response = null)
+    public function __construct(array $options, Response $response = null)
     {
-        $this->logger = $logger;
         $this->options = $options;
-        $this->response = $response;
 
         if ($response) {
             $this->bodySize = $response->getBody()->getSize();
         }
+        register_shutdown_function(array($this, 'shutdown'));
     }
 
     /**
      * Set container
      * 
-     * @param Container|null $c container
+     * @param Container|null $container container
      *
      * @return void
      */
-    public function setContainer(Container $c = null)
+    public function setContainer(Container $container = null)
     {
-        $this->c = $c;
+        $this->c = $container;
     }
 
     /**
@@ -91,50 +83,102 @@ class Zend
      */
     public function __invoke(Request $request, Response $response, $err = null)
     {   
+        $this->request = $request;
+        
         if ($err) {
             return $this->handleError($err, $request, $response);
         }
 
-        // Return provided response if it does not match the one provided at
-        // instantiation; this is an indication of calling `$next` in the final
-        // registered middleware and providing a new response instance.
-        
-        if ($this->response && $this->response !== $response) {
-            $this->terminate($request);
-            return $response;
-        }
-        
-        // If the response passed is the same as the one at instantiation,
-        // check to see if the body size has changed; if it has, return
-        // the response, as the message body has been written to.
-    
-        if ($this->response
-            && $this->response === $response
-            && $this->bodySize !== $response->getBody()->getSize()
-        ) {
-            $this->terminate($request);
-            return $response;
-        }
-
-        $response = $this->create404($request, $response);
-
-        $this->terminate($request);
         return $response;
+    }
+
+    /**
+     * Handle an error condition
+     *
+     * Use the $error to create details for the response.
+     *
+     * @param mixed             $error    error
+     * @param RequestInterface  $request  Request instance.
+     * @param ResponseInterface $response Response instance.
+     * 
+     * @return Http\Response
+     */
+    protected function handleError($error, Request $request, Response $response)
+    {
+        $response = $response->withStatus(
+            Utils::getStatusCode($error, $response)
+        );
+        $message = $response->getReasonPhrase() ?: 'Unknown Error';
+
+        if ($this->c['app']->env() !== 'production') {
+
+            $message = $this->createDevelopmentErrorMessage($error);
+        }
+
+        $body = $this->c['template']->body($message);
+
+        $response = $response->withStatus(500)
+            ->withHeader('Content-Type', 'text/html')
+            ->withBody($body);
+
+        return $response;
+    }
+
+    /**
+     * Create a complete error message for development purposes.
+     *
+     * Creates an error message with full error details:
+     *
+     * - If the error is an exception, creates a message that includes the full
+     *   stack trace.
+     * - If the error is an object that defines `__toString()`, creates a
+     *   message by casting the error to a string.
+     * - If the error is not an object, casts the error to a string.
+     * - Otherwise, cerates a generic error message indicating the class type.
+     *
+     * In all cases, the error message is escaped for use in HTML.
+     *
+     * @param mixed $error error
+     * 
+     * @return string
+     */
+    protected function createDevelopmentErrorMessage($error)
+    {
+        if ($error instanceof Exception) {
+
+            $exception = new \Obullo\Error\Exception;
+            $message = $exception->make($error);
+
+        } elseif (is_object($error) && ! method_exists($error, '__toString')) {
+            $message = sprintf('Error of type "%s" occurred', get_class($error));
+        } else {
+            $message = (string) $error;
+            $message = htmlspecialchars($message, ENT_QUOTES, 'utf-8');
+        }
+        return $message;
     }
 
     /**
      * Finalize your application jobs
      * 
-     * Close app benchmark & application logger
-     * 
-     * @param ServerRequestInterface $request request
+     * Register fatal handler / close app benchmark / close logger 
      * 
      * @return void
      */
-    protected function terminate($request)
+    public function shutdown()
     {
-        Benchmark::end($request);
+        $this->c['app']->registerFatalError();
+        
+        \Obullo\Log\Benchmark::end($this->request);
 
-        $this->logger->shutdown();  // To catch all worker errors close logger by manually.
+        $this->c['logger']->shutdown();
+        
+        foreach ($this->c['middleware']->getQueue() as $object) {  // Run terminable middlewares
+
+            if ($object instanceof TerminableInterface) {
+                $object->terminate();
+            }
+        }
     }
+
 }

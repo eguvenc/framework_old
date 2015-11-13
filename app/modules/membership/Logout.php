@@ -19,6 +19,6 @@ class Logout extends Controller
         // $this->user->identity->forgetMe(); // Remove rember me cookie from cookie.
         
         $this->flash->info('You succesfully logged out')
-            ->url->redirect('/membership/login/index');
+            ->response->redirect('/membership/login/index');
     }
 }

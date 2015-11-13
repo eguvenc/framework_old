@@ -7,9 +7,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Exception;
 use Obullo\Http\Zend\Stratigility\Utils;
-use Obullo\Log\LoggerInterface as Logger;
+use Obullo\Http\Middleware\TerminableInterface;
 use Obullo\Container\ContainerInterface as Container;
-use Obullo\Application\ApplicationInterface as Application;
 
 /**
  * This middleware declared in index.php file
@@ -31,13 +30,6 @@ class Relay
     protected $request;
 
     /**
-     * Logger
-     * 
-     * @var object
-     */
-    protected $logger;
-
-    /**
      * Options
      * 
      * @var array
@@ -55,14 +47,10 @@ class Relay
      * Constructor
      * 
      * @param array                  $options  options
-     * @param ApplicationInterface   $app      application
-     * @param LoggerInterface        $logger   logger
      * @param null|ResponseInterface $response Original response, if any.
      */
-    public function __construct(array $options, Application $app, Logger $logger, Response $response = null)
+    public function __construct(array $options, Response $response = null)
     {
-        $this->app = $app;
-        $this->logger = $logger;
         $this->options = $options;
 
         if ($response) {
@@ -74,13 +62,13 @@ class Relay
     /**
      * Set container
      * 
-     * @param Container|null $c container
+     * @param Container|null $container container
      *
      * @return void
      */
-    public function setContainer(Container $c = null)
+    public function setContainer(Container $container = null)
     {
-        $this->c = $c;
+        $this->c = $container;
     }
 
     /**
@@ -121,11 +109,18 @@ class Relay
         );
         $message = $response->getReasonPhrase() ?: 'Unknown Error';
 
-        if (! isset($this->options['env'])
-            || $this->options['env'] !== 'production'
-        ) {
+        if ($this->c['app']->env() !== 'production') {
+
             $message = $this->createDevelopmentErrorMessage($error);
+        
+        } else {
+
+            // Catch errors in production env
+            
+            // $this->app->logException($error);
+            // echo ($error instanceof Exception) ? $error->getMessage() : $error;
         }
+
         $body = $this->c['template']->body($message);
 
         $response = $response->withStatus(500)
@@ -157,7 +152,10 @@ class Relay
     {
         if ($error instanceof Exception) {
 
-            $message = $this->c['exception']->make($error);
+            $exception = new \Obullo\Error\Exception;  // Create friendly errors
+            $message = $exception->make($error);
+
+            $this->c['app']->logException($error);
 
         } elseif (is_object($error) && ! method_exists($error, '__toString')) {
             $message = sprintf('Error of type "%s" occurred', get_class($error));
@@ -171,17 +169,23 @@ class Relay
     /**
      * Finalize your application jobs
      * 
-     * Register fatal handler / close app benchmark / closelogger 
+     * Register fatal handler / close app benchmark / close logger 
      * 
      * @return void
      */
     public function shutdown()
     {
-        $this->app->registerFatalError();
+        $this->c['app']->registerFatalError();
         
         \Obullo\Log\Benchmark::end($this->request);
 
-        $this->logger->shutdown();
-    }
+        $this->c['logger']->shutdown();
+        
+        foreach ($this->c['middleware']->getQueue() as $object) {  // Run terminable middlewares
 
+            if ($object instanceof TerminableInterface) {
+                $object->terminate();
+            }
+        }
+    }
 }

@@ -5,23 +5,19 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-use Obullo\View\TemplateInterface as Template;
 use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Http\Middleware\ParamsAwareInterface;
 
-class NotAllowed implements ParamsAwareInterface, MiddlewareInterface
+class NotAllowed implements MiddlewareInterface, ParamsAwareInterface
 {
-    protected $template;
-    protected $allowedMethods = ['GET', 'POST', 'PUT', 'DELETE'];
+    protected $allowedMethods = array();
 
     /**
      * Constructor
-     * 
-     * @param Template $template object
      */
-    public function __construct(Template $template)
+    public function __construct()
     {
-        $this->template = $template;
+        $this->allowedMethods = ['GET', 'POST', 'PUT', 'DELETE'];
     }
 
     /**
@@ -51,7 +47,7 @@ class NotAllowed implements ParamsAwareInterface, MiddlewareInterface
 
         if (! in_array($method, $this->allowedMethods)) {
             
-            $body = $this->template->make(
+            $body = $this->c['template']->make(
                 'error',
                 [
                     'error' => sprintf(
@@ -64,6 +60,8 @@ class NotAllowed implements ParamsAwareInterface, MiddlewareInterface
                 ->withHeader('Content-Type', 'text/html')
                 ->withBody($body);
         }
-        return $next($request, $response);
+        $err = null;
+
+        return $next($request, $response, $err);
     }
 }

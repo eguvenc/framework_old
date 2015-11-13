@@ -20,10 +20,7 @@ return array(
         ]
      ],
     'controller' => [
-        'annotation' => true,
-    ],
-    'layer' => [
-        'cache' => false
+        'annotation' => false,
     ],
     'cookie' => [ 
         'domain' => '',

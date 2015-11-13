@@ -1,11 +1,50 @@
 
-### Installation
+### Status
 
 ----
 
 There is no release yet, we are still working on it.
 
-### Setup
+### Installation
+
+Create your composer.json file
+
+```json
+{
+    "autoload": {
+        "psr-4": {
+            "Obullo\\": "o2/",
+            "": "app/classes"
+        }
+    },
+    "require": {
+        "obullo/service": "^1.0",
+        "relay/relay": "^1.0"
+    }
+}
+```
+
+Update dependencies
+
+```
+composer update
+composer dump-autoload
+```
+
+### Configuration of Vhost File
+
+Put the latest version to your web root (<kbd>/var/www/project/</kbd>). Create your apache vhost file and set your project root as public.
+
+```xml
+<VirtualHost *:80>
+        ServerName project.example.com
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/project/public
+</VirtualHost>
+```
+
+### Configuration of Index.php
 
 When you setup your application you have two options to work with Http middlewares.
 
@@ -25,7 +64,7 @@ Open your index.php and update <kbd>$app</kbd> variable to Http\Relay;
 | Choose your middleware app
 |--------------------------------------------------------------------------
 */
-$app = new Obullo\Http\Relay($c);
+$app = new Obullo\Http\Relay\MiddlewarePipe($c);
 /*
 |--------------------------------------------------------------------------
 | Create your http server

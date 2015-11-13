@@ -2,14 +2,14 @@
 
 namespace Http\Middlewares;
 
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Http\ControllerInterface as Controller;
 use Obullo\Http\Middleware\ControllerAwareInterface;
 
-class View implements ControllerAwareInterface, MiddlewareInterface
+class View implements MiddlewareInterface, ControllerAwareInterface
 {
     /**
      * Inject controller object
@@ -20,7 +20,9 @@ class View implements ControllerAwareInterface, MiddlewareInterface
      */ 
     public function setController(Controller $controller)
     {
-        $this->setupLayout($controller);
+        if (method_exists($controller, '__invoke')) {  // Assign layout variables
+            $controller();
+        }
     }
 
     /**
@@ -34,21 +36,8 @@ class View implements ControllerAwareInterface, MiddlewareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        $response = $next($request, $response);
-        return $response;
-    }
+        $err = null;
 
-    /**
-     * Assign layout variables
-     * 
-     * @param \Obullo\Http\Controller $controller object
-     * 
-     * @return void
-     */
-    protected function setupLayout(Controller $controller)
-    {
-        if (method_exists($controller, '__invoke')) {
-            $controller();
-        }
+        return $next($request, $response, $err);
     }
 }

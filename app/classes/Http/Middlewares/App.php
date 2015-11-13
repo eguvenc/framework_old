@@ -2,9 +2,10 @@
 
 namespace Http\Middlewares;
 
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
+use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Http\Middleware\ControllerAwareInterface;
 use Obullo\Container\ContainerInterface as Container;
@@ -13,18 +14,20 @@ use Obullo\Container\ContainerInterface as Container;
  * System adds this middleware end of the queue by default 
  * when the application is run.
  */
-class App implements MiddlewareInterface
+class App implements MiddlewareInterface, ContainerAwareInterface
 {
     protected $c;
 
     /**
-     * Constructor
-     * 
-     * @param Container $c container
+     * Sets the Container.
+     *
+     * @param ContainerInterface|null $container object or null
+     *
+     * @return void
      */
-    public function __construct(Container $c)
+    public function setContainer(Container $container = null)
     {
-        $this->c = $c;
+        $this->c = $container;
     }
 
     /**

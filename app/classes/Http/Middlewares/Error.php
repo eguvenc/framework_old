@@ -5,7 +5,8 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-use Obullo\View\TemplateInterface as Template;
+use Obullo\Container\ContainerAwareInterface;
+use Obullo\Container\ContainerInterface as Container;
 use Obullo\Http\Middleware\ErrorMiddlewareInterface;
 
 /**
@@ -13,18 +14,20 @@ use Obullo\Http\Middleware\ErrorMiddlewareInterface;
  * 
  * Only available with Zend\Stratigility middleware.
  */
-class Error implements ErrorMiddlewareInterface
+class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
 {
-    protected $template;
+    protected $c;
 
     /**
-     * Constructor
-     * 
-     * @param Template $template object
+     * Sets the Container.
+     *
+     * @param ContainerInterface|null $container object or null
+     *
+     * @return void
      */
-    public function __construct(Template $template)
+    public function setContainer(Container $container = null)
     {
-        $this->template = $template;
+        $this->c = $container;
     }
 
     /**
@@ -45,7 +48,19 @@ class Error implements ErrorMiddlewareInterface
         }
         if (is_object($error)) {
             
-            echo $error->getMessage();
+            if ($this->c['app']->env() == 'local') {
+
+                $exception = new \Obullo\Error\Exception;
+                echo $exception->make($error);
+
+                $this->c['app']->logException($error);  // Log exceptions using app/errors.php
+
+            } else {
+            
+                echo $error->getMessage();
+
+                $this->c['app']->logException($error);  // Log exceptions using app/errors.php
+            }
         }
 
         return $response;

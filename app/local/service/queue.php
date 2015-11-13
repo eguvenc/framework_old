@@ -3,6 +3,7 @@
 return array(
     
     'params' => [
+    
         /**
          * AMQP Settings
          * 

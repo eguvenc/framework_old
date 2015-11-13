@@ -48,13 +48,14 @@ require OBULLO .'Application/Http/Bootstrap.php';
 | Choose your middleware app
 |--------------------------------------------------------------------------
 */
-$app = new Obullo\Http\Relay($c);
-// $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
+// $app = new Obullo\Http\Relay\MiddlewarePipe($c);
+$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
 /*
 |--------------------------------------------------------------------------
 | Create your http server
 |--------------------------------------------------------------------------
 */
+
 $server = Obullo\Http\Zend\Diactoros\Server::createServerFromRequest(
     $app,
     Obullo\Log\Benchmark::start($app->getRequest())

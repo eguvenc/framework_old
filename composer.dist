@@ -6,6 +6,11 @@
         }
     },
     "require": {
+        "doctrine/orm": "2.4.7",
+        "guzzlehttp/guzzle": "~6.0",
+        "mailgun/mailgun-php": "~1.7.2",
+        "mandrill/mandrill": "1.0.*",
+        "videlalvaro/php-amqplib": "2.5.*",
         "obullo/service": "^1.0",
         "relay/relay": "^1.0",
         "ircmaxell/password-compat": "^1.0"

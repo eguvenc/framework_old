@@ -3,6 +3,7 @@
 return array(
     
     'params' => [
+    
         'default' => [
             'channel' => 'system',
         ],
@@ -23,9 +24,6 @@ return array(
         'app' => [
             'query' => [
                 'log'=> true,
-            ],
-            'benchmark' => [
-                'log' => true,
             ],
             'worker' => [
                 'log' => false,

@@ -37,10 +37,11 @@ $c['middleware']->configure(
 |--------------------------------------------------------------------------
 | Add your global middlewares
 |--------------------------------------------------------------------------
-| Warning ! : Router & Annotation middleware must defined at the top.
+| Warning ! : Router middleware must defined at the top.
 */
 $c['middleware']->queue(
     [
+        'App',
         'Router',
         'View',
         // 'Annotation',

@@ -21,6 +21,7 @@ class Login extends Controller
             $this->validator->setRules('password', 'Password', 'required|min(6)|trim');
 
             if (! $this->validator->isValid()) {
+                
                 $this->form->setErrors($this->validator);
             } else {
 
@@ -33,8 +34,10 @@ class Login extends Controller
                 );
 
                 if ($authResult->isValid()) {
+
                     $this->flash->success('You have authenticated successfully.')
-                        ->url->redirect('membership/restricted');
+                        ->response->redirect('/membership/restricted');
+
                 } else {
                     $this->form->setResults($authResult->getArray());
                 }

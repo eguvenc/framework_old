@@ -77,7 +77,7 @@ return array(
          * UniqueLogin : If this is true all other opened session in other devices will be logged out except the current session.
          */
         'middleware' => [
-            'unique.login' => false
+            'unique.session' => false
         ]
     ]
 );
