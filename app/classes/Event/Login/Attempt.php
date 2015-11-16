@@ -3,7 +3,7 @@
 namespace Event\Login;
 
 use Obullo\Authentication\AuthResult;
-use Obullo\Container\ContainerInterface;
+use Obullo\Container\ContainerInterface as Container;
 use Obullo\Container\ContainerAwareInterface;
 use Obullo\Event\EventListenerInterface;
 use Obullo\Event\EventInterface;
@@ -24,7 +24,7 @@ class Attempt implements EventListenerInterface, ContainerAwareInterface
      *
      * @return void
      */
-    public function setContainer(ContainerInterface $c = null)
+    public function setContainer(Container $c = null)
     {
         $this->c = $c;
     }

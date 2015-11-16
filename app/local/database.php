@@ -25,7 +25,6 @@ return array(
     ],
 
     'sql' => [
-    
         'log' => true
     ]
 

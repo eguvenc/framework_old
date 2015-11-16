@@ -84,11 +84,29 @@ class Zend
     public function __invoke(Request $request, Response $response, $err = null)
     {   
         $this->request = $request;
-        
+
         if ($err) {
             return $this->handleError($err, $request, $response);
         }
+        return $this->setCookieHeaders($response);
+    }
 
+    /**
+     * Set cookie headers
+     * 
+     * @param Response $response Response
+     * 
+     * @return object ResponseInterface
+     */
+    protected function setCookieHeaders(Response $response)
+    {
+        $headers = $this->c['cookie']->getHeaders();
+
+        if (! empty($headers) && $this->bodySize > 0) {
+            foreach ($headers as $value) {
+                $response = $response->withAddedHeader('Set-Cookie', $value);  // Send cookie headers
+            }
+        }
         return $response;
     }
 
@@ -168,7 +186,7 @@ class Zend
     public function shutdown()
     {
         $this->c['app']->registerFatalError();
-        
+
         \Obullo\Log\Benchmark::end($this->request);
 
         $this->c['logger']->shutdown();

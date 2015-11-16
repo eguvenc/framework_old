@@ -10,7 +10,6 @@ use Obullo\Container\ContainerInterface as Container;
 
 use Obullo\Log\Handler\File;
 use Obullo\Log\Handler\Mongo;
-// use Obullo\Log\Handler\Email;
 
 class Logger implements JobInterface, ContainerAwareInterface
 {
@@ -85,25 +84,6 @@ class Logger implements JobInterface, ContainerAwareInterface
                     ]
                 );
                 break;
-            // case 'email':
-            //     $mailer = $this->c['mailer'];
-            //     $mailer->from('<noreply@example.com> Server Admin');
-            //     $mailer->to('obulloframework@gmail.com');
-            //     $mailer->subject('Server Logs');
-
-            //     $handler = new Email(
-            //         $this->c['app'],
-            //         $this->c['config']
-            //     );
-            //     $handler->setMessage('Detailed logs here --> <div>%s</div>');
-            //     $handler->setNewlineChar('<br />');
-            //     $handler->func(
-            //         function ($message) use ($mailer) {
-            //             $mailer->message($message);
-            //             $mailer->send();
-            //         }
-            //     );
-            //     break;
             case 'mongo':
 
                 $provider = $this->c['mongo']->get(

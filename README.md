@@ -33,7 +33,7 @@ composer dump-autoload
 
 ### Configuration of Vhost File
 
-Put the latest version to your web root (<kbd>/var/www/project/</kbd>). Create your apache vhost file and set your project root as public.
+Put the latest version to your web root (<kbd>/var/www/project/</kbd>). Create your apache vhost file and set your project root as <kbd>public</kbd>.
 
 ```xml
 <VirtualHost *:80>

@@ -31,7 +31,7 @@
 */
 $c['app']->error(
     function (ErrorException $e) use ($c) {
-        
+
         $log = new Obullo\Error\Log($c['logger']);
         $log->error($e);
 
@@ -45,6 +45,7 @@ $c['app']->error(
 */
 $c['app']->error(
     function (RuntimeException $e) use ($c) {
+
         $log = new Obullo\Error\Log($c['logger']);
         $log->error($e);
     }
@@ -56,6 +57,7 @@ $c['app']->error(
 */
 $c['app']->error(
     function (LogicException $e) use ($c) {
+
         $log = new Obullo\Error\Log($c['logger']);
         $log->error($e);
     }
@@ -67,6 +69,7 @@ $c['app']->error(
 */
 $c['app']->fatal(
     function (ErrorException $e) use ($c) {
+
         $log = new Obullo\Error\Log($c['logger']);
         $log->error($e);
     }

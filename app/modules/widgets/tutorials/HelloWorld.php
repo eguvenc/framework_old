@@ -18,6 +18,8 @@ class HelloWorld extends Controller
         // echo $a;
         // throw new \RuntimeException("test");
 
+        // echo $this->request->getIpAddress();
+
         // echo $this->request->getUri()->getPath();
 
         // echo $this->url->baseUrl();
