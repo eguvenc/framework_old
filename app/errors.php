@@ -1,7 +1,7 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Errors
+| Global Errors
 |--------------------------------------------------------------------------
 | Specifies the your application global exceptions & errors.
 |
@@ -31,7 +31,10 @@
 */
 $c['app']->error(
     function (ErrorException $e) use ($c) {
-        $c['logger']->error($e);
+
+        $log = new Obullo\Error\Log($c['logger']);
+        $log->error($e);
+
         return ! $continue = false;   // Whether to continue show native errors
     }
 );
@@ -42,7 +45,9 @@ $c['app']->error(
 */
 $c['app']->error(
     function (RuntimeException $e) use ($c) {
-        $c['logger']->error($e);
+
+        $log = new Obullo\Error\Log($c['logger']);
+        $log->error($e);
     }
 );
 /*
@@ -52,7 +57,9 @@ $c['app']->error(
 */
 $c['app']->error(
     function (LogicException $e) use ($c) {
-        $c['logger']->error($e);
+
+        $log = new Obullo\Error\Log($c['logger']);
+        $log->error($e);
     }
 );
 /*
@@ -62,9 +69,8 @@ $c['app']->error(
 */
 $c['app']->fatal(
     function (ErrorException $e) use ($c) {
-        $c['logger']->error($e);
+
+        $log = new Obullo\Error\Log($c['logger']);
+        $log->error($e);
     }
 );
-
-/* End of file errors.php */
-/* Location: .app/errors.php */

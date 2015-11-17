@@ -1,24 +1,48 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Application middlewares
+| Http Middlewares
 |--------------------------------------------------------------------------
-| Obullo allows you to run code different stages during the handling of a request through middlewares:
-|	
-| 	- Application middlewares are triggered independently of the current handled request;
-|	- Route middlewares are triggered when their associated route is matched. 
-| 
-| IMPORTANT: Obullo automatically assign route middlewares when their associated route is matched. 
-| There is no need to assign them in here.
-| 
-| Priority of middlewares: Add your middleware to end if you need run it at the top.
+| Specifies the your application http middlewares
+|
+|  Default Middlewares
+|
+|   - Error ( Added by system if you use Zend Middleware )
+|   - NotAllowed ( Added with the router )
+|   - Router
+|   - View ( Required for layouts )
 */
 /*
 |--------------------------------------------------------------------------
-| Request
+| Middleware definitions
 |--------------------------------------------------------------------------
 */
-$c['app']->middleware(new Http\Middlewares\Request);
-
-/* End of file middlewares.php */
-/* Location: .app/middlewares.php */
+$c['middleware']->configure(
+    [
+        'Error' => 'Http\Middlewares\Error',
+        'App' => 'Http\Middlewares\App',
+        'TrustedIp' => 'Http\Middlewares\TrustedIp',
+        'Debugger' => 'Http\Middlewares\Debugger',
+        'Router' => 'Http\Middlewares\Router',
+        'Maintenance' => 'Http\Middlewares\Maintenance',
+        'NotAllowed' => 'Http\Middlewares\NotAllowed',
+        'Auth' => 'Http\Middlewares\Auth',
+        'Guest' => 'Http\Middlewares\Guest',
+        'View' => 'Http\Middlewares\View',
+    ]
+);
+/*
+|--------------------------------------------------------------------------
+| Add your global middlewares
+|--------------------------------------------------------------------------
+| Define router middleware at the top.
+*/
+$c['middleware']->queue(
+    [
+        // 'Maintenance',
+        // 'TrustedIp',
+        'App',
+        'Router',
+        'View',
+    ]
+);

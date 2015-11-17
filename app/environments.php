@@ -7,7 +7,7 @@ return array(
         'someone.computer',
         'anotherone.computer',
         'ersin-desktop',
-        'erkanyeter-System-Product-Name',
+        'ersin'
     ],
 
     'test' => [
@@ -18,6 +18,3 @@ return array(
         'localhost.production',
     ],
 );
-
-/* End of file environments.php */
-/* Location: .app/environments.php */

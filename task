@@ -1,12 +1,25 @@
 <?php
 /*
 |--------------------------------------------------------------------------
+| Disable php.ini errors to use set_error_handler() func
+|--------------------------------------------------------------------------
+*/
+ini_set('display_errors', 0);
+/*
+|--------------------------------------------------------------------------
+| Disable all php errors to use set_error_handler() func
+|--------------------------------------------------------------------------
+*/
+error_reporting(0);
+/*
+|--------------------------------------------------------------------------
 | Application Constants.
 |--------------------------------------------------------------------------
 | This file specifies which APP constants should be loaded by default.
 |
 */
 require 'constants';
+
 /*
 |--------------------------------------------------------------------------
 | Php execution limit
@@ -21,14 +34,28 @@ set_time_limit(0);                   // 0 = Unlimited
 ini_set('memory_limit', '100000M');  // Set maximum amount of memory for Cli operations.
 /*
 |--------------------------------------------------------------------------
-| Mark request header as task
+| Register Autoloader
 |--------------------------------------------------------------------------
 */
-define('TASK_REQUEST', 1);
+require 'vendor/autoload.php';
+
+require OBULLO .'Application/Autoloader.php';
+Obullo\Application\Autoloader::register();
 /*
 |--------------------------------------------------------------------------
-| Index.php file.
+| Set timezone identifier
 |--------------------------------------------------------------------------
-| Name of index.php file
-*/ 
-require(CLI_PHP);
+*/
+date_default_timezone_set('Europe/London');
+/*
+|--------------------------------------------------------------------------
+| Cli Requests
+|--------------------------------------------------------------------------
+*/
+require OBULLO .'Application/Cli/Bootstrap.php';
+/*
+|--------------------------------------------------------------------------
+| Initialize
+|--------------------------------------------------------------------------
+*/
+$c['app']->run();

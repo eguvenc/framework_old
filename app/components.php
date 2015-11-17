@@ -3,97 +3,70 @@
 |--------------------------------------------------------------------------
 | Components
 |--------------------------------------------------------------------------
-| Specifies the your application components which they available by default.
+| Specifies your application components, services, providers and dependencies.
 */
-/*
-|--------------------------------------------------------------------------
-| Event
-|--------------------------------------------------------------------------
-*/
-$c['event'] = function () use ($c) {
-    return new Obullo\Event\Event($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Exception
-|--------------------------------------------------------------------------
-*/
-$c['exception'] = function () use ($c) {
-    return new Obullo\Error\Exception($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Translator
-|--------------------------------------------------------------------------
-*/
-$c['translator'] = function () use ($c) {
-    return new Obullo\Translation\Translator($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Http Request
-|--------------------------------------------------------------------------
-*/
-$c['request'] = function () use ($c) { 
-    return new Obullo\Http\Request($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Http Response
-|--------------------------------------------------------------------------
-*/
-$c['response'] = function () use ($c) { 
-    return new Obullo\Http\Response($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Input Validate Filter
-|--------------------------------------------------------------------------
-*/
-$c['is'] = function () use ($c) {
-    return new Obullo\Filters\Is($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Input Clean Filter
-|--------------------------------------------------------------------------
-*/
-$c['clean'] = function () use ($c) {
-    return new Obullo\Filters\Clean($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Http User Agent
-|--------------------------------------------------------------------------
-*/
-$c['agent'] = function () use ($c) {
-    return new Obullo\Http\UserAgent($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Layers
-|--------------------------------------------------------------------------
-*/
-$c['layer'] = function () use ($c) { 
-    return new Obullo\Layer\Request($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Uri
-|--------------------------------------------------------------------------
-*/
-$c['uri'] = function () use ($c) {
-    return new Obullo\Uri\Uri($c);
-};
-/*
-|--------------------------------------------------------------------------
-| Router
-|--------------------------------------------------------------------------
-*/
-$c['router'] = function () use ($c) { 
-    return new Obullo\Router\Router($c);
-};
+$c['app']->provider(
+    [
+        'database' => 'Obullo\Service\Provider\Database',
+        // 'database' => 'Obullo\Service\Provider\DoctrineDBAL',
+        // 'qb' => 'Obullo\Service\Provider\DoctrineQueryBuilder',
+        'redis' => 'Obullo\Service\Provider\Redis',
+        'memcached' => 'Obullo\Service\Provider\Memcached',
+        // 'memcache' => 'Obullo\Service\Provider\Memcache',
+        'cache' => 'Obullo\Service\Provider\Cache',
+        'amqp' => 'Obullo\Service\Provider\Amqp',
+        // 'amqp' => 'Obullo\Service\Provider\AmqpLib',
+        'mongo' => 'Obullo\Service\Provider\Mongo'
+    ]
+);
 
+$c['app']->service(
+    [
+        'logger' => 'Obullo\Log\LogManager',
+        'layer' => 'Obullo\Layer\LayerManager',
+        'url' => 'Obullo\Url\UrlManager',
+        'db' => 'Obullo\Database\DatabaseManager',
+        'session' => 'Obullo\Session\SessionManager',
+        'queue' => 'Obullo\Queue\QueueManagerAmqp',
+        'user' => 'Obullo\Authentication\AuthManager'
+        // 'queue' => 'Obullo\Queue\QueueManagerAmqpLib',
+    ]
+);
 
-/* End of file components.php */
-/* Location: .app/components.php */
+$c['app']->component(
+    [
+        'response' => 'Obullo\Http\Response',
+        'event' => 'Obullo\Event\Event',
+        'middleware' => 'Obullo\Application\Middleware',
+        'translator' => 'Obullo\Translation\Translator',
+        'cookie' => 'Obullo\Cookie\Cookie',
+        'is' => 'Obullo\Filters\Is',
+        'clean' => 'Obullo\Filters\Clean',
+        'task' => 'Obullo\Cli\Task\Task',
+        'router' => 'Obullo\Router\Router',
+        'flash' => 'Obullo\Flash\Session',
+        'form' => 'Obullo\Form\Form',
+        'element' => 'Obullo\Form\Element',
+        'password' => 'Obullo\Crypt\Password\Bcrypt',
+        'csrf' => 'Obullo\Security\Csrf',
+        'validator' => 'Obullo\Validator\Validator',
+        'view' => 'Obullo\View\View',
+        'template' => 'Obullo\View\Template',
+    ]
+);
+
+$c['app']->dependency(
+    [
+        'dependency',
+        'app',
+        'middleware',
+        'config',
+        'layer',
+        'logger',
+        'request',
+        'response',
+        'session',
+        'queue',
+        'user',
+    ]
+);

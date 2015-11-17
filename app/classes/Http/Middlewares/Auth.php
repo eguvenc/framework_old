@@ -2,47 +2,64 @@
 
 namespace Http\Middlewares;
 
-use Obullo\Container\Container;
-use Obullo\Application\Middleware;
-use Obullo\Authentication\Middleware\UniqueLoginTrait;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
-class Auth extends Middleware
+use Obullo\Http\Middleware\MiddlewareInterface;
+use Obullo\Authentication\Middleware\UniqueSessionTrait;
+;
+use Obullo\Container\ContainerAwareInterface;
+use Obullo\Container\ContainerInterface as Container;
+use Obullo\Authentication\User\UserInterface as User;
+
+class Auth implements MiddlewareInterface, ContainerAwareInterface
 {
-    use UniqueLoginTrait;
+    use UniqueSessionTrait;
 
-    /**
-     * User service
-     * 
-     * @var object
-     */
     protected $user;
 
     /**
-     * Loader
+     * Constructor
      * 
-     * @return void
+     * @param User $user auth user controller
      */
-    public function load()
+    public function __construct(User $user)
     {
-        $this->user = $this->c['user'];
-        $this->next->load();
+        $this->user = $user;
     }
 
     /**
-     *  Call action
-     * 
+     * Sets the Container.
+     *
+     * @param ContainerInterface|null $container object or null
+     *
      * @return void
      */
-    public function call()
+    public function setContainer(Container $container = null)
+    {
+        $this->c = $container;
+    }
+
+    /**
+     * Invoke middleware
+     * 
+     * @param ServerRequestInterface $request  request
+     * @param ResponseInterface      $response response
+     * @param callable               $next     callable
+     * 
+     * @return object ResponseInterface
+     */
+    public function __invoke(Request $request, Response $response, callable $next = null)
     {
         if ($this->user->identity->check()) {
-            
-            $this->uniqueLoginCheck();  // Terminate multiple logins
+    
+            $this->killSessions();  // Terminate multiple logins
             
             // $this->user->activity->set('last', time());
 
         }
-        $this->next->call();
+        $err = null;
+
+        return $next($request, $response, $err);
     }
-    
 }

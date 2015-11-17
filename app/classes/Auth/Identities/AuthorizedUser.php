@@ -2,13 +2,12 @@
 
 namespace Auth\Identities;
 
-use Obullo\Authentication\AbstractUserIdentity;
-use Obullo\Authentication\Identities\AuthorizedUserInterface;
+use Obullo\Authentication\Identity\AbstractIdentity;
 
-Class AuthorizedUser extends AbstractUserIdentity implements AuthorizedUserInterface
+class AuthorizedUser extends AbstractIdentity
 {
     /**
-     * Get the unique identifier for the user.
+     * Get the identifier column value
      *
      * @return mixed
      */
@@ -20,9 +19,9 @@ Class AuthorizedUser extends AbstractUserIdentity implements AuthorizedUserInter
     }
 
     /**
-     * Get the password for the user.
+     * Get the password column value
      *
-     * @return string
+     * @return mixed
      */
     public function getPassword()
     {
@@ -32,6 +31,3 @@ Class AuthorizedUser extends AbstractUserIdentity implements AuthorizedUserInter
     }
 
 }
-
-/* End of file AuthorizedUser.php */
-/* Location: .app/classes/Auth/Identities/AuthorizedUser.php */

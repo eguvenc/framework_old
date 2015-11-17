@@ -1,0 +1,12 @@
+{
+    "autoload": {
+        "psr-4": {
+            "": "app/classes"
+        }
+    },
+    "require": {
+        "relay/relay": "^1.0",
+        "ircmaxell/password-compat": "^1.0",
+        "obullo/service": "^1.1"
+    }
+}
