@@ -7,11 +7,10 @@
 |
 |  Default Middlewares
 |
-|   - App ( Required by system )
 |   - Error ( Added by system if you use Zend Middleware )
 |   - NotAllowed ( Added with the router )
 |   - Router
-|   - View
+|   - View ( Required for layouts )
 */
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +19,13 @@
 */
 $c['middleware']->configure(
     [
-        'App' => 'Http\Middlewares\App',
         'Error' => 'Http\Middlewares\Error',
+        'App' => 'Http\Middlewares\App',
         'TrustedIp' => 'Http\Middlewares\TrustedIp',
         'Debugger' => 'Http\Middlewares\Debugger',
         'Router' => 'Http\Middlewares\Router',
         'Maintenance' => 'Http\Middlewares\Maintenance',
         'NotAllowed' => 'Http\Middlewares\NotAllowed',
-        'Annotation' => 'Http\Middlewares\Annotation',
         'Auth' => 'Http\Middlewares\Auth',
         'Guest' => 'Http\Middlewares\Guest',
         'View' => 'Http\Middlewares\View',

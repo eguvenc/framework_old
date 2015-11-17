@@ -7,21 +7,26 @@ There is no release yet, we are still working on it.
 
 ### Installation
 
-Create your composer.json file
+Create your composer.json file and dependencies
 
 ```json
 {
     "autoload": {
         "psr-4": {
-            "Obullo\\": "o2/",
             "": "app/classes"
         }
     },
     "require": {
         "obullo/service": "^1.0",
-        "ircmaxell/password-compat": "^1.0"
+        "ircmaxell/password-compat": "^1.0",
     }
 }
+```
+
+Create your obullo version
+
+```php
+composer require obullo/obullo dev-master
 ```
 
 Update dependencies

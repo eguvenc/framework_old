@@ -19,6 +19,7 @@ error_reporting(0);
 |
 */
 require 'constants';
+
 /*
 |--------------------------------------------------------------------------
 | Php execution limit
@@ -37,6 +38,9 @@ ini_set('memory_limit', '100000M');  // Set maximum amount of memory for Cli ope
 |--------------------------------------------------------------------------
 */
 require 'vendor/autoload.php';
+
+require OBULLO .'Application/Autoloader.php';
+Obullo\Application\Autoloader::register();
 /*
 |--------------------------------------------------------------------------
 | Set timezone identifier

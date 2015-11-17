@@ -53,7 +53,7 @@ class Zend
     public function __construct(array $options, Response $response = null)
     {
         $this->options = $options;
-
+        
         if ($response) {
             $this->bodySize = $response->getBody()->getSize();
         }

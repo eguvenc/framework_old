@@ -19,18 +19,15 @@ error_reporting(1);
 require '../constants';
 /*
 |--------------------------------------------------------------------------
-| Autoloader
-|--------------------------------------------------------------------------
-*/
-// require OBULLO .'Application/Autoloader.php';
-/*
-|--------------------------------------------------------------------------
 | Register Autoloader
 |--------------------------------------------------------------------------
 */
 require '../vendor/autoload.php';
 
-// Obullo\Application\Autoloader::register();
+
+require OBULLO .'Application/Autoloader.php';
+Obullo\Application\Autoloader::register();
+
 /*
 |--------------------------------------------------------------------------
 | Set timezone identifier
@@ -55,7 +52,6 @@ $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
 | Create your http server
 |--------------------------------------------------------------------------
 */
-
 $server = Obullo\Http\Zend\Diactoros\Server::createServerFromRequest(
     $app,
     Obullo\Log\Benchmark::start($app->getRequest())

@@ -89,27 +89,7 @@ class Relay
         }
         return $this->setCookieHeaders($response);
     }
-
-    /**
-     * Set cookie headers
-     * 
-     * @param Response $response Response
-     * 
-     * @return object ResponseInterface
-     */
-    protected function setCookieHeaders(Response $response)
-    {
-        $headers = $this->c['cookie']->getHeaders();
-
-        if (! empty($headers) && $this->bodySize > 0) {
-            foreach ($headers as $value) {
-                $response = $response->withAddedHeader('Set-Cookie', $value);  // Send cookie headers
-            }
-        }
-        return $response;
-    }
-
-
+    
     /**
      * Handle an error condition
      *

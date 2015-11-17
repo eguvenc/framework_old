@@ -18,7 +18,7 @@ class HelloForm extends Controller
             // oku
             // https://github.com/php-fig/fig-standards/issues/507
 
-            var_dump($this->request->getParsedBody());
+            // var_dump($this->request->getParsedBody());
 
             $this->validator->setRules('email', 'Email', 'callback_test(7)|required|email|');
             $this->validator->setRules('password', 'Password', 'required|min(6)');

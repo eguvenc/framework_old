@@ -9,7 +9,7 @@ class HelloWorld extends Controller
     /**
      * Index
      * 
-     * @middleware->method('POST', 'GET');
+     * @middleware->method('GET');
      * 
      * @return void
      */ 

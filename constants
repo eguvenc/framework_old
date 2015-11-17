@@ -17,7 +17,8 @@ define('PHP_PATH', '/usr/bin/php');
 define('FPATH', dirname(__FILE__));
 define('ROOT',  __DIR__ .'/');
 define('VENDOR',__DIR__.'/vendor/');
-define('OBULLO',__DIR__ .'/o2/');
+define('OBULLO',__DIR__ .'/obullo/Obullo/');
+// define('OBULLO',__DIR__ .'/vendor/obullo/framework/Obullo/');
 define('LOADER', 'php');
 /*
 |---------------------------------------------------------------
