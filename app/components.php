@@ -7,51 +7,50 @@
 */
 $c['app']->provider(
     [
-        'database' => 'Obullo\Service\Provider\Database',
-        // 'database' => 'Obullo\Service\Provider\DoctrineDBAL',
-        // 'qb' => 'Obullo\Service\Provider\DoctrineQueryBuilder',
-        'redis' => 'Obullo\Service\Provider\Redis',
-        'memcached' => 'Obullo\Service\Provider\Memcached',
-        // 'memcache' => 'Obullo\Service\Provider\Memcache',
-        'cache' => 'Obullo\Service\Provider\Cache',
-        'amqp' => 'Obullo\Service\Provider\Amqp',
-        // 'amqp' => 'Obullo\Service\Provider\AmqpLib',
-        'mongo' => 'Obullo\Service\Provider\Mongo'
+        'database' => 'Obullo\Service\Providers\Database',
+        // 'database' => 'Obullo\Service\Providers\DoctrineDBAL',
+        // 'qb' => 'Obullo\Service\Providers\DoctrineQueryBuilder',
+        'redis' => 'Obullo\Service\Providers\Redis',
+        'memcached' => 'Obullo\Service\Providers\Memcached',
+        // 'memcache' => 'Obullo\Service\Providers\Memcache',
+        'cache' => 'Obullo\Service\Providers\Cache',
+        'amqp' => 'Obullo\Service\Providers\Amqp',
+        // 'amqp' => 'Obullo\Service\Providers\AmqpLib',
+        'mongo' => 'Obullo\Service\Providers\Mongo'
     ]
 );
 
 $c['app']->service(
     [
-        'logger' => 'Obullo\Log\LogManager',
-        'layer' => 'Obullo\Layer\LayerManager',
-        'url' => 'Obullo\Url\UrlManager',
+        'logger' => 'Log\LogManager',
         'db' => 'Obullo\Database\DatabaseManager',
-        'session' => 'Obullo\Session\SessionManager',
+        'url' => 'Obullo\Url\UrlManager',
+        'csrf' => 'Obullo\Security\CsrfManager',
+        'user' => 'Obullo\Authentication\AuthManager',
+        'layer' => 'Obullo\Layer\LayerManager',
         'queue' => 'Obullo\Queue\QueueManagerAmqp',
-        'user' => 'Obullo\Authentication\AuthManager'
         // 'queue' => 'Obullo\Queue\QueueManagerAmqpLib',
+        'session' => 'Obullo\Session\SessionManager',
+        'captcha' => 'Obullo\Captcha\CaptchaManager',
     ]
 );
 
 $c['app']->component(
     [
+        'view' => 'Obullo\View\View',
+        'is' => 'Obullo\Filters\Is',
+        'task' => 'Obullo\Cli\Task\Task',
+        'form' => 'Obullo\Form\Form',
+        'clean' => 'Obullo\Filters\Clean',
+        'flash' => 'Obullo\Flash\Session',
+        'router' => 'Obullo\Router\Router',
+        'cookie' => 'Obullo\Cookie\Cookie',
+        'element' => 'Obullo\Form\Element',
+        'template' => 'Obullo\View\Template',
         'response' => 'Obullo\Http\Response',
-        'event' => 'Obullo\Event\Event',
+        'validator' => 'Obullo\Validator\Validator',
         'middleware' => 'Obullo\Application\Middleware',
         'translator' => 'Obullo\Translation\Translator',
-        'cookie' => 'Obullo\Cookie\Cookie',
-        'is' => 'Obullo\Filters\Is',
-        'clean' => 'Obullo\Filters\Clean',
-        'task' => 'Obullo\Cli\Task\Task',
-        'router' => 'Obullo\Router\Router',
-        'flash' => 'Obullo\Flash\Session',
-        'form' => 'Obullo\Form\Form',
-        'element' => 'Obullo\Form\Element',
-        'password' => 'Obullo\Crypt\Password\Bcrypt',
-        'csrf' => 'Obullo\Security\Csrf',
-        'validator' => 'Obullo\Validator\Validator',
-        'view' => 'Obullo\View\View',
-        'template' => 'Obullo\View\Template',
     ]
 );
 

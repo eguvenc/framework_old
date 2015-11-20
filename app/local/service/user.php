@@ -72,9 +72,9 @@ return array(
             'regenerateSessionId' => true,
         ],
         /**
-         * Auth middlewares
+         * Middlewares
          *
-         * UniqueLogin : If this is true all other opened session in other devices will be logged out except the current session.
+         * Unique.session : If it is true all other opened session in other devices will be logged out except the current session.
          */
         'middleware' => [
             'unique.session' => false

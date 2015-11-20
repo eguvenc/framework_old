@@ -22,6 +22,8 @@ $c['middleware']->configure(
         'Error' => 'Http\Middlewares\Error',
         'App' => 'Http\Middlewares\App',
         'TrustedIp' => 'Http\Middlewares\TrustedIp',
+        'Csrf' => 'Http\Middlewares\Csrf',
+        'ParsedBody' => 'Http\Middlewares\ParsedBody',
         'Debugger' => 'Http\Middlewares\Debugger',
         'Router' => 'Http\Middlewares\Router',
         'Maintenance' => 'Http\Middlewares\Maintenance',
@@ -41,8 +43,10 @@ $c['middleware']->queue(
     [
         // 'Maintenance',
         // 'TrustedIp',
-        'App',
+        // 'ParsedBody',
         'Router',
-        'View',
+        // 'Csrf',
+        // 'View',
+        'App',
     ]
 );

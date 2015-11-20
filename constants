@@ -8,6 +8,7 @@
 | PHP_PATH    - The php path of your server
 | FPATH       - The full server path without file
 | ROOT        - The root path of your server
+| VENDOR      - The composer vendor folder
 | OBULLO      - The full path of version folder
 | LOADER      - The container service loader class ( php, xml .. )
 */

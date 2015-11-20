@@ -60,7 +60,7 @@ function submitAjax(formId){
     // Captcha refresh
     var captcha = myform.captcha;
     if (captcha) {
-        myform.captchaImg.src="/index.php/captcha/create/'" + Math.random();
+        myform.captchaImg.src="/captcha/create/'" + Math.random();
     }
     myform.onsubmit = function(){
         var elements = new Array();

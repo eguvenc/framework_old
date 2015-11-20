@@ -2,11 +2,15 @@
     "autoload": {
         "psr-4": {
             "": "app/classes"
-        }
+        },
+        "files": [
+            "ircmaxell/password-compat/lib/password.php"
+        ],
     },
     "require": {
         "relay/relay": "^1.0",
         "ircmaxell/password-compat": "^1.0",
-        "obullo/service": "^1.1"
+        "obullo/service-providers": "dev-master",
+        "league/event": "^2.1"
     }
 }

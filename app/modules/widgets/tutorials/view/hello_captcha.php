@@ -56,7 +56,7 @@ var ajax = {
                     <tr>
                         <td></td>
                         <td>
-                        <img src="/index.php/captcha/create" alt="Security Image" id="captcha" />
+                        <img src="/captcha/create" alt="Security Image" id="captcha" />
                         <a href="javascript:void(0);" onclick="document.getElementById('captcha').src='/index.php/captcha/create/'+Math.random();" id="image">Refresh</a> 
                         </td>
                     </tr>

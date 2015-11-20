@@ -26,7 +26,7 @@
                 <li><?php echo $this->url->anchor('/widgets/tutorials/helloAjax', 'Hello Ajax') ?></li>
                 <li><?php echo $this->url->anchor('/widgets/tutorials/helloTask', 'Hello Task') ?></li>
                 <li><?php echo $this->url->anchor('/widgets/tutorials/helloLayers', 'Hello Layers') ?></li>
-                <li><?php echo $this->url->anchor('/widgets/tutorials/helloCaptcha', 'Hello Captcha') ?></li>
+                <li><?php echo $this->url->anchor('/captcha/examples/form', 'Hello Captcha') ?></li>
             </ol>
         </section>
 

@@ -19,8 +19,8 @@ return array(
             'format' => 'H:i:s d:m:Y'
         ]
      ],
-    'controller' => [
-        'annotation' => false,
+    'extra' => [
+        'annotations' => false,
     ],
     'cookie' => [ 
         'domain' => '',
@@ -33,13 +33,6 @@ return array(
     'security' => [
         'encryption' => [
             'key' => 'write-your-secret-key',
-        ],
-        'csrf' => [
-            'protection' => true,
-            'token' => [
-                'name' => 'csrf_token',
-                'refresh' => 30,
-            ],    
-         ],     
+        ]  
     ]
 );

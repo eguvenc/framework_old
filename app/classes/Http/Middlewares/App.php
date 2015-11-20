@@ -41,19 +41,20 @@ class App implements MiddlewareInterface, ContainerAwareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        return $next($request, $this->run($response));
+        return $next($request, $this->run($request, $response));
     }
 
     /**
      * Run application
-     * 
-     * @param ResponseInterface $response response
+     *
+     * @param ServerRequestInterface $request  request
+     * @param ResponseInterface      $response response
      * 
      * @return mixed
      */
-    protected function run(Response $response)
+    protected function run(Request $request, Response $response)
     {
-        $result = $this->c['app']->call($response);
+        $result = $this->c['app']->call($request, $response);
 
         if (! $result) {
 

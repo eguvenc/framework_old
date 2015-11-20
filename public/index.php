@@ -1,4 +1,15 @@
 <?php
+
+register_shutdown_function('shutdownFunction');
+
+function shutDownFunction() { 
+    $error = error_get_last();
+    // fatal error, E_ERROR === 1
+    if (! empty($error)) { 
+		var_dump($error);
+    } 
+}
+
 /*
 |--------------------------------------------------------------------------
 | Disable php.ini errors to use set_error_handler() func
