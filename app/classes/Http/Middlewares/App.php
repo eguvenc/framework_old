@@ -40,8 +40,10 @@ class App implements MiddlewareInterface, ContainerAwareInterface
      * @return object ResponseInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
-    {
-        return $next($request, $this->run($request, $response));
+    {        
+        $response = $this->run($request, $response);
+
+        return $next($request, $response);
     }
 
     /**
@@ -59,7 +61,7 @@ class App implements MiddlewareInterface, ContainerAwareInterface
         if (! $result) {
 
             $body = $this->c['template']->make('404');
-            
+
             return $response->withStatus(404)
                 ->withHeader('Content-Type', 'text/html')
                 ->withBody($body);

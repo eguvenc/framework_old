@@ -1,6 +1,6 @@
 <?php
 
-namespace Membership;
+namespace Examples\Membership;
 
 use Obullo\Http\Controller;
 
@@ -8,9 +8,9 @@ class Login extends Controller
 {
     /**
      * Index
-     * 
-     * @event->when("post")->subscribe('Event\Login\Attempt');
      *
+     * @middleware->when('post')->remove('Csrf');
+     * 
      * @return void
      */
     public function index()
@@ -23,6 +23,7 @@ class Login extends Controller
             if (! $this->validator->isValid()) {
                 
                 $this->form->setErrors($this->validator);
+
             } else {
 
                 $authResult = $this->user->login->attempt(
@@ -36,7 +37,7 @@ class Login extends Controller
                 if ($authResult->isValid()) {
 
                     $this->flash->success('You have authenticated successfully.')
-                        ->response->redirect('/membership/restricted');
+                        ->response->redirect('/examples/membership/restricted');
 
                 } else {
                     $this->form->setResults($authResult->getArray());

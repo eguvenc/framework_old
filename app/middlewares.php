@@ -17,7 +17,7 @@
 | Middleware definitions
 |--------------------------------------------------------------------------
 */
-$c['middleware']->configure(
+$c['middleware']->register(
     [
         'Error' => 'Http\Middlewares\Error',
         'App' => 'Http\Middlewares\App',
@@ -39,14 +39,15 @@ $c['middleware']->configure(
 |--------------------------------------------------------------------------
 | Define router middleware at the top.
 */
-$c['middleware']->queue(
+$c['middleware']->add(
     [
         // 'Maintenance',
         // 'TrustedIp',
         // 'ParsedBody',
+    
         'Router',
         // 'Csrf',
-        // 'View',
+        'View',
         'App',
     ]
 );

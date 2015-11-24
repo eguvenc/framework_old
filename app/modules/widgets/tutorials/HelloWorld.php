@@ -15,6 +15,8 @@ class HelloWorld extends Controller
      */ 
     public function index()
     {
+        // $this->cookie->name('test')->value(1)->expire(0)->set();
+
         // var_dump($this->request->getParsedBody());
 
         // echo $a;
@@ -29,7 +31,7 @@ class HelloWorld extends Controller
         // print_r($this->request->getParsedBody());
 
         $this->view->load(
-            'hello_world', 
+            'hello.world', 
             [
                 'title' => 'Hello World !',
             ]

@@ -29,7 +29,12 @@ class NotAllowed implements MiddlewareInterface, ParamsAwareInterface
      */
     public function setParams(array $params)
     {
-        $this->allowedMethods = $params;
+        $this->allowedMethods = array_map(
+            function ($value) { 
+                return strtoupper($value);
+            },
+            $params
+        );
     }
 
     /**

@@ -17,7 +17,9 @@
         <section><?php echo $this->form->getValidationErrors() ?></section>
 
         <section>
-            <form action="/widgets/tutorials/helloForm" method="POST">
+            <form action="/widgets/tutorials/helloCsrf" method="POST">
+
+                <input type="hidden" name="<?php echo $this->c['csrf']->getTokenName() ?>" value="<?php echo $this->c['csrf']->getToken(); ?>" />
 
                 <table width="100%">
                     <tr>
@@ -26,21 +28,7 @@
                         <input type="text" name="email" value="<?php echo $this->form->getValue('email') ?>" />
                         </td>
                     </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td><?php echo $this->form->getError('password'); ?>
-                        <input type="password" name="password" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Confirm</td>
-                        <td><?php echo $this->form->getError('confirm_password'); ?>
-                        <input type="password" name="confirm_password" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><?php echo $this->form->getError('agreement'); ?>
-                        <input type="checkbox" name="agreement" value="1" <?php echo $this->form->setCheckbox('agreement', 1) ?>  id="agreement">
-                        <label for="agreement"> I agree terms and conditions</label></td>
+
                     </tr>
                     <tr>
                         <td></td>
@@ -50,6 +38,11 @@
                     </tr>
                     </table>
                 </form>
+
+                <h2>Token<h2>
+
+                <code><?php echo $this->c['csrf']->getToken() ?></code>
+
 
                 <h2>Test Results</h2>
 

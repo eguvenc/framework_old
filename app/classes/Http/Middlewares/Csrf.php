@@ -36,20 +36,24 @@ class Csrf implements MiddlewareInterface, ContainerAwareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        $csrf = $this->c['csrf'];
+        if ($request->getMethod() == 'POST') {
 
-        $csrf->setCsrfToken($request);
+            $csrf = $this->c['csrf'];
+            $verify = $csrf->verify($request);
 
-        if (! $csrf->verify($request)) {
+            if (false == $verify) {
 
-            if ($request->isAjax()) {
+                $this->c['logger']->channel('security');
+                $this->c['logger']->debug('Csrf validation is failed.');
 
-                return $this->ajaxResponse($response);
+                if ($request->isAjax()) {
+
+                    return $this->ajaxResponse($response);
+                }
+
+                return $this->htmlResponse($response);
             }
-
-            return $this->htmlResponse($response);
         }
-        
         return $next($request, $response);
     }
 
@@ -84,7 +88,6 @@ class Csrf implements MiddlewareInterface, ContainerAwareInterface
                 'error' => 'The action you have requested is not allowed.'
             ]
         );
-
         return $response->withStatus(401)
             ->withHeader('Content-Type', 'text/html')
             ->withBody($body);

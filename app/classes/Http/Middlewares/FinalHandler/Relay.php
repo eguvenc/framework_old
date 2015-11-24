@@ -30,6 +30,13 @@ class Relay
     protected $request;
 
     /**
+     * Response
+     * 
+     * @var object
+     */
+    protected $response;
+
+    /**
      * Options
      * 
      * @var array
@@ -52,6 +59,7 @@ class Relay
     public function __construct(array $options, Response $response = null)
     {
         $this->options = $options;
+        $this->response = $response;
 
         if ($response) {
             $this->bodySize = $response->getBody()->getSize();
@@ -85,23 +93,66 @@ class Relay
         $this->request = $request;
 
         if ($err) {
-            return $this->handleError($err, $request, $response);
+            return $this->handleError($err, $response);
         }
-        return $this->setCookieHeaders($response);
+
+        // Return provided response if it does not match the one provided at
+        // instantiation; this is an indication of calling `$next` in the final
+        // registered middleware and providing a new response instance.
+        if ($this->response && $this->response !== $response) {
+            return $response;
+        }
+
+        // If the response passed is the same as the one at instantiation,
+        // check to see if the body size has changed; if it has, return
+        // the response, as the message body has been written to.
+        if ($this->response
+            && $this->response === $response
+            && $this->bodySize !== $response->getBody()->getSize()
+        ) {
+            return $this->setCookieHeaders($response);
+        }
+
+        $body = $this->c['template']->make('404');
+
+        return $response->withStatus(404)
+            ->withHeader('Content-Type', 'text/html')
+            ->withBody($body);
     }
     
+    /**
+     * Set cookie headers
+     * 
+     * @param Response $response Response
+     * 
+     * @return object ResponseInterface
+     */
+    protected function setCookieHeaders(Response $response)
+    {
+        if ($this->c->active('cookie')) {  // If cookie object is available
+
+            $headers = $this->c['cookie']->getHeaders();
+
+            if (! empty($headers)) {
+                foreach ($headers as $value) {
+                    $response = $response->withAddedHeader('Set-Cookie', $value);  // Send cookie headers
+                }
+            }
+        }
+        return $response;
+    }
+
     /**
      * Handle an error condition
      *
      * Use the $error to create details for the response.
      *
      * @param mixed             $error    error
-     * @param RequestInterface  $request  Request instance.
      * @param ResponseInterface $response Response instance.
      * 
      * @return Http\Response
      */
-    protected function handleError($error, Request $request, Response $response)
+    protected function handleError($error, Response $response)
     {
         $response = $response->withStatus(
             Utils::getStatusCode($error, $response)

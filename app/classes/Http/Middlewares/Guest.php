@@ -51,7 +51,7 @@ class Guest implements MiddlewareInterface, ContainerAwareInterface
 
             $this->c['flash']->info('Your session has been expired.');
 
-            return $response->redirect('/membership/login/index');
+            return $response->redirect('/examples/membership/login/index');
         }
         $err = null;
 

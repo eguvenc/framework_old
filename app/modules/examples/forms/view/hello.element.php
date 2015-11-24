@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <link href="<?php echo $this->url->asset('css/welcome.css') ?>" rel="stylesheet" type="text/css" />
-        <title>Hello Form</title>
+        <title>Hello Element</title>
     </head>
 
     <body>
@@ -11,45 +11,47 @@
             <?php echo $this->url->anchor('/', '<img src="'.$this->url->asset('images/logo.png').'">') ?>
         </header>
         
-        <h1>Hello Form</h1>
+        <h1>Hello Element</h1>
 
         <section><?php echo $this->form->getMessage() ?></section>
         <section><?php echo $this->form->getValidationErrors() ?></section>
 
         <section>
-            <form action="/widgets/tutorials/helloForm" method="POST">
+            <?php echo $this->element->form('/widgets/tutorials/helloElement') ?>
 
                 <table width="100%">
                     <tr>
                         <td style="width:20%;">Email</td>
                         <td><?php echo $this->form->getError('email'); ?>
-                        <input type="text" name="email" value="<?php echo $this->form->getValue('email') ?>" />
+                        <?php echo $this->element->input('email', $this->form->getValue('email')) ?>
                         </td>
                     </tr>
                     <tr>
                         <td>Password</td>
                         <td><?php echo $this->form->getError('password'); ?>
-                        <input type="password" name="password" value="" /></td>
+                        <?php echo $this->element->password('password') ?></td>
                     </tr>
                     <tr>
                         <td>Confirm</td>
                         <td><?php echo $this->form->getError('confirm_password'); ?>
-                        <input type="password" name="confirm_password" value="" /></td>
+                        <?php echo $this->element->password('confirm_password') ?></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td><?php echo $this->form->getError('agreement'); ?>
-                        <input type="checkbox" name="agreement" value="1" <?php echo $this->form->setCheckbox('agreement', 1) ?>  id="agreement">
-                        <label for="agreement"> I agree terms and conditions</label></td>
+                        <?php echo $this->element->checkbox('agreement', 1, $this->form->getValue('agreement'), ' id="agreement" ') ?>
+                        <?php echo $this->element->label('I agree terms and conditions', 'agreement') ?>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <input type="submit" name="dopost" value="DoPost" />
+                        <?php echo $this->element->submit('dopost', 'DoPost') ?>
                         </td>
                     </tr>
-                    </table>
-                </form>
+                </table>
+
+            <?php echo $this->element->formClose() ?>
 
                 <h2>Test Results</h2>
 
@@ -60,7 +62,7 @@
 
                     <h3>$this->form->getError('email')</h3>
                     <pre><?php echo $this->form->getError('email') ?></pre>
-                </section> 
+                </section>    
         </section> 
 
     </body>

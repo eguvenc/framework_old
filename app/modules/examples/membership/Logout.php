@@ -1,6 +1,6 @@
 <?php
 
-namespace Membership;
+namespace Examples\Membership;
 
 use Obullo\Http\Controller;
 
@@ -19,6 +19,6 @@ class Logout extends Controller
         // $this->user->identity->forgetMe(); // Remove rember me cookie from cookie.
         
         $this->flash->info('You succesfully logged out')
-            ->response->redirect('/membership/login/index');
+            ->response->redirect('/examples/membership/login/index');
     }
 }

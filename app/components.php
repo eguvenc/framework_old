@@ -49,7 +49,7 @@ $c['app']->component(
         'template' => 'Obullo\View\Template',
         'response' => 'Obullo\Http\Response',
         'validator' => 'Obullo\Validator\Validator',
-        'middleware' => 'Obullo\Application\Middleware',
+        'middleware' => 'Obullo\Application\MiddlewareStack',
         'translator' => 'Obullo\Translation\Translator',
     ]
 );

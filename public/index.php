@@ -1,14 +1,14 @@
 <?php
 
-register_shutdown_function('shutdownFunction');
+// register_shutdown_function('shutdownFunction');
 
-function shutDownFunction() { 
-    $error = error_get_last();
-    // fatal error, E_ERROR === 1
-    if (! empty($error)) { 
-		var_dump($error);
-    } 
-}
+// function shutDownFunction() { 
+//     $error = error_get_last();
+//     // fatal error, E_ERROR === 1
+//     if (! empty($error)) { 
+// 		var_dump($error);
+//     } 
+// }
 
 /*
 |--------------------------------------------------------------------------
