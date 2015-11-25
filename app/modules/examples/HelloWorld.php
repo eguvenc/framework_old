@@ -1,6 +1,6 @@
 <?php
 
-namespace Widgets\Tutorials;
+namespace Examples;
 
 use Obullo\Http\Controller;
 

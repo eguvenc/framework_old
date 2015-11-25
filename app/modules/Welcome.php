@@ -1,10 +1,8 @@
 <?php
 
-namespace Examples;
-
 use Obullo\Http\Controller;
 
-class Examples extends Controller
+class Welcome extends Controller
 {
     /**
      * Index
@@ -14,7 +12,7 @@ class Examples extends Controller
     public function index()
     {
         $this->view->load(
-            'examples',
+            'welcome',
             [
                 'title' => 'Welcome to Obullo !',
             ]
