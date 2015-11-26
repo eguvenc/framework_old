@@ -8,8 +8,6 @@ class Login extends Controller
 {
     /**
      * Index
-     *
-     * @middleware->when('post')->remove('Csrf');
      * 
      * @return void
      */

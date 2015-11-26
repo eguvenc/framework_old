@@ -4,21 +4,16 @@ namespace Examples\Errors;
 
 use Obullo\Http\Controller;
 
-class HelloError extends Controller
+class NotFound extends Controller
 {
     /**
      * Index
      * 
-     * @return void
+     * @return response
      */      
     public function index()
     {
-        $body = $this->template->make(
-            'error',
-            [
-                'error' => 'Hello this my custom error string'
-            ]
-        );
+        $body = $this->template->make('404');
         
         return $this->response
             ->withStatus(404)

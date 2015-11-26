@@ -38,7 +38,7 @@
           </ul>
         </nav>
         
-        <h2 class="text-muted">Öğretici Örnekler</h2>
+        <h2 class="text-muted"><a href="/">Öğretici Örnekler</a></h2>
       </div>
 
       <div class="jumbotron">
@@ -52,7 +52,7 @@
           <h4><a href="/examples/helloWorld">Merhaba Dünya</a></h4>
           <p>Http paketi ile bir kontrolör içerisinden response nesnesini kullanarak ilk çıktınızı üretin.</p>
 
-          <h4><a href="">Özelleştirilebilir Hata Sayfaları</a></h4>
+          <h4><a href="/examples/errors/Errors">Hata Sayfaları</a></h4>
           <p>Önceden tanımlı hata şablonlarını kullanarak özelleştirebilir hata çıktıları üretin.</p>
 
           <h4><a href="">Üyelik Modülü</a></h4>
@@ -67,7 +67,7 @@
           <h4><a href="">Kuyruklama</a></h4>
           <p>Yoğun işlemleri kuyruğa gönderin, çok çekirdekli sunucularda çoklu işçiler yardımıyla kuyruğu tüketin.</p>
 
-          <h4><a href="">Hata Görüntüleme Katmanı</a></h4>
+          <h4><a href="">Hata Görüntüleme</a></h4>
           <p>Debugger eklentisini etkinleştirerek logları, istekleri, girdileri ve çevre bileşenlerini takip edin.</p>
 
         </div>
@@ -77,7 +77,7 @@
           <h4><a href="">Arayüz Katmanı ( GUI Layer )</a></h4>
           <p>Layer paketi ile arayüz katmanları oluşturarak bir sayfayı; gezinti çubuğu, alt sayfa, yan sayfa gibi bölümlere ayırıp kullanıcı arayüzünü ( GUI ) kolayca oluşturun.</p>
 
-          <h4><a href="">Formlar ve Form Elementleri</a></h4>
+          <h4><a href="">Formlar</a></h4>
           <p>Form, form element ve form doğrulayıcı nesneleri ile http, ajax türünde formlar oluşturun. Csrf ve Captcha servisleri ile uygulamanızın girdi güvenliğini yükseltin.</p>
 
           <h4><a href="">Filtreler</a></h4>
@@ -93,17 +93,14 @@
       </div>
 
 
+      <!---
       <footer class="footer">
 
         <div class="col-lg-6">
-            <p>&copy; 2016 Obullo Framework.</p>
+            <p>&copy; 2016 Obullo.</p>
         </div>
-
-        <div class="col-lg-6 text-right">
-              <img src="/assets/images/shape_logo.png" border="0" />
-        </div>
-
       </footer>
+      -->
 
     </div> <!-- /container -->
 

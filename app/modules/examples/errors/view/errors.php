@@ -11,7 +11,7 @@
     
     <!-- <link rel="icon" href="favicon.ico"> -->
 
-    <title>Merhaba Dünya</title>
+    <title>Hatalar</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
@@ -38,13 +38,15 @@
           </ul>
         </nav>
         
-        <h2 class="text-muted"><a href="/examples/">Merhaba Dünya</a></h2>
+        <h2 class="text-muted"><a href="/examples/">Hata Sayfaları</a></h2>
       </div>
 
-      <div class="row marketing description">
-        <p>Bu benim ilk sayfam.</p>
+      <div class="content">
+        <ul>
+          <li><a href="/examples/errors/error">Özel Hatalar</a></li>
+          <li><a href="/examples/errors/notFound">404 Hataları</a></li>
+        </ul>
       </div>
-
 
       <!--
       <footer class="footer">

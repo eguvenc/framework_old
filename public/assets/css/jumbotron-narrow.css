@@ -40,12 +40,12 @@ body {
 }
 
 a {
-  color : #BF342A;
+  color: #BF342A;
   background-color: transparent;
 }
-a:active
-a:hover {
-  color: #E53528;
+a:hover,
+a:focus {
+  color: #BF342A;
   outline: 0;
 }
 
@@ -59,6 +59,25 @@ a:hover {
   color: #5B5B5B;
   background: none;
   /* background-color: #5B5B5B; */
+}
+
+.content ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.content ul {
+  margin: 2em 0;
+}
+.content li {
+  list-style: circle;
+  margin: 1em;
+  margin-left: 1em;
+}
+
+.link {
+  font-size: 0.45em;
 }
 
 /* Customize container */

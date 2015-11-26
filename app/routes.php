@@ -84,7 +84,7 @@ $c['router']->group(
     ],
     function () {
 
-        // $this->attach('membership/restricted');
+        $this->attach('membership/restricted');
 
         // $this->get('tutorials/helloWorld.*', 'tutorials/helloLayout');
         // $this->attach('(.*)'); // all url
