@@ -1,12 +1,16 @@
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  background-image: url('/assets/images/background.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
-.marketing,
 .footer {
   padding-right: 15px;
   padding-left: 15px;
@@ -61,6 +65,10 @@ a:focus {
   /* background-color: #5B5B5B; */
 }
 
+.content {
+
+}
+
 .content ul, li {
   padding: 0;
   margin: 0;
@@ -68,6 +76,7 @@ a:focus {
 }
 
 .content ul {
+  font-size: 16px;
   margin: 2em 0;
 }
 .content li {
@@ -111,14 +120,6 @@ a:focus {
   font-size: 21px;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 20px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
 .description p {
   font-weight: 300;
   color: #777575;
@@ -129,7 +130,6 @@ a:focus {
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
   .header,
-  .marketing,
   .footer {
     padding-right: 0;
     padding-left: 0;

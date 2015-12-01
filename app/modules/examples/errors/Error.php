@@ -16,11 +16,11 @@ class Error extends Controller
         $body = $this->template->make(
             'error',
             [
-                'error' => 'Hello this my first custom error'
+                'error' => 'Hello this my first custom error !'
             ]
         );
         return $this->response
-            ->withStatus(404)
+            ->withStatus(501)
             ->withHeader('Content-Type', 'text/html')
             ->withBody($body);
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Widgets\Tutorials;
+namespace Examples\Forms;
 
 use Obullo\Http\Controller;
 
-class HelloForm extends Controller
+class Form extends Controller
 {
     /**
      * Index
@@ -15,11 +15,6 @@ class HelloForm extends Controller
     {
         if ($this->request->isPost()) {
 
-            // oku
-            // https://github.com/php-fig/fig-standards/issues/507
-
-            // var_dump($this->request->getParsedBody());
-
             $this->validator->setRules('email', 'Email', 'callback_test(7)|required|email|');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
@@ -28,8 +23,8 @@ class HelloForm extends Controller
             $this->validator->func(
                 'callback_test',
                 function ($field, $value) {
-                    $this->setMessage('Callback function validation test error !');
-                    return false;
+                    $this->setMessage('Example callback function error for email field !');
+                    return true;
                 }
             );
             if ($this->validator->isValid()) {          
@@ -37,10 +32,10 @@ class HelloForm extends Controller
             } else {
                 $this->form->error('Form validation failed.');
             }
-            $this->form->setErrors($this->validator->getErrors());
+            $this->form->setErrors($this->validator);
         }
 
-        $this->view->load('hello_form');
+        $this->view->load('form');
     }
     
 }

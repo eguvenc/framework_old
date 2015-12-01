@@ -17,7 +17,7 @@
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/assets/css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="/assets/css/welcome.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -41,10 +41,9 @@
         <h2 class="text-muted"><a href="/examples/">Merhaba Dünya</a></h2>
       </div>
 
-      <div class="row marketing description">
-        <p>Bu benim ilk sayfam.</p>
+      <div class="content description">
+          <p>Bu benim ilk sayfam.</p>
       </div>
-
 
       <!--
       <footer class="footer">

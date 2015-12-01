@@ -1,18 +1,19 @@
 <?php
 
-namespace Examples;
+namespace Examples\Forms;
 
 use Obullo\Http\Controller;
 
-class Examples extends Controller
+class Forms extends Controller
 {
     /**
      * Index
      * 
      * @return void
-     */
+     */      
     public function index()
     {
-        $this->view->load('examples');
+        $this->view->load('forms');
     }
+
 }

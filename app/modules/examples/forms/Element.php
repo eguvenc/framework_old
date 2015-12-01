@@ -1,10 +1,10 @@
 <?php
 
-namespace Widgets\Tutorials;
+namespace Examples\Forms;
 
 use Obullo\Http\Controller;
 
-class HelloElement extends Controller
+class Element extends Controller
 {
     /**
      * Index
@@ -15,10 +15,11 @@ class HelloElement extends Controller
     {
         if ($this->request->isPost()) {
 
+            $this->validator->setRules('name', 'Name', 'required');
             $this->validator->setRules('email', 'Email', 'required|email');
-            $this->validator->setRules('password', 'Password', 'required|min(6)');
-            $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
-            $this->validator->setRules('agreement', 'User Agreement', 'required');
+            $this->validator->setRules('message', 'Your Message', 'required|max(800)');
+            $this->validator->setRules('hear', 'Last', 'required');
+            $this->validator->setRules('communicate', 'Communicate', 'required|max(5)');
 
             if ($this->validator->isValid()) {
                 $this->form->success('Form validation success.');
@@ -28,7 +29,7 @@ class HelloElement extends Controller
             $this->form->setErrors($this->validator);
         }
 
-        $this->view->load('hello_element');
+        $this->view->load('element');
     }
     
 }

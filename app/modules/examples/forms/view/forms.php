@@ -11,7 +11,7 @@
     
     <!-- <link rel="icon" href="favicon.ico"> -->
 
-    <title>Hoşgeldiniz</title>
+    <title>Formlar</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
@@ -30,27 +30,35 @@
 
     <div class="container">
 
-      <div class="welcome">
-
-          <div class="header clearfix text-center">
-            <p><?php echo $this->url->anchor('/', '<img src="'.$this->url->asset('images/logo.png').'">') ?></p>
-
-            <p>PHP 5.4 ve üzeri sürümler için php çatısı. Kolay ve hızlı yazılım geliştirme.</p>
-          </div>
-
-        <p class="lead">Hoşgeldiniz, eğer Obullo çatısını kullanmaya yeni başlıyorsanız aşağıdaki bağlantıyı takip edin.</p>
-        <p><a class="btn btn-lg btn-default" href="/examples/" role="button">Başlarken</a></p>
-
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="/examples">Örnekler</a></li>
+            <li role="presentation"><a href="#">Dökümentasyon</a></li>
+          </ul>
+        </nav>
+        
+        <h2 class="text-muted"><a href="/examples/">Formlar</a></h2>
       </div>
 
+      <div class="content">
+        <ul>
+          <li><a href="/examples/forms/form">Form</a></li>
+          <li><a href="/examples/forms/ajax">Ajax Form</a></li>
+          <li><a href="/examples/forms/element">Form Element</a></li>
+          <li><a href="/examples/forms/csrf">Csrf Form</a></li>
+          <li><a href="/examples/forms/captcha">Captcha Form</a></li>
+        </ul>
+      </div>
 
+      <!--
       <footer class="footer">
-        <p>&copy; 2016 Obullo.</p>
+
       </footer>
+      -->
 
     </div> <!-- /container -->
 
+
   </body>
 </html>
-
-
