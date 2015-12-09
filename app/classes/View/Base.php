@@ -5,7 +5,7 @@ namespace View;
 Trait Base
 {
     /**
-     * Setup layouts & assign view variables using layer
+     * Setup layouts / Assign view variables
      * 
      * @return void
      */

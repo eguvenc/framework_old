@@ -18,7 +18,6 @@ class Csrf extends Controller
         if (! $this->config['extra']['annotations']) {
             throw new \RuntimeException('Annotations must be enabled in your configuration file.');
         }
-
         if ($this->request->isPost()) {
 
             $this->validator->setRules('email', 'Email', 'required|email|');

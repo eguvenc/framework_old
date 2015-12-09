@@ -76,7 +76,6 @@ $c['router']->group(
     }
 );
 
-
 $c['router']->group(
     [
         'name' => 'AuthorizedUsers',

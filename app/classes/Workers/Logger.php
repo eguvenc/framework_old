@@ -37,13 +37,13 @@ class Logger implements JobInterface, ContainerAwareInterface
     /**
      * Set container
      * 
-     * @param Container|null $c container
+     * @param Container|null $container container
      *
      * @return void
      */
-    public function setContainer(Container $c = null)
+    public function setContainer(Container $container = null)
     {
-        $this->c = $c;
+        $this->c = $container;
     }
 
     /**

@@ -33,6 +33,7 @@
       <div class="welcome">
 
           <div class="header clearfix text-center">
+
             <p><?php echo $this->url->anchor('/', '<img src="'.$this->url->asset('images/logo.png').'">') ?></p>
 
             <p>PHP 5.4 ve üzeri sürümler için php çatısı. Kolay ve hızlı yazılım geliştirme.</p>
@@ -43,9 +44,8 @@
 
       </div>
 
-
       <footer class="footer">
-        <p>&copy; 2016 Obullo.</p>
+            <p>&copy; 2016 Obullo.</p>
       </footer>
 
     </div> <!-- /container -->

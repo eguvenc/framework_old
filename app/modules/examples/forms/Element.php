@@ -28,7 +28,7 @@ class Element extends Controller
             }
             $this->form->setErrors($this->validator);
         }
-
+        
         $this->view->load('element');
     }
     

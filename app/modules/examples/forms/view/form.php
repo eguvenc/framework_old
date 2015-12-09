@@ -68,7 +68,6 @@
                 <label><input type="checkbox" name="agreement" value="1" <?php echo $this->form->setCheckbox('agreement', 1) ?> id="agreement"> I agree terms and conditions</label>
             </div>
           </div>
-
           <button type="submit" class="btn btn-default">Submit</button>
         </form>
 

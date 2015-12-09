@@ -85,6 +85,7 @@ class Csrf implements MiddlewareInterface, ContainerAwareInterface
         $body = $this->c['template']->make(
             'error',
             [
+                'header' => 'Security Error',
                 'error' => 'The action you have requested is not allowed.'
             ]
         );

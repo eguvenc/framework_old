@@ -3,12 +3,12 @@
 --
 
 --
--- Database: `framework`
+-- Database: `membership`
 --
 
 -- --------------------------------------------------------
 
-CREATE DATABASE IF NOT EXISTS framework;
+CREATE DATABASE IF NOT EXISTS membership;
 
 --
 -- Table structure for table `users`

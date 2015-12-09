@@ -91,6 +91,8 @@ class Relay
     public function __invoke(Request $request, Response $response, $err = null)
     {   
         $this->request = $request;
+        
+        $response = $this->setCookies($response);
 
         if ($err) {
             return $this->handleError($err, $response);
@@ -112,7 +114,6 @@ class Relay
         ) {
             return $this->setCookieHeaders($response);
         }
-
         $body = $this->c['template']->make('404');
 
         return $response->withStatus(404)
@@ -123,20 +124,17 @@ class Relay
     /**
      * Set cookie headers
      * 
-     * @param Response $response Response
-     * 
-     * @return object ResponseInterface
+     * @param Response $response http ressponse
+     *
+     * @return object response
      */
-    protected function setCookieHeaders(Response $response)
+    protected function setCookies(Response $response)
     {
-        if ($this->c->active('cookie')) {  // If cookie object is available
-
+        if ($this->c->active('cookie')) {
             $headers = $this->c['cookie']->getHeaders();
-
             if (! empty($headers)) {
-                foreach ($headers as $value) {
-                    $response = $response->withAddedHeader('Set-Cookie', $value);  // Send cookie headers
-                }
+                $response->setCookies($headers);
+                return $response;
             }
         }
         return $response;

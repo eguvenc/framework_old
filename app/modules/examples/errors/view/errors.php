@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,8 +43,11 @@
 
       <div class="content">
         <ul>
-          <li><a href="/examples/errors/error">Özel Hatalar</a></li>
-          <li><a href="/examples/errors/notFound">404 Hataları</a></li>
+          <li><a href="/examples/errors/error" target="custom">Özel Hatalar</a> <p class="small-text">examples/errors/error</p></li>
+          <iframe src="" name="custom"></iframe>
+
+          <li><a href="/examples/errors/notFound" target="404">404 Hataları</a> <p class="small-text">examples/errors/notFound</p></li>
+          <iframe src="" name="404"></iframe>
         </ul>
       </div>
 

@@ -18,7 +18,8 @@ class Logout extends Controller
         // $this->user->identity->destroy();  // Remove the identity from cache and logout. ( So application needs to do sql query )
         // $this->user->identity->forgetMe(); // Remove rember me cookie from cookie.
         
-        $this->flash->info('You succesfully logged out')
-            ->response->redirect('/examples/membership/login/index');
+        $this->flash->info('You succesfully logged out');
+        
+        return $this->response->redirect('/examples/membership/login/index');
     }
 }

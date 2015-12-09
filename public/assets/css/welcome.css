@@ -11,8 +11,63 @@ body {
   padding-left: 15px;
 }
 
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.welcome .header p {
+  font-weight: 300;
+  color: #777575;
+  font-size: 1.17em;
+  margin: 2em 0;
+}
+
 label {
   font-weight: normal;
+}
+
+.small-text {
+  font-size: 12px;
+  color: #777575;
+}
+
+.layer {
+  margin-top:8px;
+}
+
+.example-gray {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  padding:9.5px;
+  font-size: 13px;
+  line-height: 1.42857;
+  color: #333;
+  background-color:#F5F5F5;
+  padding:8px;
+  border: 1px solid #CCC;
+  border-radius: 4px;
+  margin-bottom:10px;
+}
+.example-white {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  padding:9.5px;
+  font-size: 13px;
+  line-height: 1.42857;
+  color: #333;
+  background-color:#FFF;
+  padding:8px;
+  border: 1px solid #CCC;
+  border-radius: 4px;
+  margin-bottom:10px;
+}
+
+.form-control:focus
+{
+    outline: none !important;
+    border-color: #828282 !important;
+    box-shadow: none !important;
 }
 
 /* Custom page header */
@@ -37,7 +92,6 @@ label {
 
 /* Custom page footer */
 .footer {
-  padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
@@ -98,8 +152,6 @@ a:focus {
   margin: 30px 0;
 }
 
-
-/* Main marketing message and sign up button */
 .welcome {
   text-align: center;
   margin-bottom: 100px;
@@ -109,7 +161,6 @@ a:focus {
   font-size: 21px;
 }
 
-/* Main marketing message and sign up button */
 .jumbotron {
   text-align: left;
   border-bottom: 1px solid #e5e5e5;

@@ -51,31 +51,14 @@ return array(
                 ]
             ],
         ],
-        /**
-         * Security
-         *
-         * PasswordNeedsRehash :
-         *     cost : It depends of your server http://php.net/manual/en/function.password-hash.php 
-         *            Set 6 for best performance but less security, if your "hardware" strong set between 8 - 12 for strong security.
-         */
         'security' => [
             'passwordNeedsRehash' => [
                 'cost' => 6
             ],
         ],
-        /**
-         * Session
-         *
-         * RegenerateId : Whether to regenerate session id upon new logins.
-         */
         'session' => [
             'regenerateSessionId' => true,
         ],
-        /**
-         * Middlewares
-         *
-         * Unique.session : If it is true all other opened session in other devices will be logged out except the current session.
-         */
         'middleware' => [
             'unique.session' => false
         ]

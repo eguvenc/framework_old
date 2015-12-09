@@ -34,10 +34,12 @@ class Login extends Controller
 
                 if ($authResult->isValid()) {
 
-                    $this->flash->success('You have authenticated successfully.')
-                        ->response->redirect('/examples/membership/restricted');
+                    $this->flash->success('You have authenticated successfully.');
+                    
+                    return $this->response->redirect('/examples/membership/restricted');
 
                 } else {
+
                     $this->form->setResults($authResult->getArray());
                 }
             }

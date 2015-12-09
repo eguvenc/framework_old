@@ -11,11 +11,6 @@ class Welcome extends Controller
      */
     public function index()
     {
-        $this->view->load(
-            'welcome',
-            [
-                'title' => 'Welcome to Obullo !',
-            ]
-        );
+        $this->view->load('welcome');
     }
 }

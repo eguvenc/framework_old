@@ -59,7 +59,7 @@ class Zend
      */
     public function __construct(array $options, Response $response = null)
     {
-        $this->options = $options;
+        $this->options  = $options;
         $this->response = $response;
         
         if ($response) {
@@ -93,6 +93,8 @@ class Zend
     {   
         $this->request = $request;
 
+        $response = $this->setCookies($response);
+
         if ($err) {
             return $this->handleError($err, $response);
         }
@@ -111,7 +113,7 @@ class Zend
             && $this->response === $response
             && $this->bodySize !== $response->getBody()->getSize()
         ) {
-            return $this->setCookieHeaders($response);
+            return $response;
         }
 
         $body = $this->c['template']->make('404');
@@ -124,20 +126,17 @@ class Zend
     /**
      * Set cookie headers
      * 
-     * @param Response $response Response
-     * 
-     * @return object ResponseInterface
+     * @param Response $response http ressponse
+     *
+     * @return object response
      */
-    protected function setCookieHeaders(Response $response)
+    protected function setCookies(Response $response)
     {
-        if ($this->c->active('cookie')) {  // If cookie object is available
-
+        if ($this->c->active('cookie')) {
             $headers = $this->c['cookie']->getHeaders();
-
             if (! empty($headers)) {
-                foreach ($headers as $value) {
-                    $response = $response->withAddedHeader('Set-Cookie', $value);  // Send cookie headers
-                }
+                $response->setCookies($headers);
+                return $response;
             }
         }
         return $response;
@@ -164,7 +163,6 @@ class Zend
 
             $message = $this->createDevelopmentErrorMessage($error);
         }
-
         $body = $this->c['template']->body($message);
 
         $response = $response->withStatus(500)

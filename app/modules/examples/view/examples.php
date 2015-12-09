@@ -67,7 +67,7 @@
 
         <div class = "panel panel-default">
            <div class = "panel-body">
-            <h4><a href="">Üyelik</a></h4>
+            <h4><a href="/examples/membership/login">Üyelik</a></h4>
             <p>Kullanıcı kimliklerini saklayabilen yetkilendirme servisi ile bir üyelik modülünün nasıl işlediğini test edin.</p>
            </div>
         </div>
@@ -76,22 +76,7 @@
         <div class = "panel panel-default">
            <div class = "panel-body">
             <h4><a href="">Loglama</a></h4>
-            <p>Loglarınızı dosyaya yazın ve konsoldan takip edin yada daha büyük uygulamalar için loglarınızı kuyruğa gönderin.</p>
-           </div>
-        </div>
-
-
-        <div class = "panel panel-default">
-           <div class = "panel-body">
-            <h4><a href="">Çoklu Diller</a></h4>
-            <p>Translation paketi ile uygulamanızı farklı dillerde yayınlayın.</p>
-           </div>
-        </div>
-
-        <div class = "panel panel-default">
-           <div class = "panel-body">
-            <h4><a href="">Kuyruklama</a></h4>
-            <p>Yoğun işlemleri kuyruğa gönderin, çok çekirdekli sunucularda çoklu işçiler yardımıyla kuyruğu tüketin.</p>
+            <p>Loglarınızı dosyaya yazın ve konsoldan takip edin.</p>
            </div>
         </div>
 
@@ -101,8 +86,8 @@
 
           <div class = "panel panel-default">
              <div class = "panel-body">
-              <h4><a href="">Arayüz Katmanı</a></h4>
-              <p>Layer paketi ile arayüz katmanları oluşturarak bir sayfayı; gezinti çubuğu, alt sayfa, yan sayfa gibi bölümlere ayırıp kullanıcı arayüzünü ( GUI ) kolayca oluşturun.</p>
+              <h4><a href="/examples/layers">Arayüz Katmanları</a></h4>
+              <p>Katmanlar oluşturarak bir sayfayı; gezinti çubuğu, alt sayfa, yan sayfa gibi bölümlere ayırıp kullanıcı arayüzünü ( GUI ) kolayca oluşturun.</p>
              </div>
           </div>
 
@@ -110,13 +95,6 @@
              <div class = "panel-body">
               <h4><a href="/examples/forms">Formlar</a></h4>
               <p>Form, form element ve form doğrulayıcı nesneleri ile http, ajax türünde formlar oluşturun. Csrf ve Captcha servisleri ile uygulamanızın girdi güvenliğini yükseltin.</p>
-             </div>
-          </div>
-
-          <div class = "panel panel-default">
-             <div class = "panel-body">
-              <h4><a href="">Hata Katmanı</a></h4>
-              <p>Zend middleware eklentisi ile uygulama içerisinde oluşan istisnai hataları tek bir katman ile kontrol edin.</p>
              </div>
           </div>
 

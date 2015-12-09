@@ -29,8 +29,14 @@ font-weight:        normal;
 </head>
 <body>
 <div id="content">
-    <h1>Error</h1>
-    <p><?php echo $error ?></p>
+<?php
+if(isset($header)) {
+	echo '<h1>'.$header.'</h1>';
+} else {
+	echo '<h1>Error</h1>';
+}
+?>
+<p><?php echo $error ?></p>
 </div>
 </body>
 </html>

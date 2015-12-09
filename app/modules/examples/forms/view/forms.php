@@ -47,7 +47,10 @@
           <li><a href="/examples/forms/ajax">Ajax Form</a></li>
           <li><a href="/examples/forms/element">Form Element</a></li>
           <li><a href="/examples/forms/csrf">Csrf Form</a></li>
-          <li><a href="/examples/forms/captcha">Captcha Form</a></li>
+          <li><a href="/examples/captcha">Captcha Form</a></li>
+          <li><a href="/examples/captcha/ajax">Captcha Ajax Form</a></li>
+          <li><a href="/examples/recaptcha">ReCaptcha Form</a></li>
+          <li><a href="/examples/recaptcha/ajax">ReCaptcha Ajax Form</a></li>
         </ul>
       </div>
 
@@ -58,7 +61,6 @@
       -->
 
     </div> <!-- /container -->
-
 
   </body>
 </html>

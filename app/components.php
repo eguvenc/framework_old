@@ -32,13 +32,14 @@ $c['app']->service(
         // 'queue' => 'Obullo\Queue\QueueManagerAmqpLib',
         'session' => 'Obullo\Session\SessionManager',
         'captcha' => 'Obullo\Captcha\CaptchaManager',
+        'recaptcha' => 'Obullo\Captcha\ReCaptchaManager',
     ]
 );
 
 $c['app']->component(
     [
-        'view' => 'Obullo\View\View',
         'is' => 'Obullo\Filters\Is',
+        'view' => 'Obullo\View\View',
         'task' => 'Obullo\Cli\Task\Task',
         'form' => 'Obullo\Form\Form',
         'clean' => 'Obullo\Filters\Clean',

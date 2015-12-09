@@ -4,9 +4,6 @@ namespace Views;
 
 use Obullo\Http\Controller;
 
-/**
- * View controller
- */
 class Footer extends Controller
 {
     /**
@@ -19,7 +16,7 @@ class Footer extends Controller
         echo $this->view->get(
             'footer',
             [
-                'footer' => '<pre>--------------- EXAMPLE FOOTER LAYER ---------------</pre>'
+                'footer' => '<div class="layer example-gray">Footer Controller <div class="layer example-white">$this->layer->get("views/footer")</div></div>'
             ]
         );
     }
