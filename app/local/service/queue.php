@@ -4,18 +4,11 @@ return array(
     
     'params' => [
     
-        /**
-         * AMQP Settings
-         * 
-         * Exchange
-         *     type : Exchange types : AMQP_EX_TYPE_DIRECT (direct) / AMQP_EX_TYPE_FANOUT (fanout) / AMQP_EX_TYPE_HEADER (header) / AMQP_EX_TYPE_TOPIC (topic),
-         *     flag : Exchange flags : AMQP_DURABLE (durable), AMQP_PASSIVE (passive)
-         */
         'amqp' => [
 
             'exchange' => [
-                'type' => 'direct',
-                'flag' => 'durable',
+                'type' => 'direct',  // fanout / header / topic
+                'flag' => 'durable', // passive
             ],
             'connections' => 
             [

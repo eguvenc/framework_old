@@ -45,9 +45,9 @@ $c['middleware']->add(
         // 'TrustedIp',
         // 'ParsedBody',
     
+        'View',
         'Router',
         // 'Csrf',
-        'View',
         'App',
     ]
 );

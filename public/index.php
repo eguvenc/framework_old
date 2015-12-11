@@ -53,10 +53,9 @@ date_default_timezone_set('Europe/London');
 require OBULLO .'Application/Http/Bootstrap.php';
 /*
 |--------------------------------------------------------------------------
-| Choose your middleware app
+| Middleware pipe
 |--------------------------------------------------------------------------
 */
-// $app = new Obullo\Http\Relay\MiddlewarePipe($c);
 $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
 /*
 |--------------------------------------------------------------------------

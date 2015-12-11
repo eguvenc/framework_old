@@ -96,23 +96,6 @@ $server->listen();
 Learn more details about <a href="https://github.com/zendframework/zend-stratigility" target="_blank">zend middleware</a>.
 
 
-#### Setup with Relay 
+#### Setup with Relay
 
-It's a simple middleware solution.
-
-```php
-composer require relay/relay
-```
-
-Open your index.php and update <kbd>$app</kbd> variable to Http\Relay;
-
-```php
-/*
-|--------------------------------------------------------------------------
-| Choose your middleware app
-|--------------------------------------------------------------------------
-*/
-$app = new Obullo\Http\Relay\MiddlewarePipe($c);
-```
-
-Learn more details about <a href="http://relayphp.com/" target="_blank">relay middleware</a>.
+Look at <a href="https://github.com/obullo/relay.middleware" target="_blank">https://github.com/obullo/relay.middleware</a>

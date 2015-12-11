@@ -41,11 +41,12 @@
       </div>
 
       <div class="content description">
-
+      
         <section>
           <?php echo $this->flash->output() ?>
           <a href="/examples/membership/logout" class="btn btn-default">Logout</a>
-
+          <a href="/examples/membership/logout?action=forgetMe" class="btn btn-default">Forget Me</a>
+          <a href="/examples/membership/logout?action=destroyMe" class="btn btn-default">Destroy Me</a>
           <h3>Kimlik Çıktısı</h3>
           <pre><?php echo print_r($this->user->identity->getArray(), true); ?></pre>
         </section>

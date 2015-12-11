@@ -26,7 +26,7 @@ return array(
         'domain' => '',
         'path'   => '/',
         'secure' => false,
-        'httpOnly' => false,
+        'httpOnly' => true,
         'expire' => 604800,
         'prefix' => '',
     ],

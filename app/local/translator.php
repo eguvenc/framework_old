@@ -6,15 +6,18 @@ return array(
     | -------------------------------------------------------------------
     | Translator
     | -------------------------------------------------------------------
-    | Locale settings
-    | 
     | Debug : Puts "translate:" texts everywhere. it is help to you for multilingual development.
     | Locale : This determines which set of language files should be used by default.
+    | Set :   Write default language to cookie.
     |
     */
+    'debug' => false,
+
     'default' => [
-        'debug' => false,
-        'locale'  => 'en'
+        'locale'  => 'en',
+        'set' => [
+            'enabled' => true,
+        ],
     ],
     'fallback' => [
         'enabled' => false,

@@ -13,12 +13,27 @@ class Logout extends Controller
      */
     public function index()
     {
-        $this->user->identity->logout();      // Don't remove the user identity from cache just logout user. ( We use cached identity if user come back )
+        $action = ($this->request->get('action')) ? $this->request->get('action') : 'logout';
 
-        // $this->user->identity->destroy();  // Remove the identity from cache and logout. ( So application needs to do sql query )
-        // $this->user->identity->forgetMe(); // Remove rember me cookie from cookie.
-        
-        $this->flash->info('You succesfully logged out');
+        switch ($action) {            
+
+        case 'destroyMe':
+            $this->user->identity->destroy();  // Destroy all the identity cache and logout.
+            $this->flash->info('Identity cache destroyed and you have succesfully logged out');
+            break;
+
+        case 'forgetMe':
+            $this->user->identity->logout();   // Mark user as logged out but identity cache still in memory.
+            $this->user->identity->forgetMe(); // Remove rember me cookie.
+            $this->flash->info('Remember me cookie removed and you have succesfully logged out');
+            break;
+
+        case 'logout':
+            $this->user->identity->logout();  // Mark user as logged out but identity cache still in memory.
+                                              // Next login will perform without no database query.
+            $this->flash->info('You have succesfully logged out');
+            break;
+        }
         
         return $this->response->redirect('/examples/membership/login/index');
     }
