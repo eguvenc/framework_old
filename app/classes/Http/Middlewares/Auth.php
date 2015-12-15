@@ -54,8 +54,6 @@ class Auth implements MiddlewareInterface, ContainerAwareInterface
         if ($this->user->identity->check()) {
     
             $this->killSessions();  // Terminate multiple logins
-            
-            // $this->user->activity->set('last', time());
 
         }
         $err = null;

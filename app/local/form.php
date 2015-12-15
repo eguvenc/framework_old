@@ -35,7 +35,6 @@ return array(
     ],
 
     'error' => [
-
         'class' => 'has-error has-feedback',
         'label' => '<label class="control-label" for="%s">%s</label>
         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>'

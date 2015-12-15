@@ -1,18 +1,18 @@
 <?php
 
-namespace Examples\Layers;
+namespace Examples\Console;
 
 use Obullo\Http\Controller;
 
-class Layers extends Controller
+class Console extends Controller
 {
     /**
      * Index
      * 
      * @return void
-     */      
+     */
     public function index()
     {
-        $this->view->load('layers');
+        $this->view->load('console');
     }
 }

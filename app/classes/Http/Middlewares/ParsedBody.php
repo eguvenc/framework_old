@@ -36,7 +36,6 @@ class ParsedBody implements MiddlewareInterface
                 $parsedBody = simplexml_load_string($body);
                 break;
             }
-
             $request = $request->withParsedBody($parsedBody);
         }
         $err = null;

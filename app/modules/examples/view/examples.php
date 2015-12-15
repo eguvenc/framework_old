@@ -53,8 +53,8 @@
 
         <div class = "panel panel-default">
            <div class = "panel-body">
-                  <h4><a href="/examples/helloWorld">Merhaba Dünya</a></h4>
-                  <p>Http paketi ile bir kontrolör içerisinden response nesnesini kullanarak ilk çıktınızı üretin.</p>
+              <h4><a href="/examples/helloWorld">Merhaba Dünya</a></h4>
+              <p>Http paketi ile bir kontrolör içerisinden response nesnesini kullanarak ilk çıktınızı üretin.</p>
            </div>
         </div>
 
@@ -72,10 +72,9 @@
            </div>
         </div>
 
-
         <div class = "panel panel-default">
            <div class = "panel-body">
-            <h4><a href="">Loglama</a></h4>
+            <h4><a href="/examples/logger">Loglama</a></h4>
             <p>Loglarınızı dosyaya yazın ve konsoldan takip edin.</p>
            </div>
         </div>
@@ -100,19 +99,20 @@
 
           <div class = "panel panel-default">
              <div class = "panel-body">
-              <h4><a href="">Konsol Görevleri</a></h4>
+              <h4><a href="/examples/console">Konsol Görevleri</a></h4>
               <p>Konsoldan çalıştırılabilen php dosyaları oluşturun.</p>
              </div>
           </div>
 
           <div class = "panel panel-default">
              <div class = "panel-body">
-              <h4><a href="">Hata Görüntüleme</a></h4>
+              <h4><a href="/examples/debugger">Çıktı Görüntüleme</a></h4>
               <p>Debugger eklentisini etkinleştirerek logları, istekleri, girdileri ve çevre bileşenlerini denetleyin.</p>
              </div>
           </div>
 
-<!--           <div class = "panel panel-default">
+          <!--      
+          <div class = "panel panel-default">
              <div class = "panel-body">
               <h4><a href="">Çerezler</a></h4>
               <p>Çerez nesnesi ile çerezleri kolayca yönetin.</p>             
@@ -124,7 +124,8 @@
               <h4><a href="">Oturumlar</a></h4>
               <p>Kullanıcı oturumları açın ve oturum verilerini yönetin.</p>             
              </div>
-          </div> -->
+          </div>
+          -->
 
         </div>
       </div>

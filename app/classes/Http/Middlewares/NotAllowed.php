@@ -5,19 +5,28 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+use Obullo\Container\ContainerInterface as Container;
+use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Http\Middleware\ParamsAwareInterface;
 
-class NotAllowed implements MiddlewareInterface, ParamsAwareInterface
+class NotAllowed implements MiddlewareInterface, ParamsAwareInterface, ContainerAwareInterface
 {
-    protected $allowedMethods = array();
+    protected $c;
+    protected $params;
+    protected $maintenance;
+    protected $allowedMethods = array('GET', 'POST', 'PUT', 'DELETE');
 
     /**
-     * Constructor
+     * Sets the Container.
+     *
+     * @param ContainerInterface|null $container object or null
+     *
+     * @return void
      */
-    public function __construct()
+    public function setContainer(Container $container = null)
     {
-        $this->allowedMethods = ['GET', 'POST', 'PUT', 'DELETE'];
+        $this->c = $container;
     }
 
     /**

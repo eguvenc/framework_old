@@ -20,7 +20,6 @@
 $c['middleware']->register(
     [
         'Error' => 'Http\Middlewares\Error',
-        'App' => 'Http\Middlewares\App',
         'TrustedIp' => 'Http\Middlewares\TrustedIp',
         'Csrf' => 'Http\Middlewares\Csrf',
         'ParsedBody' => 'Http\Middlewares\ParsedBody',
@@ -29,6 +28,7 @@ $c['middleware']->register(
         'Maintenance' => 'Http\Middlewares\Maintenance',
         'NotAllowed' => 'Http\Middlewares\NotAllowed',
         'Auth' => 'Http\Middlewares\Auth',
+        'Https' => 'Http\Middlewares\Https',
         'Guest' => 'Http\Middlewares\Guest',
         'View' => 'Http\Middlewares\View',
     ]
@@ -44,10 +44,8 @@ $c['middleware']->add(
         // 'Maintenance',
         // 'TrustedIp',
         // 'ParsedBody',
-    
         'View',
         'Router',
-        // 'Csrf',
-        'App',
+        // 'Csrf'
     ]
 );

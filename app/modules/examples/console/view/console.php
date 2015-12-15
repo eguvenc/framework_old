@@ -11,7 +11,7 @@
     
     <!-- <link rel="icon" href="favicon.ico"> -->
 
-    <title>Gezinti Çubuğu</title>
+    <title>Konsol Görevleri</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
@@ -37,22 +37,38 @@
             <li role="presentation"><a href="#">Dökümentasyon</a></li>
           </ul>
         </nav>
-        <h2 class="text-muted"><a href="/examples/layers/">Gezinti Çubuğu</a></h2>
+        <h2 class="text-muted"><a href="/examples/">Konsol Görevleri</a></h2>
       </div>
 
-      <header>
-        <?php echo $header ?>
-      </header>
+      <div class="content description">
 
-      <div class="content">
-        <pre>Content</pre>
+          <p>Konsoldan çalıştırma</p>
+
+          <div class="layer example-gray">php task welcome</div>
+
+          <p>Uygulama içerisinden</p>
+
+          <div class="layer example-gray">$this->task->run('welcome/index')</div>
+
+        <p>Çıktı</p>
+
+        <pre>
+          <?php
+            echo $this->task->run('welcome/index', $output = true);
+          ?>
+        </pre>
+
       </div>
 
-      <footer class="footer" style="padding-top:0;border:none;">
-        <?php echo $footer ?>
+      <!--
+      <footer class="footer">
+
       </footer>
+      -->
 
     </div> <!-- /container -->
 
   </body>
 </html>
+
+

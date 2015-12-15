@@ -11,7 +11,7 @@
     
     <!-- <link rel="icon" href="favicon.ico"> -->
 
-    <title>Gezinti Çubuğu</title>
+    <title>Loglama</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
@@ -37,22 +37,41 @@
             <li role="presentation"><a href="#">Dökümentasyon</a></li>
           </ul>
         </nav>
-        <h2 class="text-muted"><a href="/examples/layers/">Gezinti Çubuğu</a></h2>
+        <h2 class="text-muted"><a href="/examples/">Loglama</a></h2>
       </div>
 
-      <header>
-        <?php echo $header ?>
-      </header>
+      <div class="content description">
 
-      <div class="content">
-        <pre>Content</pre>
+          <p>Bir log oluşturmak</p>
+
+          <div class="layer example-gray">$this->logger->debug('Message', array('variables'), $priority = 10);</div>
+
+        <p>File sürücüsü için oluşturduğunuz logu konsoldan görüntüleyebilirsiniz.</p>
+
+        <pre>php task log</pre>
+
+        <p>Log Seviyeleri</p>
+
+        <pre>
+$this->logger->debug();
+$this->logger->error();
+$this->logger->alert();
+$this->logger->warning();
+$this->logger->info();
+$this->logger->emergency();
+$this->logger->critical();
+$this->logger->notice();</pre>
+
       </div>
 
-      <footer class="footer" style="padding-top:0;border:none;">
-        <?php echo $footer ?>
+      <!--
+      <footer class="footer">
+
       </footer>
+      -->
 
     </div> <!-- /container -->
+
 
   </body>
 </html>
