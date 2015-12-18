@@ -28,12 +28,12 @@ class Navbar extends Controller
             }
             $li.= "<li $class>".$this->url->anchor('examples/layers/navbar?link='.$key, $value)."</li>";
         }
+        
         echo $this->view->get(
             'navbar',
             [
                 'li' => $li
             ]
         );
-
     }
 }

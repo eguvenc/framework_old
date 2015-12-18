@@ -15,7 +15,7 @@ class Form extends Controller
     {
         if ($this->request->isPost()) {
 
-            $this->validator->setRules('email', 'Email', 'callback_test(7)|required|email|');
+            $this->validator->setRules('email', 'Email', 'callback_test(7)|required|test');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
             $this->validator->setRules('agreement', 'User Agreement', 'required');

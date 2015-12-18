@@ -37,12 +37,14 @@
             <li role="presentation"><a href="#">Dökümentasyon</a></li>
           </ul>
         </nav>
-        <h2 class="text-muted"><a href="/examples/layers/">Gezinti Çubuğu</a></h2>
+        <h2 class="text-muted"><a href="/examples/">Gezinti Çubuğu</a></h2>
       </div>
 
       <header>
         <?php echo $header ?>
       </header>
+<!-- 
+      <iframe src="http://framework/views/navbar"></iframe> -->
 
       <div class="content">
         <pre>Content</pre>

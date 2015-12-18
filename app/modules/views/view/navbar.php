@@ -35,6 +35,8 @@
 		  </div><!-- /.container-fluid -->
 		</nav>
 		</header>
+
+
 	</div>
 	<div class="layer example-white">$this->layer->get("views/navbar")</div>
 

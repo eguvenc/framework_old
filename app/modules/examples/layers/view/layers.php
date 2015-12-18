@@ -38,7 +38,7 @@
           </ul>
         </nav>
         
-        <h2 class="text-muted"><a href="/examples/layers/">Arayüz Katmanları</a></h2>
+        <h2 class="text-muted"><a href="/examples/">Arayüz Katmanları</a></h2>
       </div>
 
       <div class="content">

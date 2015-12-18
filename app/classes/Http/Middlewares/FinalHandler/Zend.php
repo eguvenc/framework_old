@@ -98,29 +98,8 @@ class Zend
         if ($err) {
             return $this->handleError($err, $response);
         }
+        return $response;
 
-        // Return provided response if it does not match the one provided at
-        // instantiation; this is an indication of calling `$next` in the final
-        // registered middleware and providing a new response instance.
-        if ($this->response && $this->response !== $response) {
-            return $response;
-        }
-        
-        // If the response passed is the same as the one at instantiation,
-        // check to see if the body size has changed; if it has, return
-        // the response, as the message body has been written to.
-        if ($this->response
-            && $this->response === $response
-            && $this->bodySize !== $response->getBody()->getSize()
-        ) {
-            return $response;
-        }
-
-        $body = $this->c['template']->make('404');
-
-        return $response->withStatus(404)
-            ->withHeader('Content-Type', 'text/html')
-            ->withBody($body);
     }
 
     /**

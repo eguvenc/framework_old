@@ -37,7 +37,7 @@
             <li role="presentation"><a href="#">Dökümentasyon</a></li>
           </ul>
         </nav>
-        <h2 class="text-muted"><a href="/examples/layers/">Şema Kullanımı</a></h2>
+        <h2 class="text-muted"><a href="/examples/">Şema Kullanımı</a></h2>
       </div>
 
       <header>

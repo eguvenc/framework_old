@@ -65,7 +65,7 @@ class Debugger implements MiddlewareInterface, ContainerAwareInterface, Terminab
         if ($this->c['app']->request->getUri()->segment(0) != 'debugger') {
 
             $body = $this->c['app']->response->getBody();
-
+            
             $this->websocket->emit(
                 (string)$body,
                 $this->c['logger']->getPayload()
