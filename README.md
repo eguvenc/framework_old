@@ -98,4 +98,4 @@ Learn more details about <a href="https://github.com/zendframework/zend-stratigi
 
 #### Setup with Relay
 
-Look at <a href="https://github.com/obullo/relay.middleware" target="_blank">https://github.com/obullo/relay.middleware</a>
+Look at <a href="https://github.com/obullo/relay-middleware" target="_blank">https://github.com/obullo/relay-middleware</a>
