@@ -68,5 +68,6 @@ $c['app']->dependency(
         'session',
         'queue',
         'user',
+        'csrf'
     ]
 );
