@@ -1,7 +1,6 @@
 {
     "autoload": {
         "psr-4": {
-            "Obullo\\": "o2/",
             "": "app/classes"
         }
     },
