@@ -44,15 +44,17 @@
 
       <div class="content">
 
-        <?php echo $this->form->getMessage() ?>
+        <?php echo $this->form->getMessages() ?>
 
          <form style="width: 300px;" role="form" action="/examples/forms/csrf" method="POST">
           
+          <!--
           <input type="hidden" name="<?php echo $this->csrf->getTokenName() ?>" value="<?php echo $this->csrf->getToken(); ?>" />
+          -->
 
           <div class="form-group <?php echo $this->form->getErrorClass('email') ?>">
             <?php echo $this->form->getErrorLabel('email') ?>
-            <input type="email" name="email" value="<?php echo $this->form->getValue('email') ?>" class="form-control" id="email" placeholder="Email">
+            <input type="text" name="email" value="<?php echo $this->form->getValue('email') ?>" class="form-control" id="email" placeholder="Email">
           </div>
 
           <div class="form-group <?php echo $this->form->getErrorClass('password') ?>">
@@ -81,9 +83,6 @@
 
             <h4>$this->form->getError('email')</h4>
             <pre><?php echo $this->form->getError('email') ?></pre>
-
-            <h4>$this->form->getValidationErrors()</h4>
-            <pre><?php echo $this->form->getValidationErrors() ?></pre>
         </section> 
 
       </div>

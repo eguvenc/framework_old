@@ -19,8 +19,8 @@ class Recaptcha extends Controller
         }
         if ($this->request->isPost()) {
 
-            $this->validator->bind($this->recaptcha);
             $this->validator->setRules('email', 'Email', 'required|trim|email|max(100)');
+            $this->validator->setRules('recaptcha', 'Captcha', 'reCaptcha');
 
             if ($this->validator->isValid()) {
                 $this->form->success('Form Validation Success.');

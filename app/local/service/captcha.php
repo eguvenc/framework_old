@@ -61,9 +61,6 @@ return array(
                   Refresh
                 </button>',
             ],
-            'validation' => [
-                'callback' => true,
-            ]
         ],
         'text' => [
             'colors' =>  [

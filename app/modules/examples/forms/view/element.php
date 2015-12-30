@@ -44,7 +44,7 @@
 
       <div class="content">
 
-        <?php echo $this->form->getMessage() ?>
+        <?php echo $this->form->getMessages() ?>
 
           <?php echo $this->element->form('/examples/forms/element', ' method="POST" style="width: 300px;" role="form" ') ?>
 

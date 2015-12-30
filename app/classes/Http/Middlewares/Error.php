@@ -53,13 +53,13 @@ class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
                 $exception = new \Obullo\Error\Exception;
                 echo $exception->make($error);
 
-                $this->c['app']->logException($error);  // Log exceptions using app/errors.php
+                $this->c['app']->exceptionError($error);  // Log exceptions using app/errors.php
 
             } else {
             
                 echo $error->getMessage();
 
-                $this->c['app']->logException($error);  // Log exceptions using app/errors.php
+                $this->c['app']->exceptionError($error);  // Log exceptions using app/errors.php
             }
         }
 

@@ -19,8 +19,8 @@ class Captcha extends Controller
         }
         if ($this->request->isPost()) {
 
-            $this->validator->bind($this->captcha);
             $this->validator->setRules('email', 'Email', 'required|trim|email|max(100)');
+            $this->validator->setRules('captcha_answer', 'Captcha', 'required|captcha');
 
             if ($this->validator->isValid()) {
                 $this->form->success('Form Validation Success.');

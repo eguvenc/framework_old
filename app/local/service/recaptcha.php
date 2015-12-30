@@ -25,9 +25,6 @@ return array(
                     'value' => 1,
                     'style' => 'display:none;',
                 ]
-            ],
-            'validation' => [
-                'callback' => true,
             ]
         ]
     ],

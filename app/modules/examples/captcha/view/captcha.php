@@ -53,7 +53,7 @@
 
       <div class="content">
 
-        <?php echo $this->form->getMessage() ?>
+        <?php echo $this->form->getMessages() ?>
 
          <form style="width: 300px;" role="form" action="/examples/captcha" method="POST">
 
@@ -81,9 +81,6 @@
 
             <h4>$this->form->getValue('captcha_answer')</h4>
             <pre><?php echo $this->form->getValue('captcha_answer') ?></pre>
-
-            <h4>$this->form->getValidationErrors()</h4>
-            <pre><?php echo $this->form->getValidationErrors() ?></pre>
         </section> 
 
       </div>

@@ -46,7 +46,7 @@
 
       <div class="content">
 
-        <?php echo $this->form->getMessage() ?>
+        <?php echo $this->form->getMessages() ?>
 
          <form style="width: 300px;" role="form" action="/examples/recaptcha" method="POST">
 

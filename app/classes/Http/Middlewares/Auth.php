@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Authentication\Middleware\UniqueSessionTrait;
-;
+
 use Obullo\Container\ContainerAwareInterface;
 use Obullo\Container\ContainerInterface as Container;
 use Obullo\Authentication\User\UserInterface as User;

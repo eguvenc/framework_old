@@ -13,14 +13,11 @@ class Navbar extends Controller
      */
     public function index()
     {   
-        $header = $this->layer->get('views/navbar');
-        $footer = $this->layer->get('views/footer');
-
         $this->view->load(
             'navbar',
             [
-                'header' => $header,
-                'footer' => $footer,
+                'header' => $this->layer->get('views/navbar'),
+                'footer' => $this->layer->get('views/footer'),
             ]
         );
     }

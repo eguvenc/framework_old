@@ -125,9 +125,9 @@ function submitAjax(formId){
             
             if(typeof obj['success'] !== 'undefined' && obj['success'] == '1') {  // Success
 
-                if(typeof obj['message'] !== 'undefined'){
+                if(typeof obj['messages'] !== 'undefined'){
 
-                    alert(obj['message']);
+                    alert(obj['messages']);
 
                     return false;
                 }

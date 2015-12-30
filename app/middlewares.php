@@ -21,7 +21,6 @@ $c['middleware']->register(
     [
         'Error' => 'Http\Middlewares\Error',
         'TrustedIp' => 'Http\Middlewares\TrustedIp',
-        'Csrf' => 'Http\Middlewares\Csrf',
         'ParsedBody' => 'Http\Middlewares\ParsedBody',
         'Debugger' => 'Http\Middlewares\Debugger',
         'Router' => 'Http\Middlewares\Router',
