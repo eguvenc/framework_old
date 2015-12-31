@@ -20,7 +20,7 @@ class Csrf extends Controller
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('csrf_token', 'Csrf Token', 'csrf');
 
-            if ($this->validator->isValid()) {          
+            if ($this->validator->isValid()) {
                 $this->form->success('Form validation success.');
             } else {
                 $this->form->error('Form validation failed.');

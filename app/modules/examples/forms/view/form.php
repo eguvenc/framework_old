@@ -50,7 +50,7 @@
           
           <div class="form-group <?php echo $this->form->getErrorClass('email') ?>">
             <?php echo $this->form->getErrorLabel('email') ?>
-            <input type="email" name="email" value="<?php echo $this->form->getValue('email') ?>" class="form-control" id="email" placeholder="Email">
+            <input type="text" name="email" value="<?php echo $this->form->getValue('email') ?>" class="form-control" id="email" placeholder="Email">
           </div>
 
           <div class="form-group <?php echo $this->form->getErrorClass('password') ?>">

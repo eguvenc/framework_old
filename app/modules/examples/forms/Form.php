@@ -15,7 +15,7 @@ class Form extends Controller
     {
         if ($this->request->isPost()) {
 
-            $this->validator->setRules('email', 'Email', 'email|callback_test(7)|required');
+            $this->validator->setRules('email', 'Email', 'required|callback_test(7)|email');
             // $this->validator->setRules('iban', 'Iban', 'required|iban(TR)(false)');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
@@ -23,9 +23,14 @@ class Form extends Controller
 
             $this->validator->func(
                 'callback_test',
-                function ($field, $params) {
-                    $this->setMessage('Example callback error for email field !');
-                    return true;
+                function ($next) {
+
+                    $isValid = true;
+                    if (! $isValid) {
+                        $next->setError('Example callback error for email field !');
+                        return false;
+                    }
+                    return $next();
                 }
             );
             if ($this->validator->isValid()) {          

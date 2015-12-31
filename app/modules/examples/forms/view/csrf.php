@@ -48,9 +48,7 @@
 
          <form style="width: 300px;" role="form" action="/examples/forms/csrf" method="POST">
           
-          <!--
           <input type="hidden" name="<?php echo $this->csrf->getTokenName() ?>" value="<?php echo $this->csrf->getToken(); ?>" />
-          -->
 
           <div class="form-group <?php echo $this->form->getErrorClass('email') ?>">
             <?php echo $this->form->getErrorLabel('email') ?>

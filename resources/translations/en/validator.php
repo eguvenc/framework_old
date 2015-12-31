@@ -16,15 +16,16 @@ return array(
     'OBULLO:VALIDATOR:DATE'            => "The %s field must contain a valid date.",
     'OBULLO:VALIDATOR:ISDECIMAL'       => "The %s field must contain only decimal characters.",
     'OBULLO:VALIDATOR:ISJSON'          => "The %s field must contain a valid json data.",
+    'OBULLO:VALIDATOR:CSRF'            => "Invalid csrf code.",
     'OBULLO:VALIDATOR:CSRF:INVALID'    => "The form submitted did not originate from the expected site.",
-    'OBULLO:VALIDATOR:CSRF:REQUIRED'   => "The csrf security field is required.",
+    'OBULLO:VALIDATOR:CSRF:REQUIRED'   => "The csrf token does not exist in post data.",
 
     'OBULLO:VALIDATOR:CAPTCHA:LABEL' => "Captcha",
     'OBULLO:VALIDATOR:CAPTCHA:NOT_FOUND' => "The captcha failure code not found.",
     'OBULLO:VALIDATOR:CAPTCHA:EXPIRED' => "The captcha code has been expired.",
     'OBULLO:VALIDATOR:CAPTCHA:INVALID' => "Invalid captcha code.",
     'OBULLO:VALIDATOR:CAPTCHA:SUCCESS' => "Captcha code verified.",
-    'OBULLO:VALIDATOR:CAPTCHA:VALIDATION' => "The %s field validation is wrong.",
+    'OBULLO:VALIDATOR:CAPTCHA:VALIDATION' => "The captcha field validation is wrong.",
     'OBULLO:VALIDATOR:CAPTCHA:REFRESH_BUTTON_LABEL' => "Refresh Captcha",
     
     'OBULLO:VALIDATOR:RECAPTCHA:MISSING_INPUT_SECRET' => "The secret parameter is missing.",
