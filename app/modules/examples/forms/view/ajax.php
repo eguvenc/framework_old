@@ -183,7 +183,7 @@ function submitAjax(formId){
       <div class="content">
 
         <div id="formHtml">
-           <form style="width: 300px;" role="form" action="/examples/forms/ajax" method="POST" id="ajaxForm">
+           <form role="form" action="/examples/forms/ajax" method="POST" id="ajaxForm">
           
              <div class="form-group">
                 <input type="email" name="email" value="" class="form-control" id="email" placeholder="Email">

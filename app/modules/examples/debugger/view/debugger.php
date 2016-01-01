@@ -46,16 +46,6 @@
 
           <ul>
             <li>
-                <span class="text-muted">Ana konfigürasyon dosyasından çıktı görüntüleyiciyi aktive edin.</span>
-
-<div class="layer">
-  <pre>'debugger' => [
-    'enabled' => true,
-  ]</pre>
-</div>
-            </li>
-
-            <li>
                 <span class="text-muted">Konsolunuzdan web socket sunucusunu çalıştırın.</span>
                <div class="layer example-gray">php task debugger</div>
             </li>

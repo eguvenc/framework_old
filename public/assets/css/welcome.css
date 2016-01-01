@@ -63,6 +63,9 @@ label {
   margin-bottom:10px;
 }
 
+form {
+  width: 350px;
+}
 .form-control:focus
 {
     outline: none !important;

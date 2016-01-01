@@ -53,14 +53,14 @@
         <p>Log Seviyeleri</p>
 
         <pre>
-$this->logger->debug();
-$this->logger->error();
-$this->logger->alert();
-$this->logger->warning();
-$this->logger->info();
-$this->logger->emergency();
-$this->logger->critical();
-$this->logger->notice();</pre>
+$this->logger->debug('Example debug level log.', array('foo' => 'bar'));
+$this->logger->error('Example error level log.', array('foo' => 'bar'));
+$this->logger->alert('Example alert level log.', array('foo' => 'bar'));
+$this->logger->warning('Example warning level log.', array('foo' => 'bar'));
+$this->logger->info('Example info level log.', array('foo' => 'bar'));
+$this->logger->emergency('Example emergency level log.', array('foo' => 'bar'));
+$this->logger->critical('Example critical level log.', array('foo' => 'bar'));
+$this->logger->notice('Example notice level log.', array('foo' => 'bar'));</pre>
 
       </div>
 

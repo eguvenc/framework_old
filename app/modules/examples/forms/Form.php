@@ -15,22 +15,26 @@ class Form extends Controller
     {
         if ($this->request->isPost()) {
 
-            $this->validator->setRules('email', 'Email', 'required|callback_test(7)|email');
-            // $this->validator->setRules('iban', 'Iban', 'required|iban(TR)(false)');
+            $this->validator->setRules('email', 'Email', 'required|callback_test|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
             $this->validator->setRules('agreement', 'User Agreement', 'required');
-
-            $this->validator->func(
+            $this->validator->callback(
                 'callback_test',
-                function ($next) {
+                function ($field) {
 
-                    $isValid = true;
-                    if (! $isValid) {
-                        $next->setError('Example callback error for email field !');
+                    $value = $field->getValue();
+
+                    // $min = new \Obullo\Validator\Rules\Min;
+                    // $field->setParams(array(3));
+                    // return $min($field);
+
+                    $somethingNotTrue = true;
+                    if (! $somethingNotTrue) {
+                        $field->setError('Example callback error for email field !');
                         return false;
                     }
-                    return $next();
+                    return $field(); // call next
                 }
             );
             if ($this->validator->isValid()) {          

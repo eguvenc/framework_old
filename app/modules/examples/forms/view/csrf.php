@@ -46,7 +46,7 @@
 
         <?php echo $this->form->getMessages() ?>
 
-         <form style="width: 300px;" role="form" action="/examples/forms/csrf" method="POST">
+         <form role="form" action="/examples/forms/csrf" method="POST">
           
           <input type="hidden" name="<?php echo $this->csrf->getTokenName() ?>" value="<?php echo $this->csrf->getToken(); ?>" />
 

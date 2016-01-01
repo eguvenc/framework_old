@@ -6,25 +6,25 @@ return array(
         'enabled' => true,
     ],
     'http' => [
-        'webhost'  => 'framework',
+        'webhost' => 'framework',
         'debugger' => [
             'enabled' => false,
-            'socket' => 'ws://127.0.0.1:9000'
-        ]
+            'socket' => 'ws://127.0.0.1:9000',
+        ],
     ],
     'locale' => [
         'timezone' => 'gmt',
-        'charset'  => 'UTF-8',
+        'charset' => 'UTF-8',
         'date' => [
-            'format' => 'H:i:s d:m:Y'
-        ]
-     ],
+            'format' => 'H:i:s d:m:Y',
+        ],
+    ],
     'extra' => [
         'annotations' => true,
     ],
-    'cookie' => [ 
+    'cookie' => [
         'domain' => '',
-        'path'   => '/',
+        'path' => '/',
         'secure' => false,
         'httpOnly' => true,
         'expire' => 604800,
@@ -33,6 +33,6 @@ return array(
     'security' => [
         'encryption' => [
             'key' => 'write-your-secret-key',
-        ]  
-    ]
+        ],
+    ],
 );

@@ -46,12 +46,12 @@
 
         <?php echo $this->form->getMessages() ?>
 
-          <?php echo $this->element->form('/examples/forms/element', ' method="POST" style="width: 300px;" role="form" ') ?>
+          <?php echo $this->element->form('/examples/forms/element', ' method="POST" role="form" ') ?>
 
           <div class="form-group <?php echo $this->form->getErrorClass('name') ?>">
             <?php
                 echo $this->form->getErrorLabel('name');
-                echo $this->element->password('name', $this->form->getValue('name'), ' class="form-control" id="pwd" placeholder="Name" ');
+                echo $this->element->input('name', $this->form->getValue('name'), ' class="form-control" id="name" placeholder="Name" ');
             ?>
           </div>
 
