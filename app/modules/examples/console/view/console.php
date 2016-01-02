@@ -53,9 +53,7 @@
         <p>Çıktı</p>
 
         <pre>
-          <?php
-            echo $this->task->run('welcome/index', $output = true);
-          ?>
+          <?php echo $this->task->run('welcome/index', $output = true) ?>
         </pre>
 
       </div>

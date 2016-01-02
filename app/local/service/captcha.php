@@ -79,7 +79,6 @@ return array(
             'SurreAlfreak'           => 'SurreAlfreak.ttf',
         ],
     ],
-
     'methods' => [
         'setParameters' => [
             'setMod' => 'secure',

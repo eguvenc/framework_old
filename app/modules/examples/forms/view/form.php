@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -63,11 +62,23 @@
             <input type="password" name="confirm_password" class="form-control" id="pwd" placeholder="Confirm Password">
           </div>
 
+          <label>What do you like to do ?</label>
+
+          <div class="<?php echo $this->form->getErrorClass('hobbies[]') ?>">
+            <div class="checkbox">
+              <label><input type="checkbox" value="1" <?php echo $this->form->setCheckbox('hobbies[]', 1) ?>  name="hobbies[]" />Dancing</label>
+              <label><input type="checkbox" value="2" <?php echo $this->form->setCheckbox('hobbies[]', 2) ?>  name="hobbies[]" />Biking</label>
+              <label><input type="checkbox" value="3" <?php echo $this->form->setCheckbox('hobbies[]', 3) ?>  name="hobbies[]" />Yoga</label>
+              <label><input type="checkbox" value="4" <?php echo $this->form->setCheckbox('hobbies[]', 4) ?> name="hobbies[]" />Fitness</label>
+            </div>
+          </div>
+
           <div class="<?php echo $this->form->getErrorClass('agreement') ?>">
             <div class="checkbox">
                 <label><input type="checkbox" name="agreement" value="1" <?php echo $this->form->setCheckbox('agreement', 1) ?> id="agreement"> I agree terms and conditions</label>
             </div>
           </div>
+
           <button type="submit" class="btn btn-default">Submit</button>
         </form>
 

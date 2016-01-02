@@ -15,12 +15,13 @@ class Form extends Controller
     {
         if ($this->request->isPost()) {
 
-            $this->validator->setRules('email', 'Email', 'required|callback_test|email');
+            $this->validator->setRules('email', 'Email', 'required|email');
             $this->validator->setRules('password', 'Password', 'required|min(6)');
             $this->validator->setRules('confirm_password', 'Confirm Password', 'required|matches(password)');
+            $this->validator->setRules('hobbies[]', 'Hobbies', 'callback_hobbies');
             $this->validator->setRules('agreement', 'User Agreement', 'required');
             $this->validator->callback(
-                'callback_test',
+                'callback_hobbies',
                 function ($field) {
 
                     $value = $field->getValue();
@@ -29,9 +30,9 @@ class Form extends Controller
                     // $field->setParams(array(3));
                     // return $min($field);
 
-                    $somethingNotTrue = true;
-                    if (! $somethingNotTrue) {
-                        $field->setError('Example callback error for email field !');
+                    if (empty($value)) {
+                        $field->setMessage('Please choose a hobby.');
+                        $field->setError('Please choose a hobby.');
                         return false;
                     }
                     return $field(); // call next
