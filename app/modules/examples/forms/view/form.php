@@ -73,6 +73,16 @@
             </div>
           </div>
 
+          <label>What are your favorite colors ?</label>
+
+          <div class="<?php echo $this->form->getErrorClass('options[]') ?>">
+              <div class="checkbox">
+                <label><input type="checkbox" name="options[color][]" value="red" <?php echo $this->form->setCheckbox('options[]', 'red') ?> />Red</label>
+                <label><input type="checkbox" name="options[color][]" value="blue" <?php echo $this->form->setCheckbox('options[]', 'blue') ?> />Blue</label>
+                <label><input type="checkbox" name="options[color][]" value="green" <?php echo $this->form->setCheckbox('options[]', 'green') ?>  />Green</label>
+              </div>
+          </div>
+
           <div class="<?php echo $this->form->getErrorClass('agreement') ?>">
             <div class="checkbox">
                 <label><input type="checkbox" name="agreement" value="1" <?php echo $this->form->setCheckbox('agreement', 1) ?> id="agreement"> I agree terms and conditions</label>

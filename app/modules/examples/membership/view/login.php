@@ -46,7 +46,7 @@
 
         <section>
         <?php
-        if ($results = $this->form->results()) {
+        if ($results = $this->form->getResults()) {
             foreach ($results->messages as $message) {
                 echo $this->form->getMessage($message);
             }
