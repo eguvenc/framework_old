@@ -24,13 +24,19 @@ Create your composer.json file and dependencies
     "autoload": {
         "psr-4": {
             "": "app/classes"
-        }
+        },
+        "files": [
+            "vendor/ircmaxell/password-compat/lib/password.php"
+        ]
     },
     "require": {
-        "obullo/service": "^1.0",
+        "psr/http-message": "^1.0",
         "ircmaxell/password-compat": "^1.0",
+        "obullo/service-providers": "dev-master",
+        "league/event": "^2.1"
     }
 }
+
 ```
 
 Create your obullo version
