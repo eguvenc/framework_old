@@ -26,6 +26,7 @@ $c['middleware']->register(
         'Router' => 'Http\Middlewares\Router',
         'Maintenance' => 'Http\Middlewares\Maintenance',
         'NotAllowed' => 'Http\Middlewares\NotAllowed',
+        'Translation' => 'Http\Middlewares\Translation',
         'Auth' => 'Http\Middlewares\Auth',
         'Https' => 'Http\Middlewares\Https',
         'Guest' => 'Http\Middlewares\Guest',
@@ -43,6 +44,7 @@ $c['middleware']->add(
         // 'Maintenance',
         // 'TrustedIp',
         // 'ParsedBody',
+        // 'Translation',
         'View',
         'Router',
         // 'Csrf'
