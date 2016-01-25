@@ -5,32 +5,27 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-use Obullo\Container\ContainerAwareInterface;
+use League\Container\ContainerAwareTrait;
+use League\Container\ContainerAwareInterface;
+
 use Obullo\Http\Middleware\TerminableInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
 
 use Obullo\Debugger\Websocket;
 use Obullo\Log\LoggerInterface as Logger;
 use Obullo\Config\ConfigInterface as Config;
-use Obullo\Http\ControllerInterface as Controller;
 use Obullo\Container\ContainerInterface as Container;
 
 class Debugger implements MiddlewareInterface, ContainerAwareInterface, TerminableInterface
 {
-    protected $c;
-    protected $websocket;
+    use ContainerAwareTrait;
 
     /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container object or null
-     *
-     * @return void
+     * Websocket
+     * 
+     * @var object
      */
-    public function setContainer(Container $container = null)
-    {
-        $this->c = $container;
-    }
+    protected $websocket;
 
     /**
      * Invoke middleware
@@ -44,9 +39,9 @@ class Debugger implements MiddlewareInterface, ContainerAwareInterface, Terminab
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
         $this->websocket = new Websocket(
-            $this->c['app'],
-            $this->c['config'],
-            $this->c['logger.params']
+            $this->container->get('app'),
+            $this->container->get('config'),
+            $this->container->get('logger.params')
         );
         $this->websocket->connect();
 
@@ -62,13 +57,13 @@ class Debugger implements MiddlewareInterface, ContainerAwareInterface, Terminab
      */
     public function terminate()
     {
-        if ($this->c['app']->request->getUri()->segment(0) != 'debugger') {
+        if ($this->container->get('app')->request->getUri()->segment(0) != 'debugger') {
 
-            $body = $this->c['app']->response->getBody();
+            $body = $this->container->get('app')->response->getBody();
             
             $this->websocket->emit(
                 (string)$body,
-                $this->c['logger']->getPayload()
+                $this->container->get('logger')->getPayload()
             );
         }
     }

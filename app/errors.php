@@ -29,10 +29,10 @@
 | Php Native Errors
 |--------------------------------------------------------------------------
 */
-$c['app']->error(
-    function (ErrorException $e) use ($c) {
+$app->error(
+    function (ErrorException $e) use ($container) {
 
-        $log = new Obullo\Error\Log($c['logger']);
+        $log = new Obullo\Error\Log($container->get('logger'));
         $log->error($e);
 
         return ! $continue = false;   // Whether to continue show native errors
@@ -43,10 +43,10 @@ $c['app']->error(
 | Database and Other Runtime Exceptions
 |--------------------------------------------------------------------------
 */
-$c['app']->error(
-    function (RuntimeException $e) use ($c) {
+$app->error(
+    function (RuntimeException $e) use ($container) {
 
-        $log = new Obullo\Error\Log($c['logger']);
+        $log = new Obullo\Error\Log($container->get('logger'));
         $log->error($e);
     }
 );
@@ -55,10 +55,10 @@ $c['app']->error(
 | Logic Exceptions
 |--------------------------------------------------------------------------
 */
-$c['app']->error(
-    function (LogicException $e) use ($c) {
+$app->error(
+    function (LogicException $e) use ($container) {
 
-        $log = new Obullo\Error\Log($c['logger']);
+        $log = new Obullo\Error\Log($container->get('logger'));
         $log->error($e);
     }
 );
@@ -67,10 +67,10 @@ $c['app']->error(
 | Php Fatal Errors
 |--------------------------------------------------------------------------
 */
-$c['app']->fatal(
-    function (ErrorException $e) use ($c) {
+$app->fatal(
+    function (ErrorException $e) use ($container) {
 
-        $log = new Obullo\Error\Log($c['logger']);
+        $log = new Obullo\Error\Log($container->get('logger'));
         $log->error($e);
     }
 );

@@ -58,4 +58,4 @@ require OBULLO .'Application/Cli/Bootstrap.php';
 | Initialize
 |--------------------------------------------------------------------------
 */
-$c['app']->run();
+$container->get('app')->run();

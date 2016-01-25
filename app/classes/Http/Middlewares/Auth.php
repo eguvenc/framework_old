@@ -8,36 +8,27 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Authentication\Middleware\UniqueSessionTrait;
 
-use Obullo\Container\ContainerAwareInterface;
-use Obullo\Container\ContainerInterface as Container;
+use League\Container\ImmutableContainerAwareTrait;
+use League\Container\ImmutableContainerAwareInterface;
 use Obullo\Authentication\User\UserInterface as User;
 
-class Auth implements MiddlewareInterface, ContainerAwareInterface
+class Auth implements MiddlewareInterface, ImmutableContainerAwareInterface
 {
-    use UniqueSessionTrait;
+    use UniqueSessionTrait, ImmutableContainerAwareTrait;
 
+    /**
+     * Auth user
+     * 
+     * @var obejct
+     */
     protected $user;
 
     /**
      * Constructor
-     * 
-     * @param User $user auth user controller
      */
-    public function __construct(User $user)
+    public function __construct()
     {
-        $this->user = $user;
-    }
-
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container object or null
-     *
-     * @return void
-     */
-    public function setContainer(Container $container = null)
-    {
-        $this->c = $container;
+        $this->user = $this->getContainer()->get('user');
     }
 
     /**

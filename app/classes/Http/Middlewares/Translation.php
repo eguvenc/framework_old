@@ -6,42 +6,20 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Obullo\Config\ConfigInterface as Config;
-use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
-use Obullo\Container\ContainerInterface as Container;
 use Obullo\Translation\TranslatorInterface as Translator;
 
-class Translation implements MiddlewareInterface, ContainerAwareInterface
+use League\Container\ImmutableContainerAwareTrait;
+use League\Container\ImmutableContainerAwareInterface;
+
+class Translation implements MiddlewareInterface, ImmutableContainerAwareInterface
 {
-    protected $c;
+    use ImmutableContainerAwareTrait;
+
     protected $config;
     protected $request;
     protected $translator;
     protected $cookieValue;
-
-    /**
-     * Constructor
-     * 
-     * @param Config     $config     config
-     * @param Translator $translator translator
-     */
-    public function __construct(Config $config, Translator $translator)
-    {
-        $this->config = $config->load('translator');
-        $this->translator = $translator;
-    }
-
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container object or null
-     *
-     * @return void
-     */
-    public function setContainer(Container $container = null)
-    {
-        $this->c = $container;
-    }
 
     /**
      * Invoke middleware
@@ -56,6 +34,8 @@ class Translation implements MiddlewareInterface, ContainerAwareInterface
     {
         $this->request = $request;
         $this->cookieValue = $this->readCookie();
+        $this->config = $this->getContainer()->get('config')->load('translator');
+        $this->translator = $this->getContainer()->get('translator');
         $this->setLocale();
         $this->setFallback();
 

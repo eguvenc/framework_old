@@ -5,42 +5,24 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-use Obullo\Container\ContainerInterface as Container;
-use Obullo\Container\ContainerAwareInterface;
-use Obullo\Http\Middleware\ParamsAwareInterface;
+use Obullo\Container\ParamsAwareTrait;
+use Obullo\Container\ParamsAwareInterface;
+use League\Container\ImmutableContainerAwareTrait;
+use League\Container\ImmutableContainerAwareInterface;
 
 use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Application\Middleware\MaintenanceTrait;
 
-class Maintenance implements MiddlewareInterface, ParamsAwareInterface, ContainerAwareInterface
+class Maintenance implements MiddlewareInterface, ImmutableContainerAwareInterface, ParamsAwareInterface
 {
-    protected $c;
-    protected $params;
-    protected $maintenance;
+    use ImmutableContainerAwareTrait, ParamsAwareTrait;
 
     /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container object or null
-     *
-     * @return void
-     */
-    public function setContainer(Container $container = null)
-    {
-        $this->c = $container;
-    }
-
-    /**
-     * Set allowed methods
+     * Maintenance 
      * 
-     * @param array $params allowed methods
-     *
-     * @return void
+     * @var string
      */
-    public function setParams(array $params)
-    {
-        $this->params = $params;
-    }
+    protected $maintenance;
 
     /**
      * Invoke middleware

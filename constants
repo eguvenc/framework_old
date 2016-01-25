@@ -1,6 +1,12 @@
 <?php
 /*
 |---------------------------------------------------------------
+| Development version
+|---------------------------------------------------------------
+*/
+define('OBULLO_VERSION_ENV', 'dev');
+/*
+|---------------------------------------------------------------
 | ESSENTIAL CONSTANTS
 |---------------------------------------------------------------
 | SELF        - The name of THIS file (typically "index.php")
@@ -9,9 +15,8 @@
 | FPATH       - The full server path without file
 | ROOT        - The root path of your server
 | VENDOR      - The composer vendor folder
-| OBULLO      - The full path of version folder
-| LOADER      - The container service loader class ( php, xml .. )
 | CHOWN       - The php chown() method group name.
+| OBULLO      - The full path of version folder
 */
 define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 define('FCPATH', __FILE__);
@@ -20,14 +25,19 @@ define('FPATH', dirname(__FILE__));
 define('ROOT',  __DIR__ .'/');
 define('VENDOR',__DIR__.'/vendor/');
 define('CHOWN', 'www-data');
-define('LOADER', 'php');
 /*
 |---------------------------------------------------------------
 | DEVELOPMENT VERSION SWITCH
 |---------------------------------------------------------------
 */
-define('OBULLO',__DIR__ .'/obullo/Obullo/');
-// define('OBULLO',__DIR__ .'/vendor/obullo/framework/Obullo/');
+if (OBULLO_VERSION_ENV == 'dev') {
+
+	define('OBULLO',__DIR__ .'/obullo/Obullo/');
+
+} else {
+	
+	define('OBULLO',__DIR__ .'/vendor/obullo/framework/Obullo/');
+}
 /*
 |---------------------------------------------------------------
 | OBULLO CONSTANTS

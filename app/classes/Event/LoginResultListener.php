@@ -2,33 +2,28 @@
 
 namespace Event;
 
-use League\Event\EventInterface as Event;
 use League\Event\AbstractListener;
+use League\Event\EventInterface as Event;
 
 use Obullo\Authentication\AuthResult;
-use Obullo\Container\ContainerInterface as Container;
+use League\Container\ImmutableContainerAwareTrait;
+use League\Container\ImmutableContainerAwareInterface;
 
-class LoginResultListener extends AbstractListener
+class LoginResultListener extends AbstractListener implements ImmutableContainerAwareInterface
 {
-    /**
-     * Container
-     * 
-     * @var object
-     */
-    protected $c;
+    use ImmutableContainerAwareTrait;
 
     /**
      * Listen auth credentials
      * 
-     * @param Event     $event      EventInterface
-     * @param Container $container  ContainerInterfrace
-     * @param object    $authResult AuthResult
+     * @param Event  $event      EventInterface
+     * @param object $authResult AuthResult
      * 
      * @return void
      */
-    public function handle(Event $event, Container $container = null, AuthResult $authResult = null)
+    public function handle(Event $event, AuthResult $authResult = null)
     {
-        $this->c = $container;
+        $container = $this->getContainer();
 
         if ($authResult->isValid()) {
 

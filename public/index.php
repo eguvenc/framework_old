@@ -1,15 +1,19 @@
 <?php
-
-// register_shutdown_function('shutdownFunction');
-
-// function shutDownFunction() { 
-//     $error = error_get_last();
-//     // fatal error, E_ERROR === 1
-//     if (! empty($error)) { 
-// 		var_dump($error);
-//     } 
-// }
-
+/*
+|--------------------------------------------------------------------------
+| Fatal Errors
+|--------------------------------------------------------------------------
+*/
+register_shutdown_function(
+    function () {
+        $last = error_get_last();
+        if (! empty($last)) {
+            $header = 'Fatal Error';
+            $error = 'Message : '.$last['message']. '.<br /> File : '. $last['file']. '<br> Line : '.$last['line'];
+            include TEMPLATES .'error.php';
+        }
+    }
+);
 /*
 |--------------------------------------------------------------------------
 | Disable php.ini errors to use set_error_handler() func
@@ -56,7 +60,7 @@ require OBULLO .'Application/Http/Bootstrap.php';
 | Middleware pipe
 |--------------------------------------------------------------------------
 */
-$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
+$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($container);
 /*
 |--------------------------------------------------------------------------
 | Create your http server

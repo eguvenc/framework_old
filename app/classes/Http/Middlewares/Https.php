@@ -5,25 +5,10 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-use RuntimeException;
-use Obullo\Url\UrlInterface as Url;
-use Obullo\Router\RouterInterface as Router;
 use Obullo\Http\Middleware\MiddlewareInterface;
 
 class Https implements MiddlewareInterface
 {
-    protected $router;
-
-    /**
-     * Construct
-     * 
-     * @param Router $router router
-     */
-    public function __construct(Router $router)
-    {
-        $this->router = $router;
-    }
-
     /**
      * Invoke middleware
      * 
@@ -39,7 +24,10 @@ class Https implements MiddlewareInterface
 
         if ($request->isSecure() == false) {
 
-            return $response->redirect('https://'.$this->router->getDomain()->getName() . $request->getUri()->getPath());
+            $path = $request->getUri()->getPath();
+            $host = $request->getUri()->getHost();
+
+            return $response->redirect('https://'.$host.$path);
         }
         return $next($request, $response, $err);
     }

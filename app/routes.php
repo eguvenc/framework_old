@@ -7,14 +7,14 @@
 | corresponding ( directory / controller / method ).
 |
 */
-$c['router']->configure(
+$router->configure(
     [
         'domain' => 'framework',
         'defaultPage' => 'welcome',
     ]
 );
 
-$c['router']->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
+// $c['router']->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
 
 // $c['router']->get(
 //     '{id}/{name}/{any}', 'welcome/index/$1/$2/$3',
@@ -25,7 +25,7 @@ $c['router']->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
 
 // $c['router']->middleware('Maintenance');
 
-$c['router']->group(
+$router->group(
     [
         'domain' => 'test.*\d.framework',
     ],
@@ -48,14 +48,14 @@ $c['router']->group(
 
 // $c['router']->attach('(.)', array('maintenance'));
 
-$c['router']->group(
+$router->group(
     [
         'name' => 'GenericUsers', 
         // 'match' => '([0-9]+)/([a-z]+).*',   // Match URI
         'domain' => 'framework',
         'middleware' => array('Maintenance')
     ],
-    function ($sub) use ($c) {
+    function ($sub) use ($container) {
 
             // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
 
@@ -76,7 +76,7 @@ $c['router']->group(
     }
 );
 
-$c['router']->group(
+$router->group(
     [
         'name' => 'AuthorizedUsers',
         'middleware' => array('Auth', 'Guest')

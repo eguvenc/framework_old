@@ -3,22 +3,17 @@
 namespace Workers;
 
 use Obullo\Queue\Job;
-use Obullo\Queue\JobInterface;
-use Obullo\Log\Filter\LogFilters;
-use Obullo\Container\ContainerAwareInterface;
-use Obullo\Container\ContainerInterface as Container;
-
+use Obullo\Log\Filter;
 use Obullo\Log\Handler\File;
 use Obullo\Log\Handler\Mongo;
+use Obullo\Queue\JobInterface;
 
-class Logger implements JobInterface, ContainerAwareInterface
+use League\Container\ImmutableContainerAwareTrait;
+use League\Container\ImmutableContainerAwareInterface;
+
+class Logger implements JobInterface, ImmutableContainerAwareInterface
 {
-    /**
-     * Application
-     * 
-     * @var object
-     */
-    protected $c;
+    use ImmutableContainerAwareTrait;
 
     /**
      * Job class for queue operations
@@ -33,18 +28,6 @@ class Logger implements JobInterface, ContainerAwareInterface
      * @var array
      */
     protected $writers;
-
-    /**
-     * Set container
-     * 
-     * @param Container|null $container container
-     *
-     * @return void
-     */
-    public function setContainer(Container $container = null)
-    {
-        $this->c = $container;
-    }
 
     /**
      * Fire the job
@@ -69,12 +52,14 @@ class Logger implements JobInterface, ContainerAwareInterface
      */
     public function process()
     {
+        $request = $this->container->get('request');
+
         foreach ($this->writers as $event) {
 
             switch ($event['handler']) {
             case 'file':
                 $handler = new File(
-                    $this->c['logger.params'],
+                    $this->container->get('logger.params'),
                     [
                         'path' => [
                             'http'  => '/resources/data/logs/http.log',
@@ -85,15 +70,14 @@ class Logger implements JobInterface, ContainerAwareInterface
                 );
                 break;
             case 'mongo':
-
-                $provider = $this->c['mongo']->get(
+                $provider = $this->container->get('mongo')->shared(
                     [
                         'connection' => 'default'
                     ]
                 );
                 $handler = new Mongo(
                     $provider,
-                    $this->c['logger.params'],
+                    $this->container->get('logger.params'),
                     [
                         'database' => 'db',
                         'collection' => 'logs',
@@ -109,10 +93,9 @@ class Logger implements JobInterface, ContainerAwareInterface
                 $handler = null;
                 break;
             }
+            if (is_object($handler) && $handler->isAllowed($event, $request)) { // Check write permissions
 
-            if (is_object($handler) && $handler->isAllowed($event, $this->c['request'])) { // Check write permissions
-
-                $filteredEvent = LogFilters::handle($event, $this->c['logger']);
+                $filteredEvent = Filter::handle($event);
 
                 $handler->write($filteredEvent);  // Do job
                 $handler->close();

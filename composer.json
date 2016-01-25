@@ -10,6 +10,7 @@
     "require": {
         "psr/http-message": "^1.0",
         "ircmaxell/password-compat": "^1.0",
+        "league/container": "^2.0",
         "league/event": "^2.1"
     }
 }

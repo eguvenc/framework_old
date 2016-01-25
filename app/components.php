@@ -1,75 +1,83 @@
 <?php
 /*
 |--------------------------------------------------------------------------
+| Service Providers
+|--------------------------------------------------------------------------
+| Specifies your application components, services and service providers.
+*/
+$container->addServiceProvider('ServiceProvider\Logger');
+$container->addServiceProvider('ServiceProvider\Translator');
+// $container->addServiceProvider('ServiceProvider\Db');
+$container->addServiceProvider('ServiceProvider\View');
+$container->addServiceProvider('ServiceProvider\Cookie');
+// $container->addServiceProvider('ServiceProvider\Csrf');
+// $container->addServiceProvider('ServiceProvider\Captcha');
+// $container->addServiceProvider('ServiceProvider\ReCaptcha');
+// $container->addServiceProvider('ServiceProvider\Session');
+// $container->addServiceProvider('ServiceProvider\Task');
+$container->addServiceProvider('ServiceProvider\Url');
+$container->addServiceProvider('ServiceProvider\Form');
+$container->addServiceProvider('ServiceProvider\Validator');
+// $container->addServiceProvider('ServiceProvider\User');
+$container->addServiceProvider('ServiceProvider\Layer');
+$container->addServiceProvider('ServiceProvider\Template');
+// $container->addServiceProvider('ServiceProvider\QueueAmqp');
+// $container->addServiceProvider('ServiceProvider\QueueAmqpLib');
+// $container->addServiceProvider('ServiceProvider\DoctrineQueryBuilder');
+
+/*
+|--------------------------------------------------------------------------
+| Connectors
+|--------------------------------------------------------------------------
+| Specifies your application service provider connectors.
+*/
+// $container->addServiceProvider('ServiceProvider\Database');
+// // $container->addServiceProvider('ServiceProvider\DoctrineDBAL');
+// $container->addServiceProvider('ServiceProvider\Redis');
+// $container->addServiceProvider('ServiceProvider\Memcached');
+// //  $container->addServiceProvider('ServiceProvider\Memcache');
+// $container->addServiceProvider('ServiceProvider\Cache');
+// $container->addServiceProvider('ServiceProvider\Amqp');
+// // $container->addServiceProvider('ServiceProvider\AmqpLib');
+// $container->addServiceProvider('ServiceProvider\Mongo');
+
+// $container['app']->provider(
+//     [
+//         'database' => 'Obullo\Service\Providers\Database',
+//         // 'database' => 'Obullo\Service\Providers\DoctrineDBAL',
+//         'redis' => 'Obullo\Service\Providers\Redis',
+//         'memcached' => 'Obullo\Service\Providers\Memcached',
+//         // 'memcache' => 'Obullo\Service\Providers\Memcache',
+//         'cache' => 'Obullo\Service\Providers\Cache',
+//         'amqp' => 'Obullo\Service\Providers\Amqp',
+//         // 'amqp' => 'Obullo\Service\Providers\AmqpLib',
+//         'mongo' => 'Obullo\Service\Providers\Mongo'
+//     ]
+// );
+/*
+|--------------------------------------------------------------------------
 | Components
 |--------------------------------------------------------------------------
-| Specifies your application components, services, providers and dependencies.
+| Specifies your application services
 */
-$c['app']->provider(
-    [
-        'database' => 'Obullo\Service\Providers\Database',
-        // 'database' => 'Obullo\Service\Providers\DoctrineDBAL',
-        // 'qb' => 'Obullo\Service\Providers\DoctrineQueryBuilder',
-        'redis' => 'Obullo\Service\Providers\Redis',
-        'memcached' => 'Obullo\Service\Providers\Memcached',
-        // 'memcache' => 'Obullo\Service\Providers\Memcache',
-        'cache' => 'Obullo\Service\Providers\Cache',
-        'amqp' => 'Obullo\Service\Providers\Amqp',
-        // 'amqp' => 'Obullo\Service\Providers\AmqpLib',
-        'mongo' => 'Obullo\Service\Providers\Mongo'
-    ]
-);
+//     
+// $container->share('element', 'Obullo\Form\Element')
+//     ->withArgument($container)
+//     ->withArgument($container->get('request'))
+//     ->withArgument($container->get('config'))
+//     ->withArgument($container->get('logger'));
 
-$c['app']->service(
-    [
-        'logger' => 'Log\LogManager',
-        'db' => 'Obullo\Database\DatabaseManager',
-        'url' => 'Obullo\Url\UrlManager',
-        'csrf' => 'Obullo\Security\CsrfManager',
-        'user' => 'Obullo\Authentication\AuthManager',
-        'layer' => 'Obullo\Layer\LayerManager',
-        'queue' => 'Obullo\Queue\QueueManagerAmqp',
-        // 'queue' => 'Obullo\Queue\QueueManagerAmqpLib',
-        'session' => 'Obullo\Session\SessionManager',
-        'captcha' => 'Obullo\Captcha\CaptchaManager',
-        'recaptcha' => 'Obullo\Captcha\ReCaptchaManager',
-    ]
-);
+// $container->share('template', 'Obullo\View\Template')
+//     ->withArgument($container)
+//     ->withArgument($container->get('view'))
+//     ->withArgument($container->get('logger'));
 
-$c['app']->component(
-    [
-        'is' => 'Obullo\Filters\Is',
-        'view' => 'Obullo\View\View',
-        'task' => 'Obullo\Cli\Task\Task',
-        'form' => 'Obullo\Form\Form',
-        'clean' => 'Obullo\Filters\Clean',
-        'flash' => 'Obullo\Flash\Session',
-        'router' => 'Obullo\Router\Router',
-        'cookie' => 'Obullo\Cookie\Cookie',
-        'element' => 'Obullo\Form\Element',
-        'template' => 'Obullo\View\Template',
-        'response' => 'Obullo\Http\Response',
-        'validator' => 'Obullo\Validator\Validator',
-        'middleware' => 'Obullo\Application\MiddlewareStack',
-        'translator' => 'Obullo\Translation\Translator',
-    ]
-);
+// $container->share('flash', 'Obullo\Flash\Session')
+//     ->withArgument($container->get('request'))
+//     ->withArgument($container->get('config'))
+//     ->withArgument($container->get('logger'))
+//     ->withArgument($container->get('session'));
 
-$c['app']->dependency(
-    [
-        'dependency',
-        'app',
-        'middleware',
-        'config',
-        'layer',
-        'logger',
-        'request',
-        'response',
-        'session',
-        'queue',
-        'user',
-        'csrf',
-        'captcha',
-        'recaptcha',
-    ]
-);
+// $container->share('is', 'Obullo\Filters\Is');
+// $container->share('clean', 'Obullo\Filters\Clean');
+// $container->share('response', 'Obullo\Http\Response');

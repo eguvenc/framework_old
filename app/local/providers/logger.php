@@ -30,19 +30,19 @@ return array(
             ]
         ],
         'queue' => [
-            'enabled' => false,
             'job' => 'logger.1',
             'delay' => 0,
+        ],
+        'push' => [
+            'handler' => '\Workers\Logger'  // \Log\Queue
         ]
     ],
     'methods' => [
-        ['registerFilter' => ['priority', 'Obullo\Log\Filter\PriorityFilter']],
-        ['registerHandler' => [5, 'file']],
-        ['registerHandler' => [4, 'mongo']],
-        ['filter' => ['priority@notIn', array(LOG_DEBUG)]],
-        ['registerHandler' => [3, 'email']],
-        ['filter' => ['priority@notIn', array(LOG_DEBUG)]],
-        ['setWriter' => ['file']],
-        ['filter' => ['priority@notIn', array()]],
+        ['name' => 'registerFilter','argument' => ['priority', 'Obullo\Log\Filters\PriorityFilter']],
+        ['name' => 'registerHandler', 'argument' => [5, 'file']],
+        ['name' => 'registerHandler','argument' => [4, 'mongo']],
+        ['name' => 'filter', 'argument' => ['priority@notIn', array(LOG_DEBUG)]],
+        ['name' => 'setWriter','argument' => ['file']],
+        ['name' => 'filter', 'argument' => ['priority@notIn', array()]],
     ]
 );

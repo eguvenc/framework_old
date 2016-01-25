@@ -8,20 +8,16 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Exception;
 use Obullo\Http\Zend\Stratigility\Utils;
 use Obullo\Http\Middleware\TerminableInterface;
-use Obullo\Container\ContainerInterface as Container;
+use League\Container\ImmutableContainerAwareTrait;
+use League\Container\ImmutableContainerAwareInterface;
 
 /**
  * This middleware called in index.php file 
  * using by middlewarePipe class.
  */
-class Zend
+class Zend implements ImmutableContainerAwareInterface
 {
-    /**
-     * Container
-     * 
-     * @var object
-     */
-    protected $c;
+    use ImmutableContainerAwareTrait;
 
     /**
      * Request
@@ -43,7 +39,7 @@ class Zend
      * @var array
      */
     protected $options;
-
+    
     /**
      * Original response body size.
      *
@@ -69,18 +65,6 @@ class Zend
     }
 
     /**
-     * Set container
-     * 
-     * @param Container|null $container container
-     *
-     * @return void
-     */
-    public function setContainer(Container $container = null)
-    {
-        $this->c = $container;
-    }
-
-    /**
      * Invoke middleware
      * 
      * @param ServerRequestInterface $request  request
@@ -99,7 +83,6 @@ class Zend
             return $this->handleError($err, $response);
         }
         return $response;
-
     }
 
     /**
@@ -111,8 +94,10 @@ class Zend
      */
     protected function setCookies(Response $response)
     {
-        if ($this->c->active('cookie')) {
-            $headers = $this->c['cookie']->getHeaders();
+        if ($this->container->hasShared('cookie')) {
+
+            $headers = $this->container->get('cookie')->getHeaders();
+
             if (! empty($headers)) {
                 $response->setCookies($headers);
                 return $response;
@@ -138,11 +123,11 @@ class Zend
         );
         $message = $response->getReasonPhrase() ?: 'Unknown Error';
 
-        if ($this->c['app']->env() !== 'production') {
+        if ($this->container->get('app')->getEnv() !== 'production') {
 
             $message = $this->createDevelopmentErrorMessage($error);
         }
-        $body = $this->c['template']->body($message);
+        $body = $this->container->get('template')->body($message);
 
         $response = $response->withStatus(500)
             ->withHeader('Content-Type', 'text/html')
@@ -194,13 +179,13 @@ class Zend
      */
     public function shutdown()
     {
-        $this->c['app']->registerFatalError();
+        $this->container->get('app')->registerFatalError();
 
         \Obullo\Log\Benchmark::end($this->request);
 
-        $this->c['logger']->shutdown();
+        $this->container->get('logger')->shutdown();
         
-        foreach ($this->c['middleware']->getQueue() as $object) {  // Run terminable middlewares
+        foreach ($this->container->get('middleware')->getQueue() as $object) {  // Run terminable middlewares
 
             if ($object instanceof TerminableInterface) {
                 $object->terminate();

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return $environments = array(
 
     'local' => [
         'aly',

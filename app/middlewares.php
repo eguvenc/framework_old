@@ -17,7 +17,7 @@
 | Middleware definitions
 |--------------------------------------------------------------------------
 */
-$c['middleware']->register(
+$middleware->register(
     [
         'Error' => 'Http\Middlewares\Error',
         'TrustedIp' => 'Http\Middlewares\TrustedIp',
@@ -39,7 +39,7 @@ $c['middleware']->register(
 |--------------------------------------------------------------------------
 | Define router middleware at the top.
 */
-$c['middleware']->add(
+$middleware->add(
     [
         // 'Maintenance',
         // 'TrustedIp',
@@ -47,6 +47,5 @@ $c['middleware']->add(
         // 'Translation',
         'View',
         'Router',
-        // 'Csrf'
     ]
 );

@@ -2,49 +2,30 @@
 
 namespace Http\Middlewares;
 
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
-use Obullo\Container\ContainerInterface as Container;
-use Obullo\Container\ContainerAwareInterface;
+use Obullo\Container\ParamsAwareTrait;
+use Obullo\Container\ParamsAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
-use Obullo\Http\Middleware\ParamsAwareInterface;
+use League\Container\ImmutableContainerAwareTrait;
+use League\Container\ImmutableContainerAwareInterface;
 
-class NotAllowed implements MiddlewareInterface, ParamsAwareInterface, ContainerAwareInterface
+class NotAllowed implements MiddlewareInterface, ImmutableContainerAwareInterface, ParamsAwareInterface
 {
-    protected $c;
-    protected $params;
-    protected $maintenance;
-    protected $allowedMethods = array('GET', 'POST', 'PUT', 'DELETE');
+    use ImmutableContainerAwareTrait, ParamsAwareTrait;
 
     /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container object or null
-     *
-     * @return void
-     */
-    public function setContainer(Container $container = null)
-    {
-        $this->c = $container;
-    }
-
-    /**
-     * Set allowed methods
+     * Allowed http methods
      * 
-     * @param array $params allowed methods
-     *
-     * @return void
+     * @var array
      */
-    public function setParams(array $params)
-    {
-        $this->allowedMethods = array_map(
-            function ($value) { 
-                return strtoupper($value);
-            },
-            $params
-        );
-    }
+    protected $allowedMethods = array(
+        'GET',
+        'POST',
+        'PUT',
+        'DELETE'
+    );
 
     /**
      * Invoke middleware
@@ -59,17 +40,19 @@ class NotAllowed implements MiddlewareInterface, ParamsAwareInterface, Container
     {
         $method = $request->getMethod();
 
-        if (! in_array($method, $this->allowedMethods)) {
+        if (! in_array($method, $this->getAllowedMethods())) {
             
-            $body = $this->c['template']->make(
-                'error',
-                [
-                    'error' => sprintf(
-                        '%s Method Not Allowed',
-                        $method
-                    )
-                ]
-            );
+            $body = $this->getContainer()
+                ->get('template')
+                ->make(
+                    'error',
+                    [
+                        'error' => sprintf(
+                            '%s Method Not Allowed',
+                            $method
+                        )
+                    ]
+                );
             return $response->withStatus(405)
                 ->withHeader('Content-Type', 'text/html')
                 ->withBody($body);
@@ -78,4 +61,20 @@ class NotAllowed implements MiddlewareInterface, ParamsAwareInterface, Container
 
         return $next($request, $response, $err);
     }
+
+    /**
+     * Get allowed allowed methods
+     * 
+     * @return void
+     */
+    protected function getAllowedMethods()
+    {
+        $this->allowedMethods = array_map(
+            function ($value) { 
+                return strtoupper($value);
+            },
+            $this->getParams()
+        );
+    }
+
 }
