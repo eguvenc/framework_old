@@ -5,11 +5,11 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-use Obullo\Container\ControllerAwareInterface;
-use Obullo\Container\ControllerInterface as Controller;
+use Obullo\Http\ImmutableControllerAwareInterface;
+use Obullo\Http\ImmutableControllerInterface as Controller;
 use Obullo\Http\Middleware\MiddlewareInterface;
 
-class View implements MiddlewareInterface, ControllerAwareInterface
+class View implements MiddlewareInterface, ImmutableControllerAwareInterface
 {
     /**
      * Inject controller object

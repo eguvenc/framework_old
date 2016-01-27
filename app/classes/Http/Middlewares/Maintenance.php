@@ -11,7 +11,6 @@ use League\Container\ImmutableContainerAwareTrait;
 use League\Container\ImmutableContainerAwareInterface;
 
 use Obullo\Http\Middleware\MiddlewareInterface;
-use Obullo\Application\Middleware\MaintenanceTrait;
 
 class Maintenance implements MiddlewareInterface, ImmutableContainerAwareInterface, ParamsAwareInterface
 {
@@ -37,7 +36,9 @@ class Maintenance implements MiddlewareInterface, ImmutableContainerAwareInterfa
     {
         if ($this->check() == false) {
             
-            $body = $this->c['template']->make('maintenance');
+            $body = $this->getContainer()
+                ->get('template')
+                ->make('maintenance');
 
             return $response->withStatus(404)
                 ->withHeader('Content-Type', 'text/html')
@@ -55,17 +56,17 @@ class Maintenance implements MiddlewareInterface, ImmutableContainerAwareInterfa
      */
     public function check()
     {   
-        $maintenance = $this->c['config']['maintenance'];  // Default loaded in config class.
+        $maintenance = $this->getContainer()->get('config')['maintenance'];  // Default loaded in config class.
         $maintenance['root']['regex'] = null;
-
-        $domain = (isset($this->params['domain'])) ? $this->params['domain'] : null;
+        $params = $this->getParams();
+        $domain = (isset($params['domain'])) ? $params['domain'] : null;
         
         foreach ($maintenance as $label) {
-            if (! empty($label['regex']) && $label['regex'] == $domain) {  // If route domain equal to domain.php regex config
+            if (! empty($label['regex']) && $label['regex'] == $domain) {  // If route domain equal to domain.php regex value
                 $this->maintenance = $label['maintenance'];
             }
         }
-        if ($this->checkRoot()) {
+        if ($this->checkRoot($maintenance)) {
             return false;
         }
         if ($this->checkNodes()) {
@@ -76,12 +77,14 @@ class Maintenance implements MiddlewareInterface, ImmutableContainerAwareInterfa
 
     /**
      * Check root domain is down
+     *
+     * @param array $maintenance config
      * 
      * @return boolean
      */
-    public function checkRoot()
+    public function checkRoot($maintenance)
     {
-        if ($this->c['config']['maintenance']['root']['maintenance'] == 'down') {  // First do filter for root domain
+        if ($maintenance['root']['maintenance'] == 'down') {  // First do filter for root domain
             return true;
         }
         return false;

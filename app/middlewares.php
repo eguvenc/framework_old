@@ -27,6 +27,7 @@ $middleware->register(
         'Maintenance' => 'Http\Middlewares\Maintenance',
         'NotAllowed' => 'Http\Middlewares\NotAllowed',
         'Translation' => 'Http\Middlewares\Translation',
+        'RewriteLocale' => 'Http\Middlewares\RewriteLocale',
         'Auth' => 'Http\Middlewares\Auth',
         'Https' => 'Http\Middlewares\Https',
         'Guest' => 'Http\Middlewares\Guest',
@@ -44,8 +45,8 @@ $middleware->add(
         // 'Maintenance',
         // 'TrustedIp',
         // 'ParsedBody',
-        // 'Translation',
         'View',
         'Router',
+        'Translation',
     ]
 );

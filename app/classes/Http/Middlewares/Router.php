@@ -24,12 +24,14 @@ class Router implements MiddlewareInterface, ImmutableContainerAwareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        if ($this->container->get('router')->getDefaultPage() == '') {
+        if ($this->getContainer()->get('router')->getDefaultPage() == '') {
 
             $error = 'Unable to determine what should be displayed.';
             $error.= 'A default route has not been specified in the router middleware.';
 
-            $body = $this->container->get('template')->make('error', ['error' => $error]);
+            $body = $this->getContainer()
+                ->get('template')
+                ->make('error', ['error' => $error]);
 
             return $response->withStatus(404)
                 ->withHeader('Content-Type', 'text/html')

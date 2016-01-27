@@ -53,26 +53,17 @@ $router->group(
         'name' => 'GenericUsers', 
         // 'match' => '([0-9]+)/([a-z]+).*',   // Match URI
         'domain' => 'framework',
-        'middleware' => array('Maintenance')
+        'middleware' => array()  // 'RewriteLocale'
     ],
     function ($sub) use ($container) {
 
             // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
 
-            // echo $this->getNamespace();
+            $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
+            $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
+            $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
 
-            // echo 'OK !!';
-
-            // $this->get('(?:en|tr|de|nl)/(.*)', '$1');
-            // $this->get('(?:en|tr|de|nl)', 'welcome');  // default controller
-
-            // $this->attach('.*'); // all urls
-
-            // $this->middleware(['Maintenance'], '.*');
-            // ikinci parametre girilmemişse
-            // tek olarak atayacak middleware i girilirse
-            // regex vardır diyecek.
-
+            $this->attach('.*'); // all urls
     }
 );
 

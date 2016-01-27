@@ -16,7 +16,7 @@ class Translation implements MiddlewareInterface, ImmutableContainerAwareInterfa
 {
     use ImmutableContainerAwareTrait;
 
-    protected $config;
+    protected $params;
     protected $request;
     protected $translator;
     protected $cookieValue;
@@ -33,11 +33,12 @@ class Translation implements MiddlewareInterface, ImmutableContainerAwareInterfa
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
         $this->request = $request;
-        $this->cookieValue = $this->readCookie();
-        $this->config = $this->getContainer()->get('config')->load('translator');
         $this->translator = $this->getContainer()->get('translator');
+        $this->params = $this->getContainer()->get('translator.params');
+
+        $this->cookieValue = $this->readCookie();
         $this->setLocale();
-        $this->setFallback();
+        // $this->setFallback();
 
         return $next($request, $response);
     }
@@ -49,7 +50,7 @@ class Translation implements MiddlewareInterface, ImmutableContainerAwareInterfa
      */
     protected function readCookie()
     {
-        $name = $this->config['cookie']['name'];
+        $name = $this->params['cookie']['name'];
         $cookies = $this->request->getCookieParams();
 
         return isset($cookies[$name]) ? $cookies[$name] : null;
@@ -99,12 +100,13 @@ class Translation implements MiddlewareInterface, ImmutableContainerAwareInterfa
      */
     protected function setByUri()
     {
-        if ($this->config['uri']['segment']) {
+        if ($this->params['uri']['enabled']) {
 
-            $segment = $this->request->getUri()->segment($this->config['uri']['segmentNumber']);  // Set via URI Segment
+            $segment = $this->request->getUri()->segment($this->params['uri']['segment']);  // Set via URI Segment
 
-            if (! empty($segment)) {
+            if (! empty($segment) && in_array($segment, $this->params['default']['languages'])) {
                 $bool = ($this->cookieValue == $segment) ? false : true; // Do not write if cookie == segment value same
+
                 if ($this->translator->setLocale($segment, $bool)) {
                     return true;
                 }
@@ -137,7 +139,11 @@ class Translation implements MiddlewareInterface, ImmutableContainerAwareInterfa
         $intl = extension_loaded('intl');     // Intl extension should be enabled.
 
         if ($intl == false) {
-            $this->c['logger']->notice('Install php intl extension to enable detecting browser language feature.');
+
+            $this->getContainer()
+                ->get('logger')
+                ->notice('Install php intl extension to enable detecting browser language feature.');
+
             return false;
         }
         $server = $this->request->getServerParams();

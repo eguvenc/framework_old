@@ -15,14 +15,19 @@ return array(
         'default' => [
             'set' => true,
             'locale'  => 'en',
+            'languages' => [
+                'en',
+                'es',
+                'tr',
+            ]
         ],
         'fallback' => [
             'enabled' => false,
             'locale' => 'en',
         ],
         'uri' => [
-            'segment' => true,
-            'segmentNumber' => 0       
+            'enabled' => true,
+            'segment' => 0       
         ],
         'cookie' => [
             'name'   =>'locale', 

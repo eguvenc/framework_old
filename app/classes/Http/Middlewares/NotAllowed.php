@@ -69,7 +69,7 @@ class NotAllowed implements MiddlewareInterface, ImmutableContainerAwareInterfac
      */
     protected function getAllowedMethods()
     {
-        $this->allowedMethods = array_map(
+        return array_map(
             function ($value) { 
                 return strtoupper($value);
             },

@@ -1,21 +1,6 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Fatal Errors
-|--------------------------------------------------------------------------
-*/
-register_shutdown_function(
-    function () {
-        $last = error_get_last();
-        if (! empty($last)) {
-            $header = 'Fatal Error';
-            $error = 'Message : '.$last['message']. '.<br /> File : '. $last['file']. '<br> Line : '.$last['line'];
-            include TEMPLATES .'error.php';
-        }
-    }
-);
-/*
-|--------------------------------------------------------------------------
 | Disable php.ini errors to use set_error_handler() func
 |--------------------------------------------------------------------------
 */
@@ -38,7 +23,19 @@ require '../constants';
 |--------------------------------------------------------------------------
 */
 require '../vendor/autoload.php';
-
+/*
+|--------------------------------------------------------------------------
+| Fatal Errors
+|--------------------------------------------------------------------------
+*/
+register_shutdown_function(
+    function () {
+        $error = error_get_last();
+        if (! empty($error)) {
+            var_dump($error);
+        }
+    }
+);
 
 require OBULLO .'Application/Autoloader.php';
 Obullo\Application\Autoloader::register();
