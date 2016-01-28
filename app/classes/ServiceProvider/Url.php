@@ -34,7 +34,6 @@ class Url extends AbstractServiceProvider
 
         $container->share('url', 'Obullo\Url\Url')
             ->withArgument($container)
-            ->withArgument($container->get('request'))
             ->withArgument($container->get('logger'))
             ->withArgument($config->getParams());
     }
