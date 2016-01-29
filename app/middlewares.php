@@ -45,8 +45,8 @@ $middleware->add(
         // 'Maintenance',
         // 'TrustedIp',
         // 'ParsedBody',
+        'Translation',
         'View',
         'Router',
-        'Translation',
     ]
 );

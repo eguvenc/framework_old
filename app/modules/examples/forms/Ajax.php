@@ -34,7 +34,6 @@ class Ajax extends Controller
             } else {
                 
                 $this->form->error('Form validation failed.');
-                $this->form->setErrors($this->validator);
             }
 
             return $this->response->json($this->form->outputArray());

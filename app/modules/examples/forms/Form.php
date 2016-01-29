@@ -29,26 +29,26 @@ class Form extends Controller
             $this->validator->setRules('agreement', 'User Agreement', 'required');
             $this->validator->callback(
                 'callback_options',
-                function ($field) {
+                function ($field, $next) {
                     $value = $field->getValue();
                     if (empty($value)) {
                         $field->setMessage('Please choose a color.');
                         $field->setError('Please choose a color.');
                         return false;
                     }
-                    return $field();
+                    return $next($field);
                 }
             );
             $this->validator->callback(
                 'callback_hobbies',
-                function ($field) {
+                function ($field, $next) {
                     $value = $field->getValue();
                     if (empty($value)) {
                         $field->setMessage('Please choose a hobby.');
                         $field->setError('Please choose a hobby.');
                         return false;
                     }
-                    return $field();
+                    return $next($field);
                 }
             );
             if ($this->validator->isValid()) {          
@@ -56,7 +56,6 @@ class Form extends Controller
             } else {
                 $this->form->error('Form validation failed.');
             }
-            $this->form->setErrors($this->validator);
         }
 
         $this->view->load('form');

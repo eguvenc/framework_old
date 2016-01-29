@@ -25,7 +25,6 @@ class Csrf extends Controller
             } else {
                 $this->form->error('Form validation failed.');
             }
-            $this->form->setErrors($this->validator);
         }
 
         $this->view->load('csrf');
