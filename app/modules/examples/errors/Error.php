@@ -13,10 +13,10 @@ class Error extends Controller
      */      
     public function index()
     {
-        $body = $this->template->make(
-            'error',
+        $body = $this->view->getStream(
+            'templates::error',
             [
-                'error' => 'Hello this my first custom error !'
+                'error' => 'This is my first custom error !'
             ]
         );
         return $this->response

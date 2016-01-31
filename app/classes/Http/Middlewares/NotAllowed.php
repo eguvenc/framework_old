@@ -42,10 +42,9 @@ class NotAllowed implements MiddlewareInterface, ImmutableContainerAwareInterfac
 
         if (! in_array($method, $this->getAllowedMethods())) {
             
-            $body = $this->getContainer()
-                ->get('template')
-                ->make(
-                    'error',
+            $body = $this->getContainer()->get('view')
+                ->getStream(
+                    'templates::error',
                     [
                         'error' => sprintf(
                             '%s Method Not Allowed',

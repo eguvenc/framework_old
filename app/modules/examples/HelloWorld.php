@@ -13,7 +13,7 @@ class HelloWorld extends Controller
      */ 
     public function index()
     {
-        $this->view->load('hello.world');
+        $this->view->load('helloWorld');
     }
 
 }

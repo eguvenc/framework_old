@@ -20,7 +20,7 @@ $container->addServiceProvider('ServiceProvider\Form');
 $container->addServiceProvider('ServiceProvider\Validator');
 // $container->addServiceProvider('ServiceProvider\User');
 $container->addServiceProvider('ServiceProvider\Layer');
-$container->addServiceProvider('ServiceProvider\Template');
+$container->addServiceProvider('ServiceProvider\View');
 // $container->addServiceProvider('ServiceProvider\QueueAmqp');
 // $container->addServiceProvider('ServiceProvider\QueueAmqpLib');
 // $container->addServiceProvider('ServiceProvider\DoctrineQueryBuilder');
@@ -54,30 +54,3 @@ $container->addServiceProvider('ServiceProvider\Template');
 //         'mongo' => 'Obullo\Service\Providers\Mongo'
 //     ]
 // );
-/*
-|--------------------------------------------------------------------------
-| Components
-|--------------------------------------------------------------------------
-| Specifies your application services
-*/
-//     
-// $container->share('element', 'Obullo\Form\Element')
-//     ->withArgument($container)
-//     ->withArgument($container->get('request'))
-//     ->withArgument($container->get('config'))
-//     ->withArgument($container->get('logger'));
-
-// $container->share('template', 'Obullo\View\Template')
-//     ->withArgument($container)
-//     ->withArgument($container->get('view'))
-//     ->withArgument($container->get('logger'));
-
-// $container->share('flash', 'Obullo\Flash\Session')
-//     ->withArgument($container->get('request'))
-//     ->withArgument($container->get('config'))
-//     ->withArgument($container->get('logger'))
-//     ->withArgument($container->get('session'));
-
-// $container->share('is', 'Obullo\Filters\Is');
-// $container->share('clean', 'Obullo\Filters\Clean');
-// $container->share('response', 'Obullo\Http\Response');

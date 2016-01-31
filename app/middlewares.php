@@ -7,14 +7,14 @@
 |
 |  Default Middlewares
 |
-|   - Error ( Added by system if you use Zend Middleware )
-|   - NotAllowed ( Added with the router )
+|   - Error ( Added by system )
+|   - NotAllowed ( Added by system )
 |   - Router
-|   - View ( Required for layouts )
+|   - View ( Required for Layers )
 */
 /*
 |--------------------------------------------------------------------------
-| Middleware definitions
+| Register all middlewares
 |--------------------------------------------------------------------------
 */
 $middleware->register(
@@ -36,7 +36,7 @@ $middleware->register(
 );
 /*
 |--------------------------------------------------------------------------
-| Add your global middlewares
+| Global middlewares
 |--------------------------------------------------------------------------
 | Define router middleware at the top.
 */
@@ -45,7 +45,7 @@ $middleware->add(
         // 'Maintenance',
         // 'TrustedIp',
         // 'ParsedBody',
-        'Translation',
+        // 'Translation',
         'View',
         'Router',
     ]

@@ -37,8 +37,8 @@ class Maintenance implements MiddlewareInterface, ImmutableContainerAwareInterfa
         if ($this->check() == false) {
             
             $body = $this->getContainer()
-                ->get('template')
-                ->make('maintenance');
+                ->get('view')
+                ->getStream('templates::maintenance');
 
             return $response->withStatus(404)
                 ->withHeader('Content-Type', 'text/html')

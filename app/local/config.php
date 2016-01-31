@@ -20,7 +20,7 @@ return array(
         ],
     ],
     'extra' => [
-        'annotations' => true,
+        'annotations' => false,
     ],
     'cookie' => [
         'domain' => '',

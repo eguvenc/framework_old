@@ -12,6 +12,6 @@
         "ircmaxell/password-compat": "^1.0",
         "league/container": "^2.0",
         "league/event": "^2.1",
-        "league/tactician": "^1.0"
+        "league/plates": "^3.1"
     }
 }

@@ -25,19 +25,19 @@ $router->configure(
 
 // $c['router']->middleware('Maintenance');
 
-$router->group(
-    [
-        'domain' => 'test.*\d.framework',
-    ],
-    function () {
+// $router->group(
+//     [
+//         'domain' => 'test.*\d.framework',
+//     ],
+//     function () {
 
-        $this->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
+//         // $this->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
 
-        // $this->attach('.*'); // all urls
-        // $this->attach('welcome');
-        // $this->attach('welcome/test');
-    }
-);
+//         // $this->attach('.*'); // all urls
+//         // $this->attach('welcome');
+//         // $this->attach('welcome/test');
+//     }
+// );
 
 // $c['router']->get(
 //     'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2',
@@ -59,11 +59,11 @@ $router->group(
 
             // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
 
-            $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
-            $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
-            $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
+            // $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
+            // $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
+            // $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
 
-            $this->attach('.*'); // all urls
+            // $this->attach('.*'); // all urls
     }
 );
 
