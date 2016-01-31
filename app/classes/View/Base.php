@@ -11,7 +11,7 @@ Trait Base
      */
     public function __invoke()
     {
-        $this->view->assign(
+        $this->view->withData(
             [
                 'header' => $this->layer->get('views/header'),
                 'footer' => $this->layer->get('views/footer')

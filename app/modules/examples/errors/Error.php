@@ -13,7 +13,7 @@ class Error extends Controller
      */      
     public function index()
     {
-        $body = $this->view->getStream(
+        $body = $this->view->withStream()->get(
             'templates::error',
             [
                 'error' => 'This is my first custom error !'

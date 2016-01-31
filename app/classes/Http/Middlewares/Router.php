@@ -29,9 +29,9 @@ class Router implements MiddlewareInterface, ImmutableContainerAwareInterface
             $error = 'Unable to determine what should be displayed.';
             $error.= 'A default route has not been specified in the router middleware.';
 
-            $body = $this->getContainer()
-                ->get('view')
-                ->getStream(
+            $body = $this->getContainer()->get('view')
+                ->withStream()
+                ->get(
                     'templates::error', 
                     [
                         'error' => $error

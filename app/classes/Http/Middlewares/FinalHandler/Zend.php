@@ -127,7 +127,7 @@ class Zend implements ImmutableContainerAwareInterface
 
             $message = $this->createDevelopmentErrorMessage($error);
         }
-        $body = $this->container->get('view')->getStream($message);
+        $body = $this->container->get('view')->withStream($message)->get();
 
         $response = $response->withStatus(500)
             ->withHeader('Content-Type', 'text/html')

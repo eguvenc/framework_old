@@ -13,7 +13,7 @@ class NotFound extends Controller
      */      
     public function index()
     {
-        $body = $this->view->getStream('templates::404');
+        $body = $this->view->withStream()->get('templates::404');
         
         return $this->response
             ->withStatus(404)
