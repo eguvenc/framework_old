@@ -30,11 +30,15 @@ class Layer extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $config = $this->getConfiguration();
 
         $container->share('layer', 'Obullo\Layer\Request')
             ->withArgument($container)
             ->withArgument($container->get('logger'))
-            ->withArgument($config->getParams());
+            ->withArgument(
+                [
+                    'cache' => false,
+                    'log' => true
+                ]
+            );
     }
 }

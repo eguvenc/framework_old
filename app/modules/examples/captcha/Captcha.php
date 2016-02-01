@@ -14,9 +14,6 @@ class Captcha extends Controller
      */
     public function index()
     {
-        if (! $this->c->has('captcha')) {
-            throw new RuntimeException("Captcha service is not defined in your components.");
-        }
         if ($this->request->isPost()) {
 
             $this->validator->setRules('email', 'Email', 'required|trim|email|max(100)');

@@ -11,6 +11,11 @@ class Welcome extends Controller
      */
     public function index()
     {
-        $this->view->load('welcome');
+    	// $redis = $this->container->get('redis')->shared(['connection' => 'default']);
+
+    	// var_dump($redis);
+
+
+        $this->view->load('views::welcome');
     }
 }

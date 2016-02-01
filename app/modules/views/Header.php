@@ -16,7 +16,9 @@ class Header extends Controller
         echo $this->view->get(
             'header',
             [
-                'header' => '<div class="layer example-gray">Header Controller<div class="layer example-white">$this->layer->get("views/header")</div></div>'
+                'header' => '<div class="layer example-gray">
+                    Header Controller<div class="layer example-white">$this->layer->get("views/header")</div>
+                </div>'
             ]
         );
     }

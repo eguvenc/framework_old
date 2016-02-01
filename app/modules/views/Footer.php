@@ -16,7 +16,9 @@ class Footer extends Controller
         echo $this->view->get(
             'footer',
             [
-                'footer' => '<div class="layer example-gray">Footer Controller <div class="layer example-white">$this->layer->get("views/footer")</div></div>'
+                'footer' => '<div class="layer example-gray">
+                    Footer Controller <div class="layer example-white">$this->layer->get("views/footer")</div>
+                </div>'
             ]
         );
     }

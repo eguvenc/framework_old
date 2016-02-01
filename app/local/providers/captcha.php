@@ -5,7 +5,7 @@ return array(
     'params' => [
 
         'locale' => [
-            'charset' => 'UTF-8'
+            'charset' => 'utf-8'
         ],
         'characters' => [
             'default' => [
@@ -20,7 +20,6 @@ return array(
         ],
         'font' => [
             'size' => 30,
-            'path' => '/assets/fonts',
         ],
         'image' => [
             'trueColor'  => true,
@@ -67,30 +66,19 @@ return array(
                 'text' => ['red'],
                 'noise' => ['red']
             ]
-        ],
-        'fonts' => [
-            'AlphaSmoke'             => 'AlphaSmoke.ttf',
-            'Anglican'               => 'Anglican.ttf',
-            'Bknuckss'               => 'Bknuckss.ttf',
-            'KingthingsFlashbang'    => 'KingthingsFlashbang.ttf',
-            'NightSkK'               => 'NightSkK.ttf',
-            'Notjustatoy'            => 'Notjustatoy.ttf',
-            'Popsf'                  => 'Popsf.ttf',
-            'SurreAlfreak'           => 'SurreAlfreak.ttf',
-        ],
-    ],
-    'methods' => [
-        'setParameters' => [
-            'setMod' => 'secure',
-            'setPool' => 'alpha',
-            'setChar' => 5,
-            'setFont' => ['NightSkK','AlphaSmoke','Popsf'],
-            'setFontSize' => 20,
-            'setHeight' => 36,
-            'setWave' => false,
-            'setColor' => ['red', 'black'],
-            'setTrueColor' => false,
-            'setNoiseColor' => ['red'],
         ]
+    ],
+    
+    'methods' => [
+        ['name' => 'setMod','argument' => ['secure']],
+        ['name' => 'setPool','argument' => ['alpha']],
+        ['name' => 'setChar','argument' => [5]],
+        ['name' => 'setFont','argument' => ['NightSkK','AlphaSmoke','Popsf']],
+        ['name' => 'setFontSize','argument' => [20]],
+        ['name' => 'setHeight','argument' => [36]],
+        ['name' => 'setWave','argument' => [false]],
+        ['name' => 'setColor','argument' => ['red', 'black']],
+        ['name' => 'setTrueColor','argument' => [false]],
+        ['name' => 'setNoiseColor','argument' => ['red']],
     ]
 );

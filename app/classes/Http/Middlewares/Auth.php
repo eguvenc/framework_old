@@ -19,7 +19,7 @@ class Auth implements MiddlewareInterface, ImmutableContainerAwareInterface
     /**
      * Auth user
      * 
-     * @var obejct
+     * @var object
      */
     protected $user;
 

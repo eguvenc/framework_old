@@ -3,13 +3,9 @@
 return array(
     
     'params' => [
-    
+
         'provider' => [
-            'name' => 'cache',
-            'params' => [
-                'driver' => 'redis',
-                'connection' => 'default'
-            ]
+            'connection' => 'default'
         ],
         'storage' => [
             'key' => 'sessions:',

@@ -10,8 +10,9 @@ $container->addServiceProvider('ServiceProvider\Translator');
 // $container->addServiceProvider('ServiceProvider\Db');
 $container->addServiceProvider('ServiceProvider\View');
 $container->addServiceProvider('ServiceProvider\Cookie');
+$container->addServiceProvider('ServiceProvider\Session');
 // $container->addServiceProvider('ServiceProvider\Csrf');
-// $container->addServiceProvider('ServiceProvider\Captcha');
+$container->addServiceProvider('ServiceProvider\Captcha');
 // $container->addServiceProvider('ServiceProvider\ReCaptcha');
 // $container->addServiceProvider('ServiceProvider\Session');
 // $container->addServiceProvider('ServiceProvider\Task');
@@ -31,9 +32,12 @@ $container->addServiceProvider('ServiceProvider\View');
 |--------------------------------------------------------------------------
 | Specifies your application service provider connectors.
 */
-// $container->addServiceProvider('ServiceProvider\Database');
+$container->addServiceProvider('ServiceProvider\Connector\Redis');
+
+
+// $container->addServiceProvider('Obullo\ServiceProvider\Database');
 // // $container->addServiceProvider('ServiceProvider\DoctrineDBAL');
-// $container->addServiceProvider('ServiceProvider\Redis');
+
 // $container->addServiceProvider('ServiceProvider\Memcached');
 // //  $container->addServiceProvider('ServiceProvider\Memcache');
 // $container->addServiceProvider('ServiceProvider\Cache');
