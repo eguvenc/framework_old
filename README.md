@@ -32,11 +32,11 @@ Create your composer.json file and dependencies
     "require": {
         "psr/http-message": "^1.0",
         "ircmaxell/password-compat": "^1.0",
-        "obullo/service-providers": "dev-master",
-        "league/event": "^2.1"
+        "league/container": "^2.0",
+        "league/event": "^2.1",
+        "league/plates": "^3.1"
     }
 }
-
 ```
 
 Create your obullo version
@@ -81,7 +81,7 @@ Open your index.php and update <kbd>$app</kbd> variable to Http\Zend\Stratigilit
 | Choose your middleware app
 |--------------------------------------------------------------------------
 */
-$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($c);
+$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($container);
 /*
 |--------------------------------------------------------------------------
 | Create your http server
