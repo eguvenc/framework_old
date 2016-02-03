@@ -1,10 +1,10 @@
 <?php
 
-namespace ServiceProvider;
+namespace ServiceProvider\Connector;
 
 use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
-class Translator extends AbstractServiceProvider
+class Cache extends AbstractServiceProvider
 {
     /**
      * The provides array is a way to let the container
@@ -16,7 +16,7 @@ class Translator extends AbstractServiceProvider
      * @var array
      */
     protected $provides = [
-        'translator'
+        'cache'
     ];
 
     /**
@@ -30,11 +30,9 @@ class Translator extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $params    = $this->getConfiguration('translator')->getParams();
-        
-        $container->share('translator', 'Obullo\Translation\Translator')
+
+        $container->share('cache', 'Obullo\Container\ServiceProvider\Cache')
             ->withArgument($container)
-            ->withArgument($container->get('logger'))
-            ->withArgument($params);
+            ->withArgument($container->get('config'));
     }
 }

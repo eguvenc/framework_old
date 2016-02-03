@@ -5,13 +5,8 @@ return array(
     'params' => [
 
         'cache.key' => 'Auth',
-        'db.adapter'=> '\Obullo\Authentication\Adapter\Database',
-        'db.model'  => '\Obullo\Authentication\Model\Pdo\User',
         'db.provider' => [
-            'name' => 'database',
-            'params' => [
-                'connection' => 'default'
-            ]
+            'connection' => 'default'
         ],
         'db.tablename' => 'users',
         'db.id' => 'id',
@@ -24,10 +19,8 @@ return array(
         'cache' => [            
             'storage' => '\Obullo\Authentication\Storage\Redis',
             'provider' => [
-                'params' => [
-                    'driver' => 'redis',
-                    'connection' => 'default'
-                ]
+                'driver' => 'redis',
+                'connection' => 'default'
             ],
             'block' => [
                 'permanent' => [

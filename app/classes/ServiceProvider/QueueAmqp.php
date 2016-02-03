@@ -4,7 +4,7 @@ namespace ServiceProvider;
 
 use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
-class Translator extends AbstractServiceProvider
+class QueueAmqp extends AbstractServiceProvider
 {
     /**
      * The provides array is a way to let the container
@@ -16,7 +16,7 @@ class Translator extends AbstractServiceProvider
      * @var array
      */
     protected $provides = [
-        'translator'
+        'queue'
     ];
 
     /**
@@ -30,11 +30,17 @@ class Translator extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $params    = $this->getConfiguration('translator')->getParams();
-        
-        $container->share('translator', 'Obullo\Translation\Translator')
-            ->withArgument($container)
-            ->withArgument($container->get('logger'))
-            ->withArgument($params);
+        $config    = $this->getConfiguration('queue');
+
+        $container->share('queue', 'Obullo\Queue\Handler\Amqp')
+            ->withArgument($container->get('amqp'))
+            ->withArgument($config->getParams());
+
+        // AmqpLib Replacement
+        // 
+
+        // $container->share('queue', 'Obullo\Queue\Handler\AmqpLib')
+        //     ->withArgument($container->get('amqp'))
+        //     ->withArgument($config->getParams());
     }
 }

@@ -43,11 +43,11 @@ class App implements MiddlewareInterface, ImmutableContainerAwareInterface
      */
     protected function run(Request $request, Response $response)
     {
-        $result = $this->container->get('app')->call($request, $response);
+        $result = $this->getContainer()->get('app')->call($request, $response);
 
         if (! $result) {
 
-            $body = $this->container->get('view')->withStream()->get('templates::404');
+            $body = $this->getContainer()->get('view')->withStream()->get('templates::404');
 
             return $response->withStatus(404)
                 ->withHeader('Content-Type', 'text/html')

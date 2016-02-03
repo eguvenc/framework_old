@@ -30,11 +30,18 @@ class Url extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $config    = $this->getConfiguration('url');
 
         $container->share('url', 'Obullo\Url\Url')
             ->withArgument($container)
             ->withArgument($container->get('logger'))
-            ->withArgument($config->getParams());
+            ->withArgument(
+                [
+                    'baseurl'  => '/',
+                    'assets'   => [
+                        'url' => '/',
+                        'folder' => '/assets/',
+                    ]
+                ]
+            );
     }
 }

@@ -30,12 +30,15 @@ class View extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $config = $this->getConfiguration();
 
         $container->share('view', 'Obullo\View\View')
             ->withArgument($container)
             ->withArgument($container->get('logger'))
-            ->withArgument($config->getParams())
+            ->withArgument(
+                [
+                    'engine' => 'Obullo\View\Plates\Plates',
+                ]
+            )
             ->withMethodCall(
                 'addFolder',
                 [

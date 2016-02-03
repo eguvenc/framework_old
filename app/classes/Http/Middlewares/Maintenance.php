@@ -57,6 +57,7 @@ class Maintenance implements MiddlewareInterface, ImmutableContainerAwareInterfa
     public function check()
     {   
         $maintenance = $this->getContainer()->get('config')['maintenance'];  // Default loaded in config class.
+        
         $maintenance['root']['regex'] = null;
         $params = $this->getParams();
         $domain = (isset($params['domain'])) ? $params['domain'] : null;

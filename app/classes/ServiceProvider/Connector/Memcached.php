@@ -1,10 +1,10 @@
 <?php
 
-namespace ServiceProvider;
+namespace ServiceProvider\Connector;
 
 use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
-class Translator extends AbstractServiceProvider
+class Memcached extends AbstractServiceProvider
 {
     /**
      * The provides array is a way to let the container
@@ -16,7 +16,7 @@ class Translator extends AbstractServiceProvider
      * @var array
      */
     protected $provides = [
-        'translator'
+        'memcached'
     ];
 
     /**
@@ -30,11 +30,10 @@ class Translator extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $params    = $this->getConfiguration('translator')->getParams();
-        
-        $container->share('translator', 'Obullo\Translation\Translator')
+        $config    = $this->getConfiguration('memcached');
+
+        $container->share('memcached', 'Obullo\Container\ServiceProvider\Memcached')
             ->withArgument($container)
-            ->withArgument($container->get('logger'))
-            ->withArgument($params);
+            ->withArgument($config->getParams());
     }
 }

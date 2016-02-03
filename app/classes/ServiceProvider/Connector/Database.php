@@ -31,9 +31,17 @@ class Database extends AbstractServiceProvider
     {
         $container = $this->getContainer();
         $config    = $this->getConfiguration('database');
-
-        $container->share('database', 'Obullo\ServiceProvider\Database')
+        
+        $container->share('database', 'Obullo\Container\ServiceProvider\Database')
             ->withArgument($container)
             ->withArgument($config->getParams());
+
+
+        // DoctrineDBAL Replacement
+        // 
+
+        // $container->share('database', 'Obullo\Container\ServiceProvider\DoctrineDBAL')
+        //     ->withArgument($container)
+        //     ->withArgument($config->getParams());
     }
 }

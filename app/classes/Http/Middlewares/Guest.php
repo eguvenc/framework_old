@@ -19,14 +19,6 @@ class Guest implements MiddlewareInterface, ImmutableContainerAwareInterface
     const REDIRECT_URI = '/examples/membership/login/index';
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->user = $this->getContainer()->get('user');
-    }
-
-    /**
      * Invoke middleware
      * 
      * @param ServerRequestInterface $request  request
@@ -37,7 +29,7 @@ class Guest implements MiddlewareInterface, ImmutableContainerAwareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        if ($this->user->identity->guest()) {
+        if ($this->getContainer()->get('user')->identity->guest()) {
 
             $this->getContainer()->get('flash')->info('Your session has been expired.');
 

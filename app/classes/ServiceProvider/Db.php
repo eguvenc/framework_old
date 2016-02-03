@@ -33,7 +33,8 @@ class Db extends AbstractServiceProvider
 
         $container->shared(
             'db',
-            $container->get('database')->shared(['connection' => 'default'])
+            $container->get('database')
+                ->shared(['connection' => 'default'])
         );
     }
 }

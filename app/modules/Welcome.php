@@ -15,6 +15,9 @@ class Welcome extends Controller
 
     	// var_dump($redis);
 
+    	// $this->database->shared(['connection' => 'default']);
+
+    	// var_dump($this->container->hasShared('database'));
 
         $this->view->load('views::welcome');
     }

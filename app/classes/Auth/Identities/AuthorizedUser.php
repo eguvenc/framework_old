@@ -2,7 +2,7 @@
 
 namespace Auth\Identities;
 
-use Obullo\Authentication\Identity\AbstractIdentity;
+use Obullo\Authentication\AbstractIdentity;
 
 class AuthorizedUser extends AbstractIdentity
 {

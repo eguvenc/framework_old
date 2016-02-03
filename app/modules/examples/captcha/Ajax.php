@@ -14,9 +14,6 @@ class Ajax extends Controller
      */
     public function index()
     {
-        if (! $this->c->has('captcha')) {
-            throw new RuntimeException("Captcha service is not defined in your components.");
-        }
         if ($this->request->isAjax()) {
 
             $this->validator->setRules('name', 'Name', 'required');
@@ -33,7 +30,6 @@ class Ajax extends Controller
             } else {
                 
                 $this->form->error('Form validation failed.');
-                $this->form->setErrors($this->validator);
             }
 
             return $this->response->json($this->form->outputArray());

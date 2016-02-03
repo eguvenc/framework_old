@@ -32,11 +32,20 @@ class Session extends AbstractServiceProvider
         $container = $this->getContainer();
         $config    = $this->getConfiguration('session');
 
-        $container->share('session', 'Obullo\Session\Session')
-            ->withArgument($container->get('config'))
+        $session = $container->share('session', 'Obullo\Session\Session')
             ->withArgument($container->get('redis'))
+            ->withArgument($container->get('config'))
             ->withArgument($container->get('request'))
             ->withArgument($container->get('logger'))
             ->withArgument($config->getParams());
+
+        foreach ($config->getMethods() as $method) {
+            
+            $session->withMethodCall(
+                $method['name'],
+                $method['argument']
+            );
+        }
+
     }
 }

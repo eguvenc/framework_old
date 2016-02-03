@@ -22,10 +22,8 @@ return array(
         ],
     ],
     'methods' => [
-        'setParameters' => [
-            'registerSaveHandler' => '\Obullo\Session\SaveHandler\Cache',
-            'setName' => '',
-            'start' => '',
-        ]
+        ['name' => 'registerSaveHandler','argument' => ['\Obullo\Session\SaveHandler\Cache']],
+        ['name' => 'setName','argument' => ['']],
+        ['name' => 'start','argument' => ['']]
     ]
 );

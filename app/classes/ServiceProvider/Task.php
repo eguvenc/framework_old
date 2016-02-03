@@ -2,7 +2,7 @@
 
 namespace ServiceProvider;
 
-use Obullo\Application\ServiceProvider\AbstractServiceProvider;
+use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
 class Task extends AbstractServiceProvider
 {

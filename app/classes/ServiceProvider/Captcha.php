@@ -30,7 +30,7 @@ class Captcha extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $config = $this->getConfiguration('captcha');
+        $config    = $this->getConfiguration('captcha');
 
         $captcha = $container->share('captcha', 'Obullo\Captcha\Provider\Image')
             ->withArgument($container->get('url'))

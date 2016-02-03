@@ -30,11 +30,11 @@ class Csrf extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $config    = $this->getConfiguration('csrf');
+        $params    = $this->getConfiguration('csrf')->getParams();
 
         $container->share('csrf', 'Obullo\Security\Csrf')
             ->withArgument($container->get('session'))
             ->withArgument($container->get('logger'))
-            ->withArgument($config->getParams());
+            ->withArgument($params);
     }
 }

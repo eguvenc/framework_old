@@ -20,7 +20,7 @@ class Login extends Controller
 
             if (! $this->validator->isValid()) {
                 
-                $this->form->setErrors($this->validator);
+                $this->form->setErrors();
 
             } else {
 

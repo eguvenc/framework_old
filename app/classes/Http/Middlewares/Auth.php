@@ -10,26 +10,10 @@ use Obullo\Authentication\Middleware\UniqueSessionTrait;
 
 use League\Container\ImmutableContainerAwareTrait;
 use League\Container\ImmutableContainerAwareInterface;
-use Obullo\Authentication\User\UserInterface as User;
 
 class Auth implements MiddlewareInterface, ImmutableContainerAwareInterface
 {
-    use UniqueSessionTrait, ImmutableContainerAwareTrait;
-
-    /**
-     * Auth user
-     * 
-     * @var object
-     */
-    protected $user;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->user = $this->getContainer()->get('user');
-    }
+    use ImmutableContainerAwareTrait, UniqueSessionTrait;
 
     /**
      * Invoke middleware
@@ -42,7 +26,7 @@ class Auth implements MiddlewareInterface, ImmutableContainerAwareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        if ($this->user->identity->check()) {
+        if ($this->getContainer()->get('user')->identity->check()) {
     
             $this->killSessions();  // Terminate multiple logins
 

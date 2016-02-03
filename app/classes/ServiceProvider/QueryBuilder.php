@@ -4,7 +4,7 @@ namespace ServiceProvider;
 
 use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
-class Translator extends AbstractServiceProvider
+class QueryBuilder extends AbstractServiceProvider
 {
     /**
      * The provides array is a way to let the container
@@ -16,7 +16,7 @@ class Translator extends AbstractServiceProvider
      * @var array
      */
     protected $provides = [
-        'translator'
+        'qb'
     ];
 
     /**
@@ -30,11 +30,8 @@ class Translator extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $params    = $this->getConfiguration('translator')->getParams();
-        
-        $container->share('translator', 'Obullo\Translation\Translator')
-            ->withArgument($container)
-            ->withArgument($container->get('logger'))
-            ->withArgument($params);
+
+        $container->share('qb', 'Obullo\Container\ServiceProvider\DoctrineQueryBuilder')
+            ->withArgument($container);
     }
 }
