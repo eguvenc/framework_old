@@ -32,7 +32,7 @@ class Redis extends AbstractServiceProvider
         $container = $this->getContainer();
         $config    = $this->getConfiguration('redis');
 
-        $container->share('redis', 'Obullo\Container\ServiceProvider\Redis')
+        $container->share('redis', 'Obullo\Container\ServiceProvider\Connector\Redis')
             ->withArgument($container)
             ->withArgument($config->getParams());
     }

@@ -31,7 +31,7 @@ class Cache extends AbstractServiceProvider
     {
         $container = $this->getContainer();
 
-        $container->share('cache', 'Obullo\Container\ServiceProvider\Cache')
+        $container->share('cache', 'Obullo\Container\ServiceProvider\Connector\Cache')
             ->withArgument($container)
             ->withArgument($container->get('config'));
     }

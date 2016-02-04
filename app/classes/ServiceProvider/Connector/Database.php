@@ -32,7 +32,7 @@ class Database extends AbstractServiceProvider
         $container = $this->getContainer();
         $config    = $this->getConfiguration('database');
         
-        $container->share('database', 'Obullo\Container\ServiceProvider\Database')
+        $container->share('database', 'Obullo\Container\ServiceProvider\Connector\Database')
             ->withArgument($container)
             ->withArgument($config->getParams());
 
@@ -40,7 +40,7 @@ class Database extends AbstractServiceProvider
         // DoctrineDBAL Replacement
         // 
 
-        // $container->share('database', 'Obullo\Container\ServiceProvider\DoctrineDBAL')
+        // $container->share('database', 'Obullo\Container\ServiceProvider\Connector\DoctrineDBAL')
         //     ->withArgument($container)
         //     ->withArgument($config->getParams());
     }

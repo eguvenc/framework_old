@@ -32,7 +32,7 @@ class Memcache extends AbstractServiceProvider
         $container = $this->getContainer();
         $config    = $this->getConfiguration('memcache');
 
-        $container->share('memcache', 'Obullo\Container\ServiceProvider\Memcache')
+        $container->share('memcache', 'Obullo\Container\ServiceProvider\Connector\Memcache')
             ->withArgument($container)
             ->withArgument($config->getParams());
     }

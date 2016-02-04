@@ -34,14 +34,14 @@ return array(
             'delay' => 0,
         ],
         'push' => [
-            'handler' => '\Workers\Logger'  // \Log\Queue
+            'handler' => '\Workers\Logger'  // \Obullo\Log\Queue
         ]
     ],
     'methods' => [
         ['name' => 'registerFilter','argument' => ['priority', 'Obullo\Log\Filters\PriorityFilter']],
         ['name' => 'registerHandler', 'argument' => [5, 'file']],
         ['name' => 'registerHandler','argument' => [4, 'mongo']],
-        ['name' => 'filter', 'argument' => ['priority@notIn', array(LOG_DEBUG)]],
+        // ['name' => 'filter', 'argument' => ['priority@notIn', array(LOG_DEBUG)]],
         ['name' => 'setWriter','argument' => ['file']],
         ['name' => 'filter', 'argument' => ['priority@notIn', array()]],
     ]
