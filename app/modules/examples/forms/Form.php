@@ -16,7 +16,7 @@ class Form extends Controller
         if ($this->request->isPost()) {
 
             // $min = new \Obullo\Validator\Rules\Min;
-            // $field->setParams(array(3));
+            // $field->getRule()->setParams(array(3));
             // return $min($field);
 
             // var_dump($this->request->post('options'));

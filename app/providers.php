@@ -17,7 +17,7 @@ $container->addServiceProvider('Obullo\Container\ServiceProvider\Cookie');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Session');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Captcha');
 // $container->addServiceProvider('ServiceProvider\ReCaptcha');
-// $container->addServiceProvider('ServiceProvider\Task');
+$container->addServiceProvider('Obullo\Container\ServiceProvider\Task');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Form');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Flash');
 // $container->addServiceProvider('Obullo\Container\ServiceProvider\Csrf');
@@ -35,7 +35,7 @@ $container->addServiceProvider('Obullo\Container\ServiceProvider\User');
 */
 $container->addServiceProvider('ServiceProvider\Connector\Cache');
 $container->addServiceProvider('ServiceProvider\Connector\Redis');
-// $container->addServiceProvider('ServiceProvider\Connector\Memcached');
+$container->addServiceProvider('ServiceProvider\Connector\Memcached');
 // $container->addServiceProvider('ServiceProvider\Connector\Memcache');
 $container->addServiceProvider('ServiceProvider\Connector\Database');
 $container->addServiceProvider('ServiceProvider\Connector\Amqp');

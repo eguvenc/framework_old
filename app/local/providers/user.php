@@ -4,7 +4,8 @@ return array(
     
     'params' => [
 
-        'cache.key' => 'Auth',
+        'db.adapter' => 'Obullo\Authentication\Adapter\Database',
+        'db.model' => 'Obullo\Authentication\Model\Database',
         'db.provider' => [
             'connection' => 'default'
         ],
@@ -16,10 +17,10 @@ return array(
         'db.select' => [
             'date',
         ],
-        'cache' => [            
-            'storage' => '\Obullo\Authentication\Storage\Redis',
+        'cache' => [
+            'key' => 'Auth',
+            'storage' => 'Obullo\Authentication\Storage\Redis',
             'provider' => [
-                'driver' => 'redis',
                 'connection' => 'default'
             ],
             'block' => [
