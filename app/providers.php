@@ -8,6 +8,7 @@
 $container->addServiceProvider('ServiceProvider\View');
 $container->addServiceProvider('ServiceProvider\Url');
 $container->addServiceProvider('ServiceProvider\Layer');
+$container->addServiceProvider('ServiceProvider\Cache');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Db');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Logger');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Translator');
@@ -33,8 +34,8 @@ $container->addServiceProvider('Obullo\Container\ServiceProvider\User');
 |--------------------------------------------------------------------------
 | Specifies your connection managers.
 */
-$container->addServiceProvider('ServiceProvider\Connector\Cache');
 $container->addServiceProvider('ServiceProvider\Connector\Redis');
+$container->addServiceProvider('ServiceProvider\Connector\CacheFactory');
 $container->addServiceProvider('ServiceProvider\Connector\Memcached');
 // $container->addServiceProvider('ServiceProvider\Connector\Memcache');
 $container->addServiceProvider('ServiceProvider\Connector\Database');

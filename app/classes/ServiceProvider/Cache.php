@@ -1,6 +1,6 @@
 <?php
 
-namespace ServiceProvider\Connector;
+namespace ServiceProvider;
 
 use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
@@ -31,8 +31,13 @@ class Cache extends AbstractServiceProvider
     {
         $container = $this->getContainer();
 
-        $container->share('cache', 'Obullo\Container\ServiceProvider\Connector\Cache')
-            ->withArgument($container)
-            ->withArgument($container->get('config'));
+        $container->share(
+            'cache',
+            $container->get('redis')->shared(
+                [
+                    'connection' => 'default'
+                ]
+            )
+        );
     }
 }
