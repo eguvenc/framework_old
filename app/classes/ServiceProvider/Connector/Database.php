@@ -36,7 +36,6 @@ class Database extends AbstractServiceProvider
             ->withArgument($container)
             ->withArgument($config->getParams());
 
-
         // DoctrineDBAL Replacement
         // 
 

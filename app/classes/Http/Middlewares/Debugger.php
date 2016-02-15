@@ -34,9 +34,11 @@ class Debugger implements MiddlewareInterface, ImmutableContainerAwareInterface,
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
+        $params = $this->getContainer()->get('config')->load('debugger');
+
         $this->websocket = new Websocket(
-            $this->getContainer()->get('app'),
-            $this->getContainer()->get('config'),
+            $this->getContainer(),
+            $params,
             $this->getContainer()->get('logger.params')
         );
         $this->websocket->connect();

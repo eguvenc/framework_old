@@ -7,10 +7,6 @@ return array(
     ],
     'http' => [
         'webhost' => 'framework',
-        'debugger' => [
-            'enabled' => false,
-            'socket' => 'ws://127.0.0.1:9000',
-        ],
     ],
     'locale' => [
         'timezone' => 'gmt',
