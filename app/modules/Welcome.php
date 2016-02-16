@@ -11,7 +11,6 @@ class Welcome extends Controller
      */
     public function index()
     {
-
     	// $redis = $this->container->get('redis')->shared(['connection' => 'default']);
 
     	// var_dump($redis);

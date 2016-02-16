@@ -7,8 +7,8 @@
 |
 |  Default Middlewares
 |
-|   - Error ( Added by system )
-|   - NotAllowed ( Added by system )
+|   - Error ( System )
+|   - NotAllowed ( System )
 |   - Router
 |   - View ( Required for Layers )
 */
