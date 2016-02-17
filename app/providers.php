@@ -21,7 +21,7 @@ $container->addServiceProvider('Obullo\Container\ServiceProvider\Captcha');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Task');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Form');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Flash');
-// $container->addServiceProvider('Obullo\Container\ServiceProvider\Csrf');
+$container->addServiceProvider('Obullo\Container\ServiceProvider\Csrf');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Element');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Validator');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\User');

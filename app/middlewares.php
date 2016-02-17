@@ -40,7 +40,7 @@ $middleware->register(
 |--------------------------------------------------------------------------
 | Define router middleware at the top.
 */
-$middleware->add(
+$middleware->init(
     [
         // 'Maintenance',
         // 'TrustedIp',

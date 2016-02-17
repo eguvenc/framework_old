@@ -1,11 +1,10 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Global Errors
+| Exceptions
 |--------------------------------------------------------------------------
-| Specifies the your application global exceptions & errors.
-|
-|  Known Exception Hierarchy
+| 
+| Known Exception Hierarchy
 |
 |   - Exception
 |       - ErrorException
