@@ -11,6 +11,7 @@ class Welcome extends Controller
      */
     public function index()
     {
+        // print_r($this->config->load('maintenance')['subdomain']);
 
     	// $redis = $this->container->get('redis')->shared(['connection' => 'default']);
 

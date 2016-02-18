@@ -9,6 +9,7 @@ $container->addServiceProvider('ServiceProvider\View');
 $container->addServiceProvider('ServiceProvider\Url');
 $container->addServiceProvider('ServiceProvider\Layer');
 $container->addServiceProvider('ServiceProvider\Cache');
+// $container->addServiceProvider('ServiceProvider\Queue');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Db');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Logger');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Translator');
@@ -17,7 +18,7 @@ $container->addServiceProvider('Obullo\Container\ServiceProvider\Translator');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Cookie');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Session');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Captcha');
-// $container->addServiceProvider('ServiceProvider\ReCaptcha');
+// $container->addServiceProvider('Obullo\Container\ServiceProvider\ReCaptcha');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Task');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Form');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Flash');
@@ -25,8 +26,7 @@ $container->addServiceProvider('Obullo\Container\ServiceProvider\Flash');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Element');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Validator');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\User');
-// $container->addServiceProvider('ServiceProvider\QueueAmqp');
-// $container->addServiceProvider('ServiceProvider\QueryBuilder');
+// $container->addServiceProvider('Obullo\Container\ServiceProvider\QueryBuilder');
 
 /*
 |--------------------------------------------------------------------------
