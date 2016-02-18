@@ -111,7 +111,7 @@ function removeErrorClass(field, element, fieldAlreadyHasError){
 function refreshCaptcha(myform){
     var captcha = myform.captcha_image;
     if (captcha) {
-        myform.captcha_image.src="/captcha/create/index/'" + Math.random();
+        myform.captcha_image.src="/captcha/index/'" + Math.random();
         myform.captcha_answer.value = '';
     }
 }

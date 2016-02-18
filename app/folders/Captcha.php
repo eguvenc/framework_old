@@ -1,10 +1,8 @@
 <?php
 
-namespace Captcha;
-
 use Obullo\Http\Controller;
 
-class Create extends Controller
+class Captcha extends Controller
 {
     /**
      * Index

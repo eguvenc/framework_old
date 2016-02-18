@@ -1,7 +1,5 @@
 <?php
 
-namespace Debugger;
-
 use Obullo\Http\Controller;
 use Obullo\Debugger\Manager;
 
@@ -16,12 +14,14 @@ class Debugger extends Controller
 
     /**
      * Constructor
+     *
+     * @param object $container Interop\Container\ContainerInterface
      * 
      * @return void
      */
-    public function __construct()
+    public function __construct($container)
     {
-        $this->debugger = new Manager;
+        $this->debugger = new Manager($container);
     }
 
     /**
@@ -73,12 +73,12 @@ class Debugger extends Controller
         /**
          * Disable websocket
          */
-        $newArray = $this->config->load('debugger');
+        $newArray = $this->config->load('config');
 
-        if ($newArray['enabled'] == true) {
+        if ($newArray['extra']['debugger'] == true) {
             $disconnect = 1;
-            $newArray['enabled'] = false;
-            $this->config->write('debugger', $newArray);
+            $newArray['extra']['debugger'] = false;
+            $this->config->write('config', $newArray);
         } else {
             $disconnect = 0;
         }

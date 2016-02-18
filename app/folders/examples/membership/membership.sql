@@ -21,16 +21,3 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_email` varchar(160) NOT null,
   PRIMARY KEY (`usr_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Table structure for table `sessions`
---
-
-CREATE TABLE IF NOT EXISTS  `frm_sessions` (
-session_id varchar(40) DEFAULT '0' NOT null,
-ip_address varchar(16) DEFAULT '0' NOT null,
-user_agent varchar(50) NOT null,
-last_activity int(10) unsigned DEFAULT 0 NOT null,
-user_data text character set utf8 NOT null,
-PRIMARY KEY (session_id)
-);

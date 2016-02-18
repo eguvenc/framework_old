@@ -15,7 +15,7 @@ use Obullo\Http\Middleware\MiddlewareInterface;
 class Debugger implements MiddlewareInterface, ImmutableContainerAwareInterface, TerminableInterface
 {
     use ImmutableContainerAwareTrait;
-
+    
     /**
      * Websocket
      * 

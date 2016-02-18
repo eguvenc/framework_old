@@ -5,18 +5,12 @@ return array(
     'log' => [
         'enabled' => true,
     ],
-    'http' => [
-        'webhost' => 'framework',
-    ],
     'locale' => [
         'timezone' => 'gmt',
         'charset' => 'UTF-8',
         'date' => [
             'format' => 'H:i:s d:m:Y',
         ],
-    ],
-    'extra' => [
-        'annotations' => false,
     ],
     'cookie' => [
         'domain' => '',
@@ -30,5 +24,9 @@ return array(
         'encryption' => [
             'key' => 'write-your-secret-key',
         ],
+    ],
+    'extra' => [
+        'debugger' => false,
+        'annotations' => false,
     ],
 );

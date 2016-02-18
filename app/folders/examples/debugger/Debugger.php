@@ -14,9 +14,9 @@ class Debugger extends Controller
      */
     public function index()
     {
-        if (! is_dir(MODULES .'debugger')) {
+        if (! is_file(FOLDERS .'Debugger.php')) {
             throw new RuntimeException(
-                "Debugger module is not enabled. Install debugger module."
+                "Debugger controller is not exists. Please first install it."
             );
         }
         $this->view->load('debugger');

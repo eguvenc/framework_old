@@ -36,14 +36,14 @@ class View extends AbstractServiceProvider
             ->withArgument($container->get('logger'))
             ->withArgument(
                 [
-                    'engine' => 'Obullo\View\Plates\Plates',
+                    'engine' => 'Obullo\View\Native', // 'Obullo\View\Plates\Plates',
                 ]
             )
             ->withMethodCall(
                 'addFolder',
                 [
                     'views',
-                    MODULES .'views/view/'
+                    FOLDERS .'views/view/'
                 ]
             )
             ->withMethodCall(

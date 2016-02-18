@@ -48,7 +48,7 @@ return array(
             ],
             'img' => [
                 'attributes' => [             
-                    'src'   =>  '/captcha/create/index/',
+                    'src'   =>  '/captcha/index/',
                     'style' => 'display:block;float:left;margin-right:10px;margin-top:10px;',
                     'id'    => 'captcha_image',
                     'class' => ''
