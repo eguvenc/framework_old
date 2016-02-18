@@ -39,7 +39,6 @@ register_shutdown_function(
 
 require OBULLO .'Application/Autoloader.php';
 Obullo\Application\Autoloader::register();
-
 /*
 |--------------------------------------------------------------------------
 | Set timezone identifier

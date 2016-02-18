@@ -1,7 +1,6 @@
 <?php
 
 return array(
-    
     'OBULLO:VALIDATOR:REQUIRED'        => 'The %s field is required.',
     'OBULLO:VALIDATOR:EMAIL'           => "The %s field must contain a valid email address.",
     'OBULLO:VALIDATOR:MIN'             => "The %s field must be at least %s characters in length.",

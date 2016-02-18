@@ -14,16 +14,16 @@ $router->configure(
     ]
 );
 
-// $c['router']->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
+// $router->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
 
-// $c['router']->get(
+// $router->get(
 //     '{id}/{name}/{any}', 'welcome/index/$1/$2/$3',
 //     function ($id, $name, $any) use ($c) {
 //         echo $id.'-'.$name.'-'.$any;
 //     }
 // )->where(['id' => '([0-9]+)', 'name' => '([a-z]+)', 'any' => '(.+)']);
 
-// $c['router']->middleware('Maintenance');
+// $router->middleware('Maintenance');
 
 // $router->group(
 //     [
@@ -39,14 +39,14 @@ $router->configure(
 //     }
 // );
 
-// $c['router']->get(
+// $router->get(
 //     'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2',
 //     function () use ($c) {
 //         $c['view']->load('dummy');
 //     }
 // )->attach('welcome/(.*)',  array('activity')); 
 
-// $c['router']->attach('(.)', array('maintenance'));
+// $router->attach('(.)', array('maintenance'));
 
 $router->group(
     [
@@ -82,9 +82,9 @@ $router->group(
     }
 );
 
-// $c['router']->error404('errors/page_not_found');
+// $router->error404('errors/page_not_found');
 
 // Example Api
 
 
-// $c['router']->match(array('get', 'post'), 'welcome', 'welcome/test');
+// $router->match(array('get', 'post'), 'welcome', 'welcome/test');

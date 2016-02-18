@@ -8,6 +8,6 @@ use Obullo\Authentication\User\Identity as AuthIdentity;
 class Identity extends AuthIdentity
 {
 	/**
-	 * Implement your methods.
+	 * Create your methods.
 	 */
 }

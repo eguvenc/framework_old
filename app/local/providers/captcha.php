@@ -68,7 +68,6 @@ return array(
             ]
         ]
     ],
-    
     'methods' => [
         ['name' => 'setBackground','argument' => ['secure']],
         ['name' => 'setPool','argument' => ['alpha']],

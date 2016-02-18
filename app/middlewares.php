@@ -7,8 +7,8 @@
 |
 |  Default Middlewares
 |
-|   - Error ( Added by system )
-|   - NotAllowed ( Added by system )
+|   - Error ( System )
+|   - NotAllowed ( System )
 |   - Router
 |   - View ( Required for Layers )
 */
@@ -40,7 +40,7 @@ $middleware->register(
 |--------------------------------------------------------------------------
 | Define router middleware at the top.
 */
-$middleware->add(
+$middleware->init(
     [
         // 'Maintenance',
         // 'TrustedIp',

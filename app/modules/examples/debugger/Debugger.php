@@ -16,10 +16,7 @@ class Debugger extends Controller
     {
         if (! is_dir(MODULES .'debugger')) {
             throw new RuntimeException(
-                sprintf(
-                    "Debugger module is not enabled.Install debugger module. %s",
-                    "<pre>php task module add debugger</pre>"
-                )
+                "Debugger module is not enabled. Install debugger module."
             );
         }
         $this->view->load('debugger');

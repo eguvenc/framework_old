@@ -15,6 +15,6 @@ use Obullo\Authentication\Model\UserInterface;
 class User implements UserInterface
 {
     /**
-     * Implement your methods.
+     * Create your methods.
      */
 }
