@@ -11,6 +11,12 @@ class Welcome extends Controller
      */
     public function index()
     {
+        // print_r($messages);
+
+        // foreach ( as $message) {
+        //     echo $messsage;
+        // }
+
     	// $redis = $this->container->get('redis')->shared(['connection' => 'default']);
 
     	// var_dump($redis);
@@ -18,7 +24,7 @@ class Welcome extends Controller
     	// $this->database->shared(['connection' => 'default']);
 
     	// var_dump($this->container->hasShared('database'));
-
+         
         $this->view->load('views::welcome');
     }
 }

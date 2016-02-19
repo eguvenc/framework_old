@@ -43,7 +43,7 @@
       <div class="content description">
       
         <section>
-          <?php echo $this->flash->output() ?>
+          <?php echo $this->flash->getOutput() ?>
           <a href="/examples/membership/logout" class="btn btn-default">Logout</a>
           <a href="/examples/membership/logout?action=forgetMe" class="btn btn-default">Forget Me</a>
           <a href="/examples/membership/logout?action=destroyMe" class="btn btn-default">Destroy Me</a>

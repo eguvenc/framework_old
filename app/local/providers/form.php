@@ -5,12 +5,8 @@ return array(
     'params' => [
     
         /**
-        * Form Messages
+        * Form message templates.
         * 
-        * This file contains form messages configurations.
-        * It is used by Form class to set messages HTML template or attributes.
-        * Array keys are predefined in form class file.
-        *
         * Note : Default CSS classes brought from getbootstrap.com
          */
         'notification' => 
@@ -33,10 +29,16 @@ return array(
                 'icon' => '<span class="glyphicon glyphicon-info-sign"></span> '
             ],
         ],
-        'error' => [
-            'class' => 'has-error has-feedback',
-            'label' => '<label class="control-label" for="%s">%s</label>
-            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>'
+        /**
+        * Form validation errors.
+         */
+        'validation' => [
+
+            'error' => [
+                'class' => 'has-error has-feedback',
+                'label' => '<label class="control-label" for="%s">%s</label>
+                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>'
+            ]
         ]
     ],
 

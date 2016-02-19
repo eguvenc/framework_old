@@ -3,8 +3,8 @@
 namespace Auth;
 
 use Pdo;
-use Obullo\Container\ServiceProvider\ServiceProviderInterface as ServiceProvider;
 use Obullo\Authentication\Model\UserInterface;
+use Interop\Container\ContainerInterface as Container;
 
 /**
  * User Model

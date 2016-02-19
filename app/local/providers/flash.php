@@ -5,12 +5,8 @@ return array(
     'params' => [
             
         /**
-        * Flash Messages
+        * Flash message templates.
         * 
-        * This file contains flash messages configurations.
-        * It is used by Flash class to set messages HTML template or attributes.
-        * Array keys are predefined in flash class file.
-        *
         * Note : Default CSS classes brought from getbootstrap.com
          */
         'notification' => 
