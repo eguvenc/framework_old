@@ -36,9 +36,11 @@ class Url extends AbstractServiceProvider
             ->withArgument($container->get('logger'))
             ->withArgument(
                 [
-                    'baseurl'  => '/',
+                    'base'  => [
+                        'path' => '/'
+                    ],
                     'assets'   => [
-                        'url' => '/',
+                        'path' => '/',
                         'folder' => '/assets/',
                     ]
                 ]

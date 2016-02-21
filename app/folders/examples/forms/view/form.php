@@ -95,8 +95,8 @@
         <hr />
 
         <section>
-            <h4>$this->form->outputArray()</h4>
-            <pre><?php echo strip_tags(print_r($this->form->outputArray(), true)); ?>
+            <h4>$this->form->getOutputArray()</h4>
+            <pre><?php echo strip_tags(print_r($this->form->getOutputArray(), true)); ?>
             </pre>
 
             <h4>$this->form->getError('email')</h4>
