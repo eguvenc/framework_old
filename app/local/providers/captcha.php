@@ -3,10 +3,7 @@
 return array(
     
     'params' => [
-
-        'locale' => [
-            'charset' => 'utf-8'
-        ],
+    
         'characters' => [
             'default' => [
                 'pool' => 'random'
@@ -36,48 +33,11 @@ return array(
             'yellow' => '255,255,0',
             'cyan'   => '0,146,134',
         ],
-        'form' => [
-            'input' => [
-                'attributes' => [
-                    'type'  => 'text',
-                    'name'  => 'captcha_answer',
-                    'class' => 'form-control',
-                    'id'    => 'captcha_answer',      
-                    'placeholder' => 'Security Code'
-                ]
-            ],
-            'img' => [
-                'attributes' => [             
-                    'src'   =>  '/captcha/index/',
-                    'style' => 'display:block;float:left;margin-right:10px;margin-top:10px;',
-                    'id'    => 'captcha_image',
-                    'class' => ''
-                ]
-            ],
-            'refresh' => [
-                'button' => '<button type="button" style="margin-top:10px;" onclick="refreshCaptcha(this.form);" class="btn btn-default" aria-label="Left Align">
-                  <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-                  Refresh
-                </button>',
-            ],
-        ],
         'text' => [
             'colors' =>  [
                 'text' => ['red'],
                 'noise' => ['red']
             ]
         ]
-    ],
-    'methods' => [
-        ['name' => 'setBackground','argument' => ['secure']],
-        ['name' => 'setPool','argument' => ['alpha']],
-        ['name' => 'setChar','argument' => [5]],
-        ['name' => 'setFont','argument' => ['NightSkK','AlphaSmoke','Popsf']],
-        ['name' => 'setFontSize','argument' => [20]],
-        ['name' => 'setHeight','argument' => [36]],
-        ['name' => 'setWave','argument' => [false]],
-        ['name' => 'setColor','argument' => ['red', 'black']],
-        ['name' => 'setTrueColor','argument' => [false]],
-        ['name' => 'setNoiseColor','argument' => ['red']],
     ]
 );

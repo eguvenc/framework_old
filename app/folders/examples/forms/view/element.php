@@ -45,20 +45,22 @@
       <div class="content">
 
         <?php echo $this->form->getMessages() ?>
+        
+        <?php $element = $this->form->getElement() ?>
 
-          <?php echo $this->element->form('/examples/forms/element', ' method="POST" role="form" ') ?>
+          <?php echo $element->form('/examples/forms/element', ' method="POST" role="form" ') ?>
 
           <div class="form-group <?php echo $this->form->getErrorClass('name') ?>">
             <?php
                 echo $this->form->getErrorLabel('name');
-                echo $this->element->input('name', $this->form->getValue('name'), ' class="form-control" id="name" placeholder="Name" ');
+                echo $element->input('name', $this->form->getValue('name'), ' class="form-control" id="name" placeholder="Name" ');
             ?>
           </div>
 
           <div class="form-group <?php echo $this->form->getErrorClass('email') ?>">
             <?php
               echo $this->form->getErrorLabel('email');
-              echo $this->element->input('email', $this->form->getValue('email'), ' class="form-control" id="email" placeholder="Email" ');
+              echo $element->input('email', $this->form->getValue('email'), ' class="form-control" id="email" placeholder="Email" ');
             ?>
           </div>
 
@@ -75,21 +77,21 @@
                   'class'     => 'form-control',
                   'placeholder' => 'Your Message',
               );
-              echo $this->element->textarea($data);
+              echo $element->textarea($data);
             ?>
           </div>
 
           <div class="<?php echo $this->form->getErrorClass('subscribe') ?>">
             <div class="checkbox">
-              <label for="subscribe"><?php echo $this->element->checkbox('subscribe', 1, $this->form->setCheckbox('subscribe', 1), ' id="subscribe" ')?>Subscribe to newsletter</label>
+              <label for="subscribe"><?php echo $element->checkbox('subscribe', 1, $this->form->setCheckbox('subscribe', 1), ' id="subscribe" ')?>Subscribe to newsletter</label>
             </div>
           </div>
 
         <div class="form-group <?php echo $this->form->getErrorClass('communicate') ?>">
           <p>How we communicate with you ?</p>
           <div class="radio">
-          <label for="communicate1"><?php echo $this->element->radio('communicate', 'email', $this->form->setRadio('communicate', 'email'), ' id="communicate1" ') ?>&nbsp;By Email</label>
-          <label for="communicate2"><?php echo $this->element->radio('communicate', 'phone', $this->form->setRadio('communicate', 'phone'), ' id="communicate2" '); ?>&nbsp;By Phone</label>
+          <label for="communicate1"><?php echo $element->radio('communicate', 'email', $this->form->setRadio('communicate', 'email'), ' id="communicate1" ') ?>&nbsp;By Email</label>
+          <label for="communicate2"><?php echo $element->radio('communicate', 'phone', $this->form->setRadio('communicate', 'phone'), ' id="communicate2" '); ?>&nbsp;By Phone</label>
           </div>
         </div>
 
@@ -105,18 +107,18 @@
                 'radio'  => 'Radio',
                 'friend'  => 'A friend',
             );
-            echo $this->element->dropdown('hear', $options, $this->form->getValue('hear'), ' class="form-control" ');
+            echo $element->dropdown('hear', $options, $this->form->getValue('hear'), ' class="form-control" ');
           ?>
         </div>
 
-        <?php echo $this->element->submit('submitForm', "Submit", ' class="btn btn-default" '); ?>
-        <?php echo $this->element->formClose() ?>
+        <?php echo $element->submit('submitForm', "Submit", ' class="btn btn-default" '); ?>
+        <?php echo $element->formClose() ?>
 
         <hr />
 
         <section>
-            <h4>$this->form->outputArray()</h4>
-            <pre><?php echo strip_tags(print_r($this->form->outputArray(), true)); ?>
+            <h4>$this->form->getOutputArray()</h4>
+            <pre><?php echo strip_tags(print_r($this->form->getOutputArray(), true)); ?>
             </pre>
 
             <h4>$this->form->getError('name')</h4>

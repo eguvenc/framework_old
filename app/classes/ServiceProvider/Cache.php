@@ -33,8 +33,9 @@ class Cache extends AbstractServiceProvider
 
         $container->share(
             'cache',
-            $container->get('redis')->shared(
+            $container->get('cacheFactory')->shared(
                 [
+                    'driver' => 'redis',
                     'connection' => 'default'
                 ]
             )

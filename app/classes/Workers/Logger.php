@@ -93,17 +93,28 @@ class Logger implements JobInterface, ImmutableContainerAwareInterface
                 $handler = null;
                 break;
             }
-            if (is_object($handler) && $handler->isAllowed($event, $request)) { // Check write permissions
 
-                $filteredEvent = Filter::handle($event);
+            /**
+             * Check write permissions.
+             */
+            if (is_object($handler)) {
 
-                $handler->write($filteredEvent);  // Do job
-                $handler->close();
-
-                if ($this->job instanceof Job) {
-                    $this->job->delete();  // Delete job from queue
+                if ($event['request'] == 'worker') {   // Disable worker server logs.
+                    return;
                 }
-            }
+                if ($handler->isAllowed($event, $request)) {  // Do not remove this line.
+                    
+                    $filteredEvent = Filter::handle($event);
+
+                    $handler->write($filteredEvent);  // Do job
+                    $handler->close();
+
+                    if ($this->job instanceof Job) {
+                        $this->job->delete();  // Delete job from queue
+                    }
+                }
+
+            }  // end allowed if
         
         } // end foreach
     }
@@ -132,7 +143,7 @@ Array
                                 )
 
                         )
-            [record] => Array
+            [records] => Array
                 (
                     [0] => Array
                         (

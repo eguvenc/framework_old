@@ -8,6 +8,7 @@ return array(
             'connection' => 'default'
         ],
         'storage' => [
+            'driver' => 'redis',  // apc, memcached, memcache, file
             'key' => 'sessions:',
             'lifetime' => 3600,
         ],
@@ -22,7 +23,7 @@ return array(
         ],
     ],
     'methods' => [
-        ['name' => 'registerSaveHandler','argument' => ['\Obullo\Session\SaveHandler\Cache']],
+        ['name' => 'registerSaveHandler','argument' => ['Obullo\Session\SaveHandler\Cache']],
         ['name' => 'setName','argument' => ['']],
         ['name' => 'start','argument' => ['']]
     ]

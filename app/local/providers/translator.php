@@ -2,14 +2,6 @@
 
 return array(
 
-    /*
-    | -------------------------------------------------------------------
-    | Translator
-    | -------------------------------------------------------------------
-    | Set : Write default language to cookie.
-    | Locale : This determines which set of language files should be used by default.
-    |
-    */
     'params' => [
 
         'default' => [

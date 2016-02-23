@@ -2,10 +2,7 @@
 
 namespace Log\Filters;
 
-use Obullo\Container\ParamsAwareTrait;
-use Obullo\Container\ParamsAwareInterface;
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
+use Obullo\Log\AbstractFilter;
 
 /**
  * Filter
@@ -13,19 +10,22 @@ use League\Container\ImmutableContainerAwareInterface;
  * @copyright 2009-2016 Obullo
  * @license   http://opensource.org/licenses/MIT MIT license
  */
-class Filter implements ImmutableContainerAwareInterface, ParamsAwareInterface
+class Filter implements AbstractFilter
 {
-    use ImmutableContainerAwareTrait, ParamsAwareTrait;
-
     /**
      * Handle record array
      * 
-     * @param array $record unformatted record data
+     * @param array $record log record
+     * @param array $params possible parameters
      * 
      * @return array|null
      */
-    public function method(array $record)
+    public function method(array $record, $params = array())
     {
-
+        /**
+         * Filter operation.
+         */
+        
+        return $record;
     }
 }
