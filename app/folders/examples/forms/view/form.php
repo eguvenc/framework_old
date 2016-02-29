@@ -43,7 +43,7 @@
 
       <div class="content">
 
-        <?php echo $this->form->getMessages() ?>
+        <?php echo $this->form->getMessageString() ?>
 
          <form role="form" action="/examples/forms/form" method="POST">
           

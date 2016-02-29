@@ -48,7 +48,7 @@
         <?php
         if ($results = $this->form->getResultArray()) {
             foreach ($results['messages'] as $message) {
-                echo $this->form->getMessages($message);
+                echo $this->form->getMessageString($message);
             }
         }
         ?>

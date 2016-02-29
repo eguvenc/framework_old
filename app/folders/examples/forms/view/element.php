@@ -44,7 +44,7 @@
 
       <div class="content">
 
-        <?php echo $this->form->getMessages() ?>
+        <?php echo $this->form->getMessageString() ?>
         
         <?php $element = $this->form->getElement() ?>
 

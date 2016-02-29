@@ -15,6 +15,7 @@ return array(
         ],
         'fallback' => [
             'enabled' => false,
+            'translation' => false,
             'locale' => 'en',
         ],
         'uri' => [

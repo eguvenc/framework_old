@@ -46,7 +46,7 @@
 
       <div class="content">
 
-        <?php echo $this->form->getMessages() ?>
+        <?php echo $this->form->getMessageString() ?>
 
          <form style="width: 300px;" role="form" action="/examples/recaptcha" method="POST">
 
@@ -64,8 +64,8 @@
         </form>
 
         <section>
-            <h4>$this->form->outputArray()</h4>
-            <pre><?php echo strip_tags(print_r($this->form->outputArray(), true)); ?>
+            <h4>$this->form->getOutputArray()</h4>
+            <pre><?php echo strip_tags(print_r($this->form->getOutputArray(), true)); ?>
             </pre>
 
             <h4>$this->form->getValidationErrors()</h4>

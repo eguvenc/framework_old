@@ -2,8 +2,8 @@
 
 namespace Examples\Layers;
 
-use Obullo\Http\Controller;
 use View\Base;
+use Obullo\Http\Controller;
 
 class Layout extends Controller
 {

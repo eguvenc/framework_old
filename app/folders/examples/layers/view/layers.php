@@ -45,7 +45,7 @@
         <ul>
           <li><a href="/examples/layers/welcome">Merhaba Katmanlar</a></li>
           <li><a href="/examples/layers/navbar">Gezinti Çubuğu</a></li>
-          <li><a href="/examples/layers/layout">Şema Kullanımı (Trait)</a></li>
+          <li><a href="/examples/layers/layout">Şemalar</a></li>
         </ul>
       </div>
 

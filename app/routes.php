@@ -14,14 +14,21 @@ $router->configure(
     ]
 );
 
-// $router->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
+// $router->get(
+//     '{id}/{name}/{any}', 'welcome/index/$1/$2/$3',
+//     function ($id, $name, $any) {
+//         echo $id.'-'.$name.'-'.$any;
+//     }
+// )->where(array('id' => '[0-9]+', 'name' => '[a-z]+', 'any' => '.*'));
+
+// $router->get('[0-9]+/.*', 'welcome/index/$1/$2/');
 
 // $router->get(
 //     '{id}/{name}/{any}', 'welcome/index/$1/$2/$3',
 //     function ($id, $name, $any) use ($c) {
 //         echo $id.'-'.$name.'-'.$any;
 //     }
-// )->where(['id' => '([0-9]+)', 'name' => '([a-z]+)', 'any' => '(.+)']);
+// )->where(['id' => '[0-9]+', 'name' => '[a-z]+', 'any' => '.+']);
 
 // $router->middleware('Maintenance');
 
@@ -31,7 +38,7 @@ $router->configure(
 //     ],
 //     function () {
 
-//         // $this->get('([0-9]+)/(.*)', 'welcome/index/$1/$2');
+//         // $this->get('[0-9]+/.*', 'welcome/index/$1/$2');
 
 //         // $this->attach('.*'); // all urls
 //         // $this->attach('welcome');
@@ -40,36 +47,40 @@ $router->configure(
 // );
 
 // $router->get(
-//     'welcome/([0-9]+)/([a-z]+)', 'welcome/$1/$2',
+//     'welcome/[0-9]+/[a-z]+', 'welcome/$1/$2',
 //     function () use ($c) {
-//         $c['view']->load('dummy');
+//         $container->get('view')->load('views::dummy');
 //     }
-// )->attach('welcome/(.*)',  array('activity')); 
+// )->attach('welcome/.*',  array('activity')); 
 
-// $router->attach('(.)', array('maintenance'));
+// $router->attach('.', array('maintenance'));
 
+/**
+ * Generic users
+ */
 $router->group(
     [
-        'name' => 'GenericUsers', 
-        // 'match' => '([0-9]+)/([a-z]+).*',   // Match URI
+        // 'match' => '[0-9]+/[a-z]+.*',   // Match URI
         'domain' => 'framework',
         'middleware' => array()  // 'RewriteLocale'
     ],
     function ($sub) use ($container) {
 
-            // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
+        // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
 
-            // $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
-            // $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
-            // $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
+        // $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
+        // $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
+        // $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
 
-            // $this->attach('.*'); // all urls
+        // $this->attach('.*'); // all urls
     }
 );
 
+/**
+ * Authorized users
+ */
 $router->group(
     [
-        'name' => 'AuthorizedUsers',
         'middleware' => array('Auth', 'Guest')
     ],
     function () {

@@ -47,7 +47,10 @@ class App implements MiddlewareInterface, ImmutableContainerAwareInterface
 
         if (! $result) {
 
-            $body = $this->getContainer()->get('view')->withStream()->get('templates::404');
+            $body = $this->getContainer()
+                ->get('view')
+                ->withStream()
+                ->get('templates::404');
 
             return $response->withStatus(404)
                 ->withHeader('Content-Type', 'text/html')

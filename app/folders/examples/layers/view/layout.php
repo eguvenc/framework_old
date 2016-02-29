@@ -11,7 +11,7 @@
     
     <!-- <link rel="icon" href="favicon.ico"> -->
 
-    <title>Şema Kullanımı</title>
+    <title>Şemalar</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
@@ -37,44 +37,34 @@
             <li role="presentation"><a href="#">Dökümentasyon</a></li>
           </ul>
         </nav>
-        <h2 class="text-muted"><a href="/examples/">Şema Kullanımı</a></h2>
+        <h2 class="text-muted"><a href="/examples/">Şemalar</a></h2>
       </div>
-
-      <header>
-        <?php echo $header ?>
-      </header>
-
-      <div class="content">
-        <pre>Content</pre>
-      </div>
-
-      <footer class="footer" style="padding-top:0;border:none;">
-        <?php echo $footer ?>
-      </footer>
-
-<h4>View trait</h4>
 
 <pre>
-namespace View;
-
-Trait Base
+class Layout extends Controller
 {
-    public function __invoke()
-    {
-        $this->view->assign(
-            [
-                'header' => $this->layer->get('views/header'),
-                'footer' => $this->layer->get('views/footer')
-            ]
-        );
+    use \View\Base;
+
+    public function index()
+    {   
+        $this->view->load('layout');
     }
 }
-
-// location.  app/classes/Views/Base.php
 </pre>
 
+      <pre>echo $header</pre>
+
+      <header>
+        <pre><?php echo htmlentities($header) ?></pre>
+      </header>
+
+      <pre>echo $footer</pre>
+
+      <footer class="footer" style="padding-top:0;border:none;">
+        <pre><?php echo htmlentities($footer) ?></pre>
+      </footer>
+
+
     </div> <!-- /container -->
-
-
   </body>
 </html>

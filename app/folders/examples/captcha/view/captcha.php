@@ -53,7 +53,7 @@
 
       <div class="content">
 
-        <?php echo $this->form->getMessages() ?>
+        <?php echo $this->form->getMessageString() ?>
 
          <form style="width: 300px;" role="form" action="/examples/captcha" method="POST">
 

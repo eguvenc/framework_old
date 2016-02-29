@@ -5,8 +5,8 @@
 |--------------------------------------------------------------------------
 | Specifies your application components, services and service providers.
 */
-$container->addServiceProvider('ServiceProvider\View');
 $container->addServiceProvider('ServiceProvider\Url');
+$container->addServiceProvider('ServiceProvider\View');
 $container->addServiceProvider('ServiceProvider\Layer');
 $container->addServiceProvider('ServiceProvider\Cache');
 $container->addServiceProvider('ServiceProvider\Captcha');
@@ -24,6 +24,7 @@ $container->addServiceProvider('Obullo\Container\ServiceProvider\Form');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Flash');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Csrf');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Validator');
+$container->addServiceProvider('Obullo\Container\ServiceProvider\Password');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\User');
 // $container->addServiceProvider('Obullo\Container\ServiceProvider\QueryBuilder');
 
@@ -33,10 +34,10 @@ $container->addServiceProvider('Obullo\Container\ServiceProvider\User');
 |--------------------------------------------------------------------------
 | Specifies your connection managers.
 */
-$container->addServiceProvider('ServiceProvider\Connector\Redis');
+$container->addServiceProvider('ServiceProvider\Connector\Amqp');
+$container->addServiceProvider('ServiceProvider\Connector\Database');
 $container->addServiceProvider('ServiceProvider\Connector\CacheFactory');
+$container->addServiceProvider('ServiceProvider\Connector\Redis');
 $container->addServiceProvider('ServiceProvider\Connector\Memcached');
 // $container->addServiceProvider('ServiceProvider\Connector\Memcache');
-$container->addServiceProvider('ServiceProvider\Connector\Database');
-$container->addServiceProvider('ServiceProvider\Connector\Amqp');
 $container->addServiceProvider('ServiceProvider\Connector\Mongo');

@@ -45,10 +45,9 @@ return array(
                 ]
             ],
         ],
-        'security' => [
-            'passwordNeedsRehash' => [
-                'cost' => 6
-            ],
+        'password' => [
+            'algo' => PASSWORD_BCRYPT,
+            'cost' => 6
         ],
         'session' => [
             'regenerateSessionId' => true,

@@ -24,17 +24,18 @@ return array(
             'connection' => 'default'
         ],
 
-        'failedJob' => 
+        'job' => 
         [
-            'enabled' => true,
-            'storage' => '\Obullo\Queue\Failed\Storage\Database',
-            'provider' => [
-                'name' => 'database',
-                'params' => [
+            'saveFailures' => [
+
+                'enabled' => true,
+                'storage' => '\Obullo\Queue\Failed\Storage\Database',
+                'provider' => [
+                    'name' => 'database',
                     'connection' => 'failed',
-                ]
-            ],
-            'table' => 'failures',
+                ],
+                'table' => 'failures',
+            ]
         ],
     ]
 );

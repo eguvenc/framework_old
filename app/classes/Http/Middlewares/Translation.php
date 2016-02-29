@@ -38,7 +38,7 @@ class Translation implements MiddlewareInterface, ImmutableContainerAwareInterfa
 
         $this->cookieValue = $this->readCookie();
         $this->setLocale();
-        // $this->setFallback();
+        $this->setFallback();
 
         return $next($request, $response);
     }
@@ -85,6 +85,9 @@ class Translation implements MiddlewareInterface, ImmutableContainerAwareInterfa
      */
     protected function setFallback()
     {
+        if (! $this->params['fallback']['translation']) {
+            return;
+        }
         $locale   = $this->translator->getLocale();
         $fallback = $this->translator->getFallback();
 

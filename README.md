@@ -33,8 +33,7 @@ Create your composer.json file and dependencies
         "psr/http-message": "^1.0",
         "ircmaxell/password-compat": "^1.0",
         "league/container": "^2.0",
-        "league/event": "^2.1",
-        "league/plates": "^3.1"
+        "league/event": "^2.1"
     }
 }
 ```
@@ -87,9 +86,10 @@ $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($container);
 | Create your http server
 |--------------------------------------------------------------------------
 */
-$server = Obullo\Http\Server::createServerFromRequest(
+$server = Obullo\Http\Zend\Diactoros\Server::createServerFromRequest(
     $app,
-    Obullo\Log\Benchmark::start($app->getRequest())
+    Obullo\Log\Benchmark::start($app->getRequest()),
+    $app->getResponse()
 );
 /*
 |--------------------------------------------------------------------------
