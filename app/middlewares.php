@@ -46,7 +46,7 @@ $middleware->init(
         // 'TrustedIp',
         // 'ParsedBody',
         // 'Translation',
-        'View',
+        // 'View',
         'Router',
     ]
 );

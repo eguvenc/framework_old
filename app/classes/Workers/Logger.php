@@ -7,6 +7,7 @@ use Obullo\Log\Filter;
 use Obullo\Log\Handler\File;
 use Obullo\Log\Handler\Mongo;
 use Obullo\Queue\JobInterface;
+use Obullo\Log\Handler\MetadataAwareInterface;
 
 use League\Container\ImmutableContainerAwareTrait;
 use League\Container\ImmutableContainerAwareInterface;
@@ -27,20 +28,24 @@ class Logger implements JobInterface, ImmutableContainerAwareInterface
      * 
      * @var array
      */
-    protected $writers;
+    protected $data;
 
     /**
      * Fire the job
      * 
-     * @param mixed $job  object|null
      * @param array $data log data
+     * @param mixed $job  object|null
      * 
      * @return void
      */
-    public function fire($job, array $data)
+    public function fire(array $data, $job = null)
     {
         $this->job = $job;
-        $this->writers = $data['writers'];
+        $this->data = $data;
+
+        if ($data['meta']['request'] == 'worker') {   // Disable worker server logs.
+            return;
+        }
         $this->process();
     }
 
@@ -52,9 +57,7 @@ class Logger implements JobInterface, ImmutableContainerAwareInterface
      */
     public function process()
     {
-        $request = $this->container->get('request');
-
-        foreach ($this->writers as $event) {
+        foreach ($this->data['writers'] as $event) {
 
             switch ($event['handler']) {
             case 'file':
@@ -65,27 +68,23 @@ class Logger implements JobInterface, ImmutableContainerAwareInterface
                             'http'  => '/resources/data/logs/http.log',
                             'cli'   => '/resources/data/logs/cli.log',
                             'ajax'  => '/resources/data/logs/ajax.log',
+                            'worker' => '/resources/data/logs/worker.log',
                         ],
                     ]
                 );
                 break;
             case 'mongo':
-                $provider = $this->container->get('mongo')->shared(
-                    [
-                        'connection' => 'default'
-                    ]
-                );
                 $handler = new Mongo(
-                    $provider,
                     $this->container->get('logger.params'),
+                    $this->container->get('mongo')->shared(['connection' => 'default']),
                     [
                         'database' => 'db',
                         'collection' => 'logs',
-                        'save_options' => null,
-                        'save_format' => [
+                        'options' => array(),
+                        'encoding' => [
                             'context' => 'array',  // json
-                            'extra'   => 'array'   // json
-                        ],
+                            'extra'   => 'array',  // json
+                        ]
                     ]
                 );
                 break;
@@ -94,69 +93,73 @@ class Logger implements JobInterface, ImmutableContainerAwareInterface
                 break;
             }
 
-            /**
-             * Check write permissions.
-             */
             if (is_object($handler)) {
 
-                if ($event['request'] == 'worker') {   // Disable worker server logs.
-                    return;
+                $filteredEvent = Filter::handle($event);
+
+                if ($handler instanceof MetadataAwareInterface) {
+                    $handler->setMetadata($this->data['meta']);
                 }
-                if ($handler->isAllowed($event, $request)) {  // Do not remove this line.
-                    
-                    $filteredEvent = Filter::handle($event);
+                $handler->write($filteredEvent);  // Do job
+                $handler->close();
 
-                    $handler->write($filteredEvent);  // Do job
-                    $handler->close();
-
-                    if ($this->job instanceof Job) {
-                        $this->job->delete();  // Delete job from queue
-                    }
+                if ($this->job instanceof Job) {
+                    $this->job->delete();  // Delete job from queue
                 }
-
-            }  // end allowed if
+            }
         
         } // end foreach
     }
 
 }
 
-/* EXAMPLE LOG DATA
+/* Event Data
+
 Array
 (
-    [5] => Array
-        (
-            [handler] => file
-            [request] => http
-            [type] => writer
-            [time] => 1445593189
-            [filters] => Array
-                        (
-                            [0] => Array
-                                (
-                                    [class] => Obullo\Log\Filter\PriorityFilter
-                                    [method] => notIn
-                                    [params] => Array
-                                        (
-                                        )
+    meta =>  Array(
 
-                                )
+        [request] => http
+        [time] => 1445593189
+        [host] => example.com
+        [uri] => /welcome/index
+    ),
 
-                        )
-            [records] => Array
-                (
-                    [0] => Array
-                        (
-                            [channel] => system
-                            [level] => debug
-                            [message] => Uri Class Initialized
-                            [context] => Array
-                                (
-                                    [uri] => /welcome/index
-                                )
+    writers => Array(
 
-                        )
-    [6] => Array(
-        // second writer data
+        [5] => Array
+            (
+                [handler] => file
+                [type] => writer
+                [filters] => Array
+                            (
+                                [0] => Array
+                                    (
+                                        [class] => Obullo\Log\Filter\PriorityFilter
+                                        [method] => notIn
+                                        [params] => Array
+                                            (
+                                            )
+
+                                    )
+
+                            )
+                [records] => Array
+                    (
+                        [0] => Array
+                            (
+                                [channel] => system
+                                [level] => debug
+                                [message] => Uri Class Initialized
+                                [context] => Array
+                                    (
+                                        [uri] => /welcome/index
+                                    )
+
+                            )
+        [6] => Array(
+        
+            // handler data
+        )
     )
 */

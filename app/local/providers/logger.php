@@ -25,9 +25,7 @@ return array(
             'job' => 'logger.1',
             'delay' => 0,
         ],
-        'push' => [
-            'handler' => 'Workers\Logger'  // Obullo\Log\Queue
-        ]
+        'pusher' => 'Obullo\Log\Pusher\Local', // Obullo\Log\Pusher\Queue, // Obullo\Log\Pusher\Amqp
     ],
     'methods' => [
         ['name' => 'registerFilter','argument' => ['priority', 'Obullo\Log\Filter\PriorityFilter']],
