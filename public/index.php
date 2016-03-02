@@ -28,15 +28,14 @@ require '../vendor/autoload.php';
 | Fatal Errors
 |--------------------------------------------------------------------------
 */
-register_shutdown_function(
-    function () {
-        $error = error_get_last();
-        if (! empty($error)) {
-            var_dump($error);
-        }
-    }
-);
-
+// register_shutdown_function(
+//     function () {
+//         $error = error_get_last();
+//         if (! empty($error)) {
+//             var_dump($error);
+//         }
+//     }
+// );
 require OBULLO .'Application/Autoloader.php';
 Obullo\Application\Autoloader::register();
 /*

@@ -14,9 +14,7 @@ return array(
         'db.identifier' => 'username',
         'db.password' => 'password',
         'db.rememberToken' => 'remember_token',
-        'db.select' => [
-            'date',
-        ],
+        'db.fields' => [],
         'cache' => [
             'key' => 'Auth',
             'storage' => 'Obullo\Authentication\Storage\Redis',
