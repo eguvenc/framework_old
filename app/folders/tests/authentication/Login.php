@@ -14,7 +14,7 @@ class Login extends TestController
     public function index()
     {
         $this->view->load(
-            $this->getViewName(), 
+            'tests::index',
             ['content' => $this->getClassMethods()]
         );
     }

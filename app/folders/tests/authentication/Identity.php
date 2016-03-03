@@ -8,14 +8,14 @@ use Obullo\Authentication\Token;
 class Identity extends TestController
 {
     /**
-     * Index (Enable annotations from config.php file !!!!)
+     * Index
      * 
      * @return void
      */
     public function index()
     {
         $this->view->load(
-            $this->getViewName(), 
+            'tests::index',
             ['content' => $this->getClassMethods()]
         );
     }
@@ -27,13 +27,8 @@ class Identity extends TestController
      */
     public function guest()
     {
-        // Test : Unauthorized user
-        //
-        // Expected Result :
-        // 
-        // If user authorized : boolean(false) otherwise : boolean(true)
-
-        var_dump($this->user->identity->guest());
+        $this->user->identity->logout();
+        $this->assertTrue($this->user->identity->guest(), "I logout, then i refresh page and i expect value is true.");
     }
 
     /**
@@ -43,13 +38,8 @@ class Identity extends TestController
      */
     public function check()
     {
-        // Test : Authorized user
-        //
-        // Expected Result :
-        // 
-        // If user authorized : boolean(true) otherwise : boolean(false)
-        
-        var_dump($this->user->identity->check());
+        $this->login();
+        $this->assertTrue($this->user->identity->check(), "I login then i expect value is true.");
     }
 
     /**
@@ -59,25 +49,15 @@ class Identity extends TestController
      */
     public function recallerExists()
     {
-        // Test : Unauthorized user who has a recaller cookie with : __rm  value.
-        //
-        // Expected Result :
-        // 
-        // First i see boolean(false) then i click refresh and i see __rm value: 
-        // string(32) "fgvH6hrlWNDeb9jz5L2P4xBW3vdrDP17" 
-        
-        $this->user->identity->destroy(); //  Make user guest.
-
+        $this->user->identity->destroy();
         $params = $this->config->load('providers::user')['params'];
 
-        $this->cookie->set((string)$params['login']['rememberMe']['cookie']['name'], 'fgvH6hrlWNDeb9jz5L2P4xBW3vdrDP17');
+        $rm = 'fgvH6hrlWNDeb9jz5L2P4xBW3vdrDP17';
+        $this->cookie->set((string)$params['login']['rememberMe']['cookie']['name'], $rm);
 
-        $this->session->remove('Auth/IgnoreRecaller');  // We use ignore recaller for this situation :
-                                                        // if user has remember cookie and still try to login attempt.
-                                                        // In here we remove recaller point to make sure recallerExists()
-                                                        // functionality.
-
-        var_dump($this->user->identity->recallerExists());  
+        $this->session->remove('Auth/IgnoreRecaller');
+        $this->assertEqual($this->user->identity->recallerExists(), $rm, "I set a recaller cookie, then i refresh the page and i expect value is equal to $rm");
+        $this->varDump($rm);
     }
 
     /**
@@ -87,21 +67,11 @@ class Identity extends TestController
      */
     public function isTemporary()
     {
-        // Test : Authorize user and make identity temporary. usename : user@example.com, password: 123456
-        //
-        // Expected Result :
-        // 
-        // boolean(true)
-
         if ($this->user->identity->isTemporary() == false && $this->user->identity->guest()) {
-
             $this->login();
-            $this->user->identity->makeTemporary();  // Make temporary user.
-
-            return $this->response->redirect("/tests/authentication/identity/isTemporary");
+            $this->user->identity->makeTemporary();
         }
-
-        var_dump($this->user->identity->isTemporary());
+        $this->assertTrue($this->user->identity->isTemporary(), "I login then i set identity as temporary, then i refresh the page and i expect value is true.");
     }
 
     /**
@@ -111,42 +81,24 @@ class Identity extends TestController
      */
     public function expire()
     {
-        // Test : Expired user  usename : user@example.com, password: 123456
-        //
-        // Expected Result :
-        // 
-        // If user is expired after 5 seconds i see : boolean(true) otherwise i see below the output.
-        
-        // Array
-        // (
-        //     [__expire] => 1456917284
-        //     [__isAuthenticated] => 1
-        //     [__isTemporary] => 0
-        //     [__rememberMe] => 0
-        //     [__time] => 1456917280
-        //     [date] => 0
-        //     [id] => 56
-        //     [password] => $2y$06$6k9aYbbOiVnqgvksFR4zXO.kNBTXFt3cl8xhvZLWj4Qi/IpkYXeP.
-        //     [remember_token] => PjMT9ujPcLaUIkU2oVN7uh6l0THtuXDd
-        //     [username] => user@example.com
-        // )
+        $this->user->identity->destroy();
+        $this->login(false);
+        $this->user->identity->expire(5);
+        $time = time();
+        $this->assertGreaterThan($time, $this->user->identity->get('__expire'),  "I login.Then i set identity expire and i expect to __expire value is greater than $time.");
+        $this->varDump($this->user->identity->getArray());
+    }
 
-        if ($this->user->identity->isExpired()) {
-            $this->user->identity->destroy();
-            var_dump($this->user->identity->isExpired());
-            return;
-        }        
-        $this->login();
-
-        if (! $this->user->identity->has('__expire')) {
-            $this->user->identity->expire(5);  // Expire in 5 seconds.
-
-            echo "User identity will expired in (5) seconds.<br>";
-
-        } else {
-
-            echo "<pre>".print_r($this->user->identity->getArray(), true)."</pre>";
-        }
+    /**
+     * Check identity is expired
+     * 
+     * @return boolean
+     */
+    public function isExpired()
+    {
+        $this->login(false);
+        $this->user->identity->expire(2);
+        $this->assertTrue($this->user->identity->isExpired(), "I login.Then i set identity expire.I wait 2 seconds.Then i expect value is true");
     }
 
     /**

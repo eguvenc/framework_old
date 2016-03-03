@@ -14,7 +14,7 @@ class Middleware extends TestController
     public function index()
     {
         $this->view->load(
-            $this->getViewName(), 
+            'tests::index',
             ['content' => $this->getClassMethods()]
         );
     }
@@ -26,8 +26,8 @@ class Middleware extends TestController
      */
     public function has()
     {
-        $this->container->get('middleware')->add('ParsedBody');
-        $this->assertTrue($this->container->get('middleware')->has('ParsedBody'), "I add ParsedBody middleware and i expect that the value is true.");
+        $this->middleware->add('ParsedBody');
+        $this->assertTrue($this->middleware->has('ParsedBody'), "I add ParsedBody middleware and i expect that the value is true.");
     }
 
     /**
@@ -37,8 +37,8 @@ class Middleware extends TestController
      */
     public function add()
     {
-        $this->container->get('middleware')->add('TrustedIp');
-        $this->assertTrue($this->container->get('middleware')->isAdded('TrustedIp'), "I add TrustedIp middleware and i expect that the value is true.");
+        $this->middleware->add('TrustedIp');
+        $this->assertTrue($this->middleware->isAdded('TrustedIp'), "I add TrustedIp middleware and i expect that the value is true.");
     }
 
     /**
@@ -48,11 +48,10 @@ class Middleware extends TestController
      */
     public function get()
     {
-        $this->container->get('middleware')->add('Router');
-        $router = $this->container->get('middleware')->get('Router');
+        $this->middleware->add('Router');
+        $router = $this->middleware->get('Router');
 
         $this->assertInstanceOf('Http\Middlewares\Router', $router, "I add Router middleware and i expect it is an instance of Http\Middlewares\Router object.");
-        $this->varDump($router);
     }
 
     /**
@@ -62,10 +61,10 @@ class Middleware extends TestController
      */
     public function remove()
     {
-        $this->container->get('middleware')->add('TrustedIp');
-        $this->container->get('middleware')->remove('TrustedIp');
+        $this->middleware->add('TrustedIp');
+        $this->middleware->remove('TrustedIp');
 
-        $this->assertFalse($this->container->get('middleware')->isAdded('TrustedIp'), "I add TrustedIp middleware then i remove and i expect that the value is false.");
+        $this->assertFalse($this->middleware->isAdded('TrustedIp'), "I add TrustedIp middleware then i remove and i expect that the value is false.");
     }
 
     /**
@@ -75,10 +74,10 @@ class Middleware extends TestController
      */
     public function getQueue()
     {
-        $this->container->get('middleware')->add('TrustedIp');
+        $this->middleware->add('TrustedIp');
         $names   = array();
         $objects = array();
-        foreach (array_values($this->container->get('middleware')->getQueue()) as $object) {
+        foreach (array_values($this->middleware->getQueue()) as $object) {
             $objects[] = $object;
             $names[]   = get_class($object);
         };
@@ -97,7 +96,7 @@ class Middleware extends TestController
      */
     public function getNames()
     {
-        $names = $this->container->get('middleware')->getNames();
+        $names = $this->middleware->getNames();
 
         $this->assertContains('App', $names, "I expect middleware names contain App key.");
         $this->varDump($names);
@@ -110,13 +109,7 @@ class Middleware extends TestController
      */
     public function getPath()
     {
-        // Test : getPath
-        // 
-        // Expected Result :
-        // 
-        // string(20) "Http\Middlewares\App"
-
-        $path = $this->container->get('middleware')->getPath('App');
+        $path = $this->middleware->getPath('App');
 
         $this->assertEqual('Http\Middlewares\App', $path, "I expect App middleware path equal to Http\Middlewares\App string.");
         $this->varDump($path);

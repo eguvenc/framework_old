@@ -28,14 +28,14 @@ class Annotation extends TestController
     }
 
     /**
-     * Index (Enable annotations from config.php file !!!!)
+     * Index (Disable annotations from config.php file !)
      * 
      * @return void
      */
     public function index()
     {
         $this->view->load(
-            $this->getViewName(), 
+            'tests::index',
             ['content' => $this->getClassMethods()]
         );
     }
