@@ -43,7 +43,7 @@ class View extends AbstractServiceProvider
                 'addFolder',
                 [
                     'views',
-                    FOLDERS .'views/view/'
+                    FOLDERS .'views/views/'
                 ]
             )
             ->withMethodCall(
@@ -52,6 +52,14 @@ class View extends AbstractServiceProvider
                     'templates',
                     RESOURCES.'/templates/'
                 ]
+            )
+            ->withMethodCall(
+                'addFolder',
+                [
+                    'tests',
+                    FOLDERS.'tests/views/'
+                ]
             );
+
     }
 }

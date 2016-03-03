@@ -49,9 +49,6 @@ return array(
         ],
         'session' => [
             'regenerateSessionId' => true,
-        ],
-        'middleware' => [
-            'unique.session' => false
         ]
     ]
 );

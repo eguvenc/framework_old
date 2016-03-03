@@ -2,10 +2,31 @@
 
 namespace Tests\App;
 
-use Obullo\Http\Controller;
+use Obullo\Http\TestController;
 
-class Annotation extends Controller
+class Annotation extends TestController
 {
+    /**
+     * Annotation parser
+     * 
+     * @var object
+     */
+    protected $parser;
+
+    /**
+     * Build reflection class
+     * 
+     * @param object $container container
+     */
+    public function __construct($container)
+    {
+        $reflector = new \ReflectionClass($this);
+        $controller = new \Obullo\Application\Annotations\Controller;
+        $controller->setContainer($container);
+        $controller->setReflectionClass($reflector);
+        $this->parser = $controller;
+    }
+
     /**
      * Index (Enable annotations from config.php file !!!!)
      * 
@@ -13,11 +34,10 @@ class Annotation extends Controller
      */
     public function index()
     {
-        $methods = get_class_methods($this);
-        foreach ($methods as $name) {
-            if (! in_array($name, ['index', 'setContainer', 'getContainer', '__get','__set']))
-            echo $this->url->anchor(rtrim($this->request->getRequestTarget(), "/")."/".$name, $name)."<br>";
-        }
+        $this->view->load(
+            $this->getViewName(), 
+            ['content' => $this->getClassMethods()]
+        );
     }
 
     /**
@@ -29,82 +49,72 @@ class Annotation extends Controller
      */
     public function method()
     {
-        // Enable annotations from config.php file !!!!
-        // 
-        // Expected Result :
-        // 
-        // Error
-        // 
-        // GET Method Not Allowed
+        $this->parser->setMethod('method');
+        $output = $this->parser->parse(false);
+        
+        $this->assertEqual($output[0]['method'], 'method', "I read @middleware->method('put', 'delete') annotation and i expect value is method.");
+        $this->assertEqual($output[0]['params'][0], 'put', "I expect value is put.");
+        $this->assertEqual($output[0]['params'][1], 'delete', "I expect value is delete.");
+
+        $this->varDump($output);
     }
 
     /**
      * Add
      *
-     * @middleware->add('Guest')
+     * @middleware->add('TrustedIp')
      * 
-     * @return void
+     * @return boolean(true)
      */
     public function add()
-    {
-        // Add middleware test ( Guest )
-        // 
-        // Expected Result :
-        // 
-        // http://framework/examples/membership/login/index
-        // 
-        // Your session has been expired.
+    {        
+        $this->parser->setMethod('add');
+        $output = $this->parser->parse(false);
+        
+        $this->assertEqual($output[0]['method'], 'add', "I read @middleware->add('TrustedIp') annotation and i expect value is add.");
+        $this->assertEqual($output[0]['params'], 'TrustedIp', "I expect value is TrustedIp.");
+
+        $this->varDump($output);
     }
 
     /**
      * Remove
      *
-     * @middleware->when('post', 'put', 'delete')->add('Guest')
+     * @middleware->when('post', 'get')->add('TrustedIp')
      * 
      * @return void
      */
-    public function whenPost()
+    public function when()
     {
-        // When add test ( Guest )
-        // 
-        // Expected Result :
-        // 
-        // empty content
+        $this->parser->setMethod('when');
+        $output = $this->parser->parse(false);
+        
+        $this->assertEqual($output[0]['method'], 'when', "I read @middleware->when('post', 'put', 'delete')->add('TrustedIp') annotation and i expect value is when.");
+        $this->assertEqual($output[0]['params'][0], 'post', "I expect value is post.");
+        $this->assertEqual($output[0]['params'][1], 'get', "I expect value is get.");
+        $this->assertEqual($output[1]['method'], 'add', "I expect value is equal to add.");
+        $this->assertEqual($output[1]['params'], 'TrustedIp', "I expect value is equal to TrustedIp.");
+
+        $this->varDump($output);
     }
 
     /**
      * Remove
      *
-     * @middleware->when('get')->add('Guest')
-     * 
-     * @return void
-     */
-    public function whenGet()
-    {
-        // When add test ( Guest )
-        // 
-        // Expected Result :
-        // 
-        // http://framework/examples/membership/login/index
-        // 
-        // Your session has been expired.
-    }
-
-    /**
-     * Remove
-     *
-     * @middleware->add('Guest')
-     * @middleware->remove('Guest')
+     * @middleware->add('TrustedIp')
+     * @middleware->remove('TrustedIp')
      * 
      * @return void
      */
     public function remove()
     {
-        // Remove middleware test ( Guest )
-        // 
-        // Expected Result :
-        // 
-        // empty content
+        $this->parser->setMethod('remove');
+        $output = $this->parser->parse(false);
+        
+        $this->assertEqual($output[1]['method'], 'remove', "I read @middleware->remove('TrustedIp') annotation and i expect value is remove.");
+        $this->assertEqual($output[1]['params'], 'TrustedIp', "I expect value is equal to TrustedIp.");
+
+        $this->varDump($output);
     }
 
 }

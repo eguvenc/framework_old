@@ -2,10 +2,10 @@
 
 namespace Tests\Authentication;
 
-use Obullo\Http\Controller;
+use Obullo\Http\TestController;
 use Obullo\Authentication\Token;
 
-class Identity extends Controller
+class Identity extends TestController
 {
     /**
      * Index (Enable annotations from config.php file !!!!)
@@ -14,11 +14,10 @@ class Identity extends Controller
      */
     public function index()
     {
-        $methods = get_class_methods($this);
-        foreach ($methods as $name) {
-            if (! in_array($name, ['index', 'setContainer', 'getContainer', '__get','__set', 'login']))
-            echo $this->url->anchor(rtrim($this->request->getRequestTarget(), "/")."/".$name, $name)."<br>";
-        }
+        $this->view->load(
+            $this->getViewName(), 
+            ['content' => $this->getClassMethods()]
+        );
     }
 
     /**
@@ -183,7 +182,6 @@ class Identity extends Controller
         // boolean(false)
 
         $this->login();
-
         $this->user->identity->makeTemporary();  // Make temporary user.
         $this->user->identity->makePermanent();  // Make permanent user.
 
@@ -331,7 +329,8 @@ class Identity extends Controller
         // Expected Result :
         // 
         // When i click the "Update Token" link i see a different tokens in db each time.
-
+        
+        $this->login(false);
         $this->user->identity->set('__rememberMe', 1);
         $row = $this->db->query('SELECT remember_token from users WHERE id = 1')->rowArray();
 
@@ -359,7 +358,7 @@ class Identity extends Controller
     }
 
     /**
-     * Validate credentials without login
+     * Validate credentials authorized user credentials
      * 
      * @return string
      */
@@ -371,11 +370,42 @@ class Identity extends Controller
         // 
         // If credentials is valid i see : boolean(true)  otherwise : boolean(false)
 
+        $this->login();
         $this->user->identity->initialize();
         $i = $this->container->get('user.params')['db.identifier'];
         $p = $this->container->get('user.params')['db.password'];
 
         var_dump($this->user->identity->validate([$i => 'user@example.com', $p => '123456']));
+    }
+
+    /**
+     * Returns to login id of user, its an unique id for each browsers.
+     * 
+     * @return string login ID
+     */
+    public function getLoginId()
+    {
+        var_dump($this->user->identity->getLoginId());
+    }
+
+    /**
+     * Kill authority of user using auth id
+     *
+     * @return boolean
+     */
+    public function kill()
+    {
+        // Test : current login id
+        //
+        // Expected Result :
+        // 
+        // We destroy current login id i see: array(0) { } 
+
+        $this->login();
+        $loginId = $this->user->identity->getLoginId();
+        $this->user->identity->kill($loginId);
+
+        var_dump($this->user->storage->getCredentials());
     }
 
     /**
@@ -385,7 +415,7 @@ class Identity extends Controller
      * 
      * @return string|array
      */
-    protected function login($dump = true)
+    public function login($dump = true)
     {
         if ($this->user->identity->guest()) {
 

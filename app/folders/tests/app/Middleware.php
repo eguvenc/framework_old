@@ -2,9 +2,9 @@
 
 namespace Tests\App;
 
-use Obullo\Http\Controller;
+use Obullo\Http\TestController;
 
-class Middleware extends Controller
+class Middleware extends TestController
 {
     /**
      * Index
@@ -13,11 +13,10 @@ class Middleware extends Controller
      */
     public function index()
     {
-        $methods = get_class_methods($this);
-        foreach ($methods as $name) {
-            if (! in_array($name, ['index', 'setContainer', 'getContainer', '__get','__set']))
-            echo $this->url->anchor(rtrim($this->request->getRequestTarget(), "/")."/".$name, $name)."<br>";
-        }
+        $this->view->load(
+            $this->getViewName(), 
+            ['content' => $this->getClassMethods()]
+        );
     }
 
     /**
@@ -27,13 +26,8 @@ class Middleware extends Controller
      */
     public function has()
     {
-        // Test : Router
-        // 
-        // Expected Result :
-        // 
-        // true
-        
-        var_dump($this->container->get('middleware')->has('Router'));
+        $this->container->get('middleware')->add('ParsedBody');
+        $this->assertTrue($this->container->get('middleware')->has('ParsedBody'), "I add ParsedBody middleware and i expect that the value is true.");
     }
 
     /**
@@ -43,15 +37,8 @@ class Middleware extends Controller
      */
     public function add()
     {
-        // Test : TrustedIp
-        // 
-        // Expected Result :
-        // 
-        // true
-        
         $this->container->get('middleware')->add('TrustedIp');
-
-        var_dump($this->container->get('middleware')->isAdded('TrustedIp'));
+        $this->assertTrue($this->container->get('middleware')->isAdded('TrustedIp'), "I add TrustedIp middleware and i expect that the value is true.");
     }
 
     /**
@@ -61,13 +48,11 @@ class Middleware extends Controller
      */
     public function get()
     {
-        // Test : Router
-        // 
-        // Expected Result :
-        // 
-        // object(Http\Middlewares\Router)
-        
-        var_dump($this->container->get('middleware')->get('Router'));
+        $this->container->get('middleware')->add('Router');
+        $router = $this->container->get('middleware')->get('Router');
+
+        $this->assertInstanceOf('Http\Middlewares\Router', $router, "I add Router middleware and i expect it is an instance of Http\Middlewares\Router object.");
+        $this->varDump($router);
     }
 
     /**
@@ -77,16 +62,10 @@ class Middleware extends Controller
      */
     public function remove()
     {
-        // Test : TrustedIp
-        // 
-        // Expected Result :
-        // 
-        // false
-        
         $this->container->get('middleware')->add('TrustedIp');
         $this->container->get('middleware')->remove('TrustedIp');
 
-        var_dump($this->container->get('middleware')->isAdded('TrustedIp'));
+        $this->assertFalse($this->container->get('middleware')->isAdded('TrustedIp'), "I add TrustedIp middleware then i remove and i expect that the value is false.");
     }
 
     /**
@@ -96,13 +75,19 @@ class Middleware extends Controller
      */
     public function getQueue()
     {
-        // Test : default queue
-        // 
-        // Expected Result :
-        // 
-        // array(3) { [0]=> object(Http\Middlewares\Router)#48 (1) { ["con ....
-
-        var_dump(array_values($this->container->get('middleware')->getQueue()));
+        $this->container->get('middleware')->add('TrustedIp');
+        $names   = array();
+        $objects = array();
+        foreach (array_values($this->container->get('middleware')->getQueue()) as $object) {
+            $objects[] = $object;
+            $names[]   = get_class($object);
+        };
+        $this->assertInstanceOf(
+            "Http\Middlewares\TrustedIp",
+            end($objects),
+            "I add TrustedIp middleware to end of the queue then i expect it is an instance of Http\Middlewares\TrustedIp object."
+        );
+        $this->varDump($names);
     }
 
     /**
@@ -112,13 +97,10 @@ class Middleware extends Controller
      */
     public function getNames()
     {
-        // Test : names
-        // 
-        // Expected Result :
-        // 
-        // array(3) { [0]=> string(6) "Router" [1]=> string(3) "App" [2]=> string(5) "Error" }
+        $names = $this->container->get('middleware')->getNames();
 
-        var_dump(array_values($this->container->get('middleware')->getNames()));
+        $this->assertContains('App', $names, "I expect middleware names contain App key.");
+        $this->varDump($names);
     }
 
     /**
@@ -134,7 +116,10 @@ class Middleware extends Controller
         // 
         // string(20) "Http\Middlewares\App"
 
-        var_dump($this->container->get('middleware')->getPath('App'));
+        $path = $this->container->get('middleware')->getPath('App');
+
+        $this->assertEqual('Http\Middlewares\App', $path, "I expect App middleware path equal to Http\Middlewares\App string.");
+        $this->varDump($path);
     }
 
 }

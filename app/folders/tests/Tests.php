@@ -17,17 +17,31 @@ class Tests extends Controller
 
         unset($folders[0], $folders[1], $folders[2]);
 
+        $html = "";
         foreach ($folders as $folder) {
-            
-            echo "<b>".ucfirst($folder)."</b><br>";
 
+            if ($folder == 'views')
+                continue;
+
+            $html.= "<ul><li>".ucfirst($folder)."<ul>";
             $files = scandir(FOLDERS .'tests/'.$folder);
-
             unset($files[0], $files[1]);
 
             foreach ($files as $file) {
-                echo "&nbsp;&nbsp;".$this->url->anchor("tests/".$folder."/".strtolower(substr($file, 0, -4)), $file)."<br>";
+                
+                if ($file == 'views')
+                continue;
+
+                $html.= "<li>".$this->url->anchor("tests/".$folder."/".strtolower(substr($file, 0, -4)), $file)."</li>";
             }
+            $html.= "</ul></li></ul>";
         }
+
+        $this->view->load(
+            'test',
+            [
+                'content' => $html
+            ]
+        );
     }
 }

@@ -121,6 +121,33 @@ a:focus {
   /* background-color: #5B5B5B; */
 }
 
+.tests ul, li {
+  padding: 0.10px;
+  margin: 0;
+  list-style: none;
+}
+
+.tests ul {
+  color: gray;
+  font-size: 16px;
+/*  margin: 2em 0;*/
+}
+
+.tests li {
+  list-style: none;
+  margin: 0.5em;
+  margin-left: 0em;
+}
+
+.tests li a {
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.tests p {
+  font-size: 16px;
+}
+
 .content {
 
 }
@@ -133,7 +160,7 @@ a:focus {
 
 .content ul {
   font-size: 16px;
-  margin: 2em 0;
+/*  margin: 2em 0;*/
 }
 .content li {
   list-style: circle;

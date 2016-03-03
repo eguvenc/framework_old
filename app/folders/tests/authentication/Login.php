@@ -2,9 +2,9 @@
 
 namespace Tests\Authentication;
 
-use Obullo\Http\Controller;
+use Obullo\Http\TestController;
 
-class Login extends Controller
+class Login extends TestController
 {
     /**
      * Index (Enable annotations from config.php file !!!!)
@@ -13,11 +13,10 @@ class Login extends Controller
      */
     public function index()
     {
-        $methods = get_class_methods($this);
-        foreach ($methods as $name) {
-            if (! in_array($name, ['index', 'setContainer', 'getContainer', '__get','__set']))
-            echo $this->url->anchor(rtrim($this->request->getRequestTarget(), "/")."/".$name, $name)."<br>";
-        }
+        $this->view->load(
+            $this->getViewName(), 
+            ['content' => $this->getClassMethods()]
+        );
     }
 
     /**
