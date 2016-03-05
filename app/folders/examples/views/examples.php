@@ -31,14 +31,7 @@
     <div class="container">
 
       <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="/">Hoşgeldiniz</a></li>
-            <li role="presentation"><a href="#">Dökümentasyon</a></li>
-            <li role="presentation"><a href="/tests">Testler</a></li>
-          </ul>
-        </nav>
-        
+        <?php echo $this->view->get('examples::navigation') ?>
         <h2 class="text-muted"><a href="/">Öğretici Örnekler</a></h2>
       </div>
 

@@ -38,7 +38,7 @@
           </ul>
         </nav>
         
-        <h2 class="text-muted"><a href="/tests/<?php echo $this->router->getClass() ?>">Testler</a></h2>
+        <h2 class="text-muted"><a href="/examples">Testler</a></h2>
       </div>
       
       <div class="tests">

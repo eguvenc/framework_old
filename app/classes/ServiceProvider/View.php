@@ -59,7 +59,15 @@ class View extends AbstractServiceProvider
                     'tests',
                     FOLDERS.'tests/views/'
                 ]
+            )
+            ->withMethodCall(
+                'addFolder',
+                [
+                    'examples',
+                    FOLDERS.'examples/views/'
+                ]
             );
+
 
     }
 }
