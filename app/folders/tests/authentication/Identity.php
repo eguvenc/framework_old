@@ -18,7 +18,8 @@ class Identity extends TestController {
     public function guest()
     {
         $this->user->identity->logout();
-        $this->assertTrue($this->user->identity->guest(), "I logout, then i refresh page and i expect that the value is true.");
+        $this->user->identity->initialize();
+        $this->assertTrue($this->user->identity->guest(), "I logout, then i expect that the value is true.");
     }
 
     /**
@@ -47,6 +48,7 @@ class Identity extends TestController {
 
         $this->session->remove('Auth/IgnoreRecaller');
         $this->assertEqual($this->user->identity->recallerExists(), $rm, "I set a recaller cookie, then i refresh the page and i expect that the value is equal to $rm");
+        $this->setCommandRefresh();
         $this->varDump($rm);
     }
 
@@ -75,7 +77,7 @@ class Identity extends TestController {
         $this->user->identity->destroy('__temporary');
         $this->user->identity->destroy('__permanent');
         $this->newLoginRequest();
-        $this->user->identity->expire(2);
+        $this->user->identity->expire(1);
         $time = time();
         $this->assertGreaterThan($time, $this->user->identity->get('__expire'),  "I login.Then i set identity as expired and i expect to __expire value is greater than $time.");
     }
@@ -88,8 +90,9 @@ class Identity extends TestController {
     public function isExpired()
     {
         $this->newLoginRequest();
-        $this->user->identity->expire(2);
-        $this->assertTrue($this->user->identity->isExpired(), "I login.Then i set identity as expired.I wait 2 seconds.Then i expect that the value is true.");
+        $this->user->identity->expire(1);
+        $this->assertTrue($this->user->identity->isExpired(), "I login.Then i set identity as expired.I wait 1 seconds.Then i refresh the page and i expect that the value is true.");
+        $this->setCommandRefresh();
     }
 
     /**
@@ -132,9 +135,7 @@ class Identity extends TestController {
     {
         $this->newLoginRequest();
         $time = $this->user->identity->getTime();
-
-        $this->assertType('string', $time, "I expect that the value is string.");
-        $this->assertType('numeric', $time, "I expect that the value is numeric.");
+        $this->assertUnixTimeStamp($time, "I expect that the value is unix timestamp.");
     }
 
     /**
@@ -146,7 +147,7 @@ class Identity extends TestController {
     {
         $this->newLoginRequest();
         $array = $this->user->identity->getArray();
-        $this->assertHas('__isAuthenticated', $array, "I expect identity array has '__isAuthenticated' key.");
+        $this->assertArrayHasKey('__isAuthenticated', $array, "I expect identity array has '__isAuthenticated' key.");
         $this->varDump($this->user->identity->getArray());
     }
 
@@ -176,7 +177,7 @@ class Identity extends TestController {
     {
         $this->newLoginRequest();
         $this->user->identity->set('__rememberMe', 1);
-        $this->assertType('integer', $this->user->identity->getRememberMe(), "I expect __rememberMe value that is an integer.");
+        $this->assertInternalType('integer', $this->user->identity->getRememberMe(), "I expect __rememberMe value that is an integer.");
         $this->assertEqual($this->user->identity->getRememberMe(), 1, "I expect __rememberMe value that is 1.");
         $this->user->identity->destroy();
     }
@@ -193,7 +194,7 @@ class Identity extends TestController {
         $this->user->identity->set('__rememberToken', $token);
         $token = $this->user->identity->getRememberToken();
 
-        $this->assertType('alnum', $token, "I login.I create remember me token and i expect that the type is alfanumeric.");
+        $this->assertInternalType('alnum', $token, "I login.I create remember me token and i expect that the type is alfanumeric.");
         $this->assertEqual(32, strlen($token), "I expect length of value that is equal to 32.");
         $this->user->identity->destroy();
     }
