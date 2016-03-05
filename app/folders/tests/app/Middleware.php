@@ -2,23 +2,10 @@
 
 namespace Tests\App;
 
-use Obullo\Http\TestController;
+use Obullo\Http\Tests\TestController;
 
 class Middleware extends TestController
 {
-    /**
-     * Index
-     * 
-     * @return void
-     */
-    public function index()
-    {
-        $this->view->load(
-            'tests::index',
-            ['content' => $this->getClassMethods()]
-        );
-    }
-
     /**
      * Has middleware
      * 

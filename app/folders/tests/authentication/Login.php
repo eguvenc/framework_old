@@ -7,19 +7,6 @@ use Obullo\Http\TestController;
 class Login extends TestController
 {
     /**
-     * Index (Enable annotations from config.php file !!!!)
-     * 
-     * @return void
-     */
-    public function index()
-    {
-        $this->view->load(
-            'tests::index',
-            ['content' => $this->getClassMethods()]
-        );
-    }
-
-    /**
      * Attempt
      * 
      * @return void

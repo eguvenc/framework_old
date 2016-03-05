@@ -2,23 +2,13 @@
 
 namespace Tests\Authentication;
 
-use Obullo\Http\TestController;
+use Obullo\Http\Tests\LoginTrait;
+use Obullo\Http\Tests\TestController;
 use Obullo\Authentication\Token;
 
-class Identity extends TestController
-{
-    /**
-     * Index
-     * 
-     * @return void
-     */
-    public function index()
-    {
-        $this->view->load(
-            'tests::index',
-            ['content' => $this->getClassMethods()]
-        );
-    }
+class Identity extends TestController {
+
+    use LoginTrait;
 
     /**
      * Guest
@@ -28,7 +18,7 @@ class Identity extends TestController
     public function guest()
     {
         $this->user->identity->logout();
-        $this->assertTrue($this->user->identity->guest(), "I logout, then i refresh page and i expect value is true.");
+        $this->assertTrue($this->user->identity->guest(), "I logout, then i refresh page and i expect that the value is true.");
     }
 
     /**
@@ -38,14 +28,14 @@ class Identity extends TestController
      */
     public function check()
     {
-        $this->login();
-        $this->assertTrue($this->user->identity->check(), "I login then i expect value is true.");
+        $this->newLoginRequest();
+        $this->assertTrue($this->user->identity->check(), "I login then i expect that the value is true.");
     }
 
     /**
      * Check recaller cookie
      * 
-     * @return string
+     * @return void
      */
     public function recallerExists()
     {
@@ -56,140 +46,123 @@ class Identity extends TestController
         $this->cookie->set((string)$params['login']['rememberMe']['cookie']['name'], $rm);
 
         $this->session->remove('Auth/IgnoreRecaller');
-        $this->assertEqual($this->user->identity->recallerExists(), $rm, "I set a recaller cookie, then i refresh the page and i expect value is equal to $rm");
+        $this->assertEqual($this->user->identity->recallerExists(), $rm, "I set a recaller cookie, then i refresh the page and i expect that the value is equal to $rm");
         $this->varDump($rm);
     }
 
     /**
      * Check auth is temporary
      * 
-     * @return boolean
+     * @return void
      */
     public function isTemporary()
     {
         if ($this->user->identity->isTemporary() == false && $this->user->identity->guest()) {
-            $this->login();
+            $this->newLoginRequest();
             $this->user->identity->makeTemporary();
+            $this->user->identity->initialize();
         }
-        $this->assertTrue($this->user->identity->isTemporary(), "I login then i set identity as temporary, then i refresh the page and i expect value is true.");
+        $this->assertTrue($this->user->identity->isTemporary(), "I login then i set a temporary identity and i expect that the value is true.");
     }
 
     /**
      * Expire permanent identity
      * 
-     * @return string
+     * @return void
      */
     public function expire()
     {
-        $this->user->identity->destroy();
-        $this->login(false);
-        $this->user->identity->expire(5);
+        $this->user->identity->destroy('__temporary');
+        $this->user->identity->destroy('__permanent');
+        $this->newLoginRequest();
+        $this->user->identity->expire(2);
         $time = time();
-        $this->assertGreaterThan($time, $this->user->identity->get('__expire'),  "I login.Then i set identity expire and i expect to __expire value is greater than $time.");
-        $this->varDump($this->user->identity->getArray());
+        $this->assertGreaterThan($time, $this->user->identity->get('__expire'),  "I login.Then i set identity as expired and i expect to __expire value is greater than $time.");
     }
 
     /**
      * Check identity is expired
      * 
-     * @return boolean
+     * @return void
      */
     public function isExpired()
     {
-        $this->login(false);
+        $this->newLoginRequest();
         $this->user->identity->expire(2);
-        $this->assertTrue($this->user->identity->isExpired(), "I login.Then i set identity expire.I wait 2 seconds.Then i expect value is true");
+        $this->assertTrue($this->user->identity->isExpired(), "I login.Then i set identity as expired.I wait 2 seconds.Then i expect that the value is true.");
     }
 
     /**
      * Make temporary user
      * 
-     * @return string
+     * @return void
      */
     public function makeTemporary()
     {
-        // Test : Make permanent user  usename : user@example.com, password: 123456
-        //
-        // Expected Result :
-        // 
-        // I see boolean(false) then click refresh i see boolean(true)
-        
-        $this->login(false);
-        $this->user->identity->makeTemporary();  // Make temporary user.
+        $this->newLoginRequest();
+        $this->user->identity->makeTemporary();
+        $this->user->identity->initialize();
+        $this->assertTrue($this->user->identity->isTemporary(), "I login.Then i set identity as temporary.I expect that the value is true.");
 
-        var_dump($this->user->identity->isTemporary());
+        if ($this->user->identity->isTemporary()) {
+            $this->user->identity->destroy('__temporary');  // Destroy temporary identity
+        }
     }
 
     /**
      * Make permanent user
      * 
-     * @return string
+     * @return void
      */
     public function makePermanent()
     {
-        // Test : Make permanent user  usename : user@example.com, password: 123456
-        //
-        // Expected Result :
-        // 
-        // boolean(false)
-
-        $this->login();
+        $this->newLoginRequest();
         $this->user->identity->makeTemporary();  // Make temporary user.
         $this->user->identity->makePermanent();  // Make permanent user.
 
-        var_dump($this->user->identity->isTemporary());
+        $this->assertFalse($this->user->identity->isTemporary(), "I login.Then i set identity as temporary.Then set it as permanent.Then i refresh the page and i expect that the value is false.");
     }
 
     /**
      * Returns to time
      * 
-     * @return string(10) "1456922578" 
+     * @return void
      */
     public function getTime()
     {
-        $this->login();
-        var_dump($this->user->identity->getTime());
+        $this->newLoginRequest();
+        $time = $this->user->identity->getTime();
+
+        $this->assertType('string', $time, "I expect that the value is string.");
+        $this->assertType('numeric', $time, "I expect that the value is numeric.");
     }
 
     /**
      * Returns to time
      * 
-     * @return string
+     * @return void
      */
     public function getArray()
     {
-        // Test : getArray
-        //
-        // Expected Result :
-        // Array
-        // (
-        //     [__isAuthenticated] => 1
-        //     [__isTemporary] => 0
-        //     [__rememberMe] => 0
-        //     [__time] => 1456922578
-        //     [id] => 56
-        //     [password] => $2y$06$6k9aYbbOiVnqgvksFR4zXO.kNBTXFt3cl8xhvZLWj4Qi/IpkYXeP.
-        //     [remember_token] => PjMT9ujPcLaUIkU2oVN7uh6l0THtuXDd
-        //     [username] => user@example.com
-        // )
-
-        $this->login();
-        echo "<pre>".print_r($this->user->identity->getArray(), true)."</pre>";
+        $this->newLoginRequest();
+        $array = $this->user->identity->getArray();
+        $this->assertHas('__isAuthenticated', $array, "I expect identity array has '__isAuthenticated' key.");
+        $this->varDump($this->user->identity->getArray());
     }
 
     /**
      * Get the password needs rehash array.
      *
-     * @return string hashed password $2y$06$6k9aYbbOiVnqgvksFR4zXO.kNBTXFt3cl8xhvZLWj4Qi/IpkYXeP.
+     * @return void
      */
     public function getPasswordNeedsReHash()
     {
-        $this->login();
+        $this->newLoginRequest();
         $this->user->identity->set('__passwordNeedsRehash', 1);
         $this->user->identity->set('password', "$2y$06$6k9aYbbOiVnqgvksFR4zXO.kNBTXFt3cl8xhvZLWj4Qi/IpkYXeP.");
 
         if ($this->user->identity->getPasswordNeedsReHash()) {
-            var_dump($this->user->identity->getPassword());
+            $this->assertEqual($this->user->identity->getPassword(), "$2y$06$6k9aYbbOiVnqgvksFR4zXO.kNBTXFt3cl8xhvZLWj4Qi/IpkYXeP.", "I expect identity password that is equal to $2y$06$6k9aYbbOiVnqgvksFR4zXO.kNBTXFt3cl8xhvZLWj4Qi/IpkYXeP.");
         }
         $this->user->identity->destroy();
     }
@@ -197,40 +170,42 @@ class Identity extends TestController
     /**
      * Returns to "1" user if used remember me
      *
-     * @return integer(1)
+     * @return void
      */
     public function getRememberMe()
     {
-        $this->login();
+        $this->newLoginRequest();
         $this->user->identity->set('__rememberMe', 1);
-
-        var_dump($this->user->identity->getRememberMe());
+        $this->assertType('integer', $this->user->identity->getRememberMe(), "I expect __rememberMe value that is an integer.");
+        $this->assertEqual($this->user->identity->getRememberMe(), 1, "I expect __rememberMe value that is 1.");
         $this->user->identity->destroy();
     }
 
     /**
      * Returns to remember token
      *
-     * @return string(32) "pc2AoW7QEpHXkq4EOFZRfIYde3Ujy3dd" 
+     * @return void
      */
     public function getRememberToken()
     {
-        $this->login();
+        $this->newLoginRequest();
         $token = Token::getRememberToken($this->container->get('cookie'), $this->container->get('user.params'));
         $this->user->identity->set('__rememberToken', $token);
+        $token = $this->user->identity->getRememberToken();
 
-        var_dump($this->user->identity->getRememberToken());
+        $this->assertType('alnum', $token, "I login.I create remember me token and i expect that the type is alfanumeric.");
+        $this->assertEqual(32, strlen($token), "I expect length of value that is equal to 32.");
         $this->user->identity->destroy();
     }
 
     /**
      * Sets authority of user to "0" don't touch to cached data
      *
-     * @return string(1) "0" string(32) "Vxwo4gswHLaE1gITfRBnDsPtCzPX8Ang" 
+     * @return void
      */
     public function logout()
     {
-        $this->login();
+        $this->newLoginRequest();
         $this->user->identity->logout();
 
         var_dump($this->user->storage->getCredentials()['__isAuthenticated']);
@@ -240,11 +215,11 @@ class Identity extends TestController
     /**
      * Destroy all identity data
      * 
-     * @return boolean(false)
+     * @return void
      */
     public function destroy()
     {
-        $this->login();
+        $this->newLoginRequest();
         $this->user->identity->destroy();
 
         var_dump($this->user->identity->exists());
@@ -253,7 +228,7 @@ class Identity extends TestController
     /**
      * Update temporary credentials
      * 
-     * @return string
+     * @return void
      */
     public function updateTemporary()
     {
@@ -263,7 +238,7 @@ class Identity extends TestController
         // 
         // First i see boolean(false) then click rehresh i see string(10) "test-value" 
 
-        $this->login(false);
+        $this->newLoginRequest();
         $this->user->identity->makeTemporary();
         $this->user->identity->updateTemporary('test', 'test-value', '__temporary');
         var_dump($this->user->identity->get('test'));
@@ -272,7 +247,7 @@ class Identity extends TestController
     /**
      * Update remember token if it exists in the memory and browser header
      *
-     * @return int|boolean
+     * @return void
      */
     public function updateRememberToken()
     {
@@ -282,9 +257,9 @@ class Identity extends TestController
         // 
         // When i click the "Update Token" link i see a different tokens in db each time.
         
-        $this->login(false);
+        $this->newLoginRequest();
         $this->user->identity->set('__rememberMe', 1);
-        $row = $this->db->query('SELECT remember_token from users WHERE id = 1')->rowArray();
+        $row = $this->db->query('SELECT remember_token FROM users WHERE id = 1')->rowArray();
 
         if ($this->request->get('update')) {
             $this->user->identity->updateRememberToken();
@@ -296,7 +271,7 @@ class Identity extends TestController
     /**
      * Removes "__rm" cookie from user browser
      *
-     * @return bool(false) 
+     * @return void
      */
     public function forgetMe()
     {
@@ -312,7 +287,7 @@ class Identity extends TestController
     /**
      * Validate credentials authorized user credentials
      * 
-     * @return string
+     * @return void
      */
     public function validate()
     {
@@ -322,7 +297,7 @@ class Identity extends TestController
         // 
         // If credentials is valid i see : boolean(true)  otherwise : boolean(false)
 
-        $this->login();
+        $this->newLoginRequest();
         $this->user->identity->initialize();
         $i = $this->container->get('user.params')['db.identifier'];
         $p = $this->container->get('user.params')['db.password'];
@@ -333,7 +308,7 @@ class Identity extends TestController
     /**
      * Returns to login id of user, its an unique id for each browsers.
      * 
-     * @return string login ID
+     * @return void
      */
     public function getLoginId()
     {
@@ -343,7 +318,7 @@ class Identity extends TestController
     /**
      * Kill authority of user using auth id
      *
-     * @return boolean
+     * @return void
      */
     public function kill()
     {
@@ -353,37 +328,11 @@ class Identity extends TestController
         // 
         // We destroy current login id i see: array(0) { } 
 
-        $this->login();
+        $this->newLoginRequest();
         $loginId = $this->user->identity->getLoginId();
         $this->user->identity->kill($loginId);
 
         var_dump($this->user->storage->getCredentials());
-    }
-
-    /**
-     * Do login
-     *
-     * @param bool $dump var_dump switch
-     * 
-     * @return string|array
-     */
-    public function login($dump = true)
-    {
-        if ($this->user->identity->guest()) {
-
-            $authResult = $this->user->login->attempt(
-                [
-                    'db.identifier' => 'user@example.com', 
-                    'db.password'   => '123456',
-                ]
-            );
-            if ($authResult->isValid()) {
-            } else {
-
-                if ($dump)
-                var_dump($authResult->getArray());
-            }
-        }
     }
 
 }

@@ -25,17 +25,17 @@ require '../constants';
 require '../vendor/autoload.php';
 /*
 |--------------------------------------------------------------------------
-| Fatal Errors
+| Only for parse errors
 |--------------------------------------------------------------------------
 */
-// register_shutdown_function(
-//     function () {
-//         $error = error_get_last();
-//         if (! empty($error)) {
-//             var_dump($error);
-//         }
-//     }
-// );
+register_shutdown_function(
+    function () {
+        $error = error_get_last();
+        if (! empty($error) && $error['type'] == E_PARSE) {
+            echo $error['message']." File: ".$error['file']." Line : ".$error['line'];
+        }
+    }
+);
 require OBULLO .'Application/Autoloader.php';
 Obullo\Application\Autoloader::register();
 /*

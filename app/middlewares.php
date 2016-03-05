@@ -31,6 +31,7 @@ $middleware->register(
         'Auth' => 'Http\Middlewares\Auth',
         'Https' => 'Http\Middlewares\Https',
         'Guest' => 'Http\Middlewares\Guest',
+        'TestGuest' => 'Http\Middlewares\TestGuest',
         'View' => 'Http\Middlewares\View',
     ]
 );
