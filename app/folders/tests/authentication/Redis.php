@@ -2,14 +2,11 @@
 
 namespace Tests\Authentication;
 
-use Obullo\Http\Tests\LoginTrait;
 use Obullo\Http\Tests\TestController;
 use Obullo\Authentication\Storage\Redis as StorageRedis;
 
 class Redis extends TestController
 {
-    use LoginTrait;
-
     protected $storage;
 
     /**
