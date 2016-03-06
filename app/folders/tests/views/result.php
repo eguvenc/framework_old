@@ -39,17 +39,18 @@
         </nav>
         
         <?php
+        $primaryFolder = $this->router->getPrimaryFolder();
   			$folder = $this->router->getFolder();
-  			$class  = $this->router->getClass();
+  			$class  = strtolower($this->router->getClass());
   			$method = $this->router->getMethod();
         ?>
-        <h2 class="text-muted"><a href="/tests/<?php echo $folder ?>/<?php echo strtolower($class) ?>"><?php echo $class ?>-><?php echo $method ?>()</a></h2>
+        <h2 class="text-muted"><a href="/<?php echo $primaryFolder?>/<?php echo $folder ?>/<?php echo $class ?>"><?php echo $class ?>-><?php echo $method ?>()</a></h2>
       </div>
 
       <div class="tests">
         <?php echo $results ?>
         <?php 
-        if (! empty($dump)) {
+        if (isset($dump)) {
             if (is_array($dump)) {
                 echo "<pre>".print_r($dump, true)."</pre>";
             } else {

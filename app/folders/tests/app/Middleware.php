@@ -25,7 +25,7 @@ class Middleware extends TestController
     public function add()
     {
         $this->middleware->add('TrustedIp');
-        $this->assertTrue($this->middleware->isAdded('TrustedIp'), "I add TrustedIp middleware and i expect that the value is true.");
+        $this->assertTrue($this->middleware->exists('TrustedIp'), "I add TrustedIp middleware and i expect that the value is true.");
     }
 
     /**
@@ -51,7 +51,7 @@ class Middleware extends TestController
         $this->middleware->add('TrustedIp');
         $this->middleware->remove('TrustedIp');
 
-        $this->assertFalse($this->middleware->isAdded('TrustedIp'), "I add TrustedIp middleware then i remove and i expect that the value is false.");
+        $this->assertFalse($this->middleware->exists('TrustedIp'), "I add TrustedIp middleware then i remove and i expect that the value is false.");
     }
 
     /**

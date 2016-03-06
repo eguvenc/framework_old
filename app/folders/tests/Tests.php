@@ -14,12 +14,27 @@ class Tests extends Controller
     public function index()
     {
         $folders = scandir(FOLDERS .'tests');
-
         unset($folders[0], $folders[1], $folders[2]);
 
+        $this->view->load(
+            'test',
+            [
+                'content' => $this->getHtml($folders)
+            ]
+        );
+    }
+
+    /**
+     * Returns to folder index
+     * 
+     * @param array $folders folders
+     * 
+     * @return string html
+     */
+    protected function getHtml($folders)
+    {
         $html = "";
         foreach ($folders as $folder) {
-
             if ($folder == 'views')
                 continue;
 
@@ -28,7 +43,6 @@ class Tests extends Controller
             unset($files[0], $files[1]);
 
             foreach ($files as $file) {
-                
                 if ($file == 'views')
                 continue;
 
@@ -36,12 +50,7 @@ class Tests extends Controller
             }
             $html.= "</ul></li></ul>";
         }
-
-        $this->view->load(
-            'test',
-            [
-                'content' => $html
-            ]
-        );
+        return $html;
     }
+
 }

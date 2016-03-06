@@ -6,8 +6,8 @@ use Obullo\Http\Tests\LoginTrait;
 use Obullo\Http\Tests\TestController;
 use Obullo\Authentication\Token;
 
-class Identity extends TestController {
-
+class Identity extends TestController
+{
     use LoginTrait;
 
     /**
@@ -74,12 +74,12 @@ class Identity extends TestController {
      */
     public function expire()
     {
-        $this->user->identity->destroy('__temporary');
-        $this->user->identity->destroy('__permanent');
         $this->newLoginRequest();
-        $this->user->identity->expire(1);
         $time = time();
-        $this->assertGreaterThan($time, $this->user->identity->get('__expire'),  "I login.Then i set identity as expired and i expect to __expire value is greater than $time.");
+        $this->user->identity->expire(1);
+        $this->user->identity->initialize();
+        $this->assertGreaterThan($this->user->identity->get('__expire'), $time, "I login.Then i set identity as expired and i expect to $time is greater than __expire value.");
+        $this->user->identity->destroy();
     }
 
     /**
@@ -91,8 +91,11 @@ class Identity extends TestController {
     {
         $this->newLoginRequest();
         $this->user->identity->expire(1);
-        $this->assertTrue($this->user->identity->isExpired(), "I login.Then i set identity as expired.I wait 1 seconds.Then i refresh the page and i expect that the value is true.");
-        $this->setCommandRefresh();
+        $this->user->identity->initialize();
+        $expire = $this->user->identity->get('__expire');
+        $expire = $expire - time();
+
+        $this->assertEqual($expire, 1, "I login.Then i set identity as expired for 1 secs and i expect expire - time() that is equal to 1.");
     }
 
     /**
@@ -108,7 +111,7 @@ class Identity extends TestController {
         $this->assertTrue($this->user->identity->isTemporary(), "I login.Then i set identity as temporary.I expect that the value is true.");
 
         if ($this->user->identity->isTemporary()) {
-            $this->user->identity->destroy('__temporary');  // Destroy temporary identity
+            $this->user->identity->destroyTemporary();  // Destroy temporary identity
         }
     }
 
@@ -122,8 +125,9 @@ class Identity extends TestController {
         $this->newLoginRequest();
         $this->user->identity->makeTemporary();  // Make temporary user.
         $this->user->identity->makePermanent();  // Make permanent user.
+        $this->user->identity->initialize();
 
-        $this->assertFalse($this->user->identity->isTemporary(), "I login.Then i set identity as temporary.Then set it as permanent.Then i refresh the page and i expect that the value is false.");
+        $this->assertFalse($this->user->identity->isTemporary(), "I login.Then i set identity as temporary.Then set it as permanent and i expect that the value is false.");
     }
 
     /**
@@ -177,6 +181,7 @@ class Identity extends TestController {
     {
         $this->newLoginRequest();
         $this->user->identity->set('__rememberMe', 1);
+
         $this->assertInternalType('integer', $this->user->identity->getRememberMe(), "I expect __rememberMe value that is an integer.");
         $this->assertEqual($this->user->identity->getRememberMe(), 1, "I expect __rememberMe value that is 1.");
         $this->user->identity->destroy();
@@ -208,13 +213,16 @@ class Identity extends TestController {
     {
         $this->newLoginRequest();
         $this->user->identity->logout();
+        $credentials = $this->user->storage->getCredentials();
 
-        var_dump($this->user->storage->getCredentials()['__isAuthenticated']);
-        var_dump($this->user->identity->getRememberToken());
+        $this->assertArrayHasKey('__isAuthenticated', $credentials, "I expect user credentials has '__isAuthenticated' key.");
+        $this->assertEqual($credentials['__isAuthenticated'], 0, "I expect value of '__isAuthenticated' that is equal to 0.");
+        $this->varDump($credentials);
+        $this->user->identity->destroy();
     }
 
     /**
-     * Destroy all identity data
+     * Destroy permanent identity of authorized user
      * 
      * @return void
      */
@@ -222,8 +230,8 @@ class Identity extends TestController {
     {
         $this->newLoginRequest();
         $this->user->identity->destroy();
-
-        var_dump($this->user->identity->exists());
+        $this->user->identity->initialize();
+        $this->assertFalse($this->user->identity->exists(), "I destroy the identiy and i expect that the value is false.");
     }
 
     /**
@@ -233,16 +241,30 @@ class Identity extends TestController {
      */
     public function updateTemporary()
     {
-        // Test update temporary identity
-        // 
-        // Expected Result :
-        // 
-        // First i see boolean(false) then click rehresh i see string(10) "test-value" 
-
         $this->newLoginRequest();
         $this->user->identity->makeTemporary();
-        $this->user->identity->updateTemporary('test', 'test-value', '__temporary');
-        var_dump($this->user->identity->get('test'));
+        $this->user->identity->initialize();
+        $this->user->identity->updateTemporary('test', 'test-value');
+        $this->user->identity->initialize();
+
+        $this->assertEqual($this->user->identity->get('test'), "test-value", "I create temporay identiy then i update it with 'test-value' and i expect that the value is equal to it.");
+        $this->user->identity->destroyTemporary();
+    }
+
+    /**
+     * Destroy temporary identity of unauthorized user
+     * 
+     * @return void
+     */
+    public function destroyTemporary()
+    {
+        $this->newLoginRequest();
+        $this->user->identity->makeTemporary();
+        $this->user->identity->initialize();
+        $this->user->identity->destroyTemporary();
+        $this->user->identity->initialize();
+        $exists = $this->user->identity->exists();
+        $this->assertFalse($exists, "I destroy the identiy and i expect that the value is false.");
     }
 
     /**
@@ -252,21 +274,21 @@ class Identity extends TestController {
      */
     public function updateRememberToken()
     {
-        // Test update temporary identity
-        // 
-        // Expected Result :
-        // 
-        // When i click the "Update Token" link i see a different tokens in db each time.
-        
+        $sql ='SELECT remember_token FROM users WHERE id = 1';
+
         $this->newLoginRequest();
         $this->user->identity->set('__rememberMe', 1);
-        $row = $this->db->query('SELECT remember_token FROM users WHERE id = 1')->rowArray();
-
-        if ($this->request->get('update')) {
-            $this->user->identity->updateRememberToken();
-        } 
-        var_dump($row['remember_token']);
-        echo $this->url->anchor("/tests/authentication/identity/updateRememberToken?update=true", "Update Token");
+        $beforeRow = $this->db->query($sql)->rowArray();
+        $this->user->identity->updateRememberToken();
+        $this->user->identity->set('__rememberMe', 0);
+        $this->user->identity->initialize();
+        $afterRow  = $this->db->query($sql)->rowArray();
+        $name = $this->container->get('user.params')['login']['rememberMe']['cookie']['name'];
+        $this->cookie->delete($name);
+        $this->assertNotEqual($beforeRow['remember_token'], $afterRow['remember_token'], "I check remember_token from database and i expect that the value is not equal to old value.");
+        $this->assertInternalType('alnum', $afterRow['remember_token'], "I expect that the value is alfanumeric.");
+        $this->assertEqual(strlen($afterRow['remember_token']), 32, "I expect length of value that is equal to 32.");
+        $this->user->identity->destroy();
     }
 
     /**
@@ -280,9 +302,9 @@ class Identity extends TestController {
         $name = $this->container->get('user.params')['login']['rememberMe']['cookie']['name'];
 
         $this->cookie->set($name, "test-value");
-        $this->user->identity->forgetMe();
+        $isRemoved = $this->user->identity->forgetMe();
 
-        var_dump($this->cookie->get($name));
+        $this->assertTrue($isRemoved, "I set a test-value to cookie headers and i remove it with forgetMe.Then i expect result of forgetMe function that is equal to true.");
     }
 
     /**
@@ -292,18 +314,16 @@ class Identity extends TestController {
      */
     public function validate()
     {
-        // Test : username : user@example.com, password : 123456
-        //
-        // Expected Result :
-        // 
-        // If credentials is valid i see : boolean(true)  otherwise : boolean(false)
-
         $this->newLoginRequest();
         $this->user->identity->initialize();
         $i = $this->container->get('user.params')['db.identifier'];
         $p = $this->container->get('user.params')['db.password'];
 
-        var_dump($this->user->identity->validate([$i => 'user@example.com', $p => '123456']));
+        $credentials = $this->config->load('tests')['login']['credentials'];
+
+        $isValid = $this->user->identity->validate([$i => $credentials['username'], $p => $credentials['password']]);
+        $this->assertTrue($isValid, "I login.Then i validate user credentials and i expect that the value is true.");
+        $this->user->identity->destroy();
     }
 
     /**
@@ -313,7 +333,11 @@ class Identity extends TestController {
      */
     public function getLoginId()
     {
-        var_dump($this->user->identity->getLoginId());
+        $this->newLoginRequest();
+        $loginId = $this->user->identity->getLoginId();  // 87010e88
+        $this->assertInternalType('alnum', $loginId, "I expect that the value is alfanumeric.");
+        $this->assertEqual(strlen($loginId), 8, "I expect that the length of string is 8.");
+        $this->user->identity->destroy();
     }
 
     /**
@@ -323,17 +347,10 @@ class Identity extends TestController {
      */
     public function kill()
     {
-        // Test : current login id
-        //
-        // Expected Result :
-        // 
-        // We destroy current login id i see: array(0) { } 
-
         $this->newLoginRequest();
         $loginId = $this->user->identity->getLoginId();
         $this->user->identity->kill($loginId);
-
-        var_dump($this->user->storage->getCredentials());
+        $this->assertEmpty($this->user->storage->getCredentials(), "I login.Then i kill identity with my login id and i expect that the identity data is empty.");
     }
 
 }

@@ -28,7 +28,7 @@ class RewriteLocale implements MiddlewareInterface, ImmutableContainerAwareInter
     {        
         $err = null;
 
-        if (! $this->getContainer()->get('middleware')->isAdded('Translation')) {
+        if (! $this->getContainer()->get('middleware')->exists('Translation')) {
 
             throw new RuntimeException(
                 'RewriteLocale middleware requires Translation middleware.'
