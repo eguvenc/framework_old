@@ -44,11 +44,11 @@ class Identity extends TestController
         $params = $this->config->load('providers::user')['params'];
 
         $rm = 'fgvH6hrlWNDeb9jz5L2P4xBW3vdrDP17';
-        $this->cookie->set((string)$params['login']['rememberMe']['cookie']['name'], $rm);
-
+        $cookies = [
+            $params['login']['rememberMe']['cookie']['name'] => $rm
+        ];
         $this->session->remove('Auth/IgnoreRecaller');
-        $this->assertEqual($this->user->identity->recallerExists(), $rm, "I set a recaller cookie, then i refresh the page and i expect that the value is equal to $rm");
-        $this->setCommandRefresh();
+        $this->assertEqual($this->user->identity->recallerExists($cookies), $rm, "I set a recaller cookie, then i refresh the page and i expect that the value is equal to $rm");
         $this->varDump($rm);
     }
 
@@ -302,9 +302,11 @@ class Identity extends TestController
         $name = $this->container->get('user.params')['login']['rememberMe']['cookie']['name'];
 
         $this->cookie->set($name, "test-value");
-        $isRemoved = $this->user->identity->forgetMe();
+        $this->user->identity->forgetMe();
+        $cookieID = $this->cookie->getId();
+        $headers  = $this->cookie->getHeaders();
 
-        $this->assertTrue($isRemoved, "I set a test-value to cookie headers and i remove it with forgetMe.Then i expect result of forgetMe function that is equal to true.");
+        $this->assertArrayHasKey($cookieID, $headers, "I set a test-value to cookie headers then i do forgetMe and i expect the cookie id removed from cookie headers.");
     }
 
     /**
