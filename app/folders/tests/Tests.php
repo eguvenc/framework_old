@@ -13,15 +13,23 @@ class Tests extends Controller
      */
     public function index()
     {
-        $folders = scandir(FOLDERS .'tests');
-        unset($folders[0], $folders[1], $folders[2]);
 
-        $this->view->load(
-            'test',
-            [
-                'content' => $this->getHtml($folders)
-            ]
-        );
+        $path = realpath(FOLDERS .'tests');
+
+        $objects = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path), \RecursiveIteratorIterator::SELF_FIRST);
+        foreach($objects as $name => $object){
+            echo "$name\n";
+        }
+
+        // $folders = scandir(FOLDERS .'tests');
+        // unset($folders[0], $folders[1], $folders[2]);
+
+        // $this->view->load(
+        //     'test',
+        //     [
+        //         'content' => $this->getHtml($folders)
+        //     ]
+        // );
     }
 
     /**
