@@ -5,16 +5,12 @@ return array(
     'params' => [
 
         'db.adapter' => 'Obullo\Authentication\Adapter\Database',
-        'db.model' => 'Obullo\Authentication\Model\Database',
-        'db.provider' => [
-            'connection' => 'default'
-        ],
+        'db.model' => 'Auth\Model\User',
         'db.tablename' => 'users',
         'db.id' => 'id',
         'db.identifier' => 'username',
         'db.password' => 'password',
         'db.rememberToken' => 'remember_token',
-        'db.fields' => [],
         'cache' => [
             'key' => 'Auth',
             'storage' => 'Obullo\Authentication\Storage\Redis',

@@ -31,7 +31,7 @@ require '../vendor/autoload.php';
 register_shutdown_function(
     function () {
         $error = error_get_last();
-        if (! empty($error) && $error['type'] == E_PARSE) {
+        if (! empty($error)) {
             echo $error['message']." File: ".$error['file']." Line : ".$error['line'];
         }
     }

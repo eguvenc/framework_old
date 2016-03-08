@@ -4,7 +4,7 @@
 | Routes 
 |--------------------------------------------------------------------------
 | Typically there is a one-to-one relationship between a URL string and its 
-| corresponding ( directory / controller / method ).
+| corresponding ( folders / controller / method ).
 |
 */
 $router->configure(
@@ -33,9 +33,6 @@ $router->configure(
 // $router->middleware('Maintenance');
 
 // $router->group(
-//     [
-//         'domain' => 'test.*\d.framework',
-//     ],
 //     function () {
 
 //         // $this->get('[0-9]+/.*', 'welcome/index/$1/$2');
@@ -44,6 +41,7 @@ $router->configure(
 //         // $this->attach('welcome');
 //         // $this->attach('welcome/test');
 //     }
+//     ['domain' => 'test.*\d.framework'],
 // );
 
 // $router->get(
@@ -58,13 +56,15 @@ $router->configure(
 /**
  * Generic users
  */
-$router->group(
-    [
-        // 'match' => '[0-9]+/[a-z]+.*',   // Match URI
-        'domain' => 'framework',
-        'middleware' => array()  // 'RewriteLocale'
-    ],
-    function ($sub) use ($container) {
+$router->domain('framework')->group('examples/', function () {
+
+        // echo 'EXAMPLES';
+
+        $this->group(
+            'forms/', function () {
+                // echo 'FORMS';
+            }
+        );
 
         // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
 
@@ -73,24 +73,22 @@ $router->group(
         // $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
 
         // $this->attach('.*'); // all urls
-    }
+    },
+    ['middleware' => array()]
 );
 
 /**
  * Authorized users
  */
-$router->group(
-    [
-        'middleware' => array('Auth', 'Guest')
-    ],
-    function () {
+$router->group(function () {
 
-        $this->attach('membership/restricted');
+        // $this->attach('membership/restricted');
 
         // $this->get('tutorials/helloWorld.*', 'tutorials/helloLayout');
         // $this->attach('(.*)'); // all url
         // $this->attach('((?!tutorials/helloWorld).)*$');  // url not contains "tutorials/hello_world"
-    }
+    },
+    ['middleware' => array('Auth', 'Guest')]
 );
 
 // $router->error404('errors/page_not_found');

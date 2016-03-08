@@ -3,9 +3,9 @@
 namespace Tests\Authentication\Storage;
 
 use Obullo\Authentication\Storage\AbstractTestStorage;
-use Obullo\Authentication\Storage\Memcached as StorageMemcached;
+use Obullo\Authentication\Storage\Memcache as StorageMemcache;
 
-class Memcached extends AbstractTestStorage
+class Memcache extends AbstractTestStorage
 {
     protected $storage;
 
@@ -18,7 +18,7 @@ class Memcached extends AbstractTestStorage
     {
         $container->get('user');
 
-        $this->storage = new StorageMemcached(
+        $this->storage = new StorageMemcache(
             $container,
             $container->get('request'),
             $container->get('session'),

@@ -3,23 +3,7 @@
 return array(
 
     /**
-     * Redis Connections
-     * 
-     * Default
-     *     host : Host address
-     *     port : Port number
-     *     weight : Integer weight
-     * 
-     * Options 
-     *     persistent : On / off persistent connections
-     *     auth : Auth password field
-     *     timeout : Connection timeout in seconds
-     *     attempt : Connection attempts
-     *     serializer : None, php or igbinary
-     *     database : Default database
-     *     prefix : Default prefix
-     *
-     * Important : Default connection always use serializer "none", for second connection choose a serializer.
+     * Important : Default connection always use serializer "none".
      */
     'params' => [
 
@@ -38,7 +22,6 @@ return array(
                     'prefix' => null,
                 ]
             ],
-            
             'second' => [
                 'host' => '127.0.0.1',
                 'port' => 6379,

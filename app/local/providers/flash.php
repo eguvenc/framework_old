@@ -7,7 +7,7 @@ return array(
         /**
         * Flash message templates.
         * 
-        * Note : Default CSS classes brought from getbootstrap.com
+        * Note : Default CSS brought from getbootstrap.com
          */
         'notification' => 
         [
