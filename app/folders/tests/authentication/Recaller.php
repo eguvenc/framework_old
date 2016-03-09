@@ -50,7 +50,9 @@ class Recaller extends TestController
         $this->assertArrayHasKey($password, $result, "I expect identity array has '$password' key.");
         $this->varDump($result);
         
+        $rm = $this->container->get('user.params')['login']['rememberMe']['cookie']['name'];
         $this->user->identity->destroy();
+        $this->cookie->delete($rm);
 
     }
 }
