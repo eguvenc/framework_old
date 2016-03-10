@@ -27,7 +27,6 @@ class Session extends AbstractTestStorage
         $this->storage->setIdentifier('user@example.com');
         $this->setDisabledMethods(
             [
-                'isEmpty',
                 'query',
                 'createTemporary',
                 'makeTemporary',

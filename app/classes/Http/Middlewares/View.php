@@ -6,10 +6,9 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Obullo\Http\Middleware\MiddlewareInterface;
-use Obullo\Http\Controller\ImmutableControllerAwareInterface;
-use Obullo\Http\Controller\ImmutableControllerInterface as Controller;
+use Obullo\Http\Controller\ControllerAwareInterface;
 
-class View implements MiddlewareInterface, ImmutableControllerAwareInterface
+class View implements MiddlewareInterface, ControllerAwareInterface
 {
     /**
      * Inject controller object
@@ -18,7 +17,7 @@ class View implements MiddlewareInterface, ImmutableControllerAwareInterface
      * 
      * @return void
      */ 
-    public function setController(Controller $controller)
+    public function setController($controller)
     {
         if (method_exists($controller, '__invoke')) {  // Assign layout variables
             $controller();

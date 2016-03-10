@@ -13,7 +13,6 @@ $router->configure(
         'defaultPage' => 'welcome',
     ]
 );
-
 // $router->get(
 //     '{id}/{name}/{any}', 'welcome/index/$1/$2/$3',
 //     function ($id, $name, $any) {
@@ -56,31 +55,34 @@ $router->configure(
 /**
  * Generic users
  */
-$router->domain('framework')->group('examples/', function () {
+$router->domain('framework')
+    ->group(
+        'examples/',
+        function () {
 
-        // echo 'EXAMPLES';
+            // echo 'EXAMPLES';
 
-        $this->group(
-            'forms/', function () {
-                // echo 'FORMS';
-            }
-        );
+            $this->group(
+                'forms/', function () {
+                    // echo 'FORMS';
+                }
+            );
+            // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
 
-        // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
+            // $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
+            // $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
+            // $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
 
-        // $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
-        // $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
-        // $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
-
-        // $this->attach('.*'); // all urls
-    },
-    ['middleware' => array()]
+            // $this->attach('.*'); // all urls
+        },
+        ['middleware' => array()]
 );
 
 /**
  * Authorized users
  */
-$router->group(function () {
+$router->group(
+    function () {
 
         // $this->attach('membership/restricted');
 

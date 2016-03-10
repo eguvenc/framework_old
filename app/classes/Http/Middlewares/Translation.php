@@ -32,9 +32,11 @@ class Translation implements MiddlewareInterface, ImmutableContainerAwareInterfa
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
+        $container = $this->getContainer();
+        
         $this->request = $request;
-        $this->translator = $this->getContainer()->get('translator');
-        $this->params = $this->getContainer()->get('translator.params');
+        $this->translator = $container->get('translator');
+        $this->params = $container->get('translator.params');
 
         $this->cookieValue = $this->readCookie();
         $this->setLocale();

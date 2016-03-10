@@ -27,8 +27,9 @@ class RewriteLocale implements MiddlewareInterface, ImmutableContainerAwareInter
     public function __invoke(Request $request, Response $response, callable $next = null)
     {        
         $err = null;
+        $container = $this->getContainer();
 
-        if (! $this->getContainer()->get('middleware')->exists('Translation')) {
+        if (! $container->get('middleware')->exists('Translation')) {
 
             throw new RuntimeException(
                 'RewriteLocale middleware requires Translation middleware.'
@@ -36,13 +37,12 @@ class RewriteLocale implements MiddlewareInterface, ImmutableContainerAwareInter
         }
         if ($request->getMethod() == 'GET') {
 
-            $params  = $this->getContainer()->get('translator.params');
+            $params  = $container->get('translator.params');
             $segment = $request->getUri()->segment($params['uri']['segment']);  // Get segment http://examples.com/en/welcome  (en)
 
             if (! in_array($segment, $params['default']['languages'])) {
 
-                $translator = $this->getContainer()->get('translator');
-                $path = $translator->getLocale().$request->getUri()->getPath();
+                $path = $container->get('translator')->getLocale().$request->getUri()->getPath();
 
                 return $response->redirect($request->getUri()->withPath($path));
             }

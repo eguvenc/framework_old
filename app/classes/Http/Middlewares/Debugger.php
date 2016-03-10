@@ -34,12 +34,13 @@ class Debugger implements MiddlewareInterface, ImmutableContainerAwareInterface,
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        $params = $this->getContainer()->get('config')->load('debugger');
+        $container = $this->getContainer();
+        $params    = $container->get('config')->load('debugger');
 
         $this->websocket = new Websocket(
-            $this->getContainer(),
+            $container,
             $params,
-            $this->getContainer()->get('logger.params')
+            $container->get('logger.params')
         );
         $this->websocket->connect();
 
@@ -55,13 +56,15 @@ class Debugger implements MiddlewareInterface, ImmutableContainerAwareInterface,
      */
     public function terminate()
     {
-        if ($this->getContainer()->get('app')->request->getUri()->segment(0) != 'debugger') {
+        $container = $this->getContainer();
 
-            $body = $this->getContainer()->get('app')->response->getBody();
+        if ($container->get('app')->request->getUri()->segment(0) != 'debugger') {
+
+            $body = $container->get('app')->response->getBody();
             
             $this->websocket->emit(
                 (string)$body,
-                $this->getContainer()->get('logger')->getPayload()
+                $container->get('logger')->getPayload()
             );
         }
     }

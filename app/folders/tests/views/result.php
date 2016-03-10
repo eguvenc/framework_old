@@ -41,10 +41,10 @@
         <?php
         $primaryFolder = $this->router->getPrimaryFolder();
   			$folder = $this->router->getFolder();
-  			$class  = strtolower($this->router->getClass());
+  			$class  = $this->router->getClass();
   			$method = $this->router->getMethod();
         ?>
-        <h2 class="text-muted"><a href="/<?php echo $primaryFolder?>/<?php echo $folder ?>/<?php echo $class ?>"><?php echo $class ?>-><?php echo $method ?>()</a></h2>
+        <h2 class="text-muted"><a href="/<?php echo $primaryFolder?>/<?php echo $folder ?>/<?php echo lcfirst($class) ?>"><?php echo lcfirst($class) ?>-><?php echo $method ?>()</a></h2>
       </div>
 
       <div class="tests">

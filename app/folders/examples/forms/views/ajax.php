@@ -164,6 +164,8 @@ function submitAjax(formId){
 </script>
 </head>
 
+<?php $element = $this->form->getElement() ?>
+
   <body>
   
     <div class="container">
@@ -199,8 +201,8 @@ function submitAjax(formId){
             <div class="form-group <?php echo $this->form->getErrorClass('communicate') ?>">
               <p>How we communicate with you ?</p>
               <div class="radio">
-              <label for="communicate1"><?php echo $this->element->radio('communicate', 'email', $this->form->setRadio('communicate', 'email'), ' id="communicate1" ') ?>&nbsp;By Email</label>
-              <label for="communicate2"><?php echo $this->element->radio('communicate', 'phone', $this->form->setRadio('communicate', 'phone'), ' id="communicate2" '); ?>&nbsp;By Phone</label>
+              <label for="communicate1"><?php echo $element->radio('communicate', 'email', $this->form->setRadio('communicate', 'email'), ' id="communicate1" ') ?>&nbsp;By Email</label>
+              <label for="communicate2"><?php echo $element->radio('communicate', 'phone', $this->form->setRadio('communicate', 'phone'), ' id="communicate2" '); ?>&nbsp;By Phone</label>
               </div>
             </div>
 
@@ -216,7 +218,7 @@ function submitAjax(formId){
                     'radio'  => 'Radio',
                     'friend'  => 'A friend',
                 );
-                echo $this->element->dropdown('hear', $options, $this->form->getValue('hear'), ' class="form-control" ');
+                echo $element->dropdown('hear', $options, $this->form->getValue('hear'), ' class="form-control" ');
               ?>
             </div>
             <button type="submit" class="btn btn-default" onclick="submitAjax('ajaxForm');">Submit</button>

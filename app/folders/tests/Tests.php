@@ -15,12 +15,12 @@ class Tests extends Controller
      */
     public function index()
     {
-        $ritit = new RecursiveIteratorIterator(
+        $iterator = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator(FOLDERS .'tests', RecursiveDirectoryIterator::SKIP_DOTS),
             RecursiveIteratorIterator::CHILD_FIRST
         );
-        $r = array();
-        foreach ($ritit as $splFileInfo) {
+        $results = array();
+        foreach ($iterator as $splFileInfo) {
             $path = $splFileInfo->isDir() ? array($splFileInfo->getFilename() => array()) : array($splFileInfo->getFilename());
             if (in_array(
                 $splFileInfo->getFilename(),
@@ -35,16 +35,15 @@ class Tests extends Controller
             )) {
                 continue;
             }
-            for ($depth = $ritit->getDepth() - 1; $depth >= 0; $depth--) {
-                $path = array($ritit->getSubIterator($depth)->current()->getFilename() => $path);
+            for ($depth = $iterator->getDepth() - 1; $depth >= 0; $depth--) {
+                $path = array($iterator->getSubIterator($depth)->current()->getFilename() => $path);
             }
-            $r = array_merge_recursive($r, $path);
+            $results = array_merge_recursive($results, $path);
         }
-
         $this->view->load(
             'test',
             [
-                'content' => $this->getHtml($r)
+                'content' => $this->getHtml($results)
             ]
         );
     }
@@ -73,7 +72,8 @@ class Tests extends Controller
                             $html.= "<li>".$this->url->anchor("tests/".strtolower($folder)."/".$subfolder."/".strtolower(substr($file, 0, -4)), ucfirst($subfolder).'/'.$file)."</li>";
                         }
                     } elseif (is_numeric($key)) {
-                        $html.= "<li>".$this->url->anchor("tests/".strtolower($folder)."/".strtolower(substr($value, 0, -4)), $value)."</li>";
+                        $file = substr(lcfirst($value), 0, -4);
+                        $html.= "<li>".$this->url->anchor("tests/".strtolower($folder)."/".$file, $value)."</li>";
                     }
                 }
             }

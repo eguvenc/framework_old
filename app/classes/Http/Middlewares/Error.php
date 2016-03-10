@@ -30,27 +30,16 @@ class Error implements ErrorMiddlewareInterface, ImmutableContainerAwareInterfac
      */
     public function __invoke($error, Request $request, Response $response, callable $out = null)
     {
-        if (is_string($error)) {
-
+        if (is_string($error)) {  // middleware errors
             echo $error;
         }
         if (is_object($error)) {
-            
-            if ($this->getContainer()->get('app')->getEnv() == 'local') {
+        
+            $exception = new \Obullo\Error\Exception;
+            echo $exception->make($error);  // display exceptions
 
-                $exception = new \Obullo\Error\Exception;
-                echo $exception->make($error);
-
-                $this->getContainer()->get('app')->exceptionError($error);  // Log exceptions using app/errors.php
-
-            } else {
-            
-                echo $error->getMessage();
-
-                $this->getContainer()->get('app')->exceptionError($error);  // Log exceptions using app/errors.php
-            }
+            $this->getContainer()->get('app')->exceptionError($error);  // log exceptions to app/errors.php
         }
-
         return $response;
     }
 }
