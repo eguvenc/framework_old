@@ -19,6 +19,7 @@ return array(
     'OBULLO:VALIDATOR:DATE'            => "The %s field must contain a valid date.",
     'OBULLO:VALIDATOR:ISDECIMAL'       => "The %s field must contain only decimal characters.",
     'OBULLO:VALIDATOR:ISJSON'          => "The %s field must contain a valid json data.",
+    'OBULLO:VALIDATOR:CONTAINS'        => "The %s field may only contain (%s) values.",
     'OBULLO:VALIDATOR:CSRF'            => "Invalid csrf code.",
     'OBULLO:VALIDATOR:CSRF:INVALID'    => "The form submitted did not originate from the expected site.",
     'OBULLO:VALIDATOR:CSRF:REQUIRED'   => "The csrf token does not exist in post data.",

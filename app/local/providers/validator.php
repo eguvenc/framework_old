@@ -14,6 +14,7 @@ return array(
             'alnumunicode' => 'Obullo\Validator\Rules\AlnumUnicode',
             'alnumdash' => 'Obullo\Validator\Rules\AlnumDash',
             'alnumdashunicode' => 'Obullo\Validator\Rules\AlnumDashUnicode',
+            'contains' => 'Obullo\Validator\Rules\Contains',
             'csrf' => 'Obullo\Validator\Rules\Csrf',
             'captcha' => 'Obullo\Validator\Rules\Captcha',
             'recaptcha' => 'Obullo\Validator\Rules\ReCaptcha',
