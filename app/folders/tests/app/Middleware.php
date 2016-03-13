@@ -2,7 +2,7 @@
 
 namespace Tests\App;
 
-use Obullo\Http\Tests\TestController;
+use Obullo\Tests\TestController;
 
 class Middleware extends TestController
 {
@@ -85,7 +85,7 @@ class Middleware extends TestController
     {
         $names = $this->middleware->getNames();
 
-        $this->assertContains('App', $names, "I expect middleware names contain App key.");
+        $this->assertArrayContains('App', $names, "I expect middleware names contain App key.");
         $this->varDump($names);
     }
 

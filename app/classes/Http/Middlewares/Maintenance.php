@@ -7,14 +7,13 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Obullo\Container\ParamsAwareTrait;
 use Obullo\Container\ParamsAwareInterface;
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
-
+use Obullo\Container\ContainerAwareTrait;
+use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
 
-class Maintenance implements MiddlewareInterface, ImmutableContainerAwareInterface, ParamsAwareInterface
+class Maintenance implements MiddlewareInterface, ContainerAwareInterface, ParamsAwareInterface
 {
-    use ImmutableContainerAwareTrait, ParamsAwareTrait;
+    use ContainerAwareTrait, ParamsAwareTrait;
 
     /**
      * Maintenance 

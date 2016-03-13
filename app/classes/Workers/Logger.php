@@ -9,12 +9,12 @@ use Obullo\Log\Handler\Mongo;
 use Obullo\Queue\JobInterface;
 use Obullo\Log\Handler\MetadataAwareInterface;
 
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
+use Obullo\Container\ContainerAwareTrait;
+use Obullo\Container\ContainerAwareInterface;
 
-class Logger implements JobInterface, ImmutableContainerAwareInterface
+class Logger implements JobInterface, ContainerAwareInterface
 {
-    use ImmutableContainerAwareTrait;
+    use ContainerAwareTrait;
 
     /**
      * Job class for queue operations

@@ -6,12 +6,12 @@ use League\Event\AbstractListener;
 use League\Event\EventInterface as Event;
 
 use Obullo\Authentication\AuthResult;
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
+use Obullo\Container\ContainerAwareTrait;
+use Obullo\Container\ContainerAwareInterface;
 
-class LoginResultListener extends AbstractListener implements ImmutableContainerAwareInterface
+class LoginResultListener extends AbstractListener implements ContainerAwareInterface
 {
-    use ImmutableContainerAwareTrait;
+    use ContainerAwareTrait;
 
     /**
      * Listen auth credentials

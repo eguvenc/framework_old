@@ -2,7 +2,7 @@
 
 namespace Tests\App;
 
-use Obullo\Http\Tests\TestController;
+use Obullo\Tests\TestController;
 
 class Annotation extends TestController
 {

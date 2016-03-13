@@ -5,15 +5,14 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+use Obullo\Container\ContainerAwareTrait;
+use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Authentication\Middleware\UniqueSessionTrait;
 
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
-
-class Auth implements MiddlewareInterface, ImmutableContainerAwareInterface
+class Auth implements MiddlewareInterface, ContainerAwareInterface
 {
-    use ImmutableContainerAwareTrait, UniqueSessionTrait;
+    use ContainerAwareTrait, UniqueSessionTrait;
 
     /**
      * Invoke middleware

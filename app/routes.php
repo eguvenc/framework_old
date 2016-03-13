@@ -7,12 +7,16 @@
 | corresponding ( folders / controller / method ).
 |
 */
-$router->configure(
-    [
-        'domain' => 'framework',
-        'defaultPage' => 'welcome',
-    ]
-);
+/**
+ * Set your root domain without ".www" e.g."example.com"
+ */
+$router->domainRoot('framework');
+
+/**
+ * Set your default index page
+ */
+$router->defaultPage('welcome');
+
 // $router->get(
 //     '{id}/{name}/{any}', 'welcome/index/$1/$2/$3',
 //     function ($id, $name, $any) {
@@ -76,7 +80,7 @@ $router->domain('framework')
             // $this->attach('.*'); // all urls
         },
         ['middleware' => array()]
-);
+    );
 
 /**
  * Authorized users

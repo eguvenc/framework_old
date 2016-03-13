@@ -3,7 +3,7 @@
 namespace Tests\Authentication;
 
 use Obullo\Http\Tests\LoginTrait;
-use Obullo\Http\Tests\TestController;
+use Obullo\Tests\TestController;
 use Obullo\Authentication\AuthResult as AuthResultClass;
 
 class AuthResult extends TestController

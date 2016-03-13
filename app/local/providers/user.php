@@ -42,9 +42,6 @@ return array(
         'password' => [
             'algo' => PASSWORD_BCRYPT,
             'cost' => 6
-        ],
-        'session' => [
-            'regenerateSessionId' => true,
         ]
     ]
 );

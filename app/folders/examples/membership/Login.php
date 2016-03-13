@@ -29,9 +29,11 @@ class Login extends Controller
                         'db.identifier' => $this->validator->getValue('email'), 
                         'db.password'   => $this->validator->getValue('password'),
                     ],
-                    $this->request->post('rememberMe')
+                    [
+                        'regenerateSessionId' => true,
+                        'rememberMe' => $this->request->post('rememberMe')
+                    ]
                 );
-
                 if ($authResult->isValid()) {
 
                     $this->flash->success('You have authenticated successfully.');

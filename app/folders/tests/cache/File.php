@@ -2,7 +2,7 @@
 
 namespace Tests\Cache;
 
-use Obullo\Http\Tests\TestController;
+use Obullo\Tests\TestController;
 use Obullo\Cache\Handler\File as FileCache;
 
 class File extends TestController
@@ -12,7 +12,39 @@ class File extends TestController
      */
     public function __construct()
     {
-        $this->cache = new FileCache(['path' => '/resources/data/cache/']);
+        $this->cache = new FileCache(
+            ['path' => '/resources/data/cache/']
+        );
+    }
+
+    /**
+     * Get item
+     * 
+     * @return void
+     */
+    public function getItem()
+    {
+        $this->cache->setItem('test', 'test-value');
+        $this->assertEqual($this->cache->getItem('test'), 'test-value', "I expect that the value is test-value.");
+        $this->cache->removeItem('test');
+    }
+
+    /**
+     * Get items
+     * 
+     * @return void
+     */
+    public function getItems()
+    {
+        $items = [
+            'test1' => 'test-value1',
+            'test2' => 'test-value2',
+        ];
+        $this->cache->setItems($items);
+        $values = $this->cache->getItems(['test1', 'test2']);
+        $this->assertEqual('test-value1', $values[0], "I expect that the value is test-value1.");
+        $this->assertEqual('test-value2', $values[1], "I expect that the value is test-value2.");
+        $this->cache->removeItems(['test1', 'test2']);
     }
 
     /**
@@ -20,11 +52,11 @@ class File extends TestController
      * 
      * @return void
      */
-    public function get()
+    public function hasItem()
     {
-        $this->cache->set('test', 'test-value');
-        $this->assertEqual($this->cache->get('test'), 'test-value', "I expect that the value is test-value.");
-        $this->cache->remove('test');
+        $this->cache->setItem('test', 'test-value');
+        $this->assertTrue($this->cache->hasItem('test'), "I expect that the value is true.");
+        $this->cache->removeItem('test');
     }
 
     /**
@@ -32,10 +64,193 @@ class File extends TestController
      * 
      * @return void
      */
-    public function has()
+    public function replaceItem()
     {
-        $this->cache->set('test', 'test-value');
-        $this->assertTrue($this->cache->has('test'), "I expect that the value is true.");
-        $this->cache->remove('test');
+        $this->cache->setItem('test', 'test-value');
+        $this->cache->replaceItem('test', 'test-value-replace');
+
+        $this->assertEqual("test-value-replace", $this->cache->getItem('test'), "I expect that the value is equal to 'test-value-replace'.");
+        $this->cache->removeItem('test');
     }
+    
+    /**
+     * Replace data
+     * 
+     * @return void
+     */
+    public function replaceItems()
+    {
+        $items = [
+            'test1' => 'test-value1',
+            'test2' => 'test-value2',
+        ];
+        $this->cache->setItems($items);
+        $replaceItems = [
+            'test1' =>  'test-value-replace1',
+            'test2' =>  'test-value-replace2',
+        ];
+        $this->cache->replaceItems($replaceItems);
+
+        $this->assertEqual("test-value-replace1", $this->cache->getItem('test1'), "I expect that the value is equal to 'test-value-replace1'.");
+        $this->assertEqual("test-value-replace2", $this->cache->getItem('test2'), "I expect that the value is equal to 'test-value-replace2'.");
+        $this->cache->removeItems(array_keys($items));
+    }
+
+    /**
+     * Set item
+     * 
+     * @return boolean
+     */
+    public function setItem()
+    {
+        $this->cache->setItem('test', 'test-value');
+        $this->assertEqual("test-value", $this->cache->getItem('test'), "I expect that the value is equal to 'test-value-replace'.");
+        $this->cache->removeItem('test');
+    }
+
+    /**
+     * Set items
+     *
+     * @return void
+     */
+    public function setItems()
+    {
+        $items = [
+            'test1' => 'test-value1',
+            'test2' => 'test-value2',
+        ];
+        $this->cache->setItems($items);
+        $this->assertEqual("test-value1", $this->cache->getItem('test1'), "I expect that the value is equal to 'test-value-replace1'.");
+        $this->assertEqual("test-value2", $this->cache->getItem('test2'), "I expect that the value is equal to 'test-value-replace2'.");
+        $this->cache->removeItems(array_keys($items));
+    }
+
+    /**
+     * Remove item
+     * 
+     * @return boolean
+     */
+    public function removeItem()
+    {
+        $this->cache->setItem('test', 'test-value');
+        $this->assertEqual("test-value", $this->cache->getItem('test'), "I expect that the value is equal to 'test-value-replace'.");
+        $this->cache->removeItem('test');
+    }
+
+    /**
+     * Remove item
+     * 
+     * @return boolean
+     */
+    public function removeItems()
+    {
+        $items = [
+            'test1' => 'test-value1',
+            'test2' => 'test-value2',
+        ];
+        $this->cache->setItems($items);
+        $this->cache->removeItems(array_keys($items));
+        $this->assertFalse($this->cache->getItem('test1'), "I expect that the value is false.");
+        $this->assertFalse($this->cache->getItem('test2'), "I expect that the value is false.");
+    }
+
+    /**
+     * Returns to all keys
+     * 
+     * @return array
+     */
+    public function getAllKeys()
+    {
+        $items = [
+            'test1' => 'test-value1',
+            'test2' => 'test-value2',
+        ];
+        $this->cache->setItems($items);
+        $getAllKeys = $this->cache->getAllKeys();
+
+        $this->assertArrayContains(['test2'], $getAllKeys, "I expect that the all keys contain test1 & test2 keys.");
+        $this->cache->removeItems(array_keys($items));
+    }
+
+    /**
+     * Returns to all keys
+     * 
+     * @return array
+     */
+    public function getAllData()
+    {
+        $items = [
+            'test1' => 'test-value1',
+            'test2' => 'test-value2',
+        ];
+        $this->cache->setItems($items);
+        $getAllData = $this->cache->getAllData();
+
+        $this->assertArrayContains($items, $getAllData, "I expect that the all data contain items.");
+        $this->cache->removeItems(array_keys($items));
+    }
+
+    /**
+     * Clean all data
+     * 
+     * @return void
+     */
+    public function flushAll()
+    {
+        $items = [
+            'test1' => 'test-value1',
+            'test2' => 'test-value2',
+        ];
+        $this->cache->setItems($items);
+        $this->cache->flushAll();
+        $getAllData = $this->cache->getAllData();
+
+        $this->assertEmpty($getAllData, "I expect that the value is empty.");
+    }
+
+    /**
+     * Cache Info
+     * 
+     * @return array
+     */
+    public function getInfo()
+    {
+        $items = [
+            'test1' => 'test-value1',
+            'test2' => 'test-value2',
+        ];
+        $this->cache->setItems($items);
+        $info = $this->cache->getInfo();
+
+        foreach ($info as $splFileInfo) {
+            $files[] = $splFileInfo->getFilename();
+        }
+        $this->assertEqual('test1', $files[0], "I expect that the name of first filename is equal to test1.");
+        $this->assertEqual('test2', $files[1], "I expect that the value of second filename is equal to test2.");
+
+        $this->cache->removeItems(array_keys($items));
+    }
+
+    /**
+     * Get Meta Data
+     * 
+     * @return void
+     */
+    public function getMetaData()
+    {
+        $items = [
+            'test1' => 'test-value1',
+        ];
+        $this->cache->setItems($items);
+        $meta = $this->cache->getMetaData('test1');
+
+        if ($this->assertArrayHasKey("expire", $meta, "I expect that the metadata has 'test1' key.")) {
+            $this->assertDate($meta['expire'], "I expect that the type of date is valid.");
+        };
+        if ($this->assertArrayHasKey("mtime", $meta, "I expect that the metadata has 'test2' key.")) {
+            $this->assertDate($meta['mtime'], "I expect that the type of date is valid.");
+        }
+        $this->cache->removeItems(array_keys($items));
+    }
+
 }

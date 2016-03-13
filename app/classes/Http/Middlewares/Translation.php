@@ -5,16 +5,15 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+use Obullo\Container\ContainerAwareTrait;
 use Obullo\Config\ConfigInterface as Config;
+use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Translation\TranslatorInterface as Translator;
 
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
-
-class Translation implements MiddlewareInterface, ImmutableContainerAwareInterface
+class Translation implements MiddlewareInterface, ContainerAwareInterface
 {
-    use ImmutableContainerAwareTrait;
+    use ContainerAwareTrait;
 
     protected $params;
     protected $request;

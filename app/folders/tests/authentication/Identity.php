@@ -2,8 +2,8 @@
 
 namespace Tests\Authentication;
 
-use Obullo\Http\Tests\LoginTrait;
-use Obullo\Http\Tests\TestController;
+use Obullo\Tests\LoginTrait;
+use Obullo\Tests\TestController;
 use Obullo\Authentication\Token;
 
 class Identity extends TestController
@@ -20,6 +20,7 @@ class Identity extends TestController
         $this->user->identity->logout();
         $this->user->identity->initialize();
         $this->assertTrue($this->user->identity->guest(), "I logout, then i expect that the value is true.");
+        $this->user->identity->destroy();
     }
 
     /**
@@ -31,6 +32,7 @@ class Identity extends TestController
     {
         $this->newLoginRequest();
         $this->assertTrue($this->user->identity->check(), "I login then i expect that the value is true.");
+        $this->user->identity->destroy();
     }
 
     /**
@@ -48,8 +50,9 @@ class Identity extends TestController
             $params['login']['rememberMe']['cookie']['name'] => $rm
         ];
         $this->session->remove('Auth/IgnoreRecaller');
-        $this->assertEqual($this->user->identity->recallerExists($cookies), $rm, "I set a recaller cookie, then i refresh the page and i expect that the value is equal to $rm");
-        $this->varDump($rm);
+        $exists = $this->user->identity->recallerExists($cookies);
+        $this->assertEqual($exists, $rm, "I set a recaller cookie then i expect that the value is equal to '$rm'");
+        $this->user->identity->destroy();
     }
 
     /**
@@ -65,6 +68,7 @@ class Identity extends TestController
             $this->user->identity->initialize();
         }
         $this->assertTrue($this->user->identity->isTemporary(), "I login then i set a temporary identity and i expect that the value is true.");
+        $this->user->identity->destroyTemporary();
     }
 
     /**
@@ -96,6 +100,7 @@ class Identity extends TestController
         $expire = $expire - time();
 
         $this->assertEqual($expire, 1, "I login.Then i set identity as expired for 1 secs and i expect expire - time() that is equal to 1.");
+        $this->user->identity->destroy();
     }
 
     /**
@@ -108,11 +113,12 @@ class Identity extends TestController
         $this->newLoginRequest();
         $this->user->identity->makeTemporary();
         $this->user->identity->initialize();
-        $this->assertTrue($this->user->identity->isTemporary(), "I login.Then i set identity as temporary.I expect that the value is true.");
+        $this->assertTrue($this->user->identity->isTemporary(), "I login as temporary.I expect that the value is true.");
 
         if ($this->user->identity->isTemporary()) {
             $this->user->identity->destroyTemporary();  // Destroy temporary identity
         }
+        $this->user->identity->destroy();
     }
 
     /**
@@ -127,7 +133,8 @@ class Identity extends TestController
         $this->user->identity->makePermanent();  // Make permanent user.
         $this->user->identity->initialize();
 
-        $this->assertFalse($this->user->identity->isTemporary(), "I login.Then i set identity as temporary.Then set it as permanent and i expect that the value is false.");
+        $this->assertFalse($this->user->identity->isTemporary(), "I login as temporary.Then i set it identity as permanent and i expect that the value is false.");
+        $this->user->identity->destroy();
     }
 
     /**
@@ -139,7 +146,10 @@ class Identity extends TestController
     {
         $this->newLoginRequest();
         $time = $this->user->identity->getTime();
-        $this->assertUnixTimeStamp($time, "I expect that the value is unix timestamp.");
+        if ($this->assertInternalType('integer', $time, "I expect that the value of time is integer.")) {
+            $this->assertDate($time, "I expect that the date is valid.");
+        }
+        $this->user->identity->destroy();
     }
 
     /**
@@ -153,6 +163,7 @@ class Identity extends TestController
         $array = $this->user->identity->getArray();
         $this->assertArrayHasKey('__isAuthenticated', $array, "I expect identity array has '__isAuthenticated' key.");
         $this->varDump($this->user->identity->getArray());
+        $this->user->identity->destroy();
     }
 
     /**
@@ -338,7 +349,7 @@ class Identity extends TestController
         $this->newLoginRequest();
         $loginId = $this->user->identity->getLoginId();  // 87010e88
         $this->assertInternalType('alnum', $loginId, "I expect that the value is alfanumeric.");
-        $this->assertEqual(strlen($loginId), 8, "I expect that the length of string is 8.");
+        $this->assertEqual(strlen($loginId), 32, "I expect that the length of string is 32.");
         $this->user->identity->destroy();
     }
 

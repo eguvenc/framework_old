@@ -5,16 +5,16 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
+use Obullo\Container\ContainerAwareTrait;
+use Obullo\Container\ContainerAwareInterface;
 
 use Obullo\Debugger\Websocket;
 use Obullo\Http\Middleware\TerminableInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
 
-class Debugger implements MiddlewareInterface, ImmutableContainerAwareInterface, TerminableInterface
+class Debugger implements MiddlewareInterface, ContainerAwareInterface, TerminableInterface
 {
-    use ImmutableContainerAwareTrait;
+    use ContainerAwareTrait;
     
     /**
      * Websocket

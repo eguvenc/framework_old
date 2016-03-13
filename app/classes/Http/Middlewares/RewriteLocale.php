@@ -6,14 +6,14 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use RuntimeException;
+use Obullo\Container\ContainerAwareTrait;
+use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
 use Obullo\Http\Translation\TranslatorInterface as Translator;
 
-class RewriteLocale implements MiddlewareInterface, ImmutableContainerAwareInterface
+class RewriteLocale implements MiddlewareInterface, ContainerAwareInterface
 {
-    use ImmutableContainerAwareTrait;
+    use ContainerAwareTrait;
 
     /**
      * Invoke middleware

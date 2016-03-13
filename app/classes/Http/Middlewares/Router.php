@@ -5,13 +5,13 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+use Obullo\Container\ContainerAwareTrait;
+use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
 
-class Router implements MiddlewareInterface, ImmutableContainerAwareInterface
+class Router implements MiddlewareInterface, ContainerAwareInterface
 {
-    use ImmutableContainerAwareTrait;
+    use ContainerAwareTrait;
 
     /**
      * Invoke middleware
@@ -25,8 +25,9 @@ class Router implements MiddlewareInterface, ImmutableContainerAwareInterface
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
         $container = $this->getContainer();
-
-        if ($container->get('router')->getDefaultPage() == '') {
+        $router    = $container->get('router'); 
+    
+        if ($router->getDefaultPage() == '') {
 
             $error = 'Unable to determine what should be displayed.';
             $error.= 'A default route has not been specified in the router middleware.';

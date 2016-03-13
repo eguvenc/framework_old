@@ -5,18 +5,18 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+use Obullo\Container\ContainerAwareTrait;
+use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\ErrorMiddlewareInterface;
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
 
 /**
  * Catch middleware errors
  * 
  * Only available with Zend\Stratigility middleware.
  */
-class Error implements ErrorMiddlewareInterface, ImmutableContainerAwareInterface
+class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
 {
-    use ImmutableContainerAwareTrait;
+    use ContainerAwareTrait;
 
     /**
      * Invoke middleware

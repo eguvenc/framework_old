@@ -8,12 +8,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Obullo\Container\ParamsAwareTrait;
 use Obullo\Container\ParamsAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
+use Obullo\Container\ContainerAwareTrait;
+use Obullo\Container\ContainerAwareInterface;
 
-class NotAllowed implements MiddlewareInterface, ImmutableContainerAwareInterface, ParamsAwareInterface
+class NotAllowed implements MiddlewareInterface, ContainerAwareInterface, ParamsAwareInterface
 {
-    use ImmutableContainerAwareTrait, ParamsAwareTrait;
+    use ContainerAwareTrait, ParamsAwareTrait;
 
     /**
      * Allowed http methods

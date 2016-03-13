@@ -6,16 +6,16 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Obullo\Http\Middleware\MiddlewareInterface;
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
+use Obullo\Container\ContainerAwareTrait;
+use Obullo\Container\ContainerAwareInterface;
 
 /**
  * System adds this middleware end of the queue by default 
  * when the application is run.
  */
-class App implements MiddlewareInterface, ImmutableContainerAwareInterface
+class App implements MiddlewareInterface, ContainerAwareInterface
 {
-    use ImmutableContainerAwareTrait;
+    use ContainerAwareTrait;
 
     /**
      * Invoke middleware

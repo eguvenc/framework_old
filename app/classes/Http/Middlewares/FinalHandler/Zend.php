@@ -7,17 +7,17 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Exception;
 use Obullo\Http\Zend\Stratigility\Utils;
+use Obullo\Container\ContainerAwareTrait;
+use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\TerminableInterface;
-use League\Container\ImmutableContainerAwareTrait;
-use League\Container\ImmutableContainerAwareInterface;
 
 /**
  * This middleware called in index.php file 
  * using by middlewarePipe class.
  */
-class Zend implements ImmutableContainerAwareInterface
+class Zend implements ContainerAwareInterface
 {
-    use ImmutableContainerAwareTrait;
+    use ContainerAwareTrait;
 
     /**
      * Request

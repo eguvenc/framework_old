@@ -2,8 +2,8 @@
 
 namespace Tests\Authentication;
 
-use Obullo\Http\Tests\LoginTrait;
-use Obullo\Http\Tests\TestController;
+use Obullo\Tests\LoginTrait;
+use Obullo\Tests\TestController;
 
 class Login extends TestController
 {
@@ -42,9 +42,10 @@ class Login extends TestController
      */
     public function hasRememberMe()
     {
-        $this->newLoginRequest(1);
+        $this->newLoginRequest(['rememberMe' => 1]);
         $this->assertEqual($this->user->identity->getRememberMe(), 1, "I expect that the value is 1.");
         $this->user->identity->destroy();
+        $this->user->identity->forgetMe();
     }
 
     /**
@@ -61,7 +62,6 @@ class Login extends TestController
 
         $credentials = $this->config->load('tests')['login']['credentials'];
         $isValid     = $this->user->login->validate([$i => $credentials['username'], $p => $credentials['password']]);
-
         $this->assertTrue($isValid, "I validate user credentials without login and i expect that the value is true.");
     }
 

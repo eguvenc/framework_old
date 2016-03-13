@@ -2,8 +2,8 @@
 
 namespace Tests\Authentication;
 
-use Obullo\Http\Tests\LoginTrait;
-use Obullo\Http\Tests\TestController;
+use Obullo\Tests\LoginTrait;
+use Obullo\Tests\TestController;
 use Obullo\Authentication\Recaller as AuthRecaller;
 
 class Recaller extends TestController
@@ -17,7 +17,7 @@ class Recaller extends TestController
      */
     public function recallUser()
     {
-        $this->newLoginRequest(1);
+        $this->newLoginRequest(['rememberMe' => 1]);
         $this->user->identity->destroy();
 
         $sql ='SELECT remember_token FROM users WHERE id = 1';
