@@ -1,10 +1,10 @@
 <?php
 
-namespace ServiceProvider\Connector;
+namespace ServiceProvider;
 
 use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
-class Mongo extends AbstractServiceProvider
+class Amqp extends AbstractServiceProvider
 {
     /**
      * The provides array is a way to let the container
@@ -16,7 +16,7 @@ class Mongo extends AbstractServiceProvider
      * @var array
      */
     protected $provides = [
-        'mongo'
+        'amqp'
     ];
 
     /**
@@ -30,10 +30,18 @@ class Mongo extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $config    = $this->getConfiguration('mongo');
-
-        $container->share('mongo', 'Obullo\Container\ServiceProvider\Connector\Mongo')
+        $config    = $this->getConfiguration('queue');
+        
+        $container->share('amqp', 'Obullo\Container\ServiceProvider\Connector\Amqp')
             ->withArgument($container)
             ->withArgument($config->getParams());
+
+        // AmqpLib Replacement
+        // 
+        
+        // $container->share('amqp', 'Obullo\Container\ServiceProvider\Connector\AmqpLib')
+        //     ->withArgument($container)
+        //     ->withArgument($config->getParams());
+
     }
 }

@@ -35,13 +35,6 @@ return array(
                     'prefix' => null,
                 ]
             ],
-        ],
-
-        'nodes' => [
-            [
-                'host' => '',
-                'port' => 6379,
-            ]
-        ],
+        ]
     ]
 );

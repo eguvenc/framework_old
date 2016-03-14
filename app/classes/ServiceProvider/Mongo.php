@@ -1,10 +1,10 @@
 <?php
 
-namespace ServiceProvider\Connector;
+namespace ServiceProvider;
 
 use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
-class Memcache extends AbstractServiceProvider
+class Mongo extends AbstractServiceProvider
 {
     /**
      * The provides array is a way to let the container
@@ -16,7 +16,7 @@ class Memcache extends AbstractServiceProvider
      * @var array
      */
     protected $provides = [
-        'memcache'
+        'mongo'
     ];
 
     /**
@@ -30,9 +30,9 @@ class Memcache extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $config    = $this->getConfiguration('memcache');
+        $config    = $this->getConfiguration('mongo');
 
-        $container->share('memcache', 'Obullo\Container\ServiceProvider\Connector\Memcache')
+        $container->share('mongo', 'Obullo\Container\ServiceProvider\Connector\Mongo')
             ->withArgument($container)
             ->withArgument($config->getParams());
     }

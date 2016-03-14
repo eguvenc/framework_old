@@ -1,10 +1,10 @@
 <?php
 
-namespace ServiceProvider\Connector;
+namespace ServiceProvider;
 
 use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
-class Redis extends AbstractServiceProvider
+class Memcached extends AbstractServiceProvider
 {
     /**
      * The provides array is a way to let the container
@@ -16,7 +16,7 @@ class Redis extends AbstractServiceProvider
      * @var array
      */
     protected $provides = [
-        'redis'
+        'memcached'
     ];
 
     /**
@@ -30,9 +30,9 @@ class Redis extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $config    = $this->getConfiguration('redis');
+        $config    = $this->getConfiguration('memcached');
 
-        $container->share('redis', 'Obullo\Container\ServiceProvider\Connector\Redis')
+        $container->share('memcached', 'Obullo\Container\ServiceProvider\Connector\Memcached')
             ->withArgument($container)
             ->withArgument($config->getParams());
     }

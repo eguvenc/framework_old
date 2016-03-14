@@ -3,9 +3,9 @@
 namespace Tests\Cache;
 
 use Obullo\Tests\TestController;
-use Obullo\Cache\Handler\File as FileCache;
+use Obullo\Cache\Handler\Memcached as MemcachedCache;
 
-class File extends TestController
+class Memcached extends TestController
 {
     protected $cache;
 
@@ -18,7 +18,7 @@ class File extends TestController
     {
         $this->cache = $container->get('cacheFactory')->shared(
             [
-                'driver' => 'file',
+                'driver' => 'memcached',
                 'connection' => 'default'
             ]
         );
@@ -162,7 +162,7 @@ class File extends TestController
     }
 
     /**
-     * Returns to all keys
+     * Get all keys
      * 
      * @return array
      */
@@ -174,7 +174,6 @@ class File extends TestController
         ];
         $this->cache->setItems($items);
         $getAllKeys = $this->cache->getAllKeys();
-
         $this->assertArrayContains(['test1'], $getAllKeys, "I expect that the keys contain test1 key.");
         $this->assertArrayContains(['test2'], $getAllKeys, "I expect that the keys contain test2 key.");
         $this->cache->removeItems(array_keys($items));
@@ -195,7 +194,6 @@ class File extends TestController
         $getAllData = $this->cache->getAllData();
 
         $this->assertArrayContains($items, $getAllData, "I expect that the all data contain items.");
-        $this->varDump($getAllData);
         $this->cache->removeItems(array_keys($items));
     }
 
@@ -212,9 +210,11 @@ class File extends TestController
         ];
         $this->cache->setItems($items);
         $this->cache->flushAll();
-        $getAllData = $this->cache->getAllData();
 
-        $this->assertEmpty($getAllData, "I expect that the value is empty.");
+        $values = $this->cache->getItems(array('test1', 'test2'));
+
+        $this->assertEmpty($values[0], "I expect that the value is empty.");
+        $this->assertEmpty($values[1], "I expect that the value is empty.");
     }
 
     /**
@@ -230,13 +230,7 @@ class File extends TestController
         ];
         $this->cache->setItems($items);
         $info = $this->cache->getInfo();
-
-        foreach ($info as $splFileInfo) {
-            $files[] = $splFileInfo->getFilename();
-        }
-        $this->assertEqual('test1', $files[0], "I expect that the name of first filename is equal to test1.");
-        $this->assertEqual('test2', $files[1], "I expect that the value of second filename is equal to test2.");
-
+        $this->assertNotEmpty($info, "I expect that the info data is not empty.");
         $this->cache->removeItems(array_keys($items));
     }
 
@@ -249,6 +243,7 @@ class File extends TestController
     {
         $items = [
             'test1' => 'test-value1',
+            'test2' => 'test-value2',
         ];
         $this->cache->setItems($items);
         $meta = $this->cache->getMetaData('test1');

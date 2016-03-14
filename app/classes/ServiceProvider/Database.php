@@ -1,10 +1,10 @@
 <?php
 
-namespace ServiceProvider\Connector;
+namespace ServiceProvider;
 
 use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
-class CacheFactory extends AbstractServiceProvider
+class Database extends AbstractServiceProvider
 {
     /**
      * The provides array is a way to let the container
@@ -16,7 +16,7 @@ class CacheFactory extends AbstractServiceProvider
      * @var array
      */
     protected $provides = [
-        'cacheFactory'
+        'database'
     ];
 
     /**
@@ -30,9 +30,17 @@ class CacheFactory extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-
-        $container->share('cacheFactory', 'Obullo\Container\ServiceProvider\Connector\Cache')
+        $config    = $this->getConfiguration('database');
+        
+        $container->share('database', 'Obullo\Container\ServiceProvider\Connector\Database')
             ->withArgument($container)
-            ->withArgument($container->get('config'));
+            ->withArgument($config->getParams());
+
+        // DoctrineDBAL Replacement
+        // 
+
+        // $container->share('database', 'Obullo\Container\ServiceProvider\Connector\DoctrineDBAL')
+        //     ->withArgument($container)
+        //     ->withArgument($config->getParams());
     }
 }

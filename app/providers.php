@@ -34,10 +34,9 @@ $container->addServiceProvider('Obullo\Container\ServiceProvider\User');
 |--------------------------------------------------------------------------
 | Specifies your connection managers.
 */
-$container->addServiceProvider('ServiceProvider\Connector\Amqp');
-$container->addServiceProvider('ServiceProvider\Connector\Database');
-$container->addServiceProvider('ServiceProvider\Connector\CacheFactory');
-$container->addServiceProvider('ServiceProvider\Connector\Redis');
-$container->addServiceProvider('ServiceProvider\Connector\Memcached');
-// $container->addServiceProvider('ServiceProvider\Connector\Memcache');
-$container->addServiceProvider('ServiceProvider\Connector\Mongo');
+$container->addServiceProvider('ServiceProvider\Amqp');
+$container->addServiceProvider('ServiceProvider\Database');
+$container->addServiceProvider('ServiceProvider\CacheFactory');
+$container->addServiceProvider('ServiceProvider\Redis');
+$container->addServiceProvider('ServiceProvider\Memcached');
+$container->addServiceProvider('ServiceProvider\Mongo');

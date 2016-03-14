@@ -19,14 +19,6 @@ return array(
                     'prefix' => null
                 ]
             ]
-        ],
-
-        'nodes' => [
-            [
-                'host' => '',
-                'port' => '11211',
-                'weight' => 1
-            ]
         ]
     ]    
 );

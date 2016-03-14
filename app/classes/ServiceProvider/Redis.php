@@ -1,10 +1,10 @@
 <?php
 
-namespace ServiceProvider\Connector;
+namespace ServiceProvider;
 
 use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
-class Amqp extends AbstractServiceProvider
+class Redis extends AbstractServiceProvider
 {
     /**
      * The provides array is a way to let the container
@@ -16,7 +16,7 @@ class Amqp extends AbstractServiceProvider
      * @var array
      */
     protected $provides = [
-        'amqp'
+        'redis'
     ];
 
     /**
@@ -30,18 +30,10 @@ class Amqp extends AbstractServiceProvider
     public function register()
     {
         $container = $this->getContainer();
-        $config    = $this->getConfiguration('queue');
-        
-        $container->share('amqp', 'Obullo\Container\ServiceProvider\Connector\Amqp')
+        $config    = $this->getConfiguration('redis');
+
+        $container->share('redis', 'Obullo\Container\ServiceProvider\Connector\Redis')
             ->withArgument($container)
             ->withArgument($config->getParams());
-
-        // AmqpLib Replacement
-        // 
-        
-        // $container->share('amqp', 'Obullo\Container\ServiceProvider\Connector\AmqpLib')
-        //     ->withArgument($container)
-        //     ->withArgument($config->getParams());
-
     }
 }
