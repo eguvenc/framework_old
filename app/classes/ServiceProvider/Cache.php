@@ -2,6 +2,7 @@
 
 namespace ServiceProvider;
 
+use Obullo\Cache\CacheFactory;
 use Obullo\Container\ServiceProvider\AbstractServiceProvider;
 
 class Cache extends AbstractServiceProvider
@@ -31,14 +32,18 @@ class Cache extends AbstractServiceProvider
     {
         $container = $this->getContainer();
 
+        $cache = new CacheFactory($container);
+
         $container->share(
             'cache',
-            $container->get('cacheFactory')->shared(
-                [
-                    'driver' => 'redis',
-                    'connection' => 'default'
-                ]
-            )
+            $cache->shared(['driver' => 'redis', 'connection' => 'default'])
         );
+
+        // Replacements
+        //
+
+        // $cache->shared(['driver' => 'memcached', 'connection' => 'default']);
+        // $cache->shared(['driver' => 'apc']);
+        // $cache->shared(['driver' => 'file']);
     }
 }

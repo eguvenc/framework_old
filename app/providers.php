@@ -36,7 +36,6 @@ $container->addServiceProvider('Obullo\Container\ServiceProvider\User');
 */
 $container->addServiceProvider('ServiceProvider\Amqp');
 $container->addServiceProvider('ServiceProvider\Database');
-$container->addServiceProvider('ServiceProvider\CacheFactory');
 $container->addServiceProvider('ServiceProvider\Redis');
 $container->addServiceProvider('ServiceProvider\Memcached');
 $container->addServiceProvider('ServiceProvider\Mongo');

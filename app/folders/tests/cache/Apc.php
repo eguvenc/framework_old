@@ -2,6 +2,7 @@
 
 namespace Tests\Cache;
 
+use Obullo\Cache\CacheFactory;
 use Obullo\Tests\TestController;
 
 class Apc extends TestController
@@ -15,10 +16,11 @@ class Apc extends TestController
      */
     public function __construct($container)
     {
-        $this->cache = $container->get('cacheFactory')->shared(
+        $cacheFactory = new CacheFactory($container);
+
+        $this->cache = $cacheFactory->shared(
             [
-                'driver' => 'apc',
-                'connection' => 'default'
+                'driver' => 'apc'
             ]
         );
     }

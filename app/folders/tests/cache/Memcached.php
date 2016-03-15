@@ -2,8 +2,8 @@
 
 namespace Tests\Cache;
 
+use Obullo\Cache\CacheFactory;
 use Obullo\Tests\TestController;
-use Obullo\Cache\Handler\Memcached as MemcachedCache;
 
 class Memcached extends TestController
 {
@@ -16,7 +16,9 @@ class Memcached extends TestController
      */
     public function __construct($container)
     {
-        $this->cache = $container->get('cacheFactory')->shared(
+        $cacheFactory = new CacheFactory($container);
+
+        $this->cache = $cacheFactory->shared(
             [
                 'driver' => 'memcached',
                 'connection' => 'default'
