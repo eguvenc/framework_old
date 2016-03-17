@@ -2,7 +2,6 @@
 
 namespace Tests\Cache;
 
-use Obullo\Cache\CacheFactory;
 use Obullo\Tests\TestController;
 
 class File extends TestController
@@ -16,13 +15,7 @@ class File extends TestController
      */
     public function __construct($container)
     {
-        $cacheFactory = new CacheFactory($container);
-
-        $this->cache = $cacheFactory->shared(
-            [
-                'driver' => 'file'
-            ]
-        );
+        $this->cache = $container->get('cacheManager')->shared(['driver' => 'file']);
     }
 
     /**

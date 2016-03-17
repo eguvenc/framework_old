@@ -3,11 +3,9 @@
 return $environments = array(
 
     'local' => [
-        'aly',
-        'someone.computer',
-        'anotherone.computer',
         'ersin-desktop',
-        'ersin'
+        'ersin',
+        'localhost.local',
     ],
 
     'test' => [

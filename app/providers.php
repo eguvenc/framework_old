@@ -13,6 +13,7 @@ $container->addServiceProvider('ServiceProvider\Captcha');
 // $container->addServiceProvider('ServiceProvider\Queue');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Db');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Logger');
+$container->addServiceProvider('Obullo\Container\ServiceProvider\CacheManager');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Translator');
 // $container->addServiceProvider('Obullo\Container\ServiceProvider\Is');
 // $container->addServiceProvider('Obullo\Container\ServiceProvider\Clean');

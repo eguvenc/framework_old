@@ -20,7 +20,7 @@ class Recaller extends TestController
         $this->newLoginRequest(['rememberMe' => 1]);
         $this->user->identity->destroy();
 
-        $sql ='SELECT remember_token FROM users WHERE id = 1';
+        $sql = 'SELECT remember_token FROM users WHERE id = 1';
         $row = $this->db->query($sql)->rowArray();
         $token = $row['remember_token'];
 
