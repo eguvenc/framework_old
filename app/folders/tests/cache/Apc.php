@@ -16,6 +16,10 @@ class Apc extends TestController
     public function __construct($container)
     {
         $this->cache = $container->get('cacheManager')->shared(['driver' => 'apc']);
+
+        $this->disableConsole();  // This class disabled in Cli mode.
+
+        // http://stackoverflow.com/questions/10419546/apc-not-working-in-php-console
     }
 
     /**

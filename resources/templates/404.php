@@ -1,3 +1,9 @@
+<?php
+if (defined('STDIN')) {
+	echo Obullo\Cli\Console::fail("404 Page Not Found");
+	return;
+}
+?>
 <html>
 <head>
 <title>404 Page Not Found</title>

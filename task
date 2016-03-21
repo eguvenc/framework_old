@@ -19,7 +19,6 @@ error_reporting(0);
 |
 */
 require 'constants';
-
 /*
 |--------------------------------------------------------------------------
 | Php execution limit

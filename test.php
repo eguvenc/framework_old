@@ -4,34 +4,19 @@
 | Disable php.ini errors to use set_error_handler() func
 |--------------------------------------------------------------------------
 */
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
 /*
 |--------------------------------------------------------------------------
 | Disable all php errors to use set_error_handler() func
 |--------------------------------------------------------------------------
 */
-error_reporting(0);
+error_reporting(1);
 /*
 |--------------------------------------------------------------------------
-| Application Constants.
+| Constants.
 |--------------------------------------------------------------------------
-| This file specifies which APP constants should be loaded by default.
-|
 */
 require 'constants';
-
-/*
-|--------------------------------------------------------------------------
-| Php execution limit
-|--------------------------------------------------------------------------
-*/
-set_time_limit(0);                   // 0 = Unlimited
-/*
-|--------------------------------------------------------------------------
-| Memory Limit
-|--------------------------------------------------------------------------
-*/
-ini_set('memory_limit', '100000M');  // Set maximum amount of memory for Cli operations.
 /*
 |--------------------------------------------------------------------------
 | Register Autoloader
@@ -43,14 +28,6 @@ require 'vendor/autoload.php';
 | Only for parse errors
 |--------------------------------------------------------------------------
 */
-register_shutdown_function(
-    function () {
-        $error = error_get_last();
-        if (! empty($error)) {
-            echo $error['message']." File: ".$error['file']." Line : ".$error['line'];
-        }
-    }
-);
 require OBULLO .'Application/Autoloader.php';
 Obullo\Application\Autoloader::register();
 /*
@@ -78,7 +55,7 @@ $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($container);
 */
 $server = Obullo\Http\Zend\Diactoros\Server::createServerFromRequest(
     $app,
-    Obullo\Log\Benchmark::start($app->getRequest()),
+    $app->getRequest(),
     $app->getResponse()
 );
 /*

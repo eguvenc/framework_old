@@ -46,7 +46,7 @@ class App implements MiddlewareInterface, ContainerAwareInterface
         $result = $this->getContainer()->get('app')->call($request, $response);
 
         if (! $result) {
-
+            
             $body = $this->getContainer()
                 ->get('view')
                 ->withStream()
