@@ -2,6 +2,7 @@
 
 namespace Tests\Authentication\Storage;
 
+use Obullo\Tests\TestPreferences;
 use Obullo\Authentication\Storage\AbstractTestStorage;
 use Obullo\Authentication\Storage\Session as StorageSession;
 
@@ -25,7 +26,8 @@ class Session extends AbstractTestStorage
             $container->get('user.params')
         );
         $this->storage->setIdentifier('user@example.com');
-        $this->setDisabledMethods(
+
+        TestPreferences::ignoreMethod(
             [
                 'query',
                 'createTemporary',
@@ -34,6 +36,6 @@ class Session extends AbstractTestStorage
                 'getUserSessions',
                 'getMemoryBlockLifetime', // This method not exists in memcached storage.
             ]
-        );
+        ); 
     }
 }

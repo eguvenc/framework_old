@@ -50,7 +50,7 @@
       <div class="tests">
         <?php echo $results ?>
         <?php 
-        if (isset($dump)) {
+        if (! empty($dump)) {
             if (is_array($dump)) {
                 echo "<pre>".print_r($dump, true)."</pre>";
             } else {

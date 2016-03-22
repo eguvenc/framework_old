@@ -2,6 +2,7 @@
 
 namespace Tests\Authentication;
 
+use Obullo\Tests\TestOutput;
 use Obullo\Tests\TestController;
 use Obullo\Http\Tests\LoginTrait;
 use Obullo\Authentication\AuthResult as AuthResultClass;
@@ -138,7 +139,7 @@ class AuthResult extends TestController
         if ($this->assertArrayHasKey("identifier", $results, "I expect the identifier is 'messages' key.")) {
             $this->assertEqual($results['identifier'], "user@example.com", "I expect that the identifier value is 'user@example.com'.");
         }
-        $this->varDump($results);
+        TestOutput::varDump($results);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Tests\Authentication\Storage;
 
+use Obullo\Tests\TestPreferences;
 use Obullo\Authentication\Storage\AbstractTestStorage;
 use Obullo\Authentication\Storage\Memcached as StorageMemcached;
 
@@ -25,11 +26,8 @@ class Memcached extends AbstractTestStorage
             $container->get('user.params')
         );
         $this->storage->setIdentifier('user@example.com');
-        $this->setDisabledMethods(
-            [
-                'getBlock', // This method not exists in memcached storage.
-            ]
-        );
+
+        TestPreferences::ignoreMethod('getBlock');  // This method not exists in memcached storage
     }
 
     /**

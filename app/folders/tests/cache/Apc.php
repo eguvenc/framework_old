@@ -3,6 +3,7 @@
 namespace Tests\Cache;
 
 use Obullo\Tests\TestController;
+use Obullo\Tests\TestPreferences;
 
 class Apc extends TestController
 {
@@ -17,9 +18,8 @@ class Apc extends TestController
     {
         $this->cache = $container->get('cacheManager')->shared(['driver' => 'apc']);
 
-        $this->disableConsole();  // This class disabled in Cli mode.
-
-        // http://stackoverflow.com/questions/10419546/apc-not-working-in-php-console
+        TestPreferences::ignoreProperty('console');  // This class disabled for console operations,
+                                                     // apc class does not work in cli mode.
     }
 
     /**

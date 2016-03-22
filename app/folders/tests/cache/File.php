@@ -2,6 +2,7 @@
 
 namespace Tests\Cache;
 
+use Obullo\Tests\TestOutput;
 use Obullo\Tests\TestController;
 
 class File extends TestController
@@ -189,7 +190,7 @@ class File extends TestController
         $getAllData = $this->cache->getAllData();
 
         $this->assertArrayContains($items, $getAllData, "I expect that the all data contain items.");
-        $this->varDump($getAllData);
+        TestOutput::varDump($getAllData);
         $this->cache->removeItems(array_keys($items));
     }
 

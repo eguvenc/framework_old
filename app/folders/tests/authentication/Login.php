@@ -2,13 +2,12 @@
 
 namespace Tests\Authentication;
 
-use Obullo\Tests\LoginTrait;
+use Obullo\Tests\TestLogin;
+use Obullo\Tests\TestOutput;
 use Obullo\Tests\TestController;
 
 class Login extends TestController
 {
-    use LoginTrait;
-
     /**
      * Attempt
      * 
@@ -16,7 +15,12 @@ class Login extends TestController
      */
     public function attempt()
     {
-        $this->newLoginRequest();
+        $login = new TestLogin($this->container);
+        $login->attempt();
+
+        if ($login->hasError()) {
+            TestOutput::error($login->getErrors());
+        }
         $result = $this->user->identity->getArray();
         $identifier = $this->container->get('user.params')['db.identifier'];
         $password   = $this->container->get('user.params')['db.password'];
@@ -32,7 +36,8 @@ class Login extends TestController
         $this->assertArrayHasKey('__time', $result, "I expect identity array has '__time' key.");
         $this->assertArrayHasKey($identifier, $result, "I expect identity array has '$identifier' key.");
         $this->assertArrayHasKey($password, $result, "I expect identity array has '$password' key.");
-        $this->varDump($result);
+        
+        TestOutput::varDump($result);
     }
 
     /**

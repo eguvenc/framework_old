@@ -3,6 +3,7 @@
 namespace Tests\Authentication;
 
 use Obullo\Tests\LoginTrait;
+use Obullo\Tests\TestOutput;
 use Obullo\Tests\TestController;
 use Obullo\Authentication\Recaller as AuthRecaller;
 
@@ -48,7 +49,8 @@ class Recaller extends TestController
         $this->assertArrayHasKey('__time', $result, "I expect identity array has '__time' key.");
         $this->assertArrayHasKey($identifier, $result, "I expect identity array has '$identifier' key.");
         $this->assertArrayHasKey($password, $result, "I expect identity array has '$password' key.");
-        $this->varDump($result);
+
+        TestOutput::varDump($result);
         
         $rm = $this->container->get('user.params')['login']['rememberMe']['cookie']['name'];
         $this->user->identity->destroy();

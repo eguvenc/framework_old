@@ -3,6 +3,7 @@
 namespace Tests\App;
 
 use Obullo\Tests\TestController;
+use Obullo\Tests\TestOutput;
 
 class Annotation extends TestController
 {
@@ -27,6 +28,7 @@ class Annotation extends TestController
         $controller = new \Obullo\Application\Annotations\Controller;
         $controller->setContainer($container);
         $controller->setReflectionClass($reflector);
+        
         $this->parser = $controller;
     }
 
@@ -46,7 +48,7 @@ class Annotation extends TestController
         $this->assertEqual($output[0]['params'][0], 'put', "i expect that the value is put.");
         $this->assertEqual($output[0]['params'][1], 'delete', "i expect that the value is delete.");
 
-        $this->varDump($output);
+        TestOutput::varDump($output);
     }
 
     /**
@@ -64,7 +66,7 @@ class Annotation extends TestController
         $this->assertEqual($output[0]['method'], 'add', "I read @middleware->add('TrustedIp') annotation and i expect that the value is add.");
         $this->assertEqual($output[0]['params'], 'TrustedIp', "i expect that the value is TrustedIp.");
 
-        $this->varDump($output);
+        TestOutput::varDump($output);
     }
 
     /**
@@ -85,7 +87,7 @@ class Annotation extends TestController
         $this->assertEqual($output[1]['method'], 'add', "i expect that the value is equal to add.");
         $this->assertEqual($output[1]['params'], 'TrustedIp', "i expect that the value is equal to TrustedIp.");
 
-        $this->varDump($output);
+        TestOutput::varDump($output);
     }
 
     /**
@@ -104,7 +106,7 @@ class Annotation extends TestController
         $this->assertEqual($output[1]['method'], 'remove', "I read @middleware->remove('TrustedIp') annotation and i expect that the value is remove.");
         $this->assertEqual($output[1]['params'], 'TrustedIp', "i expect that the value is equal to TrustedIp.");
 
-        $this->varDump($output);
+        TestOutput::varDump($output);
     }
 
 }

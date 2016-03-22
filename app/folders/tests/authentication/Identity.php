@@ -3,6 +3,7 @@
 namespace Tests\Authentication;
 
 use Obullo\Tests\LoginTrait;
+use Obullo\Tests\TestOutput;
 use Obullo\Tests\TestController;
 use Obullo\Authentication\Token;
 
@@ -162,7 +163,7 @@ class Identity extends TestController
         $this->newLoginRequest();
         $array = $this->user->identity->getArray();
         $this->assertArrayHasKey('__isAuthenticated', $array, "I expect identity array has '__isAuthenticated' key.");
-        $this->varDump($this->user->identity->getArray());
+        TestOutput::varDump($this->user->identity->getArray());
         $this->user->identity->destroy();
     }
 
@@ -228,7 +229,7 @@ class Identity extends TestController
 
         $this->assertArrayHasKey('__isAuthenticated', $credentials, "I expect user credentials has '__isAuthenticated' key.");
         $this->assertEqual($credentials['__isAuthenticated'], 0, "I expect value of '__isAuthenticated' that is equal to 0.");
-        $this->varDump($credentials);
+        TestOutput::varDump($credentials);
         $this->user->identity->destroy();
     }
 
