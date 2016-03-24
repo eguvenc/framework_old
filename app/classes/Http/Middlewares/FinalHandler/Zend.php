@@ -179,12 +179,10 @@ class Zend implements ContainerAwareInterface
      */
     public function shutdown()
     {
-        $this->container->get('app')->registerFatalError();
-
         \Obullo\Log\Benchmark::end($this->request);
 
         $this->container->get('logger')->shutdown();
-        
+
         foreach ($this->container->get('middleware')->getQueue() as $object) {  // Run terminable middlewares
 
             if ($object instanceof TerminableInterface) {

@@ -4,38 +4,36 @@
 | Disable php.ini errors to use set_error_handler() func
 |--------------------------------------------------------------------------
 */
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 /*
 |--------------------------------------------------------------------------
 | Disable all php errors to use set_error_handler() func
 |--------------------------------------------------------------------------
 */
-error_reporting(1);
+error_reporting(0);
+/*
+|--------------------------------------------------------------------------
+| Root Constant
+|--------------------------------------------------------------------------
+*/
+define('ROOT', dirname(__DIR__).'/');
 /*
 |--------------------------------------------------------------------------
 | Constants.
 |--------------------------------------------------------------------------
 */
-require '../constants';
+require ROOT .'constants';
 /*
 |--------------------------------------------------------------------------
 | Register Autoloader
 |--------------------------------------------------------------------------
 */
-require '../vendor/autoload.php';
+require ROOT .'vendor/autoload.php';
 /*
 |--------------------------------------------------------------------------
 | Only for parse errors
 |--------------------------------------------------------------------------
 */
-register_shutdown_function(
-    function () {
-        $error = error_get_last();
-        if (! empty($error)) {
-            echo $error['message']." File: ".$error['file']." Line : ".$error['line'];
-        }
-    }
-);
 require OBULLO .'Application/Autoloader.php';
 Obullo\Application\Autoloader::register();
 /*

@@ -9,21 +9,14 @@ define('OBULLO_VERSION_ENV', 'dev');
 |---------------------------------------------------------------
 | ESSENTIAL CONSTANTS
 |---------------------------------------------------------------
-| SELF        - The name of THIS file (typically "index.php")
-| FCPATH      - The full server path to this file
 | PHP_PATH    - The php path of your server
-| FPATH       - The full server path without file
 | ROOT        - The root path of your server
 | VENDOR      - The composer vendor folder
 | CHOWN       - The php chown() method group name.
 | OBULLO      - The full path of version folder
 */
-define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
-define('FCPATH', __FILE__);
 define('PHP_PATH', '/usr/bin/php'); 
-define('FPATH', dirname(__FILE__));
-define('ROOT',  __DIR__ .'/');
-define('VENDOR',__DIR__.'/vendor/');
+define('VENDOR', ROOT.'/vendor/');
 define('CHOWN', 'www-data');
 /*
 |---------------------------------------------------------------

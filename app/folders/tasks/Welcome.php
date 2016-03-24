@@ -15,7 +15,7 @@ class Welcome extends Controller
     public function index()
     {
         echo Console::logo("Welcome to Task Manager (c) 2016");
-        echo Console::description("You are running \$php task welcome index.");
+        echo Console::newline(2);
 
 echo Console::help("Available commands:", true);
 echo Console::newline(1);
@@ -46,6 +46,5 @@ Available Commands
 );
 echo Console::newline(2);
     }
-
 
 }

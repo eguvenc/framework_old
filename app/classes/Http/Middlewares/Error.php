@@ -5,14 +5,15 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+use LogicException;
+use ErrorException;
+use RuntimeException;
 use Obullo\Container\ContainerAwareTrait;
 use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\ErrorMiddlewareInterface;
 
 /**
  * Catch middleware errors
- * 
- * Only available with Zend\Stratigility middleware.
  */
 class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
 {
@@ -30,15 +31,45 @@ class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
      */
     public function __invoke($error, Request $request, Response $response, callable $out = null)
     {
-        if (is_string($error)) {  // middleware errors
+        $container = $this->getContainer();
+
+        if (is_string($error)) {  // Middleware errors
             echo $error;
         }
         if (is_object($error)) {
         
-            $exception = new \Obullo\Error\Exception;
-            echo $exception->make($error);  // display exceptions
-
-            $this->getContainer()->get('app')->exceptionError($error);  // log exceptions to app/errors.php
+            if ($container->get('app')->getEnv() != 'production') {
+                $exception = new \Obullo\Error\Exception;
+                echo $exception->make($error);
+            }
+            /*
+            | Exception Hierarchy
+            |
+            |   - Exception
+            |       - ErrorException
+            |       - LogicException
+            |           - BadFunctionCallException
+            |               - BadMethodCallException
+            |           - DomainException
+            |           - InvalidArgumentException
+            |           - LengthException
+            |           - OutOfRangeException
+            |       - RuntimeException
+            |           - PDOException
+            |           - OutOfBoundsException
+            |           - OverflowException
+            |           - RangeException
+            |           - UnderflowException
+            |           - UnexpectedValueException
+            */
+            switch ($error) {
+            case ($error instanceof ErrorException):
+            case ($error instanceof RuntimeException):
+            case ($error instanceof LogicException):
+                $log = new \Obullo\Error\Log($container->get('logger'));
+                $log->error($error);
+                break;
+            }
         }
         return $response;
     }
