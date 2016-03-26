@@ -114,14 +114,15 @@ class App implements MiddlewareInterface, ContainerAwareInterface
     {   
         if (null != $error = error_get_last()) {
 
-            $app = $this->getContainer()->get('app');
-
+            $container = $this->getContainer();
             $e = new ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']);
             $exception = new \Obullo\Error\Exception;
 
-            if ($app->getEnv() != 'production') {
+            if ($container->get('app')->getEnv() != 'production') {
                 echo $exception->make($e);
             }
+            $log = new \Obullo\Error\Log($container->get('logger'));
+            $log->error($e);
         }
     }
 

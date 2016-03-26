@@ -68,7 +68,7 @@ Put the latest version to your web root (<kbd>/var/www/project/</kbd>). Create y
 
 When you setup your application you have two options to work with Http middlewares.
 
-#### Setup with Zend Stratigility ( Default )
+#### Setup Zend Stratigility
 
 It's an advanced middleware solution from zend.
 
@@ -100,8 +100,3 @@ $server->listen();
 ```
 
 Learn more details about <a href="https://github.com/zendframework/zend-stratigility" target="_blank">zend middleware</a>.
-
-
-#### Setup with Relay
-
-Look at <a href="https://github.com/obullo/relay-middleware" target="_blank">https://github.com/obullo/relay-middleware</a>
