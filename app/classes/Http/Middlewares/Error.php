@@ -34,7 +34,7 @@ class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
         $container = $this->getContainer();
 
         if (is_string($error)) {  // Middleware errors
-            echo $error;
+           return $response->getBody()->write($error);
         }
         if (is_object($error)) {
         
