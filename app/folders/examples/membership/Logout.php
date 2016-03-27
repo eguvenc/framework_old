@@ -19,6 +19,7 @@ class Logout extends Controller
 
         case 'destroyMe':
             $this->user->identity->destroy();  // Destroy all the identity cache and logout.
+            $this->session->destroy();         // Destroy user sessions.
             $this->flash->info('Identity cache destroyed and you have succesfully logged out');
             break;
 

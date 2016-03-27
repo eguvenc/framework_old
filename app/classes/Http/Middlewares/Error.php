@@ -33,12 +33,12 @@ class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
     {
         $container = $this->getContainer();
 
-        if (is_string($error)) {  // Middleware errors
-            echo $error;
+        if (is_string($error)) {
+            return $response->getBody()->write($error);  // Middleware errors
         }
         if (is_object($error)) {
         
-            if ($container->get('app')->getEnv() != 'production') {
+            if ($container->get('env')->getValue() != 'production') {
                 $exception = new \Obullo\Error\Exception;
                 echo $exception->make($error);
             }

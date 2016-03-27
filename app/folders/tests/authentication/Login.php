@@ -2,7 +2,7 @@
 
 namespace Tests\Authentication;
 
-use Obullo\Tests\TestLogin;
+use Obullo\Tests\TestUser;
 use Obullo\Tests\TestOutput;
 use Obullo\Tests\TestController;
 
@@ -15,16 +15,13 @@ class Login extends TestController
      */
     public function attempt()
     {
-        $login = new TestLogin($this->container);
-        $login->attempt();
+        $user = new TestUser($this->container);
+        $user->login();
 
-        if ($login->hasError()) {
-            TestOutput::error($login->getErrors());
-        }
         $result = $this->user->identity->getArray();
         $identifier = $this->container->get('user.params')['db.identifier'];
         $password   = $this->container->get('user.params')['db.password'];
-        $this->user->identity->destroy();
+        $user->destroy();
         
         if ($this->assertArrayHasKey('__isAuthenticated', $result, "I expect identity array has '__isAuthenticated' key.")) {
             $this->assertEqual($result['__isAuthenticated'], 1, "I expect that the value is equal to 1.");
@@ -38,6 +35,7 @@ class Login extends TestController
         $this->assertArrayHasKey($password, $result, "I expect identity array has '$password' key.");
         
         TestOutput::varDump($result);
+
     }
 
     /**
@@ -47,14 +45,11 @@ class Login extends TestController
      */
     public function hasRememberMe()
     {
-        $login = new TestLogin($this->container);
-        $login->attempt(['rememberMe' => 1]);
-
-        if ($login->hasError()) {
-            TestOutput::error($login->getErrors());
-        }
+        $user = new TestUser($this->container);
+        $user->login();
+        
         $this->assertEqual($this->user->identity->getRememberMe(), 1, "I expect that the value is 1.");
-        $this->user->identity->destroy();
+        $user->destroy();
         $this->user->identity->forgetMe();
     }
 
@@ -73,6 +68,7 @@ class Login extends TestController
         $credentials = $this->config->load('tests')['login']['credentials'];
         $isValid     = $this->user->login->validate([$i => $credentials['username'], $p => $credentials['password']]);
         $this->assertTrue($isValid, "I validate user credentials without login and i expect that the value is true.");
+        $this->session->destroy();
     }
 
 }

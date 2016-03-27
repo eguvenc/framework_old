@@ -18,6 +18,7 @@ class Memcached extends AbstractTestStorage
     public function __construct($container)
     {
         $container->get('user');
+        $container->get('session')->destroy();
 
         $this->storage = new StorageMemcached(
             $container,
@@ -39,5 +40,6 @@ class Memcached extends AbstractTestStorage
     {
         $block = $this->storage->getCacheKey(). ':__temporary:' .$this->storage->getUserId();
         $this->assertEqual($block, $this->storage->getBlock('__temporary'), "I expect the block key equals to key '$block'.");
+        $this->session->destroy();
     }
 }

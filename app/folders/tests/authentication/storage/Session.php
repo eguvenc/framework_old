@@ -18,6 +18,7 @@ class Session extends AbstractTestStorage
     public function __construct($container)
     {
         $container->get('user');
+        $container->get('session')->destroy();
 
         $this->storage = new StorageSession(
             $container,

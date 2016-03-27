@@ -15,7 +15,7 @@ Fast & simple development.
 
 There is no release yet, we are still working on it.
 
-### Installation
+### Test Installation
 
 Create your composer.json file and dependencies
 
@@ -68,7 +68,7 @@ Put the latest version to your web root (<kbd>/var/www/project/</kbd>). Create y
 
 When you setup your application you have two options to work with Http middlewares.
 
-#### Setup Zend Stratigility
+#### Configuring Zend Stratigility
 
 It's an advanced middleware solution from zend.
 

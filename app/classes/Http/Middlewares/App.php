@@ -7,9 +7,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Exception;
 use ErrorException;
-use Obullo\Http\Middleware\MiddlewareInterface;
 use Obullo\Container\ContainerAwareTrait;
 use Obullo\Container\ContainerAwareInterface;
+use Obullo\Http\Middleware\MiddlewareInterface;
 
 /**
  * System adds this middleware end of the queue by default 
@@ -114,11 +114,13 @@ class App implements MiddlewareInterface, ContainerAwareInterface
     {   
         if (null != $error = error_get_last()) {
 
-            $container = $this->getContainer();
             $e = new ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']);
             $exception = new \Obullo\Error\Exception;
 
-            if ($container->get('app')->getEnv() != 'production') {
+            global $container;
+            $env = $container->get('env')->getValue();
+
+            if ($env != 'production') {
                 echo $exception->make($e);
             }
             $log = new \Obullo\Error\Log($container->get('logger'));

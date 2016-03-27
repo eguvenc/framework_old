@@ -123,7 +123,7 @@ class Zend implements ContainerAwareInterface
         );
         $message = $response->getReasonPhrase() ?: 'Unknown Error';
 
-        if ($this->container->get('app')->getEnv() !== 'production') {
+        if ($this->container->get('env')->getValue() !== 'production') {
 
             $message = $this->createDevelopmentErrorMessage($error);
         }

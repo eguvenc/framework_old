@@ -18,8 +18,7 @@ class Apc extends TestController
     {
         $this->cache = $container->get('cacheManager')->shared(['driver' => 'apc']);
 
-        TestPreferences::ignoreProperty('console');  // This class disabled for console operations,
-                                                     // apc class does not work in cli mode.
+        TestPreferences::ignoreProperty('console');  // Apc class disabled in cli mode.
     }
 
     /**

@@ -234,27 +234,5 @@ class File extends TestController
 
         $this->cache->removeItems(array_keys($items));
     }
-
-    /**
-     * Get Meta Data
-     * 
-     * @return void
-     */
-    public function getMetaData()
-    {
-        $items = [
-            'test1' => 'test-value1',
-        ];
-        $this->cache->setItems($items);
-        $meta = $this->cache->getMetaData('test1');
-
-        if ($this->assertArrayHasKey("expire", $meta, "I expect that the metadata has 'test1' key.")) {
-            $this->assertDate($meta['expire'], "I expect that the type of date is valid.");
-        };
-        if ($this->assertArrayHasKey("mtime", $meta, "I expect that the metadata has 'test2' key.")) {
-            $this->assertDate($meta['mtime'], "I expect that the type of date is valid.");
-        }
-        $this->cache->removeItems(array_keys($items));
-    }
-
+    
 }
