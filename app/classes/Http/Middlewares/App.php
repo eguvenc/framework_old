@@ -33,7 +33,6 @@ class App implements MiddlewareInterface, ContainerAwareInterface
     {
         set_error_handler(array($this, 'handleError'));
         set_exception_handler(array($this, 'handleException'));
-        register_shutdown_function(array($this, 'handleFatalError'));
     }
 
     /**
@@ -59,7 +58,7 @@ class App implements MiddlewareInterface, ContainerAwareInterface
      * @return boolean
      */
     public function handleException(Exception $e)
-    {
+    { 
         $this->err = $e;
     }
 
@@ -103,29 +102,6 @@ class App implements MiddlewareInterface, ContainerAwareInterface
                 ->withBody($body);
         }
         return $result;
-    }
-
-    /**
-     * Handle fatal errors
-     * 
-     * @return mixed
-     */
-    public function handleFatalError()
-    {   
-        if (null != $error = error_get_last()) {
-
-            $e = new ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']);
-            $exception = new \Obullo\Error\Exception;
-
-            global $container;
-            $env = $container->get('env')->getValue();
-
-            if ($env != 'production') {
-                echo $exception->make($e);
-            }
-            $log = new \Obullo\Error\Log($container->get('logger'));
-            $log->error($e);
-        }
     }
 
 }

@@ -5,6 +5,7 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+use Exception;
 use LogicException;
 use ErrorException;
 use RuntimeException;
@@ -63,9 +64,10 @@ class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
             |           - UnexpectedValueException
             */
             switch ($error) {
+            case ($error instanceof Exception):
             case ($error instanceof ErrorException):
-            case ($error instanceof RuntimeException):
             case ($error instanceof LogicException):
+            case ($error instanceof RuntimeException):
                 $log = new \Obullo\Error\Log($container->get('logger'));
                 $log->error($error);
                 break;

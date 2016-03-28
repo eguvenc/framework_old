@@ -26,7 +26,7 @@ return array(
         ],
     ],
     'extra' => [
-        'debug_backtrace' => true,
+        'debug_backtrace' => false,
         'debugger' => false,
         'annotations' => false,
     ],

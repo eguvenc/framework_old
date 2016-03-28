@@ -7,6 +7,7 @@ return array(
         'provider' => [
             'connection' => 'default'
         ],
+        'handler' => 'Obullo\Session\SaveHandler\Cache',
         'storage' => [
             'driver' => 'redis',  // apc, memcached, memcache, file
             'key' => 'sessions:',
@@ -21,10 +22,5 @@ return array(
             'httpOnly' => false, 
             'prefix'   => '', 
         ],
-    ],
-    'methods' => [
-        ['name' => 'registerSaveHandler','argument' => ['Obullo\Session\SaveHandler\Cache']],
-        ['name' => 'setName','argument' => ['']],
-        ['name' => 'start','argument' => ['']]
     ]
 );
