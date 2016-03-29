@@ -5,8 +5,6 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-use Exception;
-use ErrorException;
 use Obullo\Container\ContainerAwareTrait;
 use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
@@ -18,49 +16,6 @@ use Obullo\Http\Middleware\MiddlewareInterface;
 class App implements MiddlewareInterface, ContainerAwareInterface
 {
     use ContainerAwareTrait;
-
-    /**
-     * Error
-     * 
-     * @var mixed
-     */
-    protected $err;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        set_error_handler(array($this, 'handleError'));
-        set_exception_handler(array($this, 'handleException'));
-    }
-
-    /**
-     * Error handler, convert all errors to exceptions
-     * 
-     * @param integer $level   name
-     * @param string  $message error message
-     * @param string  $file    file
-     * @param integer $line    line
-     * 
-     * @return boolean whether to continue displaying php errors
-     */
-    public function handleError($level, $message, $file = '', $line = 0)
-    {
-        $this->err = new ErrorException($message, $level, 0, $file, $line);
-    }
-
-    /**
-     * Exception error handler
-     * 
-     * @param Exception $e exception class
-     * 
-     * @return boolean
-     */
-    public function handleException(Exception $e)
-    { 
-        $this->err = $e;
-    }
 
     /**
      * Invoke middleware
@@ -75,7 +30,7 @@ class App implements MiddlewareInterface, ContainerAwareInterface
     {        
         $response = $this->run($request, $response);
 
-        return $next($request, $response, $this->err);
+        return $next($request, $response);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Tests\Authentication\Storage;
 
+use RuntimeException;
 use Obullo\Tests\TestPreferences;
 use Obullo\Authentication\Storage\AbstractTestStorage;
 use Obullo\Authentication\Storage\Memcached as StorageMemcached;
