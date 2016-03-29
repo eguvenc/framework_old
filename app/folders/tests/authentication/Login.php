@@ -46,7 +46,7 @@ class Login extends TestController
     public function hasRememberMe()
     {
         $user = new TestUser($this->container);
-        $user->login();
+        $user->login(['rememberMe' => 1]);
         
         $this->assertEqual($this->user->identity->getRememberMe(), 1, "I expect that the value is 1.");
         $user->destroy();
