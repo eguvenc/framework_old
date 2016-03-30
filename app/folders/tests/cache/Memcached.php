@@ -24,6 +24,60 @@ class Memcached extends TestController
     }
 
     /**
+     * Get current serializer name
+     * 
+     * @return string serializer name
+     */
+    public function getSerializer()
+    {
+        $this->cache->setSerializer('php');
+        $this->assertEqual('php', $this->cache->getSerializer(), "I expect that the serializer is 'php'.");
+    }
+
+    /**
+     * Sets serializer
+     *
+     * @return void
+     */
+    public function setSerializer()
+    {
+        $this->cache->setSerializer('php');
+        $this->assertEqual('php', $this->cache->getSerializer(), "I expect that the serializer is 'php'.");
+    }
+
+    /**
+     * Get client option
+     * 
+     * @return string value
+     */
+    public function getOption()
+    {
+        $this->cache->setSerializer('php');
+        $options = [
+            \Memcached::SERIALIZER_PHP,
+            \Memcached::SERIALIZER_IGBINARY,
+            \Memcached::SERIALIZER_JSON,
+        ];
+        $this->assertArrayContains(
+            [$this->cache->getOption('OPT_SERIALIZER')],
+            $options,
+            "I expect that the getOptions array has contains ".\Memcached::SERIALIZER_PHP."."
+        );
+    }
+
+    /**
+     * Set option
+     *
+     * @return void
+     */
+    public function setOption()
+    {
+        $this->cache->setOption('OPT_PREFIX_KEY', "test_");
+
+        $this->assertEqual($this->cache->getOption("OPT_PREFIX_KEY"), 'test_', "I expect that the value is test_.");
+    }
+
+    /**
      * Get item
      * 
      * @return void
