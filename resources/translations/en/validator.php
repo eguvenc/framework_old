@@ -32,6 +32,8 @@ return array(
     'OBULLO:VALIDATOR:CAPTCHA:VALIDATION' => "The captcha field validation is wrong.",
     'OBULLO:VALIDATOR:CAPTCHA:REFRESH_BUTTON_LABEL' => "Refresh Captcha",
     
+    'OBULLO:VALIDATOR:RECAPTCHA:SUCCESS' => "ReCaptcha code verified.",
+    'OBULLO:VALIDATOR:RECAPTCHA:NOT_FOUND' => "ReCaptcha failure code not found.",
     'OBULLO:VALIDATOR:RECAPTCHA:MISSING_INPUT_SECRET' => "The secret parameter is missing.",
     'OBULLO:VALIDATOR:RECAPTCHA:INVALID_INPUT_SECRET' => "The secret parameter is invalid or malformed.",
     'OBULLO:VALIDATOR:RECAPTCHA:MISSING_INPUT_RESPONSE' => "The response parameter is missing.",

@@ -24,6 +24,61 @@ class Redis extends TestController
     }
 
     /**
+     * Get current serializer name
+     * 
+     * @return string serializer name
+     */
+    public function getSerializer()
+    {
+        $this->cache->setSerializer('php');
+        $this->assertEqual('php', $this->cache->getSerializer(), "I expect that the serializer is 'php'.");
+    }
+
+    /**
+     * Sets serializer
+     *
+     * @return void
+     */
+    public function setSerializer()
+    {
+        $this->cache->setSerializer('php');
+        $this->assertEqual('php', $this->cache->getSerializer(), "I expect that the serializer is 'php'.");
+    }
+
+    /**
+     * Get client option
+     * 
+     * @return string value
+     */
+    public function getOption()
+    {
+        $this->cache->setSerializer('php');
+        $options = [
+            \Redis::SERIALIZER_NONE,
+            \Redis::SERIALIZER_PHP,
+            2, // igbinary
+        ];
+        $this->assertArrayContains(
+            [$this->cache->getOption('OPT_SERIALIZER')],
+            $options,
+            "I expect that the getOptions array has contains ".\Redis::SERIALIZER_PHP."."
+        );
+    }
+
+    /**
+     * Set option
+     *
+     * @return void
+     */
+    public function setOption()
+    {
+        $this->cache->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);
+        $this->assertEqual($this->cache->_serialize("foo"), 'foo', "I set OPT_SERIALIZER as SERIALIZER_NONE and expect that the value is 'foo'.");
+        $this->cache->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_PHP);
+        $this->assertEqual($this->cache->_serialize("foo"), 's:3:"foo";', "I set OPT_SERIALIZER as SERIALIZER_PHP and i expect that the value is 's:3:\"foo\";'.");
+    }
+
+    /**
      * Get item
      * 
      * @return void
@@ -198,6 +253,32 @@ class Redis extends TestController
     }
 
     /**
+     * Adds a value to the hash stored at key. If this value is already in the hash, FALSE is returned.
+     * 
+     * @return void
+     */
+    public function hSet()
+    {
+        $this->cache->hDel('test_', 'key1');
+
+        $this->assertEqual($this->cache->hSet('test_', 'key1', 'hello'), 1, "I expect that the value is 1.");
+        $this->assertEqual($this->cache->hGet('test_', 'key1'), 'hello', "I expect that the value is equal to 'hello'.");
+    }
+
+    /**
+     * Fills in a whole hash. Non-string values are converted to string, using the standard (string) cast. NULL values are stored as empty strings.
+     * 
+     * @return void
+     */
+    public function hMSet()
+    {
+        $this->cache->removeItem('user:1');
+        $this->cache->hMSet('user:1', array('name' => 'test', 'value' => 2000));
+        $this->cache->hIncrBy('user:1', 'value', 100);
+        $this->assertEqual($this->cache->hMGet('user:1', ['value'])['value'], 2100, "I expect that the value is equal to '2100'");
+    }
+
+    /**
      * Clean all data
      * 
      * @return void
@@ -224,14 +305,7 @@ class Redis extends TestController
      */
     public function getInfo()
     {
-        $items = [
-            'test1' => 'test-value1',
-            'test2' => 'test-value2',
-        ];
-        $this->cache->setItems($items);
-        $info = $this->cache->getInfo();
-        $this->assertNotEmpty($info, "I expect that the info data is not empty.");
-        $this->cache->removeItems(array_keys($items));
+        $this->assertNotEmpty($this->cache->getInfo(), "I expect that the info data is not empty.");
     }
 
 }

@@ -19,11 +19,15 @@ return array(
             'size' => 30,
         ],
         'image' => [
-            'trueColor'  => true,
+            'truecolor'  => true,
             'type'       => 'png',
             'wave'       => true,
             'height'     => 80,
             'expiration' => 1440,
+            'colors' =>  [
+                'text' => ['red'],
+                'noise' => ['red']
+            ]
         ],
         'colors' => [
             'red'    => '255,0,0',
@@ -33,11 +37,5 @@ return array(
             'yellow' => '255,255,0',
             'cyan'   => '0,146,134',
         ],
-        'text' => [
-            'colors' =>  [
-                'text' => ['red'],
-                'noise' => ['red']
-            ]
-        ]
     ]
 );

@@ -36,9 +36,10 @@ class Captcha extends AbstractServiceProvider
             ->withArgument($container->get('url'))
             ->withArgument($container->get('request'))
             ->withArgument($container->get('session'))
-            ->withArgument($container->get('translator'))
             ->withArgument($container->get('logger'))
             ->withArgument($params);
+
+        // $captcha->withMethodCall('setTranslator', $container->get('translator'));
 
         $captcha->withMethodCall(
             'setImageAttributes',
@@ -76,7 +77,7 @@ class Captcha extends AbstractServiceProvider
         $captcha->withMethodCall('setBackground', ['secure']);  // none
         $captcha->withMethodCall('setPool', ['alpha']);  // numbers, random
         $captcha->withMethodCall('setChar', [5]);
-        $captcha->withMethodCall('setFont', ['NightSkK','AlphaSmoke','Popsf']);
+        $captcha->withMethodCall('setFont', [['Almontew','Anglican','Heras']]);
         $captcha->withMethodCall('setFontSize', [20]);
         $captcha->withMethodCall('setHeight', [36]);
         $captcha->withMethodCall('setWave', [false]);

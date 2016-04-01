@@ -73,8 +73,7 @@ class Memcached extends TestController
     public function setOption()
     {
         $this->cache->setOption('OPT_PREFIX_KEY', "test_");
-
-        $this->assertEqual($this->cache->getOption("OPT_PREFIX_KEY"), 'test_', "I expect that the value is test_.");
+        $this->assertEqual($this->cache->getOption("OPT_PREFIX_KEY"), 'test_', "I expect that the prefix is test_.");
     }
 
     /**
