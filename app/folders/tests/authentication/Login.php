@@ -9,6 +9,16 @@ use Obullo\Tests\TestController;
 class Login extends TestController
 {
     /**
+     * Constructor
+     * 
+     * @param object $container container
+     */
+    public function __construct($container)
+    {
+        $container->get("user");
+    }
+
+    /**
      * Attempt
      * 
      * @return void

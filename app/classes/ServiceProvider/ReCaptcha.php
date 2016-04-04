@@ -32,7 +32,7 @@ class ReCaptcha extends AbstractServiceProvider
         $container = $this->getContainer();
         $params    = $this->getConfiguration('recaptcha')->getParams();
 
-        $container->share('captcha', 'Obullo\Captcha\Provider\ReCaptcha')
+        $container->share('recaptcha', 'Obullo\Captcha\Provider\ReCaptcha')
             ->withArgument($container->get('request'))
             ->withArgument($container->get('logger'))
             ->withArgument($params);

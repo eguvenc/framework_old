@@ -135,7 +135,7 @@ class AuthResult extends TestController
         if ($this->assertArrayHasKey("messages", $results, "I expect the result array has 'messages' key.")) {
             $this->assertEqual($results['messages'][1], "Test Message", "I expect that the message is 'Test Message'.");
         }
-        if ($this->assertArrayHasKey("identifier", $results, "I expect the identifier is 'messages' key.")) {
+        if ($this->assertArrayHasKey("identifier", $results, "I expect that the 'messages' array has identifier key.")) {
             $this->assertEqual($results['identifier'], "user@example.com", "I expect that the identifier value is 'user@example.com'.");
         }
         TestOutput::varDump($results);

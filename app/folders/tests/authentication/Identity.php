@@ -10,6 +10,16 @@ use Obullo\Authentication\Token;
 class Identity extends TestController
 {
     /**
+     * Constructor
+     * 
+     * @param object $container container
+     */
+    public function __construct($container)
+    {
+        $container->get("user");
+    }
+
+    /**
      * Guest
      * 
      * @return void

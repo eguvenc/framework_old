@@ -7,7 +7,17 @@ use Obullo\Tests\TestController;
 class Image extends TestController
 {
     /**
-     * Get item
+     * Constructor
+     * 
+     * @param object $container container
+     */
+    public function __construct($container)
+    {
+        $container->get("captcha");
+    }
+
+    /**
+     * Set translator
      * 
      * @return void
      */
@@ -20,6 +30,16 @@ class Image extends TestController
             $this->captcha->getTranslator(),
             "I expect that the translator object is instance of 'Obullo\Translation\Translator'."
         );
+    }
+
+    /**
+     * Get translator
+     * 
+     * @return void
+     */
+    public function getTranslator()
+    {
+        $this->setTranslator();
     }
 
     /**
@@ -318,7 +338,60 @@ class Image extends TestController
         $this->captcha->create();
         $binary = ob_get_clean();
 
-        $this->assertNotEmpty($binary, "I expect that value is not empty. ");
+        $this->assertNotEmpty($binary, "I expect that value is not empty.");
+    }
+
+    /**
+     * Validation captcha code
+     * 
+     * @return void
+     */
+    public function result()
+    {
+        $this->captcha->init();
+
+        ob_start();
+        $this->captcha->create();
+        ob_get_clean();
+
+        $result = $this->captcha->result($this->captcha->getCode());
+        $this->assertTrue($result->isValid(), "I expect that the value is true.");
+    }
+
+    /**
+     * Print captcha html
+     * 
+     * @return string html
+     */
+    public function printHtml()
+    {
+        // <img
+        // <input
+
+        $html = $this->captcha->printHtml();
+        $this->assertRegExp("#<img\s.*<input\s.*#", $html, "I expect that the value contains img and input tags.");
+    }
+
+    /**
+     * Print captcha js
+     * 
+     * @return string html
+     */
+    public function printJs()
+    {
+        $this->assertNull($this->captcha->printJs(), "I expect that the value is null.");
+    }
+
+    /**
+     * Print refresh button tag
+     * 
+     * @return string
+     */
+    public function printRefreshButton()
+    {
+        $html = $this->captcha->printRefreshButton();
+
+        $this->assertRegExp("#<button.*>.*<\/button>#", preg_replace(["/\n/", "/\t/"], ["",""], $html), "I expect that the value contains button tag.");
     }
 
 }

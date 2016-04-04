@@ -9,6 +9,16 @@ use Obullo\Authentication\Recaller as AuthRecaller;
 class Recaller extends TestController
 {
     /**
+     * Constructor
+     * 
+     * @param object $container container
+     */
+    public function __construct($container)
+    {
+        $container->get("user");
+    }
+
+    /**
      * Recall user identity using remember token
      * 
      * @return void

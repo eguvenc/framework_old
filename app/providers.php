@@ -10,7 +10,7 @@ $container->addServiceProvider('ServiceProvider\View');
 $container->addServiceProvider('ServiceProvider\Layer');
 $container->addServiceProvider('ServiceProvider\Cache');
 $container->addServiceProvider('ServiceProvider\Captcha');
-// $container->addServiceProvider('ServiceProvider\ReCaptcha');
+$container->addServiceProvider('ServiceProvider\ReCaptcha');
 $container->addServiceProvider('ServiceProvider\Session');
 // $container->addServiceProvider('ServiceProvider\Queue');
 $container->addServiceProvider('Obullo\Container\ServiceProvider\Db');
