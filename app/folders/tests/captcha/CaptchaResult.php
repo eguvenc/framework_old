@@ -12,7 +12,7 @@ class CaptchaResult extends TestController
      * Check error constants & variables 
      * and isValid()
      * 
-     * @return boolean [description]
+     * @return void
      */
     public function isValid()
     {

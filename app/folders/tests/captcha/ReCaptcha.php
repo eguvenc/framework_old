@@ -184,20 +184,16 @@ class ReCaptcha extends TestController
     /**
      * Validation captcha
      * 
-     * @param string $code result
-     * 
-     * @return bool
+     * @return void
      */
-    public function result($code)
+    public function result()
     {
-        // $response = $this->sendVerifyRequest(
-        //     array(
-        //         'secret'   => $this->getSecretKey(),
-        //         'response' => $code,
-        //         'remoteip' => $this->getUserIp() // optional
-        //     )
-        // );
-        // return $this->validateCode($response);
+        $token = "03AHJ_Vuux6CMtsAQzSXgMk9aLhOVsGVFu3C0fRpKFnpcz1eWFJwEZMT5DmxhckYkjmFN1X7btUtxvGahdFKpmxAN1jIJ0Fo9_LUjHCGA_-A3FjBj-X2E7R7JY44y88riwcbDiihBzWYJE0dk3JuSHQRjT0MFcLDrBlxBwJiXRj-rJ76UqJRQcAfOXqqvO_Wy0BvbdrXrrRfrIG-QYVDFhaiquk8BAfd-wDO0GN76PsWvcdGKIZoTiIQwtrHIrtDQ77jEtJeK7tYDZP0u9rm2AhI1utIEcW09mLUFKbq8u5Uz5BOmD_Q82CqDD-Lcrlmkcvpkdon0E4iqZt5TEPkMCDjxTPxdVNNDdGeTGFq1UiXfUVSPFAvFgutTd4gAkCUWcKlLi55uI9zMKTxFCCVQ1dh4R5HZKhdVxxSsCcScDKdNddspTQ4xCO6AEUjWshknou8hnZ5l4KakR5sHEscnaaXg4SUk6Xp5ATYCrU5hF7a0Gr6eGATF_xiKKcU65Js1BXqm5PrQVxsg8R-nq8eCJjWIQ3rVK6ZF-eZk22ozwDhGbrQxaJmioyU4lckAYSvzmCFhOhkefXbAVcYj-gCWi_cWCnHGHp6zmwaYBepzFy3G-bdlWPUabTT02D2F8bQG6b9xN61RpP3k0Yyh3o1c6UHGfBNZBfyopqx6d_7BHUvNf59aAYjKs8OIiQxQ_PNgDoZIxsuXMwBsbQ0GChjsqLahvAJ_TlTrFOYr2-SaGt1Dv6bpDSZ7E8NnKypVK6QtoI3sDkUmHbdxPWcudeP0RuNmEWboeOKEZlekjL-ZwFpY8LKsSPzJSGyR53514C6X0MQ3KUolGopi3mrGUwjHAguSNQG0eC0w2IX1WejN2n3FFT1vk1HabaRpFybudnQGKV7x0XLBw6ELIfHyQrJYqaSAeNj_y6q-0mQ";
+
+        $captchaResult = $this->recaptcha->result($token);
+
+        $this->assertInstanceOf("Obullo\Captcha\CaptchaResult", $captchaResult, "I expect that the result is instance of 'Obullo\Captcha\CaptchaResult' class.");
+        $this->assertEqual($captchaResult::FAILURE_CAPTCHA_NOT_FOUND, $captchaResult->getCode(), "I expect that the value is ".$captchaResult::FAILURE_CAPTCHA_NOT_FOUND.".");
     }
 
 
