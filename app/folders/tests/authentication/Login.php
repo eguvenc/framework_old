@@ -75,7 +75,7 @@ class Login extends TestController
         $i = $this->container->get('user.params')['db.identifier'];
         $p = $this->container->get('user.params')['db.password'];
 
-        $credentials = $this->config->load('tests')['login']['credentials'];
+        $credentials = $this->config->get('tests')['login']['credentials'];
         $isValid     = $this->user->login->validate([$i => $credentials['username'], $p => $credentials['password']]);
         $this->assertTrue($isValid, "I validate user credentials without login and i expect that the value is true.");
         $this->session->destroy();

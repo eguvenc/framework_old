@@ -21,7 +21,7 @@ class Annotation extends TestController
      */
     public function __construct($container)
     {
-        if ($container->get('config')['extra']['annotations'] == true) {
+        if ($container->get('config')->get('config')['extra']['annotations'] == true) {
             throw new \RuntimeException("Annotations must be disabled from your config file.");
         }
         $reflector = new \ReflectionClass($this);

@@ -73,7 +73,7 @@ class Debugger extends Controller
         /**
          * Disable websocket
          */
-        $newArray = $this->config->load('config');
+        $newArray = $this->config->get('config');
 
         if ($newArray['extra']['debugger'] == true) {
             $disconnect = 1;

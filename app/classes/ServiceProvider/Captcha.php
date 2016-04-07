@@ -73,7 +73,7 @@ class Captcha extends AbstractServiceProvider
                 </button>'
             ]
         );
-        $captcha->withMethodCall('setCharset', [$container->get('config')['locale']['charset']]);  // UTF-8
+        $captcha->withMethodCall('setCharset', [$container->get('config')->get('config')['locale']['charset']]);  // UTF-8
         $captcha->withMethodCall('setBackground', ['secure']);  // none
         $captcha->withMethodCall('setPool', ['alpha']);  // numbers, random
         $captcha->withMethodCall('setChar', [5]);

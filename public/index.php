@@ -4,13 +4,13 @@
 | Disable php.ini errors to use set_error_handler() func
 |--------------------------------------------------------------------------
 */
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
 /*
 |--------------------------------------------------------------------------
 | Disable all php errors to use set_error_handler() func
 |--------------------------------------------------------------------------
 */
-error_reporting(0);
+error_reporting(E_ALL);
 /*
 |--------------------------------------------------------------------------
 | Root Constant
@@ -56,12 +56,18 @@ require OBULLO .'Application/Bootstraps/Http.php';
 $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($container);
 /*
 |--------------------------------------------------------------------------
+| Benchmark
+|--------------------------------------------------------------------------
+*/
+$app->benchmark(true);
+/*
+|--------------------------------------------------------------------------
 | Create your http server
 |--------------------------------------------------------------------------
 */
 $server = Obullo\Http\Zend\Diactoros\Server::createServerFromRequest(
     $app,
-    Obullo\Log\Benchmark::start($app->getRequest()),
+    $app->getRequest(),
     $app->getResponse()
 );
 /*

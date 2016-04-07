@@ -35,7 +35,7 @@ class Debugger implements MiddlewareInterface, ContainerAwareInterface, Terminab
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
         $container = $this->getContainer();
-        $params    = $container->get('config')->load('debugger');
+        $params    = $container->get('config')->get('debugger');
 
         $this->websocket = new Websocket(
             $container,

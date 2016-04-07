@@ -55,7 +55,7 @@ class Identity extends TestController
         $user = new TestUser($this->container);
         $user->destroy();
 
-        $params = $this->config->load('providers::user')['params'];
+        $params = $this->config->get('providers::user')['params'];
 
         $rm = 'fgvH6hrlWNDeb9jz5L2P4xBW3vdrDP17';
         $cookies = [
@@ -368,7 +368,7 @@ class Identity extends TestController
         $i = $this->container->get('user.params')['db.identifier'];
         $p = $this->container->get('user.params')['db.password'];
 
-        $credentials = $this->config->load('tests')['login']['credentials'];
+        $credentials = $this->config->get('tests')['login']['credentials'];
 
         $isValid = $user->identity->validate([$i => $credentials['username'], $p => $credentials['password']]);
         $this->assertTrue($isValid, "I login.Then i validate user credentials and i expect that the value is true.");

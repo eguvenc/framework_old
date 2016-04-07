@@ -196,5 +196,4 @@ class ReCaptcha extends TestController
         $this->assertEqual($captchaResult::FAILURE_CAPTCHA_NOT_FOUND, $captchaResult->getCode(), "I expect that the value is ".$captchaResult::FAILURE_CAPTCHA_NOT_FOUND.".");
     }
 
-
 }

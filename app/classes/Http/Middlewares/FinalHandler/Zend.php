@@ -78,7 +78,7 @@ class Zend implements ContainerAwareInterface
         $this->request = $request;
 
         $response = $this->setCookies($response);
-
+        
         if ($err) {
             return $this->handleError($err, $response);
         }
@@ -126,6 +126,10 @@ class Zend implements ContainerAwareInterface
         if ($this->container->get('env')->getValue() !== 'production') {
 
             $message = $this->createDevelopmentErrorMessage($error);
+
+            if ($message instanceof Response) {
+                return $message;
+            }
         }
         $body = $this->container->get('view')->withStream($message)->get();
 
@@ -158,8 +162,10 @@ class Zend implements ContainerAwareInterface
     {
         if ($error instanceof Exception) {
 
-            $exception = new \Obullo\Error\Exception;
-            $message = $exception->make($error);
+            $closure = new \Http\Middlewares\Error;
+            $closure->setContainer($this->container);
+
+            return $closure($error, $this->request, $this->response);
 
         } elseif (is_object($error) && ! method_exists($error, '__toString')) {
             $message = sprintf('Error of type "%s" occurred', get_class($error));
