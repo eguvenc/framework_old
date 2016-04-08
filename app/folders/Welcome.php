@@ -11,6 +11,7 @@ class Welcome extends Controller
      */
     public function index()
     {
+
     	// throw new \RuntimeException("asd");
 
     	// echo $a;

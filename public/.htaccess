@@ -1,4 +1,8 @@
 
+# Set applicaiton environment
+
+SetEnv APPLICATION_ENV local
+
 # Disable directory indexing
 
 Options -Indexes

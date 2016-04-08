@@ -1,6 +1,6 @@
 <?php
 
-return $environments = array(
+return array(
 
     'local' => [
         'ersin-desktop',

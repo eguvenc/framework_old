@@ -33,14 +33,34 @@ class Config extends TestController
 
         if ($this->assertArrayHasKey('security', $array, "I set env as 'test' then i load config file and i expect that the array has 'security' key.")) {
             if ($this->assertArrayHasKey('encryption', $array['security'], "I expect that the security array has 'encryption' key.")) {
-                $this->assertNotEqual($array['security']['encryption'], $config['security']['encryption'], "I expect that the security key value of test env is not equal to local env security key.");
+                $this->assertNotEqual($array['security']['encryption'], $config['security']['encryption'], "I expect that the encryption value of test env is not equal to local env.");
             }
         }
     }
 
+    /**
+     * Write config file
+     * 
+     * @return void
+     */
     public function write()
     {
-        
+        $this->container->add('env', new RawArgument('test'));
+
+        $oldArray = $this->config->get('maintenance');
+        $newArray = $oldArray;
+        $newArray['root']['maintenance'] = 'test-down';
+
+        $currentArray = $this->config->write('maintenance', $newArray);
+
+        if ($this->assertArrayHasKey('root', $currentArray, "I expect that the value has 'root' key.")) {
+            if ($this->assertArrayHasKey('maintenance', $currentArray['root'], "I expect that the root array has 'maintenance' key.")) {
+                
+                if ($this->assertEqual($currentArray['root']['maintenance'], "test-down", "I expect that the maintenance value is equal to 'test-down'.")) {
+                    $this->config->write('maintenance', $oldArray);
+                }
+            }
+        }
     }
 
 }

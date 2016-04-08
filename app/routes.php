@@ -10,12 +10,9 @@
 /**
  * Set your root domain without ".www" e.g."example.com"
  */
-$router->domainRoot('framework');
-
-/**
- * Set your default index page
- */
-$router->defaultPage('welcome');
+$router->setDomainRoot('framework');
+$router->setDefaultPage('welcome');
+$router->setSubfolderLevel(3);
 
 // $router->get(
 //     '{id}/{name}/{any}', 'welcome/index/$1/$2/$3',
