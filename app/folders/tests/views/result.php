@@ -30,21 +30,14 @@
 
     <div class="container">
 
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="/examples">Örnekler</a></li>
-            <li role="presentation"><a href="#">Dökümentasyon</a></li>
-          </ul>
-        </nav>
-        
+      <div class="header clearfix">        
         <?php
         $ancestor = $this->router->getAncestor();
   			$folder = $this->router->getFolder();
   			$class  = $this->router->getClass();
   			$method = $this->router->getMethod();
         ?>
-        <h2 class="text-muted"><a href="/<?php echo $ancestor?>/<?php echo $folder ?>/<?php echo lcfirst($class) ?>"><?php echo lcfirst($class) ?>-><?php echo $method ?>()</a></h2>
+        <h2 class="text-muted"><a href="/<?php echo $ancestor?>/<?php echo $folder ?>/<?php echo $class ?>"><?php echo $class ?>-><?php echo $method ?>()</a></h2>
       </div>
 
       <div class="tests">

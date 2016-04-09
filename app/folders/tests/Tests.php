@@ -40,6 +40,9 @@ class Tests extends Controller
             }
             $results = array_merge_recursive($results, $path);
         }
+
+        // print_r($results);die;
+
         $this->view->load(
             'test',
             [
@@ -64,16 +67,29 @@ class Tests extends Controller
                 $html.= "<ul><li>".$folder."<ul>";
             }
             if (is_array($filename)) {
+                
                 $subfolder = "";
                 foreach ($filename as $key => $value) {
+
                     if (! is_numeric($key)) {
+
                         $subfolder = $key;
-                        foreach ($value as $file) {
-                            $html.= "<li>".$this->url->anchor("tests/".strtolower($folder)."/".$subfolder."/".strtolower(substr($file, 0, -4)), ucfirst($subfolder).'/'.$file)."</li>";
+                        foreach ($value as $k => $file) {
+
+                            if (is_array($file)) {
+                                $subfolder = $key;
+                                $subfolder = $subfolder.'/'.ucfirst($k);
+                                foreach ($file as $v) {
+                                    $html.= "<li>".$this->url->anchor("tests/".strtolower($folder)."/".strtolower($subfolder)."/".substr($v, 0, -4))."</li>";
+                                }
+
+                            } else {
+                                $html.= "<li>".$this->url->anchor("tests/".strtolower($folder)."/".$subfolder."/".substr($file, 0, -4))."</li>";
+                            }
                         }
                     } elseif (is_numeric($key)) {
-                        $file = substr(lcfirst($value), 0, -4);
-                        $html.= "<li>".$this->url->anchor("tests/".strtolower($folder)."/".$file, $value)."</li>";
+                        $file = substr($value, 0, -4);
+                        $html.= "<li>".$this->url->anchor("tests/".strtolower($folder)."/".$file)."</li>";
                     }
                 }
             }

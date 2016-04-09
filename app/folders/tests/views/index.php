@@ -32,8 +32,7 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="/examples">Örnekler</a></li>
-            <li role="presentation"><a href="#">Dökümentasyon</a></li>
+            <li role="presentation"><a href="/tests">Testler</a></li>
           </ul>
         </nav>
         <h2 class="text-muted"><?php echo $this->url->anchor("tests/", ucfirst($this->router->getClass())." Sınıfı Metotları") ?></a></h2>
