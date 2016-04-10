@@ -49,9 +49,7 @@ $router->setSubfolderLevel(3);
 //     function () use ($c) {
 //         $container->get('view')->load('views::dummy');
 //     }
-// )->attach('welcome/.*',  array('activity')); 
-
-// $router->attach('.', array('maintenance'));
+// )->add('maintenance')->attach('welcome/.*'); 
 
 /**
  * Generic users
@@ -62,10 +60,14 @@ $router->domain('framework')
         function () {
 
             // echo 'EXAMPLES';
+                // print_r($this->group->getOptions());
 
             $this->group(
                 'forms/', function () {
                     // echo 'FORMS';
+
+                    // print_r($this->group->getOptions());
+
                 }
             );
             // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
@@ -73,11 +75,8 @@ $router->domain('framework')
             // $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
             // $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
             // $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
-
-            // $this->attach('.*'); // all urls
-        },
-        ['middleware' => array()]
-    );
+        }
+    );// ->add(['Guest']); // ->match(['.*']);
 
 /**
  * Authorized users
@@ -85,18 +84,28 @@ $router->domain('framework')
 $router->group(
     function () {
 
+        // print_r($this->group->getOptions());
+
         // $this->attach('membership/restricted');
 
         // $this->get('tutorials/helloWorld.*', 'tutorials/helloLayout');
-        // $this->attach('(.*)'); // all url
-        // $this->attach('((?!tutorials/helloWorld).)*$');  // url not contains "tutorials/hello_world"
-    },
-    ['middleware' => array('Auth', 'Guest')]
-);
+        // $this->attach('.*'); // all url
+    }
+)->add(['Guest']);
 
-// $router->error404('errors/page_not_found');
+
+/**
+ * Çalışmıyor.
+ */
+// $router->get('welcome/')->add('Guest')->attach('welcome/.*')
+
+/**
+ * Çalışmıyor.
+ */
+// ->attach(['((?!examples/helloWorld).)*$']); 
+
+// ((?!examples/helloWorld).)*$  // url not contains "examples/hello_world"
 
 // Example Api
-
 
 // $router->match(array('get', 'post'), 'welcome', 'welcome/test');
