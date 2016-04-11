@@ -10,8 +10,7 @@
 /**
  * Set your root domain without ".www" e.g."example.com"
  */
-$router->setDomainRoot('framework');
-$router->setDefaultPage('welcome');
+$router->setDomainRoot('framework.com');
 $router->setSubfolderLevel(3);
 
 // $router->get(
@@ -44,17 +43,21 @@ $router->setSubfolderLevel(3);
 //     ['domain' => 'test.*\d.framework'],
 // );
 
-// $router->get(
-//     'welcome/[0-9]+/[a-z]+', 'welcome/$1/$2',
-//     function () use ($c) {
-//         $container->get('view')->load('views::dummy');
-//     }
-// )->add('maintenance')->attach('welcome/.*'); 
+/**
+ * Default route
+ */
+$router->get(
+    '/', 'welcome',
+    function () use ($container) {
+        // echo 'ok';
+    }
+);
 
 /**
  * Generic users
  */
-$router->domain('framework')
+$router->begin()
+    ->domain('framework.com')
     ->group(
         'examples/',
         function () {
@@ -70,28 +73,34 @@ $router->domain('framework')
 
                 }
             );
+
             // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
 
             // $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
             // $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
             // $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
         }
-    );// ->add(['Guest']); // ->match(['.*']);
+    )->add(['Maintenance'])->attach(['*'])
+->end();
+
 
 /**
  * Authorized users
  */
-$router->group(
-    function () {
+$router->begin()
+    ->domain('framework')
+    ->group(
+        function () {
 
-        // print_r($this->group->getOptions());
+            // print_r($this->group->getOptions());
 
-        // $this->attach('membership/restricted');
+            // $this->attach('membership/restricted');
 
-        // $this->get('tutorials/helloWorld.*', 'tutorials/helloLayout');
-        // $this->attach('.*'); // all url
-    }
-)->add(['Guest']);
+            // $this->get('tutorials/helloWorld.*', 'tutorials/helloLayout');
+            // $this->attach('.*'); // all url
+        }
+    )->add(['Guest'])->attach('*')
+    ->end();
 
 
 /**

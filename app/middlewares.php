@@ -9,7 +9,6 @@
 |
 |   - Error ( System )
 |   - NotAllowed ( System )
-|   - Router
 |   - View ( Required for Layers )
 */
 /*
@@ -47,6 +46,5 @@ $middleware->init(
         // 'ParsedBody',
         // 'Translation',
         'View',
-        'Router',
     ]
 );

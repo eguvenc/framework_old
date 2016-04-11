@@ -33,6 +33,7 @@ class Maintenance implements MiddlewareInterface, ContainerAwareInterface, Param
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
+        echo 'maintenance';
         if ($this->check() == false) {
             
             $body = $this->getContainer()->get('view')
@@ -56,7 +57,7 @@ class Maintenance implements MiddlewareInterface, ContainerAwareInterface, Param
     public function check()
     {   
         $maintenance = $this->getContainer()->get('config')
-            ->get('config')['maintenance'];  // Default loaded in config class.
+            ->get('maintenance');  // Default loaded in config class.
         
         $maintenance['root']['regex'] = null;
         $params = $this->getParams();
