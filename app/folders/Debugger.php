@@ -1,7 +1,7 @@
 <?php
 
 use Obullo\Http\Controller;
-use Obullo\Debugger\Manager;
+use Obullo\Debugger\HttpServer;
 
 class Debugger extends Controller
 {
@@ -21,7 +21,7 @@ class Debugger extends Controller
      */
     public function __construct($container)
     {
-        $this->debugger = new Manager($container);
+        $this->debugger = new HttpServer($container);
     }
 
     /**

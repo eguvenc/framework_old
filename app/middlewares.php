@@ -7,6 +7,7 @@
 |
 |  Default Middlewares
 |
+|   - App  ( System )
 |   - Error ( System )
 |   - NotAllowed ( System )
 |   - View ( Required for Layers )

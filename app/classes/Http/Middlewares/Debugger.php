@@ -35,12 +35,11 @@ class Debugger implements MiddlewareInterface, ContainerAwareInterface, Terminab
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
         $container = $this->getContainer();
-        $params    = $container->get('config')->get('debugger');
+        $config    = $container->get('config')->get('debugger');
 
         $this->websocket = new Websocket(
             $container,
-            $params,
-            $container->get('logger.params')
+            $config
         );
         $this->websocket->connect();
 
@@ -61,10 +60,10 @@ class Debugger implements MiddlewareInterface, ContainerAwareInterface, Terminab
         if ($container->get('app')->request->getUri()->segment(0) != 'debugger') {
 
             $body = $container->get('app')->response->getBody();
-            
+
             $this->websocket->emit(
                 (string)$body,
-                $container->get('logger')->getPayload()
+                $container->get('debugger')->getPayload()
             );
         }
     }

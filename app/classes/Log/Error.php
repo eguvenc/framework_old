@@ -3,7 +3,7 @@
 namespace Log;
 
 use Obullo\Utils\File;
-use Obullo\Log\LoggerInterface as Logger;
+use Psr\Log\LoggerInterface as Logger;
 
 /**
  * Log all application errors
@@ -34,8 +34,7 @@ class Error
     {        
         if ($this->logger instanceof Logger) {
 
-            $this->logger->channel('system');
-            $this->logger->error(
+            $this->logger->withName('system')->error(
                 $e->getMessage(),
                 [
                     'file' => File::getSecurePath($e->getFile()),

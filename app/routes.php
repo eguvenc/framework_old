@@ -56,51 +56,51 @@ $router->get(
 /**
  * Generic users
  */
-$router->begin()
-    ->domain('framework.com')
-    ->group(
-        'examples/',
-        function () {
+// $router->begin()
+//     ->domain('framework.com')
+//     ->group(
+//         'examples/',
+//         function () {
 
-            // echo 'EXAMPLES';
-                // print_r($this->group->getOptions());
+//             // echo 'EXAMPLES';
+//                 // print_r($this->group->getOptions());
 
-            $this->group(
-                'forms/', function () {
-                    // echo 'FORMS';
+//             $this->group(
+//                 'forms/', function () {
+//                     // echo 'FORMS';
 
-                    // print_r($this->group->getOptions());
+//                     // print_r($this->group->getOptions());
 
-                }
-            );
+//                 }
+//             );
 
-            // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
+//             // $this->match(['get', 'post'], 'widgets/tutorials/helloForm')->middleware('Csrf');
 
-            // $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
-            // $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
-            // $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
-        }
-    )->add(['Maintenance'])->attach(['*'])
-->end();
+//             // $this->get('(?:en|de|es|tr)', 'welcome');     // example.com/en
+//             // $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
+//             // $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
+//         }
+//     )->add(['Maintenance'])->attach('.*')
+// ->end();
 
 
-/**
- * Authorized users
- */
-$router->begin()
-    ->domain('framework')
-    ->group(
-        function () {
+// /**
+//  * Authorized users
+//  */
+// $router->begin()
+//     ->domain('framework')
+//     ->group(
+//         function () {
 
-            // print_r($this->group->getOptions());
+//             // print_r($this->group->getOptions());
 
-            // $this->attach('membership/restricted');
+//             // $this->attach('membership/restricted');
 
-            // $this->get('tutorials/helloWorld.*', 'tutorials/helloLayout');
-            // $this->attach('.*'); // all url
-        }
-    )->add(['Guest'])->attach('*')
-    ->end();
+//             // $this->get('tutorials/helloWorld.*', 'tutorials/helloLayout');
+//             // $this->attach('.*'); // all url
+//         }
+//     )->add(['Guest'])->attach('.*')
+//     ->end();
 
 
 /**

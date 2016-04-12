@@ -56,10 +56,10 @@ require OBULLO .'Application/Bootstraps/Http.php';
 $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($container);
 /*
 |--------------------------------------------------------------------------
-| Benchmark
+| Benchmark start
 |--------------------------------------------------------------------------
 */
-$app->benchmark(true);
+$app->benchmarkStart();
 /*
 |--------------------------------------------------------------------------
 | Create your http server
@@ -76,3 +76,9 @@ $server = Obullo\Http\Zend\Diactoros\Server::createServerFromRequest(
 |--------------------------------------------------------------------------
 */
 $server->listen();
+/*
+|--------------------------------------------------------------------------
+| Benchmark end
+|--------------------------------------------------------------------------
+*/
+$app->benchmarkEnd();
