@@ -40,9 +40,7 @@ class Tests extends Controller
             }
             $results = array_merge_recursive($results, $path);
         }
-
-        // print_r($results);die;
-
+        
         $this->view->load(
             'test',
             [
@@ -73,6 +71,9 @@ class Tests extends Controller
 
                     if (! is_numeric($key)) {
 
+                        // Unix directories does not support uppercase characters 
+                        // we force to all directory names to lowercase
+
                         $subfolder = $key;
                         foreach ($value as $k => $file) {
 
@@ -84,7 +85,7 @@ class Tests extends Controller
                                 }
 
                             } else {
-                                $html.= "<li>".$this->url->anchor("tests/".strtolower($folder)."/".$subfolder."/".substr($file, 0, -4))."</li>";
+                                $html.= "<li>".$this->url->anchor("tests/".strtolower($folder)."/".strtolower($subfolder)."/".substr($file, 0, -4))."</li>";
                             }
                         }
                     } elseif (is_numeric($key)) {

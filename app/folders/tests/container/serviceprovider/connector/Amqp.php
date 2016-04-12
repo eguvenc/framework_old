@@ -9,7 +9,7 @@ class Amqp extends TestController
 {
     public function test()
     {
-
+        $this->assertEqual('test-value', 'test-value', "I expect that the value is test-value.");
     }
 
 }

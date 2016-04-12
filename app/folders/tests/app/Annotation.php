@@ -24,12 +24,7 @@ class Annotation extends TestController
         if ($container->get('config')->get('config')['extra']['annotations'] == true) {
             throw new \RuntimeException("Annotations must be disabled from your config file.");
         }
-        $reflector = new \ReflectionClass($this);
-        $controller = new \Obullo\Application\Annotations\Controller;
-        $controller->setContainer($container);
-        $controller->setReflectionClass($reflector);
-        
-        $this->parser = $controller;
+        $this->parser = new \Obullo\Application\Annotations\Controller($container, new \ReflectionClass($this), 'index');
     }
 
     /**

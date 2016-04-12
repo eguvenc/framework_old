@@ -36,10 +36,10 @@ class Middleware extends TestController
      */
     public function get()
     {
-        $this->middleware->add('Router');
-        $router = $this->middleware->get('Router');
+        $this->middleware->add('TrustedIp');
+        $router = $this->middleware->get('TrustedIp');
 
-        $this->assertInstanceOf('Http\Middlewares\Router', $router, "I add Router middleware and i expect it is an instance of Http\Middlewares\Router object.");
+        $this->assertInstanceOf('Http\Middlewares\TrustedIp', $router, "I add TrustedIp middleware and i expect it is an instance of Http\Middlewares\TrustedIp object.");
     }
 
     /**
