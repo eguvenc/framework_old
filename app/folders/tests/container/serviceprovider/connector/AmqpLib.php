@@ -5,8 +5,22 @@ namespace Tests\Container\ServiceProvider\Connector;
 use Obullo\Tests\TestOutput;
 use Obullo\Tests\TestController;
 
-class Amqp extends TestController
+class AmqpLib extends TestController
 {
+    /**
+     * Constructor
+     * 
+     * @param object $container container
+     */
+    public function __construct($container)
+    {
+        $AMQPConnection = $container->get('amqp')->shared(['connection' => 'default']);
+
+        if (! $AMQPConnection instanceof PhpAmqpLib\Connection\AMQPConnection) {
+            throw new \RuntimeException("asd");
+        }
+    }
+
     /**
      * Shared
      * 
@@ -17,7 +31,7 @@ class Amqp extends TestController
         $AMQPConnection = $this->container->get('amqp')->shared(['connection' => 'default']);
         $AMQPConnectionShared = $this->container->get('amqp')->shared(['connection' => 'default']);
 
-        $this->assertInstanceOf('AMQPConnection', $AMQPConnection, "I expect that the value is instance of AMQPConnection.");
+        $this->assertInstanceOf('PhpAmqpLib\Connection\AMQPConnection', $AMQPConnection, "I expect that the value is instance of PhpAmqpLib\Connection\AMQPConnection.");
         $this->assertSame($AMQPConnection, $AMQPConnectionShared, "I expect that the two variables reference the same object.");
     }
 

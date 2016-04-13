@@ -46,7 +46,7 @@ $router->setSubfolderLevel(3);
 /**
  * Default route
  */
-$router->get(
+$router->match(['get', 'post'],
     '/', 'welcome',
     function () use ($container) {
         // echo 'ok';

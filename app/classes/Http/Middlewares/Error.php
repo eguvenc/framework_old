@@ -40,6 +40,7 @@ class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
             
             // $json = $this->renderJsonErrorMessage($error);
         }
+
         if (is_object($error)) {
             /*
             | Exception Hierarchy

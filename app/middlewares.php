@@ -7,8 +7,7 @@
 |
 |  Default Middlewares
 |
-|   - App  ( System )
-|   - Error ( System )
+|   - Error, TestError ( System )
 |   - NotAllowed ( System )
 |   - View ( Required for Layers )
 */
@@ -19,7 +18,6 @@
 */
 $middleware->register(
     [
-        'Error' => 'Http\Middlewares\Error',
         'TrustedIp' => 'Http\Middlewares\TrustedIp',
         'ParsedBody' => 'Http\Middlewares\ParsedBody',
         'Debugger' => 'Http\Middlewares\Debugger',
