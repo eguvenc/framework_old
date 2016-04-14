@@ -5,7 +5,7 @@ return array(
     'params' => [
 
         'db.adapter' => 'Obullo\Authentication\Adapter\Database',
-        'db.model' => 'Auth\Model\User',
+        'db.model' => 'Auth\Model\Pdo',
         'db.tablename' => 'users',
         'db.id' => 'id',
         'db.identifier' => 'username',

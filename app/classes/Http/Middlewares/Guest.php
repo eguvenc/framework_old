@@ -29,8 +29,6 @@ class Guest implements MiddlewareInterface, ContainerAwareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        echo 'Guest';
-        return $next($request, $response);
         if ($this->getContainer()->get('user')->identity->guest()) {
 
             $this->getContainer()->get('flash')->info('Your session has been expired.');

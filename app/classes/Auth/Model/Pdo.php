@@ -2,7 +2,7 @@
 
 namespace Auth\Model;
 
-use Obullo\Authentication\Model\Database;
+use Obullo\Authentication\Model\Pdo as ModelPdo;
 
 /**
  * Database Model
@@ -10,7 +10,7 @@ use Obullo\Authentication\Model\Database;
  * @copyright 2009-2016 Obullo
  * @license   http://opensource.org/licenses/MIT MIT license
  */
-class User extends Database
+class Pdo extends ModelPdo
 {
     /**
      * Connect to database service

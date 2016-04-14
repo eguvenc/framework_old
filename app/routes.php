@@ -46,23 +46,22 @@ $router->setSubfolderLevel(3);
 /**
  * Default route
  */
-$router->match(['get', 'post'],
+$router->match(
+    ['get', 'post'],
     '/', 'welcome',
     function () use ($container) {
         // echo 'ok';
     }
-)->add('Maintenance');
+); // ->add(['Maintenance']);
 
-/**
- * Generic users
- */
+
 // $router->begin()
-//     ->domain('framework.com')
+//     ->domain('test.*\d.framework')
 //     ->group(
 //         'examples/',
 //         function () {
 
-//             // echo 'EXAMPLES';
+//             echo 'EXAMPLES';
 //                 // print_r($this->group->getOptions());
 
 //             $this->group(

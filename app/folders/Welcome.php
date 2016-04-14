@@ -4,11 +4,6 @@ use Obullo\Http\Controller;
 
 class Welcome extends Controller
 {
-    public function __construct()
-    {
-         // throw new \RuntimeException("asd");
-    }
-
     /**
      * Index
      * 
@@ -16,9 +11,13 @@ class Welcome extends Controller
      */
     public function index()
     {
-        echo $this->request->getUri()->getHost();
-       
+        // echo str_replace('test', '', "test.exampletest.com");
 
+        // echo $this->router->getDomain()->getBaseHost();
+        // $subname = $this->router->getDomain()->getSubName('t.framework.com');
+
+        // var_dump($subname);
+       
     	// throw new \RuntimeException("asd");
 
     	// echo $a;

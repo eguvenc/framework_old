@@ -33,7 +33,6 @@ class Maintenance implements MiddlewareInterface, ContainerAwareInterface, Param
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        echo 'maintenance';
         if ($this->check() == false) {
             
             $body = $this->getContainer()->get('view')
@@ -71,7 +70,7 @@ class Maintenance implements MiddlewareInterface, ContainerAwareInterface, Param
         if ($this->checkRoot($maintenance)) {
             return false;
         }
-        if ($this->checkNodes()) {
+        if ($this->checkSubDomains()) {
             return false;
         }
         return true;
@@ -93,11 +92,11 @@ class Maintenance implements MiddlewareInterface, ContainerAwareInterface, Param
     }
 
     /**
-     * Check app nodes is down
+     * Check app subdomain is down
      * 
      * @return boolean
      */
-    public function checkNodes()
+    public function checkSubDomains()
     {
         if (empty($this->maintenance)) {
             return false;
