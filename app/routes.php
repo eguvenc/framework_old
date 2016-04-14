@@ -10,7 +10,7 @@
 /**
  * Set your root domain without ".www" e.g."example.com"
  */
-$router->setDomainRoot('framework.com');
+$router->setDomainRoot('framework');
 $router->setSubfolderLevel(3);
 
 // $router->get(
@@ -51,7 +51,7 @@ $router->match(['get', 'post'],
     function () use ($container) {
         // echo 'ok';
     }
-);
+)->add('Maintenance');
 
 /**
  * Generic users

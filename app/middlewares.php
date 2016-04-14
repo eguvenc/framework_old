@@ -7,9 +7,8 @@
 |
 |  Default Middlewares
 |
-|   - Error, TestError ( System )
+|   - Error
 |   - NotAllowed ( System )
-|   - View ( Required for Layers )
 */
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +43,5 @@ $middleware->init(
         // 'TrustedIp',
         // 'ParsedBody',
         // 'Translation',
-        'View',
     ]
 );

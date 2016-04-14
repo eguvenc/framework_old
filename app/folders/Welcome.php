@@ -16,6 +16,7 @@ class Welcome extends Controller
      */
     public function index()
     {
+        echo $this->request->getUri()->getHost();
        
 
     	// throw new \RuntimeException("asd");
