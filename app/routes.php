@@ -52,7 +52,7 @@ $router->match(
     function () use ($container) {
         // echo 'ok';
     }
-); // ->add(['Maintenance']);
+);
 
 
 // $router->begin()

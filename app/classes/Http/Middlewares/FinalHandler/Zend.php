@@ -186,7 +186,6 @@ class Zend implements ContainerAwareInterface
     public function shutdown()
     {
         foreach ($this->container->get('middleware')->getQueue() as $object) {  // Run terminable middlewares
-
             if ($object instanceof TerminableInterface) {
                 $object->terminate();
             }

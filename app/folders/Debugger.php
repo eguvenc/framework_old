@@ -32,7 +32,7 @@ class Debugger extends Controller
     public function index()
     {
         return $this->response->html(
-            $this->debugger->printIndex(),
+            (string)$this->debugger->printIndex(),
             200
         );
     }
@@ -45,7 +45,7 @@ class Debugger extends Controller
     public function body()
     {
         return $this->response->html(
-            $this->debugger->printBody(),
+            (string)$this->debugger->printBody(),
             200
         );
     }
@@ -76,15 +76,15 @@ class Debugger extends Controller
         $newArray = $this->config->get('config');
 
         if ($newArray['extra']['debugger'] == true) {
-            $disconnect = 1;
+            $disconnect = '1';
             $newArray['extra']['debugger'] = false;
             $this->config->write('config', $newArray);
         } else {
-            $disconnect = 0;
+            $disconnect = '0';
         }
 
         return $this->response->html(
-            $disconnect,
+            (string)$disconnect,
             200
         );
     }

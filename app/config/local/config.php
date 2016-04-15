@@ -27,6 +27,5 @@ return array(
     ],
     'extra' => [
         'debugger' => false,
-        'annotations' => false,
     ],
 );
