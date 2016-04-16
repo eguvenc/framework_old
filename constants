@@ -16,7 +16,7 @@ define('OBULLO_VERSION_ENV', 'dev');
 | OBULLO      - The full path of version folder
 */
 define('PHP_PATH', '/usr/bin/php'); 
-define('VENDOR', ROOT.'/vendor/');
+define('VENDOR', ROOT.'vendor/');
 define('CHOWN', 'www-data');
 /*
 |---------------------------------------------------------------

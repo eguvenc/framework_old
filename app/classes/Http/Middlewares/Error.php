@@ -9,6 +9,7 @@ use Exception;
 use LogicException;
 use ErrorException;
 use RuntimeException;
+use Obullo\Utils\File;
 use Obullo\Container\ContainerAwareTrait;
 use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\ErrorMiddlewareInterface;
@@ -143,7 +144,7 @@ class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
             $html .= sprintf('<tr><td><strong>Code:</strong></td><td>%s</td></tr>', $code);
         }
 
-        if (($file = $exception->getFile())) {
+        if (($file = File::getSecurePath($exception->getFile()))) {
             $html .= sprintf('<tr><td><strong>File:</strong></td><td>%s</td></tr>', $file);
         }
 
@@ -180,7 +181,7 @@ class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
                 'type' => get_class($exception),
                 'code' => $exception->getCode(),
                 'message' => $exception->getMessage(),
-                'file' => $exception->getFile(),
+                'file' => File::getSecurePath($exception->getFile()),
                 'line' => $exception->getLine(),
                 'trace' => explode("\n", $exception->getTraceAsString()),
             ];

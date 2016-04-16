@@ -5,15 +5,13 @@ namespace Http\Middlewares;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-use Obullo\Container\ParamsAwareTrait;
-use Obullo\Container\ParamsAwareInterface;
 use Obullo\Container\ContainerAwareTrait;
 use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
 
-class Maintenance implements MiddlewareInterface, ContainerAwareInterface, ParamsAwareInterface
+class Maintenance implements MiddlewareInterface, ContainerAwareInterface
 {
-    use ContainerAwareTrait, ParamsAwareTrait;
+    use ContainerAwareTrait;
 
     /**
      * Maintenance 
@@ -23,16 +21,26 @@ class Maintenance implements MiddlewareInterface, ContainerAwareInterface, Param
     protected $maintenance;
 
     /**
+     * Parameters
+     * 
+     * @var array
+     */
+    protected $params = array();
+
+    /**
      * Invoke middleware
      * 
      * @param ServerRequestInterface $request  request
      * @param ResponseInterface      $response respone
      * @param callable               $next     callable
+     * @param array                  $params   params
      * 
      * @return object ResponseInterface
      */
-    public function __invoke(Request $request, Response $response, callable $next = null)
+    public function __invoke(Request $request, Response $response, callable $next = null, $params = array())
     {
+        $this->params = $params;
+
         if ($this->check() == false) {
             
             $body = $this->getContainer()->get('view')
@@ -55,15 +63,16 @@ class Maintenance implements MiddlewareInterface, ContainerAwareInterface, Param
      */
     public function check()
     {   
-        $maintenance = $this->getContainer()->get('config')
-            ->get('maintenance');  // Default loaded in config class.
+        $maintenance = $this->getContainer()
+            ->get('config')
+            ->get('maintenance');
         
         $maintenance['root']['regex'] = null;
-        $params = $this->getParams();
-        $domain = (isset($params['domain'])) ? $params['domain'] : null;
+        $domain = (isset($this->params['domain'])) ? $this->params['domain'] : null;
         
         foreach ($maintenance as $label) {
-            if (! empty($label['regex']) && $label['regex'] == $domain) {  // If route domain equal to domain.php regex value
+            if (! empty($label['regex']) && $label['regex'] == $domain) {  // If route domain equal to 
+                                                                           // maintenance.php regex value
                 $this->maintenance = $label['maintenance'];
             }
         }

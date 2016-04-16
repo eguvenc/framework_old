@@ -14,24 +14,17 @@ $router->setDomainRoot('framework');
 $router->setSubfolderLevel(3);
 
 // $router->get(
-//     '{id}/{name}/{any}', 'welcome/index/$1/$2/$3',
-//     function ($id, $name, $any) {
-//         echo $id.'-'.$name.'-'.$any;
+//     '{name}/{id}/{any}', 'welcome/index/$1/$2/$3',
+//     function ($name, $id, $any) {
+//         echo $name.'-'.$id.'-'.$any;
 //     }
-// )->where(array('id' => '[0-9]+', 'name' => '[a-z]+', 'any' => '.*'));
+// )
+// ->where(['id' => '[0-9]+', 'name' => '[a-z]+', 'any' => '.+'])
+// ->add('Maintenance');
 
-// $router->get('[0-9]+/.*', 'welcome/index/$1/$2/');
-
-// $router->get(
-//     '{id}/{name}/{any}', 'welcome/index/$1/$2/$3',
-//     function ($id, $name, $any) use ($c) {
-//         echo $id.'-'.$name.'-'.$any;
-//     }
-// )->where(['id' => '[0-9]+', 'name' => '[a-z]+', 'any' => '.+']);
-
-// $router->middleware('Maintenance');
 
 // $router->group(
+//  'welcome',
 //     function () {
 
 //         // $this->get('[0-9]+/.*', 'welcome/index/$1/$2');
@@ -40,7 +33,6 @@ $router->setSubfolderLevel(3);
 //         // $this->attach('welcome');
 //         // $this->attach('welcome/test');
 //     }
-//     ['domain' => 'test.*\d.framework'],
 // );
 
 /**
@@ -53,22 +45,39 @@ $router->match(
         // echo 'ok';
     }
 );
+// ->add('Maintenance');
+
+// $router->get('welcome')->add(['Maintenance', 'Guest']);
+
+// print_r($router->getRoute()->getAll());
 
 
-// $router->begin()
+// $router
 //     ->domain('test.*\d.framework')
 //     ->group(
-//         'examples/',
 //         function () {
 
-//             echo 'EXAMPLES';
-//                 // print_r($this->group->getOptions());
+//             $this->get('/', 'welcome');
+
+
+//             //     // print_r($this->group->getOptions());
+
+//             // $this->get(
+//             //  'examples', function () {
+//             //  echo 'ok';
+//             // });
 
 //             $this->group(
-//                 'forms/', function () {
-//                     // echo 'FORMS';
+//                 'examples/', function () {
 
-//                     // print_r($this->group->getOptions());
+//                     // echo 'EXAMPLES';
+
+//                     $this->group(
+//                         'forms/', function () {
+
+//                             // echo 'FORMS';
+//                         }
+//                     )->add('Auth')->add('Guest')->attach('.*');
 
 //                 }
 //             );
@@ -79,14 +88,22 @@ $router->match(
 //             // $this->get('(?:en|de|es|tr)(/)', 'welcome');  // example.com/en/
 //             // $this->get('(?:en|de|es|tr)/(.*)', '$1');     // example.com/en/examples/helloWorld
 //         }
-//     )->add(['Maintenance'])->attach('.*')
-// ->end();
+//     )
+//     ->add('Maintenance')->attach('.*')
+//     ->end();
+
+// foreach ($router->getRoute()->getAll() as $key => $value) {
+//     foreach ($value as $r) {
+//         unset($r['closure']);
+//     }
+//     print_r($r);
+// };
 
 
 // /**
 //  * Authorized users
 //  */
-// $router->begin()
+// $router
 //     ->domain('framework')
 //     ->group(
 //         function () {

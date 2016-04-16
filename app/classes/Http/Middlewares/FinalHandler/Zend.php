@@ -77,7 +77,22 @@ class Zend implements ContainerAwareInterface
     {   
         $this->request = $request;
 
-        $response = $this->setCookies($response);
+        /**
+         * App middleware must be called at the end. ( Otherwise ParsedBody middleware does not work. )
+         */
+        $result = $this->container->get('app')->call($request, $response);
+
+        if (! $result) {
+            $body = $this->container->get('view')
+                ->withStream()
+                ->get('templates::404');
+
+            return $response->withStatus(404)
+                ->withHeader('Content-Type', 'text/html')
+                ->withBody($body);
+        }
+
+        $response = $this->setCookies($result);
         
         if ($err) {
             return $this->handleError($err, $response);
@@ -185,9 +200,9 @@ class Zend implements ContainerAwareInterface
      */
     public function shutdown()
     {
-        foreach ($this->container->get('middleware')->getQueue() as $object) {  // Run terminable middlewares
-            if ($object instanceof TerminableInterface) {
-                $object->terminate();
+        foreach ($this->container->get('middleware')->getQueue() as $middleware) {  // Run terminable middlewares
+            if ($middleware['callable'] instanceof TerminableInterface) {
+                $middleware['callable']->terminate();
             }
         }
     }

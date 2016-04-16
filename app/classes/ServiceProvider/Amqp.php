@@ -32,16 +32,16 @@ class Amqp extends AbstractServiceProvider
         $container = $this->getContainer();
         $config    = $this->getConfiguration('queue');
         
-        $container->share('amqp', 'Obullo\Container\ServiceProvider\Connector\Amqp')
-            ->withArgument($container)
-            ->withArgument($config->getParams());
+        // $container->share('amqp', 'Obullo\Container\ServiceProvider\Connector\Amqp')
+        //     ->withArgument($container)
+        //     ->withArgument($config->getParams());
 
         // AmqpLib Replacement
         // 
         
-        // $container->share('amqp', 'Obullo\Container\ServiceProvider\Connector\AmqpLib')
-        //     ->withArgument($container)
-        //     ->withArgument($config->getParams());
+        $container->share('amqp', 'Obullo\Container\ServiceProvider\Connector\AmqpLib')
+            ->withArgument($container)
+            ->withArgument($config->getParams());
 
     }
 }

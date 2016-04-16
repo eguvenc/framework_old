@@ -2,8 +2,8 @@
 
 namespace Tests\App;
 
-use Obullo\Tests\TestController;
 use Obullo\Tests\TestOutput;
+use Obullo\Tests\TestController;
 
 class Middleware extends TestController
 {
@@ -84,9 +84,10 @@ class Middleware extends TestController
      */
     public function getNames()
     {
+        $this->middleware->add('TrustedIp');
         $names = $this->middleware->getNames();
 
-        $this->assertArrayContains('App', $names, "I expect middleware names contain App key.");
+        $this->assertArrayContains('TrustedIp', $names, "I expect middleware names contain TrustedIp key.");
         TestOutput::varDump($names);
     }
 
@@ -97,9 +98,9 @@ class Middleware extends TestController
      */
     public function getPath()
     {
-        $path = $this->middleware->getPath('App');
+        $path = $this->middleware->getPath('TrustedIp');
 
-        $this->assertEqual('Http\Middlewares\App', $path, "I expect App middleware path equal to Http\Middlewares\App string.");
+        $this->assertEqual('Http\Middlewares\TrustedIp', $path, "I expect TrustedIp middleware path equal to Http\Middlewares\TrustedIp string.");
         TestOutput::varDump($path);
     }
 
