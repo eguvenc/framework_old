@@ -39,6 +39,7 @@ class Maintenance implements MiddlewareInterface, ContainerAwareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null, $params = array())
     {
+        echo 'Maintenance';
         $this->params = $params;
 
         if ($this->check() == false) {
