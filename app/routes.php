@@ -94,7 +94,7 @@ $router
     )
     ->add('Maintenance')->attach('.*');
 
-echo $router->getDomain()->getName();
+// echo $router->getDomain()->getName();
 
 // foreach ($router->getRoute()->getAll() as $key => $value) {
 //     foreach ($value as $r) {
