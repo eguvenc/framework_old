@@ -22,8 +22,8 @@ Class Dummy extends Controller
         echo '<pre>Global Request Object: <span class="string">'.$this->app->request->getUri()->getPath().'</span></pre>';
         echo '<p>-----------------------------------------</p>';
 
-        echo $this->layer->get('views/test');
-        echo $this->layer->get('views/test');
+        echo $this->layer->get('views/test', array('request' => $this->app->request->getUri()->getPath()));
+        // echo $this->layer->get('views/test');
         
         echo 'WELCOME MODULE: '.$this->router->getNamespace().'<br>';
 
