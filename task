@@ -54,13 +54,13 @@ Obullo\Application\Autoloader::register();
 date_default_timezone_set('Europe/London');
 /*
 |--------------------------------------------------------------------------
-| Bootstrap
+| Container
 |--------------------------------------------------------------------------
 */
-require OBULLO .'Application/Bootstraps/Cli.php';
+$container = new League\Container\Container;
 /*
 |--------------------------------------------------------------------------
-| Initialize
+| Application
 |--------------------------------------------------------------------------
 */
-$container->get('app')->run();
+$app = new Obullo\Application\Cli($container);

@@ -77,10 +77,12 @@ class Zend implements ContainerAwareInterface
     {   
         $this->request = $request;
 
+        global $app;
+
         /**
          * App middleware must be called at the end. ( Otherwise ParsedBody middleware does not work. )
          */
-        $result = $this->container->get('app')->call($request, $response);
+        $result = $app->call($request, $response);
 
         if (! $result) {
             $body = $this->container->get('view')

@@ -10,6 +10,7 @@ use LogicException;
 use ErrorException;
 use RuntimeException;
 use Obullo\Utils\File;
+use Obullo\Utils\Error\Log;
 use Obullo\Container\ContainerAwareTrait;
 use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\ErrorMiddlewareInterface;
@@ -68,7 +69,7 @@ class Error implements ErrorMiddlewareInterface, ContainerAwareInterface
             case ($error instanceof ErrorException):
             case ($error instanceof LogicException):
             case ($error instanceof RuntimeException):
-                $log = new \Log\Error($container->get('logger'));
+                $log = new Log($container->get('logger'));
                 $log->message($error);
                 break;
             }

@@ -11,6 +11,7 @@ ini_set('display_errors', 1);
 |--------------------------------------------------------------------------
 */
 error_reporting(E_ALL);
+
 /*
 |--------------------------------------------------------------------------
 | Root Constant
@@ -44,16 +45,16 @@ Obullo\Application\Autoloader::register();
 date_default_timezone_set('Europe/London');
 /*
 |--------------------------------------------------------------------------
-| Bootstrap
+| Container
 |--------------------------------------------------------------------------
 */
-require OBULLO .'Application/Bootstraps/Http.php';
+$container = new League\Container\Container;
 /*
 |--------------------------------------------------------------------------
-| Middleware pipe
+| Application
 |--------------------------------------------------------------------------
 */
-$app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($container);
+$app = new Obullo\Application\App($container);
 /*
 |--------------------------------------------------------------------------
 | Benchmark start
@@ -62,7 +63,7 @@ $app = new Obullo\Http\Zend\Stratigility\MiddlewarePipe($container);
 $app->benchmarkStart();
 /*
 |--------------------------------------------------------------------------
-| Create your http server
+| Http server
 |--------------------------------------------------------------------------
 */
 $server = Obullo\Http\Zend\Diactoros\Server::createServerFromRequest(
