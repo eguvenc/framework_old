@@ -19,11 +19,11 @@ Class Dummy extends Controller
     {
         echo '<pre>Request: <span class="string">'.$this->request->getUri()->getPath().'</span></pre>';
         echo '<pre>Response: <span class="string">'.$arg1 .' - '.$arg2. ' - '.$arg3.'</span></pre>';
-        echo '<pre>Global Request Object: <span class="string">'.$this->app->request->getUri()->getPath().'</span></pre>';
+        echo '<pre>Global Request Object: <span class="string">'.$this->request->getFirst()->getUri()->getPath().'</span></pre>';
         echo '<p>-----------------------------------------</p>';
 
-        echo $this->layer->get('views/test', array('request' => $this->app->request->getUri()->getPath()));
-        // echo $this->layer->get('views/test');
+        echo $this->layer->get('views/test');
+        echo $this->layer->get('views/test');
         
         echo 'WELCOME MODULE: '.$this->router->getNamespace().'<br>';
 
