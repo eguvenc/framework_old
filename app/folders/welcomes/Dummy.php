@@ -1,6 +1,6 @@
 <?php
 
-namespace Welcome;
+namespace Welcomes;
 
 use Obullo\Http\Controller;
 
