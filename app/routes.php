@@ -44,15 +44,12 @@ $router->match(
     function () use ($container) {
         // echo 'ok';
     }
-);
-// ->add('Maintenance');
-
-$router->get('welcome')->add('Guest');
+)->add('Auth');
 
 // print_r($router->getRoute()->getAll());
 
 // $router
-//     ->domain('test.*\d.framework')
+//     // ->domain('test.*\d.framework')
 //     ->group(
 //         function () {
 

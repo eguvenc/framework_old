@@ -18,7 +18,8 @@
 */
 $middleware->add(
     [
-    	'App',
+        'Router',
+        'App',
         // 'Maintenance',
         // 'TrustedIp',
         // 'ParsedBody',
