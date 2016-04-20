@@ -25,7 +25,6 @@ class Auth implements MiddlewareInterface, ContainerAwareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        echo 'Auth';
         if ($this->getContainer()->get('user')->identity->check()) {
     
             $this->killSessions();  // Terminate multiple logins

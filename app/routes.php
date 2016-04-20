@@ -47,7 +47,7 @@ $router->match(
 );
 // ->add('Maintenance');
 
-// $router->get('welcome')->add(['Maintenance', 'Guest']);
+$router->get('welcome')->add('Guest');
 
 // print_r($router->getRoute()->getAll());
 

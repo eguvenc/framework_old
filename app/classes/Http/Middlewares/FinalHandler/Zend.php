@@ -77,24 +77,7 @@ class Zend implements ContainerAwareInterface
     {   
         $this->request = $request;
 
-        global $app;
-
-        /**
-         * App middleware must be called at the end. ( Otherwise ParsedBody middleware does not work. )
-         */
-        $result = $app->call($request, $response);
-
-        if (! $result) {
-            $body = $this->container->get('view')
-                ->withStream()
-                ->get('templates::404');
-
-            return $response->withStatus(404)
-                ->withHeader('Content-Type', 'text/html')
-                ->withBody($body);
-        }
-
-        $response = $this->setCookies($result);
+        $response = $this->setCookies($response);
         
         if ($err) {
             return $this->handleError($err, $response);

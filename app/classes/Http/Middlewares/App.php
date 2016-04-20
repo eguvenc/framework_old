@@ -9,14 +9,9 @@ use Obullo\Container\ContainerAwareTrait;
 use Obullo\Container\ContainerAwareInterface;
 use Obullo\Http\Middleware\MiddlewareInterface;
 
-class Guest implements MiddlewareInterface, ContainerAwareInterface
+class App implements MiddlewareInterface, ContainerAwareInterface
 {
     use ContainerAwareTrait;
-
-    /**
-     * Redirect url
-     */
-    const REDIRECT_URI = '/examples/membership/login/index';
 
     /**
      * Invoke middleware
@@ -29,14 +24,27 @@ class Guest implements MiddlewareInterface, ContainerAwareInterface
      */
     public function __invoke(Request $request, Response $response, callable $next = null)
     {
-        if ($this->getContainer()->get('user')->identity->guest()) {
+        global $app;
 
-            $this->getContainer()->get('flash')->info('Your session has been expired.');
+        /**
+         * App middleware must be called at the end. ( Otherwise ParsedBody middleware does not work. )
+         */
+        $result = $app->call($request, $response);
 
-            return $response->redirect(static::REDIRECT_URI);
+        if (! $result) {
+            $body = $this->container->get('view')
+                ->withStream()
+                ->get('templates::404');
+
+            return $response->withStatus(404)
+                ->withHeader('Content-Type', 'text/html')
+                ->withBody($body);
         }
+
         $err = null;
 
-        return $next($request, $response, $err);
+        return $next($request, $result, $err);
     }
 }
+
+

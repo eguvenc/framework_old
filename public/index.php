@@ -48,7 +48,9 @@ date_default_timezone_set('Europe/London');
 | Container
 |--------------------------------------------------------------------------
 */
+
 $container = new League\Container\Container;
+
 /*
 |--------------------------------------------------------------------------
 | Application
@@ -83,3 +85,15 @@ $server->listen();
 |--------------------------------------------------------------------------
 */
 $app->benchmarkEnd();
+
+		// try {
+
+
+
+  //       } catch (Throwable $throwable) { // PHP 7 + throwable error support
+                
+
+  //       } catch (Exception $exception) {
+  //           var_dump($exception->getMessage());
+  //       }
+
