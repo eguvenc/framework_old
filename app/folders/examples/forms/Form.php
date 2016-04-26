@@ -54,7 +54,8 @@ class Form extends Controller
             if ($this->validator->isValid()) {          
                 $this->form->success('Form validation success.');
             } else {
-                $this->form->error('Form validation failed.');
+                $this->form->setErrors();
+                // $this->form->error('Form validation failed.');
             }
         }
 
